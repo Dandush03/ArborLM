@@ -113,7 +113,7 @@ def digit_puzzle_r3(level: int, r: random.Random) -> Built:
                                        ("ends_differ_by", abs(ds[0] - ds[-1])), ("first_gt_last",) if ds[0] > ds[-1] else ("first_lt_last",)]
         cand += [("multiple_of", m) for m in (3, 4, 6, 7, 9, 11, 12, 13) if secret % m == 0]
         cand += [("digit_relation", q) for q in (2, 3) if ds[0] == q * ds[-1]]
-        cand += [("contains_digit", d) for d in set(ds) if ds.count(d) == 1]
+        cand += [("contains_digit", d) for d in sorted(set(ds)) if ds.count(d) == 1]
         cand.append(("greater_than", r.randint(lo - 1, secret - 1)))  # a threshold below the secret, uniform over its valid range
         cand.append(("less_than", r.randint(secret + 1, 10**nd)))  # a threshold above the secret, uniform over its valid range
         if len(set(ds)) == len(ds):

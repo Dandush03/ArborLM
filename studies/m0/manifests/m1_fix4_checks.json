@@ -1,0 +1,879 @@
+{
+ "lineages": {
+  "M1.ages_r3": {
+   "identical_level_pairs": [],
+   "key_problems": [],
+   "profile": {
+    "log10_answer": [
+     1.748,
+     1.765,
+     1.868,
+     1.99,
+     1.971,
+     2.063,
+     2.069
+    ],
+    "numbers": [
+     3.0,
+     3.0,
+     3.0,
+     3.0,
+     3.0,
+     3.0,
+     3.0
+    ]
+   },
+   "rising_parameter_problems": null
+  },
+  "M1.arithmetic_series_r3": {
+   "identical_level_pairs": [],
+   "key_problems": [],
+   "profile": {
+    "log10_answer": [
+     2.83,
+     2.991,
+     3.049,
+     3.131,
+     3.176,
+     3.279,
+     3.313
+    ],
+    "numbers": [
+     6.0,
+     6.0,
+     6.0,
+     6.0,
+     6.0,
+     6.0,
+     6.0
+    ]
+   },
+   "rising_parameter_problems": null
+  },
+  "M1.average_missing_r4": {
+   "identical_level_pairs": [],
+   "key_problems": [],
+   "profile": {
+    "log10_answer": [
+     1.836,
+     1.87,
+     1.877,
+     1.911,
+     1.943,
+     1.946,
+     1.961
+    ],
+    "numbers": [
+     7.0,
+     7.0,
+     8.0,
+     8.0,
+     9.0,
+     9.0,
+     10.0
+    ]
+   },
+   "rising_parameter_problems": []
+  },
+  "M1.binomial_choose_r3": {
+   "identical_level_pairs": [],
+   "key_problems": [],
+   "profile": {
+    "log10_answer": [
+     2.509,
+     2.817,
+     3.301,
+     4.757,
+     5.468,
+     6.034,
+     6.658
+    ],
+    "numbers": [
+     5.0,
+     5.0,
+     5.0,
+     7.0,
+     7.0,
+     7.0,
+     7.0
+    ]
+   },
+   "rising_parameter_problems": null
+  },
+  "M1.change_ways_r3": {
+   "identical_level_pairs": [],
+   "key_problems": [],
+   "profile": {
+    "log10_answer": [
+     1.177,
+     1.379,
+     1.507,
+     1.625,
+     1.73,
+     1.843,
+     1.897
+    ],
+    "numbers": [
+     4.0,
+     4.0,
+     4.0,
+     4.0,
+     4.0,
+     4.0,
+     4.0
+    ]
+   },
+   "rising_parameter_problems": null
+  },
+  "M1.clock_duration_r4": {
+   "identical_level_pairs": [],
+   "key_problems": [],
+   "profile": {
+    "log10_answer": [
+     2.095,
+     2.115,
+     2.316,
+     2.337,
+     2.477,
+     2.498,
+     2.607
+    ],
+    "numbers": [
+     11.0,
+     11.0,
+     16.0,
+     16.0,
+     21.0,
+     21.0,
+     26.0
+    ]
+   },
+   "rising_parameter_problems": []
+  },
+  "M1.coins_r3": {
+   "identical_level_pairs": [],
+   "key_problems": [],
+   "profile": {
+    "log10_answer": [
+     1.186,
+     1.234,
+     1.273,
+     1.302,
+     1.34,
+     1.333,
+     1.395
+    ],
+    "numbers": [
+     5.0,
+     5.0,
+     5.0,
+     5.0,
+     5.0,
+     5.0,
+     5.0
+    ]
+   },
+   "rising_parameter_problems": null
+  },
+  "M1.consecutive_r3": {
+   "identical_level_pairs": [],
+   "key_problems": [],
+   "profile": {
+    "log10_answer": [
+     3.113,
+     3.291,
+     3.441,
+     3.534,
+     3.61,
+     3.67,
+     3.75
+    ],
+    "numbers": [
+     2.0,
+     2.0,
+     2.58,
+     2.49,
+     2.53,
+     2.5,
+     2.45
+    ]
+   },
+   "rising_parameter_problems": null
+  },
+  "M1.crt_congruence_r3": {
+   "identical_level_pairs": [],
+   "key_problems": [],
+   "profile": {
+    "log10_answer": [
+     2.537,
+     2.701,
+     2.721,
+     3.538,
+     3.674,
+     5.078,
+     5.223
+    ],
+    "numbers": [
+     4.0,
+     4.0,
+     4.0,
+     6.0,
+     6.0,
+     8.0,
+     8.0
+    ]
+   },
+   "rising_parameter_problems": null
+  },
+  "M1.division_counting_r3": {
+   "identical_level_pairs": [],
+   "key_problems": [],
+   "profile": {
+    "log10_answer": [
+     0.879,
+     0.935,
+     1.006,
+     0.949,
+     1.018,
+     1.03,
+     1.096
+    ],
+    "numbers": [
+     3.0,
+     3.0,
+     3.0,
+     3.0,
+     3.0,
+     3.0,
+     3.0
+    ]
+   },
+   "rising_parameter_problems": null
+  },
+  "M1.finite_differences_r4": {
+   "identical_level_pairs": [],
+   "key_problems": [],
+   "profile": {
+    "log10_answer": [
+     2.609,
+     2.662,
+     2.742,
+     2.91,
+     2.931,
+     3.237,
+     3.348
+    ],
+    "numbers": [
+     9.0,
+     9.0,
+     9.0,
+     10.0,
+     10.0,
+     11.0,
+     11.0
+    ]
+   },
+   "rising_parameter_problems": []
+  },
+  "M1.fraction_remainder_r3": {
+   "identical_level_pairs": [],
+   "key_problems": [],
+   "profile": {
+    "log10_answer": [
+     2.885,
+     2.935,
+     3.007,
+     3.045,
+     3.068,
+     3.123,
+     3.176
+    ],
+    "numbers": [
+     1.0,
+     1.0,
+     1.0,
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "rising_parameter_problems": null
+  },
+  "M1.gcd_lcm_r4": {
+   "identical_level_pairs": [],
+   "key_problems": [],
+   "profile": {
+    "log10_answer": [
+     2.66,
+     2.82,
+     2.833,
+     2.813,
+     2.975,
+     3.107,
+     3.393
+    ],
+    "numbers": [
+     3.54,
+     3.55,
+     3.48,
+     4.51,
+     4.52,
+     5.48,
+     5.52
+    ]
+   },
+   "rising_parameter_problems": []
+  },
+  "M1.grid_perimeter_r3": {
+   "identical_level_pairs": [],
+   "key_problems": [],
+   "profile": {
+    "log10_answer": [
+     1.435,
+     1.548,
+     1.638,
+     1.713,
+     1.787,
+     1.826,
+     1.885
+    ],
+    "numbers": [
+     14.87,
+     18.34,
+     21.93,
+     25.22,
+     28.83,
+     31.5,
+     35.11
+    ]
+   },
+   "rising_parameter_problems": null
+  },
+  "M1.inclusion_exclusion_r3": {
+   "identical_level_pairs": [],
+   "key_problems": [],
+   "profile": {
+    "log10_answer": [
+     1.256,
+     1.362,
+     1.431,
+     1.758,
+     1.794,
+     1.886,
+     1.968
+    ],
+    "numbers": [
+     5.0,
+     5.0,
+     5.0,
+     9.0,
+     9.0,
+     9.0,
+     9.0
+    ]
+   },
+   "rising_parameter_problems": null
+  },
+  "M1.last_digit_power_r3": {
+   "identical_level_pairs": [],
+   "key_problems": [],
+   "profile": {
+    "log10_answer": [
+     1.236,
+     1.31,
+     1.252,
+     1.261,
+     1.298,
+     1.35,
+     1.301
+    ],
+    "numbers": [
+     5.0,
+     5.0,
+     7.0,
+     7.0,
+     7.0,
+     9.0,
+     9.0
+    ]
+   },
+   "rising_parameter_problems": null
+  },
+  "M1.linear_equation_r3": {
+   "identical_level_pairs": [],
+   "key_problems": [],
+   "profile": {
+    "log10_answer": [
+     1.132,
+     1.27,
+     1.41,
+     1.533,
+     1.56,
+     1.621,
+     1.706
+    ],
+    "numbers": [
+     3.0,
+     3.0,
+     3.0,
+     4.0,
+     4.0,
+     4.0,
+     4.0
+    ]
+   },
+   "rising_parameter_problems": null
+  },
+  "M1.median_list_r3": {
+   "identical_level_pairs": [],
+   "key_problems": [],
+   "profile": {
+    "log10_answer": [
+     1.969,
+     2.1,
+     2.197,
+     2.26,
+     2.32,
+     2.395,
+     2.431
+    ],
+    "numbers": [
+     8.53,
+     9.9,
+     11.47,
+     12.97,
+     14.39,
+     16.11,
+     17.39
+    ]
+   },
+   "rising_parameter_problems": null
+  },
+  "M1.mixture_r4": {
+   "identical_level_pairs": [],
+   "key_problems": [],
+   "profile": {
+    "log10_answer": [
+     1.194,
+     1.254,
+     1.327,
+     1.468,
+     1.511,
+     1.528,
+     1.545
+    ],
+    "numbers": [
+     4.0,
+     4.0,
+     4.0,
+     5.0,
+     5.0,
+     5.0,
+     5.0
+    ]
+   },
+   "rising_parameter_problems": []
+  },
+  "M1.mode_tally_r3": {
+   "identical_level_pairs": [],
+   "key_problems": [],
+   "profile": {
+    "log10_answer": [
+     1.525,
+     1.526,
+     1.562,
+     1.571,
+     1.601,
+     1.594,
+     1.613
+    ],
+    "numbers": [
+     46.81,
+     46.71,
+     46.52,
+     45.44,
+     46.41,
+     45.48,
+     45.52
+    ]
+   },
+   "rising_parameter_problems": null
+  },
+  "M1.painted_cube_r3": {
+   "identical_level_pairs": [],
+   "key_problems": [],
+   "profile": {
+    "log10_answer": [
+     2.761,
+     2.789,
+     2.911,
+     3.091,
+     3.057,
+     3.252,
+     3.241
+    ],
+    "numbers": [
+     4.0,
+     4.0,
+     4.0,
+     4.0,
+     4.0,
+     4.0,
+     4.0
+    ]
+   },
+   "rising_parameter_problems": null
+  },
+  "M1.percent_change_r3": {
+   "identical_level_pairs": [],
+   "key_problems": [],
+   "profile": {
+    "log10_answer": [
+     1.921,
+     1.977,
+     2.027,
+     2.555,
+     2.55,
+     2.591,
+     2.665
+    ],
+    "numbers": [
+     3.0,
+     3.0,
+     3.0,
+     4.0,
+     4.0,
+     4.0,
+     4.0
+    ]
+   },
+   "rising_parameter_problems": null
+  },
+  "M1.pigeonhole_worst_case_r3": {
+   "identical_level_pairs": [],
+   "key_problems": [],
+   "profile": {
+    "log10_answer": [
+     1.856,
+     1.893,
+     2.106,
+     2.132,
+     2.244,
+     2.296,
+     2.313
+    ],
+    "numbers": [
+     4.5,
+     4.53,
+     5.48,
+     5.51,
+     6.5,
+     6.51,
+     6.55
+    ]
+   },
+   "rising_parameter_problems": null
+  },
+  "M1.pipes_work_r3": {
+   "identical_level_pairs": [],
+   "key_problems": [],
+   "profile": {
+    "log10_answer": [
+     1.268,
+     1.32,
+     1.368,
+     1.416,
+     1.431,
+     1.455,
+     1.488
+    ],
+    "numbers": [
+     3.0,
+     3.0,
+     3.0,
+     4.0,
+     4.0,
+     4.0,
+     4.0
+    ]
+   },
+   "rising_parameter_problems": null
+  },
+  "M1.prime_factors_r3": {
+   "identical_level_pairs": [],
+   "key_problems": [],
+   "profile": {
+    "log10_answer": [
+     1.339,
+     1.324,
+     1.367,
+     1.44,
+     1.439,
+     1.447,
+     1.533
+    ],
+    "numbers": [
+     2.29,
+     2.34,
+     2.35,
+     2.15,
+     2.24,
+     2.42,
+     2.22
+    ]
+   },
+   "rising_parameter_problems": null
+  },
+  "M1.pythagoras_r3": {
+   "identical_level_pairs": [],
+   "key_problems": [],
+   "profile": {
+    "log10_answer": [
+     2.339,
+     2.68,
+     2.819,
+     2.951,
+     3.024,
+     3.132,
+     3.204
+    ],
+    "numbers": [
+     2.0,
+     2.0,
+     2.0,
+     2.0,
+     2.0,
+     2.0,
+     2.0
+    ]
+   },
+   "rising_parameter_problems": null
+  },
+  "M1.quadratic_area_r3": {
+   "identical_level_pairs": [],
+   "key_problems": [],
+   "profile": {
+    "log10_answer": [
+     1.863,
+     1.95,
+     2.012,
+     2.04,
+     2.114,
+     2.092,
+     2.144
+    ],
+    "numbers": [
+     2.0,
+     2.0,
+     2.0,
+     2.0,
+     2.0,
+     2.0,
+     2.0
+    ]
+   },
+   "rising_parameter_problems": null
+  },
+  "M1.ratio_share_r3": {
+   "identical_level_pairs": [],
+   "key_problems": [],
+   "profile": {
+    "log10_answer": [
+     2.218,
+     2.323,
+     2.394,
+     2.569,
+     2.562,
+     2.599,
+     2.683
+    ],
+    "numbers": [
+     3.0,
+     3.0,
+     4.0,
+     4.0,
+     5.0,
+     5.0,
+     5.0
+    ]
+   },
+   "rising_parameter_problems": null
+  },
+  "M1.rectangle_r3": {
+   "identical_level_pairs": [],
+   "key_problems": [],
+   "profile": {
+    "log10_answer": [
+     3.27,
+     3.391,
+     3.499,
+     3.61,
+     3.678,
+     3.722,
+     3.723
+    ],
+    "numbers": [
+     2.0,
+     2.0,
+     2.0,
+     2.0,
+     2.0,
+     2.0,
+     2.0
+    ]
+   },
+   "rising_parameter_problems": null
+  },
+  "M1.recurrence_iterate_r3": {
+   "identical_level_pairs": [],
+   "key_problems": [],
+   "profile": {
+    "log10_answer": [
+     3.219,
+     3.347,
+     3.705,
+     3.771,
+     3.992,
+     4.224,
+     4.241
+    ],
+    "numbers": [
+     4.95,
+     4.94,
+     4.9,
+     4.9,
+     4.95,
+     4.92,
+     4.99
+    ]
+   },
+   "rising_parameter_problems": null
+  },
+  "M1.shopping_r3": {
+   "identical_level_pairs": [],
+   "key_problems": [],
+   "profile": {
+    "log10_answer": [
+     1.009,
+     0.973,
+     0.969,
+     0.953,
+     0.983,
+     0.985,
+     0.973
+    ],
+    "numbers": [
+     5.0,
+     7.0,
+     9.0,
+     9.0,
+     11.0,
+     11.0,
+     13.0
+    ]
+   },
+   "rising_parameter_problems": null
+  },
+  "M1.slot_permutations_r4": {
+   "identical_level_pairs": [],
+   "key_problems": [],
+   "profile": {
+    "log10_answer": [
+     1.513,
+     1.785,
+     1.999,
+     2.172,
+     2.225,
+     2.425,
+     2.556
+    ],
+    "numbers": [
+     9.02,
+     8.84,
+     8.84,
+     8.89,
+     8.99,
+     8.83,
+     8.66
+    ]
+   },
+   "rising_parameter_problems": []
+  },
+  "M1.speed_distance_r3": {
+   "identical_level_pairs": [],
+   "key_problems": [],
+   "profile": {
+    "log10_answer": [
+     2.444,
+     2.573,
+     2.444,
+     2.523,
+     2.631,
+     2.668,
+     2.842
+    ],
+    "numbers": [
+     4.0,
+     4.0,
+     6.0,
+     6.0,
+     8.0,
+     8.0,
+     10.0
+    ]
+   },
+   "rising_parameter_problems": null
+  },
+  "M1.tiered_pricing": {
+   "identical_level_pairs": [],
+   "key_problems": [],
+   "profile": {
+    "log10_answer": [
+     0.999,
+     1.125,
+     1.489,
+     1.792,
+     1.964,
+     2.043,
+     2.084
+    ],
+    "numbers": [
+     4.0,
+     4.0,
+     6.0,
+     6.0,
+     8.0,
+     8.0,
+     8.0
+    ]
+   },
+   "rising_parameter_problems": null
+  },
+  "M1.tip_split_r3": {
+   "identical_level_pairs": [],
+   "key_problems": [],
+   "profile": {
+    "log10_answer": [
+     1.75,
+     1.815,
+     1.815,
+     1.806,
+     1.834,
+     1.89,
+     1.888
+    ],
+    "numbers": [
+     3.0,
+     3.0,
+     3.0,
+     3.0,
+     3.0,
+     3.0,
+     3.0
+    ]
+   },
+   "rising_parameter_problems": null
+  }
+ }
+}

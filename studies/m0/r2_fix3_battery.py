@@ -15,7 +15,6 @@ import argparse
 import json
 import math
 import random
-import sys
 from collections import Counter
 from collections.abc import Callable
 from multiprocessing import Pool
@@ -50,10 +49,9 @@ def wilson(k: int, n: int, z: float = 1.96) -> tuple[float, float]:
 
 def heuristics_for(name: str, own: bool = True) -> list[tuple[str, Callable[[dict[str, Any], str], str | None]]]:
     """The auditor's battery for this lineage name plus (own=True) this round's own heuristics. The 'current' (before) set is measured with the auditor's battery only: the own rules were written for the new shapes."""
-    if str(AUDIT_DIR) not in sys.path:
-        sys.path.append(str(AUDIT_DIR))
-    import a3_heur  # type: ignore[import-not-found]  # the auditor's file, read-only
-
+    from studies.m0 import (
+        r2_fix4_a3_heur as a3_heur,  # package copy, with attribution, of the auditor's a3_heur.py (fix round 4 hygiene edit)
+    )
     from studies.m0.r2_fix3_heuristics import OWN
 
     return [*a3_heur.H.get(name, []), *(OWN.get(name, []) if own else [])]

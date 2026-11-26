@@ -1,0 +1,4932 @@
+{
+ "battery_seeds": {
+  "a3": 5,
+  "a4": 17,
+  "own": 410302
+ },
+ "bound": {
+  "observed_before": "item-side measurements only",
+  "set_by": "the human lead (fifth decision)",
+  "two_sided": true,
+  "value": 0.15
+ },
+ "candidates": {
+  "M1.ages_r3": {
+   "audit4_reference": "AUDIT4_M1 section 8: REGISTRABLE AS IS on the audit's measurement",
+   "capacity_as_written_fails_at_levels": [
+    0,
+    1,
+    2
+   ],
+   "capacity_as_written_min_margin": 0.564,
+   "level_checks": {
+    "identical_level_pairs": [],
+    "key_problems": [],
+    "profile": {
+     "log10_answer": [
+      1.748,
+      1.765,
+      1.868,
+      1.99,
+      1.971,
+      2.063,
+      2.069
+     ],
+     "numbers": [
+      3.0,
+      3.0,
+      3.0,
+      3.0,
+      3.0,
+      3.0,
+      3.0
+     ]
+    },
+    "rising_parameter_problems": null
+   },
+   "name": "M1.ages_r3",
+   "per_level_max_rule_excess": {
+    "0": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0145,
+     "rule": "im:ignore_years",
+     "signed": -0.0145
+    },
+    "1": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.012,
+     "rule": "im:ignore_years",
+     "signed": -0.012
+    },
+    "2": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0115,
+     "rule": "a4:sum_over_k_plus_1",
+     "signed": 0.0115
+    },
+    "3": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0145,
+     "rule": "a4:sum_over_k_plus_1",
+     "signed": 0.0145
+    },
+    "4": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.022,
+     "rule": "a4:sum_over_k_plus_1",
+     "signed": 0.022
+    },
+    "5": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.016,
+     "rule": "im:ignore_years",
+     "signed": -0.016
+    },
+    "6": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0225,
+     "rule": "a4:sum_over_k_plus_1",
+     "signed": 0.0225
+    }
+   },
+   "reason": "AUDIT4_M1 section 8: REGISTRABLE AS IS on the audit's measurement",
+   "repaired_in_round_4": false,
+   "replaces": null,
+   "status": "SURVIVES",
+   "stem": "ages",
+   "strict_cluster": "S1_linear_solve"
+  },
+  "M1.arithmetic_series_r3": {
+   "audit4_reference": "AUDIT4_M1 section 8: REGISTRABLE AS IS on the audit's measurement",
+   "capacity_as_written_fails_at_levels": null,
+   "capacity_as_written_min_margin": 1.565,
+   "level_checks": {
+    "identical_level_pairs": [],
+    "key_problems": [],
+    "profile": {
+     "log10_answer": [
+      2.83,
+      2.991,
+      3.049,
+      3.131,
+      3.176,
+      3.279,
+      3.313
+     ],
+     "numbers": [
+      6.0,
+      6.0,
+      6.0,
+      6.0,
+      6.0,
+      6.0,
+      6.0
+     ]
+    },
+    "rising_parameter_problems": null
+   },
+   "name": "M1.arithmetic_series_r3",
+   "per_level_max_rule_excess": {
+    "0": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0035,
+     "rule": "a3:echo_best_position[first/first]",
+     "signed": -0.0035
+    },
+    "1": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.002,
+     "rule": "own:echo_best_position[first/first]",
+     "signed": -0.002
+    },
+    "2": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.001,
+     "rule": "own:echo_best_position[first/first]",
+     "signed": -0.001
+    },
+    "3": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.002,
+     "rule": "a4:echo_pos",
+     "signed": -0.002
+    },
+    "4": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.001,
+     "rule": "own:echo_best_position[first/first]",
+     "signed": -0.001
+    },
+    "5": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.001,
+     "rule": "own:echo_best_position[first/first]",
+     "signed": -0.001
+    },
+    "6": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0015,
+     "rule": "a3:echo_best_position[first/first]",
+     "signed": -0.0015
+    }
+   },
+   "reason": "AUDIT4_M1 section 8: REGISTRABLE AS IS on the audit's measurement",
+   "repaired_in_round_4": false,
+   "replaces": null,
+   "status": "SURVIVES",
+   "stem": "arithmetic_series",
+   "strict_cluster": "S7_step_rule"
+  },
+  "M1.average_missing_r4": {
+   "audit4_reference": "AUDIT4_M1 section 4 (profile): levels 0=1, 2=3, 4=5 identical, unchanged since batch 1; read as the same collapsed-level defect (repair (c)), see the notes",
+   "capacity_as_written_fails_at_levels": null,
+   "capacity_as_written_min_margin": 127.141,
+   "level_checks": {
+    "identical_level_pairs": [],
+    "key_problems": [],
+    "profile": {
+     "log10_answer": [
+      1.836,
+      1.87,
+      1.877,
+      1.911,
+      1.943,
+      1.946,
+      1.961
+     ],
+     "numbers": [
+      7.0,
+      7.0,
+      8.0,
+      8.0,
+      9.0,
+      9.0,
+      10.0
+     ]
+    },
+    "rising_parameter_problems": []
+   },
+   "name": "M1.average_missing_r4",
+   "per_level_max_rule_excess": {
+    "0": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.008,
+     "rule": "a4:echo_pos",
+     "signed": 0.008
+    },
+    "1": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0105,
+     "rule": "a4:echo_pos_offset",
+     "signed": 0.0105
+    },
+    "2": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.007,
+     "rule": "a3:target_mean_rounded",
+     "signed": 0.007
+    },
+    "3": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0045,
+     "rule": "own:echo_best_position[second/second]",
+     "signed": -0.0045
+    },
+    "4": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0065,
+     "rule": "a4:target_mean",
+     "signed": 0.0065
+    },
+    "5": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.007,
+     "rule": "own:target_mean_rounded",
+     "signed": 0.007
+    },
+    "6": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0055,
+     "rule": "a4:echo_pos",
+     "signed": 0.0055
+    }
+   },
+   "reason": "AUDIT4_M1 section 4 (profile): levels 0=1, 2=3, 4=5 identical, unchanged since batch 1; read as the same collapsed-level defect (repair (c)), see the notes",
+   "repaired_in_round_4": true,
+   "replaces": "M1.average_missing_r3",
+   "status": "SURVIVES",
+   "stem": "average_missing",
+   "strict_cluster": "S1_linear_solve"
+  },
+  "M1.binomial_choose_r3": {
+   "audit4_reference": "AUDIT4_M1 section 6 and 8: NOT REGISTERED in round 3 (capacity), agreed by the audit",
+   "capacity_as_written_fails_at_levels": null,
+   "capacity_as_written_min_margin": null,
+   "level_checks": {
+    "identical_level_pairs": [],
+    "key_problems": [],
+    "profile": {
+     "log10_answer": [
+      2.509,
+      2.817,
+      3.301,
+      4.757,
+      5.468,
+      6.034,
+      6.658
+     ],
+     "numbers": [
+      5.0,
+      5.0,
+      5.0,
+      7.0,
+      7.0,
+      7.0,
+      7.0
+     ]
+    },
+    "rising_parameter_problems": null
+   },
+   "name": "M1.binomial_choose_r3",
+   "per_level_max_rule_excess": {
+    "0": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.131,
+     "rule": "own:product_of_x_times_j",
+     "signed": 0.131
+    },
+    "1": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.1275,
+     "rule": "own:product_of_x_times_j",
+     "signed": 0.1275
+    },
+    "2": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0745,
+     "rule": "im:product_of_x_times_j",
+     "signed": 0.0745
+    },
+    "3": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0295,
+     "rule": "own:product_of_x_times_j",
+     "signed": 0.0295
+    },
+    "4": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0145,
+     "rule": "im:product_of_x_times_j",
+     "signed": 0.0145
+    },
+    "5": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0095,
+     "rule": "im:product_of_x_times_j",
+     "signed": 0.0095
+    },
+    "6": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.01,
+     "rule": "im:product_of_x_times_j",
+     "signed": 0.01
+    }
+   },
+   "reason": "NOT REGISTERED in round 3 and stays so (R-24/R-25: no new lineage, no replacement): Capacity at the low levels cannot be reached without changing the difficulty. The plain and 'must include' shapes of rev2 are a few hundred items; the group-pro...",
+   "repaired_in_round_4": false,
+   "replaces": null,
+   "status": "NOT_REGISTERED",
+   "stem": "binomial_choose",
+   "strict_cluster": "S4_product_rule_counting"
+  },
+  "M1.change_ways_r3": {
+   "audit4_reference": "AUDIT4_M1 section 8: REGISTRABLE AS IS on the audit's measurement",
+   "capacity_as_written_fails_at_levels": null,
+   "capacity_as_written_min_margin": 2.606,
+   "level_checks": {
+    "identical_level_pairs": [],
+    "key_problems": [],
+    "profile": {
+     "log10_answer": [
+      1.177,
+      1.379,
+      1.507,
+      1.625,
+      1.73,
+      1.843,
+      1.897
+     ],
+     "numbers": [
+      4.0,
+      4.0,
+      4.0,
+      4.0,
+      4.0,
+      4.0,
+      4.0
+     ]
+    },
+    "rising_parameter_problems": null
+   },
+   "name": "M1.change_ways_r3",
+   "per_level_max_rule_excess": {
+    "0": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.042,
+     "rule": "own:T_over_max_plus_1",
+     "signed": 0.042
+    },
+    "1": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.025,
+     "rule": "own:T_over_min_plus_1",
+     "signed": -0.025
+    },
+    "2": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0205,
+     "rule": "own:two_smallest_coins_only",
+     "signed": -0.0205
+    },
+    "3": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0105,
+     "rule": "own:two_smallest_coins_only",
+     "signed": -0.0105
+    },
+    "4": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0125,
+     "rule": "own:echo_best_position[first/second_last]",
+     "signed": -0.0125
+    },
+    "5": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0085,
+     "rule": "own:two_smallest_coins_only",
+     "signed": -0.0085
+    },
+    "6": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0105,
+     "rule": "im:two_smallest_coins_only",
+     "signed": -0.0105
+    }
+   },
+   "reason": "AUDIT4_M1 section 8: REGISTRABLE AS IS on the audit's measurement",
+   "repaired_in_round_4": false,
+   "replaces": null,
+   "status": "SURVIVES",
+   "stem": "change_ways",
+   "strict_cluster": "S5_unbounded_table"
+  },
+  "M1.clock_duration_r4": {
+   "audit4_reference": "AUDIT4_M1 section 4 (profile): levels 0=1, 2=3, 4=5 identical, unchanged since batch 1; read as the same collapsed-level defect (repair (c)), see the notes",
+   "capacity_as_written_fails_at_levels": null,
+   "capacity_as_written_min_margin": 8264.187,
+   "level_checks": {
+    "identical_level_pairs": [],
+    "key_problems": [],
+    "profile": {
+     "log10_answer": [
+      2.095,
+      2.115,
+      2.316,
+      2.337,
+      2.477,
+      2.498,
+      2.607
+     ],
+     "numbers": [
+      11.0,
+      11.0,
+      16.0,
+      16.0,
+      21.0,
+      21.0,
+      26.0
+     ]
+    },
+    "rising_parameter_problems": []
+   },
+   "name": "M1.clock_duration_r4",
+   "per_level_max_rule_excess": {
+    "0": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.012,
+     "rule": "a3:span_incl_waits",
+     "signed": -0.012
+    },
+    "1": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.009,
+     "rule": "own:span_incl_waits",
+     "signed": -0.009
+    },
+    "2": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.007,
+     "rule": "a3:span_incl_waits",
+     "signed": -0.007
+    },
+    "3": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0075,
+     "rule": "a3:span_incl_waits",
+     "signed": -0.0075
+    },
+    "4": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.007,
+     "rule": "own:echo_best_position[first/sum]",
+     "signed": -0.007
+    },
+    "5": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.007,
+     "rule": "own:span_incl_waits",
+     "signed": -0.007
+    },
+    "6": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.004,
+     "rule": "a3:span_incl_waits",
+     "signed": -0.004
+    }
+   },
+   "reason": "AUDIT4_M1 section 4 (profile): levels 0=1, 2=3, 4=5 identical, unchanged since batch 1; read as the same collapsed-level defect (repair (c)), see the notes",
+   "repaired_in_round_4": true,
+   "replaces": "M1.clock_duration_r3",
+   "status": "SURVIVES",
+   "stem": "clock_duration",
+   "strict_cluster": "clock_duration"
+  },
+  "M1.coins_r3": {
+   "audit4_reference": "AUDIT4_M1 section 3 and 8: floor(total/hi) - 1 on hi asks, +0.160 at level 0 (R-13 zero on floor(total/hi))",
+   "capacity_as_written_fails_at_levels": null,
+   "capacity_as_written_min_margin": null,
+   "level_checks": {
+    "identical_level_pairs": [],
+    "key_problems": [],
+    "profile": {
+     "log10_answer": [
+      1.186,
+      1.234,
+      1.273,
+      1.302,
+      1.34,
+      1.333,
+      1.395
+     ],
+     "numbers": [
+      5.0,
+      5.0,
+      5.0,
+      5.0,
+      5.0,
+      5.0,
+      5.0
+     ]
+    },
+    "rising_parameter_problems": null
+   },
+   "name": "M1.coins_r3",
+   "per_level_max_rule_excess": {
+    "0": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.16,
+     "rule": "a4:hi_is_value_over_hi_minus_1",
+     "signed": 0.16
+    },
+    "1": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.1395,
+     "rule": "a4:hi_is_value_over_hi_minus_1",
+     "signed": 0.1395
+    },
+    "2": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.128,
+     "rule": "a4:hi_is_value_over_hi_minus_1",
+     "signed": 0.128
+    },
+    "3": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.1135,
+     "rule": "a4:hi_is_value_over_hi_minus_1",
+     "signed": 0.1135
+    },
+    "4": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.1095,
+     "rule": "a4:hi_is_value_over_hi_minus_1",
+     "signed": 0.1095
+    },
+    "5": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0875,
+     "rule": "a4:hi_is_value_over_hi_minus_1",
+     "signed": 0.0875
+    },
+    "6": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.076,
+     "rule": "a4:hi_is_value_over_hi_minus_1",
+     "signed": 0.076
+    }
+   },
+   "reason": "R-24: |rule - base| > 0.15 at levels [0]; largest +0.160 at level 0 (a4:hi_is_value_over_hi_minus_1)",
+   "repaired_in_round_4": false,
+   "replaces": null,
+   "status": "NOT_REGISTERED",
+   "stem": "coins",
+   "strict_cluster": "S1_linear_solve"
+  },
+  "M1.consecutive_r3": {
+   "audit4_reference": "AUDIT4_M1 section 8: REGISTRABLE AS IS on the audit's measurement",
+   "capacity_as_written_fails_at_levels": [
+    0,
+    1
+   ],
+   "capacity_as_written_min_margin": 0.495,
+   "level_checks": {
+    "identical_level_pairs": [],
+    "key_problems": [],
+    "profile": {
+     "log10_answer": [
+      3.113,
+      3.291,
+      3.441,
+      3.534,
+      3.61,
+      3.67,
+      3.75
+     ],
+     "numbers": [
+      2.0,
+      2.0,
+      2.58,
+      2.49,
+      2.53,
+      2.5,
+      2.45
+     ]
+    },
+    "rising_parameter_problems": null
+   },
+   "name": "M1.consecutive_r3",
+   "per_level_max_rule_excess": {
+    "0": {
+     "excluded_procedure_max_signed": 0.51,
+     "excluded_procedure_rule": "im:mean_plus_step",
+     "max_abs_excess": 0.001,
+     "rule": "a4:echo_pos_offset",
+     "signed": -0.001
+    },
+    "1": {
+     "excluded_procedure_max_signed": 0.507,
+     "excluded_procedure_rule": "im:mean_plus_step",
+     "max_abs_excess": 0.0,
+     "rule": "",
+     "signed": 0.0
+    },
+    "2": {
+     "excluded_procedure_max_signed": 0.129,
+     "excluded_procedure_rule": "im:mean_plus_step",
+     "max_abs_excess": 0.0005,
+     "rule": "a4:mode_by_visible_ask",
+     "signed": -0.0005
+    },
+    "3": {
+     "excluded_procedure_max_signed": 0.1285,
+     "excluded_procedure_rule": "own:mean_plus_step",
+     "max_abs_excess": 0.0,
+     "rule": "",
+     "signed": 0.0
+    },
+    "4": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0005,
+     "rule": "own:echo_best_position[first/first]",
+     "signed": 0.0005
+    },
+    "5": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0005,
+     "rule": "a4:mode_by_visible_ask",
+     "signed": 0.0005
+    },
+    "6": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0005,
+     "rule": "a4:echo_pos_offset",
+     "signed": 0.0005
+    }
+   },
+   "reason": "AUDIT4_M1 section 8: REGISTRABLE AS IS on the audit's measurement",
+   "repaired_in_round_4": false,
+   "replaces": null,
+   "status": "SURVIVES",
+   "stem": "consecutive",
+   "strict_cluster": "S1_linear_solve"
+  },
+  "M1.crt_congruence_r3": {
+   "audit4_reference": "AUDIT4_M1 section 8: REGISTRABLE AS IS on the audit's measurement",
+   "capacity_as_written_fails_at_levels": null,
+   "capacity_as_written_min_margin": 28.975,
+   "level_checks": {
+    "identical_level_pairs": [],
+    "key_problems": [],
+    "profile": {
+     "log10_answer": [
+      2.537,
+      2.701,
+      2.721,
+      3.538,
+      3.674,
+      5.078,
+      5.223
+     ],
+     "numbers": [
+      4.0,
+      4.0,
+      4.0,
+      6.0,
+      6.0,
+      8.0,
+      8.0
+     ]
+    },
+    "rising_parameter_problems": null
+   },
+   "name": "M1.crt_congruence_r3",
+   "per_level_max_rule_excess": {
+    "0": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0625,
+     "rule": "a3:largest_mod_remainder",
+     "signed": 0.0625
+    },
+    "1": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0515,
+     "rule": "im:largest_mod_remainder",
+     "signed": 0.0515
+    },
+    "2": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0485,
+     "rule": "a3:largest_mod_remainder",
+     "signed": 0.0485
+    },
+    "3": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.053,
+     "rule": "im:drop_first_condition",
+     "signed": 0.053
+    },
+    "4": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.054,
+     "rule": "a3:drop_last_condition",
+     "signed": 0.054
+    },
+    "5": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.056,
+     "rule": "a3:drop_last_condition",
+     "signed": 0.056
+    },
+    "6": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.043,
+     "rule": "im:drop_last_condition",
+     "signed": 0.043
+    }
+   },
+   "reason": "AUDIT4_M1 section 8: REGISTRABLE AS IS on the audit's measurement",
+   "repaired_in_round_4": false,
+   "replaces": null,
+   "status": "SURVIVES",
+   "stem": "crt_congruence",
+   "strict_cluster": "crt_congruence"
+  },
+  "M1.digit_puzzle_r3": {
+   "audit4_reference": "AUDIT4_M1 section 6 and 8: NOT REGISTERED in round 3 (capacity and the clue tell), agreed by the audit",
+   "capacity_as_written_fails_at_levels": null,
+   "capacity_as_written_min_margin": null,
+   "level_checks": null,
+   "name": "M1.digit_puzzle_r3",
+   "per_level_max_rule_excess": {
+    "0": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.2767,
+     "rule": "own:smallest_meeting_all_but_first",
+     "signed": 0.2767
+    },
+    "1": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.1133,
+     "rule": "own:smallest_meeting_all_but_first",
+     "signed": 0.1133
+    },
+    "2": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.1467,
+     "rule": "im:smallest_meeting_all_but_last",
+     "signed": 0.1467
+    },
+    "3": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.2333,
+     "rule": "im:smallest_meeting_all_but_last",
+     "signed": 0.2333
+    },
+    "4": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.2067,
+     "rule": "im:smallest_meeting_all_but_last",
+     "signed": 0.2067
+    },
+    "5": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.2167,
+     "rule": "own:smallest_meeting_all_but_first",
+     "signed": 0.2167
+    },
+    "6": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.21,
+     "rule": "im:smallest_meeting_all_but_first",
+     "signed": 0.21
+    }
+   },
+   "reason": "NOT REGISTERED in round 3 and stays so (R-24/R-25: no new lineage, no replacement): Capacity and the tell, both measured. The wording and the 'exactly once / at least once' ambiguity are fixed, and the printed clue set is minimal (and every all...; R-24: |rule - base| > 0.15 at levels [0, 3, 4, 5, 6]; largest +0.277 at level 0 (own:smallest_meeting_all_but_first)",
+   "repaired_in_round_4": false,
+   "replaces": null,
+   "status": "NOT_REGISTERED",
+   "stem": "digit_puzzle",
+   "strict_cluster": "digit_puzzle"
+  },
+  "M1.division_counting_r3": {
+   "audit4_reference": "AUDIT4_M1 section 8: REGISTRABLE AS IS on the audit's measurement",
+   "capacity_as_written_fails_at_levels": null,
+   "capacity_as_written_min_margin": 7.075,
+   "level_checks": {
+    "identical_level_pairs": [],
+    "key_problems": [],
+    "profile": {
+     "log10_answer": [
+      0.879,
+      0.935,
+      1.006,
+      0.949,
+      1.018,
+      1.03,
+      1.096
+     ],
+     "numbers": [
+      3.0,
+      3.0,
+      3.0,
+      3.0,
+      3.0,
+      3.0,
+      3.0
+     ]
+    },
+    "rising_parameter_problems": null
+   },
+   "name": "M1.division_counting_r3",
+   "per_level_max_rule_excess": {
+    "0": {
+     "excluded_procedure_max_signed": 0.4045,
+     "excluded_procedure_rule": "im:k_minus_remainder_ignores_exact_fit",
+     "max_abs_excess": 0.075,
+     "rule": "own:echo_best_position[second/second]",
+     "signed": -0.075
+    },
+    "1": {
+     "excluded_procedure_max_signed": 0.4355,
+     "excluded_procedure_rule": "own:k_minus_remainder_ignores_exact_fit",
+     "max_abs_excess": 0.0625,
+     "rule": "a3:echo_best_position[second/second]",
+     "signed": -0.0625
+    },
+    "2": {
+     "excluded_procedure_max_signed": 0.439,
+     "excluded_procedure_rule": "a3:k_minus_remainder_ignores_exact_fit",
+     "max_abs_excess": 0.0665,
+     "rule": "a4:echo_pos",
+     "signed": -0.0665
+    },
+    "3": {
+     "excluded_procedure_max_signed": 0.447,
+     "excluded_procedure_rule": "im:k_minus_remainder_ignores_exact_fit",
+     "max_abs_excess": 0.067,
+     "rule": "own:echo_best_position[second/second]",
+     "signed": -0.067
+    },
+    "4": {
+     "excluded_procedure_max_signed": 0.4285,
+     "excluded_procedure_rule": "a3:k_minus_remainder_ignores_exact_fit",
+     "max_abs_excess": 0.049,
+     "rule": "own:echo_best_position[second/second]",
+     "signed": -0.049
+    },
+    "5": {
+     "excluded_procedure_max_signed": 0.442,
+     "excluded_procedure_rule": "im:k_minus_remainder_ignores_exact_fit",
+     "max_abs_excess": 0.055,
+     "rule": "a3:echo_best_position[second/second]",
+     "signed": -0.055
+    },
+    "6": {
+     "excluded_procedure_max_signed": 0.453,
+     "excluded_procedure_rule": "im:k_minus_remainder_ignores_exact_fit",
+     "max_abs_excess": 0.048,
+     "rule": "a3:echo_best_position[second/second]",
+     "signed": -0.048
+    }
+   },
+   "reason": "AUDIT4_M1 section 8: REGISTRABLE AS IS on the audit's measurement",
+   "repaired_in_round_4": false,
+   "replaces": null,
+   "status": "SURVIVES",
+   "stem": "division_counting",
+   "strict_cluster": "division_counting"
+  },
+  "M1.finite_differences_r4": {
+   "audit4_reference": "AUDIT4_M1 section 4: levels 0=1=2, 3=4, 5=6 identical (repair (c))",
+   "capacity_as_written_fails_at_levels": null,
+   "capacity_as_written_min_margin": 2.627,
+   "level_checks": {
+    "identical_level_pairs": [],
+    "key_problems": [],
+    "profile": {
+     "log10_answer": [
+      2.609,
+      2.662,
+      2.742,
+      2.91,
+      2.931,
+      3.237,
+      3.348
+     ],
+     "numbers": [
+      9.0,
+      9.0,
+      9.0,
+      10.0,
+      10.0,
+      11.0,
+      11.0
+     ]
+    },
+    "rising_parameter_problems": []
+   },
+   "name": "M1.finite_differences_r4",
+   "per_level_max_rule_excess": {
+    "0": {
+     "excluded_procedure_max_signed": 0.502,
+     "excluded_procedure_rule": "im:next_term_when_asked_later",
+     "max_abs_excess": 0.0015,
+     "rule": "a4:echo_pos",
+     "signed": -0.0015
+    },
+    "1": {
+     "excluded_procedure_max_signed": 0.511,
+     "excluded_procedure_rule": "im:next_term_when_asked_later",
+     "max_abs_excess": 0.003,
+     "rule": "a4:echo_pos",
+     "signed": -0.003
+    },
+    "2": {
+     "excluded_procedure_max_signed": 0.5105,
+     "excluded_procedure_rule": "im:next_term_when_asked_later",
+     "max_abs_excess": 0.0025,
+     "rule": "a3:echo_best_position[first/first]",
+     "signed": -0.0025
+    },
+    "3": {
+     "excluded_procedure_max_signed": 0.514,
+     "excluded_procedure_rule": "im:next_term_when_asked_later",
+     "max_abs_excess": 0.0015,
+     "rule": "a4:echo_pos",
+     "signed": -0.0015
+    },
+    "4": {
+     "excluded_procedure_max_signed": 0.498,
+     "excluded_procedure_rule": "im:next_term_when_asked_later",
+     "max_abs_excess": 0.002,
+     "rule": "a4:echo_pos",
+     "signed": -0.002
+    },
+    "5": {
+     "excluded_procedure_max_signed": -0.001,
+     "excluded_procedure_rule": "a3:next_term_only",
+     "max_abs_excess": 0.001,
+     "rule": "a3:echo_best_position[first/first]",
+     "signed": -0.001
+    },
+    "6": {
+     "excluded_procedure_max_signed": -0.0005,
+     "excluded_procedure_rule": "im:next_term_only",
+     "max_abs_excess": 0.0005,
+     "rule": "a4:echo_pos",
+     "signed": -0.0005
+    }
+   },
+   "reason": "AUDIT4_M1 section 4: levels 0=1=2, 3=4, 5=6 identical (repair (c))",
+   "repaired_in_round_4": true,
+   "replaces": "M1.finite_differences_r3",
+   "status": "SURVIVES",
+   "stem": "finite_differences",
+   "strict_cluster": "finite_differences"
+  },
+  "M1.fraction_remainder_r3": {
+   "audit4_reference": "AUDIT4_M1 section 8: REGISTRABLE AS IS on the audit's measurement",
+   "capacity_as_written_fails_at_levels": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "capacity_as_written_min_margin": 0.369,
+   "level_checks": {
+    "identical_level_pairs": [],
+    "key_problems": [],
+    "profile": {
+     "log10_answer": [
+      2.885,
+      2.935,
+      3.007,
+      3.045,
+      3.068,
+      3.123,
+      3.176
+     ],
+     "numbers": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ]
+    },
+    "rising_parameter_problems": null
+   },
+   "name": "M1.fraction_remainder_r3",
+   "per_level_max_rule_excess": {
+    "0": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.011,
+     "rule": "a4:spends_not_left",
+     "signed": 0.011
+    },
+    "1": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0165,
+     "rule": "a4:spends_not_left",
+     "signed": 0.0165
+    },
+    "2": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.015,
+     "rule": "a4:spends_not_left",
+     "signed": 0.015
+    },
+    "3": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.021,
+     "rule": "a4:spends_not_left",
+     "signed": 0.021
+    },
+    "4": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.017,
+     "rule": "a4:spends_not_left",
+     "signed": 0.017
+    },
+    "5": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0165,
+     "rule": "a4:spends_not_left",
+     "signed": 0.0165
+    },
+    "6": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.019,
+     "rule": "a4:spends_not_left",
+     "signed": 0.019
+    }
+   },
+   "reason": "AUDIT4_M1 section 8: REGISTRABLE AS IS on the audit's measurement",
+   "repaired_in_round_4": false,
+   "replaces": null,
+   "status": "SURVIVES",
+   "stem": "fraction_remainder",
+   "strict_cluster": "S3_multiplicative_chain"
+  },
+  "M1.gcd_lcm_r4": {
+   "audit4_reference": "AUDIT4_M1 section 4: levels 0=1=2, 3=4, 5=6 identical (repair (c)); section 3: false general rule exact at k >= 3, PENDING LEAD REVIEW, not repaired",
+   "capacity_as_written_fails_at_levels": null,
+   "capacity_as_written_min_margin": 2.617,
+   "level_checks": {
+    "identical_level_pairs": [],
+    "key_problems": [],
+    "profile": {
+     "log10_answer": [
+      2.66,
+      2.82,
+      2.833,
+      2.813,
+      2.975,
+      3.107,
+      3.393
+     ],
+     "numbers": [
+      3.54,
+      3.55,
+      3.48,
+      4.51,
+      4.52,
+      5.48,
+      5.52
+     ]
+    },
+    "rising_parameter_problems": []
+   },
+   "name": "M1.gcd_lcm_r4",
+   "per_level_max_rule_excess": {
+    "0": {
+     "excluded_procedure_max_signed": 0.4815,
+     "excluded_procedure_rule": "im:product_over_gcd_of_all",
+     "max_abs_excess": 0.0275,
+     "rule": "a3:min_difference",
+     "signed": 0.0275
+    },
+    "1": {
+     "excluded_procedure_max_signed": 0.504,
+     "excluded_procedure_rule": "im:product_over_gcd_of_all",
+     "max_abs_excess": 0.0245,
+     "rule": "a3:min_difference",
+     "signed": 0.0245
+    },
+    "2": {
+     "excluded_procedure_max_signed": 0.5005,
+     "excluded_procedure_rule": "own:product_over_gcd_of_all",
+     "max_abs_excess": 0.0215,
+     "rule": "im:min_difference",
+     "signed": 0.0215
+    },
+    "3": {
+     "excluded_procedure_max_signed": 0.485,
+     "excluded_procedure_rule": "a4:product_over_lcm_pow_k_minus_1 (k>=3; a false general rule)",
+     "max_abs_excess": 0.022,
+     "rule": "a3:gcd_of_two_smallest",
+     "signed": -0.022
+    },
+    "4": {
+     "excluded_procedure_max_signed": 0.4905,
+     "excluded_procedure_rule": "a4:product_over_lcm_pow_k_minus_1 (k>=3; a false general rule)",
+     "max_abs_excess": 0.0205,
+     "rule": "a3:gcd_of_two_smallest",
+     "signed": -0.0205
+    },
+    "5": {
+     "excluded_procedure_max_signed": 0.479,
+     "excluded_procedure_rule": "a4:product_over_gcd_pow_k_minus_1 (k>=3; a false general rule)",
+     "max_abs_excess": 0.023,
+     "rule": "a4:smallest_pairwise_gcd",
+     "signed": -0.023
+    },
+    "6": {
+     "excluded_procedure_max_signed": 0.484,
+     "excluded_procedure_rule": "a4:product_over_lcm_pow_k_minus_1 (k>=3; a false general rule)",
+     "max_abs_excess": 0.018,
+     "rule": "a4:smallest_pairwise_gcd",
+     "signed": -0.018
+    }
+   },
+   "reason": "AUDIT4_M1 section 4: levels 0=1=2, 3=4, 5=6 identical (repair (c)); section 3: false general rule exact at k >= 3, PENDING LEAD REVIEW, not repaired",
+   "repaired_in_round_4": true,
+   "replaces": "M1.gcd_lcm_r3",
+   "status": "SURVIVES",
+   "stem": "gcd_lcm",
+   "strict_cluster": "gcd_lcm"
+  },
+  "M1.grid_perimeter_r3": {
+   "audit4_reference": "AUDIT4_M1 section 8: REGISTRABLE AS IS on the audit's measurement",
+   "capacity_as_written_fails_at_levels": [
+    0
+   ],
+   "capacity_as_written_min_margin": 0.96,
+   "level_checks": {
+    "identical_level_pairs": [],
+    "key_problems": [],
+    "profile": {
+     "log10_answer": [
+      1.435,
+      1.548,
+      1.638,
+      1.713,
+      1.787,
+      1.826,
+      1.885
+     ],
+     "numbers": [
+      14.87,
+      18.34,
+      21.93,
+      25.22,
+      28.83,
+      31.5,
+      35.11
+     ]
+    },
+    "rising_parameter_problems": null
+   },
+   "name": "M1.grid_perimeter_r3",
+   "per_level_max_rule_excess": {
+    "0": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0875,
+     "rule": "a4:echo_pos",
+     "signed": -0.0875
+    },
+    "1": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0845,
+     "rule": "a4:echo_pos",
+     "signed": -0.0845
+    },
+    "2": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.083,
+     "rule": "a3:echo_best_position[first/first]",
+     "signed": -0.083
+    },
+    "3": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0885,
+     "rule": "a3:echo_best_position[first/first]",
+     "signed": -0.0885
+    },
+    "4": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.075,
+     "rule": "own:echo_best_position[first/first]",
+     "signed": -0.075
+    },
+    "5": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.072,
+     "rule": "own:echo_best_position[first/first]",
+     "signed": -0.072
+    },
+    "6": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.07,
+     "rule": "own:echo_best_position[first/first]",
+     "signed": -0.07
+    }
+   },
+   "reason": "AUDIT4_M1 section 8: REGISTRABLE AS IS on the audit's measurement",
+   "repaired_in_round_4": false,
+   "replaces": null,
+   "status": "SURVIVES",
+   "stem": "grid_perimeter",
+   "strict_cluster": "S6_exposed_faces"
+  },
+  "M1.inclusion_exclusion_r3": {
+   "audit4_reference": "AUDIT4_M1 section 8: REGISTRABLE AS IS on the audit's measurement",
+   "capacity_as_written_fails_at_levels": null,
+   "capacity_as_written_min_margin": 8.896,
+   "level_checks": {
+    "identical_level_pairs": [],
+    "key_problems": [],
+    "profile": {
+     "log10_answer": [
+      1.256,
+      1.362,
+      1.431,
+      1.758,
+      1.794,
+      1.886,
+      1.968
+     ],
+     "numbers": [
+      5.0,
+      5.0,
+      5.0,
+      9.0,
+      9.0,
+      9.0,
+      9.0
+     ]
+    },
+    "rising_parameter_problems": null
+   },
+   "name": "M1.inclusion_exclusion_r3",
+   "per_level_max_rule_excess": {
+    "0": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0335,
+     "rule": "im:any_ignore_overlap",
+     "signed": -0.0335
+    },
+    "1": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0305,
+     "rule": "a3:any_ignore_overlap",
+     "signed": -0.0305
+    },
+    "2": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.025,
+     "rule": "a3:any_ignore_overlap",
+     "signed": -0.025
+    },
+    "3": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0145,
+     "rule": "own:forget_triple",
+     "signed": -0.0145
+    },
+    "4": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.009,
+     "rule": "own:forget_triple",
+     "signed": -0.009
+    },
+    "5": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.009,
+     "rule": "a4:mode_by_visible_ask",
+     "signed": 0.009
+    },
+    "6": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0075,
+     "rule": "a4:both_read_as_exactly_two",
+     "signed": -0.0075
+    }
+   },
+   "reason": "AUDIT4_M1 section 8: REGISTRABLE AS IS on the audit's measurement",
+   "repaired_in_round_4": false,
+   "replaces": null,
+   "status": "SURVIVES",
+   "stem": "inclusion_exclusion",
+   "strict_cluster": "inclusion_exclusion"
+  },
+  "M1.last_digit_power_r3": {
+   "audit4_reference": "AUDIT4_M1 section 8: REGISTRABLE AS IS on the audit's measurement",
+   "capacity_as_written_fails_at_levels": null,
+   "capacity_as_written_min_margin": 12.567,
+   "level_checks": {
+    "identical_level_pairs": [],
+    "key_problems": [],
+    "profile": {
+     "log10_answer": [
+      1.236,
+      1.31,
+      1.252,
+      1.261,
+      1.298,
+      1.35,
+      1.301
+     ],
+     "numbers": [
+      5.0,
+      5.0,
+      7.0,
+      7.0,
+      7.0,
+      9.0,
+      9.0
+     ]
+    },
+    "rising_parameter_problems": null
+   },
+   "name": "M1.last_digit_power_r3",
+   "per_level_max_rule_excess": {
+    "0": {
+     "excluded_procedure_max_signed": 0.116,
+     "excluded_procedure_rule": "a3:fermat_misapplied_e_mod_p_plus_1",
+     "max_abs_excess": 0.093,
+     "rule": "a3:exp_mod_p",
+     "signed": 0.093
+    },
+    "1": {
+     "excluded_procedure_max_signed": 0.0975,
+     "excluded_procedure_rule": "own:fermat_misapplied_e_mod_p_plus_1",
+     "max_abs_excess": 0.0695,
+     "rule": "own:exp_mod_p",
+     "signed": 0.0695
+    },
+    "2": {
+     "excluded_procedure_max_signed": 0.0325,
+     "excluded_procedure_rule": "im:fermat_misapplied_e_mod_p_plus_1",
+     "max_abs_excess": 0.021,
+     "rule": "a3:exp_last_digit",
+     "signed": 0.021
+    },
+    "3": {
+     "excluded_procedure_max_signed": 0.0295,
+     "excluded_procedure_rule": "own:fermat_misapplied_e_mod_p_plus_1",
+     "max_abs_excess": 0.02,
+     "rule": "own:exp_last_digit",
+     "signed": 0.02
+    },
+    "4": {
+     "excluded_procedure_max_signed": 0.031,
+     "excluded_procedure_rule": "a3:fermat_misapplied_e_mod_p_plus_1",
+     "max_abs_excess": 0.023,
+     "rule": "own:exp_last_digit",
+     "signed": 0.023
+    },
+    "5": {
+     "excluded_procedure_max_signed": 0.0175,
+     "excluded_procedure_rule": "a3:fermat_misapplied_e_mod_p_plus_1",
+     "max_abs_excess": 0.019,
+     "rule": "a3:exp_last_digit",
+     "signed": 0.019
+    },
+    "6": {
+     "excluded_procedure_max_signed": 0.0095,
+     "excluded_procedure_rule": "im:fermat_misapplied_e_mod_p_plus_1",
+     "max_abs_excess": 0.015,
+     "rule": "own:exp_last_digit",
+     "signed": 0.015
+    }
+   },
+   "reason": "AUDIT4_M1 section 8: REGISTRABLE AS IS on the audit's measurement",
+   "repaired_in_round_4": false,
+   "replaces": null,
+   "status": "SURVIVES",
+   "stem": "last_digit_power",
+   "strict_cluster": "last_digit_power"
+  },
+  "M1.linear_equation_r3": {
+   "audit4_reference": "AUDIT4_M1 section 8: REGISTRABLE AS IS on the audit's measurement",
+   "capacity_as_written_fails_at_levels": null,
+   "capacity_as_written_min_margin": 2.602,
+   "level_checks": {
+    "identical_level_pairs": [],
+    "key_problems": [],
+    "profile": {
+     "log10_answer": [
+      1.132,
+      1.27,
+      1.41,
+      1.533,
+      1.56,
+      1.621,
+      1.706
+     ],
+     "numbers": [
+      3.0,
+      3.0,
+      3.0,
+      4.0,
+      4.0,
+      4.0,
+      4.0
+     ]
+    },
+    "rising_parameter_problems": null
+   },
+   "name": "M1.linear_equation_r3",
+   "per_level_max_rule_excess": {
+    "0": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0165,
+     "rule": "own:ignore_constant",
+     "signed": -0.0165
+    },
+    "1": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.013,
+     "rule": "im:ignore_constant",
+     "signed": -0.013
+    },
+    "2": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0125,
+     "rule": "im:ignore_constant",
+     "signed": -0.0125
+    },
+    "3": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0105,
+     "rule": "a4:echo_pos",
+     "signed": 0.0105
+    },
+    "4": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0075,
+     "rule": "a4:echo_pos_offset",
+     "signed": 0.0075
+    },
+    "5": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.011,
+     "rule": "own:echo_best_position[max_minus_min/max_minus_min]",
+     "signed": 0.011
+    },
+    "6": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.007,
+     "rule": "a3:echo_best_position[max_minus_min/max_minus_min]",
+     "signed": 0.007
+    }
+   },
+   "reason": "AUDIT4_M1 section 8: REGISTRABLE AS IS on the audit's measurement",
+   "repaired_in_round_4": false,
+   "replaces": null,
+   "status": "SURVIVES",
+   "stem": "linear_equation",
+   "strict_cluster": "S1_linear_solve"
+  },
+  "M1.median_list_r3": {
+   "audit4_reference": "AUDIT4_M1 section 8: REGISTRABLE AS IS on the audit's measurement",
+   "capacity_as_written_fails_at_levels": null,
+   "capacity_as_written_min_margin": 8264.187,
+   "level_checks": {
+    "identical_level_pairs": [],
+    "key_problems": [],
+    "profile": {
+     "log10_answer": [
+      1.969,
+      2.1,
+      2.197,
+      2.26,
+      2.32,
+      2.395,
+      2.431
+     ],
+     "numbers": [
+      8.53,
+      9.9,
+      11.47,
+      12.97,
+      14.39,
+      16.11,
+      17.39
+     ]
+    },
+    "rising_parameter_problems": null
+   },
+   "name": "M1.median_list_r3",
+   "per_level_max_rule_excess": {
+    "0": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0895,
+     "rule": "im:mode_value",
+     "signed": 0.0895
+    },
+    "1": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.056,
+     "rule": "a3:mode_value",
+     "signed": 0.056
+    },
+    "2": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0675,
+     "rule": "im:mode_value",
+     "signed": 0.0675
+    },
+    "3": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.05,
+     "rule": "a3:mode_value",
+     "signed": 0.05
+    },
+    "4": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0515,
+     "rule": "im:mode_value",
+     "signed": 0.0515
+    },
+    "5": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0425,
+     "rule": "im:mode_value",
+     "signed": 0.0425
+    },
+    "6": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.041,
+     "rule": "own:mode_value",
+     "signed": 0.041
+    }
+   },
+   "reason": "AUDIT4_M1 section 8: REGISTRABLE AS IS on the audit's measurement",
+   "repaired_in_round_4": false,
+   "replaces": null,
+   "status": "SURVIVES",
+   "stem": "median_list",
+   "strict_cluster": "median_list"
+  },
+  "M1.mixture_r4": {
+   "audit4_reference": "AUDIT4_M1 section 4: levels 0=1=2 and 3=4=5=6 identical (repair (c))",
+   "capacity_as_written_fails_at_levels": null,
+   "capacity_as_written_min_margin": 1.785,
+   "level_checks": {
+    "identical_level_pairs": [],
+    "key_problems": [],
+    "profile": {
+     "log10_answer": [
+      1.194,
+      1.254,
+      1.327,
+      1.468,
+      1.511,
+      1.528,
+      1.545
+     ],
+     "numbers": [
+      4.0,
+      4.0,
+      4.0,
+      5.0,
+      5.0,
+      5.0,
+      5.0
+     ]
+    },
+    "rising_parameter_problems": []
+   },
+   "name": "M1.mixture_r4",
+   "per_level_max_rule_excess": {
+    "0": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.03,
+     "rule": "a4:swapped_weights",
+     "signed": 0.03
+    },
+    "1": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0275,
+     "rule": "a4:swapped_weights",
+     "signed": 0.0275
+    },
+    "2": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0275,
+     "rule": "own:unweighted_mean",
+     "signed": 0.0275
+    },
+    "3": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0325,
+     "rule": "own:unweighted_mean",
+     "signed": 0.0325
+    },
+    "4": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.029,
+     "rule": "a3:unweighted_mean",
+     "signed": 0.029
+    },
+    "5": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.032,
+     "rule": "own:unweighted_mean",
+     "signed": 0.032
+    },
+    "6": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0265,
+     "rule": "own:unweighted_mean",
+     "signed": 0.0265
+    }
+   },
+   "reason": "AUDIT4_M1 section 4: levels 0=1=2 and 3=4=5=6 identical (repair (c))",
+   "repaired_in_round_4": true,
+   "replaces": "M1.mixture_r3",
+   "status": "SURVIVES",
+   "stem": "mixture",
+   "strict_cluster": "S2_weighted_sum"
+  },
+  "M1.mode_tally_r3": {
+   "audit4_reference": "AUDIT4_M1 section 3 and 8: the 'others' key predictable from the printed list length, +0.382 at level 1; levels flat",
+   "capacity_as_written_fails_at_levels": null,
+   "capacity_as_written_min_margin": null,
+   "level_checks": {
+    "identical_level_pairs": [],
+    "key_problems": [],
+    "profile": {
+     "log10_answer": [
+      1.525,
+      1.526,
+      1.562,
+      1.571,
+      1.601,
+      1.594,
+      1.613
+     ],
+     "numbers": [
+      46.81,
+      46.71,
+      46.52,
+      45.44,
+      46.41,
+      45.48,
+      45.52
+     ]
+    },
+    "rising_parameter_problems": null
+   },
+   "name": "M1.mode_tally_r3",
+   "per_level_max_rule_excess": {
+    "0": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.377,
+     "rule": "a4:mode_by_visible_ask",
+     "signed": 0.377
+    },
+    "1": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.3815,
+     "rule": "a4:mode_by_visible_ask",
+     "signed": 0.3815
+    },
+    "2": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.371,
+     "rule": "a4:mode_by_visible_ask",
+     "signed": 0.371
+    },
+    "3": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.3755,
+     "rule": "a4:mode_by_visible_ask",
+     "signed": 0.3755
+    },
+    "4": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.3725,
+     "rule": "a4:mode_by_visible_ask",
+     "signed": 0.3725
+    },
+    "5": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.367,
+     "rule": "a4:mode_by_visible_ask",
+     "signed": 0.367
+    },
+    "6": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.376,
+     "rule": "a4:mode_by_visible_ask",
+     "signed": 0.376
+    }
+   },
+   "reason": "R-24: |rule - base| > 0.15 at levels [0, 1, 2, 3, 4, 5, 6]; largest +0.382 at level 1 (a4:mode_by_visible_ask)",
+   "repaired_in_round_4": false,
+   "replaces": null,
+   "status": "NOT_REGISTERED",
+   "stem": "mode_tally",
+   "strict_cluster": "mode_tally"
+  },
+  "M1.painted_cube_r3": {
+   "audit4_reference": "AUDIT4_M1 section 8: REGISTRABLE AS IS on the audit's measurement",
+   "capacity_as_written_fails_at_levels": null,
+   "capacity_as_written_min_margin": 1.894,
+   "level_checks": {
+    "identical_level_pairs": [],
+    "key_problems": [],
+    "profile": {
+     "log10_answer": [
+      2.761,
+      2.789,
+      2.911,
+      3.091,
+      3.057,
+      3.252,
+      3.241
+     ],
+     "numbers": [
+      4.0,
+      4.0,
+      4.0,
+      4.0,
+      4.0,
+      4.0,
+      4.0
+     ]
+    },
+    "rising_parameter_problems": null
+   },
+   "name": "M1.painted_cube_r3",
+   "per_level_max_rule_excess": {
+    "0": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.007,
+     "rule": "a3:ignore_bottom_rule_ONLY_on_unpainted_bottom_items",
+     "signed": -0.007
+    },
+    "1": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.007,
+     "rule": "a4:mode_by_visible_ask",
+     "signed": 0.007
+    },
+    "2": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0075,
+     "rule": "own:echo_best_position[first/first]",
+     "signed": -0.0075
+    },
+    "3": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0045,
+     "rule": "own:echo_best_position[first/first]",
+     "signed": -0.0045
+    },
+    "4": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0035,
+     "rule": "own:echo_best_position[first/first]",
+     "signed": -0.0035
+    },
+    "5": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0045,
+     "rule": "a3:echo_best_position[first/first]",
+     "signed": -0.0045
+    },
+    "6": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.005,
+     "rule": "own:echo_best_position[first/first]",
+     "signed": -0.005
+    }
+   },
+   "reason": "AUDIT4_M1 section 8: REGISTRABLE AS IS on the audit's measurement",
+   "repaired_in_round_4": false,
+   "replaces": null,
+   "status": "SURVIVES",
+   "stem": "painted_cube",
+   "strict_cluster": "S6_exposed_faces"
+  },
+  "M1.percent_change_r3": {
+   "audit4_reference": "AUDIT4_M1 section 8: REGISTRABLE AS IS on the audit's measurement",
+   "capacity_as_written_fails_at_levels": [
+    0,
+    1,
+    3
+   ],
+   "capacity_as_written_min_margin": 0.824,
+   "level_checks": {
+    "identical_level_pairs": [],
+    "key_problems": [],
+    "profile": {
+     "log10_answer": [
+      1.921,
+      1.977,
+      2.027,
+      2.555,
+      2.55,
+      2.591,
+      2.665
+     ],
+     "numbers": [
+      3.0,
+      3.0,
+      3.0,
+      4.0,
+      4.0,
+      4.0,
+      4.0
+     ]
+    },
+    "rising_parameter_problems": null
+   },
+   "name": "M1.percent_change_r3",
+   "per_level_max_rule_excess": {
+    "0": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0025,
+     "rule": "a4:additive_percents",
+     "signed": -0.0025
+    },
+    "1": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.003,
+     "rule": "own:echo_best_position[first/first]",
+     "signed": 0.003
+    },
+    "2": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0045,
+     "rule": "a4:echo_pos",
+     "signed": 0.0045
+    },
+    "3": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0075,
+     "rule": "own:first_step_only",
+     "signed": 0.0075
+    },
+    "4": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.005,
+     "rule": "own:echo_best_position[sum/first]",
+     "signed": -0.005
+    },
+    "5": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.005,
+     "rule": "a3:first_step_only",
+     "signed": 0.005
+    },
+    "6": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.006,
+     "rule": "a3:first_step_only",
+     "signed": 0.006
+    }
+   },
+   "reason": "AUDIT4_M1 section 8: REGISTRABLE AS IS on the audit's measurement",
+   "repaired_in_round_4": false,
+   "replaces": null,
+   "status": "SURVIVES",
+   "stem": "percent_change",
+   "strict_cluster": "S3_multiplicative_chain"
+  },
+  "M1.pigeonhole_worst_case_r3": {
+   "audit4_reference": "AUDIT4_M1 section 3 and 8: 'every other colour, then k of the largest' +0.287 at level 1",
+   "capacity_as_written_fails_at_levels": null,
+   "capacity_as_written_min_margin": null,
+   "level_checks": {
+    "identical_level_pairs": [],
+    "key_problems": [],
+    "profile": {
+     "log10_answer": [
+      1.856,
+      1.893,
+      2.106,
+      2.132,
+      2.244,
+      2.296,
+      2.313
+     ],
+     "numbers": [
+      4.5,
+      4.53,
+      5.48,
+      5.51,
+      6.5,
+      6.51,
+      6.55
+     ]
+    },
+    "rising_parameter_problems": null
+   },
+   "name": "M1.pigeonhole_worst_case_r3",
+   "per_level_max_rule_excess": {
+    "0": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.273,
+     "rule": "a4:all_other_colours_then_k",
+     "signed": 0.273
+    },
+    "1": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.2875,
+     "rule": "a4:all_other_colours_then_k",
+     "signed": 0.2875
+    },
+    "2": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.2745,
+     "rule": "a4:all_other_colours_then_k",
+     "signed": 0.2745
+    },
+    "3": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.252,
+     "rule": "a4:all_other_colours_then_k",
+     "signed": 0.252
+    },
+    "4": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.2285,
+     "rule": "a4:all_other_colours_then_k",
+     "signed": 0.2285
+    },
+    "5": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.243,
+     "rule": "a4:all_other_colours_then_k",
+     "signed": 0.243
+    },
+    "6": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.257,
+     "rule": "a4:all_other_colours_then_k",
+     "signed": 0.257
+    }
+   },
+   "reason": "R-24: |rule - base| > 0.15 at levels [0, 1, 2, 3, 4, 5, 6]; largest +0.287 at level 1 (a4:all_other_colours_then_k)",
+   "repaired_in_round_4": false,
+   "replaces": null,
+   "status": "NOT_REGISTERED",
+   "stem": "pigeonhole_worst_case",
+   "strict_cluster": "pigeonhole_worst_case"
+  },
+  "M1.pipes_work_r3": {
+   "audit4_reference": "AUDIT4_M1 section 8: REGISTRABLE AS IS on the audit's measurement",
+   "capacity_as_written_fails_at_levels": [
+    0,
+    1,
+    2
+   ],
+   "capacity_as_written_min_margin": 0.565,
+   "level_checks": {
+    "identical_level_pairs": [],
+    "key_problems": [],
+    "profile": {
+     "log10_answer": [
+      1.268,
+      1.32,
+      1.368,
+      1.416,
+      1.431,
+      1.455,
+      1.488
+     ],
+     "numbers": [
+      3.0,
+      3.0,
+      3.0,
+      4.0,
+      4.0,
+      4.0,
+      4.0
+     ]
+    },
+    "rising_parameter_problems": null
+   },
+   "name": "M1.pipes_work_r3",
+   "per_level_max_rule_excess": {
+    "0": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0315,
+     "rule": "im:ignore_drain",
+     "signed": -0.0315
+    },
+    "1": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.025,
+     "rule": "own:ignore_drain",
+     "signed": -0.025
+    },
+    "2": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.021,
+     "rule": "a3:ignore_drain",
+     "signed": -0.021
+    },
+    "3": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.03,
+     "rule": "own:echo_best_position[last/last]",
+     "signed": 0.03
+    },
+    "4": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.031,
+     "rule": "a4:echo_pos",
+     "signed": 0.031
+    },
+    "5": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0255,
+     "rule": "a4:echo_pos",
+     "signed": 0.0255
+    },
+    "6": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0275,
+     "rule": "a3:echo_best_position[last/last]",
+     "signed": 0.0275
+    }
+   },
+   "reason": "AUDIT4_M1 section 8: REGISTRABLE AS IS on the audit's measurement",
+   "repaired_in_round_4": false,
+   "replaces": null,
+   "status": "SURVIVES",
+   "stem": "pipes_work",
+   "strict_cluster": "S1_linear_solve"
+  },
+  "M1.prime_factors_r3": {
+   "audit4_reference": "AUDIT4_M1 section 8: REGISTRABLE AS IS on the audit's measurement",
+   "capacity_as_written_fails_at_levels": null,
+   "capacity_as_written_min_margin": 1.826,
+   "level_checks": {
+    "identical_level_pairs": [],
+    "key_problems": [],
+    "profile": {
+     "log10_answer": [
+      1.339,
+      1.324,
+      1.367,
+      1.44,
+      1.439,
+      1.447,
+      1.533
+     ],
+     "numbers": [
+      2.29,
+      2.34,
+      2.35,
+      2.15,
+      2.24,
+      2.42,
+      2.22
+     ]
+    },
+    "rising_parameter_problems": null
+   },
+   "name": "M1.prime_factors_r3",
+   "per_level_max_rule_excess": {
+    "0": {
+     "excluded_procedure_max_signed": 0.1725,
+     "excluded_procedure_rule": "a3:largest_le_sqrt",
+     "max_abs_excess": 0.077,
+     "rule": "own:omega_plus_one",
+     "signed": -0.077
+    },
+    "1": {
+     "excluded_procedure_max_signed": 0.1655,
+     "excluded_procedure_rule": "im:largest_le_sqrt",
+     "max_abs_excess": 0.083,
+     "rule": "own:omega_plus_one",
+     "signed": -0.083
+    },
+    "2": {
+     "excluded_procedure_max_signed": 0.181,
+     "excluded_procedure_rule": "a3:largest_le_sqrt",
+     "max_abs_excess": 0.065,
+     "rule": "a3:omega_plus_one",
+     "signed": -0.065
+    },
+    "3": {
+     "excluded_procedure_max_signed": 0.1905,
+     "excluded_procedure_rule": "a3:largest_le_sqrt",
+     "max_abs_excess": 0.066,
+     "rule": "own:omega_plus_one",
+     "signed": -0.066
+    },
+    "4": {
+     "excluded_procedure_max_signed": 0.2015,
+     "excluded_procedure_rule": "a3:largest_le_sqrt",
+     "max_abs_excess": 0.064,
+     "rule": "own:omega_plus_one",
+     "signed": -0.064
+    },
+    "5": {
+     "excluded_procedure_max_signed": 0.193,
+     "excluded_procedure_rule": "im:largest_le_sqrt",
+     "max_abs_excess": 0.063,
+     "rule": "a3:omega_plus_one",
+     "signed": -0.063
+    },
+    "6": {
+     "excluded_procedure_max_signed": 0.1955,
+     "excluded_procedure_rule": "im:largest_le_sqrt",
+     "max_abs_excess": 0.0555,
+     "rule": "a4:mode_by_visible_ask",
+     "signed": 0.0555
+    }
+   },
+   "reason": "AUDIT4_M1 section 8: REGISTRABLE AS IS on the audit's measurement",
+   "repaired_in_round_4": false,
+   "replaces": null,
+   "status": "SURVIVES",
+   "stem": "prime_factors",
+   "strict_cluster": "prime_factors"
+  },
+  "M1.pythagoras_r3": {
+   "audit4_reference": "AUDIT4_M1 section 6 and 8: NOT REGISTERED in round 3 (capacity and memorised triples), agreed by the audit",
+   "capacity_as_written_fails_at_levels": null,
+   "capacity_as_written_min_margin": null,
+   "level_checks": {
+    "identical_level_pairs": [],
+    "key_problems": [],
+    "profile": {
+     "log10_answer": [
+      2.339,
+      2.68,
+      2.819,
+      2.951,
+      3.024,
+      3.132,
+      3.204
+     ],
+     "numbers": [
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0
+     ]
+    },
+    "rising_parameter_problems": null
+   },
+   "name": "M1.pythagoras_r3",
+   "per_level_max_rule_excess": {
+    "0": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.2565,
+     "rule": "im:memorised_16_scaled",
+     "signed": 0.2565
+    },
+    "1": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.1315,
+     "rule": "own:memorised_16_scaled",
+     "signed": 0.1315
+    },
+    "2": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0725,
+     "rule": "im:memorised_16_scaled",
+     "signed": 0.0725
+    },
+    "3": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0535,
+     "rule": "own:memorised_16_scaled",
+     "signed": 0.0535
+    },
+    "4": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0465,
+     "rule": "own:memorised_16_scaled",
+     "signed": 0.0465
+    },
+    "5": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0395,
+     "rule": "own:memorised_16_scaled",
+     "signed": 0.0395
+    },
+    "6": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0335,
+     "rule": "own:memorised_16_scaled",
+     "signed": 0.0335
+    }
+   },
+   "reason": "NOT REGISTERED in round 3 and stays so (R-24/R-25: no new lineage, no replacement): Capacity and the memorised-triple tell cannot both be fixed. Integer right triangles are sparse: 294 with hypotenuse <= 400, 1,981 with <= 2,000, 3,414 with <= ...; R-24: |rule - base| > 0.15 at levels [0]; largest +0.257 at level 0 (im:memorised_16_scaled)",
+   "repaired_in_round_4": false,
+   "replaces": null,
+   "status": "NOT_REGISTERED",
+   "stem": "pythagoras",
+   "strict_cluster": "pythagoras"
+  },
+  "M1.quadratic_area_r3": {
+   "audit4_reference": "AUDIT4_M1 section 8: REGISTRABLE AS IS on the audit's measurement",
+   "capacity_as_written_fails_at_levels": null,
+   "capacity_as_written_min_margin": 2.788,
+   "level_checks": {
+    "identical_level_pairs": [],
+    "key_problems": [],
+    "profile": {
+     "log10_answer": [
+      1.863,
+      1.95,
+      2.012,
+      2.04,
+      2.114,
+      2.092,
+      2.144
+     ],
+     "numbers": [
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0
+     ]
+    },
+    "rising_parameter_problems": null
+   },
+   "name": "M1.quadratic_area_r3",
+   "per_level_max_rule_excess": {
+    "0": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0065,
+     "rule": "own:echo_best_position[min/min]",
+     "signed": 0.0065
+    },
+    "1": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.01,
+     "rule": "a3:quarter_perimeter",
+     "signed": -0.01
+    },
+    "2": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0065,
+     "rule": "a3:quarter_perimeter",
+     "signed": -0.0065
+    },
+    "3": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.005,
+     "rule": "a3:quarter_perimeter",
+     "signed": -0.005
+    },
+    "4": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.004,
+     "rule": "own:quarter_perimeter",
+     "signed": -0.004
+    },
+    "5": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0035,
+     "rule": "a3:quarter_perimeter",
+     "signed": -0.0035
+    },
+    "6": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0045,
+     "rule": "own:quarter_perimeter",
+     "signed": -0.0045
+    }
+   },
+   "reason": "AUDIT4_M1 section 8: REGISTRABLE AS IS on the audit's measurement",
+   "repaired_in_round_4": false,
+   "replaces": null,
+   "status": "SURVIVES",
+   "stem": "quadratic_area",
+   "strict_cluster": "quadratic_area"
+  },
+  "M1.ratio_share_r3": {
+   "audit4_reference": "AUDIT4_M1 section 8: REGISTRABLE AS IS on the audit's measurement",
+   "capacity_as_written_fails_at_levels": [
+    0
+   ],
+   "capacity_as_written_min_margin": 0.891,
+   "level_checks": {
+    "identical_level_pairs": [],
+    "key_problems": [],
+    "profile": {
+     "log10_answer": [
+      2.218,
+      2.323,
+      2.394,
+      2.569,
+      2.562,
+      2.599,
+      2.683
+     ],
+     "numbers": [
+      3.0,
+      3.0,
+      4.0,
+      4.0,
+      5.0,
+      5.0,
+      5.0
+     ]
+    },
+    "rising_parameter_problems": null
+   },
+   "name": "M1.ratio_share_r3",
+   "per_level_max_rule_excess": {
+    "0": {
+     "excluded_procedure_max_signed": 0.539,
+     "excluded_procedure_rule": "own:largest_share",
+     "max_abs_excess": 0.0595,
+     "rule": "own:equal_split",
+     "signed": 0.0595
+    },
+    "1": {
+     "excluded_procedure_max_signed": 0.542,
+     "excluded_procedure_rule": "im:largest_share",
+     "max_abs_excess": 0.055,
+     "rule": "a3:equal_split",
+     "signed": 0.055
+    },
+    "2": {
+     "excluded_procedure_max_signed": 0.38,
+     "excluded_procedure_rule": "a3:largest_share",
+     "max_abs_excess": 0.028,
+     "rule": "a3:equal_split",
+     "signed": 0.028
+    },
+    "3": {
+     "excluded_procedure_max_signed": 0.3755,
+     "excluded_procedure_rule": "a3:largest_share",
+     "max_abs_excess": 0.0285,
+     "rule": "own:equal_split",
+     "signed": 0.0285
+    },
+    "4": {
+     "excluded_procedure_max_signed": 0.279,
+     "excluded_procedure_rule": "own:largest_share",
+     "max_abs_excess": 0.0215,
+     "rule": "a4:equal_split",
+     "signed": 0.0215
+    },
+    "5": {
+     "excluded_procedure_max_signed": 0.2885,
+     "excluded_procedure_rule": "own:smallest_share",
+     "max_abs_excess": 0.02,
+     "rule": "a4:equal_split",
+     "signed": 0.02
+    },
+    "6": {
+     "excluded_procedure_max_signed": 0.2825,
+     "excluded_procedure_rule": "own:smallest_share",
+     "max_abs_excess": 0.0225,
+     "rule": "own:equal_split",
+     "signed": 0.0225
+    }
+   },
+   "reason": "AUDIT4_M1 section 8: REGISTRABLE AS IS on the audit's measurement",
+   "repaired_in_round_4": false,
+   "replaces": null,
+   "status": "SURVIVES",
+   "stem": "ratio_share",
+   "strict_cluster": "S3_multiplicative_chain"
+  },
+  "M1.rectangle_r3": {
+   "audit4_reference": "AUDIT4_M1 section 8: REGISTRABLE AS IS on the audit's measurement",
+   "capacity_as_written_fails_at_levels": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "capacity_as_written_min_margin": 0.2,
+   "level_checks": {
+    "identical_level_pairs": [],
+    "key_problems": [],
+    "profile": {
+     "log10_answer": [
+      3.27,
+      3.391,
+      3.499,
+      3.61,
+      3.678,
+      3.722,
+      3.723
+     ],
+     "numbers": [
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0,
+      2.0
+     ]
+    },
+    "rising_parameter_problems": null
+   },
+   "name": "M1.rectangle_r3",
+   "per_level_max_rule_excess": {
+    "0": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.01,
+     "rule": "a4:echo_pos_offset",
+     "signed": 0.01
+    },
+    "1": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.011,
+     "rule": "a4:echo_pos_offset",
+     "signed": 0.011
+    },
+    "2": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.015,
+     "rule": "a4:echo_pos_offset",
+     "signed": 0.015
+    },
+    "3": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0135,
+     "rule": "a4:square_area",
+     "signed": 0.0135
+    },
+    "4": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.009,
+     "rule": "a4:square_area",
+     "signed": 0.009
+    },
+    "5": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.012,
+     "rule": "a4:square_area",
+     "signed": 0.012
+    },
+    "6": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0105,
+     "rule": "a4:square_area",
+     "signed": 0.0105
+    }
+   },
+   "reason": "AUDIT4_M1 section 8: REGISTRABLE AS IS on the audit's measurement",
+   "repaired_in_round_4": false,
+   "replaces": null,
+   "status": "SURVIVES",
+   "stem": "rectangle",
+   "strict_cluster": "S1_linear_solve"
+  },
+  "M1.recurrence_iterate_r3": {
+   "audit4_reference": "AUDIT4_M1 section 8: REGISTRABLE AS IS on the audit's measurement",
+   "capacity_as_written_fails_at_levels": null,
+   "capacity_as_written_min_margin": 5.705,
+   "level_checks": {
+    "identical_level_pairs": [],
+    "key_problems": [],
+    "profile": {
+     "log10_answer": [
+      3.219,
+      3.347,
+      3.705,
+      3.771,
+      3.992,
+      4.224,
+      4.241
+     ],
+     "numbers": [
+      4.95,
+      4.94,
+      4.9,
+      4.9,
+      4.95,
+      4.92,
+      4.99
+     ]
+    },
+    "rising_parameter_problems": null
+   },
+   "name": "M1.recurrence_iterate_r3",
+   "per_level_max_rule_excess": {
+    "0": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.005,
+     "rule": "a4:echo_pos_offset",
+     "signed": 0.005
+    },
+    "1": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0015,
+     "rule": "a4:echo_pos",
+     "signed": -0.0015
+    },
+    "2": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0005,
+     "rule": "own:echo_best_position[first/first]",
+     "signed": -0.0005
+    },
+    "3": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0005,
+     "rule": "a4:echo_pos",
+     "signed": -0.0005
+    },
+    "4": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.001,
+     "rule": "a3:echo_best_position[first/first]",
+     "signed": -0.001
+    },
+    "5": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.001,
+     "rule": "a3:echo_best_position[first/first]",
+     "signed": -0.001
+    },
+    "6": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0015,
+     "rule": "own:echo_best_position[first/first]",
+     "signed": -0.0015
+    }
+   },
+   "reason": "AUDIT4_M1 section 8: REGISTRABLE AS IS on the audit's measurement",
+   "repaired_in_round_4": false,
+   "replaces": null,
+   "status": "SURVIVES",
+   "stem": "recurrence_iterate",
+   "strict_cluster": "S7_step_rule"
+  },
+  "M1.shopping_r3": {
+   "audit4_reference": "AUDIT4_M1 section 8: REGISTRABLE AS IS on the audit's measurement",
+   "capacity_as_written_fails_at_levels": null,
+   "capacity_as_written_min_margin": 36.896,
+   "level_checks": {
+    "identical_level_pairs": [],
+    "key_problems": [],
+    "profile": {
+     "log10_answer": [
+      1.009,
+      0.973,
+      0.969,
+      0.953,
+      0.983,
+      0.985,
+      0.973
+     ],
+     "numbers": [
+      5.0,
+      7.0,
+      9.0,
+      9.0,
+      11.0,
+      11.0,
+      13.0
+     ]
+    },
+    "rising_parameter_problems": null
+   },
+   "name": "M1.shopping_r3",
+   "per_level_max_rule_excess": {
+    "0": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.031,
+     "rule": "a3:ignore_counts",
+     "signed": 0.031
+    },
+    "1": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.002,
+     "rule": "a3:ignore_counts",
+     "signed": 0.002
+    },
+    "2": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0005,
+     "rule": "a4:echo_pos",
+     "signed": 0.0005
+    },
+    "3": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0035,
+     "rule": "a4:echo_pos",
+     "signed": 0.0035
+    },
+    "4": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0045,
+     "rule": "a3:ignore_counts",
+     "signed": -0.0045
+    },
+    "5": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0035,
+     "rule": "a3:ignore_counts",
+     "signed": -0.0035
+    },
+    "6": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0025,
+     "rule": "own:ignore_counts",
+     "signed": -0.0025
+    }
+   },
+   "reason": "AUDIT4_M1 section 8: REGISTRABLE AS IS on the audit's measurement",
+   "repaired_in_round_4": false,
+   "replaces": null,
+   "status": "SURVIVES",
+   "stem": "shopping",
+   "strict_cluster": "S2_weighted_sum"
+  },
+  "M1.slot_permutations_r4": {
+   "audit4_reference": "AUDIT4_M1 section 2 and 8: leading-zero wording defect in 17.6-19.0 % of items (repair (b)) and collapsed levels (repair (c))",
+   "capacity_as_written_fails_at_levels": null,
+   "capacity_as_written_min_margin": null,
+   "level_checks": {
+    "identical_level_pairs": [],
+    "key_problems": [],
+    "profile": {
+     "log10_answer": [
+      1.513,
+      1.785,
+      1.999,
+      2.172,
+      2.225,
+      2.425,
+      2.556
+     ],
+     "numbers": [
+      9.02,
+      8.84,
+      8.84,
+      8.89,
+      8.99,
+      8.83,
+      8.66
+     ]
+    },
+    "rising_parameter_problems": []
+   },
+   "name": "M1.slot_permutations_r4",
+   "per_level_max_rule_excess": {
+    "0": {
+     "excluded_procedure_max_signed": 0.134,
+     "excluded_procedure_rule": "im:ignore_first_rule",
+     "max_abs_excess": 0.0625,
+     "rule": "own:swap_repeat_rule",
+     "signed": -0.0625
+    },
+    "1": {
+     "excluded_procedure_max_signed": 0.1545,
+     "excluded_procedure_rule": "im:ignore_first_rule",
+     "max_abs_excess": 0.0695,
+     "rule": "a4:no_overlap_correction",
+     "signed": 0.0695
+    },
+    "2": {
+     "excluded_procedure_max_signed": 0.172,
+     "excluded_procedure_rule": "own:ignore_first_rule",
+     "max_abs_excess": 0.0755,
+     "rule": "a4:mode_by_visible_ask",
+     "signed": 0.0755
+    },
+    "3": {
+     "excluded_procedure_max_signed": 0.1535,
+     "excluded_procedure_rule": "im:ignore_first_rule",
+     "max_abs_excess": 0.08,
+     "rule": "a4:mode_by_visible_ask",
+     "signed": 0.08
+    },
+    "4": {
+     "excluded_procedure_max_signed": 0.162,
+     "excluded_procedure_rule": "own:ignore_first_rule",
+     "max_abs_excess": 0.125,
+     "rule": "a4:mode_by_visible_ask",
+     "signed": 0.125
+    },
+    "5": {
+     "excluded_procedure_max_signed": 0.1405,
+     "excluded_procedure_rule": "own:ignore_first_rule",
+     "max_abs_excess": 0.123,
+     "rule": "a4:mode_by_visible_ask",
+     "signed": 0.123
+    },
+    "6": {
+     "excluded_procedure_max_signed": 0.16,
+     "excluded_procedure_rule": "im:ignore_first_rule",
+     "max_abs_excess": 0.188,
+     "rule": "a4:mode_by_visible_ask",
+     "signed": 0.188
+    }
+   },
+   "reason": "R-24: |rule - base| > 0.15 at levels [6]; largest +0.188 at level 6 (a4:mode_by_visible_ask)",
+   "repaired_in_round_4": true,
+   "replaces": "M1.slot_permutations_r3",
+   "status": "NOT_REGISTERED",
+   "stem": "slot_permutations",
+   "strict_cluster": "S4_product_rule_counting"
+  },
+  "M1.speed_distance_r3": {
+   "audit4_reference": "AUDIT4_M1 section 8: REGISTRABLE AS IS on the audit's measurement",
+   "capacity_as_written_fails_at_levels": null,
+   "capacity_as_written_min_margin": 1.933,
+   "level_checks": {
+    "identical_level_pairs": [],
+    "key_problems": [],
+    "profile": {
+     "log10_answer": [
+      2.444,
+      2.573,
+      2.444,
+      2.523,
+      2.631,
+      2.668,
+      2.842
+     ],
+     "numbers": [
+      4.0,
+      4.0,
+      6.0,
+      6.0,
+      8.0,
+      8.0,
+      10.0
+     ]
+    },
+    "rising_parameter_problems": null
+   },
+   "name": "M1.speed_distance_r3",
+   "per_level_max_rule_excess": {
+    "0": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.026,
+     "rule": "own:sum_speeds_x_mean_hours",
+     "signed": 0.026
+    },
+    "1": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0165,
+     "rule": "a4:total_hours_x_mean_speed_rounded",
+     "signed": 0.0165
+    },
+    "2": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0335,
+     "rule": "a4:median_speed",
+     "signed": 0.0335
+    },
+    "3": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0355,
+     "rule": "a4:mean_speed_rounded",
+     "signed": 0.0355
+    },
+    "4": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.025,
+     "rule": "a4:mean_speed_rounded",
+     "signed": 0.025
+    },
+    "5": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.022,
+     "rule": "a4:mean_speed_rounded",
+     "signed": 0.022
+    },
+    "6": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0195,
+     "rule": "a4:mean_speed_rounded",
+     "signed": 0.0195
+    }
+   },
+   "reason": "AUDIT4_M1 section 8: REGISTRABLE AS IS on the audit's measurement",
+   "repaired_in_round_4": false,
+   "replaces": null,
+   "status": "SURVIVES",
+   "stem": "speed_distance",
+   "strict_cluster": "S2_weighted_sum"
+  },
+  "M1.tiered_pricing": {
+   "audit4_reference": "AUDIT4_M1 section 8: REGISTRABLE AS IS on the audit's measurement",
+   "capacity_as_written_fails_at_levels": null,
+   "capacity_as_written_min_margin": 11.916,
+   "level_checks": {
+    "identical_level_pairs": [],
+    "key_problems": [],
+    "profile": {
+     "log10_answer": [
+      0.999,
+      1.125,
+      1.489,
+      1.792,
+      1.964,
+      2.043,
+      2.084
+     ],
+     "numbers": [
+      4.0,
+      4.0,
+      6.0,
+      6.0,
+      8.0,
+      8.0,
+      8.0
+     ]
+    },
+    "rising_parameter_problems": null
+   },
+   "name": "M1.tiered_pricing",
+   "per_level_max_rule_excess": {
+    "0": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0035,
+     "rule": "a3:all_at_first_rate",
+     "signed": -0.0035
+    },
+    "1": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.003,
+     "rule": "a3:echo_best_position[min/min]",
+     "signed": 0.003
+    },
+    "2": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.001,
+     "rule": "a3:echo_best_position[first/first]",
+     "signed": 0.001
+    },
+    "3": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.007,
+     "rule": "im:all_at_first_rate",
+     "signed": -0.007
+    },
+    "4": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0055,
+     "rule": "a4:echo_pos",
+     "signed": -0.0055
+    },
+    "5": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0055,
+     "rule": "own:echo_best_position[first/first]",
+     "signed": -0.0055
+    },
+    "6": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.003,
+     "rule": "own:echo_best_position[first/first]",
+     "signed": -0.003
+    }
+   },
+   "reason": "AUDIT4_M1 section 8: REGISTRABLE AS IS on the audit's measurement",
+   "repaired_in_round_4": false,
+   "replaces": null,
+   "status": "SURVIVES",
+   "stem": "tiered_pricing",
+   "strict_cluster": "tiered_pricing"
+  },
+  "M1.tip_split_r3": {
+   "audit4_reference": "AUDIT4_M1 section 8: REGISTRABLE AS IS on the audit's measurement",
+   "capacity_as_written_fails_at_levels": null,
+   "capacity_as_written_min_margin": 1.035,
+   "level_checks": {
+    "identical_level_pairs": [],
+    "key_problems": [],
+    "profile": {
+     "log10_answer": [
+      1.75,
+      1.815,
+      1.815,
+      1.806,
+      1.834,
+      1.89,
+      1.888
+     ],
+     "numbers": [
+      3.0,
+      3.0,
+      3.0,
+      3.0,
+      3.0,
+      3.0,
+      3.0
+     ]
+    },
+    "rising_parameter_problems": null
+   },
+   "name": "M1.tip_split_r3",
+   "per_level_max_rule_excess": {
+    "0": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.001,
+     "rule": "a4:echo_pos",
+     "signed": -0.001
+    },
+    "1": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0005,
+     "rule": "own:echo_best_position[first/first]",
+     "signed": -0.0005
+    },
+    "2": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0005,
+     "rule": "a4:echo_pos",
+     "signed": -0.0005
+    },
+    "3": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0005,
+     "rule": "a4:echo_pos",
+     "signed": -0.0005
+    },
+    "4": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0005,
+     "rule": "own:echo_best_position[second/first]",
+     "signed": -0.0005
+    },
+    "5": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0005,
+     "rule": "a4:echo_pos",
+     "signed": -0.0005
+    },
+    "6": {
+     "excluded_procedure_max_signed": 0.0,
+     "excluded_procedure_rule": "",
+     "max_abs_excess": 0.0,
+     "rule": "",
+     "signed": 0.0
+    }
+   },
+   "reason": "AUDIT4_M1 section 8: REGISTRABLE AS IS on the audit's measurement",
+   "repaired_in_round_4": false,
+   "replaces": null,
+   "status": "SURVIVES",
+   "stem": "tip_split",
+   "strict_cluster": "S3_multiplicative_chain"
+  }
+ },
+ "capacity": {
+  "G_per_part_smaller": 8,
+  "M": 30000,
+  "as_written": {
+   "by_cluster": {
+    "S1_linear_solve": {
+     "0": "FAIL: M1.ages_r3, M1.consecutive_r3, M1.pipes_work_r3, M1.rectangle_r3",
+     "1": "FAIL: M1.ages_r3, M1.consecutive_r3, M1.pipes_work_r3, M1.rectangle_r3",
+     "2": "FAIL: M1.ages_r3, M1.pipes_work_r3, M1.rectangle_r3",
+     "3": "FAIL: M1.rectangle_r3",
+     "4": "FAIL: M1.rectangle_r3",
+     "5": "FAIL: M1.rectangle_r3",
+     "6": "FAIL: M1.rectangle_r3"
+    },
+    "S2_weighted_sum": {
+     "0": "PASS",
+     "1": "PASS",
+     "2": "PASS",
+     "3": "PASS",
+     "4": "PASS",
+     "5": "PASS",
+     "6": "PASS"
+    },
+    "S3_multiplicative_chain": {
+     "0": "FAIL: M1.fraction_remainder_r3, M1.percent_change_r3, M1.ratio_share_r3",
+     "1": "FAIL: M1.fraction_remainder_r3, M1.percent_change_r3",
+     "2": "FAIL: M1.fraction_remainder_r3",
+     "3": "FAIL: M1.fraction_remainder_r3, M1.percent_change_r3",
+     "4": "FAIL: M1.fraction_remainder_r3",
+     "5": "FAIL: M1.fraction_remainder_r3",
+     "6": "FAIL: M1.fraction_remainder_r3"
+    },
+    "S5_unbounded_table": {
+     "0": "PASS",
+     "1": "PASS",
+     "2": "PASS",
+     "3": "PASS",
+     "4": "PASS",
+     "5": "PASS",
+     "6": "PASS"
+    },
+    "S6_exposed_faces": {
+     "0": "FAIL: M1.grid_perimeter_r3",
+     "1": "PASS",
+     "2": "PASS",
+     "3": "PASS",
+     "4": "PASS",
+     "5": "PASS",
+     "6": "PASS"
+    },
+    "S7_step_rule": {
+     "0": "PASS",
+     "1": "PASS",
+     "2": "PASS",
+     "3": "PASS",
+     "4": "PASS",
+     "5": "PASS",
+     "6": "PASS"
+    },
+    "clock_duration": {
+     "0": "PASS",
+     "1": "PASS",
+     "2": "PASS",
+     "3": "PASS",
+     "4": "PASS",
+     "5": "PASS",
+     "6": "PASS"
+    },
+    "crt_congruence": {
+     "0": "PASS",
+     "1": "PASS",
+     "2": "PASS",
+     "3": "PASS",
+     "4": "PASS",
+     "5": "PASS",
+     "6": "PASS"
+    },
+    "division_counting": {
+     "0": "PASS",
+     "1": "PASS",
+     "2": "PASS",
+     "3": "PASS",
+     "4": "PASS",
+     "5": "PASS",
+     "6": "PASS"
+    },
+    "finite_differences": {
+     "0": "PASS",
+     "1": "PASS",
+     "2": "PASS",
+     "3": "PASS",
+     "4": "PASS",
+     "5": "PASS",
+     "6": "PASS"
+    },
+    "gcd_lcm": {
+     "0": "PASS",
+     "1": "PASS",
+     "2": "PASS",
+     "3": "PASS",
+     "4": "PASS",
+     "5": "PASS",
+     "6": "PASS"
+    },
+    "inclusion_exclusion": {
+     "0": "PASS",
+     "1": "PASS",
+     "2": "PASS",
+     "3": "PASS",
+     "4": "PASS",
+     "5": "PASS",
+     "6": "PASS"
+    },
+    "last_digit_power": {
+     "0": "PASS",
+     "1": "PASS",
+     "2": "PASS",
+     "3": "PASS",
+     "4": "PASS",
+     "5": "PASS",
+     "6": "PASS"
+    },
+    "median_list": {
+     "0": "PASS",
+     "1": "PASS",
+     "2": "PASS",
+     "3": "PASS",
+     "4": "PASS",
+     "5": "PASS",
+     "6": "PASS"
+    },
+    "prime_factors": {
+     "0": "PASS",
+     "1": "PASS",
+     "2": "PASS",
+     "3": "PASS",
+     "4": "PASS",
+     "5": "PASS",
+     "6": "PASS"
+    },
+    "quadratic_area": {
+     "0": "PASS",
+     "1": "PASS",
+     "2": "PASS",
+     "3": "PASS",
+     "4": "PASS",
+     "5": "PASS",
+     "6": "PASS"
+    },
+    "tiered_pricing": {
+     "0": "PASS",
+     "1": "PASS",
+     "2": "PASS",
+     "3": "PASS",
+     "4": "PASS",
+     "5": "PASS",
+     "6": "PASS"
+    }
+   },
+   "demand_per_lineage_part": {
+    "A": 18150,
+    "B": 17010
+   },
+   "fails": {
+    "M1.ages_r3": [
+     0,
+     1,
+     2
+    ],
+    "M1.consecutive_r3": [
+     0,
+     1
+    ],
+    "M1.fraction_remainder_r3": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "M1.grid_perimeter_r3": [
+     0
+    ],
+    "M1.percent_change_r3": [
+     0,
+     1,
+     3
+    ],
+    "M1.pipes_work_r3": [
+     0,
+     1,
+     2
+    ],
+    "M1.ratio_share_r3": [
+     0
+    ],
+    "M1.rectangle_r3": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ]
+   },
+   "informational_text_dedup_n_eff": {
+    "M": 30000,
+    "fails_at_levels_against_the_lineage_demand": {
+     "M1.consecutive_r3": [
+      0,
+      1
+     ],
+     "M1.percent_change_r3": [
+      0,
+      1
+     ],
+     "M1.rectangle_r3": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ]
+    },
+    "min_over_levels": {
+     "M1.ages_r3": 112496250,
+     "M1.arithmetic_series_r3": 2960428,
+     "M1.average_missing_r4": 149995000,
+     "M1.change_ways_r3": 149995000,
+     "M1.clock_duration_r4": 112496250,
+     "M1.consecutive_r3": 8462,
+     "M1.crt_congruence_r3": 149995000,
+     "M1.division_counting_r3": 17307115,
+     "M1.finite_differences_r4": 149995000,
+     "M1.fraction_remainder_r3": 1236223,
+     "M1.gcd_lcm_r4": 34614231,
+     "M1.grid_perimeter_r3": 149795,
+     "M1.inclusion_exclusion_r3": 13635909,
+     "M1.last_digit_power_r3": 149995000,
+     "M1.linear_equation_r3": 43468,
+     "M1.median_list_r3": 149995000,
+     "M1.mixture_r4": 60191,
+     "M1.painted_cube_r3": 149995000,
+     "M1.percent_change_r3": 13787,
+     "M1.pipes_work_r3": 19904,
+     "M1.prime_factors_r3": 149995000,
+     "M1.quadratic_area_r3": 149995000,
+     "M1.ratio_share_r3": 149995000,
+     "M1.rectangle_r3": 3608,
+     "M1.recurrence_iterate_r3": 149995000,
+     "M1.shopping_r3": 149995000,
+     "M1.speed_distance_r3": 70124,
+     "M1.tiered_pricing": 208326,
+     "M1.tip_split_r3": 17473
+    },
+    "note": "n_eff on the normalised text, names and setting included (what draw_items de-duplicates on); a LOWER bound from M draws, a level without a collision is given M(M-1)/6"
+   },
+   "lineages": {
+    "M1.ages_r3": {
+     "demand": 18150,
+     "min_margin": 0.564,
+     "n_eff_per_level": [
+      10241,
+      12582,
+      17943,
+      20988,
+      28786,
+      33531,
+      43168
+     ],
+     "part": "A"
+    },
+    "M1.arithmetic_series_r3": {
+     "demand": 17010,
+     "min_margin": 1.565,
+     "n_eff_per_level": [
+      26623,
+      36062,
+      44026,
+      53487,
+      62016,
+      72567,
+      80455
+     ],
+     "part": "B"
+    },
+    "M1.average_missing_r4": {
+     "demand": 18150,
+     "min_margin": 127.141,
+     "n_eff_per_level": [
+      2307615,
+      3912913,
+      89997000,
+      224992500,
+      149995000,
+      149995000,
+      149995000
+     ],
+     "part": "A"
+    },
+    "M1.change_ways_r3": {
+     "demand": 18150,
+     "min_margin": 2.606,
+     "n_eff_per_level": [
+      47292,
+      66763,
+      88825,
+      105161,
+      122279,
+      141638,
+      166046
+     ],
+     "part": "A"
+    },
+    "M1.clock_duration_r4": {
+     "demand": 18150,
+     "min_margin": 8264.187,
+     "n_eff_per_level": [
+      224992500,
+      224992500,
+      149995000,
+      149995000,
+      149995000,
+      149995000,
+      149995000
+     ],
+     "part": "A"
+    },
+    "M1.consecutive_r3": {
+     "demand": 17010,
+     "min_margin": 0.495,
+     "n_eff_per_level": [
+      8419,
+      12382,
+      32636,
+      40771,
+      48954,
+      56917,
+      64699
+     ],
+     "part": "B"
+    },
+    "M1.crt_congruence_r3": {
+     "demand": 17010,
+     "min_margin": 28.975,
+     "n_eff_per_level": [
+      492864,
+      896384,
+      1557042,
+      4591684,
+      14062031,
+      149995000,
+      149995000
+     ],
+     "part": "B"
+    },
+    "M1.division_counting_r3": {
+     "demand": 18150,
+     "min_margin": 7.075,
+     "n_eff_per_level": [
+      128420,
+      177159,
+      248886,
+      328217,
+      383946,
+      488053,
+      474168
+     ],
+     "part": "A"
+    },
+    "M1.finite_differences_r4": {
+     "demand": 18150,
+     "min_margin": 2.627,
+     "n_eff_per_level": [
+      47688,
+      79293,
+      123963,
+      180862,
+      245893,
+      102293,
+      214688
+     ],
+     "part": "A"
+    },
+    "M1.fraction_remainder_r3": {
+     "demand": 17010,
+     "min_margin": 0.369,
+     "n_eff_per_level": [
+      6283,
+      7242,
+      8351,
+      9308,
+      10432,
+      11518,
+      12718
+     ],
+     "part": "B"
+    },
+    "M1.gcd_lcm_r4": {
+     "demand": 17010,
+     "min_margin": 2.617,
+     "n_eff_per_level": [
+      56845,
+      101052,
+      188357,
+      48230,
+      101738,
+      44513,
+      93068
+     ],
+     "part": "B"
+    },
+    "M1.grid_perimeter_r3": {
+     "demand": 18150,
+     "min_margin": 0.96,
+     "n_eff_per_level": [
+      17420,
+      885797,
+      449985000,
+      149995000,
+      149995000,
+      149995000,
+      149995000
+     ],
+     "part": "A"
+    },
+    "M1.inclusion_exclusion_r3": {
+     "demand": 18150,
+     "min_margin": 8.896,
+     "n_eff_per_level": [
+      161459,
+      641919,
+      1867158,
+      149995000,
+      149995000,
+      149995000,
+      149995000
+     ],
+     "part": "A"
+    },
+    "M1.last_digit_power_r3": {
+     "demand": 17010,
+     "min_margin": 12.567,
+     "n_eff_per_level": [
+      213770,
+      410570,
+      149995000,
+      149995000,
+      149995000,
+      149995000,
+      149995000
+     ],
+     "part": "B"
+    },
+    "M1.linear_equation_r3": {
+     "demand": 17010,
+     "min_margin": 2.602,
+     "n_eff_per_level": [
+      44259,
+      66448,
+      87427,
+      661743,
+      945347,
+      988978,
+      1159755
+     ],
+     "part": "B"
+    },
+    "M1.median_list_r3": {
+     "demand": 18150,
+     "min_margin": 8264.187,
+     "n_eff_per_level": [
+      149995000,
+      149995000,
+      149995000,
+      149995000,
+      149995000,
+      149995000,
+      149995000
+     ],
+     "part": "A"
+    },
+    "M1.mixture_r4": {
+     "demand": 17010,
+     "min_margin": 1.785,
+     "n_eff_per_level": [
+      30367,
+      44121,
+      61574,
+      749975,
+      941391,
+      1174896,
+      1437652
+     ],
+     "part": "B"
+    },
+    "M1.painted_cube_r3": {
+     "demand": 18150,
+     "min_margin": 1.894,
+     "n_eff_per_level": [
+      34374,
+      51129,
+      70652,
+      101807,
+      135947,
+      168597,
+      221996
+     ],
+     "part": "A"
+    },
+    "M1.percent_change_r3": {
+     "demand": 17010,
+     "min_margin": 0.824,
+     "n_eff_per_level": [
+      14024,
+      16220,
+      18689,
+      15334,
+      17073,
+      18878,
+      20425
+     ],
+     "part": "B"
+    },
+    "M1.pipes_work_r3": {
+     "demand": 18150,
+     "min_margin": 0.565,
+     "n_eff_per_level": [
+      10262,
+      13772,
+      17933,
+      556224,
+      760110,
+      894602,
+      1282009
+     ],
+     "part": "A"
+    },
+    "M1.prime_factors_r3": {
+     "demand": 17010,
+     "min_margin": 1.826,
+     "n_eff_per_level": [
+      31055,
+      43807,
+      68252,
+      105383,
+      166538,
+      252659,
+      370053
+     ],
+     "part": "B"
+    },
+    "M1.quadratic_area_r3": {
+     "demand": 17010,
+     "min_margin": 2.788,
+     "n_eff_per_level": [
+      47417,
+      63468,
+      80802,
+      98357,
+      119613,
+      145156,
+      171947
+     ],
+     "part": "B"
+    },
+    "M1.ratio_share_r3": {
+     "demand": 17010,
+     "min_margin": 0.891,
+     "n_eff_per_level": [
+      15154,
+      20119,
+      219827,
+      263766,
+      1562448,
+      1999933,
+      2284188
+     ],
+     "part": "B"
+    },
+    "M1.rectangle_r3": {
+     "demand": 18150,
+     "min_margin": 0.2,
+     "n_eff_per_level": [
+      3625,
+      4207,
+      4829,
+      5421,
+      6040,
+      6652,
+      7298
+     ],
+     "part": "A"
+    },
+    "M1.recurrence_iterate_r3": {
+     "demand": 18150,
+     "min_margin": 5.705,
+     "n_eff_per_level": [
+      103540,
+      136029,
+      147150,
+      170513,
+      187807,
+      205943,
+      226693
+     ],
+     "part": "A"
+    },
+    "M1.shopping_r3": {
+     "demand": 17010,
+     "min_margin": 36.896,
+     "n_eff_per_level": [
+      627594,
+      112496250,
+      149995000,
+      149995000,
+      149995000,
+      149995000,
+      149995000
+     ],
+     "part": "B"
+    },
+    "M1.speed_distance_r3": {
+     "demand": 18150,
+     "min_margin": 1.933,
+     "n_eff_per_level": [
+      35078,
+      72555,
+      9374688,
+      18749375,
+      149995000,
+      149995000,
+      149995000
+     ],
+     "part": "A"
+    },
+    "M1.tiered_pricing": {
+     "demand": 17010,
+     "min_margin": 11.916,
+     "n_eff_per_level": [
+      202696,
+      493946,
+      149995000,
+      149995000,
+      149995000,
+      149995000,
+      149995000
+     ],
+     "part": "B"
+    },
+    "M1.tip_split_r3": {
+     "demand": 17010,
+     "min_margin": 1.035,
+     "n_eff_per_level": [
+      17613,
+      21937,
+      28942,
+      34834,
+      42435,
+      47855,
+      56276
+     ],
+     "part": "B"
+    }
+   },
+   "lineages_in_part": {
+    "A": 14,
+    "B": 15
+   },
+   "partition_rule": "core.family_partition rule applied to the surviving families"
+  },
+  "basis": "MEASURED sampled n_eff (lower bound) per lineage-level; demand ANALYTICAL",
+  "clusters": 17,
+  "demand_G_per_part": 31000,
+  "demand_formula": "10 x (ceil(4000 / G) + ceil(20000 / G) + 100)",
+  "demand_literal_G_equals_all_clusters": 15130,
+  "hypothetical_per_cluster": {
+   "G": 8,
+   "LABEL": "HYPOTHETICAL: no per-cluster pool builder exists; nothing below is a pass under core.generate_pool",
+   "clusters": {
+    "S1_linear_solve": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [
+       0,
+       1,
+       2
+      ],
+      "mixture": []
+     },
+     "members": [
+      "M1.ages_r3",
+      "M1.average_missing_r4",
+      "M1.consecutive_r3",
+      "M1.linear_equation_r3",
+      "M1.pipes_work_r3",
+      "M1.rectangle_r3"
+     ],
+     "n_eff": {
+      "chao1": [
+       2355469,
+       4322063,
+       90131548,
+       226259103,
+       451819450,
+       452001243,
+       452603385
+      ],
+      "equal_share": [
+       21752,
+       25239,
+       28972,
+       32527,
+       36242,
+       39915,
+       43788
+      ],
+      "mixture": [
+       58752,
+       74092,
+       99812,
+       138489,
+       161364,
+       180136,
+       203052
+      ]
+     }
+    },
+    "S2_weighted_sum": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "members": [
+      "M1.mixture_r4",
+      "M1.shopping_r3",
+      "M1.speed_distance_r3"
+     ],
+     "n_eff": {
+      "chao1": [
+       711335,
+       112611390,
+       459450110,
+       469501595,
+       900959394,
+       901262163,
+       901494138
+      ],
+      "equal_share": [
+       91102,
+       132362,
+       184723,
+       2249925,
+       2824174,
+       3524687,
+       4312955
+      ],
+      "mixture": [
+       142787,
+       246868,
+       550328,
+       6459115,
+       8367490,
+       10410964,
+       12695502
+      ]
+     }
+    },
+    "S3_multiplicative_chain": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [
+       0,
+       1
+      ],
+      "mixture": []
+     },
+     "members": [
+      "M1.fraction_remainder_r3",
+      "M1.percent_change_r3",
+      "M1.ratio_share_r3",
+      "M1.tip_split_r3"
+     ],
+     "n_eff": {
+      "chao1": [
+       66610,
+       82961,
+       290902,
+       342849,
+       1710770,
+       2100677,
+       2404468
+      ],
+      "equal_share": [
+       25134,
+       28967,
+       33406,
+       37233,
+       41729,
+       46072,
+       50873
+      ],
+      "mixture": [
+       45297,
+       54231,
+       75348,
+       77994,
+       89568,
+       99262,
+       109744
+      ]
+     }
+    },
+    "S5_unbounded_table": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "members": [
+      "M1.change_ways_r3"
+     ],
+     "n_eff": {
+      "chao1": [
+       58435,
+       78537,
+       105373,
+       121589,
+       140334,
+       160645,
+       184691
+      ],
+      "equal_share": [
+       47292,
+       66763,
+       88825,
+       105161,
+       122279,
+       141638,
+       166046
+      ],
+      "mixture": [
+       47292,
+       66763,
+       88825,
+       105161,
+       122279,
+       141638,
+       166046
+      ]
+     }
+    },
+    "S6_exposed_faces": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "members": [
+      "M1.grid_perimeter_r3",
+      "M1.painted_cube_r3"
+     ],
+     "n_eff": {
+      "chao1": [
+       404964,
+       1920902,
+       450047432,
+       450121088,
+       450153395,
+       450194199,
+       450241135
+      ],
+      "equal_share": [
+       34841,
+       102258,
+       141305,
+       203613,
+       271894,
+       337194,
+       443991
+      ],
+      "mixture": [
+       46245,
+       193355,
+       282565,
+       406950,
+       543296,
+       673630,
+       886670
+      ]
+     }
+    },
+    "S7_step_rule": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "members": [
+      "M1.arithmetic_series_r3",
+      "M1.recurrence_iterate_r3"
+     ],
+     "n_eff": {
+      "chao1": [
+       168566,
+       205533,
+       219015,
+       246243,
+       274476,
+       292928,
+       319786
+      ],
+      "equal_share": [
+       53246,
+       72125,
+       88051,
+       106974,
+       124031,
+       145133,
+       160910
+      ],
+      "mixture": [
+       84711,
+       114021,
+       135548,
+       162861,
+       186484,
+       214636,
+       237522
+      ]
+     }
+    },
+    "clock_duration": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "members": [
+      "M1.clock_duration_r4"
+     ],
+     "n_eff": {
+      "chao1": [
+       224970002,
+       224970002,
+       450015000,
+       450015000,
+       450015000,
+       450015000,
+       450015000
+      ],
+      "equal_share": [
+       224992500,
+       224992500,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ],
+      "mixture": [
+       224992500,
+       224992500,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ]
+     }
+    },
+    "crt_congruence": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "members": [
+      "M1.crt_congruence_r3"
+     ],
+     "n_eff": {
+      "chao1": [
+       524885,
+       946040,
+       1559761,
+       4561935,
+       14032532,
+       450015000,
+       450015000
+      ],
+      "equal_share": [
+       492864,
+       896384,
+       1557042,
+       4591684,
+       14062031,
+       149995000,
+       149995000
+      ],
+      "mixture": [
+       492864,
+       896384,
+       1557042,
+       4591684,
+       14062031,
+       149995000,
+       149995000
+      ]
+     }
+    },
+    "division_counting": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "members": [
+      "M1.division_counting_r3"
+     ],
+     "n_eff": {
+      "chao1": [
+       180689,
+       227059,
+       295983,
+       351252,
+       422039,
+       523666,
+       517092
+      ],
+      "equal_share": [
+       128420,
+       177159,
+       248886,
+       328217,
+       383946,
+       488053,
+       474168
+      ],
+      "mixture": [
+       128420,
+       177159,
+       248886,
+       328217,
+       383946,
+       488053,
+       474168
+      ]
+     }
+    },
+    "finite_differences": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "members": [
+      "M1.finite_differences_r4"
+     ],
+     "n_eff": {
+      "chao1": [
+       47724,
+       77950,
+       122179,
+       185121,
+       248654,
+       102335,
+       211507
+      ],
+      "equal_share": [
+       47688,
+       79293,
+       123963,
+       180862,
+       245893,
+       102293,
+       214688
+      ],
+      "mixture": [
+       47688,
+       79293,
+       123963,
+       180862,
+       245893,
+       102293,
+       214688
+      ]
+     }
+    },
+    "gcd_lcm": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "members": [
+      "M1.gcd_lcm_r4"
+     ],
+     "n_eff": {
+      "chao1": [
+       57422,
+       100444,
+       194612,
+       48414,
+       103440,
+       44390,
+       92897
+      ],
+      "equal_share": [
+       56845,
+       101052,
+       188357,
+       48230,
+       101738,
+       44513,
+       93068
+      ],
+      "mixture": [
+       56845,
+       101052,
+       188357,
+       48230,
+       101738,
+       44513,
+       93068
+      ]
+     }
+    },
+    "inclusion_exclusion": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "members": [
+      "M1.inclusion_exclusion_r3"
+     ],
+     "n_eff": {
+      "chao1": [
+       163998,
+       631547,
+       1860620,
+       450015000,
+       450015000,
+       450015000,
+       450015000
+      ],
+      "equal_share": [
+       161459,
+       641919,
+       1867158,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ],
+      "mixture": [
+       161459,
+       641919,
+       1867158,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ]
+     }
+    },
+    "last_digit_power": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "members": [
+      "M1.last_digit_power_r3"
+     ],
+     "n_eff": {
+      "chao1": [
+       218566,
+       409720,
+       450015000,
+       450015000,
+       450015000,
+       450015000,
+       450015000
+      ],
+      "equal_share": [
+       213770,
+       410570,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ],
+      "mixture": [
+       213770,
+       410570,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ]
+     }
+    },
+    "median_list": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "members": [
+      "M1.median_list_r3"
+     ],
+     "n_eff": {
+      "chao1": [
+       450015000,
+       450015000,
+       450015000,
+       450015000,
+       450015000,
+       450015000,
+       450015000
+      ],
+      "equal_share": [
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ],
+      "mixture": [
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ]
+     }
+    },
+    "prime_factors": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "members": [
+      "M1.prime_factors_r3"
+     ],
+     "n_eff": {
+      "chao1": [
+       31275,
+       44360,
+       67780,
+       106958,
+       167282,
+       261584,
+       371510
+      ],
+      "equal_share": [
+       31055,
+       43807,
+       68252,
+       105383,
+       166538,
+       252659,
+       370053
+      ],
+      "mixture": [
+       31055,
+       43807,
+       68252,
+       105383,
+       166538,
+       252659,
+       370053
+      ]
+     }
+    },
+    "quadratic_area": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "members": [
+      "M1.quadratic_area_r3"
+     ],
+     "n_eff": {
+      "chao1": [
+       50313,
+       65908,
+       83669,
+       101550,
+       123051,
+       144116,
+       170212
+      ],
+      "equal_share": [
+       47417,
+       63468,
+       80802,
+       98357,
+       119613,
+       145156,
+       171947
+      ],
+      "mixture": [
+       47417,
+       63468,
+       80802,
+       98357,
+       119613,
+       145156,
+       171947
+      ]
+     }
+    },
+    "tiered_pricing": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "members": [
+      "M1.tiered_pricing"
+     ],
+     "n_eff": {
+      "chao1": [
+       201178,
+       484041,
+       450015000,
+       450015000,
+       450015000,
+       450015000,
+       450015000
+      ],
+      "equal_share": [
+       202696,
+       493946,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ],
+      "mixture": [
+       202696,
+       493946,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ]
+     }
+    }
+   },
+   "demand": 31000,
+   "fails": {
+    "S1_linear_solve": {
+     "equal_share": [
+      0,
+      1,
+      2
+     ]
+    },
+    "S3_multiplicative_chain": {
+     "equal_share": [
+      0,
+      1
+     ]
+    }
+   }
+  },
+  "seed": 23
+ },
+ "capacity_as_written_failures_listed_for_the_lead": {
+  "M1.ages_r3": [
+   0,
+   1,
+   2
+  ],
+  "M1.consecutive_r3": [
+   0,
+   1
+  ],
+  "M1.fraction_remainder_r3": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6
+  ],
+  "M1.grid_perimeter_r3": [
+   0
+  ],
+  "M1.percent_change_r3": [
+   0,
+   1,
+   3
+  ],
+  "M1.pipes_work_r3": [
+   0,
+   1,
+   2
+  ],
+  "M1.ratio_share_r3": [
+   0
+  ],
+  "M1.rectangle_r3": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6
+  ]
+ },
+ "dropped": [
+  "M1.binomial_choose_r3",
+  "M1.coins_r3",
+  "M1.digit_puzzle_r3",
+  "M1.mode_tally_r3",
+  "M1.pigeonhole_worst_case_r3",
+  "M1.pythagoras_r3",
+  "M1.slot_permutations_r4"
+ ],
+ "dropped_count": 7,
+ "excluded_everywhere": [
+  "M1.min_cost_packs_r2",
+  "M1.min_cost_packs"
+ ],
+ "hygiene_edit": {
+  "after": "for d in sorted(set(ds)) if ds.count(d) == 1]",
+  "before": "for d in set(ds) if ds.count(d) == 1]",
+  "file": "studies/m0/lineages_m1_fix3_c.py",
+  "generated_items_identical": false,
+  "line": 116,
+  "lineage": "M1.digit_puzzle_r3 (NOT REGISTERED in round 3)",
+  "measurement": "60 items at levels 0-4 and 10 at levels 5-6 from the stream (seed 4001, 'fix4-hygiene', lineage id, level), SHA-256 of the items' JSON, PYTHONHASHSEED 0 and 1 gave the same hashes each time",
+  "per_level_after": [
+   "0f6052a3",
+   "fd2d2883",
+   "84314adb",
+   "8ca88965",
+   "f505308e",
+   "316cb9ec",
+   "b5d3b522"
+  ],
+  "per_level_before": [
+   "46e8ee48",
+   "0b1a20fa",
+   "ed71cf9a",
+   "029b5f92",
+   "1ce9051e",
+   "98c09225",
+   "12c06b84"
+  ],
+  "total_after": "78989ef5a9997b132d49d0810cd12cd4d30008fe3012acd6d364906467b97ebf",
+  "total_before": "60cbdf1e35e8d6ac15e6db206e46c51f69d3fe592c524b7277870e14aefc351d"
+ },
+ "inputs": {
+  "battery": {
+   "path": "studies/m0/manifests/m1_fix4_battery_raw.json",
+   "sha256": "af6087d05234b198e25232baee626838201c73d441d337b04f45d69aeed2204c"
+  },
+  "capacity": {
+   "path": "studies/m0/manifests/m1_fix4_capacity_raw.json",
+   "sha256": "125dcf4773c286b4297d031dd32f4c1171eec21861a2e995cb101aaefd3b0329"
+  },
+  "checks": {
+   "path": "studies/m0/manifests/m1_fix4_checks.json",
+   "sha256": "b84c53e84b9de70f42a4a3bee3b78a193cb1015df9c8b009090b626c2d664e2d"
+  },
+  "text_capacity": {
+   "path": "studies/m0/manifests/m1_fix4_text_capacity_raw.json",
+   "sha256": "ee8a9506684728eb54ab4f7b088e65d03f4701cc66e5123261d58230e4307f46"
+  }
+ },
+ "measure": "largest |rule rate - base| over the union battery (own battery by its own scoring, audit-4 script, audit-3 rule definitions by audit-3 scoring), rates over all items, base = held-out most frequent answer; MEASURED",
+ "n_per_level": 2000,
+ "procedure_rule_exclusions": {
+  "consecutive": [
+   "mean_plus_step"
+  ],
+  "division_counting": [
+   "k_minus_remainder_ignores_exact_fit"
+  ],
+  "finite_differences": [
+   "next_term_only",
+   "next_term_when_asked_later"
+  ],
+  "gcd_lcm": [
+   "product_over_gcd_of_all",
+   "product_over_gcd_pow_k_minus_1 (k>=3; a false general rule)",
+   "product_over_lcm_pow_k_minus_1 (k>=3; a false general rule)"
+  ],
+  "last_digit_power": [
+   "fermat_misapplied_e_mod_p_plus_1"
+  ],
+  "prime_factors": [
+   "largest_le_sqrt"
+  ],
+  "ratio_share": [
+   "largest_share",
+   "smallest_share"
+  ],
+  "slot_permutations": [
+   "ignore_first_rule",
+   "parity_fraction_of_total"
+  ]
+ },
+ "surviving_cluster_count": 17,
+ "surviving_cluster_names": [
+  "S1_linear_solve",
+  "S2_weighted_sum",
+  "S3_multiplicative_chain",
+  "S5_unbounded_table",
+  "S6_exposed_faces",
+  "S7_step_rule",
+  "clock_duration",
+  "crt_congruence",
+  "division_counting",
+  "finite_differences",
+  "gcd_lcm",
+  "inclusion_exclusion",
+  "last_digit_power",
+  "median_list",
+  "prime_factors",
+  "quadratic_area",
+  "tiered_pricing"
+ ],
+ "surviving_clusters": {
+  "S1_linear_solve": [
+   "M1.ages_r3",
+   "M1.average_missing_r4",
+   "M1.consecutive_r3",
+   "M1.linear_equation_r3",
+   "M1.pipes_work_r3",
+   "M1.rectangle_r3"
+  ],
+  "S2_weighted_sum": [
+   "M1.mixture_r4",
+   "M1.shopping_r3",
+   "M1.speed_distance_r3"
+  ],
+  "S3_multiplicative_chain": [
+   "M1.fraction_remainder_r3",
+   "M1.percent_change_r3",
+   "M1.ratio_share_r3",
+   "M1.tip_split_r3"
+  ],
+  "S5_unbounded_table": [
+   "M1.change_ways_r3"
+  ],
+  "S6_exposed_faces": [
+   "M1.grid_perimeter_r3",
+   "M1.painted_cube_r3"
+  ],
+  "S7_step_rule": [
+   "M1.arithmetic_series_r3",
+   "M1.recurrence_iterate_r3"
+  ],
+  "clock_duration": [
+   "M1.clock_duration_r4"
+  ],
+  "crt_congruence": [
+   "M1.crt_congruence_r3"
+  ],
+  "division_counting": [
+   "M1.division_counting_r3"
+  ],
+  "finite_differences": [
+   "M1.finite_differences_r4"
+  ],
+  "gcd_lcm": [
+   "M1.gcd_lcm_r4"
+  ],
+  "inclusion_exclusion": [
+   "M1.inclusion_exclusion_r3"
+  ],
+  "last_digit_power": [
+   "M1.last_digit_power_r3"
+  ],
+  "median_list": [
+   "M1.median_list_r3"
+  ],
+  "prime_factors": [
+   "M1.prime_factors_r3"
+  ],
+  "quadratic_area": [
+   "M1.quadratic_area_r3"
+  ],
+  "tiered_pricing": [
+   "M1.tiered_pricing"
+  ]
+ },
+ "survivor_count": 29,
+ "survivors": [
+  "M1.ages_r3",
+  "M1.arithmetic_series_r3",
+  "M1.average_missing_r4",
+  "M1.change_ways_r3",
+  "M1.clock_duration_r4",
+  "M1.consecutive_r3",
+  "M1.crt_congruence_r3",
+  "M1.division_counting_r3",
+  "M1.finite_differences_r4",
+  "M1.fraction_remainder_r3",
+  "M1.gcd_lcm_r4",
+  "M1.grid_perimeter_r3",
+  "M1.inclusion_exclusion_r3",
+  "M1.last_digit_power_r3",
+  "M1.linear_equation_r3",
+  "M1.median_list_r3",
+  "M1.mixture_r4",
+  "M1.painted_cube_r3",
+  "M1.percent_change_r3",
+  "M1.pipes_work_r3",
+  "M1.prime_factors_r3",
+  "M1.quadratic_area_r3",
+  "M1.ratio_share_r3",
+  "M1.rectangle_r3",
+  "M1.recurrence_iterate_r3",
+  "M1.shopping_r3",
+  "M1.speed_distance_r3",
+  "M1.tiered_pricing",
+  "M1.tip_split_r3"
+ ],
+ "survivors_with_an_excluded_procedure_rule_above_the_bound_PENDING_LEAD_REVIEW": {
+  "M1.consecutive_r3": {
+   "largest_signed": 0.51,
+   "levels": [
+    0,
+    1
+   ],
+   "rules": [
+    "im:mean_plus_step"
+   ]
+  },
+  "M1.division_counting_r3": {
+   "largest_signed": 0.453,
+   "levels": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "rules": [
+    "a3:k_minus_remainder_ignores_exact_fit",
+    "im:k_minus_remainder_ignores_exact_fit",
+    "own:k_minus_remainder_ignores_exact_fit"
+   ]
+  },
+  "M1.finite_differences_r4": {
+   "largest_signed": 0.514,
+   "levels": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "rules": [
+    "im:next_term_when_asked_later"
+   ]
+  },
+  "M1.gcd_lcm_r4": {
+   "largest_signed": 0.504,
+   "levels": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "rules": [
+    "a4:product_over_gcd_pow_k_minus_1 (k>=3; a false general rule)",
+    "a4:product_over_lcm_pow_k_minus_1 (k>=3; a false general rule)",
+    "im:product_over_gcd_of_all",
+    "own:product_over_gcd_of_all"
+   ]
+  },
+  "M1.prime_factors_r3": {
+   "largest_signed": 0.2015,
+   "levels": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "rules": [
+    "a3:largest_le_sqrt",
+    "im:largest_le_sqrt"
+   ]
+  },
+  "M1.ratio_share_r3": {
+   "largest_signed": 0.542,
+   "levels": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "rules": [
+    "a3:largest_share",
+    "im:largest_share",
+    "own:largest_share",
+    "own:smallest_share"
+   ]
+  }
+ },
+ "title": "M1 fix round 4 survivors (narrow repair round; R-24 to R-29). Implementer self-check: not independent review, not Astra validation, not human approval; nothing is registered; no model was run."
+}

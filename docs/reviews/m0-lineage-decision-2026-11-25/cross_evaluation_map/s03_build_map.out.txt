@@ -1,0 +1,5 @@
+clusters per eval: {'R1': 10, 'R2': 18, 'M1': 17, 'C1': 18}
+lineages per eval: {'R1': 12, 'R2': 18, 'M1': 29, 'C1': 27}
+procedure statements not used (should be empty): []
+pairs: 7 STRONG, 15 BORDERLINE
+wrote /Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_crosseval_map_20261125/deliver/cross_evaluation_procedures_proposed.json sha256 8d25b2f40d48257da673d894cde4853779ad675f043d774aa8a041485e78876c

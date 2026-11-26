@@ -1,0 +1,884 @@
+{
+ "R1.boolean_lights_r4": {
+  "distinct_level_classes": [
+   [
+    0
+   ],
+   [
+    1
+   ],
+   [
+    2
+   ],
+   [
+    3
+   ],
+   [
+    4
+   ],
+   [
+    5
+   ],
+   [
+    6
+   ]
+  ],
+  "levels": {
+   "0": {
+    "mean_parameter": 3,
+    "mean_question_chars": 473.5,
+    "retry_rate": 0.077
+   },
+   "1": {
+    "mean_parameter": 5,
+    "mean_question_chars": 492.6,
+    "retry_rate": 0.003
+   },
+   "2": {
+    "mean_parameter": 7,
+    "mean_question_chars": 515.7,
+    "retry_rate": 0.0
+   },
+   "3": {
+    "mean_parameter": 9,
+    "mean_question_chars": 622.3,
+    "retry_rate": 0.0
+   },
+   "4": {
+    "mean_parameter": 11,
+    "mean_question_chars": 644.4,
+    "retry_rate": 0.0
+   },
+   "5": {
+    "mean_parameter": 13,
+    "mean_question_chars": 661.1,
+    "retry_rate": 0.0
+   },
+   "6": {
+    "mean_parameter": 15,
+    "mean_question_chars": 780.1,
+    "retry_rate": 0.0
+   }
+  },
+  "parameter": "presses (3 + 2 level)"
+ },
+ "R1.categories_default_exceptions_r4": {
+  "distinct_level_classes": [
+   [
+    0
+   ],
+   [
+    1
+   ],
+   [
+    2
+   ],
+   [
+    3
+   ],
+   [
+    4
+   ],
+   [
+    5
+   ],
+   [
+    6
+   ]
+  ],
+  "levels": {
+   "0": {
+    "mean_parameter": 17,
+    "mean_question_chars": 815.3,
+    "retry_rate": 0.0
+   },
+   "1": {
+    "mean_parameter": 19,
+    "mean_question_chars": 870.2,
+    "retry_rate": 0.0
+   },
+   "2": {
+    "mean_parameter": 23,
+    "mean_question_chars": 1029.3,
+    "retry_rate": 0.0
+   },
+   "3": {
+    "mean_parameter": 25,
+    "mean_question_chars": 1092.4,
+    "retry_rate": 0.0
+   },
+   "4": {
+    "mean_parameter": 29,
+    "mean_question_chars": 1249.9,
+    "retry_rate": 0.0
+   },
+   "5": {
+    "mean_parameter": 31,
+    "mean_question_chars": 1311.2,
+    "retry_rate": 0.0
+   },
+   "6": {
+    "mean_parameter": 35,
+    "mean_question_chars": 1466.0,
+    "retry_rate": 0.0
+   }
+  },
+  "parameter": "groups in the chain (T + 8 + 2 level)"
+ },
+ "R1.compass_turns": {
+  "distinct_level_classes": [
+   [
+    0
+   ],
+   [
+    1
+   ],
+   [
+    2
+   ],
+   [
+    3
+   ],
+   [
+    4
+   ],
+   [
+    5
+   ],
+   [
+    6
+   ]
+  ],
+  "levels": {
+   "0": {
+    "mean_parameter": 3,
+    "mean_question_chars": 163.5,
+    "retry_rate": 0.0
+   },
+   "1": {
+    "mean_parameter": 5,
+    "mean_question_chars": 214.2,
+    "retry_rate": 0.0
+   },
+   "2": {
+    "mean_parameter": 7,
+    "mean_question_chars": 264.5,
+    "retry_rate": 0.0
+   },
+   "3": {
+    "mean_parameter": 9,
+    "mean_question_chars": 313.1,
+    "retry_rate": 0.0
+   },
+   "4": {
+    "mean_parameter": 11,
+    "mean_question_chars": 362.3,
+    "retry_rate": 0.0
+   },
+   "5": {
+    "mean_parameter": 13,
+    "mean_question_chars": 411.1,
+    "retry_rate": 0.0
+   },
+   "6": {
+    "mean_parameter": 15,
+    "mean_question_chars": 464.0,
+    "retry_rate": 0.0
+   }
+  },
+  "parameter": "commands (3 + 2 level)"
+ },
+ "R1.conditional_decision_tree_r6": {
+  "distinct_level_classes": [
+   [
+    0
+   ],
+   [
+    1
+   ],
+   [
+    2
+   ],
+   [
+    3
+   ],
+   [
+    4
+   ],
+   [
+    5
+   ],
+   [
+    6
+   ]
+  ],
+  "levels": {
+   "0": {
+    "mean_parameter": 5,
+    "mean_question_chars": 657.1,
+    "retry_rate": 0.0
+   },
+   "1": {
+    "mean_parameter": 6,
+    "mean_question_chars": 695.8,
+    "retry_rate": 0.0
+   },
+   "2": {
+    "mean_parameter": 8,
+    "mean_question_chars": 1196.3,
+    "retry_rate": 0.0
+   },
+   "3": {
+    "mean_parameter": 9,
+    "mean_question_chars": 1236.2,
+    "retry_rate": 0.0
+   },
+   "4": {
+    "mean_parameter": 10,
+    "mean_question_chars": 1274.9,
+    "retry_rate": 0.0
+   },
+   "5": {
+    "mean_parameter": 12,
+    "mean_question_chars": 2196.6,
+    "retry_rate": 0.0
+   },
+   "6": {
+    "mean_parameter": 13,
+    "mean_question_chars": 2264.9,
+    "retry_rate": 0.0
+   }
+  },
+  "parameter": "lights stated (depth + 2 + level)"
+ },
+ "R1.conditional_threshold_rule_r4": {
+  "distinct_level_classes": [
+   [
+    0
+   ],
+   [
+    1
+   ],
+   [
+    2
+   ],
+   [
+    3
+   ],
+   [
+    4
+   ],
+   [
+    5
+   ],
+   [
+    6
+   ]
+  ],
+  "levels": {
+   "0": {
+    "mean_parameter": 6,
+    "mean_question_chars": 434.8,
+    "retry_rate": 0.0
+   },
+   "1": {
+    "mean_parameter": 7,
+    "mean_question_chars": 463.9,
+    "retry_rate": 0.0
+   },
+   "2": {
+    "mean_parameter": 8,
+    "mean_question_chars": 494.3,
+    "retry_rate": 0.0
+   },
+   "3": {
+    "mean_parameter": 9,
+    "mean_question_chars": 522.1,
+    "retry_rate": 0.0
+   },
+   "4": {
+    "mean_parameter": 10,
+    "mean_question_chars": 551.4,
+    "retry_rate": 0.0
+   },
+   "5": {
+    "mean_parameter": 11,
+    "mean_question_chars": 580.9,
+    "retry_rate": 0.0
+   },
+   "6": {
+    "mean_parameter": 12,
+    "mean_question_chars": 609.9,
+    "retry_rate": 0.0
+   }
+  },
+  "parameter": "members (6 + level)"
+ },
+ "R1.equivalence_exchange_rates_r6": {
+  "distinct_level_classes": [
+   [
+    0
+   ],
+   [
+    1
+   ],
+   [
+    2
+   ],
+   [
+    3
+   ],
+   [
+    4
+   ],
+   [
+    5
+   ],
+   [
+    6
+   ]
+  ],
+  "levels": {
+   "0": {
+    "mean_parameter": 5,
+    "mean_question_chars": 365.0,
+    "retry_rate": 0.0
+   },
+   "1": {
+    "mean_parameter": 6,
+    "mean_question_chars": 425.1,
+    "retry_rate": 0.0
+   },
+   "2": {
+    "mean_parameter": 7,
+    "mean_question_chars": 485.2,
+    "retry_rate": 0.0
+   },
+   "3": {
+    "mean_parameter": 9,
+    "mean_question_chars": 604.8,
+    "retry_rate": 0.0
+   },
+   "4": {
+    "mean_parameter": 10,
+    "mean_question_chars": 665.0,
+    "retry_rate": 0.0
+   },
+   "5": {
+    "mean_parameter": 11,
+    "mean_question_chars": 725.0,
+    "retry_rate": 0.0
+   },
+   "6": {
+    "mean_parameter": 13,
+    "mean_question_chars": 845.5,
+    "retry_rate": 0.0
+   }
+  },
+  "parameter": "rates stated (3 + level spine rates + 2 + level // 3 others)"
+ },
+ "R1.event_timeline_r6": {
+  "distinct_level_classes": [
+   [
+    0
+   ],
+   [
+    1
+   ],
+   [
+    2
+   ],
+   [
+    3
+   ],
+   [
+    4
+   ],
+   [
+    5
+   ],
+   [
+    6
+   ]
+  ],
+  "levels": {
+   "0": {
+    "mean_parameter": 6,
+    "mean_question_chars": 411.1,
+    "retry_rate": 0.003
+   },
+   "1": {
+    "mean_parameter": 7,
+    "mean_question_chars": 468.8,
+    "retry_rate": 0.007
+   },
+   "2": {
+    "mean_parameter": 8,
+    "mean_question_chars": 525.4,
+    "retry_rate": 0.0
+   },
+   "3": {
+    "mean_parameter": 10,
+    "mean_question_chars": 638.6,
+    "retry_rate": 0.0
+   },
+   "4": {
+    "mean_parameter": 11,
+    "mean_question_chars": 696.1,
+    "retry_rate": 0.0
+   },
+   "5": {
+    "mean_parameter": 12,
+    "mean_question_chars": 753.9,
+    "retry_rate": 0.0
+   },
+   "6": {
+    "mean_parameter": 14,
+    "mean_question_chars": 867.4,
+    "retry_rate": 0.003
+   }
+  },
+  "parameter": "statements (4 + level spine + 2 + level // 3 others)"
+ },
+ "R1.graph_shortest_route_r6": {
+  "distinct_level_classes": [
+   [
+    0
+   ],
+   [
+    1
+   ],
+   [
+    2
+   ],
+   [
+    3
+   ],
+   [
+    4
+   ],
+   [
+    5
+   ],
+   [
+    6
+   ]
+  ],
+  "levels": {
+   "0": {
+    "mean_parameter": 6,
+    "mean_question_chars": 616.7,
+    "retry_rate": 0.0
+   },
+   "1": {
+    "mean_parameter": 7,
+    "mean_question_chars": 748.5,
+    "retry_rate": 0.0
+   },
+   "2": {
+    "mean_parameter": 9,
+    "mean_question_chars": 992.0,
+    "retry_rate": 0.0
+   },
+   "3": {
+    "mean_parameter": 10,
+    "mean_question_chars": 1126.9,
+    "retry_rate": 0.0
+   },
+   "4": {
+    "mean_parameter": 12,
+    "mean_question_chars": 1371.1,
+    "retry_rate": 0.0
+   },
+   "5": {
+    "mean_parameter": 13,
+    "mean_question_chars": 1494.2,
+    "retry_rate": 0.0
+   },
+   "6": {
+    "mean_parameter": 15,
+    "mean_question_chars": 1755.2,
+    "retry_rate": 0.0
+   }
+  },
+  "parameter": "towns (h + 3 + level)"
+ },
+ "R1.knights_knaves_r6": {
+  "distinct_level_classes": [
+   [
+    0
+   ],
+   [
+    1
+   ],
+   [
+    2
+   ],
+   [
+    3
+   ],
+   [
+    4
+   ],
+   [
+    5
+   ],
+   [
+    6
+   ]
+  ],
+  "levels": {
+   "0": {
+    "mean_parameter": 4,
+    "mean_question_chars": 314.2,
+    "retry_rate": 0.0
+   },
+   "1": {
+    "mean_parameter": 5,
+    "mean_question_chars": 360.2,
+    "retry_rate": 0.0
+   },
+   "2": {
+    "mean_parameter": 6,
+    "mean_question_chars": 403.7,
+    "retry_rate": 0.0
+   },
+   "3": {
+    "mean_parameter": 7,
+    "mean_question_chars": 446.3,
+    "retry_rate": 0.0
+   },
+   "4": {
+    "mean_parameter": 8,
+    "mean_question_chars": 489.1,
+    "retry_rate": 0.0
+   },
+   "5": {
+    "mean_parameter": 9,
+    "mean_question_chars": 533.5,
+    "retry_rate": 0.0
+   },
+   "6": {
+    "mean_parameter": 10,
+    "mean_question_chars": 579.3,
+    "retry_rate": 0.0
+   }
+  },
+  "parameter": "people (4 + level)"
+ },
+ "R1.spatial_grid_walk_r5": {
+  "distinct_level_classes": [
+   [
+    0
+   ],
+   [
+    1
+   ],
+   [
+    2
+   ],
+   [
+    3
+   ],
+   [
+    4
+   ],
+   [
+    5
+   ],
+   [
+    6
+   ]
+  ],
+  "levels": {
+   "0": {
+    "mean_parameter": 8.67,
+    "mean_question_chars": 447.4,
+    "retry_rate": 0.17
+   },
+   "1": {
+    "mean_parameter": 9.52,
+    "mean_question_chars": 457.9,
+    "retry_rate": 0.13
+   },
+   "2": {
+    "mean_parameter": 10.48,
+    "mean_question_chars": 504.4,
+    "retry_rate": 0.107
+   },
+   "3": {
+    "mean_parameter": 12.5,
+    "mean_question_chars": 580.0,
+    "retry_rate": 0.07
+   },
+   "4": {
+    "mean_parameter": 13.55,
+    "mean_question_chars": 593.1,
+    "retry_rate": 0.077
+   },
+   "5": {
+    "mean_parameter": 14.46,
+    "mean_question_chars": 649.5,
+    "retry_rate": 0.05
+   },
+   "6": {
+    "mean_parameter": 16.53,
+    "mean_question_chars": 738.7,
+    "retry_rate": 0.057
+   }
+  },
+  "parameter": "moves (4 + level + 0 to 3 free, 3 + level // 3 blocked)"
+ },
+ "R1.spatial_relative_directions_r6": {
+  "distinct_level_classes": [
+   [
+    0
+   ],
+   [
+    1
+   ],
+   [
+    2
+   ],
+   [
+    3
+   ],
+   [
+    4
+   ],
+   [
+    5
+   ],
+   [
+    6
+   ]
+  ],
+  "levels": {
+   "0": {
+    "mean_parameter": 7,
+    "mean_question_chars": 356.5,
+    "retry_rate": 0.01
+   },
+   "1": {
+    "mean_parameter": 8,
+    "mean_question_chars": 392.3,
+    "retry_rate": 0.003
+   },
+   "2": {
+    "mean_parameter": 9,
+    "mean_question_chars": 428.6,
+    "retry_rate": 0.0
+   },
+   "3": {
+    "mean_parameter": 11,
+    "mean_question_chars": 500.5,
+    "retry_rate": 0.0
+   },
+   "4": {
+    "mean_parameter": 12,
+    "mean_question_chars": 536.6,
+    "retry_rate": 0.0
+   },
+   "5": {
+    "mean_parameter": 13,
+    "mean_question_chars": 572.5,
+    "retry_rate": 0.003
+   },
+   "6": {
+    "mean_parameter": 15,
+    "mean_question_chars": 644.1,
+    "retry_rate": 0.0
+   }
+  },
+  "parameter": "facts (5 + level spine + 2 + level // 3 others)"
+ },
+ "R1.swap_tracking_r5": {
+  "distinct_level_classes": [
+   [
+    0
+   ],
+   [
+    1
+   ],
+   [
+    2
+   ],
+   [
+    3
+   ],
+   [
+    4
+   ],
+   [
+    5
+   ],
+   [
+    6
+   ]
+  ],
+  "levels": {
+   "0": {
+    "mean_parameter": 6,
+    "mean_question_chars": 637.4,
+    "retry_rate": 0.037
+   },
+   "1": {
+    "mean_parameter": 8,
+    "mean_question_chars": 783.4,
+    "retry_rate": 0.007
+   },
+   "2": {
+    "mean_parameter": 10,
+    "mean_question_chars": 963.5,
+    "retry_rate": 0.007
+   },
+   "3": {
+    "mean_parameter": 12,
+    "mean_question_chars": 1100.2,
+    "retry_rate": 0.0
+   },
+   "4": {
+    "mean_parameter": 14,
+    "mean_question_chars": 1272.0,
+    "retry_rate": 0.0
+   },
+   "5": {
+    "mean_parameter": 16,
+    "mean_question_chars": 1411.0,
+    "retry_rate": 0.0
+   },
+   "6": {
+    "mean_parameter": 18,
+    "mean_question_chars": 1592.1,
+    "retry_rate": 0.0
+   }
+  },
+  "parameter": "operations (6 + 2 level)"
+ },
+ "R1.temporal_weekday_shift_r6": {
+  "distinct_level_classes": [
+   [
+    0
+   ],
+   [
+    1
+   ],
+   [
+    2
+   ],
+   [
+    3
+   ],
+   [
+    4
+   ],
+   [
+    5
+   ],
+   [
+    6
+   ]
+  ],
+  "levels": {
+   "0": {
+    "mean_parameter": 7,
+    "mean_question_chars": 500.6,
+    "retry_rate": 0.0
+   },
+   "1": {
+    "mean_parameter": 8,
+    "mean_question_chars": 557.6,
+    "retry_rate": 0.0
+   },
+   "2": {
+    "mean_parameter": 9,
+    "mean_question_chars": 615.9,
+    "retry_rate": 0.0
+   },
+   "3": {
+    "mean_parameter": 11,
+    "mean_question_chars": 731.7,
+    "retry_rate": 0.0
+   },
+   "4": {
+    "mean_parameter": 12,
+    "mean_question_chars": 789.4,
+    "retry_rate": 0.0
+   },
+   "5": {
+    "mean_parameter": 13,
+    "mean_question_chars": 847,
+    "retry_rate": 0.0
+   },
+   "6": {
+    "mean_parameter": 15,
+    "mean_question_chars": 962.6,
+    "retry_rate": 0.0
+   }
+  },
+  "parameter": "links (5 + level spine + 2 + level // 3 others)"
+ },
+ "R1.venn_counting_r5": {
+  "distinct_level_classes": [
+   [
+    0
+   ],
+   [
+    1
+   ],
+   [
+    2
+   ],
+   [
+    3
+   ],
+   [
+    4
+   ],
+   [
+    5
+   ],
+   [
+    6
+   ]
+  ],
+  "levels": {
+   "0": {
+    "mean_parameter": 2,
+    "mean_question_chars": 250.9,
+    "retry_rate": 0.0
+   },
+   "1": {
+    "mean_parameter": 2,
+    "mean_question_chars": 258.1,
+    "retry_rate": 0.0
+   },
+   "2": {
+    "mean_parameter": 3,
+    "mean_question_chars": 438.9,
+    "retry_rate": 0.0
+   },
+   "3": {
+    "mean_parameter": 3,
+    "mean_question_chars": 446.1,
+    "retry_rate": 0.0
+   },
+   "4": {
+    "mean_parameter": 3,
+    "mean_question_chars": 447.9,
+    "retry_rate": 0.0
+   },
+   "5": {
+    "mean_parameter": 4,
+    "mean_question_chars": 816.3,
+    "retry_rate": 0.0
+   },
+   "6": {
+    "mean_parameter": 4,
+    "mean_question_chars": 824.5,
+    "retry_rate": 0.0
+   }
+  },
+  "parameter": "groups (2 to 4 by level; regions 1 to 24 + 4 level)"
+ }
+}

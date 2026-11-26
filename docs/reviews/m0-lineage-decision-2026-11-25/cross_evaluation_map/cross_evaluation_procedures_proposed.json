@@ -1,0 +1,3393 @@
+{
+ "title": "M0 cross-evaluation procedure map -- PROPOSED by an independent auditor; not the map of record, not registered, nothing decided",
+ "status": "PROPOSAL. The same-procedure test is the human lead's (addendum 1 draft 2, section 13 item 4). Astra review: NOT_PERFORMED.",
+ "inputs": {
+  "r1_fix4_survivors.json": "e1a7a092a709de28e7fdbf07c93f8451543841e1a407b6ff2ae5b9a2bd90749b",
+  "r2_fix4_survivors.json": "2456dac6fd735f87ef3f4ba55f0c2058ae9226ae458e5be35732fc603425a102",
+  "m1_fix4_survivors.json": "153e68374e8f34dfdbd96fdab73085227e29165a7122247748f38331963d1986",
+  "c1_fix4_survivors.json": "eaedec75b53e7d09b486596c1f78af3b2144bfd127a69c2587017fecb70d3603",
+  "c1_fix4_clusters.json": "6cefaf9e32c185d82185b791ac3dcc465f2346bd099b403c2df2c683bcdf83e2"
+ },
+ "c1_variant_clusters": [
+  "C1.fast_power_square_map",
+  "C1.counter_list_state_machine"
+ ],
+ "strict_clusters": [
+  {
+   "eval": "C1",
+   "cluster": "B1",
+   "survivors": [
+    "C1.list_build_f3",
+    "C1.nested_pairs_f3",
+    "C1.string_build_f3"
+   ],
+   "cluster_procedure": "Loop over a range with a condition, building or accumulating (filter-map / filter-sum)."
+  },
+  {
+   "eval": "C1",
+   "cluster": "B2",
+   "survivors": [
+    "C1.func_branch_f4",
+    "C1.func_compose_f4"
+   ],
+   "cluster_procedure": "Evaluate small user-defined integer functions (branching, composition)."
+  },
+  {
+   "eval": "C1",
+   "cluster": "B3",
+   "survivors": [
+    "C1.slices_f4",
+    "C1.string_methods_f3"
+   ],
+   "cluster_procedure": "Python sequence/string semantics (slicing, string methods)."
+  },
+  {
+   "eval": "C1",
+   "cluster": "B5",
+   "survivors": [
+    "C1.cond_chain_f3",
+    "C1.euclid_gcd_traced_f3"
+   ],
+   "cluster_procedure": "Euclid-style two-variable remainder/subtraction loop."
+  },
+  {
+   "eval": "C1",
+   "cluster": "B6",
+   "survivors": [
+    "C1.fib_like_f3",
+    "C1.fib_shapes_recursive_f3",
+    "C1.recursive_calls_r2"
+   ],
+   "cluster_procedure": "Recurrence evaluation (iterative or recursive)."
+  },
+  {
+   "eval": "C1",
+   "cluster": "B7",
+   "survivors": [
+    "C1.bytecode_loop_f3",
+    "C1.turtle_walk_f3"
+   ],
+   "cluster_procedure": "Opcode interpreter loop (accumulator machine; turtle)."
+  },
+  {
+   "eval": "C1",
+   "cluster": "B8",
+   "survivors": [
+    "C1.bracket_matching_f3",
+    "C1.postfix_evaluation"
+   ],
+   "cluster_procedure": "Stack algorithms over a token sequence (bracket matching; postfix evaluation)."
+  },
+  {
+   "eval": "C1",
+   "cluster": "C1.binary_search",
+   "survivors": [
+    "C1.binary_search_f3"
+   ],
+   "cluster_procedure": "Program: binary search (classic or lower-bound variant) over a sorted list, printing the probe/direction trace."
+  },
+  {
+   "eval": "C1",
+   "cluster": "C1.circle_elimination",
+   "survivors": [
+    "C1.circle_elimination_r2"
+   ],
+   "cluster_procedure": "Program: Josephus-style circular elimination with a step count over a 0/1 occupancy array."
+  },
+  {
+   "eval": "C1",
+   "cluster": "C1.counter_list_state_machine",
+   "survivors": [
+    "C1.counter_list_f3"
+   ],
+   "cluster_procedure": "Program: finite-state machine over a list (state c updated mod 5 by parity rules) incrementing a counter array at the state."
+  },
+  {
+   "eval": "C1",
+   "cluster": "C1.digit_peel",
+   "survivors": [
+    "C1.digit_peel_f3"
+   ],
+   "cluster_procedure": "Program: peel base-b digits by repeated % and // and recombine them (Horner in another base, or position-weighted digit sum)."
+  },
+  {
+   "eval": "C1",
+   "cluster": "C1.fast_power_square_map",
+   "survivors": [
+    "C1.fast_power_f4"
+   ],
+   "cluster_procedure": "Program: square-and-multiply loop over the exponent's bits, but the squaring step is perturbed (r = r*r + c mod n), so it is not a power."
+  },
+  {
+   "eval": "C1",
+   "cluster": "C1.merge_two_sorted",
+   "survivors": [
+    "C1.merge_two_sorted_f3"
+   ],
+   "cluster_procedure": "Program: two-pointer merge of two sorted lists, accumulating a statistic of the compared pairs."
+  },
+  {
+   "eval": "C1",
+   "cluster": "C1.run_length_scan",
+   "survivors": [
+    "C1.run_length_scan"
+   ],
+   "cluster_procedure": "Program: run-length encoding scan of a string (letter followed by run length)."
+  },
+  {
+   "eval": "C1",
+   "cluster": "C1.shared_lists",
+   "survivors": [
+    "C1.shared_lists_f3"
+   ],
+   "cluster_procedure": "Program: Python list aliasing / copy semantics through assignments and a mutating function."
+  },
+  {
+   "eval": "C1",
+   "cluster": "C1.sieve_marking",
+   "survivors": [
+    "C1.sieve_marking_f4"
+   ],
+   "cluster_procedure": "Program: Eratosthenes-style marking of multiples over a pre-marked 0/1 array, summing the marked indices."
+  },
+  {
+   "eval": "C1",
+   "cluster": "C1.union_find_links",
+   "survivors": [
+    "C1.union_find_links_f3"
+   ],
+   "cluster_procedure": "Program: union-find with find by parent-pointer chasing and link of the larger root under the smaller; print the parent array."
+  },
+  {
+   "eval": "C1",
+   "cluster": "C1.while_counter",
+   "survivors": [
+    "C1.while_counter_f3"
+   ],
+   "cluster_procedure": "Program: Collatz iteration (n/2 or 3n+1) until 1, summing the values."
+  },
+  {
+   "eval": "M1",
+   "cluster": "S1_linear_solve",
+   "survivors": [
+    "M1.ages_r3",
+    "M1.average_missing_r4",
+    "M1.consecutive_r3",
+    "M1.linear_equation_r3",
+    "M1.pipes_work_r3",
+    "M1.rectangle_r3"
+   ],
+   "cluster_procedure": "Set up and solve one linear equation in one unknown."
+  },
+  {
+   "eval": "M1",
+   "cluster": "S2_weighted_sum",
+   "survivors": [
+    "M1.mixture_r4",
+    "M1.shopping_r3",
+    "M1.speed_distance_r3"
+   ],
+   "cluster_procedure": "Sum of products (quantity x rate), then a final arithmetic read-out."
+  },
+  {
+   "eval": "M1",
+   "cluster": "S3_multiplicative_chain",
+   "survivors": [
+    "M1.fraction_remainder_r3",
+    "M1.percent_change_r3",
+    "M1.ratio_share_r3",
+    "M1.tip_split_r3"
+   ],
+   "cluster_procedure": "Apply a chain of multiplicative factors to an amount."
+  },
+  {
+   "eval": "M1",
+   "cluster": "S5_unbounded_table",
+   "survivors": [
+    "M1.change_ways_r3"
+   ],
+   "cluster_procedure": "Count coin combinations (unbounded)."
+  },
+  {
+   "eval": "M1",
+   "cluster": "S6_exposed_faces",
+   "survivors": [
+    "M1.grid_perimeter_r3",
+    "M1.painted_cube_r3"
+   ],
+   "cluster_procedure": "Count exposed unit faces/edges of a cell arrangement."
+  },
+  {
+   "eval": "M1",
+   "cluster": "S7_step_rule",
+   "survivors": [
+    "M1.arithmetic_series_r3",
+    "M1.recurrence_iterate_r3"
+   ],
+   "cluster_procedure": "Iterate / sum a sequence defined by an additive step rule."
+  },
+  {
+   "eval": "M1",
+   "cluster": "clock_duration",
+   "survivors": [
+    "M1.clock_duration_r4"
+   ],
+   "cluster_procedure": "Time arithmetic: convert hh:mm to minutes, sum the per-leg arrival-minus-departure differences."
+  },
+  {
+   "eval": "M1",
+   "cluster": "crt_congruence",
+   "survivors": [
+    "M1.crt_congruence_r3"
+   ],
+   "cluster_procedure": "Smallest positive solution of a system of 2-4 congruences (Chinese remainder theorem / sieving)."
+  },
+  {
+   "eval": "M1",
+   "cluster": "division_counting",
+   "survivors": [
+    "M1.division_counting_r3"
+   ],
+   "cluster_procedure": "Two-level floor division and remainder (mixed-radix decomposition: items -> full boxes -> full pallets; read a leftover)."
+  },
+  {
+   "eval": "M1",
+   "cluster": "finite_differences",
+   "survivors": [
+    "M1.finite_differences_r4"
+   ],
+   "cluster_procedure": "Polynomial extrapolation by a finite-difference table (degree stated), extending to the asked position."
+  },
+  {
+   "eval": "M1",
+   "cluster": "gcd_lcm",
+   "survivors": [
+    "M1.gcd_lcm_r4"
+   ],
+   "cluster_procedure": "GCD or LCM of 2-4 integers (Euclid's algorithm, lcm via a*b/gcd; or prime factorisation)."
+  },
+  {
+   "eval": "M1",
+   "cluster": "inclusion_exclusion",
+   "survivors": [
+    "M1.inclusion_exclusion_r3"
+   ],
+   "cluster_procedure": "Inclusion-exclusion over 3 sets: |A u B u C| from singles, pairwise and triple counts."
+  },
+  {
+   "eval": "M1",
+   "cluster": "last_digit_power",
+   "survivors": [
+    "M1.last_digit_power_r3"
+   ],
+   "cluster_procedure": "Power remainder: (sum of) a^n mod m, by fast modular exponentiation or the cycle of powers mod m."
+  },
+  {
+   "eval": "M1",
+   "cluster": "median_list",
+   "survivors": [
+    "M1.median_list_r3"
+   ],
+   "cluster_procedure": "Sort the values and take the middle (mean of the two middle values for an even count)."
+  },
+  {
+   "eval": "M1",
+   "cluster": "prime_factors",
+   "survivors": [
+    "M1.prime_factors_r3"
+   ],
+   "cluster_procedure": "Prime factorisation by trial division; read the largest prime factor or the divisor count."
+  },
+  {
+   "eval": "M1",
+   "cluster": "quadratic_area",
+   "survivors": [
+    "M1.quadratic_area_r3"
+   ],
+   "cluster_procedure": "Solve w*(w+d) = A for positive integer w (quadratic formula or search)."
+  },
+  {
+   "eval": "M1",
+   "cluster": "tiered_pricing",
+   "survivors": [
+    "M1.tiered_pricing"
+   ],
+   "cluster_procedure": "Tiered (piecewise-linear) charge: split the quantity across brackets and sum units*rate per bracket."
+  },
+  {
+   "eval": "R1",
+   "cluster": "R1.attribute_rule",
+   "survivors": [
+    "R1.conditional_decision_tree_r6"
+   ],
+   "cluster_procedure": "Evaluate a nested if-then-else decision tree on a given truth assignment (follow one root-to-leaf path)."
+  },
+  {
+   "eval": "R1",
+   "cluster": "R1.boolean_lights",
+   "survivors": [
+    "R1.boolean_lights_r4",
+    "R1.compass_turns"
+   ],
+   "cluster_procedure": "Modular state accumulation (bit-vector XOR toggles; heading mod 4) -- the R1 map's merge."
+  },
+  {
+   "eval": "R1",
+   "cluster": "R1.categories_default_exceptions",
+   "survivors": [
+    "R1.categories_default_exceptions_r4"
+   ],
+   "cluster_procedure": "Inheritance with exceptions: walk up the is-a chain from the entity and return the property value of the first (most specific) ancestor that has a rule."
+  },
+  {
+   "eval": "R1",
+   "cluster": "R1.conditional_chain",
+   "survivors": [
+    "R1.knights_knaves_r6"
+   ],
+   "cluster_procedure": "Boolean constraint satisfaction: find the (unique) knight/knave assignment consistent with every statement (enumeration or propagation)."
+  },
+  {
+   "eval": "R1",
+   "cluster": "R1.conditional_threshold_rule",
+   "survivors": [
+    "R1.conditional_threshold_rule_r4"
+   ],
+   "cluster_procedure": "Signed weighted sum: sum the weights of yes voters minus no voters and compare with the threshold."
+  },
+  {
+   "eval": "R1",
+   "cluster": "R1.equivalence_exchange_rates",
+   "survivors": [
+    "R1.equivalence_exchange_rates_r6",
+    "R1.temporal_weekday_shift_r6"
+   ],
+   "cluster_procedure": ""
+  },
+  {
+   "eval": "R1",
+   "cluster": "R1.graph_shortest_route",
+   "survivors": [
+    "R1.graph_shortest_route_r6"
+   ],
+   "cluster_procedure": "Single-pair shortest path on a small weighted undirected graph (Dijkstra or exhaustive path comparison)."
+  },
+  {
+   "eval": "R1",
+   "cluster": "R1.spatial_grid_walk",
+   "survivors": [
+    "R1.spatial_grid_walk_r5"
+   ],
+   "cluster_procedure": "Grid position simulation: apply unit moves N/S/E/W from the start cell, skipping moves into walls or off the map; read the final cell."
+  },
+  {
+   "eval": "R1",
+   "cluster": "R1.swap_tracking",
+   "survivors": [
+    "R1.swap_tracking_r5"
+   ],
+   "cluster_procedure": "Permutation tracking: apply the sequence of transpositions and 3-cycles to the holder->item map and read one holder's item."
+  },
+  {
+   "eval": "R1",
+   "cluster": "R1.venn_counting",
+   "survivors": [
+    "R1.venn_counting_r5"
+   ],
+   "cluster_procedure": "Inclusion-exclusion over 2-4 sets: recover Venn region counts from the stated intersections and read none / exactly-k."
+  },
+  {
+   "eval": "R2",
+   "cluster": "R2.binary_search_trace",
+   "survivors": [
+    "R2.binary_search_trace"
+   ],
+   "cluster_procedure": "Binary search on a sorted list with the stated midpoint and update rules; report the probed values in order."
+  },
+  {
+   "eval": "R2",
+   "cluster": "R2.caesar_shift",
+   "survivors": [
+    "R2.caesar_shift"
+   ],
+   "cluster_procedure": "Caesar cipher: shift each letter by k mod 26."
+  },
+  {
+   "eval": "R2",
+   "cluster": "R2.cellular_automaton",
+   "survivors": [
+    "R2.cellular_automaton"
+   ],
+   "cluster_procedure": "Elementary 1-D cellular automaton: apply the stated 3-neighbour rule table synchronously for t steps with zero boundary."
+  },
+  {
+   "eval": "R2",
+   "cluster": "R2.cheapest_network",
+   "survivors": [
+    "R2.cheapest_network"
+   ],
+   "cluster_procedure": "Minimum spanning tree total weight (Kruskal or Prim) on a small weighted graph."
+  },
+  {
+   "eval": "R2",
+   "cluster": "R2.count_divisible",
+   "survivors": [
+    "R2.count_divisible"
+   ],
+   "cluster_procedure": "Filter-and-accumulate: sum (with multiplicity) the list entries satisfying a divisibility and threshold predicate."
+  },
+  {
+   "eval": "R2",
+   "cluster": "R2.crt_smallest",
+   "survivors": [
+    "R2.crt_smallest"
+   ],
+   "cluster_procedure": "Smallest positive solution of a system of 2-3 congruences (Chinese remainder theorem / sieving)."
+  },
+  {
+   "eval": "R2",
+   "cluster": "R2.dictionary_rank",
+   "survivors": [
+    "R2.dictionary_rank"
+   ],
+   "cluster_procedure": "Lexicographic rank / unrank of a k-permutation of a letter set (mixed-radix counting of permutations)."
+  },
+  {
+   "eval": "R2",
+   "cluster": "R2.digit_root",
+   "survivors": [
+    "R2.digit_root"
+   ],
+   "cluster_procedure": "Digital root: repeatedly sum decimal digits until one digit remains (equivalently n mod 9 rule)."
+  },
+  {
+   "eval": "R2",
+   "cluster": "R2.expression_eval",
+   "survivors": [
+    "R2.expression_eval"
+   ],
+   "cluster_procedure": "Evaluate an infix arithmetic expression with parentheses under a stated precedence rule (usual or strictly left-to-right)."
+  },
+  {
+   "eval": "R2",
+   "cluster": "R2.from_base",
+   "survivors": [
+    "R2.from_base"
+   ],
+   "cluster_procedure": "Positional base-b to decimal conversion (Horner evaluation of the digit string)."
+  },
+  {
+   "eval": "R2",
+   "cluster": "R2.grid_sum",
+   "survivors": [
+    "R2.grid_sum"
+   ],
+   "cluster_procedure": "Sum the entries of one stated row or column of a small matrix."
+  },
+  {
+   "eval": "R2",
+   "cluster": "R2.interval_scheduling",
+   "survivors": [
+    "R2.interval_scheduling"
+   ],
+   "cluster_procedure": "Greedy interval scheduling: repeatedly take the compatible meeting with the earliest end (tie: smaller number); list chosen."
+  },
+  {
+   "eval": "R2",
+   "cluster": "R2.kth_smallest",
+   "survivors": [
+    "R2.sort_list"
+   ],
+   "cluster_procedure": "Sort a list of integers ascending or descending."
+  },
+  {
+   "eval": "R2",
+   "cluster": "R2.list_ops",
+   "survivors": [
+    "R2.list_ops"
+   ],
+   "cluster_procedure": "Simulate a sequence of list operations (remove first/last, append, move first to end, reverse) and print the list."
+  },
+  {
+   "eval": "R2",
+   "cluster": "R2.luhn_check",
+   "survivors": [
+    "R2.luhn_check"
+   ],
+   "cluster_procedure": "Luhn checksum: double every second digit from the right, cast out nines, sum, test (or solve for) a multiple of 10."
+  },
+  {
+   "eval": "R2",
+   "cluster": "R2.min_heap_ops",
+   "survivors": [
+    "R2.min_heap_ops"
+   ],
+   "cluster_procedure": "Binary min-heap: insert with sift-up and extract-min with sift-down as stated; print the array."
+  },
+  {
+   "eval": "R2",
+   "cluster": "R2.run_length",
+   "survivors": [
+    "R2.run_length"
+   ],
+   "cluster_procedure": "Run-length encoding of a letter string (letter followed by run length)."
+  },
+  {
+   "eval": "R2",
+   "cluster": "R2.string_rewrite_nonidentity",
+   "survivors": [
+    "R2.string_rewrite_nonidentity"
+   ],
+   "cluster_procedure": "Sequential string rewriting: for each rule in order, replace all non-overlapping left-to-right matches (str.replace semantics)."
+  }
+ ],
+ "lineages": [
+  {
+   "id": "C1.list_build_f3",
+   "eval": "C1",
+   "strict_cluster": "B1",
+   "procedure": "Program: loop over a range, filter by a modulus test and append a computed value (filter-map)."
+  },
+  {
+   "id": "C1.nested_pairs_f3",
+   "eval": "C1",
+   "strict_cluster": "B1",
+   "procedure": "Program: double loop over index pairs with a condition, accumulating a function of the pair."
+  },
+  {
+   "id": "C1.string_build_f3",
+   "eval": "C1",
+   "strict_cluster": "B1",
+   "procedure": "Program: loop over a range appending a character chosen by modulus tests, then reverse."
+  },
+  {
+   "id": "C1.func_branch_f4",
+   "eval": "C1",
+   "strict_cluster": "B2",
+   "procedure": "Program: evaluate a piecewise (if/elif/else) integer function at a few arguments and combine."
+  },
+  {
+   "id": "C1.func_compose_f4",
+   "eval": "C1",
+   "strict_cluster": "B2",
+   "procedure": "Program: evaluate composed small integer functions at a few arguments and combine."
+  },
+  {
+   "id": "C1.slices_f4",
+   "eval": "C1",
+   "strict_cluster": "B3",
+   "procedure": "Program: Python slice semantics (start/stop/step incl. negatives) on a list, concatenated."
+  },
+  {
+   "id": "C1.string_methods_f3",
+   "eval": "C1",
+   "strict_cluster": "B3",
+   "procedure": "Program: a chain of Python string methods (replace, slicing, upper/lower, concatenation)."
+  },
+  {
+   "id": "C1.cond_chain_f3",
+   "eval": "C1",
+   "strict_cluster": "B5",
+   "procedure": "Program: subtractive-Euclid-like two-variable loop (subtract smaller from larger; extra equal/halving branches), accumulating one variable."
+  },
+  {
+   "id": "C1.euclid_gcd_traced_f3",
+   "eval": "C1",
+   "strict_cluster": "B5",
+   "procedure": "Program: Euclid's remainder steps (a, b) -> (b, a mod b), capped at 2 rounds, accumulating weighted remainders."
+  },
+  {
+   "id": "C1.fib_like_f3",
+   "eval": "C1",
+   "strict_cluster": "B6",
+   "procedure": "Program: iterate a two-term linear recurrence (Fibonacci-like) for n steps."
+  },
+  {
+   "id": "C1.fib_shapes_recursive_f3",
+   "eval": "C1",
+   "strict_cluster": "B6",
+   "procedure": "Program: recursive two-term recurrence f(n) = a*f(n-1) + b*f(n-2) + c with base cases."
+  },
+  {
+   "id": "C1.recursive_calls_r2",
+   "eval": "C1",
+   "strict_cluster": "B6",
+   "procedure": "Program: divide-style recursion h(j) = a*h(j//2) + b*h(j - j//2) + j%2 with base case."
+  },
+  {
+   "id": "C1.bytecode_loop_f3",
+   "eval": "C1",
+   "strict_cluster": "B7",
+   "procedure": "Program: interpreter loop over (opcode, argument) pairs with an accumulator, a register and conditional skips."
+  },
+  {
+   "id": "C1.turtle_walk_f3",
+   "eval": "C1",
+   "strict_cluster": "B7",
+   "procedure": "Program: turtle interpreter: heading mod 4 changed by turn opcodes, position (x, y) changed by move opcodes; print position."
+  },
+  {
+   "id": "C1.bracket_matching_f3",
+   "eval": "C1",
+   "strict_cluster": "B8",
+   "procedure": "Program: stack-based bracket matching over a bracket string, accumulating matched positions / mismatch counts."
+  },
+  {
+   "id": "C1.postfix_evaluation",
+   "eval": "C1",
+   "strict_cluster": "B8",
+   "procedure": "Program: stack-based postfix (RPN) arithmetic evaluation, accumulating intermediate results."
+  },
+  {
+   "id": "C1.binary_search_f3",
+   "eval": "C1",
+   "strict_cluster": "C1.binary_search",
+   "procedure": "Program: binary search (classic or lower-bound variant) over a sorted list, printing the probe/direction trace."
+  },
+  {
+   "id": "C1.circle_elimination_r2",
+   "eval": "C1",
+   "strict_cluster": "C1.circle_elimination",
+   "procedure": "Program: Josephus-style circular elimination with a step count over a 0/1 occupancy array."
+  },
+  {
+   "id": "C1.counter_list_f3",
+   "eval": "C1",
+   "strict_cluster": "C1.counter_list_state_machine",
+   "procedure": "Program: finite-state machine over a list (state c updated mod 5 by parity rules) incrementing a counter array at the state."
+  },
+  {
+   "id": "C1.digit_peel_f3",
+   "eval": "C1",
+   "strict_cluster": "C1.digit_peel",
+   "procedure": "Program: peel base-b digits by repeated % and // and recombine them (Horner in another base, or position-weighted digit sum)."
+  },
+  {
+   "id": "C1.fast_power_f4",
+   "eval": "C1",
+   "strict_cluster": "C1.fast_power_square_map",
+   "procedure": "Program: square-and-multiply loop over the exponent's bits, but the squaring step is perturbed (r = r*r + c mod n), so it is not a power."
+  },
+  {
+   "id": "C1.merge_two_sorted_f3",
+   "eval": "C1",
+   "strict_cluster": "C1.merge_two_sorted",
+   "procedure": "Program: two-pointer merge of two sorted lists, accumulating a statistic of the compared pairs."
+  },
+  {
+   "id": "C1.run_length_scan",
+   "eval": "C1",
+   "strict_cluster": "C1.run_length_scan",
+   "procedure": "Program: run-length encoding scan of a string (letter followed by run length)."
+  },
+  {
+   "id": "C1.shared_lists_f3",
+   "eval": "C1",
+   "strict_cluster": "C1.shared_lists",
+   "procedure": "Program: Python list aliasing / copy semantics through assignments and a mutating function."
+  },
+  {
+   "id": "C1.sieve_marking_f4",
+   "eval": "C1",
+   "strict_cluster": "C1.sieve_marking",
+   "procedure": "Program: Eratosthenes-style marking of multiples over a pre-marked 0/1 array, summing the marked indices."
+  },
+  {
+   "id": "C1.union_find_links_f3",
+   "eval": "C1",
+   "strict_cluster": "C1.union_find_links",
+   "procedure": "Program: union-find with find by parent-pointer chasing and link of the larger root under the smaller; print the parent array."
+  },
+  {
+   "id": "C1.while_counter_f3",
+   "eval": "C1",
+   "strict_cluster": "C1.while_counter",
+   "procedure": "Program: Collatz iteration (n/2 or 3n+1) until 1, summing the values."
+  },
+  {
+   "id": "M1.ages_r3",
+   "eval": "M1",
+   "strict_cluster": "S1_linear_solve",
+   "procedure": "Linear equation in one unknown (ratio of ages now, sum later): solve k*x + x + 2t = S."
+  },
+  {
+   "id": "M1.average_missing_r4",
+   "eval": "M1",
+   "strict_cluster": "S1_linear_solve",
+   "procedure": "Linear equation in one unknown: required next score = target mean * n - sum of known scores."
+  },
+  {
+   "id": "M1.consecutive_r3",
+   "eval": "M1",
+   "strict_cluster": "S1_linear_solve",
+   "procedure": "Linear equation in one unknown: k terms of an arithmetic sequence with known step summing to S; solve for the first and read the last."
+  },
+  {
+   "id": "M1.linear_equation_r3",
+   "eval": "M1",
+   "strict_cluster": "S1_linear_solve",
+   "procedure": "Linear equation in one unknown: a*x + b = c*x + d."
+  },
+  {
+   "id": "M1.pipes_work_r3",
+   "eval": "M1",
+   "strict_cluster": "S1_linear_solve",
+   "procedure": "Linear rate equation: time = volume / (sum of inflow rates - outflow rate)."
+  },
+  {
+   "id": "M1.rectangle_r3",
+   "eval": "M1",
+   "strict_cluster": "S1_linear_solve",
+   "procedure": "Linear equation from perimeter and side difference, then area = w*(w+d)."
+  },
+  {
+   "id": "M1.mixture_r4",
+   "eval": "M1",
+   "strict_cluster": "S2_weighted_sum",
+   "procedure": "Weighted sum then divide: (sum of mass*price + extra per kg) / total mass."
+  },
+  {
+   "id": "M1.shopping_r3",
+   "eval": "M1",
+   "strict_cluster": "S2_weighted_sum",
+   "procedure": "Weighted sum: sum of quantity*unit price, then change = paid - total."
+  },
+  {
+   "id": "M1.speed_distance_r3",
+   "eval": "M1",
+   "strict_cluster": "S2_weighted_sum",
+   "procedure": "Weighted sum: sum of hours*speed over legs."
+  },
+  {
+   "id": "M1.fraction_remainder_r3",
+   "eval": "M1",
+   "strict_cluster": "S3_multiplicative_chain",
+   "procedure": "Multiplicative chain: apply successive 'spend fraction of what is left' multipliers to an amount."
+  },
+  {
+   "id": "M1.percent_change_r3",
+   "eval": "M1",
+   "strict_cluster": "S3_multiplicative_chain",
+   "procedure": "Multiplicative chain: apply successive percentage multipliers (1 +/- p/100) to a price."
+  },
+  {
+   "id": "M1.ratio_share_r3",
+   "eval": "M1",
+   "strict_cluster": "S3_multiplicative_chain",
+   "procedure": "Multiplicative chain: share = total / (sum of ratio parts) * own parts."
+  },
+  {
+   "id": "M1.tip_split_r3",
+   "eval": "M1",
+   "strict_cluster": "S3_multiplicative_chain",
+   "procedure": "Multiplicative chain: bill * (1 + tip%) / people."
+  },
+  {
+   "id": "M1.change_ways_r3",
+   "eval": "M1",
+   "strict_cluster": "S5_unbounded_table",
+   "procedure": "Count the multisets of coins (unbounded) summing to an amount (counting DP or nested enumeration)."
+  },
+  {
+   "id": "M1.grid_perimeter_r3",
+   "eval": "M1",
+   "strict_cluster": "S6_exposed_faces",
+   "procedure": "Exposed-face count: perimeter of a polyomino as 4*cells - 2*shared edges."
+  },
+  {
+   "id": "M1.painted_cube_r3",
+   "eval": "M1",
+   "strict_cluster": "S6_exposed_faces",
+   "procedure": "Exposed-face count on a box of unit cubes with one unpainted face: count cubes with exactly k painted faces by face/edge/corner classes."
+  },
+  {
+   "id": "M1.arithmetic_series_r3",
+   "eval": "M1",
+   "strict_cluster": "S7_step_rule",
+   "procedure": "Sum of an arithmetic progression (iterate the constant step or closed form n/2*(2a+(n-1)d))."
+  },
+  {
+   "id": "M1.recurrence_iterate_r3",
+   "eval": "M1",
+   "strict_cluster": "S7_step_rule",
+   "procedure": "Iterate a first-order additive recurrence a_n = a_{n-1} + c*n from a_1 to position N."
+  },
+  {
+   "id": "M1.clock_duration_r4",
+   "eval": "M1",
+   "strict_cluster": "clock_duration",
+   "procedure": "Time arithmetic: convert hh:mm to minutes, sum the per-leg arrival-minus-departure differences."
+  },
+  {
+   "id": "M1.crt_congruence_r3",
+   "eval": "M1",
+   "strict_cluster": "crt_congruence",
+   "procedure": "Smallest positive solution of a system of 2-4 congruences (Chinese remainder theorem / sieving)."
+  },
+  {
+   "id": "M1.division_counting_r3",
+   "eval": "M1",
+   "strict_cluster": "division_counting",
+   "procedure": "Two-level floor division and remainder (mixed-radix decomposition: items -> full boxes -> full pallets; read a leftover)."
+  },
+  {
+   "id": "M1.finite_differences_r4",
+   "eval": "M1",
+   "strict_cluster": "finite_differences",
+   "procedure": "Polynomial extrapolation by a finite-difference table (degree stated), extending to the asked position."
+  },
+  {
+   "id": "M1.gcd_lcm_r4",
+   "eval": "M1",
+   "strict_cluster": "gcd_lcm",
+   "procedure": "GCD or LCM of 2-4 integers (Euclid's algorithm, lcm via a*b/gcd; or prime factorisation)."
+  },
+  {
+   "id": "M1.inclusion_exclusion_r3",
+   "eval": "M1",
+   "strict_cluster": "inclusion_exclusion",
+   "procedure": "Inclusion-exclusion over 3 sets: |A u B u C| from singles, pairwise and triple counts."
+  },
+  {
+   "id": "M1.last_digit_power_r3",
+   "eval": "M1",
+   "strict_cluster": "last_digit_power",
+   "procedure": "Power remainder: (sum of) a^n mod m, by fast modular exponentiation or the cycle of powers mod m."
+  },
+  {
+   "id": "M1.median_list_r3",
+   "eval": "M1",
+   "strict_cluster": "median_list",
+   "procedure": "Sort the values and take the middle (mean of the two middle values for an even count)."
+  },
+  {
+   "id": "M1.prime_factors_r3",
+   "eval": "M1",
+   "strict_cluster": "prime_factors",
+   "procedure": "Prime factorisation by trial division; read the largest prime factor or the divisor count."
+  },
+  {
+   "id": "M1.quadratic_area_r3",
+   "eval": "M1",
+   "strict_cluster": "quadratic_area",
+   "procedure": "Solve w*(w+d) = A for positive integer w (quadratic formula or search)."
+  },
+  {
+   "id": "M1.tiered_pricing",
+   "eval": "M1",
+   "strict_cluster": "tiered_pricing",
+   "procedure": "Tiered (piecewise-linear) charge: split the quantity across brackets and sum units*rate per bracket."
+  },
+  {
+   "id": "R1.conditional_decision_tree_r6",
+   "eval": "R1",
+   "strict_cluster": "R1.attribute_rule",
+   "procedure": "Evaluate a nested if-then-else decision tree on a given truth assignment (follow one root-to-leaf path)."
+  },
+  {
+   "id": "R1.boolean_lights_r4",
+   "eval": "R1",
+   "strict_cluster": "R1.boolean_lights",
+   "procedure": "Bit-vector toggling: for the asked lamp, XOR its start state with the parity of presses of switches that cover it (simulate XOR updates)."
+  },
+  {
+   "id": "R1.compass_turns",
+   "eval": "R1",
+   "strict_cluster": "R1.boolean_lights",
+   "procedure": "Heading accumulation modulo 4: sum the turns (right=+1, left=-1, around=+2, k*90 deg) mod 4 from the start heading; walks are no-ops."
+  },
+  {
+   "id": "R1.categories_default_exceptions_r4",
+   "eval": "R1",
+   "strict_cluster": "R1.categories_default_exceptions",
+   "procedure": "Inheritance with exceptions: walk up the is-a chain from the entity and return the property value of the first (most specific) ancestor that has a rule."
+  },
+  {
+   "id": "R1.knights_knaves_r6",
+   "eval": "R1",
+   "strict_cluster": "R1.conditional_chain",
+   "procedure": "Boolean constraint satisfaction: find the (unique) knight/knave assignment consistent with every statement (enumeration or propagation)."
+  },
+  {
+   "id": "R1.conditional_threshold_rule_r4",
+   "eval": "R1",
+   "strict_cluster": "R1.conditional_threshold_rule",
+   "procedure": "Signed weighted sum: sum the weights of yes voters minus no voters and compare with the threshold."
+  },
+  {
+   "id": "R1.equivalence_exchange_rates_r6",
+   "eval": "R1",
+   "strict_cluster": "R1.equivalence_exchange_rates",
+   "procedure": "Path in a ratio graph: find a chain of stated equivalences linking the two goods and multiply/divide the ratios along it."
+  },
+  {
+   "id": "R1.temporal_weekday_shift_r6",
+   "eval": "R1",
+   "strict_cluster": "R1.equivalence_exchange_rates",
+   "procedure": "Path in an offset graph: find a chain of stated day offsets from the anchored event to the asked one, sum the signed offsets, read the weekday mod 7."
+  },
+  {
+   "id": "R1.graph_shortest_route_r6",
+   "eval": "R1",
+   "strict_cluster": "R1.graph_shortest_route",
+   "procedure": "Single-pair shortest path on a small weighted undirected graph (Dijkstra or exhaustive path comparison)."
+  },
+  {
+   "id": "R1.spatial_grid_walk_r5",
+   "eval": "R1",
+   "strict_cluster": "R1.spatial_grid_walk",
+   "procedure": "Grid position simulation: apply unit moves N/S/E/W from the start cell, skipping moves into walls or off the map; read the final cell."
+  },
+  {
+   "id": "R1.swap_tracking_r5",
+   "eval": "R1",
+   "strict_cluster": "R1.swap_tracking",
+   "procedure": "Permutation tracking: apply the sequence of transpositions and 3-cycles to the holder->item map and read one holder's item."
+  },
+  {
+   "id": "R1.venn_counting_r5",
+   "eval": "R1",
+   "strict_cluster": "R1.venn_counting",
+   "procedure": "Inclusion-exclusion over 2-4 sets: recover Venn region counts from the stated intersections and read none / exactly-k."
+  },
+  {
+   "id": "R2.binary_search_trace",
+   "eval": "R2",
+   "strict_cluster": "R2.binary_search_trace",
+   "procedure": "Binary search on a sorted list with the stated midpoint and update rules; report the probed values in order."
+  },
+  {
+   "id": "R2.caesar_shift",
+   "eval": "R2",
+   "strict_cluster": "R2.caesar_shift",
+   "procedure": "Caesar cipher: shift each letter by k mod 26."
+  },
+  {
+   "id": "R2.cellular_automaton",
+   "eval": "R2",
+   "strict_cluster": "R2.cellular_automaton",
+   "procedure": "Elementary 1-D cellular automaton: apply the stated 3-neighbour rule table synchronously for t steps with zero boundary."
+  },
+  {
+   "id": "R2.cheapest_network",
+   "eval": "R2",
+   "strict_cluster": "R2.cheapest_network",
+   "procedure": "Minimum spanning tree total weight (Kruskal or Prim) on a small weighted graph."
+  },
+  {
+   "id": "R2.count_divisible",
+   "eval": "R2",
+   "strict_cluster": "R2.count_divisible",
+   "procedure": "Filter-and-accumulate: sum (with multiplicity) the list entries satisfying a divisibility and threshold predicate."
+  },
+  {
+   "id": "R2.crt_smallest",
+   "eval": "R2",
+   "strict_cluster": "R2.crt_smallest",
+   "procedure": "Smallest positive solution of a system of 2-3 congruences (Chinese remainder theorem / sieving)."
+  },
+  {
+   "id": "R2.dictionary_rank",
+   "eval": "R2",
+   "strict_cluster": "R2.dictionary_rank",
+   "procedure": "Lexicographic rank / unrank of a k-permutation of a letter set (mixed-radix counting of permutations)."
+  },
+  {
+   "id": "R2.digit_root",
+   "eval": "R2",
+   "strict_cluster": "R2.digit_root",
+   "procedure": "Digital root: repeatedly sum decimal digits until one digit remains (equivalently n mod 9 rule)."
+  },
+  {
+   "id": "R2.expression_eval",
+   "eval": "R2",
+   "strict_cluster": "R2.expression_eval",
+   "procedure": "Evaluate an infix arithmetic expression with parentheses under a stated precedence rule (usual or strictly left-to-right)."
+  },
+  {
+   "id": "R2.from_base",
+   "eval": "R2",
+   "strict_cluster": "R2.from_base",
+   "procedure": "Positional base-b to decimal conversion (Horner evaluation of the digit string)."
+  },
+  {
+   "id": "R2.grid_sum",
+   "eval": "R2",
+   "strict_cluster": "R2.grid_sum",
+   "procedure": "Sum the entries of one stated row or column of a small matrix."
+  },
+  {
+   "id": "R2.interval_scheduling",
+   "eval": "R2",
+   "strict_cluster": "R2.interval_scheduling",
+   "procedure": "Greedy interval scheduling: repeatedly take the compatible meeting with the earliest end (tie: smaller number); list chosen."
+  },
+  {
+   "id": "R2.sort_list",
+   "eval": "R2",
+   "strict_cluster": "R2.kth_smallest",
+   "procedure": "Sort a list of integers ascending or descending."
+  },
+  {
+   "id": "R2.list_ops",
+   "eval": "R2",
+   "strict_cluster": "R2.list_ops",
+   "procedure": "Simulate a sequence of list operations (remove first/last, append, move first to end, reverse) and print the list."
+  },
+  {
+   "id": "R2.luhn_check",
+   "eval": "R2",
+   "strict_cluster": "R2.luhn_check",
+   "procedure": "Luhn checksum: double every second digit from the right, cast out nines, sum, test (or solve for) a multiple of 10."
+  },
+  {
+   "id": "R2.min_heap_ops",
+   "eval": "R2",
+   "strict_cluster": "R2.min_heap_ops",
+   "procedure": "Binary min-heap: insert with sift-up and extract-min with sift-down as stated; print the array."
+  },
+  {
+   "id": "R2.run_length",
+   "eval": "R2",
+   "strict_cluster": "R2.run_length",
+   "procedure": "Run-length encoding of a letter string (letter followed by run length)."
+  },
+  {
+   "id": "R2.string_rewrite_nonidentity",
+   "eval": "R2",
+   "strict_cluster": "R2.string_rewrite_nonidentity",
+   "procedure": "Sequential string rewriting: for each rule in order, replace all non-overlapping left-to-right matches (str.replace semantics)."
+  }
+ ],
+ "pairs": [
+  {
+   "id": "S1",
+   "a": [
+    "R2",
+    "R2.binary_search_trace"
+   ],
+   "b": [
+    "C1",
+    "C1.binary_search"
+   ],
+   "grade": "STRONG",
+   "lineages_compared": "R2.binary_search_trace ~ C1.binary_search_f3",
+   "reason": "Both are binary search over a sorted list with a probe trace as the read-out; C1's lower-bound variant is a tie-break/parameter change under section 1 item 1."
+  },
+  {
+   "id": "S2",
+   "a": [
+    "R2",
+    "R2.run_length"
+   ],
+   "b": [
+    "C1",
+    "C1.run_length_scan"
+   ],
+   "grade": "STRONG",
+   "lineages_compared": "R2.run_length ~ C1.run_length_scan",
+   "reason": "Identical algorithm: scan, count maximal runs, emit letter+count."
+  },
+  {
+   "id": "S3",
+   "a": [
+    "R2",
+    "R2.crt_smallest"
+   ],
+   "b": [
+    "M1",
+    "crt_congruence"
+   ],
+   "grade": "STRONG",
+   "lineages_compared": "R2.crt_smallest ~ M1.crt_congruence_r3",
+   "reason": "Identical task: smallest positive x meeting 2-4 congruences; only the frame (a person thinking of a number) differs."
+  },
+  {
+   "id": "S4",
+   "a": [
+    "M1",
+    "gcd_lcm"
+   ],
+   "b": [
+    "C1",
+    "B5"
+   ],
+   "grade": "STRONG",
+   "lineages_compared": "M1.gcd_lcm_r4 ~ C1.euclid_gcd_traced_f3 (B5 also holds C1.cond_chain_f3)",
+   "reason": "Euclid's remainder step is the shared algorithm; C1 reads a weighted remainder sum after at most 2 rounds (a different read-out of the same state). Against: M1 items are often solved by prime factorisation and the C1 trace is only 2 rounds; lcm needs a*b/gcd on top."
+  },
+  {
+   "id": "S5",
+   "a": [
+    "R1",
+    "R1.venn_counting"
+   ],
+   "b": [
+    "M1",
+    "inclusion_exclusion"
+   ],
+   "grade": "STRONG",
+   "lineages_compared": "R1.venn_counting_r5 ~ M1.inclusion_exclusion_r3",
+   "reason": "Both recover Venn-region counts by inclusion-exclusion; R1 reads none/exactly-k over 2-4 sets, M1 reads the union over 3 sets (different read-out, set count is a parameter)."
+  },
+  {
+   "id": "S6",
+   "a": [
+    "R2",
+    "R2.kth_smallest"
+   ],
+   "b": [
+    "M1",
+    "median_list"
+   ],
+   "grade": "STRONG",
+   "lineages_compared": "R2.sort_list (cluster R2.kth_smallest, which also holds the unregistered R2.kth_smallest) ~ M1.median_list_r3",
+   "reason": "The median is the middle order statistic of the sorted list; R2's own map already merged sorting with k-th smallest."
+  },
+  {
+   "id": "S7",
+   "a": [
+    "R2",
+    "R2.from_base"
+   ],
+   "b": [
+    "C1",
+    "C1.digit_peel"
+   ],
+   "grade": "STRONG",
+   "lineages_compared": "R2.from_base (cluster also holds the unregistered R2.to_base_wide) ~ C1.digit_peel_f3",
+   "reason": "Positional base conversion: C1 peels base-b digits by % and // (to-base) and usually recombines them by Horner (from-base). Inverting the question is a same-cluster change under section 1 item 1, and R2's own map put both directions in one cluster. Against: survivor-to-survivor, R2.from_base is only the Horner direction."
+  },
+  {
+   "id": "B1",
+   "a": [
+    "R1",
+    "R1.boolean_lights"
+   ],
+   "b": [
+    "C1",
+    "B7"
+   ],
+   "grade": "BORDERLINE",
+   "lineages_compared": "R1.compass_turns ~ C1.turtle_walk_f3",
+   "reason": "For: a turtle interpreter keeps heading mod 4 exactly as compass_turns does; R1 asks a different read-out (heading). Against: the turtle also keeps (x, y) and the read-out is the position, so the maintained data structure differs (section 1 item 1, last sentence); and merging would pull R1's bit-toggle lineage and C1's bytecode interpreter into one component."
+  },
+  {
+   "id": "B2",
+   "a": [
+    "R1",
+    "R1.spatial_grid_walk"
+   ],
+   "b": [
+    "C1",
+    "B7"
+   ],
+   "grade": "BORDERLINE",
+   "lineages_compared": "R1.spatial_grid_walk_r5 ~ C1.turtle_walk_f3",
+   "reason": "For: both update a grid position by unit direction vectors and read the end point. Against: R1 moves are absolute with walls/edges; C1 moves are heading-relative with variable lengths and no walls."
+  },
+  {
+   "id": "B3",
+   "a": [
+    "R1",
+    "R1.categories_default_exceptions"
+   ],
+   "b": [
+    "C1",
+    "C1.union_find_links"
+   ],
+   "grade": "BORDERLINE",
+   "lineages_compared": "R1.categories_default_exceptions_r4 ~ C1.union_find_links_f3",
+   "reason": "For: both chase parent pointers up a forest (find the first ancestor with a rule vs find the root). Against: union-find also performs unions and prints the whole parent array; R1 has no union step."
+  },
+  {
+   "id": "B4",
+   "a": [
+    "R1",
+    "R1.graph_shortest_route"
+   ],
+   "b": [
+    "R2",
+    "R2.cheapest_network"
+   ],
+   "grade": "BORDERLINE",
+   "lineages_compared": "R1.graph_shortest_route_r6 ~ R2.cheapest_network",
+   "reason": "For: Dijkstra and Prim are the same greedy frontier expansion with a different key. Against: shortest path and minimum spanning tree are different problems and Kruskal (sort + union-find) is the usual MST route."
+  },
+  {
+   "id": "B5",
+   "a": [
+    "R1",
+    "R1.equivalence_exchange_rates"
+   ],
+   "b": [
+    "M1",
+    "S3_multiplicative_chain"
+   ],
+   "grade": "BORDERLINE",
+   "lineages_compared": "R1.equivalence_exchange_rates_r6 ~ M1.percent_change_r3 / fraction_remainder_r3",
+   "reason": "For: both multiply a chain of ratios. Against: R1's core step is finding the path through a graph of equivalences; M1 gives the chain in order."
+  },
+  {
+   "id": "B6",
+   "a": [
+    "R1",
+    "R1.conditional_threshold_rule"
+   ],
+   "b": [
+    "M1",
+    "S2_weighted_sum"
+   ],
+   "grade": "BORDERLINE",
+   "lineages_compared": "R1.conditional_threshold_rule_r4 ~ M1.shopping_r3 / speed_distance_r3",
+   "reason": "For: both are a weighted sum then a comparison/read-out. Against: the shared step is generic arithmetic; topic does not make lineages one (section 1 item 1) and neither does 'add numbers' alone."
+  },
+  {
+   "id": "B7",
+   "a": [
+    "R2",
+    "R2.cheapest_network"
+   ],
+   "b": [
+    "C1",
+    "C1.union_find_links"
+   ],
+   "grade": "BORDERLINE",
+   "lineages_compared": "R2.cheapest_network ~ C1.union_find_links_f3",
+   "reason": "For: Kruskal's MST is union-find over sorted edges. Against: MST can be done by Prim without union-find, and C1 reads the parent array, which an MST total never needs."
+  },
+  {
+   "id": "B8",
+   "a": [
+    "R2",
+    "R2.expression_eval"
+   ],
+   "b": [
+    "C1",
+    "B8"
+   ],
+   "grade": "BORDERLINE",
+   "lineages_compared": "R2.expression_eval ~ C1.postfix_evaluation",
+   "reason": "For: both evaluate arithmetic expressions with a stack. Against: R2 is infix with parentheses and a stated precedence rule (parsing), C1 is postfix (no parsing)."
+  },
+  {
+   "id": "B9",
+   "a": [
+    "R2",
+    "R2.string_rewrite_nonidentity"
+   ],
+   "b": [
+    "C1",
+    "B3"
+   ],
+   "grade": "BORDERLINE",
+   "lineages_compared": "R2.string_rewrite_nonidentity ~ C1.string_methods_f3",
+   "reason": "For: R2 rewriting is exactly Python str.replace applied in sequence, which C1 string_methods uses. Against: C1 composes replace with slicing and case changes; replace is one step of several."
+  },
+  {
+   "id": "B10",
+   "a": [
+    "R2",
+    "R2.count_divisible"
+   ],
+   "b": [
+    "C1",
+    "B1"
+   ],
+   "grade": "BORDERLINE",
+   "lineages_compared": "R2.count_divisible ~ C1.list_build_f3 / nested_pairs_f3",
+   "reason": "For: filter by a modulus/threshold test and accumulate. Against: generic loop-with-condition; C1 B1 is the 'no named algorithm' cluster."
+  },
+  {
+   "id": "B11",
+   "a": [
+    "R2",
+    "R2.kth_smallest"
+   ],
+   "b": [
+    "C1",
+    "C1.merge_two_sorted"
+   ],
+   "grade": "BORDERLINE",
+   "lineages_compared": "R2.sort_list ~ C1.merge_two_sorted_f3",
+   "reason": "For: merging two sorted lists is merge sort's step. Against: sorting does not require merging, and C1 reads a statistic of the merge comparisons."
+  },
+  {
+   "id": "B12",
+   "a": [
+    "R2",
+    "R2.digit_root"
+   ],
+   "b": [
+    "C1",
+    "C1.digit_peel"
+   ],
+   "grade": "BORDERLINE",
+   "lineages_compared": "R2.digit_root ~ C1.digit_peel_f3",
+   "reason": "For: digit extraction and digit sums (C1's level-0 variant is a weighted digit sum). Against: R2 gives the decimal string, so no division is needed, and the digital root repeats the sum."
+  },
+  {
+   "id": "B13",
+   "a": [
+    "M1",
+    "last_digit_power"
+   ],
+   "b": [
+    "C1",
+    "C1.fast_power_square_map"
+   ],
+   "grade": "BORDERLINE",
+   "lineages_compared": "M1.last_digit_power_r3 ~ C1.fast_power_f4",
+   "reason": "For: the C1 program has the square-and-multiply skeleton of fast modular exponentiation. Against: its squaring is perturbed (r*r + c), so it computes no power, and M1 is usually solved by the cycle of powers mod m."
+  },
+  {
+   "id": "B14",
+   "a": [
+    "M1",
+    "S7_step_rule"
+   ],
+   "b": [
+    "C1",
+    "B6"
+   ],
+   "grade": "BORDERLINE",
+   "lineages_compared": "M1.recurrence_iterate_r3 ~ C1.fib_like_f3",
+   "reason": "For: iterate a recurrence to position n. Against: first-order with a position term (closed form exists) vs second-order linear; B6 also holds a divide recursion."
+  },
+  {
+   "id": "B15",
+   "a": [
+    "M1",
+    "division_counting"
+   ],
+   "b": [
+    "C1",
+    "C1.digit_peel"
+   ],
+   "grade": "BORDERLINE",
+   "lineages_compared": "M1.division_counting_r3 ~ C1.digit_peel_f3",
+   "reason": "For: both extract mixed-radix digits by % and //. Against: M1 has two fixed steps with different divisors and a word-problem read-out; C1 iterates one base to zero."
+  },
+  {
+   "id": "B16",
+   "a": [
+    "M1",
+    "S7_step_rule"
+   ],
+   "b": [
+    "C1",
+    "B1"
+   ],
+   "grade": "BORDERLINE",
+   "added_after_reading": true,
+   "lineages_compared": "M1.arithmetic_series_r3 ~ C1.loop_sum (NOT REGISTERED; still a member of C1 cluster B1 in c1_fix4_survivors.json removed_member_of_a_standing_cluster)",
+   "reason": "For: loop_sum sums an affine function over an arithmetic range (audit 4 C1: arithmetic-series closed form 1.000), and M1's own map and audit 4 C1 call it strong. Against: its modulus filter and mixed-sign updates make it B1's filter-accumulate loop more than a plain series; implementer's C1 map and audit 4 M1 call it medium. It matters because the addendum's graph has unregistered nodes: a link from an unregistered member of a surviving cluster joins that whole cluster."
+  }
+ ],
+ "considered_not_linked": [
+  {
+   "a": "R1.temporal_weekday_shift_r6",
+   "b": "M1.clock_duration_r4",
+   "reason": "Both are calendar/clock arithmetic, but R1 sums offsets along a graph path mod 7, and M1 subtracts base-60 times per leg."
+  },
+  {
+   "a": "R1.conditional_decision_tree_r6",
+   "b": "C1.func_branch_f4",
+   "reason": "Both pick a branch of a conditional; this is generic, and the tree walk is not a piecewise numeric function."
+  },
+  {
+   "a": "M1.tiered_pricing",
+   "b": "C1.func_branch_f4",
+   "reason": "Piecewise rates, but the tiered charge sums across brackets while func_branch selects one branch."
+  },
+  {
+   "a": "M1.prime_factors_r3",
+   "b": "C1.sieve_marking_f4",
+   "reason": "Both are about primes, but trial-division factorisation and sieve marking are different algorithms; the topic alone does not link them."
+  },
+  {
+   "a": "R1.swap_tracking_r5",
+   "b": "R2.list_ops",
+   "reason": "Both simulate operations on a sequence; the operations differ (permutations vs insert/delete/reverse)."
+  },
+  {
+   "a": "R2.list_ops",
+   "b": "C1.slices_f4",
+   "reason": "List reversal appears in both; slice index arithmetic with steps is not deque simulation."
+  },
+  {
+   "a": "R2.luhn_check",
+   "b": "C1.digit_peel_f3",
+   "reason": "Weighted digit sums appear in both; Luhn reads digits from text, with no division by a base."
+  },
+  {
+   "a": "R2.from_base",
+   "b": "M1.clock_duration_r4",
+   "reason": "hh:mm to minutes is a two-digit base-60 conversion, but it is incidental to the duration procedure."
+  },
+  {
+   "a": "R2.cellular_automaton",
+   "b": "R1.boolean_lights_r4",
+   "reason": "Synchronous bit-vector updates in both; the neighbourhood rule table and switch toggles are different updates."
+  },
+  {
+   "a": "M1.finite_differences_r4",
+   "b": "M1.recurrence_iterate_r3 / C1.B6",
+   "reason": "Extrapolating an unknown polynomial from a difference table is not applying a stated rule."
+  }
+ ],
+ "unregistered_links": [
+  {
+   "unregistered": "R2.gcd_euclid",
+   "survivor_cluster": "M1.gcd_lcm / C1.B5",
+   "grade": "STRONG",
+   "note": "R2 item asks an lcm of two numbers (s02)."
+  },
+  {
+   "unregistered": "R2.modular_power",
+   "survivor_cluster": "M1.last_digit_power",
+   "grade": "STRONG",
+   "note": "a^n mod m (s02); R2's map puts R2.permutation_power in the same cluster."
+  },
+  {
+   "unregistered": "R2.prime_factor_query",
+   "survivor_cluster": "M1.prime_factors",
+   "grade": "STRONG",
+   "note": "largest prime factor (s02)."
+  },
+  {
+   "unregistered": "R2.bracket_match",
+   "survivor_cluster": "C1.B8 (bracket_matching_f3)",
+   "grade": "STRONG",
+   "note": "stack bracket matching (s02)."
+  },
+  {
+   "unregistered": "R2.stack_machine",
+   "survivor_cluster": "C1.B8 (postfix_evaluation)",
+   "grade": "STRONG",
+   "note": "explicit push/arith stack machine (s02)."
+  },
+  {
+   "unregistered": "C1.coin_change_table_f3 (dropped cluster B4)",
+   "survivor_cluster": "M1.S5_unbounded_table (change_ways_r3)",
+   "grade": "STRONG",
+   "note": "counting DP over coins (s02)."
+  },
+  {
+   "unregistered": "C1.cellular_update_f3 (dropped cluster C1.cellular_update)",
+   "survivor_cluster": "R2.cellular_automaton",
+   "grade": "STRONG",
+   "note": "elementary CA, wrap-around boundary (s02)."
+  },
+  {
+   "unregistered": "C1.bfs_queue (dropped cluster)",
+   "survivor_cluster": "R1.graph_shortest_route",
+   "grade": "BORDERLINE",
+   "note": "BFS distances (unit weights) vs Dijkstra."
+  },
+  {
+   "unregistered": "R1.activity_selection_r5 (NOT REGISTERED, name only)",
+   "survivor_cluster": "R2.interval_scheduling",
+   "grade": "UNVERIFIED",
+   "note": "name suggests interval scheduling; not rendered by this auditor."
+  }
+ ],
+ "dropped_since_fix4": [],
+ "judgement_before_reading_sha256": "8d25b2f40d48257da673d894cde4853779ad675f043d774aa8a041485e78876c",
+ "audit_grades_where_they_differ": [
+  {
+   "pair": "B14 (M1.S7 ~ C1.B6)",
+   "mine": "BORDERLINE",
+   "audits": "STRONG in audit3_m1, audit4_m1, audit4_c1 and the C1 implementer map",
+   "sensitivity": "s04_recompute_sensitivity_B14_strong.out.txt"
+  },
+  {
+   "pair": "B16 (M1.S7 ~ C1.B1 via C1.loop_sum)",
+   "mine": "BORDERLINE (added after reading)",
+   "audits": "STRONG in M1's map and audit4_c1; medium in audit4_m1 and the C1 implementer map",
+   "sensitivity": "s04_recompute_sensitivity_B16_strong.out.txt"
+  },
+  {
+   "pair": "R2.list_ops ~ C1.B3",
+   "mine": "considered, not linked",
+   "audits": "medium in audit4_r2, audit3_c1 and the C1 implementer map",
+   "sensitivity": "not run"
+  },
+  {
+   "pair": "B4, B5, B6, B7, B11, B15 (mine)",
+   "mine": "BORDERLINE",
+   "audits": "not listed by any audit",
+   "sensitivity": "reading 2"
+  }
+ ],
+ "unregistered_links_from_audits_not_rendered_here": [
+  {
+   "unregistered": "R1.activity_selection_r5",
+   "survivor_cluster": "R2.interval_scheduling",
+   "audit_grade": "strong (audit3_r2, audit4_r2)"
+  },
+  {
+   "unregistered": "R1.mst_cost_r4",
+   "survivor_cluster": "R2.cheapest_network",
+   "audit_grade": "strong (audit3_r2, audit4_r2)"
+  },
+  {
+   "unregistered": "R1.containers_queue_line_r5",
+   "survivor_cluster": "R2.list_ops",
+   "audit_grade": "strong (audit3_r2) / medium (audit4_r2); the r5 builder is a queue simulation (read here), not Josephus"
+  },
+  {
+   "unregistered": "R1.equivalence_classes_r5 / R1.road_reachability_r5 (dropped cluster R1.categories_follow)",
+   "survivor_cluster": "C1.union_find_links (medium, audit4_c1)",
+   "audit_grade": "medium"
+  },
+  {
+   "unregistered": "R2.permutation_power (in R2's modular_power cluster)",
+   "survivor_cluster": "M1.last_digit_power via R2.modular_power",
+   "audit_grade": "R2 map merge"
+  },
+  {
+   "unregistered": "C1.bubble_pass (dropped)",
+   "survivor_cluster": "R2.sort_list cluster; M1.median_list",
+   "audit_grade": "medium"
+  },
+  {
+   "unregistered": "R2.multiples_between (dropped)",
+   "survivor_cluster": "M1.division_counting",
+   "audit_grade": "weak/borderline"
+  },
+  {
+   "unregistered": "M1.mode_tally_r3 (dropped)",
+   "survivor_cluster": "C1.counter_list_state_machine; R2.count_divisible cluster (count_letter)",
+   "audit_grade": "weak/borderline"
+  },
+  {
+   "unregistered": "M1.slot_permutations_r4 / binomial_choose_r3 (dropped cluster S4)",
+   "survivor_cluster": "R2.dictionary_rank",
+   "audit_grade": "not listed by the audits; this auditor's guess, BORDERLINE, not rendered"
+  }
+ ],
+ "addendum_text_read": {
+  "working_definition": "docs/decisions/ADR-0033-addendum-1-lineage-clusters.md DRAFT 2 (commit a2fb316f, SHA-256 0df152b115928d34e939d0e01e641097a743694ac23787848a6cb394554e087f), sections 1, 3, 4",
+  "also_checked": "DRAFT 3 (commit 9788a8ef, SHA-256 2df30a29...; committed while this map was being made), sections 1, 3, 4, 4A"
+ },
+ "reading_1_strong_only": {
+  "links_used": [
+   "S1",
+   "S2",
+   "S3",
+   "S4",
+   "S5",
+   "S6",
+   "S7"
+  ],
+  "global_clusters": [
+   {
+    "identity_among_survivors": "C1.binary_search_f3",
+    "evals": [
+     "R2",
+     "C1"
+    ],
+    "members": [
+     {
+      "eval": "C1",
+      "cluster": "C1.binary_search",
+      "lineages": [
+       "C1.binary_search_f3"
+      ]
+     },
+     {
+      "eval": "R2",
+      "cluster": "R2.binary_search_trace",
+      "lineages": [
+       "R2.binary_search_trace"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "C1.bracket_matching_f3",
+    "evals": [
+     "C1"
+    ],
+    "members": [
+     {
+      "eval": "C1",
+      "cluster": "B8",
+      "lineages": [
+       "C1.bracket_matching_f3",
+       "C1.postfix_evaluation"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "C1.bytecode_loop_f3",
+    "evals": [
+     "C1"
+    ],
+    "members": [
+     {
+      "eval": "C1",
+      "cluster": "B7",
+      "lineages": [
+       "C1.bytecode_loop_f3",
+       "C1.turtle_walk_f3"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "C1.circle_elimination_r2",
+    "evals": [
+     "C1"
+    ],
+    "members": [
+     {
+      "eval": "C1",
+      "cluster": "C1.circle_elimination",
+      "lineages": [
+       "C1.circle_elimination_r2"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "C1.cond_chain_f3",
+    "evals": [
+     "M1",
+     "C1"
+    ],
+    "members": [
+     {
+      "eval": "C1",
+      "cluster": "B5",
+      "lineages": [
+       "C1.cond_chain_f3",
+       "C1.euclid_gcd_traced_f3"
+      ]
+     },
+     {
+      "eval": "M1",
+      "cluster": "gcd_lcm",
+      "lineages": [
+       "M1.gcd_lcm_r4"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "C1.counter_list_f3",
+    "evals": [
+     "C1"
+    ],
+    "members": [
+     {
+      "eval": "C1",
+      "cluster": "C1.counter_list_state_machine",
+      "lineages": [
+       "C1.counter_list_f3"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "C1.digit_peel_f3",
+    "evals": [
+     "R2",
+     "C1"
+    ],
+    "members": [
+     {
+      "eval": "C1",
+      "cluster": "C1.digit_peel",
+      "lineages": [
+       "C1.digit_peel_f3"
+      ]
+     },
+     {
+      "eval": "R2",
+      "cluster": "R2.from_base",
+      "lineages": [
+       "R2.from_base"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "C1.fast_power_f4",
+    "evals": [
+     "C1"
+    ],
+    "members": [
+     {
+      "eval": "C1",
+      "cluster": "C1.fast_power_square_map",
+      "lineages": [
+       "C1.fast_power_f4"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "C1.fib_like_f3",
+    "evals": [
+     "C1"
+    ],
+    "members": [
+     {
+      "eval": "C1",
+      "cluster": "B6",
+      "lineages": [
+       "C1.fib_like_f3",
+       "C1.fib_shapes_recursive_f3",
+       "C1.recursive_calls_r2"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "C1.func_branch_f4",
+    "evals": [
+     "C1"
+    ],
+    "members": [
+     {
+      "eval": "C1",
+      "cluster": "B2",
+      "lineages": [
+       "C1.func_branch_f4",
+       "C1.func_compose_f4"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "C1.list_build_f3",
+    "evals": [
+     "C1"
+    ],
+    "members": [
+     {
+      "eval": "C1",
+      "cluster": "B1",
+      "lineages": [
+       "C1.list_build_f3",
+       "C1.nested_pairs_f3",
+       "C1.string_build_f3"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "C1.merge_two_sorted_f3",
+    "evals": [
+     "C1"
+    ],
+    "members": [
+     {
+      "eval": "C1",
+      "cluster": "C1.merge_two_sorted",
+      "lineages": [
+       "C1.merge_two_sorted_f3"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "C1.run_length_scan",
+    "evals": [
+     "R2",
+     "C1"
+    ],
+    "members": [
+     {
+      "eval": "C1",
+      "cluster": "C1.run_length_scan",
+      "lineages": [
+       "C1.run_length_scan"
+      ]
+     },
+     {
+      "eval": "R2",
+      "cluster": "R2.run_length",
+      "lineages": [
+       "R2.run_length"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "C1.shared_lists_f3",
+    "evals": [
+     "C1"
+    ],
+    "members": [
+     {
+      "eval": "C1",
+      "cluster": "C1.shared_lists",
+      "lineages": [
+       "C1.shared_lists_f3"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "C1.sieve_marking_f4",
+    "evals": [
+     "C1"
+    ],
+    "members": [
+     {
+      "eval": "C1",
+      "cluster": "C1.sieve_marking",
+      "lineages": [
+       "C1.sieve_marking_f4"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "C1.slices_f4",
+    "evals": [
+     "C1"
+    ],
+    "members": [
+     {
+      "eval": "C1",
+      "cluster": "B3",
+      "lineages": [
+       "C1.slices_f4",
+       "C1.string_methods_f3"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "C1.union_find_links_f3",
+    "evals": [
+     "C1"
+    ],
+    "members": [
+     {
+      "eval": "C1",
+      "cluster": "C1.union_find_links",
+      "lineages": [
+       "C1.union_find_links_f3"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "C1.while_counter_f3",
+    "evals": [
+     "C1"
+    ],
+    "members": [
+     {
+      "eval": "C1",
+      "cluster": "C1.while_counter",
+      "lineages": [
+       "C1.while_counter_f3"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "M1.ages_r3",
+    "evals": [
+     "M1"
+    ],
+    "members": [
+     {
+      "eval": "M1",
+      "cluster": "S1_linear_solve",
+      "lineages": [
+       "M1.ages_r3",
+       "M1.average_missing_r4",
+       "M1.consecutive_r3",
+       "M1.linear_equation_r3",
+       "M1.pipes_work_r3",
+       "M1.rectangle_r3"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "M1.arithmetic_series_r3",
+    "evals": [
+     "M1"
+    ],
+    "members": [
+     {
+      "eval": "M1",
+      "cluster": "S7_step_rule",
+      "lineages": [
+       "M1.arithmetic_series_r3",
+       "M1.recurrence_iterate_r3"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "M1.change_ways_r3",
+    "evals": [
+     "M1"
+    ],
+    "members": [
+     {
+      "eval": "M1",
+      "cluster": "S5_unbounded_table",
+      "lineages": [
+       "M1.change_ways_r3"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "M1.clock_duration_r4",
+    "evals": [
+     "M1"
+    ],
+    "members": [
+     {
+      "eval": "M1",
+      "cluster": "clock_duration",
+      "lineages": [
+       "M1.clock_duration_r4"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "M1.crt_congruence_r3",
+    "evals": [
+     "R2",
+     "M1"
+    ],
+    "members": [
+     {
+      "eval": "M1",
+      "cluster": "crt_congruence",
+      "lineages": [
+       "M1.crt_congruence_r3"
+      ]
+     },
+     {
+      "eval": "R2",
+      "cluster": "R2.crt_smallest",
+      "lineages": [
+       "R2.crt_smallest"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "M1.division_counting_r3",
+    "evals": [
+     "M1"
+    ],
+    "members": [
+     {
+      "eval": "M1",
+      "cluster": "division_counting",
+      "lineages": [
+       "M1.division_counting_r3"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "M1.finite_differences_r4",
+    "evals": [
+     "M1"
+    ],
+    "members": [
+     {
+      "eval": "M1",
+      "cluster": "finite_differences",
+      "lineages": [
+       "M1.finite_differences_r4"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "M1.fraction_remainder_r3",
+    "evals": [
+     "M1"
+    ],
+    "members": [
+     {
+      "eval": "M1",
+      "cluster": "S3_multiplicative_chain",
+      "lineages": [
+       "M1.fraction_remainder_r3",
+       "M1.percent_change_r3",
+       "M1.ratio_share_r3",
+       "M1.tip_split_r3"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "M1.grid_perimeter_r3",
+    "evals": [
+     "M1"
+    ],
+    "members": [
+     {
+      "eval": "M1",
+      "cluster": "S6_exposed_faces",
+      "lineages": [
+       "M1.grid_perimeter_r3",
+       "M1.painted_cube_r3"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "M1.inclusion_exclusion_r3",
+    "evals": [
+     "R1",
+     "M1"
+    ],
+    "members": [
+     {
+      "eval": "M1",
+      "cluster": "inclusion_exclusion",
+      "lineages": [
+       "M1.inclusion_exclusion_r3"
+      ]
+     },
+     {
+      "eval": "R1",
+      "cluster": "R1.venn_counting",
+      "lineages": [
+       "R1.venn_counting_r5"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "M1.last_digit_power_r3",
+    "evals": [
+     "M1"
+    ],
+    "members": [
+     {
+      "eval": "M1",
+      "cluster": "last_digit_power",
+      "lineages": [
+       "M1.last_digit_power_r3"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "M1.median_list_r3",
+    "evals": [
+     "R2",
+     "M1"
+    ],
+    "members": [
+     {
+      "eval": "M1",
+      "cluster": "median_list",
+      "lineages": [
+       "M1.median_list_r3"
+      ]
+     },
+     {
+      "eval": "R2",
+      "cluster": "R2.kth_smallest",
+      "lineages": [
+       "R2.sort_list"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "M1.mixture_r4",
+    "evals": [
+     "M1"
+    ],
+    "members": [
+     {
+      "eval": "M1",
+      "cluster": "S2_weighted_sum",
+      "lineages": [
+       "M1.mixture_r4",
+       "M1.shopping_r3",
+       "M1.speed_distance_r3"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "M1.prime_factors_r3",
+    "evals": [
+     "M1"
+    ],
+    "members": [
+     {
+      "eval": "M1",
+      "cluster": "prime_factors",
+      "lineages": [
+       "M1.prime_factors_r3"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "M1.quadratic_area_r3",
+    "evals": [
+     "M1"
+    ],
+    "members": [
+     {
+      "eval": "M1",
+      "cluster": "quadratic_area",
+      "lineages": [
+       "M1.quadratic_area_r3"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "M1.tiered_pricing",
+    "evals": [
+     "M1"
+    ],
+    "members": [
+     {
+      "eval": "M1",
+      "cluster": "tiered_pricing",
+      "lineages": [
+       "M1.tiered_pricing"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "R1.boolean_lights_r4",
+    "evals": [
+     "R1"
+    ],
+    "members": [
+     {
+      "eval": "R1",
+      "cluster": "R1.boolean_lights",
+      "lineages": [
+       "R1.boolean_lights_r4",
+       "R1.compass_turns"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "R1.categories_default_exceptions_r4",
+    "evals": [
+     "R1"
+    ],
+    "members": [
+     {
+      "eval": "R1",
+      "cluster": "R1.categories_default_exceptions",
+      "lineages": [
+       "R1.categories_default_exceptions_r4"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "R1.conditional_decision_tree_r6",
+    "evals": [
+     "R1"
+    ],
+    "members": [
+     {
+      "eval": "R1",
+      "cluster": "R1.attribute_rule",
+      "lineages": [
+       "R1.conditional_decision_tree_r6"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "R1.conditional_threshold_rule_r4",
+    "evals": [
+     "R1"
+    ],
+    "members": [
+     {
+      "eval": "R1",
+      "cluster": "R1.conditional_threshold_rule",
+      "lineages": [
+       "R1.conditional_threshold_rule_r4"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "R1.equivalence_exchange_rates_r6",
+    "evals": [
+     "R1"
+    ],
+    "members": [
+     {
+      "eval": "R1",
+      "cluster": "R1.equivalence_exchange_rates",
+      "lineages": [
+       "R1.equivalence_exchange_rates_r6",
+       "R1.temporal_weekday_shift_r6"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "R1.graph_shortest_route_r6",
+    "evals": [
+     "R1"
+    ],
+    "members": [
+     {
+      "eval": "R1",
+      "cluster": "R1.graph_shortest_route",
+      "lineages": [
+       "R1.graph_shortest_route_r6"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "R1.knights_knaves_r6",
+    "evals": [
+     "R1"
+    ],
+    "members": [
+     {
+      "eval": "R1",
+      "cluster": "R1.conditional_chain",
+      "lineages": [
+       "R1.knights_knaves_r6"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "R1.spatial_grid_walk_r5",
+    "evals": [
+     "R1"
+    ],
+    "members": [
+     {
+      "eval": "R1",
+      "cluster": "R1.spatial_grid_walk",
+      "lineages": [
+       "R1.spatial_grid_walk_r5"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "R1.swap_tracking_r5",
+    "evals": [
+     "R1"
+    ],
+    "members": [
+     {
+      "eval": "R1",
+      "cluster": "R1.swap_tracking",
+      "lineages": [
+       "R1.swap_tracking_r5"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "R2.caesar_shift",
+    "evals": [
+     "R2"
+    ],
+    "members": [
+     {
+      "eval": "R2",
+      "cluster": "R2.caesar_shift",
+      "lineages": [
+       "R2.caesar_shift"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "R2.cellular_automaton",
+    "evals": [
+     "R2"
+    ],
+    "members": [
+     {
+      "eval": "R2",
+      "cluster": "R2.cellular_automaton",
+      "lineages": [
+       "R2.cellular_automaton"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "R2.cheapest_network",
+    "evals": [
+     "R2"
+    ],
+    "members": [
+     {
+      "eval": "R2",
+      "cluster": "R2.cheapest_network",
+      "lineages": [
+       "R2.cheapest_network"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "R2.count_divisible",
+    "evals": [
+     "R2"
+    ],
+    "members": [
+     {
+      "eval": "R2",
+      "cluster": "R2.count_divisible",
+      "lineages": [
+       "R2.count_divisible"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "R2.dictionary_rank",
+    "evals": [
+     "R2"
+    ],
+    "members": [
+     {
+      "eval": "R2",
+      "cluster": "R2.dictionary_rank",
+      "lineages": [
+       "R2.dictionary_rank"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "R2.digit_root",
+    "evals": [
+     "R2"
+    ],
+    "members": [
+     {
+      "eval": "R2",
+      "cluster": "R2.digit_root",
+      "lineages": [
+       "R2.digit_root"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "R2.expression_eval",
+    "evals": [
+     "R2"
+    ],
+    "members": [
+     {
+      "eval": "R2",
+      "cluster": "R2.expression_eval",
+      "lineages": [
+       "R2.expression_eval"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "R2.grid_sum",
+    "evals": [
+     "R2"
+    ],
+    "members": [
+     {
+      "eval": "R2",
+      "cluster": "R2.grid_sum",
+      "lineages": [
+       "R2.grid_sum"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "R2.interval_scheduling",
+    "evals": [
+     "R2"
+    ],
+    "members": [
+     {
+      "eval": "R2",
+      "cluster": "R2.interval_scheduling",
+      "lineages": [
+       "R2.interval_scheduling"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "R2.list_ops",
+    "evals": [
+     "R2"
+    ],
+    "members": [
+     {
+      "eval": "R2",
+      "cluster": "R2.list_ops",
+      "lineages": [
+       "R2.list_ops"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "R2.luhn_check",
+    "evals": [
+     "R2"
+    ],
+    "members": [
+     {
+      "eval": "R2",
+      "cluster": "R2.luhn_check",
+      "lineages": [
+       "R2.luhn_check"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "R2.min_heap_ops",
+    "evals": [
+     "R2"
+    ],
+    "members": [
+     {
+      "eval": "R2",
+      "cluster": "R2.min_heap_ops",
+      "lineages": [
+       "R2.min_heap_ops"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "R2.string_rewrite_nonidentity",
+    "evals": [
+     "R2"
+    ],
+    "members": [
+     {
+      "eval": "R2",
+      "cluster": "R2.string_rewrite_nonidentity",
+      "lineages": [
+       "R2.string_rewrite_nonidentity"
+      ]
+     }
+    ]
+   }
+  ],
+  "cross_evaluation_count": 7,
+  "per_evaluation": {
+   "R1": {
+    "strict_clusters": 10,
+    "independent_units_G": 10,
+    "cross_evaluation": 1,
+    "single_evaluation": 9
+   },
+   "R2": {
+    "strict_clusters": 18,
+    "independent_units_G": 18,
+    "cross_evaluation": 5,
+    "single_evaluation": 13
+   },
+   "M1": {
+    "strict_clusters": 17,
+    "independent_units_G": 17,
+    "cross_evaluation": 4,
+    "single_evaluation": 13
+   },
+   "C1": {
+    "strict_clusters": 18,
+    "independent_units_G": 18,
+    "cross_evaluation": 4,
+    "single_evaluation": 14
+   }
+  }
+ },
+ "reading_2_strong_plus_borderline": {
+  "links_used": [
+   "S1",
+   "S2",
+   "S3",
+   "S4",
+   "S5",
+   "S6",
+   "S7",
+   "B1",
+   "B2",
+   "B3",
+   "B4",
+   "B5",
+   "B6",
+   "B7",
+   "B8",
+   "B9",
+   "B10",
+   "B11",
+   "B12",
+   "B13",
+   "B14",
+   "B15",
+   "B16"
+  ],
+  "global_clusters": [
+   {
+    "identity_among_survivors": "C1.binary_search_f3",
+    "evals": [
+     "R2",
+     "C1"
+    ],
+    "members": [
+     {
+      "eval": "C1",
+      "cluster": "C1.binary_search",
+      "lineages": [
+       "C1.binary_search_f3"
+      ]
+     },
+     {
+      "eval": "R2",
+      "cluster": "R2.binary_search_trace",
+      "lineages": [
+       "R2.binary_search_trace"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "C1.bracket_matching_f3",
+    "evals": [
+     "R2",
+     "C1"
+    ],
+    "members": [
+     {
+      "eval": "C1",
+      "cluster": "B8",
+      "lineages": [
+       "C1.bracket_matching_f3",
+       "C1.postfix_evaluation"
+      ]
+     },
+     {
+      "eval": "R2",
+      "cluster": "R2.expression_eval",
+      "lineages": [
+       "R2.expression_eval"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "C1.bytecode_loop_f3",
+    "evals": [
+     "R1",
+     "C1"
+    ],
+    "members": [
+     {
+      "eval": "C1",
+      "cluster": "B7",
+      "lineages": [
+       "C1.bytecode_loop_f3",
+       "C1.turtle_walk_f3"
+      ]
+     },
+     {
+      "eval": "R1",
+      "cluster": "R1.boolean_lights",
+      "lineages": [
+       "R1.boolean_lights_r4",
+       "R1.compass_turns"
+      ]
+     },
+     {
+      "eval": "R1",
+      "cluster": "R1.spatial_grid_walk",
+      "lineages": [
+       "R1.spatial_grid_walk_r5"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "C1.circle_elimination_r2",
+    "evals": [
+     "C1"
+    ],
+    "members": [
+     {
+      "eval": "C1",
+      "cluster": "C1.circle_elimination",
+      "lineages": [
+       "C1.circle_elimination_r2"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "C1.cond_chain_f3",
+    "evals": [
+     "M1",
+     "C1"
+    ],
+    "members": [
+     {
+      "eval": "C1",
+      "cluster": "B5",
+      "lineages": [
+       "C1.cond_chain_f3",
+       "C1.euclid_gcd_traced_f3"
+      ]
+     },
+     {
+      "eval": "M1",
+      "cluster": "gcd_lcm",
+      "lineages": [
+       "M1.gcd_lcm_r4"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "C1.counter_list_f3",
+    "evals": [
+     "C1"
+    ],
+    "members": [
+     {
+      "eval": "C1",
+      "cluster": "C1.counter_list_state_machine",
+      "lineages": [
+       "C1.counter_list_f3"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "C1.digit_peel_f3",
+    "evals": [
+     "R2",
+     "M1",
+     "C1"
+    ],
+    "members": [
+     {
+      "eval": "C1",
+      "cluster": "C1.digit_peel",
+      "lineages": [
+       "C1.digit_peel_f3"
+      ]
+     },
+     {
+      "eval": "M1",
+      "cluster": "division_counting",
+      "lineages": [
+       "M1.division_counting_r3"
+      ]
+     },
+     {
+      "eval": "R2",
+      "cluster": "R2.digit_root",
+      "lineages": [
+       "R2.digit_root"
+      ]
+     },
+     {
+      "eval": "R2",
+      "cluster": "R2.from_base",
+      "lineages": [
+       "R2.from_base"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "C1.fast_power_f4",
+    "evals": [
+     "M1",
+     "C1"
+    ],
+    "members": [
+     {
+      "eval": "C1",
+      "cluster": "C1.fast_power_square_map",
+      "lineages": [
+       "C1.fast_power_f4"
+      ]
+     },
+     {
+      "eval": "M1",
+      "cluster": "last_digit_power",
+      "lineages": [
+       "M1.last_digit_power_r3"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "C1.fib_like_f3",
+    "evals": [
+     "R2",
+     "M1",
+     "C1"
+    ],
+    "members": [
+     {
+      "eval": "C1",
+      "cluster": "B1",
+      "lineages": [
+       "C1.list_build_f3",
+       "C1.nested_pairs_f3",
+       "C1.string_build_f3"
+      ]
+     },
+     {
+      "eval": "C1",
+      "cluster": "B6",
+      "lineages": [
+       "C1.fib_like_f3",
+       "C1.fib_shapes_recursive_f3",
+       "C1.recursive_calls_r2"
+      ]
+     },
+     {
+      "eval": "M1",
+      "cluster": "S7_step_rule",
+      "lineages": [
+       "M1.arithmetic_series_r3",
+       "M1.recurrence_iterate_r3"
+      ]
+     },
+     {
+      "eval": "R2",
+      "cluster": "R2.count_divisible",
+      "lineages": [
+       "R2.count_divisible"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "C1.func_branch_f4",
+    "evals": [
+     "C1"
+    ],
+    "members": [
+     {
+      "eval": "C1",
+      "cluster": "B2",
+      "lineages": [
+       "C1.func_branch_f4",
+       "C1.func_compose_f4"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "C1.merge_two_sorted_f3",
+    "evals": [
+     "R2",
+     "M1",
+     "C1"
+    ],
+    "members": [
+     {
+      "eval": "C1",
+      "cluster": "C1.merge_two_sorted",
+      "lineages": [
+       "C1.merge_two_sorted_f3"
+      ]
+     },
+     {
+      "eval": "M1",
+      "cluster": "median_list",
+      "lineages": [
+       "M1.median_list_r3"
+      ]
+     },
+     {
+      "eval": "R2",
+      "cluster": "R2.kth_smallest",
+      "lineages": [
+       "R2.sort_list"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "C1.run_length_scan",
+    "evals": [
+     "R2",
+     "C1"
+    ],
+    "members": [
+     {
+      "eval": "C1",
+      "cluster": "C1.run_length_scan",
+      "lineages": [
+       "C1.run_length_scan"
+      ]
+     },
+     {
+      "eval": "R2",
+      "cluster": "R2.run_length",
+      "lineages": [
+       "R2.run_length"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "C1.shared_lists_f3",
+    "evals": [
+     "C1"
+    ],
+    "members": [
+     {
+      "eval": "C1",
+      "cluster": "C1.shared_lists",
+      "lineages": [
+       "C1.shared_lists_f3"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "C1.sieve_marking_f4",
+    "evals": [
+     "C1"
+    ],
+    "members": [
+     {
+      "eval": "C1",
+      "cluster": "C1.sieve_marking",
+      "lineages": [
+       "C1.sieve_marking_f4"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "C1.slices_f4",
+    "evals": [
+     "R2",
+     "C1"
+    ],
+    "members": [
+     {
+      "eval": "C1",
+      "cluster": "B3",
+      "lineages": [
+       "C1.slices_f4",
+       "C1.string_methods_f3"
+      ]
+     },
+     {
+      "eval": "R2",
+      "cluster": "R2.string_rewrite_nonidentity",
+      "lineages": [
+       "R2.string_rewrite_nonidentity"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "C1.union_find_links_f3",
+    "evals": [
+     "R1",
+     "R2",
+     "C1"
+    ],
+    "members": [
+     {
+      "eval": "C1",
+      "cluster": "C1.union_find_links",
+      "lineages": [
+       "C1.union_find_links_f3"
+      ]
+     },
+     {
+      "eval": "R1",
+      "cluster": "R1.categories_default_exceptions",
+      "lineages": [
+       "R1.categories_default_exceptions_r4"
+      ]
+     },
+     {
+      "eval": "R1",
+      "cluster": "R1.graph_shortest_route",
+      "lineages": [
+       "R1.graph_shortest_route_r6"
+      ]
+     },
+     {
+      "eval": "R2",
+      "cluster": "R2.cheapest_network",
+      "lineages": [
+       "R2.cheapest_network"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "C1.while_counter_f3",
+    "evals": [
+     "C1"
+    ],
+    "members": [
+     {
+      "eval": "C1",
+      "cluster": "C1.while_counter",
+      "lineages": [
+       "C1.while_counter_f3"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "M1.ages_r3",
+    "evals": [
+     "M1"
+    ],
+    "members": [
+     {
+      "eval": "M1",
+      "cluster": "S1_linear_solve",
+      "lineages": [
+       "M1.ages_r3",
+       "M1.average_missing_r4",
+       "M1.consecutive_r3",
+       "M1.linear_equation_r3",
+       "M1.pipes_work_r3",
+       "M1.rectangle_r3"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "M1.change_ways_r3",
+    "evals": [
+     "M1"
+    ],
+    "members": [
+     {
+      "eval": "M1",
+      "cluster": "S5_unbounded_table",
+      "lineages": [
+       "M1.change_ways_r3"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "M1.clock_duration_r4",
+    "evals": [
+     "M1"
+    ],
+    "members": [
+     {
+      "eval": "M1",
+      "cluster": "clock_duration",
+      "lineages": [
+       "M1.clock_duration_r4"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "M1.crt_congruence_r3",
+    "evals": [
+     "R2",
+     "M1"
+    ],
+    "members": [
+     {
+      "eval": "M1",
+      "cluster": "crt_congruence",
+      "lineages": [
+       "M1.crt_congruence_r3"
+      ]
+     },
+     {
+      "eval": "R2",
+      "cluster": "R2.crt_smallest",
+      "lineages": [
+       "R2.crt_smallest"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "M1.finite_differences_r4",
+    "evals": [
+     "M1"
+    ],
+    "members": [
+     {
+      "eval": "M1",
+      "cluster": "finite_differences",
+      "lineages": [
+       "M1.finite_differences_r4"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "M1.fraction_remainder_r3",
+    "evals": [
+     "R1",
+     "M1"
+    ],
+    "members": [
+     {
+      "eval": "M1",
+      "cluster": "S3_multiplicative_chain",
+      "lineages": [
+       "M1.fraction_remainder_r3",
+       "M1.percent_change_r3",
+       "M1.ratio_share_r3",
+       "M1.tip_split_r3"
+      ]
+     },
+     {
+      "eval": "R1",
+      "cluster": "R1.equivalence_exchange_rates",
+      "lineages": [
+       "R1.equivalence_exchange_rates_r6",
+       "R1.temporal_weekday_shift_r6"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "M1.grid_perimeter_r3",
+    "evals": [
+     "M1"
+    ],
+    "members": [
+     {
+      "eval": "M1",
+      "cluster": "S6_exposed_faces",
+      "lineages": [
+       "M1.grid_perimeter_r3",
+       "M1.painted_cube_r3"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "M1.inclusion_exclusion_r3",
+    "evals": [
+     "R1",
+     "M1"
+    ],
+    "members": [
+     {
+      "eval": "M1",
+      "cluster": "inclusion_exclusion",
+      "lineages": [
+       "M1.inclusion_exclusion_r3"
+      ]
+     },
+     {
+      "eval": "R1",
+      "cluster": "R1.venn_counting",
+      "lineages": [
+       "R1.venn_counting_r5"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "M1.mixture_r4",
+    "evals": [
+     "R1",
+     "M1"
+    ],
+    "members": [
+     {
+      "eval": "M1",
+      "cluster": "S2_weighted_sum",
+      "lineages": [
+       "M1.mixture_r4",
+       "M1.shopping_r3",
+       "M1.speed_distance_r3"
+      ]
+     },
+     {
+      "eval": "R1",
+      "cluster": "R1.conditional_threshold_rule",
+      "lineages": [
+       "R1.conditional_threshold_rule_r4"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "M1.prime_factors_r3",
+    "evals": [
+     "M1"
+    ],
+    "members": [
+     {
+      "eval": "M1",
+      "cluster": "prime_factors",
+      "lineages": [
+       "M1.prime_factors_r3"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "M1.quadratic_area_r3",
+    "evals": [
+     "M1"
+    ],
+    "members": [
+     {
+      "eval": "M1",
+      "cluster": "quadratic_area",
+      "lineages": [
+       "M1.quadratic_area_r3"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "M1.tiered_pricing",
+    "evals": [
+     "M1"
+    ],
+    "members": [
+     {
+      "eval": "M1",
+      "cluster": "tiered_pricing",
+      "lineages": [
+       "M1.tiered_pricing"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "R1.conditional_decision_tree_r6",
+    "evals": [
+     "R1"
+    ],
+    "members": [
+     {
+      "eval": "R1",
+      "cluster": "R1.attribute_rule",
+      "lineages": [
+       "R1.conditional_decision_tree_r6"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "R1.knights_knaves_r6",
+    "evals": [
+     "R1"
+    ],
+    "members": [
+     {
+      "eval": "R1",
+      "cluster": "R1.conditional_chain",
+      "lineages": [
+       "R1.knights_knaves_r6"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "R1.swap_tracking_r5",
+    "evals": [
+     "R1"
+    ],
+    "members": [
+     {
+      "eval": "R1",
+      "cluster": "R1.swap_tracking",
+      "lineages": [
+       "R1.swap_tracking_r5"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "R2.caesar_shift",
+    "evals": [
+     "R2"
+    ],
+    "members": [
+     {
+      "eval": "R2",
+      "cluster": "R2.caesar_shift",
+      "lineages": [
+       "R2.caesar_shift"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "R2.cellular_automaton",
+    "evals": [
+     "R2"
+    ],
+    "members": [
+     {
+      "eval": "R2",
+      "cluster": "R2.cellular_automaton",
+      "lineages": [
+       "R2.cellular_automaton"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "R2.dictionary_rank",
+    "evals": [
+     "R2"
+    ],
+    "members": [
+     {
+      "eval": "R2",
+      "cluster": "R2.dictionary_rank",
+      "lineages": [
+       "R2.dictionary_rank"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "R2.grid_sum",
+    "evals": [
+     "R2"
+    ],
+    "members": [
+     {
+      "eval": "R2",
+      "cluster": "R2.grid_sum",
+      "lineages": [
+       "R2.grid_sum"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "R2.interval_scheduling",
+    "evals": [
+     "R2"
+    ],
+    "members": [
+     {
+      "eval": "R2",
+      "cluster": "R2.interval_scheduling",
+      "lineages": [
+       "R2.interval_scheduling"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "R2.list_ops",
+    "evals": [
+     "R2"
+    ],
+    "members": [
+     {
+      "eval": "R2",
+      "cluster": "R2.list_ops",
+      "lineages": [
+       "R2.list_ops"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "R2.luhn_check",
+    "evals": [
+     "R2"
+    ],
+    "members": [
+     {
+      "eval": "R2",
+      "cluster": "R2.luhn_check",
+      "lineages": [
+       "R2.luhn_check"
+      ]
+     }
+    ]
+   },
+   {
+    "identity_among_survivors": "R2.min_heap_ops",
+    "evals": [
+     "R2"
+    ],
+    "members": [
+     {
+      "eval": "R2",
+      "cluster": "R2.min_heap_ops",
+      "lineages": [
+       "R2.min_heap_ops"
+      ]
+     }
+    ]
+   }
+  ],
+  "cross_evaluation_count": 15,
+  "per_evaluation": {
+   "R1": {
+    "strict_clusters": 10,
+    "independent_units_G": 8,
+    "cross_evaluation": 5,
+    "single_evaluation": 3
+   },
+   "R2": {
+    "strict_clusters": 18,
+    "independent_units_G": 17,
+    "cross_evaluation": 9,
+    "single_evaluation": 8
+   },
+   "M1": {
+    "strict_clusters": 17,
+    "independent_units_G": 17,
+    "cross_evaluation": 9,
+    "single_evaluation": 8
+   },
+   "C1": {
+    "strict_clusters": 18,
+    "independent_units_G": 17,
+    "cross_evaluation": 11,
+    "single_evaluation": 6
+   }
+  }
+ },
+ "note_on_identity": "Identities here are the smallest SURVIVOR id; the addendum's identity is the smallest id over all written lineages in the component, registered or not, which this map has not fully judged. Identities do not change counts."
+}

@@ -1,0 +1,549 @@
+{
+ "C1.func_branch": {
+  "collapsed": [
+   "L0->L1: 100% of shared-stream items are identical",
+   "L3->L4: 100% of shared-stream items are identical",
+   "L4->L5: 100% of shared-stream items are identical",
+   "L5->L6: 100% of shared-stream items are identical"
+  ],
+  "levels": {
+   "0": {
+    "dup_cross_level": 0,
+    "items_with_features": 400,
+    "mean_ast_nodes": 39.0,
+    "mean_chars": 108.16,
+    "mean_longest_list": 0.0,
+    "mean_max_literal": 14.45,
+    "mean_steps": 12.0,
+    "n": 400
+   },
+   "1": {
+    "dup_cross_level": 0,
+    "items_with_features": 400,
+    "mean_ast_nodes": 39.0,
+    "mean_chars": 107.88,
+    "mean_longest_list": 0.0,
+    "mean_max_literal": 14.27,
+    "mean_steps": 12.0,
+    "n": 400
+   },
+   "2": {
+    "dup_cross_level": 0,
+    "items_with_features": 400,
+    "mean_ast_nodes": 54.0,
+    "mean_chars": 153.18,
+    "mean_longest_list": 0.0,
+    "mean_max_literal": 13.96,
+    "mean_steps": 12.79,
+    "n": 400
+   },
+   "3": {
+    "dup_cross_level": 0,
+    "items_with_features": 400,
+    "mean_ast_nodes": 60.0,
+    "mean_chars": 161.81,
+    "mean_longest_list": 0.0,
+    "mean_max_literal": 15.33,
+    "mean_steps": 15.15,
+    "n": 400
+   },
+   "4": {
+    "dup_cross_level": 0,
+    "items_with_features": 400,
+    "mean_ast_nodes": 60.0,
+    "mean_chars": 161.91,
+    "mean_longest_list": 0.0,
+    "mean_max_literal": 15.39,
+    "mean_steps": 15.16,
+    "n": 400
+   },
+   "5": {
+    "dup_cross_level": 0,
+    "items_with_features": 400,
+    "mean_ast_nodes": 60.0,
+    "mean_chars": 162.55,
+    "mean_longest_list": 0.0,
+    "mean_max_literal": 15.68,
+    "mean_steps": 15.13,
+    "n": 400
+   },
+   "6": {
+    "dup_cross_level": 0,
+    "items_with_features": 400,
+    "mean_ast_nodes": 60.0,
+    "mean_chars": 161.97,
+    "mean_longest_list": 0.0,
+    "mean_max_literal": 15.44,
+    "mean_steps": 15.13,
+    "n": 400
+   }
+  },
+  "levels_distinct": false,
+  "stated_parameter": "",
+  "steps": {
+   "L0->L1": {
+    "features_with_higher_mean": [],
+    "ks": {
+     "ast_nodes": 0.0,
+     "chars": 0.055,
+     "longest_list": 0.0,
+     "max_literal": 0.057,
+     "steps": 0.0
+    },
+    "ks_crit": 0.115,
+    "shared_stream_identical_share": 1.0
+   },
+   "L1->L2": {
+    "features_with_higher_mean": [
+     "steps",
+     "ast_nodes",
+     "chars"
+    ],
+    "ks": {
+     "ast_nodes": 1.0,
+     "chars": 1.0,
+     "longest_list": 0.0,
+     "max_literal": 0.06,
+     "steps": 0.617
+    },
+    "ks_crit": 0.115,
+    "shared_stream_identical_share": 0.0
+   },
+   "L2->L3": {
+    "features_with_higher_mean": [
+     "steps",
+     "ast_nodes",
+     "chars",
+     "max_literal"
+    ],
+    "ks": {
+     "ast_nodes": 1.0,
+     "chars": 0.445,
+     "longest_list": 0.0,
+     "max_literal": 0.145,
+     "steps": 0.828
+    },
+    "ks_crit": 0.115,
+    "shared_stream_identical_share": 0.0
+   },
+   "L3->L4": {
+    "features_with_higher_mean": [
+     "steps",
+     "chars",
+     "max_literal"
+    ],
+    "ks": {
+     "ast_nodes": 0.0,
+     "chars": 0.025,
+     "longest_list": 0.0,
+     "max_literal": 0.04,
+     "steps": 0.05
+    },
+    "ks_crit": 0.115,
+    "shared_stream_identical_share": 1.0
+   },
+   "L4->L5": {
+    "features_with_higher_mean": [
+     "chars",
+     "max_literal"
+    ],
+    "ks": {
+     "ast_nodes": 0.0,
+     "chars": 0.042,
+     "longest_list": 0.0,
+     "max_literal": 0.055,
+     "steps": 0.057
+    },
+    "ks_crit": 0.115,
+    "shared_stream_identical_share": 1.0
+   },
+   "L5->L6": {
+    "features_with_higher_mean": [
+     "steps"
+    ],
+    "ks": {
+     "ast_nodes": 0.0,
+     "chars": 0.047,
+     "longest_list": 0.0,
+     "max_literal": 0.065,
+     "steps": 0.032
+    },
+    "ks_crit": 0.115,
+    "shared_stream_identical_share": 1.0
+   }
+  },
+  "weakly_separated": [
+   "L0->L1",
+   "L3->L4",
+   "L4->L5",
+   "L5->L6"
+  ]
+ },
+ "C1.func_compose_f3": {
+  "collapsed": [
+   "L0->L1: 100% of shared-stream items are identical",
+   "L3->L4: 100% of shared-stream items are identical",
+   "L4->L5: 100% of shared-stream items are identical",
+   "L5->L6: 100% of shared-stream items are identical"
+  ],
+  "levels": {
+   "0": {
+    "dup_cross_level": 0,
+    "items_with_features": 400,
+    "mean_ast_nodes": 40.88,
+    "mean_chars": 95.83,
+    "mean_longest_list": 0.0,
+    "mean_max_literal": 19.74,
+    "mean_steps": 12.32,
+    "n": 400
+   },
+   "1": {
+    "dup_cross_level": 0,
+    "items_with_features": 400,
+    "mean_ast_nodes": 40.89,
+    "mean_chars": 96.62,
+    "mean_longest_list": 0.0,
+    "mean_max_literal": 20.54,
+    "mean_steps": 12.35,
+    "n": 400
+   },
+   "2": {
+    "dup_cross_level": 0,
+    "items_with_features": 400,
+    "mean_ast_nodes": 44.0,
+    "mean_chars": 102.2,
+    "mean_longest_list": 0.0,
+    "mean_max_literal": 20.87,
+    "mean_steps": 13.99,
+    "n": 400
+   },
+   "3": {
+    "dup_cross_level": 0,
+    "items_with_features": 400,
+    "mean_ast_nodes": 56.13,
+    "mean_chars": 138.39,
+    "mean_longest_list": 0.0,
+    "mean_max_literal": 24.04,
+    "mean_steps": 16.6,
+    "n": 400
+   },
+   "4": {
+    "dup_cross_level": 0,
+    "items_with_features": 400,
+    "mean_ast_nodes": 56.45,
+    "mean_chars": 139.3,
+    "mean_longest_list": 0.0,
+    "mean_max_literal": 23.7,
+    "mean_steps": 16.64,
+    "n": 400
+   },
+   "5": {
+    "dup_cross_level": 0,
+    "items_with_features": 400,
+    "mean_ast_nodes": 56.02,
+    "mean_chars": 138.35,
+    "mean_longest_list": 0.0,
+    "mean_max_literal": 23.76,
+    "mean_steps": 16.47,
+    "n": 400
+   },
+   "6": {
+    "dup_cross_level": 0,
+    "items_with_features": 400,
+    "mean_ast_nodes": 55.8,
+    "mean_chars": 138.57,
+    "mean_longest_list": 0.0,
+    "mean_max_literal": 23.91,
+    "mean_steps": 16.42,
+    "n": 400
+   }
+  },
+  "levels_distinct": false,
+  "stated_parameter": "",
+  "steps": {
+   "L0->L1": {
+    "features_with_higher_mean": [
+     "steps",
+     "ast_nodes",
+     "chars",
+     "max_literal"
+    ],
+    "ks": {
+     "ast_nodes": 0.04,
+     "chars": 0.058,
+     "longest_list": 0.0,
+     "max_literal": 0.06,
+     "steps": 0.025
+    },
+    "ks_crit": 0.115,
+    "shared_stream_identical_share": 1.0
+   },
+   "L1->L2": {
+    "features_with_higher_mean": [
+     "steps",
+     "ast_nodes",
+     "chars",
+     "max_literal"
+    ],
+    "ks": {
+     "ast_nodes": 0.295,
+     "chars": 0.22,
+     "longest_list": 0.0,
+     "max_literal": 0.052,
+     "steps": 0.498
+    },
+    "ks_crit": 0.115,
+    "shared_stream_identical_share": 0.143
+   },
+   "L2->L3": {
+    "features_with_higher_mean": [
+     "steps",
+     "ast_nodes",
+     "chars",
+     "max_literal"
+    ],
+    "ks": {
+     "ast_nodes": 0.79,
+     "chars": 0.895,
+     "longest_list": 0.0,
+     "max_literal": 0.255,
+     "steps": 0.525
+    },
+    "ks_crit": 0.115,
+    "shared_stream_identical_share": 0.0
+   },
+   "L3->L4": {
+    "features_with_higher_mean": [
+     "steps",
+     "ast_nodes",
+     "chars"
+    ],
+    "ks": {
+     "ast_nodes": 0.055,
+     "chars": 0.073,
+     "longest_list": 0.0,
+     "max_literal": 0.082,
+     "steps": 0.047
+    },
+    "ks_crit": 0.115,
+    "shared_stream_identical_share": 1.0
+   },
+   "L4->L5": {
+    "features_with_higher_mean": [
+     "max_literal"
+    ],
+    "ks": {
+     "ast_nodes": 0.035,
+     "chars": 0.08,
+     "longest_list": 0.0,
+     "max_literal": 0.04,
+     "steps": 0.035
+    },
+    "ks_crit": 0.115,
+    "shared_stream_identical_share": 1.0
+   },
+   "L5->L6": {
+    "features_with_higher_mean": [
+     "chars",
+     "max_literal"
+    ],
+    "ks": {
+     "ast_nodes": 0.025,
+     "chars": 0.045,
+     "longest_list": 0.0,
+     "max_literal": 0.03,
+     "steps": 0.025
+    },
+    "ks_crit": 0.115,
+    "shared_stream_identical_share": 1.0
+   }
+  },
+  "weakly_separated": [
+   "L0->L1",
+   "L3->L4",
+   "L4->L5",
+   "L5->L6"
+  ]
+ },
+ "C1.slices": {
+  "collapsed": [],
+  "levels": {
+   "0": {
+    "dup_cross_level": 0,
+    "items_with_features": 400,
+    "mean_ast_nodes": 31.25,
+    "mean_chars": 53.27,
+    "mean_longest_list": 3.17,
+    "mean_max_literal": 26.55,
+    "mean_steps": 8.0,
+    "n": 400
+   },
+   "1": {
+    "dup_cross_level": 0,
+    "items_with_features": 400,
+    "mean_ast_nodes": 31.83,
+    "mean_chars": 55.62,
+    "mean_longest_list": 3.88,
+    "mean_max_literal": 27.63,
+    "mean_steps": 8.0,
+    "n": 400
+   },
+   "2": {
+    "dup_cross_level": 0,
+    "items_with_features": 400,
+    "mean_ast_nodes": 31.62,
+    "mean_chars": 58.96,
+    "mean_longest_list": 3.96,
+    "mean_max_literal": 27.82,
+    "mean_steps": 8.0,
+    "n": 400
+   },
+   "3": {
+    "dup_cross_level": 0,
+    "items_with_features": 400,
+    "mean_ast_nodes": 32.22,
+    "mean_chars": 61.58,
+    "mean_longest_list": 4.68,
+    "mean_max_literal": 28.72,
+    "mean_steps": 8.0,
+    "n": 400
+   },
+   "4": {
+    "dup_cross_level": 0,
+    "items_with_features": 400,
+    "mean_ast_nodes": 32.81,
+    "mean_chars": 65.87,
+    "mean_longest_list": 4.97,
+    "mean_max_literal": 30.05,
+    "mean_steps": 8.0,
+    "n": 400
+   },
+   "5": {
+    "dup_cross_level": 0,
+    "items_with_features": 400,
+    "mean_ast_nodes": 33.65,
+    "mean_chars": 68.2,
+    "mean_longest_list": 5.69,
+    "mean_max_literal": 30.57,
+    "mean_steps": 8.0,
+    "n": 400
+   },
+   "6": {
+    "dup_cross_level": 0,
+    "items_with_features": 400,
+    "mean_ast_nodes": 33.73,
+    "mean_chars": 72.47,
+    "mean_longest_list": 6.39,
+    "mean_max_literal": 32.96,
+    "mean_steps": 8.0,
+    "n": 400
+   }
+  },
+  "levels_distinct": true,
+  "stated_parameter": "",
+  "steps": {
+   "L0->L1": {
+    "features_with_higher_mean": [
+     "ast_nodes",
+     "chars",
+     "max_literal",
+     "longest_list"
+    ],
+    "ks": {
+     "ast_nodes": 0.07,
+     "chars": 0.163,
+     "longest_list": 0.555,
+     "max_literal": 0.052,
+     "steps": 0.0
+    },
+    "ks_crit": 0.115,
+    "shared_stream_identical_share": 0.46
+   },
+   "L1->L2": {
+    "features_with_higher_mean": [
+     "chars",
+     "max_literal",
+     "longest_list"
+    ],
+    "ks": {
+     "ast_nodes": 0.07,
+     "chars": 0.165,
+     "longest_list": 0.495,
+     "max_literal": 0.215,
+     "steps": 0.0
+    },
+    "ks_crit": 0.115,
+    "shared_stream_identical_share": 0.0
+   },
+   "L2->L3": {
+    "features_with_higher_mean": [
+     "ast_nodes",
+     "chars",
+     "max_literal",
+     "longest_list"
+    ],
+    "ks": {
+     "ast_nodes": 0.087,
+     "chars": 0.165,
+     "longest_list": 0.52,
+     "max_literal": 0.05,
+     "steps": 0.0
+    },
+    "ks_crit": 0.115,
+    "shared_stream_identical_share": 0.477
+   },
+   "L3->L4": {
+    "features_with_higher_mean": [
+     "ast_nodes",
+     "chars",
+     "max_literal",
+     "longest_list"
+    ],
+    "ks": {
+     "ast_nodes": 0.06,
+     "chars": 0.215,
+     "longest_list": 0.498,
+     "max_literal": 0.215,
+     "steps": 0.0
+    },
+    "ks_crit": 0.115,
+    "shared_stream_identical_share": 0.0
+   },
+   "L4->L5": {
+    "features_with_higher_mean": [
+     "ast_nodes",
+     "chars",
+     "max_literal",
+     "longest_list"
+    ],
+    "ks": {
+     "ast_nodes": 0.103,
+     "chars": 0.185,
+     "longest_list": 0.518,
+     "max_literal": 0.055,
+     "steps": 0.0
+    },
+    "ks_crit": 0.115,
+    "shared_stream_identical_share": 0.47
+   },
+   "L5->L6": {
+    "features_with_higher_mean": [
+     "ast_nodes",
+     "chars",
+     "max_literal",
+     "longest_list"
+    ],
+    "ks": {
+     "ast_nodes": 0.032,
+     "chars": 0.19,
+     "longest_list": 0.532,
+     "max_literal": 0.203,
+     "steps": 0.0
+    },
+    "ks_crit": 0.115,
+    "shared_stream_identical_share": 0.0
+   }
+  },
+  "weakly_separated": []
+ }
+}

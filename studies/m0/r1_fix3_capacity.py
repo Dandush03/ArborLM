@@ -343,7 +343,7 @@ class _Canon:
         for _ in range(3):
             ctx: dict[str, list[str]] = {w: [] for w in ws}
             for node, path, words in cont:
-                for w in set(words):
+                for w in sorted(set(words)):
                     if w in col and (_is_ent(w) or self.rl):
                         ctx[w].append(self.canon(node, col, path, star=w, depth=path.count("/") + 1 if path else 0))
             col = {w: (_h((col[w], sorted(ctx[w]))) if (_is_ent(w) or self.rl) else col[w]) for w in ws}

@@ -1,0 +1,7967 @@
+{
+ "bound": 0.15,
+ "lineages": {
+  "C1.bfs_queue": {
+   "in_shape_max_by_shape": {
+    "distsum": {
+     "0": {
+      "rate": 0.255,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.229,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.248,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.154,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.036,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.06,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.086,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "last": {
+     "0": {
+      "rate": 0.245,
+      "rule": "S.max_node"
+     },
+     "1": {
+      "rate": 0.266,
+      "rule": "S.max_node"
+     },
+     "2": {
+      "rate": 0.312,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.234,
+      "rule": "S.max_node"
+     },
+     "4": {
+      "rate": 0.238,
+      "rule": "S.max_node"
+     },
+     "5": {
+      "rate": 0.253,
+      "rule": "S.max_node"
+     },
+     "6": {
+      "rate": 0.165,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "order": {
+     "0": {
+      "rate": 0.01,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "target": {
+     "0": {
+      "rate": 0.588,
+      "rule": "S.two"
+     },
+     "1": {
+      "rate": 0.467,
+      "rule": "S.two"
+     },
+     "2": {
+      "rate": 0.414,
+      "rule": "S.two"
+     },
+     "3": {
+      "rate": 0.429,
+      "rule": "S.two"
+     },
+     "4": {
+      "rate": 0.379,
+      "rule": "S.two"
+     },
+     "5": {
+      "rate": 0.427,
+      "rule": "S.two"
+     },
+     "6": {
+      "rate": 0.466,
+      "rule": "S.two"
+     }
+    }
+   },
+   "in_shape_max_overall": 0.588,
+   "level_wide_cheap": {
+    "0": {
+     "max_excess": 0.268,
+     "per_source_max": {
+      "a3": 0.247,
+      "a4": 0.268,
+      "battery": 0.147
+     },
+     "rule": "a4.EFF_S"
+    },
+    "1": {
+     "max_excess": 0.22,
+     "per_source_max": {
+      "a3": 0.215,
+      "a4": 0.22,
+      "battery": 0.16
+     },
+     "rule": "a4.MFsh"
+    },
+    "2": {
+     "max_excess": 0.242,
+     "per_source_max": {
+      "a3": 0.21,
+      "a4": 0.242,
+      "battery": 0.098
+     },
+     "rule": "a4.MFsh"
+    },
+    "3": {
+     "max_excess": 0.172,
+     "per_source_max": {
+      "a3": 0.14,
+      "a4": 0.172,
+      "battery": 0.142
+     },
+     "rule": "a4.MFsh"
+    },
+    "4": {
+     "max_excess": 0.145,
+     "per_source_max": {
+      "a3": 0.142,
+      "a4": 0.145,
+      "battery": 0.125
+     },
+     "rule": "a4.MFsh"
+    },
+    "5": {
+     "max_excess": 0.175,
+     "per_source_max": {
+      "a3": 0.128,
+      "a4": 0.175,
+      "battery": 0.1
+     },
+     "rule": "a4.MFsh"
+    },
+    "6": {
+     "max_excess": 0.185,
+     "per_source_max": {
+      "a3": 0.152,
+      "a4": 0.185,
+      "battery": 0.107
+     },
+     "rule": "a4.EFF_S"
+    }
+   },
+   "level_wide_max": 0.268,
+   "lineage": "C1.bfs_queue",
+   "partial_trace_M_level_wide_EFF_SM": {
+    "0": 0.688,
+    "1": 0.605,
+    "2": 0.608,
+    "3": 0.562,
+    "4": 0.535,
+    "5": 0.492,
+    "6": 0.472
+   },
+   "shape_counts_by_level": {
+    "0": {
+     "distsum": 102,
+     "last": 98,
+     "order": 98,
+     "target": 102
+    },
+    "1": {
+     "distsum": 109,
+     "last": 94,
+     "order": 107,
+     "target": 90
+    },
+    "2": {
+     "distsum": 105,
+     "last": 96,
+     "order": 100,
+     "target": 99
+    },
+    "3": {
+     "distsum": 91,
+     "last": 107,
+     "order": 104,
+     "target": 98
+    },
+    "4": {
+     "distsum": 84,
+     "last": 101,
+     "order": 112,
+     "target": 103
+    },
+    "5": {
+     "distsum": 100,
+     "last": 91,
+     "order": 113,
+     "target": 96
+    },
+    "6": {
+     "distsum": 105,
+     "last": 85,
+     "order": 107,
+     "target": 103
+    }
+   }
+  },
+  "C1.binary_search_f3": {
+   "in_shape_max_by_shape": {
+    "path_closed": {
+     "0": {
+      "rate": 0.101,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.047,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.029,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.013,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "path_half": {
+     "0": {
+      "rate": 0.1,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.135,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.052,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.031,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.033,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.014,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.029,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "probes_closed": {
+     "0": {
+      "rate": 0.083,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.097,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.085,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.045,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.119,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.028,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "probes_half": {
+     "0": {
+      "rate": 0.103,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.127,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.175,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.071,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.072,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.028,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.035,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "sum_closed": {
+     "0": {
+      "rate": 0.018,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.014,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "sum_half": {
+     "0": {
+      "rate": 0.024,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.015,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "in_shape_max_overall": 0.175,
+   "level_wide_cheap": {
+    "0": {
+     "max_excess": 0.07,
+     "per_source_max": {
+      "a3": 0.025,
+      "a4": 0.07,
+      "battery": 0.022
+     },
+     "rule": "a4.MFsh"
+    },
+    "1": {
+     "max_excess": 0.077,
+     "per_source_max": {
+      "a3": 0.043,
+      "a4": 0.077,
+      "battery": 0.018
+     },
+     "rule": "a4.EFF_S"
+    },
+    "2": {
+     "max_excess": 0.052,
+     "per_source_max": {
+      "a3": 0.022,
+      "a4": 0.052,
+      "battery": 0.015
+     },
+     "rule": "a4.MFsh"
+    },
+    "3": {
+     "max_excess": 0.025,
+     "per_source_max": {
+      "a3": 0.013,
+      "a4": 0.025,
+      "battery": 0.015
+     },
+     "rule": "a4.MFsh"
+    },
+    "4": {
+     "max_excess": 0.022,
+     "per_source_max": {
+      "a3": 0.015,
+      "a4": 0.022,
+      "battery": 0.0125
+     },
+     "rule": "a4.EFF_S"
+    },
+    "5": {
+     "max_excess": 0.03,
+     "per_source_max": {
+      "a3": 0.025,
+      "a4": 0.03,
+      "battery": 0.005
+     },
+     "rule": "a4.EFF_S"
+    },
+    "6": {
+     "max_excess": 0.022,
+     "per_source_max": {
+      "a3": 0.007,
+      "a4": 0.022,
+      "battery": 0.005
+     },
+     "rule": "a4.EFF_S"
+    }
+   },
+   "level_wide_max": 0.077,
+   "lineage": "C1.binary_search_f3",
+   "partial_trace_M_level_wide_EFF_SM": {
+    "0": 0.065,
+    "1": 0.077,
+    "2": 0.052,
+    "3": 0.02,
+    "4": 0.022,
+    "5": 0.03,
+    "6": 0.022
+   },
+   "shape_counts_by_level": {
+    "0": {
+     "path_closed": 69,
+     "path_half": 60,
+     "probes_closed": 72,
+     "probes_half": 58,
+     "sum_closed": 57,
+     "sum_half": 84
+    },
+    "1": {
+     "path_closed": 64,
+     "path_half": 74,
+     "probes_closed": 62,
+     "probes_half": 79,
+     "sum_closed": 53,
+     "sum_half": 68
+    },
+    "2": {
+     "path_closed": 70,
+     "path_half": 77,
+     "probes_closed": 59,
+     "probes_half": 57,
+     "sum_closed": 76,
+     "sum_half": 61
+    },
+    "3": {
+     "path_closed": 67,
+     "path_half": 65,
+     "probes_closed": 67,
+     "probes_half": 56,
+     "sum_closed": 73,
+     "sum_half": 72
+    },
+    "4": {
+     "path_closed": 71,
+     "path_half": 61,
+     "probes_closed": 71,
+     "probes_half": 69,
+     "sum_closed": 62,
+     "sum_half": 66
+    },
+    "5": {
+     "path_closed": 52,
+     "path_half": 69,
+     "probes_closed": 67,
+     "probes_half": 72,
+     "sum_closed": 77,
+     "sum_half": 63
+    },
+    "6": {
+     "path_closed": 80,
+     "path_half": 69,
+     "probes_closed": 72,
+     "probes_half": 57,
+     "sum_closed": 61,
+     "sum_half": 61
+    }
+   }
+  },
+  "C1.bracket_matching_f3": {
+   "in_shape_max_by_shape": {
+    "code": {
+     "0": {
+      "rate": 0.035,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.014,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.013,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.014,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.083,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.016,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "errpos": {
+     "0": {
+      "rate": 0.049,
+      "rule": "S.sum_pos_all_closers"
+     },
+     "1": {
+      "rate": 0.041,
+      "rule": "S.sum_pos_all_closers"
+     },
+     "2": {
+      "rate": 0.036,
+      "rule": "S.sum_pos_all_closers"
+     },
+     "3": {
+      "rate": 0.089,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.0,
+      "rule": "S.sum_pos_all_closers"
+     },
+     "5": {
+      "rate": 0.029,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.013,
+      "rule": "S.sum_pos_all_closers"
+     }
+    },
+    "popsum": {
+     "0": {
+      "rate": 0.014,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.037,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.037,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.026,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.014,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "remain": {
+     "0": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "remain_at": {
+     "0": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "in_shape_max_overall": 0.089,
+   "level_wide_cheap": {
+    "0": {
+     "max_excess": 0.025,
+     "per_source_max": {
+      "a3": 0.013,
+      "a4": 0.025,
+      "battery": 0.0175
+     },
+     "rule": "a4.EFF_S"
+    },
+    "1": {
+     "max_excess": 0.02,
+     "per_source_max": {
+      "a3": 0.013,
+      "a4": 0.015,
+      "battery": 0.02
+     },
+     "rule": "battery.remain_at|S.pop_any_closer"
+    },
+    "2": {
+     "max_excess": 0.018,
+     "per_source_max": {
+      "a3": 0.018,
+      "a4": 0.018,
+      "battery": 0.013
+     },
+     "rule": "a4.MFsh"
+    },
+    "3": {
+     "max_excess": 0.025,
+     "per_source_max": {
+      "a3": 0.015,
+      "a4": 0.025,
+      "battery": 0.0125
+     },
+     "rule": "a4.MFsh"
+    },
+    "4": {
+     "max_excess": 0.015,
+     "per_source_max": {
+      "a3": 0.005,
+      "a4": 0.005,
+      "battery": 0.015
+     },
+     "rule": "battery.remain_at|S.pop_any_closer"
+    },
+    "5": {
+     "max_excess": 0.028,
+     "per_source_max": {
+      "a3": 0.028,
+      "a4": 0.025,
+      "battery": 0.01
+     },
+     "rule": "a3.MF_shape_cv"
+    },
+    "6": {
+     "max_excess": 0.007,
+     "per_source_max": {
+      "a3": 0.007,
+      "a4": 0.007,
+      "battery": 0.007
+     },
+     "rule": "battery.MF_cv"
+    }
+   },
+   "level_wide_max": 0.028,
+   "lineage": "C1.bracket_matching_f3",
+   "partial_trace_M_level_wide_EFF_SM": {
+    "0": 0.058,
+    "1": 0.043,
+    "2": 0.037,
+    "3": 0.035,
+    "4": 0.013,
+    "5": 0.025,
+    "6": 0.005
+   },
+   "shape_counts_by_level": {
+    "0": {
+     "code": 85,
+     "errpos": 82,
+     "popsum": 69,
+     "remain": 84,
+     "remain_at": 80
+    },
+    "1": {
+     "code": 73,
+     "errpos": 73,
+     "popsum": 81,
+     "remain": 94,
+     "remain_at": 79
+    },
+    "2": {
+     "code": 79,
+     "errpos": 84,
+     "popsum": 82,
+     "remain": 79,
+     "remain_at": 76
+    },
+    "3": {
+     "code": 71,
+     "errpos": 79,
+     "popsum": 76,
+     "remain": 86,
+     "remain_at": 88
+    },
+    "4": {
+     "code": 79,
+     "errpos": 77,
+     "popsum": 88,
+     "remain": 82,
+     "remain_at": 74
+    },
+    "5": {
+     "code": 84,
+     "errpos": 70,
+     "popsum": 74,
+     "remain": 96,
+     "remain_at": 76
+    },
+    "6": {
+     "code": 63,
+     "errpos": 76,
+     "popsum": 95,
+     "remain": 92,
+     "remain_at": 74
+    }
+   }
+  },
+  "C1.bubble_pass": {
+   "in_shape_max_by_shape": {
+    "passes1": {
+     "0": {
+      "rate": 0.547,
+      "rule": "S.extreme_to_end"
+     },
+     "1": {
+      "rate": 0.482,
+      "rule": "S.extreme_to_end"
+     }
+    },
+    "passes2": {
+     "2": {
+      "rate": 0.095,
+      "rule": "S.sorted"
+     },
+     "3": {
+      "rate": 0.065,
+      "rule": "S.sorted"
+     }
+    },
+    "passes3": {
+     "4": {
+      "rate": 0.06,
+      "rule": "S.sorted"
+     },
+     "5": {
+      "rate": 0.037,
+      "rule": "S.sorted"
+     }
+    },
+    "passes4": {
+     "6": {
+      "rate": 0.06,
+      "rule": "S.sorted"
+     }
+    }
+   },
+   "in_shape_max_overall": 0.547,
+   "level_wide_cheap": {
+    "0": {
+     "max_excess": 0.547,
+     "per_source_max": {
+      "a3": 0.068,
+      "a4": 0.547,
+      "battery": 0.06
+     },
+     "rule": "a4.passes1|S.extreme_to_end"
+    },
+    "1": {
+     "max_excess": 0.482,
+     "per_source_max": {
+      "a3": 0.028,
+      "a4": 0.482,
+      "battery": 0.022
+     },
+     "rule": "a4.passes1|S.extreme_to_end"
+    },
+    "2": {
+     "max_excess": 0.095,
+     "per_source_max": {
+      "a3": 0.052,
+      "a4": 0.095,
+      "battery": 0.055
+     },
+     "rule": "a4.passes2|S.sorted"
+    },
+    "3": {
+     "max_excess": 0.065,
+     "per_source_max": {
+      "a3": 0.037,
+      "a4": 0.065,
+      "battery": 0.01
+     },
+     "rule": "a4.passes2|S.sorted"
+    },
+    "4": {
+     "max_excess": 0.06,
+     "per_source_max": {
+      "a3": 0.035,
+      "a4": 0.06,
+      "battery": 0.043
+     },
+     "rule": "a4.passes3|S.sorted"
+    },
+    "5": {
+     "max_excess": 0.037,
+     "per_source_max": {
+      "a3": 0.015,
+      "a4": 0.037,
+      "battery": 0.015
+     },
+     "rule": "a4.passes3|S.sorted"
+    },
+    "6": {
+     "max_excess": 0.06,
+     "per_source_max": {
+      "a3": 0.035,
+      "a4": 0.06,
+      "battery": 0.045
+     },
+     "rule": "a4.passes4|S.sorted"
+    }
+   },
+   "level_wide_max": 0.547,
+   "lineage": "C1.bubble_pass",
+   "partial_trace_M_level_wide_EFF_SM": {
+    "0": 0.547,
+    "1": 0.482,
+    "2": 0.095,
+    "3": 0.065,
+    "4": 0.06,
+    "5": 0.037,
+    "6": 0.06
+   },
+   "shape_counts_by_level": {
+    "0": {
+     "passes1": 400
+    },
+    "1": {
+     "passes1": 400
+    },
+    "2": {
+     "passes2": 400
+    },
+    "3": {
+     "passes2": 400
+    },
+    "4": {
+     "passes3": 400
+    },
+    "5": {
+     "passes3": 400
+    },
+    "6": {
+     "passes4": 400
+    }
+   }
+  },
+  "C1.bytecode_loop_f3": {
+   "in_shape_max_by_shape": {
+    "acc": {
+     "0": {
+      "rate": 0.06,
+      "rule": "S.sum_all_args"
+     },
+     "1": {
+      "rate": 0.041,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.023,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.016,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.015,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.035,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.05,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "reg": {
+     "6": {
+      "rate": 0.031,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "sumarg": {
+     "1": {
+      "rate": 0.073,
+      "rule": "S.sum_all_args"
+     },
+     "2": {
+      "rate": 0.066,
+      "rule": "S.sum_all_args"
+     },
+     "3": {
+      "rate": 0.06,
+      "rule": "S.sum_all_args"
+     },
+     "4": {
+      "rate": 0.041,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.039,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.051,
+      "rule": "S.sum_all_args"
+     }
+    }
+   },
+   "in_shape_max_overall": 0.073,
+   "level_wide_cheap": {
+    "0": {
+     "max_excess": 0.06,
+     "per_source_max": {
+      "a3": 0.06,
+      "a4": 0.06,
+      "battery": 0.0425
+     },
+     "rule": "a4.acc|S.sum_all_args"
+    },
+    "1": {
+     "max_excess": 0.065,
+     "per_source_max": {
+      "a3": 0.0375,
+      "a4": 0.065,
+      "battery": 0.0475
+     },
+     "rule": "a4.EFF_S"
+    },
+    "2": {
+     "max_excess": 0.065,
+     "per_source_max": {
+      "a3": 0.0375,
+      "a4": 0.037,
+      "battery": 0.065
+     },
+     "rule": "battery.MF_cv"
+    },
+    "3": {
+     "max_excess": 0.08,
+     "per_source_max": {
+      "a3": 0.052,
+      "a4": 0.05,
+      "battery": 0.08
+     },
+     "rule": "battery.other|S.no_skips"
+    },
+    "4": {
+     "max_excess": 0.04,
+     "per_source_max": {
+      "a3": 0.028,
+      "a4": 0.04,
+      "battery": 0.03
+     },
+     "rule": "a4.EFF_S"
+    },
+    "5": {
+     "max_excess": 0.055,
+     "per_source_max": {
+      "a3": 0.025,
+      "a4": 0.055,
+      "battery": 0.045
+     },
+     "rule": "a4.EFF_S"
+    },
+    "6": {
+     "max_excess": 0.075,
+     "per_source_max": {
+      "a3": 0.037,
+      "a4": 0.065,
+      "battery": 0.075
+     },
+     "rule": "battery.other|S.always_skip"
+    }
+   },
+   "level_wide_max": 0.08,
+   "lineage": "C1.bytecode_loop_f3",
+   "partial_trace_M_level_wide_EFF_SM": {
+    "0": 0.06,
+    "1": 0.065,
+    "2": 0.04,
+    "3": 0.113,
+    "4": 0.043,
+    "5": 0.055,
+    "6": 0.075
+   },
+   "shape_counts_by_level": {
+    "0": {
+     "acc": 400
+    },
+    "1": {
+     "acc": 195,
+     "sumarg": 205
+    },
+    "2": {
+     "acc": 171,
+     "sumarg": 229
+    },
+    "3": {
+     "acc": 193,
+     "reg": 23,
+     "sumarg": 184
+    },
+    "4": {
+     "acc": 203,
+     "sumarg": 197
+    },
+    "5": {
+     "acc": 201,
+     "reg": 20,
+     "sumarg": 179
+    },
+    "6": {
+     "acc": 161,
+     "reg": 64,
+     "sumarg": 175
+    }
+   }
+  },
+  "C1.cellular_update_f3": {
+   "in_shape_max_by_shape": {
+    "row_branch": {
+     "0": {
+      "rate": 0.139,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.111,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.096,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.117,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.056,
+      "rule": "S.echo_init"
+     },
+     "5": {
+      "rate": 0.035,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.075,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "row_equals": {
+     "0": {
+      "rate": 0.167,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.111,
+      "rule": "S.echo_init"
+     },
+     "2": {
+      "rate": 0.377,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.225,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.234,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.274,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.257,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "row_table": {
+     "0": {
+      "rate": 0.039,
+      "rule": "S.echo_init"
+     },
+     "1": {
+      "rate": 0.159,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.065,
+      "rule": "S.echo_init"
+     },
+     "3": {
+      "rate": 0.032,
+      "rule": "S.echo_init"
+     },
+     "4": {
+      "rate": 0.032,
+      "rule": "S.echo_init"
+     },
+     "5": {
+      "rate": 0.029,
+      "rule": "S.echo_init"
+     },
+     "6": {
+      "rate": 0.051,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "weighted_branch": {
+     "0": {
+      "rate": 0.167,
+      "rule": "S.echo_init"
+     },
+     "1": {
+      "rate": 0.206,
+      "rule": "S.echo_init"
+     },
+     "2": {
+      "rate": 0.15,
+      "rule": "S.echo_init"
+     },
+     "3": {
+      "rate": 0.2,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.133,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.107,
+      "rule": "S.echo_init"
+     },
+     "6": {
+      "rate": 0.123,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "weighted_equals": {
+     "0": {
+      "rate": 0.25,
+      "rule": "S.echo_init"
+     },
+     "1": {
+      "rate": 0.08,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.341,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.295,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.274,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.318,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.265,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "weighted_table": {
+     "0": {
+      "rate": 0.097,
+      "rule": "S.echo_init"
+     },
+     "1": {
+      "rate": 0.156,
+      "rule": "S.echo_init"
+     },
+     "2": {
+      "rate": 0.093,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.072,
+      "rule": "S.echo_init"
+     },
+     "4": {
+      "rate": 0.118,
+      "rule": "S.echo_init"
+     },
+     "5": {
+      "rate": 0.101,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.027,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "in_shape_max_overall": 0.377,
+   "level_wide_cheap": {
+    "0": {
+     "max_excess": 0.138,
+     "per_source_max": {
+      "a3": 0.12,
+      "a4": 0.138,
+      "battery": 0.043
+     },
+     "rule": "a4.EFF_S"
+    },
+    "1": {
+     "max_excess": 0.122,
+     "per_source_max": {
+      "a3": 0.122,
+      "a4": 0.113,
+      "battery": 0.1
+     },
+     "rule": "a3.MF_shape_cv"
+    },
+    "2": {
+     "max_excess": 0.215,
+     "per_source_max": {
+      "a3": 0.215,
+      "a4": 0.185,
+      "battery": 0.105
+     },
+     "rule": "a3.MF_shape_cv"
+    },
+    "3": {
+     "max_excess": 0.18,
+     "per_source_max": {
+      "a3": 0.18,
+      "a4": 0.155,
+      "battery": 0.098
+     },
+     "rule": "a3.MF_shape_cv"
+    },
+    "4": {
+     "max_excess": 0.138,
+     "per_source_max": {
+      "a3": 0.138,
+      "a4": 0.13,
+      "battery": 0.08
+     },
+     "rule": "a3.MF_shape_cv"
+    },
+    "5": {
+     "max_excess": 0.155,
+     "per_source_max": {
+      "a3": 0.155,
+      "a4": 0.133,
+      "battery": 0.08
+     },
+     "rule": "a3.MF_shape_cv"
+    },
+    "6": {
+     "max_excess": 0.145,
+     "per_source_max": {
+      "a3": 0.145,
+      "a4": 0.135,
+      "battery": 0.085
+     },
+     "rule": "a3.MF_shape_cv"
+    }
+   },
+   "level_wide_max": 0.215,
+   "lineage": "C1.cellular_update_f3",
+   "partial_trace_M_level_wide_EFF_SM": {
+    "0": 0.138,
+    "1": 0.263,
+    "2": 0.26,
+    "3": 0.247,
+    "4": 0.228,
+    "5": 0.165,
+    "6": 0.195
+   },
+   "shape_counts_by_level": {
+    "0": {
+     "row_branch": 72,
+     "row_equals": 72,
+     "row_table": 76,
+     "weighted_branch": 36,
+     "weighted_equals": 72,
+     "weighted_table": 72
+    },
+    "1": {
+     "row_branch": 45,
+     "row_equals": 54,
+     "row_table": 82,
+     "weighted_branch": 68,
+     "weighted_equals": 87,
+     "weighted_table": 64
+    },
+    "2": {
+     "row_branch": 52,
+     "row_equals": 69,
+     "row_table": 62,
+     "weighted_branch": 60,
+     "weighted_equals": 82,
+     "weighted_table": 75
+    },
+    "3": {
+     "row_branch": 60,
+     "row_equals": 80,
+     "row_table": 63,
+     "weighted_branch": 50,
+     "weighted_equals": 78,
+     "weighted_table": 69
+    },
+    "4": {
+     "row_branch": 54,
+     "row_equals": 77,
+     "row_table": 62,
+     "weighted_branch": 60,
+     "weighted_equals": 62,
+     "weighted_table": 85
+    },
+    "5": {
+     "row_branch": 57,
+     "row_equals": 73,
+     "row_table": 69,
+     "weighted_branch": 56,
+     "weighted_equals": 66,
+     "weighted_table": 79
+    },
+    "6": {
+     "row_branch": 40,
+     "row_equals": 74,
+     "row_table": 79,
+     "weighted_branch": 65,
+     "weighted_equals": 68,
+     "weighted_table": 74
+    }
+   }
+  },
+  "C1.circle_elimination_r2": {
+   "in_shape_max_by_shape": {
+    "last": {
+     "0": {
+      "rate": 0.101,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.065,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.149,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.064,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.072,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.083,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.061,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "sum": {
+     "0": {
+      "rate": 0.031,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.036,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.007,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.021,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.03,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.027,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.032,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "survivor": {
+     "0": {
+      "rate": 0.198,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.065,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.098,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.108,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.087,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.051,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.07,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "in_shape_max_overall": 0.198,
+   "level_wide_cheap": {
+    "0": {
+     "max_excess": 0.11,
+     "per_source_max": {
+      "a3": 0.11,
+      "a4": 0.11,
+      "battery": 0.102
+     },
+     "rule": "a4.MFsh"
+    },
+    "1": {
+     "max_excess": 0.072,
+     "per_source_max": {
+      "a3": 0.055,
+      "a4": 0.055,
+      "battery": 0.072
+     },
+     "rule": "battery.MF_cv"
+    },
+    "2": {
+     "max_excess": 0.085,
+     "per_source_max": {
+      "a3": 0.085,
+      "a4": 0.085,
+      "battery": 0.072
+     },
+     "rule": "a4.MFsh"
+    },
+    "3": {
+     "max_excess": 0.068,
+     "per_source_max": {
+      "a3": 0.065,
+      "a4": 0.065,
+      "battery": 0.068
+     },
+     "rule": "battery.MF_cv"
+    },
+    "4": {
+     "max_excess": 0.068,
+     "per_source_max": {
+      "a3": 0.062,
+      "a4": 0.068,
+      "battery": 0.068
+     },
+     "rule": "battery.BEST_generic_cv"
+    },
+    "5": {
+     "max_excess": 0.055,
+     "per_source_max": {
+      "a3": 0.052,
+      "a4": 0.055,
+      "battery": 0.043
+     },
+     "rule": "a4.EFF_S"
+    },
+    "6": {
+     "max_excess": 0.055,
+     "per_source_max": {
+      "a3": 0.055,
+      "a4": 0.055,
+      "battery": 0.037
+     },
+     "rule": "a4.MFsh"
+    }
+   },
+   "level_wide_max": 0.11,
+   "lineage": "C1.circle_elimination_r2",
+   "partial_trace_M_level_wide_EFF_SM": {
+    "0": 0.268,
+    "1": 0.145,
+    "2": 0.212,
+    "3": 0.168,
+    "4": 0.125,
+    "5": 0.212,
+    "6": 0.113
+   },
+   "shape_counts_by_level": {
+    "0": {
+     "last": 138,
+     "sum": 131,
+     "survivor": 131
+    },
+    "1": {
+     "last": 123,
+     "sum": 139,
+     "survivor": 138
+    },
+    "2": {
+     "last": 134,
+     "sum": 134,
+     "survivor": 132
+    },
+    "3": {
+     "last": 110,
+     "sum": 142,
+     "survivor": 148
+    },
+    "4": {
+     "last": 139,
+     "sum": 135,
+     "survivor": 126
+    },
+    "5": {
+     "last": 133,
+     "sum": 150,
+     "survivor": 117
+    },
+    "6": {
+     "last": 147,
+     "sum": 125,
+     "survivor": 128
+    }
+   }
+  },
+  "C1.coin_change_table_f3": {
+   "in_shape_max_by_shape": {
+    "combos": {
+     "0": {
+      "rate": 0.337,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.265,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.299,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.23,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.148,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.256,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.212,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "fewest": {
+     "0": {
+      "rate": 0.719,
+      "rule": "S.greedy"
+     },
+     "1": {
+      "rate": 0.773,
+      "rule": "S.greedy"
+     },
+     "2": {
+      "rate": 0.556,
+      "rule": "S.greedy"
+     },
+     "3": {
+      "rate": 0.687,
+      "rule": "S.greedy"
+     },
+     "4": {
+      "rate": 0.617,
+      "rule": "S.greedy"
+     },
+     "5": {
+      "rate": 0.642,
+      "rule": "S.T_div_maxcoin_ceil"
+     },
+     "6": {
+      "rate": 0.595,
+      "rule": "S.T_div_maxcoin_ceil"
+     }
+    },
+    "orders": {
+     "0": {
+      "rate": 0.2,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.287,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.243,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.241,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.198,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.196,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.193,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "tablesum": {
+     "0": {
+      "rate": 0.043,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.084,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.059,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.042,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.009,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.009,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.028,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "in_shape_max_overall": 0.773,
+   "level_wide_cheap": {
+    "0": {
+     "max_excess": 0.302,
+     "per_source_max": {
+      "a3": 0.203,
+      "a4": 0.302,
+      "battery": 0.185
+     },
+     "rule": "a4.EFF_S"
+    },
+    "1": {
+     "max_excess": 0.318,
+     "per_source_max": {
+      "a3": 0.172,
+      "a4": 0.318,
+      "battery": 0.17
+     },
+     "rule": "a4.EFF_S"
+    },
+    "2": {
+     "max_excess": 0.268,
+     "per_source_max": {
+      "a3": 0.163,
+      "a4": 0.268,
+      "battery": 0.13
+     },
+     "rule": "a4.EFF_S"
+    },
+    "3": {
+     "max_excess": 0.265,
+     "per_source_max": {
+      "a3": 0.133,
+      "a4": 0.265,
+      "battery": 0.125
+     },
+     "rule": "a4.EFF_S"
+    },
+    "4": {
+     "max_excess": 0.225,
+     "per_source_max": {
+      "a3": 0.12,
+      "a4": 0.225,
+      "battery": 0.105
+     },
+     "rule": "a4.EFF_S"
+    },
+    "5": {
+     "max_excess": 0.25,
+     "per_source_max": {
+      "a3": 0.138,
+      "a4": 0.25,
+      "battery": 0.128
+     },
+     "rule": "a4.EFF_S"
+    },
+    "6": {
+     "max_excess": 0.235,
+     "per_source_max": {
+      "a3": 0.098,
+      "a4": 0.235,
+      "battery": 0.138
+     },
+     "rule": "a4.EFF_S"
+    }
+   },
+   "level_wide_max": 0.318,
+   "lineage": "C1.coin_change_table_f3",
+   "partial_trace_M_level_wide_EFF_SM": {
+    "0": 0.472,
+    "1": 0.438,
+    "2": 0.318,
+    "3": 0.282,
+    "4": 0.26,
+    "5": 0.295,
+    "6": 0.26
+   },
+   "shape_counts_by_level": {
+    "0": {
+     "combos": 95,
+     "fewest": 89,
+     "orders": 100,
+     "tablesum": 116
+    },
+    "1": {
+     "combos": 117,
+     "fewest": 75,
+     "orders": 101,
+     "tablesum": 107
+    },
+    "2": {
+     "combos": 107,
+     "fewest": 81,
+     "orders": 111,
+     "tablesum": 101
+    },
+    "3": {
+     "combos": 87,
+     "fewest": 83,
+     "orders": 112,
+     "tablesum": 118
+    },
+    "4": {
+     "combos": 115,
+     "fewest": 81,
+     "orders": 96,
+     "tablesum": 108
+    },
+    "5": {
+     "combos": 90,
+     "fewest": 95,
+     "orders": 107,
+     "tablesum": 108
+    },
+    "6": {
+     "combos": 99,
+     "fewest": 84,
+     "orders": 109,
+     "tablesum": 108
+    }
+   }
+  },
+  "C1.cond_chain_f3": {
+   "in_shape_max_by_shape": {
+    "a": {
+     "0": {
+      "rate": 0.079,
+      "rule": "S.rounds_x_gcd"
+     },
+     "1": {
+      "rate": 0.031,
+      "rule": "S.rounds_x_gcd"
+     },
+     "2": {
+      "rate": 0.027,
+      "rule": "S.rounds_x_gcd"
+     },
+     "3": {
+      "rate": 0.016,
+      "rule": "S.rounds_x_gcd"
+     },
+     "4": {
+      "rate": 0.008,
+      "rule": "S.rounds_x_gcd"
+     },
+     "5": {
+      "rate": 0.016,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.016,
+      "rule": "S.rounds_x_gcd"
+     }
+    },
+    "a-b": {
+     "0": {
+      "rate": 0.046,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.041,
+      "rule": "S.rounds_x_gcd"
+     },
+     "2": {
+      "rate": 0.008,
+      "rule": "S.rounds_x_gcd"
+     },
+     "3": {
+      "rate": 0.0,
+      "rule": "S.rounds_x_gcd"
+     },
+     "4": {
+      "rate": 0.015,
+      "rule": "S.rounds_x_gcd"
+     },
+     "5": {
+      "rate": 0.0,
+      "rule": "S.rounds_x_gcd"
+     },
+     "6": {
+      "rate": 0.0,
+      "rule": "S.rounds_x_gcd"
+     }
+    },
+    "b": {
+     "0": {
+      "rate": 0.1,
+      "rule": "S.rounds_x_gcd"
+     },
+     "1": {
+      "rate": 0.071,
+      "rule": "S.rounds_x_gcd"
+     },
+     "2": {
+      "rate": 0.024,
+      "rule": "S.rounds_x_gcd"
+     },
+     "3": {
+      "rate": 0.008,
+      "rule": "S.rounds_x_gcd"
+     },
+     "4": {
+      "rate": 0.0,
+      "rule": "S.rounds_x_gcd"
+     },
+     "5": {
+      "rate": 0.008,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.007,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "in_shape_max_overall": 0.1,
+   "level_wide_cheap": {
+    "0": {
+     "max_excess": 0.062,
+     "per_source_max": {
+      "a3": 0.0275,
+      "a4": 0.062,
+      "battery": 0.0525
+     },
+     "rule": "a4.EFF_S"
+    },
+    "1": {
+     "max_excess": 0.0575,
+     "per_source_max": {
+      "a3": 0.018,
+      "a4": 0.022,
+      "battery": 0.0575
+     },
+     "rule": "battery.tot|S.k_times_gcd"
+    },
+    "2": {
+     "max_excess": 0.03,
+     "per_source_max": {
+      "a3": 0.01,
+      "a4": 0.01,
+      "battery": 0.03
+     },
+     "rule": "battery.tot|S.k_times_gcd"
+    },
+    "3": {
+     "max_excess": 0.0425,
+     "per_source_max": {
+      "a3": 0.005,
+      "a4": 0.005,
+      "battery": 0.0425
+     },
+     "rule": "battery.tot|S.no_halving"
+    },
+    "4": {
+     "max_excess": 0.0275,
+     "per_source_max": {
+      "a3": 0.0075,
+      "a4": 0.005,
+      "battery": 0.0275
+     },
+     "rule": "battery.tot|S.no_halving"
+    },
+    "5": {
+     "max_excess": 0.028,
+     "per_source_max": {
+      "a3": 0.0075,
+      "a4": 0.007,
+      "battery": 0.028
+     },
+     "rule": "battery.BEST_generic_cv"
+    },
+    "6": {
+     "max_excess": 0.0275,
+     "per_source_max": {
+      "a3": 0.003,
+      "a4": 0.005,
+      "battery": 0.0275
+     },
+     "rule": "battery.tot|S.no_halving"
+    }
+   },
+   "level_wide_max": 0.062,
+   "lineage": "C1.cond_chain_f3",
+   "partial_trace_M_level_wide_EFF_SM": {
+    "0": 0.233,
+    "1": 0.13,
+    "2": 0.113,
+    "3": 0.018,
+    "4": 0.01,
+    "5": 0.01,
+    "6": 0.018
+   },
+   "shape_counts_by_level": {
+    "0": {
+     "a": 139,
+     "a-b": 131,
+     "b": 130
+    },
+    "1": {
+     "a": 127,
+     "a-b": 146,
+     "b": 127
+    },
+    "2": {
+     "a": 149,
+     "a-b": 126,
+     "b": 125
+    },
+    "3": {
+     "a": 127,
+     "a-b": 141,
+     "b": 132
+    },
+    "4": {
+     "a": 133,
+     "a-b": 137,
+     "b": 130
+    },
+    "5": {
+     "a": 124,
+     "a-b": 150,
+     "b": 126
+    },
+    "6": {
+     "a": 126,
+     "a-b": 124,
+     "b": 150
+    }
+   }
+  },
+  "C1.counter_list_f3": {
+   "in_shape_max_by_shape": {
+    "style_parity": {
+     "0": {
+      "rate": 0.023,
+      "rule": "F.residue_histogram"
+     },
+     "1": {
+      "rate": 0.024,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.008,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.007,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.008,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.008,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.008,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "style_plain": {
+     "0": {
+      "rate": 0.034,
+      "rule": "F.residue_histogram"
+     },
+     "1": {
+      "rate": 0.043,
+      "rule": "F.residue_histogram"
+     },
+     "2": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.028,
+      "rule": "F.residue_histogram"
+     },
+     "4": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.007,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "style_threshold": {
+     "0": {
+      "rate": 0.089,
+      "rule": "F.residue_histogram"
+     },
+     "1": {
+      "rate": 0.067,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.063,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.033,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.029,
+      "rule": "F.residue_histogram"
+     },
+     "5": {
+      "rate": 0.032,
+      "rule": "F.residue_histogram"
+     },
+     "6": {
+      "rate": 0.03,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "in_shape_max_overall": 0.089,
+   "level_wide_cheap": {
+    "0": {
+     "max_excess": 0.06,
+     "per_source_max": {
+      "a3": 0.0475,
+      "a4": 0.048,
+      "battery": 0.06
+     },
+     "rule": "battery.counts|S.uniform"
+    },
+    "1": {
+     "max_excess": 0.045,
+     "per_source_max": {
+      "a3": 0.037,
+      "a4": 0.037,
+      "battery": 0.045
+     },
+     "rule": "battery.counts|S.uniform"
+    },
+    "2": {
+     "max_excess": 0.048,
+     "per_source_max": {
+      "a3": 0.048,
+      "a4": 0.048,
+      "battery": 0.0325
+     },
+     "rule": "a4.MF"
+    },
+    "3": {
+     "max_excess": 0.025,
+     "per_source_max": {
+      "a3": 0.0175,
+      "a4": 0.018,
+      "battery": 0.025
+     },
+     "rule": "battery.counts|S.uniform"
+    },
+    "4": {
+     "max_excess": 0.0325,
+     "per_source_max": {
+      "a3": 0.018,
+      "a4": 0.022,
+      "battery": 0.0325
+     },
+     "rule": "battery.counts|S.uniform"
+    },
+    "5": {
+     "max_excess": 0.0375,
+     "per_source_max": {
+      "a3": 0.015,
+      "a4": 0.015,
+      "battery": 0.0375
+     },
+     "rule": "battery.counts|S.uniform"
+    },
+    "6": {
+     "max_excess": 0.013,
+     "per_source_max": {
+      "a3": 0.013,
+      "a4": 0.013,
+      "battery": 0.01
+     },
+     "rule": "a4.MFsh"
+    }
+   },
+   "level_wide_max": 0.06,
+   "lineage": "C1.counter_list_f3",
+   "partial_trace_M_level_wide_EFF_SM": {
+    "0": 0.007,
+    "1": 0.03,
+    "2": 0.03,
+    "3": 0.018,
+    "4": 0.022,
+    "5": 0.007,
+    "6": 0.013
+   },
+   "shape_counts_by_level": {
+    "0": {
+     "style_parity": 129,
+     "style_plain": 148,
+     "style_threshold": 123
+    },
+    "1": {
+     "style_parity": 127,
+     "style_plain": 138,
+     "style_threshold": 135
+    },
+    "2": {
+     "style_parity": 120,
+     "style_plain": 153,
+     "style_threshold": 127
+    },
+    "3": {
+     "style_parity": 142,
+     "style_plain": 108,
+     "style_threshold": 150
+    },
+    "4": {
+     "style_parity": 129,
+     "style_plain": 132,
+     "style_threshold": 139
+    },
+    "5": {
+     "style_parity": 132,
+     "style_plain": 143,
+     "style_threshold": 125
+    },
+    "6": {
+     "style_parity": 125,
+     "style_plain": 141,
+     "style_threshold": 134
+    }
+   }
+  },
+  "C1.digit_peel_f3": {
+   "in_shape_max_by_shape": {
+    "fold": {
+     "0": {
+      "rate": 0.004,
+      "rule": "S.decimal_digits_fold"
+     },
+     "1": {
+      "rate": 0.004,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.0,
+      "rule": "S.decimal_digits_fold"
+     },
+     "3": {
+      "rate": 0.0,
+      "rule": "S.decimal_digits_fold"
+     },
+     "4": {
+      "rate": 0.0,
+      "rule": "S.decimal_digits_fold"
+     },
+     "5": {
+      "rate": 0.0,
+      "rule": "S.decimal_digits_fold"
+     },
+     "6": {
+      "rate": 0.0,
+      "rule": "S.decimal_digits_fold"
+     }
+    },
+    "fold_k=base": {
+     "2": {
+      "rate": 0.0,
+      "rule": "S.decimal_digits_fold"
+     },
+     "4": {
+      "rate": 0.0,
+      "rule": "S.decimal_digits_fold"
+     },
+     "5": {
+      "rate": 0.0,
+      "rule": "S.decimal_digits_fold"
+     },
+     "6": {
+      "rate": 0.0,
+      "rule": "S.decimal_digits_fold"
+     }
+    },
+    "wsum": {
+     "0": {
+      "rate": 0.039,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.024,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.008,
+      "rule": "S.decimal_digits_wsum"
+     },
+     "3": {
+      "rate": 0.007,
+      "rule": "S.decimal_digits_wsum"
+     },
+     "4": {
+      "rate": 0.028,
+      "rule": "S.decimal_digits_wsum"
+     },
+     "5": {
+      "rate": 0.017,
+      "rule": "S.decimal_digits_wsum"
+     },
+     "6": {
+      "rate": 0.015,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "in_shape_max_overall": 0.039,
+   "level_wide_cheap": {
+    "0": {
+     "max_excess": 0.0925,
+     "per_source_max": {
+      "a3": 0.0925,
+      "a4": 0.02,
+      "battery": 0.01
+     },
+     "rule": "a3.rev_bN|F.closed"
+    },
+    "1": {
+     "max_excess": 0.045,
+     "per_source_max": {
+      "a3": 0.045,
+      "a4": 0.01,
+      "battery": 0.01
+     },
+     "rule": "a3.rev_bN|F.closed"
+    },
+    "2": {
+     "max_excess": 0.045,
+     "per_source_max": {
+      "a3": 0.045,
+      "a4": 0.003,
+      "battery": 0.0075
+     },
+     "rule": "a3.rev_bN|F.closed"
+    },
+    "3": {
+     "max_excess": 0.0625,
+     "per_source_max": {
+      "a3": 0.0625,
+      "a4": 0.003,
+      "battery": 0.0075
+     },
+     "rule": "a3.rev_bN|F.closed"
+    },
+    "4": {
+     "max_excess": 0.0725,
+     "per_source_max": {
+      "a3": 0.0725,
+      "a4": 0.01,
+      "battery": 0.0025
+     },
+     "rule": "a3.rev_bN|F.closed"
+    },
+    "5": {
+     "max_excess": 0.055,
+     "per_source_max": {
+      "a3": 0.055,
+      "a4": 0.005,
+      "battery": 0.0025
+     },
+     "rule": "a3.rev_bN|F.closed"
+    },
+    "6": {
+     "max_excess": 0.035,
+     "per_source_max": {
+      "a3": 0.035,
+      "a4": 0.005,
+      "battery": 0.003
+     },
+     "rule": "a3.rev_bN|F.closed"
+    }
+   },
+   "level_wide_max": 0.0925,
+   "lineage": "C1.digit_peel_f3",
+   "partial_trace_M_level_wide_EFF_SM": {
+    "0": 0.02,
+    "1": 0.033,
+    "2": 0.003,
+    "3": 0.0,
+    "4": 0.007,
+    "5": 0.003,
+    "6": 0.003
+   },
+   "shape_counts_by_level": {
+    "0": {
+     "fold": 255,
+     "fold_k=base": 17,
+     "wsum": 128
+    },
+    "1": {
+     "fold": 250,
+     "fold_k=base": 24,
+     "wsum": 126
+    },
+    "2": {
+     "fold": 239,
+     "fold_k=base": 32,
+     "wsum": 129
+    },
+    "3": {
+     "fold": 232,
+     "fold_k=base": 23,
+     "wsum": 145
+    },
+    "4": {
+     "fold": 227,
+     "fold_k=base": 30,
+     "wsum": 143
+    },
+    "5": {
+     "fold": 256,
+     "fold_k=base": 25,
+     "wsum": 119
+    },
+    "6": {
+     "fold": 237,
+     "fold_k=base": 31,
+     "wsum": 132
+    }
+   }
+  },
+  "C1.euclid_gcd_traced_f3": {
+   "in_shape_max_by_shape": {
+    "rsum": {
+     "0": {
+      "rate": 0.021,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.011,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.009,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.0,
+      "rule": "S.literal_y"
+     },
+     "4": {
+      "rate": 0.0,
+      "rule": "S.literal_y"
+     },
+     "5": {
+      "rate": 0.0,
+      "rule": "S.literal_y"
+     },
+     "6": {
+      "rate": 0.005,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "state": {
+     "0": {
+      "rate": 0.014,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.009,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.005,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.005,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.01,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.0,
+      "rule": "S.gcd_0"
+     },
+     "6": {
+      "rate": 0.005,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "in_shape_max_overall": 0.021,
+   "level_wide_cheap": {
+    "0": {
+     "max_excess": 0.022,
+     "per_source_max": {
+      "a3": 0.018,
+      "a4": 0.022,
+      "battery": 0.01
+     },
+     "rule": "a4.EFF_S"
+    },
+    "1": {
+     "max_excess": 0.01,
+     "per_source_max": {
+      "a3": 0.01,
+      "a4": 0.01,
+      "battery": 0.005
+     },
+     "rule": "a4.MFsh"
+    },
+    "2": {
+     "max_excess": 0.007,
+     "per_source_max": {
+      "a3": 0.007,
+      "a4": 0.007,
+      "battery": 0.0
+     },
+     "rule": "a4.MFsh"
+    },
+    "3": {
+     "max_excess": 0.007,
+     "per_source_max": {
+      "a3": 0.003,
+      "a4": 0.003,
+      "battery": 0.007
+     },
+     "rule": "battery.MF_cv"
+    },
+    "4": {
+     "max_excess": 0.005,
+     "per_source_max": {
+      "a3": 0.005,
+      "a4": 0.005,
+      "battery": 0.0
+     },
+     "rule": "a4.MFsh"
+    },
+    "5": {
+     "max_excess": 0.0,
+     "per_source_max": {
+      "a3": 0.0,
+      "a4": 0.0,
+      "battery": 0.0
+     },
+     "rule": "battery.state|S.state_one_more_round"
+    },
+    "6": {
+     "max_excess": 0.01,
+     "per_source_max": {
+      "a3": 0.005,
+      "a4": 0.01,
+      "battery": 0.003
+     },
+     "rule": "a4.EFF_S"
+    }
+   },
+   "level_wide_max": 0.022,
+   "lineage": "C1.euclid_gcd_traced_f3",
+   "partial_trace_M_level_wide_EFF_SM": {
+    "0": 0.022,
+    "1": 0.01,
+    "2": 0.003,
+    "3": 0.003,
+    "4": 0.003,
+    "5": 0.0,
+    "6": 0.01
+   },
+   "shape_counts_by_level": {
+    "0": {
+     "rsum": 190,
+     "state": 210
+    },
+    "1": {
+     "rsum": 184,
+     "state": 216
+    },
+    "2": {
+     "rsum": 212,
+     "state": 188
+    },
+    "3": {
+     "rsum": 188,
+     "state": 212
+    },
+    "4": {
+     "rsum": 200,
+     "state": 200
+    },
+    "5": {
+     "rsum": 191,
+     "state": 209
+    },
+    "6": {
+     "rsum": 193,
+     "state": 207
+    }
+   }
+  },
+  "C1.fast_power_f3[fix-3 original, all shapes]": {
+   "in_shape_max_by_shape": {
+    "base": {
+     "0": {
+      "rate": 0.029,
+      "rule": "S.literal_base"
+     },
+     "1": {
+      "rate": 0.045,
+      "rule": "S.literal_base"
+     },
+     "2": {
+      "rate": 0.022,
+      "rule": "S.literal_base"
+     },
+     "3": {
+      "rate": 0.083,
+      "rule": "S.literal_base"
+     },
+     "4": {
+      "rate": 0.007,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.024,
+      "rule": "S.literal_base"
+     },
+     "6": {
+      "rate": 0.008,
+      "rule": "S.literal_base"
+     }
+    },
+    "bsum": {
+     "0": {
+      "rate": 0.016,
+      "rule": "F.pow_bsum"
+     },
+     "1": {
+      "rate": 0.032,
+      "rule": "F.pow_bsum"
+     },
+     "2": {
+      "rate": 0.007,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.007,
+      "rule": "F.pow_bsum"
+     },
+     "5": {
+      "rate": 0.007,
+      "rule": "F.pow_bsum"
+     },
+     "6": {
+      "rate": 0.007,
+      "rule": "F.pow_bsum"
+     }
+    },
+    "res": {
+     "0": {
+      "rate": 0.043,
+      "rule": "F.pow_res"
+     },
+     "1": {
+      "rate": 0.043,
+      "rule": "F.pow_res"
+     },
+     "2": {
+      "rate": 0.024,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.041,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.038,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.05,
+      "rule": "F.pow_res"
+     },
+     "6": {
+      "rate": 0.023,
+      "rule": "F.pow_res"
+     }
+    }
+   },
+   "in_shape_max_overall": 0.083,
+   "level_wide_cheap": {
+    "0": {
+     "max_excess": 0.02,
+     "per_source_max": {
+      "a3": 0.0,
+      "a4": 0.02,
+      "battery": 0.0
+     },
+     "rule": "a4.closed_forms_best_per_shape_summed"
+    },
+    "1": {
+     "max_excess": 0.028,
+     "per_source_max": {
+      "a3": 0.0,
+      "a4": 0.028,
+      "battery": 0.0
+     },
+     "rule": "a4.closed_forms_best_per_shape_summed"
+    },
+    "2": {
+     "max_excess": 0.013,
+     "per_source_max": {
+      "a3": 0.0,
+      "a4": 0.013,
+      "battery": 0.0
+     },
+     "rule": "a4.MFsh"
+    },
+    "3": {
+     "max_excess": 0.043,
+     "per_source_max": {
+      "a3": 0.0,
+      "a4": 0.043,
+      "battery": 0.0
+     },
+     "rule": "a4.EFF_S"
+    },
+    "4": {
+     "max_excess": 0.013,
+     "per_source_max": {
+      "a3": 0.0,
+      "a4": 0.013,
+      "battery": 0.0
+     },
+     "rule": "a4.MFsh"
+    },
+    "5": {
+     "max_excess": 0.021,
+     "per_source_max": {
+      "a3": 0.0,
+      "a4": 0.021,
+      "battery": 0.0
+     },
+     "rule": "a4.closed_forms_best_per_shape_summed"
+    },
+    "6": {
+     "max_excess": 0.01,
+     "per_source_max": {
+      "a3": 0.0,
+      "a4": 0.01,
+      "battery": 0.0
+     },
+     "rule": "a4.closed_forms_best_per_shape_summed"
+    }
+   },
+   "level_wide_max": 0.043,
+   "lineage": "C1.fast_power_f3",
+   "partial_trace_M_level_wide_EFF_SM": {
+    "0": 0.015,
+    "1": 0.02,
+    "2": 0.013,
+    "3": 0.043,
+    "4": 0.007,
+    "5": 0.007,
+    "6": 0.005
+   },
+   "shape_counts_by_level": {
+    "0": {
+     "base": 136,
+     "bsum": 126,
+     "res": 138
+    },
+    "1": {
+     "base": 134,
+     "bsum": 126,
+     "res": 140
+    },
+    "2": {
+     "base": 138,
+     "bsum": 136,
+     "res": 126
+    },
+    "3": {
+     "base": 132,
+     "bsum": 123,
+     "res": 145
+    },
+    "4": {
+     "base": 152,
+     "bsum": 142,
+     "res": 106
+    },
+    "5": {
+     "base": 123,
+     "bsum": 137,
+     "res": 140
+    },
+    "6": {
+     "base": 128,
+     "bsum": 139,
+     "res": 133
+    }
+   }
+  },
+  "C1.fast_power_f4": {
+   "in_shape_max_by_shape": {
+    "res": {
+     "0": {
+      "rate": 0.025,
+      "rule": "F.pow_res"
+     },
+     "1": {
+      "rate": 0.04,
+      "rule": "F.pow_res"
+     },
+     "2": {
+      "rate": 0.048,
+      "rule": "F.pow_res"
+     },
+     "3": {
+      "rate": 0.052,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.033,
+      "rule": "F.pow_res"
+     },
+     "5": {
+      "rate": 0.058,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.022,
+      "rule": "F.pow_res"
+     }
+    }
+   },
+   "in_shape_max_overall": 0.058,
+   "level_wide_cheap": {
+    "0": {
+     "max_excess": 0.0325,
+     "per_source_max": {
+      "a3": 0.0325,
+      "a4": 0.025,
+      "battery": 0.03
+     },
+     "rule": "a3.res|F.base_final"
+    },
+    "1": {
+     "max_excess": 0.04,
+     "per_source_max": {
+      "a3": 0.04,
+      "a4": 0.04,
+      "battery": 0.03
+     },
+     "rule": "a4.res|F.pow_res"
+    },
+    "2": {
+     "max_excess": 0.048,
+     "per_source_max": {
+      "a3": 0.0475,
+      "a4": 0.048,
+      "battery": 0.0225
+     },
+     "rule": "a4.res|F.pow_res"
+    },
+    "3": {
+     "max_excess": 0.052,
+     "per_source_max": {
+      "a3": 0.052,
+      "a4": 0.052,
+      "battery": 0.048
+     },
+     "rule": "a4.MFsh"
+    },
+    "4": {
+     "max_excess": 0.045,
+     "per_source_max": {
+      "a3": 0.045,
+      "a4": 0.033,
+      "battery": 0.035
+     },
+     "rule": "a3.res|F.base_final"
+    },
+    "5": {
+     "max_excess": 0.058,
+     "per_source_max": {
+      "a3": 0.058,
+      "a4": 0.058,
+      "battery": 0.052
+     },
+     "rule": "a4.MFsh"
+    },
+    "6": {
+     "max_excess": 0.045,
+     "per_source_max": {
+      "a3": 0.033,
+      "a4": 0.022,
+      "battery": 0.045
+     },
+     "rule": "battery.MF_cv"
+    }
+   },
+   "level_wide_max": 0.058,
+   "lineage": "C1.fast_power_f4",
+   "partial_trace_M_level_wide_EFF_SM": {
+    "0": 0.015,
+    "1": 0.033,
+    "2": 0.015,
+    "3": 0.052,
+    "4": 0.015,
+    "5": 0.058,
+    "6": 0.01
+   },
+   "shape_counts_by_level": {
+    "0": {
+     "res": 400
+    },
+    "1": {
+     "res": 400
+    },
+    "2": {
+     "res": 400
+    },
+    "3": {
+     "res": 400
+    },
+    "4": {
+     "res": 400
+    },
+    "5": {
+     "res": 400
+    },
+    "6": {
+     "res": 400
+    }
+   }
+  },
+  "C1.fib_like_f3": {
+   "in_shape_max_by_shape": {
+    "mod": {
+     "0": {
+      "rate": 0.015,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.041,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.024,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.029,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.025,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.02,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.036,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "plain": {
+     "0": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.005,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "in_shape_max_overall": 0.041,
+   "level_wide_cheap": {
+    "0": {
+     "max_excess": 0.1075,
+     "per_source_max": {
+      "a3": 0.018,
+      "a4": 0.01,
+      "battery": 0.1075
+     },
+     "rule": "battery.all|S.plain_fibonacci_a"
+    },
+    "1": {
+     "max_excess": 0.0875,
+     "per_source_max": {
+      "a3": 0.02,
+      "a4": 0.025,
+      "battery": 0.0875
+     },
+     "rule": "battery.all|S.plain_fibonacci_b"
+    },
+    "2": {
+     "max_excess": 0.0575,
+     "per_source_max": {
+      "a3": 0.045,
+      "a4": 0.045,
+      "battery": 0.0575
+     },
+     "rule": "battery.all|S.plain_fibonacci_b"
+    },
+    "3": {
+     "max_excess": 0.0775,
+     "per_source_max": {
+      "a3": 0.022,
+      "a4": 0.025,
+      "battery": 0.0775
+     },
+     "rule": "battery.all|S.plain_fibonacci_a"
+    },
+    "4": {
+     "max_excess": 0.0625,
+     "per_source_max": {
+      "a3": 0.043,
+      "a4": 0.05,
+      "battery": 0.0625
+     },
+     "rule": "battery.all|S.plain_fibonacci_a"
+    },
+    "5": {
+     "max_excess": 0.07,
+     "per_source_max": {
+      "a3": 0.018,
+      "a4": 0.01,
+      "battery": 0.07
+     },
+     "rule": "battery.all|S.plain_fibonacci_b"
+    },
+    "6": {
+     "max_excess": 0.0825,
+     "per_source_max": {
+      "a3": 0.033,
+      "a4": 0.033,
+      "battery": 0.0825
+     },
+     "rule": "battery.all|S.plain_fibonacci_b"
+    }
+   },
+   "level_wide_max": 0.1075,
+   "lineage": "C1.fib_like_f3",
+   "partial_trace_M_level_wide_EFF_SM": {
+    "0": 0.102,
+    "1": 0.025,
+    "2": 0.045,
+    "3": 0.025,
+    "4": 0.05,
+    "5": 0.01,
+    "6": 0.033
+   },
+   "shape_counts_by_level": {
+    "0": {
+     "mod": 195,
+     "plain": 205
+    },
+    "1": {
+     "mod": 197,
+     "plain": 203
+    },
+    "2": {
+     "mod": 211,
+     "plain": 189
+    },
+    "3": {
+     "mod": 210,
+     "plain": 190
+    },
+    "4": {
+     "mod": 203,
+     "plain": 197
+    },
+    "5": {
+     "mod": 196,
+     "plain": 204
+    },
+    "6": {
+     "mod": 197,
+     "plain": 203
+    }
+   }
+  },
+  "C1.fib_shapes_recursive_f3": {
+   "in_shape_max_by_shape": {
+    "tri": {
+     "0": {
+      "rate": 0.01,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.005,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "two": {
+     "0": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "in_shape_max_overall": 0.01,
+   "level_wide_cheap": {
+    "0": {
+     "max_excess": 0.013,
+     "per_source_max": {
+      "a3": 0.005,
+      "a4": 0.005,
+      "battery": 0.013
+     },
+     "rule": "battery.BEST_generic_cv"
+    },
+    "1": {
+     "max_excess": 0.003,
+     "per_source_max": {
+      "a3": 0.0,
+      "a4": 0.0,
+      "battery": 0.003
+     },
+     "rule": "battery.MF_cv"
+    },
+    "2": {
+     "max_excess": 0.003,
+     "per_source_max": {
+      "a3": 0.003,
+      "a4": 0.003,
+      "battery": 0.003
+     },
+     "rule": "battery.BEST_generic_cv"
+    },
+    "3": {
+     "max_excess": 0.003,
+     "per_source_max": {
+      "a3": 0.0,
+      "a4": 0.0,
+      "battery": 0.003
+     },
+     "rule": "battery.MF_cv"
+    },
+    "4": {
+     "max_excess": 0.003,
+     "per_source_max": {
+      "a3": 0.003,
+      "a4": 0.003,
+      "battery": 0.003
+     },
+     "rule": "battery.MF_cv"
+    },
+    "5": {
+     "max_excess": 0.0,
+     "per_source_max": {
+      "a3": 0.0,
+      "a4": 0.0,
+      "battery": 0.0
+     },
+     "rule": "battery.all|S.no_mod"
+    },
+    "6": {
+     "max_excess": 0.0,
+     "per_source_max": {
+      "a3": 0.0,
+      "a4": 0.0,
+      "battery": 0.0
+     },
+     "rule": "battery.all|S.no_mod"
+    }
+   },
+   "level_wide_max": 0.013,
+   "lineage": "C1.fib_shapes_recursive_f3",
+   "partial_trace_M_level_wide_EFF_SM": {
+    "0": 0.005,
+    "1": 0.0,
+    "2": 0.003,
+    "3": 0.0,
+    "4": 0.0,
+    "5": 0.0,
+    "6": 0.0
+   },
+   "shape_counts_by_level": {
+    "0": {
+     "tri": 202,
+     "two": 198
+    },
+    "1": {
+     "tri": 212,
+     "two": 188
+    },
+    "2": {
+     "tri": 187,
+     "two": 213
+    },
+    "3": {
+     "tri": 191,
+     "two": 209
+    },
+    "4": {
+     "tri": 198,
+     "two": 202
+    },
+    "5": {
+     "tri": 201,
+     "two": 199
+    },
+    "6": {
+     "tri": 183,
+     "two": 217
+    }
+   }
+  },
+  "C1.func_branch": {
+   "in_shape_max_by_shape": {
+    "calls2": {
+     "0": {
+      "rate": 0.015,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.037,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "calls2_even": {
+     "2": {
+      "rate": 0.007,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "calls3_even": {
+     "3": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.005,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.007,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "in_shape_max_overall": 0.037,
+   "level_wide_cheap": {
+    "0": {
+     "max_excess": 0.062,
+     "per_source_max": {
+      "a3": 0.028,
+      "a4": 0.015,
+      "battery": 0.062
+     },
+     "rule": "battery.BEST_generic_cv"
+    },
+    "1": {
+     "max_excess": 0.07,
+     "per_source_max": {
+      "a3": 0.037,
+      "a4": 0.037,
+      "battery": 0.07
+     },
+     "rule": "battery.BEST_generic_cv"
+    },
+    "2": {
+     "max_excess": 0.018,
+     "per_source_max": {
+      "a3": 0.013,
+      "a4": 0.007,
+      "battery": 0.018
+     },
+     "rule": "battery.BEST_generic_cv"
+    },
+    "3": {
+     "max_excess": 0.02,
+     "per_source_max": {
+      "a3": 0.02,
+      "a4": 0.0,
+      "battery": 0.01
+     },
+     "rule": "a3.BEST_generic_cv"
+    },
+    "4": {
+     "max_excess": 0.01,
+     "per_source_max": {
+      "a3": 0.01,
+      "a4": 0.007,
+      "battery": 0.005
+     },
+     "rule": "a3.BEST_generic_cv"
+    },
+    "5": {
+     "max_excess": 0.02,
+     "per_source_max": {
+      "a3": 0.02,
+      "a4": 0.007,
+      "battery": 0.013
+     },
+     "rule": "a3.BEST_generic_cv"
+    },
+    "6": {
+     "max_excess": 0.01,
+     "per_source_max": {
+      "a3": 0.01,
+      "a4": 0.0,
+      "battery": 0.007
+     },
+     "rule": "a3.BEST_generic_cv"
+    }
+   },
+   "level_wide_max": 0.07,
+   "lineage": "C1.func_branch",
+   "partial_trace_M_level_wide_EFF_SM": {
+    "0": 0.007,
+    "1": 0.037,
+    "2": 0.637,
+    "3": 0.517,
+    "4": 0.497,
+    "5": 0.497,
+    "6": 0.492
+   },
+   "shape_counts_by_level": {
+    "0": {
+     "calls2": 400
+    },
+    "1": {
+     "calls2": 400
+    },
+    "2": {
+     "calls2_even": 400
+    },
+    "3": {
+     "calls3_even": 400
+    },
+    "4": {
+     "calls3_even": 400
+    },
+    "5": {
+     "calls3_even": 400
+    },
+    "6": {
+     "calls3_even": 400
+    }
+   }
+  },
+  "C1.func_compose_f3": {
+   "in_shape_max_by_shape": {
+    "g_one": {
+     "0": {
+      "rate": 0.007,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.005,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "g_two": {
+     "2": {
+      "rate": 0.035,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "h_one": {
+     "3": {
+      "rate": 0.058,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.088,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.077,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.116,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "h_two": {
+     "3": {
+      "rate": 0.105,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.087,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.073,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.098,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "in_shape_max_overall": 0.116,
+   "level_wide_cheap": {
+    "0": {
+     "max_excess": 0.022,
+     "per_source_max": {
+      "a3": 0.007,
+      "a4": 0.007,
+      "battery": 0.022
+     },
+     "rule": "battery.BEST_generic_cv"
+    },
+    "1": {
+     "max_excess": 0.007,
+     "per_source_max": {
+      "a3": 0.005,
+      "a4": 0.005,
+      "battery": 0.007
+     },
+     "rule": "battery.BEST_generic_cv"
+    },
+    "2": {
+     "max_excess": 0.02,
+     "per_source_max": {
+      "a3": 0.02,
+      "a4": 0.02,
+      "battery": 0.005
+     },
+     "rule": "a4.MF"
+    },
+    "3": {
+     "max_excess": 0.092,
+     "per_source_max": {
+      "a3": 0.092,
+      "a4": 0.092,
+      "battery": 0.08
+     },
+     "rule": "a4.MF"
+    },
+    "4": {
+     "max_excess": 0.087,
+     "per_source_max": {
+      "a3": 0.083,
+      "a4": 0.087,
+      "battery": 0.062
+     },
+     "rule": "a4.MFsh"
+    },
+    "5": {
+     "max_excess": 0.09,
+     "per_source_max": {
+      "a3": 0.083,
+      "a4": 0.083,
+      "battery": 0.09
+     },
+     "rule": "battery.MF_cv"
+    },
+    "6": {
+     "max_excess": 0.107,
+     "per_source_max": {
+      "a3": 0.083,
+      "a4": 0.107,
+      "battery": 0.09
+     },
+     "rule": "a4.MFsh"
+    }
+   },
+   "level_wide_max": 0.107,
+   "lineage": "C1.func_compose_f3",
+   "partial_trace_M_level_wide_EFF_SM": {
+    "0": 0.007,
+    "1": 0.0,
+    "2": 0.018,
+    "3": 0.08,
+    "4": 0.087,
+    "5": 0.068,
+    "6": 0.085
+   },
+   "shape_counts_by_level": {
+    "0": {
+     "g_one": 400
+    },
+    "1": {
+     "g_one": 400
+    },
+    "2": {
+     "g_one": 201,
+     "g_two": 199
+    },
+    "3": {
+     "h_one": 190,
+     "h_two": 210
+    },
+    "4": {
+     "h_one": 194,
+     "h_two": 206
+    },
+    "5": {
+     "h_one": 208,
+     "h_two": 192
+    },
+    "6": {
+     "h_one": 207,
+     "h_two": 193
+    }
+   }
+  },
+  "C1.grid_path_table": {
+   "in_shape_max_by_shape": {
+    "count": {
+     "0": {
+      "rate": 0.433,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.26,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.157,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.096,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.082,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.048,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.037,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "max": {
+     "0": {
+      "rate": 0.855,
+      "rule": "S.greedy_path"
+     },
+     "1": {
+      "rate": 0.829,
+      "rule": "S.greedy_path"
+     },
+     "2": {
+      "rate": 0.671,
+      "rule": "S.greedy_path"
+     },
+     "3": {
+      "rate": 0.665,
+      "rule": "S.greedy_path"
+     },
+     "4": {
+      "rate": 0.482,
+      "rule": "S.greedy_path"
+     },
+     "5": {
+      "rate": 0.545,
+      "rule": "S.greedy_path"
+     },
+     "6": {
+      "rate": 0.438,
+      "rule": "S.greedy_path"
+     }
+    },
+    "min": {
+     "0": {
+      "rate": 0.915,
+      "rule": "S.greedy_path"
+     },
+     "1": {
+      "rate": 0.814,
+      "rule": "S.greedy_path"
+     },
+     "2": {
+      "rate": 0.722,
+      "rule": "S.greedy_path"
+     },
+     "3": {
+      "rate": 0.638,
+      "rule": "S.greedy_path"
+     },
+     "4": {
+      "rate": 0.55,
+      "rule": "S.greedy_path"
+     },
+     "5": {
+      "rate": 0.496,
+      "rule": "S.greedy_path"
+     },
+     "6": {
+      "rate": 0.336,
+      "rule": "S.greedy_path"
+     }
+    }
+   },
+   "in_shape_max_overall": 0.915,
+   "level_wide_cheap": {
+    "0": {
+     "max_excess": 0.775,
+     "per_source_max": {
+      "a3": 0.177,
+      "a4": 0.775,
+      "battery": 0.203
+     },
+     "rule": "a4.EFF_S"
+    },
+    "1": {
+     "max_excess": 0.637,
+     "per_source_max": {
+      "a3": 0.117,
+      "a4": 0.637,
+      "battery": 0.085
+     },
+     "rule": "a4.EFF_S"
+    },
+    "2": {
+     "max_excess": 0.583,
+     "per_source_max": {
+      "a3": 0.107,
+      "a4": 0.583,
+      "battery": 0.045
+     },
+     "rule": "a4.EFF_S"
+    },
+    "3": {
+     "max_excess": 0.505,
+     "per_source_max": {
+      "a3": 0.022,
+      "a4": 0.505,
+      "battery": 0.043
+     },
+     "rule": "a4.EFF_S"
+    },
+    "4": {
+     "max_excess": 0.39,
+     "per_source_max": {
+      "a3": 0.028,
+      "a4": 0.39,
+      "battery": 0.048
+     },
+     "rule": "a4.EFF_S"
+    },
+    "5": {
+     "max_excess": 0.375,
+     "per_source_max": {
+      "a3": 0.028,
+      "a4": 0.375,
+      "battery": 0.028
+     },
+     "rule": "a4.EFF_S"
+    },
+    "6": {
+     "max_excess": 0.295,
+     "per_source_max": {
+      "a3": 0.022,
+      "a4": 0.295,
+      "battery": 0.055
+     },
+     "rule": "a4.EFF_S"
+    }
+   },
+   "level_wide_max": 0.775,
+   "lineage": "C1.grid_path_table",
+   "partial_trace_M_level_wide_EFF_SM": {
+    "0": 0.775,
+    "1": 0.637,
+    "2": 0.583,
+    "3": 0.505,
+    "4": 0.39,
+    "5": 0.375,
+    "6": 0.295
+   },
+   "shape_counts_by_level": {
+    "0": {
+     "count": 120,
+     "max": 138,
+     "min": 142
+    },
+    "1": {
+     "count": 131,
+     "max": 129,
+     "min": 140
+    },
+    "2": {
+     "count": 115,
+     "max": 152,
+     "min": 133
+    },
+    "3": {
+     "count": 104,
+     "max": 158,
+     "min": 138
+    },
+    "4": {
+     "count": 110,
+     "max": 141,
+     "min": 149
+    },
+    "5": {
+     "count": 124,
+     "max": 143,
+     "min": 133
+    },
+    "6": {
+     "count": 107,
+     "max": 153,
+     "min": 140
+    }
+   }
+  },
+  "C1.list_build_f3": {
+   "in_shape_max_by_shape": {
+    "list": {
+     "0": {
+      "rate": 0.014,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "list_filt": {
+     "0": {
+      "rate": 0.037,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "sum": {
+     "0": {
+      "rate": 0.024,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.024,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.074,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.011,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.08,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.012,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "sum_filt": {
+     "0": {
+      "rate": 0.054,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.065,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.02,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.04,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.019,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.106,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "wsum": {
+     "0": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.012,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.014,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.025,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.039,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "wsum_filt": {
+     "0": {
+      "rate": 0.024,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.02,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.02,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.021,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.019,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "in_shape_max_overall": 0.106,
+   "level_wide_cheap": {
+    "0": {
+     "max_excess": 0.03,
+     "per_source_max": {
+      "a3": 0.02,
+      "a4": 0.022,
+      "battery": 0.03
+     },
+     "rule": "battery.BEST_generic_cv"
+    },
+    "1": {
+     "max_excess": 0.035,
+     "per_source_max": {
+      "a3": 0.02,
+      "a4": 0.02,
+      "battery": 0.035
+     },
+     "rule": "battery.sum|S.n_times_half"
+    },
+    "2": {
+     "max_excess": 0.05,
+     "per_source_max": {
+      "a3": 0.007,
+      "a4": 0.025,
+      "battery": 0.05
+     },
+     "rule": "battery.BEST_generic_cv"
+    },
+    "3": {
+     "max_excess": 0.043,
+     "per_source_max": {
+      "a3": 0.02,
+      "a4": 0.013,
+      "battery": 0.043
+     },
+     "rule": "battery.BEST_generic_cv"
+    },
+    "4": {
+     "max_excess": 0.0225,
+     "per_source_max": {
+      "a3": 0.013,
+      "a4": 0.007,
+      "battery": 0.0225
+     },
+     "rule": "battery.sum|S.n_times_half"
+    },
+    "5": {
+     "max_excess": 0.04,
+     "per_source_max": {
+      "a3": 0.022,
+      "a4": 0.04,
+      "battery": 0.04
+     },
+     "rule": "battery.sum|S.n_times_half"
+    },
+    "6": {
+     "max_excess": 0.02,
+     "per_source_max": {
+      "a3": 0.02,
+      "a4": 0.007,
+      "battery": 0.015
+     },
+     "rule": "a3.BEST_generic_cv"
+    }
+   },
+   "level_wide_max": 0.05,
+   "lineage": "C1.list_build_f3",
+   "partial_trace_M_level_wide_EFF_SM": {
+    "0": 0.028,
+    "1": 0.022,
+    "2": 0.025,
+    "3": 0.01,
+    "4": 0.003,
+    "5": 0.033,
+    "6": 0.007
+   },
+   "shape_counts_by_level": {
+    "0": {
+     "list": 74,
+     "list_filt": 54,
+     "sum": 84,
+     "sum_filt": 56,
+     "wsum": 91,
+     "wsum_filt": 41
+    },
+    "1": {
+     "list": 78,
+     "list_filt": 60,
+     "sum": 84,
+     "sum_filt": 62,
+     "wsum": 66,
+     "wsum_filt": 50
+    },
+    "2": {
+     "list": 95,
+     "list_filt": 50,
+     "sum": 68,
+     "sum_filt": 51,
+     "wsum": 86,
+     "wsum_filt": 50
+    },
+    "3": {
+     "list": 90,
+     "list_filt": 54,
+     "sum": 88,
+     "sum_filt": 50,
+     "wsum": 70,
+     "wsum_filt": 48
+    },
+    "4": {
+     "list": 76,
+     "list_filt": 49,
+     "sum": 99,
+     "sum_filt": 54,
+     "wsum": 79,
+     "wsum_filt": 43
+    },
+    "5": {
+     "list": 82,
+     "list_filt": 55,
+     "sum": 87,
+     "sum_filt": 47,
+     "wsum": 76,
+     "wsum_filt": 53
+    },
+    "6": {
+     "list": 86,
+     "list_filt": 47,
+     "sum": 82,
+     "sum_filt": 61,
+     "wsum": 76,
+     "wsum_filt": 48
+    }
+   }
+  },
+  "C1.loop_sum": {
+   "in_shape_max_by_shape": {
+    "else": {
+     "2": {
+      "rate": 1.0,
+      "rule": "F.arith_series"
+     },
+     "3": {
+      "rate": 1.0,
+      "rule": "F.arith_series"
+     },
+     "4": {
+      "rate": 1.0,
+      "rule": "F.arith_series"
+     },
+     "5": {
+      "rate": 1.0,
+      "rule": "F.arith_series"
+     },
+     "6": {
+      "rate": 1.0,
+      "rule": "F.arith_series"
+     }
+    },
+    "plain": {
+     "0": {
+      "rate": 1.0,
+      "rule": "F.arith_series"
+     },
+     "1": {
+      "rate": 1.0,
+      "rule": "F.arith_series"
+     }
+    }
+   },
+   "in_shape_max_overall": 1.0,
+   "level_wide_cheap": {
+    "0": {
+     "max_excess": 1.0,
+     "per_source_max": {
+      "a3": 0.11,
+      "a4": 1.0,
+      "battery": 0.077
+     },
+     "rule": "a4.plain|F.arith_series"
+    },
+    "1": {
+     "max_excess": 1.0,
+     "per_source_max": {
+      "a3": 0.068,
+      "a4": 1.0,
+      "battery": 0.077
+     },
+     "rule": "a4.plain|F.arith_series"
+    },
+    "2": {
+     "max_excess": 1.0,
+     "per_source_max": {
+      "a3": 0.028,
+      "a4": 1.0,
+      "battery": 0.04
+     },
+     "rule": "a4.else|F.arith_series"
+    },
+    "3": {
+     "max_excess": 1.0,
+     "per_source_max": {
+      "a3": 0.018,
+      "a4": 1.0,
+      "battery": 0.03
+     },
+     "rule": "a4.else|F.arith_series"
+    },
+    "4": {
+     "max_excess": 1.0,
+     "per_source_max": {
+      "a3": 0.028,
+      "a4": 1.0,
+      "battery": 0.037
+     },
+     "rule": "a4.else|F.arith_series"
+    },
+    "5": {
+     "max_excess": 1.0,
+     "per_source_max": {
+      "a3": 0.013,
+      "a4": 1.0,
+      "battery": 0.022
+     },
+     "rule": "a4.else|F.arith_series"
+    },
+    "6": {
+     "max_excess": 1.0,
+     "per_source_max": {
+      "a3": 0.003,
+      "a4": 1.0,
+      "battery": 0.035
+     },
+     "rule": "a4.else|F.arith_series"
+    }
+   },
+   "level_wide_max": 1.0,
+   "lineage": "C1.loop_sum",
+   "partial_trace_M_level_wide_EFF_SM": {
+    "0": 0.11,
+    "1": 0.068,
+    "2": 0.028,
+    "3": 0.018,
+    "4": 0.028,
+    "5": 0.005,
+    "6": 0.003
+   },
+   "shape_counts_by_level": {
+    "0": {
+     "plain": 400
+    },
+    "1": {
+     "plain": 400
+    },
+    "2": {
+     "else": 400
+    },
+    "3": {
+     "else": 400
+    },
+    "4": {
+     "else": 400
+    },
+    "5": {
+     "else": 400
+    },
+    "6": {
+     "else": 400
+    }
+   }
+  },
+  "C1.majority_vote_scan_f3": {
+   "in_shape_max_by_shape": {
+    "candsum": {
+     "0": {
+      "rate": 0.178,
+      "rule": "S.prefix_mode_sum"
+     },
+     "1": {
+      "rate": 0.121,
+      "rule": "S.prefix_mode_sum"
+     },
+     "2": {
+      "rate": 0.073,
+      "rule": "S.sum_vals"
+     },
+     "3": {
+      "rate": 0.054,
+      "rule": "S.sum_vals"
+     },
+     "4": {
+      "rate": 0.043,
+      "rule": "S.prefix_mode_sum"
+     },
+     "5": {
+      "rate": 0.062,
+      "rule": "S.prefix_mode_sum"
+     },
+     "6": {
+      "rate": 0.049,
+      "rule": "S.prefix_mode_sum"
+     }
+    },
+    "cntsum": {
+     "0": {
+      "rate": 0.213,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.174,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.114,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.146,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.133,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.077,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.096,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "repl": {
+     "0": {
+      "rate": 0.089,
+      "rule": "S.mode"
+     },
+     "1": {
+      "rate": 0.118,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.085,
+      "rule": "S.sum_distinct"
+     },
+     "3": {
+      "rate": 0.066,
+      "rule": "S.sum_distinct"
+     },
+     "4": {
+      "rate": 0.088,
+      "rule": "S.sum_distinct"
+     },
+     "5": {
+      "rate": 0.08,
+      "rule": "S.sum_distinct"
+     },
+     "6": {
+      "rate": 0.057,
+      "rule": "S.sum_distinct"
+     }
+    }
+   },
+   "in_shape_max_overall": 0.213,
+   "level_wide_cheap": {
+    "0": {
+     "max_excess": 0.145,
+     "per_source_max": {
+      "a3": 0.083,
+      "a4": 0.145,
+      "battery": 0.145
+     },
+     "rule": "battery.MF_cv"
+    },
+    "1": {
+     "max_excess": 0.115,
+     "per_source_max": {
+      "a3": 0.0625,
+      "a4": 0.115,
+      "battery": 0.075
+     },
+     "rule": "a4.EFF_S"
+    },
+    "2": {
+     "max_excess": 0.068,
+     "per_source_max": {
+      "a3": 0.055,
+      "a4": 0.068,
+      "battery": 0.062
+     },
+     "rule": "a4.MFsh"
+    },
+    "3": {
+     "max_excess": 0.085,
+     "per_source_max": {
+      "a3": 0.065,
+      "a4": 0.085,
+      "battery": 0.062
+     },
+     "rule": "a4.MFsh"
+    },
+    "4": {
+     "max_excess": 0.095,
+     "per_source_max": {
+      "a3": 0.065,
+      "a4": 0.095,
+      "battery": 0.033
+     },
+     "rule": "a4.EFF_S"
+    },
+    "5": {
+     "max_excess": 0.055,
+     "per_source_max": {
+      "a3": 0.04,
+      "a4": 0.045,
+      "battery": 0.055
+     },
+     "rule": "battery.MF_cv"
+    },
+    "6": {
+     "max_excess": 0.055,
+     "per_source_max": {
+      "a3": 0.0325,
+      "a4": 0.055,
+      "battery": 0.055
+     },
+     "rule": "battery.MF_cv"
+    }
+   },
+   "level_wide_max": 0.145,
+   "lineage": "C1.majority_vote_scan_f3",
+   "partial_trace_M_level_wide_EFF_SM": {
+    "0": 0.145,
+    "1": 0.115,
+    "2": 0.065,
+    "3": 0.085,
+    "4": 0.095,
+    "5": 0.045,
+    "6": 0.055
+   },
+   "shape_counts_by_level": {
+    "0": {
+     "candsum": 129,
+     "cntsum": 136,
+     "repl": 135
+    },
+    "1": {
+     "candsum": 132,
+     "cntsum": 115,
+     "repl": 153
+    },
+    "2": {
+     "candsum": 150,
+     "cntsum": 132,
+     "repl": 118
+    },
+    "3": {
+     "candsum": 112,
+     "cntsum": 151,
+     "repl": 137
+    },
+    "4": {
+     "candsum": 117,
+     "cntsum": 135,
+     "repl": 148
+    },
+    "5": {
+     "candsum": 145,
+     "cntsum": 142,
+     "repl": 113
+    },
+    "6": {
+     "candsum": 142,
+     "cntsum": 135,
+     "repl": 123
+    }
+   }
+  },
+  "C1.merge_two_sorted_f3": {
+   "in_shape_max_by_shape": {
+    "diffsum": {
+     "0": {
+      "rate": 0.109,
+      "rule": "S.zero"
+     },
+     "1": {
+      "rate": 0.084,
+      "rule": "S.zero"
+     },
+     "2": {
+      "rate": 0.068,
+      "rule": "S.zero"
+     },
+     "3": {
+      "rate": 0.065,
+      "rule": "S.zero"
+     },
+     "4": {
+      "rate": 0.052,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.048,
+      "rule": "S.zero"
+     },
+     "6": {
+      "rate": 0.035,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "maxsum": {
+     "0": {
+      "rate": 0.136,
+      "rule": "S.sum_all"
+     },
+     "1": {
+      "rate": 0.086,
+      "rule": "S.sum_all"
+     },
+     "2": {
+      "rate": 0.052,
+      "rule": "S.sum_merged_but_last"
+     },
+     "3": {
+      "rate": 0.035,
+      "rule": "S.sum_all"
+     },
+     "4": {
+      "rate": 0.027,
+      "rule": "S.sum_all"
+     },
+     "5": {
+      "rate": 0.009,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.02,
+      "rule": "S.sum_all"
+     }
+    }
+   },
+   "in_shape_max_overall": 0.136,
+   "level_wide_cheap": {
+    "0": {
+     "max_excess": 0.105,
+     "per_source_max": {
+      "a3": 0.05,
+      "a4": 0.105,
+      "battery": 0.035
+     },
+     "rule": "a4.EFF_S"
+    },
+    "1": {
+     "max_excess": 0.048,
+     "per_source_max": {
+      "a3": 0.035,
+      "a4": 0.048,
+      "battery": 0.0375
+     },
+     "rule": "a4.MFsh"
+    },
+    "2": {
+     "max_excess": 0.045,
+     "per_source_max": {
+      "a3": 0.02,
+      "a4": 0.045,
+      "battery": 0.0375
+     },
+     "rule": "a4.MFsh"
+    },
+    "3": {
+     "max_excess": 0.035,
+     "per_source_max": {
+      "a3": 0.0325,
+      "a4": 0.035,
+      "battery": 0.022
+     },
+     "rule": "a4.MFsh"
+    },
+    "4": {
+     "max_excess": 0.035,
+     "per_source_max": {
+      "a3": 0.028,
+      "a4": 0.03,
+      "battery": 0.035
+     },
+     "rule": "battery.MF_cv"
+    },
+    "5": {
+     "max_excess": 0.025,
+     "per_source_max": {
+      "a3": 0.02,
+      "a4": 0.022,
+      "battery": 0.025
+     },
+     "rule": "battery.MF_cv"
+    },
+    "6": {
+     "max_excess": 0.028,
+     "per_source_max": {
+      "a3": 0.018,
+      "a4": 0.028,
+      "battery": 0.018
+     },
+     "rule": "a4.MFsh"
+    }
+   },
+   "level_wide_max": 0.105,
+   "lineage": "C1.merge_two_sorted_f3",
+   "partial_trace_M_level_wide_EFF_SM": {
+    "0": 0.105,
+    "1": 0.045,
+    "2": 0.043,
+    "3": 0.028,
+    "4": 0.018,
+    "5": 0.005,
+    "6": 0.025
+   },
+   "shape_counts_by_level": {
+    "0": {
+     "diffsum": 202,
+     "maxsum": 198
+    },
+    "1": {
+     "diffsum": 215,
+     "maxsum": 185
+    },
+    "2": {
+     "diffsum": 206,
+     "maxsum": 194
+    },
+    "3": {
+     "diffsum": 201,
+     "maxsum": 199
+    },
+    "4": {
+     "diffsum": 213,
+     "maxsum": 187
+    },
+    "5": {
+     "diffsum": 188,
+     "maxsum": 212
+    },
+    "6": {
+     "diffsum": 202,
+     "maxsum": 198
+    }
+   }
+  },
+  "C1.mirror_pointers": {
+   "in_shape_max_by_shape": {
+    "chars": {
+     "0": {
+      "rate": 0.023,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.014,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.058,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.015,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.027,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.039,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.008,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "pairs": {
+     "0": {
+      "rate": 0.007,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.0,
+      "rule": "S.whole_string"
+     },
+     "2": {
+      "rate": 0.0,
+      "rule": "S.whole_string"
+     },
+     "3": {
+      "rate": 0.006,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.0,
+      "rule": "S.whole_string"
+     },
+     "5": {
+      "rate": 0.0,
+      "rule": "S.whole_string"
+     },
+     "6": {
+      "rate": 0.0,
+      "rule": "S.whole_string"
+     }
+    },
+    "poss": {
+     "0": {
+      "rate": 0.626,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.312,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.261,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.113,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.176,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.14,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.083,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "in_shape_max_overall": 0.626,
+   "level_wide_cheap": {
+    "0": {
+     "max_excess": 0.215,
+     "per_source_max": {
+      "a3": 0.205,
+      "a4": 0.215,
+      "battery": 0.182
+     },
+     "rule": "a4.MFsh"
+    },
+    "1": {
+     "max_excess": 0.115,
+     "per_source_max": {
+      "a3": 0.11,
+      "a4": 0.115,
+      "battery": 0.083
+     },
+     "rule": "a4.MFsh"
+    },
+    "2": {
+     "max_excess": 0.11,
+     "per_source_max": {
+      "a3": 0.092,
+      "a4": 0.11,
+      "battery": 0.055
+     },
+     "rule": "a4.MFsh"
+    },
+    "3": {
+     "max_excess": 0.06,
+     "per_source_max": {
+      "a3": 0.03,
+      "a4": 0.043,
+      "battery": 0.06
+     },
+     "rule": "battery.MF_cv"
+    },
+    "4": {
+     "max_excess": 0.068,
+     "per_source_max": {
+      "a3": 0.058,
+      "a4": 0.068,
+      "battery": 0.037
+     },
+     "rule": "a4.MFsh"
+    },
+    "5": {
+     "max_excess": 0.062,
+     "per_source_max": {
+      "a3": 0.05,
+      "a4": 0.062,
+      "battery": 0.033
+     },
+     "rule": "a4.MFsh"
+    },
+    "6": {
+     "max_excess": 0.035,
+     "per_source_max": {
+      "a3": 0.033,
+      "a4": 0.035,
+      "battery": 0.013
+     },
+     "rule": "a4.MFsh"
+    }
+   },
+   "level_wide_max": 0.215,
+   "lineage": "C1.mirror_pointers",
+   "partial_trace_M_level_wide_EFF_SM": {
+    "0": 0.215,
+    "1": 0.115,
+    "2": 0.105,
+    "3": 0.043,
+    "4": 0.065,
+    "5": 0.062,
+    "6": 0.035
+   },
+   "shape_counts_by_level": {
+    "0": {
+     "chars": 133,
+     "pairs": 136,
+     "poss": 131
+    },
+    "1": {
+     "chars": 138,
+     "pairs": 121,
+     "poss": 141
+    },
+    "2": {
+     "chars": 120,
+     "pairs": 138,
+     "poss": 142
+    },
+    "3": {
+     "chars": 133,
+     "pairs": 161,
+     "poss": 106
+    },
+    "4": {
+     "chars": 148,
+     "pairs": 121,
+     "poss": 131
+    },
+    "5": {
+     "chars": 128,
+     "pairs": 129,
+     "poss": 143
+    },
+    "6": {
+     "chars": 124,
+     "pairs": 120,
+     "poss": 156
+    }
+   }
+  },
+  "C1.nested_pairs_f3": {
+   "in_shape_max_by_shape": {
+    "rect": {
+     "0": {
+      "rate": 0.033,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.007,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.008,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.004,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.007,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.004,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "tri": {
+     "0": {
+      "rate": 0.13,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.1,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.151,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.102,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.116,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.11,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.102,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "in_shape_max_overall": 0.151,
+   "level_wide_cheap": {
+    "0": {
+     "max_excess": 0.065,
+     "per_source_max": {
+      "a3": 0.052,
+      "a4": 0.065,
+      "battery": 0.0525
+     },
+     "rule": "a4.MFsh"
+    },
+    "1": {
+     "max_excess": 0.06,
+     "per_source_max": {
+      "a3": 0.037,
+      "a4": 0.037,
+      "battery": 0.06
+     },
+     "rule": "battery.count|S.run_inc_1"
+    },
+    "2": {
+     "max_excess": 0.058,
+     "per_source_max": {
+      "a3": 0.058,
+      "a4": 0.058,
+      "battery": 0.04
+     },
+     "rule": "a4.MFsh"
+    },
+    "3": {
+     "max_excess": 0.0475,
+     "per_source_max": {
+      "a3": 0.035,
+      "a4": 0.035,
+      "battery": 0.0475
+     },
+     "rule": "battery.count|S.run_inc_1"
+    },
+    "4": {
+     "max_excess": 0.045,
+     "per_source_max": {
+      "a3": 0.045,
+      "a4": 0.04,
+      "battery": 0.0275
+     },
+     "rule": "a3.MF_shape_cv"
+    },
+    "5": {
+     "max_excess": 0.04,
+     "per_source_max": {
+      "a3": 0.037,
+      "a4": 0.04,
+      "battery": 0.0375
+     },
+     "rule": "a4.MFsh"
+    },
+    "6": {
+     "max_excess": 0.043,
+     "per_source_max": {
+      "a3": 0.033,
+      "a4": 0.037,
+      "battery": 0.043
+     },
+     "rule": "battery.MF_cv"
+    }
+   },
+   "level_wide_max": 0.065,
+   "lineage": "C1.nested_pairs_f3",
+   "partial_trace_M_level_wide_EFF_SM": {
+    "0": 0.052,
+    "1": 0.035,
+    "2": 0.055,
+    "3": 0.02,
+    "4": 0.04,
+    "5": 0.037,
+    "6": 0.037
+   },
+   "shape_counts_by_level": {
+    "0": {
+     "rect": 269,
+     "tri": 131
+    },
+    "1": {
+     "rect": 270,
+     "tri": 130
+    },
+    "2": {
+     "rect": 261,
+     "tri": 139
+    },
+    "3": {
+     "rect": 282,
+     "tri": 118
+    },
+    "4": {
+     "rect": 271,
+     "tri": 129
+    },
+    "5": {
+     "rect": 273,
+     "tri": 127
+    },
+    "6": {
+     "rect": 273,
+     "tri": 127
+    }
+   }
+  },
+  "C1.partition_pass_f3": {
+   "in_shape_max_by_shape": {
+    "disp": {
+     "0": {
+      "rate": 1.0,
+      "rule": "F.2x0_plus_x1"
+     },
+     "1": {
+      "rate": 1.0,
+      "rule": "F.2x0_plus_x1"
+     },
+     "2": {
+      "rate": 1.0,
+      "rule": "F.2x0_plus_x1"
+     },
+     "3": {
+      "rate": 1.0,
+      "rule": "F.2x0_plus_x1"
+     },
+     "4": {
+      "rate": 1.0,
+      "rule": "F.2x0_plus_x1"
+     },
+     "5": {
+      "rate": 1.0,
+      "rule": "F.2x0_plus_x1"
+     },
+     "6": {
+      "rate": 1.0,
+      "rule": "F.2x0_plus_x1"
+     }
+    },
+    "list": {
+     "0": {
+      "rate": 1.0,
+      "rule": "F.template_permutation"
+     },
+     "1": {
+      "rate": 1.0,
+      "rule": "F.template_permutation"
+     },
+     "2": {
+      "rate": 1.0,
+      "rule": "F.template_permutation"
+     },
+     "3": {
+      "rate": 1.0,
+      "rule": "F.template_permutation"
+     },
+     "4": {
+      "rate": 1.0,
+      "rule": "F.template_permutation"
+     },
+     "5": {
+      "rate": 1.0,
+      "rule": "F.template_permutation"
+     },
+     "6": {
+      "rate": 1.0,
+      "rule": "F.template_permutation"
+     }
+    },
+    "mid": {
+     "0": {
+      "rate": 1.0,
+      "rule": "F.template_permutation"
+     },
+     "1": {
+      "rate": 1.0,
+      "rule": "F.template_permutation"
+     },
+     "2": {
+      "rate": 1.0,
+      "rule": "F.template_permutation"
+     },
+     "3": {
+      "rate": 1.0,
+      "rule": "F.template_permutation"
+     },
+     "4": {
+      "rate": 1.0,
+      "rule": "F.template_permutation"
+     },
+     "5": {
+      "rate": 1.0,
+      "rule": "F.template_permutation"
+     },
+     "6": {
+      "rate": 1.0,
+      "rule": "F.template_permutation"
+     }
+    }
+   },
+   "in_shape_max_overall": 1.0,
+   "level_wide_cheap": {
+    "0": {
+     "max_excess": 1.0,
+     "per_source_max": {
+      "a3": 0.003,
+      "a4": 1.0,
+      "battery": 0.005
+     },
+     "rule": "a4.closed_forms_best_per_shape_summed"
+    },
+    "1": {
+     "max_excess": 1.0,
+     "per_source_max": {
+      "a3": 0.003,
+      "a4": 1.0,
+      "battery": 0.005
+     },
+     "rule": "a4.closed_forms_best_per_shape_summed"
+    },
+    "2": {
+     "max_excess": 1.0,
+     "per_source_max": {
+      "a3": 0.0,
+      "a4": 1.0,
+      "battery": 0.01
+     },
+     "rule": "a4.closed_forms_best_per_shape_summed"
+    },
+    "3": {
+     "max_excess": 1.0,
+     "per_source_max": {
+      "a3": 0.003,
+      "a4": 1.0,
+      "battery": 0.0
+     },
+     "rule": "a4.closed_forms_best_per_shape_summed"
+    },
+    "4": {
+     "max_excess": 1.0,
+     "per_source_max": {
+      "a3": 0.0,
+      "a4": 1.0,
+      "battery": 0.005
+     },
+     "rule": "a4.closed_forms_best_per_shape_summed"
+    },
+    "5": {
+     "max_excess": 0.999,
+     "per_source_max": {
+      "a3": 0.005,
+      "a4": 0.999,
+      "battery": 0.003
+     },
+     "rule": "a4.closed_forms_best_per_shape_summed"
+    },
+    "6": {
+     "max_excess": 1.0,
+     "per_source_max": {
+      "a3": 0.003,
+      "a4": 1.0,
+      "battery": 0.003
+     },
+     "rule": "a4.closed_forms_best_per_shape_summed"
+    }
+   },
+   "level_wide_max": 1.0,
+   "lineage": "C1.partition_pass_f3",
+   "partial_trace_M_level_wide_EFF_SM": {
+    "0": 0.003,
+    "1": 0.003,
+    "2": 0.0,
+    "3": 0.003,
+    "4": 0.0,
+    "5": 0.0,
+    "6": 0.003
+   },
+   "shape_counts_by_level": {
+    "0": {
+     "disp": 133,
+     "list": 132,
+     "mid": 135
+    },
+    "1": {
+     "disp": 138,
+     "list": 140,
+     "mid": 122
+    },
+    "2": {
+     "disp": 132,
+     "list": 141,
+     "mid": 127
+    },
+    "3": {
+     "disp": 147,
+     "list": 152,
+     "mid": 101
+    },
+    "4": {
+     "disp": 131,
+     "list": 134,
+     "mid": 135
+    },
+    "5": {
+     "disp": 145,
+     "list": 141,
+     "mid": 114
+    },
+    "6": {
+     "disp": 141,
+     "list": 127,
+     "mid": 132
+    }
+   }
+  },
+  "C1.postfix_evaluation": {
+   "in_shape_max_by_shape": {
+    "opsum": {
+     "0": {
+      "rate": 0.026,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.024,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.026,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.005,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.005,
+      "rule": "S.sum_operands"
+     },
+     "5": {
+      "rate": 0.0,
+      "rule": "S.sum_operands"
+     },
+     "6": {
+      "rate": 0.005,
+      "rule": "S.last_operand"
+     }
+    },
+    "top": {
+     "0": {
+      "rate": 0.081,
+      "rule": "S.sum_operands"
+     },
+     "1": {
+      "rate": 0.021,
+      "rule": "S.last_operand"
+     },
+     "2": {
+      "rate": 0.019,
+      "rule": "S.sum_operands"
+     },
+     "3": {
+      "rate": 0.01,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.005,
+      "rule": "S.sum_operands"
+     },
+     "5": {
+      "rate": 0.01,
+      "rule": "S.last_operand"
+     },
+     "6": {
+      "rate": 0.005,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "in_shape_max_overall": 0.081,
+   "level_wide_cheap": {
+    "0": {
+     "max_excess": 0.1,
+     "per_source_max": {
+      "a3": 0.1,
+      "a4": 0.092,
+      "battery": 0.075
+     },
+     "rule": "a3.BEST_generic_cv"
+    },
+    "1": {
+     "max_excess": 0.02,
+     "per_source_max": {
+      "a3": 0.015,
+      "a4": 0.018,
+      "battery": 0.02
+     },
+     "rule": "battery.BEST_generic_cv"
+    },
+    "2": {
+     "max_excess": 0.022,
+     "per_source_max": {
+      "a3": 0.01,
+      "a4": 0.015,
+      "battery": 0.022
+     },
+     "rule": "battery.BEST_generic_cv"
+    },
+    "3": {
+     "max_excess": 0.018,
+     "per_source_max": {
+      "a3": 0.007,
+      "a4": 0.007,
+      "battery": 0.018
+     },
+     "rule": "battery.BEST_generic_cv"
+    },
+    "4": {
+     "max_excess": 0.003,
+     "per_source_max": {
+      "a3": 0.003,
+      "a4": 0.003,
+      "battery": 0.003
+     },
+     "rule": "battery.MF_cv"
+    },
+    "5": {
+     "max_excess": 0.007,
+     "per_source_max": {
+      "a3": 0.003,
+      "a4": 0.005,
+      "battery": 0.007
+     },
+     "rule": "battery.BEST_generic_cv"
+    },
+    "6": {
+     "max_excess": 0.01,
+     "per_source_max": {
+      "a3": 0.01,
+      "a4": 0.003,
+      "battery": 0.007
+     },
+     "rule": "a3.BEST_generic_cv"
+    }
+   },
+   "level_wide_max": 0.1,
+   "lineage": "C1.postfix_evaluation",
+   "partial_trace_M_level_wide_EFF_SM": {
+    "0": 0.092,
+    "1": 0.018,
+    "2": 0.003,
+    "3": 0.003,
+    "4": 0.0,
+    "5": 0.003,
+    "6": 0.003
+   },
+   "shape_counts_by_level": {
+    "0": {
+     "opsum": 189,
+     "top": 211
+    },
+    "1": {
+     "opsum": 208,
+     "top": 192
+    },
+    "2": {
+     "opsum": 191,
+     "top": 209
+    },
+    "3": {
+     "opsum": 206,
+     "top": 194
+    },
+    "4": {
+     "opsum": 194,
+     "top": 206
+    },
+    "5": {
+     "opsum": 192,
+     "top": 208
+    },
+    "6": {
+     "opsum": 199,
+     "top": 201
+    }
+   }
+  },
+  "C1.recursive_calls_r2": {
+   "in_shape_max_by_shape": {
+    "listfold": {
+     "0": {
+      "rate": 0.007,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.008,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "mutual": {
+     "0": {
+      "rate": 0.008,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.007,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "split": {
+     "0": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "in_shape_max_overall": 0.008,
+   "level_wide_cheap": {
+    "0": {
+     "max_excess": 0.007,
+     "per_source_max": {
+      "a3": 0.005,
+      "a4": 0.007,
+      "battery": 0.003
+     },
+     "rule": "a4.EFF_S"
+    },
+    "1": {
+     "max_excess": 0.003,
+     "per_source_max": {
+      "a3": 0.0,
+      "a4": 0.003,
+      "battery": 0.003
+     },
+     "rule": "battery.BEST_generic_cv"
+    },
+    "2": {
+     "max_excess": 0.003,
+     "per_source_max": {
+      "a3": 0.0,
+      "a4": 0.003,
+      "battery": 0.0
+     },
+     "rule": "a4.MFsh"
+    },
+    "3": {
+     "max_excess": 0.0,
+     "per_source_max": {
+      "a3": 0.0,
+      "a4": 0.0,
+      "battery": 0.0
+     },
+     "rule": "battery.MF_cv"
+    },
+    "4": {
+     "max_excess": 0.003,
+     "per_source_max": {
+      "a3": 0.003,
+      "a4": 0.0,
+      "battery": 0.0
+     },
+     "rule": "a3.MF_shape_cv"
+    },
+    "5": {
+     "max_excess": 0.0,
+     "per_source_max": {
+      "a3": 0.0,
+      "a4": 0.0,
+      "battery": 0.0
+     },
+     "rule": "battery.MF_cv"
+    },
+    "6": {
+     "max_excess": 0.0,
+     "per_source_max": {
+      "a3": 0.0,
+      "a4": 0.0,
+      "battery": 0.0
+     },
+     "rule": "battery.MF_cv"
+    }
+   },
+   "level_wide_max": 0.007,
+   "lineage": "C1.recursive_calls_r2",
+   "partial_trace_M_level_wide_EFF_SM": {
+    "0": 0.015,
+    "1": 0.0,
+    "2": 0.003,
+    "3": 0.0,
+    "4": 0.0,
+    "5": 0.003,
+    "6": 0.0
+   },
+   "shape_counts_by_level": {
+    "0": {
+     "listfold": 141,
+     "mutual": 126,
+     "split": 133
+    },
+    "1": {
+     "listfold": 142,
+     "mutual": 135,
+     "split": 123
+    },
+    "2": {
+     "listfold": 126,
+     "mutual": 124,
+     "split": 150
+    },
+    "3": {
+     "listfold": 117,
+     "mutual": 148,
+     "split": 135
+    },
+    "4": {
+     "listfold": 132,
+     "mutual": 130,
+     "split": 138
+    },
+    "5": {
+     "listfold": 126,
+     "mutual": 146,
+     "split": 128
+    },
+    "6": {
+     "listfold": 119,
+     "mutual": 141,
+     "split": 140
+    }
+   }
+  },
+  "C1.run_length_scan": {
+   "in_shape_max_by_shape": {
+    "counts": {
+     "0": {
+      "rate": 0.025,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "enc": {
+     "0": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "long": {
+     "0": {
+      "rate": 0.007,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "in_shape_max_overall": 0.025,
+   "level_wide_cheap": {
+    "0": {
+     "max_excess": 0.015,
+     "per_source_max": {
+      "a3": 0.007,
+      "a4": 0.01,
+      "battery": 0.015
+     },
+     "rule": "battery.MF_cv"
+    },
+    "1": {
+     "max_excess": 0.007,
+     "per_source_max": {
+      "a3": 0.0,
+      "a4": 0.0,
+      "battery": 0.007
+     },
+     "rule": "battery.MF_cv"
+    },
+    "2": {
+     "max_excess": 0.0,
+     "per_source_max": {
+      "a3": 0.0,
+      "a4": 0.0,
+      "battery": 0.0
+     },
+     "rule": "battery.MF_cv"
+    },
+    "3": {
+     "max_excess": 0.0,
+     "per_source_max": {
+      "a3": 0.0,
+      "a4": 0.0,
+      "battery": 0.0
+     },
+     "rule": "battery.MF_cv"
+    },
+    "4": {
+     "max_excess": 0.0,
+     "per_source_max": {
+      "a3": 0.0,
+      "a4": 0.0,
+      "battery": 0.0
+     },
+     "rule": "battery.MF_cv"
+    },
+    "5": {
+     "max_excess": 0.0,
+     "per_source_max": {
+      "a3": 0.0,
+      "a4": 0.0,
+      "battery": 0.0
+     },
+     "rule": "battery.MF_cv"
+    },
+    "6": {
+     "max_excess": 0.0,
+     "per_source_max": {
+      "a3": 0.0,
+      "a4": 0.0,
+      "battery": 0.0
+     },
+     "rule": "battery.MF_cv"
+    }
+   },
+   "level_wide_max": 0.015,
+   "lineage": "C1.run_length_scan",
+   "partial_trace_M_level_wide_EFF_SM": {
+    "0": 0.107,
+    "1": 0.14,
+    "2": 0.077,
+    "3": 0.09,
+    "4": 0.09,
+    "5": 0.052,
+    "6": 0.06
+   },
+   "shape_counts_by_level": {
+    "0": {
+     "counts": 120,
+     "enc": 146,
+     "long": 134
+    },
+    "1": {
+     "counts": 107,
+     "enc": 133,
+     "long": 160
+    },
+    "2": {
+     "counts": 142,
+     "enc": 142,
+     "long": 116
+    },
+    "3": {
+     "counts": 136,
+     "enc": 119,
+     "long": 145
+    },
+    "4": {
+     "counts": 119,
+     "enc": 156,
+     "long": 125
+    },
+    "5": {
+     "counts": 127,
+     "enc": 131,
+     "long": 142
+    },
+    "6": {
+     "counts": 127,
+     "enc": 133,
+     "long": 140
+    }
+   }
+  },
+  "C1.shared_lists_f3": {
+   "in_shape_max_by_shape": {
+    "list": {
+     "0": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "sum": {
+     "0": {
+      "rate": 0.058,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.046,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.029,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.035,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.039,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.021,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.022,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "in_shape_max_overall": 0.058,
+   "level_wide_cheap": {
+    "0": {
+     "max_excess": 0.03,
+     "per_source_max": {
+      "a3": 0.03,
+      "a4": 0.03,
+      "battery": 0.0225
+     },
+     "rule": "a4.EFF_S"
+    },
+    "1": {
+     "max_excess": 0.03,
+     "per_source_max": {
+      "a3": 0.022,
+      "a4": 0.025,
+      "battery": 0.03
+     },
+     "rule": "battery.sum|S.naive_copy"
+    },
+    "2": {
+     "max_excess": 0.04,
+     "per_source_max": {
+      "a3": 0.015,
+      "a4": 0.015,
+      "battery": 0.04
+     },
+     "rule": "battery.sum|S.naive_copy"
+    },
+    "3": {
+     "max_excess": 0.045,
+     "per_source_max": {
+      "a3": 0.018,
+      "a4": 0.02,
+      "battery": 0.045
+     },
+     "rule": "battery.list|S.naive_copy"
+    },
+    "4": {
+     "max_excess": 0.05,
+     "per_source_max": {
+      "a3": 0.02,
+      "a4": 0.02,
+      "battery": 0.05
+     },
+     "rule": "battery.sum|S.naive_copy"
+    },
+    "5": {
+     "max_excess": 0.03,
+     "per_source_max": {
+      "a3": 0.013,
+      "a4": 0.015,
+      "battery": 0.03
+     },
+     "rule": "battery.list|S.naive_copy"
+    },
+    "6": {
+     "max_excess": 0.05,
+     "per_source_max": {
+      "a3": 0.01,
+      "a4": 0.01,
+      "battery": 0.05
+     },
+     "rule": "battery.sum|S.naive_copy"
+    }
+   },
+   "level_wide_max": 0.05,
+   "lineage": "C1.shared_lists_f3",
+   "partial_trace_M_level_wide_EFF_SM": {
+    "0": 0.045,
+    "1": 0.033,
+    "2": 0.113,
+    "3": 0.113,
+    "4": 0.14,
+    "5": 0.135,
+    "6": 0.117
+   },
+   "shape_counts_by_level": {
+    "0": {
+     "list": 209,
+     "sum": 191
+    },
+    "1": {
+     "list": 205,
+     "sum": 195
+    },
+    "2": {
+     "list": 194,
+     "sum": 206
+    },
+    "3": {
+     "list": 202,
+     "sum": 198
+    },
+    "4": {
+     "list": 195,
+     "sum": 205
+    },
+    "5": {
+     "list": 210,
+     "sum": 190
+    },
+    "6": {
+     "list": 217,
+     "sum": 183
+    }
+   }
+  },
+  "C1.sieve_marking_f3[fix-3 original, all shapes]": {
+   "in_shape_max_by_shape": {
+    "flags": {
+     "0": {
+      "rate": 1.0,
+      "rule": "F.order_free_divisor_test"
+     },
+     "1": {
+      "rate": 1.0,
+      "rule": "F.order_free_divisor_test"
+     },
+     "2": {
+      "rate": 1.0,
+      "rule": "F.order_free_divisor_test"
+     },
+     "3": {
+      "rate": 1.0,
+      "rule": "F.order_free_divisor_test"
+     },
+     "4": {
+      "rate": 1.0,
+      "rule": "F.order_free_divisor_test"
+     },
+     "5": {
+      "rate": 1.0,
+      "rule": "F.order_free_divisor_test"
+     },
+     "6": {
+      "rate": 1.0,
+      "rule": "F.order_free_divisor_test"
+     }
+    },
+    "strikesum": {
+     "0": {
+      "rate": 0.088,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.082,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.044,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.058,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.034,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.026,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.015,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "in_shape_max_overall": 1.0,
+   "level_wide_cheap": {
+    "0": {
+     "max_excess": 0.487,
+     "per_source_max": {
+      "a3": 0.0,
+      "a4": 0.487,
+      "battery": 0.0
+     },
+     "rule": "a4.flags|F.order_free_divisor_test"
+    },
+    "1": {
+     "max_excess": 0.453,
+     "per_source_max": {
+      "a3": 0.0,
+      "a4": 0.453,
+      "battery": 0.0
+     },
+     "rule": "a4.flags|F.order_free_divisor_test"
+    },
+    "2": {
+     "max_excess": 0.545,
+     "per_source_max": {
+      "a3": 0.0,
+      "a4": 0.545,
+      "battery": 0.0
+     },
+     "rule": "a4.flags|F.order_free_divisor_test"
+    },
+    "3": {
+     "max_excess": 0.482,
+     "per_source_max": {
+      "a3": 0.0,
+      "a4": 0.482,
+      "battery": 0.0
+     },
+     "rule": "a4.flags|F.order_free_divisor_test"
+    },
+    "4": {
+     "max_excess": 0.485,
+     "per_source_max": {
+      "a3": 0.0,
+      "a4": 0.485,
+      "battery": 0.0
+     },
+     "rule": "a4.flags|F.order_free_divisor_test"
+    },
+    "5": {
+     "max_excess": 0.512,
+     "per_source_max": {
+      "a3": 0.0,
+      "a4": 0.512,
+      "battery": 0.0
+     },
+     "rule": "a4.flags|F.order_free_divisor_test"
+    },
+    "6": {
+     "max_excess": 0.487,
+     "per_source_max": {
+      "a3": 0.0,
+      "a4": 0.487,
+      "battery": 0.0
+     },
+     "rule": "a4.flags|F.order_free_divisor_test"
+    }
+   },
+   "level_wide_max": 0.545,
+   "lineage": "C1.sieve_marking_f3",
+   "partial_trace_M_level_wide_EFF_SM": {
+    "0": 0.115,
+    "1": 0.087,
+    "2": 0.083,
+    "3": 0.087,
+    "4": 0.07,
+    "5": 0.033,
+    "6": 0.03
+   },
+   "shape_counts_by_level": {
+    "0": {
+     "flags": 195,
+     "strikesum": 205
+    },
+    "1": {
+     "flags": 181,
+     "strikesum": 219
+    },
+    "2": {
+     "flags": 218,
+     "strikesum": 182
+    },
+    "3": {
+     "flags": 193,
+     "strikesum": 207
+    },
+    "4": {
+     "flags": 194,
+     "strikesum": 206
+    },
+    "5": {
+     "flags": 205,
+     "strikesum": 195
+    },
+    "6": {
+     "flags": 195,
+     "strikesum": 205
+    }
+   }
+  },
+  "C1.sieve_marking_f4": {
+   "in_shape_max_by_shape": {
+    "strikesum": {
+     "0": {
+      "rate": 0.11,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.055,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.05,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.018,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.02,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.018,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.05,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "in_shape_max_overall": 0.11,
+   "level_wide_cheap": {
+    "0": {
+     "max_excess": 0.11,
+     "per_source_max": {
+      "a3": 0.11,
+      "a4": 0.11,
+      "battery": 0.1
+     },
+     "rule": "a4.MFsh"
+    },
+    "1": {
+     "max_excess": 0.055,
+     "per_source_max": {
+      "a3": 0.055,
+      "a4": 0.055,
+      "battery": 0.033
+     },
+     "rule": "a4.MFsh"
+    },
+    "2": {
+     "max_excess": 0.08,
+     "per_source_max": {
+      "a3": 0.05,
+      "a4": 0.05,
+      "battery": 0.08
+     },
+     "rule": "battery.MF_cv"
+    },
+    "3": {
+     "max_excess": 0.028,
+     "per_source_max": {
+      "a3": 0.018,
+      "a4": 0.018,
+      "battery": 0.028
+     },
+     "rule": "battery.MF_cv"
+    },
+    "4": {
+     "max_excess": 0.03,
+     "per_source_max": {
+      "a3": 0.02,
+      "a4": 0.02,
+      "battery": 0.03
+     },
+     "rule": "battery.MF_cv"
+    },
+    "5": {
+     "max_excess": 0.058,
+     "per_source_max": {
+      "a3": 0.018,
+      "a4": 0.018,
+      "battery": 0.058
+     },
+     "rule": "battery.MF_cv"
+    },
+    "6": {
+     "max_excess": 0.05,
+     "per_source_max": {
+      "a3": 0.05,
+      "a4": 0.05,
+      "battery": 0.04
+     },
+     "rule": "a4.MFsh"
+    }
+   },
+   "level_wide_max": 0.11,
+   "lineage": "C1.sieve_marking_f4",
+   "partial_trace_M_level_wide_EFF_SM": {
+    "0": 0.11,
+    "1": 0.055,
+    "2": 0.05,
+    "3": 0.018,
+    "4": 0.02,
+    "5": 0.018,
+    "6": 0.05
+   },
+   "shape_counts_by_level": {
+    "0": {
+     "strikesum": 400
+    },
+    "1": {
+     "strikesum": 400
+    },
+    "2": {
+     "strikesum": 400
+    },
+    "3": {
+     "strikesum": 400
+    },
+    "4": {
+     "strikesum": 400
+    },
+    "5": {
+     "strikesum": 400
+    },
+    "6": {
+     "strikesum": 400
+    }
+   }
+  },
+  "C1.slices": {
+   "in_shape_max_by_shape": {
+    "concat_list": {
+     "0": {
+      "rate": 0.033,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.073,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.01,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.067,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.067,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.047,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.01,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "concat_str": {
+     "0": {
+      "rate": 0.011,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.011,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.005,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.02,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "sum_list": {
+     "0": {
+      "rate": 0.239,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.286,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.228,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.261,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.211,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.317,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.235,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "in_shape_max_overall": 0.317,
+   "level_wide_cheap": {
+    "0": {
+     "max_excess": 0.077,
+     "per_source_max": {
+      "a3": 0.052,
+      "a4": 0.068,
+      "battery": 0.077
+     },
+     "rule": "battery.MF_cv"
+    },
+    "1": {
+     "max_excess": 0.105,
+     "per_source_max": {
+      "a3": 0.08,
+      "a4": 0.105,
+      "battery": 0.06
+     },
+     "rule": "a4.MFsh"
+    },
+    "2": {
+     "max_excess": 0.07,
+     "per_source_max": {
+      "a3": 0.058,
+      "a4": 0.062,
+      "battery": 0.07
+     },
+     "rule": "battery.MF_cv"
+    },
+    "3": {
+     "max_excess": 0.098,
+     "per_source_max": {
+      "a3": 0.077,
+      "a4": 0.098,
+      "battery": 0.065
+     },
+     "rule": "a4.EFF_S"
+    },
+    "4": {
+     "max_excess": 0.077,
+     "per_source_max": {
+      "a3": 0.05,
+      "a4": 0.077,
+      "battery": 0.06
+     },
+     "rule": "a4.MFsh"
+    },
+    "5": {
+     "max_excess": 0.092,
+     "per_source_max": {
+      "a3": 0.08,
+      "a4": 0.092,
+      "battery": 0.06
+     },
+     "rule": "a4.MFsh"
+    },
+    "6": {
+     "max_excess": 0.072,
+     "per_source_max": {
+      "a3": 0.068,
+      "a4": 0.072,
+      "battery": 0.055
+     },
+     "rule": "a4.EFF_S"
+    }
+   },
+   "level_wide_max": 0.105,
+   "lineage": "C1.slices",
+   "partial_trace_M_level_wide_EFF_SM": {
+    "0": 0.065,
+    "1": 0.107,
+    "2": 0.048,
+    "3": 0.095,
+    "4": 0.075,
+    "5": 0.092,
+    "6": 0.075
+   },
+   "shape_counts_by_level": {
+    "0": {
+     "concat_list": 123,
+     "concat_str": 189,
+     "sum_list": 88
+    },
+    "1": {
+     "concat_list": 110,
+     "concat_str": 178,
+     "sum_list": 112
+    },
+    "2": {
+     "concat_list": 97,
+     "concat_str": 202,
+     "sum_list": 101
+    },
+    "3": {
+     "concat_list": 89,
+     "concat_str": 192,
+     "sum_list": 119
+    },
+    "4": {
+     "concat_list": 104,
+     "concat_str": 201,
+     "sum_list": 95
+    },
+    "5": {
+     "concat_list": 106,
+     "concat_str": 193,
+     "sum_list": 101
+    },
+    "6": {
+     "concat_list": 98,
+     "concat_str": 187,
+     "sum_list": 115
+    }
+   }
+  },
+  "C1.string_build_f3": {
+   "in_shape_max_by_shape": {
+    "alt": {
+     "0": {
+      "rate": 0.007,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "rev": {
+     "0": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "s": {
+     "0": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "in_shape_max_overall": 0.007,
+   "level_wide_cheap": {
+    "0": {
+     "max_excess": 0.003,
+     "per_source_max": {
+      "a3": 0.003,
+      "a4": 0.003,
+      "battery": 0.0
+     },
+     "rule": "a4.MFsh"
+    },
+    "1": {
+     "max_excess": 0.005,
+     "per_source_max": {
+      "a3": 0.005,
+      "a4": 0.005,
+      "battery": 0.0
+     },
+     "rule": "a4.MF"
+    },
+    "2": {
+     "max_excess": 0.005,
+     "per_source_max": {
+      "a3": 0.0,
+      "a4": 0.003,
+      "battery": 0.005
+     },
+     "rule": "battery.MF_cv"
+    },
+    "3": {
+     "max_excess": 0.0,
+     "per_source_max": {
+      "a3": 0.0,
+      "a4": 0.0,
+      "battery": 0.0
+     },
+     "rule": "battery.s|S.ignore_step"
+    },
+    "4": {
+     "max_excess": 0.0,
+     "per_source_max": {
+      "a3": 0.0,
+      "a4": 0.0,
+      "battery": 0.0
+     },
+     "rule": "battery.s|S.ignore_step"
+    },
+    "5": {
+     "max_excess": 0.0,
+     "per_source_max": {
+      "a3": 0.0,
+      "a4": 0.0,
+      "battery": 0.0
+     },
+     "rule": "battery.s|S.ignore_step"
+    },
+    "6": {
+     "max_excess": 0.0,
+     "per_source_max": {
+      "a3": 0.0,
+      "a4": 0.0,
+      "battery": 0.0
+     },
+     "rule": "battery.s|S.ignore_step"
+    }
+   },
+   "level_wide_max": 0.005,
+   "lineage": "C1.string_build_f3",
+   "partial_trace_M_level_wide_EFF_SM": {
+    "0": 0.14,
+    "1": 0.155,
+    "2": 0.052,
+    "3": 0.062,
+    "4": 0.043,
+    "5": 0.045,
+    "6": 0.04
+   },
+   "shape_counts_by_level": {
+    "0": {
+     "alt": 142,
+     "rev": 133,
+     "s": 125
+    },
+    "1": {
+     "alt": 159,
+     "rev": 133,
+     "s": 108
+    },
+    "2": {
+     "alt": 141,
+     "rev": 128,
+     "s": 131
+    },
+    "3": {
+     "alt": 121,
+     "rev": 128,
+     "s": 151
+    },
+    "4": {
+     "alt": 143,
+     "rev": 121,
+     "s": 136
+    },
+    "5": {
+     "alt": 136,
+     "rev": 126,
+     "s": 138
+    },
+    "6": {
+     "alt": 125,
+     "rev": 131,
+     "s": 144
+    }
+   }
+  },
+  "C1.string_methods_f3": {
+   "in_shape_max_by_shape": {
+    "tail:[1:]": {
+     "0": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "tail:[:(-2)]": {
+     "0": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "tail:[::(-1)]": {
+     "0": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "tail:[::2]": {
+     "0": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.025,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "tail:none": {
+     "0": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "in_shape_max_overall": 0.025,
+   "level_wide_cheap": {
+    "0": {
+     "max_excess": 0.06,
+     "per_source_max": {
+      "a3": 0.055,
+      "a4": 0.03,
+      "battery": 0.06
+     },
+     "rule": "battery.text|S.word_lower"
+    },
+    "1": {
+     "max_excess": 0.0325,
+     "per_source_max": {
+      "a3": 0.015,
+      "a4": 0.005,
+      "battery": 0.0325
+     },
+     "rule": "battery.text|S.word_lower_tail"
+    },
+    "2": {
+     "max_excess": 0.018,
+     "per_source_max": {
+      "a3": 0.013,
+      "a4": 0.007,
+      "battery": 0.018
+     },
+     "rule": "battery.BEST_generic_cv"
+    },
+    "3": {
+     "max_excess": 0.0075,
+     "per_source_max": {
+      "a3": 0.003,
+      "a4": 0.0,
+      "battery": 0.0075
+     },
+     "rule": "battery.text|S.word_lower_tail"
+    },
+    "4": {
+     "max_excess": 0.003,
+     "per_source_max": {
+      "a3": 0.003,
+      "a4": 0.0,
+      "battery": 0.003
+     },
+     "rule": "battery.BEST_generic_cv"
+    },
+    "5": {
+     "max_excess": 0.0,
+     "per_source_max": {
+      "a3": 0.0,
+      "a4": 0.0,
+      "battery": 0.0
+     },
+     "rule": "battery.text|S.word_rev_lower"
+    },
+    "6": {
+     "max_excess": 0.0,
+     "per_source_max": {
+      "a3": 0.0,
+      "a4": 0.0,
+      "battery": 0.0
+     },
+     "rule": "battery.text|S.word_rev_lower"
+    }
+   },
+   "level_wide_max": 0.06,
+   "lineage": "C1.string_methods_f3",
+   "partial_trace_M_level_wide_EFF_SM": {
+    "0": 0.03,
+    "1": 0.005,
+    "2": 0.007,
+    "3": 0.0,
+    "4": 0.0,
+    "5": 0.0,
+    "6": 0.0
+   },
+   "shape_counts_by_level": {
+    "0": {
+     "tail:[1:]": 82,
+     "tail:[:(-2)]": 79,
+     "tail:[::(-1)]": 87,
+     "tail:[::2]": 75,
+     "tail:none": 77
+    },
+    "1": {
+     "tail:[1:]": 69,
+     "tail:[:(-2)]": 84,
+     "tail:[::(-1)]": 80,
+     "tail:[::2]": 81,
+     "tail:none": 86
+    },
+    "2": {
+     "tail:[1:]": 83,
+     "tail:[:(-2)]": 81,
+     "tail:[::(-1)]": 78,
+     "tail:[::2]": 79,
+     "tail:none": 79
+    },
+    "3": {
+     "tail:[1:]": 84,
+     "tail:[:(-2)]": 84,
+     "tail:[::(-1)]": 72,
+     "tail:[::2]": 84,
+     "tail:none": 76
+    },
+    "4": {
+     "tail:[1:]": 92,
+     "tail:[:(-2)]": 69,
+     "tail:[::(-1)]": 99,
+     "tail:[::2]": 63,
+     "tail:none": 77
+    },
+    "5": {
+     "tail:[1:]": 94,
+     "tail:[:(-2)]": 71,
+     "tail:[::(-1)]": 75,
+     "tail:[::2]": 77,
+     "tail:none": 83
+    },
+    "6": {
+     "tail:[1:]": 75,
+     "tail:[:(-2)]": 87,
+     "tail:[::(-1)]": 76,
+     "tail:[::2]": 83,
+     "tail:none": 79
+    }
+   }
+  },
+  "C1.string_pair_table": {
+   "in_shape_max_by_shape": {
+    "edit_cell": {
+     "0": {
+      "rate": 0.917,
+      "rule": "S.hamming_plus_lendiff"
+     },
+     "1": {
+      "rate": 0.65,
+      "rule": "S.hamming_plus_lendiff"
+     },
+     "2": {
+      "rate": 0.863,
+      "rule": "S.hamming_plus_lendiff"
+     },
+     "3": {
+      "rate": 0.485,
+      "rule": "S.hamming_plus_lendiff"
+     },
+     "4": {
+      "rate": 0.75,
+      "rule": "S.hamming_plus_lendiff"
+     },
+     "5": {
+      "rate": 0.41,
+      "rule": "S.hamming_plus_lendiff"
+     },
+     "6": {
+      "rate": 0.757,
+      "rule": "S.hamming_plus_lendiff"
+     }
+    },
+    "edit_lastrow": {
+     "0": {
+      "rate": 0.074,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.088,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.101,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.039,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.03,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.082,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.111,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "edit_tablesum": {
+     "0": {
+      "rate": 0.172,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.077,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.015,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.046,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.039,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.033,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "lcs_cell": {
+     "0": {
+      "rate": 0.765,
+      "rule": "S.common_multiset"
+     },
+     "1": {
+      "rate": 0.716,
+      "rule": "S.common_multiset"
+     },
+     "2": {
+      "rate": 0.636,
+      "rule": "S.common_multiset"
+     },
+     "3": {
+      "rate": 0.671,
+      "rule": "S.common_multiset"
+     },
+     "4": {
+      "rate": 0.529,
+      "rule": "S.common_multiset"
+     },
+     "5": {
+      "rate": 0.5,
+      "rule": "S.common_multiset"
+     },
+     "6": {
+      "rate": 0.515,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "lcs_lastrow": {
+     "0": {
+      "rate": 0.169,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.215,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.203,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.075,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.176,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.062,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.044,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "lcs_tablesum": {
+     "0": {
+      "rate": 0.164,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.033,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.048,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.078,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.041,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.042,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.014,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "in_shape_max_overall": 0.917,
+   "level_wide_cheap": {
+    "0": {
+     "max_excess": 0.36,
+     "per_source_max": {
+      "a3": 0.175,
+      "a4": 0.36,
+      "battery": 0.168
+     },
+     "rule": "a4.EFF_S"
+    },
+    "1": {
+     "max_excess": 0.325,
+     "per_source_max": {
+      "a3": 0.198,
+      "a4": 0.325,
+      "battery": 0.163
+     },
+     "rule": "a4.EFF_S"
+    },
+    "2": {
+     "max_excess": 0.307,
+     "per_source_max": {
+      "a3": 0.16,
+      "a4": 0.307,
+      "battery": 0.163
+     },
+     "rule": "a4.EFF_S"
+    },
+    "3": {
+     "max_excess": 0.237,
+     "per_source_max": {
+      "a3": 0.188,
+      "a4": 0.237,
+      "battery": 0.135
+     },
+     "rule": "a4.EFF_S"
+    },
+    "4": {
+     "max_excess": 0.242,
+     "per_source_max": {
+      "a3": 0.17,
+      "a4": 0.242,
+      "battery": 0.172
+     },
+     "rule": "a4.EFF_S"
+    },
+    "5": {
+     "max_excess": 0.18,
+     "per_source_max": {
+      "a3": 0.125,
+      "a4": 0.18,
+      "battery": 0.128
+     },
+     "rule": "a4.EFF_S"
+    },
+    "6": {
+     "max_excess": 0.228,
+     "per_source_max": {
+      "a3": 0.15,
+      "a4": 0.228,
+      "battery": 0.115
+     },
+     "rule": "a4.EFF_S"
+    }
+   },
+   "level_wide_max": 0.36,
+   "lineage": "C1.string_pair_table",
+   "partial_trace_M_level_wide_EFF_SM": {
+    "0": 0.36,
+    "1": 0.325,
+    "2": 0.307,
+    "3": 0.237,
+    "4": 0.242,
+    "5": 0.18,
+    "6": 0.228
+   },
+   "shape_counts_by_level": {
+    "0": {
+     "edit_cell": 72,
+     "edit_lastrow": 81,
+     "edit_tablesum": 58,
+     "lcs_cell": 51,
+     "lcs_lastrow": 71,
+     "lcs_tablesum": 67
+    },
+    "1": {
+     "edit_cell": 60,
+     "edit_lastrow": 68,
+     "edit_tablesum": 65,
+     "lcs_cell": 81,
+     "lcs_lastrow": 65,
+     "lcs_tablesum": 61
+    },
+    "2": {
+     "edit_cell": 73,
+     "edit_lastrow": 69,
+     "edit_tablesum": 71,
+     "lcs_cell": 66,
+     "lcs_lastrow": 59,
+     "lcs_tablesum": 62
+    },
+    "3": {
+     "edit_cell": 68,
+     "edit_lastrow": 76,
+     "edit_tablesum": 68,
+     "lcs_cell": 70,
+     "lcs_lastrow": 67,
+     "lcs_tablesum": 51
+    },
+    "4": {
+     "edit_cell": 56,
+     "edit_lastrow": 67,
+     "edit_tablesum": 65,
+     "lcs_cell": 70,
+     "lcs_lastrow": 68,
+     "lcs_tablesum": 74
+    },
+    "5": {
+     "edit_cell": 78,
+     "edit_lastrow": 49,
+     "edit_tablesum": 76,
+     "lcs_cell": 62,
+     "lcs_lastrow": 64,
+     "lcs_tablesum": 71
+    },
+    "6": {
+     "edit_cell": 70,
+     "edit_lastrow": 63,
+     "edit_tablesum": 60,
+     "lcs_cell": 68,
+     "lcs_lastrow": 68,
+     "lcs_tablesum": 71
+    }
+   }
+  },
+  "C1.turtle_walk_f3": {
+   "in_shape_max_by_shape": {
+    "pathsum": {
+     "0": {
+      "rate": 0.011,
+      "rule": "S.zero"
+     },
+     "1": {
+      "rate": 0.0,
+      "rule": "S.zero"
+     },
+     "2": {
+      "rate": 0.011,
+      "rule": "S.zero"
+     },
+     "3": {
+      "rate": 0.0,
+      "rule": "S.zero"
+     },
+     "4": {
+      "rate": 0.008,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.004,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.0,
+      "rule": "S.zero"
+     }
+    },
+    "pos": {
+     "0": {
+      "rate": 0.038,
+      "rule": "S.zero"
+     },
+     "1": {
+      "rate": 0.0,
+      "rule": "S.zero"
+     },
+     "2": {
+      "rate": 0.0,
+      "rule": "S.zero"
+     },
+     "3": {
+      "rate": 0.0,
+      "rule": "S.zero"
+     },
+     "4": {
+      "rate": 0.0,
+      "rule": "S.zero"
+     },
+     "5": {
+      "rate": 0.0,
+      "rule": "S.zero"
+     },
+     "6": {
+      "rate": 0.0,
+      "rule": "S.zero"
+     }
+    }
+   },
+   "in_shape_max_overall": 0.038,
+   "level_wide_cheap": {
+    "0": {
+     "max_excess": 0.035,
+     "per_source_max": {
+      "a3": 0.0125,
+      "a4": 0.013,
+      "battery": 0.035
+     },
+     "rule": "battery.pathsum|S.no_turns"
+    },
+    "1": {
+     "max_excess": 0.0225,
+     "per_source_max": {
+      "a3": 0.007,
+      "a4": 0.003,
+      "battery": 0.0225
+     },
+     "rule": "battery.pathsum|S.no_turns"
+    },
+    "2": {
+     "max_excess": 0.025,
+     "per_source_max": {
+      "a3": 0.0075,
+      "a4": 0.007,
+      "battery": 0.025
+     },
+     "rule": "battery.pathsum|S.no_turns"
+    },
+    "3": {
+     "max_excess": 0.0225,
+     "per_source_max": {
+      "a3": 0.0025,
+      "a4": 0.007,
+      "battery": 0.0225
+     },
+     "rule": "battery.pos|S.no_back"
+    },
+    "4": {
+     "max_excess": 0.01,
+     "per_source_max": {
+      "a3": 0.005,
+      "a4": 0.005,
+      "battery": 0.01
+     },
+     "rule": "battery.pathsum|S.no_turns"
+    },
+    "5": {
+     "max_excess": 0.0275,
+     "per_source_max": {
+      "a3": 0.003,
+      "a4": 0.003,
+      "battery": 0.0275
+     },
+     "rule": "battery.pos|S.no_back"
+    },
+    "6": {
+     "max_excess": 0.02,
+     "per_source_max": {
+      "a3": 0.0,
+      "a4": 0.003,
+      "battery": 0.02
+     },
+     "rule": "battery.pos|S.no_back"
+    }
+   },
+   "level_wide_max": 0.035,
+   "lineage": "C1.turtle_walk_f3",
+   "partial_trace_M_level_wide_EFF_SM": {
+    "0": 0.045,
+    "1": 0.035,
+    "2": 0.007,
+    "3": 0.04,
+    "4": 0.025,
+    "5": 0.033,
+    "6": 0.003
+   },
+   "shape_counts_by_level": {
+    "0": {
+     "pathsum": 268,
+     "pos": 132
+    },
+    "1": {
+     "pathsum": 276,
+     "pos": 124
+    },
+    "2": {
+     "pathsum": 270,
+     "pos": 130
+    },
+    "3": {
+     "pathsum": 266,
+     "pos": 134
+    },
+    "4": {
+     "pathsum": 261,
+     "pos": 139
+    },
+    "5": {
+     "pathsum": 283,
+     "pos": 117
+    },
+    "6": {
+     "pathsum": 270,
+     "pos": 130
+    }
+   }
+  },
+  "C1.union_find_links_f3": {
+   "in_shape_max_by_shape": {
+    "parents": {
+     "0": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "wsum": {
+     "0": {
+      "rate": 0.01,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.014,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.015,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.005,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.01,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "in_shape_max_overall": 0.015,
+   "level_wide_cheap": {
+    "0": {
+     "max_excess": 0.03,
+     "per_source_max": {
+      "a3": 0.007,
+      "a4": 0.005,
+      "battery": 0.03
+     },
+     "rule": "battery.parents|S.naive_node_links"
+    },
+    "1": {
+     "max_excess": 0.022,
+     "per_source_max": {
+      "a3": 0.007,
+      "a4": 0.007,
+      "battery": 0.022
+     },
+     "rule": "battery.MF_cv"
+    },
+    "2": {
+     "max_excess": 0.018,
+     "per_source_max": {
+      "a3": 0.007,
+      "a4": 0.018,
+      "battery": 0.015
+     },
+     "rule": "a4.EFF_S"
+    },
+    "3": {
+     "max_excess": 0.005,
+     "per_source_max": {
+      "a3": 0.0,
+      "a4": 0.0,
+      "battery": 0.005
+     },
+     "rule": "battery.rootsum|S.naive_node_links"
+    },
+    "4": {
+     "max_excess": 0.005,
+     "per_source_max": {
+      "a3": 0.003,
+      "a4": 0.003,
+      "battery": 0.005
+     },
+     "rule": "battery.wsum|S.naive_node_links"
+    },
+    "5": {
+     "max_excess": 0.005,
+     "per_source_max": {
+      "a3": 0.005,
+      "a4": 0.005,
+      "battery": 0.005
+     },
+     "rule": "battery.rootsum|S.identity"
+    },
+    "6": {
+     "max_excess": 0.005,
+     "per_source_max": {
+      "a3": 0.0,
+      "a4": 0.003,
+      "battery": 0.005
+     },
+     "rule": "battery.rootsum|S.naive_node_links"
+    }
+   },
+   "level_wide_max": 0.03,
+   "lineage": "C1.union_find_links_f3",
+   "partial_trace_M_level_wide_EFF_SM": {
+    "0": 0.27,
+    "1": 0.185,
+    "2": 0.12,
+    "3": 0.055,
+    "4": 0.037,
+    "5": 0.005,
+    "6": 0.028
+   },
+   "shape_counts_by_level": {
+    "0": {
+     "parents": 194,
+     "wsum": 206
+    },
+    "1": {
+     "parents": 184,
+     "wsum": 216
+    },
+    "2": {
+     "parents": 206,
+     "wsum": 194
+    },
+    "3": {
+     "parents": 195,
+     "wsum": 205
+    },
+    "4": {
+     "parents": 179,
+     "wsum": 221
+    },
+    "5": {
+     "parents": 207,
+     "wsum": 193
+    },
+    "6": {
+     "parents": 206,
+     "wsum": 194
+    }
+   }
+  },
+  "C1.while_counter_f3": {
+   "in_shape_max_by_shape": {
+    "collatz": {
+     "0": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.014,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.007,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.007,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "down": {
+     "0": {
+      "rate": 0.008,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "rate": 0.007,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "grow": {
+     "0": {
+      "rate": 0.014,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "rate": 0.0,
+      "rule": "S.threshold"
+     },
+     "2": {
+      "rate": 0.0,
+      "rule": "S.threshold"
+     },
+     "3": {
+      "rate": 0.0,
+      "rule": "S.threshold"
+     },
+     "4": {
+      "rate": 0.0,
+      "rule": "S.threshold"
+     },
+     "5": {
+      "rate": 0.0,
+      "rule": "S.threshold"
+     },
+     "6": {
+      "rate": 0.0,
+      "rule": "S.threshold"
+     }
+    }
+   },
+   "in_shape_max_overall": 0.014,
+   "level_wide_cheap": {
+    "0": {
+     "max_excess": 0.0225,
+     "per_source_max": {
+      "a3": 0.005,
+      "a4": 0.007,
+      "battery": 0.0225
+     },
+     "rule": "battery.collatz|S.sum_even_only"
+    },
+    "1": {
+     "max_excess": 0.0125,
+     "per_source_max": {
+      "a3": 0.005,
+      "a4": 0.005,
+      "battery": 0.0125
+     },
+     "rule": "battery.grow|S.no_remainder_term"
+    },
+    "2": {
+     "max_excess": 0.0225,
+     "per_source_max": {
+      "a3": 0.007,
+      "a4": 0.003,
+      "battery": 0.0225
+     },
+     "rule": "battery.collatz|S.sum_even_only"
+    },
+    "3": {
+     "max_excess": 0.01,
+     "per_source_max": {
+      "a3": 0.0,
+      "a4": 0.0,
+      "battery": 0.01
+     },
+     "rule": "battery.collatz|S.sum_even_only"
+    },
+    "4": {
+     "max_excess": 0.02,
+     "per_source_max": {
+      "a3": 0.003,
+      "a4": 0.003,
+      "battery": 0.02
+     },
+     "rule": "battery.BEST_generic_cv"
+    },
+    "5": {
+     "max_excess": 0.015,
+     "per_source_max": {
+      "a3": 0.0,
+      "a4": 0.0,
+      "battery": 0.015
+     },
+     "rule": "battery.grow|S.no_remainder_term"
+    },
+    "6": {
+     "max_excess": 0.013,
+     "per_source_max": {
+      "a3": 0.003,
+      "a4": 0.013,
+      "battery": 0.0075
+     },
+     "rule": "a4.EFF_S"
+    }
+   },
+   "level_wide_max": 0.0225,
+   "lineage": "C1.while_counter_f3",
+   "partial_trace_M_level_wide_EFF_SM": {
+    "0": 0.007,
+    "1": 0.005,
+    "2": 0.003,
+    "3": 0.0,
+    "4": 0.0,
+    "5": 0.003,
+    "6": 0.013
+   },
+   "shape_counts_by_level": {
+    "0": {
+     "collatz": 128,
+     "down": 126,
+     "grow": 146
+    },
+    "1": {
+     "collatz": 145,
+     "down": 128,
+     "grow": 127
+    },
+    "2": {
+     "collatz": 137,
+     "down": 136,
+     "grow": 127
+    },
+    "3": {
+     "collatz": 145,
+     "down": 134,
+     "grow": 121
+    },
+    "4": {
+     "collatz": 128,
+     "down": 142,
+     "grow": 130
+    },
+    "5": {
+     "collatz": 132,
+     "down": 141,
+     "grow": 127
+    },
+    "6": {
+     "collatz": 134,
+     "down": 146,
+     "grow": 120
+    }
+   }
+  }
+ }
+}

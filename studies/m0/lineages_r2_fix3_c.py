@@ -169,7 +169,7 @@ _BY_COUNT: dict[str, dict[int, list[str]]] = {}
 def _index() -> dict[str, dict[int, list[str]]]:
     if not _BY_COUNT:
         for w in PSEUDO:
-            for ch in set(w):
+            for ch in sorted(set(w)):
                 _BY_COUNT.setdefault(ch, {}).setdefault(w.count(ch), []).append(w)
         for ch, d in _BY_COUNT.items():
             d[0] = [w for w in PSEUDO if ch not in w]

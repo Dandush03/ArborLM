@@ -1,0 +1,25 @@
+reading 1 (STRONG), draft 2 deal (A first): units=56, cross-evaluation units=7
+  R1: clusters (independent units) 10 in 10 partition units; part A 5..5 (achievable sizes [5]), part B 5..5; smaller part 5..5
+  R2: clusters (independent units) 18 in 18 partition units; part A 9..9 (achievable sizes [9]), part B 9..9; smaller part 9..9
+  M1: clusters (independent units) 17 in 17 partition units; part A 8..8 (achievable sizes [8]), part B 9..9; smaller part 8..8
+  C1: clusters (independent units) 18 in 18 partition units; part A 9..9 (achievable sizes [9]), part B 9..9; smaller part 9..9
+reading 1 (STRONG), draft 3 deal (B first): units=56, cross-evaluation units=7
+  R1: clusters (independent units) 10 in 10 partition units; part A 5..5 (achievable sizes [5]), part B 5..5; smaller part 5..5
+  R2: clusters (independent units) 18 in 18 partition units; part A 9..9 (achievable sizes [9]), part B 9..9; smaller part 9..9
+  M1: clusters (independent units) 17 in 17 partition units; part A 8..8 (achievable sizes [8]), part B 9..9; smaller part 8..8
+  C1: clusters (independent units) 18 in 18 partition units; part A 9..9 (achievable sizes [9]), part B 9..9; smaller part 9..9
+reading 1 (STRONG), draft 3 option item 9: borderline groups kept in one part (B first): units=40, cross-evaluation units=15
+  R1: clusters (independent units) 10 in 8 partition units; part A 3..7 (achievable sizes [3, 4, 5, 6, 7]), part B 3..7; smaller part 3..5
+  R2: clusters (independent units) 18 in 17 partition units; part A 8..9 (achievable sizes [8, 9]), part B 9..10; smaller part 8..9
+  M1: clusters (independent units) 17 in 17 partition units; part A 8..8 (achievable sizes [8]), part B 9..9; smaller part 8..8
+  C1: clusters (independent units) 18 in 17 partition units; part A 8..9 (achievable sizes [8, 9]), part B 9..10; smaller part 8..9
+reading 2 (STRONG+BORDERLINE merged), draft 2 deal (A first): units=40, cross-evaluation units=15
+  R1: clusters (independent units) 8 in 8 partition units; part A 3..5 (achievable sizes [3, 4, 5]), part B 3..5; smaller part 3..4
+  R2: clusters (independent units) 17 in 17 partition units; part A 8..8 (achievable sizes [8]), part B 9..9; smaller part 8..8
+  M1: clusters (independent units) 17 in 17 partition units; part A 8..8 (achievable sizes [8]), part B 9..9; smaller part 8..8
+  C1: clusters (independent units) 17 in 17 partition units; part A 8..8 (achievable sizes [8]), part B 9..9; smaller part 8..8
+reading 2 (STRONG+BORDERLINE merged), draft 3 deal (B first): units=40, cross-evaluation units=15
+  R1: clusters (independent units) 8 in 8 partition units; part A 3..5 (achievable sizes [3, 4, 5]), part B 3..5; smaller part 3..4
+  R2: clusters (independent units) 17 in 17 partition units; part A 8..8 (achievable sizes [8]), part B 9..9; smaller part 8..8
+  M1: clusters (independent units) 17 in 17 partition units; part A 8..8 (achievable sizes [8]), part B 9..9; smaller part 8..8
+  C1: clusters (independent units) 17 in 17 partition units; part A 8..8 (achievable sizes [8]), part B 9..9; smaller part 8..8

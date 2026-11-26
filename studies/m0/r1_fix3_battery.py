@@ -621,7 +621,7 @@ def h_mst(b):
     cheapest = {}
     for w, a, c in es:
         cheapest.setdefault(a, (w, a, c)); cheapest.setdefault(c, (w, a, c))
-    out = {"n_minus_1_cheapest": str(sum(w for w, _, _ in es[: n - 1])), "each_town_cheapest_distinct": str(sum(w for w, _, _ in set(cheapest.values())))}
+    out = {"n_minus_1_cheapest": str(sum(w for w, _, _ in es[: n - 1])), "each_town_cheapest_distinct": str(sum(w for w, _, _ in sorted(set(cheapest.values()))))}
     s = re.search(r"between (\w+) and", b.question).group(1)
     INF = 10 ** 9
     d = {t: INF for t in towns}; d[s] = 0; par = {}
