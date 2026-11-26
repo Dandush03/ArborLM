@@ -1,0 +1,86 @@
+{
+  "approved_text": {
+    "commit": "2c944302cf8c81e081e14b33a42d4dfc994da8ba",
+    "sha256": "154d16a0597dc8b2d41179ded63a5da3e6e92aa4f7b414fefda1f93cd4d0923c"
+  },
+  "generators_commit": "7cd0ac5a",
+  "i_survivor_list": {
+    "path": "studies/m0/manifests/survivor_list_of_record.json",
+    "sha256": "0b658145a825490647b99eeab449bd442057fcd177a0be848fafa1868a87be0d"
+  },
+  "ii_script_listing": {
+    "path": "docs/reviews/m0-fresh-run-2026-11-26/script_listing/script_listing.json",
+    "sha256": "43657fa19e061276198d5f8fafaf9c90b50f3e7f1dc24f6f4e458238e4049e12"
+  },
+  "iii_copy_audit": {
+    "path": "docs/reviews/m0-fresh-run-2026-11-26/copy_audit/copy_hashes.json",
+    "sha256": "4ef58a395cd77d496806fd4d9d0131d8e3be99a10462e117619e24fe45469eac"
+  },
+  "iii_run_copies": {
+    "studies/m0/fresh_run/c1/f5_closed_forms.py": "7e9455104d0cdb2f2b4cf6f51a2dc2a5abbf50befbbad44d38a00aa1f2604e49",
+    "studies/m0/fresh_run/c1/f5b_closed_forms_v2.py": "3429dcda6f69921d789be38607a8af81a42d4d0562f7e86466b32fe385790a37",
+    "studies/m0/fresh_run/m1/m1_fix3_shortcuts.py": "5961ccfc3388267d6d50a4d32e542b9ca3ed05ab5c24ae9306b50098a327c1ee",
+    "studies/m0/fresh_run/m1/m1_fix4_battery.py": "17c3de3775bd888dccdd6cb46cea2f6138b4dc0227cd4d3900e0527f15e23d30",
+    "studies/m0/fresh_run/m1/shortcuts_a3.py": "c3d0bd399cd35e36caee6eaab7e8b163fd3bce538388bfd7804d569d2505aeb2",
+    "studies/m0/fresh_run/m1/shortcuts_a4.py": "f6f63e1aaed5a5bc8d02a89f1c65ba5868b6da0b6d6bc74e9d173452adbf6743",
+    "studies/m0/fresh_run/r1/new_rules_final.py": "a57be6728a81f710d001437eaad624243bd8362a4f683fe9c30e6aa5129bdf60",
+    "studies/m0/fresh_run/r1/r1_fix4_measure.py": "cce2747a072a8aef83862f9e95f925f493d23a280ec491ebaa3a04127507ef72",
+    "studies/m0/fresh_run/r1/r1_fix4_tells.py": "812e0d38c3c1c167e586091dfceac95b63943e43889b97c0e5eaf311f4eab45a",
+    "studies/m0/fresh_run/r2/f_new_heur.py": "30710a0f7e0efd0af79e946f099a7071eb89d73c39c47f7b12d23b611bb2e62b",
+    "studies/m0/fresh_run/r2/f_rules.py": "5f5fcee11234d40c4df1d603bc851ce6cfdf0a92f506f135a74281b0f93d297f",
+    "studies/m0/fresh_run/r2/f_rules_new.py": "5b3019ced2307d9ab7776158151df14f7e33e74e2fcac73d527352f60c487dc0",
+    "studies/m0/fresh_run/r2/r2_fix4_battery.py": "920d246080a23e36e412a3ae2c669c9864cc1184c4a170cc17f741bbacfed0f9"
+  },
+  "iv_amendment_list": {
+    "path": "docs/reviews/m0-fresh-run-2026-11-26/amendment_audit/amendment_list.json",
+    "sha256": "a861df02fb54662b0aa6f8ff151ec12c7f627fa3c8cc532a09db78f7516ccaf1"
+  },
+  "iv_class_table": {
+    "path": "docs/reviews/adr-0033-m0-2026-11-20/addendum1_scripts/addendum1_rev7_uncounted_rules.json (claude/m0-spec)",
+    "sha256": "ccea7d78754480830f3887d27ac808e207c60ef4c4a444e47fe6a3fc4c2cd24d"
+  },
+  "lead_rulings": {
+    "path": "docs/reviews/m0-fresh-run-2026-11-26/LEAD_RULINGS_8.md",
+    "sha256": "2c443281d129fbb630c8f175834b3cf3586c9a24fb112de1a9daa9b8a356de60"
+  },
+  "map_of_record": {
+    "path": "studies/m0/manifests/map_of_record.json",
+    "sha256": "1ba6ddd520dfe6514dfd282883ce4bc84660b7dca1abfefdac58285dcab5809c"
+  },
+  "rule_scripts_commit": "b78e58b1f47619f070dfc6c0a88999d345b1a34b",
+  "runner": {
+    "path": "studies/m0/fresh_run/run_fresh.py",
+    "sha256": "12fd29aa6defcbe408d14abcd3e9c277bddb764560882d685284ec3422685f8b"
+  },
+  "second_solvers": {
+    "studies/m0/solvers2/solver2_c1.py": "6615f6d878fe67d5434aaecccf644b7287e1913c5b4c0cca52ba1e82faf4b135",
+    "studies/m0/solvers2/solver2_m1a.py": "2ee46ee4e1284016fe8ee0878775deff2a204415855708d37aecce087b1b9dfb",
+    "studies/m0/solvers2/solver2_m1b.py": "d4ddb3b1e3b5c6af01eea9a5a89ae634a92da112d6047535a4996262bba4eae5",
+    "studies/m0/solvers2/solver2_m1c.py": "9a7dc6e0ce04768e46ff285cc3cbff805f190b053cb2e2129783da722c11100c",
+    "studies/m0/solvers2/solver2_r1.py": "9d18a713bfa010f874f31ff370d5d5aa94fc4ea5eb91eca26b79b63821e5cc0b",
+    "studies/m0/solvers2/solver2_r2a.py": "04e297eed65e34c51e13289b4d892c1794c006bcec1703cf48e7c95fc0ce1706",
+    "studies/m0/solvers2/solver2_r2b.py": "a44c690176ba0c3c13b49f8587e8751e8708994272b126c7d2c6e74a0d39228f"
+  },
+  "stage2_conditions": {
+    "path": "studies/m0/manifests/stage2_conditions.json",
+    "sha256": "81d454a2c7045c7ad9bad9a18b2d9f18e5f3e5c02a4590b5a76ebc1368ae3e55"
+  },
+  "v_field_table": {
+    "path": "studies/m0/fresh_run/field_table.json",
+    "sha256": "1f64ac39427c18efc25e0eb134ab3cae23a2b7671957bf73505baca3ccd1bafe"
+  },
+  "v_pooling_script": {
+    "path": "studies/m0/fresh_run/pool_fresh.py",
+    "sha256": "19e6f61f2da4e1eda448b7fb0bdcb33f85ad7159855884d8927198ab471347aa"
+  },
+  "vi_dry_run": {
+    "exclusions": [],
+    "path": "docs/reviews/m0-fresh-run-2026-11-26/dry_run/hashes_dry.json",
+    "sha256": "c9420f6452a53afe260a54c8c6dcb8db2dd1a996d18f03cd4b7e8151a0cc4be6"
+  },
+  "vii_run_plan": {
+    "path": "studies/m0/fresh_run/run_plan.json",
+    "sha256": "316f1026f1987d14792116ad4f3271efe0047d4c0d0a0a26d30e98b681caf389"
+  },
+  "what": "The hashes of ADR-0033 addendum 1, section 4A, stage 1S point 9, taken before any item of the three run seeds is generated"
+}
