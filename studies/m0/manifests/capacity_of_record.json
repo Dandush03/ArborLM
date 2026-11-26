@@ -1,0 +1,6207 @@
+{
+ "inputs": {
+  "cache_tag": null,
+  "candidates": "studies/m0/registration/candidate_list.json",
+  "map": "studies/m0/manifests/map_of_record.json",
+  "partition": "studies/m0/manifests/partition_of_record.json",
+  "sha256": {
+   "candidates": "8dcc796c0dc8554fab52a5e3093f73c6f2838fe5b965e2b3743fea6291f8946a",
+   "map": "1ba6ddd520dfe6514dfd282883ce4bc84660b7dca1abfefdac58285dcab5809c",
+   "partition": "750715d846a086f901ccf2525ab8c87c13f61b543f44e44dca2aeb0d401a37e9"
+  }
+ },
+ "parts": {
+  "C1": {
+   "A": {
+    "G_registered": 13,
+    "G_start": 13,
+    "families": [
+     "accumulators",
+     "functions",
+     "lists",
+     "nested",
+     "simulation",
+     "slices",
+     "stacks",
+     "string_methods",
+     "strings",
+     "while"
+    ],
+    "lineages_registered": 17,
+    "lineages_start": 17,
+    "n_families": 10,
+    "registered": {
+     "C1.bracket_matching": [
+      "C1.bracket_matching_f3",
+      "C1.postfix_evaluation"
+     ],
+     "C1.bytecode_loop": [
+      "C1.bytecode_loop_f3"
+     ],
+     "C1.counter_list_f3": [
+      "C1.counter_list_f3"
+     ],
+     "C1.digit_peel": [
+      "C1.digit_peel_f3"
+     ],
+     "C1.euclid_gcd": [
+      "C1.euclid_gcd_traced_f3"
+     ],
+     "C1.fast_power": [
+      "C1.fast_power_f4"
+     ],
+     "C1.fib_like": [
+      "C1.fib_like_f3",
+      "C1.fib_shapes_recursive_f3",
+      "C1.recursive_calls_r2"
+     ],
+     "C1.list_build": [
+      "C1.list_build_f3"
+     ],
+     "C1.nested_pairs": [
+      "C1.nested_pairs_f3"
+     ],
+     "C1.slices": [
+      "C1.slices_f4",
+      "C1.string_methods_f3"
+     ],
+     "C1.string_build": [
+      "C1.string_build_f3"
+     ],
+     "C1.turtle_walk": [
+      "C1.turtle_walk_f3"
+     ],
+     "C1.while_counter": [
+      "C1.while_counter_f3"
+     ]
+    },
+    "removed": [],
+    "rounds": [
+     {
+      "D_G": 19470,
+      "G": 13,
+      "clusters": {
+       "C1.bracket_matching": {
+        "D_lin": 9740,
+        "k": 2,
+        "lineages": {
+         "C1.bracket_matching_f3": {
+          "0": {
+           "attempts": 9740,
+           "count": 9740,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 9740
+          },
+          "1": {
+           "attempts": 9740,
+           "count": 9740,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 9740
+          },
+          "2": {
+           "attempts": 9740,
+           "count": 9740,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 9740
+          },
+          "3": {
+           "attempts": 9740,
+           "count": 9740,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 9740
+          },
+          "4": {
+           "attempts": 9740,
+           "count": 9740,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 9740
+          },
+          "5": {
+           "attempts": 9740,
+           "count": 9740,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 9740
+          },
+          "6": {
+           "attempts": 9740,
+           "count": 9740,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 9740
+          }
+         },
+         "C1.postfix_evaluation": {
+          "0": {
+           "attempts": 10156,
+           "count": 9740,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 9740
+          },
+          "1": {
+           "attempts": 9747,
+           "count": 9740,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 9740
+          },
+          "2": {
+           "attempts": 9740,
+           "count": 9740,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 9740
+          },
+          "3": {
+           "attempts": 9740,
+           "count": 9740,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 9740
+          },
+          "4": {
+           "attempts": 9740,
+           "count": 9740,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 9740
+          },
+          "5": {
+           "attempts": 9740,
+           "count": 9740,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 9740
+          },
+          "6": {
+           "attempts": 9740,
+           "count": 9740,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 9740
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 19480,
+         "1": 19480,
+         "2": 19480,
+         "3": 19480,
+         "4": 19480,
+         "5": 19480,
+         "6": 19480
+        },
+        "union_evaluated": true
+       },
+       "C1.bytecode_loop": {
+        "D_lin": 19470,
+        "k": 1,
+        "lineages": {
+         "C1.bytecode_loop_f3": {
+          "0": {
+           "attempts": 19488,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "1": {
+           "attempts": 19470,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "2": {
+           "attempts": 19470,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "3": {
+           "attempts": 19470,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "4": {
+           "attempts": 19470,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "5": {
+           "attempts": 19470,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "6": {
+           "attempts": 19470,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 19470,
+         "1": 19470,
+         "2": 19470,
+         "3": 19470,
+         "4": 19470,
+         "5": 19470,
+         "6": 19470
+        },
+        "union_evaluated": true
+       },
+       "C1.counter_list_f3": {
+        "D_lin": 19470,
+        "k": 1,
+        "lineages": {
+         "C1.counter_list_f3": {
+          "0": {
+           "attempts": 19470,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "1": {
+           "attempts": 19470,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "2": {
+           "attempts": 19470,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "3": {
+           "attempts": 19470,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "4": {
+           "attempts": 19470,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "5": {
+           "attempts": 19470,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "6": {
+           "attempts": 19470,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 19470,
+         "1": 19470,
+         "2": 19470,
+         "3": 19470,
+         "4": 19470,
+         "5": 19470,
+         "6": 19470
+        },
+        "union_evaluated": true
+       },
+       "C1.digit_peel": {
+        "D_lin": 19470,
+        "k": 1,
+        "lineages": {
+         "C1.digit_peel_f3": {
+          "0": {
+           "attempts": 21312,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "1": {
+           "attempts": 19916,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "2": {
+           "attempts": 19571,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "3": {
+           "attempts": 19492,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "4": {
+           "attempts": 19480,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "5": {
+           "attempts": 19474,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "6": {
+           "attempts": 19472,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 19470,
+         "1": 19470,
+         "2": 19470,
+         "3": 19470,
+         "4": 19470,
+         "5": 19470,
+         "6": 19470
+        },
+        "union_evaluated": true
+       },
+       "C1.euclid_gcd": {
+        "D_lin": 19470,
+        "k": 1,
+        "lineages": {
+         "C1.euclid_gcd_traced_f3": {
+          "0": {
+           "attempts": 24336,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "1": {
+           "attempts": 22251,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "2": {
+           "attempts": 21251,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "3": {
+           "attempts": 20598,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "4": {
+           "attempts": 20337,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "5": {
+           "attempts": 19946,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "6": {
+           "attempts": 19864,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 19470,
+         "1": 19470,
+         "2": 19470,
+         "3": 19470,
+         "4": 19470,
+         "5": 19470,
+         "6": 19470
+        },
+        "union_evaluated": true
+       },
+       "C1.fast_power": {
+        "D_lin": 19470,
+        "k": 1,
+        "lineages": {
+         "C1.fast_power_f4": {
+          "0": {
+           "attempts": 19792,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "1": {
+           "attempts": 19573,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "2": {
+           "attempts": 19498,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "3": {
+           "attempts": 19482,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "4": {
+           "attempts": 19473,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "5": {
+           "attempts": 19472,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "6": {
+           "attempts": 19472,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 19470,
+         "1": 19470,
+         "2": 19470,
+         "3": 19470,
+         "4": 19470,
+         "5": 19470,
+         "6": 19470
+        },
+        "union_evaluated": true
+       },
+       "C1.fib_like": {
+        "D_lin": 6500,
+        "k": 3,
+        "lineages": {
+         "C1.fib_like_f3": {
+          "0": {
+           "attempts": 7650,
+           "count": 6500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6500
+          },
+          "1": {
+           "attempts": 7638,
+           "count": 6500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6500
+          },
+          "2": {
+           "attempts": 7732,
+           "count": 6500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6500
+          },
+          "3": {
+           "attempts": 7697,
+           "count": 6500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6500
+          },
+          "4": {
+           "attempts": 7634,
+           "count": 6500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6500
+          },
+          "5": {
+           "attempts": 7733,
+           "count": 6500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6500
+          },
+          "6": {
+           "attempts": 7712,
+           "count": 6500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6500
+          }
+         },
+         "C1.fib_shapes_recursive_f3": {
+          "0": {
+           "attempts": 10491,
+           "count": 6500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6500
+          },
+          "1": {
+           "attempts": 10619,
+           "count": 6500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6500
+          },
+          "2": {
+           "attempts": 10677,
+           "count": 6500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6500
+          },
+          "3": {
+           "attempts": 10670,
+           "count": 6500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6500
+          },
+          "4": {
+           "attempts": 10604,
+           "count": 6500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6500
+          },
+          "5": {
+           "attempts": 10577,
+           "count": 6500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6500
+          },
+          "6": {
+           "attempts": 10590,
+           "count": 6500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6500
+          }
+         },
+         "C1.recursive_calls_r2": {
+          "0": {
+           "attempts": 7591,
+           "count": 6500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6500
+          },
+          "1": {
+           "attempts": 7336,
+           "count": 6500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6500
+          },
+          "2": {
+           "attempts": 7276,
+           "count": 6500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6500
+          },
+          "3": {
+           "attempts": 7155,
+           "count": 6500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6500
+          },
+          "4": {
+           "attempts": 7130,
+           "count": 6500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6500
+          },
+          "5": {
+           "attempts": 7093,
+           "count": 6500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6500
+          },
+          "6": {
+           "attempts": 7034,
+           "count": 6500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6500
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 19500,
+         "1": 19500,
+         "2": 19500,
+         "3": 19500,
+         "4": 19500,
+         "5": 19500,
+         "6": 19500
+        },
+        "union_evaluated": true
+       },
+       "C1.list_build": {
+        "D_lin": 19470,
+        "k": 1,
+        "lineages": {
+         "C1.list_build_f3": {
+          "0": {
+           "attempts": 29948,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "1": {
+           "attempts": 29838,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "2": {
+           "attempts": 30054,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "3": {
+           "attempts": 29921,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "4": {
+           "attempts": 29860,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "5": {
+           "attempts": 30104,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "6": {
+           "attempts": 29748,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 19470,
+         "1": 19470,
+         "2": 19470,
+         "3": 19470,
+         "4": 19470,
+         "5": 19470,
+         "6": 19470
+        },
+        "union_evaluated": true
+       },
+       "C1.nested_pairs": {
+        "D_lin": 19470,
+        "k": 1,
+        "lineages": {
+         "C1.nested_pairs_f3": {
+          "0": {
+           "attempts": 29440,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "1": {
+           "attempts": 26468,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "2": {
+           "attempts": 24706,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "3": {
+           "attempts": 23618,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "4": {
+           "attempts": 22996,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "5": {
+           "attempts": 22317,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "6": {
+           "attempts": 22125,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 19470,
+         "1": 19470,
+         "2": 19470,
+         "3": 19470,
+         "4": 19470,
+         "5": 19470,
+         "6": 19470
+        },
+        "union_evaluated": true
+       },
+       "C1.slices": {
+        "D_lin": 9740,
+        "k": 2,
+        "lineages": {
+         "C1.slices_f4": {
+          "0": {
+           "attempts": 9740,
+           "count": 9740,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 9740
+          },
+          "1": {
+           "attempts": 9740,
+           "count": 9740,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 9740
+          },
+          "2": {
+           "attempts": 9740,
+           "count": 9740,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 9740
+          },
+          "3": {
+           "attempts": 9740,
+           "count": 9740,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 9740
+          },
+          "4": {
+           "attempts": 9740,
+           "count": 9740,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 9740
+          },
+          "5": {
+           "attempts": 9740,
+           "count": 9740,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 9740
+          },
+          "6": {
+           "attempts": 9740,
+           "count": 9740,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 9740
+          }
+         },
+         "C1.string_methods_f3": {
+          "0": {
+           "attempts": 9744,
+           "count": 9740,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 9740
+          },
+          "1": {
+           "attempts": 9742,
+           "count": 9740,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 9740
+          },
+          "2": {
+           "attempts": 9740,
+           "count": 9740,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 9740
+          },
+          "3": {
+           "attempts": 9740,
+           "count": 9740,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 9740
+          },
+          "4": {
+           "attempts": 9740,
+           "count": 9740,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 9740
+          },
+          "5": {
+           "attempts": 9740,
+           "count": 9740,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 9740
+          },
+          "6": {
+           "attempts": 9740,
+           "count": 9740,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 9740
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 19480,
+         "1": 19480,
+         "2": 19480,
+         "3": 19480,
+         "4": 19480,
+         "5": 19480,
+         "6": 19480
+        },
+        "union_evaluated": true
+       },
+       "C1.string_build": {
+        "D_lin": 19470,
+        "k": 1,
+        "lineages": {
+         "C1.string_build_f3": {
+          "0": {
+           "attempts": 21040,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "1": {
+           "attempts": 21011,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "2": {
+           "attempts": 19547,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "3": {
+           "attempts": 19539,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "4": {
+           "attempts": 19545,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "5": {
+           "attempts": 19535,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "6": {
+           "attempts": 19536,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 19470,
+         "1": 19470,
+         "2": 19470,
+         "3": 19470,
+         "4": 19470,
+         "5": 19470,
+         "6": 19470
+        },
+        "union_evaluated": true
+       },
+       "C1.turtle_walk": {
+        "D_lin": 19470,
+        "k": 1,
+        "lineages": {
+         "C1.turtle_walk_f3": {
+          "0": {
+           "attempts": 19470,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "1": {
+           "attempts": 19470,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "2": {
+           "attempts": 19470,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "3": {
+           "attempts": 19470,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "4": {
+           "attempts": 19470,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "5": {
+           "attempts": 19470,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "6": {
+           "attempts": 19470,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 19470,
+         "1": 19470,
+         "2": 19470,
+         "3": 19470,
+         "4": 19470,
+         "5": 19470,
+         "6": 19470
+        },
+        "union_evaluated": true
+       },
+       "C1.while_counter": {
+        "D_lin": 19470,
+        "k": 1,
+        "lineages": {
+         "C1.while_counter_f3": {
+          "0": {
+           "attempts": 36247,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "1": {
+           "attempts": 33920,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "2": {
+           "attempts": 32663,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "3": {
+           "attempts": 31764,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "4": {
+           "attempts": 31038,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "5": {
+           "attempts": 30460,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          },
+          "6": {
+           "attempts": 30252,
+           "count": 19470,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 19470
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 19470,
+         "1": 19470,
+         "2": 19470,
+         "3": 19470,
+         "4": 19470,
+         "5": 19470,
+         "6": 19470
+        },
+        "union_evaluated": true
+       }
+      },
+      "failing": [],
+      "round": 1
+     }
+    ],
+    "start": {
+     "C1.bracket_matching": [
+      "C1.bracket_matching_f3",
+      "C1.postfix_evaluation"
+     ],
+     "C1.bytecode_loop": [
+      "C1.bytecode_loop_f3"
+     ],
+     "C1.counter_list_f3": [
+      "C1.counter_list_f3"
+     ],
+     "C1.digit_peel": [
+      "C1.digit_peel_f3"
+     ],
+     "C1.euclid_gcd": [
+      "C1.euclid_gcd_traced_f3"
+     ],
+     "C1.fast_power": [
+      "C1.fast_power_f4"
+     ],
+     "C1.fib_like": [
+      "C1.fib_like_f3",
+      "C1.fib_shapes_recursive_f3",
+      "C1.recursive_calls_r2"
+     ],
+     "C1.list_build": [
+      "C1.list_build_f3"
+     ],
+     "C1.nested_pairs": [
+      "C1.nested_pairs_f3"
+     ],
+     "C1.slices": [
+      "C1.slices_f4",
+      "C1.string_methods_f3"
+     ],
+     "C1.string_build": [
+      "C1.string_build_f3"
+     ],
+     "C1.turtle_walk": [
+      "C1.turtle_walk_f3"
+     ],
+     "C1.while_counter": [
+      "C1.while_counter_f3"
+     ]
+    }
+   },
+   "B": {
+    "G_registered": 4,
+    "G_start": 4,
+    "families": [
+     "functions",
+     "lists",
+     "strings"
+    ],
+    "lineages_registered": 4,
+    "lineages_start": 4,
+    "n_families": 3,
+    "registered": {
+     "C1.binary_search": [
+      "C1.binary_search_f3"
+     ],
+     "C1.func_branch": [
+      "C1.func_compose_f4"
+     ],
+     "C1.merge_two_sorted": [
+      "C1.merge_two_sorted_f3"
+     ],
+     "C1.run_length_scan": [
+      "C1.run_length_scan"
+     ]
+    },
+    "removed": [],
+    "rounds": [
+     {
+      "D_G": 61000,
+      "G": 4,
+      "clusters": {
+       "C1.binary_search": {
+        "D_lin": 61000,
+        "k": 1,
+        "lineages": {
+         "C1.binary_search_f3": {
+          "0": {
+           "attempts": 61000,
+           "count": 61000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 61000
+          },
+          "1": {
+           "attempts": 61000,
+           "count": 61000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 61000
+          },
+          "2": {
+           "attempts": 61000,
+           "count": 61000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 61000
+          },
+          "3": {
+           "attempts": 61000,
+           "count": 61000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 61000
+          },
+          "4": {
+           "attempts": 61000,
+           "count": 61000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 61000
+          },
+          "5": {
+           "attempts": 61000,
+           "count": 61000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 61000
+          },
+          "6": {
+           "attempts": 61000,
+           "count": 61000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 61000
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 61000,
+         "1": 61000,
+         "2": 61000,
+         "3": 61000,
+         "4": 61000,
+         "5": 61000,
+         "6": 61000
+        },
+        "union_evaluated": true
+       },
+       "C1.func_branch": {
+        "D_lin": 61000,
+        "k": 1,
+        "lineages": {
+         "C1.func_compose_f4": {
+          "0": {
+           "attempts": 101500,
+           "count": 61000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 61000
+          },
+          "1": {
+           "attempts": 80188,
+           "count": 61000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 61000
+          },
+          "2": {
+           "attempts": 63395,
+           "count": 61000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 61000
+          },
+          "3": {
+           "attempts": 61106,
+           "count": 61000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 61000
+          },
+          "4": {
+           "attempts": 61063,
+           "count": 61000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 61000
+          },
+          "5": {
+           "attempts": 61041,
+           "count": 61000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 61000
+          },
+          "6": {
+           "attempts": 61044,
+           "count": 61000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 61000
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 61000,
+         "1": 61000,
+         "2": 61000,
+         "3": 61000,
+         "4": 61000,
+         "5": 61000,
+         "6": 61000
+        },
+        "union_evaluated": true
+       },
+       "C1.merge_two_sorted": {
+        "D_lin": 61000,
+        "k": 1,
+        "lineages": {
+         "C1.merge_two_sorted_f3": {
+          "0": {
+           "attempts": 82782,
+           "count": 61000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 61000
+          },
+          "1": {
+           "attempts": 62750,
+           "count": 61000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 61000
+          },
+          "2": {
+           "attempts": 61061,
+           "count": 61000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 61000
+          },
+          "3": {
+           "attempts": 61007,
+           "count": 61000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 61000
+          },
+          "4": {
+           "attempts": 61001,
+           "count": 61000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 61000
+          },
+          "5": {
+           "attempts": 61000,
+           "count": 61000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 61000
+          },
+          "6": {
+           "attempts": 61000,
+           "count": 61000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 61000
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 61000,
+         "1": 61000,
+         "2": 61000,
+         "3": 61000,
+         "4": 61000,
+         "5": 61000,
+         "6": 61000
+        },
+        "union_evaluated": true
+       },
+       "C1.run_length_scan": {
+        "D_lin": 61000,
+        "k": 1,
+        "lineages": {
+         "C1.run_length_scan": {
+          "0": {
+           "attempts": 76290,
+           "count": 61000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 61000
+          },
+          "1": {
+           "attempts": 62210,
+           "count": 61000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 61000
+          },
+          "2": {
+           "attempts": 61021,
+           "count": 61000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 61000
+          },
+          "3": {
+           "attempts": 61000,
+           "count": 61000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 61000
+          },
+          "4": {
+           "attempts": 61000,
+           "count": 61000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 61000
+          },
+          "5": {
+           "attempts": 61000,
+           "count": 61000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 61000
+          },
+          "6": {
+           "attempts": 61000,
+           "count": 61000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 61000
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 61000,
+         "1": 61000,
+         "2": 61000,
+         "3": 61000,
+         "4": 61000,
+         "5": 61000,
+         "6": 61000
+        },
+        "union_evaluated": true
+       }
+      },
+      "failing": [],
+      "round": 1
+     }
+    ],
+    "start": {
+     "C1.binary_search": [
+      "C1.binary_search_f3"
+     ],
+     "C1.func_branch": [
+      "C1.func_compose_f4"
+     ],
+     "C1.merge_two_sorted": [
+      "C1.merge_two_sorted_f3"
+     ],
+     "C1.run_length_scan": [
+      "C1.run_length_scan"
+     ]
+    }
+   }
+  },
+  "M1": {
+   "A": {
+    "G_registered": 8,
+    "G_start": 8,
+    "families": [
+     "age",
+     "average",
+     "counting",
+     "linear",
+     "number_theory",
+     "pricing",
+     "rates",
+     "ratio",
+     "sequences",
+     "series",
+     "shopping",
+     "time"
+    ],
+    "lineages_registered": 15,
+    "lineages_start": 16,
+    "n_families": 12,
+    "registered": {
+     "C1.coin_change_table": [
+      "M1.change_ways_r3"
+     ],
+     "C1.euclid_gcd": [
+      "M1.gcd_lcm_r4"
+     ],
+     "C1.fib_like": [
+      "M1.arithmetic_series_r3",
+      "M1.recurrence_iterate_r3"
+     ],
+     "M1.ages": [
+      "M1.ages_r3",
+      "M1.average_missing_r4",
+      "M1.consecutive_r3",
+      "M1.linear_equation_r3",
+      "M1.pipes_work_r3"
+     ],
+     "M1.clock_duration": [
+      "M1.clock_duration_r4"
+     ],
+     "M1.crt_congruence": [
+      "M1.crt_congruence_r3"
+     ],
+     "M1.mixture": [
+      "M1.mixture_r4",
+      "M1.shopping_r3",
+      "M1.speed_distance_r3"
+     ],
+     "M1.tiered_pricing": [
+      "M1.tiered_pricing"
+     ]
+    },
+    "removed": [
+     {
+      "G": 8,
+      "cluster": "M1.ages",
+      "k": 6,
+      "lineage": "M1.rectangle_r3",
+      "reasons": [
+       {
+        "kind": "own_demand",
+        "levels": {
+         "0": {
+          "count": 4189,
+          "demand": 5180,
+          "ended": "budget"
+         },
+         "1": {
+          "count": 4899,
+          "demand": 5180,
+          "ended": "budget"
+         }
+        }
+       }
+      ],
+      "round": 1
+     }
+    ],
+    "rounds": [
+     {
+      "D_G": 31000,
+      "G": 8,
+      "clusters": {
+       "C1.coin_change_table": {
+        "D_lin": 31000,
+        "k": 1,
+        "lineages": {
+         "M1.change_ways_r3": {
+          "0": {
+           "attempts": 33700,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "1": {
+           "attempts": 32856,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "2": {
+           "attempts": 32354,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "3": {
+           "attempts": 32195,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "4": {
+           "attempts": 31954,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "5": {
+           "attempts": 31868,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "6": {
+           "attempts": 31720,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 31000,
+         "1": 31000,
+         "2": 31000,
+         "3": 31000,
+         "4": 31000,
+         "5": 31000,
+         "6": 31000
+        },
+        "union_evaluated": true
+       },
+       "C1.euclid_gcd": {
+        "D_lin": 31000,
+        "k": 1,
+        "lineages": {
+         "M1.gcd_lcm_r4": {
+          "0": {
+           "attempts": 33912,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "1": {
+           "attempts": 32563,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "2": {
+           "attempts": 31814,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "3": {
+           "attempts": 32062,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "4": {
+           "attempts": 31475,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "5": {
+           "attempts": 31265,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "6": {
+           "attempts": 31135,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 31000,
+         "1": 31000,
+         "2": 31000,
+         "3": 31000,
+         "4": 31000,
+         "5": 31000,
+         "6": 31000
+        },
+        "union_evaluated": true
+       },
+       "C1.fib_like": {
+        "D_lin": 15500,
+        "k": 2,
+        "lineages": {
+         "M1.arithmetic_series_r3": {
+          "0": {
+           "attempts": 23211,
+           "count": 15500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 15500
+          },
+          "1": {
+           "attempts": 20258,
+           "count": 15500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 15500
+          },
+          "2": {
+           "attempts": 18961,
+           "count": 15500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 15500
+          },
+          "3": {
+           "attempts": 18430,
+           "count": 15500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 15500
+          },
+          "4": {
+           "attempts": 17866,
+           "count": 15500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 15500
+          },
+          "5": {
+           "attempts": 17450,
+           "count": 15500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 15500
+          },
+          "6": {
+           "attempts": 17204,
+           "count": 15500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 15500
+          }
+         },
+         "M1.recurrence_iterate_r3": {
+          "0": {
+           "attempts": 15771,
+           "count": 15500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 15500
+          },
+          "1": {
+           "attempts": 15693,
+           "count": 15500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 15500
+          },
+          "2": {
+           "attempts": 15711,
+           "count": 15500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 15500
+          },
+          "3": {
+           "attempts": 15650,
+           "count": 15500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 15500
+          },
+          "4": {
+           "attempts": 15654,
+           "count": 15500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 15500
+          },
+          "5": {
+           "attempts": 15639,
+           "count": 15500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 15500
+          },
+          "6": {
+           "attempts": 15638,
+           "count": 15500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 15500
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 31000,
+         "1": 31000,
+         "2": 31000,
+         "3": 31000,
+         "4": 31000,
+         "5": 31000,
+         "6": 31000
+        },
+        "union_evaluated": true
+       },
+       "M1.ages": {
+        "D_lin": 5180,
+        "k": 6,
+        "lineages": {
+         "M1.ages_r3": {
+          "0": {
+           "attempts": 7185,
+           "count": 5180,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 5180
+          },
+          "1": {
+           "attempts": 6741,
+           "count": 5180,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 5180
+          },
+          "2": {
+           "attempts": 6124,
+           "count": 5180,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 5180
+          },
+          "3": {
+           "attempts": 5907,
+           "count": 5180,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 5180
+          },
+          "4": {
+           "attempts": 5698,
+           "count": 5180,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 5180
+          },
+          "5": {
+           "attempts": 5646,
+           "count": 5180,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 5180
+          },
+          "6": {
+           "attempts": 5483,
+           "count": 5180,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 5180
+          }
+         },
+         "M1.average_missing_r4": {
+          "0": {
+           "attempts": 5180,
+           "count": 5180,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 5180
+          },
+          "1": {
+           "attempts": 5180,
+           "count": 5180,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 5180
+          },
+          "2": {
+           "attempts": 5180,
+           "count": 5180,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 5180
+          },
+          "3": {
+           "attempts": 5180,
+           "count": 5180,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 5180
+          },
+          "4": {
+           "attempts": 5180,
+           "count": 5180,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 5180
+          },
+          "5": {
+           "attempts": 5180,
+           "count": 5180,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 5180
+          },
+          "6": {
+           "attempts": 5180,
+           "count": 5180,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 5180
+          }
+         },
+         "M1.consecutive_r3": {
+          "0": {
+           "attempts": 8132,
+           "count": 5180,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 5180
+          },
+          "1": {
+           "attempts": 6735,
+           "count": 5180,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 5180
+          },
+          "2": {
+           "attempts": 5650,
+           "count": 5180,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 5180
+          },
+          "3": {
+           "attempts": 5533,
+           "count": 5180,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 5180
+          },
+          "4": {
+           "attempts": 5488,
+           "count": 5180,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 5180
+          },
+          "5": {
+           "attempts": 5411,
+           "count": 5180,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 5180
+          },
+          "6": {
+           "attempts": 5414,
+           "count": 5180,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 5180
+          }
+         },
+         "M1.linear_equation_r3": {
+          "0": {
+           "attempts": 5502,
+           "count": 5180,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 5180
+          },
+          "1": {
+           "attempts": 5403,
+           "count": 5180,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 5180
+          },
+          "2": {
+           "attempts": 5334,
+           "count": 5180,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 5180
+          },
+          "3": {
+           "attempts": 5189,
+           "count": 5180,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 5180
+          },
+          "4": {
+           "attempts": 5188,
+           "count": 5180,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 5180
+          },
+          "5": {
+           "attempts": 5187,
+           "count": 5180,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 5180
+          },
+          "6": {
+           "attempts": 5188,
+           "count": 5180,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 5180
+          }
+         },
+         "M1.pipes_work_r3": {
+          "0": {
+           "attempts": 5946,
+           "count": 5180,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 5180
+          },
+          "1": {
+           "attempts": 5706,
+           "count": 5180,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 5180
+          },
+          "2": {
+           "attempts": 5595,
+           "count": 5180,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 5180
+          },
+          "3": {
+           "attempts": 5195,
+           "count": 5180,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 5180
+          },
+          "4": {
+           "attempts": 5187,
+           "count": 5180,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 5180
+          },
+          "5": {
+           "attempts": 5187,
+           "count": 5180,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 5180
+          },
+          "6": {
+           "attempts": 5184,
+           "count": 5180,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 5180
+          }
+         },
+         "M1.rectangle_r3": {
+          "0": {
+           "attempts": 208200,
+           "count": 4189,
+           "ended": "budget",
+           "solver_disagreements": 0,
+           "target": 5180
+          },
+          "1": {
+           "attempts": 208200,
+           "count": 4899,
+           "ended": "budget",
+           "solver_disagreements": 0,
+           "target": 5180
+          },
+          "2": {
+           "attempts": 17118,
+           "count": 5180,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 5180
+          },
+          "3": {
+           "attempts": 11463,
+           "count": 5180,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 5180
+          },
+          "4": {
+           "attempts": 10023,
+           "count": 5180,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 5180
+          },
+          "5": {
+           "attempts": 9190,
+           "count": 5180,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 5180
+          },
+          "6": {
+           "attempts": 8464,
+           "count": 5180,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 5180
+          }
+         }
+        },
+        "union_evaluated": false
+       },
+       "M1.clock_duration": {
+        "D_lin": 31000,
+        "k": 1,
+        "lineages": {
+         "M1.clock_duration_r4": {
+          "0": {
+           "attempts": 31006,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "1": {
+           "attempts": 31001,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "2": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "3": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "4": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "5": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "6": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 31000,
+         "1": 31000,
+         "2": 31000,
+         "3": 31000,
+         "4": 31000,
+         "5": 31000,
+         "6": 31000
+        },
+        "union_evaluated": true
+       },
+       "M1.crt_congruence": {
+        "D_lin": 31000,
+        "k": 1,
+        "lineages": {
+         "M1.crt_congruence_r3": {
+          "0": {
+           "attempts": 31474,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "1": {
+           "attempts": 31267,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "2": {
+           "attempts": 31193,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "3": {
+           "attempts": 31022,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "4": {
+           "attempts": 31009,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "5": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "6": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 31000,
+         "1": 31000,
+         "2": 31000,
+         "3": 31000,
+         "4": 31000,
+         "5": 31000,
+         "6": 31000
+        },
+        "union_evaluated": true
+       },
+       "M1.mixture": {
+        "D_lin": 10350,
+        "k": 3,
+        "lineages": {
+         "M1.mixture_r4": {
+          "0": {
+           "attempts": 11257,
+           "count": 10350,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 10350
+          },
+          "1": {
+           "attempts": 10980,
+           "count": 10350,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 10350
+          },
+          "2": {
+           "attempts": 10756,
+           "count": 10350,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 10350
+          },
+          "3": {
+           "attempts": 10392,
+           "count": 10350,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 10350
+          },
+          "4": {
+           "attempts": 10383,
+           "count": 10350,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 10350
+          },
+          "5": {
+           "attempts": 10364,
+           "count": 10350,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 10350
+          },
+          "6": {
+           "attempts": 10376,
+           "count": 10350,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 10350
+          }
+         },
+         "M1.shopping_r3": {
+          "0": {
+           "attempts": 10400,
+           "count": 10350,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 10350
+          },
+          "1": {
+           "attempts": 10350,
+           "count": 10350,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 10350
+          },
+          "2": {
+           "attempts": 10350,
+           "count": 10350,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 10350
+          },
+          "3": {
+           "attempts": 10350,
+           "count": 10350,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 10350
+          },
+          "4": {
+           "attempts": 10350,
+           "count": 10350,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 10350
+          },
+          "5": {
+           "attempts": 10350,
+           "count": 10350,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 10350
+          },
+          "6": {
+           "attempts": 10350,
+           "count": 10350,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 10350
+          }
+         },
+         "M1.speed_distance_r3": {
+          "0": {
+           "attempts": 11165,
+           "count": 10350,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 10350
+          },
+          "1": {
+           "attempts": 10692,
+           "count": 10350,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 10350
+          },
+          "2": {
+           "attempts": 10351,
+           "count": 10350,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 10350
+          },
+          "3": {
+           "attempts": 10351,
+           "count": 10350,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 10350
+          },
+          "4": {
+           "attempts": 10350,
+           "count": 10350,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 10350
+          },
+          "5": {
+           "attempts": 10350,
+           "count": 10350,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 10350
+          },
+          "6": {
+           "attempts": 10350,
+           "count": 10350,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 10350
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 31050,
+         "1": 31050,
+         "2": 31050,
+         "3": 31050,
+         "4": 31050,
+         "5": 31050,
+         "6": 31050
+        },
+        "union_evaluated": true
+       },
+       "M1.tiered_pricing": {
+        "D_lin": 31000,
+        "k": 1,
+        "lineages": {
+         "M1.tiered_pricing": {
+          "0": {
+           "attempts": 33713,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "1": {
+           "attempts": 32043,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "2": {
+           "attempts": 31002,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "3": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "4": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "5": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "6": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 31000,
+         "1": 31000,
+         "2": 31000,
+         "3": 31000,
+         "4": 31000,
+         "5": 31000,
+         "6": 31000
+        },
+        "union_evaluated": true
+       }
+      },
+      "failing": [
+       "M1.rectangle_r3"
+      ],
+      "round": 1
+     },
+     {
+      "D_G": 31000,
+      "G": 8,
+      "clusters": {
+       "C1.coin_change_table": {
+        "D_lin": 31000,
+        "k": 1,
+        "lineages": {
+         "M1.change_ways_r3": {
+          "0": {
+           "attempts": 33700,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "1": {
+           "attempts": 32856,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "2": {
+           "attempts": 32354,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "3": {
+           "attempts": 32195,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "4": {
+           "attempts": 31954,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "5": {
+           "attempts": 31868,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "6": {
+           "attempts": 31720,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 31000,
+         "1": 31000,
+         "2": 31000,
+         "3": 31000,
+         "4": 31000,
+         "5": 31000,
+         "6": 31000
+        },
+        "union_evaluated": true
+       },
+       "C1.euclid_gcd": {
+        "D_lin": 31000,
+        "k": 1,
+        "lineages": {
+         "M1.gcd_lcm_r4": {
+          "0": {
+           "attempts": 33912,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "1": {
+           "attempts": 32563,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "2": {
+           "attempts": 31814,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "3": {
+           "attempts": 32062,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "4": {
+           "attempts": 31475,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "5": {
+           "attempts": 31265,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "6": {
+           "attempts": 31135,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 31000,
+         "1": 31000,
+         "2": 31000,
+         "3": 31000,
+         "4": 31000,
+         "5": 31000,
+         "6": 31000
+        },
+        "union_evaluated": true
+       },
+       "C1.fib_like": {
+        "D_lin": 15500,
+        "k": 2,
+        "lineages": {
+         "M1.arithmetic_series_r3": {
+          "0": {
+           "attempts": 23211,
+           "count": 15500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 15500
+          },
+          "1": {
+           "attempts": 20258,
+           "count": 15500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 15500
+          },
+          "2": {
+           "attempts": 18961,
+           "count": 15500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 15500
+          },
+          "3": {
+           "attempts": 18430,
+           "count": 15500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 15500
+          },
+          "4": {
+           "attempts": 17866,
+           "count": 15500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 15500
+          },
+          "5": {
+           "attempts": 17450,
+           "count": 15500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 15500
+          },
+          "6": {
+           "attempts": 17204,
+           "count": 15500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 15500
+          }
+         },
+         "M1.recurrence_iterate_r3": {
+          "0": {
+           "attempts": 15771,
+           "count": 15500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 15500
+          },
+          "1": {
+           "attempts": 15693,
+           "count": 15500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 15500
+          },
+          "2": {
+           "attempts": 15711,
+           "count": 15500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 15500
+          },
+          "3": {
+           "attempts": 15650,
+           "count": 15500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 15500
+          },
+          "4": {
+           "attempts": 15654,
+           "count": 15500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 15500
+          },
+          "5": {
+           "attempts": 15639,
+           "count": 15500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 15500
+          },
+          "6": {
+           "attempts": 15638,
+           "count": 15500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 15500
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 31000,
+         "1": 31000,
+         "2": 31000,
+         "3": 31000,
+         "4": 31000,
+         "5": 31000,
+         "6": 31000
+        },
+        "union_evaluated": true
+       },
+       "M1.ages": {
+        "D_lin": 6200,
+        "k": 5,
+        "lineages": {
+         "M1.ages_r3": {
+          "0": {
+           "attempts": 9507,
+           "count": 6200,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6200
+          },
+          "1": {
+           "attempts": 8624,
+           "count": 6200,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6200
+          },
+          "2": {
+           "attempts": 7616,
+           "count": 6200,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6200
+          },
+          "3": {
+           "attempts": 7299,
+           "count": 6200,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6200
+          },
+          "4": {
+           "attempts": 6942,
+           "count": 6200,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6200
+          },
+          "5": {
+           "attempts": 6879,
+           "count": 6200,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6200
+          },
+          "6": {
+           "attempts": 6640,
+           "count": 6200,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6200
+          }
+         },
+         "M1.average_missing_r4": {
+          "0": {
+           "attempts": 6201,
+           "count": 6200,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6200
+          },
+          "1": {
+           "attempts": 6200,
+           "count": 6200,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6200
+          },
+          "2": {
+           "attempts": 6200,
+           "count": 6200,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6200
+          },
+          "3": {
+           "attempts": 6200,
+           "count": 6200,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6200
+          },
+          "4": {
+           "attempts": 6200,
+           "count": 6200,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6200
+          },
+          "5": {
+           "attempts": 6200,
+           "count": 6200,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6200
+          },
+          "6": {
+           "attempts": 6200,
+           "count": 6200,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6200
+          }
+         },
+         "M1.consecutive_r3": {
+          "0": {
+           "attempts": 11362,
+           "count": 6200,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6200
+          },
+          "1": {
+           "attempts": 8586,
+           "count": 6200,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6200
+          },
+          "2": {
+           "attempts": 6891,
+           "count": 6200,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6200
+          },
+          "3": {
+           "attempts": 6727,
+           "count": 6200,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6200
+          },
+          "4": {
+           "attempts": 6624,
+           "count": 6200,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6200
+          },
+          "5": {
+           "attempts": 6534,
+           "count": 6200,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6200
+          },
+          "6": {
+           "attempts": 6538,
+           "count": 6200,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6200
+          }
+         },
+         "M1.linear_equation_r3": {
+          "0": {
+           "attempts": 6671,
+           "count": 6200,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6200
+          },
+          "1": {
+           "attempts": 6514,
+           "count": 6200,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6200
+          },
+          "2": {
+           "attempts": 6404,
+           "count": 6200,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6200
+          },
+          "3": {
+           "attempts": 6219,
+           "count": 6200,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6200
+          },
+          "4": {
+           "attempts": 6216,
+           "count": 6200,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6200
+          },
+          "5": {
+           "attempts": 6214,
+           "count": 6200,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6200
+          },
+          "6": {
+           "attempts": 6210,
+           "count": 6200,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6200
+          }
+         },
+         "M1.pipes_work_r3": {
+          "0": {
+           "attempts": 7361,
+           "count": 6200,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6200
+          },
+          "1": {
+           "attempts": 7003,
+           "count": 6200,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6200
+          },
+          "2": {
+           "attempts": 6810,
+           "count": 6200,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6200
+          },
+          "3": {
+           "attempts": 6219,
+           "count": 6200,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6200
+          },
+          "4": {
+           "attempts": 6212,
+           "count": 6200,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6200
+          },
+          "5": {
+           "attempts": 6209,
+           "count": 6200,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6200
+          },
+          "6": {
+           "attempts": 6205,
+           "count": 6200,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 6200
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 31000,
+         "1": 31000,
+         "2": 31000,
+         "3": 31000,
+         "4": 31000,
+         "5": 31000,
+         "6": 31000
+        },
+        "union_evaluated": true
+       },
+       "M1.clock_duration": {
+        "D_lin": 31000,
+        "k": 1,
+        "lineages": {
+         "M1.clock_duration_r4": {
+          "0": {
+           "attempts": 31006,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "1": {
+           "attempts": 31001,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "2": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "3": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "4": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "5": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "6": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 31000,
+         "1": 31000,
+         "2": 31000,
+         "3": 31000,
+         "4": 31000,
+         "5": 31000,
+         "6": 31000
+        },
+        "union_evaluated": true
+       },
+       "M1.crt_congruence": {
+        "D_lin": 31000,
+        "k": 1,
+        "lineages": {
+         "M1.crt_congruence_r3": {
+          "0": {
+           "attempts": 31474,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "1": {
+           "attempts": 31267,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "2": {
+           "attempts": 31193,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "3": {
+           "attempts": 31022,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "4": {
+           "attempts": 31009,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "5": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "6": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 31000,
+         "1": 31000,
+         "2": 31000,
+         "3": 31000,
+         "4": 31000,
+         "5": 31000,
+         "6": 31000
+        },
+        "union_evaluated": true
+       },
+       "M1.mixture": {
+        "D_lin": 10350,
+        "k": 3,
+        "lineages": {
+         "M1.mixture_r4": {
+          "0": {
+           "attempts": 11257,
+           "count": 10350,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 10350
+          },
+          "1": {
+           "attempts": 10980,
+           "count": 10350,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 10350
+          },
+          "2": {
+           "attempts": 10756,
+           "count": 10350,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 10350
+          },
+          "3": {
+           "attempts": 10392,
+           "count": 10350,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 10350
+          },
+          "4": {
+           "attempts": 10383,
+           "count": 10350,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 10350
+          },
+          "5": {
+           "attempts": 10364,
+           "count": 10350,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 10350
+          },
+          "6": {
+           "attempts": 10376,
+           "count": 10350,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 10350
+          }
+         },
+         "M1.shopping_r3": {
+          "0": {
+           "attempts": 10400,
+           "count": 10350,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 10350
+          },
+          "1": {
+           "attempts": 10350,
+           "count": 10350,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 10350
+          },
+          "2": {
+           "attempts": 10350,
+           "count": 10350,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 10350
+          },
+          "3": {
+           "attempts": 10350,
+           "count": 10350,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 10350
+          },
+          "4": {
+           "attempts": 10350,
+           "count": 10350,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 10350
+          },
+          "5": {
+           "attempts": 10350,
+           "count": 10350,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 10350
+          },
+          "6": {
+           "attempts": 10350,
+           "count": 10350,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 10350
+          }
+         },
+         "M1.speed_distance_r3": {
+          "0": {
+           "attempts": 11165,
+           "count": 10350,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 10350
+          },
+          "1": {
+           "attempts": 10692,
+           "count": 10350,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 10350
+          },
+          "2": {
+           "attempts": 10351,
+           "count": 10350,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 10350
+          },
+          "3": {
+           "attempts": 10351,
+           "count": 10350,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 10350
+          },
+          "4": {
+           "attempts": 10350,
+           "count": 10350,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 10350
+          },
+          "5": {
+           "attempts": 10350,
+           "count": 10350,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 10350
+          },
+          "6": {
+           "attempts": 10350,
+           "count": 10350,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 10350
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 31050,
+         "1": 31050,
+         "2": 31050,
+         "3": 31050,
+         "4": 31050,
+         "5": 31050,
+         "6": 31050
+        },
+        "union_evaluated": true
+       },
+       "M1.tiered_pricing": {
+        "D_lin": 31000,
+        "k": 1,
+        "lineages": {
+         "M1.tiered_pricing": {
+          "0": {
+           "attempts": 33713,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "1": {
+           "attempts": 32043,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "2": {
+           "attempts": 31002,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "3": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "4": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "5": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "6": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 31000,
+         "1": 31000,
+         "2": 31000,
+         "3": 31000,
+         "4": 31000,
+         "5": 31000,
+         "6": 31000
+        },
+        "union_evaluated": true
+       }
+      },
+      "failing": [],
+      "round": 2
+     }
+    ],
+    "start": {
+     "C1.coin_change_table": [
+      "M1.change_ways_r3"
+     ],
+     "C1.euclid_gcd": [
+      "M1.gcd_lcm_r4"
+     ],
+     "C1.fib_like": [
+      "M1.arithmetic_series_r3",
+      "M1.recurrence_iterate_r3"
+     ],
+     "M1.ages": [
+      "M1.ages_r3",
+      "M1.average_missing_r4",
+      "M1.consecutive_r3",
+      "M1.linear_equation_r3",
+      "M1.pipes_work_r3",
+      "M1.rectangle_r3"
+     ],
+     "M1.clock_duration": [
+      "M1.clock_duration_r4"
+     ],
+     "M1.crt_congruence": [
+      "M1.crt_congruence_r3"
+     ],
+     "M1.mixture": [
+      "M1.mixture_r4",
+      "M1.shopping_r3",
+      "M1.speed_distance_r3"
+     ],
+     "M1.tiered_pricing": [
+      "M1.tiered_pricing"
+     ]
+    }
+   },
+   "B": {
+    "G_registered": 6,
+    "G_start": 6,
+    "families": [
+     "algebra",
+     "counting",
+     "geometry",
+     "percent",
+     "remainder",
+     "sequences",
+     "statistics"
+    ],
+    "lineages_registered": 8,
+    "lineages_start": 8,
+    "n_families": 7,
+    "registered": {
+     "M1.finite_differences": [
+      "M1.finite_differences_r4"
+     ],
+     "M1.fraction_remainder": [
+      "M1.fraction_remainder_r3",
+      "M1.percent_change_r3",
+      "M1.tip_split_r3"
+     ],
+     "M1.grid_perimeter": [
+      "M1.painted_cube_r3"
+     ],
+     "M1.inclusion_exclusion": [
+      "M1.inclusion_exclusion_r3"
+     ],
+     "M1.median_list": [
+      "M1.median_list_r3"
+     ],
+     "M1.quadratic_area": [
+      "M1.quadratic_area_r3"
+     ]
+    },
+    "removed": [],
+    "rounds": [
+     {
+      "D_G": 41010,
+      "G": 6,
+      "clusters": {
+       "M1.finite_differences": {
+        "D_lin": 41010,
+        "k": 1,
+        "lineages": {
+         "M1.finite_differences_r4": {
+          "0": {
+           "attempts": 46259,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "1": {
+           "attempts": 44010,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "2": {
+           "attempts": 42818,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "3": {
+           "attempts": 42309,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "4": {
+           "attempts": 41871,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "5": {
+           "attempts": 43100,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "6": {
+           "attempts": 42056,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 41010,
+         "1": 41010,
+         "2": 41010,
+         "3": 41010,
+         "4": 41010,
+         "5": 41010,
+         "6": 41010
+        },
+        "union_evaluated": true
+       },
+       "M1.fraction_remainder": {
+        "D_lin": 13690,
+        "k": 3,
+        "lineages": {
+         "M1.fraction_remainder_r3": {
+          "0": {
+           "attempts": 33672,
+           "count": 13690,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 13690
+          },
+          "1": {
+           "attempts": 28320,
+           "count": 13690,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 13690
+          },
+          "2": {
+           "attempts": 25500,
+           "count": 13690,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 13690
+          },
+          "3": {
+           "attempts": 23267,
+           "count": 13690,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 13690
+          },
+          "4": {
+           "attempts": 21937,
+           "count": 13690,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 13690
+          },
+          "5": {
+           "attempts": 21086,
+           "count": 13690,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 13690
+          },
+          "6": {
+           "attempts": 20291,
+           "count": 13690,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 13690
+          }
+         },
+         "M1.percent_change_r3": {
+          "0": {
+           "attempts": 59624,
+           "count": 13690,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 13690
+          },
+          "1": {
+           "attempts": 29739,
+           "count": 13690,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 13690
+          },
+          "2": {
+           "attempts": 24540,
+           "count": 13690,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 13690
+          },
+          "3": {
+           "attempts": 19256,
+           "count": 13690,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 13690
+          },
+          "4": {
+           "attempts": 18539,
+           "count": 13690,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 13690
+          },
+          "5": {
+           "attempts": 17949,
+           "count": 13690,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 13690
+          },
+          "6": {
+           "attempts": 17507,
+           "count": 13690,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 13690
+          }
+         },
+         "M1.tip_split_r3": {
+          "0": {
+           "attempts": 23431,
+           "count": 13690,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 13690
+          },
+          "1": {
+           "attempts": 19825,
+           "count": 13690,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 13690
+          },
+          "2": {
+           "attempts": 17876,
+           "count": 13690,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 13690
+          },
+          "3": {
+           "attempts": 17090,
+           "count": 13690,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 13690
+          },
+          "4": {
+           "attempts": 16374,
+           "count": 13690,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 13690
+          },
+          "5": {
+           "attempts": 15952,
+           "count": 13690,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 13690
+          },
+          "6": {
+           "attempts": 15651,
+           "count": 13690,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 13690
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 41070,
+         "1": 41070,
+         "2": 41070,
+         "3": 41070,
+         "4": 41070,
+         "5": 41070,
+         "6": 41070
+        },
+        "union_evaluated": true
+       },
+       "M1.grid_perimeter": {
+        "D_lin": 41010,
+        "k": 1,
+        "lineages": {
+         "M1.painted_cube_r3": {
+          "0": {
+           "attempts": 42650,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "1": {
+           "attempts": 42149,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "2": {
+           "attempts": 41792,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "3": {
+           "attempts": 41591,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "4": {
+           "attempts": 41450,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "5": {
+           "attempts": 41330,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "6": {
+           "attempts": 41256,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 41010,
+         "1": 41010,
+         "2": 41010,
+         "3": 41010,
+         "4": 41010,
+         "5": 41010,
+         "6": 41010
+        },
+        "union_evaluated": true
+       },
+       "M1.inclusion_exclusion": {
+        "D_lin": 41010,
+        "k": 1,
+        "lineages": {
+         "M1.inclusion_exclusion_r3": {
+          "0": {
+           "attempts": 41067,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "1": {
+           "attempts": 41026,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "2": {
+           "attempts": 41015,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "3": {
+           "attempts": 41010,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "4": {
+           "attempts": 41010,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "5": {
+           "attempts": 41010,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "6": {
+           "attempts": 41010,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 41010,
+         "1": 41010,
+         "2": 41010,
+         "3": 41010,
+         "4": 41010,
+         "5": 41010,
+         "6": 41010
+        },
+        "union_evaluated": true
+       },
+       "M1.median_list": {
+        "D_lin": 41010,
+        "k": 1,
+        "lineages": {
+         "M1.median_list_r3": {
+          "0": {
+           "attempts": 41010,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "1": {
+           "attempts": 41010,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "2": {
+           "attempts": 41010,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "3": {
+           "attempts": 41010,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "4": {
+           "attempts": 41010,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "5": {
+           "attempts": 41010,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "6": {
+           "attempts": 41010,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 41010,
+         "1": 41010,
+         "2": 41010,
+         "3": 41010,
+         "4": 41010,
+         "5": 41010,
+         "6": 41010
+        },
+        "union_evaluated": true
+       },
+       "M1.quadratic_area": {
+        "D_lin": 41010,
+        "k": 1,
+        "lineages": {
+         "M1.quadratic_area_r3": {
+          "0": {
+           "attempts": 42903,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "1": {
+           "attempts": 42491,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "2": {
+           "attempts": 42151,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "3": {
+           "attempts": 41923,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "4": {
+           "attempts": 41756,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "5": {
+           "attempts": 41638,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "6": {
+           "attempts": 41579,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 41010,
+         "1": 41010,
+         "2": 41010,
+         "3": 41010,
+         "4": 41010,
+         "5": 41010,
+         "6": 41010
+        },
+        "union_evaluated": true
+       }
+      },
+      "failing": [],
+      "round": 1
+     }
+    ],
+    "start": {
+     "M1.finite_differences": [
+      "M1.finite_differences_r4"
+     ],
+     "M1.fraction_remainder": [
+      "M1.fraction_remainder_r3",
+      "M1.percent_change_r3",
+      "M1.tip_split_r3"
+     ],
+     "M1.grid_perimeter": [
+      "M1.painted_cube_r3"
+     ],
+     "M1.inclusion_exclusion": [
+      "M1.inclusion_exclusion_r3"
+     ],
+     "M1.median_list": [
+      "M1.median_list_r3"
+     ],
+     "M1.quadratic_area": [
+      "M1.quadratic_area_r3"
+     ]
+    }
+   }
+  },
+  "R1": {
+   "A": {
+    "G_registered": 4,
+    "G_start": 4,
+    "families": [
+     "boolean_state",
+     "categories",
+     "conditional",
+     "spatial",
+     "truth"
+    ],
+    "lineages_registered": 5,
+    "lineages_start": 5,
+    "n_families": 5,
+    "registered": {
+     "R1.boolean_lights": [
+      "R1.boolean_lights_r4",
+      "R1.compass_turns"
+     ],
+     "R1.categories_default_exceptions": [
+      "R1.categories_default_exceptions_r4"
+     ],
+     "R1.conditional_chain": [
+      "R1.knights_knaves_r6"
+     ],
+     "R1.conditional_threshold_rule": [
+      "R1.conditional_threshold_rule_r4"
+     ]
+    },
+    "removed": [],
+    "rounds": [
+     {
+      "D_G": 61000,
+      "G": 4,
+      "clusters": {
+       "R1.boolean_lights": {
+        "D_lin": 30500,
+        "k": 2,
+        "lineages": {
+         "R1.boolean_lights_r4": {
+          "0": {
+           "attempts": 30501,
+           "count": 30500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 30500
+          },
+          "1": {
+           "attempts": 30500,
+           "count": 30500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 30500
+          },
+          "2": {
+           "attempts": 30500,
+           "count": 30500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 30500
+          },
+          "3": {
+           "attempts": 30500,
+           "count": 30500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 30500
+          },
+          "4": {
+           "attempts": 30500,
+           "count": 30500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 30500
+          },
+          "5": {
+           "attempts": 30500,
+           "count": 30500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 30500
+          },
+          "6": {
+           "attempts": 30500,
+           "count": 30500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 30500
+          }
+         },
+         "R1.compass_turns": {
+          "0": {
+           "attempts": 50284,
+           "count": 30500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 30500
+          },
+          "1": {
+           "attempts": 30718,
+           "count": 30500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 30500
+          },
+          "2": {
+           "attempts": 30501,
+           "count": 30500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 30500
+          },
+          "3": {
+           "attempts": 30500,
+           "count": 30500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 30500
+          },
+          "4": {
+           "attempts": 30500,
+           "count": 30500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 30500
+          },
+          "5": {
+           "attempts": 30500,
+           "count": 30500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 30500
+          },
+          "6": {
+           "attempts": 30500,
+           "count": 30500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 30500
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 61000,
+         "1": 61000,
+         "2": 61000,
+         "3": 61000,
+         "4": 61000,
+         "5": 61000,
+         "6": 61000
+        },
+        "union_evaluated": true
+       },
+       "R1.categories_default_exceptions": {
+        "D_lin": 61000,
+        "k": 1,
+        "lineages": {
+         "R1.categories_default_exceptions_r4": {
+          "0": {
+           "attempts": 61000,
+           "count": 61000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 61000
+          },
+          "1": {
+           "attempts": 61000,
+           "count": 61000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 61000
+          },
+          "2": {
+           "attempts": 61000,
+           "count": 61000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 61000
+          },
+          "3": {
+           "attempts": 61000,
+           "count": 61000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 61000
+          },
+          "4": {
+           "attempts": 61000,
+           "count": 61000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 61000
+          },
+          "5": {
+           "attempts": 61000,
+           "count": 61000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 61000
+          },
+          "6": {
+           "attempts": 61000,
+           "count": 61000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 61000
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 61000,
+         "1": 61000,
+         "2": 61000,
+         "3": 61000,
+         "4": 61000,
+         "5": 61000,
+         "6": 61000
+        },
+        "union_evaluated": true
+       },
+       "R1.conditional_chain": {
+        "D_lin": 61000,
+        "k": 1,
+        "lineages": {
+         "R1.knights_knaves_r6": {
+          "0": {
+           "attempts": 61615,
+           "count": 61000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 61000
+          },
+          "1": {
+           "attempts": 61002,
+           "count": 61000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 61000
+          },
+          "2": {
+           "attempts": 61000,
+           "count": 61000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 61000
+          },
+          "3": {
+           "attempts": 61000,
+           "count": 61000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 61000
+          },
+          "4": {
+           "attempts": 61000,
+           "count": 61000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 61000
+          },
+          "5": {
+           "attempts": 61000,
+           "count": 61000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 61000
+          },
+          "6": {
+           "attempts": 61000,
+           "count": 61000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 61000
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 61000,
+         "1": 61000,
+         "2": 61000,
+         "3": 61000,
+         "4": 61000,
+         "5": 61000,
+         "6": 61000
+        },
+        "union_evaluated": true
+       },
+       "R1.conditional_threshold_rule": {
+        "D_lin": 61000,
+        "k": 1,
+        "lineages": {
+         "R1.conditional_threshold_rule_r4": {
+          "0": {
+           "attempts": 61004,
+           "count": 61000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 61000
+          },
+          "1": {
+           "attempts": 61001,
+           "count": 61000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 61000
+          },
+          "2": {
+           "attempts": 61000,
+           "count": 61000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 61000
+          },
+          "3": {
+           "attempts": 61000,
+           "count": 61000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 61000
+          },
+          "4": {
+           "attempts": 61000,
+           "count": 61000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 61000
+          },
+          "5": {
+           "attempts": 61000,
+           "count": 61000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 61000
+          },
+          "6": {
+           "attempts": 61000,
+           "count": 61000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 61000
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 61000,
+         "1": 61000,
+         "2": 61000,
+         "3": 61000,
+         "4": 61000,
+         "5": 61000,
+         "6": 61000
+        },
+        "union_evaluated": true
+       }
+      },
+      "failing": [],
+      "round": 1
+     }
+    ],
+    "start": {
+     "R1.boolean_lights": [
+      "R1.boolean_lights_r4",
+      "R1.compass_turns"
+     ],
+     "R1.categories_default_exceptions": [
+      "R1.categories_default_exceptions_r4"
+     ],
+     "R1.conditional_chain": [
+      "R1.knights_knaves_r6"
+     ],
+     "R1.conditional_threshold_rule": [
+      "R1.conditional_threshold_rule_r4"
+     ]
+    }
+   },
+   "B": {
+    "G_registered": 1,
+    "G_start": 1,
+    "families": [
+     "temporal"
+    ],
+    "lineages_registered": 1,
+    "lineages_start": 1,
+    "n_families": 1,
+    "registered": {
+     "R1.equivalence_exchange_rates": [
+      "R1.temporal_weekday_shift_r6"
+     ]
+    },
+    "removed": [],
+    "rounds": [
+     {
+      "D_G": 241000,
+      "G": 1,
+      "clusters": {
+       "R1.equivalence_exchange_rates": {
+        "D_lin": 241000,
+        "k": 1,
+        "lineages": {
+         "R1.temporal_weekday_shift_r6": {
+          "0": {
+           "attempts": 241000,
+           "count": 241000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 241000
+          },
+          "1": {
+           "attempts": 241000,
+           "count": 241000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 241000
+          },
+          "2": {
+           "attempts": 241000,
+           "count": 241000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 241000
+          },
+          "3": {
+           "attempts": 241000,
+           "count": 241000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 241000
+          },
+          "4": {
+           "attempts": 241000,
+           "count": 241000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 241000
+          },
+          "5": {
+           "attempts": 241000,
+           "count": 241000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 241000
+          },
+          "6": {
+           "attempts": 241000,
+           "count": 241000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 241000
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 241000,
+         "1": 241000,
+         "2": 241000,
+         "3": 241000,
+         "4": 241000,
+         "5": 241000,
+         "6": 241000
+        },
+        "union_evaluated": true
+       }
+      },
+      "failing": [],
+      "round": 1
+     }
+    ],
+    "start": {
+     "R1.equivalence_exchange_rates": [
+      "R1.temporal_weekday_shift_r6"
+     ]
+    }
+   }
+  },
+  "R2": {
+   "A": {
+    "G_registered": 8,
+    "G_start": 8,
+    "families": [
+     "base",
+     "combinatorics",
+     "counting",
+     "graphs",
+     "grid",
+     "numtheory",
+     "parsing",
+     "rewrite"
+    ],
+    "lineages_registered": 9,
+    "lineages_start": 9,
+    "n_families": 8,
+    "registered": {
+     "C1.digit_peel": [
+      "R2.from_base",
+      "R2.to_base_wide"
+     ],
+     "M1.crt_congruence": [
+      "R2.crt_smallest"
+     ],
+     "R1.mst_cost": [
+      "R2.cheapest_network"
+     ],
+     "R2.count_divisible": [
+      "R2.count_divisible"
+     ],
+     "R2.dictionary_rank": [
+      "R2.dictionary_rank"
+     ],
+     "R2.expression_eval": [
+      "R2.expression_eval"
+     ],
+     "R2.grid_sum": [
+      "R2.grid_sum"
+     ],
+     "R2.string_rewrite": [
+      "R2.string_rewrite_nonidentity"
+     ]
+    },
+    "removed": [],
+    "rounds": [
+     {
+      "D_G": 31000,
+      "G": 8,
+      "clusters": {
+       "C1.digit_peel": {
+        "D_lin": 15500,
+        "k": 2,
+        "lineages": {
+         "R2.from_base": {
+          "0": {
+           "attempts": 127954,
+           "count": 15500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 15500
+          },
+          "1": {
+           "attempts": 41717,
+           "count": 15500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 15500
+          },
+          "2": {
+           "attempts": 19931,
+           "count": 15500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 15500
+          },
+          "3": {
+           "attempts": 18435,
+           "count": 15500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 15500
+          },
+          "4": {
+           "attempts": 17609,
+           "count": 15500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 15500
+          },
+          "5": {
+           "attempts": 16902,
+           "count": 15500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 15500
+          },
+          "6": {
+           "attempts": 16583,
+           "count": 15500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 15500
+          }
+         },
+         "R2.to_base_wide": {
+          "0": {
+           "attempts": 57891,
+           "count": 15500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 15500
+          },
+          "1": {
+           "attempts": 17691,
+           "count": 15500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 15500
+          },
+          "2": {
+           "attempts": 15822,
+           "count": 15500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 15500
+          },
+          "3": {
+           "attempts": 15590,
+           "count": 15500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 15500
+          },
+          "4": {
+           "attempts": 15531,
+           "count": 15500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 15500
+          },
+          "5": {
+           "attempts": 15504,
+           "count": 15500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 15500
+          },
+          "6": {
+           "attempts": 15503,
+           "count": 15500,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 15500
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 31000,
+         "1": 31000,
+         "2": 31000,
+         "3": 31000,
+         "4": 31000,
+         "5": 31000,
+         "6": 31000
+        },
+        "union_evaluated": true
+       },
+       "M1.crt_congruence": {
+        "D_lin": 31000,
+        "k": 1,
+        "lineages": {
+         "R2.crt_smallest": {
+          "0": {
+           "attempts": 56605,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "1": {
+           "attempts": 35810,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "2": {
+           "attempts": 32654,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "3": {
+           "attempts": 31003,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "4": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "5": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "6": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 31000,
+         "1": 31000,
+         "2": 31000,
+         "3": 31000,
+         "4": 31000,
+         "5": 31000,
+         "6": 31000
+        },
+        "union_evaluated": true
+       },
+       "R1.mst_cost": {
+        "D_lin": 31000,
+        "k": 1,
+        "lineages": {
+         "R2.cheapest_network": {
+          "0": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "1": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "2": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "3": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "4": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "5": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "6": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 31000,
+         "1": 31000,
+         "2": 31000,
+         "3": 31000,
+         "4": 31000,
+         "5": 31000,
+         "6": 31000
+        },
+        "union_evaluated": true
+       },
+       "R2.count_divisible": {
+        "D_lin": 31000,
+        "k": 1,
+        "lineages": {
+         "R2.count_divisible": {
+          "0": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "1": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "2": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "3": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "4": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "5": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "6": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 31000,
+         "1": 31000,
+         "2": 31000,
+         "3": 31000,
+         "4": 31000,
+         "5": 31000,
+         "6": 31000
+        },
+        "union_evaluated": true
+       },
+       "R2.dictionary_rank": {
+        "D_lin": 31000,
+        "k": 1,
+        "lineages": {
+         "R2.dictionary_rank": {
+          "0": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "1": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "2": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "3": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "4": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "5": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "6": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 31000,
+         "1": 31000,
+         "2": 31000,
+         "3": 31000,
+         "4": 31000,
+         "5": 31000,
+         "6": 31000
+        },
+        "union_evaluated": true
+       },
+       "R2.expression_eval": {
+        "D_lin": 31000,
+        "k": 1,
+        "lineages": {
+         "R2.expression_eval": {
+          "0": {
+           "attempts": 31103,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "1": {
+           "attempts": 31002,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "2": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "3": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "4": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "5": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "6": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 31000,
+         "1": 31000,
+         "2": 31000,
+         "3": 31000,
+         "4": 31000,
+         "5": 31000,
+         "6": 31000
+        },
+        "union_evaluated": true
+       },
+       "R2.grid_sum": {
+        "D_lin": 31000,
+        "k": 1,
+        "lineages": {
+         "R2.grid_sum": {
+          "0": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "1": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "2": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "3": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "4": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "5": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "6": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 31000,
+         "1": 31000,
+         "2": 31000,
+         "3": 31000,
+         "4": 31000,
+         "5": 31000,
+         "6": 31000
+        },
+        "union_evaluated": true
+       },
+       "R2.string_rewrite": {
+        "D_lin": 31000,
+        "k": 1,
+        "lineages": {
+         "R2.string_rewrite_nonidentity": {
+          "0": {
+           "attempts": 44003,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "1": {
+           "attempts": 31026,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "2": {
+           "attempts": 31001,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "3": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "4": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "5": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          },
+          "6": {
+           "attempts": 31000,
+           "count": 31000,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 31000
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 31000,
+         "1": 31000,
+         "2": 31000,
+         "3": 31000,
+         "4": 31000,
+         "5": 31000,
+         "6": 31000
+        },
+        "union_evaluated": true
+       }
+      },
+      "failing": [],
+      "round": 1
+     }
+    ],
+    "start": {
+     "C1.digit_peel": [
+      "R2.from_base",
+      "R2.to_base_wide"
+     ],
+     "M1.crt_congruence": [
+      "R2.crt_smallest"
+     ],
+     "R1.mst_cost": [
+      "R2.cheapest_network"
+     ],
+     "R2.count_divisible": [
+      "R2.count_divisible"
+     ],
+     "R2.dictionary_rank": [
+      "R2.dictionary_rank"
+     ],
+     "R2.expression_eval": [
+      "R2.expression_eval"
+     ],
+     "R2.grid_sum": [
+      "R2.grid_sum"
+     ],
+     "R2.string_rewrite": [
+      "R2.string_rewrite_nonidentity"
+     ]
+    }
+   },
+   "B": {
+    "G_registered": 6,
+    "G_start": 7,
+    "families": [
+     "caesar",
+     "codes",
+     "rle",
+     "search",
+     "sorting",
+     "structures"
+    ],
+    "lineages_registered": 6,
+    "lineages_start": 7,
+    "n_families": 6,
+    "registered": {
+     "C1.binary_search": [
+      "R2.binary_search_trace"
+     ],
+     "C1.run_length_scan": [
+      "R2.run_length"
+     ],
+     "M1.median_list": [
+      "R2.sort_list"
+     ],
+     "R2.caesar_shift": [
+      "R2.caesar_shift"
+     ],
+     "R2.luhn_check": [
+      "R2.luhn_check"
+     ],
+     "R2.min_heap_ops": [
+      "R2.min_heap_ops"
+     ]
+    },
+    "removed": [
+     {
+      "G": 7,
+      "cluster": "C1.cellular_update",
+      "k": 1,
+      "lineage": "R2.cellular_automaton",
+      "reasons": [
+       {
+        "kind": "own_demand",
+        "levels": {
+         "0": {
+          "count": 32768,
+          "demand": 35300,
+          "ended": "budget"
+         }
+        }
+       }
+      ],
+      "round": 1
+     }
+    ],
+    "rounds": [
+     {
+      "D_G": 35300,
+      "G": 7,
+      "clusters": {
+       "C1.binary_search": {
+        "D_lin": 35300,
+        "k": 1,
+        "lineages": {
+         "R2.binary_search_trace": {
+          "0": {
+           "attempts": 35300,
+           "count": 35300,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 35300
+          },
+          "1": {
+           "attempts": 35300,
+           "count": 35300,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 35300
+          },
+          "2": {
+           "attempts": 35300,
+           "count": 35300,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 35300
+          },
+          "3": {
+           "attempts": 35300,
+           "count": 35300,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 35300
+          },
+          "4": {
+           "attempts": 35300,
+           "count": 35300,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 35300
+          },
+          "5": {
+           "attempts": 35300,
+           "count": 35300,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 35300
+          },
+          "6": {
+           "attempts": 35300,
+           "count": 35300,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 35300
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 35300,
+         "1": 35300,
+         "2": 35300,
+         "3": 35300,
+         "4": 35300,
+         "5": 35300,
+         "6": 35300
+        },
+        "union_evaluated": true
+       },
+       "C1.cellular_update": {
+        "D_lin": 35300,
+        "k": 1,
+        "lineages": {
+         "R2.cellular_automaton": {
+          "0": {
+           "attempts": 1413000,
+           "count": 32768,
+           "ended": "budget",
+           "solver_disagreements": 0,
+           "target": 35300
+          },
+          "1": {
+           "attempts": 41069,
+           "count": 35300,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 35300
+          },
+          "2": {
+           "attempts": 36525,
+           "count": 35300,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 35300
+          },
+          "3": {
+           "attempts": 35608,
+           "count": 35300,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 35300
+          },
+          "4": {
+           "attempts": 35364,
+           "count": 35300,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 35300
+          },
+          "5": {
+           "attempts": 35317,
+           "count": 35300,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 35300
+          },
+          "6": {
+           "attempts": 35301,
+           "count": 35300,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 35300
+          }
+         }
+        },
+        "union_evaluated": false
+       },
+       "C1.run_length_scan": {
+        "D_lin": 35300,
+        "k": 1,
+        "lineages": {
+         "R2.run_length": {
+          "0": {
+           "attempts": 35317,
+           "count": 35300,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 35300
+          },
+          "1": {
+           "attempts": 35301,
+           "count": 35300,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 35300
+          },
+          "2": {
+           "attempts": 35300,
+           "count": 35300,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 35300
+          },
+          "3": {
+           "attempts": 35300,
+           "count": 35300,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 35300
+          },
+          "4": {
+           "attempts": 35300,
+           "count": 35300,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 35300
+          },
+          "5": {
+           "attempts": 35300,
+           "count": 35300,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 35300
+          },
+          "6": {
+           "attempts": 35300,
+           "count": 35300,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 35300
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 35300,
+         "1": 35300,
+         "2": 35300,
+         "3": 35300,
+         "4": 35300,
+         "5": 35300,
+         "6": 35300
+        },
+        "union_evaluated": true
+       },
+       "M1.median_list": {
+        "D_lin": 35300,
+        "k": 1,
+        "lineages": {
+         "R2.sort_list": {
+          "0": {
+           "attempts": 35301,
+           "count": 35300,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 35300
+          },
+          "1": {
+           "attempts": 35300,
+           "count": 35300,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 35300
+          },
+          "2": {
+           "attempts": 35300,
+           "count": 35300,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 35300
+          },
+          "3": {
+           "attempts": 35300,
+           "count": 35300,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 35300
+          },
+          "4": {
+           "attempts": 35300,
+           "count": 35300,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 35300
+          },
+          "5": {
+           "attempts": 35300,
+           "count": 35300,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 35300
+          },
+          "6": {
+           "attempts": 35300,
+           "count": 35300,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 35300
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 35300,
+         "1": 35300,
+         "2": 35300,
+         "3": 35300,
+         "4": 35300,
+         "5": 35300,
+         "6": 35300
+        },
+        "union_evaluated": true
+       },
+       "R2.caesar_shift": {
+        "D_lin": 35300,
+        "k": 1,
+        "lineages": {
+         "R2.caesar_shift": {
+          "0": {
+           "attempts": 39040,
+           "count": 35300,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 35300
+          },
+          "1": {
+           "attempts": 35301,
+           "count": 35300,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 35300
+          },
+          "2": {
+           "attempts": 35300,
+           "count": 35300,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 35300
+          },
+          "3": {
+           "attempts": 35300,
+           "count": 35300,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 35300
+          },
+          "4": {
+           "attempts": 35300,
+           "count": 35300,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 35300
+          },
+          "5": {
+           "attempts": 35300,
+           "count": 35300,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 35300
+          },
+          "6": {
+           "attempts": 35300,
+           "count": 35300,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 35300
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 35300,
+         "1": 35300,
+         "2": 35300,
+         "3": 35300,
+         "4": 35300,
+         "5": 35300,
+         "6": 35300
+        },
+        "union_evaluated": true
+       },
+       "R2.luhn_check": {
+        "D_lin": 35300,
+        "k": 1,
+        "lineages": {
+         "R2.luhn_check": {
+          "0": {
+           "attempts": 35519,
+           "count": 35300,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 35300
+          },
+          "1": {
+           "attempts": 35301,
+           "count": 35300,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 35300
+          },
+          "2": {
+           "attempts": 35300,
+           "count": 35300,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 35300
+          },
+          "3": {
+           "attempts": 35300,
+           "count": 35300,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 35300
+          },
+          "4": {
+           "attempts": 35300,
+           "count": 35300,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 35300
+          },
+          "5": {
+           "attempts": 35300,
+           "count": 35300,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 35300
+          },
+          "6": {
+           "attempts": 35300,
+           "count": 35300,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 35300
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 35300,
+         "1": 35300,
+         "2": 35300,
+         "3": 35300,
+         "4": 35300,
+         "5": 35300,
+         "6": 35300
+        },
+        "union_evaluated": true
+       },
+       "R2.min_heap_ops": {
+        "D_lin": 35300,
+        "k": 1,
+        "lineages": {
+         "R2.min_heap_ops": {
+          "0": {
+           "attempts": 35300,
+           "count": 35300,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 35300
+          },
+          "1": {
+           "attempts": 35300,
+           "count": 35300,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 35300
+          },
+          "2": {
+           "attempts": 35300,
+           "count": 35300,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 35300
+          },
+          "3": {
+           "attempts": 35300,
+           "count": 35300,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 35300
+          },
+          "4": {
+           "attempts": 35300,
+           "count": 35300,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 35300
+          },
+          "5": {
+           "attempts": 35300,
+           "count": 35300,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 35300
+          },
+          "6": {
+           "attempts": 35300,
+           "count": 35300,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 35300
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 35300,
+         "1": 35300,
+         "2": 35300,
+         "3": 35300,
+         "4": 35300,
+         "5": 35300,
+         "6": 35300
+        },
+        "union_evaluated": true
+       }
+      },
+      "failing": [
+       "R2.cellular_automaton"
+      ],
+      "round": 1
+     },
+     {
+      "D_G": 41010,
+      "G": 6,
+      "clusters": {
+       "C1.binary_search": {
+        "D_lin": 41010,
+        "k": 1,
+        "lineages": {
+         "R2.binary_search_trace": {
+          "0": {
+           "attempts": 41010,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "1": {
+           "attempts": 41010,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "2": {
+           "attempts": 41010,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "3": {
+           "attempts": 41010,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "4": {
+           "attempts": 41010,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "5": {
+           "attempts": 41010,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "6": {
+           "attempts": 41010,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 41010,
+         "1": 41010,
+         "2": 41010,
+         "3": 41010,
+         "4": 41010,
+         "5": 41010,
+         "6": 41010
+        },
+        "union_evaluated": true
+       },
+       "C1.run_length_scan": {
+        "D_lin": 41010,
+        "k": 1,
+        "lineages": {
+         "R2.run_length": {
+          "0": {
+           "attempts": 41027,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "1": {
+           "attempts": 41011,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "2": {
+           "attempts": 41010,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "3": {
+           "attempts": 41010,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "4": {
+           "attempts": 41010,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "5": {
+           "attempts": 41010,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "6": {
+           "attempts": 41010,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 41010,
+         "1": 41010,
+         "2": 41010,
+         "3": 41010,
+         "4": 41010,
+         "5": 41010,
+         "6": 41010
+        },
+        "union_evaluated": true
+       },
+       "M1.median_list": {
+        "D_lin": 41010,
+        "k": 1,
+        "lineages": {
+         "R2.sort_list": {
+          "0": {
+           "attempts": 41012,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "1": {
+           "attempts": 41010,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "2": {
+           "attempts": 41010,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "3": {
+           "attempts": 41010,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "4": {
+           "attempts": 41010,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "5": {
+           "attempts": 41010,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "6": {
+           "attempts": 41010,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 41010,
+         "1": 41010,
+         "2": 41010,
+         "3": 41010,
+         "4": 41010,
+         "5": 41010,
+         "6": 41010
+        },
+        "union_evaluated": true
+       },
+       "R2.caesar_shift": {
+        "D_lin": 41010,
+        "k": 1,
+        "lineages": {
+         "R2.caesar_shift": {
+          "0": {
+           "attempts": 46194,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "1": {
+           "attempts": 41011,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "2": {
+           "attempts": 41010,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "3": {
+           "attempts": 41010,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "4": {
+           "attempts": 41010,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "5": {
+           "attempts": 41010,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "6": {
+           "attempts": 41010,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 41010,
+         "1": 41010,
+         "2": 41010,
+         "3": 41010,
+         "4": 41010,
+         "5": 41010,
+         "6": 41010
+        },
+        "union_evaluated": true
+       },
+       "R2.luhn_check": {
+        "D_lin": 41010,
+        "k": 1,
+        "lineages": {
+         "R2.luhn_check": {
+          "0": {
+           "attempts": 41300,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "1": {
+           "attempts": 41014,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "2": {
+           "attempts": 41010,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "3": {
+           "attempts": 41010,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "4": {
+           "attempts": 41010,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "5": {
+           "attempts": 41010,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "6": {
+           "attempts": 41010,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 41010,
+         "1": 41010,
+         "2": 41010,
+         "3": 41010,
+         "4": 41010,
+         "5": 41010,
+         "6": 41010
+        },
+        "union_evaluated": true
+       },
+       "R2.min_heap_ops": {
+        "D_lin": 41010,
+        "k": 1,
+        "lineages": {
+         "R2.min_heap_ops": {
+          "0": {
+           "attempts": 41010,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "1": {
+           "attempts": 41010,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "2": {
+           "attempts": 41010,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "3": {
+           "attempts": 41010,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "4": {
+           "attempts": 41010,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "5": {
+           "attempts": 41010,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          },
+          "6": {
+           "attempts": 41010,
+           "count": 41010,
+           "ended": "target",
+           "solver_disagreements": 0,
+           "target": 41010
+          }
+         }
+        },
+        "union_by_level": {
+         "0": 41010,
+         "1": 41010,
+         "2": 41010,
+         "3": 41010,
+         "4": 41010,
+         "5": 41010,
+         "6": 41010
+        },
+        "union_evaluated": true
+       }
+      },
+      "failing": [],
+      "round": 2
+     }
+    ],
+    "start": {
+     "C1.binary_search": [
+      "R2.binary_search_trace"
+     ],
+     "C1.cellular_update": [
+      "R2.cellular_automaton"
+     ],
+     "C1.run_length_scan": [
+      "R2.run_length"
+     ],
+     "M1.median_list": [
+      "R2.sort_list"
+     ],
+     "R2.caesar_shift": [
+      "R2.caesar_shift"
+     ],
+     "R2.luhn_check": [
+      "R2.luhn_check"
+     ],
+     "R2.min_heap_ops": [
+      "R2.min_heap_ops"
+     ]
+    }
+   }
+  }
+ },
+ "spec": {
+  "attempt_budget": "40 * T + 1000",
+  "counting": "capacity.count",
+  "development_sealed_tuning": [
+   4000,
+   20000,
+   100
+  ],
+  "key": "distinct-key-v1 reading (i)",
+  "key_bytes": 16,
+  "levels": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6
+  ],
+  "reduced_levels": false,
+  "retry_limit": 500,
+  "seed": 400002,
+  "solvers_checked": true,
+  "stream_labels": [
+   "capacity",
+   "<e>",
+   "<lineage id>",
+   "<level>"
+  ]
+ },
+ "stage": "ADR-0033 addendum 1 section 4A stage 4"
+}
