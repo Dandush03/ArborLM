@@ -1,0 +1,126 @@
+{
+ "i_key_space_lower_bound_L0": {
+  "expected_pairs_sharing_the_ordered_tuple_in_241000": 1.327863717421125e-07,
+  "expected_pairs_sharing_the_ordered_tuple_in_500000": 5.715580704160951e-07,
+  "ordered_day_counts": "300^7",
+  "value": 218700000000000000
+ },
+ "i_one_number_changed_key_differs": true,
+ "i_rename_example_L0": {
+  "a": "The music recital took place on a Tuesday. The school play took place 140 days before the chess final. The art auction took place 2 days before the bake-off. The music recital took place 175 days after the chess final. The harvest fair took place 191 days before the bake-off. The school play took place 275 days after the bake-off. The market day took place 133 days before the bake-off. The art auction took place 173 days after the film night. On which day of the week did the film night take place?",
+  "b": "The art auction took place on a Tuesday. The book sale took place 140 days before the boat race. The film night took place 2 days before the town parade. The art auction took place 175 days after the boat race. The council vote took place 191 days before the town parade. The book sale took place 275 days after the town parade. The bake-off took place 133 days before the town parade. The film night took place 173 days after the flower show. On which day of the week did the flower show take place?",
+  "key_text_a": "The \u27e6N0\u27e7 took place on a Tuesday. The \u27e6N1\u27e7 took place 140 days before the \u27e6N2\u27e7. The \u27e6N3\u27e7 took place 2 days before the \u27e6N4\u27e7. The \u27e6N0\u27e7 took place 175 days after the \u27e6N2\u27e7. The \u27e6N5\u27e7 took place 191 days before the \u27e6N4\u27e7. The \u27e6N1\u27e7 took place 275 days after the \u27e6N4\u27e7. The \u27e6N6\u27e7 took place 133 days before the \u27e6N4\u27e7. The \u27e6N3\u27e7 took place 173 days after the \u27e6N7\u27e7. On which day of the week did the \u27e6N7\u27e7 take place?",
+  "key_text_b": "The \u27e6N0\u27e7 took place on a Tuesday. The \u27e6N1\u27e7 took place 140 days before the \u27e6N2\u27e7. The \u27e6N3\u27e7 took place 2 days before the \u27e6N4\u27e7. The \u27e6N0\u27e7 took place 175 days after the \u27e6N2\u27e7. The \u27e6N5\u27e7 took place 191 days before the \u27e6N4\u27e7. The \u27e6N1\u27e7 took place 275 days after the \u27e6N4\u27e7. The \u27e6N6\u27e7 took place 133 days before the \u27e6N4\u27e7. The \u27e6N3\u27e7 took place 173 days after the \u27e6N7\u27e7. On which day of the week did the \u27e6N7\u27e7 take place?"
+ },
+ "i_rename_names_only": {
+  "0": {
+   "answers_differ": 0,
+   "keys_equal": 2000,
+   "pairs": 2000,
+   "texts_differ": 2000
+  },
+  "3": {
+   "answers_differ": 0,
+   "keys_equal": 2000,
+   "pairs": 2000,
+   "texts_differ": 2000
+  },
+  "6": {
+   "answers_differ": 0,
+   "keys_equal": 2000,
+   "pairs": 2000,
+   "texts_differ": 2000
+  }
+ },
+ "i_temporal_L0_500k_capacity": {
+  "attempts": 500000,
+  "count": 500000,
+  "ended": "target",
+  "keys_sha256": "91af2a68d1416c23977705531b1882061bacd91c3846eec190f45a25cb0b267b"
+ },
+ "i_temporal_L0_500k_capacity-recompute-extra": {
+  "attempts": 500000,
+  "count": 500000,
+  "ended": "target",
+  "keys_sha256": "a89225069d08d7acd5b1937abdbd64cce095f3fd1d63190863664a72d202e8c5"
+ },
+ "ii_L0_2000000_attempts": {
+  "attempts": 2000000,
+  "count": 32768,
+  "ended": "budget"
+ },
+ "ii_L0_draw_to_32768": {
+  "attempts": 369491,
+  "count": 32768,
+  "ended": "target"
+ },
+ "ii_L0_exhaustive": {
+  "distinct_keys": 32768,
+  "distinct_texts": 32768
+ },
+ "ii_space_by_level": {
+  "0": 32768,
+  "1": 131072,
+  "2": 524288,
+  "3": 2097152,
+  "4": 8388608,
+  "5": 33554432,
+  "6": 134217728
+ },
+ "iii_D_lin_8_k": {
+  "1": 31000,
+  "2": 15500,
+  "3": 10350,
+  "4": 7750,
+  "5": 6200,
+  "6": 5180,
+  "7": 4450,
+  "8": 3890
+ },
+ "iii_rectangle_space": {
+  "0": {
+   "distinct_(shape,perimeter,parameter)": 4189,
+   "excess_items": 3540,
+   "ratio_items": 649,
+   "total": 4189,
+   "widths": 59
+  },
+  "1": {
+   "distinct_(shape,perimeter,parameter)": 4899,
+   "excess_items": 4140,
+   "ratio_items": 759,
+   "total": 4899,
+   "widths": 69
+  },
+  "2": {
+   "excess_items": 4740,
+   "ratio_items": 869,
+   "total": 5609,
+   "widths": 79
+  },
+  "3": {
+   "excess_items": 5340,
+   "ratio_items": 979,
+   "total": 6319,
+   "widths": 89
+  },
+  "4": {
+   "excess_items": 5940,
+   "ratio_items": 1089,
+   "total": 7029,
+   "widths": 99
+  },
+  "5": {
+   "excess_items": 6540,
+   "ratio_items": 1199,
+   "total": 7739,
+   "widths": 109
+  },
+  "6": {
+   "excess_items": 7140,
+   "ratio_items": 1309,
+   "total": 8449,
+   "widths": 119
+  }
+ }
+}
