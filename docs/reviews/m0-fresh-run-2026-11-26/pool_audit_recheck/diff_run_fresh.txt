@@ -1,0 +1,98 @@
+--- superseded_v1/run_fresh.py	2026-11-26 12:56:28
++++ run_fresh.py	2026-11-26 12:56:28
+@@ -1,7 +1,8 @@
+ # ruff: noqa: E501
+ """The runner of the M0 fresh run (ADR-0033 addendum 1, section 4A, stage 1S point 11). Standard library only.
+ 
+-    python3 -I run_fresh.py --plan run_plan.json --seed-set {dry,1,2,3} [--units R1a,R2b,...] [--jobs N] [--check-only]
++    uv run --locked python run_fresh.py --plan run_plan.json --expect-plan-sha256 HEX --seed-set {dry,1,2,3} [--units R1a,R2b,...] [--jobs N] [--check-only]
++(run from the worktree root; the plan's own commands are run with their own argv, this script only needs the standard library)
+ 
+ For each unit, in the plan's fixed order: it creates the unit's output directory (it refuses to start if that directory already exists and is
+ non-empty; nothing is ever overwritten), executes each command exactly as planned (argv, cwd, the plan's environment added to a minimal inherited
+@@ -12,8 +13,11 @@
+ A command that exits non-zero ends the unit's chain; the unit's whole chain (every command from the first) is then run once again, unchanged except
+ for the output-directory prefix, into the sibling directory <unit>/seed<i>_retry1 (<unit>_retry1 for the dry set); both attempts are recorded. If that
+ also fails, no further unit is started, running units are left to end, and the runner exits 1, printing only the unit name and the exit statuses.
+-Exit status: 0 all units ended with exit 0; 1 a unit failed twice; 2 a refusal (a usage error, an output directory that is not empty, a unit already
+-recorded) before any command was started.
++A runner error (an exception of this script, not an exit status of a command) is recorded for that unit (exception type and message), stops everything
++the same way, and no later unit starts. It refuses to start (exit 2) if the plan's SHA-256 is not the expected one, or if any hash record under the run
++or the dry output root, for this seed set or any other, holds a unit whose final status is not ok.
++Exit status: 0 all units ended with exit 0; 1 a unit failed twice or the runner failed on a unit; 2 a refusal (a usage error, a plan hash mismatch, a
++failed unit in an earlier record, an output directory that is not empty, a unit already recorded) before any command was started.
+ """
+ from __future__ import annotations
+ 
+@@ -130,6 +134,7 @@
+ def main(argv: list[str] | None = None) -> int:
+     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+     ap.add_argument("--plan", required=True)
++    ap.add_argument("--expect-plan-sha256", required=True, help="the SHA-256 recorded for the run plan; checked before anything runs")
+     ap.add_argument("--seed-set", required=True, choices=["dry", "1", "2", "3"])
+     ap.add_argument("--units", default=None, help="comma-separated subset; they still run in the plan's fixed order")
+     ap.add_argument("--jobs", type=int, default=1, help="units run concurrently (independent units only); default 1")
+@@ -139,6 +144,9 @@
+     with open(a.plan, encoding="utf-8") as f:
+         plan = json.load(f)
+     plan_sha = sha256_file(a.plan)
++    if plan_sha != a.expect_plan_sha256:
++        print("refusing: the plan does not have the expected SHA-256", file=sys.stderr)
++        return 2
+     order = plan["unit_order"]
+     want = order if a.units is None else a.units.split(",")
+     for u in want:
+@@ -150,6 +158,17 @@
+     ss = a.seed_set
+     root = plan["output_roots"]["dry" if ss == "dry" else "run"]
+     record_path = os.path.join(root, "hashes_dry.json" if ss == "dry" else f"hashes_seed{ss}.json")
++    for rt in (plan["output_roots"]["run"], plan["output_roots"]["dry"]):  # a unit that did not end ok in ANY record stops the run for good
++        if not os.path.isdir(rt):
++            continue
++        for fn in sorted(os.listdir(rt)):
++            if fn.startswith("hashes_") and fn.endswith(".json"):
++                with open(os.path.join(rt, fn), encoding="utf-8") as f:
++                    old = json.load(f)
++                for ou, orec in sorted(old.get("units", {}).items()):
++                    if not orec.get("ok", False):
++                        print(f"refusing: {fn} holds unit {ou} whose final status is not ok; the run stopped and goes to the human lead", file=sys.stderr)
++                        return 2
+     record: dict[str, Any] = {"seed_set": ss, "units": {}}
+     if os.path.exists(record_path):
+         with open(record_path, encoding="utf-8") as f:
+@@ -174,7 +193,23 @@
+         if STOP.is_set():
+             print(f"unit {u}: not started (an earlier unit failed twice)", flush=True)
+             return False
+-        return run_unit(plan, u, ss, record, record_path, plan_sha)
++        try:
++            return run_unit(plan, u, ss, record, record_path, plan_sha)
++        except BaseException as e:  # an error of the runner itself: recorded for the unit, everything stops
++            STOP.set()
++            d = plan["units"][u]["runs"][ss]["output_dir"]
++            try:
++                files = tree_hashes(d) if os.path.isdir(d) else {}
++            except OSError:
++                files = {}
++            with LOCK:
++                record["units"][u] = {"ok": False, "runner_exception": {"type": type(e).__name__, "message": str(e)[:300]}, "attempts": [], "files_present": files}
++                try:
++                    write_record(record_path, record, plan_sha)
++                except OSError:
++                    pass
++            print(f"unit {u} seed-set {ss}: runner error {type(e).__name__}", flush=True)
++            return False
+ 
+     with ThreadPoolExecutor(max_workers=max(1, a.jobs)) as ex:
+         results = list(ex.map(job, units))
+@@ -182,6 +217,10 @@
+     if not ok_all:
+         failed = [u for u, r in zip(units, results, strict=True) if not r and u in record["units"]]
+         for u in failed:
++            if "runner_exception" in record["units"][u]:
++                ex = record["units"][u]["runner_exception"]
++                print(f"STOP unit={u} runner error {ex['type']}: {ex['message']}", file=sys.stderr)
++                continue
+             st = [[c["exit_status"] for c in at["commands"]] for at in record["units"][u]["attempts"]]
+             print(f"STOP unit={u} exit statuses per attempt {st}", file=sys.stderr)
+         return 1

@@ -1,0 +1,92 @@
+PASS  a0-written     old echo fixture: written name [max/max] still 2/15, kept
+          expected {'excess': '2/15', 'over': 'False', 'stripped': 'False'}
+          got      {'excess': '2/15', 'over': 'False', 'stripped': 'False'}
+PASS  a0-stripped    old echo fixture: stripped name 1/5 vs chance, dropped
+          expected {'excess': '1/5', 'margin': '4001/20000', 'over': 'True', 'stripped': 'True'}
+          got      {'excess': '1/5', 'margin': '4001/20000', 'over': 'True', 'stripped': 'True'}
+PASS  a0-drop        old echo fixture: M1.ratio_share_r3 now dropped (was kept under v1; changed by R-56)
+          expected True
+          got      True
+PASS  a1             (a) written [max/max]: 0.2*200/300 = 2/15 kept
+          expected {'excess': '2/15', 'over': 'False'}
+          got      {'excess': '2/15', 'over': 'False'}
+PASS  a2             (a) written [max/last]: 1/15 kept
+          expected {'excess': '1/15', 'over': 'False'}
+          got      {'excess': '1/15', 'over': 'False'}
+PASS  a3             (a) stripped vs chance 1/5 + 1/20000: dropped
+          expected {'excess': '1/5', 'margin': '4001/20000', 'over': 'True', 'counted': 'True', 'stripped': 'True'}
+          got      {'excess': '1/5', 'margin': '4001/20000', 'over': 'True', 'counted': 'True', 'stripped': 'True'}
+PASS  a4             (a) stripped vs base 0.05: 3/20 + 1/10000: dropped
+          expected {'excess': '3/20', 'margin': '1501/10000', 'over': 'True'}
+          got      {'excess': '3/20', 'margin': '1501/10000', 'over': 'True'}
+PASS  a5             (a) e56_echo dropped and listed as differing only under the second reading
+          expected [True, True, False]
+          got      [True, True, False]
+PASS  b1             (b) stripped exactly 3/20 (0.1499, 0.1500, 0.1501), written 4 dp: 3/20 + 1/20000 > 0.15, dropped (point 7)
+          expected {'excess': '3/20', 'margin': '3001/20000', 'over': 'True'}
+          got      {'excess': '3/20', 'margin': '3001/20000', 'over': 'True'}
+PASS  b1w            (b) written [a] (0.1499 and 0.1501 of 300 items) 1/10, kept
+          expected {'excess': '1/10', 'over': 'False'}
+          got      {'excess': '1/10', 'over': 'False'}
+PASS  b2             (b) stripped 281/1875 (0.1498, 0.1499, 0.1499): + 1/20000 = 0.14991..., kept
+          expected {'excess': '281/1875', 'margin': '1799/12000', 'over': 'False'}
+          got      {'excess': '281/1875', 'margin': '1799/12000', 'over': 'False'}
+PASS  b2b            (b) same vs base 0: + 1/10000 = 0.14996..., kept
+          expected {'excess': '281/1875', 'margin': '4499/30000', 'over': 'False'}
+          got      {'excess': '281/1875', 'margin': '4499/30000', 'over': 'False'}
+PASS  b3             (b) stripped 1501/10000 (0.1500, 0.1501, 0.1502): dropped
+          expected {'excess': '1501/10000', 'over': 'True'}
+          got      {'excess': '1501/10000', 'over': 'True'}
+PASS  b4             (b) drops: drop_r3 yes, keep_r3 no, above_r3 yes
+          expected [True, False, True]
+          got      [True, False, True]
+PASS  c1             (c) stripped im:largest_share on stem ratio_share (M1.ratio_share_r2): an entry, uncounted
+          expected {'counted': 'False', 'stripped': 'True'}
+          got      {'counted': 'False', 'stripped': 'True'}
+PASS  c2             (c) written im:largest_share[a] on ratio_share_r2: not an entry, counted, 2/15 kept
+          expected {'counted': 'True', 'excess': '2/15', 'over': 'False'}
+          got      {'counted': 'True', 'excess': '2/15', 'over': 'False'}
+PASS  c3             (c) stripped im:largest_share on another stem: counted, 1/5, dropped
+          expected {'counted': 'True', 'excess': '1/5', 'over': 'True'}
+          got      {'counted': 'True', 'excess': '1/5', 'over': 'True'}
+PASS  c4             (c) ratio_share_r2 kept, e56_noentry dropped
+          expected [False, True]
+          got      [False, True]
+PASS  r56-all        r56 drops = main drops + e56_echo, e56_drop, e56_above, e56_noentry
+          expected ['C1.c_a3above', 'C1.c_a3fb', 'C1.c_closed', 'C1.c_mnot', 'C1.c_msh', 'C1.c_printform', 'C1.c_s5edge', 'C1.c_s5rec', 'C1.c_srcs', 'C1.c_srcs3', 'C1.slices_f4', 'M1.base_r3', 'M1.e56_above_r3', 'M1.e56_drop_r3', 'M1.e56_echo_r3', 'M1.e56_noentry_r3', 'M1.gamma_r3', 'M1.prime_factors_r3', 'M1.vsbase_r3', 'M1.vschance_r3', 'R1.beta_r5', 'R1.delta', 'R1.eps_r4', 'R1.eta_r4', 'R1.gamma_r6', 'R1.kappa_r4', 'R1.mu_r4', 'R1.nu_r4', 'R1.zeta_r4', 'R2.b_open', 'R2.d_yn', 'R2.f_cond', 'R2.h_sd', 'R2.i_sdsum', 'R2.k_klass2', 'R2.l_construct', 'R2.m_new']
+          got      ['C1.c_a3above', 'C1.c_a3fb', 'C1.c_closed', 'C1.c_mnot', 'C1.c_msh', 'C1.c_printform', 'C1.c_s5edge', 'C1.c_s5rec', 'C1.c_srcs', 'C1.c_srcs3', 'C1.slices_f4', 'M1.base_r3', 'M1.e56_above_r3', 'M1.e56_drop_r3', 'M1.e56_echo_r3', 'M1.e56_noentry_r3', 'M1.gamma_r3', 'M1.prime_factors_r3', 'M1.vsbase_r3', 'M1.vschance_r3', 'R1.beta_r5', 'R1.delta', 'R1.eps_r4', 'R1.eta_r4', 'R1.gamma_r6', 'R1.kappa_r4', 'R1.mu_r4', 'R1.nu_r4', 'R1.zeta_r4', 'R2.b_open', 'R2.d_yn', 'R2.f_cond', 'R2.h_sd', 'R2.i_sdsum', 'R2.k_klass2', 'R2.l_construct', 'R2.m_new']
+PASS  x1             no bracket-stripped row outside M1a
+          expected 0
+          got      0
+PASS  x2             dry_run_exclusions copied to the extras
+          expected []
+          got      []
+PASS  f-pooled_table.json (f) pooled_table.json identical with the in-shape report-only fields changed
+          expected True
+          got      True
+PASS  f-dropped.json (f) dropped.json identical with the in-shape report-only fields changed
+          expected True
+          got      True
+PASS  f-per_lineage.json (f) per_lineage.json identical with the in-shape report-only fields changed
+          expected True
+          got      True
+PASS  f-extras-other (f) every other extras key identical
+          expected True
+          got      True
+FAIL  f-a3           (f) a3 S row rate_in_shape 0.777 and mf_in_shape_cv 0.111 reported
+          expected {'rate_in_shape': '777/1000', 'mf_in_shape_cv': '111/1000', 'n_shape': '16'}
+          got      {'rate_in_shape': '777/1000', 'mf_in_shape_cv': '111/1000', 'n_shape': '16/1'}
+PASS  f-bat          (f) battery S row rate 0.555 reported
+          expected 111/200
+          got      111/200
+PASS  f-s5           (f) s5 MF_in_shape_cv 0.333 reported
+          expected 333/1000
+          got      333/1000
+FAIL  f-r2           (f) R2 per-shape counts reported (g_sd removals=1, SDR rule, seed 1): k 2, n 20
+          expected ['2', '20']
+          got      ['2/1', '20/1']
+PASS  f-bmsh         (f) battery MF_shape_cv per shape reported (c_msh L4 shape A)
+          expected 3/8
+          got      3/8
+
+CASES 30  PASS 28  FAIL 2

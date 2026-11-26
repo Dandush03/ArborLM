@@ -1,0 +1,16 @@
+old_main2 exit=0 stderr=[] outdir=yes
+old_stop_r2a_missing exit=3 stderr=[STOP unit=R2a lineage=R2.a_open] outdir=no
+old_stop_m1b_level exit=3 stderr=[STOP unit=M1b lineage=M1.gamma_r3] outdir=no
+old_stop_r1c_six exit=3 stderr=[STOP unit=R1c lineage=R1.lambda_r4 (a line does not have 7 values per figure, so its levels cannot be read)] outdir=no
+old_stop_a3_log exit=3 stderr=[STOP unit=C1c lineage=C1.c_srcs (no entry in run_log.json)] outdir=no
+old_stop_f5_missing exit=3 stderr=[STOP unit=C1c lineage=C1.c_closed] outdir=no
+old_classes2 exit=0 stderr=[] outdir=yes
+old_echo exit=0 stderr=[] outdir=yes
+new_main exit=0 stderr=[] outdir=yes
+new_r56 exit=0 stderr=[] outdir=yes
+new_r56_stop_two exit=3 stderr=[STOP unit=M1a lineage=M1.e56_echo_r3 (bracketed variants of one name cannot be combined without double counting items)] outdir=no
+new_r56_stop_bare exit=3 stderr=[STOP unit=M1a lineage=M1.e56_echo_r3 (bracketed variants of one name cannot be combined without double counting items)] outdir=no
+new_shapes_alt exit=0 stderr=[] outdir=yes
+e_badplan exit=4 stderr=[INPUT ERROR: the run plan does not have the expected SHA-256] outdir=no
+e_badfield exit=4 stderr=[INPUT ERROR: the field table does not have the expected SHA-256] outdir=no
+e_badamend exit=4 stderr=[INPUT ERROR: the amendment list does not have the expected SHA-256] outdir=no
