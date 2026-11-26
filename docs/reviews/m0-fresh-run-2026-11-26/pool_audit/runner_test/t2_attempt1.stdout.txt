@@ -1,0 +1,4 @@
+unit R1a seed-set 1: exit statuses per attempt [[0]]; ok=True
+unit R1b seed-set 1: exit statuses per attempt [[0, 1], [0, 0]]; ok=True
+unit R1c seed-set 1: exit statuses per attempt [[2], [2]]; ok=False
+unit R2a: not started (an earlier unit failed twice)

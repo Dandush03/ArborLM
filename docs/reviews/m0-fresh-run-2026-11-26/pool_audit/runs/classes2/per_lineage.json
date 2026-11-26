@@ -1,0 +1,8032 @@
+{
+ "C1.c_a3above": {
+  "dropped": true,
+  "evaluation": "C1",
+  "levels": {
+   "0": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "1": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "2": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "3": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.158333333333",
+     "fraction": "19/120"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "S.foo",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.158333333333",
+     "fraction": "19/120"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "4": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "5": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "6": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   }
+  }
+ },
+ "C1.c_a3exact": {
+  "dropped": false,
+  "evaluation": "C1",
+  "levels": {
+   "0": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "1": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "2": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "3": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.150000000000",
+     "fraction": "3/20"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "S.foo",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.150000000000",
+     "fraction": "3/20"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "4": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "5": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "6": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   }
+  }
+ },
+ "C1.c_a3fb": {
+  "dropped": true,
+  "evaluation": "C1",
+  "levels": {
+   "0": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "1": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "2": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "3": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.600000000000",
+     "fraction": "3/5"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "S.foo",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.600000000000",
+     "fraction": "3/5"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "4": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "5": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "6": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   }
+  }
+ },
+ "C1.c_a3ok": {
+  "dropped": false,
+  "evaluation": "C1",
+  "levels": {
+   "0": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "1": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "2": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "3": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "S.foo",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "4": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "5": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "6": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   }
+  }
+ },
+ "C1.c_bkeep": {
+  "dropped": false,
+  "evaluation": "C1",
+  "levels": {
+   "0": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "1": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "2": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "3": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "4": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "5": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "6": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   }
+  }
+ },
+ "C1.c_closed": {
+  "dropped": true,
+  "evaluation": "C1",
+  "levels": {
+   "0": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "1": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "2": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "3": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "4": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "5": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.500000000000",
+     "fraction": "1/2"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "M.no_back",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.500000000000",
+     "fraction": "1/2"
+    },
+    "source": "f5",
+    "unit": "C1c"
+   },
+   "6": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   }
+  }
+ },
+ "C1.c_closed2": {
+  "dropped": false,
+  "evaluation": "C1",
+  "levels": {
+   "0": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "1": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "2": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "3": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "4": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "5": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.100000000000",
+     "fraction": "1/10"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "F.keep",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.100000000000",
+     "fraction": "1/10"
+    },
+    "source": "f5b",
+    "unit": "C1c"
+   },
+   "6": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   }
+  }
+ },
+ "C1.c_effsm": {
+  "dropped": false,
+  "evaluation": "C1",
+  "levels": {
+   "0": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "1": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "2": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "3": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "4": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "5": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "6": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   }
+  }
+ },
+ "C1.c_err": {
+  "dropped": false,
+  "evaluation": "C1",
+  "levels": {
+   "0": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "1": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "2": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "3": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "4": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "5": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "6": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   }
+  }
+ },
+ "C1.c_mnot": {
+  "dropped": true,
+  "evaluation": "C1",
+  "levels": {
+   "0": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "1": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "2": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.400000000000",
+     "fraction": "2/5"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "M.not_entry",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.400000000000",
+     "fraction": "2/5"
+    },
+    "source": "s5",
+    "unit": "C1a"
+   },
+   "3": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "4": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "5": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "6": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   }
+  }
+ },
+ "C1.c_msh": {
+  "dropped": true,
+  "evaluation": "C1",
+  "levels": {
+   "0": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "1": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "2": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "3": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "4": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.150000000000",
+     "fraction": "3/20"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "MF_shape_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.150000000000",
+     "fraction": "3/20"
+    },
+    "source": "battery",
+    "unit": "C1b"
+   },
+   "5": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "6": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   }
+  }
+ },
+ "C1.c_printform": {
+  "dropped": true,
+  "evaluation": "C1",
+  "levels": {
+   "0": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "1": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "2": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "3": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.200000000000",
+     "fraction": "1/5"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "MF_printform_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.200000000000",
+     "fraction": "1/5"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "4": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "5": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "6": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   }
+  }
+ },
+ "C1.c_s5edge": {
+  "dropped": true,
+  "evaluation": "C1",
+  "levels": {
+   "0": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "1": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "2": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.150000000000",
+     "fraction": "3/20"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "S.foo",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.150000000000",
+     "fraction": "3/20"
+    },
+    "source": "s5",
+    "unit": "C1a"
+   },
+   "3": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "4": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "5": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "6": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   }
+  }
+ },
+ "C1.c_s5keep": {
+  "dropped": false,
+  "evaluation": "C1",
+  "levels": {
+   "0": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "1": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "2": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.125000000000",
+     "fraction": "1/8"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "S.foo",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.125000000000",
+     "fraction": "1/8"
+    },
+    "source": "s5",
+    "unit": "C1a"
+   },
+   "3": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "4": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "5": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "6": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   }
+  }
+ },
+ "C1.c_s5rec": {
+  "dropped": true,
+  "evaluation": "C1",
+  "levels": {
+   "0": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "1": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "2": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.175000000000",
+     "fraction": "7/40"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "S.foo",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.175000000000",
+     "fraction": "7/40"
+    },
+    "source": "s5",
+    "unit": "C1a"
+   },
+   "3": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "4": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "5": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "6": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   }
+  }
+ },
+ "C1.c_srcs": {
+  "dropped": true,
+  "evaluation": "C1",
+  "levels": {
+   "0": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "1": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "2": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "3": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "4": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.600000000000",
+     "fraction": "3/5"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "S.no_back",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.600000000000",
+     "fraction": "3/5"
+    },
+    "source": "battery",
+    "unit": "C1b"
+   },
+   "5": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "6": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   }
+  }
+ },
+ "C1.c_srcs2": {
+  "dropped": false,
+  "evaluation": "C1",
+  "levels": {
+   "0": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "1": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "2": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "3": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "4": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "5": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "6": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   }
+  }
+ },
+ "C1.c_srcs3": {
+  "dropped": true,
+  "evaluation": "C1",
+  "levels": {
+   "0": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "1": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "2": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "3": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.600000000000",
+     "fraction": "3/5"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "C.self_check",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.600000000000",
+     "fraction": "3/5"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "4": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "5": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "6": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   }
+  }
+ },
+ "C1.slices_f4": {
+  "dropped": true,
+  "evaluation": "C1",
+  "levels": {
+   "0": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "1": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "2": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.200000000000",
+     "fraction": "1/5"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "EFF_F",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.200000000000",
+     "fraction": "1/5"
+    },
+    "source": "s5",
+    "unit": "C1a"
+   },
+   "3": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "4": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "5": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   },
+   "6": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "rate",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000500000000",
+     "fraction": "1/2000"
+    },
+    "rule": "BEST_generic_cv",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "a3",
+    "unit": "C1a"
+   }
+  }
+ },
+ "M1.base_r3": {
+  "dropped": true,
+  "evaluation": "M1",
+  "levels": {
+   "0": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "vs_base",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000100000000",
+     "fraction": "1/10000"
+    },
+    "rule": "a3:base_r",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "-0.050000000000",
+     "fraction": "-1/20"
+    },
+    "source": "a3",
+    "unit": "M1a"
+   },
+   "1": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "vs_base",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000100000000",
+     "fraction": "1/10000"
+    },
+    "rule": "a3:base_r",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "-0.050000000000",
+     "fraction": "-1/20"
+    },
+    "source": "a3",
+    "unit": "M1a"
+   },
+   "2": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "vs_base",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000100000000",
+     "fraction": "1/10000"
+    },
+    "rule": "a3:base_r",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "-0.050000000000",
+     "fraction": "-1/20"
+    },
+    "source": "a3",
+    "unit": "M1a"
+   },
+   "3": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "vs_base",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000100000000",
+     "fraction": "1/10000"
+    },
+    "rule": "a3:base_r",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "-0.050000000000",
+     "fraction": "-1/20"
+    },
+    "source": "a3",
+    "unit": "M1a"
+   },
+   "4": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "vs_base",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000100000000",
+     "fraction": "1/10000"
+    },
+    "rule": "a3:base_r",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "-0.050000000000",
+     "fraction": "-1/20"
+    },
+    "source": "a3",
+    "unit": "M1a"
+   },
+   "5": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "vs_base",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000100000000",
+     "fraction": "1/10000"
+    },
+    "rule": "a3:base_r",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "-0.050000000000",
+     "fraction": "-1/20"
+    },
+    "source": "a3",
+    "unit": "M1a"
+   },
+   "6": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.200000000000",
+     "fraction": "1/5"
+    },
+    "reading": "vs_chance",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000005000000",
+     "fraction": "1/200000"
+    },
+    "rule": "base",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.200000000000",
+     "fraction": "1/5"
+    },
+    "source": "results",
+    "unit": "M1c"
+   }
+  }
+ },
+ "M1.gamma_r3": {
+  "dropped": true,
+  "evaluation": "M1",
+  "levels": {
+   "0": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "vs_base",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000100000000",
+     "fraction": "1/10000"
+    },
+    "rule": "a3:base_r",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "-0.050000000000",
+     "fraction": "-1/20"
+    },
+    "source": "a3",
+    "unit": "M1a"
+   },
+   "1": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "vs_base",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000100000000",
+     "fraction": "1/10000"
+    },
+    "rule": "a3:base_r",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "-0.050000000000",
+     "fraction": "-1/20"
+    },
+    "source": "a3",
+    "unit": "M1a"
+   },
+   "2": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.900000000000",
+     "fraction": "9/10"
+    },
+    "reading": "vs_chance",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "im:largest_share",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.900000000000",
+     "fraction": "9/10"
+    },
+    "source": "own",
+    "unit": "M1a"
+   },
+   "3": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "vs_base",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000100000000",
+     "fraction": "1/10000"
+    },
+    "rule": "a3:base_r",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "-0.050000000000",
+     "fraction": "-1/20"
+    },
+    "source": "a3",
+    "unit": "M1a"
+   },
+   "4": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "vs_base",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000100000000",
+     "fraction": "1/10000"
+    },
+    "rule": "a3:base_r",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "-0.050000000000",
+     "fraction": "-1/20"
+    },
+    "source": "a3",
+    "unit": "M1a"
+   },
+   "5": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "vs_base",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000100000000",
+     "fraction": "1/10000"
+    },
+    "rule": "a3:base_r",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "-0.050000000000",
+     "fraction": "-1/20"
+    },
+    "source": "a3",
+    "unit": "M1a"
+   },
+   "6": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "vs_base",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000100000000",
+     "fraction": "1/10000"
+    },
+    "rule": "a3:base_r",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "-0.050000000000",
+     "fraction": "-1/20"
+    },
+    "source": "a3",
+    "unit": "M1a"
+   }
+  }
+ },
+ "M1.prime_factors_r3": {
+  "dropped": true,
+  "evaluation": "M1",
+  "levels": {
+   "0": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "vs_base",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000100000000",
+     "fraction": "1/10000"
+    },
+    "rule": "a3:base_r",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "-0.050000000000",
+     "fraction": "-1/20"
+    },
+    "source": "a3",
+    "unit": "M1a"
+   },
+   "1": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "vs_base",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000100000000",
+     "fraction": "1/10000"
+    },
+    "rule": "a3:base_r",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "-0.050000000000",
+     "fraction": "-1/20"
+    },
+    "source": "a3",
+    "unit": "M1a"
+   },
+   "2": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.900000000000",
+     "fraction": "9/10"
+    },
+    "reading": "vs_chance",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "a3:largest_le_sqrt",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.900000000000",
+     "fraction": "9/10"
+    },
+    "source": "a3",
+    "unit": "M1a"
+   },
+   "3": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "vs_base",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000100000000",
+     "fraction": "1/10000"
+    },
+    "rule": "a3:base_r",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "-0.050000000000",
+     "fraction": "-1/20"
+    },
+    "source": "a3",
+    "unit": "M1a"
+   },
+   "4": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "vs_base",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000100000000",
+     "fraction": "1/10000"
+    },
+    "rule": "a3:base_r",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "-0.050000000000",
+     "fraction": "-1/20"
+    },
+    "source": "a3",
+    "unit": "M1a"
+   },
+   "5": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "vs_base",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000100000000",
+     "fraction": "1/10000"
+    },
+    "rule": "a3:base_r",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "-0.050000000000",
+     "fraction": "-1/20"
+    },
+    "source": "a3",
+    "unit": "M1a"
+   },
+   "6": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "vs_base",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000100000000",
+     "fraction": "1/10000"
+    },
+    "rule": "a3:base_r",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "-0.050000000000",
+     "fraction": "-1/20"
+    },
+    "source": "a3",
+    "unit": "M1a"
+   }
+  }
+ },
+ "M1.ratio_share_r3": {
+  "dropped": false,
+  "evaluation": "M1",
+  "levels": {
+   "0": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "vs_base",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000100000000",
+     "fraction": "1/10000"
+    },
+    "rule": "a3:base_r",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "-0.050000000000",
+     "fraction": "-1/20"
+    },
+    "source": "a3",
+    "unit": "M1a"
+   },
+   "1": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "vs_base",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000100000000",
+     "fraction": "1/10000"
+    },
+    "rule": "a3:base_r",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "-0.050000000000",
+     "fraction": "-1/20"
+    },
+    "source": "a3",
+    "unit": "M1a"
+   },
+   "2": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "vs_base",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000100000000",
+     "fraction": "1/10000"
+    },
+    "rule": "a3:base_r",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "-0.050000000000",
+     "fraction": "-1/20"
+    },
+    "source": "a3",
+    "unit": "M1a"
+   },
+   "3": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "vs_base",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000100000000",
+     "fraction": "1/10000"
+    },
+    "rule": "a3:base_r",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "-0.050000000000",
+     "fraction": "-1/20"
+    },
+    "source": "a3",
+    "unit": "M1a"
+   },
+   "4": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "vs_base",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000100000000",
+     "fraction": "1/10000"
+    },
+    "rule": "a3:base_r",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "-0.050000000000",
+     "fraction": "-1/20"
+    },
+    "source": "a3",
+    "unit": "M1a"
+   },
+   "5": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "vs_base",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000100000000",
+     "fraction": "1/10000"
+    },
+    "rule": "a3:base_r",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "-0.050000000000",
+     "fraction": "-1/20"
+    },
+    "source": "a3",
+    "unit": "M1a"
+   },
+   "6": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "vs_base",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000100000000",
+     "fraction": "1/10000"
+    },
+    "rule": "a3:base_r",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "-0.050000000000",
+     "fraction": "-1/20"
+    },
+    "source": "a3",
+    "unit": "M1a"
+   }
+  }
+ },
+ "M1.smalln_r3": {
+  "dropped": false,
+  "evaluation": "M1",
+  "levels": {
+   "0": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "vs_base",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000100000000",
+     "fraction": "1/10000"
+    },
+    "rule": "a3:base_r",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "-0.050000000000",
+     "fraction": "-1/20"
+    },
+    "source": "a3",
+    "unit": "M1a"
+   },
+   "1": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "vs_base",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000100000000",
+     "fraction": "1/10000"
+    },
+    "rule": "a3:base_r",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "-0.050000000000",
+     "fraction": "-1/20"
+    },
+    "source": "a3",
+    "unit": "M1a"
+   },
+   "2": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "vs_base",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000100000000",
+     "fraction": "1/10000"
+    },
+    "rule": "a3:base_r",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "-0.050000000000",
+     "fraction": "-1/20"
+    },
+    "source": "a3",
+    "unit": "M1a"
+   },
+   "3": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "vs_base",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000100000000",
+     "fraction": "1/10000"
+    },
+    "rule": "a3:base_r",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "-0.050000000000",
+     "fraction": "-1/20"
+    },
+    "source": "a3",
+    "unit": "M1a"
+   },
+   "4": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.139130434783",
+     "fraction": "16/115"
+    },
+    "reading": "vs_chance",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "im:sm",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.139130434783",
+     "fraction": "16/115"
+    },
+    "source": "own",
+    "unit": "M1a"
+   },
+   "5": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "vs_base",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000100000000",
+     "fraction": "1/10000"
+    },
+    "rule": "a3:base_r",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "-0.050000000000",
+     "fraction": "-1/20"
+    },
+    "source": "a3",
+    "unit": "M1a"
+   },
+   "6": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "vs_base",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000100000000",
+     "fraction": "1/10000"
+    },
+    "rule": "a3:base_r",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "-0.050000000000",
+     "fraction": "-1/20"
+    },
+    "source": "a3",
+    "unit": "M1a"
+   }
+  }
+ },
+ "M1.vsbase_r3": {
+  "dropped": true,
+  "evaluation": "M1",
+  "levels": {
+   "0": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "vs_base",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000100000000",
+     "fraction": "1/10000"
+    },
+    "rule": "a3:base_r",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "-0.050000000000",
+     "fraction": "-1/20"
+    },
+    "source": "a3",
+    "unit": "M1a"
+   },
+   "1": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "vs_base",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000100000000",
+     "fraction": "1/10000"
+    },
+    "rule": "a3:base_r",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "-0.050000000000",
+     "fraction": "-1/20"
+    },
+    "source": "a3",
+    "unit": "M1a"
+   },
+   "2": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "vs_base",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000100000000",
+     "fraction": "1/10000"
+    },
+    "rule": "a3:base_r",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "-0.050000000000",
+     "fraction": "-1/20"
+    },
+    "source": "a3",
+    "unit": "M1a"
+   },
+   "3": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.149933333333",
+     "fraction": "2249/15000"
+    },
+    "reading": "vs_chance",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base[own]",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.149933333333",
+     "fraction": "2249/15000"
+    },
+    "source": "own",
+    "unit": "M1a"
+   },
+   "4": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "vs_base",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000100000000",
+     "fraction": "1/10000"
+    },
+    "rule": "a3:base_r",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "-0.050000000000",
+     "fraction": "-1/20"
+    },
+    "source": "a3",
+    "unit": "M1a"
+   },
+   "5": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "vs_base",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000100000000",
+     "fraction": "1/10000"
+    },
+    "rule": "a3:base_r",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "-0.050000000000",
+     "fraction": "-1/20"
+    },
+    "source": "a3",
+    "unit": "M1a"
+   },
+   "6": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "vs_base",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000100000000",
+     "fraction": "1/10000"
+    },
+    "rule": "a3:base_r",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "-0.050000000000",
+     "fraction": "-1/20"
+    },
+    "source": "a3",
+    "unit": "M1a"
+   }
+  }
+ },
+ "M1.vschance_r3": {
+  "dropped": true,
+  "evaluation": "M1",
+  "levels": {
+   "0": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "vs_base",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000100000000",
+     "fraction": "1/10000"
+    },
+    "rule": "a3:base_r",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "-0.050000000000",
+     "fraction": "-1/20"
+    },
+    "source": "a3",
+    "unit": "M1a"
+   },
+   "1": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.160000000000",
+     "fraction": "4/25"
+    },
+    "reading": "vs_chance",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000005000000",
+     "fraction": "1/200000"
+    },
+    "rule": "new:foo",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.160000000000",
+     "fraction": "4/25"
+    },
+    "source": "results",
+    "unit": "M1b"
+   },
+   "2": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "vs_base",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000100000000",
+     "fraction": "1/10000"
+    },
+    "rule": "a3:base_r",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "-0.050000000000",
+     "fraction": "-1/20"
+    },
+    "source": "a3",
+    "unit": "M1a"
+   },
+   "3": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "vs_base",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000100000000",
+     "fraction": "1/10000"
+    },
+    "rule": "a3:base_r",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "-0.050000000000",
+     "fraction": "-1/20"
+    },
+    "source": "a3",
+    "unit": "M1a"
+   },
+   "4": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "vs_base",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000100000000",
+     "fraction": "1/10000"
+    },
+    "rule": "a3:base_r",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "-0.050000000000",
+     "fraction": "-1/20"
+    },
+    "source": "a3",
+    "unit": "M1a"
+   },
+   "5": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "vs_base",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000100000000",
+     "fraction": "1/10000"
+    },
+    "rule": "a3:base_r",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "-0.050000000000",
+     "fraction": "-1/20"
+    },
+    "source": "a3",
+    "unit": "M1a"
+   },
+   "6": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "vs_base",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000100000000",
+     "fraction": "1/10000"
+    },
+    "rule": "a3:base_r",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "-0.050000000000",
+     "fraction": "-1/20"
+    },
+    "source": "a3",
+    "unit": "M1a"
+   }
+  }
+ },
+ "R1.alpha_r4": {
+  "dropped": false,
+  "evaluation": "R1",
+  "levels": {
+   "0": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "1": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "2": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "3": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "4": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "5": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "6": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   }
+  }
+ },
+ "R1.beta_r5": {
+  "dropped": true,
+  "evaluation": "R1",
+  "levels": {
+   "0": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "1": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "2": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "3": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.300000000000",
+     "fraction": "3/10"
+    },
+    "reading": "eff",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "my_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.300000000000",
+     "fraction": "3/10"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "4": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "5": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "6": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   }
+  }
+ },
+ "R1.compass_turns": {
+  "dropped": false,
+  "evaluation": "R1",
+  "levels": {
+   "0": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "1": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.149900000000",
+     "fraction": "1499/10000"
+    },
+    "reading": "eff",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "c_ok",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.149900000000",
+     "fraction": "1499/10000"
+    },
+    "source": "impl",
+    "unit": "R1a"
+   },
+   "2": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "3": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "4": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "5": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "6": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   }
+  }
+ },
+ "R1.delta": {
+  "dropped": true,
+  "evaluation": "R1",
+  "levels": {
+   "0": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "1": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "2": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.400000000000",
+     "fraction": "2/5"
+    },
+    "reading": "eff",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "im:abstain_as_no",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.400000000000",
+     "fraction": "2/5"
+    },
+    "source": "impl",
+    "unit": "R1b"
+   },
+   "3": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "4": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "5": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "6": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   }
+  }
+ },
+ "R1.eps_r4": {
+  "dropped": true,
+  "evaluation": "R1",
+  "levels": {
+   "0": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.500000000000",
+     "fraction": "1/2"
+    },
+    "reading": "eff",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "exact_x",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.500000000000",
+     "fraction": "1/2"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "1": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.500000000000",
+     "fraction": "1/2"
+    },
+    "reading": "eff",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "exact_x",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.500000000000",
+     "fraction": "1/2"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "2": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.500000000000",
+     "fraction": "1/2"
+    },
+    "reading": "eff",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "exact_x",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.500000000000",
+     "fraction": "1/2"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "3": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.500000000000",
+     "fraction": "1/2"
+    },
+    "reading": "eff",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "exact_x",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.500000000000",
+     "fraction": "1/2"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "4": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.500000000000",
+     "fraction": "1/2"
+    },
+    "reading": "eff",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "exact_x",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.500000000000",
+     "fraction": "1/2"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "5": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.500000000000",
+     "fraction": "1/2"
+    },
+    "reading": "eff",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "exact_x",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.500000000000",
+     "fraction": "1/2"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "6": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.500000000000",
+     "fraction": "1/2"
+    },
+    "reading": "eff",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "exact_x",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.500000000000",
+     "fraction": "1/2"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   }
+  }
+ },
+ "R1.eta_r4": {
+  "dropped": true,
+  "evaluation": "R1",
+  "levels": {
+   "0": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "1": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "2": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "3": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "4": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "5": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.150100000000",
+     "fraction": "1501/10000"
+    },
+    "reading": "eff",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "e_neg",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "-0.150100000000",
+     "fraction": "-1501/10000"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "6": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   }
+  }
+ },
+ "R1.gamma_r6": {
+  "dropped": true,
+  "evaluation": "R1",
+  "levels": {
+   "0": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "1": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "2": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.400000000000",
+     "fraction": "2/5"
+    },
+    "reading": "eff",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "ccw_as_cw",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.400000000000",
+     "fraction": "2/5"
+    },
+    "source": "aud",
+    "unit": "R1b"
+   },
+   "3": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "4": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "5": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "6": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   }
+  }
+ },
+ "R1.iota_r4": {
+  "dropped": false,
+  "evaluation": "R1",
+  "levels": {
+   "0": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "1": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "2": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.133333333333",
+     "fraction": "2/15"
+    },
+    "reading": "eff",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "small_n",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.133333333333",
+     "fraction": "2/15"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "3": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "4": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "5": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "6": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   }
+  }
+ },
+ "R1.kappa_r4": {
+  "dropped": true,
+  "evaluation": "R1",
+  "levels": {
+   "0": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.200000000000",
+     "fraction": "1/5"
+    },
+    "reading": "eff",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000550000000",
+     "fraction": "11/20000"
+    },
+    "rule": "abstain_as_no",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.200000000000",
+     "fraction": "1/5"
+    },
+    "source": "new",
+    "unit": "R1c"
+   },
+   "1": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "2": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "3": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "4": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "5": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "6": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   }
+  }
+ },
+ "R1.lambda_r4": {
+  "dropped": false,
+  "evaluation": "R1",
+  "levels": {
+   "0": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "1": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "2": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "3": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "4": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.149000000000",
+     "fraction": "149/1000"
+    },
+    "reading": "eff",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000550000000",
+     "fraction": "11/20000"
+    },
+    "rule": "lam",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.149000000000",
+     "fraction": "149/1000"
+    },
+    "source": "new",
+    "unit": "R1c"
+   },
+   "5": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "6": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   }
+  }
+ },
+ "R1.mu_r4": {
+  "dropped": true,
+  "evaluation": "R1",
+  "levels": {
+   "0": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "1": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "2": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "3": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "4": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.150000000000",
+     "fraction": "3/20"
+    },
+    "reading": "eff",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000550000000",
+     "fraction": "11/20000"
+    },
+    "rule": "mu_r",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.150000000000",
+     "fraction": "3/20"
+    },
+    "source": "new",
+    "unit": "R1c"
+   },
+   "5": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "6": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   }
+  }
+ },
+ "R1.nu_r4": {
+  "dropped": true,
+  "evaluation": "R1",
+  "levels": {
+   "0": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "1": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "2": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "3": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "4": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "5": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "6": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.200000000000",
+     "fraction": "1/5"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "nu_anti",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.200000000000",
+     "fraction": "1/5"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   }
+  }
+ },
+ "R1.theta_r4": {
+  "dropped": false,
+  "evaluation": "R1",
+  "levels": {
+   "0": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "1": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "2": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "3": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "4": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.100000000000",
+     "fraction": "1/10"
+    },
+    "reading": "eff",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "one_seed",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.100000000000",
+     "fraction": "1/10"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "5": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "6": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   }
+  }
+ },
+ "R1.zeta_r4": {
+  "dropped": true,
+  "evaluation": "R1",
+  "levels": {
+   "0": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "1": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.150000000000",
+     "fraction": "3/20"
+    },
+    "reading": "eff",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "z_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.150000000000",
+     "fraction": "3/20"
+    },
+    "source": "impl",
+    "unit": "R1a"
+   },
+   "2": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "3": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "4": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "5": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   },
+   "6": {
+    "answer_type": null,
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "anti",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000050000000",
+     "fraction": "1/20000"
+    },
+    "rule": "base_rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "aud",
+    "unit": "R1a"
+   }
+  }
+ },
+ "R2.a_open": {
+  "dropped": false,
+  "evaluation": "R2",
+  "levels": {
+   "0": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "1": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "2": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.150000000000",
+     "fraction": "3/20"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "[impl] x",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.150000000000",
+     "fraction": "3/20"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "3": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "4": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "5": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "6": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   }
+  }
+ },
+ "R2.b_open": {
+  "dropped": true,
+  "evaluation": "R2",
+  "levels": {
+   "0": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "1": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "2": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.158333333333",
+     "fraction": "19/120"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "[impl] x",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.158333333333",
+     "fraction": "19/120"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "3": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "4": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "5": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "6": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   }
+  }
+ },
+ "R2.c_yn": {
+  "dropped": false,
+  "evaluation": "R2",
+  "levels": {
+   "0": {
+    "answer_type": "yn",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "k_over_napp",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "[impl] base",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "1": {
+    "answer_type": "yn",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "k_over_napp",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "[impl] base",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "2": {
+    "answer_type": "yn",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.150000000000",
+     "fraction": "3/20"
+    },
+    "reading": "k_over_napp",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "[mine] yn hi",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.150000000000",
+     "fraction": "3/20"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "3": {
+    "answer_type": "yn",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "k_over_napp",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "[impl] base",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "4": {
+    "answer_type": "yn",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "k_over_napp",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "[impl] base",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "5": {
+    "answer_type": "yn",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "k_over_napp",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "[impl] base",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "6": {
+    "answer_type": "yn",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "k_over_napp",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "[impl] base",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   }
+  }
+ },
+ "R2.count_divisible": {
+  "dropped": true,
+  "evaluation": "R2",
+  "levels": {
+   "0": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "1": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "2": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "3": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "4": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "[NEW] (partial) largest modulus: try r, r+m, r+2m against the other congruences, else r",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "source": "f_rules_new",
+    "unit": "R2b"
+   },
+   "5": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "6": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   }
+  }
+ },
+ "R2.crt_smallest": {
+  "dropped": true,
+  "evaluation": "R2",
+  "levels": {
+   "0": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "1": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "2": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "3": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "[NEW] (P) misread: each distinct value counted once (the wording now excludes it)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "source": "f_rules_new",
+    "unit": "R2b"
+   },
+   "4": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "5": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "6": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   }
+  }
+ },
+ "R2.d_yn": {
+  "dropped": true,
+  "evaluation": "R2",
+  "levels": {
+   "0": {
+    "answer_type": "yn",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "k_over_napp",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "[impl] base",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "1": {
+    "answer_type": "yn",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "k_over_napp",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "[impl] base",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "2": {
+    "answer_type": "yn",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.158333333333",
+     "fraction": "19/120"
+    },
+    "reading": "k_over_napp",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "[mine] yn lo2",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "-0.158333333333",
+     "fraction": "-19/120"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "3": {
+    "answer_type": "yn",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "k_over_napp",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "[impl] base",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "4": {
+    "answer_type": "yn",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "k_over_napp",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "[impl] base",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "5": {
+    "answer_type": "yn",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "k_over_napp",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "[impl] base",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "6": {
+    "answer_type": "yn",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "reading": "k_over_napp",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "[impl] base",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   }
+  }
+ },
+ "R2.e_oneseed": {
+  "dropped": false,
+  "evaluation": "R2",
+  "levels": {
+   "0": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "1": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "2": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.150000000000",
+     "fraction": "3/20"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "[impl] once",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.150000000000",
+     "fraction": "3/20"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "3": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "4": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "5": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "6": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   }
+  }
+ },
+ "R2.f_cond": {
+  "dropped": true,
+  "evaluation": "R2",
+  "levels": {
+   "0": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "1": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "2": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.250000000000",
+     "fraction": "1/4"
+    },
+    "reading": "k_over_napp",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "[mine] [cond] foo",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.250000000000",
+     "fraction": "1/4"
+    },
+    "source": "f_rules",
+    "unit": "R2b"
+   },
+   "3": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "4": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "5": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "6": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   }
+  }
+ },
+ "R2.g_sd": {
+  "dropped": false,
+  "evaluation": "R2",
+  "levels": {
+   "0": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "1": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "2": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.100000000000",
+     "fraction": "1/10"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "[a3] removal by deleting the minimum and keeping the order of the rest",
+    "shape": "removals=1",
+    "signed_excess": {
+     "decimal_12dp": "0.100000000000",
+     "fraction": "1/10"
+    },
+    "source": "f_rules",
+    "unit": "R2b"
+   },
+   "3": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "4": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "5": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "6": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   }
+  }
+ },
+ "R2.h_sd": {
+  "dropped": true,
+  "evaluation": "R2",
+  "levels": {
+   "0": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "1": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "2": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.200000000000",
+     "fraction": "1/5"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "[a3] removal by deleting the minimum and keeping the order of the rest",
+    "shape": "removals=1",
+    "signed_excess": {
+     "decimal_12dp": "0.200000000000",
+     "fraction": "1/5"
+    },
+    "source": "f_rules",
+    "unit": "R2b"
+   },
+   "3": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "4": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "5": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "6": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.050000000000",
+     "fraction": "1/20"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   }
+  }
+ },
+ "R2.i_sdsum": {
+  "dropped": true,
+  "evaluation": "R2",
+  "levels": {
+   "0": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "1": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "2": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.200000000000",
+     "fraction": "1/5"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "[a3] removal by deleting the minimum and keeping the order of the rest",
+    "shape": "-",
+    "signed_excess": {
+     "decimal_12dp": "0.200000000000",
+     "fraction": "1/5"
+    },
+    "source": "f_rules",
+    "unit": "R2b"
+   },
+   "3": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "4": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "5": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "6": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   }
+  }
+ },
+ "R2.j_klass": {
+  "dropped": false,
+  "evaluation": "R2",
+  "levels": {
+   "0": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "1": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "2": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "3": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "4": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "5": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "6": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   }
+  }
+ },
+ "R2.k_klass2": {
+  "dropped": true,
+  "evaluation": "R2",
+  "levels": {
+   "0": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "1": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "[a3] only the first rule",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "2": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "3": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "4": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "5": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "6": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   }
+  }
+ },
+ "R2.l_construct": {
+  "dropped": true,
+  "evaluation": "R2",
+  "levels": {
+   "0": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "1": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "[mine] t mod 10 applications",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "2": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "3": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "4": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "5": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "6": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   }
+  }
+ },
+ "R2.m_new": {
+  "dropped": true,
+  "evaluation": "R2",
+  "levels": {
+   "0": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "1": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "2": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "3": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "[NEW] (P) misread: each distinct value counted once (the wording now excludes it)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "source": "f_rules_new",
+    "unit": "R2b"
+   },
+   "4": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "[NEW] (partial) largest modulus: try r, r+m, r+2m against the other congruences, else r",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "source": "f_rules_new",
+    "unit": "R2b"
+   },
+   "5": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   },
+   "6": {
+    "answer_type": "number",
+    "largest_counted_abs_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "reading": "k_over_n",
+    "rounding_uncertainty": {
+     "decimal_12dp": "0.000000000000",
+     "fraction": "0/1"
+    },
+    "rule": "most frequent answer (train draw)",
+    "shape": null,
+    "signed_excess": {
+     "decimal_12dp": "0.025000000000",
+     "fraction": "1/40"
+    },
+    "source": "r2a",
+    "unit": "R2a"
+   }
+  }
+ }
+}

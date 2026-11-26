@@ -1,0 +1,1162 @@
+{
+ "a3_wrapper_fallbacks": [
+  {
+   "alias_err_first_300": "Traceback: AttributeError (made up)",
+   "alias_rc": "1",
+   "lineage": "C1.c_a3fb",
+   "read_from": "a3/c_a3fb__own.json",
+   "run_log_key": "C1.c_a3fb",
+   "seed": "1",
+   "unit": "C1a"
+  },
+  {
+   "alias_err_first_300": "Traceback: AttributeError (made up)",
+   "alias_rc": "1",
+   "lineage": "C1.c_a3fb",
+   "read_from": "a3/c_a3fb__own.json",
+   "run_log_key": "C1.c_a3fb",
+   "seed": "2",
+   "unit": "C1a"
+  },
+  {
+   "alias_err_first_300": "Traceback: AttributeError (made up)",
+   "alias_rc": "1",
+   "lineage": "C1.c_a3fb",
+   "read_from": "a3/c_a3fb__own.json",
+   "run_log_key": "C1.c_a3fb",
+   "seed": "3",
+   "unit": "C1a"
+  }
+ ],
+ "counted_rows_with_no_items": [],
+ "dir_overrides": {},
+ "item_counts_that_disagree_inside_one_group": [],
+ "lineages_before_and_after_per_evaluation": {
+  "C1": {
+   "after": 8,
+   "before": 19,
+   "dropped": 11
+  },
+  "M1": {
+   "after": 2,
+   "before": 7,
+   "dropped": 5
+  },
+  "R1": {
+   "after": 5,
+   "before": 14,
+   "dropped": 9
+  },
+  "R2": {
+   "after": 5,
+   "before": 15,
+   "dropped": 10
+  }
+ },
+ "m1_names_given_by_more_than_one_section": [
+  [
+   "M1a",
+   "M1.ratio_share_r3",
+   "im:largest_share",
+   2,
+   "a4,own"
+  ]
+ ],
+ "r1_exact_rows": [
+  {
+   "counted": false,
+   "entry": "class table R1 M: abstain_as_no (bare name equal; lineages: every R1 lineage)",
+   "lineage": "R1.alpha_r4",
+   "rule": "abstain_as_no",
+   "rule_is_an_entry_of_the_class_table": true,
+   "set_aside": true,
+   "source": "aud",
+   "unit": "R1a"
+  },
+  {
+   "counted": true,
+   "entry": null,
+   "lineage": "R1.eps_r4",
+   "rule": "exact_x",
+   "rule_is_an_entry_of_the_class_table": false,
+   "set_aside": false,
+   "source": "aud",
+   "unit": "R1a"
+  }
+ ],
+ "r2_levels_with_more_than_one_answer_type": [],
+ "rows_not_read": {
+  "c1_lineages_not_survivors_not_read": 15,
+  "error_marker_rows_not_read": 9,
+  "m1_lineages_not_survivors_not_read": 15,
+  "r1_rows_of_non_survivors_not_read": 105,
+  "r1c_lines_of_non_survivors_not_read": 3,
+  "r2_lineages_not_survivors_not_read": 6
+ },
+ "rows_with_an_item_count_other_than_the_plan": [
+  {
+   "levels": [
+    {
+     "items": 30,
+     "level": 4
+    }
+   ],
+   "lineage": "M1.smalln_r3",
+   "plan_items": 100,
+   "seed": "1",
+   "source": "own",
+   "unit": "M1a"
+  },
+  {
+   "levels": [
+    {
+     "items": 40,
+     "level": 2
+    }
+   ],
+   "lineage": "R1.iota_r4",
+   "plan_items": 100,
+   "seed": "1",
+   "source": "aud",
+   "unit": "R1a"
+  },
+  {
+   "levels": [
+    {
+     "items": 40,
+     "level": 2
+    }
+   ],
+   "lineage": "R1.iota_r4",
+   "plan_items": 100,
+   "seed": "1",
+   "source": "impl",
+   "unit": "R1a"
+  }
+ ],
+ "s5_recovery_alternatives_that_change_a_decision": [],
+ "seed_set": "run",
+ "seeds": [
+  "1",
+  "2",
+  "3"
+ ],
+ "uncounted_rules": [
+  {
+   "entry": "class table C1 artefact_a3: S.no_back (source a3 (a3_shortcuts.py output, field S))",
+   "kind": "class table",
+   "levels": [
+    3
+   ],
+   "lineage": "C1.c_srcs2",
+   "rule": "S.no_back",
+   "shape": null,
+   "source": "a3",
+   "unit": "C1a"
+  },
+  {
+   "entry": "class table C1 partial: EFF_SM (source a4 (s5_analyse_v2.py output))",
+   "kind": "class table",
+   "levels": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "lineage": "C1.c_a3above",
+   "rule": "EFF_SM",
+   "shape": null,
+   "source": "s5",
+   "unit": "C1a"
+  },
+  {
+   "entry": "class table C1 partial: EFF_SM (source a4 (s5_analyse_v2.py output))",
+   "kind": "class table",
+   "levels": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "lineage": "C1.c_a3exact",
+   "rule": "EFF_SM",
+   "shape": null,
+   "source": "s5",
+   "unit": "C1a"
+  },
+  {
+   "entry": "class table C1 partial: EFF_SM (source a4 (s5_analyse_v2.py output))",
+   "kind": "class table",
+   "levels": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "lineage": "C1.c_a3fb",
+   "rule": "EFF_SM",
+   "shape": null,
+   "source": "s5",
+   "unit": "C1a"
+  },
+  {
+   "entry": "class table C1 partial: EFF_SM (source a4 (s5_analyse_v2.py output))",
+   "kind": "class table",
+   "levels": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "lineage": "C1.c_a3ok",
+   "rule": "EFF_SM",
+   "shape": null,
+   "source": "s5",
+   "unit": "C1a"
+  },
+  {
+   "entry": "class table C1 partial: EFF_SM (source a4 (s5_analyse_v2.py output))",
+   "kind": "class table",
+   "levels": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "lineage": "C1.c_bkeep",
+   "rule": "EFF_SM",
+   "shape": null,
+   "source": "s5",
+   "unit": "C1a"
+  },
+  {
+   "entry": "class table C1 partial: EFF_SM (source a4 (s5_analyse_v2.py output))",
+   "kind": "class table",
+   "levels": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "lineage": "C1.c_closed",
+   "rule": "EFF_SM",
+   "shape": null,
+   "source": "s5",
+   "unit": "C1a"
+  },
+  {
+   "entry": "class table C1 partial: EFF_SM (source a4 (s5_analyse_v2.py output))",
+   "kind": "class table",
+   "levels": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "lineage": "C1.c_closed2",
+   "rule": "EFF_SM",
+   "shape": null,
+   "source": "s5",
+   "unit": "C1a"
+  },
+  {
+   "entry": "class table C1 partial: EFF_SM (source a4 (s5_analyse_v2.py output))",
+   "kind": "class table",
+   "levels": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "lineage": "C1.c_effsm",
+   "rule": "EFF_SM",
+   "shape": null,
+   "source": "s5",
+   "unit": "C1a"
+  },
+  {
+   "entry": "class table C1 hazard: H.c_semantics (source a4 (s5_analyse_v2.py output, field rules))",
+   "kind": "class table",
+   "levels": [
+    2
+   ],
+   "lineage": "C1.c_effsm",
+   "rule": "H.c_semantics",
+   "shape": null,
+   "source": "s5",
+   "unit": "C1a"
+  },
+  {
+   "entry": "class table C1 partial: M.no_back (source a4 (s5_analyse_v2.py output, field rules))",
+   "kind": "class table",
+   "levels": [
+    2
+   ],
+   "lineage": "C1.c_effsm",
+   "rule": "M.no_back",
+   "shape": null,
+   "source": "s5",
+   "unit": "C1a"
+  },
+  {
+   "entry": "class table C1 partial: EFF_SM (source a4 (s5_analyse_v2.py output))",
+   "kind": "class table",
+   "levels": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "lineage": "C1.c_err",
+   "rule": "EFF_SM",
+   "shape": null,
+   "source": "s5",
+   "unit": "C1a"
+  },
+  {
+   "entry": "class table C1 partial: EFF_SM (source a4 (s5_analyse_v2.py output))",
+   "kind": "class table",
+   "levels": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "lineage": "C1.c_mnot",
+   "rule": "EFF_SM",
+   "shape": null,
+   "source": "s5",
+   "unit": "C1a"
+  },
+  {
+   "entry": "class table C1 partial: EFF_SM (source a4 (s5_analyse_v2.py output))",
+   "kind": "class table",
+   "levels": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "lineage": "C1.c_msh",
+   "rule": "EFF_SM",
+   "shape": null,
+   "source": "s5",
+   "unit": "C1a"
+  },
+  {
+   "entry": "class table C1 partial: EFF_SM (source a4 (s5_analyse_v2.py output))",
+   "kind": "class table",
+   "levels": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "lineage": "C1.c_printform",
+   "rule": "EFF_SM",
+   "shape": null,
+   "source": "s5",
+   "unit": "C1a"
+  },
+  {
+   "entry": "class table C1 partial: EFF_SM (source a4 (s5_analyse_v2.py output))",
+   "kind": "class table",
+   "levels": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "lineage": "C1.c_s5edge",
+   "rule": "EFF_SM",
+   "shape": null,
+   "source": "s5",
+   "unit": "C1a"
+  },
+  {
+   "entry": "class table C1 partial: EFF_SM (source a4 (s5_analyse_v2.py output))",
+   "kind": "class table",
+   "levels": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "lineage": "C1.c_s5keep",
+   "rule": "EFF_SM",
+   "shape": null,
+   "source": "s5",
+   "unit": "C1a"
+  },
+  {
+   "entry": "class table C1 partial: EFF_SM (source a4 (s5_analyse_v2.py output))",
+   "kind": "class table",
+   "levels": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "lineage": "C1.c_s5rec",
+   "rule": "EFF_SM",
+   "shape": null,
+   "source": "s5",
+   "unit": "C1a"
+  },
+  {
+   "entry": "class table C1 partial: EFF_SM (source a4 (s5_analyse_v2.py output))",
+   "kind": "class table",
+   "levels": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "lineage": "C1.c_srcs",
+   "rule": "EFF_SM",
+   "shape": null,
+   "source": "s5",
+   "unit": "C1a"
+  },
+  {
+   "entry": "class table C1 partial: EFF_SM (source a4 (s5_analyse_v2.py output))",
+   "kind": "class table",
+   "levels": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "lineage": "C1.c_srcs2",
+   "rule": "EFF_SM",
+   "shape": null,
+   "source": "s5",
+   "unit": "C1a"
+  },
+  {
+   "entry": "class table C1 partial: EFF_SM (source a4 (s5_analyse_v2.py output))",
+   "kind": "class table",
+   "levels": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "lineage": "C1.c_srcs3",
+   "rule": "EFF_SM",
+   "shape": null,
+   "source": "s5",
+   "unit": "C1a"
+  },
+  {
+   "entry": "class table C1 partial: EFF_SM (source a4 (s5_analyse_v2.py output))",
+   "kind": "class table",
+   "levels": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "lineage": "C1.slices_f4",
+   "rule": "EFF_SM",
+   "shape": null,
+   "source": "s5",
+   "unit": "C1a"
+  },
+  {
+   "entry": "class table C1 control: C.self_check (source battery (c1_fix4_battery.py output, field S))",
+   "kind": "class table",
+   "levels": [
+    4
+   ],
+   "lineage": "C1.c_srcs2",
+   "rule": "C.self_check",
+   "shape": null,
+   "source": "battery",
+   "unit": "C1b"
+  },
+  {
+   "entry": "class table C1 hazard: H.negative_step_as_positive (source closed forms (f5_closed_forms.py and f5b_closed_forms_v2.py output))",
+   "kind": "class table",
+   "levels": [
+    5
+   ],
+   "lineage": "C1.c_closed2",
+   "rule": "H.negative_step_as_positive",
+   "shape": null,
+   "source": "f5b",
+   "unit": "C1c"
+  },
+  {
+   "entry": "class table C1 partial: M.no_even_branch (source closed forms (f5_closed_forms.py and f5b_closed_forms_v2.py output))",
+   "kind": "class table",
+   "levels": [
+    5
+   ],
+   "lineage": "C1.c_closed2",
+   "rule": "M.no_even_branch",
+   "shape": null,
+   "source": "f5b",
+   "unit": "C1c"
+  },
+  {
+   "entry": "class table C1 partial: EFF_SM (source a4 (s5_analyse_v2.py output))",
+   "kind": "class table",
+   "levels": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "lineage": "C1.c_a3above",
+   "rule": "EFF_SM",
+   "shape": null,
+   "source": "s5",
+   "unit": "C1c"
+  },
+  {
+   "entry": "class table C1 partial: EFF_SM (source a4 (s5_analyse_v2.py output))",
+   "kind": "class table",
+   "levels": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "lineage": "C1.c_a3exact",
+   "rule": "EFF_SM",
+   "shape": null,
+   "source": "s5",
+   "unit": "C1c"
+  },
+  {
+   "entry": "class table C1 partial: EFF_SM (source a4 (s5_analyse_v2.py output))",
+   "kind": "class table",
+   "levels": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "lineage": "C1.c_a3fb",
+   "rule": "EFF_SM",
+   "shape": null,
+   "source": "s5",
+   "unit": "C1c"
+  },
+  {
+   "entry": "class table C1 partial: EFF_SM (source a4 (s5_analyse_v2.py output))",
+   "kind": "class table",
+   "levels": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "lineage": "C1.c_a3ok",
+   "rule": "EFF_SM",
+   "shape": null,
+   "source": "s5",
+   "unit": "C1c"
+  },
+  {
+   "entry": "class table C1 partial: EFF_SM (source a4 (s5_analyse_v2.py output))",
+   "kind": "class table",
+   "levels": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "lineage": "C1.c_bkeep",
+   "rule": "EFF_SM",
+   "shape": null,
+   "source": "s5",
+   "unit": "C1c"
+  },
+  {
+   "entry": "class table C1 partial: EFF_SM (source a4 (s5_analyse_v2.py output))",
+   "kind": "class table",
+   "levels": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "lineage": "C1.c_closed",
+   "rule": "EFF_SM",
+   "shape": null,
+   "source": "s5",
+   "unit": "C1c"
+  },
+  {
+   "entry": "class table C1 partial: EFF_SM (source a4 (s5_analyse_v2.py output))",
+   "kind": "class table",
+   "levels": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "lineage": "C1.c_closed2",
+   "rule": "EFF_SM",
+   "shape": null,
+   "source": "s5",
+   "unit": "C1c"
+  },
+  {
+   "entry": "class table C1 partial: EFF_SM (source a4 (s5_analyse_v2.py output))",
+   "kind": "class table",
+   "levels": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "lineage": "C1.c_effsm",
+   "rule": "EFF_SM",
+   "shape": null,
+   "source": "s5",
+   "unit": "C1c"
+  },
+  {
+   "entry": "class table C1 partial: EFF_SM (source a4 (s5_analyse_v2.py output))",
+   "kind": "class table",
+   "levels": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "lineage": "C1.c_err",
+   "rule": "EFF_SM",
+   "shape": null,
+   "source": "s5",
+   "unit": "C1c"
+  },
+  {
+   "entry": "class table C1 partial: EFF_SM (source a4 (s5_analyse_v2.py output))",
+   "kind": "class table",
+   "levels": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "lineage": "C1.c_mnot",
+   "rule": "EFF_SM",
+   "shape": null,
+   "source": "s5",
+   "unit": "C1c"
+  },
+  {
+   "entry": "class table C1 partial: EFF_SM (source a4 (s5_analyse_v2.py output))",
+   "kind": "class table",
+   "levels": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "lineage": "C1.c_msh",
+   "rule": "EFF_SM",
+   "shape": null,
+   "source": "s5",
+   "unit": "C1c"
+  },
+  {
+   "entry": "class table C1 partial: EFF_SM (source a4 (s5_analyse_v2.py output))",
+   "kind": "class table",
+   "levels": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "lineage": "C1.c_printform",
+   "rule": "EFF_SM",
+   "shape": null,
+   "source": "s5",
+   "unit": "C1c"
+  },
+  {
+   "entry": "class table C1 partial: EFF_SM (source a4 (s5_analyse_v2.py output))",
+   "kind": "class table",
+   "levels": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "lineage": "C1.c_s5edge",
+   "rule": "EFF_SM",
+   "shape": null,
+   "source": "s5",
+   "unit": "C1c"
+  },
+  {
+   "entry": "class table C1 partial: EFF_SM (source a4 (s5_analyse_v2.py output))",
+   "kind": "class table",
+   "levels": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "lineage": "C1.c_s5keep",
+   "rule": "EFF_SM",
+   "shape": null,
+   "source": "s5",
+   "unit": "C1c"
+  },
+  {
+   "entry": "class table C1 partial: EFF_SM (source a4 (s5_analyse_v2.py output))",
+   "kind": "class table",
+   "levels": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "lineage": "C1.c_s5rec",
+   "rule": "EFF_SM",
+   "shape": null,
+   "source": "s5",
+   "unit": "C1c"
+  },
+  {
+   "entry": "class table C1 partial: EFF_SM (source a4 (s5_analyse_v2.py output))",
+   "kind": "class table",
+   "levels": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "lineage": "C1.c_srcs",
+   "rule": "EFF_SM",
+   "shape": null,
+   "source": "s5",
+   "unit": "C1c"
+  },
+  {
+   "entry": "class table C1 partial: EFF_SM (source a4 (s5_analyse_v2.py output))",
+   "kind": "class table",
+   "levels": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "lineage": "C1.c_srcs2",
+   "rule": "EFF_SM",
+   "shape": null,
+   "source": "s5",
+   "unit": "C1c"
+  },
+  {
+   "entry": "class table C1 partial: EFF_SM (source a4 (s5_analyse_v2.py output))",
+   "kind": "class table",
+   "levels": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "lineage": "C1.c_srcs3",
+   "rule": "EFF_SM",
+   "shape": null,
+   "source": "s5",
+   "unit": "C1c"
+  },
+  {
+   "entry": "class table C1 partial: EFF_SM (source a4 (s5_analyse_v2.py output))",
+   "kind": "class table",
+   "levels": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "lineage": "C1.slices_f4",
+   "rule": "EFF_SM",
+   "shape": null,
+   "source": "s5",
+   "unit": "C1c"
+  },
+  {
+   "entry": "class table M1 PROC, by name and definition: a3:largest_share (lineage stem ratio_share)",
+   "kind": "class table",
+   "levels": [
+    2
+   ],
+   "lineage": "M1.ratio_share_r3",
+   "rule": "a3:largest_share",
+   "shape": null,
+   "source": "a3",
+   "unit": "M1a"
+  },
+  {
+   "entry": "class table M1 PROC: im:largest_share (lineage stem ratio_share)",
+   "kind": "class table",
+   "levels": [
+    2
+   ],
+   "lineage": "M1.ratio_share_r3",
+   "rule": "im:largest_share",
+   "shape": null,
+   "source": "a4",
+   "unit": "M1a"
+  },
+  {
+   "entry": "class table M1 PROC: im:largest_le_sqrt (lineage stem prime_factors)",
+   "kind": "class table",
+   "levels": [
+    2
+   ],
+   "lineage": "M1.prime_factors_r3",
+   "rule": "im:largest_le_sqrt",
+   "shape": null,
+   "source": "own",
+   "unit": "M1a"
+  },
+  {
+   "entry": "class table M1 PROC: im:largest_share (lineage stem ratio_share)",
+   "kind": "class table",
+   "levels": [
+    2
+   ],
+   "lineage": "M1.ratio_share_r3",
+   "rule": "im:largest_share",
+   "shape": null,
+   "source": "own",
+   "unit": "M1a"
+  },
+  {
+   "entry": "class table M1 PROC: im:largest_share (lineage stem ratio_share)",
+   "kind": "class table",
+   "levels": [
+    2
+   ],
+   "lineage": "M1.ratio_share_r3",
+   "rule": "im:largest_share",
+   "shape": null,
+   "source": "results",
+   "unit": "M1b"
+  },
+  {
+   "entry": "class table R1 M: abstain_as_no (bare name equal; lineages: every R1 lineage)",
+   "kind": "class table",
+   "levels": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "lineage": "R1.alpha_r4",
+   "rule": "abstain_as_no",
+   "shape": null,
+   "source": "aud",
+   "unit": "R1a"
+  },
+  {
+   "entry": "amendment list: unit R1a, lineage R1.alpha_r4, rule my_rule",
+   "kind": "amendment list",
+   "levels": [
+    3
+   ],
+   "lineage": "R1.alpha_r4",
+   "rule": "my_rule",
+   "shape": null,
+   "source": "aud",
+   "unit": "R1a"
+  },
+  {
+   "entry": "class table R1 EXCL: latest_start_first (bare name equal; lineages: every R1 lineage)",
+   "kind": "class table",
+   "levels": [
+    0
+   ],
+   "lineage": "R1.theta_r4",
+   "rule": "a3:latest_start_first",
+   "shape": null,
+   "source": "aud",
+   "unit": "R1a"
+  },
+  {
+   "entry": "class table R1 M: abstain_as_yes (bare name equal; lineages: every R1 lineage)",
+   "kind": "class table",
+   "levels": [
+    2
+   ],
+   "lineage": "R1.compass_turns",
+   "rule": "a3:abstain_as_yes",
+   "shape": null,
+   "source": "aud",
+   "unit": "R1b"
+  },
+  {
+   "entry": "class table R1 EXCL: ccw_as_cw (bare name equal; lineages: compass_turns)",
+   "kind": "class table",
+   "levels": [
+    2
+   ],
+   "lineage": "R1.compass_turns",
+   "rule": "a4:ccw_as_cw",
+   "shape": null,
+   "source": "aud",
+   "unit": "R1b"
+  },
+  {
+   "entry": "class table R1 EXCL: ignore_180s (bare name equal; lineages: compass_turns)",
+   "kind": "class table",
+   "levels": [
+    2
+   ],
+   "lineage": "R1.compass_turns",
+   "rule": "ignore_180s",
+   "shape": null,
+   "source": "impl",
+   "unit": "R1b"
+  },
+  {
+   "entry": "class table R2 artifact (order 2, name equal): [a3] ignore reverses",
+   "kind": "class table",
+   "levels": [
+    5
+   ],
+   "lineage": "R2.a_open",
+   "rule": "[a3] ignore reverses",
+   "shape": null,
+   "source": "r2a",
+   "unit": "R2a"
+  },
+  {
+   "entry": "class table R2 artifact (order 4, name equal, and level 0): [a3] only the first rule",
+   "kind": "class table",
+   "levels": [
+    0
+   ],
+   "lineage": "R2.j_klass",
+   "rule": "[a3] only the first rule",
+   "shape": null,
+   "source": "r2a",
+   "unit": "R2a"
+  },
+  {
+   "entry": "class table R2 P (order 5, name equal): [a3] rules in reverse order",
+   "kind": "class table",
+   "levels": [
+    1
+   ],
+   "lineage": "R2.j_klass",
+   "rule": "[a3] rules in reverse order",
+   "shape": null,
+   "source": "r2a",
+   "unit": "R2a"
+  },
+  {
+   "entry": "class table R2 artifact (order 4, name equal, and level 0): [a3] rules in reverse order",
+   "kind": "class table",
+   "levels": [
+    0
+   ],
+   "lineage": "R2.j_klass",
+   "rule": "[a3] rules in reverse order",
+   "shape": null,
+   "source": "r2a",
+   "unit": "R2a"
+  },
+  {
+   "entry": "class table R2 partial (order 7, name contains): letter pairs",
+   "kind": "class table",
+   "levels": [
+    0,
+    1
+   ],
+   "lineage": "R2.j_klass",
+   "rule": "[impl] uses letter pairs here",
+   "shape": null,
+   "source": "r2a",
+   "unit": "R2a"
+  },
+  {
+   "entry": "class table R2 P (order 1, name contains): (P",
+   "kind": "class table",
+   "levels": [
+    0,
+    1
+   ],
+   "lineage": "R2.j_klass",
+   "rule": "[mine] alpha (P) beta",
+   "shape": null,
+   "source": "r2a",
+   "unit": "R2a"
+  },
+  {
+   "entry": "class table R2 artifact (order 3, name equal, and shape equal): [a3] removal by deleting the minimum and keeping the order of the rest",
+   "kind": "class table",
+   "levels": [
+    2
+   ],
+   "lineage": "R2.g_sd",
+   "rule": "[a3] removal by deleting the minimum and keeping the order of the rest",
+   "shape": "removals=0",
+   "source": "f_rules",
+   "unit": "R2b"
+  },
+  {
+   "entry": "class table R2 artifact (order 3, name equal, and shape equal): [a3] removal by deleting the minimum and keeping the order of the rest",
+   "kind": "class table",
+   "levels": [
+    2
+   ],
+   "lineage": "R2.h_sd",
+   "rule": "[a3] removal by deleting the minimum and keeping the order of the rest",
+   "shape": "removals=0",
+   "source": "f_rules",
+   "unit": "R2b"
+  },
+  {
+   "entry": "class table R2 new rule P: [NEW] (P) misread: each distinct value counted once (the wording now excludes it) (lineage count_divisible)",
+   "kind": "class table",
+   "levels": [
+    3
+   ],
+   "lineage": "R2.count_divisible",
+   "rule": "[NEW] (P) misread: each distinct value counted once (the wording now excludes it)",
+   "shape": null,
+   "source": "f_rules_new",
+   "unit": "R2b"
+  },
+  {
+   "entry": "class table R2 new rule partial: [NEW] (partial) largest modulus: try r, r+m, r+2m against the other congruences, else r (lineage crt_smallest)",
+   "kind": "class table",
+   "levels": [
+    4
+   ],
+   "lineage": "R2.crt_smallest",
+   "rule": "[NEW] (partial) largest modulus: try r, r+m, r+2m against the other congruences, else r",
+   "shape": null,
+   "source": "f_rules_new",
+   "unit": "R2b"
+  }
+ ]
+}

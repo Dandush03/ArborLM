@@ -1,0 +1,30 @@
+base 1: sha256('400002|fresh-shortcut|1')[:8] = 16103270370041696293; text 16103270370041696293; OK
+base 2: sha256('400002|fresh-shortcut|2')[:8] = 10773834973117025986; text 10773834973117025986; OK
+base 3: sha256('400002|fresh-shortcut|3')[:8] = 619660634241804713; text 619660634241804713; OK
+base dry: sha256('400002|fresh-shortcut-dry-run')[:8] = 3342082268851962967; text 3342082268851962967; OK
+note: C1a 1 C1a-step2: python -I (environment variables PYTHON* are ignored by that interpreter)
+note: C1a 1 C1a-step3: python -I (environment variables PYTHON* are ignored by that interpreter)
+note: C1a 2 C1a-step2: python -I (environment variables PYTHON* are ignored by that interpreter)
+note: C1a 2 C1a-step3: python -I (environment variables PYTHON* are ignored by that interpreter)
+note: C1a 3 C1a-step2: python -I (environment variables PYTHON* are ignored by that interpreter)
+note: C1a 3 C1a-step3: python -I (environment variables PYTHON* are ignored by that interpreter)
+note: C1a dry C1a-step2: python -I (environment variables PYTHON* are ignored by that interpreter)
+note: C1a dry C1a-step3: python -I (environment variables PYTHON* are ignored by that interpreter)
+note: C1c 1 C1c-step2: python -I (environment variables PYTHON* are ignored by that interpreter)
+note: C1c 1 C1c-step3: python -I (environment variables PYTHON* are ignored by that interpreter)
+note: C1c 1 C1c-step5: python -I (environment variables PYTHON* are ignored by that interpreter)
+note: C1c 1 C1c-step6: python -I (environment variables PYTHON* are ignored by that interpreter)
+note: C1c 2 C1c-step2: python -I (environment variables PYTHON* are ignored by that interpreter)
+note: C1c 2 C1c-step3: python -I (environment variables PYTHON* are ignored by that interpreter)
+note: C1c 2 C1c-step5: python -I (environment variables PYTHON* are ignored by that interpreter)
+note: C1c 2 C1c-step6: python -I (environment variables PYTHON* are ignored by that interpreter)
+note: C1c 3 C1c-step2: python -I (environment variables PYTHON* are ignored by that interpreter)
+note: C1c 3 C1c-step3: python -I (environment variables PYTHON* are ignored by that interpreter)
+note: C1c 3 C1c-step5: python -I (environment variables PYTHON* are ignored by that interpreter)
+note: C1c 3 C1c-step6: python -I (environment variables PYTHON* are ignored by that interpreter)
+note: C1c dry C1c-step2: python -I (environment variables PYTHON* are ignored by that interpreter)
+note: C1c dry C1c-step3: python -I (environment variables PYTHON* are ignored by that interpreter)
+note: C1c dry C1c-step5: python -I (environment variables PYTHON* are ignored by that interpreter)
+note: C1c dry C1c-step6: python -I (environment variables PYTHON* are ignored by that interpreter)
+distinct integers (bases + per-unit seeds): 108
+PROBLEMS: 0

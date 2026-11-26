@@ -1,0 +1,5 @@
+stop_r2a_missing exit=3 stdout=[] stderr=[STOP unit=R2a lineage=R2.a_open] outdir_exists=no
+stop_m1b_level exit=3 stdout=[] stderr=[STOP unit=M1b lineage=M1.gamma_r3] outdir_exists=no
+stop_r1c_six exit=3 stdout=[] stderr=[STOP unit=R1c lineage=R1.lambda_r4 (a line does not have 7 values per figure, so its levels cannot be read)] outdir_exists=no
+stop_a3_log exit=3 stdout=[] stderr=[STOP unit=C1c lineage=C1.c_srcs (no entry in run_log.json)] outdir_exists=no
+stop_f5_missing exit=3 stdout=[] stderr=[STOP unit=C1c lineage=C1.c_closed] outdir_exists=no

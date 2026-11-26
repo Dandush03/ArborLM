@@ -1,0 +1,428 @@
+PASS  R2-1     open rule exactly at 0.15 (18/120): kept
+          expected {'excess': '3/20', 'margin': '3/20', 'counted': 'True', 'over': 'False', 'items': '120'}
+          got      {'excess': '3/20', 'margin': '3/20', 'counted': 'True', 'over': 'False', 'items': '120'}
+PASS  R2-1d    R2.a_open dropped?
+          expected False
+          got      False
+PASS  R2-2     open rule just above (19/120): dropped
+          expected {'excess': '19/120', 'over': 'True'}
+          got      {'excess': '19/120', 'over': 'True'}
+PASS  R2-2d    R2.b_open dropped?
+          expected True
+          got      True
+PASS  R2-3     yes/no 78/120 vs 1/2: excess +0.15 exactly, kept
+          expected {'excess': '3/20', 'over': 'False'}
+          got      {'excess': '3/20', 'over': 'False'}
+PASS  R2-4     yes/no 42/120 vs 1/2: excess -0.15 exactly, kept
+          expected {'excess': '-3/20', 'over': 'False'}
+          got      {'excess': '-3/20', 'over': 'False'}
+PASS  R2-4d    R2.c_yn dropped?
+          expected False
+          got      False
+PASS  R2-5     yes/no 41/120: excess -19/120 just below -0.15, dropped
+          expected {'excess': '-19/120', 'over': 'True'}
+          got      {'excess': '-19/120', 'over': 'True'}
+PASS  R2-5d    R2.d_yn dropped?
+          expected True
+          got      True
+PASS  R2-6     rule named in seed 2 only (18 of 40): no hit and 40 items for seeds 1, 3 -> 18/120, kept
+          expected {'excess': '3/20', 'over': 'False', 'items': '120'}
+          got      {'excess': '3/20', 'over': 'False', 'items': '120'}
+PASS  R2-6d    R2.e_oneseed dropped?
+          expected False
+          got      False
+PASS  R2-7a    [cond] k/n = 15/120 below the bound
+          expected {'excess': '1/8', 'over': 'False'}
+          got      {'excess': '1/8', 'over': 'False'}
+PASS  R2-7b    [cond] k/napp = 15/60 above: the larger decides
+          expected {'excess': '1/4', 'over': 'True'}
+          got      {'excess': '1/4', 'over': 'True'}
+PASS  R2-7d    R2.f_cond dropped?
+          expected True
+          got      True
+PASS  R2-8a    shape-dependent rule, removals=0 (artefact): uncounted
+          expected {'counted': 'False', 'over': 'False'}
+          got      {'counted': 'False', 'over': 'False'}
+PASS  R2-8b    shape-dependent rule, removals=1 counted on its own 20 items: 6/60
+          expected {'excess': '1/10', 'counted': 'True', 'over': 'False', 'items': '60'}
+          got      {'excess': '1/10', 'counted': 'True', 'over': 'False', 'items': '60'}
+PASS  R2-8d    R2.g_sd dropped?
+          expected False
+          got      False
+PASS  R2-9     shape-dependent rule, removals=1 12/60 = 0.2 (summed over shapes 12/120 = 0.1): dropped
+          expected {'excess': '1/5', 'over': 'True'}
+          got      {'excess': '1/5', 'over': 'True'}
+PASS  R2-9d    R2.h_sd dropped?
+          expected True
+          got      True
+PASS  R2-10    shape-dependent rule whose counts are given over shapes together (shape '-'): counts on that figure, 24/120
+          expected {'excess': '1/5', 'counted': 'True', 'over': 'True'}
+          got      {'excess': '1/5', 'counted': 'True', 'over': 'True'}
+PASS  R2-10d   R2.i_sdsum dropped?
+          expected True
+          got      True
+PASS  R2-11a   klass order 4: '[a3] rules in reverse order' at level 0 artefact
+          expected {'counted': 'False'}
+          got      {'counted': 'False'}
+PASS  R2-11b   klass order 5: same name at level 1 is P
+          expected {'counted': 'False'}
+          got      {'counted': 'False'}
+PASS  R2-11c   klass order 1: name contains '(P'
+          expected {'counted': 'False'}
+          got      {'counted': 'False'}
+PASS  R2-11d   klass order 7: name contains 'letter pairs' (partial)
+          expected {'counted': 'False'}
+          got      {'counted': 'False'}
+PASS  R2-11e   klass order 4: '[a3] only the first rule' at level 0 artefact
+          expected {'counted': 'False'}
+          got      {'counted': 'False'}
+PASS  R2-11d2  R2.j_klass dropped?
+          expected False
+          got      False
+PASS  R2-12    '[a3] only the first rule' at level 1: cue, counted
+          expected {'counted': 'True', 'over': 'True'}
+          got      {'counted': 'True', 'over': 'True'}
+PASS  R2-12d   R2.k_klass2 dropped?
+          expected True
+          got      True
+PASS  R2-13    construct counts
+          expected {'counted': 'True', 'over': 'True'}
+          got      {'counted': 'True', 'over': 'True'}
+PASS  R2-13d   R2.l_construct dropped?
+          expected True
+          got      True
+PASS  R2-14a   [NEW] (P) entry for its own lineage (count_divisible): uncounted
+          expected {'counted': 'False'}
+          got      {'counted': 'False'}
+PASS  R2-14b   same [NEW] name for another lineage: counted
+          expected {'counted': 'True', 'over': 'True'}
+          got      {'counted': 'True', 'over': 'True'}
+PASS  R2-14d1  R2.count_divisible dropped?
+          expected False
+          got      False
+PASS  R2-14d2  R2.m_new dropped?
+          expected True
+          got      True
+PASS  R2-15    non-survivor lineage R2.zz_not not read
+          expected 0
+          got      0
+PASS  R1-1     amendment-list rule on its own lineage (alpha): uncounted
+          expected {'excess': '3/10', 'counted': 'False', 'over': 'False'}
+          got      {'excess': '3/10', 'counted': 'False', 'over': 'False'}
+PASS  R1-2     same rule, on the amendment list for alpha only, scored for beta: counts
+          expected {'excess': '3/10', 'counted': 'True', 'over': 'True'}
+          got      {'excess': '3/10', 'counted': 'True', 'over': 'True'}
+PASS  R1-2d1   R1.alpha_r4 dropped?
+          expected False
+          got      False
+PASS  R1-2d2   R1.beta_r5 dropped?
+          expected True
+          got      True
+PASS  R1-3     exact rule that is an entry (M abstain_as_no on alpha): listed, set aside, not counted
+          expected {'listed': True, 'set_aside': True, 'counted': False}
+          got      {'listed': True, 'set_aside': True, 'counted': False}
+PASS  R1-4     exact rule not an entry (eps exact_x): listed, counts, drops
+          expected {'listed': True, 'set_aside': False, 'counted': True, 'dropped': True}
+          got      {'listed': True, 'set_aside': False, 'counted': True, 'dropped': True}
+PASS  R1-5     eff written 0.1500 (4 dp): + 0.00005 > 0.15, dropped
+          expected {'excess': '3/20', 'margin': '3001/20000', 'over': 'True'}
+          got      {'excess': '3/20', 'margin': '3001/20000', 'over': 'True'}
+PASS  R1-5d    R1.zeta_r4 dropped?
+          expected True
+          got      True
+PASS  R1-6     eff written 0.1499: 0.14995, kept
+          expected {'margin': '2999/20000', 'over': 'False'}
+          got      {'margin': '2999/20000', 'over': 'False'}
+PASS  R1-7     eff -0.1501: just below -0.15, dropped
+          expected {'excess': '-1501/10000', 'over': 'True'}
+          got      {'excess': '-1501/10000', 'over': 'True'}
+PASS  R1-7b    anti 0.1499 read as an excess of its own, kept
+          expected {'excess': '1499/10000', 'over': 'False'}
+          got      {'excess': '1499/10000', 'over': 'False'}
+PASS  R1-7d    R1.eta_r4 dropped?
+          expected True
+          got      True
+PASS  R1-8     rule named in seed 1 only (eff 0.30, n 100): seeds 2, 3 count 100 items at chance (eff 0) -> 0.10
+          expected {'excess': '1/10', 'over': 'False', 'items': '300'}
+          got      {'excess': '1/10', 'over': 'False', 'items': '300'}
+PASS  R1-8d    R1.theta_r4 dropped?
+          expected False
+          got      False
+PASS  R1-9     row item count 40 (plan 100) in seed 1: (0.3*40+0.1*100+0.1*100)/240 = 2/15, kept
+          expected {'excess': '2/15', 'over': 'False', 'items': '240'}
+          got      {'excess': '2/15', 'over': 'False', 'items': '240'}
+PASS  R1-9b    iota seed 1 level 2 listed with an item count other than the plan's
+          expected True
+          got      True
+PASS  R1-9d    R1.iota_r4 dropped?
+          expected False
+          got      False
+PASS  R1-10a   a4:ccw_as_cw on compass_turns (EXCL stem-limited, prefix stripped): uncounted
+          expected {'counted': 'False'}
+          got      {'counted': 'False'}
+PASS  R1-10b   a3:abstain_as_yes (M, every lineage): uncounted
+          expected {'counted': 'False'}
+          got      {'counted': 'False'}
+PASS  R1-10c   ignore_180s in impl rows on compass_turns: uncounted
+          expected {'counted': 'False'}
+          got      {'counted': 'False'}
+PASS  R1-10d   R1.compass_turns dropped?
+          expected False
+          got      False
+PASS  R1-11    ccw_as_cw on gamma (EXCL limited to compass_turns): counted
+          expected {'counted': 'True', 'over': 'True'}
+          got      {'counted': 'True', 'over': 'True'}
+PASS  R1-11d   R1.gamma_r6 dropped?
+          expected True
+          got      True
+PASS  R1-12    'im:abstain_as_no' (prefix not a3:/a4:, so not bare-matched): counted
+          expected {'counted': 'True', 'over': 'True'}
+          got      {'counted': 'True', 'over': 'True'}
+PASS  R1-12d   R1.delta dropped?
+          expected True
+          got      True
+PASS  R1-13    R1c rule named abstain_as_no (R1c has no class): counted, 0.2 + 0.00055
+          expected {'excess': '1/5', 'margin': '4011/20000', 'counted': 'True', 'over': 'True'}
+          got      {'excess': '1/5', 'margin': '4011/20000', 'counted': 'True', 'over': 'True'}
+PASS  R1-13d   R1.kappa_r4 dropped?
+          expected True
+          got      True
+PASS  R1-14    R1c +0.149: 0.14955, kept
+          expected {'margin': '2991/20000', 'over': 'False'}
+          got      {'margin': '2991/20000', 'over': 'False'}
+PASS  R1-14d   R1.lambda_r4 dropped?
+          expected False
+          got      False
+PASS  R1-15    R1c +0.150: 0.15055, dropped
+          expected {'margin': '3011/20000', 'over': 'True'}
+          got      {'margin': '3011/20000', 'over': 'True'}
+PASS  R1-15d   R1.mu_r4 dropped?
+          expected True
+          got      True
+PASS  R1-16    anti 0.2000 drops
+          expected {'excess': '1/5', 'over': 'True'}
+          got      {'excess': '1/5', 'over': 'True'}
+PASS  R1-16d   R1.nu_r4 dropped?
+          expected True
+          got      True
+PASS  R1-17    non-survivor R1.notasurvivor_r2 not read
+          expected 0
+          got      0
+PASS  R1-18    mode_rate (R1b, 0.9 written on every row) read as no rule
+          expected 0
+          got      0
+PASS  M1-1a    im:largest_share (M1a own) on ratio_share: an entry, uncounted
+          expected {'counted': 'False'}
+          got      {'counted': 'False'}
+PASS  M1-1b    a3:largest_share (M1a a3) on ratio_share: an entry, uncounted
+          expected {'counted': 'False'}
+          got      {'counted': 'False'}
+PASS  M1-1c    im:largest_share (M1a a4) on ratio_share: an entry, uncounted
+          expected {'counted': 'False'}
+          got      {'counted': 'False'}
+PASS  M1-1d    im:largest_share (M1b results) on ratio_share: an entry, uncounted
+          expected {'counted': 'False'}
+          got      {'counted': 'False'}
+PASS  M1-2     key ending __within_applicable not read (M1a own and M1b)
+          expected 0
+          got      0
+PASS  M1-2b    fields mode_insample, answer_echoed_anywhere, one_op_best, asked_is_largest..., within_applicable not rules
+          expected 0
+          got      0
+PASS  M1-2d    M1.ratio_share_r3 dropped?
+          expected False
+          got      False
+PASS  M1-3     im:largest_share for gamma (pair is not an entry): counted
+          expected {'counted': 'True', 'over': 'True'}
+          got      {'counted': 'True', 'over': 'True'}
+PASS  M1-3d    M1.gamma_r3 dropped?
+          expected True
+          got      True
+PASS  M1-4a    vs chance: rate 0, kept
+          expected {'excess': '0', 'over': 'False'}
+          got      {'excess': '0', 'over': 'False'}
+PASS  M1-4b    base as the rule 'most frequent answer' vs chance: 2249/15000 + 1/20000, kept
+          expected {'excess': '2249/15000', 'margin': '8999/60000', 'over': 'False'}
+          got      {'excess': '2249/15000', 'margin': '8999/60000', 'over': 'False'}
+PASS  M1-4c    vs base: -2249/15000 with two half units 1/10000 = 4501/30000 > 0.15, dropped
+          expected {'excess': '-2249/15000', 'margin': '4501/30000', 'over': 'True'}
+          got      {'excess': '-2249/15000', 'margin': '4501/30000', 'over': 'True'}
+PASS  M1-4d    M1.vsbase_r3 dropped?
+          expected True
+          got      True
+PASS  M1-5     M1b rate 0.16000 vs chance
+          expected {'excess': '4/25', 'margin': '32001/200000', 'over': 'True'}
+          got      {'excess': '4/25', 'margin': '32001/200000', 'over': 'True'}
+PASS  M1-5d    M1.vschance_r3 dropped?
+          expected True
+          got      True
+PASS  M1-6     M1c base 0.20000 read as a rule vs chance
+          expected {'excess': '1/5', 'over': 'True'}
+          got      {'excess': '1/5', 'over': 'True'}
+PASS  M1-6d    M1.base_r3 dropped?
+          expected True
+          got      True
+PASS  M1-7     M1 row N=30 (plan 100) in seed 1: (0.4*30 + 0.1*100*2)/230 = 16/115, kept
+          expected {'excess': '16/115', 'over': 'False', 'items': '230'}
+          got      {'excess': '16/115', 'over': 'False', 'items': '230'}
+PASS  M1-7b    smalln listed with N other than the plan's
+          expected True
+          got      True
+PASS  M1-7d    M1.smalln_r3 dropped?
+          expected False
+          got      False
+PASS  M1-8a    im:largest_le_sqrt on prime_factors: an entry
+          expected {'counted': 'False'}
+          got      {'counted': 'False'}
+PASS  M1-8b    a3:largest_le_sqrt (same name, definition differs, not an entry; amendment list empty): counted
+          expected {'counted': 'True', 'over': 'True'}
+          got      {'counted': 'True', 'over': 'True'}
+PASS  M1-8d    M1.prime_factors_r3 dropped?
+          expected True
+          got      True
+PASS  M1-9     non-survivor M1.zz_not_r3 not read
+          expected 0
+          got      0
+PASS  C1-1     EFF_F 0.200 under an alias id (C1.slices -> C1.slices_f4): counts, dropped
+          expected {'excess': '1/5', 'counted': 'True', 'over': 'True'}
+          got      {'excess': '1/5', 'counted': 'True', 'over': 'True'}
+PASS  C1-1b    slices_f4: every single rule and other measure below the bound
+          expected True
+          got      True
+PASS  C1-1d    C1.slices_f4 dropped?
+          expected True
+          got      True
+PASS  C1-2a    EFF_SM: uncounted (measure entry)
+          expected {'counted': 'False'}
+          got      {'counted': 'False'}
+PASS  C1-2b    s5 M.no_back: uncounted (literal entry)
+          expected {'counted': 'False'}
+          got      {'counted': 'False'}
+PASS  C1-2c    s5 H.c_semantics: uncounted
+          expected {'counted': 'False'}
+          got      {'counted': 'False'}
+PASS  C1-2d    C1.c_effsm dropped?
+          expected False
+          got      False
+PASS  C1-3     s5 M.not_entry (prefix M., not an entry): counted
+          expected {'counted': 'True', 'over': 'True'}
+          got      {'counted': 'True', 'over': 'True'}
+PASS  C1-3d    C1.c_mnot dropped?
+          expected True
+          got      True
+PASS  C1-4     s5 S.foo: round(0.25*16)+round(0.125*24) = 4+3 = 7 per seed -> 21/120
+          expected {'excess': '7/40', 'over': 'True'}
+          got      {'excess': '7/40', 'over': 'True'}
+PASS  C1-4d    C1.c_s5rec dropped?
+          expected True
+          got      True
+PASS  C1-5     s5 S.foo: 4 + round(0.042*24)=1 -> 15/120, kept
+          expected {'excess': '1/8', 'over': 'False'}
+          got      {'excess': '1/8', 'over': 'False'}
+PASS  C1-5d    C1.c_s5keep dropped?
+          expected False
+          got      False
+PASS  C1-6     s5 S.foo: 4 + round(0.083*24)=2 -> 18/120 = 0.15 recovered from 3-dp shares, + 0.0005: dropped (strict reading)
+          expected {'excess': '3/20', 'margin': '301/2000', 'over': 'True'}
+          got      {'excess': '3/20', 'margin': '301/2000', 'over': 'True'}
+PASS  C1-7     error-marker shape rows not read (s5, a3, battery)
+          expected 0
+          got      0
+PASS  C1-7d    C1.c_err dropped?
+          expected False
+          got      False
+PASS  C1-8     a3 with alias_rc=1: fallback own file read (24/40 per seed)
+          expected {'excess': '3/5', 'over': 'True'}
+          got      {'excess': '3/5', 'over': 'True'}
+PASS  C1-8b    fallback recorded for C1a c_a3fb, three seeds
+          expected 3
+          got      3
+PASS  C1-8d    C1.c_a3fb dropped?
+          expected True
+          got      True
+PASS  C1-9     a3 with alias_rc=0: alias file read (2/40), own file ignored
+          expected {'excess': '1/20', 'over': 'False'}
+          got      {'excess': '1/20', 'over': 'False'}
+PASS  C1-9d    C1.c_a3ok dropped?
+          expected False
+          got      False
+PASS  C1-10    a3 hits 6,6,6 of 40: exactly 0.15 from counts, kept
+          expected {'excess': '3/20', 'margin': '3/20', 'over': 'False'}
+          got      {'excess': '3/20', 'margin': '3/20', 'over': 'False'}
+PASS  C1-10d   C1.c_a3exact dropped?
+          expected False
+          got      False
+PASS  C1-11    a3 hits 6,6,7: 19/120 just above, dropped
+          expected {'excess': '19/120', 'over': 'True'}
+          got      {'excess': '19/120', 'over': 'True'}
+PASS  C1-11d   C1.c_a3above dropped?
+          expected True
+          got      True
+PASS  C1-12    battery S.no_back (BATTERY_MUT; entries are a3-only): counted
+          expected {'counted': 'True', 'over': 'True'}
+          got      {'counted': 'True', 'over': 'True'}
+PASS  C1-12d   C1.c_srcs dropped?
+          expected True
+          got      True
+PASS  C1-13a   battery C.self_check: uncounted
+          expected {'counted': 'False'}
+          got      {'counted': 'False'}
+PASS  C1-13b   a3 S.no_back (A3_MUT): uncounted
+          expected {'counted': 'False'}
+          got      {'counted': 'False'}
+PASS  C1-13d   C1.c_srcs2 dropped?
+          expected False
+          got      False
+PASS  C1-14    a3 C.self_check (entry is the battery's only): counted
+          expected {'counted': 'True', 'over': 'True'}
+          got      {'counted': 'True', 'over': 'True'}
+PASS  C1-14d   C1.c_srcs3 dropped?
+          expected True
+          got      True
+PASS  C1-15    f5 M.no_back (not a closed-form entry): counted, 20/40
+          expected {'excess': '1/2', 'counted': 'True', 'over': 'True'}
+          got      {'excess': '1/2', 'counted': 'True', 'over': 'True'}
+PASS  C1-15d   C1.c_closed dropped?
+          expected True
+          got      True
+PASS  C1-16a   f5b M.no_even_branch: uncounted
+          expected {'counted': 'False'}
+          got      {'counted': 'False'}
+PASS  C1-16b   f5b H.negative_step_as_positive: uncounted
+          expected {'counted': 'False'}
+          got      {'counted': 'False'}
+PASS  C1-16c   f5b F.keep 0.1000*40 = 4: 1/10 + 0.00005
+          expected {'excess': '1/10', 'margin': '2001/20000', 'over': 'False'}
+          got      {'excess': '1/10', 'margin': '2001/20000', 'over': 'False'}
+PASS  C1-16d   C1.c_closed2 dropped?
+          expected False
+          got      False
+PASS  C1-17    battery MF_shape_cv {A 0.375 x 16 = 6, B 0}: 18/120 = 0.15 + 0.0005, dropped
+          expected {'excess': '3/20', 'margin': '301/2000', 'over': 'True'}
+          got      {'excess': '3/20', 'margin': '301/2000', 'over': 'True'}
+PASS  C1-17d   C1.c_msh dropped?
+          expected True
+          got      True
+PASS  C1-18    oracle_any_literal and best_generic_in_shape not read (0.9 / 1.0 written on every C1 row)
+          expected 0
+          got      0
+PASS  C1-18d   C1.c_bkeep dropped?
+          expected False
+          got      False
+PASS  C1-19    a3 MF_printform_cv 0.200: counted
+          expected {'excess': '1/5', 'counted': 'True', 'over': 'True'}
+          got      {'excess': '1/5', 'counted': 'True', 'over': 'True'}
+PASS  C1-19d   C1.c_printform dropped?
+          expected True
+          got      True
+PASS  C1-20    non-survivor C1.zz_not not read
+          expected 0
+          got      0
+PASS  ALL      the set of lineages dropped equals the hand list
+          expected ['C1.c_a3above', 'C1.c_a3fb', 'C1.c_closed', 'C1.c_mnot', 'C1.c_msh', 'C1.c_printform', 'C1.c_s5edge', 'C1.c_s5rec', 'C1.c_srcs', 'C1.c_srcs3', 'C1.slices_f4', 'M1.base_r3', 'M1.gamma_r3', 'M1.prime_factors_r3', 'M1.vsbase_r3', 'M1.vschance_r3', 'R1.beta_r5', 'R1.delta', 'R1.eps_r4', 'R1.eta_r4', 'R1.gamma_r6', 'R1.kappa_r4', 'R1.mu_r4', 'R1.nu_r4', 'R1.zeta_r4', 'R2.b_open', 'R2.d_yn', 'R2.f_cond', 'R2.h_sd', 'R2.i_sdsum', 'R2.k_klass2', 'R2.l_construct', 'R2.m_new']
+          got      ['C1.c_a3above', 'C1.c_a3fb', 'C1.c_closed', 'C1.c_mnot', 'C1.c_msh', 'C1.c_printform', 'C1.c_s5edge', 'C1.c_s5rec', 'C1.c_srcs', 'C1.c_srcs3', 'C1.slices_f4', 'M1.base_r3', 'M1.gamma_r3', 'M1.prime_factors_r3', 'M1.vsbase_r3', 'M1.vschance_r3', 'R1.beta_r5', 'R1.delta', 'R1.eps_r4', 'R1.eta_r4', 'R1.gamma_r6', 'R1.kappa_r4', 'R1.mu_r4', 'R1.nu_r4', 'R1.zeta_r4', 'R2.b_open', 'R2.d_yn', 'R2.f_cond', 'R2.h_sd', 'R2.i_sdsum', 'R2.k_klass2', 'R2.l_construct', 'R2.m_new']
+FAIL  ALL-2    per-evaluation counts before/after
+          expected {'C1': [19, 10, 9], 'M1': [7, 5, 2], 'R1': [14, 9, 5], 'R2': [14, 8, 6]}
+          got      {'C1': [19, 11, 8], 'M1': [7, 5, 2], 'R1': [14, 9, 5], 'R2': [14, 8, 6]}
+
+CASES 142  PASS 141  FAIL 1

@@ -1,0 +1,135 @@
+{
+ "C1.slices_f4": {
+  "alias": "C1.alias_slices_f4",
+  "alias_rc": 0,
+  "alias_err": "",
+  "own_rc": null,
+  "own_err": ""
+ },
+ "C1.c_effsm": {
+  "alias": "C1.alias_c_effsm",
+  "alias_rc": 0,
+  "alias_err": "",
+  "own_rc": null,
+  "own_err": ""
+ },
+ "C1.c_mnot": {
+  "alias": "C1.alias_c_mnot",
+  "alias_rc": 0,
+  "alias_err": "",
+  "own_rc": null,
+  "own_err": ""
+ },
+ "C1.c_s5rec": {
+  "alias": "C1.alias_c_s5rec",
+  "alias_rc": 0,
+  "alias_err": "",
+  "own_rc": null,
+  "own_err": ""
+ },
+ "C1.c_s5keep": {
+  "alias": "C1.alias_c_s5keep",
+  "alias_rc": 0,
+  "alias_err": "",
+  "own_rc": null,
+  "own_err": ""
+ },
+ "C1.c_s5edge": {
+  "alias": "C1.alias_c_s5edge",
+  "alias_rc": 0,
+  "alias_err": "",
+  "own_rc": null,
+  "own_err": ""
+ },
+ "C1.c_err": {
+  "alias": "C1.alias_c_err",
+  "alias_rc": 0,
+  "alias_err": "",
+  "own_rc": null,
+  "own_err": ""
+ },
+ "C1.c_a3fb": {
+  "alias": "C1.alias_c_a3fb",
+  "alias_rc": 1,
+  "alias_err": "Traceback: AttributeError (made up)",
+  "own_rc": 0,
+  "own_err": ""
+ },
+ "C1.c_a3ok": {
+  "alias": "C1.alias_c_a3ok",
+  "alias_rc": 0,
+  "alias_err": "",
+  "own_rc": null,
+  "own_err": ""
+ },
+ "C1.c_a3exact": {
+  "alias": "C1.alias_c_a3exact",
+  "alias_rc": 0,
+  "alias_err": "",
+  "own_rc": null,
+  "own_err": ""
+ },
+ "C1.c_a3above": {
+  "alias": "C1.alias_c_a3above",
+  "alias_rc": 0,
+  "alias_err": "",
+  "own_rc": null,
+  "own_err": ""
+ },
+ "C1.c_srcs": {
+  "alias": "C1.alias_c_srcs",
+  "alias_rc": 0,
+  "alias_err": "",
+  "own_rc": null,
+  "own_err": ""
+ },
+ "C1.c_srcs2": {
+  "alias": "C1.alias_c_srcs2",
+  "alias_rc": 0,
+  "alias_err": "",
+  "own_rc": null,
+  "own_err": ""
+ },
+ "C1.c_srcs3": {
+  "alias": "C1.alias_c_srcs3",
+  "alias_rc": 0,
+  "alias_err": "",
+  "own_rc": null,
+  "own_err": ""
+ },
+ "C1.c_closed": {
+  "alias": "C1.alias_c_closed",
+  "alias_rc": 0,
+  "alias_err": "",
+  "own_rc": null,
+  "own_err": ""
+ },
+ "C1.c_closed2": {
+  "alias": "C1.alias_c_closed2",
+  "alias_rc": 0,
+  "alias_err": "",
+  "own_rc": null,
+  "own_err": ""
+ },
+ "C1.c_msh": {
+  "alias": "C1.alias_c_msh",
+  "alias_rc": 0,
+  "alias_err": "",
+  "own_rc": null,
+  "own_err": ""
+ },
+ "C1.c_bkeep": {
+  "alias": "C1.alias_c_bkeep",
+  "alias_rc": 0,
+  "alias_err": "",
+  "own_rc": null,
+  "own_err": ""
+ },
+ "C1.c_printform": {
+  "alias": "C1.alias_c_printform",
+  "alias_rc": 0,
+  "alias_err": "",
+  "own_rc": null,
+  "own_err": ""
+ }
+}

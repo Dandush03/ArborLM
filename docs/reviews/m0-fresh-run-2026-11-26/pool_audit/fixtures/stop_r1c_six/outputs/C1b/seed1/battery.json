@@ -1,0 +1,5242 @@
+{
+ "C1.slices_f4": {
+  "0": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "1": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "2": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "3": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "4": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "5": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "6": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  }
+ },
+ "C1.c_effsm": {
+  "0": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "1": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "2": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "3": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "4": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "5": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "6": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  }
+ },
+ "C1.c_mnot": {
+  "0": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "1": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "2": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "3": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "4": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "5": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "6": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  }
+ },
+ "C1.c_s5rec": {
+  "0": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "1": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "2": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "3": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "4": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "5": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "6": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  }
+ },
+ "C1.c_s5keep": {
+  "0": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "1": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "2": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "3": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "4": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "5": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "6": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  }
+ },
+ "C1.c_s5edge": {
+  "0": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "1": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "2": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "3": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "4": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "5": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "6": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  }
+ },
+ "C1.c_err": {
+  "0": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "1": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "2": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "3": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "4": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    },
+    "RULE_ERROR:KeyError:y|S.bad": {
+     "hit": 40,
+     "n_shape": 40,
+     "rate": 1.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "5": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "6": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  }
+ },
+ "C1.c_a3fb": {
+  "0": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "1": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "2": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "3": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "4": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "5": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "6": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  }
+ },
+ "C1.c_a3ok": {
+  "0": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "1": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "2": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "3": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "4": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "5": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "6": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  }
+ },
+ "C1.c_a3exact": {
+  "0": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "1": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "2": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "3": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "4": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "5": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "6": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  }
+ },
+ "C1.c_a3above": {
+  "0": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "1": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "2": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "3": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "4": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "5": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "6": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  }
+ },
+ "C1.c_srcs": {
+  "0": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "1": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "2": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "3": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "4": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    },
+    "B|S.no_back": {
+     "hit": 24,
+     "n_shape": 24,
+     "rate": 1.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "5": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "6": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  }
+ },
+ "C1.c_srcs2": {
+  "0": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "1": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "2": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "3": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "4": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    },
+    "B|C.self_check": {
+     "hit": 24,
+     "n_shape": 24,
+     "rate": 1.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "5": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "6": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  }
+ },
+ "C1.c_srcs3": {
+  "0": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "1": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "2": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "3": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "4": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "5": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "6": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  }
+ },
+ "C1.c_closed": {
+  "0": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "1": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "2": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "3": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "4": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "5": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "6": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  }
+ },
+ "C1.c_closed2": {
+  "0": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "1": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "2": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "3": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "4": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "5": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "6": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  }
+ },
+ "C1.c_msh": {
+  "0": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "1": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "2": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "3": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "4": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.375,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "5": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "6": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  }
+ },
+ "C1.c_bkeep": {
+  "0": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "1": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "2": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "3": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "4": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "5": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "6": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  }
+ },
+ "C1.c_printform": {
+  "0": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "1": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "2": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "3": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "4": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "5": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "6": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  }
+ },
+ "C1.zz_not": {
+  "0": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "1": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "2": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "3": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "4": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    },
+    "B|S.big": {
+     "hit": 40,
+     "n_shape": 24,
+     "rate": 1.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "5": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  },
+  "6": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_shape_cv": {
+    "A": 0.0,
+    "B": 0.0
+   },
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g",
+    "g"
+   ],
+   "best_generic_in_shape": {
+    "A": {
+     "rule": "g",
+     "rate": 1.0
+    },
+    "B": {
+     "rule": "g",
+     "rate": 1.0
+    }
+   },
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "n_shape": 16,
+     "rate": 0.0
+    }
+   },
+   "distinct_keys": 5,
+   "retries": 0
+  }
+ }
+}

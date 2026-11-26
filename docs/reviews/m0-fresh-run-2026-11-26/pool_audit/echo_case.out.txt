@@ -1,0 +1,5 @@
+im:echo_best_position[max/last] vs_base 300 1/60 False ['3']
+im:echo_best_position[max/last] vs_chance 300 1/15 False ['3']
+im:echo_best_position[max/max] vs_base 300 1/12 False ['1', '2']
+im:echo_best_position[max/max] vs_chance 300 2/15 False ['1', '2']
+dropped ratio_share? False

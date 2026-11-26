@@ -1,0 +1,4 @@
+R1a R1.theta_r4 0 a3:latest_start_first rows 2 counted [False, False] entry ['class table R1 EXCL: latest_start_first (bare name equal; lineages: every R1 lineage)', 'class table R1 EXCL: latest_start_first (bare name equal; lineages: every R1 lineage)']
+R2a R2.a_open 5 [a3] ignore reverses rows 1 counted [False] entry ['class table R2 artifact (order 2, name equal): [a3] ignore reverses']
+R2b R2.crt_smallest 4 [NEW] (partial) largest modulus: try r,  rows 1 counted [False] entry ['class table R2 new rule partial: [NEW] (partial) largest modulus: try r, r+m, r+2m against the other congruences, else r (lineage crt_smallest)']
+theta dropped False a_open dropped False crt dropped True

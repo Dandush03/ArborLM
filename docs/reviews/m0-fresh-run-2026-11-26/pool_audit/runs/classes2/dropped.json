@@ -1,0 +1,1823 @@
+[
+ {
+  "all_rows_over_the_bound": [
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.158333333333",
+     "fraction": "19/120"
+    },
+    "excess": {
+     "decimal_12dp": "0.158333333333",
+     "fraction": "19/120"
+    },
+    "level": 3,
+    "reading": "rate",
+    "rule": "S.foo",
+    "shape": null,
+    "source": "a3",
+    "unit": "C1a"
+   }
+  ],
+  "evaluation": "C1",
+  "lineage": "C1.c_a3above",
+  "reason": {
+   "abs_excess_plus_uncertainty": {
+    "decimal_12dp": "0.158333333333",
+    "fraction": "19/120"
+   },
+   "bound": "15/100",
+   "excess": {
+    "decimal_12dp": "0.158333333333",
+    "fraction": "19/120"
+   },
+   "level": 3,
+   "pooled_figure": {
+    "decimal_12dp": "0.158333333333",
+    "fraction": "19/120"
+   },
+   "reading": "rate",
+   "rounding_uncertainty": {
+    "decimal_12dp": "0.000000000000",
+    "fraction": "0/1"
+   },
+   "rule": "S.foo",
+   "shape": null,
+   "source": "a3",
+   "unit": "C1a"
+  }
+ },
+ {
+  "all_rows_over_the_bound": [
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.600000000000",
+     "fraction": "3/5"
+    },
+    "excess": {
+     "decimal_12dp": "0.600000000000",
+     "fraction": "3/5"
+    },
+    "level": 3,
+    "reading": "rate",
+    "rule": "S.foo",
+    "shape": null,
+    "source": "a3",
+    "unit": "C1a"
+   }
+  ],
+  "evaluation": "C1",
+  "lineage": "C1.c_a3fb",
+  "reason": {
+   "abs_excess_plus_uncertainty": {
+    "decimal_12dp": "0.600000000000",
+    "fraction": "3/5"
+   },
+   "bound": "15/100",
+   "excess": {
+    "decimal_12dp": "0.600000000000",
+    "fraction": "3/5"
+   },
+   "level": 3,
+   "pooled_figure": {
+    "decimal_12dp": "0.600000000000",
+    "fraction": "3/5"
+   },
+   "reading": "rate",
+   "rounding_uncertainty": {
+    "decimal_12dp": "0.000000000000",
+    "fraction": "0/1"
+   },
+   "rule": "S.foo",
+   "shape": null,
+   "source": "a3",
+   "unit": "C1a"
+  }
+ },
+ {
+  "all_rows_over_the_bound": [
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.500050000000",
+     "fraction": "10001/20000"
+    },
+    "excess": {
+     "decimal_12dp": "0.500000000000",
+     "fraction": "1/2"
+    },
+    "level": 5,
+    "reading": "rate",
+    "rule": "M.no_back",
+    "shape": null,
+    "source": "f5",
+    "unit": "C1c"
+   }
+  ],
+  "evaluation": "C1",
+  "lineage": "C1.c_closed",
+  "reason": {
+   "abs_excess_plus_uncertainty": {
+    "decimal_12dp": "0.500050000000",
+    "fraction": "10001/20000"
+   },
+   "bound": "15/100",
+   "excess": {
+    "decimal_12dp": "0.500000000000",
+    "fraction": "1/2"
+   },
+   "level": 5,
+   "pooled_figure": {
+    "decimal_12dp": "0.500000000000",
+    "fraction": "1/2"
+   },
+   "reading": "rate",
+   "rounding_uncertainty": {
+    "decimal_12dp": "0.000050000000",
+    "fraction": "1/20000"
+   },
+   "rule": "M.no_back",
+   "shape": null,
+   "source": "f5",
+   "unit": "C1c"
+  }
+ },
+ {
+  "all_rows_over_the_bound": [
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.400500000000",
+     "fraction": "801/2000"
+    },
+    "excess": {
+     "decimal_12dp": "0.400000000000",
+     "fraction": "2/5"
+    },
+    "level": 2,
+    "reading": "rate",
+    "rule": "M.not_entry",
+    "shape": null,
+    "source": "s5",
+    "unit": "C1a"
+   }
+  ],
+  "evaluation": "C1",
+  "lineage": "C1.c_mnot",
+  "reason": {
+   "abs_excess_plus_uncertainty": {
+    "decimal_12dp": "0.400500000000",
+    "fraction": "801/2000"
+   },
+   "bound": "15/100",
+   "excess": {
+    "decimal_12dp": "0.400000000000",
+    "fraction": "2/5"
+   },
+   "level": 2,
+   "pooled_figure": {
+    "decimal_12dp": "0.400000000000",
+    "fraction": "2/5"
+   },
+   "reading": "rate",
+   "rounding_uncertainty": {
+    "decimal_12dp": "0.000500000000",
+    "fraction": "1/2000"
+   },
+   "rule": "M.not_entry",
+   "shape": null,
+   "source": "s5",
+   "unit": "C1a"
+  }
+ },
+ {
+  "all_rows_over_the_bound": [
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.150500000000",
+     "fraction": "301/2000"
+    },
+    "excess": {
+     "decimal_12dp": "0.150000000000",
+     "fraction": "3/20"
+    },
+    "level": 4,
+    "reading": "rate",
+    "rule": "MF_shape_cv",
+    "shape": null,
+    "source": "battery",
+    "unit": "C1b"
+   }
+  ],
+  "evaluation": "C1",
+  "lineage": "C1.c_msh",
+  "reason": {
+   "abs_excess_plus_uncertainty": {
+    "decimal_12dp": "0.150500000000",
+    "fraction": "301/2000"
+   },
+   "bound": "15/100",
+   "excess": {
+    "decimal_12dp": "0.150000000000",
+    "fraction": "3/20"
+   },
+   "level": 4,
+   "pooled_figure": {
+    "decimal_12dp": "0.150000000000",
+    "fraction": "3/20"
+   },
+   "reading": "rate",
+   "rounding_uncertainty": {
+    "decimal_12dp": "0.000500000000",
+    "fraction": "1/2000"
+   },
+   "rule": "MF_shape_cv",
+   "shape": null,
+   "source": "battery",
+   "unit": "C1b"
+  }
+ },
+ {
+  "all_rows_over_the_bound": [
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.200500000000",
+     "fraction": "401/2000"
+    },
+    "excess": {
+     "decimal_12dp": "0.200000000000",
+     "fraction": "1/5"
+    },
+    "level": 3,
+    "reading": "rate",
+    "rule": "MF_printform_cv",
+    "shape": null,
+    "source": "a3",
+    "unit": "C1a"
+   }
+  ],
+  "evaluation": "C1",
+  "lineage": "C1.c_printform",
+  "reason": {
+   "abs_excess_plus_uncertainty": {
+    "decimal_12dp": "0.200500000000",
+    "fraction": "401/2000"
+   },
+   "bound": "15/100",
+   "excess": {
+    "decimal_12dp": "0.200000000000",
+    "fraction": "1/5"
+   },
+   "level": 3,
+   "pooled_figure": {
+    "decimal_12dp": "0.200000000000",
+    "fraction": "1/5"
+   },
+   "reading": "rate",
+   "rounding_uncertainty": {
+    "decimal_12dp": "0.000500000000",
+    "fraction": "1/2000"
+   },
+   "rule": "MF_printform_cv",
+   "shape": null,
+   "source": "a3",
+   "unit": "C1a"
+  }
+ },
+ {
+  "all_rows_over_the_bound": [
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.150500000000",
+     "fraction": "301/2000"
+    },
+    "excess": {
+     "decimal_12dp": "0.150000000000",
+     "fraction": "3/20"
+    },
+    "level": 2,
+    "reading": "rate",
+    "rule": "S.foo",
+    "shape": null,
+    "source": "s5",
+    "unit": "C1a"
+   }
+  ],
+  "evaluation": "C1",
+  "lineage": "C1.c_s5edge",
+  "reason": {
+   "abs_excess_plus_uncertainty": {
+    "decimal_12dp": "0.150500000000",
+    "fraction": "301/2000"
+   },
+   "bound": "15/100",
+   "excess": {
+    "decimal_12dp": "0.150000000000",
+    "fraction": "3/20"
+   },
+   "level": 2,
+   "pooled_figure": {
+    "decimal_12dp": "0.150000000000",
+    "fraction": "3/20"
+   },
+   "reading": "rate",
+   "rounding_uncertainty": {
+    "decimal_12dp": "0.000500000000",
+    "fraction": "1/2000"
+   },
+   "rule": "S.foo",
+   "shape": null,
+   "source": "s5",
+   "unit": "C1a"
+  }
+ },
+ {
+  "all_rows_over_the_bound": [
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.175500000000",
+     "fraction": "351/2000"
+    },
+    "excess": {
+     "decimal_12dp": "0.175000000000",
+     "fraction": "7/40"
+    },
+    "level": 2,
+    "reading": "rate",
+    "rule": "S.foo",
+    "shape": null,
+    "source": "s5",
+    "unit": "C1a"
+   }
+  ],
+  "evaluation": "C1",
+  "lineage": "C1.c_s5rec",
+  "reason": {
+   "abs_excess_plus_uncertainty": {
+    "decimal_12dp": "0.175500000000",
+    "fraction": "351/2000"
+   },
+   "bound": "15/100",
+   "excess": {
+    "decimal_12dp": "0.175000000000",
+    "fraction": "7/40"
+   },
+   "level": 2,
+   "pooled_figure": {
+    "decimal_12dp": "0.175000000000",
+    "fraction": "7/40"
+   },
+   "reading": "rate",
+   "rounding_uncertainty": {
+    "decimal_12dp": "0.000500000000",
+    "fraction": "1/2000"
+   },
+   "rule": "S.foo",
+   "shape": null,
+   "source": "s5",
+   "unit": "C1a"
+  }
+ },
+ {
+  "all_rows_over_the_bound": [
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.600000000000",
+     "fraction": "3/5"
+    },
+    "excess": {
+     "decimal_12dp": "0.600000000000",
+     "fraction": "3/5"
+    },
+    "level": 4,
+    "reading": "rate",
+    "rule": "S.no_back",
+    "shape": null,
+    "source": "battery",
+    "unit": "C1b"
+   }
+  ],
+  "evaluation": "C1",
+  "lineage": "C1.c_srcs",
+  "reason": {
+   "abs_excess_plus_uncertainty": {
+    "decimal_12dp": "0.600000000000",
+    "fraction": "3/5"
+   },
+   "bound": "15/100",
+   "excess": {
+    "decimal_12dp": "0.600000000000",
+    "fraction": "3/5"
+   },
+   "level": 4,
+   "pooled_figure": {
+    "decimal_12dp": "0.600000000000",
+    "fraction": "3/5"
+   },
+   "reading": "rate",
+   "rounding_uncertainty": {
+    "decimal_12dp": "0.000000000000",
+    "fraction": "0/1"
+   },
+   "rule": "S.no_back",
+   "shape": null,
+   "source": "battery",
+   "unit": "C1b"
+  }
+ },
+ {
+  "all_rows_over_the_bound": [
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.600000000000",
+     "fraction": "3/5"
+    },
+    "excess": {
+     "decimal_12dp": "0.600000000000",
+     "fraction": "3/5"
+    },
+    "level": 3,
+    "reading": "rate",
+    "rule": "C.self_check",
+    "shape": null,
+    "source": "a3",
+    "unit": "C1a"
+   }
+  ],
+  "evaluation": "C1",
+  "lineage": "C1.c_srcs3",
+  "reason": {
+   "abs_excess_plus_uncertainty": {
+    "decimal_12dp": "0.600000000000",
+    "fraction": "3/5"
+   },
+   "bound": "15/100",
+   "excess": {
+    "decimal_12dp": "0.600000000000",
+    "fraction": "3/5"
+   },
+   "level": 3,
+   "pooled_figure": {
+    "decimal_12dp": "0.600000000000",
+    "fraction": "3/5"
+   },
+   "reading": "rate",
+   "rounding_uncertainty": {
+    "decimal_12dp": "0.000000000000",
+    "fraction": "0/1"
+   },
+   "rule": "C.self_check",
+   "shape": null,
+   "source": "a3",
+   "unit": "C1a"
+  }
+ },
+ {
+  "all_rows_over_the_bound": [
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.200500000000",
+     "fraction": "401/2000"
+    },
+    "excess": {
+     "decimal_12dp": "0.200000000000",
+     "fraction": "1/5"
+    },
+    "level": 2,
+    "reading": "rate",
+    "rule": "EFF_F",
+    "shape": null,
+    "source": "s5",
+    "unit": "C1a"
+   }
+  ],
+  "evaluation": "C1",
+  "lineage": "C1.slices_f4",
+  "reason": {
+   "abs_excess_plus_uncertainty": {
+    "decimal_12dp": "0.200500000000",
+    "fraction": "401/2000"
+   },
+   "bound": "15/100",
+   "excess": {
+    "decimal_12dp": "0.200000000000",
+    "fraction": "1/5"
+   },
+   "level": 2,
+   "pooled_figure": {
+    "decimal_12dp": "0.200000000000",
+    "fraction": "1/5"
+   },
+   "reading": "rate",
+   "rounding_uncertainty": {
+    "decimal_12dp": "0.000500000000",
+    "fraction": "1/2000"
+   },
+   "rule": "EFF_F",
+   "shape": null,
+   "source": "s5",
+   "unit": "C1a"
+  }
+ },
+ {
+  "all_rows_over_the_bound": [
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.200005000000",
+     "fraction": "40001/200000"
+    },
+    "excess": {
+     "decimal_12dp": "0.200000000000",
+     "fraction": "1/5"
+    },
+    "level": 6,
+    "reading": "vs_chance",
+    "rule": "base",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.200010000000",
+     "fraction": "20001/100000"
+    },
+    "excess": {
+     "decimal_12dp": "-0.200000000000",
+     "fraction": "-1/5"
+    },
+    "level": 6,
+    "reading": "vs_base",
+    "rule": "base_r",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   }
+  ],
+  "evaluation": "M1",
+  "lineage": "M1.base_r3",
+  "reason": {
+   "abs_excess_plus_uncertainty": {
+    "decimal_12dp": "0.200010000000",
+    "fraction": "20001/100000"
+   },
+   "bound": "15/100",
+   "excess": {
+    "decimal_12dp": "-0.200000000000",
+    "fraction": "-1/5"
+   },
+   "level": 6,
+   "pooled_figure": {
+    "decimal_12dp": "0.000000000000",
+    "fraction": "0/1"
+   },
+   "reading": "vs_base",
+   "rounding_uncertainty": {
+    "decimal_12dp": "0.000010000000",
+    "fraction": "1/100000"
+   },
+   "rule": "base_r",
+   "shape": null,
+   "source": "results",
+   "unit": "M1c"
+  }
+ },
+ {
+  "all_rows_over_the_bound": [
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.850100000000",
+     "fraction": "8501/10000"
+    },
+    "excess": {
+     "decimal_12dp": "0.850000000000",
+     "fraction": "17/20"
+    },
+    "level": 2,
+    "reading": "vs_base",
+    "rule": "im:largest_share",
+    "shape": null,
+    "source": "own",
+    "unit": "M1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.900050000000",
+     "fraction": "18001/20000"
+    },
+    "excess": {
+     "decimal_12dp": "0.900000000000",
+     "fraction": "9/10"
+    },
+    "level": 2,
+    "reading": "vs_chance",
+    "rule": "im:largest_share",
+    "shape": null,
+    "source": "own",
+    "unit": "M1a"
+   }
+  ],
+  "evaluation": "M1",
+  "lineage": "M1.gamma_r3",
+  "reason": {
+   "abs_excess_plus_uncertainty": {
+    "decimal_12dp": "0.900050000000",
+    "fraction": "18001/20000"
+   },
+   "bound": "15/100",
+   "excess": {
+    "decimal_12dp": "0.900000000000",
+    "fraction": "9/10"
+   },
+   "level": 2,
+   "pooled_figure": {
+    "decimal_12dp": "0.900000000000",
+    "fraction": "9/10"
+   },
+   "reading": "vs_chance",
+   "rounding_uncertainty": {
+    "decimal_12dp": "0.000050000000",
+    "fraction": "1/20000"
+   },
+   "rule": "im:largest_share",
+   "shape": null,
+   "source": "own",
+   "unit": "M1a"
+  }
+ },
+ {
+  "all_rows_over_the_bound": [
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.850100000000",
+     "fraction": "8501/10000"
+    },
+    "excess": {
+     "decimal_12dp": "0.850000000000",
+     "fraction": "17/20"
+    },
+    "level": 2,
+    "reading": "vs_base",
+    "rule": "a3:largest_le_sqrt",
+    "shape": null,
+    "source": "a3",
+    "unit": "M1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.900050000000",
+     "fraction": "18001/20000"
+    },
+    "excess": {
+     "decimal_12dp": "0.900000000000",
+     "fraction": "9/10"
+    },
+    "level": 2,
+    "reading": "vs_chance",
+    "rule": "a3:largest_le_sqrt",
+    "shape": null,
+    "source": "a3",
+    "unit": "M1a"
+   }
+  ],
+  "evaluation": "M1",
+  "lineage": "M1.prime_factors_r3",
+  "reason": {
+   "abs_excess_plus_uncertainty": {
+    "decimal_12dp": "0.900050000000",
+    "fraction": "18001/20000"
+   },
+   "bound": "15/100",
+   "excess": {
+    "decimal_12dp": "0.900000000000",
+    "fraction": "9/10"
+   },
+   "level": 2,
+   "pooled_figure": {
+    "decimal_12dp": "0.900000000000",
+    "fraction": "9/10"
+   },
+   "reading": "vs_chance",
+   "rounding_uncertainty": {
+    "decimal_12dp": "0.000050000000",
+    "fraction": "1/20000"
+   },
+   "rule": "a3:largest_le_sqrt",
+   "shape": null,
+   "source": "a3",
+   "unit": "M1a"
+  }
+ },
+ {
+  "all_rows_over_the_bound": [
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.150033333333",
+     "fraction": "4501/30000"
+    },
+    "excess": {
+     "decimal_12dp": "-0.149933333333",
+     "fraction": "-2249/15000"
+    },
+    "level": 3,
+    "reading": "vs_base",
+    "rule": "im:base_r",
+    "shape": null,
+    "source": "own",
+    "unit": "M1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.150033333333",
+     "fraction": "4501/30000"
+    },
+    "excess": {
+     "decimal_12dp": "-0.149933333333",
+     "fraction": "-2249/15000"
+    },
+    "level": 3,
+    "reading": "vs_base",
+    "rule": "im:foo",
+    "shape": null,
+    "source": "own",
+    "unit": "M1a"
+   }
+  ],
+  "evaluation": "M1",
+  "lineage": "M1.vsbase_r3",
+  "reason": {
+   "abs_excess_plus_uncertainty": {
+    "decimal_12dp": "0.150033333333",
+    "fraction": "4501/30000"
+   },
+   "bound": "15/100",
+   "excess": {
+    "decimal_12dp": "-0.149933333333",
+    "fraction": "-2249/15000"
+   },
+   "level": 3,
+   "pooled_figure": {
+    "decimal_12dp": "0.000000000000",
+    "fraction": "0/1"
+   },
+   "reading": "vs_base",
+   "rounding_uncertainty": {
+    "decimal_12dp": "0.000100000000",
+    "fraction": "1/10000"
+   },
+   "rule": "im:base_r",
+   "shape": null,
+   "source": "own",
+   "unit": "M1a"
+  }
+ },
+ {
+  "all_rows_over_the_bound": [
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.160005000000",
+     "fraction": "32001/200000"
+    },
+    "excess": {
+     "decimal_12dp": "0.160000000000",
+     "fraction": "4/25"
+    },
+    "level": 1,
+    "reading": "vs_chance",
+    "rule": "new:foo",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   }
+  ],
+  "evaluation": "M1",
+  "lineage": "M1.vschance_r3",
+  "reason": {
+   "abs_excess_plus_uncertainty": {
+    "decimal_12dp": "0.160005000000",
+    "fraction": "32001/200000"
+   },
+   "bound": "15/100",
+   "excess": {
+    "decimal_12dp": "0.160000000000",
+    "fraction": "4/25"
+   },
+   "level": 1,
+   "pooled_figure": {
+    "decimal_12dp": "0.160000000000",
+    "fraction": "4/25"
+   },
+   "reading": "vs_chance",
+   "rounding_uncertainty": {
+    "decimal_12dp": "0.000005000000",
+    "fraction": "1/200000"
+   },
+   "rule": "new:foo",
+   "shape": null,
+   "source": "results",
+   "unit": "M1b"
+  }
+ },
+ {
+  "all_rows_over_the_bound": [
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.300050000000",
+     "fraction": "6001/20000"
+    },
+    "excess": {
+     "decimal_12dp": "0.300000000000",
+     "fraction": "3/10"
+    },
+    "level": 3,
+    "reading": "eff",
+    "rule": "my_rule",
+    "shape": null,
+    "source": "aud",
+    "unit": "R1a"
+   }
+  ],
+  "evaluation": "R1",
+  "lineage": "R1.beta_r5",
+  "reason": {
+   "abs_excess_plus_uncertainty": {
+    "decimal_12dp": "0.300050000000",
+    "fraction": "6001/20000"
+   },
+   "bound": "15/100",
+   "excess": {
+    "decimal_12dp": "0.300000000000",
+    "fraction": "3/10"
+   },
+   "level": 3,
+   "pooled_figure": {
+    "decimal_12dp": "0.300000000000",
+    "fraction": "3/10"
+   },
+   "reading": "eff",
+   "rounding_uncertainty": {
+    "decimal_12dp": "0.000050000000",
+    "fraction": "1/20000"
+   },
+   "rule": "my_rule",
+   "shape": null,
+   "source": "aud",
+   "unit": "R1a"
+  }
+ },
+ {
+  "all_rows_over_the_bound": [
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.400050000000",
+     "fraction": "8001/20000"
+    },
+    "excess": {
+     "decimal_12dp": "0.400000000000",
+     "fraction": "2/5"
+    },
+    "level": 2,
+    "reading": "eff",
+    "rule": "im:abstain_as_no",
+    "shape": null,
+    "source": "impl",
+    "unit": "R1b"
+   }
+  ],
+  "evaluation": "R1",
+  "lineage": "R1.delta",
+  "reason": {
+   "abs_excess_plus_uncertainty": {
+    "decimal_12dp": "0.400050000000",
+    "fraction": "8001/20000"
+   },
+   "bound": "15/100",
+   "excess": {
+    "decimal_12dp": "0.400000000000",
+    "fraction": "2/5"
+   },
+   "level": 2,
+   "pooled_figure": {
+    "decimal_12dp": "0.400000000000",
+    "fraction": "2/5"
+   },
+   "reading": "eff",
+   "rounding_uncertainty": {
+    "decimal_12dp": "0.000050000000",
+    "fraction": "1/20000"
+   },
+   "rule": "im:abstain_as_no",
+   "shape": null,
+   "source": "impl",
+   "unit": "R1b"
+  }
+ },
+ {
+  "all_rows_over_the_bound": [
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.500050000000",
+     "fraction": "10001/20000"
+    },
+    "excess": {
+     "decimal_12dp": "0.500000000000",
+     "fraction": "1/2"
+    },
+    "level": 0,
+    "reading": "eff",
+    "rule": "exact_x",
+    "shape": null,
+    "source": "aud",
+    "unit": "R1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.500050000000",
+     "fraction": "10001/20000"
+    },
+    "excess": {
+     "decimal_12dp": "0.500000000000",
+     "fraction": "1/2"
+    },
+    "level": 1,
+    "reading": "eff",
+    "rule": "exact_x",
+    "shape": null,
+    "source": "aud",
+    "unit": "R1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.500050000000",
+     "fraction": "10001/20000"
+    },
+    "excess": {
+     "decimal_12dp": "0.500000000000",
+     "fraction": "1/2"
+    },
+    "level": 2,
+    "reading": "eff",
+    "rule": "exact_x",
+    "shape": null,
+    "source": "aud",
+    "unit": "R1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.500050000000",
+     "fraction": "10001/20000"
+    },
+    "excess": {
+     "decimal_12dp": "0.500000000000",
+     "fraction": "1/2"
+    },
+    "level": 3,
+    "reading": "eff",
+    "rule": "exact_x",
+    "shape": null,
+    "source": "aud",
+    "unit": "R1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.500050000000",
+     "fraction": "10001/20000"
+    },
+    "excess": {
+     "decimal_12dp": "0.500000000000",
+     "fraction": "1/2"
+    },
+    "level": 4,
+    "reading": "eff",
+    "rule": "exact_x",
+    "shape": null,
+    "source": "aud",
+    "unit": "R1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.500050000000",
+     "fraction": "10001/20000"
+    },
+    "excess": {
+     "decimal_12dp": "0.500000000000",
+     "fraction": "1/2"
+    },
+    "level": 5,
+    "reading": "eff",
+    "rule": "exact_x",
+    "shape": null,
+    "source": "aud",
+    "unit": "R1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.500050000000",
+     "fraction": "10001/20000"
+    },
+    "excess": {
+     "decimal_12dp": "0.500000000000",
+     "fraction": "1/2"
+    },
+    "level": 6,
+    "reading": "eff",
+    "rule": "exact_x",
+    "shape": null,
+    "source": "aud",
+    "unit": "R1a"
+   }
+  ],
+  "evaluation": "R1",
+  "lineage": "R1.eps_r4",
+  "reason": {
+   "abs_excess_plus_uncertainty": {
+    "decimal_12dp": "0.500050000000",
+    "fraction": "10001/20000"
+   },
+   "bound": "15/100",
+   "excess": {
+    "decimal_12dp": "0.500000000000",
+    "fraction": "1/2"
+   },
+   "level": 0,
+   "pooled_figure": {
+    "decimal_12dp": "0.500000000000",
+    "fraction": "1/2"
+   },
+   "reading": "eff",
+   "rounding_uncertainty": {
+    "decimal_12dp": "0.000050000000",
+    "fraction": "1/20000"
+   },
+   "rule": "exact_x",
+   "shape": null,
+   "source": "aud",
+   "unit": "R1a"
+  }
+ },
+ {
+  "all_rows_over_the_bound": [
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.150150000000",
+     "fraction": "3003/20000"
+    },
+    "excess": {
+     "decimal_12dp": "-0.150100000000",
+     "fraction": "-1501/10000"
+    },
+    "level": 5,
+    "reading": "eff",
+    "rule": "e_neg",
+    "shape": null,
+    "source": "aud",
+    "unit": "R1a"
+   }
+  ],
+  "evaluation": "R1",
+  "lineage": "R1.eta_r4",
+  "reason": {
+   "abs_excess_plus_uncertainty": {
+    "decimal_12dp": "0.150150000000",
+    "fraction": "3003/20000"
+   },
+   "bound": "15/100",
+   "excess": {
+    "decimal_12dp": "-0.150100000000",
+    "fraction": "-1501/10000"
+   },
+   "level": 5,
+   "pooled_figure": {
+    "decimal_12dp": "-0.150100000000",
+    "fraction": "-1501/10000"
+   },
+   "reading": "eff",
+   "rounding_uncertainty": {
+    "decimal_12dp": "0.000050000000",
+    "fraction": "1/20000"
+   },
+   "rule": "e_neg",
+   "shape": null,
+   "source": "aud",
+   "unit": "R1a"
+  }
+ },
+ {
+  "all_rows_over_the_bound": [
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.400050000000",
+     "fraction": "8001/20000"
+    },
+    "excess": {
+     "decimal_12dp": "0.400000000000",
+     "fraction": "2/5"
+    },
+    "level": 2,
+    "reading": "eff",
+    "rule": "ccw_as_cw",
+    "shape": null,
+    "source": "aud",
+    "unit": "R1b"
+   }
+  ],
+  "evaluation": "R1",
+  "lineage": "R1.gamma_r6",
+  "reason": {
+   "abs_excess_plus_uncertainty": {
+    "decimal_12dp": "0.400050000000",
+    "fraction": "8001/20000"
+   },
+   "bound": "15/100",
+   "excess": {
+    "decimal_12dp": "0.400000000000",
+    "fraction": "2/5"
+   },
+   "level": 2,
+   "pooled_figure": {
+    "decimal_12dp": "0.400000000000",
+    "fraction": "2/5"
+   },
+   "reading": "eff",
+   "rounding_uncertainty": {
+    "decimal_12dp": "0.000050000000",
+    "fraction": "1/20000"
+   },
+   "rule": "ccw_as_cw",
+   "shape": null,
+   "source": "aud",
+   "unit": "R1b"
+  }
+ },
+ {
+  "all_rows_over_the_bound": [
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.200550000000",
+     "fraction": "4011/20000"
+    },
+    "excess": {
+     "decimal_12dp": "0.200000000000",
+     "fraction": "1/5"
+    },
+    "level": 0,
+    "reading": "eff",
+    "rule": "abstain_as_no",
+    "shape": null,
+    "source": "new",
+    "unit": "R1c"
+   }
+  ],
+  "evaluation": "R1",
+  "lineage": "R1.kappa_r4",
+  "reason": {
+   "abs_excess_plus_uncertainty": {
+    "decimal_12dp": "0.200550000000",
+    "fraction": "4011/20000"
+   },
+   "bound": "15/100",
+   "excess": {
+    "decimal_12dp": "0.200000000000",
+    "fraction": "1/5"
+   },
+   "level": 0,
+   "pooled_figure": {
+    "decimal_12dp": "0.200000000000",
+    "fraction": "1/5"
+   },
+   "reading": "eff",
+   "rounding_uncertainty": {
+    "decimal_12dp": "0.000550000000",
+    "fraction": "11/20000"
+   },
+   "rule": "abstain_as_no",
+   "shape": null,
+   "source": "new",
+   "unit": "R1c"
+  }
+ },
+ {
+  "all_rows_over_the_bound": [
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.150550000000",
+     "fraction": "3011/20000"
+    },
+    "excess": {
+     "decimal_12dp": "0.150000000000",
+     "fraction": "3/20"
+    },
+    "level": 4,
+    "reading": "eff",
+    "rule": "mu_r",
+    "shape": null,
+    "source": "new",
+    "unit": "R1c"
+   }
+  ],
+  "evaluation": "R1",
+  "lineage": "R1.mu_r4",
+  "reason": {
+   "abs_excess_plus_uncertainty": {
+    "decimal_12dp": "0.150550000000",
+    "fraction": "3011/20000"
+   },
+   "bound": "15/100",
+   "excess": {
+    "decimal_12dp": "0.150000000000",
+    "fraction": "3/20"
+   },
+   "level": 4,
+   "pooled_figure": {
+    "decimal_12dp": "0.150000000000",
+    "fraction": "3/20"
+   },
+   "reading": "eff",
+   "rounding_uncertainty": {
+    "decimal_12dp": "0.000550000000",
+    "fraction": "11/20000"
+   },
+   "rule": "mu_r",
+   "shape": null,
+   "source": "new",
+   "unit": "R1c"
+  }
+ },
+ {
+  "all_rows_over_the_bound": [
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.200050000000",
+     "fraction": "4001/20000"
+    },
+    "excess": {
+     "decimal_12dp": "0.200000000000",
+     "fraction": "1/5"
+    },
+    "level": 6,
+    "reading": "anti",
+    "rule": "nu_anti",
+    "shape": null,
+    "source": "aud",
+    "unit": "R1a"
+   }
+  ],
+  "evaluation": "R1",
+  "lineage": "R1.nu_r4",
+  "reason": {
+   "abs_excess_plus_uncertainty": {
+    "decimal_12dp": "0.200050000000",
+    "fraction": "4001/20000"
+   },
+   "bound": "15/100",
+   "excess": {
+    "decimal_12dp": "0.200000000000",
+    "fraction": "1/5"
+   },
+   "level": 6,
+   "pooled_figure": {
+    "decimal_12dp": "0.200000000000",
+    "fraction": "1/5"
+   },
+   "reading": "anti",
+   "rounding_uncertainty": {
+    "decimal_12dp": "0.000050000000",
+    "fraction": "1/20000"
+   },
+   "rule": "nu_anti",
+   "shape": null,
+   "source": "aud",
+   "unit": "R1a"
+  }
+ },
+ {
+  "all_rows_over_the_bound": [
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.150050000000",
+     "fraction": "3001/20000"
+    },
+    "excess": {
+     "decimal_12dp": "0.150000000000",
+     "fraction": "3/20"
+    },
+    "level": 1,
+    "reading": "eff",
+    "rule": "z_rule",
+    "shape": null,
+    "source": "impl",
+    "unit": "R1a"
+   }
+  ],
+  "evaluation": "R1",
+  "lineage": "R1.zeta_r4",
+  "reason": {
+   "abs_excess_plus_uncertainty": {
+    "decimal_12dp": "0.150050000000",
+    "fraction": "3001/20000"
+   },
+   "bound": "15/100",
+   "excess": {
+    "decimal_12dp": "0.150000000000",
+    "fraction": "3/20"
+   },
+   "level": 1,
+   "pooled_figure": {
+    "decimal_12dp": "0.150000000000",
+    "fraction": "3/20"
+   },
+   "reading": "eff",
+   "rounding_uncertainty": {
+    "decimal_12dp": "0.000050000000",
+    "fraction": "1/20000"
+   },
+   "rule": "z_rule",
+   "shape": null,
+   "source": "impl",
+   "unit": "R1a"
+  }
+ },
+ {
+  "all_rows_over_the_bound": [
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.158333333333",
+     "fraction": "19/120"
+    },
+    "excess": {
+     "decimal_12dp": "0.158333333333",
+     "fraction": "19/120"
+    },
+    "level": 2,
+    "reading": "k_over_n",
+    "rule": "[impl] x",
+    "shape": null,
+    "source": "r2a",
+    "unit": "R2a"
+   }
+  ],
+  "evaluation": "R2",
+  "lineage": "R2.b_open",
+  "reason": {
+   "abs_excess_plus_uncertainty": {
+    "decimal_12dp": "0.158333333333",
+    "fraction": "19/120"
+   },
+   "bound": "15/100",
+   "excess": {
+    "decimal_12dp": "0.158333333333",
+    "fraction": "19/120"
+   },
+   "level": 2,
+   "pooled_figure": {
+    "decimal_12dp": "0.158333333333",
+    "fraction": "19/120"
+   },
+   "reading": "k_over_n",
+   "rounding_uncertainty": {
+    "decimal_12dp": "0.000000000000",
+    "fraction": "0/1"
+   },
+   "rule": "[impl] x",
+   "shape": null,
+   "source": "r2a",
+   "unit": "R2a"
+  }
+ },
+ {
+  "all_rows_over_the_bound": [
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "excess": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "level": 4,
+    "reading": "k_over_n",
+    "rule": "[NEW] (partial) largest modulus: try r, r+m, r+2m against the other congruences, else r",
+    "shape": null,
+    "source": "f_rules_new",
+    "unit": "R2b"
+   }
+  ],
+  "evaluation": "R2",
+  "lineage": "R2.count_divisible",
+  "reason": {
+   "abs_excess_plus_uncertainty": {
+    "decimal_12dp": "1.000000000000",
+    "fraction": "1/1"
+   },
+   "bound": "15/100",
+   "excess": {
+    "decimal_12dp": "1.000000000000",
+    "fraction": "1/1"
+   },
+   "level": 4,
+   "pooled_figure": {
+    "decimal_12dp": "1.000000000000",
+    "fraction": "1/1"
+   },
+   "reading": "k_over_n",
+   "rounding_uncertainty": {
+    "decimal_12dp": "0.000000000000",
+    "fraction": "0/1"
+   },
+   "rule": "[NEW] (partial) largest modulus: try r, r+m, r+2m against the other congruences, else r",
+   "shape": null,
+   "source": "f_rules_new",
+   "unit": "R2b"
+  }
+ },
+ {
+  "all_rows_over_the_bound": [
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "excess": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "level": 3,
+    "reading": "k_over_n",
+    "rule": "[NEW] (P) misread: each distinct value counted once (the wording now excludes it)",
+    "shape": null,
+    "source": "f_rules_new",
+    "unit": "R2b"
+   }
+  ],
+  "evaluation": "R2",
+  "lineage": "R2.crt_smallest",
+  "reason": {
+   "abs_excess_plus_uncertainty": {
+    "decimal_12dp": "1.000000000000",
+    "fraction": "1/1"
+   },
+   "bound": "15/100",
+   "excess": {
+    "decimal_12dp": "1.000000000000",
+    "fraction": "1/1"
+   },
+   "level": 3,
+   "pooled_figure": {
+    "decimal_12dp": "1.000000000000",
+    "fraction": "1/1"
+   },
+   "reading": "k_over_n",
+   "rounding_uncertainty": {
+    "decimal_12dp": "0.000000000000",
+    "fraction": "0/1"
+   },
+   "rule": "[NEW] (P) misread: each distinct value counted once (the wording now excludes it)",
+   "shape": null,
+   "source": "f_rules_new",
+   "unit": "R2b"
+  }
+ },
+ {
+  "all_rows_over_the_bound": [
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.158333333333",
+     "fraction": "19/120"
+    },
+    "excess": {
+     "decimal_12dp": "-0.158333333333",
+     "fraction": "-19/120"
+    },
+    "level": 2,
+    "reading": "k_over_napp",
+    "rule": "[mine] yn lo2",
+    "shape": null,
+    "source": "r2a",
+    "unit": "R2a"
+   }
+  ],
+  "evaluation": "R2",
+  "lineage": "R2.d_yn",
+  "reason": {
+   "abs_excess_plus_uncertainty": {
+    "decimal_12dp": "0.158333333333",
+    "fraction": "19/120"
+   },
+   "bound": "15/100",
+   "excess": {
+    "decimal_12dp": "-0.158333333333",
+    "fraction": "-19/120"
+   },
+   "level": 2,
+   "pooled_figure": {
+    "decimal_12dp": "0.341666666667",
+    "fraction": "41/120"
+   },
+   "reading": "k_over_napp",
+   "rounding_uncertainty": {
+    "decimal_12dp": "0.000000000000",
+    "fraction": "0/1"
+   },
+   "rule": "[mine] yn lo2",
+   "shape": null,
+   "source": "r2a",
+   "unit": "R2a"
+  }
+ },
+ {
+  "all_rows_over_the_bound": [
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.250000000000",
+     "fraction": "1/4"
+    },
+    "excess": {
+     "decimal_12dp": "0.250000000000",
+     "fraction": "1/4"
+    },
+    "level": 2,
+    "reading": "k_over_napp",
+    "rule": "[mine] [cond] foo",
+    "shape": null,
+    "source": "f_rules",
+    "unit": "R2b"
+   }
+  ],
+  "evaluation": "R2",
+  "lineage": "R2.f_cond",
+  "reason": {
+   "abs_excess_plus_uncertainty": {
+    "decimal_12dp": "0.250000000000",
+    "fraction": "1/4"
+   },
+   "bound": "15/100",
+   "excess": {
+    "decimal_12dp": "0.250000000000",
+    "fraction": "1/4"
+   },
+   "level": 2,
+   "pooled_figure": {
+    "decimal_12dp": "0.250000000000",
+    "fraction": "1/4"
+   },
+   "reading": "k_over_napp",
+   "rounding_uncertainty": {
+    "decimal_12dp": "0.000000000000",
+    "fraction": "0/1"
+   },
+   "rule": "[mine] [cond] foo",
+   "shape": null,
+   "source": "f_rules",
+   "unit": "R2b"
+  }
+ },
+ {
+  "all_rows_over_the_bound": [
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.200000000000",
+     "fraction": "1/5"
+    },
+    "excess": {
+     "decimal_12dp": "0.200000000000",
+     "fraction": "1/5"
+    },
+    "level": 2,
+    "reading": "k_over_n",
+    "rule": "[a3] removal by deleting the minimum and keeping the order of the rest",
+    "shape": "removals=1",
+    "source": "f_rules",
+    "unit": "R2b"
+   }
+  ],
+  "evaluation": "R2",
+  "lineage": "R2.h_sd",
+  "reason": {
+   "abs_excess_plus_uncertainty": {
+    "decimal_12dp": "0.200000000000",
+    "fraction": "1/5"
+   },
+   "bound": "15/100",
+   "excess": {
+    "decimal_12dp": "0.200000000000",
+    "fraction": "1/5"
+   },
+   "level": 2,
+   "pooled_figure": {
+    "decimal_12dp": "0.200000000000",
+    "fraction": "1/5"
+   },
+   "reading": "k_over_n",
+   "rounding_uncertainty": {
+    "decimal_12dp": "0.000000000000",
+    "fraction": "0/1"
+   },
+   "rule": "[a3] removal by deleting the minimum and keeping the order of the rest",
+   "shape": "removals=1",
+   "source": "f_rules",
+   "unit": "R2b"
+  }
+ },
+ {
+  "all_rows_over_the_bound": [
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.200000000000",
+     "fraction": "1/5"
+    },
+    "excess": {
+     "decimal_12dp": "0.200000000000",
+     "fraction": "1/5"
+    },
+    "level": 2,
+    "reading": "k_over_n",
+    "rule": "[a3] removal by deleting the minimum and keeping the order of the rest",
+    "shape": "-",
+    "source": "f_rules",
+    "unit": "R2b"
+   }
+  ],
+  "evaluation": "R2",
+  "lineage": "R2.i_sdsum",
+  "reason": {
+   "abs_excess_plus_uncertainty": {
+    "decimal_12dp": "0.200000000000",
+    "fraction": "1/5"
+   },
+   "bound": "15/100",
+   "excess": {
+    "decimal_12dp": "0.200000000000",
+    "fraction": "1/5"
+   },
+   "level": 2,
+   "pooled_figure": {
+    "decimal_12dp": "0.200000000000",
+    "fraction": "1/5"
+   },
+   "reading": "k_over_n",
+   "rounding_uncertainty": {
+    "decimal_12dp": "0.000000000000",
+    "fraction": "0/1"
+   },
+   "rule": "[a3] removal by deleting the minimum and keeping the order of the rest",
+   "shape": "-",
+   "source": "f_rules",
+   "unit": "R2b"
+  }
+ },
+ {
+  "all_rows_over_the_bound": [
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "excess": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "level": 1,
+    "reading": "k_over_n",
+    "rule": "[a3] only the first rule",
+    "shape": null,
+    "source": "r2a",
+    "unit": "R2a"
+   }
+  ],
+  "evaluation": "R2",
+  "lineage": "R2.k_klass2",
+  "reason": {
+   "abs_excess_plus_uncertainty": {
+    "decimal_12dp": "1.000000000000",
+    "fraction": "1/1"
+   },
+   "bound": "15/100",
+   "excess": {
+    "decimal_12dp": "1.000000000000",
+    "fraction": "1/1"
+   },
+   "level": 1,
+   "pooled_figure": {
+    "decimal_12dp": "1.000000000000",
+    "fraction": "1/1"
+   },
+   "reading": "k_over_n",
+   "rounding_uncertainty": {
+    "decimal_12dp": "0.000000000000",
+    "fraction": "0/1"
+   },
+   "rule": "[a3] only the first rule",
+   "shape": null,
+   "source": "r2a",
+   "unit": "R2a"
+  }
+ },
+ {
+  "all_rows_over_the_bound": [
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "excess": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "level": 1,
+    "reading": "k_over_n",
+    "rule": "[mine] t mod 10 applications",
+    "shape": null,
+    "source": "r2a",
+    "unit": "R2a"
+   }
+  ],
+  "evaluation": "R2",
+  "lineage": "R2.l_construct",
+  "reason": {
+   "abs_excess_plus_uncertainty": {
+    "decimal_12dp": "1.000000000000",
+    "fraction": "1/1"
+   },
+   "bound": "15/100",
+   "excess": {
+    "decimal_12dp": "1.000000000000",
+    "fraction": "1/1"
+   },
+   "level": 1,
+   "pooled_figure": {
+    "decimal_12dp": "1.000000000000",
+    "fraction": "1/1"
+   },
+   "reading": "k_over_n",
+   "rounding_uncertainty": {
+    "decimal_12dp": "0.000000000000",
+    "fraction": "0/1"
+   },
+   "rule": "[mine] t mod 10 applications",
+   "shape": null,
+   "source": "r2a",
+   "unit": "R2a"
+  }
+ },
+ {
+  "all_rows_over_the_bound": [
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "excess": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "level": 3,
+    "reading": "k_over_n",
+    "rule": "[NEW] (P) misread: each distinct value counted once (the wording now excludes it)",
+    "shape": null,
+    "source": "f_rules_new",
+    "unit": "R2b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "excess": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "level": 4,
+    "reading": "k_over_n",
+    "rule": "[NEW] (partial) largest modulus: try r, r+m, r+2m against the other congruences, else r",
+    "shape": null,
+    "source": "f_rules_new",
+    "unit": "R2b"
+   }
+  ],
+  "evaluation": "R2",
+  "lineage": "R2.m_new",
+  "reason": {
+   "abs_excess_plus_uncertainty": {
+    "decimal_12dp": "1.000000000000",
+    "fraction": "1/1"
+   },
+   "bound": "15/100",
+   "excess": {
+    "decimal_12dp": "1.000000000000",
+    "fraction": "1/1"
+   },
+   "level": 3,
+   "pooled_figure": {
+    "decimal_12dp": "1.000000000000",
+    "fraction": "1/1"
+   },
+   "reading": "k_over_n",
+   "rounding_uncertainty": {
+    "decimal_12dp": "0.000000000000",
+    "fraction": "0/1"
+   },
+   "rule": "[NEW] (P) misread: each distinct value counted once (the wording now excludes it)",
+   "shape": null,
+   "source": "f_rules_new",
+   "unit": "R2b"
+  }
+ }
+]
