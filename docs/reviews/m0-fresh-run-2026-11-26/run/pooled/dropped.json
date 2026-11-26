@@ -1,0 +1,4611 @@
+[
+ {
+  "all_rows_over_the_bound": [
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.277833333333",
+     "fraction": "1667/6000"
+    },
+    "excess": {
+     "decimal_12dp": "0.277333333333",
+     "fraction": "104/375"
+    },
+    "level": 0,
+    "reading": "rate",
+    "rule": "EFF_F",
+    "shape": null,
+    "source": "s5",
+    "unit": "C1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.249166666667",
+     "fraction": "299/1200"
+    },
+    "excess": {
+     "decimal_12dp": "0.248666666667",
+     "fraction": "373/1500"
+    },
+    "level": 1,
+    "reading": "rate",
+    "rule": "EFF_F",
+    "shape": null,
+    "source": "s5",
+    "unit": "C1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.224166666667",
+     "fraction": "269/1200"
+    },
+    "excess": {
+     "decimal_12dp": "0.223666666667",
+     "fraction": "671/3000"
+    },
+    "level": 2,
+    "reading": "rate",
+    "rule": "EFF_F",
+    "shape": null,
+    "source": "s5",
+    "unit": "C1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.202500000000",
+     "fraction": "81/400"
+    },
+    "excess": {
+     "decimal_12dp": "0.202000000000",
+     "fraction": "101/500"
+    },
+    "level": 3,
+    "reading": "rate",
+    "rule": "EFF_F",
+    "shape": null,
+    "source": "s5",
+    "unit": "C1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.186833333333",
+     "fraction": "1121/6000"
+    },
+    "excess": {
+     "decimal_12dp": "0.186333333333",
+     "fraction": "559/3000"
+    },
+    "level": 4,
+    "reading": "rate",
+    "rule": "EFF_F",
+    "shape": null,
+    "source": "s5",
+    "unit": "C1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.168833333333",
+     "fraction": "1013/6000"
+    },
+    "excess": {
+     "decimal_12dp": "0.168333333333",
+     "fraction": "101/600"
+    },
+    "level": 5,
+    "reading": "rate",
+    "rule": "EFF_F",
+    "shape": null,
+    "source": "s5",
+    "unit": "C1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.163833333333",
+     "fraction": "983/6000"
+    },
+    "excess": {
+     "decimal_12dp": "0.163333333333",
+     "fraction": "49/300"
+    },
+    "level": 6,
+    "reading": "rate",
+    "rule": "EFF_F",
+    "shape": null,
+    "source": "s5",
+    "unit": "C1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.282166666667",
+     "fraction": "1693/6000"
+    },
+    "excess": {
+     "decimal_12dp": "0.281666666667",
+     "fraction": "169/600"
+    },
+    "level": 0,
+    "reading": "rate",
+    "rule": "EFF_F",
+    "shape": null,
+    "source": "s5",
+    "unit": "C1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.253166666667",
+     "fraction": "1519/6000"
+    },
+    "excess": {
+     "decimal_12dp": "0.252666666667",
+     "fraction": "379/1500"
+    },
+    "level": 1,
+    "reading": "rate",
+    "rule": "EFF_F",
+    "shape": null,
+    "source": "s5",
+    "unit": "C1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.212833333333",
+     "fraction": "1277/6000"
+    },
+    "excess": {
+     "decimal_12dp": "0.212333333333",
+     "fraction": "637/3000"
+    },
+    "level": 2,
+    "reading": "rate",
+    "rule": "EFF_F",
+    "shape": null,
+    "source": "s5",
+    "unit": "C1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.205166666667",
+     "fraction": "1231/6000"
+    },
+    "excess": {
+     "decimal_12dp": "0.204666666667",
+     "fraction": "307/1500"
+    },
+    "level": 3,
+    "reading": "rate",
+    "rule": "EFF_F",
+    "shape": null,
+    "source": "s5",
+    "unit": "C1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.187166666667",
+     "fraction": "1123/6000"
+    },
+    "excess": {
+     "decimal_12dp": "0.186666666667",
+     "fraction": "14/75"
+    },
+    "level": 4,
+    "reading": "rate",
+    "rule": "EFF_F",
+    "shape": null,
+    "source": "s5",
+    "unit": "C1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.171166666667",
+     "fraction": "1027/6000"
+    },
+    "excess": {
+     "decimal_12dp": "0.170666666667",
+     "fraction": "64/375"
+    },
+    "level": 5,
+    "reading": "rate",
+    "rule": "EFF_F",
+    "shape": null,
+    "source": "s5",
+    "unit": "C1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.167166666667",
+     "fraction": "1003/6000"
+    },
+    "excess": {
+     "decimal_12dp": "0.166666666667",
+     "fraction": "1/6"
+    },
+    "level": 6,
+    "reading": "rate",
+    "rule": "EFF_F",
+    "shape": null,
+    "source": "s5",
+    "unit": "C1c"
+   }
+  ],
+  "evaluation": "C1",
+  "lineage": "C1.circle_elimination_r2",
+  "reason": {
+   "abs_excess_plus_uncertainty": {
+    "decimal_12dp": "0.282166666667",
+    "fraction": "1693/6000"
+   },
+   "bound": "15/100",
+   "excess": {
+    "decimal_12dp": "0.281666666667",
+    "fraction": "169/600"
+   },
+   "level": 0,
+   "pooled_figure": {
+    "decimal_12dp": "0.281666666667",
+    "fraction": "169/600"
+   },
+   "reading": "rate",
+   "rounding_uncertainty": {
+    "decimal_12dp": "0.000500000000",
+    "fraction": "1/2000"
+   },
+   "rule": "EFF_F",
+   "shape": null,
+   "source": "s5",
+   "unit": "C1c"
+  }
+ },
+ {
+  "all_rows_over_the_bound": [
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.225500000000",
+     "fraction": "451/2000"
+    },
+    "excess": {
+     "decimal_12dp": "0.225000000000",
+     "fraction": "9/40"
+    },
+    "level": 0,
+    "reading": "rate",
+    "rule": "EFF_F",
+    "shape": null,
+    "source": "s5",
+    "unit": "C1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.150833333333",
+     "fraction": "181/1200"
+    },
+    "excess": {
+     "decimal_12dp": "0.150333333333",
+     "fraction": "451/3000"
+    },
+    "level": 1,
+    "reading": "rate",
+    "rule": "EFF_F",
+    "shape": null,
+    "source": "s5",
+    "unit": "C1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.237833333333",
+     "fraction": "1427/6000"
+    },
+    "excess": {
+     "decimal_12dp": "0.237333333333",
+     "fraction": "89/375"
+    },
+    "level": 0,
+    "reading": "rate",
+    "rule": "EFF_F",
+    "shape": null,
+    "source": "s5",
+    "unit": "C1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.150500000000",
+     "fraction": "301/2000"
+    },
+    "excess": {
+     "decimal_12dp": "0.150000000000",
+     "fraction": "3/20"
+    },
+    "level": 1,
+    "reading": "rate",
+    "rule": "EFF_F",
+    "shape": null,
+    "source": "s5",
+    "unit": "C1c"
+   }
+  ],
+  "evaluation": "C1",
+  "lineage": "C1.cond_chain_f3",
+  "reason": {
+   "abs_excess_plus_uncertainty": {
+    "decimal_12dp": "0.237833333333",
+    "fraction": "1427/6000"
+   },
+   "bound": "15/100",
+   "excess": {
+    "decimal_12dp": "0.237333333333",
+    "fraction": "89/375"
+   },
+   "level": 0,
+   "pooled_figure": {
+    "decimal_12dp": "0.237333333333",
+    "fraction": "89/375"
+   },
+   "reading": "rate",
+   "rounding_uncertainty": {
+    "decimal_12dp": "0.000500000000",
+    "fraction": "1/2000"
+   },
+   "rule": "EFF_F",
+   "shape": null,
+   "source": "s5",
+   "unit": "C1c"
+  }
+ },
+ {
+  "all_rows_over_the_bound": [
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.678500000000",
+     "fraction": "1357/2000"
+    },
+    "excess": {
+     "decimal_12dp": "0.678000000000",
+     "fraction": "339/500"
+    },
+    "level": 2,
+    "reading": "rate",
+    "rule": "EFF_F",
+    "shape": null,
+    "source": "s5",
+    "unit": "C1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.591166666667",
+     "fraction": "3547/6000"
+    },
+    "excess": {
+     "decimal_12dp": "0.590666666667",
+     "fraction": "443/750"
+    },
+    "level": 3,
+    "reading": "rate",
+    "rule": "EFF_F",
+    "shape": null,
+    "source": "s5",
+    "unit": "C1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.592833333333",
+     "fraction": "3557/6000"
+    },
+    "excess": {
+     "decimal_12dp": "0.592333333333",
+     "fraction": "1777/3000"
+    },
+    "level": 4,
+    "reading": "rate",
+    "rule": "EFF_F",
+    "shape": null,
+    "source": "s5",
+    "unit": "C1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.512166666667",
+     "fraction": "3073/6000"
+    },
+    "excess": {
+     "decimal_12dp": "0.511666666667",
+     "fraction": "307/600"
+    },
+    "level": 5,
+    "reading": "rate",
+    "rule": "EFF_F",
+    "shape": null,
+    "source": "s5",
+    "unit": "C1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.530166666667",
+     "fraction": "3181/6000"
+    },
+    "excess": {
+     "decimal_12dp": "0.529666666667",
+     "fraction": "1589/3000"
+    },
+    "level": 6,
+    "reading": "rate",
+    "rule": "EFF_F",
+    "shape": null,
+    "source": "s5",
+    "unit": "C1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.432716666667",
+     "fraction": "25963/60000"
+    },
+    "excess": {
+     "decimal_12dp": "0.432666666667",
+     "fraction": "649/1500"
+    },
+    "level": 0,
+    "reading": "rate",
+    "rule": "S.always_high_branch",
+    "shape": null,
+    "source": "f5",
+    "unit": "C1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.450550000000",
+     "fraction": "9011/20000"
+    },
+    "excess": {
+     "decimal_12dp": "0.450500000000",
+     "fraction": "901/2000"
+    },
+    "level": 1,
+    "reading": "rate",
+    "rule": "S.always_high_branch",
+    "shape": null,
+    "source": "f5",
+    "unit": "C1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.473216666667",
+     "fraction": "28393/60000"
+    },
+    "excess": {
+     "decimal_12dp": "0.473166666667",
+     "fraction": "2839/6000"
+    },
+    "level": 2,
+    "reading": "rate",
+    "rule": "S.always_high_branch",
+    "shape": null,
+    "source": "f5",
+    "unit": "C1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.356883333333",
+     "fraction": "21413/60000"
+    },
+    "excess": {
+     "decimal_12dp": "0.356833333333",
+     "fraction": "2141/6000"
+    },
+    "level": 3,
+    "reading": "rate",
+    "rule": "S.always_high_branch",
+    "shape": null,
+    "source": "f5",
+    "unit": "C1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.363383333333",
+     "fraction": "21803/60000"
+    },
+    "excess": {
+     "decimal_12dp": "0.363333333333",
+     "fraction": "109/300"
+    },
+    "level": 4,
+    "reading": "rate",
+    "rule": "S.always_high_branch",
+    "shape": null,
+    "source": "f5",
+    "unit": "C1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.295383333333",
+     "fraction": "17723/60000"
+    },
+    "excess": {
+     "decimal_12dp": "0.295333333333",
+     "fraction": "443/1500"
+    },
+    "level": 5,
+    "reading": "rate",
+    "rule": "S.always_high_branch",
+    "shape": null,
+    "source": "f5",
+    "unit": "C1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.304883333333",
+     "fraction": "18293/60000"
+    },
+    "excess": {
+     "decimal_12dp": "0.304833333333",
+     "fraction": "1829/6000"
+    },
+    "level": 6,
+    "reading": "rate",
+    "rule": "S.always_high_branch",
+    "shape": null,
+    "source": "f5",
+    "unit": "C1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.432716666667",
+     "fraction": "25963/60000"
+    },
+    "excess": {
+     "decimal_12dp": "0.432666666667",
+     "fraction": "649/1500"
+    },
+    "level": 0,
+    "reading": "rate",
+    "rule": "S.always_high_branch",
+    "shape": null,
+    "source": "f5b",
+    "unit": "C1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.450550000000",
+     "fraction": "9011/20000"
+    },
+    "excess": {
+     "decimal_12dp": "0.450500000000",
+     "fraction": "901/2000"
+    },
+    "level": 1,
+    "reading": "rate",
+    "rule": "S.always_high_branch",
+    "shape": null,
+    "source": "f5b",
+    "unit": "C1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.473216666667",
+     "fraction": "28393/60000"
+    },
+    "excess": {
+     "decimal_12dp": "0.473166666667",
+     "fraction": "2839/6000"
+    },
+    "level": 2,
+    "reading": "rate",
+    "rule": "S.always_high_branch",
+    "shape": null,
+    "source": "f5b",
+    "unit": "C1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.356883333333",
+     "fraction": "21413/60000"
+    },
+    "excess": {
+     "decimal_12dp": "0.356833333333",
+     "fraction": "2141/6000"
+    },
+    "level": 3,
+    "reading": "rate",
+    "rule": "S.always_high_branch",
+    "shape": null,
+    "source": "f5b",
+    "unit": "C1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.363383333333",
+     "fraction": "21803/60000"
+    },
+    "excess": {
+     "decimal_12dp": "0.363333333333",
+     "fraction": "109/300"
+    },
+    "level": 4,
+    "reading": "rate",
+    "rule": "S.always_high_branch",
+    "shape": null,
+    "source": "f5b",
+    "unit": "C1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.295383333333",
+     "fraction": "17723/60000"
+    },
+    "excess": {
+     "decimal_12dp": "0.295333333333",
+     "fraction": "443/1500"
+    },
+    "level": 5,
+    "reading": "rate",
+    "rule": "S.always_high_branch",
+    "shape": null,
+    "source": "f5b",
+    "unit": "C1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.304883333333",
+     "fraction": "18293/60000"
+    },
+    "excess": {
+     "decimal_12dp": "0.304833333333",
+     "fraction": "1829/6000"
+    },
+    "level": 6,
+    "reading": "rate",
+    "rule": "S.always_high_branch",
+    "shape": null,
+    "source": "f5b",
+    "unit": "C1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.677500000000",
+     "fraction": "271/400"
+    },
+    "excess": {
+     "decimal_12dp": "0.677000000000",
+     "fraction": "677/1000"
+    },
+    "level": 2,
+    "reading": "rate",
+    "rule": "EFF_F",
+    "shape": null,
+    "source": "s5",
+    "unit": "C1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.578833333333",
+     "fraction": "3473/6000"
+    },
+    "excess": {
+     "decimal_12dp": "0.578333333333",
+     "fraction": "347/600"
+    },
+    "level": 3,
+    "reading": "rate",
+    "rule": "EFF_F",
+    "shape": null,
+    "source": "s5",
+    "unit": "C1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.585500000000",
+     "fraction": "1171/2000"
+    },
+    "excess": {
+     "decimal_12dp": "0.585000000000",
+     "fraction": "117/200"
+    },
+    "level": 4,
+    "reading": "rate",
+    "rule": "EFF_F",
+    "shape": null,
+    "source": "s5",
+    "unit": "C1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.507833333333",
+     "fraction": "3047/6000"
+    },
+    "excess": {
+     "decimal_12dp": "0.507333333333",
+     "fraction": "761/1500"
+    },
+    "level": 5,
+    "reading": "rate",
+    "rule": "EFF_F",
+    "shape": null,
+    "source": "s5",
+    "unit": "C1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.531166666667",
+     "fraction": "3187/6000"
+    },
+    "excess": {
+     "decimal_12dp": "0.530666666667",
+     "fraction": "199/375"
+    },
+    "level": 6,
+    "reading": "rate",
+    "rule": "EFF_F",
+    "shape": null,
+    "source": "s5",
+    "unit": "C1c"
+   }
+  ],
+  "evaluation": "C1",
+  "lineage": "C1.func_branch_f4",
+  "reason": {
+   "abs_excess_plus_uncertainty": {
+    "decimal_12dp": "0.678500000000",
+    "fraction": "1357/2000"
+   },
+   "bound": "15/100",
+   "excess": {
+    "decimal_12dp": "0.678000000000",
+    "fraction": "339/500"
+   },
+   "level": 2,
+   "pooled_figure": {
+    "decimal_12dp": "0.678000000000",
+    "fraction": "339/500"
+   },
+   "reading": "rate",
+   "rounding_uncertainty": {
+    "decimal_12dp": "0.000500000000",
+    "fraction": "1/2000"
+   },
+   "rule": "EFF_F",
+   "shape": null,
+   "source": "s5",
+   "unit": "C1a"
+  }
+ },
+ {
+  "all_rows_over_the_bound": [
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.153500000000",
+     "fraction": "307/2000"
+    },
+    "excess": {
+     "decimal_12dp": "0.153000000000",
+     "fraction": "153/1000"
+    },
+    "level": 6,
+    "reading": "rate",
+    "rule": "EFF_F",
+    "shape": null,
+    "source": "s5",
+    "unit": "C1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.151166666667",
+     "fraction": "907/6000"
+    },
+    "excess": {
+     "decimal_12dp": "0.150666666667",
+     "fraction": "113/750"
+    },
+    "level": 6,
+    "reading": "rate",
+    "rule": "EFF_F",
+    "shape": null,
+    "source": "s5",
+    "unit": "C1c"
+   }
+  ],
+  "evaluation": "C1",
+  "lineage": "C1.shared_lists_f3",
+  "reason": {
+   "abs_excess_plus_uncertainty": {
+    "decimal_12dp": "0.153500000000",
+    "fraction": "307/2000"
+   },
+   "bound": "15/100",
+   "excess": {
+    "decimal_12dp": "0.153000000000",
+    "fraction": "153/1000"
+   },
+   "level": 6,
+   "pooled_figure": {
+    "decimal_12dp": "0.153000000000",
+    "fraction": "153/1000"
+   },
+   "reading": "rate",
+   "rounding_uncertainty": {
+    "decimal_12dp": "0.000500000000",
+    "fraction": "1/2000"
+   },
+   "rule": "EFF_F",
+   "shape": null,
+   "source": "s5",
+   "unit": "C1a"
+  }
+ },
+ {
+  "all_rows_over_the_bound": [
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.310500000000",
+     "fraction": "621/2000"
+    },
+    "excess": {
+     "decimal_12dp": "0.310000000000",
+     "fraction": "31/100"
+    },
+    "level": 0,
+    "reading": "rate",
+    "rule": "EFF_F",
+    "shape": null,
+    "source": "s5",
+    "unit": "C1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.180500000000",
+     "fraction": "361/2000"
+    },
+    "excess": {
+     "decimal_12dp": "0.180000000000",
+     "fraction": "9/50"
+    },
+    "level": 1,
+    "reading": "rate",
+    "rule": "EFF_F",
+    "shape": null,
+    "source": "s5",
+    "unit": "C1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.313833333333",
+     "fraction": "1883/6000"
+    },
+    "excess": {
+     "decimal_12dp": "0.313333333333",
+     "fraction": "47/150"
+    },
+    "level": 0,
+    "reading": "rate",
+    "rule": "EFF_F",
+    "shape": null,
+    "source": "s5",
+    "unit": "C1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.183833333333",
+     "fraction": "1103/6000"
+    },
+    "excess": {
+     "decimal_12dp": "0.183333333333",
+     "fraction": "11/60"
+    },
+    "level": 1,
+    "reading": "rate",
+    "rule": "EFF_F",
+    "shape": null,
+    "source": "s5",
+    "unit": "C1c"
+   }
+  ],
+  "evaluation": "C1",
+  "lineage": "C1.union_find_links_f3",
+  "reason": {
+   "abs_excess_plus_uncertainty": {
+    "decimal_12dp": "0.313833333333",
+    "fraction": "1883/6000"
+   },
+   "bound": "15/100",
+   "excess": {
+    "decimal_12dp": "0.313333333333",
+    "fraction": "47/150"
+   },
+   "level": 0,
+   "pooled_figure": {
+    "decimal_12dp": "0.313333333333",
+    "fraction": "47/150"
+   },
+   "reading": "rate",
+   "rounding_uncertainty": {
+    "decimal_12dp": "0.000500000000",
+    "fraction": "1/2000"
+   },
+   "rule": "EFF_F",
+   "shape": null,
+   "source": "s5",
+   "unit": "C1c"
+  }
+ },
+ {
+  "all_rows_over_the_bound": [
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.413766666667",
+     "fraction": "12413/30000"
+    },
+    "excess": {
+     "decimal_12dp": "0.413666666667",
+     "fraction": "1241/3000"
+    },
+    "level": 0,
+    "reading": "vs_base",
+    "rule": "a3:k_minus_remainder_ignores_exact_fit",
+    "shape": null,
+    "source": "a3",
+    "unit": "M1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.487483333333",
+     "fraction": "29249/60000"
+    },
+    "excess": {
+     "decimal_12dp": "0.487433333333",
+     "fraction": "14623/30000"
+    },
+    "level": 0,
+    "reading": "vs_chance",
+    "rule": "a3:k_minus_remainder_ignores_exact_fit",
+    "shape": null,
+    "source": "a3",
+    "unit": "M1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.419366666667",
+     "fraction": "12581/30000"
+    },
+    "excess": {
+     "decimal_12dp": "0.419266666667",
+     "fraction": "6289/15000"
+    },
+    "level": 1,
+    "reading": "vs_base",
+    "rule": "a3:k_minus_remainder_ignores_exact_fit",
+    "shape": null,
+    "source": "a3",
+    "unit": "M1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.485916666667",
+     "fraction": "5831/12000"
+    },
+    "excess": {
+     "decimal_12dp": "0.485866666667",
+     "fraction": "911/1875"
+    },
+    "level": 1,
+    "reading": "vs_chance",
+    "rule": "a3:k_minus_remainder_ignores_exact_fit",
+    "shape": null,
+    "source": "a3",
+    "unit": "M1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.409633333333",
+     "fraction": "12289/30000"
+    },
+    "excess": {
+     "decimal_12dp": "0.409533333333",
+     "fraction": "6143/15000"
+    },
+    "level": 2,
+    "reading": "vs_base",
+    "rule": "a3:k_minus_remainder_ignores_exact_fit",
+    "shape": null,
+    "source": "a3",
+    "unit": "M1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.476883333333",
+     "fraction": "28613/60000"
+    },
+    "excess": {
+     "decimal_12dp": "0.476833333333",
+     "fraction": "2861/6000"
+    },
+    "level": 2,
+    "reading": "vs_chance",
+    "rule": "a3:k_minus_remainder_ignores_exact_fit",
+    "shape": null,
+    "source": "a3",
+    "unit": "M1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.429666666667",
+     "fraction": "1289/3000"
+    },
+    "excess": {
+     "decimal_12dp": "0.429566666667",
+     "fraction": "12887/30000"
+    },
+    "level": 3,
+    "reading": "vs_base",
+    "rule": "a3:k_minus_remainder_ignores_exact_fit",
+    "shape": null,
+    "source": "a3",
+    "unit": "M1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.495050000000",
+     "fraction": "9901/20000"
+    },
+    "excess": {
+     "decimal_12dp": "0.495000000000",
+     "fraction": "99/200"
+    },
+    "level": 3,
+    "reading": "vs_chance",
+    "rule": "a3:k_minus_remainder_ignores_exact_fit",
+    "shape": null,
+    "source": "a3",
+    "unit": "M1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.419300000000",
+     "fraction": "4193/10000"
+    },
+    "excess": {
+     "decimal_12dp": "0.419200000000",
+     "fraction": "262/625"
+    },
+    "level": 4,
+    "reading": "vs_base",
+    "rule": "a3:k_minus_remainder_ignores_exact_fit",
+    "shape": null,
+    "source": "a3",
+    "unit": "M1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.480316666667",
+     "fraction": "28819/60000"
+    },
+    "excess": {
+     "decimal_12dp": "0.480266666667",
+     "fraction": "1801/3750"
+    },
+    "level": 4,
+    "reading": "vs_chance",
+    "rule": "a3:k_minus_remainder_ignores_exact_fit",
+    "shape": null,
+    "source": "a3",
+    "unit": "M1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.427366666667",
+     "fraction": "12821/30000"
+    },
+    "excess": {
+     "decimal_12dp": "0.427266666667",
+     "fraction": "6409/15000"
+    },
+    "level": 5,
+    "reading": "vs_base",
+    "rule": "a3:k_minus_remainder_ignores_exact_fit",
+    "shape": null,
+    "source": "a3",
+    "unit": "M1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.482516666667",
+     "fraction": "28951/60000"
+    },
+    "excess": {
+     "decimal_12dp": "0.482466666667",
+     "fraction": "7237/15000"
+    },
+    "level": 5,
+    "reading": "vs_chance",
+    "rule": "a3:k_minus_remainder_ignores_exact_fit",
+    "shape": null,
+    "source": "a3",
+    "unit": "M1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.426566666667",
+     "fraction": "12797/30000"
+    },
+    "excess": {
+     "decimal_12dp": "0.426466666667",
+     "fraction": "6397/15000"
+    },
+    "level": 6,
+    "reading": "vs_base",
+    "rule": "a3:k_minus_remainder_ignores_exact_fit",
+    "shape": null,
+    "source": "a3",
+    "unit": "M1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.485083333333",
+     "fraction": "5821/12000"
+    },
+    "excess": {
+     "decimal_12dp": "0.485033333333",
+     "fraction": "14551/30000"
+    },
+    "level": 6,
+    "reading": "vs_chance",
+    "rule": "a3:k_minus_remainder_ignores_exact_fit",
+    "shape": null,
+    "source": "a3",
+    "unit": "M1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.408676666667",
+     "fraction": "122603/300000"
+    },
+    "excess": {
+     "decimal_12dp": "0.408666666667",
+     "fraction": "613/1500"
+    },
+    "level": 0,
+    "reading": "vs_base",
+    "rule": "a3:k_minus_remainder_ignores_exact_fit",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.480755000000",
+     "fraction": "96151/200000"
+    },
+    "excess": {
+     "decimal_12dp": "0.480750000000",
+     "fraction": "1923/4000"
+    },
+    "level": 0,
+    "reading": "vs_chance",
+    "rule": "a3:k_minus_remainder_ignores_exact_fit",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.407093333333",
+     "fraction": "7633/18750"
+    },
+    "excess": {
+     "decimal_12dp": "0.407083333333",
+     "fraction": "977/2400"
+    },
+    "level": 1,
+    "reading": "vs_base",
+    "rule": "a3:k_minus_remainder_ignores_exact_fit",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.479671666667",
+     "fraction": "287803/600000"
+    },
+    "excess": {
+     "decimal_12dp": "0.479666666667",
+     "fraction": "1439/3000"
+    },
+    "level": 1,
+    "reading": "vs_chance",
+    "rule": "a3:k_minus_remainder_ignores_exact_fit",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.411260000000",
+     "fraction": "20563/50000"
+    },
+    "excess": {
+     "decimal_12dp": "0.411250000000",
+     "fraction": "329/800"
+    },
+    "level": 2,
+    "reading": "vs_base",
+    "rule": "a3:k_minus_remainder_ignores_exact_fit",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.479421666667",
+     "fraction": "287653/600000"
+    },
+    "excess": {
+     "decimal_12dp": "0.479416666667",
+     "fraction": "5753/12000"
+    },
+    "level": 2,
+    "reading": "vs_chance",
+    "rule": "a3:k_minus_remainder_ignores_exact_fit",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.417260000000",
+     "fraction": "20863/50000"
+    },
+    "excess": {
+     "decimal_12dp": "0.417250000000",
+     "fraction": "1669/4000"
+    },
+    "level": 3,
+    "reading": "vs_base",
+    "rule": "a3:k_minus_remainder_ignores_exact_fit",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.480255000000",
+     "fraction": "96051/200000"
+    },
+    "excess": {
+     "decimal_12dp": "0.480250000000",
+     "fraction": "1921/4000"
+    },
+    "level": 3,
+    "reading": "vs_chance",
+    "rule": "a3:k_minus_remainder_ignores_exact_fit",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.426760000000",
+     "fraction": "10669/25000"
+    },
+    "excess": {
+     "decimal_12dp": "0.426750000000",
+     "fraction": "1707/4000"
+    },
+    "level": 4,
+    "reading": "vs_base",
+    "rule": "a3:k_minus_remainder_ignores_exact_fit",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.488921666667",
+     "fraction": "293353/600000"
+    },
+    "excess": {
+     "decimal_12dp": "0.488916666667",
+     "fraction": "5867/12000"
+    },
+    "level": 4,
+    "reading": "vs_chance",
+    "rule": "a3:k_minus_remainder_ignores_exact_fit",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.418260000000",
+     "fraction": "20913/50000"
+    },
+    "excess": {
+     "decimal_12dp": "0.418250000000",
+     "fraction": "1673/4000"
+    },
+    "level": 5,
+    "reading": "vs_base",
+    "rule": "a3:k_minus_remainder_ignores_exact_fit",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.477921666667",
+     "fraction": "286753/600000"
+    },
+    "excess": {
+     "decimal_12dp": "0.477916666667",
+     "fraction": "1147/2400"
+    },
+    "level": 5,
+    "reading": "vs_chance",
+    "rule": "a3:k_minus_remainder_ignores_exact_fit",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.434760000000",
+     "fraction": "10869/25000"
+    },
+    "excess": {
+     "decimal_12dp": "0.434750000000",
+     "fraction": "1739/4000"
+    },
+    "level": 6,
+    "reading": "vs_base",
+    "rule": "a3:k_minus_remainder_ignores_exact_fit",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.484838333333",
+     "fraction": "290903/600000"
+    },
+    "excess": {
+     "decimal_12dp": "0.484833333333",
+     "fraction": "2909/6000"
+    },
+    "level": 6,
+    "reading": "vs_chance",
+    "rule": "a3:k_minus_remainder_ignores_exact_fit",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.411093333333",
+     "fraction": "3854/9375"
+    },
+    "excess": {
+     "decimal_12dp": "0.411083333333",
+     "fraction": "4933/12000"
+    },
+    "level": 0,
+    "reading": "vs_base",
+    "rule": "a3:k_minus_remainder_ignores_exact_fit",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.483671666667",
+     "fraction": "290203/600000"
+    },
+    "excess": {
+     "decimal_12dp": "0.483666666667",
+     "fraction": "1451/3000"
+    },
+    "level": 0,
+    "reading": "vs_chance",
+    "rule": "a3:k_minus_remainder_ignores_exact_fit",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.413676666667",
+     "fraction": "124103/300000"
+    },
+    "excess": {
+     "decimal_12dp": "0.413666666667",
+     "fraction": "1241/3000"
+    },
+    "level": 1,
+    "reading": "vs_base",
+    "rule": "a3:k_minus_remainder_ignores_exact_fit",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.482338333333",
+     "fraction": "289403/600000"
+    },
+    "excess": {
+     "decimal_12dp": "0.482333333333",
+     "fraction": "1447/3000"
+    },
+    "level": 1,
+    "reading": "vs_chance",
+    "rule": "a3:k_minus_remainder_ignores_exact_fit",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.422510000000",
+     "fraction": "42251/100000"
+    },
+    "excess": {
+     "decimal_12dp": "0.422500000000",
+     "fraction": "169/400"
+    },
+    "level": 2,
+    "reading": "vs_base",
+    "rule": "a3:k_minus_remainder_ignores_exact_fit",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.488171666667",
+     "fraction": "292903/600000"
+    },
+    "excess": {
+     "decimal_12dp": "0.488166666667",
+     "fraction": "2929/6000"
+    },
+    "level": 2,
+    "reading": "vs_chance",
+    "rule": "a3:k_minus_remainder_ignores_exact_fit",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.425176666667",
+     "fraction": "127553/300000"
+    },
+    "excess": {
+     "decimal_12dp": "0.425166666667",
+     "fraction": "2551/6000"
+    },
+    "level": 3,
+    "reading": "vs_base",
+    "rule": "a3:k_minus_remainder_ignores_exact_fit",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.488338333333",
+     "fraction": "293003/600000"
+    },
+    "excess": {
+     "decimal_12dp": "0.488333333333",
+     "fraction": "293/600"
+    },
+    "level": 3,
+    "reading": "vs_chance",
+    "rule": "a3:k_minus_remainder_ignores_exact_fit",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.429426666667",
+     "fraction": "32207/75000"
+    },
+    "excess": {
+     "decimal_12dp": "0.429416666667",
+     "fraction": "5153/12000"
+    },
+    "level": 4,
+    "reading": "vs_base",
+    "rule": "a3:k_minus_remainder_ignores_exact_fit",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.487088333333",
+     "fraction": "292253/600000"
+    },
+    "excess": {
+     "decimal_12dp": "0.487083333333",
+     "fraction": "1169/2400"
+    },
+    "level": 4,
+    "reading": "vs_chance",
+    "rule": "a3:k_minus_remainder_ignores_exact_fit",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.439760000000",
+     "fraction": "5497/12500"
+    },
+    "excess": {
+     "decimal_12dp": "0.439750000000",
+     "fraction": "1759/4000"
+    },
+    "level": 5,
+    "reading": "vs_base",
+    "rule": "a3:k_minus_remainder_ignores_exact_fit",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.491838333333",
+     "fraction": "295103/600000"
+    },
+    "excess": {
+     "decimal_12dp": "0.491833333333",
+     "fraction": "2951/6000"
+    },
+    "level": 5,
+    "reading": "vs_chance",
+    "rule": "a3:k_minus_remainder_ignores_exact_fit",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.427093333333",
+     "fraction": "4004/9375"
+    },
+    "excess": {
+     "decimal_12dp": "0.427083333333",
+     "fraction": "41/96"
+    },
+    "level": 6,
+    "reading": "vs_base",
+    "rule": "a3:k_minus_remainder_ignores_exact_fit",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.481005000000",
+     "fraction": "96201/200000"
+    },
+    "excess": {
+     "decimal_12dp": "0.481000000000",
+     "fraction": "481/1000"
+    },
+    "level": 6,
+    "reading": "vs_chance",
+    "rule": "a3:k_minus_remainder_ignores_exact_fit",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   }
+  ],
+  "evaluation": "M1",
+  "lineage": "M1.division_counting_r3",
+  "reason": {
+   "abs_excess_plus_uncertainty": {
+    "decimal_12dp": "0.495050000000",
+    "fraction": "9901/20000"
+   },
+   "bound": "15/100",
+   "excess": {
+    "decimal_12dp": "0.495000000000",
+    "fraction": "99/200"
+   },
+   "level": 3,
+   "pooled_figure": {
+    "decimal_12dp": "0.495000000000",
+    "fraction": "99/200"
+   },
+   "reading": "vs_chance",
+   "rounding_uncertainty": {
+    "decimal_12dp": "0.000050000000",
+    "fraction": "1/20000"
+   },
+   "rule": "a3:k_minus_remainder_ignores_exact_fit",
+   "shape": null,
+   "source": "a3",
+   "unit": "M1a"
+  }
+ },
+ {
+  "all_rows_over_the_bound": [
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.162050000000",
+     "fraction": "3241/20000"
+    },
+    "excess": {
+     "decimal_12dp": "0.162000000000",
+     "fraction": "81/500"
+    },
+    "level": 0,
+    "reading": "vs_chance",
+    "rule": "a3:bbox_plus_4",
+    "shape": null,
+    "source": "a3",
+    "unit": "M1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.165116666667",
+     "fraction": "9907/60000"
+    },
+    "excess": {
+     "decimal_12dp": "0.165066666667",
+     "fraction": "619/3750"
+    },
+    "level": 0,
+    "reading": "vs_chance",
+    "rule": "im:bbox_plus_4",
+    "shape": null,
+    "source": "a4",
+    "unit": "M1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.157550000000",
+     "fraction": "3151/20000"
+    },
+    "excess": {
+     "decimal_12dp": "0.157500000000",
+     "fraction": "63/400"
+    },
+    "level": 0,
+    "reading": "vs_chance",
+    "rule": "im:bbox_plus_4",
+    "shape": null,
+    "source": "own",
+    "unit": "M1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.153921666667",
+     "fraction": "92353/600000"
+    },
+    "excess": {
+     "decimal_12dp": "0.153916666667",
+     "fraction": "1847/12000"
+    },
+    "level": 0,
+    "reading": "vs_chance",
+    "rule": "a3:bbox_plus_4",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.153921666667",
+     "fraction": "92353/600000"
+    },
+    "excess": {
+     "decimal_12dp": "0.153916666667",
+     "fraction": "1847/12000"
+    },
+    "level": 0,
+    "reading": "vs_chance",
+    "rule": "im:bbox_plus_4",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.158005000000",
+     "fraction": "31601/200000"
+    },
+    "excess": {
+     "decimal_12dp": "0.158000000000",
+     "fraction": "79/500"
+    },
+    "level": 0,
+    "reading": "vs_chance",
+    "rule": "new:mode_by_template",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.163338333333",
+     "fraction": "98003/600000"
+    },
+    "excess": {
+     "decimal_12dp": "0.163333333333",
+     "fraction": "49/300"
+    },
+    "level": 0,
+    "reading": "vs_chance",
+    "rule": "a3:bbox_plus_4",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.163338333333",
+     "fraction": "98003/600000"
+    },
+    "excess": {
+     "decimal_12dp": "0.163333333333",
+     "fraction": "49/300"
+    },
+    "level": 0,
+    "reading": "vs_chance",
+    "rule": "im:bbox_plus_4",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   }
+  ],
+  "evaluation": "M1",
+  "lineage": "M1.grid_perimeter_r3",
+  "reason": {
+   "abs_excess_plus_uncertainty": {
+    "decimal_12dp": "0.165116666667",
+    "fraction": "9907/60000"
+   },
+   "bound": "15/100",
+   "excess": {
+    "decimal_12dp": "0.165066666667",
+    "fraction": "619/3750"
+   },
+   "level": 0,
+   "pooled_figure": {
+    "decimal_12dp": "0.165066666667",
+    "fraction": "619/3750"
+   },
+   "reading": "vs_chance",
+   "rounding_uncertainty": {
+    "decimal_12dp": "0.000050000000",
+    "fraction": "1/20000"
+   },
+   "rule": "im:bbox_plus_4",
+   "shape": null,
+   "source": "a4",
+   "unit": "M1a"
+  }
+ },
+ {
+  "all_rows_over_the_bound": [
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.175383333333",
+     "fraction": "10523/60000"
+    },
+    "excess": {
+     "decimal_12dp": "0.175333333333",
+     "fraction": "263/1500"
+    },
+    "level": 0,
+    "reading": "vs_chance",
+    "rule": "a3:exp_mod_p",
+    "shape": null,
+    "source": "a3",
+    "unit": "M1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.198616666667",
+     "fraction": "11917/60000"
+    },
+    "excess": {
+     "decimal_12dp": "0.198566666667",
+     "fraction": "5957/30000"
+    },
+    "level": 0,
+    "reading": "vs_chance",
+    "rule": "a3:fermat_misapplied_e_mod_p_plus_1",
+    "shape": null,
+    "source": "a3",
+    "unit": "M1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.169650000000",
+     "fraction": "3393/20000"
+    },
+    "excess": {
+     "decimal_12dp": "0.169600000000",
+     "fraction": "106/625"
+    },
+    "level": 1,
+    "reading": "vs_chance",
+    "rule": "a3:fermat_misapplied_e_mod_p_plus_1",
+    "shape": null,
+    "source": "a3",
+    "unit": "M1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.172716666667",
+     "fraction": "10363/60000"
+    },
+    "excess": {
+     "decimal_12dp": "0.172666666667",
+     "fraction": "259/1500"
+    },
+    "level": 0,
+    "reading": "vs_chance",
+    "rule": "im:exp_mod_p",
+    "shape": null,
+    "source": "a4",
+    "unit": "M1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.168583333333",
+     "fraction": "2023/12000"
+    },
+    "excess": {
+     "decimal_12dp": "0.168533333333",
+     "fraction": "316/1875"
+    },
+    "level": 0,
+    "reading": "vs_chance",
+    "rule": "im:exp_mod_p",
+    "shape": null,
+    "source": "own",
+    "unit": "M1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.167088333333",
+     "fraction": "100253/600000"
+    },
+    "excess": {
+     "decimal_12dp": "0.167083333333",
+     "fraction": "401/2400"
+    },
+    "level": 0,
+    "reading": "vs_chance",
+    "rule": "a3:exp_mod_p",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.192005000000",
+     "fraction": "38401/200000"
+    },
+    "excess": {
+     "decimal_12dp": "0.192000000000",
+     "fraction": "24/125"
+    },
+    "level": 0,
+    "reading": "vs_chance",
+    "rule": "a3:fermat_misapplied_e_mod_p_plus_1",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.167088333333",
+     "fraction": "100253/600000"
+    },
+    "excess": {
+     "decimal_12dp": "0.167083333333",
+     "fraction": "401/2400"
+    },
+    "level": 0,
+    "reading": "vs_chance",
+    "rule": "im:exp_mod_p",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.163505000000",
+     "fraction": "32701/200000"
+    },
+    "excess": {
+     "decimal_12dp": "0.163500000000",
+     "fraction": "327/2000"
+    },
+    "level": 1,
+    "reading": "vs_chance",
+    "rule": "a3:fermat_misapplied_e_mod_p_plus_1",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.170421666667",
+     "fraction": "102253/600000"
+    },
+    "excess": {
+     "decimal_12dp": "0.170416666667",
+     "fraction": "409/2400"
+    },
+    "level": 0,
+    "reading": "vs_chance",
+    "rule": "a3:exp_mod_p",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.194838333333",
+     "fraction": "116903/600000"
+    },
+    "excess": {
+     "decimal_12dp": "0.194833333333",
+     "fraction": "1169/6000"
+    },
+    "level": 0,
+    "reading": "vs_chance",
+    "rule": "a3:fermat_misapplied_e_mod_p_plus_1",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.170421666667",
+     "fraction": "102253/600000"
+    },
+    "excess": {
+     "decimal_12dp": "0.170416666667",
+     "fraction": "409/2400"
+    },
+    "level": 0,
+    "reading": "vs_chance",
+    "rule": "im:exp_mod_p",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.166921666667",
+     "fraction": "100153/600000"
+    },
+    "excess": {
+     "decimal_12dp": "0.166916666667",
+     "fraction": "2003/12000"
+    },
+    "level": 1,
+    "reading": "vs_chance",
+    "rule": "a3:fermat_misapplied_e_mod_p_plus_1",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   }
+  ],
+  "evaluation": "M1",
+  "lineage": "M1.last_digit_power_r3",
+  "reason": {
+   "abs_excess_plus_uncertainty": {
+    "decimal_12dp": "0.198616666667",
+    "fraction": "11917/60000"
+   },
+   "bound": "15/100",
+   "excess": {
+    "decimal_12dp": "0.198566666667",
+    "fraction": "5957/30000"
+   },
+   "level": 0,
+   "pooled_figure": {
+    "decimal_12dp": "0.198566666667",
+    "fraction": "5957/30000"
+   },
+   "reading": "vs_chance",
+   "rounding_uncertainty": {
+    "decimal_12dp": "0.000050000000",
+    "fraction": "1/20000"
+   },
+   "rule": "a3:fermat_misapplied_e_mod_p_plus_1",
+   "shape": null,
+   "source": "a3",
+   "unit": "M1a"
+  }
+ },
+ {
+  "all_rows_over_the_bound": [
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.218316666667",
+     "fraction": "13099/60000"
+    },
+    "excess": {
+     "decimal_12dp": "0.218266666667",
+     "fraction": "1637/7500"
+    },
+    "level": 0,
+    "reading": "vs_chance",
+    "rule": "a3:largest_le_sqrt",
+    "shape": null,
+    "source": "a3",
+    "unit": "M1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.161033333333",
+     "fraction": "4831/30000"
+    },
+    "excess": {
+     "decimal_12dp": "0.160933333333",
+     "fraction": "1207/7500"
+    },
+    "level": 1,
+    "reading": "vs_base",
+    "rule": "a3:largest_le_sqrt",
+    "shape": null,
+    "source": "a3",
+    "unit": "M1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.226483333333",
+     "fraction": "13589/60000"
+    },
+    "excess": {
+     "decimal_12dp": "0.226433333333",
+     "fraction": "6793/30000"
+    },
+    "level": 1,
+    "reading": "vs_chance",
+    "rule": "a3:largest_le_sqrt",
+    "shape": null,
+    "source": "a3",
+    "unit": "M1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.175733333333",
+     "fraction": "659/3750"
+    },
+    "excess": {
+     "decimal_12dp": "0.175633333333",
+     "fraction": "5269/30000"
+    },
+    "level": 2,
+    "reading": "vs_base",
+    "rule": "a3:largest_le_sqrt",
+    "shape": null,
+    "source": "a3",
+    "unit": "M1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.237550000000",
+     "fraction": "4751/20000"
+    },
+    "excess": {
+     "decimal_12dp": "0.237500000000",
+     "fraction": "19/80"
+    },
+    "level": 2,
+    "reading": "vs_chance",
+    "rule": "a3:largest_le_sqrt",
+    "shape": null,
+    "source": "a3",
+    "unit": "M1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.188066666667",
+     "fraction": "2821/15000"
+    },
+    "excess": {
+     "decimal_12dp": "0.187966666667",
+     "fraction": "5639/30000"
+    },
+    "level": 3,
+    "reading": "vs_base",
+    "rule": "a3:largest_le_sqrt",
+    "shape": null,
+    "source": "a3",
+    "unit": "M1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.244516666667",
+     "fraction": "14671/60000"
+    },
+    "excess": {
+     "decimal_12dp": "0.244466666667",
+     "fraction": "3667/15000"
+    },
+    "level": 3,
+    "reading": "vs_chance",
+    "rule": "a3:largest_le_sqrt",
+    "shape": null,
+    "source": "a3",
+    "unit": "M1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.189966666667",
+     "fraction": "5699/30000"
+    },
+    "excess": {
+     "decimal_12dp": "0.189866666667",
+     "fraction": "356/1875"
+    },
+    "level": 4,
+    "reading": "vs_base",
+    "rule": "a3:largest_le_sqrt",
+    "shape": null,
+    "source": "a3",
+    "unit": "M1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.244616666667",
+     "fraction": "14677/60000"
+    },
+    "excess": {
+     "decimal_12dp": "0.244566666667",
+     "fraction": "7337/30000"
+    },
+    "level": 4,
+    "reading": "vs_chance",
+    "rule": "a3:largest_le_sqrt",
+    "shape": null,
+    "source": "a3",
+    "unit": "M1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.193933333333",
+     "fraction": "2909/15000"
+    },
+    "excess": {
+     "decimal_12dp": "0.193833333333",
+     "fraction": "1163/6000"
+    },
+    "level": 5,
+    "reading": "vs_base",
+    "rule": "a3:largest_le_sqrt",
+    "shape": null,
+    "source": "a3",
+    "unit": "M1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.247383333333",
+     "fraction": "14843/60000"
+    },
+    "excess": {
+     "decimal_12dp": "0.247333333333",
+     "fraction": "371/1500"
+    },
+    "level": 5,
+    "reading": "vs_chance",
+    "rule": "a3:largest_le_sqrt",
+    "shape": null,
+    "source": "a3",
+    "unit": "M1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.185833333333",
+     "fraction": "223/1200"
+    },
+    "excess": {
+     "decimal_12dp": "0.185733333333",
+     "fraction": "1393/7500"
+    },
+    "level": 6,
+    "reading": "vs_base",
+    "rule": "a3:largest_le_sqrt",
+    "shape": null,
+    "source": "a3",
+    "unit": "M1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.240850000000",
+     "fraction": "4817/20000"
+    },
+    "excess": {
+     "decimal_12dp": "0.240800000000",
+     "fraction": "301/1250"
+    },
+    "level": 6,
+    "reading": "vs_chance",
+    "rule": "a3:largest_le_sqrt",
+    "shape": null,
+    "source": "a3",
+    "unit": "M1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.220505000000",
+     "fraction": "44101/200000"
+    },
+    "excess": {
+     "decimal_12dp": "0.220500000000",
+     "fraction": "441/2000"
+    },
+    "level": 0,
+    "reading": "vs_chance",
+    "rule": "a3:largest_le_sqrt",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.166676666667",
+     "fraction": "50003/300000"
+    },
+    "excess": {
+     "decimal_12dp": "0.166666666667",
+     "fraction": "1/6"
+    },
+    "level": 1,
+    "reading": "vs_base",
+    "rule": "a3:largest_le_sqrt",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.230421666667",
+     "fraction": "138253/600000"
+    },
+    "excess": {
+     "decimal_12dp": "0.230416666667",
+     "fraction": "553/2400"
+    },
+    "level": 1,
+    "reading": "vs_chance",
+    "rule": "a3:largest_le_sqrt",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.176176666667",
+     "fraction": "52853/300000"
+    },
+    "excess": {
+     "decimal_12dp": "0.176166666667",
+     "fraction": "1057/6000"
+    },
+    "level": 2,
+    "reading": "vs_base",
+    "rule": "a3:largest_le_sqrt",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.234088333333",
+     "fraction": "140453/600000"
+    },
+    "excess": {
+     "decimal_12dp": "0.234083333333",
+     "fraction": "2809/12000"
+    },
+    "level": 2,
+    "reading": "vs_chance",
+    "rule": "a3:largest_le_sqrt",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.177343333333",
+     "fraction": "53203/300000"
+    },
+    "excess": {
+     "decimal_12dp": "0.177333333333",
+     "fraction": "133/750"
+    },
+    "level": 3,
+    "reading": "vs_base",
+    "rule": "a3:largest_le_sqrt",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.236838333333",
+     "fraction": "142103/600000"
+    },
+    "excess": {
+     "decimal_12dp": "0.236833333333",
+     "fraction": "1421/6000"
+    },
+    "level": 3,
+    "reading": "vs_chance",
+    "rule": "a3:largest_le_sqrt",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.176593333333",
+     "fraction": "26489/150000"
+    },
+    "excess": {
+     "decimal_12dp": "0.176583333333",
+     "fraction": "2119/12000"
+    },
+    "level": 4,
+    "reading": "vs_base",
+    "rule": "a3:largest_le_sqrt",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.242505000000",
+     "fraction": "48501/200000"
+    },
+    "excess": {
+     "decimal_12dp": "0.242500000000",
+     "fraction": "97/400"
+    },
+    "level": 4,
+    "reading": "vs_chance",
+    "rule": "a3:largest_le_sqrt",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.193260000000",
+     "fraction": "9663/50000"
+    },
+    "excess": {
+     "decimal_12dp": "0.193250000000",
+     "fraction": "773/4000"
+    },
+    "level": 5,
+    "reading": "vs_base",
+    "rule": "a3:largest_le_sqrt",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.247921666667",
+     "fraction": "148753/600000"
+    },
+    "excess": {
+     "decimal_12dp": "0.247916666667",
+     "fraction": "119/480"
+    },
+    "level": 5,
+    "reading": "vs_chance",
+    "rule": "a3:largest_le_sqrt",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.193176666667",
+     "fraction": "57953/300000"
+    },
+    "excess": {
+     "decimal_12dp": "0.193166666667",
+     "fraction": "1159/6000"
+    },
+    "level": 6,
+    "reading": "vs_base",
+    "rule": "a3:largest_le_sqrt",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.247755000000",
+     "fraction": "49551/200000"
+    },
+    "excess": {
+     "decimal_12dp": "0.247750000000",
+     "fraction": "991/4000"
+    },
+    "level": 6,
+    "reading": "vs_chance",
+    "rule": "a3:largest_le_sqrt",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.212421666667",
+     "fraction": "127453/600000"
+    },
+    "excess": {
+     "decimal_12dp": "0.212416666667",
+     "fraction": "2549/12000"
+    },
+    "level": 0,
+    "reading": "vs_chance",
+    "rule": "a3:largest_le_sqrt",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.161843333333",
+     "fraction": "48553/300000"
+    },
+    "excess": {
+     "decimal_12dp": "0.161833333333",
+     "fraction": "971/6000"
+    },
+    "level": 1,
+    "reading": "vs_base",
+    "rule": "a3:largest_le_sqrt",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.227588333333",
+     "fraction": "136553/600000"
+    },
+    "excess": {
+     "decimal_12dp": "0.227583333333",
+     "fraction": "2731/12000"
+    },
+    "level": 1,
+    "reading": "vs_chance",
+    "rule": "a3:largest_le_sqrt",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.173593333333",
+     "fraction": "26039/150000"
+    },
+    "excess": {
+     "decimal_12dp": "0.173583333333",
+     "fraction": "2083/12000"
+    },
+    "level": 2,
+    "reading": "vs_base",
+    "rule": "a3:largest_le_sqrt",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.232755000000",
+     "fraction": "46551/200000"
+    },
+    "excess": {
+     "decimal_12dp": "0.232750000000",
+     "fraction": "931/4000"
+    },
+    "level": 2,
+    "reading": "vs_chance",
+    "rule": "a3:largest_le_sqrt",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.183676666667",
+     "fraction": "55103/300000"
+    },
+    "excess": {
+     "decimal_12dp": "0.183666666667",
+     "fraction": "551/3000"
+    },
+    "level": 3,
+    "reading": "vs_base",
+    "rule": "a3:largest_le_sqrt",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.241005000000",
+     "fraction": "48201/200000"
+    },
+    "excess": {
+     "decimal_12dp": "0.241000000000",
+     "fraction": "241/1000"
+    },
+    "level": 3,
+    "reading": "vs_chance",
+    "rule": "a3:largest_le_sqrt",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.193426666667",
+     "fraction": "14507/75000"
+    },
+    "excess": {
+     "decimal_12dp": "0.193416666667",
+     "fraction": "2321/12000"
+    },
+    "level": 4,
+    "reading": "vs_base",
+    "rule": "a3:largest_le_sqrt",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.245171666667",
+     "fraction": "147103/600000"
+    },
+    "excess": {
+     "decimal_12dp": "0.245166666667",
+     "fraction": "1471/6000"
+    },
+    "level": 4,
+    "reading": "vs_chance",
+    "rule": "a3:largest_le_sqrt",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.194760000000",
+     "fraction": "4869/25000"
+    },
+    "excess": {
+     "decimal_12dp": "0.194750000000",
+     "fraction": "779/4000"
+    },
+    "level": 5,
+    "reading": "vs_base",
+    "rule": "a3:largest_le_sqrt",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.248838333333",
+     "fraction": "149303/600000"
+    },
+    "excess": {
+     "decimal_12dp": "0.248833333333",
+     "fraction": "1493/6000"
+    },
+    "level": 5,
+    "reading": "vs_chance",
+    "rule": "a3:largest_le_sqrt",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.190260000000",
+     "fraction": "9513/50000"
+    },
+    "excess": {
+     "decimal_12dp": "0.190250000000",
+     "fraction": "761/4000"
+    },
+    "level": 6,
+    "reading": "vs_base",
+    "rule": "a3:largest_le_sqrt",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.245505000000",
+     "fraction": "49101/200000"
+    },
+    "excess": {
+     "decimal_12dp": "0.245500000000",
+     "fraction": "491/2000"
+    },
+    "level": 6,
+    "reading": "vs_chance",
+    "rule": "a3:largest_le_sqrt",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   }
+  ],
+  "evaluation": "M1",
+  "lineage": "M1.prime_factors_r3",
+  "reason": {
+   "abs_excess_plus_uncertainty": {
+    "decimal_12dp": "0.248838333333",
+    "fraction": "149303/600000"
+   },
+   "bound": "15/100",
+   "excess": {
+    "decimal_12dp": "0.248833333333",
+    "fraction": "1493/6000"
+   },
+   "level": 5,
+   "pooled_figure": {
+    "decimal_12dp": "0.248833333333",
+    "fraction": "1493/6000"
+   },
+   "reading": "vs_chance",
+   "rounding_uncertainty": {
+    "decimal_12dp": "0.000005000000",
+    "fraction": "1/200000"
+   },
+   "rule": "a3:largest_le_sqrt",
+   "shape": null,
+   "source": "results",
+   "unit": "M1c"
+  }
+ },
+ {
+  "all_rows_over_the_bound": [
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.516176666667",
+     "fraction": "154853/300000"
+    },
+    "excess": {
+     "decimal_12dp": "0.516166666667",
+     "fraction": "3097/6000"
+    },
+    "level": 0,
+    "reading": "vs_base",
+    "rule": "new:ratio_first_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.526005000000",
+     "fraction": "105201/200000"
+    },
+    "excess": {
+     "decimal_12dp": "0.526000000000",
+     "fraction": "263/500"
+    },
+    "level": 0,
+    "reading": "vs_chance",
+    "rule": "new:ratio_first_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.525093333333",
+     "fraction": "19691/37500"
+    },
+    "excess": {
+     "decimal_12dp": "0.525083333333",
+     "fraction": "6301/12000"
+    },
+    "level": 0,
+    "reading": "vs_base",
+    "rule": "new:ratio_last_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.534921666667",
+     "fraction": "320953/600000"
+    },
+    "excess": {
+     "decimal_12dp": "0.534916666667",
+     "fraction": "6419/12000"
+    },
+    "level": 0,
+    "reading": "vs_chance",
+    "rule": "new:ratio_last_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.529343333333",
+     "fraction": "158803/300000"
+    },
+    "excess": {
+     "decimal_12dp": "0.529333333333",
+     "fraction": "397/750"
+    },
+    "level": 1,
+    "reading": "vs_base",
+    "rule": "new:ratio_first_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.534505000000",
+     "fraction": "106901/200000"
+    },
+    "excess": {
+     "decimal_12dp": "0.534500000000",
+     "fraction": "1069/2000"
+    },
+    "level": 1,
+    "reading": "vs_chance",
+    "rule": "new:ratio_first_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.524510000000",
+     "fraction": "52451/100000"
+    },
+    "excess": {
+     "decimal_12dp": "0.524500000000",
+     "fraction": "1049/2000"
+    },
+    "level": 1,
+    "reading": "vs_base",
+    "rule": "new:ratio_last_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.529671666667",
+     "fraction": "317803/600000"
+    },
+    "excess": {
+     "decimal_12dp": "0.529666666667",
+     "fraction": "1589/3000"
+    },
+    "level": 1,
+    "reading": "vs_chance",
+    "rule": "new:ratio_last_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.380176666667",
+     "fraction": "114053/300000"
+    },
+    "excess": {
+     "decimal_12dp": "0.380166666667",
+     "fraction": "2281/6000"
+    },
+    "level": 2,
+    "reading": "vs_base",
+    "rule": "new:ratio_first_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.385338333333",
+     "fraction": "231203/600000"
+    },
+    "excess": {
+     "decimal_12dp": "0.385333333333",
+     "fraction": "289/750"
+    },
+    "level": 2,
+    "reading": "vs_chance",
+    "rule": "new:ratio_first_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.371510000000",
+     "fraction": "37151/100000"
+    },
+    "excess": {
+     "decimal_12dp": "0.371500000000",
+     "fraction": "743/2000"
+    },
+    "level": 2,
+    "reading": "vs_base",
+    "rule": "new:ratio_last_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.376671666667",
+     "fraction": "226003/600000"
+    },
+    "excess": {
+     "decimal_12dp": "0.376666666667",
+     "fraction": "113/300"
+    },
+    "level": 2,
+    "reading": "vs_chance",
+    "rule": "new:ratio_last_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.365843333333",
+     "fraction": "109753/300000"
+    },
+    "excess": {
+     "decimal_12dp": "0.365833333333",
+     "fraction": "439/1200"
+    },
+    "level": 3,
+    "reading": "vs_base",
+    "rule": "new:ratio_first_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.369838333333",
+     "fraction": "221903/600000"
+    },
+    "excess": {
+     "decimal_12dp": "0.369833333333",
+     "fraction": "2219/6000"
+    },
+    "level": 3,
+    "reading": "vs_chance",
+    "rule": "new:ratio_first_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.374176666667",
+     "fraction": "112253/300000"
+    },
+    "excess": {
+     "decimal_12dp": "0.374166666667",
+     "fraction": "449/1200"
+    },
+    "level": 3,
+    "reading": "vs_base",
+    "rule": "new:ratio_last_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.378171666667",
+     "fraction": "226903/600000"
+    },
+    "excess": {
+     "decimal_12dp": "0.378166666667",
+     "fraction": "2269/6000"
+    },
+    "level": 3,
+    "reading": "vs_chance",
+    "rule": "new:ratio_last_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.282010000000",
+     "fraction": "28201/100000"
+    },
+    "excess": {
+     "decimal_12dp": "0.282000000000",
+     "fraction": "141/500"
+    },
+    "level": 4,
+    "reading": "vs_base",
+    "rule": "new:ratio_first_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.285921666667",
+     "fraction": "171553/600000"
+    },
+    "excess": {
+     "decimal_12dp": "0.285916666667",
+     "fraction": "3431/12000"
+    },
+    "level": 4,
+    "reading": "vs_chance",
+    "rule": "new:ratio_first_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.290843333333",
+     "fraction": "87253/300000"
+    },
+    "excess": {
+     "decimal_12dp": "0.290833333333",
+     "fraction": "349/1200"
+    },
+    "level": 4,
+    "reading": "vs_base",
+    "rule": "new:ratio_last_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.294755000000",
+     "fraction": "58951/200000"
+    },
+    "excess": {
+     "decimal_12dp": "0.294750000000",
+     "fraction": "1179/4000"
+    },
+    "level": 4,
+    "reading": "vs_chance",
+    "rule": "new:ratio_last_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.296510000000",
+     "fraction": "29651/100000"
+    },
+    "excess": {
+     "decimal_12dp": "0.296500000000",
+     "fraction": "593/2000"
+    },
+    "level": 5,
+    "reading": "vs_base",
+    "rule": "new:ratio_first_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.299421666667",
+     "fraction": "179653/600000"
+    },
+    "excess": {
+     "decimal_12dp": "0.299416666667",
+     "fraction": "3593/12000"
+    },
+    "level": 5,
+    "reading": "vs_chance",
+    "rule": "new:ratio_first_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.295426666667",
+     "fraction": "22157/75000"
+    },
+    "excess": {
+     "decimal_12dp": "0.295416666667",
+     "fraction": "709/2400"
+    },
+    "level": 5,
+    "reading": "vs_base",
+    "rule": "new:ratio_last_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.298338333333",
+     "fraction": "179003/600000"
+    },
+    "excess": {
+     "decimal_12dp": "0.298333333333",
+     "fraction": "179/600"
+    },
+    "level": 5,
+    "reading": "vs_chance",
+    "rule": "new:ratio_last_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.296093333333",
+     "fraction": "22207/75000"
+    },
+    "excess": {
+     "decimal_12dp": "0.296083333333",
+     "fraction": "3553/12000"
+    },
+    "level": 6,
+    "reading": "vs_base",
+    "rule": "new:ratio_first_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.299838333333",
+     "fraction": "179903/600000"
+    },
+    "excess": {
+     "decimal_12dp": "0.299833333333",
+     "fraction": "1799/6000"
+    },
+    "level": 6,
+    "reading": "vs_chance",
+    "rule": "new:ratio_first_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.287260000000",
+     "fraction": "14363/50000"
+    },
+    "excess": {
+     "decimal_12dp": "0.287250000000",
+     "fraction": "1149/4000"
+    },
+    "level": 6,
+    "reading": "vs_base",
+    "rule": "new:ratio_last_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.291005000000",
+     "fraction": "58201/200000"
+    },
+    "excess": {
+     "decimal_12dp": "0.291000000000",
+     "fraction": "291/1000"
+    },
+    "level": 6,
+    "reading": "vs_chance",
+    "rule": "new:ratio_last_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.525843333333",
+     "fraction": "157753/300000"
+    },
+    "excess": {
+     "decimal_12dp": "0.525833333333",
+     "fraction": "631/1200"
+    },
+    "level": 0,
+    "reading": "vs_base",
+    "rule": "new:ratio_first_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.533255000000",
+     "fraction": "106651/200000"
+    },
+    "excess": {
+     "decimal_12dp": "0.533250000000",
+     "fraction": "2133/4000"
+    },
+    "level": 0,
+    "reading": "vs_chance",
+    "rule": "new:ratio_first_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.521010000000",
+     "fraction": "52101/100000"
+    },
+    "excess": {
+     "decimal_12dp": "0.521000000000",
+     "fraction": "521/1000"
+    },
+    "level": 0,
+    "reading": "vs_base",
+    "rule": "new:ratio_last_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.528421666667",
+     "fraction": "317053/600000"
+    },
+    "excess": {
+     "decimal_12dp": "0.528416666667",
+     "fraction": "6341/12000"
+    },
+    "level": 0,
+    "reading": "vs_chance",
+    "rule": "new:ratio_last_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.529010000000",
+     "fraction": "52901/100000"
+    },
+    "excess": {
+     "decimal_12dp": "0.529000000000",
+     "fraction": "529/1000"
+    },
+    "level": 1,
+    "reading": "vs_base",
+    "rule": "new:ratio_first_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.535921666667",
+     "fraction": "321553/600000"
+    },
+    "excess": {
+     "decimal_12dp": "0.535916666667",
+     "fraction": "6431/12000"
+    },
+    "level": 1,
+    "reading": "vs_chance",
+    "rule": "new:ratio_first_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.523760000000",
+     "fraction": "6547/12500"
+    },
+    "excess": {
+     "decimal_12dp": "0.523750000000",
+     "fraction": "419/800"
+    },
+    "level": 1,
+    "reading": "vs_base",
+    "rule": "new:ratio_last_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.530671666667",
+     "fraction": "318403/600000"
+    },
+    "excess": {
+     "decimal_12dp": "0.530666666667",
+     "fraction": "199/375"
+    },
+    "level": 1,
+    "reading": "vs_chance",
+    "rule": "new:ratio_last_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.365343333333",
+     "fraction": "109603/300000"
+    },
+    "excess": {
+     "decimal_12dp": "0.365333333333",
+     "fraction": "137/375"
+    },
+    "level": 2,
+    "reading": "vs_base",
+    "rule": "new:ratio_first_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.371588333333",
+     "fraction": "222953/600000"
+    },
+    "excess": {
+     "decimal_12dp": "0.371583333333",
+     "fraction": "4459/12000"
+    },
+    "level": 2,
+    "reading": "vs_chance",
+    "rule": "new:ratio_first_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.373093333333",
+     "fraction": "13991/37500"
+    },
+    "excess": {
+     "decimal_12dp": "0.373083333333",
+     "fraction": "4477/12000"
+    },
+    "level": 2,
+    "reading": "vs_base",
+    "rule": "new:ratio_last_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.379338333333",
+     "fraction": "227603/600000"
+    },
+    "excess": {
+     "decimal_12dp": "0.379333333333",
+     "fraction": "569/1500"
+    },
+    "level": 2,
+    "reading": "vs_chance",
+    "rule": "new:ratio_last_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.363676666667",
+     "fraction": "109103/300000"
+    },
+    "excess": {
+     "decimal_12dp": "0.363666666667",
+     "fraction": "1091/3000"
+    },
+    "level": 3,
+    "reading": "vs_base",
+    "rule": "new:ratio_first_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.368005000000",
+     "fraction": "73601/200000"
+    },
+    "excess": {
+     "decimal_12dp": "0.368000000000",
+     "fraction": "46/125"
+    },
+    "level": 3,
+    "reading": "vs_chance",
+    "rule": "new:ratio_first_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.379593333333",
+     "fraction": "56939/150000"
+    },
+    "excess": {
+     "decimal_12dp": "0.379583333333",
+     "fraction": "911/2400"
+    },
+    "level": 3,
+    "reading": "vs_base",
+    "rule": "new:ratio_last_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.383921666667",
+     "fraction": "230353/600000"
+    },
+    "excess": {
+     "decimal_12dp": "0.383916666667",
+     "fraction": "4607/12000"
+    },
+    "level": 3,
+    "reading": "vs_chance",
+    "rule": "new:ratio_last_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.302760000000",
+     "fraction": "7569/25000"
+    },
+    "excess": {
+     "decimal_12dp": "0.302750000000",
+     "fraction": "1211/4000"
+    },
+    "level": 4,
+    "reading": "vs_base",
+    "rule": "new:ratio_first_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.305255000000",
+     "fraction": "61051/200000"
+    },
+    "excess": {
+     "decimal_12dp": "0.305250000000",
+     "fraction": "1221/4000"
+    },
+    "level": 4,
+    "reading": "vs_chance",
+    "rule": "new:ratio_first_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.287760000000",
+     "fraction": "3597/12500"
+    },
+    "excess": {
+     "decimal_12dp": "0.287750000000",
+     "fraction": "1151/4000"
+    },
+    "level": 4,
+    "reading": "vs_base",
+    "rule": "new:ratio_last_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.290255000000",
+     "fraction": "58051/200000"
+    },
+    "excess": {
+     "decimal_12dp": "0.290250000000",
+     "fraction": "1161/4000"
+    },
+    "level": 4,
+    "reading": "vs_chance",
+    "rule": "new:ratio_last_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.297426666667",
+     "fraction": "22307/75000"
+    },
+    "excess": {
+     "decimal_12dp": "0.297416666667",
+     "fraction": "3569/12000"
+    },
+    "level": 5,
+    "reading": "vs_base",
+    "rule": "new:ratio_first_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.300421666667",
+     "fraction": "180253/600000"
+    },
+    "excess": {
+     "decimal_12dp": "0.300416666667",
+     "fraction": "721/2400"
+    },
+    "level": 5,
+    "reading": "vs_chance",
+    "rule": "new:ratio_first_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.296593333333",
+     "fraction": "44489/150000"
+    },
+    "excess": {
+     "decimal_12dp": "0.296583333333",
+     "fraction": "3559/12000"
+    },
+    "level": 5,
+    "reading": "vs_base",
+    "rule": "new:ratio_last_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.299588333333",
+     "fraction": "179753/600000"
+    },
+    "excess": {
+     "decimal_12dp": "0.299583333333",
+     "fraction": "719/2400"
+    },
+    "level": 5,
+    "reading": "vs_chance",
+    "rule": "new:ratio_last_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.296843333333",
+     "fraction": "89053/300000"
+    },
+    "excess": {
+     "decimal_12dp": "0.296833333333",
+     "fraction": "1781/6000"
+    },
+    "level": 6,
+    "reading": "vs_base",
+    "rule": "new:ratio_first_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.299255000000",
+     "fraction": "59851/200000"
+    },
+    "excess": {
+     "decimal_12dp": "0.299250000000",
+     "fraction": "1197/4000"
+    },
+    "level": 6,
+    "reading": "vs_chance",
+    "rule": "new:ratio_first_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.298593333333",
+     "fraction": "44789/150000"
+    },
+    "excess": {
+     "decimal_12dp": "0.298583333333",
+     "fraction": "3583/12000"
+    },
+    "level": 6,
+    "reading": "vs_base",
+    "rule": "new:ratio_last_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.301005000000",
+     "fraction": "60201/200000"
+    },
+    "excess": {
+     "decimal_12dp": "0.301000000000",
+     "fraction": "301/1000"
+    },
+    "level": 6,
+    "reading": "vs_chance",
+    "rule": "new:ratio_last_named",
+    "shape": null,
+    "source": "results",
+    "unit": "M1c"
+   }
+  ],
+  "evaluation": "M1",
+  "lineage": "M1.ratio_share_r3",
+  "reason": {
+   "abs_excess_plus_uncertainty": {
+    "decimal_12dp": "0.535921666667",
+    "fraction": "321553/600000"
+   },
+   "bound": "15/100",
+   "excess": {
+    "decimal_12dp": "0.535916666667",
+    "fraction": "6431/12000"
+   },
+   "level": 1,
+   "pooled_figure": {
+    "decimal_12dp": "0.535916666667",
+    "fraction": "6431/12000"
+   },
+   "reading": "vs_chance",
+   "rounding_uncertainty": {
+    "decimal_12dp": "0.000005000000",
+    "fraction": "1/200000"
+   },
+   "rule": "new:ratio_first_named",
+   "shape": null,
+   "source": "results",
+   "unit": "M1c"
+  }
+ },
+ {
+  "all_rows_over_the_bound": [
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "1.000050000000",
+     "fraction": "20001/20000"
+    },
+    "excess": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "level": 0,
+    "reading": "eff",
+    "rule": "a4:direction_ignored_q_over_p",
+    "shape": null,
+    "source": "aud",
+    "unit": "R1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "1.000050000000",
+     "fraction": "20001/20000"
+    },
+    "excess": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "level": 1,
+    "reading": "eff",
+    "rule": "a4:direction_ignored_q_over_p",
+    "shape": null,
+    "source": "aud",
+    "unit": "R1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "1.000050000000",
+     "fraction": "20001/20000"
+    },
+    "excess": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "level": 2,
+    "reading": "eff",
+    "rule": "a4:direction_ignored_q_over_p",
+    "shape": null,
+    "source": "aud",
+    "unit": "R1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "1.000050000000",
+     "fraction": "20001/20000"
+    },
+    "excess": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "level": 3,
+    "reading": "eff",
+    "rule": "a4:direction_ignored_q_over_p",
+    "shape": null,
+    "source": "aud",
+    "unit": "R1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "1.000050000000",
+     "fraction": "20001/20000"
+    },
+    "excess": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "level": 4,
+    "reading": "eff",
+    "rule": "a4:direction_ignored_q_over_p",
+    "shape": null,
+    "source": "aud",
+    "unit": "R1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "1.000050000000",
+     "fraction": "20001/20000"
+    },
+    "excess": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "level": 5,
+    "reading": "eff",
+    "rule": "a4:direction_ignored_q_over_p",
+    "shape": null,
+    "source": "aud",
+    "unit": "R1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "1.000050000000",
+     "fraction": "20001/20000"
+    },
+    "excess": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "level": 6,
+    "reading": "eff",
+    "rule": "a4:direction_ignored_q_over_p",
+    "shape": null,
+    "source": "aud",
+    "unit": "R1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "1.000050000000",
+     "fraction": "20001/20000"
+    },
+    "excess": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "level": 0,
+    "reading": "eff",
+    "rule": "a4:direction_ignored_q_over_p",
+    "shape": null,
+    "source": "aud",
+    "unit": "R1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "1.000050000000",
+     "fraction": "20001/20000"
+    },
+    "excess": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "level": 1,
+    "reading": "eff",
+    "rule": "a4:direction_ignored_q_over_p",
+    "shape": null,
+    "source": "aud",
+    "unit": "R1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "1.000050000000",
+     "fraction": "20001/20000"
+    },
+    "excess": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "level": 2,
+    "reading": "eff",
+    "rule": "a4:direction_ignored_q_over_p",
+    "shape": null,
+    "source": "aud",
+    "unit": "R1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "1.000050000000",
+     "fraction": "20001/20000"
+    },
+    "excess": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "level": 3,
+    "reading": "eff",
+    "rule": "a4:direction_ignored_q_over_p",
+    "shape": null,
+    "source": "aud",
+    "unit": "R1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "1.000050000000",
+     "fraction": "20001/20000"
+    },
+    "excess": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "level": 4,
+    "reading": "eff",
+    "rule": "a4:direction_ignored_q_over_p",
+    "shape": null,
+    "source": "aud",
+    "unit": "R1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "1.000050000000",
+     "fraction": "20001/20000"
+    },
+    "excess": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "level": 5,
+    "reading": "eff",
+    "rule": "a4:direction_ignored_q_over_p",
+    "shape": null,
+    "source": "aud",
+    "unit": "R1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "1.000050000000",
+     "fraction": "20001/20000"
+    },
+    "excess": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "level": 6,
+    "reading": "eff",
+    "rule": "a4:direction_ignored_q_over_p",
+    "shape": null,
+    "source": "aud",
+    "unit": "R1b"
+   }
+  ],
+  "evaluation": "R1",
+  "lineage": "R1.equivalence_exchange_rates_r6",
+  "reason": {
+   "abs_excess_plus_uncertainty": {
+    "decimal_12dp": "1.000050000000",
+    "fraction": "20001/20000"
+   },
+   "bound": "15/100",
+   "excess": {
+    "decimal_12dp": "1.000000000000",
+    "fraction": "1/1"
+   },
+   "level": 0,
+   "pooled_figure": {
+    "decimal_12dp": "1.000000000000",
+    "fraction": "1/1"
+   },
+   "reading": "eff",
+   "rounding_uncertainty": {
+    "decimal_12dp": "0.000050000000",
+    "fraction": "1/20000"
+   },
+   "rule": "a4:direction_ignored_q_over_p",
+   "shape": null,
+   "source": "aud",
+   "unit": "R1a"
+  }
+ },
+ {
+  "all_rows_over_the_bound": [
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.163983333333",
+     "fraction": "9839/60000"
+    },
+    "excess": {
+     "decimal_12dp": "-0.163933333333",
+     "fraction": "-2459/15000"
+    },
+    "level": 0,
+    "reading": "eff",
+    "rule": "constant_mfk_fitted",
+    "shape": null,
+    "source": "aud",
+    "unit": "R1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.164216666667",
+     "fraction": "9853/60000"
+    },
+    "excess": {
+     "decimal_12dp": "-0.164166666667",
+     "fraction": "-197/1200"
+    },
+    "level": 1,
+    "reading": "eff",
+    "rule": "constant_mfk_fitted",
+    "shape": null,
+    "source": "aud",
+    "unit": "R1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.163683333333",
+     "fraction": "9821/60000"
+    },
+    "excess": {
+     "decimal_12dp": "-0.163633333333",
+     "fraction": "-4909/30000"
+    },
+    "level": 0,
+    "reading": "eff",
+    "rule": "constant_mfk_fitted",
+    "shape": null,
+    "source": "impl",
+    "unit": "R1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.164683333333",
+     "fraction": "9881/60000"
+    },
+    "excess": {
+     "decimal_12dp": "-0.164633333333",
+     "fraction": "-4939/30000"
+    },
+    "level": 1,
+    "reading": "eff",
+    "rule": "constant_mfk_fitted",
+    "shape": null,
+    "source": "impl",
+    "unit": "R1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.164283333333",
+     "fraction": "9857/60000"
+    },
+    "excess": {
+     "decimal_12dp": "-0.164233333333",
+     "fraction": "-4927/30000"
+    },
+    "level": 0,
+    "reading": "eff",
+    "rule": "constant_mfk_fitted",
+    "shape": null,
+    "source": "aud",
+    "unit": "R1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.163383333333",
+     "fraction": "9803/60000"
+    },
+    "excess": {
+     "decimal_12dp": "-0.163333333333",
+     "fraction": "-49/300"
+    },
+    "level": 1,
+    "reading": "eff",
+    "rule": "constant_mfk_fitted",
+    "shape": null,
+    "source": "aud",
+    "unit": "R1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.163950000000",
+     "fraction": "3279/20000"
+    },
+    "excess": {
+     "decimal_12dp": "-0.163900000000",
+     "fraction": "-1639/10000"
+    },
+    "level": 0,
+    "reading": "eff",
+    "rule": "constant_mfk_fitted",
+    "shape": null,
+    "source": "impl",
+    "unit": "R1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.164250000000",
+     "fraction": "657/4000"
+    },
+    "excess": {
+     "decimal_12dp": "-0.164200000000",
+     "fraction": "-821/5000"
+    },
+    "level": 1,
+    "reading": "eff",
+    "rule": "constant_mfk_fitted",
+    "shape": null,
+    "source": "impl",
+    "unit": "R1b"
+   }
+  ],
+  "evaluation": "R1",
+  "lineage": "R1.spatial_grid_walk_r5",
+  "reason": {
+   "abs_excess_plus_uncertainty": {
+    "decimal_12dp": "0.164683333333",
+    "fraction": "9881/60000"
+   },
+   "bound": "15/100",
+   "excess": {
+    "decimal_12dp": "-0.164633333333",
+    "fraction": "-4939/30000"
+   },
+   "level": 1,
+   "pooled_figure": {
+    "decimal_12dp": "-0.164633333333",
+    "fraction": "-4939/30000"
+   },
+   "reading": "eff",
+   "rounding_uncertainty": {
+    "decimal_12dp": "0.000050000000",
+    "fraction": "1/20000"
+   },
+   "rule": "constant_mfk_fitted",
+   "shape": null,
+   "source": "impl",
+   "unit": "R1a"
+  }
+ },
+ {
+  "all_rows_over_the_bound": [
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.161150000000",
+     "fraction": "3223/20000"
+    },
+    "excess": {
+     "decimal_12dp": "-0.161100000000",
+     "fraction": "-1611/10000"
+    },
+    "level": 0,
+    "reading": "eff",
+    "rule": "constant_mfk_fitted",
+    "shape": null,
+    "source": "aud",
+    "unit": "R1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.160183333333",
+     "fraction": "9611/60000"
+    },
+    "excess": {
+     "decimal_12dp": "-0.160133333333",
+     "fraction": "-1201/7500"
+    },
+    "level": 1,
+    "reading": "eff",
+    "rule": "constant_mfk_fitted",
+    "shape": null,
+    "source": "aud",
+    "unit": "R1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.160383333333",
+     "fraction": "9623/60000"
+    },
+    "excess": {
+     "decimal_12dp": "-0.160333333333",
+     "fraction": "-481/3000"
+    },
+    "level": 0,
+    "reading": "eff",
+    "rule": "constant_mfk_fitted",
+    "shape": null,
+    "source": "impl",
+    "unit": "R1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.158283333333",
+     "fraction": "9497/60000"
+    },
+    "excess": {
+     "decimal_12dp": "-0.158233333333",
+     "fraction": "-4747/30000"
+    },
+    "level": 1,
+    "reading": "eff",
+    "rule": "constant_mfk_fitted",
+    "shape": null,
+    "source": "impl",
+    "unit": "R1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.158616666667",
+     "fraction": "9517/60000"
+    },
+    "excess": {
+     "decimal_12dp": "-0.158566666667",
+     "fraction": "-4757/30000"
+    },
+    "level": 0,
+    "reading": "eff",
+    "rule": "constant_mfk_fitted",
+    "shape": null,
+    "source": "aud",
+    "unit": "R1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.161150000000",
+     "fraction": "3223/20000"
+    },
+    "excess": {
+     "decimal_12dp": "-0.161100000000",
+     "fraction": "-1611/10000"
+    },
+    "level": 1,
+    "reading": "eff",
+    "rule": "constant_mfk_fitted",
+    "shape": null,
+    "source": "aud",
+    "unit": "R1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.159483333333",
+     "fraction": "9569/60000"
+    },
+    "excess": {
+     "decimal_12dp": "-0.159433333333",
+     "fraction": "-4783/30000"
+    },
+    "level": 0,
+    "reading": "eff",
+    "rule": "constant_mfk_fitted",
+    "shape": null,
+    "source": "impl",
+    "unit": "R1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.159016666667",
+     "fraction": "9541/60000"
+    },
+    "excess": {
+     "decimal_12dp": "-0.158966666667",
+     "fraction": "-4769/30000"
+    },
+    "level": 1,
+    "reading": "eff",
+    "rule": "constant_mfk_fitted",
+    "shape": null,
+    "source": "impl",
+    "unit": "R1b"
+   }
+  ],
+  "evaluation": "R1",
+  "lineage": "R1.swap_tracking_r5",
+  "reason": {
+   "abs_excess_plus_uncertainty": {
+    "decimal_12dp": "0.161150000000",
+    "fraction": "3223/20000"
+   },
+   "bound": "15/100",
+   "excess": {
+    "decimal_12dp": "-0.161100000000",
+    "fraction": "-1611/10000"
+   },
+   "level": 0,
+   "pooled_figure": {
+    "decimal_12dp": "-0.161100000000",
+    "fraction": "-1611/10000"
+   },
+   "reading": "eff",
+   "rounding_uncertainty": {
+    "decimal_12dp": "0.000050000000",
+    "fraction": "1/20000"
+   },
+   "rule": "constant_mfk_fitted",
+   "shape": null,
+   "source": "aud",
+   "unit": "R1a"
+  }
+ },
+ {
+  "all_rows_over_the_bound": [
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "1.000050000000",
+     "fraction": "20001/20000"
+    },
+    "excess": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "level": 0,
+    "reading": "eff",
+    "rule": "a3:ignore_triples",
+    "shape": null,
+    "source": "aud",
+    "unit": "R1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "1.000050000000",
+     "fraction": "20001/20000"
+    },
+    "excess": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "level": 1,
+    "reading": "eff",
+    "rule": "a3:sizes_minus_2pairs",
+    "shape": null,
+    "source": "aud",
+    "unit": "R1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "1.000050000000",
+     "fraction": "20001/20000"
+    },
+    "excess": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "level": 3,
+    "reading": "eff",
+    "rule": "a3:pairs_minus_3triples",
+    "shape": null,
+    "source": "aud",
+    "unit": "R1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "1.000050000000",
+     "fraction": "20001/20000"
+    },
+    "excess": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "level": 4,
+    "reading": "eff",
+    "rule": "a3:pairs_minus_2triples",
+    "shape": null,
+    "source": "aud",
+    "unit": "R1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "1.000050000000",
+     "fraction": "20001/20000"
+    },
+    "excess": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "level": 6,
+    "reading": "eff",
+    "rule": "a3:pairs_minus_3triples",
+    "shape": null,
+    "source": "aud",
+    "unit": "R1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "1.000050000000",
+     "fraction": "20001/20000"
+    },
+    "excess": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "level": 0,
+    "reading": "eff",
+    "rule": "ignore_triples",
+    "shape": null,
+    "source": "impl",
+    "unit": "R1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "1.000050000000",
+     "fraction": "20001/20000"
+    },
+    "excess": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "level": 1,
+    "reading": "eff",
+    "rule": "sizes_minus_2pairs",
+    "shape": null,
+    "source": "impl",
+    "unit": "R1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "1.000050000000",
+     "fraction": "20001/20000"
+    },
+    "excess": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "level": 3,
+    "reading": "eff",
+    "rule": "pairs_minus_3triples",
+    "shape": null,
+    "source": "impl",
+    "unit": "R1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "1.000050000000",
+     "fraction": "20001/20000"
+    },
+    "excess": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "level": 4,
+    "reading": "eff",
+    "rule": "pairs_minus_2triples",
+    "shape": null,
+    "source": "impl",
+    "unit": "R1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "1.000050000000",
+     "fraction": "20001/20000"
+    },
+    "excess": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "level": 6,
+    "reading": "eff",
+    "rule": "pairs_minus_3triples",
+    "shape": null,
+    "source": "impl",
+    "unit": "R1a"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "1.000050000000",
+     "fraction": "20001/20000"
+    },
+    "excess": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "level": 0,
+    "reading": "eff",
+    "rule": "a3:ignore_triples",
+    "shape": null,
+    "source": "aud",
+    "unit": "R1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "1.000050000000",
+     "fraction": "20001/20000"
+    },
+    "excess": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "level": 1,
+    "reading": "eff",
+    "rule": "a3:sizes_minus_2pairs",
+    "shape": null,
+    "source": "aud",
+    "unit": "R1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "1.000050000000",
+     "fraction": "20001/20000"
+    },
+    "excess": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "level": 3,
+    "reading": "eff",
+    "rule": "a3:pairs_minus_3triples",
+    "shape": null,
+    "source": "aud",
+    "unit": "R1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "1.000050000000",
+     "fraction": "20001/20000"
+    },
+    "excess": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "level": 4,
+    "reading": "eff",
+    "rule": "a3:pairs_minus_2triples",
+    "shape": null,
+    "source": "aud",
+    "unit": "R1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "1.000050000000",
+     "fraction": "20001/20000"
+    },
+    "excess": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "level": 6,
+    "reading": "eff",
+    "rule": "a3:pairs_minus_3triples",
+    "shape": null,
+    "source": "aud",
+    "unit": "R1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "1.000050000000",
+     "fraction": "20001/20000"
+    },
+    "excess": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "level": 0,
+    "reading": "eff",
+    "rule": "ignore_triples",
+    "shape": null,
+    "source": "impl",
+    "unit": "R1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "1.000050000000",
+     "fraction": "20001/20000"
+    },
+    "excess": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "level": 1,
+    "reading": "eff",
+    "rule": "sizes_minus_2pairs",
+    "shape": null,
+    "source": "impl",
+    "unit": "R1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "1.000050000000",
+     "fraction": "20001/20000"
+    },
+    "excess": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "level": 3,
+    "reading": "eff",
+    "rule": "pairs_minus_3triples",
+    "shape": null,
+    "source": "impl",
+    "unit": "R1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "1.000050000000",
+     "fraction": "20001/20000"
+    },
+    "excess": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "level": 4,
+    "reading": "eff",
+    "rule": "pairs_minus_2triples",
+    "shape": null,
+    "source": "impl",
+    "unit": "R1b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "1.000050000000",
+     "fraction": "20001/20000"
+    },
+    "excess": {
+     "decimal_12dp": "1.000000000000",
+     "fraction": "1/1"
+    },
+    "level": 6,
+    "reading": "eff",
+    "rule": "pairs_minus_3triples",
+    "shape": null,
+    "source": "impl",
+    "unit": "R1b"
+   }
+  ],
+  "evaluation": "R1",
+  "lineage": "R1.venn_counting_r5",
+  "reason": {
+   "abs_excess_plus_uncertainty": {
+    "decimal_12dp": "1.000050000000",
+    "fraction": "20001/20000"
+   },
+   "bound": "15/100",
+   "excess": {
+    "decimal_12dp": "1.000000000000",
+    "fraction": "1/1"
+   },
+   "level": 0,
+   "pooled_figure": {
+    "decimal_12dp": "1.000000000000",
+    "fraction": "1/1"
+   },
+   "reading": "eff",
+   "rounding_uncertainty": {
+    "decimal_12dp": "0.000050000000",
+    "fraction": "1/20000"
+   },
+   "rule": "a3:ignore_triples",
+   "shape": null,
+   "source": "aud",
+   "unit": "R1a"
+  }
+ },
+ {
+  "all_rows_over_the_bound": [
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.399750000000",
+     "fraction": "1599/4000"
+    },
+    "excess": {
+     "decimal_12dp": "0.399750000000",
+     "fraction": "1599/4000"
+    },
+    "level": 0,
+    "reading": "k_over_n",
+    "rule": "[NEW] (artifact) final list = start list with adds appended and removals applied, all moves and reverses ignored",
+    "shape": null,
+    "source": "f_rules_new",
+    "unit": "R2b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.270166666667",
+     "fraction": "1621/6000"
+    },
+    "excess": {
+     "decimal_12dp": "0.270166666667",
+     "fraction": "1621/6000"
+    },
+    "level": 1,
+    "reading": "k_over_n",
+    "rule": "[NEW] (artifact) final list = start list with adds appended and removals applied, all moves and reverses ignored",
+    "shape": null,
+    "source": "f_rules_new",
+    "unit": "R2b"
+   },
+   {
+    "abs_excess_plus_uncertainty": {
+     "decimal_12dp": "0.189250000000",
+     "fraction": "757/4000"
+    },
+    "excess": {
+     "decimal_12dp": "0.189250000000",
+     "fraction": "757/4000"
+    },
+    "level": 2,
+    "reading": "k_over_n",
+    "rule": "[NEW] (artifact) final list = start list with adds appended and removals applied, all moves and reverses ignored",
+    "shape": null,
+    "source": "f_rules_new",
+    "unit": "R2b"
+   }
+  ],
+  "evaluation": "R2",
+  "lineage": "R2.list_ops",
+  "reason": {
+   "abs_excess_plus_uncertainty": {
+    "decimal_12dp": "0.399750000000",
+    "fraction": "1599/4000"
+   },
+   "bound": "15/100",
+   "excess": {
+    "decimal_12dp": "0.399750000000",
+    "fraction": "1599/4000"
+   },
+   "level": 0,
+   "pooled_figure": {
+    "decimal_12dp": "0.399750000000",
+    "fraction": "1599/4000"
+   },
+   "reading": "k_over_n",
+   "rounding_uncertainty": {
+    "decimal_12dp": "0.000000000000",
+    "fraction": "0/1"
+   },
+   "rule": "[NEW] (artifact) final list = start list with adds appended and removals applied, all moves and reverses ignored",
+   "shape": null,
+   "source": "f_rules_new",
+   "unit": "R2b"
+  }
+ }
+]
