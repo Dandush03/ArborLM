@@ -1,0 +1,62 @@
+lineages per evaluation: {'R1': 122, 'R2': 44, 'M1': 95, 'C1': 84} total 345
+judged pairs: 425 (explicit 245 + revision 180 )
+links: 294  borderline pairs: 99  NONE rows: 32
+global clusters: 92  groups: 30  multi-cluster groups: 4
+  clusters with a lineage of R1: 25
+  clusters with a lineage of R2: 37
+  clusters with a lineage of M1: 23
+  clusters with a lineage of C1: 34
+cross-evaluation clusters: 23
+    C1.bfs_queue ['C1', 'R1'] 15 lineages
+    C1.binary_search ['C1', 'R2'] 3 lineages
+    C1.bracket_matching ['C1', 'R2'] 6 lineages
+    C1.cellular_update ['C1', 'R2'] 4 lineages
+    C1.circle_elimination ['C1', 'R1', 'R2'] 7 lineages
+    C1.coin_change_table ['C1', 'M1', 'R2'] 8 lineages
+    C1.counter_list ['C1', 'M1'] 4 lineages
+    C1.digit_peel ['C1', 'R2'] 5 lineages
+    C1.euclid_gcd ['C1', 'M1', 'R2'] 8 lineages
+    C1.fast_power ['C1', 'M1', 'R2'] 10 lineages
+    C1.fib_like ['C1', 'M1'] 11 lineages
+    C1.kadane_scan ['C1', 'R2'] 3 lineages
+    C1.mirror_pointers ['C1', 'R2'] 2 lineages
+    C1.run_length_scan ['C1', 'R2'] 2 lineages
+    C1.string_pair_table ['C1', 'R2'] 2 lineages
+    M1.crt_congruence ['M1', 'R2'] 4 lineages
+    M1.inclusion_exclusion ['M1', 'R1'] 6 lineages
+    M1.median_list ['M1', 'R2'] 5 lineages
+    M1.prime_factors ['M1', 'R2'] 4 lineages
+    R1.activity_selection ['R1', 'R2'] 4 lineages
+    R1.mst_cost ['R1', 'R2'] 3 lineages
+    R1.nim_xor ['R1', 'R2'] 4 lineages
+    R1.stable_matching ['R1', 'R2'] 5 lineages
+borderline pairs inside one cluster (no group effect): 4
+    ('C1.bfs_queue', 'R1.categories_follow')
+    ('C1.union_find_links', 'R1.categories_follow')
+    ('R1.order_tournament_wins', 'R1.topological_order')
+    ('R2.bracket_match', 'R2.stack_machine')
+changed against earlier: 23  new pairs: 6
+   CHANGED ('C1.bfs_queue', 'R1.road_reachability') BORDERLINE -> LINK
+   CHANGED ('C1.bytecode_loop', 'C1.turtle_walk') LINK -> BORDERLINE
+   CHANGED ('C1.coin_change_table', 'C1.grid_path_table') LINK -> BORDERLINE
+   CHANGED ('C1.coin_change_table', 'C1.string_pair_table') LINK -> BORDERLINE
+   CHANGED ('C1.cond_chain', 'C1.euclid_gcd') LINK -> BORDERLINE
+   CHANGED ('C1.counter_list', 'C1.counter_list_f3') NONE -> BORDERLINE
+   CHANGED ('C1.counter_list', 'M1.mode_tally') BORDERLINE -> LINK
+   CHANGED ('C1.fast_power', 'C1.fast_power_f3') NONE -> LINK
+   CHANGED ('C1.fast_power_f3', 'R2.modular_power') BORDERLINE -> LINK
+   CHANGED ('C1.fast_power_f4', 'M1.last_digit_power') BORDERLINE -> LINK
+   CHANGED ('C1.fib_like', 'M1.recurrence_iterate') BORDERLINE -> LINK
+   CHANGED ('C1.grid_path_table', 'C1.string_pair_table') LINK -> BORDERLINE
+   CHANGED ('C1.list_build', 'C1.loop_sum') LINK -> BORDERLINE
+   CHANGED ('C1.list_build', 'C1.nested_pairs') LINK -> BORDERLINE
+   CHANGED ('C1.list_build', 'C1.string_build') LINK -> BORDERLINE
+   CHANGED ('C1.loop_sum', 'C1.nested_pairs') LINK -> BORDERLINE
+   CHANGED ('C1.loop_sum', 'C1.string_build') LINK -> BORDERLINE
+   CHANGED ('C1.loop_sum', 'M1.arithmetic_series') BORDERLINE -> LINK
+   CHANGED ('C1.mirror_pointers', 'R2.palindrome_check') BORDERLINE -> LINK
+   CHANGED ('C1.nested_pairs', 'C1.string_build') LINK -> BORDERLINE
+   CHANGED ('C1.union_find_links', 'R1.equivalence_classes') BORDERLINE -> LINK
+   CHANGED ('M1.binomial_choose', 'M1.slot_permutations') LINK -> BORDERLINE
+   CHANGED ('R1.order_tournament_wins', 'R1.topological_order') LINK -> BORDERLINE
+map_of_record.json sha256 1ba6ddd520dfe6514dfd282883ce4bc84660b7dca1abfefdac58285dcab5809c

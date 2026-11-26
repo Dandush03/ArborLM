@@ -1,0 +1,15 @@
+survivors missing from map: []
+clusters holding a survivor: 52
+  R1 survivor lineages 10 -> clusters 8
+  R2 survivor lineages 17 -> clusters 16
+  M1 survivor lineages 29 -> clusters 17
+  C1 survivor lineages 26 -> clusters 21
+survivor clusters spanning >1 evaluation: 10
+groups total 30 sizes>1: [57, 5, 2, 2]
+ group of 57 clusters: survivor-holding clusters 35 {'R1': 6, 'R2': 9, 'M1': 10, 'C1': 16}
+ group of 5 clusters: survivor-holding clusters 2 {'R1': 0, 'R2': 1, 'M1': 1, 'C1': 1}
+ group of 2 clusters: survivor-holding clusters 1 {'R1': 0, 'R2': 1, 'M1': 0, 'C1': 1}
+ group of 2 clusters: survivor-holding clusters 2 {'R1': 1, 'R2': 0, 'M1': 1, 'C1': 0}
+survivor clusters in singleton groups: 12 not in any group: 0
+ per evaluation: {'R1': 1, 'R2': 5, 'M1': 5, 'C1': 3}
+borderline pairs 99 with both ends survivors 2 with >=1 survivor end 30
