@@ -1,0 +1,255 @@
+{
+ "R2.binary_search_trace": {
+  "cue": {
+   "[NEW] (cue) sum ask: target x ceil(log2(n+1)) ; values ask: midpoints by position only, target appended": [
+    0.0321,
+    0.0211,
+    0.016,
+    0.021,
+    0.0188,
+    0.0157,
+    0.0105
+   ]
+  }
+ },
+ "R2.cheapest_network": {
+  "cue": {
+   "[NEW] (cue) nearest-neighbour path from the first listed town": [
+    0.0715,
+    0.0415,
+    0.0288,
+    0.0177,
+    0.0143,
+    0.008,
+    0.0065
+   ]
+  }
+ },
+ "R2.count_divisible": {
+  "P": {
+   "[NEW] (P) misread: each distinct value counted once (the wording now excludes it)": [
+    0.72,
+    0.6175,
+    0.7232,
+    0.658,
+    0.7075,
+    0.6282,
+    0.656
+   ]
+  }
+ },
+ "R2.crt_smallest": {
+  "cue": {
+   "[NEW] (cue) common offset: equal remainders -> r; equal (m - r) -> lcm - (m - r)": [
+    0.1108,
+    0.0663,
+    0.056,
+    0.0008,
+    0.0008,
+    0.0013,
+    0.0
+   ],
+   "[NEW] (cue) largest remainder + its modulus": [
+    0.117,
+    0.0575,
+    0.042,
+    0.0003,
+    0.0013,
+    0.0008,
+    0.0
+   ]
+  },
+  "partial": {
+   "[NEW] (partial) largest modulus: try r, r+m, r+2m against the other congruences, else r": [
+    0.3658,
+    0.1915,
+    0.1335,
+    0.0018,
+    0.0032,
+    0.0013,
+    0.0008
+   ]
+  }
+ },
+ "R2.digit_root": {
+  "cue": {
+   "[NEW] (cue) digit sum once, first digit": [
+    0.2115,
+    0.2028,
+    0.2013,
+    0.2095,
+    0.2015,
+    0.2047,
+    0.1945
+   ],
+   "[NEW] (cue) digit sum once, last digit": [
+    0.0135,
+    0.003,
+    0.001,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  }
+ },
+ "R2.expression_eval": {
+  "cue": {
+   "[NEW] (cue) parentheses ignored, the item's own convention otherwise": [
+    0.022,
+    0.0185,
+    0.0132,
+    0.011,
+    0.0015,
+    0.003,
+    0.002
+   ],
+   "[NEW] (cue) the other convention (ranked item worked left to right, left-to-right item worked with precedence)": [
+    0.003,
+    0.002,
+    0.0041,
+    0.001,
+    0.0005,
+    0.001,
+    0.0
+   ]
+  }
+ },
+ "R2.from_base": {
+  "cue": {
+   "[NEW] (cue) digits read as a decimal number": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  }
+ },
+ "R2.grid_sum": {
+  "cue": {
+   "[NEW] (cue) the asked row/column/diagonal read with the index off by one (next one)": [
+    0.0475,
+    0.048,
+    0.0385,
+    0.0413,
+    0.0367,
+    0.0395,
+    0.034
+   ]
+  }
+ },
+ "R2.interval_scheduling": {
+  "cue": {
+   "[NEW] (cue) fewest clashes first (ties by end, then number)": [
+    0.5072,
+    0.4233,
+    0.4042,
+    0.3277,
+    0.306,
+    0.264,
+    0.2323
+   ],
+   "[NEW] (cue) keep every meeting that clashes with no shorter meeting": [
+    0.019,
+    0.0067,
+    0.0035,
+    0.0022,
+    0.0005,
+    0.0,
+    0.0
+   ]
+  }
+ },
+ "R2.list_ops": {
+  "artifact": {
+   "[NEW] (artifact) final list = start list with adds appended and removals applied, all moves and reverses ignored": [
+    0.4123,
+    0.2587,
+    0.1998,
+    0.153,
+    0.1092,
+    0.0762,
+    0.063
+   ]
+  },
+  "cue": {
+   "[NEW] [cond] (cue) moves and reverses ignored (items with at least one move or reverse)": [
+    0.0689,
+    0.062,
+    0.0738,
+    0.0806,
+    0.0599,
+    0.0516,
+    0.0427
+   ]
+  }
+ },
+ "R2.luhn_check": {
+  "cue": {
+   "[NEW] (cue) check digit: (10 - digit sum mod 10) mod 10 with every digit doubled": [
+    0.1058,
+    0.1071,
+    0.095,
+    0.1023,
+    0.1059,
+    0.1051,
+    0.1012
+   ]
+  }
+ },
+ "R2.min_heap_ops": {
+  "cue": {
+   "[NEW] (cue) row sorted ascending except positions 2 and 3 swapped when out of order": [
+    0.0038,
+    0.0007,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  }
+ },
+ "R2.run_length": {
+  "cue": {
+   "[NEW] (cue) each letter with its total count, in order of first appearance": [
+    0.0393,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  }
+ },
+ "R2.string_rewrite_nonidentity": {
+  "P": {
+   "[NEW] (P) misread: each step repeated until no match is left (capped at 50 rounds)": [
+    0.7402,
+    0.5062,
+    0.4855,
+    0.3345,
+    0.3207,
+    0.215,
+    0.2107
+   ]
+  }
+ },
+ "R2.to_base_wide": {
+  "cue": {
+   "[NEW] (cue) remainders of repeated division by the base, written in the order produced": [
+    0.0428,
+    0.0243,
+    0.016,
+    0.0077,
+    0.003,
+    0.0022,
+    0.0003
+   ]
+  }
+ }
+}

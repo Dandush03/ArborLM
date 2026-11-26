@@ -1,0 +1,2223 @@
+{
+ "audit": "final C1 re-measurement after fix 4 (independent auditor, Claude Opus 5.5); Astra review: NOT_PERFORMED; not human approval",
+ "bound": 0.15,
+ "capacity_note": "per level alone: every lineage-level supplied 35,300 text-distinct items within the draw_items budget; with one shared taken over the 7 levels (as generate_pool shares it within a pool) see shared_taken_all_levels; 12,700 texts were drawn at two levels of the same lineage, none across lineages",
+ "clusters": {},
+ "consistency": {
+  "manifests": {
+   "c1_fix4_capacity_raw": {
+    "dropped_present": [],
+    "equals_27": true,
+    "extra": [],
+    "missing": [],
+    "n": 27
+   },
+   "c1_fix4_clusters": {
+    "dropped_present": [],
+    "equals_27": true,
+    "extra": [],
+    "missing": [],
+    "n": 27
+   },
+   "c1_fix4_exec": {
+    "dropped_present": [],
+    "equals_27": true,
+    "extra": [],
+    "missing": [],
+    "n": 27
+   },
+   "c1_fix4_levels_final_set": {
+    "dropped_present": [],
+    "equals_27": true,
+    "extra": [],
+    "missing": [],
+    "n": 27
+   },
+   "c1_fix4_rules_final_set": {
+    "dropped_present": [],
+    "equals_27": true,
+    "extra": [],
+    "missing": [],
+    "n": 27
+   },
+   "c1_fix4_survivors": {
+    "dropped_present": [],
+    "equals_27": true,
+    "extra": [],
+    "missing": [],
+    "n": 27
+   }
+  },
+  "my_current_equals_27": true,
+  "my_current_equals_members": true,
+  "n_clusters": 18,
+  "n_clusters_wo_variants": 16,
+  "n_members": 27,
+  "one_shape_check": {
+   "C1.fast_power_f4": {
+    "items": 14000,
+    "other_shape": 0
+   },
+   "C1.sieve_marking_f4": {
+    "items": 14000,
+    "other_shape": 0
+   }
+  },
+  "registry_c1_ids_in_survivors": [],
+  "registry_has_fix4": [],
+  "their_check_consistency": [],
+  "variant_clusters": {
+   "C1.counter_list_state_machine": [
+    "C1.counter_list_f3"
+   ],
+   "C1.fast_power_square_map": [
+    "C1.fast_power_f4"
+   ]
+  }
+ },
+ "keys_interpreters": {
+  "/Users/daniellaloush/.local/share/uv/python/cpython-3.12.14-macos-aarch64-none/bin/python3.12": {
+   "hashseed": "0",
+   "version": "3.12.14"
+  },
+  "/opt/homebrew/bin/python3.15": {
+   "hashseed": "2718281",
+   "version": "3.15.1"
+  }
+ },
+ "keys_totals": {
+  "n": 94500
+ },
+ "lineages": {
+  "C1.binary_search_f3": {
+   "a3_mutation_artefact_max": [
+    0.0,
+    6,
+    null
+   ],
+   "capacity": {
+    "G7_35300": true,
+    "G8_31000": true,
+    "G9_27680": true,
+    "max_attempts_per_item_at_35300": 1.0,
+    "per_level_alone_min_supplied": 35300,
+    "shared_taken_all_levels": {
+     "G7": true,
+     "G8": true,
+     "G9": true
+    }
+   },
+   "cluster": "C1.binary_search",
+   "in_shape_max": [
+    0.1708,
+    0,
+    "probes_half|MF_in_shape_cv"
+   ],
+   "keys": {
+    "items": 3500,
+    "per_level_min": 500,
+    "problems": {}
+   },
+   "levels": {
+    "max_cross_level_repeat_share": 0.0,
+    "min_distinct_share": 1.0,
+    "param_feature": "longest_literal",
+    "steps_not_distinct": [],
+    "steps_param_not_rising": [],
+    "steps_rising": 6,
+    "steps_rising_only_in_max_literal": []
+   },
+   "pooled_implementer_reading_max": {
+    "excess": 0.0733,
+    "level": 0,
+    "rule": "a4.EFF_S"
+   },
+   "pooled_strict_max": {
+    "excess": 0.0733,
+    "level": 0,
+    "rule": "a4.EFF_S"
+   },
+   "pooled_with_partial_trace_max": {
+    "excess": 0.0733,
+    "level": 0,
+    "rule": "a4.EFF_SM"
+   },
+   "r19": "no reject or redraw of its own; the shared finish never fired in 14,000 draws",
+   "retries_per_14000": {
+    "builder": 0,
+    "retries": 0
+   },
+   "variant": false,
+   "verdict_R31_counted_rules": "STAYS",
+   "would_drop_if_partial_trace_counted": false
+  },
+  "C1.bracket_matching_f3": {
+   "a3_mutation_artefact_max": [
+    0.0,
+    6,
+    null
+   ],
+   "capacity": {
+    "G7_35300": true,
+    "G8_31000": true,
+    "G9_27680": true,
+    "max_attempts_per_item_at_35300": 1.0,
+    "per_level_alone_min_supplied": 35300,
+    "shared_taken_all_levels": {
+     "G7": true,
+     "G8": true,
+     "G9": true
+    }
+   },
+   "cluster": "B8",
+   "in_shape_max": [
+    0.0663,
+    1,
+    "code|MF_in_shape_cv"
+   ],
+   "keys": {
+    "items": 3500,
+    "per_level_min": 500,
+    "problems": {}
+   },
+   "levels": {
+    "max_cross_level_repeat_share": 0.0,
+    "min_distinct_share": 1.0,
+    "param_feature": "longest_literal",
+    "steps_not_distinct": [],
+    "steps_param_not_rising": [],
+    "steps_rising": 6,
+    "steps_rising_only_in_max_literal": []
+   },
+   "pooled_implementer_reading_max": {
+    "excess": 0.035,
+    "level": 0,
+    "rule": "a4.EFF_S"
+   },
+   "pooled_strict_max": {
+    "excess": 0.035,
+    "level": 0,
+    "rule": "a4.EFF_S"
+   },
+   "pooled_with_partial_trace_max": {
+    "excess": 0.063,
+    "level": 0,
+    "rule": "a4.EFF_SM"
+   },
+   "r19": "no reject or redraw of its own; the shared finish never fired in 14,000 draws",
+   "retries_per_14000": {
+    "builder": 0,
+    "retries": 0
+   },
+   "variant": false,
+   "verdict_R31_counted_rules": "STAYS",
+   "would_drop_if_partial_trace_counted": false
+  },
+  "C1.bytecode_loop_f3": {
+   "a3_mutation_artefact_max": [
+    1.0,
+    0,
+    "a3.other|S.no_skips"
+   ],
+   "capacity": {
+    "G7_35300": true,
+    "G8_31000": true,
+    "G9_27680": true,
+    "max_attempts_per_item_at_35300": 1.0,
+    "per_level_alone_min_supplied": 35300,
+    "shared_taken_all_levels": {
+     "G7": true,
+     "G8": true,
+     "G9": true
+    }
+   },
+   "cluster": "B7",
+   "in_shape_max": [
+    0.0796,
+    3,
+    "reg|MF_in_shape_cv"
+   ],
+   "keys": {
+    "items": 3500,
+    "per_level_min": 500,
+    "problems": {}
+   },
+   "levels": {
+    "max_cross_level_repeat_share": 0.0,
+    "min_distinct_share": 1.0,
+    "param_feature": "steps",
+    "steps_not_distinct": [],
+    "steps_param_not_rising": [
+     "L1->L2"
+    ],
+    "steps_rising": 6,
+    "steps_rising_only_in_max_literal": []
+   },
+   "pooled_implementer_reading_max": {
+    "excess": 0.0688,
+    "level": 2,
+    "rule": "a4.EFF_S"
+   },
+   "pooled_strict_max": {
+    "excess": 0.0688,
+    "level": 2,
+    "rule": "a4.EFF_S"
+   },
+   "pooled_with_partial_trace_max": {
+    "excess": 0.0913,
+    "level": 3,
+    "rule": "a4.EFF_SM"
+   },
+   "r19": "no reject or redraw of its own; the shared finish never fired in 14,000 draws",
+   "retries_per_14000": {
+    "builder": 0,
+    "retries": 0
+   },
+   "variant": false,
+   "verdict_R31_counted_rules": "STAYS",
+   "would_drop_if_partial_trace_counted": false
+  },
+  "C1.circle_elimination_r2": {
+   "a3_mutation_artefact_max": [
+    0.0,
+    6,
+    null
+   ],
+   "capacity": {
+    "G7_35300": true,
+    "G8_31000": true,
+    "G9_27680": true,
+    "max_attempts_per_item_at_35300": 1.0,
+    "per_level_alone_min_supplied": 35300,
+    "shared_taken_all_levels": {
+     "G7": true,
+     "G8": true,
+     "G9": true
+    }
+   },
+   "cluster": "C1.circle_elimination",
+   "in_shape_max": [
+    0.111,
+    0,
+    "survivor|MF_in_shape_cv"
+   ],
+   "keys": {
+    "items": 3500,
+    "per_level_min": 500,
+    "problems": {}
+   },
+   "levels": {
+    "max_cross_level_repeat_share": 0.0,
+    "min_distinct_share": 1.0,
+    "param_feature": "longest_literal",
+    "steps_not_distinct": [],
+    "steps_param_not_rising": [],
+    "steps_rising": 6,
+    "steps_rising_only_in_max_literal": []
+   },
+   "pooled_implementer_reading_max": {
+    "excess": 0.0937,
+    "level": 0,
+    "rule": "battery.MF_cv"
+   },
+   "pooled_strict_max": {
+    "excess": 0.0937,
+    "level": 0,
+    "rule": "battery.MF_cv"
+   },
+   "pooled_with_partial_trace_max": {
+    "excess": 0.2705,
+    "level": 0,
+    "rule": "a4.EFF_SM"
+   },
+   "r19": "structural, not on the answer: fewer than 4 live flags (never fired in 14,000 draws)",
+   "retries_per_14000": {
+    "builder": 0,
+    "retries": 0
+   },
+   "variant": false,
+   "verdict_R31_counted_rules": "STAYS",
+   "would_drop_if_partial_trace_counted": true
+  },
+  "C1.cond_chain_f3": {
+   "a3_mutation_artefact_max": [
+    0.0,
+    6,
+    null
+   ],
+   "capacity": {
+    "G7_35300": true,
+    "G8_31000": true,
+    "G9_27680": true,
+    "max_attempts_per_item_at_35300": 1.0,
+    "per_level_alone_min_supplied": 35300,
+    "shared_taken_all_levels": {
+     "G7": true,
+     "G8": true,
+     "G9": true
+    }
+   },
+   "cluster": "B5",
+   "in_shape_max": [
+    0.1067,
+    0,
+    "b|S.rounds_x_gcd"
+   ],
+   "keys": {
+    "items": 3500,
+    "per_level_min": 500,
+    "problems": {}
+   },
+   "levels": {
+    "max_cross_level_repeat_share": 0.0,
+    "min_distinct_share": 1.0,
+    "param_feature": "steps",
+    "steps_not_distinct": [],
+    "steps_param_not_rising": [],
+    "steps_rising": 6,
+    "steps_rising_only_in_max_literal": []
+   },
+   "pooled_implementer_reading_max": {
+    "excess": 0.0758,
+    "level": 0,
+    "rule": "battery.tot|S.k_times_gcd"
+   },
+   "pooled_strict_max": {
+    "excess": 0.0758,
+    "level": 0,
+    "rule": "battery.tot|S.k_times_gcd"
+   },
+   "pooled_with_partial_trace_max": {
+    "excess": 0.2197,
+    "level": 0,
+    "rule": "a4.EFF_SM"
+   },
+   "r19": "no reject or redraw of its own; the shared finish never fired in 14,000 draws",
+   "retries_per_14000": {
+    "builder": 0,
+    "retries": 0
+   },
+   "variant": false,
+   "verdict_R31_counted_rules": "STAYS",
+   "would_drop_if_partial_trace_counted": true
+  },
+  "C1.counter_list_f3": {
+   "a3_mutation_artefact_max": [
+    0.0,
+    6,
+    null
+   ],
+   "capacity": {
+    "G7_35300": true,
+    "G8_31000": true,
+    "G9_27680": true,
+    "max_attempts_per_item_at_35300": 1.0,
+    "per_level_alone_min_supplied": 35300,
+    "shared_taken_all_levels": {
+     "G7": true,
+     "G8": true,
+     "G9": true
+    }
+   },
+   "closed_form_search": {
+    "implementer_gen72": {
+     "0": {
+      "F.prefix_hist": 0.0275,
+      "F.residue_hist": 0.0475,
+      "M.style0_everywhere": 0.0425,
+      "S.uniform": 0.04
+     },
+     "1": {
+      "F.prefix_hist": 0.0125,
+      "F.residue_hist": 0.02,
+      "M.style0_everywhere": 0.0275,
+      "S.uniform": 0.05
+     },
+     "2": {
+      "F.prefix_hist": 0.02,
+      "F.residue_hist": 0.01,
+      "M.style0_everywhere": 0.015,
+      "S.uniform": 0.03
+     },
+     "3": {
+      "F.prefix_hist": 0.0075,
+      "F.residue_hist": 0.0175,
+      "M.style0_everywhere": 0.015,
+      "S.uniform": 0.0325
+     },
+     "4": {
+      "F.prefix_hist": 0.015,
+      "F.residue_hist": 0.0125,
+      "M.style0_everywhere": 0.0225,
+      "S.uniform": 0.02
+     },
+     "5": {
+      "F.prefix_hist": 0.0075,
+      "F.residue_hist": 0.01,
+      "M.style0_everywhere": 0.0025,
+      "S.uniform": 0.01
+     },
+     "6": {
+      "F.prefix_hist": 0.0075,
+      "F.residue_hist": 0.0075,
+      "M.style0_everywhere": 0.005,
+      "S.uniform": 0.0125
+     }
+    },
+    "mine_gen9311": {
+     "0": {
+      "F.prefix_hist": 0.0325,
+      "F.residue_hist": 0.038,
+      "M.style0_everywhere": 0.0445,
+      "S.uniform": 0.055
+     },
+     "1": {
+      "F.prefix_hist": 0.028,
+      "F.residue_hist": 0.02,
+      "M.style0_everywhere": 0.023,
+      "S.uniform": 0.0415
+     },
+     "2": {
+      "F.prefix_hist": 0.0175,
+      "F.residue_hist": 0.02,
+      "M.style0_everywhere": 0.0165,
+      "S.uniform": 0.0345
+     },
+     "3": {
+      "F.prefix_hist": 0.009,
+      "F.residue_hist": 0.0115,
+      "M.style0_everywhere": 0.0115,
+      "S.uniform": 0.0315
+     },
+     "4": {
+      "F.prefix_hist": 0.0125,
+      "F.residue_hist": 0.009,
+      "M.style0_everywhere": 0.0075,
+      "S.uniform": 0.0235
+     },
+     "5": {
+      "F.prefix_hist": 0.01,
+      "F.residue_hist": 0.0095,
+      "M.style0_everywhere": 0.007,
+      "S.uniform": 0.0165
+     },
+     "6": {
+      "F.prefix_hist": 0.0095,
+      "F.residue_hist": 0.009,
+      "M.style0_everywhere": 0.0035,
+      "S.uniform": 0.018
+     }
+    }
+   },
+   "cluster": "C1.counter_list_state_machine",
+   "in_shape_max": [
+    0.0671,
+    0,
+    "style_threshold|MF_in_shape_cv"
+   ],
+   "keys": {
+    "items": 3500,
+    "per_level_min": 500,
+    "problems": {}
+   },
+   "levels": {
+    "max_cross_level_repeat_share": 0.0,
+    "min_distinct_share": 1.0,
+    "param_feature": "longest_literal",
+    "steps_not_distinct": [],
+    "steps_param_not_rising": [],
+    "steps_rising": 6,
+    "steps_rising_only_in_max_literal": []
+   },
+   "pooled_implementer_reading_max": {
+    "excess": 0.0587,
+    "level": 0,
+    "rule": "battery.counts|S.uniform"
+   },
+   "pooled_strict_max": {
+    "excess": 0.0587,
+    "level": 0,
+    "rule": "battery.counts|S.uniform"
+   },
+   "pooled_with_partial_trace_max": {
+    "excess": 0.0587,
+    "level": 0,
+    "rule": "battery.counts|S.uniform"
+   },
+   "r19": "no reject or redraw of its own; the shared finish never fired in 14,000 draws",
+   "retries_per_14000": {
+    "builder": 0,
+    "retries": 0
+   },
+   "variant": true,
+   "verdict_R31_counted_rules": "STAYS",
+   "would_drop_if_partial_trace_counted": false
+  },
+  "C1.digit_peel_f3": {
+   "a3_mutation_artefact_max": [
+    0.0,
+    6,
+    null
+   ],
+   "capacity": {
+    "G7_35300": true,
+    "G8_31000": true,
+    "G9_27680": true,
+    "max_attempts_per_item_at_35300": 1.0,
+    "per_level_alone_min_supplied": 35300,
+    "shared_taken_all_levels": {
+     "G7": true,
+     "G8": true,
+     "G9": true
+    }
+   },
+   "cluster": "C1.digit_peel",
+   "in_shape_max": [
+    0.0316,
+    1,
+    "wsum|MF_in_shape_cv"
+   ],
+   "keys": {
+    "items": 3500,
+    "per_level_min": 500,
+    "problems": {}
+   },
+   "levels": {
+    "max_cross_level_repeat_share": 0.0,
+    "min_distinct_share": 1.0,
+    "param_feature": "max_literal",
+    "steps_not_distinct": [],
+    "steps_param_not_rising": [],
+    "steps_rising": 6,
+    "steps_rising_only_in_max_literal": []
+   },
+   "pooled_implementer_reading_max": {
+    "excess": 0.0717,
+    "level": 0,
+    "rule": "a3.rev_bN|F.closed"
+   },
+   "pooled_strict_max": {
+    "excess": 0.0717,
+    "level": 0,
+    "rule": "a3.rev_bN|F.closed"
+   },
+   "pooled_with_partial_trace_max": {
+    "excess": 0.0717,
+    "level": 0,
+    "rule": "a3.rev_bN|F.closed"
+   },
+   "r19": "no reject or redraw of its own; the shared finish never fired in 14,000 draws",
+   "retries_per_14000": {
+    "builder": 0,
+    "retries": 0
+   },
+   "variant": false,
+   "verdict_R31_counted_rules": "STAYS",
+   "would_drop_if_partial_trace_counted": false
+  },
+  "C1.euclid_gcd_traced_f3": {
+   "a3_mutation_artefact_max": [
+    0.0,
+    6,
+    null
+   ],
+   "capacity": {
+    "G7_35300": true,
+    "G8_31000": true,
+    "G9_27680": true,
+    "max_attempts_per_item_at_35300": 1.0,
+    "per_level_alone_min_supplied": 35300,
+    "shared_taken_all_levels": {
+     "G7": true,
+     "G8": true,
+     "G9": true
+    }
+   },
+   "cluster": "B5",
+   "in_shape_max": [
+    0.0213,
+    1,
+    "state|MF_in_shape_cv"
+   ],
+   "keys": {
+    "items": 3500,
+    "per_level_min": 500,
+    "problems": {}
+   },
+   "levels": {
+    "max_cross_level_repeat_share": 0.0,
+    "min_distinct_share": 1.0,
+    "param_feature": "max_literal",
+    "steps_not_distinct": [],
+    "steps_param_not_rising": [],
+    "steps_rising": 6,
+    "steps_rising_only_in_max_literal": [
+     "L0->L1",
+     "L1->L2",
+     "L2->L3",
+     "L4->L5"
+    ]
+   },
+   "pooled_implementer_reading_max": {
+    "excess": 0.0175,
+    "level": 1,
+    "rule": "a4.MFsh"
+   },
+   "pooled_strict_max": {
+    "excess": 0.0175,
+    "level": 1,
+    "rule": "a4.MFsh"
+   },
+   "pooled_with_partial_trace_max": {
+    "excess": 0.0175,
+    "level": 1,
+    "rule": "a4.MFsh"
+   },
+   "r19": "trace-conditioned, not on the answer: equal operands and fewer than max(4, 3 + L // 2) Euclid rounds; rounds >= 4 is needed for the rsum shape's R range, the higher minimum at L >= 4 is a difficulty condition; 2.0 retries per item - PENDING LEAD REVIEW (R-13 wording)",
+   "retries_per_14000": {
+    "builder": 28175,
+    "retries": 28175
+   },
+   "variant": false,
+   "verdict_R31_counted_rules": "STAYS",
+   "would_drop_if_partial_trace_counted": false
+  },
+  "C1.fast_power_f4": {
+   "a3_mutation_artefact_max": [
+    0.0,
+    6,
+    null
+   ],
+   "capacity": {
+    "G7_35300": true,
+    "G8_31000": true,
+    "G9_27680": true,
+    "max_attempts_per_item_at_35300": 1.0,
+    "per_level_alone_min_supplied": 35300,
+    "shared_taken_all_levels": {
+     "G7": true,
+     "G8": true,
+     "G9": true
+    }
+   },
+   "closed_form_search": {
+    "implementer_gen72": {
+     "0": {
+      "F.pow_res_c0": 0.025,
+      "S.last_b_power": 0.0225,
+      "S.pow_terms_plus_c": 0.0525
+     },
+     "1": {
+      "F.pow_res_c0": 0.04,
+      "S.last_b_power": 0.0225,
+      "S.pow_terms_plus_c": 0.0775
+     },
+     "2": {
+      "F.pow_res_c0": 0.0475,
+      "S.last_b_power": 0.0275,
+      "S.pow_terms_plus_c": 0.08
+     },
+     "3": {
+      "F.pow_res_c0": 0.01,
+      "S.last_b_power": 0.0175,
+      "S.pow_terms_plus_c": 0.0775
+     },
+     "4": {
+      "F.pow_res_c0": 0.0325,
+      "S.last_b_power": 0.045,
+      "S.pow_terms_plus_c": 0.0375
+     },
+     "5": {
+      "F.pow_res_c0": 0.03,
+      "S.last_b_power": 0.0225,
+      "S.pow_terms_plus_c": 0.095
+     },
+     "6": {
+      "F.pow_res_c0": 0.0225,
+      "S.last_b_power": 0.015,
+      "S.pow_terms_plus_c": 0.075
+     }
+    },
+    "mine_gen9311": {
+     "0": {
+      "F.pow_res_c0": 0.038,
+      "S.last_b_power": 0.028,
+      "S.pow_terms_plus_c": 0.0535
+     },
+     "1": {
+      "F.pow_res_c0": 0.0205,
+      "S.last_b_power": 0.0175,
+      "S.pow_terms_plus_c": 0.0855
+     },
+     "2": {
+      "F.pow_res_c0": 0.0375,
+      "S.last_b_power": 0.034,
+      "S.pow_terms_plus_c": 0.0585
+     },
+     "3": {
+      "F.pow_res_c0": 0.019,
+      "S.last_b_power": 0.022,
+      "S.pow_terms_plus_c": 0.071
+     },
+     "4": {
+      "F.pow_res_c0": 0.0315,
+      "S.last_b_power": 0.0225,
+      "S.pow_terms_plus_c": 0.0585
+     },
+     "5": {
+      "F.pow_res_c0": 0.0295,
+      "S.last_b_power": 0.021,
+      "S.pow_terms_plus_c": 0.076
+     },
+     "6": {
+      "F.pow_res_c0": 0.0295,
+      "S.last_b_power": 0.0265,
+      "S.pow_terms_plus_c": 0.053
+     }
+    }
+   },
+   "cluster": "C1.fast_power_square_map",
+   "in_shape_max": [
+    0.048,
+    5,
+    "res|MF_in_shape_cv"
+   ],
+   "keys": {
+    "items": 3500,
+    "per_level_min": 500,
+    "problems": {}
+   },
+   "levels": {
+    "max_cross_level_repeat_share": 0.0,
+    "min_distinct_share": 1.0,
+    "param_feature": "max_literal",
+    "steps_not_distinct": [],
+    "steps_param_not_rising": [],
+    "steps_rising": 6,
+    "steps_rising_only_in_max_literal": []
+   },
+   "pooled_implementer_reading_max": {
+    "excess": 0.0542,
+    "level": 6,
+    "rule": "battery.MF_cv"
+   },
+   "pooled_strict_max": {
+    "excess": 0.0542,
+    "level": 6,
+    "rule": "battery.MF_cv"
+   },
+   "pooled_with_partial_trace_max": {
+    "excess": 0.0542,
+    "level": 6,
+    "rule": "battery.MF_cv"
+   },
+   "r19": "no reject or redraw of its own; the shared finish never fired in 14,000 draws",
+   "retries_per_14000": {
+    "builder": 0,
+    "retries": 0
+   },
+   "variant": true,
+   "verdict_R31_counted_rules": "STAYS",
+   "would_drop_if_partial_trace_counted": false
+  },
+  "C1.fib_like_f3": {
+   "a3_mutation_artefact_max": [
+    0.0,
+    6,
+    null
+   ],
+   "capacity": {
+    "G7_35300": true,
+    "G8_31000": true,
+    "G9_27680": true,
+    "max_attempts_per_item_at_35300": 1.0,
+    "per_level_alone_min_supplied": 35300,
+    "shared_taken_all_levels": {
+     "G7": true,
+     "G8": true,
+     "G9": true
+    }
+   },
+   "cluster": "B6",
+   "in_shape_max": [
+    0.0383,
+    5,
+    "mod|MF_in_shape_cv"
+   ],
+   "keys": {
+    "items": 3500,
+    "per_level_min": 500,
+    "problems": {}
+   },
+   "levels": {
+    "max_cross_level_repeat_share": 0.0,
+    "min_distinct_share": 1.0,
+    "param_feature": "steps",
+    "steps_not_distinct": [],
+    "steps_param_not_rising": [],
+    "steps_rising": 6,
+    "steps_rising_only_in_max_literal": []
+   },
+   "pooled_implementer_reading_max": {
+    "excess": 0.0883,
+    "level": 0,
+    "rule": "battery.all|S.plain_fibonacci_a"
+   },
+   "pooled_strict_max": {
+    "excess": 0.0883,
+    "level": 0,
+    "rule": "battery.all|S.plain_fibonacci_a"
+   },
+   "pooled_with_partial_trace_max": {
+    "excess": 0.0883,
+    "level": 0,
+    "rule": "battery.all|S.plain_fibonacci_a"
+   },
+   "r19": "no reject or redraw of its own; the shared finish never fired in 14,000 draws",
+   "retries_per_14000": {
+    "builder": 0,
+    "retries": 0
+   },
+   "variant": false,
+   "verdict_R31_counted_rules": "STAYS",
+   "would_drop_if_partial_trace_counted": false
+  },
+  "C1.fib_shapes_recursive_f3": {
+   "a3_mutation_artefact_max": [
+    0.0,
+    6,
+    null
+   ],
+   "capacity": {
+    "G7_35300": true,
+    "G8_31000": true,
+    "G9_27680": true,
+    "max_attempts_per_item_at_35300": 1.014,
+    "per_level_alone_min_supplied": 35300,
+    "shared_taken_all_levels": {
+     "G7": true,
+     "G8": true,
+     "G9": true
+    }
+   },
+   "cluster": "B6",
+   "in_shape_max": [
+    0.0117,
+    0,
+    "tri|MF_in_shape_cv"
+   ],
+   "keys": {
+    "items": 3500,
+    "per_level_min": 500,
+    "problems": {}
+   },
+   "levels": {
+    "max_cross_level_repeat_share": 0.003,
+    "min_distinct_share": 0.9975,
+    "param_feature": "steps",
+    "steps_not_distinct": [],
+    "steps_param_not_rising": [],
+    "steps_rising": 6,
+    "steps_rising_only_in_max_literal": []
+   },
+   "pooled_implementer_reading_max": {
+    "excess": 0.0147,
+    "level": 0,
+    "rule": "battery.BEST_generic_cv"
+   },
+   "pooled_strict_max": {
+    "excess": 0.0147,
+    "level": 0,
+    "rule": "battery.BEST_generic_cv"
+   },
+   "pooled_with_partial_trace_max": {
+    "excess": 0.0147,
+    "level": 0,
+    "rule": "battery.BEST_generic_cv"
+   },
+   "r19": "no reject or redraw of its own; the shared finish never fired in 14,000 draws",
+   "retries_per_14000": {
+    "builder": 0,
+    "retries": 0
+   },
+   "variant": false,
+   "verdict_R31_counted_rules": "STAYS",
+   "would_drop_if_partial_trace_counted": false
+  },
+  "C1.func_branch_f4": {
+   "a3_mutation_artefact_max": [
+    0.0,
+    6,
+    null
+   ],
+   "capacity": {
+    "G7_35300": true,
+    "G8_31000": true,
+    "G9_27680": true,
+    "max_attempts_per_item_at_35300": 1.0,
+    "per_level_alone_min_supplied": 35300,
+    "shared_taken_all_levels": {
+     "G7": true,
+     "G8": true,
+     "G9": true
+    }
+   },
+   "closed_form_search": {
+    "implementer_gen72": {
+     "0": {
+      "S.always_high_branch": 0.435
+     },
+     "1": {
+      "S.always_high_branch": 0.51
+     },
+     "2": {
+      "M.no_even_branch": 0.6625,
+      "S.always_high_branch": 0.4675
+     },
+     "3": {
+      "M.no_even_branch": 0.58,
+      "S.always_high_branch": 0.39
+     },
+     "4": {
+      "M.no_even_branch": 0.61,
+      "S.always_high_branch": 0.3975
+     },
+     "5": {
+      "M.no_even_branch": 0.4325,
+      "S.always_high_branch": 0.24
+     },
+     "6": {
+      "M.no_even_branch": 0.4775,
+      "S.always_high_branch": 0.275
+     }
+    },
+    "mine_gen9311": {
+     "0": {
+      "S.always_high_branch": 0.425
+     },
+     "1": {
+      "S.always_high_branch": 0.4515
+     },
+     "2": {
+      "M.no_even_branch": 0.674,
+      "S.always_high_branch": 0.461
+     },
+     "3": {
+      "M.no_even_branch": 0.602,
+      "S.always_high_branch": 0.3855
+     },
+     "4": {
+      "M.no_even_branch": 0.5855,
+      "S.always_high_branch": 0.3595
+     },
+     "5": {
+      "M.no_even_branch": 0.5105,
+      "S.always_high_branch": 0.2975
+     },
+     "6": {
+      "M.no_even_branch": 0.5425,
+      "S.always_high_branch": 0.3145
+     }
+    }
+   },
+   "cluster": "B2",
+   "in_shape_max": [
+    0.0228,
+    1,
+    "calls2|MF_in_shape_cv"
+   ],
+   "keys": {
+    "items": 3500,
+    "per_level_min": 500,
+    "problems": {}
+   },
+   "levels": {
+    "max_cross_level_repeat_share": 0.0,
+    "min_distinct_share": 1.0,
+    "param_feature": "max_literal",
+    "steps_not_distinct": [],
+    "steps_param_not_rising": [],
+    "steps_rising": 6,
+    "steps_rising_only_in_max_literal": [
+     "L3->L4",
+     "L5->L6"
+    ]
+   },
+   "pooled_implementer_reading_max": {
+    "excess": 0.062,
+    "level": 0,
+    "rule": "battery.BEST_generic_cv"
+   },
+   "pooled_strict_max": {
+    "excess": 0.062,
+    "level": 0,
+    "rule": "battery.BEST_generic_cv"
+   },
+   "pooled_with_partial_trace_max": {
+    "excess": 0.6721,
+    "level": 2,
+    "rule": "a4.calls2_even|M.drop_even_branch"
+   },
+   "r19": "no reject or redraw of its own; the shared finish never fired in 14,000 draws",
+   "retries_per_14000": {
+    "builder": 0,
+    "retries": 0
+   },
+   "variant": false,
+   "verdict_R31_counted_rules": "STAYS",
+   "would_drop_if_partial_trace_counted": true
+  },
+  "C1.func_compose_f4": {
+   "a3_mutation_artefact_max": [
+    0.0,
+    6,
+    null
+   ],
+   "capacity": {
+    "G7_35300": true,
+    "G8_31000": true,
+    "G9_27680": true,
+    "max_attempts_per_item_at_35300": 1.0,
+    "per_level_alone_min_supplied": 35300,
+    "shared_taken_all_levels": {
+     "G7": true,
+     "G8": true,
+     "G9": true
+    }
+   },
+   "cluster": "B2",
+   "in_shape_max": [
+    0.1103,
+    3,
+    "h_two|MF_in_shape_cv"
+   ],
+   "keys": {
+    "items": 3500,
+    "per_level_min": 500,
+    "problems": {}
+   },
+   "levels": {
+    "max_cross_level_repeat_share": 0.0,
+    "min_distinct_share": 1.0,
+    "param_feature": "max_literal",
+    "steps_not_distinct": [],
+    "steps_param_not_rising": [],
+    "steps_rising": 6,
+    "steps_rising_only_in_max_literal": [
+     "L0->L1",
+     "L3->L4",
+     "L4->L5",
+     "L5->L6"
+    ]
+   },
+   "pooled_implementer_reading_max": {
+    "excess": 0.0953,
+    "level": 3,
+    "rule": "battery.MF_cv"
+   },
+   "pooled_strict_max": {
+    "excess": 0.0953,
+    "level": 3,
+    "rule": "battery.MF_cv"
+   },
+   "pooled_with_partial_trace_max": {
+    "excess": 0.0953,
+    "level": 3,
+    "rule": "battery.MF_cv"
+   },
+   "r19": "no reject or redraw of its own; the shared finish never fired in 14,000 draws",
+   "retries_per_14000": {
+    "builder": 0,
+    "retries": 0
+   },
+   "variant": false,
+   "verdict_R31_counted_rules": "STAYS",
+   "would_drop_if_partial_trace_counted": false
+  },
+  "C1.list_build_f3": {
+   "a3_mutation_artefact_max": [
+    0.0,
+    6,
+    null
+   ],
+   "capacity": {
+    "G7_35300": true,
+    "G8_31000": true,
+    "G9_27680": true,
+    "max_attempts_per_item_at_35300": 1.003,
+    "per_level_alone_min_supplied": 35300,
+    "shared_taken_all_levels": {
+     "G7": true,
+     "G8": true,
+     "G9": true
+    }
+   },
+   "cluster": "B1",
+   "in_shape_max": [
+    0.0902,
+    2,
+    "sum_filt|MF_in_shape_cv"
+   ],
+   "keys": {
+    "items": 3500,
+    "per_level_min": 500,
+    "problems": {}
+   },
+   "levels": {
+    "max_cross_level_repeat_share": 0.002,
+    "min_distinct_share": 1.0,
+    "param_feature": "steps",
+    "steps_not_distinct": [],
+    "steps_param_not_rising": [],
+    "steps_rising": 6,
+    "steps_rising_only_in_max_literal": []
+   },
+   "pooled_implementer_reading_max": {
+    "excess": 0.0338,
+    "level": 2,
+    "rule": "battery.sum|S.n_times_half"
+   },
+   "pooled_strict_max": {
+    "excess": 0.0338,
+    "level": 2,
+    "rule": "battery.sum|S.n_times_half"
+   },
+   "pooled_with_partial_trace_max": {
+    "excess": 0.0338,
+    "level": 2,
+    "rule": "battery.sum|S.n_times_half"
+   },
+   "r19": "no reject or redraw of its own; the shared finish never fired in 14,000 draws",
+   "retries_per_14000": {
+    "builder": 0,
+    "retries": 0
+   },
+   "variant": false,
+   "verdict_R31_counted_rules": "STAYS",
+   "would_drop_if_partial_trace_counted": false
+  },
+  "C1.merge_two_sorted_f3": {
+   "a3_mutation_artefact_max": [
+    0.0,
+    6,
+    null
+   ],
+   "capacity": {
+    "G7_35300": true,
+    "G8_31000": true,
+    "G9_27680": true,
+    "max_attempts_per_item_at_35300": 1.0,
+    "per_level_alone_min_supplied": 35300,
+    "shared_taken_all_levels": {
+     "G7": true,
+     "G8": true,
+     "G9": true
+    }
+   },
+   "cluster": "C1.merge_two_sorted",
+   "in_shape_max": [
+    0.1268,
+    0,
+    "maxsum|S.sum_all"
+   ],
+   "keys": {
+    "items": 3500,
+    "per_level_min": 500,
+    "problems": {}
+   },
+   "levels": {
+    "max_cross_level_repeat_share": 0.0,
+    "min_distinct_share": 1.0,
+    "param_feature": "longest_literal",
+    "steps_not_distinct": [],
+    "steps_param_not_rising": [],
+    "steps_rising": 6,
+    "steps_rising_only_in_max_literal": []
+   },
+   "pooled_implementer_reading_max": {
+    "excess": 0.1108,
+    "level": 0,
+    "rule": "a4.EFF_S"
+   },
+   "pooled_strict_max": {
+    "excess": 0.1108,
+    "level": 0,
+    "rule": "a4.EFF_S"
+   },
+   "pooled_with_partial_trace_max": {
+    "excess": 0.1108,
+    "level": 0,
+    "rule": "a4.EFF_SM"
+   },
+   "r19": "no reject or redraw of its own; the shared finish never fired in 14,000 draws",
+   "retries_per_14000": {
+    "builder": 0,
+    "retries": 0
+   },
+   "variant": false,
+   "verdict_R31_counted_rules": "STAYS",
+   "would_drop_if_partial_trace_counted": false
+  },
+  "C1.nested_pairs_f3": {
+   "a3_mutation_artefact_max": [
+    0.0,
+    6,
+    null
+   ],
+   "capacity": {
+    "G7_35300": true,
+    "G8_31000": true,
+    "G9_27680": true,
+    "max_attempts_per_item_at_35300": 1.0,
+    "per_level_alone_min_supplied": 35300,
+    "shared_taken_all_levels": {
+     "G7": true,
+     "G8": true,
+     "G9": true
+    }
+   },
+   "cluster": "B1",
+   "in_shape_max": [
+    0.1417,
+    0,
+    "tri|MF_in_shape_cv"
+   ],
+   "keys": {
+    "items": 3500,
+    "per_level_min": 500,
+    "problems": {}
+   },
+   "levels": {
+    "max_cross_level_repeat_share": 0.0,
+    "min_distinct_share": 1.0,
+    "param_feature": "steps",
+    "steps_not_distinct": [],
+    "steps_param_not_rising": [],
+    "steps_rising": 6,
+    "steps_rising_only_in_max_literal": []
+   },
+   "pooled_implementer_reading_max": {
+    "excess": 0.0625,
+    "level": 0,
+    "rule": "a4.MFsh"
+   },
+   "pooled_strict_max": {
+    "excess": 0.0625,
+    "level": 0,
+    "rule": "a4.MFsh"
+   },
+   "pooled_with_partial_trace_max": {
+    "excess": 0.0625,
+    "level": 0,
+    "rule": "a4.MFsh"
+   },
+   "r19": "no reject or redraw of its own; the shared finish never fired in 14,000 draws",
+   "retries_per_14000": {
+    "builder": 0,
+    "retries": 0
+   },
+   "variant": false,
+   "verdict_R31_counted_rules": "STAYS",
+   "would_drop_if_partial_trace_counted": false
+  },
+  "C1.postfix_evaluation": {
+   "a3_mutation_artefact_max": [
+    0.0,
+    6,
+    null
+   ],
+   "capacity": {
+    "G7_35300": true,
+    "G8_31000": true,
+    "G9_27680": true,
+    "max_attempts_per_item_at_35300": 1.0,
+    "per_level_alone_min_supplied": 35300,
+    "shared_taken_all_levels": {
+     "G7": true,
+     "G8": true,
+     "G9": true
+    }
+   },
+   "cluster": "B8",
+   "in_shape_max": [
+    0.0653,
+    0,
+    "top|S.sum_operands"
+   ],
+   "keys": {
+    "items": 3500,
+    "per_level_min": 500,
+    "problems": {}
+   },
+   "levels": {
+    "max_cross_level_repeat_share": 0.0,
+    "min_distinct_share": 1.0,
+    "param_feature": "longest_literal",
+    "steps_not_distinct": [],
+    "steps_param_not_rising": [],
+    "steps_rising": 6,
+    "steps_rising_only_in_max_literal": []
+   },
+   "pooled_implementer_reading_max": {
+    "excess": 0.1078,
+    "level": 0,
+    "rule": "a4.EFF_S"
+   },
+   "pooled_strict_max": {
+    "excess": 0.1078,
+    "level": 0,
+    "rule": "a4.EFF_S"
+   },
+   "pooled_with_partial_trace_max": {
+    "excess": 0.1078,
+    "level": 0,
+    "rule": "a4.EFF_SM"
+   },
+   "r19": "no reject or redraw of its own; the shared finish never fired in 14,000 draws",
+   "retries_per_14000": {
+    "builder": 0,
+    "retries": 0
+   },
+   "variant": false,
+   "verdict_R31_counted_rules": "STAYS",
+   "would_drop_if_partial_trace_counted": false
+  },
+  "C1.recursive_calls_r2": {
+   "a3_mutation_artefact_max": [
+    0.0,
+    6,
+    null
+   ],
+   "capacity": {
+    "G7_35300": true,
+    "G8_31000": true,
+    "G9_27680": true,
+    "max_attempts_per_item_at_35300": 1.003,
+    "per_level_alone_min_supplied": 35300,
+    "shared_taken_all_levels": {
+     "G7": true,
+     "G8": true,
+     "G9": true
+    }
+   },
+   "cluster": "B6",
+   "in_shape_max": [
+    0.0198,
+    0,
+    "mutual|MF_in_shape_cv"
+   ],
+   "keys": {
+    "items": 3500,
+    "per_level_min": 500,
+    "problems": {}
+   },
+   "levels": {
+    "max_cross_level_repeat_share": 0.0,
+    "min_distinct_share": 0.9995,
+    "param_feature": "steps",
+    "steps_not_distinct": [],
+    "steps_param_not_rising": [],
+    "steps_rising": 6,
+    "steps_rising_only_in_max_literal": []
+   },
+   "pooled_implementer_reading_max": {
+    "excess": 0.0125,
+    "level": 0,
+    "rule": "a4.MFsh"
+   },
+   "pooled_strict_max": {
+    "excess": 0.0125,
+    "level": 0,
+    "rule": "a4.MFsh"
+   },
+   "pooled_with_partial_trace_max": {
+    "excess": 0.0267,
+    "level": 0,
+    "rule": "a4.EFF_SM"
+   },
+   "r19": "no reject or redraw of its own; the shared finish never fired in 14,000 draws",
+   "retries_per_14000": {
+    "builder": 0,
+    "retries": 0
+   },
+   "variant": false,
+   "verdict_R31_counted_rules": "STAYS",
+   "would_drop_if_partial_trace_counted": false
+  },
+  "C1.run_length_scan": {
+   "a3_mutation_artefact_max": [
+    0.0,
+    6,
+    null
+   ],
+   "capacity": {
+    "G7_35300": true,
+    "G8_31000": true,
+    "G9_27680": true,
+    "max_attempts_per_item_at_35300": 1.0,
+    "per_level_alone_min_supplied": 35300,
+    "shared_taken_all_levels": {
+     "G7": true,
+     "G8": true,
+     "G9": true
+    }
+   },
+   "cluster": "C1.run_length_scan",
+   "in_shape_max": [
+    0.0387,
+    0,
+    "counts|MF_in_shape_cv"
+   ],
+   "keys": {
+    "items": 3500,
+    "per_level_min": 500,
+    "problems": {}
+   },
+   "levels": {
+    "max_cross_level_repeat_share": 0.0,
+    "min_distinct_share": 1.0,
+    "param_feature": "longest_literal",
+    "steps_not_distinct": [],
+    "steps_param_not_rising": [],
+    "steps_rising": 6,
+    "steps_rising_only_in_max_literal": []
+   },
+   "pooled_implementer_reading_max": {
+    "excess": 0.0162,
+    "level": 0,
+    "rule": "a3.MF_shape_cv"
+   },
+   "pooled_strict_max": {
+    "excess": 0.0162,
+    "level": 0,
+    "rule": "a3.MF_shape_cv"
+   },
+   "pooled_with_partial_trace_max": {
+    "excess": 0.1175,
+    "level": 1,
+    "rule": "a4.EFF_SM"
+   },
+   "r19": "answer-conditional (the 'long' shape with no run >= 2, empty answer); NEEDED: an empty gold key is not gradable (scoring.in_grammar returns False for '')",
+   "retries_per_14000": {
+    "builder": 46,
+    "retries": 46
+   },
+   "variant": false,
+   "verdict_R31_counted_rules": "STAYS",
+   "would_drop_if_partial_trace_counted": false
+  },
+  "C1.shared_lists_f3": {
+   "a3_mutation_artefact_max": [
+    0.0,
+    6,
+    null
+   ],
+   "capacity": {
+    "G7_35300": true,
+    "G8_31000": true,
+    "G9_27680": true,
+    "max_attempts_per_item_at_35300": 1.0,
+    "per_level_alone_min_supplied": 35300,
+    "shared_taken_all_levels": {
+     "G7": true,
+     "G8": true,
+     "G9": true
+    }
+   },
+   "cluster": "C1.shared_lists",
+   "in_shape_max": [
+    0.0622,
+    0,
+    "sum|MF_in_shape_cv"
+   ],
+   "keys": {
+    "items": 3500,
+    "per_level_min": 500,
+    "problems": {}
+   },
+   "levels": {
+    "max_cross_level_repeat_share": 0.0,
+    "min_distinct_share": 1.0,
+    "param_feature": "top_statements",
+    "steps_not_distinct": [],
+    "steps_param_not_rising": [],
+    "steps_rising": 6,
+    "steps_rising_only_in_max_literal": []
+   },
+   "pooled_implementer_reading_max": {
+    "excess": 0.0413,
+    "level": 4,
+    "rule": "battery.sum|S.naive_copy"
+   },
+   "pooled_strict_max": {
+    "excess": 0.04,
+    "level": 0,
+    "rule": "a4.EFF_S"
+   },
+   "pooled_with_partial_trace_max": {
+    "excess": 0.1503,
+    "level": 6,
+    "rule": "a4.EFF_SM"
+   },
+   "r19": "structural, not on the answer: an alias statement of a name to itself",
+   "retries_per_14000": {
+    "builder": 3248,
+    "retries": 3248
+   },
+   "variant": false,
+   "verdict_R31_counted_rules": "STAYS",
+   "would_drop_if_partial_trace_counted": true
+  },
+  "C1.sieve_marking_f4": {
+   "a3_mutation_artefact_max": [
+    0.0404,
+    0,
+    "a3.strikesum|S.all_ones_start"
+   ],
+   "capacity": {
+    "G7_35300": true,
+    "G8_31000": true,
+    "G9_27680": true,
+    "max_attempts_per_item_at_35300": 1.0,
+    "per_level_alone_min_supplied": 35300,
+    "shared_taken_all_levels": {
+     "G7": true,
+     "G8": true,
+     "G9": true
+    }
+   },
+   "closed_form_search": {
+    "implementer_gen72": {
+     "0": {
+      "F.order_free_strikesum": 1.0,
+      "S.initial_flags_series": 0.0075
+     },
+     "1": {
+      "F.order_free_strikesum": 1.0
+     },
+     "2": {
+      "F.order_free_strikesum": 1.0
+     },
+     "3": {
+      "F.order_free_strikesum": 1.0
+     },
+     "4": {
+      "F.order_free_strikesum": 1.0
+     },
+     "5": {
+      "F.order_free_strikesum": 1.0
+     },
+     "6": {
+      "F.order_free_strikesum": 1.0
+     }
+    },
+    "mine_gen9311": {
+     "0": {
+      "F.order_free_strikesum": 1.0,
+      "S.initial_flags_series": 0.0015
+     },
+     "1": {
+      "F.order_free_strikesum": 1.0,
+      "S.initial_flags_series": 0.0005
+     },
+     "2": {
+      "F.order_free_strikesum": 1.0
+     },
+     "3": {
+      "F.order_free_strikesum": 1.0
+     },
+     "4": {
+      "F.order_free_strikesum": 1.0
+     },
+     "5": {
+      "F.order_free_strikesum": 1.0
+     },
+     "6": {
+      "F.order_free_strikesum": 1.0
+     }
+    }
+   },
+   "cluster": "C1.sieve_marking",
+   "in_shape_max": [
+    0.1025,
+    0,
+    "strikesum|MF_in_shape_cv"
+   ],
+   "keys": {
+    "items": 3500,
+    "per_level_min": 500,
+    "problems": {}
+   },
+   "levels": {
+    "max_cross_level_repeat_share": 0.0,
+    "min_distinct_share": 1.0,
+    "param_feature": "longest_literal",
+    "steps_not_distinct": [],
+    "steps_param_not_rising": [],
+    "steps_rising": 6,
+    "steps_rising_only_in_max_literal": []
+   },
+   "pooled_implementer_reading_max": {
+    "excess": 0.1025,
+    "level": 0,
+    "rule": "a4.MFsh"
+   },
+   "pooled_strict_max": {
+    "excess": 0.1025,
+    "level": 0,
+    "rule": "a4.MFsh"
+   },
+   "pooled_with_partial_trace_max": {
+    "excess": 0.1025,
+    "level": 0,
+    "rule": "a4.MFsh"
+   },
+   "r19": "no reject or redraw of its own; the shared finish never fired in 14,000 draws",
+   "retries_per_14000": {
+    "builder": 0,
+    "retries": 0
+   },
+   "variant": false,
+   "verdict_R31_counted_rules": "STAYS",
+   "would_drop_if_partial_trace_counted": false
+  },
+  "C1.slices_f4": {
+   "a3_mutation_artefact_max": [
+    0.0,
+    6,
+    null
+   ],
+   "capacity": {
+    "G7_35300": true,
+    "G8_31000": true,
+    "G9_27680": true,
+    "max_attempts_per_item_at_35300": 1.0,
+    "per_level_alone_min_supplied": 35300,
+    "shared_taken_all_levels": {
+     "G7": true,
+     "G8": true,
+     "G9": true
+    }
+   },
+   "closed_form_search": {
+    "implementer_gen72": {
+     "0": {
+      "H.negative_step_as_positive": 0.06
+     },
+     "1": {
+      "H.negative_step_as_positive": 0.055
+     },
+     "2": {
+      "H.negative_step_as_positive": 0.045
+     },
+     "3": {
+      "H.negative_step_as_positive": 0.03
+     },
+     "4": {
+      "H.negative_step_as_positive": 0.025
+     },
+     "5": {
+      "H.negative_step_as_positive": 0.0225
+     },
+     "6": {
+      "H.negative_step_as_positive": 0.03
+     }
+    },
+    "mine_gen9311": {
+     "0": {
+      "H.negative_step_as_positive": 0.0475
+     },
+     "1": {
+      "H.negative_step_as_positive": 0.0475
+     },
+     "2": {
+      "H.negative_step_as_positive": 0.035
+     },
+     "3": {
+      "H.negative_step_as_positive": 0.0385
+     },
+     "4": {
+      "H.negative_step_as_positive": 0.032
+     },
+     "5": {
+      "H.negative_step_as_positive": 0.036
+     },
+     "6": {
+      "H.negative_step_as_positive": 0.0215
+     }
+    }
+   },
+   "cluster": "B3",
+   "in_shape_max": [
+    0.3006,
+    0,
+    "sum_list|MF_in_shape_cv"
+   ],
+   "keys": {
+    "items": 3500,
+    "per_level_min": 500,
+    "problems": {}
+   },
+   "levels": {
+    "max_cross_level_repeat_share": 0.0,
+    "min_distinct_share": 1.0,
+    "param_feature": "longest_literal",
+    "steps_not_distinct": [],
+    "steps_param_not_rising": [],
+    "steps_rising": 6,
+    "steps_rising_only_in_max_literal": []
+   },
+   "pooled_implementer_reading_max": {
+    "excess": 0.1,
+    "level": 0,
+    "rule": "a4.EFF_S"
+   },
+   "pooled_strict_max": {
+    "excess": 0.1,
+    "level": 0,
+    "rule": "a4.EFF_S"
+   },
+   "pooled_with_partial_trace_max": {
+    "excess": 0.1137,
+    "level": 0,
+    "rule": "a4.EFF_SM"
+   },
+   "r19": "answer-conditional via the shared finish (empty string answer when both slices are empty); NEEDED (empty key not gradable)",
+   "retries_per_14000": {
+    "builder": 0,
+    "finish:answer:empty": 459,
+    "retries": 459
+   },
+   "variant": false,
+   "verdict_R31_counted_rules": "STAYS",
+   "would_drop_if_partial_trace_counted": false
+  },
+  "C1.string_build_f3": {
+   "a3_mutation_artefact_max": [
+    0.0,
+    6,
+    null
+   ],
+   "capacity": {
+    "G7_35300": true,
+    "G8_31000": true,
+    "G9_27680": true,
+    "max_attempts_per_item_at_35300": 1.0,
+    "per_level_alone_min_supplied": 35300,
+    "shared_taken_all_levels": {
+     "G7": true,
+     "G8": true,
+     "G9": true
+    }
+   },
+   "cluster": "B1",
+   "in_shape_max": [
+    0.0086,
+    0,
+    "alt|MF_in_shape_cv"
+   ],
+   "keys": {
+    "items": 3500,
+    "per_level_min": 500,
+    "problems": {}
+   },
+   "levels": {
+    "max_cross_level_repeat_share": 0.0,
+    "min_distinct_share": 1.0,
+    "param_feature": "steps",
+    "steps_not_distinct": [],
+    "steps_param_not_rising": [],
+    "steps_rising": 6,
+    "steps_rising_only_in_max_literal": []
+   },
+   "pooled_implementer_reading_max": {
+    "excess": 0.0038,
+    "level": 0,
+    "rule": "a4.MF"
+   },
+   "pooled_strict_max": {
+    "excess": 0.0038,
+    "level": 0,
+    "rule": "a4.MF"
+   },
+   "pooled_with_partial_trace_max": {
+    "excess": 0.1475,
+    "level": 1,
+    "rule": "a4.EFF_SM"
+   },
+   "r19": "no reject or redraw of its own; the shared finish never fired in 14,000 draws",
+   "retries_per_14000": {
+    "builder": 0,
+    "retries": 0
+   },
+   "variant": false,
+   "verdict_R31_counted_rules": "STAYS",
+   "would_drop_if_partial_trace_counted": false
+  },
+  "C1.string_methods_f3": {
+   "a3_mutation_artefact_max": [
+    0.0,
+    6,
+    null
+   ],
+   "capacity": {
+    "G7_35300": true,
+    "G8_31000": true,
+    "G9_27680": true,
+    "max_attempts_per_item_at_35300": 1.0,
+    "per_level_alone_min_supplied": 35300,
+    "shared_taken_all_levels": {
+     "G7": true,
+     "G8": true,
+     "G9": true
+    }
+   },
+   "cluster": "B3",
+   "in_shape_max": [
+    0.0084,
+    0,
+    "tail:[::2]|MF_in_shape_cv"
+   ],
+   "keys": {
+    "items": 3500,
+    "per_level_min": 500,
+    "problems": {}
+   },
+   "levels": {
+    "max_cross_level_repeat_share": 0.0,
+    "min_distinct_share": 1.0,
+    "param_feature": "chars",
+    "steps_not_distinct": [],
+    "steps_param_not_rising": [],
+    "steps_rising": 6,
+    "steps_rising_only_in_max_literal": []
+   },
+   "pooled_implementer_reading_max": {
+    "excess": 0.0583,
+    "level": 0,
+    "rule": "battery.text|S.word_lower"
+   },
+   "pooled_strict_max": {
+    "excess": 0.0583,
+    "level": 0,
+    "rule": "battery.text|S.word_lower"
+   },
+   "pooled_with_partial_trace_max": {
+    "excess": 0.0583,
+    "level": 0,
+    "rule": "battery.text|S.word_lower"
+   },
+   "r19": "answer-conditional for an empty final answer (shared finish; NEEDED) and state-conditional for an empty intermediate string (builder; not strictly needed for well-posedness, it avoids r.choice('') in a later replace; 22 per 14,000 draws) - PENDING LEAD REVIEW (minor)",
+   "retries_per_14000": {
+    "builder": 22,
+    "finish:answer:empty": 37,
+    "retries": 59
+   },
+   "variant": false,
+   "verdict_R31_counted_rules": "STAYS",
+   "would_drop_if_partial_trace_counted": false
+  },
+  "C1.turtle_walk_f3": {
+   "a3_mutation_artefact_max": [
+    0.6829,
+    1,
+    "a3.xy|S.no_back"
+   ],
+   "capacity": {
+    "G7_35300": true,
+    "G8_31000": true,
+    "G9_27680": true,
+    "max_attempts_per_item_at_35300": 1.0,
+    "per_level_alone_min_supplied": 35300,
+    "shared_taken_all_levels": {
+     "G7": true,
+     "G8": true,
+     "G9": true
+    }
+   },
+   "cluster": "B7",
+   "in_shape_max": [
+    0.0115,
+    0,
+    "pos|S.zero"
+   ],
+   "keys": {
+    "items": 3500,
+    "per_level_min": 500,
+    "problems": {}
+   },
+   "levels": {
+    "max_cross_level_repeat_share": 0.0,
+    "min_distinct_share": 1.0,
+    "param_feature": "longest_literal",
+    "steps_not_distinct": [],
+    "steps_param_not_rising": [],
+    "steps_rising": 6,
+    "steps_rising_only_in_max_literal": []
+   },
+   "pooled_implementer_reading_max": {
+    "excess": 0.0387,
+    "level": 0,
+    "rule": "battery.pathsum|S.no_turns"
+   },
+   "pooled_strict_max": {
+    "excess": 0.005,
+    "level": 0,
+    "rule": "a4.MFsh"
+   },
+   "pooled_with_partial_trace_max": {
+    "excess": 0.0492,
+    "level": 0,
+    "rule": "a4.EFF_SM"
+   },
+   "r19": "no reject or redraw of its own; the shared finish never fired in 14,000 draws",
+   "retries_per_14000": {
+    "builder": 0,
+    "retries": 0
+   },
+   "variant": false,
+   "verdict_R31_counted_rules": "STAYS",
+   "would_drop_if_partial_trace_counted": false
+  },
+  "C1.union_find_links_f3": {
+   "a3_mutation_artefact_max": [
+    0.0,
+    6,
+    null
+   ],
+   "capacity": {
+    "G7_35300": true,
+    "G8_31000": true,
+    "G9_27680": true,
+    "max_attempts_per_item_at_35300": 1.0,
+    "per_level_alone_min_supplied": 35300,
+    "shared_taken_all_levels": {
+     "G7": true,
+     "G8": true,
+     "G9": true
+    }
+   },
+   "cluster": "C1.union_find_links",
+   "in_shape_max": [
+    0.0175,
+    5,
+    "wsum|MF_in_shape_cv"
+   ],
+   "keys": {
+    "items": 3500,
+    "per_level_min": 500,
+    "problems": {}
+   },
+   "levels": {
+    "max_cross_level_repeat_share": 0.0,
+    "min_distinct_share": 1.0,
+    "param_feature": "longest_literal",
+    "steps_not_distinct": [],
+    "steps_param_not_rising": [],
+    "steps_rising": 6,
+    "steps_rising_only_in_max_literal": []
+   },
+   "pooled_implementer_reading_max": {
+    "excess": 0.0358,
+    "level": 0,
+    "rule": "battery.parents|S.naive_node_links"
+   },
+   "pooled_strict_max": {
+    "excess": 0.0358,
+    "level": 0,
+    "rule": "battery.parents|S.naive_node_links"
+   },
+   "pooled_with_partial_trace_max": {
+    "excess": 0.3142,
+    "level": 0,
+    "rule": "a4.EFF_SM"
+   },
+   "r19": "no reject or redraw of its own; the shared finish never fired in 14,000 draws",
+   "retries_per_14000": {
+    "builder": 0,
+    "retries": 0
+   },
+   "variant": false,
+   "verdict_R31_counted_rules": "STAYS",
+   "would_drop_if_partial_trace_counted": true
+  },
+  "C1.while_counter_f3": {
+   "a3_mutation_artefact_max": [
+    0.0,
+    6,
+    null
+   ],
+   "capacity": {
+    "G7_35300": true,
+    "G8_31000": true,
+    "G9_27680": true,
+    "max_attempts_per_item_at_35300": 1.03,
+    "per_level_alone_min_supplied": 35300,
+    "shared_taken_all_levels": {
+     "G7": true,
+     "G8": true,
+     "G9": true
+    }
+   },
+   "cluster": "C1.while_counter",
+   "in_shape_max": [
+    0.0208,
+    0,
+    "collatz|MF_in_shape_cv"
+   ],
+   "keys": {
+    "items": 3500,
+    "per_level_min": 500,
+    "problems": {}
+   },
+   "levels": {
+    "max_cross_level_repeat_share": 0.0065,
+    "min_distinct_share": 0.9985,
+    "param_feature": "max_literal",
+    "steps_not_distinct": [],
+    "steps_param_not_rising": [],
+    "steps_rising": 6,
+    "steps_rising_only_in_max_literal": [
+     "L3->L4",
+     "L4->L5",
+     "L5->L6"
+    ]
+   },
+   "pooled_implementer_reading_max": {
+    "excess": 0.0242,
+    "level": 0,
+    "rule": "battery.BEST_generic_cv"
+   },
+   "pooled_strict_max": {
+    "excess": 0.0242,
+    "level": 0,
+    "rule": "battery.BEST_generic_cv"
+   },
+   "pooled_with_partial_trace_max": {
+    "excess": 0.0242,
+    "level": 0,
+    "rule": "battery.BEST_generic_cv"
+   },
+   "r19": "no reject or redraw of its own; the shared finish never fired in 14,000 draws",
+   "retries_per_14000": {
+    "builder": 0,
+    "retries": 0
+   },
+   "variant": false,
+   "verdict_R31_counted_rules": "STAYS",
+   "would_drop_if_partial_trace_counted": false
+  }
+ },
+ "result_R31_counted_rules": {
+  "clusters": [
+   "B1",
+   "B2",
+   "B3",
+   "B5",
+   "B6",
+   "B7",
+   "B8",
+   "C1.binary_search",
+   "C1.circle_elimination",
+   "C1.counter_list_state_machine",
+   "C1.digit_peel",
+   "C1.fast_power_square_map",
+   "C1.merge_two_sorted",
+   "C1.run_length_scan",
+   "C1.shared_lists",
+   "C1.sieve_marking",
+   "C1.union_find_links",
+   "C1.while_counter"
+  ],
+  "lineages": [
+   "C1.binary_search_f3",
+   "C1.bracket_matching_f3",
+   "C1.bytecode_loop_f3",
+   "C1.circle_elimination_r2",
+   "C1.cond_chain_f3",
+   "C1.counter_list_f3",
+   "C1.digit_peel_f3",
+   "C1.euclid_gcd_traced_f3",
+   "C1.fast_power_f4",
+   "C1.fib_like_f3",
+   "C1.fib_shapes_recursive_f3",
+   "C1.func_branch_f4",
+   "C1.func_compose_f4",
+   "C1.list_build_f3",
+   "C1.merge_two_sorted_f3",
+   "C1.nested_pairs_f3",
+   "C1.postfix_evaluation",
+   "C1.recursive_calls_r2",
+   "C1.run_length_scan",
+   "C1.shared_lists_f3",
+   "C1.sieve_marking_f4",
+   "C1.slices_f4",
+   "C1.string_build_f3",
+   "C1.string_methods_f3",
+   "C1.turtle_walk_f3",
+   "C1.union_find_links_f3",
+   "C1.while_counter_f3"
+  ],
+  "n_clusters": 18,
+  "n_clusters_without_variants": 16,
+  "n_lineages": 27
+ },
+ "scenarios": {
+  "NEW_sieve_closed_form_counted": {
+   "clusters_lost": [
+    "C1.sieve_marking"
+   ],
+   "dropped": [
+    "C1.sieve_marking_f4"
+   ],
+   "n_clusters": 17,
+   "n_clusters_without_variants": 15,
+   "n_lineages": 26
+  },
+  "both": {
+   "clusters_lost": [
+    "C1.circle_elimination",
+    "C1.shared_lists",
+    "C1.sieve_marking",
+    "C1.union_find_links"
+   ],
+   "dropped": [
+    "C1.circle_elimination_r2",
+    "C1.cond_chain_f3",
+    "C1.func_branch_f4",
+    "C1.shared_lists_f3",
+    "C1.sieve_marking_f4",
+    "C1.union_find_links_f3"
+   ],
+   "n_clusters": 14,
+   "n_clusters_without_variants": 12,
+   "n_lineages": 21
+  },
+  "partial_trace_counted": {
+   "clusters_lost": [
+    "C1.circle_elimination",
+    "C1.shared_lists",
+    "C1.union_find_links"
+   ],
+   "dropped": [
+    "C1.circle_elimination_r2",
+    "C1.cond_chain_f3",
+    "C1.func_branch_f4",
+    "C1.shared_lists_f3",
+    "C1.union_find_links_f3"
+   ],
+   "n_clusters": 15,
+   "n_clusters_without_variants": 13,
+   "n_lineages": 22
+  }
+ },
+ "seeds": {
+  "battery": 9323,
+  "capacity_per_level": 9341,
+  "capacity_shared_levels": 9343,
+  "draw_keys_rules_levels": 9311,
+  "reproducibility": 9337,
+  "trial": 1
+ },
+ "worktree_commit": "7cd0ac5a (C1 code unchanged from the uncommitted state read at 22:11, before my draws)"
+}

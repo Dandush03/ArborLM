@@ -1,0 +1,18 @@
+{
+ "items": 94500,
+ "subprocesses": 189000,
+ "totals": {
+  "n": 94500
+ },
+ "secs": 819.5,
+ "interpreters": {
+  "/Users/daniellaloush/.local/share/uv/python/cpython-3.12.14-macos-aarch64-none/bin/python3.12": {
+   "version": "3.12.14",
+   "hashseed": "0"
+  },
+  "/opt/homebrew/bin/python3.15": {
+   "version": "3.15.1",
+   "hashseed": "2718281"
+  }
+ }
+}

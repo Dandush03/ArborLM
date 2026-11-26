@@ -1,0 +1,9 @@
+jobs 189 total cross-job collisions 26104
+fails per G: {9: 0, 8: 0, 7: 46} {9: [], 8: [], 7: [('C1.fib_shapes_recursive_f3', 0), ('C1.fib_shapes_recursive_f3', 1), ('C1.fib_shapes_recursive_f3', 2), ('C1.fib_shapes_recursive_f3', 3), ('C1.fib_shapes_recursive_f3', 4), ('C1.fib_shapes_recursive_f3', 5), ('C1.fib_shapes_recursive_f3', 6), ('C1.func_branch_f4', 0), ('C1.func_branch_f4', 1), ('C1.func_compose_f4', 0), ('C1.func_compose_f4', 1), ('C1.func_compose_f4', 2), ('C1.list_build_f3', 0), ('C1.list_build_f3', 1), ('C1.list_build_f3', 2), ('C1.list_build_f3', 3), ('C1.list_build_f3', 4), ('C1.list_build_f3', 5), ('C1.list_build_f3', 6), ('C1.nested_pairs_f3', 0), ('C1.nested_pairs_f3', 1), ('C1.nested_pairs_f3', 2), ('C1.nested_pairs_f3', 3), ('C1.nested_pairs_f3', 4), ('C1.nested_pairs_f3', 5), ('C1.nested_pairs_f3', 6), ('C1.recursive_calls_r2', 0), ('C1.recursive_calls_r2', 1), ('C1.recursive_calls_r2', 2), ('C1.recursive_calls_r2', 3), ('C1.recursive_calls_r2', 4), ('C1.recursive_calls_r2', 5), ('C1.recursive_calls_r2', 6), ('C1.string_build_f3', 0), ('C1.string_build_f3', 1), ('C1.string_build_f3', 2), ('C1.string_build_f3', 3), ('C1.string_build_f3', 4), ('C1.string_build_f3', 5), ('C1.while_counter_f3', 0), ('C1.while_counter_f3', 1), ('C1.while_counter_f3', 2), ('C1.while_counter_f3', 3), ('C1.while_counter_f3', 4), ('C1.while_counter_f3', 5), ('C1.while_counter_f3', 6)]}
+worst attempts per item at the G=7 demand: 1.03
+C1.while_counter_f3 0 attempt at 35,300: 36357 budget 1413000 coll 2874
+C1.fib_shapes_recursive_f3 5 attempt at 35,300: 35806 budget 1413000 coll 907
+C1.fib_shapes_recursive_f3 4 attempt at 35,300: 35804 budget 1413000 coll 950
+C1.fib_shapes_recursive_f3 3 attempt at 35,300: 35801 budget 1413000 coll 928
+C1.while_counter_f3 1 attempt at 35,300: 35799 budget 1413000 coll 2959
+all supplied 35300: True distinct==supplied: True

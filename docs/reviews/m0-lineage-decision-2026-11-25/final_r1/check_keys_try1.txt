@@ -1,0 +1,13 @@
+R1.boolean_lights_r4                   n=210 agree=210 mismatch=0 ambiguous=0 parse=0  per-level mismatch=[0, 0, 0, 0, 0, 0, 0] amb=[0, 0, 0, 0, 0, 0, 0]
+R1.categories_default_exceptions_r4    n=210 agree=141 mismatch=69 ambiguous=0 parse=0  per-level mismatch=[12, 9, 9, 12, 10, 10, 7] amb=[0, 0, 0, 0, 0, 0, 0]
+R1.compass_turns                       n=210 agree=210 mismatch=0 ambiguous=0 parse=0  per-level mismatch=[0, 0, 0, 0, 0, 0, 0] amb=[0, 0, 0, 0, 0, 0, 0]
+R1.conditional_decision_tree_r6        n=210 agree=210 mismatch=0 ambiguous=0 parse=0  per-level mismatch=[0, 0, 0, 0, 0, 0, 0] amb=[0, 0, 0, 0, 0, 0, 0]
+R1.conditional_threshold_rule_r4       n=210 agree=210 mismatch=0 ambiguous=0 parse=0  per-level mismatch=[0, 0, 0, 0, 0, 0, 0] amb=[0, 0, 0, 0, 0, 0, 0]
+R1.equivalence_exchange_rates_r6       n=210 agree=210 mismatch=0 ambiguous=0 parse=0  per-level mismatch=[0, 0, 0, 0, 0, 0, 0] amb=[0, 0, 0, 0, 0, 0, 0]
+R1.graph_shortest_route_r6             n=210 agree=210 mismatch=0 ambiguous=0 parse=0  per-level mismatch=[0, 0, 0, 0, 0, 0, 0] amb=[0, 0, 0, 0, 0, 0, 0]
+R1.knights_knaves_r6                   n=210 agree=210 mismatch=0 ambiguous=0 parse=0  per-level mismatch=[0, 0, 0, 0, 0, 0, 0] amb=[0, 0, 0, 0, 0, 0, 0]
+R1.spatial_grid_walk_r5                n=210 agree=210 mismatch=0 ambiguous=0 parse=0  per-level mismatch=[0, 0, 0, 0, 0, 0, 0] amb=[0, 0, 0, 0, 0, 0, 0]
+R1.swap_tracking_r5                    n=210 agree=210 mismatch=0 ambiguous=0 parse=0  per-level mismatch=[0, 0, 0, 0, 0, 0, 0] amb=[0, 0, 0, 0, 0, 0, 0]
+R1.temporal_weekday_shift_r6           n=210 agree=210 mismatch=0 ambiguous=0 parse=0  per-level mismatch=[0, 0, 0, 0, 0, 0, 0] amb=[0, 0, 0, 0, 0, 0, 0]
+R1.venn_counting_r5                    n=210 agree=210 mismatch=0 ambiguous=0 parse=0  per-level mismatch=[0, 0, 0, 0, 0, 0, 0] amb=[0, 0, 0, 0, 0, 0, 0]
+digest d8378195f04196e13fd81fe70155e17d4cb393bb2a13480056b4d5f6f970781b

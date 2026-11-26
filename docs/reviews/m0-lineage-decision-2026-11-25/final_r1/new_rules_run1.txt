@@ -1,0 +1,11 @@
+R1.knights_knaves_r6                 lookup (own kind, #knight-calls, #knave-calls, self in own)  eff +0.131 +0.127 +0.114 +0.113 +0.116 +0.114 +0.097   anti -0.131 -0.127 -0.114 -0.113 -0.116 -0.114 -0.097
+R1.knights_knaves_r6                 lookup (own form, forms mentioning asked)                    eff +0.137 +0.101 +0.089 +0.084 +0.074 +0.062 +0.055   anti -0.137 -0.101 -0.089 -0.084 -0.074 -0.062 -0.055
+R1.temporal_weekday_shift_r6         anchor_plus_links_touching_asked                             eff -0.009 +0.005 +0.005 +0.016 -0.006 -0.009 -0.003   anti +0.001 -0.001 -0.001 -0.003 +0.001 +0.002 +0.001
+R1.temporal_weekday_shift_r6         anchor_plus_signed_sum_all_links                             eff -0.000 +0.012 -0.010 +0.000 -0.005 +0.001 +0.001   anti +0.000 -0.002 +0.002 -0.000 +0.001 -0.000 -0.000
+R1.categories_default_exceptions_r4  first_stated_rule_for_verb                                   eff -0.021 +0.005 +0.004 -0.001 -0.010 +0.012 +0.006   anti +0.021 -0.005 -0.004 +0.001 +0.010 -0.012 -0.006
+R1.categories_default_exceptions_r4  last_stated_rule_for_verb                                    eff +0.014 +0.005 +0.006 +0.015 +0.003 +0.011 +0.011   anti -0.014 -0.005 -0.006 -0.015 -0.003 -0.011 -0.011
+R1.categories_default_exceptions_r4  rule_nearest_top_of_chain                                    eff -0.065 -0.042 -0.062 -0.049 -0.035 -0.031 -0.029   anti +0.065 +0.042 +0.062 +0.049 +0.035 +0.031 +0.029
+R1.categories_default_exceptions_r4  lookup (#can, #cannot rules for the verb)                    eff +0.009 -0.003 -0.005 +0.000 -0.011 +0.003 -0.001   anti -0.009 +0.003 +0.005 -0.000 +0.011 -0.003 +0.001
+R1.boolean_lights_r4                 lookup (asked on at start, #switches wired to it, #presses p eff +0.111 +0.127 +0.095 +0.064 +0.065 +0.056 +0.030   anti -0.111 -0.127 -0.095 -0.064 -0.065 -0.056 -0.030
+R1.compass_turns                     word_turns_only                                              eff +0.070 +0.020 -0.008 -0.006 -0.007 -0.012 -0.003   anti -0.023 -0.007 +0.003 +0.002 +0.002 +0.004 +0.001
+R1.conditional_decision_tree_r6      root_then_commonest_action                                   eff +0.198 +0.195 +0.136 +0.132 +0.131 +0.078 +0.087   anti -0.080 -0.078 -0.062 -0.062 -0.063 -0.036 -0.026

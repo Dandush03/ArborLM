@@ -1,0 +1,116 @@
+M1.ages_r3: identical pairs []; distinct texts/2000 [2000, 2000, 2000, 2000, 2000, 2000, 2000]; adjacent pairs differing in #features [2, 3, 2, 3, 2, 3]
+   stated: younger age (70 + 10L): observed max ['70', '80', '90', '100', '110', '120', '130'] strictly rising=True non-decreasing=True
+   mean log10 answer [1.759, 1.828, 1.895, 1.934, 1.982, 2.023, 2.074]; median [1.748, 1.826, 1.878, 1.914, 1.959, 2.006, 2.047]; printed numbers [3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0]
+   features with strictly rising max: ['sum', 't']
+M1.arithmetic_series_r3: identical pairs []; distinct texts/2000 [1997, 2000, 2000, 1999, 2000, 2000, 2000]; adjacent pairs differing in #features [1, 1, 1, 1, 1, 1]
+   stated: days (12 + 3L): observed max ['12', '15', '18', '21', '24', '27', '30'] strictly rising=True non-decreasing=True
+   mean log10 answer [2.844, 2.95, 3.038, 3.113, 3.217, 3.252, 3.339]; median [2.875, 2.985, 3.075, 3.162, 3.272, 3.285, 3.398]; printed numbers [6.0, 6.0, 6.0, 6.0, 6.0, 6.0, 6.0]
+   features with strictly rising max: ['days']
+M1.average_missing_r4: identical pairs []; distinct texts/2000 [2000, 2000, 2000, 2000, 2000, 2000, 2000]; adjacent pairs differing in #features [2, 4, 2, 4, 2, 4]
+   stated: 'marked out of' M (100 + 10L): observed max ['100', '110', '120', '130', '140', '150', '160'] strictly rising=True non-decreasing=True
+   mean log10 answer [1.841, 1.862, 1.892, 1.91, 1.94, 1.961, 1.979]; median [1.857, 1.875, 1.914, 1.929, 1.964, 1.991, 2.009]; printed numbers [7.0, 7.0, 8.0, 8.0, 9.0, 9.0, 10.0]
+   features with strictly rising max: ['max(scores)', 'mean_cents']
+M1.change_ways_r3: identical pairs []; distinct texts/2000 [2000, 2000, 2000, 2000, 2000, 2000, 2000]; adjacent pairs differing in #features [1, 1, 1, 1, 1, 1]
+   stated: target T: observed max ['585', '850', '875', '1110', '1500', '1750', '1640'] strictly rising=False non-decreasing=False
+   mean log10 answer [1.162, 1.352, 1.498, 1.626, 1.758, 1.839, 1.94]; median [1.176, 1.362, 1.505, 1.653, 1.778, 1.839, 1.968]; printed numbers [4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0]
+   features with strictly rising max: []
+M1.clock_duration_r4: identical pairs []; distinct texts/2000 [2000, 2000, 2000, 2000, 2000, 2000, 2000]; adjacent pairs differing in #features [1, 2, 1, 2, 1, 2]
+   stated: longest ride (110 + 6L) + longest visible wait: observed max ['150', '160', '169', '180', '190', '200', '210'] strictly rising=True non-decreasing=True
+   mean log10 answer [2.102, 2.115, 2.315, 2.335, 2.48, 2.496, 2.61]; median [2.117, 2.134, 2.33, 2.35, 2.491, 2.508, 2.619]; printed numbers [11.0, 11.0, 16.0, 16.0, 21.0, 21.0, 26.0]
+   features with strictly rising max: ['max(legs)']
+M1.consecutive_r3: identical pairs []; distinct texts/2000 [1792, 1849, 1944, 1945, 1967, 1965, 1959]; adjacent pairs differing in #features [1, 3, 1, 2, 1, 2]
+   stated: first number range (4000 + 2000L) via |sum|: observed max ['11997', '17994', '31996', '39932', '60005', '70010', '95997'] strictly rising=True non-decreasing=True
+   mean log10 answer [3.086, 3.303, 3.445, 3.534, 3.6, 3.687, 3.72]; median [3.269, 3.468, 3.598, 3.689, 3.773, 3.838, 3.879]; printed numbers [2.0, 2.0, 2.49, 2.51, 2.49, 2.5, 2.51]
+   features with strictly rising max: ['sum']
+M1.crt_congruence_r3: identical pairs []; distinct texts/2000 [2000, 2000, 2000, 2000, 2000, 2000, 2000]; adjacent pairs differing in #features [1, 1, 2, 1, 2, 1]
+   stated: largest modulus x count: observed max ['6002', '7002', '8002', '3603', '4003', '4404', '4804'] strictly rising=False non-decreasing=False
+   mean log10 answer [2.554, 2.64, 2.736, 3.519, 3.625, 5.112, 5.189]; median [2.624, 2.707, 2.817, 3.603, 3.702, 5.162, 5.254]; printed numbers [4.0, 4.0, 4.0, 6.0, 6.0, 8.0, 8.0]
+   features with strictly rising max: []
+M1.division_counting_r3: identical pairs []; distinct texts/2000 [2000, 2000, 2000, 2000, 1999, 2000, 2000]; adjacent pairs differing in #features [5, 5, 5, 5, 5, 5]
+   stated: number of items / people: observed max ['12242', '16232', '19327', '21678', '25397', '27679', '30767'] strictly rising=True non-decreasing=True
+   mean log10 answer [0.891, 0.904, 0.954, 0.968, 1.003, 1.006, 1.037]; median [0.954, 0.954, 1.0, 1.0, 1.041, 1.041, 1.079]; printed numbers [3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0]
+   features with strictly rising max: ['box', 'crate', 'items', 'people', 'seats']
+M1.finite_differences_r4: identical pairs []; distinct texts/2000 [2000, 2000, 2000, 2000, 2000, 2000, 2000]; adjacent pairs differing in #features [1, 1, 3, 1, 4, 1]
+   stated: answer (ceiling: fd_answer_ceiling): observed max ['954', '1133', '1346', '1924', '2168', '3881', '4819'] strictly rising=True non-decreasing=True
+   mean log10 answer [2.604, 2.681, 2.741, 2.892, 2.938, 3.252, 3.336]; median [2.645, 2.734, 2.791, 2.944, 2.994, 3.276, 3.369]; printed numbers [9.0, 9.0, 9.0, 10.0, 10.0, 11.0, 11.0]
+   features with strictly rising max: ['max(terms)']
+M1.fraction_remainder_r3: identical pairs []; distinct texts/2000 [1998, 2000, 1999, 1997, 1998, 1999, 1999]; adjacent pairs differing in #features [1, 1, 1, 1, 1, 1]
+   stated: start (3000 + 500L): observed max ['3000', '3500', '4000', '4500', '5000', '5500', '6000'] strictly rising=True non-decreasing=True
+   mean log10 answer [2.853, 2.93, 2.985, 3.022, 3.097, 3.13, 3.177]; median [2.955, 3.046, 3.103, 3.132, 3.208, 3.237, 3.297]; printed numbers [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+   features with strictly rising max: ['start']
+M1.gcd_lcm_r4: identical pairs []; distinct texts/2000 [1999, 2000, 2000, 2000, 2000, 2000, 2000]; adjacent pairs differing in #features [1, 1, 2, 1, 2, 1]
+   stated: answer (ceiling: GCD_LCM_TABLE): observed max ['89300', '144478', '302220', '387504', '1108800', '3922512', '8259300'] strictly rising=True non-decreasing=True
+   mean log10 answer [2.558, 2.701, 2.923, 2.745, 2.918, 3.162, 3.329]; median [1.837, 1.708, 3.027, 2.679, 1.491, 3.709, 3.969]; printed numbers [3.5, 3.49, 3.51, 4.5, 4.5, 5.51, 5.51]
+   features with strictly rising max: ['max(values)']
+M1.grid_perimeter_r3: identical pairs []; distinct texts/2000 [1988, 2000, 2000, 2000, 2000, 2000, 2000]; adjacent pairs differing in #features [2, 2, 2, 2, 2, 2]
+   stated: number of squares (13 + 3L): observed max ['13', '16', '19', '22', '25', '28', '31'] strictly rising=True non-decreasing=True
+   mean log10 answer [1.429, 1.547, 1.643, 1.715, 1.774, 1.826, 1.881]; median [1.431, 1.544, 1.633, 1.724, 1.771, 1.826, 1.886]; printed numbers [14.8, 18.4, 21.99, 25.31, 28.37, 31.48, 34.93]
+   features with strictly rising max: []
+M1.inclusion_exclusion_r3: identical pairs []; distinct texts/2000 [2000, 2000, 2000, 2000, 2000, 2000, 2000]; adjacent pairs differing in #features [3, 3, 7, 4, 4, 4]
+   stated: total: observed max ['75', '103', '137', '297', '343', '398', '456'] strictly rising=True non-decreasing=True
+   mean log10 answer [1.246, 1.359, 1.454, 1.729, 1.795, 1.893, 1.954]; median [1.301, 1.415, 1.519, 1.653, 1.932, 1.964, 2.029]; printed numbers [5.0, 5.0, 5.0, 9.0, 9.0, 9.0, 9.0]
+   features with strictly rising max: ['max(pairs)', 'max(sizes)', 'total']
+M1.last_digit_power_r3: identical pairs []; distinct texts/2000 [2000, 2000, 2000, 2000, 2000, 2000, 2000]; adjacent pairs differing in #features [1, 2, 1, 1, 2, 1]
+   stated: number of terms x largest exponent: observed max ['10300', '10400', '20500', '20600', '20700', '30800', '30900'] strictly rising=True non-decreasing=True
+   mean log10 answer [1.259, 1.252, 1.289, 1.288, 1.295, 1.294, 1.276]; median [1.38, 1.38, 1.38, 1.38, 1.398, 1.38, 1.362]; printed numbers [5.0, 5.0, 7.0, 7.0, 7.0, 9.0, 9.0]
+   features with strictly rising max: ['max(terms)']
+M1.linear_equation_r3: identical pairs []; distinct texts/2000 [1955, 1962, 1978, 1996, 2000, 1999, 1998]; adjacent pairs differing in #features [2, 1, 3, 2, 2, 1]
+   stated: |answer| (no range stated in the docstring): observed max ['40', '60', '80', '100', '120', '140', '160'] strictly rising=True non-decreasing=True
+   mean log10 answer [1.129, 1.299, 1.415, 1.491, 1.561, 1.643, 1.678]; median [1.204, 1.38, 1.491, 1.58, 1.653, 1.74, 1.763]; printed numbers [3.0, 3.0, 3.0, 4.0, 4.0, 4.0, 4.0]
+   features with strictly rising max: []
+M1.median_list_r3: identical pairs []; distinct texts/2000 [2000, 2000, 2000, 2000, 2000, 2000, 2000]; adjacent pairs differing in #features [2, 2, 2, 2, 2, 2]
+   stated: number of values (10 + 2L): observed max ['10', '12', '14', '16', '18', '20', '22'] strictly rising=True non-decreasing=True
+   mean log10 answer [1.985, 2.095, 2.194, 2.264, 2.331, 2.39, 2.439]; median [2.013, 2.113, 2.212, 2.279, 2.344, 2.401, 2.452]; printed numbers [8.48, 9.96, 11.52, 13.06, 14.42, 15.96, 17.48]
+   features with strictly rising max: ['len(values)', 'max(values)']
+M1.mixture_r4: identical pairs []; distinct texts/2000 [1981, 1969, 1985, 1995, 2000, 2000, 2000]; adjacent pairs differing in #features [2, 2, 3, 2, 2, 2]
+   stated: max price per kg (30 + 6L): observed max ['30', '36', '42', '48', '54', '60', '66'] strictly rising=True non-decreasing=True
+   mean log10 answer [1.194, 1.258, 1.312, 1.454, 1.496, 1.542, 1.564]; median [1.228, 1.301, 1.356, 1.489, 1.532, 1.576, 1.606]; printed numbers [4.0, 4.0, 4.0, 5.0, 5.0, 5.0, 5.0]
+   features with strictly rising max: ['a', 'b']
+M1.painted_cube_r3: identical pairs []; distinct texts/2000 [2000, 2000, 2000, 2000, 2000, 2000, 2000]; adjacent pairs differing in #features [1, 1, 1, 1, 1, 1]
+   stated: largest dimension (30 + 4L): observed max ['30', '34', '38', '42', '46', '50', '54'] strictly rising=True non-decreasing=True
+   mean log10 answer [2.765, 2.856, 2.953, 3.047, 3.106, 3.206, 3.289]; median [2.77, 2.879, 2.955, 3.092, 3.138, 3.267, 3.398]; printed numbers [4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0]
+   features with strictly rising max: ['max(dims)']
+M1.percent_change_r3: identical pairs []; distinct texts/2000 [1864, 1873, 1899, 1925, 1943, 1936, 1948]; adjacent pairs differing in #features [1, 1, 3, 1, 1, 1]
+   stated: price: observed max ['240', '280', '320', '720', '800', '880', '960'] strictly rising=True non-decreasing=True
+   mean log10 answer [1.89, 1.965, 2.014, 2.53, 2.566, 2.611, 2.632]; median [1.952, 2.024, 2.082, 2.574, 2.612, 2.667, 2.681]; printed numbers [3.0, 3.0, 3.0, 4.0, 4.0, 4.0, 4.0]
+   features with strictly rising max: ['price']
+M1.pipes_work_r3: identical pairs []; distinct texts/2000 [1901, 1934, 1951, 1999, 1999, 1997, 1999]; adjacent pairs differing in #features [3, 3, 4, 4, 4, 4]
+   stated: volume: observed max ['1760', '2200', '2700', '2744', '3420', '3534', '3835'] strictly rising=True non-decreasing=True
+   mean log10 answer [1.281, 1.318, 1.37, 1.394, 1.428, 1.458, 1.481]; median [1.342, 1.38, 1.447, 1.477, 1.505, 1.544, 1.568]; printed numbers [3.0, 3.0, 3.0, 4.0, 4.0, 4.0, 4.0]
+   features with strictly rising max: ['a', 'b', 'volume']
+M1.prime_factors_r3: identical pairs []; distinct texts/2000 [2000, 2000, 2000, 2000, 2000, 2000, 2000]; adjacent pairs differing in #features [1, 1, 1, 1, 1, 1]
+   stated: N (nmax(level)): observed max ['30000', '49979', '99968', '199520', '399938', '799240', '1596543'] strictly rising=True non-decreasing=True
+   mean log10 answer [1.331, 1.34, 1.366, 1.415, 1.436, 1.481, 1.496]; median [1.38, 1.398, 1.398, 1.505, 1.519, 1.58, 1.613]; printed numbers [2.21, 2.3, 2.29, 2.23, 2.29, 2.27, 2.27]
+   features with strictly rising max: ['n']
+M1.quadratic_area_r3: identical pairs []; distinct texts/2000 [2000, 2000, 2000, 2000, 2000, 2000, 2000]; adjacent pairs differing in #features [4, 4, 4, 4, 4, 4]
+   stated: answer x (150 + 25L): observed max ['293', '334', '373', '414', '455', '493', '540'] strictly rising=True non-decreasing=True
+   mean log10 answer [1.859, 1.929, 1.969, 2.014, 2.056, 2.109, 2.15]; median [1.959, 2.023, 2.088, 2.117, 2.179, 2.223, 2.268]; printed numbers [2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0]
+   features with strictly rising max: ['area', 'd', 'perimeter', 'total']
+M1.ratio_share_r3: identical pairs []; distinct texts/2000 [2000, 2000, 2000, 2000, 2000, 2000, 2000]; adjacent pairs differing in #features [1, 4, 1, 4, 1, 1]
+   stated: total: observed max ['1824', '2400', '4214', '5520', '7581', '8109', '10561'] strictly rising=True non-decreasing=True
+   mean log10 answer [2.228, 2.337, 2.437, 2.493, 2.579, 2.623, 2.658]; median [2.312, 2.426, 2.534, 2.585, 2.668, 2.717, 2.754]; printed numbers [3.0, 3.0, 4.0, 4.0, 5.0, 5.0, 5.0]
+   features with strictly rising max: ['total']
+M1.rectangle_r3: identical pairs []; distinct texts/2000 [1532, 1593, 1636, 1687, 1699, 1732, 1743]; adjacent pairs differing in #features [1, 1, 1, 2, 2, 2]
+   stated: perimeter: observed max ['1534', '1742', '2080', '2288', '2600', '2834', '3094'] strictly rising=True non-decreasing=True
+   mean log10 answer [3.284, 3.356, 3.462, 3.542, 3.565, 3.67, 3.77]; median [3.392, 3.469, 3.57, 3.658, 3.681, 3.791, 3.88]; printed numbers [2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0]
+   features with strictly rising max: ['perimeter']
+M1.recurrence_iterate_r3: identical pairs []; distinct texts/2000 [2000, 2000, 2000, 2000, 2000, 2000, 2000]; adjacent pairs differing in #features [2, 2, 2, 2, 2, 1]
+   stated: position (9 + 2L): observed max ['9', '11', '13', '15', '17', '19', '21'] strictly rising=True non-decreasing=True
+   mean log10 answer [3.203, 3.339, 3.616, 3.737, 3.937, 4.12, 4.375]; median [3.182, 3.356, 3.693, 3.846, 4.05, 4.234, 4.515]; printed numbers [4.98, 4.98, 4.95, 4.98, 4.98, 4.94, 4.96]
+   features with strictly rising max: ['position']
+M1.shopping_r3: identical pairs []; distinct texts/2000 [2000, 2000, 2000, 2000, 2000, 2000, 2000]; adjacent pairs differing in #features [3, 3, 2, 3, 1, 3]
+   stated: number of item lines: observed max ['2', '3', '4', '4', '5', '5', '6'] strictly rising=False non-decreasing=True
+   mean log10 answer [0.979, 0.98, 0.979, 0.981, 0.988, 0.995, 0.975]; median [1.046, 1.042, 1.041, 1.051, 1.053, 1.055, 1.035]; printed numbers [5.0, 7.0, 9.0, 9.0, 11.0, 11.0, 13.0]
+   features with strictly rising max: []
+M1.speed_distance_r3: identical pairs []; distinct texts/2000 [1968, 1987, 2000, 2000, 2000, 2000, 2000]; adjacent pairs differing in #features [1, 3, 1, 2, 1, 2]
+   stated: number of legs: observed max ['2', '2', '3', '3', '4', '4', '5'] strictly rising=False non-decreasing=True
+   mean log10 answer [2.469, 2.571, 2.389, 2.478, 2.638, 2.71, 2.821]; median [2.493, 2.585, 2.703, 2.798, 3.068, 3.141, 3.333]; printed numbers [4.0, 4.0, 6.0, 6.0, 8.0, 8.0, 10.0]
+   features with strictly rising max: ['max(legs)']
+M1.tiered_pricing: identical pairs []; distinct texts/2000 [1987, 1996, 2000, 2000, 2000, 2000, 2000]; adjacent pairs differing in #features [3, 4, 4, 5, 4, 4]
+   stated: number of tiers x units: observed max ['10060', '10080', '20155', '20181', '30276', '30322', '30357'] strictly rising=True non-decreasing=True
+   mean log10 answer [1.011, 1.151, 1.5, 1.762, 1.989, 2.046, 2.109]; median [1.025, 1.176, 1.52, 1.77, 1.989, 2.05, 2.125]; printed numbers [4.0, 4.0, 6.0, 6.0, 8.0, 8.0, 8.0]
+   features with strictly rising max: ['last_rate', 'max(tiers)', 'used']
+M1.tip_split_r3: identical pairs []; distinct texts/2000 [1882, 1935, 1924, 1945, 1959, 1956, 1964]; adjacent pairs differing in #features [2, 2, 2, 2, 2, 2]
+   stated: bill (400 + 100L): observed max ['400', '500', '600', '700', '800', '900', '1000'] strictly rising=True non-decreasing=True
+   mean log10 answer [1.732, 1.777, 1.819, 1.825, 1.876, 1.865, 1.906]; median [1.778, 1.832, 1.871, 1.871, 1.917, 1.915, 1.948]; printed numbers [3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0]
+   features with strictly rising max: ['bill', 'people']

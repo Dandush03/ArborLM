@@ -1,0 +1,3534 @@
+{
+ "G_per_part": 9,
+ "astra_review": "NOT_PERFORMED",
+ "audit": "M0-R2 final re-measurement after fix 4 (independent second solver, rules, levels, capacity, reproducibility)",
+ "audited_worktree_head": "7cd0ac5a2a2c5261352e66b4a41650576dcfe1be (generator files unchanged since 22:16 local; my runs 22:17-22:34)",
+ "auditor": "arbor-auditor, Claude Opus 5.5 (claude-opus-5-5)",
+ "bound": 0.15,
+ "capacity": {
+  "G8_demand": 31000,
+  "G9_demand": 27680,
+  "cross_lineage_shared_texts_G8": {},
+  "cross_lineage_shared_texts_G9": {}
+ },
+ "counted_classes_R31": [
+  "cue"
+ ],
+ "diagnostic_interval_L0_shortest_first_20000_more_items": "mean over 20,000: 0.14105",
+ "final_cluster_count": 18,
+ "final_surviving_clusters": [
+  "R2.binary_search_trace",
+  "R2.caesar_shift",
+  "R2.cellular_automaton",
+  "R2.cheapest_network",
+  "R2.count_divisible",
+  "R2.crt_smallest",
+  "R2.dictionary_rank",
+  "R2.digit_root",
+  "R2.expression_eval",
+  "R2.from_base",
+  "R2.grid_sum",
+  "R2.interval_scheduling",
+  "R2.kth_smallest",
+  "R2.list_ops",
+  "R2.luhn_check",
+  "R2.min_heap_ops",
+  "R2.run_length",
+  "R2.string_rewrite_nonidentity"
+ ],
+ "final_surviving_lineages": [
+  "R2.binary_search_trace",
+  "R2.caesar_shift",
+  "R2.cellular_automaton",
+  "R2.cheapest_network",
+  "R2.count_divisible",
+  "R2.crt_smallest",
+  "R2.dictionary_rank",
+  "R2.digit_root",
+  "R2.expression_eval",
+  "R2.from_base",
+  "R2.grid_sum",
+  "R2.interval_scheduling",
+  "R2.list_ops",
+  "R2.luhn_check",
+  "R2.min_heap_ops",
+  "R2.run_length",
+  "R2.sort_list",
+  "R2.string_rewrite_nonidentity"
+ ],
+ "harness_check_vs_implementer_a4_counts": "equal cells 1251, different 0",
+ "lineages": {
+  "R2.binary_search_trace": {
+   "capacity_core_generate_pool": {
+    "G8_pass": true,
+    "G8_supplied": [
+     31000,
+     31000,
+     31000,
+     31000,
+     31000,
+     31000,
+     31000
+    ],
+    "G9_pass": true,
+    "G9_supplied": [
+     27680,
+     27680,
+     27680,
+     27680,
+     27680,
+     27680,
+     27680
+    ]
+   },
+   "keys": {
+    "items": 7000,
+    "mismatches": 0,
+    "per_level_n": 1000,
+    "seeds": "final-r2-key|<lid>|<level>|k1"
+   },
+   "levels": {
+    "all_pairs_rise_my_reading": true,
+    "main_parameter": "list length",
+    "means": [
+     17.489,
+     21.522,
+     25.499,
+     29.698,
+     33.459,
+     37.533,
+     41.528
+    ],
+    "pair_auc": {
+     "0-1": 1.0,
+     "1-2": 1.0,
+     "2-3": 1.0,
+     "3-4": 0.968,
+     "4-5": 1.0,
+     "5-6": 1.0
+    },
+    "shared_texts_between_levels_1000_per_level": 0
+   },
+   "new_rules_fresh_seeds_only": {
+    "cue": [
+     0.0321,
+     "[NEW] (cue) sum ask: target x ceil(log2(n+1)) ; values ask: midpoints by position only, target appended"
+    ]
+   },
+   "rules_pooled": {
+    "max_P": [
+     1.0,
+     6,
+     "[mine] (P) 0-based positions (identical to the stated search)"
+    ],
+    "max_artifact": null,
+    "max_construct": null,
+    "max_cue_all_shapes": {
+     "answer_type": "number",
+     "effect": 0.0781,
+     "level": 1,
+     "n": 3967,
+     "rule": "[mine] midpoint rounded up"
+    },
+    "max_cue_per_shape": {
+     "by_set": {
+      "final": 0.0819,
+      "impl_a4": 0.0779,
+      "impl_f4": 0.0708
+     },
+     "effect": 0.0781,
+     "level": 1,
+     "n": 3967,
+     "rule": "[mine] midpoint rounded up",
+     "se": 0.0043,
+     "shape": "sum"
+    },
+    "max_partial": null,
+    "per_level_cue": {
+     "0": {
+      "by_set": {
+       "final": 0.0627,
+       "impl_a4": 0.0611,
+       "impl_f4": 0.0557
+      },
+      "effect": 0.0605,
+      "n": 3965,
+      "rule": "[impl] sum: first look + target",
+      "se": 0.0038,
+      "shape": "sum"
+     },
+     "1": {
+      "by_set": {
+       "final": 0.0819,
+       "impl_a4": 0.0779,
+       "impl_f4": 0.0708
+      },
+      "effect": 0.0781,
+      "n": 3967,
+      "rule": "[mine] midpoint rounded up",
+      "se": 0.0043,
+      "shape": "sum"
+     },
+     "2": {
+      "by_set": {
+       "final": 0.0436,
+       "impl_a4": 0.0446,
+       "impl_f4": 0.05
+      },
+      "effect": 0.0455,
+      "n": 4003,
+      "rule": "[impl] sum: first look + target",
+      "se": 0.0033,
+      "shape": "sum"
+     },
+     "3": {
+      "by_set": {
+       "final": 0.0332,
+       "impl_a4": 0.024,
+       "impl_f4": 0.025
+      },
+      "effect": 0.029,
+      "n": 3969,
+      "rule": "[impl] sum: first look + target",
+      "se": 0.0027,
+      "shape": "sum"
+     },
+     "4": {
+      "by_set": {
+       "final": 0.0405,
+       "impl_a4": 0.0445,
+       "impl_f4": 0.0348
+      },
+      "effect": 0.0401,
+      "n": 3942,
+      "rule": "[impl] sum: first look + target",
+      "se": 0.0031,
+      "shape": "sum"
+     },
+     "5": {
+      "by_set": {
+       "final": 0.0607,
+       "impl_a4": 0.0756,
+       "impl_f4": 0.0513
+      },
+      "effect": 0.0622,
+      "n": 3985,
+      "rule": "[mine] midpoint rounded up",
+      "se": 0.0038,
+      "shape": "sum"
+     },
+     "6": {
+      "by_set": {
+       "final": 0.024,
+       "impl_a4": 0.0178,
+       "impl_f4": 0.017
+      },
+      "effect": 0.0207,
+      "n": 4015,
+      "rule": "[impl] sum: first look + target",
+      "se": 0.0022,
+      "shape": "sum"
+     }
+    }
+   },
+   "strict_cluster": "R2.binary_search_trace",
+   "verdict": "STAYS",
+   "wording": {
+    "flags": {},
+    "items": 7000,
+    "items_with_no_unique_answer_under_stated_convention": 0
+   }
+  },
+  "R2.caesar_shift": {
+   "capacity_core_generate_pool": {
+    "G8_pass": true,
+    "G8_supplied": [
+     31000,
+     31000,
+     31000,
+     31000,
+     31000,
+     31000,
+     31000
+    ],
+    "G9_pass": true,
+    "G9_supplied": [
+     27680,
+     27680,
+     27680,
+     27680,
+     27680,
+     27680,
+     27680
+    ]
+   },
+   "keys": {
+    "items": 7000,
+    "mismatches": 0,
+    "per_level_n": 1000,
+    "seeds": "final-r2-key|<lid>|<level>|k1"
+   },
+   "levels": {
+    "all_pairs_rise_my_reading": true,
+    "main_parameter": "letters",
+    "means": [
+     5.0,
+     10.0,
+     15.0,
+     20.0,
+     25.0,
+     30.0,
+     35.0
+    ],
+    "pair_auc": {
+     "0-1": 1.0,
+     "1-2": 1.0,
+     "2-3": 1.0,
+     "3-4": 1.0,
+     "4-5": 1.0,
+     "5-6": 1.0
+    },
+    "shared_texts_between_levels_1000_per_level": 0
+   },
+   "new_rules_fresh_seeds_only": {},
+   "rules_pooled": {
+    "max_P": [
+     0.0456,
+     3,
+     "[mine] (P) misread: shift backward"
+    ],
+    "max_artifact": null,
+    "max_construct": null,
+    "max_cue_all_shapes": {
+     "answer_type": "text",
+     "effect": 0.0456,
+     "level": 3,
+     "n": 8000,
+     "rule": "[a3] shift backwards"
+    },
+    "max_cue_per_shape": {
+     "by_set": {
+      "final": 0.044,
+      "impl_a4": 0.043,
+      "impl_f4": 0.0515
+     },
+     "effect": 0.0456,
+     "level": 3,
+     "n": 8000,
+     "rule": "[a3] shift backwards",
+     "se": 0.0023,
+     "shape": "-"
+    },
+    "max_partial": null,
+    "per_level_cue": {
+     "0": {
+      "by_set": {
+       "final": 0.0405,
+       "impl_a4": 0.044,
+       "impl_f4": 0.0485
+      },
+      "effect": 0.0434,
+      "n": 8000,
+      "rule": "[a3] shift backwards",
+      "se": 0.0023,
+      "shape": "-"
+     },
+     "1": {
+      "by_set": {
+       "final": 0.0398,
+       "impl_a4": 0.0405,
+       "impl_f4": 0.0475
+      },
+      "effect": 0.0419,
+      "n": 8000,
+      "rule": "[a3] shift backwards",
+      "se": 0.0022,
+      "shape": "-"
+     },
+     "2": {
+      "by_set": {
+       "final": 0.0408,
+       "impl_a4": 0.0435,
+       "impl_f4": 0.0475
+      },
+      "effect": 0.0431,
+      "n": 8000,
+      "rule": "[a3] shift backwards",
+      "se": 0.0023,
+      "shape": "-"
+     },
+     "3": {
+      "by_set": {
+       "final": 0.044,
+       "impl_a4": 0.043,
+       "impl_f4": 0.0515
+      },
+      "effect": 0.0456,
+      "n": 8000,
+      "rule": "[a3] shift backwards",
+      "se": 0.0023,
+      "shape": "-"
+     },
+     "4": {
+      "by_set": {
+       "final": 0.0413,
+       "impl_a4": 0.038,
+       "impl_f4": 0.042
+      },
+      "effect": 0.0406,
+      "n": 8000,
+      "rule": "[a3] shift backwards",
+      "se": 0.0022,
+      "shape": "-"
+     },
+     "5": {
+      "by_set": {
+       "final": 0.0442,
+       "impl_a4": 0.038,
+       "impl_f4": 0.0355
+      },
+      "effect": 0.0405,
+      "n": 8000,
+      "rule": "[a3] shift backwards",
+      "se": 0.0022,
+      "shape": "-"
+     },
+     "6": {
+      "by_set": {
+       "final": 0.0362,
+       "impl_a4": 0.042,
+       "impl_f4": 0.036
+      },
+      "effect": 0.0376,
+      "n": 8000,
+      "rule": "[a3] shift backwards",
+      "se": 0.0021,
+      "shape": "-"
+     }
+    }
+   },
+   "strict_cluster": "R2.caesar_shift",
+   "verdict": "STAYS",
+   "wording": {
+    "flags": {},
+    "items": 7000,
+    "items_with_no_unique_answer_under_stated_convention": 0
+   }
+  },
+  "R2.cellular_automaton": {
+   "capacity_core_generate_pool": {
+    "G8_pass": true,
+    "G8_supplied": [
+     31000,
+     31000,
+     31000,
+     31000,
+     31000,
+     31000,
+     31000
+    ],
+    "G9_pass": true,
+    "G9_supplied": [
+     27680,
+     27680,
+     27680,
+     27680,
+     27680,
+     27680,
+     27680
+    ]
+   },
+   "keys": {
+    "items": 7000,
+    "mismatches": 0,
+    "per_level_n": 1000,
+    "seeds": "final-r2-key|<lid>|<level>|k1"
+   },
+   "levels": {
+    "all_pairs_rise_my_reading": true,
+    "main_parameter": "cells x steps",
+    "means": [
+     22.0,
+     26.0,
+     45.0,
+     51.0,
+     76.0,
+     84.0,
+     115.0
+    ],
+    "pair_auc": {
+     "0-1": 1.0,
+     "1-2": 1.0,
+     "2-3": 1.0,
+     "3-4": 1.0,
+     "4-5": 1.0,
+     "5-6": 1.0
+    },
+    "shared_texts_between_levels_1000_per_level": 0
+   },
+   "new_rules_fresh_seeds_only": {},
+   "rules_pooled": {
+    "max_P": [
+     0.2019,
+     0,
+     "[mine] (P) misread: edge cells keep their value"
+    ],
+    "max_artifact": null,
+    "max_construct": null,
+    "max_cue_all_shapes": {
+     "answer_type": "text",
+     "effect": 0.0429,
+     "level": 2,
+     "n": 8000,
+     "rule": "[a3] one step only"
+    },
+    "max_cue_per_shape": {
+     "by_set": {
+      "final": 0.042,
+      "impl_a4": 0.0455,
+      "impl_f4": 0.042
+     },
+     "effect": 0.0429,
+     "level": 2,
+     "n": 8000,
+     "rule": "[a3] one step only",
+     "se": 0.0023,
+     "shape": "row"
+    },
+    "max_partial": null,
+    "per_level_cue": {
+     "0": {
+      "by_set": {
+       "final": 0.0338,
+       "impl_a4": 0.038,
+       "impl_f4": 0.0425
+      },
+      "effect": 0.037,
+      "n": 8000,
+      "rule": "[a3] row: neighbour order reversed (right,cell,left)",
+      "se": 0.0021,
+      "shape": "row"
+     },
+     "1": {
+      "by_set": {
+       "final": 0.0217,
+       "impl_a4": 0.0245,
+       "impl_f4": 0.03
+      },
+      "effect": 0.0245,
+      "n": 8000,
+      "rule": "[a3] row: neighbour order reversed (right,cell,left)",
+      "se": 0.0017,
+      "shape": "row"
+     },
+     "2": {
+      "by_set": {
+       "final": 0.042,
+       "impl_a4": 0.0455,
+       "impl_f4": 0.042
+      },
+      "effect": 0.0429,
+      "n": 8000,
+      "rule": "[a3] one step only",
+      "se": 0.0023,
+      "shape": "row"
+     },
+     "3": {
+      "by_set": {
+       "final": 0.042,
+       "impl_a4": 0.0365,
+       "impl_f4": 0.0485
+      },
+      "effect": 0.0423,
+      "n": 8000,
+      "rule": "[a3] one step only",
+      "se": 0.0022,
+      "shape": "row"
+     },
+     "4": {
+      "by_set": {
+       "final": 0.007,
+       "impl_a4": 0.0095,
+       "impl_f4": 0.0095
+      },
+      "effect": 0.0083,
+      "n": 8000,
+      "rule": "[impl] the start row",
+      "se": 0.001,
+      "shape": "row"
+     },
+     "5": {
+      "by_set": {
+       "final": 0.005,
+       "impl_a4": 0.007,
+       "impl_f4": 0.0085
+      },
+      "effect": 0.0064,
+      "n": 8000,
+      "rule": "[impl] the start row",
+      "se": 0.0009,
+      "shape": "row"
+     },
+     "6": {
+      "by_set": {
+       "final": 0.0408,
+       "impl_a4": 0.0335,
+       "impl_f4": 0.047
+      },
+      "effect": 0.0405,
+      "n": 8000,
+      "rule": "[a3] one step only",
+      "se": 0.0022,
+      "shape": "row"
+     }
+    }
+   },
+   "strict_cluster": "R2.cellular_automaton",
+   "verdict": "STAYS",
+   "wording": {
+    "flags": {},
+    "items": 7000,
+    "items_with_no_unique_answer_under_stated_convention": 0
+   }
+  },
+  "R2.cheapest_network": {
+   "capacity_core_generate_pool": {
+    "G8_pass": true,
+    "G8_supplied": [
+     31000,
+     31000,
+     31000,
+     31000,
+     31000,
+     31000,
+     31000
+    ],
+    "G9_pass": true,
+    "G9_supplied": [
+     27680,
+     27680,
+     27680,
+     27680,
+     27680,
+     27680,
+     27680
+    ]
+   },
+   "keys": {
+    "items": 7000,
+    "mismatches": 0,
+    "per_level_n": 1000,
+    "seeds": "final-r2-key|<lid>|<level>|k1"
+   },
+   "levels": {
+    "all_pairs_rise_my_reading": true,
+    "main_parameter": "towns",
+    "means": [
+     8.0,
+     9.0,
+     10.0,
+     11.0,
+     12.0,
+     13.0,
+     14.0
+    ],
+    "pair_auc": {
+     "0-1": 1.0,
+     "1-2": 1.0,
+     "2-3": 1.0,
+     "3-4": 1.0,
+     "4-5": 1.0,
+     "5-6": 1.0
+    },
+    "shared_texts_between_levels_1000_per_level": 0
+   },
+   "new_rules_fresh_seeds_only": {
+    "cue": [
+     0.0715,
+     "[NEW] (cue) nearest-neighbour path from the first listed town"
+    ]
+   },
+   "rules_pooled": {
+    "max_P": [
+     1.0,
+     6,
+     "[mine] (P) Kruskal"
+    ],
+    "max_artifact": null,
+    "max_construct": null,
+    "max_cue_all_shapes": {
+     "answer_type": "number",
+     "effect": 0.0584,
+     "level": 0,
+     "n": 8000,
+     "rule": "[a3] n-1 cheapest cables"
+    },
+    "max_cue_per_shape": {
+     "by_set": {
+      "final": 0.0585,
+      "impl_a4": 0.061,
+      "impl_f4": 0.0555
+     },
+     "effect": 0.0584,
+     "level": 0,
+     "n": 8000,
+     "rule": "[a3] n-1 cheapest cables",
+     "se": 0.0026,
+     "shape": "-"
+    },
+    "max_partial": null,
+    "per_level_cue": {
+     "0": {
+      "by_set": {
+       "final": 0.0585,
+       "impl_a4": 0.061,
+       "impl_f4": 0.0555
+      },
+      "effect": 0.0584,
+      "n": 8000,
+      "rule": "[a3] n-1 cheapest cables",
+      "se": 0.0026,
+      "shape": "-"
+     },
+     "1": {
+      "by_set": {
+       "final": 0.048,
+       "impl_a4": 0.0475,
+       "impl_f4": 0.0495
+      },
+      "effect": 0.0483,
+      "n": 8000,
+      "rule": "[a3] sum of each town's cheapest cable",
+      "se": 0.0024,
+      "shape": "-"
+     },
+     "2": {
+      "by_set": {
+       "final": 0.0413,
+       "impl_a4": 0.0425,
+       "impl_f4": 0.0455
+      },
+      "effect": 0.0426,
+      "n": 8000,
+      "rule": "most frequent answer (train draw)",
+      "se": 0.0023,
+      "shape": "-"
+     },
+     "3": {
+      "by_set": {
+       "final": 0.0413,
+       "impl_a4": 0.0435,
+       "impl_f4": 0.0455
+      },
+      "effect": 0.0429,
+      "n": 8000,
+      "rule": "most frequent answer (train draw)",
+      "se": 0.0023,
+      "shape": "-"
+     },
+     "4": {
+      "by_set": {
+       "final": 0.0425,
+       "impl_a4": 0.048,
+       "impl_f4": 0.049
+      },
+      "effect": 0.0455,
+      "n": 8000,
+      "rule": "most frequent answer (train draw)",
+      "se": 0.0023,
+      "shape": "-"
+     },
+     "5": {
+      "by_set": {
+       "final": 0.0442,
+       "impl_a4": 0.0455,
+       "impl_f4": 0.0495
+      },
+      "effect": 0.0459,
+      "n": 8000,
+      "rule": "most frequent answer (train draw)",
+      "se": 0.0023,
+      "shape": "-"
+     },
+     "6": {
+      "by_set": {
+       "final": 0.0435,
+       "impl_a4": 0.044,
+       "impl_f4": 0.048
+      },
+      "effect": 0.0447,
+      "n": 8000,
+      "rule": "most frequent answer (train draw)",
+      "se": 0.0023,
+      "shape": "-"
+     }
+    }
+   },
+   "strict_cluster": "R2.cheapest_network",
+   "verdict": "STAYS",
+   "wording": {
+    "flags": {},
+    "items": 7000,
+    "items_with_no_unique_answer_under_stated_convention": 0
+   }
+  },
+  "R2.count_divisible": {
+   "capacity_core_generate_pool": {
+    "G8_pass": true,
+    "G8_supplied": [
+     31000,
+     31000,
+     31000,
+     31000,
+     31000,
+     31000,
+     31000
+    ],
+    "G9_pass": true,
+    "G9_supplied": [
+     27680,
+     27680,
+     27680,
+     27680,
+     27680,
+     27680,
+     27680
+    ]
+   },
+   "keys": {
+    "items": 7000,
+    "mismatches": 0,
+    "per_level_n": 1000,
+    "seeds": "final-r2-key|<lid>|<level>|k1"
+   },
+   "levels": {
+    "all_pairs_rise_my_reading": true,
+    "main_parameter": "list length",
+    "means": [
+     18.0,
+     22.0,
+     26.0,
+     30.0,
+     34.0,
+     38.0,
+     42.0
+    ],
+    "pair_auc": {
+     "0-1": 1.0,
+     "1-2": 1.0,
+     "2-3": 1.0,
+     "3-4": 1.0,
+     "4-5": 1.0,
+     "5-6": 1.0
+    },
+    "shared_texts_between_levels_1000_per_level": 0
+   },
+   "new_rules_fresh_seeds_only": {
+    "P": [
+     0.7232,
+     "[NEW] (P) misread: each distinct value counted once (the wording now excludes it)"
+    ]
+   },
+   "rules_pooled": {
+    "max_P": null,
+    "max_artifact": null,
+    "max_construct": null,
+    "max_cue_all_shapes": {
+     "answer_type": "number",
+     "effect": 0.0312,
+     "level": 0,
+     "n": 8000,
+     "rule": "most frequent answer (train draw)"
+    },
+    "max_cue_per_shape": {
+     "by_set": {
+      "final": 0.0338,
+      "impl_a4": 0.0265,
+      "impl_f4": 0.031
+     },
+     "effect": 0.0312,
+     "level": 0,
+     "n": 8000,
+     "rule": "most frequent answer (train draw)",
+     "se": 0.0019,
+     "shape": "sum"
+    },
+    "max_partial": null,
+    "per_level_cue": {
+     "0": {
+      "by_set": {
+       "final": 0.0338,
+       "impl_a4": 0.0265,
+       "impl_f4": 0.031
+      },
+      "effect": 0.0312,
+      "n": 8000,
+      "rule": "most frequent answer (train draw)",
+      "se": 0.0019,
+      "shape": "sum"
+     },
+     "1": {
+      "by_set": {
+       "final": 0.015,
+       "impl_a4": 0.016,
+       "impl_f4": 0.021
+      },
+      "effect": 0.0168,
+      "n": 8000,
+      "rule": "[a3] constant 0",
+      "se": 0.0014,
+      "shape": "sum"
+     },
+     "2": {
+      "by_set": {
+       "final": 0.012,
+       "impl_a4": 0.009,
+       "impl_f4": 0.009
+      },
+      "effect": 0.0105,
+      "n": 8000,
+      "rule": "[a3] constant 0",
+      "se": 0.0011,
+      "shape": "sum"
+     },
+     "3": {
+      "by_set": {
+       "final": 0.0047,
+       "impl_a4": 0.0045,
+       "impl_f4": 0.0035
+      },
+      "effect": 0.0044,
+      "n": 8000,
+      "rule": "[a3] constant 0",
+      "se": 0.0007,
+      "shape": "sum"
+     },
+     "4": {
+      "by_set": {
+       "final": 0.0035,
+       "impl_a4": 0.003,
+       "impl_f4": 0.003
+      },
+      "effect": 0.0032,
+      "n": 8000,
+      "rule": "most frequent answer (train draw)",
+      "se": 0.0006,
+      "shape": "sum"
+     },
+     "5": {
+      "by_set": {
+       "final": 0.0018,
+       "impl_a4": 0.0005,
+       "impl_f4": 0.003
+      },
+      "effect": 0.0018,
+      "n": 8000,
+      "rule": "[a3] constant 0",
+      "se": 0.0005,
+      "shape": "sum"
+     },
+     "6": {
+      "by_set": {
+       "final": 0.0015,
+       "impl_a4": 0.0005,
+       "impl_f4": 0.001
+      },
+      "effect": 0.0011,
+      "n": 8000,
+      "rule": "[mine] count instead of sum",
+      "se": 0.0004,
+      "shape": "sum"
+     }
+    }
+   },
+   "strict_cluster": "R2.count_divisible (count_letter dropped)",
+   "verdict": "STAYS",
+   "wording": {
+    "flags": {
+     "set_reading_differs_but_stated": 2203
+    },
+    "items": 7000,
+    "items_with_no_unique_answer_under_stated_convention": 0
+   }
+  },
+  "R2.crt_smallest": {
+   "capacity_core_generate_pool": {
+    "G8_pass": true,
+    "G8_supplied": [
+     31000,
+     31000,
+     31000,
+     31000,
+     31000,
+     31000,
+     31000
+    ],
+    "G9_pass": true,
+    "G9_supplied": [
+     27680,
+     27680,
+     27680,
+     27680,
+     27680,
+     27680,
+     27680
+    ]
+   },
+   "keys": {
+    "items": 7000,
+    "mismatches": 0,
+    "per_level_n": 1000,
+    "seeds": "final-r2-key|<lid>|<level>|k1"
+   },
+   "levels": {
+    "all_pairs_rise_my_reading": true,
+    "main_parameter": "log10 lcm",
+    "means": [
+     2.286,
+     2.663,
+     2.92,
+     4.706,
+     4.924,
+     5.136,
+     5.309
+    ],
+    "pair_auc": {
+     "0-1": 0.782,
+     "1-2": 0.749,
+     "2-3": 1.0,
+     "3-4": 0.733,
+     "4-5": 0.734,
+     "5-6": 0.703
+    },
+    "shared_texts_between_levels_1000_per_level": 13
+   },
+   "new_rules_fresh_seeds_only": {
+    "cue": [
+     0.117,
+     "[NEW] (cue) largest remainder + its modulus"
+    ],
+    "partial": [
+     0.3658,
+     "[NEW] (partial) largest modulus: try r, r+m, r+2m against the other congruences, else r"
+    ]
+   },
+   "rules_pooled": {
+    "max_P": [
+     0.0204,
+     3,
+     "[a3] (P) least common value ignoring the third congruence"
+    ],
+    "max_artifact": null,
+    "max_construct": null,
+    "max_cue_all_shapes": {
+     "answer_type": "number",
+     "effect": 0.1123,
+     "level": 0,
+     "n": 8000,
+     "rule": "[mine] largest remainder"
+    },
+    "max_cue_per_shape": {
+     "by_set": {
+      "final": 0.1108,
+      "impl_a4": 0.109,
+      "impl_f4": 0.1185
+     },
+     "effect": 0.1123,
+     "level": 0,
+     "n": 8000,
+     "rule": "[mine] largest remainder",
+     "se": 0.0035,
+     "shape": "-"
+    },
+    "max_partial": null,
+    "per_level_cue": {
+     "0": {
+      "by_set": {
+       "final": 0.1108,
+       "impl_a4": 0.109,
+       "impl_f4": 0.1185
+      },
+      "effect": 0.1123,
+      "n": 8000,
+      "rule": "[mine] largest remainder",
+      "se": 0.0035,
+      "shape": "-"
+     },
+     "1": {
+      "by_set": {
+       "final": 0.064,
+       "impl_a4": 0.059,
+       "impl_f4": 0.0725
+      },
+      "effect": 0.0649,
+      "n": 8000,
+      "rule": "[mine] largest remainder",
+      "se": 0.0028,
+      "shape": "-"
+     },
+     "2": {
+      "by_set": {
+       "final": 0.044,
+       "impl_a4": 0.05,
+       "impl_f4": 0.05
+      },
+      "effect": 0.047,
+      "n": 8000,
+      "rule": "[mine] largest remainder",
+      "se": 0.0024,
+      "shape": "-"
+     },
+     "3": {
+      "by_set": {
+       "final": 0.0005,
+       "impl_a4": 0.0015,
+       "impl_f4": 0.001
+      },
+      "effect": 0.0009,
+      "n": 8000,
+      "rule": "[mine] largest remainder",
+      "se": 0.0003,
+      "shape": "-"
+     },
+     "4": {
+      "by_set": {
+       "final": 0.0008,
+       "impl_a4": 0.001,
+       "impl_f4": 0.0
+      },
+      "effect": 0.0006,
+      "n": 8000,
+      "rule": "[mine] first remainder + first modulus x second remainder",
+      "se": 0.0003,
+      "shape": "-"
+     },
+     "5": {
+      "by_set": {
+       "final": 0.0005,
+       "impl_a4": 0.0005,
+       "impl_f4": 0.0015
+      },
+      "effect": 0.0008,
+      "n": 8000,
+      "rule": "[mine] largest remainder",
+      "se": 0.0003,
+      "shape": "-"
+     },
+     "6": {
+      "by_set": {
+       "final": 0.0005,
+       "impl_a4": 0.0005,
+       "impl_f4": 0.0005
+      },
+      "effect": 0.0005,
+      "n": 8000,
+      "rule": "[mine] largest remainder",
+      "se": 0.0002,
+      "shape": "-"
+     }
+    }
+   },
+   "strict_cluster": "R2.crt_smallest",
+   "verdict": "STAYS",
+   "wording": {
+    "flags": {},
+    "items": 7000,
+    "items_with_no_unique_answer_under_stated_convention": 0
+   }
+  },
+  "R2.dictionary_rank": {
+   "capacity_core_generate_pool": {
+    "G8_pass": true,
+    "G8_supplied": [
+     31000,
+     31000,
+     31000,
+     31000,
+     31000,
+     31000,
+     31000
+    ],
+    "G9_pass": true,
+    "G9_supplied": [
+     27680,
+     27680,
+     27680,
+     27680,
+     27680,
+     27680,
+     27680
+    ]
+   },
+   "keys": {
+    "items": 7000,
+    "mismatches": 0,
+    "per_level_n": 1000,
+    "seeds": "final-r2-key|<lid>|<level>|k1"
+   },
+   "levels": {
+    "all_pairs_rise_my_reading": false,
+    "main_parameter": "log10 list size",
+    "means": [
+     3.694,
+     3.789,
+     3.815,
+     4.158,
+     4.753,
+     5.179,
+     5.748
+    ],
+    "pair_auc": {
+     "0-1": 0.626,
+     "1-2": 0.517,
+     "2-3": 0.768,
+     "3-4": 0.892,
+     "4-5": 0.792,
+     "5-6": 0.886
+    },
+    "shared_texts_between_levels_1000_per_level": 0
+   },
+   "new_rules_fresh_seeds_only": {},
+   "rules_pooled": {
+    "max_P": null,
+    "max_artifact": null,
+    "max_construct": null,
+    "max_cue_all_shapes": {
+     "answer_type": "number",
+     "effect": 0.0471,
+     "level": 0,
+     "n": 3203,
+     "rule": "[impl] position: index in the FULL sorted alphabet (no removal of used letters)"
+    },
+    "max_cue_per_shape": {
+     "by_set": {
+      "final": 0.0549,
+      "impl_a4": 0.0452,
+      "impl_f4": 0.0342
+     },
+     "effect": 0.0471,
+     "level": 0,
+     "n": 3203,
+     "rule": "[impl] position: index in the FULL sorted alphabet (no removal of used letters)",
+     "se": 0.0037,
+     "shape": "position"
+    },
+    "max_partial": null,
+    "per_level_cue": {
+     "0": {
+      "by_set": {
+       "final": 0.0549,
+       "impl_a4": 0.0452,
+       "impl_f4": 0.0342
+      },
+      "effect": 0.0471,
+      "n": 3203,
+      "rule": "[impl] position: index in the FULL sorted alphabet (no removal of used letters)",
+      "se": 0.0037,
+      "shape": "position"
+     },
+     "1": {
+      "by_set": {
+       "final": 0.0436,
+       "impl_a4": 0.0324,
+       "impl_f4": 0.047
+      },
+      "effect": 0.0416,
+      "n": 3171,
+      "rule": "[impl] position: index in the FULL sorted alphabet (no removal of used letters)",
+      "se": 0.0035,
+      "shape": "position"
+     },
+     "2": {
+      "by_set": {
+       "final": 0.007,
+       "impl_a4": 0.0061,
+       "impl_f4": 0.0131
+      },
+      "effect": 0.0083,
+      "n": 3234,
+      "rule": "[impl] position: index in the FULL sorted alphabet (no removal of used letters)",
+      "se": 0.0016,
+      "shape": "position"
+     },
+     "3": {
+      "by_set": {
+       "final": 0.0087,
+       "impl_a4": 0.0121,
+       "impl_f4": 0.01
+      },
+      "effect": 0.0099,
+      "n": 3236,
+      "rule": "[impl] position: index in the FULL sorted alphabet (no removal of used letters)",
+      "se": 0.0017,
+      "shape": "position"
+     },
+     "4": {
+      "by_set": {
+       "final": 0.0006,
+       "impl_a4": 0.0012,
+       "impl_f4": 0.0024
+      },
+      "effect": 0.0012,
+      "n": 3235,
+      "rule": "[impl] position: index in the FULL sorted alphabet (no removal of used letters)",
+      "se": 0.0006,
+      "shape": "position"
+     },
+     "5": {
+      "by_set": {
+       "final": 0.0018,
+       "impl_a4": 0.0012,
+       "impl_f4": 0.0012
+      },
+      "effect": 0.0015,
+      "n": 3267,
+      "rule": "[impl] position: index in the FULL sorted alphabet (no removal of used letters)",
+      "se": 0.0007,
+      "shape": "position"
+     },
+     "6": {
+      "by_set": {
+       "final": 0.0,
+       "impl_a4": 0.0,
+       "impl_f4": 0.0
+      },
+      "effect": 0.0,
+      "n": 3181,
+      "rule": "[a3] position: index in the FULL sorted list (no removal)",
+      "se": 0.0,
+      "shape": "position"
+     }
+    }
+   },
+   "strict_cluster": "R2.dictionary_rank",
+   "verdict": "STAYS",
+   "wording": {
+    "flags": {},
+    "items": 7000,
+    "items_with_no_unique_answer_under_stated_convention": 0
+   }
+  },
+  "R2.digit_root": {
+   "capacity_core_generate_pool": {
+    "G8_pass": true,
+    "G8_supplied": [
+     31000,
+     31000,
+     31000,
+     31000,
+     31000,
+     31000,
+     31000
+    ],
+    "G9_pass": true,
+    "G9_supplied": [
+     27680,
+     27680,
+     27680,
+     27680,
+     27680,
+     27680,
+     27680
+    ]
+   },
+   "keys": {
+    "items": 7000,
+    "mismatches": 0,
+    "per_level_n": 1000,
+    "seeds": "final-r2-key|<lid>|<level>|k1"
+   },
+   "levels": {
+    "all_pairs_rise_my_reading": true,
+    "main_parameter": "digits",
+    "means": [
+     5.0,
+     6.0,
+     7.0,
+     8.0,
+     9.0,
+     10.0,
+     11.0
+    ],
+    "pair_auc": {
+     "0-1": 1.0,
+     "1-2": 1.0,
+     "2-3": 1.0,
+     "3-4": 1.0,
+     "4-5": 1.0,
+     "5-6": 1.0
+    },
+    "shared_texts_between_levels_1000_per_level": 0
+   },
+   "new_rules_fresh_seeds_only": {
+    "cue": [
+     0.2115,
+     "[NEW] (cue) digit sum once, first digit"
+    ]
+   },
+   "rules_pooled": {
+    "max_P": [
+     1.0,
+     6,
+     "[a3] (P) n mod 9 with 0 -> 9 (casting out nines)"
+    ],
+    "max_artifact": null,
+    "max_construct": null,
+    "max_cue_all_shapes": {
+     "answer_type": "number",
+     "effect": 0.1115,
+     "level": 5,
+     "n": 8000,
+     "rule": "most frequent answer (train draw)"
+    },
+    "max_cue_per_shape": {
+     "by_set": {
+      "final": 0.1095,
+      "impl_a4": 0.117,
+      "impl_f4": 0.11
+     },
+     "effect": 0.1115,
+     "level": 5,
+     "n": 8000,
+     "rule": "most frequent answer (train draw)",
+     "se": 0.0035,
+     "shape": "-"
+    },
+    "max_partial": null,
+    "per_level_cue": {
+     "0": {
+      "by_set": {
+       "final": 0.1115,
+       "impl_a4": 0.1005,
+       "impl_f4": 0.1145
+      },
+      "effect": 0.1095,
+      "n": 8000,
+      "rule": "most frequent answer (train draw)",
+      "se": 0.0035,
+      "shape": "-"
+     },
+     "1": {
+      "by_set": {
+       "final": 0.1057,
+       "impl_a4": 0.115,
+       "impl_f4": 0.111
+      },
+      "effect": 0.1094,
+      "n": 8000,
+      "rule": "most frequent answer (train draw)",
+      "se": 0.0035,
+      "shape": "-"
+     },
+     "2": {
+      "by_set": {
+       "final": 0.1123,
+       "impl_a4": 0.109,
+       "impl_f4": 0.107
+      },
+      "effect": 0.1101,
+      "n": 8000,
+      "rule": "most frequent answer (train draw)",
+      "se": 0.0035,
+      "shape": "-"
+     },
+     "3": {
+      "by_set": {
+       "final": 0.1123,
+       "impl_a4": 0.11,
+       "impl_f4": 0.109
+      },
+      "effect": 0.1109,
+      "n": 8000,
+      "rule": "most frequent answer (train draw)",
+      "se": 0.0035,
+      "shape": "-"
+     },
+     "4": {
+      "by_set": {
+       "final": 0.1077,
+       "impl_a4": 0.107,
+       "impl_f4": 0.1015
+      },
+      "effect": 0.106,
+      "n": 8000,
+      "rule": "most frequent answer (train draw)",
+      "se": 0.0034,
+      "shape": "-"
+     },
+     "5": {
+      "by_set": {
+       "final": 0.1095,
+       "impl_a4": 0.117,
+       "impl_f4": 0.11
+      },
+      "effect": 0.1115,
+      "n": 8000,
+      "rule": "most frequent answer (train draw)",
+      "se": 0.0035,
+      "shape": "-"
+     },
+     "6": {
+      "by_set": {
+       "final": 0.105,
+       "impl_a4": 0.116,
+       "impl_f4": 0.102
+      },
+      "effect": 0.107,
+      "n": 8000,
+      "rule": "most frequent answer (train draw)",
+      "se": 0.0035,
+      "shape": "-"
+     }
+    }
+   },
+   "strict_cluster": "R2.digit_root",
+   "verdict": "STAYS",
+   "wording": {
+    "flags": {},
+    "items": 7000,
+    "items_with_no_unique_answer_under_stated_convention": 0
+   }
+  },
+  "R2.expression_eval": {
+   "capacity_core_generate_pool": {
+    "G8_pass": true,
+    "G8_supplied": [
+     31000,
+     31000,
+     31000,
+     31000,
+     31000,
+     31000,
+     31000
+    ],
+    "G9_pass": true,
+    "G9_supplied": [
+     27680,
+     27680,
+     27680,
+     27680,
+     27680,
+     27680,
+     27680
+    ]
+   },
+   "keys": {
+    "items": 7000,
+    "mismatches": 0,
+    "per_level_n": 1000,
+    "seeds": "final-r2-key|<lid>|<level>|k1"
+   },
+   "levels": {
+    "all_pairs_rise_my_reading": true,
+    "main_parameter": "operators",
+    "means": [
+     4.95,
+     5.976,
+     7.651,
+     8.961,
+     11.173,
+     12.518,
+     15.141
+    ],
+    "pair_auc": {
+     "0-1": 0.819,
+     "1-2": 0.907,
+     "2-3": 0.795,
+     "3-4": 0.872,
+     "4-5": 0.715,
+     "5-6": 0.825
+    },
+    "shared_texts_between_levels_1000_per_level": 0
+   },
+   "new_rules_fresh_seeds_only": {
+    "cue": [
+     0.022,
+     "[NEW] (cue) parentheses ignored, the item's own convention otherwise"
+    ]
+   },
+   "rules_pooled": {
+    "max_P": null,
+    "max_artifact": null,
+    "max_construct": null,
+    "max_cue_all_shapes": {
+     "answer_type": "number",
+     "effect": 0.0435,
+     "level": 0,
+     "n": 8000,
+     "rule": "[mine] the other convention"
+    },
+    "max_cue_per_shape": {
+     "by_set": {
+      "final": 0.082,
+      "impl_a4": 0.0813,
+      "impl_f4": 0.0874
+     },
+     "effect": 0.0832,
+     "level": 0,
+     "n": 4016,
+     "rule": "[a3] ranked item: strict left to right (ignore precedence)",
+     "se": 0.0044,
+     "shape": "ranked"
+    },
+    "max_partial": null,
+    "per_level_cue": {
+     "0": {
+      "by_set": {
+       "final": 0.082,
+       "impl_a4": 0.0813,
+       "impl_f4": 0.0874
+      },
+      "effect": 0.0832,
+      "n": 4016,
+      "rule": "[a3] ranked item: strict left to right (ignore precedence)",
+      "se": 0.0044,
+      "shape": "ranked"
+     },
+     "1": {
+      "by_set": {
+       "final": 0.0741,
+       "impl_a4": 0.0878,
+       "impl_f4": 0.072
+      },
+      "effect": 0.0771,
+      "n": 3984,
+      "rule": "[a3] ranked item: strict left to right (ignore precedence)",
+      "se": 0.0042,
+      "shape": "ranked"
+     },
+     "2": {
+      "by_set": {
+       "final": 0.0457,
+       "impl_a4": 0.0404,
+       "impl_f4": 0.0623
+      },
+      "effect": 0.0486,
+      "n": 3948,
+      "rule": "[a3] LTR: usual precedence inside parentheses only (old ambiguity)",
+      "se": 0.0034,
+      "shape": "left_to_right"
+     },
+     "3": {
+      "by_set": {
+       "final": 0.0551,
+       "impl_a4": 0.0464,
+       "impl_f4": 0.0546
+      },
+      "effect": 0.0528,
+      "n": 3997,
+      "rule": "[a3] LTR: usual precedence inside parentheses only (old ambiguity)",
+      "se": 0.0035,
+      "shape": "left_to_right"
+     },
+     "4": {
+      "by_set": {
+       "final": 0.0177,
+       "impl_a4": 0.019,
+       "impl_f4": 0.0274
+      },
+      "effect": 0.0204,
+      "n": 4111,
+      "rule": "[a3] LTR: usual precedence inside parentheses only (old ambiguity)",
+      "se": 0.0022,
+      "shape": "left_to_right"
+     },
+     "5": {
+      "by_set": {
+       "final": 0.0237,
+       "impl_a4": 0.0265,
+       "impl_f4": 0.0112
+      },
+      "effect": 0.0214,
+      "n": 4026,
+      "rule": "[a3] LTR: usual precedence inside parentheses only (old ambiguity)",
+      "se": 0.0023,
+      "shape": "left_to_right"
+     },
+     "6": {
+      "by_set": {
+       "final": 0.0237,
+       "impl_a4": 0.0199,
+       "impl_f4": 0.0183
+      },
+      "effect": 0.0213,
+      "n": 4077,
+      "rule": "[a3] LTR: usual precedence inside parentheses only (old ambiguity)",
+      "se": 0.0023,
+      "shape": "left_to_right"
+     }
+    }
+   },
+   "strict_cluster": "R2.expression_eval",
+   "verdict": "STAYS",
+   "wording": {
+    "flags": {},
+    "items": 7000,
+    "items_with_no_unique_answer_under_stated_convention": 0
+   }
+  },
+  "R2.from_base": {
+   "capacity_core_generate_pool": {
+    "G8_pass": true,
+    "G8_supplied": [
+     31000,
+     31000,
+     31000,
+     31000,
+     31000,
+     31000,
+     31000
+    ],
+    "G9_pass": true,
+    "G9_supplied": [
+     27680,
+     27680,
+     27680,
+     27680,
+     27680,
+     27680,
+     27680
+    ]
+   },
+   "keys": {
+    "items": 7000,
+    "mismatches": 0,
+    "per_level_n": 1000,
+    "seeds": "final-r2-key|<lid>|<level>|k1"
+   },
+   "levels": {
+    "all_pairs_rise_my_reading": false,
+    "main_parameter": "log10 value",
+    "means": [
+     2.106,
+     2.775,
+     4.29,
+     4.968,
+     5.76,
+     6.568,
+     7.304
+    ],
+    "pair_auc": {
+     "0-1": 0.669,
+     "1-2": 0.761,
+     "2-3": 0.601,
+     "3-4": 0.604,
+     "4-5": 0.598,
+     "5-6": 0.574
+    },
+    "shared_texts_between_levels_1000_per_level": 317
+   },
+   "new_rules_fresh_seeds_only": {
+    "cue": [
+     0.0,
+     "[NEW] (cue) digits read as a decimal number"
+    ]
+   },
+   "rules_pooled": {
+    "max_P": [
+     0.1546,
+     0,
+     "[mine] (P) misread: digits read right to left"
+    ],
+    "max_artifact": null,
+    "max_construct": null,
+    "max_cue_all_shapes": {
+     "answer_type": "number",
+     "effect": 0.0187,
+     "level": 0,
+     "n": 8000,
+     "rule": "most frequent answer (train draw)"
+    },
+    "max_cue_per_shape": {
+     "by_set": {
+      "final": 0.0185,
+      "impl_a4": 0.02,
+      "impl_f4": 0.018
+     },
+     "effect": 0.0187,
+     "level": 0,
+     "n": 8000,
+     "rule": "most frequent answer (train draw)",
+     "se": 0.0015,
+     "shape": "-"
+    },
+    "max_partial": null,
+    "per_level_cue": {
+     "0": {
+      "by_set": {
+       "final": 0.0185,
+       "impl_a4": 0.02,
+       "impl_f4": 0.018
+      },
+      "effect": 0.0187,
+      "n": 8000,
+      "rule": "most frequent answer (train draw)",
+      "se": 0.0015,
+      "shape": "-"
+     },
+     "1": {
+      "by_set": {
+       "final": 0.0088,
+       "impl_a4": 0.008,
+       "impl_f4": 0.0065
+      },
+      "effect": 0.008,
+      "n": 8000,
+      "rule": "most frequent answer (train draw)",
+      "se": 0.001,
+      "shape": "-"
+     },
+     "2": {
+      "by_set": {
+       "final": 0.0027,
+       "impl_a4": 0.0015,
+       "impl_f4": 0.002
+      },
+      "effect": 0.0022,
+      "n": 8000,
+      "rule": "most frequent answer (train draw)",
+      "se": 0.0005,
+      "shape": "-"
+     },
+     "3": {
+      "by_set": {
+       "final": 0.001,
+       "impl_a4": 0.002,
+       "impl_f4": 0.001
+      },
+      "effect": 0.0013,
+      "n": 8000,
+      "rule": "most frequent answer (train draw)",
+      "se": 0.0004,
+      "shape": "-"
+     },
+     "4": {
+      "by_set": {
+       "final": 0.0003,
+       "impl_a4": 0.0005,
+       "impl_f4": 0.002
+      },
+      "effect": 0.0008,
+      "n": 8000,
+      "rule": "most frequent answer (train draw)",
+      "se": 0.0003,
+      "shape": "-"
+     },
+     "5": {
+      "by_set": {
+       "final": 0.0003,
+       "impl_a4": 0.0005,
+       "impl_f4": 0.0005
+      },
+      "effect": 0.0004,
+      "n": 8000,
+      "rule": "most frequent answer (train draw)",
+      "se": 0.0002,
+      "shape": "-"
+     },
+     "6": {
+      "by_set": {
+       "final": 0.0003,
+       "impl_a4": 0.0005,
+       "impl_f4": 0.0
+      },
+      "effect": 0.0003,
+      "n": 8000,
+      "rule": "most frequent answer (train draw)",
+      "se": 0.0002,
+      "shape": "-"
+     }
+    }
+   },
+   "strict_cluster": "R2.from_base (with to_base_wide)",
+   "verdict": "STAYS",
+   "wording": {
+    "flags": {},
+    "items": 7000,
+    "items_with_no_unique_answer_under_stated_convention": 0
+   }
+  },
+  "R2.grid_sum": {
+   "capacity_core_generate_pool": {
+    "G8_pass": true,
+    "G8_supplied": [
+     31000,
+     31000,
+     31000,
+     31000,
+     31000,
+     31000,
+     31000
+    ],
+    "G9_pass": true,
+    "G9_supplied": [
+     27680,
+     27680,
+     27680,
+     27680,
+     27680,
+     27680,
+     27680
+    ]
+   },
+   "keys": {
+    "items": 7000,
+    "mismatches": 0,
+    "per_level_n": 1000,
+    "seeds": "final-r2-key|<lid>|<level>|k1"
+   },
+   "levels": {
+    "all_pairs_rise_my_reading": true,
+    "main_parameter": "cells",
+    "means": [
+     9.0,
+     12.0,
+     16.0,
+     20.0,
+     25.0,
+     30.0,
+     36.0
+    ],
+    "pair_auc": {
+     "0-1": 1.0,
+     "1-2": 1.0,
+     "2-3": 1.0,
+     "3-4": 1.0,
+     "4-5": 1.0,
+     "5-6": 1.0
+    },
+    "shared_texts_between_levels_1000_per_level": 0
+   },
+   "new_rules_fresh_seeds_only": {
+    "cue": [
+     0.048,
+     "[NEW] (cue) the asked row/column/diagonal read with the index off by one (next one)"
+    ]
+   },
+   "rules_pooled": {
+    "max_P": null,
+    "max_artifact": null,
+    "max_construct": null,
+    "max_cue_all_shapes": {
+     "answer_type": "number",
+     "effect": 0.0739,
+     "level": 0,
+     "n": 8000,
+     "rule": "most frequent answer (train draw)"
+    },
+    "max_cue_per_shape": {
+     "by_set": {
+      "final": 0.0772,
+      "impl_a4": 0.0705,
+      "impl_f4": 0.0705
+     },
+     "effect": 0.0739,
+     "level": 0,
+     "n": 8000,
+     "rule": "most frequent answer (train draw)",
+     "se": 0.0029,
+     "shape": "-"
+    },
+    "max_partial": null,
+    "per_level_cue": {
+     "0": {
+      "by_set": {
+       "final": 0.0772,
+       "impl_a4": 0.0705,
+       "impl_f4": 0.0705
+      },
+      "effect": 0.0739,
+      "n": 8000,
+      "rule": "most frequent answer (train draw)",
+      "se": 0.0029,
+      "shape": "-"
+     },
+     "1": {
+      "by_set": {
+       "final": 0.0712,
+       "impl_a4": 0.0725,
+       "impl_f4": 0.063
+      },
+      "effect": 0.0695,
+      "n": 8000,
+      "rule": "most frequent answer (train draw)",
+      "se": 0.0028,
+      "shape": "-"
+     },
+     "2": {
+      "by_set": {
+       "final": 0.0678,
+       "impl_a4": 0.067,
+       "impl_f4": 0.059
+      },
+      "effect": 0.0654,
+      "n": 8000,
+      "rule": "most frequent answer (train draw)",
+      "se": 0.0028,
+      "shape": "-"
+     },
+     "3": {
+      "by_set": {
+       "final": 0.0558,
+       "impl_a4": 0.0445,
+       "impl_f4": 0.048
+      },
+      "effect": 0.051,
+      "n": 8000,
+      "rule": "most frequent answer (train draw)",
+      "se": 0.0025,
+      "shape": "-"
+     },
+     "4": {
+      "by_set": {
+       "final": 0.057,
+       "impl_a4": 0.0605,
+       "impl_f4": 0.0565
+      },
+      "effect": 0.0578,
+      "n": 8000,
+      "rule": "most frequent answer (train draw)",
+      "se": 0.0026,
+      "shape": "-"
+     },
+     "5": {
+      "by_set": {
+       "final": 0.0563,
+       "impl_a4": 0.0535,
+       "impl_f4": 0.0585
+      },
+      "effect": 0.0561,
+      "n": 8000,
+      "rule": "most frequent answer (train draw)",
+      "se": 0.0026,
+      "shape": "-"
+     },
+     "6": {
+      "by_set": {
+       "final": 0.059,
+       "impl_a4": 0.068,
+       "impl_f4": 0.0625
+      },
+      "effect": 0.0621,
+      "n": 8000,
+      "rule": "most frequent answer (train draw)",
+      "se": 0.0027,
+      "shape": "-"
+     }
+    }
+   },
+   "strict_cluster": "R2.grid_sum",
+   "verdict": "STAYS",
+   "wording": {
+    "flags": {
+     "diagonal_of_non_square_grid": 1019
+    },
+    "items": 7000,
+    "items_with_no_unique_answer_under_stated_convention": 0
+   }
+  },
+  "R2.interval_scheduling": {
+   "capacity_core_generate_pool": {
+    "G8_pass": true,
+    "G8_supplied": [
+     31000,
+     31000,
+     31000,
+     31000,
+     31000,
+     31000,
+     31000
+    ],
+    "G9_pass": true,
+    "G9_supplied": [
+     27680,
+     27680,
+     27680,
+     27680,
+     27680,
+     27680,
+     27680
+    ]
+   },
+   "keys": {
+    "items": 7000,
+    "mismatches": 0,
+    "per_level_n": 1000,
+    "seeds": "final-r2-key|<lid>|<level>|k1"
+   },
+   "levels": {
+    "all_pairs_rise_my_reading": true,
+    "main_parameter": "meetings",
+    "means": [
+     25.053,
+     30.006,
+     35.124,
+     39.987,
+     44.943,
+     49.947,
+     55.07
+    ],
+    "pair_auc": {
+     "0-1": 0.967,
+     "1-2": 0.956,
+     "2-3": 0.936,
+     "3-4": 0.923,
+     "4-5": 0.914,
+     "5-6": 0.91
+    },
+    "shared_texts_between_levels_1000_per_level": 0
+   },
+   "new_rules_fresh_seeds_only": {
+    "cue": [
+     0.5072,
+     "[NEW] (cue) fewest clashes first (ties by end, then number)"
+    ]
+   },
+   "rules_pooled": {
+    "max_P": [
+     0.6246,
+     0,
+     "[impl] (P) earliest finish, ties by earliest start (the stated rule with a misread tie or touching rule: a full solve)"
+    ],
+    "max_artifact": null,
+    "max_construct": null,
+    "max_cue_all_shapes": {
+     "answer_type": "list",
+     "effect": 0.1409,
+     "level": 0,
+     "n": 8000,
+     "rule": "[impl] shortest first"
+    },
+    "max_cue_per_shape": {
+     "by_set": {
+      "final": 0.1512,
+      "impl_a4": 0.1285,
+      "impl_f4": 0.1325
+     },
+     "effect": 0.1409,
+     "level": 0,
+     "n": 8000,
+     "rule": "[impl] shortest first",
+     "se": 0.0039,
+     "shape": "chosen"
+    },
+    "max_partial": null,
+    "per_level_cue": {
+     "0": {
+      "by_set": {
+       "final": 0.1512,
+       "impl_a4": 0.1285,
+       "impl_f4": 0.1325
+      },
+      "effect": 0.1409,
+      "n": 8000,
+      "rule": "[impl] shortest first",
+      "se": 0.0039,
+      "shape": "chosen"
+     },
+     "1": {
+      "by_set": {
+       "final": 0.0927,
+       "impl_a4": 0.098,
+       "impl_f4": 0.0975
+      },
+      "effect": 0.0953,
+      "n": 8000,
+      "rule": "[impl] shortest first",
+      "se": 0.0033,
+      "shape": "chosen"
+     },
+     "2": {
+      "by_set": {
+       "final": 0.0638,
+       "impl_a4": 0.0655,
+       "impl_f4": 0.055
+      },
+      "effect": 0.062,
+      "n": 8000,
+      "rule": "[impl] shortest first",
+      "se": 0.0027,
+      "shape": "chosen"
+     },
+     "3": {
+      "by_set": {
+       "final": 0.0467,
+       "impl_a4": 0.038,
+       "impl_f4": 0.0415
+      },
+      "effect": 0.0432,
+      "n": 8000,
+      "rule": "[impl] shortest first",
+      "se": 0.0023,
+      "shape": "chosen"
+     },
+     "4": {
+      "by_set": {
+       "final": 0.0328,
+       "impl_a4": 0.023,
+       "impl_f4": 0.0265
+      },
+      "effect": 0.0288,
+      "n": 8000,
+      "rule": "[impl] shortest first",
+      "se": 0.0019,
+      "shape": "chosen"
+     },
+     "5": {
+      "by_set": {
+       "final": 0.0232,
+       "impl_a4": 0.0165,
+       "impl_f4": 0.0195
+      },
+      "effect": 0.0206,
+      "n": 8000,
+      "rule": "[impl] shortest first",
+      "se": 0.0016,
+      "shape": "chosen"
+     },
+     "6": {
+      "by_set": {
+       "final": 0.015,
+       "impl_a4": 0.0135,
+       "impl_f4": 0.01
+      },
+      "effect": 0.0134,
+      "n": 8000,
+      "rule": "[impl] shortest first",
+      "se": 0.0013,
+      "shape": "chosen"
+     }
+    }
+   },
+   "strict_cluster": "R2.interval_scheduling",
+   "verdict": "STAYS",
+   "wording": {
+    "flags": {},
+    "items": 7000,
+    "items_with_no_unique_answer_under_stated_convention": 0
+   }
+  },
+  "R2.list_ops": {
+   "capacity_core_generate_pool": {
+    "G8_pass": true,
+    "G8_supplied": [
+     31000,
+     31000,
+     31000,
+     31000,
+     31000,
+     31000,
+     31000
+    ],
+    "G9_pass": true,
+    "G9_supplied": [
+     27680,
+     27680,
+     27680,
+     27680,
+     27680,
+     27680,
+     27680
+    ]
+   },
+   "keys": {
+    "items": 7000,
+    "mismatches": 0,
+    "per_level_n": 1000,
+    "seeds": "final-r2-key|<lid>|<level>|k1"
+   },
+   "levels": {
+    "all_pairs_rise_my_reading": true,
+    "main_parameter": "steps",
+    "means": [
+     2.0,
+     3.0,
+     4.0,
+     5.0,
+     6.0,
+     7.0,
+     8.0
+    ],
+    "pair_auc": {
+     "0-1": 1.0,
+     "1-2": 1.0,
+     "2-3": 1.0,
+     "3-4": 1.0,
+     "4-5": 1.0,
+     "5-6": 1.0
+    },
+    "shared_texts_between_levels_1000_per_level": 0
+   },
+   "new_rules_fresh_seeds_only": {
+    "artifact": [
+     0.4123,
+     "[NEW] (artifact) final list = start list with adds appended and removals applied, all moves and reverses ignored"
+    ],
+    "cue": [
+     0.0806,
+     "[NEW] [cond] (cue) moves and reverses ignored (items with at least one move or reverse)"
+    ]
+   },
+   "rules_pooled": {
+    "max_P": null,
+    "max_artifact": [
+     0.6827,
+     0,
+     "[a3] ignore reverses"
+    ],
+    "max_construct": null,
+    "max_cue_all_shapes": {
+     "answer_type": "list",
+     "effect": 0.0096,
+     "level": 6,
+     "n": 8000,
+     "rule": "[mine] [cond] append = put at the front (items with an append)"
+    },
+    "max_cue_per_shape": {
+     "by_set": {
+      "final": 0.0096,
+      "impl_a4": 0.0105,
+      "impl_f4": 0.0087
+     },
+     "effect": 0.0096,
+     "level": 6,
+     "n": 8000,
+     "rule": "[mine] [cond] append = put at the front (items with an append)",
+     "se": 0.0012,
+     "shape": "-"
+    },
+    "max_partial": [
+     0.1444,
+     3,
+     "[mine] [cond] ignore reverses (items with a reverse)"
+    ],
+    "per_level_cue": {
+     "0": {
+      "by_set": {
+       "final": 0.0,
+       "impl_a4": 0.0,
+       "impl_f4": 0.0
+      },
+      "effect": 0.0,
+      "n": 8000,
+      "rule": "[mine] [cond] append = put at the front (items with an append)",
+      "se": 0.0,
+      "shape": "-"
+     },
+     "1": {
+      "by_set": {
+       "final": 0.0,
+       "impl_a4": 0.0,
+       "impl_f4": 0.0
+      },
+      "effect": 0.0,
+      "n": 8000,
+      "rule": "[mine] [cond] append = put at the front (items with an append)",
+      "se": 0.0,
+      "shape": "-"
+     },
+     "2": {
+      "by_set": {
+       "final": 0.0,
+       "impl_a4": 0.0008,
+       "impl_f4": 0.0008
+      },
+      "effect": 0.0004,
+      "n": 8000,
+      "rule": "[mine] [cond] append = put at the front (items with an append)",
+      "se": 0.0003,
+      "shape": "-"
+     },
+     "3": {
+      "by_set": {
+       "final": 0.0014,
+       "impl_a4": 0.0021,
+       "impl_f4": 0.002
+      },
+      "effect": 0.0017,
+      "n": 8000,
+      "rule": "[mine] [cond] append = put at the front (items with an append)",
+      "se": 0.0005,
+      "shape": "-"
+     },
+     "4": {
+      "by_set": {
+       "final": 0.0045,
+       "impl_a4": 0.0019,
+       "impl_f4": 0.0026
+      },
+      "effect": 0.0034,
+      "n": 8000,
+      "rule": "[mine] [cond] append = put at the front (items with an append)",
+      "se": 0.0007,
+      "shape": "-"
+     },
+     "5": {
+      "by_set": {
+       "final": 0.009,
+       "impl_a4": 0.0085,
+       "impl_f4": 0.006
+      },
+      "effect": 0.0081,
+      "n": 8000,
+      "rule": "[mine] [cond] append = put at the front (items with an append)",
+      "se": 0.0011,
+      "shape": "-"
+     },
+     "6": {
+      "by_set": {
+       "final": 0.0096,
+       "impl_a4": 0.0105,
+       "impl_f4": 0.0087
+      },
+      "effect": 0.0096,
+      "n": 8000,
+      "rule": "[mine] [cond] append = put at the front (items with an append)",
+      "se": 0.0012,
+      "shape": "-"
+     }
+    }
+   },
+   "strict_cluster": "R2.list_ops",
+   "verdict": "STAYS",
+   "wording": {
+    "flags": {},
+    "items": 7000,
+    "items_with_no_unique_answer_under_stated_convention": 0
+   }
+  },
+  "R2.luhn_check": {
+   "capacity_core_generate_pool": {
+    "G8_pass": true,
+    "G8_supplied": [
+     31000,
+     31000,
+     31000,
+     31000,
+     31000,
+     31000,
+     31000
+    ],
+    "G9_pass": true,
+    "G9_supplied": [
+     27680,
+     27680,
+     27680,
+     27680,
+     27680,
+     27680,
+     27680
+    ]
+   },
+   "keys": {
+    "items": 7000,
+    "mismatches": 0,
+    "per_level_n": 1000,
+    "seeds": "final-r2-key|<lid>|<level>|k1"
+   },
+   "levels": {
+    "all_pairs_rise_my_reading": true,
+    "main_parameter": "digits",
+    "means": [
+     6.48,
+     8.478,
+     10.51,
+     12.505,
+     14.529,
+     16.507,
+     18.506
+    ],
+    "pair_auc": {
+     "0-1": 1.0,
+     "1-2": 1.0,
+     "2-3": 1.0,
+     "3-4": 1.0,
+     "4-5": 1.0,
+     "5-6": 1.0
+    },
+    "shared_texts_between_levels_1000_per_level": 0
+   },
+   "new_rules_fresh_seeds_only": {
+    "cue": [
+     0.1071,
+     "[NEW] (cue) check digit: (10 - digit sum mod 10) mod 10 with every digit doubled"
+    ]
+   },
+   "rules_pooled": {
+    "max_P": [
+     1.0,
+     6,
+     "[mine] (P) misread: doubling counted from the left"
+    ],
+    "max_artifact": null,
+    "max_construct": null,
+    "max_cue_all_shapes": {
+     "answer_type": "number",
+     "effect": 0.103,
+     "level": 3,
+     "n": 3982,
+     "rule": "most frequent answer (train draw)"
+    },
+    "max_cue_per_shape": {
+     "by_set": {
+      "final": 0.1098,
+      "impl_a4": 0.1,
+      "impl_f4": 0.092
+     },
+     "effect": 0.103,
+     "level": 3,
+     "n": 3982,
+     "rule": "most frequent answer (train draw)",
+     "se": 0.0048,
+     "shape": "check_digit"
+    },
+    "max_partial": [
+     0.1029,
+     4,
+     "[a3] plain digit sum (no doubling)"
+    ],
+    "per_level_cue": {
+     "0": {
+      "by_set": {
+       "final": 0.0946,
+       "impl_a4": 0.1041,
+       "impl_f4": 0.0986
+      },
+      "effect": 0.098,
+      "n": 4042,
+      "rule": "most frequent answer (train draw)",
+      "se": 0.0047,
+      "shape": "check_digit"
+     },
+     "1": {
+      "by_set": {
+       "final": 0.0954,
+       "impl_a4": 0.1117,
+       "impl_f4": 0.1087
+      },
+      "effect": 0.1028,
+      "n": 3950,
+      "rule": "most frequent answer (train draw)",
+      "se": 0.0048,
+      "shape": "check_digit"
+     },
+     "2": {
+      "by_set": {
+       "final": 0.094,
+       "impl_a4": 0.0865,
+       "impl_f4": 0.1106
+      },
+      "effect": 0.0965,
+      "n": 4074,
+      "rule": "most frequent answer (train draw)",
+      "se": 0.0046,
+      "shape": "check_digit"
+     },
+     "3": {
+      "by_set": {
+       "final": 0.1098,
+       "impl_a4": 0.1,
+       "impl_f4": 0.092
+      },
+      "effect": 0.103,
+      "n": 3982,
+      "rule": "most frequent answer (train draw)",
+      "se": 0.0048,
+      "shape": "check_digit"
+     },
+     "4": {
+      "by_set": {
+       "final": 0.1034,
+       "impl_a4": 0.0958,
+       "impl_f4": 0.1062
+      },
+      "effect": 0.1021,
+      "n": 3985,
+      "rule": "most frequent answer (train draw)",
+      "se": 0.0048,
+      "shape": "check_digit"
+     },
+     "5": {
+      "by_set": {
+       "final": 0.0955,
+       "impl_a4": 0.0903,
+       "impl_f4": 0.1151
+      },
+      "effect": 0.0989,
+      "n": 3922,
+      "rule": "most frequent answer (train draw)",
+      "se": 0.0048,
+      "shape": "check_digit"
+     },
+     "6": {
+      "by_set": {
+       "final": 0.1023,
+       "impl_a4": 0.102,
+       "impl_f4": 0.1026
+      },
+      "effect": 0.1023,
+      "n": 3852,
+      "rule": "most frequent answer (train draw)",
+      "se": 0.0049,
+      "shape": "check_digit"
+     }
+    }
+   },
+   "strict_cluster": "R2.luhn_check",
+   "verdict": "STAYS",
+   "wording": {
+    "flags": {},
+    "items": 7000,
+    "items_with_no_unique_answer_under_stated_convention": 0
+   }
+  },
+  "R2.min_heap_ops": {
+   "capacity_core_generate_pool": {
+    "G8_pass": true,
+    "G8_supplied": [
+     31000,
+     31000,
+     31000,
+     31000,
+     31000,
+     31000,
+     31000
+    ],
+    "G9_pass": true,
+    "G9_supplied": [
+     27680,
+     27680,
+     27680,
+     27680,
+     27680,
+     27680,
+     27680
+    ]
+   },
+   "keys": {
+    "items": 7000,
+    "mismatches": 0,
+    "per_level_n": 1000,
+    "seeds": "final-r2-key|<lid>|<level>|k1"
+   },
+   "levels": {
+    "all_pairs_rise_my_reading": true,
+    "main_parameter": "inserts + removals",
+    "means": [
+     10.332,
+     11.341,
+     12.346,
+     13.761,
+     14.733,
+     15.753,
+     16.771
+    ],
+    "pair_auc": {
+     "0-1": 0.891,
+     "1-2": 0.888,
+     "2-3": 0.912,
+     "3-4": 0.772,
+     "4-5": 0.785,
+     "5-6": 0.784
+    },
+    "shared_texts_between_levels_1000_per_level": 0
+   },
+   "new_rules_fresh_seeds_only": {
+    "cue": [
+     0.0038,
+     "[NEW] (cue) row sorted ascending except positions 2 and 3 swapped when out of order"
+    ]
+   },
+   "rules_pooled": {
+    "max_P": [
+     0.2471,
+     0,
+     "[mine] Floyd bottom-up heapify, then removals (a different construction)"
+    ],
+    "max_artifact": [
+     1.0,
+     6,
+     "[a3] removal by deleting the minimum and keeping the order of the rest"
+    ],
+    "max_construct": null,
+    "max_cue_all_shapes": {
+     "answer_type": "list",
+     "effect": 0.0024,
+     "level": 0,
+     "n": 8000,
+     "rule": "[a3] insertion order with the minimum swapped to the front"
+    },
+    "max_cue_per_shape": {
+     "by_set": {
+      "final": 0.0034,
+      "impl_a4": 0.0029,
+      "impl_f4": 0.0045
+     },
+     "effect": 0.0035,
+     "level": 0,
+     "n": 5394,
+     "rule": "[a3] insertion order with the minimum swapped to the front",
+     "se": 0.0008,
+     "shape": "removals=0"
+    },
+    "max_partial": null,
+    "per_level_cue": {
+     "0": {
+      "by_set": {
+       "final": 0.0034,
+       "impl_a4": 0.0029,
+       "impl_f4": 0.0045
+      },
+      "effect": 0.0035,
+      "n": 5394,
+      "rule": "[a3] insertion order with the minimum swapped to the front",
+      "se": 0.0008,
+      "shape": "removals=0"
+     },
+     "1": {
+      "by_set": {
+       "final": 0.0019,
+       "impl_a4": 0.0007,
+       "impl_f4": 0.0015
+      },
+      "effect": 0.0015,
+      "n": 5337,
+      "rule": "[a3] insertion order with the minimum swapped to the front",
+      "se": 0.0005,
+      "shape": "removals=0"
+     },
+     "2": {
+      "by_set": {
+       "final": 0.0,
+       "impl_a4": 0.0,
+       "impl_f4": 0.0
+      },
+      "effect": 0.0,
+      "n": 5308,
+      "rule": "[a3] insertion order with the minimum swapped to the front",
+      "se": 0.0,
+      "shape": "removals=0"
+     },
+     "3": {
+      "by_set": {
+       "final": 0.0,
+       "impl_a4": 0.0,
+       "impl_f4": 0.0
+      },
+      "effect": 0.0,
+      "n": 3915,
+      "rule": "[a3] insertion order with the minimum swapped to the front",
+      "se": 0.0,
+      "shape": "removals=0"
+     },
+     "4": {
+      "by_set": {
+       "final": 0.0,
+       "impl_a4": 0.0,
+       "impl_f4": 0.0
+      },
+      "effect": 0.0,
+      "n": 4047,
+      "rule": "[a3] insertion order with the minimum swapped to the front",
+      "se": 0.0,
+      "shape": "removals=0"
+     },
+     "5": {
+      "by_set": {
+       "final": 0.0,
+       "impl_a4": 0.0,
+       "impl_f4": 0.0
+      },
+      "effect": 0.0,
+      "n": 4029,
+      "rule": "[a3] insertion order with the minimum swapped to the front",
+      "se": 0.0,
+      "shape": "removals=0"
+     },
+     "6": {
+      "by_set": {
+       "final": 0.0,
+       "impl_a4": 0.0,
+       "impl_f4": 0.0
+      },
+      "effect": 0.0,
+      "n": 3942,
+      "rule": "[a3] insertion order with the minimum swapped to the front",
+      "se": 0.0,
+      "shape": "removals=0"
+     }
+    }
+   },
+   "strict_cluster": "R2.min_heap_ops",
+   "verdict": "STAYS",
+   "wording": {
+    "flags": {},
+    "items": 7000,
+    "items_with_no_unique_answer_under_stated_convention": 0
+   }
+  },
+  "R2.run_length": {
+   "capacity_core_generate_pool": {
+    "G8_pass": true,
+    "G8_supplied": [
+     31000,
+     31000,
+     31000,
+     31000,
+     31000,
+     31000,
+     31000
+    ],
+    "G9_pass": true,
+    "G9_supplied": [
+     27680,
+     27680,
+     27680,
+     27680,
+     27680,
+     27680,
+     27680
+    ]
+   },
+   "keys": {
+    "items": 7000,
+    "mismatches": 0,
+    "per_level_n": 1000,
+    "seeds": "final-r2-key|<lid>|<level>|k1"
+   },
+   "levels": {
+    "all_pairs_rise_my_reading": true,
+    "main_parameter": "length",
+    "means": [
+     14.953,
+     17.511,
+     24.164,
+     26.939,
+     34.953,
+     38.547,
+     48.305
+    ],
+    "pair_auc": {
+     "0-1": 0.73,
+     "1-2": 0.909,
+     "2-3": 0.686,
+     "3-4": 0.884,
+     "4-5": 0.678,
+     "5-6": 0.863
+    },
+    "shared_texts_between_levels_1000_per_level": 0
+   },
+   "new_rules_fresh_seeds_only": {
+    "cue": [
+     0.0393,
+     "[NEW] (cue) each letter with its total count, in order of first appearance"
+    ]
+   },
+   "rules_pooled": {
+    "max_P": [
+     1.0,
+     6,
+     "[mine] run-length by grouping (P: the procedure)"
+    ],
+    "max_artifact": null,
+    "max_construct": null,
+    "max_cue_all_shapes": {
+     "answer_type": "text",
+     "effect": 0.0,
+     "level": 0,
+     "n": 8000,
+     "rule": "most frequent answer (train draw)"
+    },
+    "max_cue_per_shape": {
+     "by_set": {
+      "final": 0.0,
+      "impl_a4": 0.0,
+      "impl_f4": 0.0
+     },
+     "effect": 0.0,
+     "level": 0,
+     "n": 8000,
+     "rule": "most frequent answer (train draw)",
+     "se": 0.0,
+     "shape": "-"
+    },
+    "max_partial": null,
+    "per_level_cue": {
+     "0": {
+      "by_set": {
+       "final": 0.0,
+       "impl_a4": 0.0,
+       "impl_f4": 0.0
+      },
+      "effect": 0.0,
+      "n": 8000,
+      "rule": "most frequent answer (train draw)",
+      "se": 0.0,
+      "shape": "-"
+     },
+     "1": {
+      "by_set": {
+       "final": 0.0,
+       "impl_a4": 0.0,
+       "impl_f4": 0.0
+      },
+      "effect": 0.0,
+      "n": 8000,
+      "rule": "most frequent answer (train draw)",
+      "se": 0.0,
+      "shape": "-"
+     },
+     "2": {
+      "by_set": {
+       "final": 0.0,
+       "impl_a4": 0.0,
+       "impl_f4": 0.0
+      },
+      "effect": 0.0,
+      "n": 8000,
+      "rule": "most frequent answer (train draw)",
+      "se": 0.0,
+      "shape": "-"
+     },
+     "3": {
+      "by_set": {
+       "final": 0.0,
+       "impl_a4": 0.0,
+       "impl_f4": 0.0
+      },
+      "effect": 0.0,
+      "n": 8000,
+      "rule": "most frequent answer (train draw)",
+      "se": 0.0,
+      "shape": "-"
+     },
+     "4": {
+      "by_set": {
+       "final": 0.0,
+       "impl_a4": 0.0,
+       "impl_f4": 0.0
+      },
+      "effect": 0.0,
+      "n": 8000,
+      "rule": "most frequent answer (train draw)",
+      "se": 0.0,
+      "shape": "-"
+     },
+     "5": {
+      "by_set": {
+       "final": 0.0,
+       "impl_a4": 0.0,
+       "impl_f4": 0.0
+      },
+      "effect": 0.0,
+      "n": 8000,
+      "rule": "most frequent answer (train draw)",
+      "se": 0.0,
+      "shape": "-"
+     },
+     "6": {
+      "by_set": {
+       "final": 0.0,
+       "impl_a4": 0.0,
+       "impl_f4": 0.0
+      },
+      "effect": 0.0,
+      "n": 8000,
+      "rule": "most frequent answer (train draw)",
+      "se": 0.0,
+      "shape": "-"
+     }
+    }
+   },
+   "strict_cluster": "R2.run_length",
+   "verdict": "STAYS",
+   "wording": {
+    "flags": {},
+    "items": 7000,
+    "items_with_no_unique_answer_under_stated_convention": 0
+   }
+  },
+  "R2.sort_list": {
+   "capacity_core_generate_pool": {
+    "G8_pass": true,
+    "G8_supplied": [
+     31000,
+     31000,
+     31000,
+     31000,
+     31000,
+     31000,
+     31000
+    ],
+    "G9_pass": true,
+    "G9_supplied": [
+     27680,
+     27680,
+     27680,
+     27680,
+     27680,
+     27680,
+     27680
+    ]
+   },
+   "keys": {
+    "items": 7000,
+    "mismatches": 0,
+    "per_level_n": 1000,
+    "seeds": "final-r2-key|<lid>|<level>|k1"
+   },
+   "levels": {
+    "all_pairs_rise_my_reading": true,
+    "main_parameter": "count",
+    "means": [
+     4.0,
+     5.0,
+     6.0,
+     7.0,
+     8.0,
+     9.0,
+     10.0
+    ],
+    "pair_auc": {
+     "0-1": 1.0,
+     "1-2": 1.0,
+     "2-3": 1.0,
+     "3-4": 1.0,
+     "4-5": 1.0,
+     "5-6": 1.0
+    },
+    "shared_texts_between_levels_1000_per_level": 0
+   },
+   "new_rules_fresh_seeds_only": {},
+   "rules_pooled": {
+    "max_P": [
+     0.0,
+     6,
+     "[mine] (P) misread: opposite direction"
+    ],
+    "max_artifact": null,
+    "max_construct": null,
+    "max_cue_all_shapes": {
+     "answer_type": "list",
+     "effect": 0.0,
+     "level": 0,
+     "n": 8000,
+     "rule": "[a3] opposite direction"
+    },
+    "max_cue_per_shape": {
+     "by_set": {
+      "final": 0.0,
+      "impl_a4": 0.0,
+      "impl_f4": 0.0
+     },
+     "effect": 0.0,
+     "level": 0,
+     "n": 3980,
+     "rule": "[a3] opposite direction",
+     "se": 0.0,
+     "shape": "desc=False"
+    },
+    "max_partial": null,
+    "per_level_cue": {
+     "0": {
+      "by_set": {
+       "final": 0.0,
+       "impl_a4": 0.0,
+       "impl_f4": 0.0
+      },
+      "effect": 0.0,
+      "n": 3980,
+      "rule": "[a3] opposite direction",
+      "se": 0.0,
+      "shape": "desc=False"
+     },
+     "1": {
+      "by_set": {
+       "final": 0.0,
+       "impl_a4": 0.0,
+       "impl_f4": 0.0
+      },
+      "effect": 0.0,
+      "n": 4050,
+      "rule": "[a3] opposite direction",
+      "se": 0.0,
+      "shape": "desc=False"
+     },
+     "2": {
+      "by_set": {
+       "final": 0.0,
+       "impl_a4": 0.0,
+       "impl_f4": 0.0
+      },
+      "effect": 0.0,
+      "n": 4001,
+      "rule": "[a3] opposite direction",
+      "se": 0.0,
+      "shape": "desc=False"
+     },
+     "3": {
+      "by_set": {
+       "final": 0.0,
+       "impl_a4": 0.0,
+       "impl_f4": 0.0
+      },
+      "effect": 0.0,
+      "n": 4071,
+      "rule": "[a3] opposite direction",
+      "se": 0.0,
+      "shape": "desc=False"
+     },
+     "4": {
+      "by_set": {
+       "final": 0.0,
+       "impl_a4": 0.0,
+       "impl_f4": 0.0
+      },
+      "effect": 0.0,
+      "n": 3970,
+      "rule": "[a3] opposite direction",
+      "se": 0.0,
+      "shape": "desc=False"
+     },
+     "5": {
+      "by_set": {
+       "final": 0.0,
+       "impl_a4": 0.0,
+       "impl_f4": 0.0
+      },
+      "effect": 0.0,
+      "n": 4086,
+      "rule": "[a3] opposite direction",
+      "se": 0.0,
+      "shape": "desc=False"
+     },
+     "6": {
+      "by_set": {
+       "final": 0.0,
+       "impl_a4": 0.0,
+       "impl_f4": 0.0
+      },
+      "effect": 0.0,
+      "n": 3927,
+      "rule": "[a3] opposite direction",
+      "se": 0.0,
+      "shape": "desc=False"
+     }
+    }
+   },
+   "strict_cluster": "R2.kth_smallest (sort_list; kth_smallest dropped)",
+   "verdict": "STAYS",
+   "wording": {
+    "flags": {},
+    "items": 7000,
+    "items_with_no_unique_answer_under_stated_convention": 0
+   }
+  },
+  "R2.string_rewrite_nonidentity": {
+   "capacity_core_generate_pool": {
+    "G8_pass": true,
+    "G8_supplied": [
+     31000,
+     31000,
+     31000,
+     31000,
+     31000,
+     31000,
+     31000
+    ],
+    "G9_pass": true,
+    "G9_supplied": [
+     27680,
+     27680,
+     27680,
+     27680,
+     27680,
+     27680,
+     27680
+    ]
+   },
+   "keys": {
+    "items": 7000,
+    "mismatches": 0,
+    "per_level_n": 1000,
+    "seeds": "final-r2-key|<lid>|<level>|k1"
+   },
+   "levels": {
+    "all_pairs_rise_my_reading": true,
+    "main_parameter": "steps x length",
+    "means": [
+     6.0,
+     16.0,
+     20.0,
+     36.0,
+     42.0,
+     64.0,
+     72.0
+    ],
+    "pair_auc": {
+     "0-1": 1.0,
+     "1-2": 1.0,
+     "2-3": 1.0,
+     "3-4": 1.0,
+     "4-5": 1.0,
+     "5-6": 1.0
+    },
+    "shared_texts_between_levels_1000_per_level": 0
+   },
+   "new_rules_fresh_seeds_only": {
+    "P": [
+     0.7402,
+     "[NEW] (P) misread: each step repeated until no match is left (capped at 50 rounds)"
+    ]
+   },
+   "rules_pooled": {
+    "max_P": [
+     1.0,
+     0,
+     "[a3] (P) all rules applied simultaneously to the start string, leftmost match"
+    ],
+    "max_artifact": [
+     1.0,
+     0,
+     "[a3] only the first rule"
+    ],
+    "max_construct": null,
+    "max_cue_all_shapes": {
+     "answer_type": "text",
+     "effect": 0.0257,
+     "level": 2,
+     "n": 8000,
+     "rule": "[mine] [cond] only the last rule"
+    },
+    "max_cue_per_shape": {
+     "by_set": {
+      "final": 0.0262,
+      "impl_a4": 0.023,
+      "impl_f4": 0.0275
+     },
+     "effect": 0.0257,
+     "level": 2,
+     "n": 8000,
+     "rule": "[mine] [cond] only the last rule",
+     "se": 0.0018,
+     "shape": "-"
+    },
+    "max_partial": null,
+    "per_level_cue": {
+     "0": {
+      "by_set": {
+       "final": 0.0073,
+       "impl_a4": 0.008,
+       "impl_f4": 0.006
+      },
+      "effect": 0.0071,
+      "n": 8000,
+      "rule": "most frequent answer (train draw)",
+      "se": 0.0009,
+      "shape": "-"
+     },
+     "1": {
+      "by_set": {
+       "final": 0.0272,
+       "impl_a4": 0.0215,
+       "impl_f4": 0.026
+      },
+      "effect": 0.0255,
+      "n": 8000,
+      "rule": "[a3] only the last rule, on the start string",
+      "se": 0.0018,
+      "shape": "-"
+     },
+     "2": {
+      "by_set": {
+       "final": 0.0262,
+       "impl_a4": 0.023,
+       "impl_f4": 0.0275
+      },
+      "effect": 0.0257,
+      "n": 8000,
+      "rule": "[mine] [cond] only the last rule",
+      "se": 0.0018,
+      "shape": "-"
+     },
+     "3": {
+      "by_set": {
+       "final": 0.0075,
+       "impl_a4": 0.008,
+       "impl_f4": 0.008
+      },
+      "effect": 0.0077,
+      "n": 8000,
+      "rule": "[mine] [cond] only the last rule",
+      "se": 0.001,
+      "shape": "-"
+     },
+     "4": {
+      "by_set": {
+       "final": 0.0083,
+       "impl_a4": 0.0065,
+       "impl_f4": 0.006
+      },
+      "effect": 0.0073,
+      "n": 8000,
+      "rule": "[a3] only the last rule, on the start string",
+      "se": 0.0009,
+      "shape": "-"
+     },
+     "5": {
+      "by_set": {
+       "final": 0.0065,
+       "impl_a4": 0.0045,
+       "impl_f4": 0.007
+      },
+      "effect": 0.0061,
+      "n": 8000,
+      "rule": "most frequent answer (train draw)",
+      "se": 0.0009,
+      "shape": "-"
+     },
+     "6": {
+      "by_set": {
+       "final": 0.0057,
+       "impl_a4": 0.008,
+       "impl_f4": 0.0065
+      },
+      "effect": 0.0065,
+      "n": 8000,
+      "rule": "most frequent answer (train draw)",
+      "se": 0.0009,
+      "shape": "-"
+     }
+    }
+   },
+   "strict_cluster": "R2.string_rewrite_nonidentity",
+   "verdict": "STAYS",
+   "wording": {
+    "flags": {},
+    "items": 7000,
+    "items_with_no_unique_answer_under_stated_convention": 0
+   }
+  },
+  "R2.to_base_wide": {
+   "capacity_core_generate_pool": {
+    "G8_pass": false,
+    "G8_supplied": [
+     15928,
+     31000,
+     31000,
+     31000,
+     31000,
+     31000,
+     31000
+    ],
+    "G9_pass": false,
+    "G9_supplied": [
+     15928,
+     27680,
+     27680,
+     27680,
+     27680,
+     27680,
+     27680
+    ]
+   },
+   "keys": {
+    "items": 7000,
+    "mismatches": 0,
+    "per_level_n": 1000,
+    "seeds": "final-r2-key|<lid>|<level>|k1"
+   },
+   "levels": {
+    "all_pairs_rise_my_reading": true,
+    "main_parameter": "log10 n",
+    "means": [
+     2.859,
+     3.48,
+     4.06,
+     4.684,
+     5.303,
+     5.872,
+     6.443
+    ],
+    "pair_auc": {
+     "0-1": 0.881,
+     "1-2": 0.868,
+     "2-3": 0.873,
+     "3-4": 0.891,
+     "4-5": 0.866,
+     "5-6": 0.858
+    },
+    "shared_texts_between_levels_1000_per_level": 19
+   },
+   "new_rules_fresh_seeds_only": {
+    "cue": [
+     0.0428,
+     "[NEW] (cue) remainders of repeated division by the base, written in the order produced"
+    ]
+   },
+   "rules_pooled": {
+    "max_P": [
+     0.0428,
+     0,
+     "[mine] (P) misread: digits reversed"
+    ],
+    "max_artifact": null,
+    "max_construct": null,
+    "max_cue_all_shapes": {
+     "answer_type": "text",
+     "effect": 0.0428,
+     "level": 0,
+     "n": 8000,
+     "rule": "[a3] digits reversed (least significant first)"
+    },
+    "max_cue_per_shape": {
+     "by_set": {
+      "final": 0.0428,
+      "impl_a4": 0.044,
+      "impl_f4": 0.0415
+     },
+     "effect": 0.0428,
+     "level": 0,
+     "n": 8000,
+     "rule": "[a3] digits reversed (least significant first)",
+     "se": 0.0023,
+     "shape": "-"
+    },
+    "max_partial": null,
+    "per_level_cue": {
+     "0": {
+      "by_set": {
+       "final": 0.0428,
+       "impl_a4": 0.044,
+       "impl_f4": 0.0415
+      },
+      "effect": 0.0428,
+      "n": 8000,
+      "rule": "[a3] digits reversed (least significant first)",
+      "se": 0.0023,
+      "shape": "-"
+     },
+     "1": {
+      "by_set": {
+       "final": 0.0243,
+       "impl_a4": 0.022,
+       "impl_f4": 0.022
+      },
+      "effect": 0.0231,
+      "n": 8000,
+      "rule": "[a3] digits reversed (least significant first)",
+      "se": 0.0017,
+      "shape": "-"
+     },
+     "2": {
+      "by_set": {
+       "final": 0.016,
+       "impl_a4": 0.014,
+       "impl_f4": 0.0115
+      },
+      "effect": 0.0144,
+      "n": 8000,
+      "rule": "[a3] digits reversed (least significant first)",
+      "se": 0.0013,
+      "shape": "-"
+     },
+     "3": {
+      "by_set": {
+       "final": 0.0077,
+       "impl_a4": 0.009,
+       "impl_f4": 0.01
+      },
+      "effect": 0.0086,
+      "n": 8000,
+      "rule": "[a3] digits reversed (least significant first)",
+      "se": 0.001,
+      "shape": "-"
+     },
+     "4": {
+      "by_set": {
+       "final": 0.003,
+       "impl_a4": 0.005,
+       "impl_f4": 0.004
+      },
+      "effect": 0.0037,
+      "n": 8000,
+      "rule": "[a3] digits reversed (least significant first)",
+      "se": 0.0007,
+      "shape": "-"
+     },
+     "5": {
+      "by_set": {
+       "final": 0.0022,
+       "impl_a4": 0.0015,
+       "impl_f4": 0.0005
+      },
+      "effect": 0.0016,
+      "n": 8000,
+      "rule": "[a3] digits reversed (least significant first)",
+      "se": 0.0005,
+      "shape": "-"
+     },
+     "6": {
+      "by_set": {
+       "final": 0.0003,
+       "impl_a4": 0.002,
+       "impl_f4": 0.0025
+      },
+      "effect": 0.0013,
+      "n": 8000,
+      "rule": "[a3] digits reversed (least significant first)",
+      "se": 0.0004,
+      "shape": "-"
+     }
+    }
+   },
+   "strict_cluster": "R2.from_base (with to_base_wide)",
+   "verdict": "NOT PASSING: capacity as written (DROPS under R-26; HELD under the R-28/R-36 reading) - PENDING LEAD REVIEW",
+   "wording": {
+    "flags": {},
+    "items": 7000,
+    "items_with_no_unique_answer_under_stated_convention": 0
+   }
+  }
+ },
+ "pooling_R32": "item-weighted over impl a4 (2,000/level), impl f4 (2,000/level), final (4,000/level)",
+ "reproducibility": {
+  "all_hash": "ALL af0581d3cc1f011371167031722b26dc1e2dc0a07fc3a9c030801e2529806747",
+  "identical_across_PYTHONHASHSEED_0_4242_random": true
+ },
+ "status": "Independent engineering evidence. Not Astra validation, not human approval. Nothing registered.",
+ "would_drop_if_counted": {
+  "NEW_P": [
+   "R2.count_divisible",
+   "R2.string_rewrite_nonidentity"
+  ],
+  "NEW_artifact": [
+   "R2.list_ops"
+  ],
+  "NEW_cue": [
+   "R2.digit_root",
+   "R2.interval_scheduling"
+  ],
+  "NEW_partial": [
+   "R2.crt_smallest"
+  ],
+  "P": [
+   "R2.binary_search_trace",
+   "R2.cellular_automaton",
+   "R2.cheapest_network",
+   "R2.digit_root",
+   "R2.from_base",
+   "R2.interval_scheduling",
+   "R2.luhn_check",
+   "R2.min_heap_ops",
+   "R2.run_length",
+   "R2.string_rewrite_nonidentity"
+  ],
+  "artifact": [
+   "R2.list_ops",
+   "R2.min_heap_ops",
+   "R2.string_rewrite_nonidentity"
+  ],
+  "construct": [],
+  "partial": []
+ }
+}

@@ -1,0 +1,14 @@
+{"lineage": "R1.knights_knaves_r6", "level": 0, "heuristic": "feat:own kind + is self in args", "eff": 0.114, "anti": null, "acc_fired": null, "fired": 3000, "n": 3000}
+{"lineage": "R1.knights_knaves_r6", "level": 1, "heuristic": "feat:own kind + is self in args", "eff": 0.103, "anti": null, "acc_fired": null, "fired": 3000, "n": 3000}
+{"lineage": "R1.knights_knaves_r6", "level": 2, "heuristic": "feat:own kind + is self in args", "eff": 0.1107, "anti": null, "acc_fired": null, "fired": 3000, "n": 3000}
+{"lineage": "R1.knights_knaves_r6", "level": 3, "heuristic": "feat:own kind + is self in args", "eff": 0.1187, "anti": null, "acc_fired": null, "fired": 3000, "n": 3000}
+{"lineage": "R1.knights_knaves_r6", "level": 4, "heuristic": "feat:own kind + is self in args", "eff": 0.111, "anti": null, "acc_fired": null, "fired": 3000, "n": 3000}
+{"lineage": "R1.knights_knaves_r6", "level": 5, "heuristic": "feat:own kind + is self in args", "eff": 0.1097, "anti": null, "acc_fired": null, "fired": 3000, "n": 3000}
+{"lineage": "R1.knights_knaves_r6", "level": 6, "heuristic": "feat:own kind + is self in args", "eff": 0.1123, "anti": null, "acc_fired": null, "fired": 3000, "n": 3000}
+{"lineage": "R1.knights_knaves_r6", "level": 0, "heuristic": "feat:own statement kind", "eff": 0.114, "anti": null, "acc_fired": null, "fired": 3000, "n": 3000}
+{"lineage": "R1.knights_knaves_r6", "level": 1, "heuristic": "feat:own statement kind", "eff": 0.1077, "anti": null, "acc_fired": null, "fired": 3000, "n": 3000}
+{"lineage": "R1.knights_knaves_r6", "level": 2, "heuristic": "feat:own statement kind", "eff": 0.1107, "anti": null, "acc_fired": null, "fired": 3000, "n": 3000}
+{"lineage": "R1.knights_knaves_r6", "level": 3, "heuristic": "feat:own statement kind", "eff": 0.122, "anti": null, "acc_fired": null, "fired": 3000, "n": 3000}
+{"lineage": "R1.knights_knaves_r6", "level": 4, "heuristic": "feat:own statement kind", "eff": 0.111, "anti": null, "acc_fired": null, "fired": 3000, "n": 3000}
+{"lineage": "R1.knights_knaves_r6", "level": 5, "heuristic": "feat:own statement kind", "eff": 0.1097, "anti": null, "acc_fired": null, "fired": 3000, "n": 3000}
+{"lineage": "R1.knights_knaves_r6", "level": 6, "heuristic": "feat:own statement kind", "eff": 0.1123, "anti": null, "acc_fired": null, "fired": 3000, "n": 3000}

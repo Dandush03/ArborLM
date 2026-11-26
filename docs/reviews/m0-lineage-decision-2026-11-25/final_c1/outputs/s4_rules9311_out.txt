@@ -1,0 +1,27 @@
+C1.binary_search_f3 parse_fail 0 {'probes_closed': 2316, 'sum_half': 2420, 'probes_half': 2330, 'path_half': 2358, 'path_closed': 2291, 'sum_closed': 2285}
+C1.bracket_matching_f3 parse_fail 0 {'remain_at': 2756, 'remain': 2862, 'code': 2818, 'errpos': 2802, 'popsum': 2762}
+C1.bytecode_loop_f3 parse_fail 0 {'acc': 7666, 'sumarg': 5843, 'reg': 491}
+C1.circle_elimination_r2 parse_fail 0 {'last': 4590, 'survivor': 4800, 'sum': 4610}
+C1.cond_chain_f3 parse_fail 0 {'a-b': 4640, 'a': 4746, 'b': 4614}
+C1.counter_list_f3 parse_fail 0 {'style_plain': 4705, 'style_threshold': 4637, 'style_parity': 4658}
+C1.digit_peel_f3 parse_fail 0 {'fold': 8453, 'wsum': 4724, 'fold_k=base': 823}
+C1.euclid_gcd_traced_f3 parse_fail 0 {'state': 6954, 'rsum': 7046}
+C1.fast_power_f3 parse_fail 0 {'res': 14000}
+C1.fib_like_f3 parse_fail 0 {'mod': 6929, 'plain': 7071}
+C1.fib_shapes_recursive_f3 parse_fail 0 {'two': 7024, 'tri': 6976}
+C1.func_branch parse_fail 0 {'calls2': 4000, 'calls2_even': 2000, 'calls3_even': 4000, 'calls4_even': 4000}
+C1.func_compose_f3 parse_fail 0 {'g_one': 4997, 'g_two': 1003, 'h_two': 3907, 'h_one': 4093}
+C1.list_build_f3 parse_fail 0 {'list': 2817, 'sum': 2787, 'wsum_filt': 1849, 'wsum': 2776, 'list_filt': 1872, 'sum_filt': 1899}
+C1.merge_two_sorted_f3 parse_fail 0 {'maxsum': 6966, 'diffsum': 7034}
+C1.nested_pairs_f3 parse_fail 0 {'tri': 4663, 'rect': 9337}
+C1.postfix_evaluation parse_fail 0 {'top': 6983, 'opsum': 7017}
+C1.recursive_calls_r2 parse_fail 0 {'listfold': 4750, 'split': 4553, 'mutual': 4697}
+C1.run_length_scan parse_fail 0 {'long': 4681, 'counts': 4613, 'enc': 4706}
+C1.shared_lists_f3 parse_fail 0 {'list': 6964, 'sum': 7036}
+C1.sieve_marking_f3 parse_fail 0 {'strikesum': 14000}
+C1.slices parse_fail 0 {'concat_list': 3626, 'concat_str': 6775, 'sum_list': 3599}
+C1.string_build_f3 parse_fail 0 {'rev': 4698, 's': 4722, 'alt': 4580}
+C1.string_methods_f3 parse_fail 0 {'tail:[1:]': 2764, 'tail:[:(-2)]': 2848, 'tail:none': 2744, 'tail:[::(-1)]': 2785, 'tail:[::2]': 2859}
+C1.turtle_walk_f3 parse_fail 0 {'pathsum': 9452, 'pos': 4548}
+C1.union_find_links_f3 parse_fail 0 {'parents': 6983, 'wsum': 7017}
+C1.while_counter_f3 parse_fail 0 {'down': 4710, 'collatz': 4546, 'grow': 4744}

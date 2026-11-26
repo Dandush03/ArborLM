@@ -1,0 +1,57 @@
+{
+ "result": 27,
+ "clusters": 18,
+ "wo_var": 16,
+ "scenarios": {
+  "partial_trace_counted": {
+   "dropped": [
+    "C1.circle_elimination_r2",
+    "C1.cond_chain_f3",
+    "C1.func_branch_f4",
+    "C1.shared_lists_f3",
+    "C1.union_find_links_f3"
+   ],
+   "n_lineages": 22,
+   "n_clusters": 15,
+   "n_clusters_without_variants": 13,
+   "clusters_lost": [
+    "C1.circle_elimination",
+    "C1.shared_lists",
+    "C1.union_find_links"
+   ]
+  },
+  "NEW_sieve_closed_form_counted": {
+   "dropped": [
+    "C1.sieve_marking_f4"
+   ],
+   "n_lineages": 26,
+   "n_clusters": 17,
+   "n_clusters_without_variants": 15,
+   "clusters_lost": [
+    "C1.sieve_marking"
+   ]
+  },
+  "both": {
+   "dropped": [
+    "C1.circle_elimination_r2",
+    "C1.cond_chain_f3",
+    "C1.func_branch_f4",
+    "C1.shared_lists_f3",
+    "C1.sieve_marking_f4",
+    "C1.union_find_links_f3"
+   ],
+   "n_lineages": 21,
+   "n_clusters": 14,
+   "n_clusters_without_variants": 12,
+   "clusters_lost": [
+    "C1.circle_elimination",
+    "C1.shared_lists",
+    "C1.sieve_marking",
+    "C1.union_find_links"
+   ]
+  }
+ },
+ "keys": {
+  "n": 94500
+ }
+}

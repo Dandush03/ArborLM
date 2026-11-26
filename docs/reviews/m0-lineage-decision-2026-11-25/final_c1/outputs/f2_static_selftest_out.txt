@@ -1,0 +1,8 @@
+set ['node:Set']
+setcall ['call:set']
+two_prints ['print_calls=2']
+print_in_loop ['print_not_last_top_level']
+hash ['call:hash']
+dict ['node:Dict']
+ok []
+extract ok True None

@@ -1,0 +1,6128 @@
+{
+ "G": 8,
+ "as_written": {
+  "a4key/cluster_demand_G_minus_1_per_lineage": {
+   "clusters_lost": [
+    "S3_multiplicative_chain",
+    "S6_exposed_faces",
+    "prime_factors"
+   ],
+   "clusters_remaining_if_failing_dropped": 14,
+   "fails": {
+    "M1.ages_r3": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "M1.arithmetic_series_r3": [
+     0
+    ],
+    "M1.consecutive_r3": [
+     0,
+     1,
+     2
+    ],
+    "M1.fraction_remainder_r3": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "M1.grid_perimeter_r3": [
+     0
+    ],
+    "M1.mixture_r4": [
+     0
+    ],
+    "M1.painted_cube_r3": [
+     0
+    ],
+    "M1.percent_change_r3": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "M1.pipes_work_r3": [
+     0,
+     1,
+     2
+    ],
+    "M1.prime_factors_r3": [
+     0
+    ],
+    "M1.ratio_share_r3": [
+     0,
+     1
+    ],
+    "M1.rectangle_r3": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "M1.tip_split_r3": [
+     0,
+     1,
+     2,
+     3
+    ]
+   }
+  },
+  "a4key/cluster_demand_G_per_lineage": {
+   "clusters_lost": [
+    "S3_multiplicative_chain"
+   ],
+   "clusters_remaining_if_failing_dropped": 16,
+   "fails": {
+    "M1.ages_r3": [
+     0,
+     1,
+     2,
+     3,
+     4
+    ],
+    "M1.arithmetic_series_r3": [
+     0
+    ],
+    "M1.consecutive_r3": [
+     0,
+     1
+    ],
+    "M1.fraction_remainder_r3": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "M1.grid_perimeter_r3": [
+     0
+    ],
+    "M1.mixture_r4": [
+     0
+    ],
+    "M1.percent_change_r3": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "M1.pipes_work_r3": [
+     0,
+     1,
+     2
+    ],
+    "M1.ratio_share_r3": [
+     0,
+     1
+    ],
+    "M1.rectangle_r3": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "M1.tip_split_r3": [
+     0,
+     1,
+     2
+    ]
+   }
+  },
+  "a4key/own_part_count": {
+   "clusters_lost": [],
+   "clusters_remaining_if_failing_dropped": 17,
+   "fails": {
+    "M1.ages_r3": [
+     0,
+     1,
+     2
+    ],
+    "M1.consecutive_r3": [
+     0,
+     1
+    ],
+    "M1.fraction_remainder_r3": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "M1.grid_perimeter_r3": [
+     0
+    ],
+    "M1.percent_change_r3": [
+     0,
+     1,
+     3
+    ],
+    "M1.pipes_work_r3": [
+     0,
+     1,
+     2
+    ],
+    "M1.ratio_share_r3": [
+     0
+    ],
+    "M1.rectangle_r3": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ]
+   }
+  },
+  "a4key/own_part_count_minus_1": {
+   "clusters_lost": [
+    "S3_multiplicative_chain"
+   ],
+   "clusters_remaining_if_failing_dropped": 16,
+   "fails": {
+    "M1.ages_r3": [
+     0,
+     1,
+     2
+    ],
+    "M1.consecutive_r3": [
+     0,
+     1
+    ],
+    "M1.fraction_remainder_r3": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "M1.grid_perimeter_r3": [
+     0
+    ],
+    "M1.percent_change_r3": [
+     0,
+     1,
+     3,
+     4
+    ],
+    "M1.pipes_work_r3": [
+     0,
+     1,
+     2
+    ],
+    "M1.ratio_share_r3": [
+     0
+    ],
+    "M1.rectangle_r3": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "M1.tip_split_r3": [
+     0
+    ]
+   }
+  },
+  "a4key/smaller_part_decides": {
+   "clusters_lost": [
+    "S3_multiplicative_chain"
+   ],
+   "clusters_remaining_if_failing_dropped": 16,
+   "fails": {
+    "M1.ages_r3": [
+     0,
+     1,
+     2
+    ],
+    "M1.consecutive_r3": [
+     0,
+     1
+    ],
+    "M1.fraction_remainder_r3": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "M1.grid_perimeter_r3": [
+     0
+    ],
+    "M1.percent_change_r3": [
+     0,
+     1,
+     3,
+     4
+    ],
+    "M1.pipes_work_r3": [
+     0,
+     1,
+     2
+    ],
+    "M1.ratio_share_r3": [
+     0
+    ],
+    "M1.rectangle_r3": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "M1.tip_split_r3": [
+     0
+    ]
+   }
+  },
+  "a4key/smaller_part_minus_1": {
+   "clusters_lost": [
+    "S3_multiplicative_chain"
+   ],
+   "clusters_remaining_if_failing_dropped": 16,
+   "fails": {
+    "M1.ages_r3": [
+     0,
+     1,
+     2
+    ],
+    "M1.consecutive_r3": [
+     0,
+     1
+    ],
+    "M1.fraction_remainder_r3": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "M1.grid_perimeter_r3": [
+     0
+    ],
+    "M1.percent_change_r3": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "M1.pipes_work_r3": [
+     0,
+     1,
+     2
+    ],
+    "M1.ratio_share_r3": [
+     0
+    ],
+    "M1.rectangle_r3": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "M1.tip_split_r3": [
+     0
+    ]
+   }
+  },
+  "struct/cluster_demand_G_minus_1_per_lineage": {
+   "clusters_lost": [
+    "S3_multiplicative_chain",
+    "prime_factors"
+   ],
+   "clusters_remaining_if_failing_dropped": 15,
+   "fails": {
+    "M1.ages_r3": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "M1.arithmetic_series_r3": [
+     0
+    ],
+    "M1.consecutive_r3": [
+     0,
+     1,
+     2
+    ],
+    "M1.fraction_remainder_r3": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "M1.percent_change_r3": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "M1.pipes_work_r3": [
+     0,
+     1,
+     2
+    ],
+    "M1.prime_factors_r3": [
+     0
+    ],
+    "M1.ratio_share_r3": [
+     0
+    ],
+    "M1.rectangle_r3": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "M1.tip_split_r3": [
+     0,
+     1,
+     2,
+     3
+    ]
+   }
+  },
+  "struct/cluster_demand_G_per_lineage": {
+   "clusters_lost": [
+    "S3_multiplicative_chain"
+   ],
+   "clusters_remaining_if_failing_dropped": 16,
+   "fails": {
+    "M1.ages_r3": [
+     0,
+     1,
+     2,
+     3,
+     4
+    ],
+    "M1.arithmetic_series_r3": [
+     0
+    ],
+    "M1.consecutive_r3": [
+     0,
+     1
+    ],
+    "M1.fraction_remainder_r3": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "M1.percent_change_r3": [
+     0,
+     1,
+     2,
+     3,
+     4
+    ],
+    "M1.pipes_work_r3": [
+     0,
+     1
+    ],
+    "M1.ratio_share_r3": [
+     0
+    ],
+    "M1.rectangle_r3": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "M1.tip_split_r3": [
+     0,
+     1,
+     2
+    ]
+   }
+  },
+  "struct/own_part_count": {
+   "clusters_lost": [],
+   "clusters_remaining_if_failing_dropped": 17,
+   "fails": {
+    "M1.ages_r3": [
+     0,
+     1,
+     2
+    ],
+    "M1.consecutive_r3": [
+     0,
+     1
+    ],
+    "M1.fraction_remainder_r3": [
+     0,
+     1,
+     2,
+     3,
+     4
+    ],
+    "M1.percent_change_r3": [
+     0,
+     1
+    ],
+    "M1.rectangle_r3": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ]
+   }
+  },
+  "struct/own_part_count_minus_1": {
+   "clusters_lost": [],
+   "clusters_remaining_if_failing_dropped": 17,
+   "fails": {
+    "M1.ages_r3": [
+     0,
+     1,
+     2
+    ],
+    "M1.consecutive_r3": [
+     0,
+     1
+    ],
+    "M1.fraction_remainder_r3": [
+     0,
+     1,
+     2,
+     3,
+     4
+    ],
+    "M1.percent_change_r3": [
+     0,
+     1
+    ],
+    "M1.rectangle_r3": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "M1.tip_split_r3": [
+     0
+    ]
+   }
+  },
+  "struct/smaller_part_decides": {
+   "clusters_lost": [],
+   "clusters_remaining_if_failing_dropped": 17,
+   "fails": {
+    "M1.ages_r3": [
+     0,
+     1,
+     2
+    ],
+    "M1.consecutive_r3": [
+     0,
+     1
+    ],
+    "M1.fraction_remainder_r3": [
+     0,
+     1,
+     2,
+     3,
+     4
+    ],
+    "M1.percent_change_r3": [
+     0,
+     1
+    ],
+    "M1.rectangle_r3": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "M1.tip_split_r3": [
+     0
+    ]
+   }
+  },
+  "struct/smaller_part_minus_1": {
+   "clusters_lost": [],
+   "clusters_remaining_if_failing_dropped": 17,
+   "fails": {
+    "M1.ages_r3": [
+     0,
+     1,
+     2
+    ],
+    "M1.consecutive_r3": [
+     0,
+     1
+    ],
+    "M1.fraction_remainder_r3": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "M1.percent_change_r3": [
+     0,
+     1,
+     2
+    ],
+    "M1.rectangle_r3": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "M1.tip_split_r3": [
+     0
+    ]
+   }
+  },
+  "text/cluster_demand_G_minus_1_per_lineage": {
+   "clusters_lost": [],
+   "clusters_remaining_if_failing_dropped": 17,
+   "fails": {
+    "M1.consecutive_r3": [
+     0,
+     1,
+     2
+    ],
+    "M1.percent_change_r3": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "M1.pipes_work_r3": [
+     0,
+     1,
+     2
+    ],
+    "M1.rectangle_r3": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "M1.tip_split_r3": [
+     0,
+     1,
+     2,
+     3
+    ]
+   }
+  },
+  "text/cluster_demand_G_per_lineage": {
+   "clusters_lost": [],
+   "clusters_remaining_if_failing_dropped": 17,
+   "fails": {
+    "M1.consecutive_r3": [
+     0,
+     1
+    ],
+    "M1.percent_change_r3": [
+     0,
+     1,
+     2,
+     3,
+     4
+    ],
+    "M1.pipes_work_r3": [
+     0,
+     1
+    ],
+    "M1.rectangle_r3": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "M1.tip_split_r3": [
+     0,
+     1,
+     2
+    ]
+   }
+  },
+  "text/own_part_count": {
+   "clusters_lost": [],
+   "clusters_remaining_if_failing_dropped": 17,
+   "fails": {
+    "M1.consecutive_r3": [
+     0,
+     1
+    ],
+    "M1.percent_change_r3": [
+     0,
+     1
+    ],
+    "M1.rectangle_r3": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ]
+   }
+  },
+  "text/own_part_count_minus_1": {
+   "clusters_lost": [],
+   "clusters_remaining_if_failing_dropped": 17,
+   "fails": {
+    "M1.consecutive_r3": [
+     0,
+     1
+    ],
+    "M1.percent_change_r3": [
+     0,
+     1
+    ],
+    "M1.rectangle_r3": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "M1.tip_split_r3": [
+     0
+    ]
+   }
+  },
+  "text/smaller_part_decides": {
+   "clusters_lost": [],
+   "clusters_remaining_if_failing_dropped": 17,
+   "fails": {
+    "M1.consecutive_r3": [
+     0,
+     1
+    ],
+    "M1.percent_change_r3": [
+     0,
+     1
+    ],
+    "M1.rectangle_r3": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "M1.tip_split_r3": [
+     0
+    ]
+   }
+  },
+  "text/smaller_part_minus_1": {
+   "clusters_lost": [],
+   "clusters_remaining_if_failing_dropped": 17,
+   "fails": {
+    "M1.consecutive_r3": [
+     0,
+     1
+    ],
+    "M1.percent_change_r3": [
+     0,
+     1,
+     2
+    ],
+    "M1.rectangle_r3": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "M1.tip_split_r3": [
+     0
+    ]
+   }
+  }
+ },
+ "cluster_count": 17,
+ "clusters": {
+  "S1_linear_solve": [
+   "M1.ages_r3",
+   "M1.average_missing_r4",
+   "M1.consecutive_r3",
+   "M1.linear_equation_r3",
+   "M1.pipes_work_r3",
+   "M1.rectangle_r3"
+  ],
+  "S2_weighted_sum": [
+   "M1.mixture_r4",
+   "M1.shopping_r3",
+   "M1.speed_distance_r3"
+  ],
+  "S3_multiplicative_chain": [
+   "M1.fraction_remainder_r3",
+   "M1.percent_change_r3",
+   "M1.ratio_share_r3",
+   "M1.tip_split_r3"
+  ],
+  "S5_unbounded_table": [
+   "M1.change_ways_r3"
+  ],
+  "S6_exposed_faces": [
+   "M1.grid_perimeter_r3",
+   "M1.painted_cube_r3"
+  ],
+  "S7_step_rule": [
+   "M1.arithmetic_series_r3",
+   "M1.recurrence_iterate_r3"
+  ],
+  "clock_duration": [
+   "M1.clock_duration_r4"
+  ],
+  "crt_congruence": [
+   "M1.crt_congruence_r3"
+  ],
+  "division_counting": [
+   "M1.division_counting_r3"
+  ],
+  "finite_differences": [
+   "M1.finite_differences_r4"
+  ],
+  "gcd_lcm": [
+   "M1.gcd_lcm_r4"
+  ],
+  "inclusion_exclusion": [
+   "M1.inclusion_exclusion_r3"
+  ],
+  "last_digit_power": [
+   "M1.last_digit_power_r3"
+  ],
+  "median_list": [
+   "M1.median_list_r3"
+  ],
+  "prime_factors": [
+   "M1.prime_factors_r3"
+  ],
+  "quadratic_area": [
+   "M1.quadratic_area_r3"
+  ],
+  "tiered_pricing": [
+   "M1.tiered_pricing"
+  ]
+ },
+ "demands": {
+  "cluster_G": 31000,
+  "cluster_G_minus_1": 35300
+ },
+ "families": 18,
+ "family_part": {
+  "age": "A",
+  "algebra": "B",
+  "average": "A",
+  "counting": "A",
+  "division": "A",
+  "geometry": "A",
+  "linear": "B",
+  "number_theory": "B",
+  "percent": "B",
+  "pricing": "B",
+  "rates": "A",
+  "ratio": "B",
+  "remainder": "B",
+  "sequences": "A",
+  "series": "B",
+  "shopping": "B",
+  "statistics": "A",
+  "time": "A"
+ },
+ "hypothetical_per_cluster": {
+  "a4key/G=7": {
+   "clusters": {
+    "S1_linear_solve": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [
+       0,
+       1,
+       2,
+       3
+      ],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       2790143,
+       4062352,
+       112630513,
+       451366637,
+       451708784,
+       451926439,
+       452606624
+      ],
+      "equal_share": [
+       21738,
+       25353,
+       29202,
+       32608,
+       36479,
+       40013,
+       43332
+      ],
+      "mixture": [
+       58667,
+       74383,
+       100242,
+       139217,
+       161394,
+       180166,
+       201141
+      ]
+     }
+    },
+    "S2_weighted_sum": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       727071,
+       450114407,
+       460072489,
+       478881277,
+       900923246,
+       901201690,
+       901530000
+      ],
+      "equal_share": [
+       89746,
+       134391,
+       183742,
+       2187934,
+       2657392,
+       3391847,
+       4455297
+      ],
+      "mixture": [
+       142170,
+       248717,
+       547649,
+       6367712,
+       7879115,
+       10024418,
+       13106359
+      ]
+     }
+    },
+    "S3_multiplicative_chain": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [
+       0,
+       1,
+       2
+      ],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       66556,
+       82997,
+       279549,
+       336715,
+       1800098,
+       2214934,
+       2270407
+      ],
+      "equal_share": [
+       24714,
+       29443,
+       33588,
+       37893,
+       40927,
+       46710,
+       50674
+      ],
+      "mixture": [
+       44911,
+       54938,
+       75769,
+       78735,
+       88737,
+       99318,
+       109517
+      ]
+     }
+    },
+    "S5_unbounded_table": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       57256,
+       81171,
+       105386,
+       123938,
+       140545,
+       167676,
+       188764
+      ],
+      "equal_share": [
+       46626,
+       66418,
+       90851,
+       108195,
+       123860,
+       145673,
+       165985
+      ],
+      "mixture": [
+       46626,
+       66418,
+       90851,
+       108195,
+       123860,
+       145673,
+       165985
+      ]
+     }
+    },
+    "S6_exposed_faces": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       423513,
+       1818816,
+       112548234,
+       450122834,
+       450156490,
+       450189204,
+       450237875
+      ],
+      "equal_share": [
+       35590,
+       101143,
+       143057,
+       197059,
+       267291,
+       342064,
+       438582
+      ],
+      "mixture": [
+       46794,
+       190450,
+       285932,
+       393860,
+       534107,
+       683349,
+       875883
+      ]
+     }
+    },
+    "S7_step_rule": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       172757,
+       201833,
+       225847,
+       250700,
+       283946,
+       308495,
+       322488
+      ],
+      "equal_share": [
+       53360,
+       70752,
+       89853,
+       106468,
+       127132,
+       140139,
+       161198
+      ],
+      "mixture": [
+       85711,
+       112230,
+       138628,
+       162376,
+       189707,
+       210224,
+       235841
+      ]
+     }
+    },
+    "clock_duration": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       149970003,
+       449970001,
+       450015000,
+       450015000,
+       450015000,
+       450015000,
+       450015000
+      ],
+      "equal_share": [
+       149995000,
+       449985000,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ],
+      "mixture": [
+       149995000,
+       449985000,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ]
+     }
+    },
+    "crt_congruence": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       525600,
+       925793,
+       1575836,
+       4970090,
+       12470036,
+       450015000,
+       449970001
+      ],
+      "equal_share": [
+       506740,
+       889298,
+       1525373,
+       4999833,
+       12499583,
+       149995000,
+       449985000
+      ],
+      "mixture": [
+       506740,
+       889298,
+       1525373,
+       4999833,
+       12499583,
+       149995000,
+       449985000
+      ]
+     }
+    },
+    "division_counting": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       192953,
+       246786,
+       290149,
+       360157,
+       409562,
+       488229,
+       543123
+      ],
+      "equal_share": [
+       135906,
+       194462,
+       251529,
+       317562,
+       373122,
+       454990,
+       515447
+      ],
+      "mixture": [
+       135906,
+       194462,
+       251529,
+       317562,
+       373122,
+       454990,
+       515447
+      ]
+     }
+    },
+    "finite_differences": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       47319,
+       79325,
+       125831,
+       179402,
+       262104,
+       103483,
+       208942
+      ],
+      "equal_share": [
+       46664,
+       78395,
+       124408,
+       182254,
+       259208,
+       103255,
+       206890
+      ],
+      "mixture": [
+       46664,
+       78395,
+       124408,
+       182254,
+       259208,
+       103255,
+       206890
+      ]
+     }
+    },
+    "gcd_lcm": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       57687,
+       100160,
+       197431,
+       48219,
+       102185,
+       44536,
+       92758
+      ],
+      "equal_share": [
+       56931,
+       100690,
+       200528,
+       48127,
+       103755,
+       44846,
+       93184
+      ],
+      "mixture": [
+       56931,
+       100690,
+       200528,
+       48127,
+       103755,
+       44846,
+       93184
+      ]
+     }
+    },
+    "inclusion_exclusion": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       164750,
+       652956,
+       1532171,
+       450015000,
+       450015000,
+       450015000,
+       450015000
+      ],
+      "equal_share": [
+       163869,
+       648393,
+       1530561,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ],
+      "mixture": [
+       163869,
+       648393,
+       1530561,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ]
+     }
+    },
+    "last_digit_power": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       223607,
+       376076,
+       450015000,
+       450015000,
+       450015000,
+       450015000,
+       450015000
+      ],
+      "equal_share": [
+       224880,
+       376556,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ],
+      "mixture": [
+       224880,
+       376556,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ]
+     }
+    },
+    "median_list": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       450015000,
+       450015000,
+       450015000,
+       450015000,
+       450015000,
+       450015000,
+       450015000
+      ],
+      "equal_share": [
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ],
+      "mixture": [
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ]
+     }
+    },
+    "prime_factors": {
+     "fails": {
+      "chao1": [
+       0
+      ],
+      "equal_share": [
+       0
+      ],
+      "mixture": [
+       0
+      ]
+     },
+     "rows": {
+      "chao1": [
+       30913,
+       43276,
+       68095,
+       106952,
+       162937,
+       250313,
+       376566
+      ],
+      "equal_share": [
+       31093,
+       44303,
+       68805,
+       104990,
+       162332,
+       249437,
+       383292
+      ],
+      "mixture": [
+       31093,
+       44303,
+       68805,
+       104990,
+       162332,
+       249437,
+       383292
+      ]
+     }
+    },
+    "quadratic_area": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       50943,
+       65131,
+       83359,
+       100769,
+       124299,
+       144021,
+       175405
+      ],
+      "equal_share": [
+       48917,
+       61465,
+       80657,
+       98573,
+       119138,
+       140008,
+       171358
+      ],
+      "mixture": [
+       48917,
+       61465,
+       80657,
+       98573,
+       119138,
+       140008,
+       171358
+      ]
+     }
+    },
+    "tiered_pricing": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       205050,
+       489598,
+       224970002,
+       450015000,
+       450015000,
+       450015000,
+       450015000
+      ],
+      "equal_share": [
+       205943,
+       503903,
+       224992500,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ],
+      "mixture": [
+       205943,
+       503903,
+       224992500,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ]
+     }
+    }
+   },
+   "demand": 35300
+  },
+  "a4key/G=8": {
+   "clusters": {
+    "S1_linear_solve": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [
+       0,
+       1,
+       2
+      ],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       2790143,
+       4062352,
+       112630513,
+       451366637,
+       451708784,
+       451926439,
+       452606624
+      ],
+      "equal_share": [
+       21738,
+       25353,
+       29202,
+       32608,
+       36479,
+       40013,
+       43332
+      ],
+      "mixture": [
+       58667,
+       74383,
+       100242,
+       139217,
+       161394,
+       180166,
+       201141
+      ]
+     }
+    },
+    "S2_weighted_sum": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       727071,
+       450114407,
+       460072489,
+       478881277,
+       900923246,
+       901201690,
+       901530000
+      ],
+      "equal_share": [
+       89746,
+       134391,
+       183742,
+       2187934,
+       2657392,
+       3391847,
+       4455297
+      ],
+      "mixture": [
+       142170,
+       248717,
+       547649,
+       6367712,
+       7879115,
+       10024418,
+       13106359
+      ]
+     }
+    },
+    "S3_multiplicative_chain": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [
+       0,
+       1
+      ],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       66556,
+       82997,
+       279549,
+       336715,
+       1800098,
+       2214934,
+       2270407
+      ],
+      "equal_share": [
+       24714,
+       29443,
+       33588,
+       37893,
+       40927,
+       46710,
+       50674
+      ],
+      "mixture": [
+       44911,
+       54938,
+       75769,
+       78735,
+       88737,
+       99318,
+       109517
+      ]
+     }
+    },
+    "S5_unbounded_table": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       57256,
+       81171,
+       105386,
+       123938,
+       140545,
+       167676,
+       188764
+      ],
+      "equal_share": [
+       46626,
+       66418,
+       90851,
+       108195,
+       123860,
+       145673,
+       165985
+      ],
+      "mixture": [
+       46626,
+       66418,
+       90851,
+       108195,
+       123860,
+       145673,
+       165985
+      ]
+     }
+    },
+    "S6_exposed_faces": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       423513,
+       1818816,
+       112548234,
+       450122834,
+       450156490,
+       450189204,
+       450237875
+      ],
+      "equal_share": [
+       35590,
+       101143,
+       143057,
+       197059,
+       267291,
+       342064,
+       438582
+      ],
+      "mixture": [
+       46794,
+       190450,
+       285932,
+       393860,
+       534107,
+       683349,
+       875883
+      ]
+     }
+    },
+    "S7_step_rule": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       172757,
+       201833,
+       225847,
+       250700,
+       283946,
+       308495,
+       322488
+      ],
+      "equal_share": [
+       53360,
+       70752,
+       89853,
+       106468,
+       127132,
+       140139,
+       161198
+      ],
+      "mixture": [
+       85711,
+       112230,
+       138628,
+       162376,
+       189707,
+       210224,
+       235841
+      ]
+     }
+    },
+    "clock_duration": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       149970003,
+       449970001,
+       450015000,
+       450015000,
+       450015000,
+       450015000,
+       450015000
+      ],
+      "equal_share": [
+       149995000,
+       449985000,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ],
+      "mixture": [
+       149995000,
+       449985000,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ]
+     }
+    },
+    "crt_congruence": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       525600,
+       925793,
+       1575836,
+       4970090,
+       12470036,
+       450015000,
+       449970001
+      ],
+      "equal_share": [
+       506740,
+       889298,
+       1525373,
+       4999833,
+       12499583,
+       149995000,
+       449985000
+      ],
+      "mixture": [
+       506740,
+       889298,
+       1525373,
+       4999833,
+       12499583,
+       149995000,
+       449985000
+      ]
+     }
+    },
+    "division_counting": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       192953,
+       246786,
+       290149,
+       360157,
+       409562,
+       488229,
+       543123
+      ],
+      "equal_share": [
+       135906,
+       194462,
+       251529,
+       317562,
+       373122,
+       454990,
+       515447
+      ],
+      "mixture": [
+       135906,
+       194462,
+       251529,
+       317562,
+       373122,
+       454990,
+       515447
+      ]
+     }
+    },
+    "finite_differences": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       47319,
+       79325,
+       125831,
+       179402,
+       262104,
+       103483,
+       208942
+      ],
+      "equal_share": [
+       46664,
+       78395,
+       124408,
+       182254,
+       259208,
+       103255,
+       206890
+      ],
+      "mixture": [
+       46664,
+       78395,
+       124408,
+       182254,
+       259208,
+       103255,
+       206890
+      ]
+     }
+    },
+    "gcd_lcm": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       57687,
+       100160,
+       197431,
+       48219,
+       102185,
+       44536,
+       92758
+      ],
+      "equal_share": [
+       56931,
+       100690,
+       200528,
+       48127,
+       103755,
+       44846,
+       93184
+      ],
+      "mixture": [
+       56931,
+       100690,
+       200528,
+       48127,
+       103755,
+       44846,
+       93184
+      ]
+     }
+    },
+    "inclusion_exclusion": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       164750,
+       652956,
+       1532171,
+       450015000,
+       450015000,
+       450015000,
+       450015000
+      ],
+      "equal_share": [
+       163869,
+       648393,
+       1530561,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ],
+      "mixture": [
+       163869,
+       648393,
+       1530561,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ]
+     }
+    },
+    "last_digit_power": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       223607,
+       376076,
+       450015000,
+       450015000,
+       450015000,
+       450015000,
+       450015000
+      ],
+      "equal_share": [
+       224880,
+       376556,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ],
+      "mixture": [
+       224880,
+       376556,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ]
+     }
+    },
+    "median_list": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       450015000,
+       450015000,
+       450015000,
+       450015000,
+       450015000,
+       450015000,
+       450015000
+      ],
+      "equal_share": [
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ],
+      "mixture": [
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ]
+     }
+    },
+    "prime_factors": {
+     "fails": {
+      "chao1": [
+       0
+      ],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       30913,
+       43276,
+       68095,
+       106952,
+       162937,
+       250313,
+       376566
+      ],
+      "equal_share": [
+       31093,
+       44303,
+       68805,
+       104990,
+       162332,
+       249437,
+       383292
+      ],
+      "mixture": [
+       31093,
+       44303,
+       68805,
+       104990,
+       162332,
+       249437,
+       383292
+      ]
+     }
+    },
+    "quadratic_area": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       50943,
+       65131,
+       83359,
+       100769,
+       124299,
+       144021,
+       175405
+      ],
+      "equal_share": [
+       48917,
+       61465,
+       80657,
+       98573,
+       119138,
+       140008,
+       171358
+      ],
+      "mixture": [
+       48917,
+       61465,
+       80657,
+       98573,
+       119138,
+       140008,
+       171358
+      ]
+     }
+    },
+    "tiered_pricing": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       205050,
+       489598,
+       224970002,
+       450015000,
+       450015000,
+       450015000,
+       450015000
+      ],
+      "equal_share": [
+       205943,
+       503903,
+       224992500,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ],
+      "mixture": [
+       205943,
+       503903,
+       224992500,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ]
+     }
+    }
+   },
+   "demand": 31000
+  },
+  "struct/G=7": {
+   "clusters": {
+    "S1_linear_solve": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [
+       0,
+       1,
+       2,
+       3
+      ],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       15573636,
+       19658134,
+       450193186,
+       452030170,
+       452596232,
+       452960853,
+       454091526
+      ],
+      "equal_share": [
+       21738,
+       25353,
+       29202,
+       32608,
+       36479,
+       40013,
+       43332
+      ],
+      "mixture": [
+       63627,
+       80354,
+       108670,
+       139820,
+       162042,
+       180832,
+       201727
+      ]
+     }
+    },
+    "S2_weighted_sum": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       1513282,
+       450234766,
+       487636150,
+       676414620,
+       901866722,
+       902216512,
+       902960678
+      ],
+      "equal_share": [
+       179372,
+       267583,
+       367035,
+       4140966,
+       5465405,
+       6553180,
+       8881283
+      ],
+      "mixture": [
+       285363,
+       497588,
+       1096633,
+       12235242,
+       16007372,
+       19103137,
+       25632057
+      ]
+     }
+    },
+    "S3_multiplicative_chain": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       86379,
+       109810,
+       1276799,
+       1519302,
+       34696716,
+       45091642,
+       32250725
+      ],
+      "equal_share": [
+       39420,
+       46865,
+       53344,
+       59575,
+       65001,
+       74209,
+       81232
+      ],
+      "mixture": [
+       60794,
+       73983,
+       98144,
+       118665,
+       133566,
+       149593,
+       166715
+      ]
+     }
+    },
+    "S5_unbounded_table": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       57256,
+       81171,
+       105386,
+       123938,
+       140545,
+       167676,
+       188764
+      ],
+      "equal_share": [
+       46626,
+       66418,
+       90851,
+       108195,
+       123860,
+       145673,
+       165985
+      ],
+      "mixture": [
+       46626,
+       66418,
+       90851,
+       108195,
+       123860,
+       145673,
+       165985
+      ]
+     }
+    },
+    "S6_exposed_faces": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       656159,
+       6789776,
+       450249629,
+       450398741,
+       450532593,
+       450726093,
+       450844432
+      ],
+      "equal_share": [
+       262076,
+       409449,
+       554169,
+       762686,
+       1026192,
+       1439952,
+       1636309
+      ],
+      "mixture": [
+       281769,
+       792227,
+       1107655,
+       1521505,
+       2045386,
+       2866146,
+       3254864
+      ]
+     }
+    },
+    "S7_step_rule": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       172757,
+       201833,
+       225847,
+       250700,
+       283946,
+       308495,
+       322488
+      ],
+      "equal_share": [
+       53360,
+       70752,
+       89853,
+       106468,
+       127132,
+       140139,
+       161198
+      ],
+      "mixture": [
+       85711,
+       112230,
+       138628,
+       162376,
+       189707,
+       210224,
+       235841
+      ]
+     }
+    },
+    "clock_duration": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       149970003,
+       449970001,
+       450015000,
+       450015000,
+       450015000,
+       450015000,
+       450015000
+      ],
+      "equal_share": [
+       149995000,
+       449985000,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ],
+      "mixture": [
+       149995000,
+       449985000,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ]
+     }
+    },
+    "crt_congruence": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       1025521,
+       1707367,
+       2910745,
+       23654230,
+       74970006,
+       450015000,
+       450015000
+      ],
+      "equal_share": [
+       1013480,
+       1717500,
+       2884519,
+       23683421,
+       74997500,
+       149995000,
+       149995000
+      ],
+      "mixture": [
+       1013480,
+       1717500,
+       2884519,
+       23683421,
+       74997500,
+       149995000,
+       149995000
+      ]
+     }
+    },
+    "division_counting": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       192953,
+       246786,
+       290149,
+       360157,
+       409562,
+       488229,
+       543123
+      ],
+      "equal_share": [
+       135906,
+       194462,
+       251529,
+       317562,
+       373122,
+       454990,
+       515447
+      ],
+      "mixture": [
+       135906,
+       194462,
+       251529,
+       317562,
+       373122,
+       454990,
+       515447
+      ]
+     }
+    },
+    "finite_differences": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       47319,
+       79325,
+       125831,
+       179402,
+       262104,
+       103483,
+       208942
+      ],
+      "equal_share": [
+       46664,
+       78395,
+       124408,
+       182254,
+       259208,
+       103255,
+       206890
+      ],
+      "mixture": [
+       46664,
+       78395,
+       124408,
+       182254,
+       259208,
+       103255,
+       206890
+      ]
+     }
+    },
+    "gcd_lcm": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       115120,
+       198622,
+       394769,
+       288356,
+       623617,
+       1031328,
+       2063238
+      ],
+      "equal_share": [
+       113547,
+       198669,
+       402491,
+       285523,
+       629350,
+       1046477,
+       2092953
+      ],
+      "mixture": [
+       113547,
+       198669,
+       402491,
+       285523,
+       629350,
+       1046477,
+       2092953
+      ]
+     }
+    },
+    "inclusion_exclusion": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       14970030,
+       64255721,
+       224970002,
+       450015000,
+       450015000,
+       450015000,
+       450015000
+      ],
+      "equal_share": [
+       14999500,
+       64283571,
+       224992500,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ],
+      "mixture": [
+       14999500,
+       64283571,
+       224992500,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ]
+     }
+    },
+    "last_digit_power": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       223607,
+       376076,
+       450015000,
+       450015000,
+       450015000,
+       450015000,
+       450015000
+      ],
+      "equal_share": [
+       224880,
+       376556,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ],
+      "mixture": [
+       224880,
+       376556,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ]
+     }
+    },
+    "median_list": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       450015000,
+       450015000,
+       450015000,
+       450015000,
+       450015000,
+       450015000,
+       450015000
+      ],
+      "equal_share": [
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ],
+      "mixture": [
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ]
+     }
+    },
+    "prime_factors": {
+     "fails": {
+      "chao1": [
+       0
+      ],
+      "equal_share": [
+       0
+      ],
+      "mixture": [
+       0
+      ]
+     },
+     "rows": {
+      "chao1": [
+       30913,
+       43276,
+       68095,
+       106952,
+       162937,
+       250313,
+       376566
+      ],
+      "equal_share": [
+       31093,
+       44303,
+       68805,
+       104990,
+       162332,
+       249437,
+       383292
+      ],
+      "mixture": [
+       31093,
+       44303,
+       68805,
+       104990,
+       162332,
+       249437,
+       383292
+      ]
+     }
+    },
+    "quadratic_area": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       73336,
+       95278,
+       121584,
+       145155,
+       182572,
+       209774,
+       262692
+      ],
+      "equal_share": [
+       73877,
+       94356,
+       119772,
+       146052,
+       179205,
+       209783,
+       262076
+      ],
+      "mixture": [
+       73877,
+       94356,
+       119772,
+       146052,
+       179205,
+       209783,
+       262076
+      ]
+     }
+    },
+    "tiered_pricing": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       205050,
+       489598,
+       224970002,
+       450015000,
+       450015000,
+       450015000,
+       450015000
+      ],
+      "equal_share": [
+       205943,
+       503903,
+       224992500,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ],
+      "mixture": [
+       205943,
+       503903,
+       224992500,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ]
+     }
+    }
+   },
+   "demand": 35300
+  },
+  "struct/G=8": {
+   "clusters": {
+    "S1_linear_solve": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [
+       0,
+       1,
+       2
+      ],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       15573636,
+       19658134,
+       450193186,
+       452030170,
+       452596232,
+       452960853,
+       454091526
+      ],
+      "equal_share": [
+       21738,
+       25353,
+       29202,
+       32608,
+       36479,
+       40013,
+       43332
+      ],
+      "mixture": [
+       63627,
+       80354,
+       108670,
+       139820,
+       162042,
+       180832,
+       201727
+      ]
+     }
+    },
+    "S2_weighted_sum": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       1513282,
+       450234766,
+       487636150,
+       676414620,
+       901866722,
+       902216512,
+       902960678
+      ],
+      "equal_share": [
+       179372,
+       267583,
+       367035,
+       4140966,
+       5465405,
+       6553180,
+       8881283
+      ],
+      "mixture": [
+       285363,
+       497588,
+       1096633,
+       12235242,
+       16007372,
+       19103137,
+       25632057
+      ]
+     }
+    },
+    "S3_multiplicative_chain": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       86379,
+       109810,
+       1276799,
+       1519302,
+       34696716,
+       45091642,
+       32250725
+      ],
+      "equal_share": [
+       39420,
+       46865,
+       53344,
+       59575,
+       65001,
+       74209,
+       81232
+      ],
+      "mixture": [
+       60794,
+       73983,
+       98144,
+       118665,
+       133566,
+       149593,
+       166715
+      ]
+     }
+    },
+    "S5_unbounded_table": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       57256,
+       81171,
+       105386,
+       123938,
+       140545,
+       167676,
+       188764
+      ],
+      "equal_share": [
+       46626,
+       66418,
+       90851,
+       108195,
+       123860,
+       145673,
+       165985
+      ],
+      "mixture": [
+       46626,
+       66418,
+       90851,
+       108195,
+       123860,
+       145673,
+       165985
+      ]
+     }
+    },
+    "S6_exposed_faces": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       656159,
+       6789776,
+       450249629,
+       450398741,
+       450532593,
+       450726093,
+       450844432
+      ],
+      "equal_share": [
+       262076,
+       409449,
+       554169,
+       762686,
+       1026192,
+       1439952,
+       1636309
+      ],
+      "mixture": [
+       281769,
+       792227,
+       1107655,
+       1521505,
+       2045386,
+       2866146,
+       3254864
+      ]
+     }
+    },
+    "S7_step_rule": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       172757,
+       201833,
+       225847,
+       250700,
+       283946,
+       308495,
+       322488
+      ],
+      "equal_share": [
+       53360,
+       70752,
+       89853,
+       106468,
+       127132,
+       140139,
+       161198
+      ],
+      "mixture": [
+       85711,
+       112230,
+       138628,
+       162376,
+       189707,
+       210224,
+       235841
+      ]
+     }
+    },
+    "clock_duration": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       149970003,
+       449970001,
+       450015000,
+       450015000,
+       450015000,
+       450015000,
+       450015000
+      ],
+      "equal_share": [
+       149995000,
+       449985000,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ],
+      "mixture": [
+       149995000,
+       449985000,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ]
+     }
+    },
+    "crt_congruence": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       1025521,
+       1707367,
+       2910745,
+       23654230,
+       74970006,
+       450015000,
+       450015000
+      ],
+      "equal_share": [
+       1013480,
+       1717500,
+       2884519,
+       23683421,
+       74997500,
+       149995000,
+       149995000
+      ],
+      "mixture": [
+       1013480,
+       1717500,
+       2884519,
+       23683421,
+       74997500,
+       149995000,
+       149995000
+      ]
+     }
+    },
+    "division_counting": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       192953,
+       246786,
+       290149,
+       360157,
+       409562,
+       488229,
+       543123
+      ],
+      "equal_share": [
+       135906,
+       194462,
+       251529,
+       317562,
+       373122,
+       454990,
+       515447
+      ],
+      "mixture": [
+       135906,
+       194462,
+       251529,
+       317562,
+       373122,
+       454990,
+       515447
+      ]
+     }
+    },
+    "finite_differences": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       47319,
+       79325,
+       125831,
+       179402,
+       262104,
+       103483,
+       208942
+      ],
+      "equal_share": [
+       46664,
+       78395,
+       124408,
+       182254,
+       259208,
+       103255,
+       206890
+      ],
+      "mixture": [
+       46664,
+       78395,
+       124408,
+       182254,
+       259208,
+       103255,
+       206890
+      ]
+     }
+    },
+    "gcd_lcm": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       115120,
+       198622,
+       394769,
+       288356,
+       623617,
+       1031328,
+       2063238
+      ],
+      "equal_share": [
+       113547,
+       198669,
+       402491,
+       285523,
+       629350,
+       1046477,
+       2092953
+      ],
+      "mixture": [
+       113547,
+       198669,
+       402491,
+       285523,
+       629350,
+       1046477,
+       2092953
+      ]
+     }
+    },
+    "inclusion_exclusion": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       14970030,
+       64255721,
+       224970002,
+       450015000,
+       450015000,
+       450015000,
+       450015000
+      ],
+      "equal_share": [
+       14999500,
+       64283571,
+       224992500,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ],
+      "mixture": [
+       14999500,
+       64283571,
+       224992500,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ]
+     }
+    },
+    "last_digit_power": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       223607,
+       376076,
+       450015000,
+       450015000,
+       450015000,
+       450015000,
+       450015000
+      ],
+      "equal_share": [
+       224880,
+       376556,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ],
+      "mixture": [
+       224880,
+       376556,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ]
+     }
+    },
+    "median_list": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       450015000,
+       450015000,
+       450015000,
+       450015000,
+       450015000,
+       450015000,
+       450015000
+      ],
+      "equal_share": [
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ],
+      "mixture": [
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ]
+     }
+    },
+    "prime_factors": {
+     "fails": {
+      "chao1": [
+       0
+      ],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       30913,
+       43276,
+       68095,
+       106952,
+       162937,
+       250313,
+       376566
+      ],
+      "equal_share": [
+       31093,
+       44303,
+       68805,
+       104990,
+       162332,
+       249437,
+       383292
+      ],
+      "mixture": [
+       31093,
+       44303,
+       68805,
+       104990,
+       162332,
+       249437,
+       383292
+      ]
+     }
+    },
+    "quadratic_area": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       73336,
+       95278,
+       121584,
+       145155,
+       182572,
+       209774,
+       262692
+      ],
+      "equal_share": [
+       73877,
+       94356,
+       119772,
+       146052,
+       179205,
+       209783,
+       262076
+      ],
+      "mixture": [
+       73877,
+       94356,
+       119772,
+       146052,
+       179205,
+       209783,
+       262076
+      ]
+     }
+    },
+    "tiered_pricing": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       205050,
+       489598,
+       224970002,
+       450015000,
+       450015000,
+       450015000,
+       450015000
+      ],
+      "equal_share": [
+       205943,
+       503903,
+       224992500,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ],
+      "mixture": [
+       205943,
+       503903,
+       224992500,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ]
+     }
+    }
+   },
+   "demand": 31000
+  },
+  "text/G=7": {
+   "clusters": {
+    "S1_linear_solve": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [
+       0,
+       1,
+       2,
+       3
+      ],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       675061142,
+       562595407,
+       675145181,
+       902023993,
+       902582519,
+       677897783,
+       904063753
+      ],
+      "equal_share": [
+       21738,
+       25353,
+       29202,
+       32608,
+       36479,
+       40013,
+       43332
+      ],
+      "mixture": [
+       76946,
+       97749,
+       130553,
+       171090,
+       192308,
+       213218,
+       232180
+      ]
+     }
+    },
+    "S2_weighted_sum": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       450174433,
+       450279765,
+       487636150,
+       676414620,
+       901866722,
+       902216512,
+       902960678
+      ],
+      "equal_share": [
+       179372,
+       267583,
+       367035,
+       4140966,
+       5465405,
+       6553180,
+       8881283
+      ],
+      "mixture": [
+       292240,
+       497465,
+       1096633,
+       12235242,
+       16007372,
+       19103137,
+       25632057
+      ]
+     }
+    },
+    "S3_multiplicative_chain": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       451311360,
+       451526530,
+       451696477,
+       451954828,
+       452140927,
+       452158555,
+       452508257
+      ],
+      "equal_share": [
+       55653,
+       65315,
+       75749,
+       104514,
+       115559,
+       125292,
+       137600
+      ],
+      "mixture": [
+       123614,
+       149814,
+       182199,
+       236936,
+       272481,
+       298882,
+       339515
+      ]
+     }
+    },
+    "S5_unbounded_table": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       450015000,
+       224970002,
+       450015000,
+       450015000,
+       450015000,
+       450015000,
+       450015000
+      ],
+      "equal_share": [
+       149995000,
+       224992500,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ],
+      "mixture": [
+       149995000,
+       224992500,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ]
+     }
+    },
+    "S6_exposed_faces": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       450541443,
+       456600076,
+       899985001,
+       900030000,
+       900030000,
+       900030000,
+       900030000
+      ],
+      "equal_share": [
+       304661,
+       12161757,
+       299990000,
+       299990000,
+       299990000,
+       299990000,
+       299990000
+      ],
+      "mixture": [
+       608705,
+       23375844,
+       449985000,
+       299990000,
+       299990000,
+       299990000,
+       299990000
+      ]
+     }
+    },
+    "S7_step_rule": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       228224811,
+       453420246,
+       455680146,
+       456700146,
+       457243127,
+       459168722,
+       459360048
+      ],
+      "equal_share": [
+       6569124,
+       6870000,
+       10975244,
+       12856714,
+       14515645,
+       18366735,
+       18749375
+      ],
+      "mixture": [
+       12949209,
+       13432388,
+       21175765,
+       24656712,
+       27691385,
+       34614231,
+       35292941
+      ]
+     }
+    },
+    "clock_duration": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       149970003,
+       449970001,
+       450015000,
+       450015000,
+       450015000,
+       450015000,
+       450015000
+      ],
+      "equal_share": [
+       149995000,
+       449985000,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ],
+      "mixture": [
+       149995000,
+       449985000,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ]
+     }
+    },
+    "crt_congruence": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       74970006,
+       449970001,
+       449970001,
+       450015000,
+       450015000,
+       450015000,
+       450015000
+      ],
+      "equal_share": [
+       74997500,
+       449985000,
+       449985000,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ],
+      "mixture": [
+       74997500,
+       449985000,
+       449985000,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ]
+     }
+    },
+    "division_counting": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       19535240,
+       21398592,
+       24970018,
+       32112871,
+       56220008,
+       40879102,
+       44970010
+      ],
+      "equal_share": [
+       19564565,
+       21427857,
+       24999167,
+       32141786,
+       56248125,
+       40907727,
+       44998500
+      ],
+      "mixture": [
+       19564565,
+       21427857,
+       24999167,
+       32141786,
+       56248125,
+       40907727,
+       44998500
+      ]
+     }
+    },
+    "finite_differences": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       450015000,
+       449970001,
+       449970001,
+       449970001,
+       450015000,
+       450015000,
+       449970001
+      ],
+      "equal_share": [
+       149995000,
+       449985000,
+       449985000,
+       449985000,
+       149995000,
+       149995000,
+       449985000
+      ],
+      "mixture": [
+       149995000,
+       449985000,
+       449985000,
+       449985000,
+       149995000,
+       149995000,
+       449985000
+      ]
+     }
+    },
+    "gcd_lcm": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       18720024,
+       34585398,
+       89970005,
+       112470004,
+       449970001,
+       449970001,
+       449970001
+      ],
+      "equal_share": [
+       18749375,
+       34614231,
+       89997000,
+       112496250,
+       449985000,
+       449985000,
+       449985000
+      ],
+      "mixture": [
+       18749375,
+       34614231,
+       89997000,
+       112496250,
+       449985000,
+       449985000,
+       449985000
+      ]
+     }
+    },
+    "inclusion_exclusion": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       14970030,
+       64255721,
+       224970002,
+       450015000,
+       450015000,
+       450015000,
+       450015000
+      ],
+      "equal_share": [
+       14999500,
+       64283571,
+       224992500,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ],
+      "mixture": [
+       14999500,
+       64283571,
+       224992500,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ]
+     }
+    },
+    "last_digit_power": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       450015000,
+       450015000,
+       450015000,
+       450015000,
+       450015000,
+       450015000,
+       450015000
+      ],
+      "equal_share": [
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ],
+      "mixture": [
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ]
+     }
+    },
+    "median_list": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       450015000,
+       450015000,
+       450015000,
+       450015000,
+       450015000,
+       450015000,
+       450015000
+      ],
+      "equal_share": [
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ],
+      "mixture": [
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ]
+     }
+    },
+    "prime_factors": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       149970003,
+       224970002,
+       450015000,
+       450015000,
+       450015000,
+       449970001,
+       450015000
+      ],
+      "equal_share": [
+       149995000,
+       224992500,
+       149995000,
+       149995000,
+       149995000,
+       449985000,
+       149995000
+      ],
+      "mixture": [
+       149995000,
+       224992500,
+       149995000,
+       149995000,
+       149995000,
+       449985000,
+       149995000
+      ]
+     }
+    },
+    "quadratic_area": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       450015000,
+       450015000,
+       449970001,
+       449970001,
+       450015000,
+       450015000,
+       450015000
+      ],
+      "equal_share": [
+       149995000,
+       149995000,
+       449985000,
+       449985000,
+       149995000,
+       149995000,
+       149995000
+      ],
+      "mixture": [
+       149995000,
+       149995000,
+       449985000,
+       449985000,
+       149995000,
+       149995000,
+       149995000
+      ]
+     }
+    },
+    "tiered_pricing": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       205050,
+       489598,
+       224970002,
+       450015000,
+       450015000,
+       450015000,
+       450015000
+      ],
+      "equal_share": [
+       205943,
+       503903,
+       224992500,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ],
+      "mixture": [
+       205943,
+       503903,
+       224992500,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ]
+     }
+    }
+   },
+   "demand": 35300
+  },
+  "text/G=8": {
+   "clusters": {
+    "S1_linear_solve": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [
+       0,
+       1,
+       2
+      ],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       675061142,
+       562595407,
+       675145181,
+       902023993,
+       902582519,
+       677897783,
+       904063753
+      ],
+      "equal_share": [
+       21738,
+       25353,
+       29202,
+       32608,
+       36479,
+       40013,
+       43332
+      ],
+      "mixture": [
+       76946,
+       97749,
+       130553,
+       171090,
+       192308,
+       213218,
+       232180
+      ]
+     }
+    },
+    "S2_weighted_sum": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       450174433,
+       450279765,
+       487636150,
+       676414620,
+       901866722,
+       902216512,
+       902960678
+      ],
+      "equal_share": [
+       179372,
+       267583,
+       367035,
+       4140966,
+       5465405,
+       6553180,
+       8881283
+      ],
+      "mixture": [
+       292240,
+       497465,
+       1096633,
+       12235242,
+       16007372,
+       19103137,
+       25632057
+      ]
+     }
+    },
+    "S3_multiplicative_chain": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       451311360,
+       451526530,
+       451696477,
+       451954828,
+       452140927,
+       452158555,
+       452508257
+      ],
+      "equal_share": [
+       55653,
+       65315,
+       75749,
+       104514,
+       115559,
+       125292,
+       137600
+      ],
+      "mixture": [
+       123614,
+       149814,
+       182199,
+       236936,
+       272481,
+       298882,
+       339515
+      ]
+     }
+    },
+    "S5_unbounded_table": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       450015000,
+       224970002,
+       450015000,
+       450015000,
+       450015000,
+       450015000,
+       450015000
+      ],
+      "equal_share": [
+       149995000,
+       224992500,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ],
+      "mixture": [
+       149995000,
+       224992500,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ]
+     }
+    },
+    "S6_exposed_faces": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       450541443,
+       456600076,
+       899985001,
+       900030000,
+       900030000,
+       900030000,
+       900030000
+      ],
+      "equal_share": [
+       304661,
+       12161757,
+       299990000,
+       299990000,
+       299990000,
+       299990000,
+       299990000
+      ],
+      "mixture": [
+       608705,
+       23375844,
+       449985000,
+       299990000,
+       299990000,
+       299990000,
+       299990000
+      ]
+     }
+    },
+    "S7_step_rule": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       228224811,
+       453420246,
+       455680146,
+       456700146,
+       457243127,
+       459168722,
+       459360048
+      ],
+      "equal_share": [
+       6569124,
+       6870000,
+       10975244,
+       12856714,
+       14515645,
+       18366735,
+       18749375
+      ],
+      "mixture": [
+       12949209,
+       13432388,
+       21175765,
+       24656712,
+       27691385,
+       34614231,
+       35292941
+      ]
+     }
+    },
+    "clock_duration": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       149970003,
+       449970001,
+       450015000,
+       450015000,
+       450015000,
+       450015000,
+       450015000
+      ],
+      "equal_share": [
+       149995000,
+       449985000,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ],
+      "mixture": [
+       149995000,
+       449985000,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ]
+     }
+    },
+    "crt_congruence": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       74970006,
+       449970001,
+       449970001,
+       450015000,
+       450015000,
+       450015000,
+       450015000
+      ],
+      "equal_share": [
+       74997500,
+       449985000,
+       449985000,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ],
+      "mixture": [
+       74997500,
+       449985000,
+       449985000,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ]
+     }
+    },
+    "division_counting": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       19535240,
+       21398592,
+       24970018,
+       32112871,
+       56220008,
+       40879102,
+       44970010
+      ],
+      "equal_share": [
+       19564565,
+       21427857,
+       24999167,
+       32141786,
+       56248125,
+       40907727,
+       44998500
+      ],
+      "mixture": [
+       19564565,
+       21427857,
+       24999167,
+       32141786,
+       56248125,
+       40907727,
+       44998500
+      ]
+     }
+    },
+    "finite_differences": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       450015000,
+       449970001,
+       449970001,
+       449970001,
+       450015000,
+       450015000,
+       449970001
+      ],
+      "equal_share": [
+       149995000,
+       449985000,
+       449985000,
+       449985000,
+       149995000,
+       149995000,
+       449985000
+      ],
+      "mixture": [
+       149995000,
+       449985000,
+       449985000,
+       449985000,
+       149995000,
+       149995000,
+       449985000
+      ]
+     }
+    },
+    "gcd_lcm": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       18720024,
+       34585398,
+       89970005,
+       112470004,
+       449970001,
+       449970001,
+       449970001
+      ],
+      "equal_share": [
+       18749375,
+       34614231,
+       89997000,
+       112496250,
+       449985000,
+       449985000,
+       449985000
+      ],
+      "mixture": [
+       18749375,
+       34614231,
+       89997000,
+       112496250,
+       449985000,
+       449985000,
+       449985000
+      ]
+     }
+    },
+    "inclusion_exclusion": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       14970030,
+       64255721,
+       224970002,
+       450015000,
+       450015000,
+       450015000,
+       450015000
+      ],
+      "equal_share": [
+       14999500,
+       64283571,
+       224992500,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ],
+      "mixture": [
+       14999500,
+       64283571,
+       224992500,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ]
+     }
+    },
+    "last_digit_power": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       450015000,
+       450015000,
+       450015000,
+       450015000,
+       450015000,
+       450015000,
+       450015000
+      ],
+      "equal_share": [
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ],
+      "mixture": [
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ]
+     }
+    },
+    "median_list": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       450015000,
+       450015000,
+       450015000,
+       450015000,
+       450015000,
+       450015000,
+       450015000
+      ],
+      "equal_share": [
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ],
+      "mixture": [
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ]
+     }
+    },
+    "prime_factors": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       149970003,
+       224970002,
+       450015000,
+       450015000,
+       450015000,
+       449970001,
+       450015000
+      ],
+      "equal_share": [
+       149995000,
+       224992500,
+       149995000,
+       149995000,
+       149995000,
+       449985000,
+       149995000
+      ],
+      "mixture": [
+       149995000,
+       224992500,
+       149995000,
+       149995000,
+       149995000,
+       449985000,
+       149995000
+      ]
+     }
+    },
+    "quadratic_area": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       450015000,
+       450015000,
+       449970001,
+       449970001,
+       450015000,
+       450015000,
+       450015000
+      ],
+      "equal_share": [
+       149995000,
+       149995000,
+       449985000,
+       449985000,
+       149995000,
+       149995000,
+       149995000
+      ],
+      "mixture": [
+       149995000,
+       149995000,
+       449985000,
+       449985000,
+       149995000,
+       149995000,
+       149995000
+      ]
+     }
+    },
+    "tiered_pricing": {
+     "fails": {
+      "chao1": [],
+      "equal_share": [],
+      "mixture": []
+     },
+     "rows": {
+      "chao1": [
+       205050,
+       489598,
+       224970002,
+       450015000,
+       450015000,
+       450015000,
+       450015000
+      ],
+      "equal_share": [
+       205943,
+       503903,
+       224992500,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ],
+      "mixture": [
+       205943,
+       503903,
+       224992500,
+       149995000,
+       149995000,
+       149995000,
+       149995000
+      ]
+     }
+    }
+   },
+   "demand": 31000
+  }
+ },
+ "lineages_per_part": {
+  "A": 14,
+  "B": 15
+ },
+ "map_equals_manifest": true,
+ "per_lineage": {
+  "M1.ages_r3": {
+   "cluster": "S1_linear_solve",
+   "family": "age",
+   "n_eff_a4key": [
+    10217,
+    12548,
+    18007,
+    21248,
+    28594,
+    33065,
+    42709
+   ],
+   "n_eff_struct": [
+    10217,
+    12548,
+    18007,
+    21248,
+    28594,
+    33065,
+    42709
+   ],
+   "n_eff_text": [
+    224992500,
+    112496250,
+    224992500,
+    149995000,
+    149995000,
+    224992500,
+    149995000
+   ],
+   "no_collision_struct": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "no_collision_text": [
+    false,
+    false,
+    false,
+    true,
+    true,
+    false,
+    true
+   ],
+   "part": "A"
+  },
+  "M1.arithmetic_series_r3": {
+   "cluster": "S7_step_rule",
+   "family": "series",
+   "n_eff_a4key": [
+    26680,
+    35376,
+    44927,
+    53234,
+    63566,
+    70069,
+    80599
+   ],
+   "n_eff_struct": [
+    26680,
+    35376,
+    44927,
+    53234,
+    63566,
+    70069,
+    80599
+   ],
+   "n_eff_text": [
+    3284562,
+    3435000,
+    5487622,
+    6428357,
+    7257823,
+    9183367,
+    9374688
+   ],
+   "no_collision_struct": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "no_collision_text": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "part": "B"
+  },
+  "M1.average_missing_r4": {
+   "cluster": "S1_linear_solve",
+   "family": "average",
+   "n_eff_a4key": [
+    2694521,
+    3982168,
+    112496250,
+    149995000,
+    149995000,
+    149995000,
+    149995000
+   ],
+   "n_eff_struct": [
+    15516724,
+    19564565,
+    149995000,
+    149995000,
+    149995000,
+    149995000,
+    149995000
+   ],
+   "n_eff_text": [
+    149995000,
+    149995000,
+    149995000,
+    149995000,
+    149995000,
+    149995000,
+    149995000
+   ],
+   "no_collision_struct": [
+    false,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "no_collision_text": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "part": "A"
+  },
+  "M1.change_ways_r3": {
+   "cluster": "S5_unbounded_table",
+   "family": "counting",
+   "n_eff_a4key": [
+    46626,
+    66418,
+    90851,
+    108195,
+    123860,
+    145673,
+    165985
+   ],
+   "n_eff_struct": [
+    46626,
+    66418,
+    90851,
+    108195,
+    123860,
+    145673,
+    165985
+   ],
+   "n_eff_text": [
+    149995000,
+    224992500,
+    149995000,
+    149995000,
+    149995000,
+    149995000,
+    149995000
+   ],
+   "no_collision_struct": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "no_collision_text": [
+    true,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "part": "A"
+  },
+  "M1.clock_duration_r4": {
+   "cluster": "clock_duration",
+   "family": "time",
+   "n_eff_a4key": [
+    149995000,
+    449985000,
+    149995000,
+    149995000,
+    149995000,
+    149995000,
+    149995000
+   ],
+   "n_eff_struct": [
+    149995000,
+    449985000,
+    149995000,
+    149995000,
+    149995000,
+    149995000,
+    149995000
+   ],
+   "n_eff_text": [
+    149995000,
+    449985000,
+    149995000,
+    149995000,
+    149995000,
+    149995000,
+    149995000
+   ],
+   "no_collision_struct": [
+    false,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "no_collision_text": [
+    false,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "part": "A"
+  },
+  "M1.consecutive_r3": {
+   "cluster": "S1_linear_solve",
+   "family": "linear",
+   "n_eff_a4key": [
+    8358,
+    12587,
+    33168,
+    41113,
+    47552,
+    57572,
+    64774
+   ],
+   "n_eff_struct": [
+    8358,
+    12587,
+    33168,
+    41113,
+    47552,
+    57572,
+    64774
+   ],
+   "n_eff_text": [
+    8358,
+    12587,
+    33168,
+    41113,
+    47552,
+    57572,
+    64774
+   ],
+   "no_collision_struct": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "no_collision_text": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "part": "B"
+  },
+  "M1.crt_congruence_r3": {
+   "cluster": "crt_congruence",
+   "family": "number_theory",
+   "n_eff_a4key": [
+    506740,
+    889298,
+    1525373,
+    4999833,
+    12499583,
+    149995000,
+    449985000
+   ],
+   "n_eff_struct": [
+    1013480,
+    1717500,
+    2884519,
+    23683421,
+    74997500,
+    149995000,
+    149995000
+   ],
+   "n_eff_text": [
+    74997500,
+    449985000,
+    449985000,
+    149995000,
+    149995000,
+    149995000,
+    149995000
+   ],
+   "no_collision_struct": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    true
+   ],
+   "no_collision_text": [
+    false,
+    false,
+    false,
+    true,
+    true,
+    true,
+    true
+   ],
+   "part": "B"
+  },
+  "M1.division_counting_r3": {
+   "cluster": "division_counting",
+   "family": "division",
+   "n_eff_a4key": [
+    135906,
+    194462,
+    251529,
+    317562,
+    373122,
+    454990,
+    515447
+   ],
+   "n_eff_struct": [
+    135906,
+    194462,
+    251529,
+    317562,
+    373122,
+    454990,
+    515447
+   ],
+   "n_eff_text": [
+    19564565,
+    21427857,
+    24999167,
+    32141786,
+    56248125,
+    40907727,
+    44998500
+   ],
+   "no_collision_struct": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "no_collision_text": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "part": "A"
+  },
+  "M1.finite_differences_r4": {
+   "cluster": "finite_differences",
+   "family": "sequences",
+   "n_eff_a4key": [
+    46664,
+    78395,
+    124408,
+    182254,
+    259208,
+    103255,
+    206890
+   ],
+   "n_eff_struct": [
+    46664,
+    78395,
+    124408,
+    182254,
+    259208,
+    103255,
+    206890
+   ],
+   "n_eff_text": [
+    149995000,
+    449985000,
+    449985000,
+    449985000,
+    149995000,
+    149995000,
+    449985000
+   ],
+   "no_collision_struct": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "no_collision_text": [
+    true,
+    false,
+    false,
+    false,
+    true,
+    true,
+    false
+   ],
+   "part": "A"
+  },
+  "M1.fraction_remainder_r3": {
+   "cluster": "S3_multiplicative_chain",
+   "family": "remainder",
+   "n_eff_a4key": [
+    6178,
+    7361,
+    8397,
+    9473,
+    10232,
+    11678,
+    12668
+   ],
+   "n_eff_struct": [
+    9855,
+    11716,
+    13336,
+    14894,
+    16250,
+    18552,
+    20308
+   ],
+   "n_eff_text": [
+    1256941,
+    1465749,
+    1636309,
+    1874938,
+    2045386,
+    2026959,
+    2380873
+   ],
+   "no_collision_struct": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "no_collision_text": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "part": "B"
+  },
+  "M1.gcd_lcm_r4": {
+   "cluster": "gcd_lcm",
+   "family": "number_theory",
+   "n_eff_a4key": [
+    56931,
+    100690,
+    200528,
+    48127,
+    103755,
+    44846,
+    93184
+   ],
+   "n_eff_struct": [
+    113547,
+    198669,
+    402491,
+    285523,
+    629350,
+    1046477,
+    2092953
+   ],
+   "n_eff_text": [
+    18749375,
+    34614231,
+    89997000,
+    112496250,
+    449985000,
+    449985000,
+    449985000
+   ],
+   "no_collision_struct": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "no_collision_text": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "part": "B"
+  },
+  "M1.grid_perimeter_r3": {
+   "cluster": "S6_exposed_faces",
+   "family": "geometry",
+   "n_eff_a4key": [
+    17795,
+    813716,
+    112496250,
+    149995000,
+    149995000,
+    149995000,
+    149995000
+   ],
+   "n_eff_struct": [
+    152331,
+    6080878,
+    449985000,
+    149995000,
+    149995000,
+    149995000,
+    149995000
+   ],
+   "n_eff_text": [
+    152331,
+    6080878,
+    449985000,
+    149995000,
+    149995000,
+    149995000,
+    149995000
+   ],
+   "no_collision_struct": [
+    false,
+    false,
+    false,
+    true,
+    true,
+    true,
+    true
+   ],
+   "no_collision_text": [
+    false,
+    false,
+    false,
+    true,
+    true,
+    true,
+    true
+   ],
+   "part": "A"
+  },
+  "M1.inclusion_exclusion_r3": {
+   "cluster": "inclusion_exclusion",
+   "family": "counting",
+   "n_eff_a4key": [
+    163869,
+    648393,
+    1530561,
+    149995000,
+    149995000,
+    149995000,
+    149995000
+   ],
+   "n_eff_struct": [
+    14999500,
+    64283571,
+    224992500,
+    149995000,
+    149995000,
+    149995000,
+    149995000
+   ],
+   "n_eff_text": [
+    14999500,
+    64283571,
+    224992500,
+    149995000,
+    149995000,
+    149995000,
+    149995000
+   ],
+   "no_collision_struct": [
+    false,
+    false,
+    false,
+    true,
+    true,
+    true,
+    true
+   ],
+   "no_collision_text": [
+    false,
+    false,
+    false,
+    true,
+    true,
+    true,
+    true
+   ],
+   "part": "A"
+  },
+  "M1.last_digit_power_r3": {
+   "cluster": "last_digit_power",
+   "family": "number_theory",
+   "n_eff_a4key": [
+    224880,
+    376556,
+    149995000,
+    149995000,
+    149995000,
+    149995000,
+    149995000
+   ],
+   "n_eff_struct": [
+    224880,
+    376556,
+    149995000,
+    149995000,
+    149995000,
+    149995000,
+    149995000
+   ],
+   "n_eff_text": [
+    149995000,
+    149995000,
+    149995000,
+    149995000,
+    149995000,
+    149995000,
+    149995000
+   ],
+   "no_collision_struct": [
+    false,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "no_collision_text": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "part": "B"
+  },
+  "M1.linear_equation_r3": {
+   "cluster": "S1_linear_solve",
+   "family": "linear",
+   "n_eff_a4key": [
+    44584,
+    65951,
+    85257,
+    677688,
+    850633,
+    884057,
+    1156774
+   ],
+   "n_eff_struct": [
+    44584,
+    65951,
+    85257,
+    870377,
+    1022693,
+    1046477,
+    1339241
+   ],
+   "n_eff_text": [
+    44584,
+    65951,
+    85257,
+    870377,
+    1022693,
+    1046477,
+    1339241
+   ],
+   "no_collision_struct": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "no_collision_text": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "part": "B"
+  },
+  "M1.median_list_r3": {
+   "cluster": "median_list",
+   "family": "statistics",
+   "n_eff_a4key": [
+    149995000,
+    149995000,
+    149995000,
+    149995000,
+    149995000,
+    149995000,
+    149995000
+   ],
+   "n_eff_struct": [
+    149995000,
+    149995000,
+    149995000,
+    149995000,
+    149995000,
+    149995000,
+    149995000
+   ],
+   "n_eff_text": [
+    149995000,
+    149995000,
+    149995000,
+    149995000,
+    149995000,
+    149995000,
+    149995000
+   ],
+   "no_collision_struct": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "no_collision_text": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "part": "A"
+  },
+  "M1.mixture_r4": {
+   "cluster": "S2_weighted_sum",
+   "family": "ratio",
+   "n_eff_a4key": [
+    29915,
+    44797,
+    61247,
+    729311,
+    885797,
+    1130616,
+    1485099
+   ],
+   "n_eff_struct": [
+    59791,
+    89194,
+    122345,
+    1380322,
+    1821802,
+    2184393,
+    2960428
+   ],
+   "n_eff_text": [
+    59791,
+    89194,
+    122345,
+    1380322,
+    1821802,
+    2184393,
+    2960428
+   ],
+   "no_collision_struct": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "no_collision_text": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "part": "B"
+  },
+  "M1.painted_cube_r3": {
+   "cluster": "S6_exposed_faces",
+   "family": "geometry",
+   "n_eff_a4key": [
+    34147,
+    50571,
+    71528,
+    98530,
+    133646,
+    171032,
+    219291
+   ],
+   "n_eff_struct": [
+    131038,
+    204725,
+    277084,
+    381343,
+    513096,
+    719976,
+    818155
+   ],
+   "n_eff_text": [
+    149995000,
+    149995000,
+    149995000,
+    149995000,
+    149995000,
+    149995000,
+    149995000
+   ],
+   "no_collision_struct": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "no_collision_text": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "part": "A"
+  },
+  "M1.percent_change_r3": {
+   "cluster": "S3_multiplicative_chain",
+   "family": "percent",
+   "n_eff_a4key": [
+    13913,
+    16329,
+    18937,
+    15387,
+    17131,
+    18558,
+    20381
+   ],
+   "n_eff_struct": [
+    13913,
+    16329,
+    18937,
+    26128,
+    28890,
+    31323,
+    34400
+   ],
+   "n_eff_text": [
+    13913,
+    16329,
+    18937,
+    26128,
+    28890,
+    31323,
+    34400
+   ],
+   "no_collision_struct": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "no_collision_text": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "part": "B"
+  },
+  "M1.pipes_work_r3": {
+   "cluster": "S1_linear_solve",
+   "family": "rates",
+   "n_eff_a4key": [
+    10279,
+    13743,
+    17780,
+    582128,
+    717679,
+    896384,
+    1267563
+   ],
+   "n_eff_struct": [
+    20100,
+    27025,
+    35218,
+    1076519,
+    1428524,
+    1799940,
+    2586121
+   ],
+   "n_eff_text": [
+    20100,
+    27025,
+    35218,
+    1076519,
+    1428524,
+    1799940,
+    2586121
+   ],
+   "no_collision_struct": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "no_collision_text": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "part": "A"
+  },
+  "M1.prime_factors_r3": {
+   "cluster": "prime_factors",
+   "family": "number_theory",
+   "n_eff_a4key": [
+    31093,
+    44303,
+    68805,
+    104990,
+    162332,
+    249437,
+    383292
+   ],
+   "n_eff_struct": [
+    31093,
+    44303,
+    68805,
+    104990,
+    162332,
+    249437,
+    383292
+   ],
+   "n_eff_text": [
+    149995000,
+    224992500,
+    149995000,
+    149995000,
+    149995000,
+    449985000,
+    149995000
+   ],
+   "no_collision_struct": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "no_collision_text": [
+    false,
+    false,
+    true,
+    true,
+    true,
+    false,
+    true
+   ],
+   "part": "B"
+  },
+  "M1.quadratic_area_r3": {
+   "cluster": "quadratic_area",
+   "family": "algebra",
+   "n_eff_a4key": [
+    48917,
+    61465,
+    80657,
+    98573,
+    119138,
+    140008,
+    171358
+   ],
+   "n_eff_struct": [
+    73877,
+    94356,
+    119772,
+    146052,
+    179205,
+    209783,
+    262076
+   ],
+   "n_eff_text": [
+    149995000,
+    149995000,
+    449985000,
+    449985000,
+    149995000,
+    149995000,
+    149995000
+   ],
+   "no_collision_struct": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "no_collision_text": [
+    true,
+    true,
+    false,
+    false,
+    true,
+    true,
+    true
+   ],
+   "part": "B"
+  },
+  "M1.ratio_share_r3": {
+   "cluster": "S3_multiplicative_chain",
+   "family": "ratio",
+   "n_eff_a4key": [
+    15206,
+    20296,
+    204911,
+    253370,
+    1698057,
+    2112606,
+    2153038
+   ],
+   "n_eff_struct": [
+    30235,
+    40318,
+    1187296,
+    1424003,
+    34614231,
+    44998500,
+    32141786
+   ],
+   "n_eff_text": [
+    449985000,
+    149995000,
+    149995000,
+    149995000,
+    149995000,
+    149995000,
+    149995000
+   ],
+   "no_collision_struct": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "no_collision_text": [
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "part": "B"
+  },
+  "M1.rectangle_r3": {
+   "cluster": "S1_linear_solve",
+   "family": "geometry",
+   "n_eff_a4key": [
+    3623,
+    4225,
+    4867,
+    5435,
+    6080,
+    6669,
+    7222
+   ],
+   "n_eff_struct": [
+    3623,
+    4225,
+    4867,
+    5435,
+    6080,
+    6669,
+    7222
+   ],
+   "n_eff_text": [
+    3623,
+    4225,
+    4867,
+    5435,
+    6080,
+    6669,
+    7222
+   ],
+   "no_collision_struct": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "no_collision_text": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "part": "A"
+  },
+  "M1.recurrence_iterate_r3": {
+   "cluster": "S7_step_rule",
+   "family": "sequences",
+   "n_eff_a4key": [
+    108850,
+    135619,
+    151612,
+    170967,
+    186793,
+    210273,
+    219612
+   ],
+   "n_eff_struct": [
+    108850,
+    135619,
+    151612,
+    170967,
+    186793,
+    210273,
+    219612
+   ],
+   "n_eff_text": [
+    224992500,
+    149995000,
+    149995000,
+    149995000,
+    149995000,
+    149995000,
+    149995000
+   ],
+   "no_collision_struct": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "no_collision_text": [
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "part": "A"
+  },
+  "M1.shopping_r3": {
+   "cluster": "S2_weighted_sum",
+   "family": "shopping",
+   "n_eff_a4key": [
+    642836,
+    449985000,
+    149995000,
+    149995000,
+    149995000,
+    149995000,
+    149995000
+   ],
+   "n_eff_struct": [
+    1335267,
+    449985000,
+    149995000,
+    149995000,
+    149995000,
+    149995000,
+    149995000
+   ],
+   "n_eff_text": [
+    149995000,
+    149995000,
+    149995000,
+    149995000,
+    149995000,
+    149995000,
+    149995000
+   ],
+   "no_collision_struct": [
+    false,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "no_collision_text": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "part": "B"
+  },
+  "M1.speed_distance_r3": {
+   "cluster": "S2_weighted_sum",
+   "family": "rates",
+   "n_eff_a4key": [
+    35310,
+    72148,
+    9999667,
+    28124062,
+    149995000,
+    149995000,
+    149995000
+   ],
+   "n_eff_struct": [
+    71099,
+    145485,
+    37498750,
+    224992500,
+    149995000,
+    149995000,
+    149995000
+   ],
+   "n_eff_text": [
+    71099,
+    145485,
+    37498750,
+    224992500,
+    149995000,
+    149995000,
+    149995000
+   ],
+   "no_collision_struct": [
+    false,
+    false,
+    false,
+    false,
+    true,
+    true,
+    true
+   ],
+   "no_collision_text": [
+    false,
+    false,
+    false,
+    false,
+    true,
+    true,
+    true
+   ],
+   "part": "A"
+  },
+  "M1.tiered_pricing": {
+   "cluster": "tiered_pricing",
+   "family": "pricing",
+   "n_eff_a4key": [
+    205943,
+    503903,
+    224992500,
+    149995000,
+    149995000,
+    149995000,
+    149995000
+   ],
+   "n_eff_struct": [
+    205943,
+    503903,
+    224992500,
+    149995000,
+    149995000,
+    149995000,
+    149995000
+   ],
+   "n_eff_text": [
+    205943,
+    503903,
+    224992500,
+    149995000,
+    149995000,
+    149995000,
+    149995000
+   ],
+   "no_collision_struct": [
+    false,
+    false,
+    false,
+    true,
+    true,
+    true,
+    true
+   ],
+   "no_collision_text": [
+    false,
+    false,
+    false,
+    true,
+    true,
+    true,
+    true
+   ],
+   "part": "B"
+  },
+  "M1.tip_split_r3": {
+   "cluster": "S3_multiplicative_chain",
+   "family": "percent",
+   "n_eff_a4key": [
+    17617,
+    22288,
+    29076,
+    34823,
+    42356,
+    47377,
+    56723
+   ],
+   "n_eff_struct": [
+    17617,
+    22288,
+    29076,
+    34823,
+    42356,
+    47377,
+    56723
+   ],
+   "n_eff_text": [
+    17617,
+    22288,
+    29076,
+    34823,
+    42356,
+    47377,
+    56723
+   ],
+   "no_collision_struct": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "no_collision_text": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "part": "B"
+  }
+ }
+}

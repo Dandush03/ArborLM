@@ -1,0 +1,102 @@
+{
+ "final_surviving_lineages": [
+  "R2.binary_search_trace",
+  "R2.caesar_shift",
+  "R2.cellular_automaton",
+  "R2.cheapest_network",
+  "R2.count_divisible",
+  "R2.crt_smallest",
+  "R2.dictionary_rank",
+  "R2.digit_root",
+  "R2.expression_eval",
+  "R2.from_base",
+  "R2.grid_sum",
+  "R2.interval_scheduling",
+  "R2.list_ops",
+  "R2.luhn_check",
+  "R2.min_heap_ops",
+  "R2.run_length",
+  "R2.sort_list",
+  "R2.string_rewrite_nonidentity"
+ ],
+ "final_surviving_clusters": [
+  "R2.binary_search_trace",
+  "R2.caesar_shift",
+  "R2.cellular_automaton",
+  "R2.cheapest_network",
+  "R2.count_divisible",
+  "R2.crt_smallest",
+  "R2.dictionary_rank",
+  "R2.digit_root",
+  "R2.expression_eval",
+  "R2.from_base",
+  "R2.grid_sum",
+  "R2.interval_scheduling",
+  "R2.kth_smallest",
+  "R2.list_ops",
+  "R2.luhn_check",
+  "R2.min_heap_ops",
+  "R2.run_length",
+  "R2.string_rewrite_nonidentity"
+ ],
+ "final_cluster_count": 18,
+ "G_per_part": 9,
+ "would_drop_if_counted": {
+  "partial": [],
+  "construct": [],
+  "P": [
+   "R2.binary_search_trace",
+   "R2.cellular_automaton",
+   "R2.cheapest_network",
+   "R2.digit_root",
+   "R2.from_base",
+   "R2.interval_scheduling",
+   "R2.luhn_check",
+   "R2.min_heap_ops",
+   "R2.run_length",
+   "R2.string_rewrite_nonidentity"
+  ],
+  "artifact": [
+   "R2.list_ops",
+   "R2.min_heap_ops",
+   "R2.string_rewrite_nonidentity"
+  ],
+  "NEW_cue": [
+   "R2.digit_root",
+   "R2.interval_scheduling"
+  ],
+  "NEW_partial": [
+   "R2.crt_smallest"
+  ],
+  "NEW_P": [
+   "R2.count_divisible",
+   "R2.string_rewrite_nonidentity"
+  ],
+  "NEW_artifact": [
+   "R2.list_ops"
+  ]
+ },
+ "reproducibility": {
+  "identical_across_PYTHONHASHSEED_0_4242_random": true,
+  "all_hash": "ALL af0581d3cc1f011371167031722b26dc1e2dc0a07fc3a9c030801e2529806747"
+ }
+}
+R2.binary_search_trace STAYS 0.0781 True True
+R2.caesar_shift STAYS 0.0456 True True
+R2.cellular_automaton STAYS 0.0429 True True
+R2.cheapest_network STAYS 0.0584 True True
+R2.count_divisible STAYS 0.0312 True True
+R2.crt_smallest STAYS 0.1123 True True
+R2.dictionary_rank STAYS 0.0471 True True
+R2.digit_root STAYS 0.1115 True True
+R2.expression_eval STAYS 0.0832 True True
+R2.from_base STAYS 0.0187 True True
+R2.grid_sum STAYS 0.0739 True True
+R2.interval_scheduling STAYS 0.1409 True True
+R2.list_ops STAYS 0.0096 True True
+R2.luhn_check STAYS 0.103 True True
+R2.min_heap_ops STAYS 0.0035 True True
+R2.run_length STAYS 0.0 True True
+R2.sort_list STAYS 0.0 True True
+R2.string_rewrite_nonidentity STAYS 0.0257 True True
+R2.to_base_wide NOT PASSING: capacit 0.0428 False False

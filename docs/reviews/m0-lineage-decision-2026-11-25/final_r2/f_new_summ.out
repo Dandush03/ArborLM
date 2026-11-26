@@ -1,0 +1,9 @@
+count_divisible              P        L0..L6 0.720 0.618 0.723 0.658 0.708 0.628 0.656  ABOVE 0.15  (P) misread: each distinct value counted once (the wording now excludes it)
+crt_smallest                 cue      L0..L6 0.111 0.066 0.056 0.001 0.001 0.001 0.000    (cue) common offset: equal remainders -> r; equal (m - r) -> lcm - (m - r)
+crt_smallest                 cue      L0..L6 0.117 0.058 0.042 0.000 0.001 0.001 0.000    (cue) largest remainder + its modulus
+crt_smallest                 partial  L0..L6 0.366 0.192 0.134 0.002 0.003 0.001 0.001  ABOVE 0.15  (partial) largest modulus: try r, r+m, r+2m against the other congruences, else r
+digit_root                   cue      L0..L6 0.211 0.203 0.201 0.209 0.202 0.205 0.195  ABOVE 0.15  (cue) digit sum once, first digit
+interval_scheduling          cue      L0..L6 0.507 0.423 0.404 0.328 0.306 0.264 0.232  ABOVE 0.15  (cue) fewest clashes first (ties by end, then number)
+list_ops                     artifact L0..L6 0.412 0.259 0.200 0.153 0.109 0.076 0.063  ABOVE 0.15  (artifact) final list = start list with adds appended and removals applied, all move
+luhn_check                   cue      L0..L6 0.106 0.107 0.095 0.102 0.106 0.105 0.101    (cue) check digit: (10 - digit sum mod 10) mod 10 with every digit doubled
+string_rewrite_nonidentity   P        L0..L6 0.740 0.506 0.485 0.335 0.321 0.215 0.211  ABOVE 0.15  (P) misread: each step repeated until no match is left (capped at 50 rounds)

@@ -1,0 +1,4 @@
+pool hashes equal: True 5723dbc92bb0325a 1 987654321
+draw files 27 27 identical 27
+draw sha256 c1fdd62fba702052
+retry stats equal True

@@ -1,0 +1,1907 @@
+{
+ "R2.binary_search_trace": {
+  "all_pairs_rise": true,
+  "levels": {
+   "0": {
+    "distinct_texts": 1000,
+    "max list length": 19,
+    "mean list length": 17.489,
+    "min list length": 16,
+    "n": 1000
+   },
+   "1": {
+    "distinct_texts": 1000,
+    "max list length": 23,
+    "mean list length": 21.522,
+    "min list length": 20,
+    "n": 1000
+   },
+   "2": {
+    "distinct_texts": 1000,
+    "max list length": 27,
+    "mean list length": 25.499,
+    "min list length": 24,
+    "n": 1000
+   },
+   "3": {
+    "distinct_texts": 1000,
+    "max list length": 32,
+    "mean list length": 29.698,
+    "min list length": 28,
+    "n": 1000
+   },
+   "4": {
+    "distinct_texts": 1000,
+    "max list length": 35,
+    "mean list length": 33.459,
+    "min list length": 32,
+    "n": 1000
+   },
+   "5": {
+    "distinct_texts": 1000,
+    "max list length": 39,
+    "mean list length": 37.533,
+    "min list length": 36,
+    "n": 1000
+   },
+   "6": {
+    "distinct_texts": 1000,
+    "max list length": 43,
+    "mean list length": 41.528,
+    "min list length": 40,
+    "n": 1000
+   }
+  },
+  "main": "list length",
+  "pairs": {
+   "0-1": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "1-2": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "2-3": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "3-4": {
+    "auc": 0.968,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "4-5": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "5-6": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   }
+  },
+  "shared_texts_any_two_levels": 0
+ },
+ "R2.caesar_shift": {
+  "all_pairs_rise": true,
+  "levels": {
+   "0": {
+    "distinct_texts": 998,
+    "max letters": 5,
+    "mean letters": 5.0,
+    "min letters": 5,
+    "n": 1000
+   },
+   "1": {
+    "distinct_texts": 1000,
+    "max letters": 10,
+    "mean letters": 10.0,
+    "min letters": 10,
+    "n": 1000
+   },
+   "2": {
+    "distinct_texts": 1000,
+    "max letters": 15,
+    "mean letters": 15.0,
+    "min letters": 15,
+    "n": 1000
+   },
+   "3": {
+    "distinct_texts": 1000,
+    "max letters": 20,
+    "mean letters": 20.0,
+    "min letters": 20,
+    "n": 1000
+   },
+   "4": {
+    "distinct_texts": 1000,
+    "max letters": 25,
+    "mean letters": 25.0,
+    "min letters": 25,
+    "n": 1000
+   },
+   "5": {
+    "distinct_texts": 1000,
+    "max letters": 30,
+    "mean letters": 30.0,
+    "min letters": 30,
+    "n": 1000
+   },
+   "6": {
+    "distinct_texts": 1000,
+    "max letters": 35,
+    "mean letters": 35.0,
+    "min letters": 35,
+    "n": 1000
+   }
+  },
+  "main": "letters",
+  "pairs": {
+   "0-1": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "1-2": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "2-3": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "3-4": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "4-5": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "5-6": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   }
+  },
+  "shared_texts_any_two_levels": 0
+ },
+ "R2.cellular_automaton": {
+  "all_pairs_rise": true,
+  "levels": {
+   "0": {
+    "distinct_texts": 987,
+    "max cells x steps": 22,
+    "mean cells": 11.0,
+    "mean cells x steps": 22.0,
+    "mean steps": 2.0,
+    "min cells x steps": 22,
+    "n": 1000
+   },
+   "1": {
+    "distinct_texts": 996,
+    "max cells x steps": 26,
+    "mean cells": 13.0,
+    "mean cells x steps": 26.0,
+    "mean steps": 2.0,
+    "min cells x steps": 26,
+    "n": 1000
+   },
+   "2": {
+    "distinct_texts": 1000,
+    "max cells x steps": 45,
+    "mean cells": 15.0,
+    "mean cells x steps": 45.0,
+    "mean steps": 3.0,
+    "min cells x steps": 45,
+    "n": 1000
+   },
+   "3": {
+    "distinct_texts": 1000,
+    "max cells x steps": 51,
+    "mean cells": 17.0,
+    "mean cells x steps": 51.0,
+    "mean steps": 3.0,
+    "min cells x steps": 51,
+    "n": 1000
+   },
+   "4": {
+    "distinct_texts": 998,
+    "max cells x steps": 76,
+    "mean cells": 19.0,
+    "mean cells x steps": 76.0,
+    "mean steps": 4.0,
+    "min cells x steps": 76,
+    "n": 1000
+   },
+   "5": {
+    "distinct_texts": 1000,
+    "max cells x steps": 84,
+    "mean cells": 21.0,
+    "mean cells x steps": 84.0,
+    "mean steps": 4.0,
+    "min cells x steps": 84,
+    "n": 1000
+   },
+   "6": {
+    "distinct_texts": 1000,
+    "max cells x steps": 115,
+    "mean cells": 23.0,
+    "mean cells x steps": 115.0,
+    "mean steps": 5.0,
+    "min cells x steps": 115,
+    "n": 1000
+   }
+  },
+  "main": "cells x steps",
+  "pairs": {
+   "0-1": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "1-2": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "2-3": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "3-4": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "4-5": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "5-6": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   }
+  },
+  "shared_texts_any_two_levels": 0
+ },
+ "R2.cheapest_network": {
+  "all_pairs_rise": true,
+  "levels": {
+   "0": {
+    "distinct_texts": 1000,
+    "max towns": 8,
+    "mean cables": 16.0,
+    "mean towns": 8.0,
+    "min towns": 8,
+    "n": 1000
+   },
+   "1": {
+    "distinct_texts": 1000,
+    "max towns": 9,
+    "mean cables": 18.0,
+    "mean towns": 9.0,
+    "min towns": 9,
+    "n": 1000
+   },
+   "2": {
+    "distinct_texts": 1000,
+    "max towns": 10,
+    "mean cables": 20.0,
+    "mean towns": 10.0,
+    "min towns": 10,
+    "n": 1000
+   },
+   "3": {
+    "distinct_texts": 1000,
+    "max towns": 11,
+    "mean cables": 22.0,
+    "mean towns": 11.0,
+    "min towns": 11,
+    "n": 1000
+   },
+   "4": {
+    "distinct_texts": 1000,
+    "max towns": 12,
+    "mean cables": 24.0,
+    "mean towns": 12.0,
+    "min towns": 12,
+    "n": 1000
+   },
+   "5": {
+    "distinct_texts": 1000,
+    "max towns": 13,
+    "mean cables": 26.0,
+    "mean towns": 13.0,
+    "min towns": 13,
+    "n": 1000
+   },
+   "6": {
+    "distinct_texts": 1000,
+    "max towns": 14,
+    "mean cables": 28.0,
+    "mean towns": 14.0,
+    "min towns": 14,
+    "n": 1000
+   }
+  },
+  "main": "towns",
+  "pairs": {
+   "0-1": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "1-2": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "2-3": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "3-4": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "4-5": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "5-6": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   }
+  },
+  "shared_texts_any_two_levels": 0
+ },
+ "R2.count_divisible": {
+  "all_pairs_rise": true,
+  "levels": {
+   "0": {
+    "distinct_texts": 1000,
+    "max list length": 18,
+    "mean list length": 18.0,
+    "mean max value": 94.317,
+    "min list length": 18,
+    "n": 1000
+   },
+   "1": {
+    "distinct_texts": 1000,
+    "max list length": 22,
+    "mean list length": 22.0,
+    "mean max value": 95.322,
+    "min list length": 22,
+    "n": 1000
+   },
+   "2": {
+    "distinct_texts": 1000,
+    "max list length": 26,
+    "mean list length": 26.0,
+    "mean max value": 192.492,
+    "min list length": 26,
+    "n": 1000
+   },
+   "3": {
+    "distinct_texts": 1000,
+    "max list length": 30,
+    "mean list length": 30.0,
+    "mean max value": 193.063,
+    "min list length": 30,
+    "n": 1000
+   },
+   "4": {
+    "distinct_texts": 1000,
+    "max list length": 34,
+    "mean list length": 34.0,
+    "mean max value": 290.74,
+    "min list length": 34,
+    "n": 1000
+   },
+   "5": {
+    "distinct_texts": 1000,
+    "max list length": 38,
+    "mean list length": 38.0,
+    "mean max value": 291.889,
+    "min list length": 38,
+    "n": 1000
+   },
+   "6": {
+    "distinct_texts": 1000,
+    "max list length": 42,
+    "mean list length": 42.0,
+    "mean max value": 390.368,
+    "min list length": 42,
+    "n": 1000
+   }
+  },
+  "main": "list length",
+  "pairs": {
+   "0-1": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "1-2": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "2-3": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "3-4": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "4-5": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "5-6": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   }
+  },
+  "shared_texts_any_two_levels": 0
+ },
+ "R2.crt_smallest": {
+  "all_pairs_rise": true,
+  "levels": {
+   "0": {
+    "distinct_texts": 972,
+    "max log10 lcm": 2.91,
+    "mean congruences": 2.0,
+    "mean log10 lcm": 2.286,
+    "mean mean modulus": 16.267,
+    "min log10 lcm": 1.079,
+    "n": 1000
+   },
+   "1": {
+    "distinct_texts": 994,
+    "max log10 lcm": 3.171,
+    "mean congruences": 2.0,
+    "mean log10 lcm": 2.663,
+    "mean mean modulus": 23.541,
+    "min log10 lcm": 1.857,
+    "n": 1000
+   },
+   "2": {
+    "distinct_texts": 998,
+    "max log10 lcm": 3.371,
+    "mean congruences": 2.0,
+    "mean log10 lcm": 2.92,
+    "mean mean modulus": 30.954,
+    "min log10 lcm": 2.26,
+    "n": 1000
+   },
+   "3": {
+    "distinct_texts": 1000,
+    "max log10 lcm": 5.29,
+    "mean congruences": 3.0,
+    "mean log10 lcm": 4.706,
+    "mean mean modulus": 39.046,
+    "min log10 lcm": 3.896,
+    "n": 1000
+   },
+   "4": {
+    "distinct_texts": 1000,
+    "max log10 lcm": 5.471,
+    "mean congruences": 3.0,
+    "mean log10 lcm": 4.924,
+    "mean mean modulus": 45.958,
+    "min log10 lcm": 4.204,
+    "n": 1000
+   },
+   "5": {
+    "distinct_texts": 1000,
+    "max log10 lcm": 5.642,
+    "mean congruences": 3.0,
+    "mean log10 lcm": 5.136,
+    "mean mean modulus": 53.797,
+    "min log10 lcm": 4.478,
+    "n": 1000
+   },
+   "6": {
+    "distinct_texts": 1000,
+    "max log10 lcm": 5.833,
+    "mean congruences": 3.0,
+    "mean log10 lcm": 5.309,
+    "mean mean modulus": 61.125,
+    "min log10 lcm": 4.666,
+    "n": 1000
+   }
+  },
+  "main": "log10 lcm",
+  "pairs": {
+   "0-1": {
+    "auc": 0.782,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 13
+   },
+   "1-2": {
+    "auc": 0.749,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "2-3": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "3-4": {
+    "auc": 0.733,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "4-5": {
+    "auc": 0.734,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "5-6": {
+    "auc": 0.703,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   }
+  },
+  "shared_texts_any_two_levels": 13
+ },
+ "R2.dictionary_rank": {
+  "all_pairs_rise": false,
+  "levels": {
+   "0": {
+    "distinct_texts": 1000,
+    "max log10 list size": 3.899,
+    "mean alphabet": 9.999,
+    "mean log10 list size": 3.694,
+    "mean word length": 4.0,
+    "min log10 list size": 3.481,
+    "n": 1000
+   },
+   "1": {
+    "distinct_texts": 1000,
+    "max log10 list size": 4.075,
+    "mean alphabet": 10.496,
+    "mean log10 list size": 3.789,
+    "mean word length": 4.0,
+    "min log10 list size": 3.481,
+    "n": 1000
+   },
+   "2": {
+    "distinct_texts": 1000,
+    "max log10 list size": 4.18,
+    "mean alphabet": 8.031,
+    "mean log10 list size": 3.815,
+    "mean word length": 5.0,
+    "min log10 list size": 3.401,
+    "n": 1000
+   },
+   "3": {
+    "distinct_texts": 1000,
+    "max log10 list size": 4.481,
+    "mean alphabet": 8.985,
+    "mean log10 list size": 4.158,
+    "mean word length": 5.0,
+    "min log10 list size": 3.827,
+    "n": 1000
+   },
+   "4": {
+    "distinct_texts": 1000,
+    "max log10 list size": 5.18,
+    "mean alphabet": 8.995,
+    "mean log10 list size": 4.753,
+    "mean word length": 6.0,
+    "min log10 list size": 4.304,
+    "n": 1000
+   },
+   "5": {
+    "distinct_texts": 1000,
+    "max log10 list size": 5.522,
+    "mean alphabet": 10.047,
+    "mean log10 list size": 5.179,
+    "mean word length": 6.0,
+    "min log10 list size": 4.782,
+    "n": 1000
+   },
+   "6": {
+    "distinct_texts": 1000,
+    "max log10 list size": 6.221,
+    "mean alphabet": 9.988,
+    "mean log10 list size": 5.748,
+    "mean word length": 7.0,
+    "min log10 list size": 5.259,
+    "n": 1000
+   }
+  },
+  "main": "log10 list size",
+  "pairs": {
+   "0-1": {
+    "auc": 0.626,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "1-2": {
+    "auc": 0.517,
+    "mean_rises": true,
+    "rises_my_reading": false,
+    "shared_texts": 0
+   },
+   "2-3": {
+    "auc": 0.768,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "3-4": {
+    "auc": 0.892,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "4-5": {
+    "auc": 0.792,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "5-6": {
+    "auc": 0.886,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   }
+  },
+  "shared_texts_any_two_levels": 0
+ },
+ "R2.digit_root": {
+  "all_pairs_rise": true,
+  "levels": {
+   "0": {
+    "distinct_texts": 997,
+    "max digits": 5,
+    "mean digits": 5.0,
+    "min digits": 5,
+    "n": 1000
+   },
+   "1": {
+    "distinct_texts": 1000,
+    "max digits": 6,
+    "mean digits": 6.0,
+    "min digits": 6,
+    "n": 1000
+   },
+   "2": {
+    "distinct_texts": 1000,
+    "max digits": 7,
+    "mean digits": 7.0,
+    "min digits": 7,
+    "n": 1000
+   },
+   "3": {
+    "distinct_texts": 1000,
+    "max digits": 8,
+    "mean digits": 8.0,
+    "min digits": 8,
+    "n": 1000
+   },
+   "4": {
+    "distinct_texts": 1000,
+    "max digits": 9,
+    "mean digits": 9.0,
+    "min digits": 9,
+    "n": 1000
+   },
+   "5": {
+    "distinct_texts": 1000,
+    "max digits": 10,
+    "mean digits": 10.0,
+    "min digits": 10,
+    "n": 1000
+   },
+   "6": {
+    "distinct_texts": 1000,
+    "max digits": 11,
+    "mean digits": 11.0,
+    "min digits": 11,
+    "n": 1000
+   }
+  },
+  "main": "digits",
+  "pairs": {
+   "0-1": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "1-2": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "2-3": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "3-4": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "4-5": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "5-6": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   }
+  },
+  "shared_texts_any_two_levels": 0
+ },
+ "R2.expression_eval": {
+  "all_pairs_rise": true,
+  "levels": {
+   "0": {
+    "distinct_texts": 1000,
+    "max operators": 6,
+    "mean operators": 4.95,
+    "mean parentheses": 1.0,
+    "min operators": 4,
+    "n": 1000
+   },
+   "1": {
+    "distinct_texts": 1000,
+    "max operators": 7,
+    "mean operators": 5.976,
+    "mean parentheses": 1.0,
+    "min operators": 5,
+    "n": 1000
+   },
+   "2": {
+    "distinct_texts": 1000,
+    "max operators": 12,
+    "mean operators": 7.651,
+    "mean parentheses": 1.228,
+    "min operators": 6,
+    "n": 1000
+   },
+   "3": {
+    "distinct_texts": 1000,
+    "max operators": 17,
+    "mean operators": 8.961,
+    "mean parentheses": 1.473,
+    "min operators": 7,
+    "n": 1000
+   },
+   "4": {
+    "distinct_texts": 1000,
+    "max operators": 17,
+    "mean operators": 11.173,
+    "mean parentheses": 2.033,
+    "min operators": 8,
+    "n": 1000
+   },
+   "5": {
+    "distinct_texts": 1000,
+    "max operators": 21,
+    "mean operators": 12.518,
+    "mean parentheses": 2.199,
+    "min operators": 9,
+    "n": 1000
+   },
+   "6": {
+    "distinct_texts": 1000,
+    "max operators": 23,
+    "mean operators": 15.141,
+    "mean parentheses": 2.921,
+    "min operators": 11,
+    "n": 1000
+   }
+  },
+  "main": "operators",
+  "pairs": {
+   "0-1": {
+    "auc": 0.819,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "1-2": {
+    "auc": 0.907,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "2-3": {
+    "auc": 0.795,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "3-4": {
+    "auc": 0.872,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "4-5": {
+    "auc": 0.715,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "5-6": {
+    "auc": 0.825,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   }
+  },
+  "shared_texts_any_two_levels": 0
+ },
+ "R2.from_base": {
+  "all_pairs_rise": false,
+  "levels": {
+   "0": {
+    "distinct_texts": 653,
+    "max log10 value": 4.51,
+    "mean digits": 3.963,
+    "mean log10 value": 2.106,
+    "min log10 value": 0.602,
+    "n": 1000
+   },
+   "1": {
+    "distinct_texts": 790,
+    "max log10 value": 5.412,
+    "mean digits": 4.996,
+    "mean log10 value": 2.775,
+    "min log10 value": 0.903,
+    "n": 1000
+   },
+   "2": {
+    "distinct_texts": 939,
+    "max log10 value": 8.426,
+    "mean digits": 6.021,
+    "mean log10 value": 4.29,
+    "min log10 value": 1.204,
+    "n": 1000
+   },
+   "3": {
+    "distinct_texts": 958,
+    "max log10 value": 9.627,
+    "mean digits": 7.02,
+    "mean log10 value": 4.968,
+    "min log10 value": 1.544,
+    "n": 1000
+   },
+   "4": {
+    "distinct_texts": 976,
+    "max log10 value": 10.834,
+    "mean digits": 7.992,
+    "mean log10 value": 5.76,
+    "min log10 value": 1.806,
+    "n": 1000
+   },
+   "5": {
+    "distinct_texts": 989,
+    "max log10 value": 12.033,
+    "mean digits": 8.968,
+    "mean log10 value": 6.568,
+    "min log10 value": 2.111,
+    "n": 1000
+   },
+   "6": {
+    "distinct_texts": 994,
+    "max log10 value": 13.245,
+    "mean digits": 10.012,
+    "mean log10 value": 7.304,
+    "min log10 value": 2.413,
+    "n": 1000
+   }
+  },
+  "main": "log10 value",
+  "pairs": {
+   "0-1": {
+    "auc": 0.669,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 99
+   },
+   "1-2": {
+    "auc": 0.761,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 53
+   },
+   "2-3": {
+    "auc": 0.601,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 32
+   },
+   "3-4": {
+    "auc": 0.604,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 30
+   },
+   "4-5": {
+    "auc": 0.598,
+    "mean_rises": true,
+    "rises_my_reading": false,
+    "shared_texts": 14
+   },
+   "5-6": {
+    "auc": 0.574,
+    "mean_rises": true,
+    "rises_my_reading": false,
+    "shared_texts": 10
+   }
+  },
+  "shared_texts_any_two_levels": 317
+ },
+ "R2.grid_sum": {
+  "all_pairs_rise": true,
+  "levels": {
+   "0": {
+    "distinct_texts": 1000,
+    "max cells": 9,
+    "mean cells": 9.0,
+    "min cells": 9,
+    "n": 1000
+   },
+   "1": {
+    "distinct_texts": 1000,
+    "max cells": 12,
+    "mean cells": 12.0,
+    "min cells": 12,
+    "n": 1000
+   },
+   "2": {
+    "distinct_texts": 1000,
+    "max cells": 16,
+    "mean cells": 16.0,
+    "min cells": 16,
+    "n": 1000
+   },
+   "3": {
+    "distinct_texts": 1000,
+    "max cells": 20,
+    "mean cells": 20.0,
+    "min cells": 20,
+    "n": 1000
+   },
+   "4": {
+    "distinct_texts": 1000,
+    "max cells": 25,
+    "mean cells": 25.0,
+    "min cells": 25,
+    "n": 1000
+   },
+   "5": {
+    "distinct_texts": 1000,
+    "max cells": 30,
+    "mean cells": 30.0,
+    "min cells": 30,
+    "n": 1000
+   },
+   "6": {
+    "distinct_texts": 1000,
+    "max cells": 36,
+    "mean cells": 36.0,
+    "min cells": 36,
+    "n": 1000
+   }
+  },
+  "main": "cells",
+  "pairs": {
+   "0-1": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "1-2": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "2-3": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "3-4": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "4-5": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "5-6": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   }
+  },
+  "shared_texts_any_two_levels": 0
+ },
+ "R2.interval_scheduling": {
+  "all_pairs_rise": true,
+  "levels": {
+   "0": {
+    "distinct_texts": 1000,
+    "max meetings": 30,
+    "mean meetings": 25.053,
+    "min meetings": 20,
+    "n": 1000
+   },
+   "1": {
+    "distinct_texts": 1000,
+    "max meetings": 36,
+    "mean meetings": 30.006,
+    "min meetings": 25,
+    "n": 1000
+   },
+   "2": {
+    "distinct_texts": 1000,
+    "max meetings": 42,
+    "mean meetings": 35.124,
+    "min meetings": 29,
+    "n": 1000
+   },
+   "3": {
+    "distinct_texts": 1000,
+    "max meetings": 47,
+    "mean meetings": 39.987,
+    "min meetings": 32,
+    "n": 1000
+   },
+   "4": {
+    "distinct_texts": 1000,
+    "max meetings": 52,
+    "mean meetings": 44.943,
+    "min meetings": 37,
+    "n": 1000
+   },
+   "5": {
+    "distinct_texts": 1000,
+    "max meetings": 59,
+    "mean meetings": 49.947,
+    "min meetings": 43,
+    "n": 1000
+   },
+   "6": {
+    "distinct_texts": 1000,
+    "max meetings": 63,
+    "mean meetings": 55.07,
+    "min meetings": 47,
+    "n": 1000
+   }
+  },
+  "main": "meetings",
+  "pairs": {
+   "0-1": {
+    "auc": 0.967,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "1-2": {
+    "auc": 0.956,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "2-3": {
+    "auc": 0.936,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "3-4": {
+    "auc": 0.923,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "4-5": {
+    "auc": 0.914,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "5-6": {
+    "auc": 0.91,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   }
+  },
+  "shared_texts_any_two_levels": 0
+ },
+ "R2.list_ops": {
+  "all_pairs_rise": true,
+  "levels": {
+   "0": {
+    "distinct_texts": 1000,
+    "max steps": 2,
+    "mean start length": 4.0,
+    "mean steps": 2.0,
+    "min steps": 2,
+    "n": 1000
+   },
+   "1": {
+    "distinct_texts": 1000,
+    "max steps": 3,
+    "mean start length": 4.0,
+    "mean steps": 3.0,
+    "min steps": 3,
+    "n": 1000
+   },
+   "2": {
+    "distinct_texts": 1000,
+    "max steps": 4,
+    "mean start length": 5.0,
+    "mean steps": 4.0,
+    "min steps": 4,
+    "n": 1000
+   },
+   "3": {
+    "distinct_texts": 1000,
+    "max steps": 5,
+    "mean start length": 5.0,
+    "mean steps": 5.0,
+    "min steps": 5,
+    "n": 1000
+   },
+   "4": {
+    "distinct_texts": 1000,
+    "max steps": 6,
+    "mean start length": 6.0,
+    "mean steps": 6.0,
+    "min steps": 6,
+    "n": 1000
+   },
+   "5": {
+    "distinct_texts": 1000,
+    "max steps": 7,
+    "mean start length": 6.0,
+    "mean steps": 7.0,
+    "min steps": 7,
+    "n": 1000
+   },
+   "6": {
+    "distinct_texts": 1000,
+    "max steps": 8,
+    "mean start length": 7.0,
+    "mean steps": 8.0,
+    "min steps": 8,
+    "n": 1000
+   }
+  },
+  "main": "steps",
+  "pairs": {
+   "0-1": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "1-2": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "2-3": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "3-4": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "4-5": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "5-6": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   }
+  },
+  "shared_texts_any_two_levels": 0
+ },
+ "R2.luhn_check": {
+  "all_pairs_rise": true,
+  "levels": {
+   "0": {
+    "distinct_texts": 1000,
+    "max digits": 7,
+    "mean digits": 6.48,
+    "min digits": 6,
+    "n": 1000
+   },
+   "1": {
+    "distinct_texts": 1000,
+    "max digits": 9,
+    "mean digits": 8.478,
+    "min digits": 8,
+    "n": 1000
+   },
+   "2": {
+    "distinct_texts": 1000,
+    "max digits": 11,
+    "mean digits": 10.51,
+    "min digits": 10,
+    "n": 1000
+   },
+   "3": {
+    "distinct_texts": 1000,
+    "max digits": 13,
+    "mean digits": 12.505,
+    "min digits": 12,
+    "n": 1000
+   },
+   "4": {
+    "distinct_texts": 1000,
+    "max digits": 15,
+    "mean digits": 14.529,
+    "min digits": 14,
+    "n": 1000
+   },
+   "5": {
+    "distinct_texts": 1000,
+    "max digits": 17,
+    "mean digits": 16.507,
+    "min digits": 16,
+    "n": 1000
+   },
+   "6": {
+    "distinct_texts": 1000,
+    "max digits": 19,
+    "mean digits": 18.506,
+    "min digits": 18,
+    "n": 1000
+   }
+  },
+  "main": "digits",
+  "pairs": {
+   "0-1": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "1-2": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "2-3": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "3-4": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "4-5": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "5-6": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   }
+  },
+  "shared_texts_any_two_levels": 0
+ },
+ "R2.min_heap_ops": {
+  "all_pairs_rise": true,
+  "levels": {
+   "0": {
+    "distinct_texts": 1000,
+    "max inserts + removals": 11,
+    "mean inserts": 10.0,
+    "mean inserts + removals": 10.332,
+    "min inserts + removals": 10,
+    "n": 1000
+   },
+   "1": {
+    "distinct_texts": 1000,
+    "max inserts + removals": 12,
+    "mean inserts": 11.0,
+    "mean inserts + removals": 11.341,
+    "min inserts + removals": 11,
+    "n": 1000
+   },
+   "2": {
+    "distinct_texts": 1000,
+    "max inserts + removals": 13,
+    "mean inserts": 12.0,
+    "mean inserts + removals": 12.346,
+    "min inserts + removals": 12,
+    "n": 1000
+   },
+   "3": {
+    "distinct_texts": 1000,
+    "max inserts + removals": 15,
+    "mean inserts": 13.0,
+    "mean inserts + removals": 13.761,
+    "min inserts + removals": 13,
+    "n": 1000
+   },
+   "4": {
+    "distinct_texts": 1000,
+    "max inserts + removals": 16,
+    "mean inserts": 14.0,
+    "mean inserts + removals": 14.733,
+    "min inserts + removals": 14,
+    "n": 1000
+   },
+   "5": {
+    "distinct_texts": 1000,
+    "max inserts + removals": 17,
+    "mean inserts": 15.0,
+    "mean inserts + removals": 15.753,
+    "min inserts + removals": 15,
+    "n": 1000
+   },
+   "6": {
+    "distinct_texts": 1000,
+    "max inserts + removals": 18,
+    "mean inserts": 16.0,
+    "mean inserts + removals": 16.771,
+    "min inserts + removals": 16,
+    "n": 1000
+   }
+  },
+  "main": "inserts + removals",
+  "pairs": {
+   "0-1": {
+    "auc": 0.891,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "1-2": {
+    "auc": 0.888,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "2-3": {
+    "auc": 0.912,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "3-4": {
+    "auc": 0.772,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "4-5": {
+    "auc": 0.785,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "5-6": {
+    "auc": 0.784,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   }
+  },
+  "shared_texts_any_two_levels": 0
+ },
+ "R2.run_length": {
+  "all_pairs_rise": true,
+  "levels": {
+   "0": {
+    "distinct_texts": 1000,
+    "max length": 24,
+    "mean length": 14.953,
+    "mean runs": 6.0,
+    "min length": 8,
+    "n": 1000
+   },
+   "1": {
+    "distinct_texts": 1000,
+    "max length": 28,
+    "mean length": 17.511,
+    "mean runs": 7.0,
+    "min length": 9,
+    "n": 1000
+   },
+   "2": {
+    "distinct_texts": 1000,
+    "max length": 37,
+    "mean length": 24.164,
+    "mean runs": 8.0,
+    "min length": 11,
+    "n": 1000
+   },
+   "3": {
+    "distinct_texts": 1000,
+    "max length": 38,
+    "mean length": 26.939,
+    "mean runs": 9.0,
+    "min length": 12,
+    "n": 1000
+   },
+   "4": {
+    "distinct_texts": 1000,
+    "max length": 52,
+    "mean length": 34.953,
+    "mean runs": 10.0,
+    "min length": 18,
+    "n": 1000
+   },
+   "5": {
+    "distinct_texts": 1000,
+    "max length": 54,
+    "mean length": 38.547,
+    "mean runs": 11.0,
+    "min length": 22,
+    "n": 1000
+   },
+   "6": {
+    "distinct_texts": 1000,
+    "max length": 69,
+    "mean length": 48.305,
+    "mean runs": 12.0,
+    "min length": 26,
+    "n": 1000
+   }
+  },
+  "main": "length",
+  "pairs": {
+   "0-1": {
+    "auc": 0.73,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "1-2": {
+    "auc": 0.909,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "2-3": {
+    "auc": 0.686,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "3-4": {
+    "auc": 0.884,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "4-5": {
+    "auc": 0.678,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "5-6": {
+    "auc": 0.863,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   }
+  },
+  "shared_texts_any_two_levels": 0
+ },
+ "R2.sort_list": {
+  "all_pairs_rise": true,
+  "levels": {
+   "0": {
+    "distinct_texts": 1000,
+    "max count": 4,
+    "mean count": 4.0,
+    "mean max |x|": 71.774,
+    "min count": 4,
+    "n": 1000
+   },
+   "1": {
+    "distinct_texts": 1000,
+    "max count": 5,
+    "mean count": 5.0,
+    "mean max |x|": 158.256,
+    "min count": 5,
+    "n": 1000
+   },
+   "2": {
+    "distinct_texts": 1000,
+    "max count": 6,
+    "mean count": 6.0,
+    "mean max |x|": 249.621,
+    "min count": 6,
+    "n": 1000
+   },
+   "3": {
+    "distinct_texts": 1000,
+    "max count": 7,
+    "mean count": 7.0,
+    "mean max |x|": 342.978,
+    "min count": 7,
+    "n": 1000
+   },
+   "4": {
+    "distinct_texts": 1000,
+    "max count": 8,
+    "mean count": 8.0,
+    "mean max |x|": 439.653,
+    "min count": 8,
+    "n": 1000
+   },
+   "5": {
+    "distinct_texts": 1000,
+    "max count": 9,
+    "mean count": 9.0,
+    "mean max |x|": 538.085,
+    "min count": 9,
+    "n": 1000
+   },
+   "6": {
+    "distinct_texts": 1000,
+    "max count": 10,
+    "mean count": 10.0,
+    "mean max |x|": 634.62,
+    "min count": 10,
+    "n": 1000
+   }
+  },
+  "main": "count",
+  "pairs": {
+   "0-1": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "1-2": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "2-3": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "3-4": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "4-5": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "5-6": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   }
+  },
+  "shared_texts_any_two_levels": 0
+ },
+ "R2.string_rewrite_nonidentity": {
+  "all_pairs_rise": true,
+  "levels": {
+   "0": {
+    "distinct_texts": 993,
+    "max steps x length": 6,
+    "mean length": 6.0,
+    "mean steps": 1.0,
+    "mean steps x length": 6.0,
+    "min steps x length": 6,
+    "n": 1000
+   },
+   "1": {
+    "distinct_texts": 1000,
+    "max steps x length": 16,
+    "mean length": 8.0,
+    "mean steps": 2.0,
+    "mean steps x length": 16.0,
+    "min steps x length": 16,
+    "n": 1000
+   },
+   "2": {
+    "distinct_texts": 1000,
+    "max steps x length": 20,
+    "mean length": 10.0,
+    "mean steps": 2.0,
+    "mean steps x length": 20.0,
+    "min steps x length": 20,
+    "n": 1000
+   },
+   "3": {
+    "distinct_texts": 1000,
+    "max steps x length": 36,
+    "mean length": 12.0,
+    "mean steps": 3.0,
+    "mean steps x length": 36.0,
+    "min steps x length": 36,
+    "n": 1000
+   },
+   "4": {
+    "distinct_texts": 1000,
+    "max steps x length": 42,
+    "mean length": 14.0,
+    "mean steps": 3.0,
+    "mean steps x length": 42.0,
+    "min steps x length": 42,
+    "n": 1000
+   },
+   "5": {
+    "distinct_texts": 1000,
+    "max steps x length": 64,
+    "mean length": 16.0,
+    "mean steps": 4.0,
+    "mean steps x length": 64.0,
+    "min steps x length": 64,
+    "n": 1000
+   },
+   "6": {
+    "distinct_texts": 1000,
+    "max steps x length": 72,
+    "mean length": 18.0,
+    "mean steps": 4.0,
+    "mean steps x length": 72.0,
+    "min steps x length": 72,
+    "n": 1000
+   }
+  },
+  "main": "steps x length",
+  "pairs": {
+   "0-1": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "1-2": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "2-3": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "3-4": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "4-5": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "5-6": {
+    "auc": 1.0,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   }
+  },
+  "shared_texts_any_two_levels": 0
+ },
+ "R2.to_base_wide": {
+  "all_pairs_rise": true,
+  "levels": {
+   "0": {
+    "distinct_texts": 964,
+    "max log10 n": 3.301,
+    "mean answer digits": 5.127,
+    "mean log10 n": 2.859,
+    "min log10 n": 1.0,
+    "n": 1000
+   },
+   "1": {
+    "distinct_texts": 997,
+    "max log10 n": 3.903,
+    "mean answer digits": 6.215,
+    "mean log10 n": 3.48,
+    "min log10 n": 1.114,
+    "n": 1000
+   },
+   "2": {
+    "distinct_texts": 998,
+    "max log10 n": 4.505,
+    "mean answer digits": 6.136,
+    "mean log10 n": 4.06,
+    "min log10 n": 1.146,
+    "n": 1000
+   },
+   "3": {
+    "distinct_texts": 1000,
+    "max log10 n": 5.107,
+    "mean answer digits": 7.006,
+    "mean log10 n": 4.684,
+    "min log10 n": 2.773,
+    "n": 1000
+   },
+   "4": {
+    "distinct_texts": 1000,
+    "max log10 n": 5.709,
+    "mean answer digits": 7.93,
+    "mean log10 n": 5.303,
+    "min log10 n": 3.205,
+    "n": 1000
+   },
+   "5": {
+    "distinct_texts": 1000,
+    "max log10 n": 6.311,
+    "mean answer digits": 8.601,
+    "mean log10 n": 5.872,
+    "min log10 n": 3.329,
+    "n": 1000
+   },
+   "6": {
+    "distinct_texts": 1000,
+    "max log10 n": 6.913,
+    "mean answer digits": 9.391,
+    "mean log10 n": 6.443,
+    "min log10 n": 2.74,
+    "n": 1000
+   }
+  },
+  "main": "log10 n",
+  "pairs": {
+   "0-1": {
+    "auc": 0.881,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 13
+   },
+   "1-2": {
+    "auc": 0.868,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 2
+   },
+   "2-3": {
+    "auc": 0.873,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 1
+   },
+   "3-4": {
+    "auc": 0.891,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   },
+   "4-5": {
+    "auc": 0.866,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 1
+   },
+   "5-6": {
+    "auc": 0.858,
+    "mean_rises": true,
+    "rises_my_reading": true,
+    "shared_texts": 0
+   }
+  },
+  "shared_texts_any_two_levels": 19
+ }
+}

@@ -1,0 +1,228 @@
+=== binary_search_trace L0 #0 type=number k=None
+A sorted list of 16 numbers (smallest first) is searched for 35. The positions are numbered 1 to 16. The search keeps a lower position (first 1) and an upper position (first 16). Each round it looks at the number in the position halfway between them, rounded down when needed (the sum of the two positions divided by 2, rounded down). If that number is the target the search stops; if the target is smaller, the upper position becomes one less than the position just looked at; otherwise the lower position becomes one more. If the lower position ever exceeds the upper position the search stops, having found nothing. The list: 6, 10, 14, 16, 20, 22, 30, 31, 32, 35, 36, 42, 43, 48, 55, 59. What is the sum of all the numbers the search looks at (a number looked at twice would count twice)?
+--> ANSWER: '108'
+=== binary_search_trace L0 #1 type=list k=None
+A sorted list of 19 numbers (smallest first) is searched for 36. The positions are numbered 1 to 19. The search keeps a lower position (first 1) and an upper position (first 19). Each round it looks at the number in the position halfway between them, rounded down when needed (the sum of the two positions divided by 2, rounded down). If that number is the target the search stops; if the target is smaller, the upper position becomes one less than the position just looked at; otherwise the lower position becomes one more. If the lower position ever exceeds the upper position the search stops, having found nothing. The list: 7, 18, 19, 20, 21, 23, 27, 29, 35, 36, 42, 46, 58, 60, 65, 66, 67, 74, 75. Which numbers does the search look at, in order? Give them separated by commas.
+--> ANSWER: '36'
+=== binary_search_trace L6 #0 type=list k=None
+A sorted list of 43 numbers (smallest first) is searched for 124. The positions are numbered 1 to 43. The search keeps a lower position (first 1) and an upper position (first 43). Each round it looks at the number in the position halfway between them, rounded down when needed (the sum of the two positions divided by 2, rounded down). If that number is the target the search stops; if the target is smaller, the upper position becomes one less than the position just looked at; otherwise the lower position becomes one more. If the lower position ever exceeds the upper position the search stops, having found nothing. The list: 1, 3, 5, 11, 17, 18, 19, 28, 32, 33, 38, 42, 45, 50, 57, 59, 63, 68, 72, 81, 87, 95, 97, 104, 106, 107, 109, 113, 115, 117, 119, 122, 123, 125, 128, 136, 137, 139, 144, 147, 150, 157, 167. Which numbers does the search look at, in order? Give them separated by commas.
+--> ANSWER: '95, 123, 139, 128, 125'
+=== binary_search_trace L6 #1 type=list k=None
+A sorted list of 40 numbers (smallest first) is searched for 145. The positions are numbered 1 to 40. The search keeps a lower position (first 1) and an upper position (first 40). Each round it looks at the number in the position halfway between them, rounded down when needed (the sum of the two positions divided by 2, rounded down). If that number is the target the search stops; if the target is smaller, the upper position becomes one less than the position just looked at; otherwise the lower position becomes one more. If the lower position ever exceeds the upper position the search stops, having found nothing. The list: 3, 7, 14, 18, 32, 33, 38, 42, 44, 51, 55, 61, 67, 71, 72, 81, 83, 88, 92, 94, 95, 96, 97, 100, 101, 108, 110, 116, 118, 119, 123, 124, 125, 128, 134, 139, 145, 146, 150, 158. Which numbers does the search look at, in order? Give them separated by commas.
+--> ANSWER: '94, 119, 134, 146, 139, 145'
+=== caesar_shift L0 #0 type=text k=None
+Shift every letter of 'bevin' forward by 12 places in the alphabet, wrapping from z back to a. Spaces stay. What is the result?
+--> ANSWER: 'nqhuz'
+=== caesar_shift L0 #1 type=text k=None
+Shift every letter of 'lozen' forward by 24 places in the alphabet, wrapping from z back to a. Spaces stay. What is the result?
+--> ANSWER: 'jmxcl'
+=== caesar_shift L6 #0 type=text k=None
+Shift every letter of 'litor beser borox miron temin zimar mozer' forward by 19 places in the alphabet, wrapping from z back to a. Spaces stay. What is the result?
+--> ANSWER: 'ebmhk uxlxk uhkhq fbkhg mxfbg sbftk fhsxk'
+=== caesar_shift L6 #1 type=text k=None
+Shift every letter of 'selox zaror danok nisix voten vazix tikek' forward by 16 places in the alphabet, wrapping from z back to a. Spaces stay. What is the result?
+--> ANSWER: 'iuben pqheh tqdea dyiyn lejud lqpyn jyaua'
+=== cellular_automaton L0 #0 type=text k=None
+A row of 11 cells holds 0s and 1s: 11011010101. In one step every cell changes at the same moment, according to the three digits (left neighbour, the cell itself, right neighbour): 111 becomes 1, 110 becomes 1, 101 becomes 1, 100 becomes 0, 011 becomes 0, 010 becomes 0, 001 becomes 1, 000 becomes 0. The cells beyond the two ends of the row count as 0. After 2 steps, what does the row look like? Give the digits with no spaces.
+--> ANSWER: '10110110100'
+=== cellular_automaton L0 #1 type=text k=None
+A row of 11 cells holds 0s and 1s: 10111110111. In one step every cell changes at the same moment, according to the three digits (left neighbour, the cell itself, right neighbour): 111 becomes 0, 110 becomes 1, 101 becomes 1, 100 becomes 0, 011 becomes 0, 010 becomes 0, 001 becomes 1, 000 becomes 1. The cells beyond the two ends of the row count as 0. After 2 steps, what does the row look like? Give the digits with no spaces.
+--> ANSWER: '10011101010'
+=== cellular_automaton L6 #0 type=text k=None
+A row of 23 cells holds 0s and 1s: 10101001001111010000101. In one step every cell changes at the same moment, according to the three digits (left neighbour, the cell itself, right neighbour): 111 becomes 0, 110 becomes 1, 101 becomes 0, 100 becomes 1, 011 becomes 0, 010 becomes 0, 001 becomes 0, 000 becomes 0. The cells beyond the two ends of the row count as 0. After 5 steps, what does the row look like? Give the digits with no spaces.
+--> ANSWER: '00000000010010000100100'
+=== cellular_automaton L6 #1 type=text k=None
+A row of 23 cells holds 0s and 1s: 10100010110011111011111. In one step every cell changes at the same moment, according to the three digits (left neighbour, the cell itself, right neighbour): 111 becomes 1, 110 becomes 0, 101 becomes 1, 100 becomes 1, 011 becomes 1, 010 becomes 0, 001 becomes 0, 000 becomes 1. The cells beyond the two ends of the row count as 0. After 5 steps, what does the row look like? Give the digits with no spaces.
+--> ANSWER: '00101010111101111101010'
+=== cheapest_network L0 #0 type=number k=None
+The towns Arden, Brook, Calder, Fenwick, Harrow, Quarry, Ravenna and Vale must be joined by cables so that anyone can get from any town to any other town, directly or through other towns. A cable between Ravenna and Arden would cost 6. A cable between Vale and Ravenna would cost 13. A cable between Vale and Harrow would cost 5. A cable between Harrow and Fenwick would cost 9. A cable between Calder and Brook would cost 8. A cable between Vale and Quarry would cost 8. A cable between Harrow and Quarry would cost 3. A cable between Arden and Quarry would cost 11. A cable between Harrow and Arden would cost 8. A cable between Ravenna and Brook would cost 14. A cable between Fenwick and Quarry would cost 12. A cable between Ravenna and Fenwick would cost 5. A cable between Vale and Arden would cost 11. A cable between Vale and Fenwick would cost 10. A cable between Arden and Fenwick would cost 1. A cable between Ravenna and Harrow would cost 14. What is the smallest total cost of a set of cables that joins all the towns?
+--> ANSWER: '44'
+=== cheapest_network L0 #1 type=number k=None
+The towns Calder, Dunmore, Ivybridge, Larkin, Oakham, Quarry, Upton and Westmere must be joined by cables so that anyone can get from any town to any other town, directly or through other towns. A cable between Westmere and Dunmore would cost 22. A cable between Ivybridge and Calder would cost 13. A cable between Quarry and Ivybridge would cost 11. A cable between Westmere and Ivybridge would cost 22. A cable between Upton and Larkin would cost 2. A cable between Quarry and Westmere would cost 19. A cable between Upton and Westmere would cost 12. A cable between Westmere and Oakham would cost 14. A cable between Quarry and Calder would cost 2. A cable between Westmere and Larkin would cost 12. A cable between Dunmore and Ivybridge would cost 16. A cable between Westmere and Calder would cost 19. A cable between Oakham and Larkin would cost 4. A cable between Dunmore and Calder would cost 3. A cable between Upton and Oakham would cost 2. A cable between Quarry and Dunmore would cost 5. What is the smallest total cost of a set of cables that joins all the towns?
+--> ANSWER: '51'
+=== cheapest_network L6 #0 type=number k=None
+The towns Brook, Calder, Dunmore, Eastvale, Fenwick, Harrow, Kelso, Larkin, Penrith, Selby, Upton, Vale, Yarrow and Zennor must be joined by cables so that anyone can get from any town to any other town, directly or through other towns. A cable between Zennor and Vale would cost 4. A cable between Upton and Larkin would cost 13. A cable between Fenwick and Vale would cost 4. A cable between Kelso and Dunmore would cost 12. A cable between Fenwick and Larkin would cost 2. A cable between Calder and Yarrow would cost 6. A cable between Kelso and Calder would cost 11. A cable between Yarrow and Harrow would cost 5. A cable between Upton and Penrith would cost 6. A cable between Calder and Harrow would cost 5. A cable between Zennor and Kelso would cost 3. A cable between Zennor and Dunmore would cost 11. A cable between Kelso and Larkin would cost 7. A cable between Brook and Selby would cost 6. A cable between Zennor and Larkin would cost 6. A cable between Zennor and Fenwick would cost 8. A cable between Dunmore and Fenwick would cost 3. A cable between Dunmore and Larkin would cost 5. A cable between Larkin and Vale would cost 2. A cable between Upton and Vale would cost 13. A cable between Eastvale and Yarrow would cost 13. A cable between Eastvale and Brook would cost 10. A cable between Kelso and Fenwick would cost 9. A cable between Kelso and Harrow would cost 8. A cable between Zennor and Harrow would cost 11. A cable between Dunmore and Vale would cost 7. A cable between Eastvale and Selby would cost 6. A cable between Kelso and Vale would cost 5. What is the smallest total cost of a set of cables that joins all the towns?
+--> ANSWER: '76'
+=== cheapest_network L6 #1 type=number k=None
+The towns Arden, Dunmore, Harrow, Ivybridge, Marlow, Oakham, Quarry, Ravenna, Selby, Thornbury, Upton, Vale, Yarrow and Zennor must be joined by cables so that anyone can get from any town to any other town, directly or through other towns. A cable between Thornbury and Dunmore would cost 6. A cable between Upton and Zennor would cost 3. A cable between Upton and Selby would cost 4. A cable between Thornbury and Arden would cost 8. A cable between Arden and Dunmore would cost 6. A cable between Zennor and Selby would cost 5. A cable between Quarry and Zennor would cost 5. A cable between Upton and Quarry would cost 8. A cable between Thornbury and Harrow would cost 12. A cable between Ivybridge and Harrow would cost 12. A cable between Ravenna and Arden would cost 5. A cable between Upton and Harrow would cost 10. A cable between Thornbury and Ravenna would cost 7. A cable between Ivybridge and Marlow would cost 11. A cable between Yarrow and Quarry would cost 1. A cable between Marlow and Oakham would cost 10. A cable between Ravenna and Dunmore would cost 7. A cable between Yarrow and Upton would cost 8. A cable between Yarrow and Zennor would cost 5. A cable between Ravenna and Ivybridge would cost 3. A cable between Quarry and Selby would cost 8. A cable between Yarrow and Selby would cost 8. A cable between Ivybridge and Arden would cost 4. A cable between Oakham and Vale would cost 9. A cable between Arden and Harrow would cost 8. A cable between Ivybridge and Dunmore would cost 8. A cable between Harrow and Dunmore would cost 6. A cable between Thornbury and Ivybridge would cost 10. What is the smallest total cost of a set of cables that joins all the towns?
+--> ANSWER: '78'
+=== count_divisible L0 #0 type=number k=None
+What is the sum of the numbers in this list that are divisible by 3 and greater than 57? Every entry of the list counts each time it appears: a number that is listed twice is added twice if it qualifies. List: 87, 10, 63, 24, 32, 92, 10, 27, 54, 36, 57, 28, 93, 40, 72, 27, 88, 29.
+--> ANSWER: '315'
+=== count_divisible L0 #1 type=number k=None
+What is the sum of the numbers in this list that are divisible by 4 and greater than 28? Every entry of the list counts each time it appears: a number that is listed twice is added twice if it qualifies. List: 35, 50, 61, 18, 28, 57, 38, 13, 81, 60, 44, 49, 44, 17, 39, 81, 99, 99.
+--> ANSWER: '148'
+=== count_divisible L6 #0 type=number k=None
+What is the sum of the numbers in this list that are divisible by 3 and greater than 105? Every entry of the list counts each time it appears: a number that is listed twice is added twice if it qualifies. List: 105, 256, 336, 222, 153, 233, 105, 397, 212, 146, 367, 281, 84, 321, 313, 350, 254, 110, 231, 66, 220, 388, 180, 371, 291, 45, 237, 367, 131, 363, 145, 314, 268, 340, 187, 61, 243, 70, 86, 398, 109, 347.
+--> ANSWER: '2577'
+=== count_divisible L6 #1 type=number k=None
+What is the sum of the numbers in this list that are divisible by 3 and greater than 126? Every entry of the list counts each time it appears: a number that is listed twice is added twice if it qualifies. List: 114, 214, 276, 205, 357, 126, 221, 216, 197, 115, 171, 291, 90, 276, 267, 368, 351, 111, 294, 336, 298, 314, 42, 289, 381, 82, 27, 277, 355, 188, 146, 174, 25, 353, 112, 52, 236, 162, 183, 382, 395, 179.
+--> ANSWER: '3735'
+=== crt_smallest L0 #0 type=number k=None
+What is the smallest positive whole number that leaves remainder 8 when divided by 19, and leaves remainder 22 when divided by 24?
+--> ANSWER: '46'
+=== crt_smallest L0 #1 type=number k=None
+What is the smallest positive whole number that leaves remainder 2 when divided by 11, and leaves remainder 11 when divided by 13?
+--> ANSWER: '24'
+=== crt_smallest L6 #0 type=number k=None
+What is the smallest positive whole number that leaves remainder 15 when divided by 45, and leaves remainder 20 when divided by 49, and leaves remainder 2 when divided by 71?
+--> ANSWER: '33585'
+=== crt_smallest L6 #1 type=number k=None
+What is the smallest positive whole number that leaves remainder 10 when divided by 57, and leaves remainder 7 when divided by 70, and leaves remainder 57 when divided by 73?
+--> ANSWER: '267967'
+=== dictionary_rank L0 #0 type=text k=None
+Write every word of 4 letters that can be made from the letters d, h, i, l, m, n, p, q, v, x, z when no letter is used twice in the same word, and list all the words in dictionary order (as in a dictionary, comparing letter by letter from the left, with a before b before c and so on). Number the words 1, 2, 3, ... in that list. Which word has number 1808?
+--> ANSWER: 'ipdz'
+=== dictionary_rank L0 #1 type=number k=None
+Write every word of 4 letters that can be made from the letters b, c, g, k, l, n, p, r, x when no letter is used twice in the same word, and list all the words in dictionary order (as in a dictionary, comparing letter by letter from the left, with a before b before c and so on). Number the words 1, 2, 3, ... in that list. What is the number of the word nprg?
+--> ANSWER: '1923'
+=== dictionary_rank L6 #0 type=number k=None
+Write every word of 7 letters that can be made from the letters a, d, g, h, n, q, r, v, z when no letter is used twice in the same word, and list all the words in dictionary order (as in a dictionary, comparing letter by letter from the left, with a before b before c and so on). Number the words 1, 2, 3, ... in that list. What is the number of the word arqvghz?
+--> ANSWER: '14298'
+=== dictionary_rank L6 #1 type=text k=None
+Write every word of 7 letters that can be made from the letters b, d, f, g, i, o, q, x, y when no letter is used twice in the same word, and list all the words in dictionary order (as in a dictionary, comparing letter by letter from the left, with a before b before c and so on). Number the words 1, 2, 3, ... in that list. Which word has number 61609?
+--> ANSWER: 'gbodyfi'
+=== digit_root L0 #0 type=number k=None
+Add up the digits of 21433. If the result has more than one digit, add up its digits again, and keep going until a single digit is left. What is that digit?
+--> ANSWER: '4'
+=== digit_root L0 #1 type=number k=None
+Add up the digits of 94854. If the result has more than one digit, add up its digits again, and keep going until a single digit is left. What is that digit?
+--> ANSWER: '3'
+=== digit_root L6 #0 type=number k=None
+Add up the digits of 70929537688. If the result has more than one digit, add up its digits again, and keep going until a single digit is left. What is that digit?
+--> ANSWER: '1'
+=== digit_root L6 #1 type=number k=None
+Add up the digits of 29274875763. If the result has more than one digit, add up its digits again, and keep going until a single digit is left. What is that digit?
+--> ANSWER: '6'
+=== expression_eval L0 #0 type=number k=None
+Work out 4 + 5 - 6 + (9 + 2) * 4. Use these rules, in this order, also inside every pair of parentheses: do what is inside parentheses first, innermost first; then do all the multiplications, from left to right; then do all the additions and subtractions together as one group, strictly from left to right (so 8 - 3 + 2 is worked as (8 - 3) + 2 = 7, and 8 + 3 - 2 as (8 + 3) - 2 = 9). What is the result?
+--> ANSWER: '47'
+=== expression_eval L0 #1 type=number k=None
+Work out 5 + 2 - (9 + 9 * 7) + 3 * 4 by this rule, which is not the usual one: work out each pair of parentheses first, innermost first, and inside a pair of parentheses use the same rule as outside; the rule is that the operators are done strictly in the order they are written, from left to right, and multiplication gets no priority over addition or subtraction (so 2 + 3 * 4 is worked as (2 + 3) * 4 = 20). What is the result?
+--> ANSWER: '-464'
+=== expression_eval L6 #0 type=number k=None
+Work out 18 - (18 * 20) + 17 * 17 - 11 + 8 + 4 * 3 - (16 - 9 * 12) + (3 - 11) by this rule, which is not the usual one: work out each pair of parentheses first, innermost first, and inside a pair of parentheses use the same rule as outside; the rule is that the operators are done strictly in the order they are written, from left to right, and multiplication gets no priority over addition or subtraction (so 2 + 3 * 4 is worked as (2 + 3) * 4 = 20). What is the result?
+--> ANSWER: '-16664'
+=== expression_eval L6 #1 type=number k=None
+Work out 8 + (4 - 5) + (20 * 9) * (20 + 8 * 6) - 5 + (4 * 17) + 18 - (20 * 20) - 20 * 20 + 14 by this rule, which is not the usual one: work out each pair of parentheses first, innermost first, and inside a pair of parentheses use the same rule as outside; the rule is that the operators are done strictly in the order they are written, from left to right, and multiplication gets no priority over addition or subtraction (so 2 + 3 * 4 is worked as (2 + 3) * 4 = 20). What is the result?
+--> ANSWER: '621554'
+=== from_base L0 #0 type=number k=None
+What is the base-4 number 1311 written in decimal? (Digits above 9 are lowercase letters: a is ten, b is eleven, and so on.)
+--> ANSWER: '117'
+=== from_base L0 #1 type=number k=None
+What is the base-4 number 22212 written in decimal? (Digits above 9 are lowercase letters: a is ten, b is eleven, and so on.)
+--> ANSWER: '678'
+=== from_base L6 #0 type=number k=None
+What is the base-9 number 14674868708 written in decimal? (Digits above 9 are lowercase letters: a is ten, b is eleven, and so on.)
+--> ANSWER: '5330871395'
+=== from_base L6 #1 type=number k=None
+What is the base-9 number 5141188053 written in decimal? (Digits above 9 are lowercase letters: a is ten, b is eleven, and so on.)
+--> ANSWER: '1999929900'
+=== grid_sum L0 #0 type=number k=None
+A grid has 3 rows and 3 columns. The rows, from top to bottom, are: 1 1 8 / 1 4 2 / 2 4 4. What is the sum of the numbers in the diagonal from the top left corner (cells (1,1), (2,2), and so on)?
+--> ANSWER: '9'
+=== grid_sum L0 #1 type=number k=None
+A grid has 3 rows and 3 columns. The rows, from top to bottom, are: 7 5 6 / 9 1 9 / 2 7 7. What is the sum of the numbers in the diagonal from the top left corner (cells (1,1), (2,2), and so on)?
+--> ANSWER: '15'
+=== grid_sum L6 #0 type=number k=None
+A grid has 6 rows and 6 columns. The rows, from top to bottom, are: 9 6 0 0 1 4 / 5 3 8 0 7 6 / 7 2 3 1 3 7 / 9 0 6 2 5 6 / 5 3 2 8 6 2 / 7 0 8 3 6 2. What is the sum of the numbers in row 3?
+--> ANSWER: '23'
+=== grid_sum L6 #1 type=number k=None
+A grid has 6 rows and 6 columns. The rows, from top to bottom, are: 2 6 8 6 0 5 / 1 6 3 6 6 7 / 3 3 3 4 0 8 / 2 4 0 2 2 0 / 0 5 1 9 8 2 / 2 8 3 1 8 3. What is the sum of the numbers in row 6?
+--> ANSWER: '25'
+=== interval_scheduling L0 #0 type=list k=None
+A person can attend only one meeting at a time. Times are whole numbers of minutes: meeting 1 runs from 83 to 86; meeting 2 runs from 7 to 13; meeting 3 runs from 58 to 62; meeting 4 runs from 9 to 14; meeting 5 runs from 25 to 28; meeting 6 runs from 108 to 117; meeting 7 runs from 75 to 83; meeting 8 runs from 103 to 107; meeting 9 runs from 2 to 6; meeting 10 runs from 30 to 38; meeting 11 runs from 32 to 40; meeting 12 runs from 55 to 64; meeting 13 runs from 7 to 11; meeting 14 runs from 81 to 85; meeting 15 runs from 74 to 79; meeting 16 runs from 27 to 35; meeting 17 runs from 52 to 60; meeting 18 runs from 99 to 107; meeting 19 runs from 10 to 12; meeting 20 runs from 28 to 35; meeting 21 runs from 34 to 36; meeting 22 runs from 54 to 61; meeting 23 runs from 10 to 16; meeting 24 runs from 100 to 102. Two meetings clash if they share any stretch of time; a meeting that ends at the very minute another starts does not clash with it. The person chooses meetings in rounds: in each round, among the meetings that do not clash with any meeting already chosen, the one that ends first is chosen (if two end at the same minute, the one with the smaller number); rounds go on until no meeting can be added. Which meetings are chosen? Give their numbers, smallest first, separated by commas.
+--> ANSWER: '5, 6, 8, 9, 13, 14, 15, 17, 20, 24'
+=== interval_scheduling L0 #1 type=list k=None
+A person can attend only one meeting at a time. Times are whole numbers of minutes: meeting 1 runs from 106 to 110; meeting 2 runs from 25 to 27; meeting 3 runs from 74 to 81; meeting 4 runs from 102 to 110; meeting 5 runs from 11 to 13; meeting 6 runs from 60 to 66; meeting 7 runs from 32 to 34; meeting 8 runs from 100 to 102; meeting 9 runs from 53 to 58; meeting 10 runs from 96 to 105; meeting 11 runs from 9 to 11; meeting 12 runs from 34 to 39; meeting 13 runs from 59 to 65; meeting 14 runs from 74 to 81; meeting 15 runs from 9 to 16; meeting 16 runs from 24 to 27; meeting 17 runs from 0 to 6; meeting 18 runs from 50 to 55; meeting 19 runs from 81 to 86; meeting 20 runs from 101 to 103; meeting 21 runs from 57 to 60; meeting 22 runs from 26 to 33; meeting 23 runs from 55 to 59; meeting 24 runs from 24 to 31; meeting 25 runs from 72 to 77. Two meetings clash if they share any stretch of time; a meeting that ends at the very minute another starts does not clash with it. The person chooses meetings in rounds: in each round, among the meetings that do not clash with any meeting already chosen, the one that ends first is chosen (if two end at the same minute, the one with the smaller number); rounds go on until no meeting can be added. Which meetings are chosen? Give their numbers, smallest first, separated by commas.
+--> ANSWER: '1, 2, 5, 7, 8, 11, 12, 13, 17, 18, 19, 23, 25'
+=== interval_scheduling L6 #0 type=list k=None
+A person can attend only one meeting at a time. Times are whole numbers of minutes: meeting 1 runs from 12 to 17; meeting 2 runs from 98 to 103; meeting 3 runs from 107 to 109; meeting 4 runs from 78 to 85; meeting 5 runs from 169 to 171; meeting 6 runs from 224 to 228; meeting 7 runs from 55 to 61; meeting 8 runs from 100 to 109; meeting 9 runs from 81 to 88; meeting 10 runs from 145 to 147; meeting 11 runs from 129 to 137; meeting 12 runs from 73 to 79; meeting 13 runs from 240 to 244; meeting 14 runs from 121 to 123; meeting 15 runs from 249 to 256; meeting 16 runs from 219 to 226; meeting 17 runs from 173 to 177; meeting 18 runs from 218 to 221; meeting 19 runs from 121 to 126; meeting 20 runs from 60 to 69; meeting 21 runs from 131 to 138; meeting 22 runs from 77 to 82; meeting 23 runs from 29 to 34; meeting 24 runs from 58 to 60; meeting 25 runs from 29 to 34; meeting 26 runs from 200 to 209; meeting 27 runs from 79 to 84; meeting 28 runs from 196 to 200; meeting 29 runs from 218 to 220; meeting 30 runs from 52 to 57; meeting 31 runs from 26 to 31; meeting 32 runs from 197 to 199; meeting 33 runs from 58 to 66; meeting 34 runs from 27 to 33; meeting 35 runs from 249 to 256; meeting 36 runs from 145 to 154; meeting 37 runs from 177 to 180; meeting 38 runs from 12 to 20; meeting 39 runs from 107 to 111; meeting 40 runs from 151 to 159; meeting 41 runs from 192 to 200; meeting 42 runs from 149 to 151; meeting 43 runs from 225 to 232; meeting 44 runs from 6 to 10; meeting 45 runs from 252 to 256; meeting 46 runs from 155 to 158; meeting 47 runs from 59 to 64; meeting 48 runs from 198 to 205; meeting 49 runs from 80 to 84; meeting 50 runs from 5 to 10; meeting 51 runs from 148 to 154; meeting 52 runs from 218 to 225; meeting 53 runs from 30 to 39; meeting 54 runs from 8 to 11; meeting 55 runs from 175 to 184; meeting 56 runs from 200 to 203; meeting 57 runs from 36 to 40; meeting 58 runs from 127 to 133. Two meetings clash if they share any stretch of time; a meeting that ends at the very minute another starts does not clash with it. The person chooses meetings in rounds: in each round, among the meetings that do not clash with any meeting already chosen, the one that ends first is chosen (if two end at the same minute, the one with the smaller number); rounds go on until no meeting can be added. Which meetings are chosen? Give their numbers, smallest first, separated by commas.
+--> ANSWER: '1, 2, 3, 5, 6, 10, 12, 13, 14, 15, 17, 20, 24, 27, 29, 30, 31, 32, 37, 42, 44, 46, 56, 57, 58'
+=== interval_scheduling L6 #1 type=list k=None
+A person can attend only one meeting at a time. Times are whole numbers of minutes: meeting 1 runs from 102 to 111; meeting 2 runs from 51 to 55; meeting 3 runs from 247 to 256; meeting 4 runs from 225 to 227; meeting 5 runs from 77 to 83; meeting 6 runs from 156 to 163; meeting 7 runs from 129 to 132; meeting 8 runs from 9 to 11; meeting 9 runs from 48 to 51; meeting 10 runs from 177 to 181; meeting 11 runs from 60 to 64; meeting 12 runs from 132 to 137; meeting 13 runs from 228 to 237; meeting 14 runs from 28 to 32; meeting 15 runs from 203 to 209; meeting 16 runs from 203 to 207; meeting 17 runs from 204 to 212; meeting 18 runs from 11 to 17; meeting 19 runs from 216 to 222; meeting 20 runs from 34 to 39; meeting 21 runs from 26 to 34; meeting 22 runs from 223 to 231; meeting 23 runs from 169 to 178; meeting 24 runs from 98 to 104; meeting 25 runs from 82 to 85; meeting 26 runs from 175 to 182; meeting 27 runs from 78 to 81; meeting 28 runs from 195 to 201; meeting 29 runs from 244 to 248; meeting 30 runs from 24 to 26; meeting 31 runs from 152 to 155; meeting 32 runs from 124 to 128; meeting 33 runs from 223 to 225; meeting 34 runs from 32 to 40; meeting 35 runs from 82 to 90; meeting 36 runs from 56 to 61; meeting 37 runs from 144 to 153; meeting 38 runs from 245 to 253; meeting 39 runs from 171 to 174; meeting 40 runs from 56 to 60; meeting 41 runs from 102 to 110; meeting 42 runs from 12 to 14; meeting 43 runs from 198 to 205; meeting 44 runs from 246 to 248; meeting 45 runs from 170 to 179; meeting 46 runs from 247 to 249; meeting 47 runs from 177 to 183; meeting 48 runs from 105 to 111; meeting 49 runs from 245 to 254; meeting 50 runs from 72 to 79; meeting 51 runs from 4 to 9; meeting 52 runs from 126 to 130; meeting 53 runs from 57 to 65; meeting 54 runs from 219 to 225; meeting 55 runs from 156 to 158; meeting 56 runs from 96 to 98; meeting 57 runs from 204 to 208. Two meetings clash if they share any stretch of time; a meeting that ends at the very minute another starts does not clash with it. The person chooses meetings in rounds: in each round, among the meetings that do not clash with any meeting already chosen, the one that ends first is chosen (if two end at the same minute, the one with the smaller number); rounds go on until no meeting can be added. Which meetings are chosen? Give their numbers, smallest first, separated by commas.
+--> ANSWER: '2, 4, 7, 8, 9, 10, 11, 12, 13, 14, 16, 19, 20, 24, 25, 28, 29, 30, 32, 33, 37, 39, 40, 42, 48, 50, 51, 55, 56'
+=== list_ops L0 #0 type=list k=None
+Start with the list 26, 34, 31, 23. Do these steps in order: move the first element to the end; add 32 at the end. What is the final list? Give the numbers separated by commas.
+--> ANSWER: '34, 31, 23, 26, 32'
+=== list_ops L0 #1 type=list k=None
+Start with the list 24, 79, 37, 33. Do these steps in order: remove the first element; add 69 at the end. What is the final list? Give the numbers separated by commas.
+--> ANSWER: '79, 37, 33, 69'
+=== list_ops L6 #0 type=list k=None
+Start with the list 93, 60, 3, 43, 4, 65, 67. Do these steps in order: remove the first element; reverse the list; move the first element to the end; add 83 at the end; move the first element to the end; reverse the list; add 1 at the end; reverse the list. What is the final list? Give the numbers separated by commas.
+--> ANSWER: '1, 4, 43, 3, 60, 67, 83, 65'
+=== list_ops L6 #1 type=list k=None
+Start with the list 4, 38, 46, 95, 20, 26, 66. Do these steps in order: reverse the list; remove the last element; add 28 at the end; move the first element to the end; add 64 at the end; add 40 at the end; remove the last element; remove the last element. What is the final list? Give the numbers separated by commas.
+--> ANSWER: '26, 20, 95, 46, 38, 28, 66'
+=== luhn_check L0 #0 type=number k=None
+Start at the rightmost digit and move left: leave the 1st digit as it is, double the 2nd, leave the 3rd, double the 4th, and so on. Whenever a doubled digit is more than 9, subtract 9 from it. Add up all the results. A number is valid if the total is a multiple of 10. One more digit is to be written at the right end of 897998 so that the new number is valid (the digit written there is the rightmost digit of the new number). Which digit must be written?
+--> ANSWER: '1'
+=== luhn_check L0 #1 type=yn k=2
+Start at the rightmost digit and move left: leave the 1st digit as it is, double the 2nd, leave the 3rd, double the 4th, and so on. Whenever a doubled digit is more than 9, subtract 9 from it. Add up all the results. The number is valid if the total is a multiple of 10. Is the number 2954451 valid? Answer yes or no.
+--> ANSWER: 'yes'
+=== luhn_check L6 #0 type=number k=None
+Start at the rightmost digit and move left: leave the 1st digit as it is, double the 2nd, leave the 3rd, double the 4th, and so on. Whenever a doubled digit is more than 9, subtract 9 from it. Add up all the results. A number is valid if the total is a multiple of 10. One more digit is to be written at the right end of 404435844975226148 so that the new number is valid (the digit written there is the rightmost digit of the new number). Which digit must be written?
+--> ANSWER: '8'
+=== luhn_check L6 #1 type=yn k=2
+Start at the rightmost digit and move left: leave the 1st digit as it is, double the 2nd, leave the 3rd, double the 4th, and so on. Whenever a doubled digit is more than 9, subtract 9 from it. Add up all the results. The number is valid if the total is a multiple of 10. Is the number 1551859657642801609 valid? Answer yes or no.
+--> ANSWER: 'yes'
+=== min_heap_ops L0 #0 type=list k=None
+A heap is a row of numbers in positions 1, 2, 3, ... where the number in position p is never larger than the numbers in positions 2p and 2p+1 (when those exist). To add a number: put it in the first free position at the end, then, while it is smaller than the number in position (its position divided by 2, rounded down), swap the two. To remove the smallest: take out the number in position 1, put the number from the last position into position 1 (the row is now one shorter), then, while it is larger than the smaller of the numbers in positions 2p and 2p+1 (those that exist), swap it with that smaller number. Start with an empty heap and add these numbers in order: 70, 93, 83, 81, 1, 95, 18, 63, 35, 59. Then remove the smallest 1 time. Give the row from position 1 to the end, separated by commas.
+--> ANSWER: '18, 35, 81, 63, 59, 95, 83, 93, 70'
+=== min_heap_ops L0 #1 type=list k=None
+A heap is a row of numbers in positions 1, 2, 3, ... where the number in position p is never larger than the numbers in positions 2p and 2p+1 (when those exist). To add a number: put it in the first free position at the end, then, while it is smaller than the number in position (its position divided by 2, rounded down), swap the two. To remove the smallest: take out the number in position 1, put the number from the last position into position 1 (the row is now one shorter), then, while it is larger than the smaller of the numbers in positions 2p and 2p+1 (those that exist), swap it with that smaller number. Start with an empty heap and add these numbers in order: 41, 67, 59, 20, 53, 50, 55, 85, 95, 5. Give the row from position 1 to the end, separated by commas.
+--> ANSWER: '5, 20, 50, 67, 41, 59, 55, 85, 95, 53'
+=== min_heap_ops L6 #0 type=list k=None
+A heap is a row of numbers in positions 1, 2, 3, ... where the number in position p is never larger than the numbers in positions 2p and 2p+1 (when those exist). To add a number: put it in the first free position at the end, then, while it is smaller than the number in position (its position divided by 2, rounded down), swap the two. To remove the smallest: take out the number in position 1, put the number from the last position into position 1 (the row is now one shorter), then, while it is larger than the smaller of the numbers in positions 2p and 2p+1 (those that exist), swap it with that smaller number. Start with an empty heap and add these numbers in order: 32, 1, 68, 65, 92, 40, 97, 62, 66, 24, 30, 25, 46, 76, 43, 49. Then remove the smallest 1 time. Give the row from position 1 to the end, separated by commas.
+--> ANSWER: '24, 30, 25, 49, 32, 40, 43, 62, 66, 92, 65, 68, 46, 97, 76'
+=== min_heap_ops L6 #1 type=list k=None
+A heap is a row of numbers in positions 1, 2, 3, ... where the number in position p is never larger than the numbers in positions 2p and 2p+1 (when those exist). To add a number: put it in the first free position at the end, then, while it is smaller than the number in position (its position divided by 2, rounded down), swap the two. To remove the smallest: take out the number in position 1, put the number from the last position into position 1 (the row is now one shorter), then, while it is larger than the smaller of the numbers in positions 2p and 2p+1 (those that exist), swap it with that smaller number. Start with an empty heap and add these numbers in order: 79, 19, 15, 25, 28, 34, 87, 4, 73, 53, 82, 89, 99, 18, 78, 27. Give the row from position 1 to the end, separated by commas.
+--> ANSWER: '4, 15, 18, 25, 28, 34, 19, 27, 73, 53, 82, 89, 99, 87, 78, 79'
+=== run_length L0 #0 type=text k=None
+Compress bayyycccbbxxxx by run-length encoding: replace each maximal run of one repeated letter by the letter followed by the run length (for example aaab becomes a3b1). What is the result?
+--> ANSWER: 'b1a1y3c3b2x4'
+=== run_length L0 #1 type=text k=None
+Compress xxxyyxxzzzbc by run-length encoding: replace each maximal run of one repeated letter by the letter followed by the run length (for example aaab becomes a3b1). What is the result?
+--> ANSWER: 'x3y2x2z3b1c1'
+=== run_length L6 #0 type=text k=None
+Compress cccczzzzcbbbbbbbccxxxzaaayccccczbbbbb by run-length encoding: replace each maximal run of one repeated letter by the letter followed by the run length (for example aaab becomes a3b1). What is the result?
+--> ANSWER: 'c4z4c1b7c2x3z1a3y1c5z1b5'
+=== run_length L6 #1 type=text k=None
+Compress zzzzxbbbbbbxxaaaaxxaabbbzzzzzzzyyyyxxxb by run-length encoding: replace each maximal run of one repeated letter by the letter followed by the run length (for example aaab becomes a3b1). What is the result?
+--> ANSWER: 'z4x1b6x2a4x2a2b3z7y4x3b1'
+=== sort_list L0 #0 type=list k=None
+Sort these numbers from largest to smallest and give them separated by commas: -36, 69, 23, 34.
+--> ANSWER: '69, 34, 23, -36'
+=== sort_list L0 #1 type=list k=None
+Sort these numbers from smallest to largest and give them separated by commas: 24, 50, 9, 90.
+--> ANSWER: '9, 24, 50, 90'
+=== sort_list L6 #0 type=list k=None
+Sort these numbers from smallest to largest and give them separated by commas: 381, 232, 229, 593, 530, 459, 437, 616, -41, 469.
+--> ANSWER: '-41, 229, 232, 381, 437, 459, 469, 530, 593, 616'
+=== sort_list L6 #1 type=list k=None
+Sort these numbers from largest to smallest and give them separated by commas: 274, 522, 267, 238, 334, 127, 186, 195, 288, -27.
+--> ANSWER: '522, 334, 288, 274, 267, 238, 195, 186, 127, -27'
+=== string_rewrite_nonidentity L0 #0 type=text k=None
+Start with the string aabcac. Do these steps in order, each step scanning left to right over non-overlapping matches in the string as it is when the step starts: delete every 'c'. What is the final string?
+--> ANSWER: 'aaba'
+=== string_rewrite_nonidentity L0 #1 type=text k=None
+Start with the string ccacac. Do these steps in order, each step scanning left to right over non-overlapping matches in the string as it is when the step starts: delete every 'ac'. What is the final string?
+--> ANSWER: 'cc'
+=== string_rewrite_nonidentity L6 #0 type=text k=None
+Start with the string abacbcabbaaccaabba. Do these steps in order, each step scanning left to right over non-overlapping matches in the string as it is when the step starts: replace every 'cc' with 'caa'; delete every 'c'; replace every 'a' with 'c'; delete every 'b'. What is the final string?
+--> ANSWER: 'cccccccccc'
+=== string_rewrite_nonidentity L6 #1 type=text k=None
+Start with the string bccbabcbaacaaaccba. Do these steps in order, each step scanning left to right over non-overlapping matches in the string as it is when the step starts: replace every 'a' with 'cbb'; replace every 'cb' with 'ccb'; replace every 'cc' with 'cba'; replace every 'c' with 'ccb'. What is the final string?
+--> ANSWER: 'bccbbaccbbccbbabbbccbbabccbbabbccbbabbccbbaccbbbccbbabbccbbabbccbbaccbbccbbabb'
+=== to_base_wide L0 #0 type=text k=None
+Write the decimal number 1277 in base 3. Use digits 0-9 and then lowercase letters a-f for ten to fifteen.
+--> ANSWER: '1202022'
+=== to_base_wide L0 #1 type=text k=None
+Write the decimal number 1445 in base 4. Use digits 0-9 and then lowercase letters a-f for ten to fifteen.
+--> ANSWER: '112211'
+=== to_base_wide L6 #0 type=text k=None
+Write the decimal number 7697909 in base 12. Use digits 0-9 and then lowercase letters a-f for ten to fifteen.
+--> ANSWER: '26b2985'
+=== to_base_wide L6 #1 type=text k=None
+Write the decimal number 3118656 in base 7. Use digits 0-9 and then lowercase letters a-f for ten to fifteen.
+--> ANSWER: '35336202'

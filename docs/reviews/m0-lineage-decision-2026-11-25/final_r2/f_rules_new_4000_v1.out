@@ -1,0 +1,51 @@
+R2.cheapest_network L0 [-] 0.071 nerr=0 [NEW] (cue) nearest-neighbour path from the first listed town
+R2.count_divisible L0 [sum] 0.720 nerr=0 [NEW] (P) misread: each distinct value counted once (the wording now excludes it)
+R2.count_divisible L1 [sum] 0.618 nerr=0 [NEW] (P) misread: each distinct value counted once (the wording now excludes it)
+R2.count_divisible L2 [sum] 0.723 nerr=0 [NEW] (P) misread: each distinct value counted once (the wording now excludes it)
+R2.count_divisible L3 [sum] 0.658 nerr=0 [NEW] (P) misread: each distinct value counted once (the wording now excludes it)
+R2.count_divisible L4 [sum] 0.708 nerr=0 [NEW] (P) misread: each distinct value counted once (the wording now excludes it)
+R2.count_divisible L5 [sum] 0.628 nerr=0 [NEW] (P) misread: each distinct value counted once (the wording now excludes it)
+R2.count_divisible L6 [sum] 0.656 nerr=0 [NEW] (P) misread: each distinct value counted once (the wording now excludes it)
+R2.crt_smallest L0 [-] 0.366 nerr=0 [NEW] (partial) largest modulus: try r, r+m, r+2m against the other congruences, else r
+R2.crt_smallest L0 [-] 0.111 nerr=0 [NEW] (cue) common offset: equal remainders -> r; equal (m - r) -> lcm - (m - r)
+R2.crt_smallest L0 [-] 0.117 nerr=0 [NEW] (cue) largest remainder + its modulus
+R2.crt_smallest L1 [-] 0.192 nerr=0 [NEW] (partial) largest modulus: try r, r+m, r+2m against the other congruences, else r
+R2.crt_smallest L1 [-] 0.066 nerr=0 [NEW] (cue) common offset: equal remainders -> r; equal (m - r) -> lcm - (m - r)
+R2.crt_smallest L1 [-] 0.058 nerr=0 [NEW] (cue) largest remainder + its modulus
+R2.crt_smallest L2 [-] 0.134 nerr=0 [NEW] (partial) largest modulus: try r, r+m, r+2m against the other congruences, else r
+R2.crt_smallest L2 [-] 0.056 nerr=0 [NEW] (cue) common offset: equal remainders -> r; equal (m - r) -> lcm - (m - r)
+R2.digit_root L0 [-] 0.211 nerr=0 [NEW] (cue) digit sum once, first digit
+R2.digit_root L1 [-] 0.203 nerr=0 [NEW] (cue) digit sum once, first digit
+R2.digit_root L2 [-] 0.201 nerr=0 [NEW] (cue) digit sum once, first digit
+R2.digit_root L3 [-] 0.209 nerr=0 [NEW] (cue) digit sum once, first digit
+R2.digit_root L4 [-] 0.202 nerr=0 [NEW] (cue) digit sum once, first digit
+R2.digit_root L5 [-] 0.205 nerr=0 [NEW] (cue) digit sum once, first digit
+R2.digit_root L6 [-] 0.195 nerr=0 [NEW] (cue) digit sum once, first digit
+R2.interval_scheduling L0 [chosen] 0.507 nerr=0 [NEW] (cue) fewest clashes first (ties by end, then number)
+R2.interval_scheduling L1 [chosen] 0.423 nerr=0 [NEW] (cue) fewest clashes first (ties by end, then number)
+R2.interval_scheduling L2 [chosen] 0.404 nerr=0 [NEW] (cue) fewest clashes first (ties by end, then number)
+R2.interval_scheduling L3 [chosen] 0.328 nerr=0 [NEW] (cue) fewest clashes first (ties by end, then number)
+R2.interval_scheduling L4 [chosen] 0.306 nerr=0 [NEW] (cue) fewest clashes first (ties by end, then number)
+R2.interval_scheduling L5 [chosen] 0.264 nerr=0 [NEW] (cue) fewest clashes first (ties by end, then number)
+R2.interval_scheduling L6 [chosen] 0.232 nerr=0 [NEW] (cue) fewest clashes first (ties by end, then number)
+R2.list_ops L0 [-] 0.412 nerr=0 [NEW] (cue) final list = start list with adds appended and removals applied, all moves and reverses ignored
+R2.list_ops L1 [-] 0.259 nerr=0 [NEW] (cue) final list = start list with adds appended and removals applied, all moves and reverses ignored
+R2.list_ops L2 [-] 0.200 nerr=0 [NEW] (cue) final list = start list with adds appended and removals applied, all moves and reverses ignored
+R2.list_ops L3 [-] 0.153 nerr=0 [NEW] (cue) final list = start list with adds appended and removals applied, all moves and reverses ignored
+R2.list_ops L4 [-] 0.109 nerr=0 [NEW] (cue) final list = start list with adds appended and removals applied, all moves and reverses ignored
+R2.list_ops L5 [-] 0.076 nerr=0 [NEW] (cue) final list = start list with adds appended and removals applied, all moves and reverses ignored
+R2.list_ops L6 [-] 0.063 nerr=0 [NEW] (cue) final list = start list with adds appended and removals applied, all moves and reverses ignored
+R2.luhn_check L0 [check_digit] 0.106 nerr=0 [NEW] (cue) check digit: (10 - digit sum mod 10) mod 10 with every digit doubled
+R2.luhn_check L1 [check_digit] 0.107 nerr=0 [NEW] (cue) check digit: (10 - digit sum mod 10) mod 10 with every digit doubled
+R2.luhn_check L2 [check_digit] 0.095 nerr=0 [NEW] (cue) check digit: (10 - digit sum mod 10) mod 10 with every digit doubled
+R2.luhn_check L3 [check_digit] 0.102 nerr=0 [NEW] (cue) check digit: (10 - digit sum mod 10) mod 10 with every digit doubled
+R2.luhn_check L4 [check_digit] 0.106 nerr=0 [NEW] (cue) check digit: (10 - digit sum mod 10) mod 10 with every digit doubled
+R2.luhn_check L5 [check_digit] 0.105 nerr=0 [NEW] (cue) check digit: (10 - digit sum mod 10) mod 10 with every digit doubled
+R2.luhn_check L6 [check_digit] 0.101 nerr=0 [NEW] (cue) check digit: (10 - digit sum mod 10) mod 10 with every digit doubled
+R2.string_rewrite_nonidentity L0 [-] 0.740 nerr=0 [NEW] (P) misread: each step repeated until no match is left (capped at 50 rounds)
+R2.string_rewrite_nonidentity L1 [-] 0.506 nerr=0 [NEW] (P) misread: each step repeated until no match is left (capped at 50 rounds)
+R2.string_rewrite_nonidentity L2 [-] 0.485 nerr=0 [NEW] (P) misread: each step repeated until no match is left (capped at 50 rounds)
+R2.string_rewrite_nonidentity L3 [-] 0.335 nerr=0 [NEW] (P) misread: each step repeated until no match is left (capped at 50 rounds)
+R2.string_rewrite_nonidentity L4 [-] 0.321 nerr=0 [NEW] (P) misread: each step repeated until no match is left (capped at 50 rounds)
+R2.string_rewrite_nonidentity L5 [-] 0.215 nerr=0 [NEW] (P) misread: each step repeated until no match is left (capped at 50 rounds)
+R2.string_rewrite_nonidentity L6 [-] 0.211 nerr=0 [NEW] (P) misread: each step repeated until no match is left (capped at 50 rounds)

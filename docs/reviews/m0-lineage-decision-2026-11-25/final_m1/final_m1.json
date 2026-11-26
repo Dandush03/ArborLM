@@ -1,0 +1,4591 @@
+{
+ "G": 8,
+ "as_written_cascade": {
+  "a4key/own_part": {
+   "cluster_count": 16,
+   "clusters_lost": [
+    "S3_multiplicative_chain"
+   ],
+   "lineages_left": [
+    "arithmetic_series",
+    "average_missing",
+    "change_ways",
+    "clock_duration",
+    "crt_congruence",
+    "division_counting",
+    "finite_differences",
+    "gcd_lcm",
+    "inclusion_exclusion",
+    "last_digit_power",
+    "linear_equation",
+    "median_list",
+    "painted_cube",
+    "prime_factors",
+    "quadratic_area",
+    "recurrence_iterate",
+    "shopping",
+    "speed_distance",
+    "tiered_pricing"
+   ]
+  },
+  "a4key/smaller_part": {
+   "cluster_count": 16,
+   "clusters_lost": [
+    "S3_multiplicative_chain"
+   ],
+   "lineages_left": [
+    "average_missing",
+    "change_ways",
+    "clock_duration",
+    "crt_congruence",
+    "division_counting",
+    "finite_differences",
+    "gcd_lcm",
+    "inclusion_exclusion",
+    "last_digit_power",
+    "linear_equation",
+    "median_list",
+    "painted_cube",
+    "prime_factors",
+    "quadratic_area",
+    "recurrence_iterate",
+    "shopping",
+    "speed_distance",
+    "tiered_pricing"
+   ]
+  },
+  "struct/own_part": {
+   "cluster_count": 17,
+   "clusters_lost": [],
+   "lineages_left": [
+    "arithmetic_series",
+    "average_missing",
+    "change_ways",
+    "clock_duration",
+    "crt_congruence",
+    "division_counting",
+    "finite_differences",
+    "gcd_lcm",
+    "grid_perimeter",
+    "inclusion_exclusion",
+    "last_digit_power",
+    "linear_equation",
+    "median_list",
+    "mixture",
+    "painted_cube",
+    "prime_factors",
+    "quadratic_area",
+    "ratio_share",
+    "recurrence_iterate",
+    "shopping",
+    "speed_distance",
+    "tiered_pricing"
+   ]
+  },
+  "struct/smaller_part": {
+   "cluster_count": 17,
+   "clusters_lost": [],
+   "lineages_left": [
+    "average_missing",
+    "change_ways",
+    "clock_duration",
+    "crt_congruence",
+    "division_counting",
+    "finite_differences",
+    "gcd_lcm",
+    "grid_perimeter",
+    "inclusion_exclusion",
+    "last_digit_power",
+    "linear_equation",
+    "median_list",
+    "mixture",
+    "painted_cube",
+    "prime_factors",
+    "quadratic_area",
+    "ratio_share",
+    "recurrence_iterate",
+    "shopping",
+    "speed_distance",
+    "tiered_pricing"
+   ]
+  },
+  "text/own_part": {
+   "cluster_count": 17,
+   "clusters_lost": [],
+   "lineages_left": [
+    "ages",
+    "arithmetic_series",
+    "average_missing",
+    "change_ways",
+    "clock_duration",
+    "crt_congruence",
+    "division_counting",
+    "finite_differences",
+    "fraction_remainder",
+    "gcd_lcm",
+    "grid_perimeter",
+    "inclusion_exclusion",
+    "last_digit_power",
+    "linear_equation",
+    "median_list",
+    "mixture",
+    "painted_cube",
+    "pipes_work",
+    "prime_factors",
+    "quadratic_area",
+    "ratio_share",
+    "recurrence_iterate",
+    "shopping",
+    "speed_distance",
+    "tiered_pricing"
+   ]
+  },
+  "text/smaller_part": {
+   "cluster_count": 17,
+   "clusters_lost": [],
+   "lineages_left": [
+    "ages",
+    "arithmetic_series",
+    "average_missing",
+    "change_ways",
+    "clock_duration",
+    "crt_congruence",
+    "division_counting",
+    "finite_differences",
+    "fraction_remainder",
+    "gcd_lcm",
+    "grid_perimeter",
+    "inclusion_exclusion",
+    "last_digit_power",
+    "linear_equation",
+    "median_list",
+    "mixture",
+    "painted_cube",
+    "prime_factors",
+    "quadratic_area",
+    "ratio_share",
+    "recurrence_iterate",
+    "shopping",
+    "speed_distance",
+    "tiered_pricing"
+   ]
+  }
+ },
+ "as_written_summary": {
+  "a4key/cluster_demand_G_minus_1_per_lineage": {
+   "clusters_left_single_pass": 14,
+   "failing": [
+    "M1.ages_r3",
+    "M1.arithmetic_series_r3",
+    "M1.consecutive_r3",
+    "M1.fraction_remainder_r3",
+    "M1.grid_perimeter_r3",
+    "M1.mixture_r4",
+    "M1.painted_cube_r3",
+    "M1.percent_change_r3",
+    "M1.pipes_work_r3",
+    "M1.prime_factors_r3",
+    "M1.ratio_share_r3",
+    "M1.rectangle_r3",
+    "M1.tip_split_r3"
+   ]
+  },
+  "a4key/cluster_demand_G_per_lineage": {
+   "clusters_left_single_pass": 16,
+   "failing": [
+    "M1.ages_r3",
+    "M1.arithmetic_series_r3",
+    "M1.consecutive_r3",
+    "M1.fraction_remainder_r3",
+    "M1.grid_perimeter_r3",
+    "M1.mixture_r4",
+    "M1.percent_change_r3",
+    "M1.pipes_work_r3",
+    "M1.ratio_share_r3",
+    "M1.rectangle_r3",
+    "M1.tip_split_r3"
+   ]
+  },
+  "a4key/own_part_count": {
+   "clusters_left_single_pass": 17,
+   "failing": [
+    "M1.ages_r3",
+    "M1.consecutive_r3",
+    "M1.fraction_remainder_r3",
+    "M1.grid_perimeter_r3",
+    "M1.percent_change_r3",
+    "M1.pipes_work_r3",
+    "M1.ratio_share_r3",
+    "M1.rectangle_r3"
+   ]
+  },
+  "a4key/own_part_count_minus_1": {
+   "clusters_left_single_pass": 16,
+   "failing": [
+    "M1.ages_r3",
+    "M1.consecutive_r3",
+    "M1.fraction_remainder_r3",
+    "M1.grid_perimeter_r3",
+    "M1.percent_change_r3",
+    "M1.pipes_work_r3",
+    "M1.ratio_share_r3",
+    "M1.rectangle_r3",
+    "M1.tip_split_r3"
+   ]
+  },
+  "a4key/smaller_part_decides": {
+   "clusters_left_single_pass": 16,
+   "failing": [
+    "M1.ages_r3",
+    "M1.consecutive_r3",
+    "M1.fraction_remainder_r3",
+    "M1.grid_perimeter_r3",
+    "M1.percent_change_r3",
+    "M1.pipes_work_r3",
+    "M1.ratio_share_r3",
+    "M1.rectangle_r3",
+    "M1.tip_split_r3"
+   ]
+  },
+  "a4key/smaller_part_minus_1": {
+   "clusters_left_single_pass": 16,
+   "failing": [
+    "M1.ages_r3",
+    "M1.consecutive_r3",
+    "M1.fraction_remainder_r3",
+    "M1.grid_perimeter_r3",
+    "M1.percent_change_r3",
+    "M1.pipes_work_r3",
+    "M1.ratio_share_r3",
+    "M1.rectangle_r3",
+    "M1.tip_split_r3"
+   ]
+  },
+  "struct/cluster_demand_G_minus_1_per_lineage": {
+   "clusters_left_single_pass": 15,
+   "failing": [
+    "M1.ages_r3",
+    "M1.arithmetic_series_r3",
+    "M1.consecutive_r3",
+    "M1.fraction_remainder_r3",
+    "M1.percent_change_r3",
+    "M1.pipes_work_r3",
+    "M1.prime_factors_r3",
+    "M1.ratio_share_r3",
+    "M1.rectangle_r3",
+    "M1.tip_split_r3"
+   ]
+  },
+  "struct/cluster_demand_G_per_lineage": {
+   "clusters_left_single_pass": 16,
+   "failing": [
+    "M1.ages_r3",
+    "M1.arithmetic_series_r3",
+    "M1.consecutive_r3",
+    "M1.fraction_remainder_r3",
+    "M1.percent_change_r3",
+    "M1.pipes_work_r3",
+    "M1.ratio_share_r3",
+    "M1.rectangle_r3",
+    "M1.tip_split_r3"
+   ]
+  },
+  "struct/own_part_count": {
+   "clusters_left_single_pass": 17,
+   "failing": [
+    "M1.ages_r3",
+    "M1.consecutive_r3",
+    "M1.fraction_remainder_r3",
+    "M1.percent_change_r3",
+    "M1.rectangle_r3"
+   ]
+  },
+  "struct/own_part_count_minus_1": {
+   "clusters_left_single_pass": 17,
+   "failing": [
+    "M1.ages_r3",
+    "M1.consecutive_r3",
+    "M1.fraction_remainder_r3",
+    "M1.percent_change_r3",
+    "M1.rectangle_r3",
+    "M1.tip_split_r3"
+   ]
+  },
+  "struct/smaller_part_decides": {
+   "clusters_left_single_pass": 17,
+   "failing": [
+    "M1.ages_r3",
+    "M1.consecutive_r3",
+    "M1.fraction_remainder_r3",
+    "M1.percent_change_r3",
+    "M1.rectangle_r3",
+    "M1.tip_split_r3"
+   ]
+  },
+  "struct/smaller_part_minus_1": {
+   "clusters_left_single_pass": 17,
+   "failing": [
+    "M1.ages_r3",
+    "M1.consecutive_r3",
+    "M1.fraction_remainder_r3",
+    "M1.percent_change_r3",
+    "M1.rectangle_r3",
+    "M1.tip_split_r3"
+   ]
+  },
+  "text/cluster_demand_G_minus_1_per_lineage": {
+   "clusters_left_single_pass": 17,
+   "failing": [
+    "M1.consecutive_r3",
+    "M1.percent_change_r3",
+    "M1.pipes_work_r3",
+    "M1.rectangle_r3",
+    "M1.tip_split_r3"
+   ]
+  },
+  "text/cluster_demand_G_per_lineage": {
+   "clusters_left_single_pass": 17,
+   "failing": [
+    "M1.consecutive_r3",
+    "M1.percent_change_r3",
+    "M1.pipes_work_r3",
+    "M1.rectangle_r3",
+    "M1.tip_split_r3"
+   ]
+  },
+  "text/own_part_count": {
+   "clusters_left_single_pass": 17,
+   "failing": [
+    "M1.consecutive_r3",
+    "M1.percent_change_r3",
+    "M1.rectangle_r3"
+   ]
+  },
+  "text/own_part_count_minus_1": {
+   "clusters_left_single_pass": 17,
+   "failing": [
+    "M1.consecutive_r3",
+    "M1.percent_change_r3",
+    "M1.rectangle_r3",
+    "M1.tip_split_r3"
+   ]
+  },
+  "text/smaller_part_decides": {
+   "clusters_left_single_pass": 17,
+   "failing": [
+    "M1.consecutive_r3",
+    "M1.percent_change_r3",
+    "M1.rectangle_r3",
+    "M1.tip_split_r3"
+   ]
+  },
+  "text/smaller_part_minus_1": {
+   "clusters_left_single_pass": 17,
+   "failing": [
+    "M1.consecutive_r3",
+    "M1.percent_change_r3",
+    "M1.rectangle_r3",
+    "M1.tip_split_r3"
+   ]
+  }
+ },
+ "astra_review": "NOT_PERFORMED",
+ "bound": 0.15,
+ "cluster_count_after_rules": 17,
+ "clusters_after_rules": [
+  "S1_linear_solve",
+  "S2_weighted_sum",
+  "S3_multiplicative_chain",
+  "S5_unbounded_table",
+  "S6_exposed_faces",
+  "S7_step_rule",
+  "clock_duration",
+  "crt_congruence",
+  "division_counting",
+  "finite_differences",
+  "gcd_lcm",
+  "inclusion_exclusion",
+  "last_digit_power",
+  "median_list",
+  "prime_factors",
+  "quadratic_area",
+  "tiered_pricing"
+ ],
+ "demand_G": {
+  "cluster_G": 31000,
+  "cluster_G_minus_1": 35300
+ },
+ "discrepancies": [
+  "Implementer's raw battery: 3,190 values recomputed at their seeds, 0 differences (after my attempt-1 tie-order error, 1 difference, fixed).",
+  "As-written failing list on the audit-4 key: the implementer's eight lineages and failing levels reproduced exactly at a fresh seed.",
+  "Capacity unit: on the TEXT key (what draw_items de-duplicates) only consecutive (L0-1), percent_change (L0-1) and rectangle (L0-6) fail; the eight are on the audit-4 structural key. Which unit counts is not ruled: PENDING LEAD REVIEW.",
+  "R-30 'smaller part decides' read for the as-written per-lineage demand (18,150 in both parts instead of 17,010 in part B) adds tip_split L0 (17,617) to the failures on every key; then all four S3 members fail.",
+  "Dropping the eight changes the part sizes; iterated to a fixed point tip_split and mixture also fail: 19 lineages, 16 clusters (S3 lost) on the audit-4 key, own-part reading. The implementer's single-pass count is 17.",
+  "Hypothetical per-cluster builder, G = 8: prime_factors L0 Chao1 30,913 < 31,000 at my seed (theirs 31,275, pass); n_eff 31,093 (pass by 0.3 %); audit 4 exact 31,236. At the edge of sampling noise. At G = 7 prime_factors fails on all bases.",
+  "gcd_lcm mean log10 answer dips L2 -> L3 at my seed too (2.923 -> 2.745; theirs 2.833 -> 2.813); the stated ceiling and the observed max rise; the gcd-ask cap falls from 60 to 24 at L3.",
+  "Audit 4's PROC list contains im:next_term_only although its reason says 'kept as a rule'; pooled value about -0.002, no consequence.",
+  "Fixtures: studies/m0/fixtures/m1_fix3 still holds coins_r3, pigeonhole_worst_case_r3, mode_tally_r3 and the r3 versions of the six replaced lineages; no fix-4 fixture set exists (disclosed by the implementer).",
+  "core.generate_pool as written cannot pool the survivors at all: part_lineages reads core.REGISTRY['M1'] (16 batch-1 lineages, no fix-3/fix-4 id). The as-written capacity is a simulation of its allocation rule.",
+  "The worktree HEAD moved during this audit (commit 7cd0ac5a at 22:33:58 by another session, adding the fix-4 files); every input file's mtime precedes the start of this audit (22:17), so the audited bytes are the committed bytes."
+ ],
+ "held_R36_confirmed_a4key_own_part": [
+  "M1.ages_r3",
+  "M1.consecutive_r3",
+  "M1.fraction_remainder_r3",
+  "M1.grid_perimeter_r3",
+  "M1.percent_change_r3",
+  "M1.pipes_work_r3",
+  "M1.ratio_share_r3",
+  "M1.rectangle_r3"
+ ],
+ "lineages": {
+  "M1.ages_r3": {
+   "capacity": {
+    "as_written_fail_levels": {
+     "a4key/cluster_demand_G_minus_1_per_lineage": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+     ],
+     "a4key/cluster_demand_G_per_lineage": [
+      0,
+      1,
+      2,
+      3,
+      4
+     ],
+     "a4key/own_part_count": [
+      0,
+      1,
+      2
+     ],
+     "a4key/own_part_count_minus_1": [
+      0,
+      1,
+      2
+     ],
+     "a4key/smaller_part_decides": [
+      0,
+      1,
+      2
+     ],
+     "text/cluster_demand_G_minus_1_per_lineage": [],
+     "text/cluster_demand_G_per_lineage": [],
+     "text/own_part_count": [],
+     "text/own_part_count_minus_1": [],
+     "text/smaller_part_decides": []
+    },
+    "hypothetical_cluster_builder_fails": {
+     "a4key/G=7": {
+      "equal_share": [
+       0,
+       1,
+       2,
+       3
+      ]
+     },
+     "a4key/G=8": {
+      "equal_share": [
+       0,
+       1,
+       2
+      ]
+     },
+     "text/G=7": {
+      "equal_share": [
+       0,
+       1,
+       2,
+       3
+      ]
+     },
+     "text/G=8": {
+      "equal_share": [
+       0,
+       1,
+       2
+      ]
+     }
+    },
+    "n_eff_a4key": [
+     10217,
+     12548,
+     18007,
+     21248,
+     28594,
+     33065,
+     42709
+    ],
+    "n_eff_struct": [
+     10217,
+     12548,
+     18007,
+     21248,
+     28594,
+     33065,
+     42709
+    ],
+    "n_eff_text": [
+     224992500,
+     112496250,
+     224992500,
+     149995000,
+     149995000,
+     224992500,
+     149995000
+    ],
+    "part": "A"
+   },
+   "cluster": "S1_linear_solve",
+   "keys": {
+    "items": 10500,
+    "mismatches": 0,
+    "seeds": [
+     2611251,
+     2611257
+    ],
+    "solver_errors": 0
+   },
+   "levels": {
+    "adjacent_pairs_features_differing": [
+     2,
+     3,
+     2,
+     3,
+     2,
+     3
+    ],
+    "identical_level_pairs": [],
+    "mean_log10_answer": [
+     1.759,
+     1.828,
+     1.895,
+     1.934,
+     1.982,
+     2.023,
+     2.074
+    ],
+    "stated_observed_max": [
+     "70",
+     "80",
+     "90",
+     "100",
+     "110",
+     "120",
+     "130"
+    ],
+    "stated_parameter": "younger age (70 + 10L)",
+    "stated_strictly_rising": true
+   },
+   "no_unique_answer": {
+    "items": 0,
+    "of": 10500,
+    "share": 0.0
+   },
+   "repaired_in_fix4": false,
+   "rules_pooled": {
+    "largest_counted": [
+     0.0217,
+     "a4:sum_over_k_plus_1",
+     6
+    ],
+    "largest_new_fresh_only": [
+     -0.005,
+     "new:mode_by_template",
+     0
+    ],
+    "largest_not_counted": null,
+    "per_level_counted": [
+     -0.0155,
+     -0.0124,
+     0.0165,
+     0.0123,
+     0.0212,
+     0.0167,
+     0.0217
+    ],
+    "verdict_at_0.15": "STAYS",
+    "would_drop_if_not_counted_counted": false,
+    "would_drop_on_new": false
+   }
+  },
+  "M1.arithmetic_series_r3": {
+   "capacity": {
+    "as_written_fail_levels": {
+     "a4key/cluster_demand_G_minus_1_per_lineage": [
+      0
+     ],
+     "a4key/cluster_demand_G_per_lineage": [
+      0
+     ],
+     "a4key/own_part_count": [],
+     "a4key/own_part_count_minus_1": [],
+     "a4key/smaller_part_decides": [],
+     "text/cluster_demand_G_minus_1_per_lineage": [],
+     "text/cluster_demand_G_per_lineage": [],
+     "text/own_part_count": [],
+     "text/own_part_count_minus_1": [],
+     "text/smaller_part_decides": []
+    },
+    "hypothetical_cluster_builder_fails": {
+     "a4key/G=7": {},
+     "a4key/G=8": {},
+     "text/G=7": {},
+     "text/G=8": {}
+    },
+    "n_eff_a4key": [
+     26680,
+     35376,
+     44927,
+     53234,
+     63566,
+     70069,
+     80599
+    ],
+    "n_eff_struct": [
+     26680,
+     35376,
+     44927,
+     53234,
+     63566,
+     70069,
+     80599
+    ],
+    "n_eff_text": [
+     3284562,
+     3435000,
+     5487622,
+     6428357,
+     7257823,
+     9183367,
+     9374688
+    ],
+    "part": "B"
+   },
+   "cluster": "S7_step_rule",
+   "keys": {
+    "items": 10500,
+    "mismatches": 0,
+    "seeds": [
+     2611251,
+     2611257
+    ],
+    "solver_errors": 0
+   },
+   "levels": {
+    "adjacent_pairs_features_differing": [
+     1,
+     1,
+     1,
+     1,
+     1,
+     1
+    ],
+    "identical_level_pairs": [],
+    "mean_log10_answer": [
+     2.844,
+     2.95,
+     3.038,
+     3.113,
+     3.217,
+     3.252,
+     3.339
+    ],
+    "stated_observed_max": [
+     "12",
+     "15",
+     "18",
+     "21",
+     "24",
+     "27",
+     "30"
+    ],
+    "stated_parameter": "days (12 + 3L)",
+    "stated_strictly_rising": true
+   },
+   "no_unique_answer": {
+    "items": 0,
+    "of": 10500,
+    "share": 0.0
+   },
+   "repaired_in_fix4": false,
+   "rules_pooled": {
+    "largest_counted": [
+     -0.0028,
+     "a3:last_day_only",
+     0
+    ],
+    "largest_new_fresh_only": [
+     -0.0022,
+     "new:one_op_two_numbers",
+     2
+    ],
+    "largest_not_counted": null,
+    "per_level_counted": [
+     -0.0028,
+     -0.0016,
+     -0.0018,
+     -0.001,
+     -0.0013,
+     -0.0008,
+     -0.0013
+    ],
+    "verdict_at_0.15": "STAYS",
+    "would_drop_if_not_counted_counted": false,
+    "would_drop_on_new": false
+   }
+  },
+  "M1.average_missing_r4": {
+   "capacity": {
+    "as_written_fail_levels": {
+     "a4key/cluster_demand_G_minus_1_per_lineage": [],
+     "a4key/cluster_demand_G_per_lineage": [],
+     "a4key/own_part_count": [],
+     "a4key/own_part_count_minus_1": [],
+     "a4key/smaller_part_decides": [],
+     "text/cluster_demand_G_minus_1_per_lineage": [],
+     "text/cluster_demand_G_per_lineage": [],
+     "text/own_part_count": [],
+     "text/own_part_count_minus_1": [],
+     "text/smaller_part_decides": []
+    },
+    "hypothetical_cluster_builder_fails": {
+     "a4key/G=7": {
+      "equal_share": [
+       0,
+       1,
+       2,
+       3
+      ]
+     },
+     "a4key/G=8": {
+      "equal_share": [
+       0,
+       1,
+       2
+      ]
+     },
+     "text/G=7": {
+      "equal_share": [
+       0,
+       1,
+       2,
+       3
+      ]
+     },
+     "text/G=8": {
+      "equal_share": [
+       0,
+       1,
+       2
+      ]
+     }
+    },
+    "n_eff_a4key": [
+     2694521,
+     3982168,
+     112496250,
+     149995000,
+     149995000,
+     149995000,
+     149995000
+    ],
+    "n_eff_struct": [
+     15516724,
+     19564565,
+     149995000,
+     149995000,
+     149995000,
+     149995000,
+     149995000
+    ],
+    "n_eff_text": [
+     149995000,
+     149995000,
+     149995000,
+     149995000,
+     149995000,
+     149995000,
+     149995000
+    ],
+    "part": "A"
+   },
+   "cluster": "S1_linear_solve",
+   "keys": {
+    "items": 10500,
+    "mismatches": 0,
+    "seeds": [
+     2611251,
+     2611257
+    ],
+    "solver_errors": 0
+   },
+   "levels": {
+    "adjacent_pairs_features_differing": [
+     2,
+     4,
+     2,
+     4,
+     2,
+     4
+    ],
+    "identical_level_pairs": [],
+    "mean_log10_answer": [
+     1.841,
+     1.862,
+     1.892,
+     1.91,
+     1.94,
+     1.961,
+     1.979
+    ],
+    "stated_observed_max": [
+     "100",
+     "110",
+     "120",
+     "130",
+     "140",
+     "150",
+     "160"
+    ],
+    "stated_parameter": "'marked out of' M (100 + 10L)",
+    "stated_strictly_rising": true
+   },
+   "no_unique_answer": {
+    "items": 0,
+    "of": 10500,
+    "share": 0.0
+   },
+   "repaired_in_fix4": true,
+   "rules_pooled": {
+    "largest_counted": [
+     0.0077,
+     "a3:target_mean_rounded",
+     0
+    ],
+    "largest_new_fresh_only": [
+     -0.0105,
+     "new:avg_ignore_count",
+     1
+    ],
+    "largest_not_counted": null,
+    "per_level_counted": [
+     0.0077,
+     0.005,
+     0.0053,
+     0.0033,
+     0.0062,
+     0.0041,
+     0.0031
+    ],
+    "verdict_at_0.15": "STAYS",
+    "would_drop_if_not_counted_counted": false,
+    "would_drop_on_new": false
+   }
+  },
+  "M1.change_ways_r3": {
+   "capacity": {
+    "as_written_fail_levels": {
+     "a4key/cluster_demand_G_minus_1_per_lineage": [],
+     "a4key/cluster_demand_G_per_lineage": [],
+     "a4key/own_part_count": [],
+     "a4key/own_part_count_minus_1": [],
+     "a4key/smaller_part_decides": [],
+     "text/cluster_demand_G_minus_1_per_lineage": [],
+     "text/cluster_demand_G_per_lineage": [],
+     "text/own_part_count": [],
+     "text/own_part_count_minus_1": [],
+     "text/smaller_part_decides": []
+    },
+    "hypothetical_cluster_builder_fails": {
+     "a4key/G=7": {},
+     "a4key/G=8": {},
+     "text/G=7": {},
+     "text/G=8": {}
+    },
+    "n_eff_a4key": [
+     46626,
+     66418,
+     90851,
+     108195,
+     123860,
+     145673,
+     165985
+    ],
+    "n_eff_struct": [
+     46626,
+     66418,
+     90851,
+     108195,
+     123860,
+     145673,
+     165985
+    ],
+    "n_eff_text": [
+     149995000,
+     224992500,
+     149995000,
+     149995000,
+     149995000,
+     149995000,
+     149995000
+    ],
+    "part": "A"
+   },
+   "cluster": "S5_unbounded_table",
+   "keys": {
+    "items": 10500,
+    "mismatches": 0,
+    "seeds": [
+     2611251,
+     2611257
+    ],
+    "solver_errors": 0
+   },
+   "levels": {
+    "adjacent_pairs_features_differing": [
+     1,
+     1,
+     1,
+     1,
+     1,
+     1
+    ],
+    "identical_level_pairs": [],
+    "mean_log10_answer": [
+     1.162,
+     1.352,
+     1.498,
+     1.626,
+     1.758,
+     1.839,
+     1.94
+    ],
+    "stated_observed_max": [
+     "585",
+     "850",
+     "875",
+     "1110",
+     "1500",
+     "1750",
+     "1640"
+    ],
+    "stated_parameter": "target T",
+    "stated_strictly_rising": false
+   },
+   "no_unique_answer": {
+    "items": 0,
+    "of": 10500,
+    "share": 0.0
+   },
+   "repaired_in_fix4": false,
+   "rules_pooled": {
+    "largest_counted": [
+     -0.0358,
+     "a4:T_over_min_coin",
+     0
+    ],
+    "largest_new_fresh_only": [
+     -0.0195,
+     "new:one_op_two_numbers",
+     0
+    ],
+    "largest_not_counted": null,
+    "per_level_counted": [
+     -0.0358,
+     -0.0138,
+     -0.0119,
+     0.0097,
+     -0.0092,
+     -0.0055,
+     -0.0065
+    ],
+    "verdict_at_0.15": "STAYS",
+    "would_drop_if_not_counted_counted": false,
+    "would_drop_on_new": false
+   }
+  },
+  "M1.clock_duration_r4": {
+   "capacity": {
+    "as_written_fail_levels": {
+     "a4key/cluster_demand_G_minus_1_per_lineage": [],
+     "a4key/cluster_demand_G_per_lineage": [],
+     "a4key/own_part_count": [],
+     "a4key/own_part_count_minus_1": [],
+     "a4key/smaller_part_decides": [],
+     "text/cluster_demand_G_minus_1_per_lineage": [],
+     "text/cluster_demand_G_per_lineage": [],
+     "text/own_part_count": [],
+     "text/own_part_count_minus_1": [],
+     "text/smaller_part_decides": []
+    },
+    "hypothetical_cluster_builder_fails": {
+     "a4key/G=7": {},
+     "a4key/G=8": {},
+     "text/G=7": {},
+     "text/G=8": {}
+    },
+    "n_eff_a4key": [
+     149995000,
+     449985000,
+     149995000,
+     149995000,
+     149995000,
+     149995000,
+     149995000
+    ],
+    "n_eff_struct": [
+     149995000,
+     449985000,
+     149995000,
+     149995000,
+     149995000,
+     149995000,
+     149995000
+    ],
+    "n_eff_text": [
+     149995000,
+     449985000,
+     149995000,
+     149995000,
+     149995000,
+     149995000,
+     149995000
+    ],
+    "part": "A"
+   },
+   "cluster": "clock_duration",
+   "keys": {
+    "items": 10500,
+    "mismatches": 0,
+    "seeds": [
+     2611251,
+     2611257
+    ],
+    "solver_errors": 0
+   },
+   "levels": {
+    "adjacent_pairs_features_differing": [
+     1,
+     2,
+     1,
+     2,
+     1,
+     2
+    ],
+    "identical_level_pairs": [],
+    "mean_log10_answer": [
+     2.102,
+     2.115,
+     2.315,
+     2.335,
+     2.48,
+     2.496,
+     2.61
+    ],
+    "stated_observed_max": [
+     "150",
+     "160",
+     "169",
+     "180",
+     "190",
+     "200",
+     "210"
+    ],
+    "stated_parameter": "longest ride (110 + 6L) + longest visible wait",
+    "stated_strictly_rising": true
+   },
+   "no_unique_answer": {
+    "items": 0,
+    "of": 10500,
+    "share": 0.0
+   },
+   "repaired_in_fix4": true,
+   "rules_pooled": {
+    "largest_counted": [
+     -0.0153,
+     "a3:span_incl_waits",
+     0
+    ],
+    "largest_new_fresh_only": [
+     0.019,
+     "new:clock_hhmm_subtract",
+     1
+    ],
+    "largest_not_counted": null,
+    "per_level_counted": [
+     -0.0153,
+     -0.0089,
+     -0.0083,
+     -0.007,
+     -0.0056,
+     -0.0057,
+     -0.0042
+    ],
+    "verdict_at_0.15": "STAYS",
+    "would_drop_if_not_counted_counted": false,
+    "would_drop_on_new": false
+   }
+  },
+  "M1.consecutive_r3": {
+   "capacity": {
+    "as_written_fail_levels": {
+     "a4key/cluster_demand_G_minus_1_per_lineage": [
+      0,
+      1,
+      2
+     ],
+     "a4key/cluster_demand_G_per_lineage": [
+      0,
+      1
+     ],
+     "a4key/own_part_count": [
+      0,
+      1
+     ],
+     "a4key/own_part_count_minus_1": [
+      0,
+      1
+     ],
+     "a4key/smaller_part_decides": [
+      0,
+      1
+     ],
+     "text/cluster_demand_G_minus_1_per_lineage": [
+      0,
+      1,
+      2
+     ],
+     "text/cluster_demand_G_per_lineage": [
+      0,
+      1
+     ],
+     "text/own_part_count": [
+      0,
+      1
+     ],
+     "text/own_part_count_minus_1": [
+      0,
+      1
+     ],
+     "text/smaller_part_decides": [
+      0,
+      1
+     ]
+    },
+    "hypothetical_cluster_builder_fails": {
+     "a4key/G=7": {
+      "equal_share": [
+       0,
+       1,
+       2,
+       3
+      ]
+     },
+     "a4key/G=8": {
+      "equal_share": [
+       0,
+       1,
+       2
+      ]
+     },
+     "text/G=7": {
+      "equal_share": [
+       0,
+       1,
+       2,
+       3
+      ]
+     },
+     "text/G=8": {
+      "equal_share": [
+       0,
+       1,
+       2
+      ]
+     }
+    },
+    "n_eff_a4key": [
+     8358,
+     12587,
+     33168,
+     41113,
+     47552,
+     57572,
+     64774
+    ],
+    "n_eff_struct": [
+     8358,
+     12587,
+     33168,
+     41113,
+     47552,
+     57572,
+     64774
+    ],
+    "n_eff_text": [
+     8358,
+     12587,
+     33168,
+     41113,
+     47552,
+     57572,
+     64774
+    ],
+    "part": "B"
+   },
+   "cluster": "S1_linear_solve",
+   "keys": {
+    "items": 10500,
+    "mismatches": 0,
+    "seeds": [
+     2611251,
+     2611257
+    ],
+    "solver_errors": 0
+   },
+   "levels": {
+    "adjacent_pairs_features_differing": [
+     1,
+     3,
+     1,
+     2,
+     1,
+     2
+    ],
+    "identical_level_pairs": [],
+    "mean_log10_answer": [
+     3.086,
+     3.303,
+     3.445,
+     3.534,
+     3.6,
+     3.687,
+     3.72
+    ],
+    "stated_observed_max": [
+     "11997",
+     "17994",
+     "31996",
+     "39932",
+     "60005",
+     "70010",
+     "95997"
+    ],
+    "stated_parameter": "first number range (4000 + 2000L) via |sum|",
+    "stated_strictly_rising": true
+   },
+   "no_unique_answer": {
+    "items": 0,
+    "of": 10500,
+    "share": 0.0
+   },
+   "repaired_in_fix4": false,
+   "rules_pooled": {
+    "largest_counted": [
+     0.0004,
+     "echo_best_position",
+     0
+    ],
+    "largest_new_fresh_only": [
+     0.0005,
+     "new:one_op_two_numbers",
+     0
+    ],
+    "largest_not_counted": [
+     0.5006,
+     "im:mean_plus_step",
+     1
+    ],
+    "per_level_counted": [
+     0.0004,
+     0.0002,
+     -0.0003,
+     0.0003,
+     0.0002,
+     0.0003,
+     0.0002
+    ],
+    "verdict_at_0.15": "STAYS",
+    "would_drop_if_not_counted_counted": true,
+    "would_drop_on_new": false
+   }
+  },
+  "M1.crt_congruence_r3": {
+   "capacity": {
+    "as_written_fail_levels": {
+     "a4key/cluster_demand_G_minus_1_per_lineage": [],
+     "a4key/cluster_demand_G_per_lineage": [],
+     "a4key/own_part_count": [],
+     "a4key/own_part_count_minus_1": [],
+     "a4key/smaller_part_decides": [],
+     "text/cluster_demand_G_minus_1_per_lineage": [],
+     "text/cluster_demand_G_per_lineage": [],
+     "text/own_part_count": [],
+     "text/own_part_count_minus_1": [],
+     "text/smaller_part_decides": []
+    },
+    "hypothetical_cluster_builder_fails": {
+     "a4key/G=7": {},
+     "a4key/G=8": {},
+     "text/G=7": {},
+     "text/G=8": {}
+    },
+    "n_eff_a4key": [
+     506740,
+     889298,
+     1525373,
+     4999833,
+     12499583,
+     149995000,
+     449985000
+    ],
+    "n_eff_struct": [
+     1013480,
+     1717500,
+     2884519,
+     23683421,
+     74997500,
+     149995000,
+     149995000
+    ],
+    "n_eff_text": [
+     74997500,
+     449985000,
+     449985000,
+     149995000,
+     149995000,
+     149995000,
+     149995000
+    ],
+    "part": "B"
+   },
+   "cluster": "crt_congruence",
+   "keys": {
+    "items": 10500,
+    "mismatches": 0,
+    "seeds": [
+     2611251,
+     2611257
+    ],
+    "solver_errors": 0
+   },
+   "levels": {
+    "adjacent_pairs_features_differing": [
+     1,
+     1,
+     2,
+     1,
+     2,
+     1
+    ],
+    "identical_level_pairs": [],
+    "mean_log10_answer": [
+     2.554,
+     2.64,
+     2.736,
+     3.519,
+     3.625,
+     5.112,
+     5.189
+    ],
+    "stated_observed_max": [
+     "6002",
+     "7002",
+     "8002",
+     "3603",
+     "4003",
+     "4404",
+     "4804"
+    ],
+    "stated_parameter": "largest modulus x count",
+    "stated_strictly_rising": false
+   },
+   "no_unique_answer": {
+    "items": 0,
+    "of": 10500,
+    "share": 0.0
+   },
+   "repaired_in_fix4": false,
+   "rules_pooled": {
+    "largest_counted": [
+     0.0543,
+     "a3:largest_mod_remainder",
+     0
+    ],
+    "largest_new_fresh_only": [
+     0.037,
+     "new:one_op_two_numbers",
+     0
+    ],
+    "largest_not_counted": null,
+    "per_level_counted": [
+     0.0543,
+     0.0484,
+     0.0445,
+     0.0529,
+     0.052,
+     0.0462,
+     0.0427
+    ],
+    "verdict_at_0.15": "STAYS",
+    "would_drop_if_not_counted_counted": false,
+    "would_drop_on_new": false
+   }
+  },
+  "M1.division_counting_r3": {
+   "capacity": {
+    "as_written_fail_levels": {
+     "a4key/cluster_demand_G_minus_1_per_lineage": [],
+     "a4key/cluster_demand_G_per_lineage": [],
+     "a4key/own_part_count": [],
+     "a4key/own_part_count_minus_1": [],
+     "a4key/smaller_part_decides": [],
+     "text/cluster_demand_G_minus_1_per_lineage": [],
+     "text/cluster_demand_G_per_lineage": [],
+     "text/own_part_count": [],
+     "text/own_part_count_minus_1": [],
+     "text/smaller_part_decides": []
+    },
+    "hypothetical_cluster_builder_fails": {
+     "a4key/G=7": {},
+     "a4key/G=8": {},
+     "text/G=7": {},
+     "text/G=8": {}
+    },
+    "n_eff_a4key": [
+     135906,
+     194462,
+     251529,
+     317562,
+     373122,
+     454990,
+     515447
+    ],
+    "n_eff_struct": [
+     135906,
+     194462,
+     251529,
+     317562,
+     373122,
+     454990,
+     515447
+    ],
+    "n_eff_text": [
+     19564565,
+     21427857,
+     24999167,
+     32141786,
+     56248125,
+     40907727,
+     44998500
+    ],
+    "part": "A"
+   },
+   "cluster": "division_counting",
+   "keys": {
+    "items": 10500,
+    "mismatches": 0,
+    "seeds": [
+     2611251,
+     2611257
+    ],
+    "solver_errors": 0
+   },
+   "levels": {
+    "adjacent_pairs_features_differing": [
+     5,
+     5,
+     5,
+     5,
+     5,
+     5
+    ],
+    "identical_level_pairs": [],
+    "mean_log10_answer": [
+     0.891,
+     0.904,
+     0.954,
+     0.968,
+     1.003,
+     1.006,
+     1.037
+    ],
+    "stated_observed_max": [
+     "12242",
+     "16232",
+     "19327",
+     "21678",
+     "25397",
+     "27679",
+     "30767"
+    ],
+    "stated_parameter": "number of items / people",
+    "stated_strictly_rising": true
+   },
+   "no_unique_answer": {
+    "items": 0,
+    "of": 10500,
+    "share": 0.0
+   },
+   "repaired_in_fix4": false,
+   "rules_pooled": {
+    "largest_counted": [
+     -0.0663,
+     "echo_best_position",
+     0
+    ],
+    "largest_new_fresh_only": [
+     -0.052,
+     "new:one_op_two_numbers",
+     0
+    ],
+    "largest_not_counted": [
+     0.438,
+     "im:k_minus_remainder_ignores_exact_fit",
+     6
+    ],
+    "per_level_counted": [
+     -0.0663,
+     -0.0555,
+     -0.0593,
+     -0.0575,
+     -0.0532,
+     -0.0505,
+     -0.0462
+    ],
+    "verdict_at_0.15": "STAYS",
+    "would_drop_if_not_counted_counted": true,
+    "would_drop_on_new": false
+   }
+  },
+  "M1.finite_differences_r4": {
+   "capacity": {
+    "as_written_fail_levels": {
+     "a4key/cluster_demand_G_minus_1_per_lineage": [],
+     "a4key/cluster_demand_G_per_lineage": [],
+     "a4key/own_part_count": [],
+     "a4key/own_part_count_minus_1": [],
+     "a4key/smaller_part_decides": [],
+     "text/cluster_demand_G_minus_1_per_lineage": [],
+     "text/cluster_demand_G_per_lineage": [],
+     "text/own_part_count": [],
+     "text/own_part_count_minus_1": [],
+     "text/smaller_part_decides": []
+    },
+    "hypothetical_cluster_builder_fails": {
+     "a4key/G=7": {},
+     "a4key/G=8": {},
+     "text/G=7": {},
+     "text/G=8": {}
+    },
+    "n_eff_a4key": [
+     46664,
+     78395,
+     124408,
+     182254,
+     259208,
+     103255,
+     206890
+    ],
+    "n_eff_struct": [
+     46664,
+     78395,
+     124408,
+     182254,
+     259208,
+     103255,
+     206890
+    ],
+    "n_eff_text": [
+     149995000,
+     449985000,
+     449985000,
+     449985000,
+     149995000,
+     149995000,
+     449985000
+    ],
+    "part": "A"
+   },
+   "cluster": "finite_differences",
+   "keys": {
+    "items": 10500,
+    "mismatches": 0,
+    "seeds": [
+     2611251,
+     2611257
+    ],
+    "solver_errors": 0
+   },
+   "levels": {
+    "adjacent_pairs_features_differing": [
+     1,
+     1,
+     3,
+     1,
+     4,
+     1
+    ],
+    "identical_level_pairs": [],
+    "mean_log10_answer": [
+     2.604,
+     2.681,
+     2.741,
+     2.892,
+     2.938,
+     3.252,
+     3.336
+    ],
+    "stated_observed_max": [
+     "954",
+     "1133",
+     "1346",
+     "1924",
+     "2168",
+     "3881",
+     "4819"
+    ],
+    "stated_parameter": "answer (ceiling: fd_answer_ceiling)",
+    "stated_strictly_rising": true
+   },
+   "no_unique_answer": {
+    "items": 0,
+    "of": 10500,
+    "share": 0.0
+   },
+   "repaired_in_fix4": true,
+   "rules_pooled": {
+    "largest_counted": [
+     -0.0022,
+     "a4:echo_pos",
+     0
+    ],
+    "largest_new_fresh_only": [
+     0.0085,
+     "new:one_op_two_numbers",
+     2
+    ],
+    "largest_not_counted": [
+     0.5048,
+     "im:next_term_when_asked_later",
+     3
+    ],
+    "per_level_counted": [
+     -0.0022,
+     -0.0022,
+     -0.0013,
+     -0.0005,
+     -0.0012,
+     -0.0008,
+     -0.0003
+    ],
+    "verdict_at_0.15": "STAYS",
+    "would_drop_if_not_counted_counted": true,
+    "would_drop_on_new": false
+   }
+  },
+  "M1.fraction_remainder_r3": {
+   "capacity": {
+    "as_written_fail_levels": {
+     "a4key/cluster_demand_G_minus_1_per_lineage": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ],
+     "a4key/cluster_demand_G_per_lineage": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ],
+     "a4key/own_part_count": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ],
+     "a4key/own_part_count_minus_1": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ],
+     "a4key/smaller_part_decides": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ],
+     "text/cluster_demand_G_minus_1_per_lineage": [],
+     "text/cluster_demand_G_per_lineage": [],
+     "text/own_part_count": [],
+     "text/own_part_count_minus_1": [],
+     "text/smaller_part_decides": []
+    },
+    "hypothetical_cluster_builder_fails": {
+     "a4key/G=7": {
+      "equal_share": [
+       0,
+       1,
+       2
+      ]
+     },
+     "a4key/G=8": {
+      "equal_share": [
+       0,
+       1
+      ]
+     },
+     "text/G=7": {},
+     "text/G=8": {}
+    },
+    "n_eff_a4key": [
+     6178,
+     7361,
+     8397,
+     9473,
+     10232,
+     11678,
+     12668
+    ],
+    "n_eff_struct": [
+     9855,
+     11716,
+     13336,
+     14894,
+     16250,
+     18552,
+     20308
+    ],
+    "n_eff_text": [
+     1256941,
+     1465749,
+     1636309,
+     1874938,
+     2045386,
+     2026959,
+     2380873
+    ],
+    "part": "B"
+   },
+   "cluster": "S3_multiplicative_chain",
+   "keys": {
+    "items": 10500,
+    "mismatches": 0,
+    "seeds": [
+     2611251,
+     2611257
+    ],
+    "solver_errors": 0
+   },
+   "levels": {
+    "adjacent_pairs_features_differing": [
+     1,
+     1,
+     1,
+     1,
+     1,
+     1
+    ],
+    "identical_level_pairs": [],
+    "mean_log10_answer": [
+     2.853,
+     2.93,
+     2.985,
+     3.022,
+     3.097,
+     3.13,
+     3.177
+    ],
+    "stated_observed_max": [
+     "3000",
+     "3500",
+     "4000",
+     "4500",
+     "5000",
+     "5500",
+     "6000"
+    ],
+    "stated_parameter": "start (3000 + 500L)",
+    "stated_strictly_rising": true
+   },
+   "no_unique_answer": {
+    "items": 0,
+    "of": 10500,
+    "share": 0.0
+   },
+   "repaired_in_fix4": false,
+   "rules_pooled": {
+    "largest_counted": [
+     0.0173,
+     "a4:spends_not_left",
+     6
+    ],
+    "largest_new_fresh_only": [
+     0.011,
+     "new:mode_by_template",
+     1
+    ],
+    "largest_not_counted": null,
+    "per_level_counted": [
+     0.0112,
+     0.0142,
+     0.0135,
+     0.0152,
+     0.0133,
+     0.015,
+     0.0173
+    ],
+    "verdict_at_0.15": "STAYS",
+    "would_drop_if_not_counted_counted": false,
+    "would_drop_on_new": false
+   }
+  },
+  "M1.gcd_lcm_r4": {
+   "capacity": {
+    "as_written_fail_levels": {
+     "a4key/cluster_demand_G_minus_1_per_lineage": [],
+     "a4key/cluster_demand_G_per_lineage": [],
+     "a4key/own_part_count": [],
+     "a4key/own_part_count_minus_1": [],
+     "a4key/smaller_part_decides": [],
+     "text/cluster_demand_G_minus_1_per_lineage": [],
+     "text/cluster_demand_G_per_lineage": [],
+     "text/own_part_count": [],
+     "text/own_part_count_minus_1": [],
+     "text/smaller_part_decides": []
+    },
+    "hypothetical_cluster_builder_fails": {
+     "a4key/G=7": {},
+     "a4key/G=8": {},
+     "text/G=7": {},
+     "text/G=8": {}
+    },
+    "n_eff_a4key": [
+     56931,
+     100690,
+     200528,
+     48127,
+     103755,
+     44846,
+     93184
+    ],
+    "n_eff_struct": [
+     113547,
+     198669,
+     402491,
+     285523,
+     629350,
+     1046477,
+     2092953
+    ],
+    "n_eff_text": [
+     18749375,
+     34614231,
+     89997000,
+     112496250,
+     449985000,
+     449985000,
+     449985000
+    ],
+    "part": "B"
+   },
+   "cluster": "gcd_lcm",
+   "keys": {
+    "items": 10500,
+    "mismatches": 0,
+    "seeds": [
+     2611251,
+     2611257
+    ],
+    "solver_errors": 0
+   },
+   "levels": {
+    "adjacent_pairs_features_differing": [
+     1,
+     1,
+     2,
+     1,
+     2,
+     1
+    ],
+    "identical_level_pairs": [],
+    "mean_log10_answer": [
+     2.558,
+     2.701,
+     2.923,
+     2.745,
+     2.918,
+     3.162,
+     3.329
+    ],
+    "stated_observed_max": [
+     "89300",
+     "144478",
+     "302220",
+     "387504",
+     "1108800",
+     "3922512",
+     "8259300"
+    ],
+    "stated_parameter": "answer (ceiling: GCD_LCM_TABLE)",
+    "stated_strictly_rising": true
+   },
+   "no_unique_answer": {
+    "items": 0,
+    "of": 10500,
+    "share": 0.0
+   },
+   "repaired_in_fix4": true,
+   "rules_pooled": {
+    "largest_counted": [
+     -0.0225,
+     "a4:smallest_pairwise_gcd",
+     5
+    ],
+    "largest_new_fresh_only": [
+     -0.0217,
+     "new:one_op_two_numbers",
+     5
+    ],
+    "largest_not_counted": [
+     0.4931,
+     "im:product_over_gcd_of_all",
+     1
+    ],
+    "per_level_counted": [
+     -0.0182,
+     0.019,
+     0.0159,
+     -0.0223,
+     -0.016,
+     -0.0225,
+     -0.0161
+    ],
+    "verdict_at_0.15": "STAYS",
+    "would_drop_if_not_counted_counted": true,
+    "would_drop_on_new": false
+   }
+  },
+  "M1.grid_perimeter_r3": {
+   "capacity": {
+    "as_written_fail_levels": {
+     "a4key/cluster_demand_G_minus_1_per_lineage": [
+      0
+     ],
+     "a4key/cluster_demand_G_per_lineage": [
+      0
+     ],
+     "a4key/own_part_count": [
+      0
+     ],
+     "a4key/own_part_count_minus_1": [
+      0
+     ],
+     "a4key/smaller_part_decides": [
+      0
+     ],
+     "text/cluster_demand_G_minus_1_per_lineage": [],
+     "text/cluster_demand_G_per_lineage": [],
+     "text/own_part_count": [],
+     "text/own_part_count_minus_1": [],
+     "text/smaller_part_decides": []
+    },
+    "hypothetical_cluster_builder_fails": {
+     "a4key/G=7": {},
+     "a4key/G=8": {},
+     "text/G=7": {},
+     "text/G=8": {}
+    },
+    "n_eff_a4key": [
+     17795,
+     813716,
+     112496250,
+     149995000,
+     149995000,
+     149995000,
+     149995000
+    ],
+    "n_eff_struct": [
+     152331,
+     6080878,
+     449985000,
+     149995000,
+     149995000,
+     149995000,
+     149995000
+    ],
+    "n_eff_text": [
+     152331,
+     6080878,
+     449985000,
+     149995000,
+     149995000,
+     149995000,
+     149995000
+    ],
+    "part": "A"
+   },
+   "cluster": "S6_exposed_faces",
+   "keys": {
+    "items": 10500,
+    "mismatches": 0,
+    "seeds": [
+     2611251,
+     2611257
+    ],
+    "solver_errors": 0
+   },
+   "levels": {
+    "adjacent_pairs_features_differing": [
+     2,
+     2,
+     2,
+     2,
+     2,
+     2
+    ],
+    "identical_level_pairs": [],
+    "mean_log10_answer": [
+     1.429,
+     1.547,
+     1.643,
+     1.715,
+     1.774,
+     1.826,
+     1.881
+    ],
+    "stated_observed_max": [
+     "13",
+     "16",
+     "19",
+     "22",
+     "25",
+     "28",
+     "31"
+    ],
+    "stated_parameter": "number of squares (13 + 3L)",
+    "stated_strictly_rising": true
+   },
+   "no_unique_answer": {
+    "items": 0,
+    "of": 10500,
+    "share": 0.0
+   },
+   "repaired_in_fix4": false,
+   "rules_pooled": {
+    "largest_counted": [
+     -0.0867,
+     "a3:bbox",
+     2
+    ],
+    "largest_new_fresh_only": [
+     0.1008,
+     "new:mode_by_template",
+     0
+    ],
+    "largest_not_counted": null,
+    "per_level_counted": [
+     -0.0777,
+     -0.0793,
+     -0.0867,
+     -0.0727,
+     -0.078,
+     -0.0659,
+     -0.0646
+    ],
+    "verdict_at_0.15": "STAYS",
+    "would_drop_if_not_counted_counted": false,
+    "would_drop_on_new": false
+   }
+  },
+  "M1.inclusion_exclusion_r3": {
+   "capacity": {
+    "as_written_fail_levels": {
+     "a4key/cluster_demand_G_minus_1_per_lineage": [],
+     "a4key/cluster_demand_G_per_lineage": [],
+     "a4key/own_part_count": [],
+     "a4key/own_part_count_minus_1": [],
+     "a4key/smaller_part_decides": [],
+     "text/cluster_demand_G_minus_1_per_lineage": [],
+     "text/cluster_demand_G_per_lineage": [],
+     "text/own_part_count": [],
+     "text/own_part_count_minus_1": [],
+     "text/smaller_part_decides": []
+    },
+    "hypothetical_cluster_builder_fails": {
+     "a4key/G=7": {},
+     "a4key/G=8": {},
+     "text/G=7": {},
+     "text/G=8": {}
+    },
+    "n_eff_a4key": [
+     163869,
+     648393,
+     1530561,
+     149995000,
+     149995000,
+     149995000,
+     149995000
+    ],
+    "n_eff_struct": [
+     14999500,
+     64283571,
+     224992500,
+     149995000,
+     149995000,
+     149995000,
+     149995000
+    ],
+    "n_eff_text": [
+     14999500,
+     64283571,
+     224992500,
+     149995000,
+     149995000,
+     149995000,
+     149995000
+    ],
+    "part": "A"
+   },
+   "cluster": "inclusion_exclusion",
+   "keys": {
+    "items": 10500,
+    "mismatches": 0,
+    "seeds": [
+     2611251,
+     2611257
+    ],
+    "solver_errors": 0
+   },
+   "levels": {
+    "adjacent_pairs_features_differing": [
+     3,
+     3,
+     7,
+     4,
+     4,
+     4
+    ],
+    "identical_level_pairs": [],
+    "mean_log10_answer": [
+     1.246,
+     1.359,
+     1.454,
+     1.729,
+     1.795,
+     1.893,
+     1.954
+    ],
+    "stated_observed_max": [
+     "75",
+     "103",
+     "137",
+     "297",
+     "343",
+     "398",
+     "456"
+    ],
+    "stated_parameter": "total",
+    "stated_strictly_rising": true
+   },
+   "no_unique_answer": {
+    "items": 0,
+    "of": 10500,
+    "share": 0.0
+   },
+   "repaired_in_fix4": false,
+   "rules_pooled": {
+    "largest_counted": [
+     -0.0362,
+     "a3:any_ignore_overlap",
+     0
+    ],
+    "largest_new_fresh_only": [
+     0.0135,
+     "new:mode_by_template",
+     1
+    ],
+    "largest_not_counted": null,
+    "per_level_counted": [
+     -0.0362,
+     -0.0232,
+     -0.0197,
+     -0.0111,
+     -0.0098,
+     -0.007,
+     -0.0067
+    ],
+    "verdict_at_0.15": "STAYS",
+    "would_drop_if_not_counted_counted": false,
+    "would_drop_on_new": false
+   }
+  },
+  "M1.last_digit_power_r3": {
+   "capacity": {
+    "as_written_fail_levels": {
+     "a4key/cluster_demand_G_minus_1_per_lineage": [],
+     "a4key/cluster_demand_G_per_lineage": [],
+     "a4key/own_part_count": [],
+     "a4key/own_part_count_minus_1": [],
+     "a4key/smaller_part_decides": [],
+     "text/cluster_demand_G_minus_1_per_lineage": [],
+     "text/cluster_demand_G_per_lineage": [],
+     "text/own_part_count": [],
+     "text/own_part_count_minus_1": [],
+     "text/smaller_part_decides": []
+    },
+    "hypothetical_cluster_builder_fails": {
+     "a4key/G=7": {},
+     "a4key/G=8": {},
+     "text/G=7": {},
+     "text/G=8": {}
+    },
+    "n_eff_a4key": [
+     224880,
+     376556,
+     149995000,
+     149995000,
+     149995000,
+     149995000,
+     149995000
+    ],
+    "n_eff_struct": [
+     224880,
+     376556,
+     149995000,
+     149995000,
+     149995000,
+     149995000,
+     149995000
+    ],
+    "n_eff_text": [
+     149995000,
+     149995000,
+     149995000,
+     149995000,
+     149995000,
+     149995000,
+     149995000
+    ],
+    "part": "B"
+   },
+   "cluster": "last_digit_power",
+   "keys": {
+    "items": 10500,
+    "mismatches": 0,
+    "seeds": [
+     2611251,
+     2611257
+    ],
+    "solver_errors": 0
+   },
+   "levels": {
+    "adjacent_pairs_features_differing": [
+     1,
+     2,
+     1,
+     1,
+     2,
+     1
+    ],
+    "identical_level_pairs": [],
+    "mean_log10_answer": [
+     1.259,
+     1.252,
+     1.289,
+     1.288,
+     1.295,
+     1.294,
+     1.276
+    ],
+    "stated_observed_max": [
+     "10300",
+     "10400",
+     "20500",
+     "20600",
+     "20700",
+     "30800",
+     "30900"
+    ],
+    "stated_parameter": "number of terms x largest exponent",
+    "stated_strictly_rising": true
+   },
+   "no_unique_answer": {
+    "items": 0,
+    "of": 10500,
+    "share": 0.0
+   },
+   "repaired_in_fix4": false,
+   "rules_pooled": {
+    "largest_counted": [
+     0.0862,
+     "a3:exp_mod_p",
+     0
+    ],
+    "largest_new_fresh_only": [
+     0.0125,
+     "new:mode_by_template",
+     3
+    ],
+    "largest_not_counted": [
+     0.1137,
+     "a3:fermat_misapplied_e_mod_p_plus_1",
+     0
+    ],
+    "per_level_counted": [
+     0.0862,
+     0.0586,
+     0.0187,
+     0.0267,
+     0.0205,
+     0.0145,
+     0.0152
+    ],
+    "verdict_at_0.15": "STAYS",
+    "would_drop_if_not_counted_counted": false,
+    "would_drop_on_new": false
+   }
+  },
+  "M1.linear_equation_r3": {
+   "capacity": {
+    "as_written_fail_levels": {
+     "a4key/cluster_demand_G_minus_1_per_lineage": [],
+     "a4key/cluster_demand_G_per_lineage": [],
+     "a4key/own_part_count": [],
+     "a4key/own_part_count_minus_1": [],
+     "a4key/smaller_part_decides": [],
+     "text/cluster_demand_G_minus_1_per_lineage": [],
+     "text/cluster_demand_G_per_lineage": [],
+     "text/own_part_count": [],
+     "text/own_part_count_minus_1": [],
+     "text/smaller_part_decides": []
+    },
+    "hypothetical_cluster_builder_fails": {
+     "a4key/G=7": {
+      "equal_share": [
+       0,
+       1,
+       2,
+       3
+      ]
+     },
+     "a4key/G=8": {
+      "equal_share": [
+       0,
+       1,
+       2
+      ]
+     },
+     "text/G=7": {
+      "equal_share": [
+       0,
+       1,
+       2,
+       3
+      ]
+     },
+     "text/G=8": {
+      "equal_share": [
+       0,
+       1,
+       2
+      ]
+     }
+    },
+    "n_eff_a4key": [
+     44584,
+     65951,
+     85257,
+     677688,
+     850633,
+     884057,
+     1156774
+    ],
+    "n_eff_struct": [
+     44584,
+     65951,
+     85257,
+     870377,
+     1022693,
+     1046477,
+     1339241
+    ],
+    "n_eff_text": [
+     44584,
+     65951,
+     85257,
+     870377,
+     1022693,
+     1046477,
+     1339241
+    ],
+    "part": "B"
+   },
+   "cluster": "S1_linear_solve",
+   "keys": {
+    "items": 10500,
+    "mismatches": 0,
+    "seeds": [
+     2611251,
+     2611257
+    ],
+    "solver_errors": 0
+   },
+   "levels": {
+    "adjacent_pairs_features_differing": [
+     2,
+     1,
+     3,
+     2,
+     2,
+     1
+    ],
+    "identical_level_pairs": [],
+    "mean_log10_answer": [
+     1.129,
+     1.299,
+     1.415,
+     1.491,
+     1.561,
+     1.643,
+     1.678
+    ],
+    "stated_observed_max": [
+     "40",
+     "60",
+     "80",
+     "100",
+     "120",
+     "140",
+     "160"
+    ],
+    "stated_parameter": "|answer| (no range stated in the docstring)",
+    "stated_strictly_rising": true
+   },
+   "no_unique_answer": {
+    "items": 0,
+    "of": 10500,
+    "share": 0.0
+   },
+   "repaired_in_fix4": false,
+   "rules_pooled": {
+    "largest_counted": [
+     -0.016,
+     "a3:ignore_constant",
+     0
+    ],
+    "largest_new_fresh_only": [
+     0.1095,
+     "new:one_op_two_numbers",
+     3
+    ],
+    "largest_not_counted": null,
+    "per_level_counted": [
+     -0.016,
+     -0.0123,
+     -0.0077,
+     0.005,
+     0.006,
+     0.006,
+     0.0053
+    ],
+    "verdict_at_0.15": "STAYS",
+    "would_drop_if_not_counted_counted": false,
+    "would_drop_on_new": false
+   }
+  },
+  "M1.median_list_r3": {
+   "capacity": {
+    "as_written_fail_levels": {
+     "a4key/cluster_demand_G_minus_1_per_lineage": [],
+     "a4key/cluster_demand_G_per_lineage": [],
+     "a4key/own_part_count": [],
+     "a4key/own_part_count_minus_1": [],
+     "a4key/smaller_part_decides": [],
+     "text/cluster_demand_G_minus_1_per_lineage": [],
+     "text/cluster_demand_G_per_lineage": [],
+     "text/own_part_count": [],
+     "text/own_part_count_minus_1": [],
+     "text/smaller_part_decides": []
+    },
+    "hypothetical_cluster_builder_fails": {
+     "a4key/G=7": {},
+     "a4key/G=8": {},
+     "text/G=7": {},
+     "text/G=8": {}
+    },
+    "n_eff_a4key": [
+     149995000,
+     149995000,
+     149995000,
+     149995000,
+     149995000,
+     149995000,
+     149995000
+    ],
+    "n_eff_struct": [
+     149995000,
+     149995000,
+     149995000,
+     149995000,
+     149995000,
+     149995000,
+     149995000
+    ],
+    "n_eff_text": [
+     149995000,
+     149995000,
+     149995000,
+     149995000,
+     149995000,
+     149995000,
+     149995000
+    ],
+    "part": "A"
+   },
+   "cluster": "median_list",
+   "keys": {
+    "items": 10500,
+    "mismatches": 0,
+    "seeds": [
+     2611251,
+     2611257
+    ],
+    "solver_errors": 0
+   },
+   "levels": {
+    "adjacent_pairs_features_differing": [
+     2,
+     2,
+     2,
+     2,
+     2,
+     2
+    ],
+    "identical_level_pairs": [],
+    "mean_log10_answer": [
+     1.985,
+     2.095,
+     2.194,
+     2.264,
+     2.331,
+     2.39,
+     2.439
+    ],
+    "stated_observed_max": [
+     "10",
+     "12",
+     "14",
+     "16",
+     "18",
+     "20",
+     "22"
+    ],
+    "stated_parameter": "number of values (10 + 2L)",
+    "stated_strictly_rising": true
+   },
+   "no_unique_answer": {
+    "items": 0,
+    "of": 10500,
+    "share": 0.0
+   },
+   "repaired_in_fix4": false,
+   "rules_pooled": {
+    "largest_counted": [
+     0.0821,
+     "im:mode_value",
+     0
+    ],
+    "largest_new_fresh_only": [
+     -0.0055,
+     "new:one_op_two_numbers",
+     2
+    ],
+    "largest_not_counted": null,
+    "per_level_counted": [
+     0.0821,
+     0.0532,
+     0.0635,
+     0.045,
+     0.0517,
+     0.0374,
+     0.0395
+    ],
+    "verdict_at_0.15": "STAYS",
+    "would_drop_if_not_counted_counted": false,
+    "would_drop_on_new": false
+   }
+  },
+  "M1.mixture_r4": {
+   "capacity": {
+    "as_written_fail_levels": {
+     "a4key/cluster_demand_G_minus_1_per_lineage": [
+      0
+     ],
+     "a4key/cluster_demand_G_per_lineage": [
+      0
+     ],
+     "a4key/own_part_count": [],
+     "a4key/own_part_count_minus_1": [],
+     "a4key/smaller_part_decides": [],
+     "text/cluster_demand_G_minus_1_per_lineage": [],
+     "text/cluster_demand_G_per_lineage": [],
+     "text/own_part_count": [],
+     "text/own_part_count_minus_1": [],
+     "text/smaller_part_decides": []
+    },
+    "hypothetical_cluster_builder_fails": {
+     "a4key/G=7": {},
+     "a4key/G=8": {},
+     "text/G=7": {},
+     "text/G=8": {}
+    },
+    "n_eff_a4key": [
+     29915,
+     44797,
+     61247,
+     729311,
+     885797,
+     1130616,
+     1485099
+    ],
+    "n_eff_struct": [
+     59791,
+     89194,
+     122345,
+     1380322,
+     1821802,
+     2184393,
+     2960428
+    ],
+    "n_eff_text": [
+     59791,
+     89194,
+     122345,
+     1380322,
+     1821802,
+     2184393,
+     2960428
+    ],
+    "part": "B"
+   },
+   "cluster": "S2_weighted_sum",
+   "keys": {
+    "items": 10500,
+    "mismatches": 0,
+    "seeds": [
+     2611251,
+     2611257
+    ],
+    "solver_errors": 0
+   },
+   "levels": {
+    "adjacent_pairs_features_differing": [
+     2,
+     2,
+     3,
+     2,
+     2,
+     2
+    ],
+    "identical_level_pairs": [],
+    "mean_log10_answer": [
+     1.194,
+     1.258,
+     1.312,
+     1.454,
+     1.496,
+     1.542,
+     1.564
+    ],
+    "stated_observed_max": [
+     "30",
+     "36",
+     "42",
+     "48",
+     "54",
+     "60",
+     "66"
+    ],
+    "stated_parameter": "max price per kg (30 + 6L)",
+    "stated_strictly_rising": true
+   },
+   "no_unique_answer": {
+    "items": 0,
+    "of": 10500,
+    "share": 0.0
+   },
+   "repaired_in_fix4": true,
+   "rules_pooled": {
+    "largest_counted": [
+     0.0332,
+     "a3:unweighted_mean",
+     4
+    ],
+    "largest_new_fresh_only": [
+     0.0077,
+     "new:one_op_two_numbers",
+     0
+    ],
+    "largest_not_counted": null,
+    "per_level_counted": [
+     0.031,
+     0.0267,
+     0.0297,
+     0.0307,
+     0.0332,
+     0.03,
+     0.03
+    ],
+    "verdict_at_0.15": "STAYS",
+    "would_drop_if_not_counted_counted": false,
+    "would_drop_on_new": false
+   }
+  },
+  "M1.painted_cube_r3": {
+   "capacity": {
+    "as_written_fail_levels": {
+     "a4key/cluster_demand_G_minus_1_per_lineage": [
+      0
+     ],
+     "a4key/cluster_demand_G_per_lineage": [],
+     "a4key/own_part_count": [],
+     "a4key/own_part_count_minus_1": [],
+     "a4key/smaller_part_decides": [],
+     "text/cluster_demand_G_minus_1_per_lineage": [],
+     "text/cluster_demand_G_per_lineage": [],
+     "text/own_part_count": [],
+     "text/own_part_count_minus_1": [],
+     "text/smaller_part_decides": []
+    },
+    "hypothetical_cluster_builder_fails": {
+     "a4key/G=7": {},
+     "a4key/G=8": {},
+     "text/G=7": {},
+     "text/G=8": {}
+    },
+    "n_eff_a4key": [
+     34147,
+     50571,
+     71528,
+     98530,
+     133646,
+     171032,
+     219291
+    ],
+    "n_eff_struct": [
+     131038,
+     204725,
+     277084,
+     381343,
+     513096,
+     719976,
+     818155
+    ],
+    "n_eff_text": [
+     149995000,
+     149995000,
+     149995000,
+     149995000,
+     149995000,
+     149995000,
+     149995000
+    ],
+    "part": "A"
+   },
+   "cluster": "S6_exposed_faces",
+   "keys": {
+    "items": 10500,
+    "mismatches": 0,
+    "seeds": [
+     2611251,
+     2611257
+    ],
+    "solver_errors": 0
+   },
+   "levels": {
+    "adjacent_pairs_features_differing": [
+     1,
+     1,
+     1,
+     1,
+     1,
+     1
+    ],
+    "identical_level_pairs": [],
+    "mean_log10_answer": [
+     2.765,
+     2.856,
+     2.953,
+     3.047,
+     3.106,
+     3.206,
+     3.289
+    ],
+    "stated_observed_max": [
+     "30",
+     "34",
+     "38",
+     "42",
+     "46",
+     "50",
+     "54"
+    ],
+    "stated_parameter": "largest dimension (30 + 4L)",
+    "stated_strictly_rising": true
+   },
+   "no_unique_answer": {
+    "items": 0,
+    "of": 10500,
+    "share": 0.0
+   },
+   "repaired_in_fix4": false,
+   "rules_pooled": {
+    "largest_counted": [
+     -0.0068,
+     "a3:inner_block_on_unpainted_bottom",
+     3
+    ],
+    "largest_new_fresh_only": [
+     -0.0065,
+     "new:one_op_two_numbers",
+     3
+    ],
+    "largest_not_counted": null,
+    "per_level_counted": [
+     -0.0065,
+     -0.0053,
+     -0.0054,
+     -0.0068,
+     -0.0029,
+     -0.0047,
+     -0.003
+    ],
+    "verdict_at_0.15": "STAYS",
+    "would_drop_if_not_counted_counted": false,
+    "would_drop_on_new": false
+   }
+  },
+  "M1.percent_change_r3": {
+   "capacity": {
+    "as_written_fail_levels": {
+     "a4key/cluster_demand_G_minus_1_per_lineage": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ],
+     "a4key/cluster_demand_G_per_lineage": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ],
+     "a4key/own_part_count": [
+      0,
+      1,
+      3
+     ],
+     "a4key/own_part_count_minus_1": [
+      0,
+      1,
+      3,
+      4
+     ],
+     "a4key/smaller_part_decides": [
+      0,
+      1,
+      3,
+      4
+     ],
+     "text/cluster_demand_G_minus_1_per_lineage": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ],
+     "text/cluster_demand_G_per_lineage": [
+      0,
+      1,
+      2,
+      3,
+      4
+     ],
+     "text/own_part_count": [
+      0,
+      1
+     ],
+     "text/own_part_count_minus_1": [
+      0,
+      1
+     ],
+     "text/smaller_part_decides": [
+      0,
+      1
+     ]
+    },
+    "hypothetical_cluster_builder_fails": {
+     "a4key/G=7": {
+      "equal_share": [
+       0,
+       1,
+       2
+      ]
+     },
+     "a4key/G=8": {
+      "equal_share": [
+       0,
+       1
+      ]
+     },
+     "text/G=7": {},
+     "text/G=8": {}
+    },
+    "n_eff_a4key": [
+     13913,
+     16329,
+     18937,
+     15387,
+     17131,
+     18558,
+     20381
+    ],
+    "n_eff_struct": [
+     13913,
+     16329,
+     18937,
+     26128,
+     28890,
+     31323,
+     34400
+    ],
+    "n_eff_text": [
+     13913,
+     16329,
+     18937,
+     26128,
+     28890,
+     31323,
+     34400
+    ],
+    "part": "B"
+   },
+   "cluster": "S3_multiplicative_chain",
+   "keys": {
+    "items": 10500,
+    "mismatches": 0,
+    "seeds": [
+     2611251,
+     2611257
+    ],
+    "solver_errors": 0
+   },
+   "levels": {
+    "adjacent_pairs_features_differing": [
+     1,
+     1,
+     3,
+     1,
+     1,
+     1
+    ],
+    "identical_level_pairs": [],
+    "mean_log10_answer": [
+     1.89,
+     1.965,
+     2.014,
+     2.53,
+     2.566,
+     2.611,
+     2.632
+    ],
+    "stated_observed_max": [
+     "240",
+     "280",
+     "320",
+     "720",
+     "800",
+     "880",
+     "960"
+    ],
+    "stated_parameter": "price",
+    "stated_strictly_rising": true
+   },
+   "no_unique_answer": {
+    "items": 0,
+    "of": 10500,
+    "share": 0.0
+   },
+   "repaired_in_fix4": false,
+   "rules_pooled": {
+    "largest_counted": [
+     0.006,
+     "a3:first_step_only",
+     5
+    ],
+    "largest_new_fresh_only": [
+     -0.003,
+     "new:one_op_two_numbers",
+     3
+    ],
+    "largest_not_counted": null,
+    "per_level_counted": [
+     -0.0022,
+     -0.0025,
+     0.0033,
+     0.0049,
+     -0.003,
+     0.006,
+     0.0043
+    ],
+    "verdict_at_0.15": "STAYS",
+    "would_drop_if_not_counted_counted": false,
+    "would_drop_on_new": false
+   }
+  },
+  "M1.pipes_work_r3": {
+   "capacity": {
+    "as_written_fail_levels": {
+     "a4key/cluster_demand_G_minus_1_per_lineage": [
+      0,
+      1,
+      2
+     ],
+     "a4key/cluster_demand_G_per_lineage": [
+      0,
+      1,
+      2
+     ],
+     "a4key/own_part_count": [
+      0,
+      1,
+      2
+     ],
+     "a4key/own_part_count_minus_1": [
+      0,
+      1,
+      2
+     ],
+     "a4key/smaller_part_decides": [
+      0,
+      1,
+      2
+     ],
+     "text/cluster_demand_G_minus_1_per_lineage": [
+      0,
+      1,
+      2
+     ],
+     "text/cluster_demand_G_per_lineage": [
+      0,
+      1
+     ],
+     "text/own_part_count": [],
+     "text/own_part_count_minus_1": [],
+     "text/smaller_part_decides": []
+    },
+    "hypothetical_cluster_builder_fails": {
+     "a4key/G=7": {
+      "equal_share": [
+       0,
+       1,
+       2,
+       3
+      ]
+     },
+     "a4key/G=8": {
+      "equal_share": [
+       0,
+       1,
+       2
+      ]
+     },
+     "text/G=7": {
+      "equal_share": [
+       0,
+       1,
+       2,
+       3
+      ]
+     },
+     "text/G=8": {
+      "equal_share": [
+       0,
+       1,
+       2
+      ]
+     }
+    },
+    "n_eff_a4key": [
+     10279,
+     13743,
+     17780,
+     582128,
+     717679,
+     896384,
+     1267563
+    ],
+    "n_eff_struct": [
+     20100,
+     27025,
+     35218,
+     1076519,
+     1428524,
+     1799940,
+     2586121
+    ],
+    "n_eff_text": [
+     20100,
+     27025,
+     35218,
+     1076519,
+     1428524,
+     1799940,
+     2586121
+    ],
+    "part": "A"
+   },
+   "cluster": "S1_linear_solve",
+   "keys": {
+    "items": 10500,
+    "mismatches": 0,
+    "seeds": [
+     2611251,
+     2611257
+    ],
+    "solver_errors": 0
+   },
+   "levels": {
+    "adjacent_pairs_features_differing": [
+     3,
+     3,
+     4,
+     4,
+     4,
+     4
+    ],
+    "identical_level_pairs": [],
+    "mean_log10_answer": [
+     1.281,
+     1.318,
+     1.37,
+     1.394,
+     1.428,
+     1.458,
+     1.481
+    ],
+    "stated_observed_max": [
+     "1760",
+     "2200",
+     "2700",
+     "2744",
+     "3420",
+     "3534",
+     "3835"
+    ],
+    "stated_parameter": "volume",
+    "stated_strictly_rising": true
+   },
+   "no_unique_answer": {
+    "items": 0,
+    "of": 10500,
+    "share": 0.0
+   },
+   "repaired_in_fix4": false,
+   "rules_pooled": {
+    "largest_counted": [
+     -0.0284,
+     "im:ignore_drain",
+     0
+    ],
+    "largest_new_fresh_only": [
+     0.023,
+     "new:one_op_two_numbers",
+     3
+    ],
+    "largest_not_counted": null,
+    "per_level_counted": [
+     -0.0284,
+     -0.0219,
+     -0.0215,
+     0.025,
+     0.0255,
+     0.0219,
+     0.0226
+    ],
+    "verdict_at_0.15": "STAYS",
+    "would_drop_if_not_counted_counted": false,
+    "would_drop_on_new": false
+   }
+  },
+  "M1.prime_factors_r3": {
+   "capacity": {
+    "as_written_fail_levels": {
+     "a4key/cluster_demand_G_minus_1_per_lineage": [
+      0
+     ],
+     "a4key/cluster_demand_G_per_lineage": [],
+     "a4key/own_part_count": [],
+     "a4key/own_part_count_minus_1": [],
+     "a4key/smaller_part_decides": [],
+     "text/cluster_demand_G_minus_1_per_lineage": [],
+     "text/cluster_demand_G_per_lineage": [],
+     "text/own_part_count": [],
+     "text/own_part_count_minus_1": [],
+     "text/smaller_part_decides": []
+    },
+    "hypothetical_cluster_builder_fails": {
+     "a4key/G=7": {
+      "chao1": [
+       0
+      ],
+      "equal_share": [
+       0
+      ],
+      "mixture": [
+       0
+      ]
+     },
+     "a4key/G=8": {
+      "chao1": [
+       0
+      ]
+     },
+     "text/G=7": {},
+     "text/G=8": {}
+    },
+    "n_eff_a4key": [
+     31093,
+     44303,
+     68805,
+     104990,
+     162332,
+     249437,
+     383292
+    ],
+    "n_eff_struct": [
+     31093,
+     44303,
+     68805,
+     104990,
+     162332,
+     249437,
+     383292
+    ],
+    "n_eff_text": [
+     149995000,
+     224992500,
+     149995000,
+     149995000,
+     149995000,
+     449985000,
+     149995000
+    ],
+    "part": "B"
+   },
+   "cluster": "prime_factors",
+   "keys": {
+    "items": 10500,
+    "mismatches": 0,
+    "seeds": [
+     2611251,
+     2611257
+    ],
+    "solver_errors": 0
+   },
+   "levels": {
+    "adjacent_pairs_features_differing": [
+     1,
+     1,
+     1,
+     1,
+     1,
+     1
+    ],
+    "identical_level_pairs": [],
+    "mean_log10_answer": [
+     1.331,
+     1.34,
+     1.366,
+     1.415,
+     1.436,
+     1.481,
+     1.496
+    ],
+    "stated_observed_max": [
+     "30000",
+     "49979",
+     "99968",
+     "199520",
+     "399938",
+     "799240",
+     "1596543"
+    ],
+    "stated_parameter": "N (nmax(level))",
+    "stated_strictly_rising": true
+   },
+   "no_unique_answer": {
+    "items": 0,
+    "of": 10500,
+    "share": 0.0
+   },
+   "repaired_in_fix4": false,
+   "rules_pooled": {
+    "largest_counted": [
+     -0.077,
+     "im:omega_plus_one",
+     0
+    ],
+    "largest_new_fresh_only": [
+     0.0625,
+     "new:mode_by_template",
+     2
+    ],
+    "largest_not_counted": [
+     0.1915,
+     "im:largest_le_sqrt",
+     5
+    ],
+    "per_level_counted": [
+     -0.077,
+     -0.0734,
+     -0.0613,
+     -0.0601,
+     -0.0608,
+     -0.0562,
+     -0.056
+    ],
+    "verdict_at_0.15": "STAYS",
+    "would_drop_if_not_counted_counted": true,
+    "would_drop_on_new": false
+   }
+  },
+  "M1.quadratic_area_r3": {
+   "capacity": {
+    "as_written_fail_levels": {
+     "a4key/cluster_demand_G_minus_1_per_lineage": [],
+     "a4key/cluster_demand_G_per_lineage": [],
+     "a4key/own_part_count": [],
+     "a4key/own_part_count_minus_1": [],
+     "a4key/smaller_part_decides": [],
+     "text/cluster_demand_G_minus_1_per_lineage": [],
+     "text/cluster_demand_G_per_lineage": [],
+     "text/own_part_count": [],
+     "text/own_part_count_minus_1": [],
+     "text/smaller_part_decides": []
+    },
+    "hypothetical_cluster_builder_fails": {
+     "a4key/G=7": {},
+     "a4key/G=8": {},
+     "text/G=7": {},
+     "text/G=8": {}
+    },
+    "n_eff_a4key": [
+     48917,
+     61465,
+     80657,
+     98573,
+     119138,
+     140008,
+     171358
+    ],
+    "n_eff_struct": [
+     73877,
+     94356,
+     119772,
+     146052,
+     179205,
+     209783,
+     262076
+    ],
+    "n_eff_text": [
+     149995000,
+     149995000,
+     449985000,
+     449985000,
+     149995000,
+     149995000,
+     149995000
+    ],
+    "part": "B"
+   },
+   "cluster": "quadratic_area",
+   "keys": {
+    "items": 10500,
+    "mismatches": 0,
+    "seeds": [
+     2611251,
+     2611257
+    ],
+    "solver_errors": 0
+   },
+   "levels": {
+    "adjacent_pairs_features_differing": [
+     4,
+     4,
+     4,
+     4,
+     4,
+     4
+    ],
+    "identical_level_pairs": [],
+    "mean_log10_answer": [
+     1.859,
+     1.929,
+     1.969,
+     2.014,
+     2.056,
+     2.109,
+     2.15
+    ],
+    "stated_observed_max": [
+     "293",
+     "334",
+     "373",
+     "414",
+     "455",
+     "493",
+     "540"
+    ],
+    "stated_parameter": "answer x (150 + 25L)",
+    "stated_strictly_rising": true
+   },
+   "no_unique_answer": {
+    "items": 0,
+    "of": 10500,
+    "share": 0.0
+   },
+   "repaired_in_fix4": false,
+   "rules_pooled": {
+    "largest_counted": [
+     -0.0072,
+     "a3:quarter_perimeter",
+     3
+    ],
+    "largest_new_fresh_only": [
+     -0.0083,
+     "new:one_op_two_numbers",
+     3
+    ],
+    "largest_not_counted": null,
+    "per_level_counted": [
+     -0.007,
+     -0.0058,
+     -0.0045,
+     -0.0072,
+     -0.0032,
+     -0.004,
+     -0.0034
+    ],
+    "verdict_at_0.15": "STAYS",
+    "would_drop_if_not_counted_counted": false,
+    "would_drop_on_new": false
+   }
+  },
+  "M1.ratio_share_r3": {
+   "capacity": {
+    "as_written_fail_levels": {
+     "a4key/cluster_demand_G_minus_1_per_lineage": [
+      0,
+      1
+     ],
+     "a4key/cluster_demand_G_per_lineage": [
+      0,
+      1
+     ],
+     "a4key/own_part_count": [
+      0
+     ],
+     "a4key/own_part_count_minus_1": [
+      0
+     ],
+     "a4key/smaller_part_decides": [
+      0
+     ],
+     "text/cluster_demand_G_minus_1_per_lineage": [],
+     "text/cluster_demand_G_per_lineage": [],
+     "text/own_part_count": [],
+     "text/own_part_count_minus_1": [],
+     "text/smaller_part_decides": []
+    },
+    "hypothetical_cluster_builder_fails": {
+     "a4key/G=7": {
+      "equal_share": [
+       0,
+       1,
+       2
+      ]
+     },
+     "a4key/G=8": {
+      "equal_share": [
+       0,
+       1
+      ]
+     },
+     "text/G=7": {},
+     "text/G=8": {}
+    },
+    "n_eff_a4key": [
+     15206,
+     20296,
+     204911,
+     253370,
+     1698057,
+     2112606,
+     2153038
+    ],
+    "n_eff_struct": [
+     30235,
+     40318,
+     1187296,
+     1424003,
+     34614231,
+     44998500,
+     32141786
+    ],
+    "n_eff_text": [
+     449985000,
+     149995000,
+     149995000,
+     149995000,
+     149995000,
+     149995000,
+     149995000
+    ],
+    "part": "B"
+   },
+   "cluster": "S3_multiplicative_chain",
+   "keys": {
+    "items": 10500,
+    "mismatches": 0,
+    "seeds": [
+     2611251,
+     2611257
+    ],
+    "solver_errors": 0
+   },
+   "levels": {
+    "adjacent_pairs_features_differing": [
+     1,
+     4,
+     1,
+     4,
+     1,
+     1
+    ],
+    "identical_level_pairs": [],
+    "mean_log10_answer": [
+     2.228,
+     2.337,
+     2.437,
+     2.493,
+     2.579,
+     2.623,
+     2.658
+    ],
+    "stated_observed_max": [
+     "1824",
+     "2400",
+     "4214",
+     "5520",
+     "7581",
+     "8109",
+     "10561"
+    ],
+    "stated_parameter": "total",
+    "stated_strictly_rising": true
+   },
+   "no_unique_answer": {
+    "items": 0,
+    "of": 10500,
+    "share": 0.0
+   },
+   "repaired_in_fix4": false,
+   "rules_pooled": {
+    "largest_counted": [
+     0.0572,
+     "a3:equal_split",
+     0
+    ],
+    "largest_new_fresh_only": [
+     0.5312,
+     "new:ratio_last_named",
+     0
+    ],
+    "largest_not_counted": [
+     0.5319,
+     "im:largest_share",
+     1
+    ],
+    "per_level_counted": [
+     0.0572,
+     0.054,
+     0.0297,
+     0.0267,
+     0.019,
+     0.0185,
+     0.0194
+    ],
+    "verdict_at_0.15": "STAYS",
+    "would_drop_if_not_counted_counted": true,
+    "would_drop_on_new": true
+   }
+  },
+  "M1.rectangle_r3": {
+   "capacity": {
+    "as_written_fail_levels": {
+     "a4key/cluster_demand_G_minus_1_per_lineage": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ],
+     "a4key/cluster_demand_G_per_lineage": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ],
+     "a4key/own_part_count": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ],
+     "a4key/own_part_count_minus_1": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ],
+     "a4key/smaller_part_decides": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ],
+     "text/cluster_demand_G_minus_1_per_lineage": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ],
+     "text/cluster_demand_G_per_lineage": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ],
+     "text/own_part_count": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ],
+     "text/own_part_count_minus_1": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ],
+     "text/smaller_part_decides": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ]
+    },
+    "hypothetical_cluster_builder_fails": {
+     "a4key/G=7": {
+      "equal_share": [
+       0,
+       1,
+       2,
+       3
+      ]
+     },
+     "a4key/G=8": {
+      "equal_share": [
+       0,
+       1,
+       2
+      ]
+     },
+     "text/G=7": {
+      "equal_share": [
+       0,
+       1,
+       2,
+       3
+      ]
+     },
+     "text/G=8": {
+      "equal_share": [
+       0,
+       1,
+       2
+      ]
+     }
+    },
+    "n_eff_a4key": [
+     3623,
+     4225,
+     4867,
+     5435,
+     6080,
+     6669,
+     7222
+    ],
+    "n_eff_struct": [
+     3623,
+     4225,
+     4867,
+     5435,
+     6080,
+     6669,
+     7222
+    ],
+    "n_eff_text": [
+     3623,
+     4225,
+     4867,
+     5435,
+     6080,
+     6669,
+     7222
+    ],
+    "part": "A"
+   },
+   "cluster": "S1_linear_solve",
+   "keys": {
+    "items": 10500,
+    "mismatches": 0,
+    "seeds": [
+     2611251,
+     2611257
+    ],
+    "solver_errors": 0
+   },
+   "levels": {
+    "adjacent_pairs_features_differing": [
+     1,
+     1,
+     1,
+     2,
+     2,
+     2
+    ],
+    "identical_level_pairs": [],
+    "mean_log10_answer": [
+     3.284,
+     3.356,
+     3.462,
+     3.542,
+     3.565,
+     3.67,
+     3.77
+    ],
+    "stated_observed_max": [
+     "1534",
+     "1742",
+     "2080",
+     "2288",
+     "2600",
+     "2834",
+     "3094"
+    ],
+    "stated_parameter": "perimeter",
+    "stated_strictly_rising": true
+   },
+   "no_unique_answer": {
+    "items": 0,
+    "of": 10500,
+    "share": 0.0
+   },
+   "repaired_in_fix4": false,
+   "rules_pooled": {
+    "largest_counted": [
+     0.0143,
+     "a4:echo_pos_offset",
+     0
+    ],
+    "largest_new_fresh_only": [
+     0.0055,
+     "new:one_op_two_numbers",
+     1
+    ],
+    "largest_not_counted": null,
+    "per_level_counted": [
+     0.0143,
+     0.0137,
+     0.0135,
+     0.0107,
+     0.0105,
+     0.012,
+     0.0115
+    ],
+    "verdict_at_0.15": "STAYS",
+    "would_drop_if_not_counted_counted": false,
+    "would_drop_on_new": false
+   }
+  },
+  "M1.recurrence_iterate_r3": {
+   "capacity": {
+    "as_written_fail_levels": {
+     "a4key/cluster_demand_G_minus_1_per_lineage": [],
+     "a4key/cluster_demand_G_per_lineage": [],
+     "a4key/own_part_count": [],
+     "a4key/own_part_count_minus_1": [],
+     "a4key/smaller_part_decides": [],
+     "text/cluster_demand_G_minus_1_per_lineage": [],
+     "text/cluster_demand_G_per_lineage": [],
+     "text/own_part_count": [],
+     "text/own_part_count_minus_1": [],
+     "text/smaller_part_decides": []
+    },
+    "hypothetical_cluster_builder_fails": {
+     "a4key/G=7": {},
+     "a4key/G=8": {},
+     "text/G=7": {},
+     "text/G=8": {}
+    },
+    "n_eff_a4key": [
+     108850,
+     135619,
+     151612,
+     170967,
+     186793,
+     210273,
+     219612
+    ],
+    "n_eff_struct": [
+     108850,
+     135619,
+     151612,
+     170967,
+     186793,
+     210273,
+     219612
+    ],
+    "n_eff_text": [
+     224992500,
+     149995000,
+     149995000,
+     149995000,
+     149995000,
+     149995000,
+     149995000
+    ],
+    "part": "A"
+   },
+   "cluster": "S7_step_rule",
+   "keys": {
+    "items": 10500,
+    "mismatches": 0,
+    "seeds": [
+     2611251,
+     2611257
+    ],
+    "solver_errors": 0
+   },
+   "levels": {
+    "adjacent_pairs_features_differing": [
+     2,
+     2,
+     2,
+     2,
+     2,
+     1
+    ],
+    "identical_level_pairs": [],
+    "mean_log10_answer": [
+     3.203,
+     3.339,
+     3.616,
+     3.737,
+     3.937,
+     4.12,
+     4.375
+    ],
+    "stated_observed_max": [
+     "9",
+     "11",
+     "13",
+     "15",
+     "17",
+     "19",
+     "21"
+    ],
+    "stated_parameter": "position (9 + 2L)",
+    "stated_strictly_rising": true
+   },
+   "no_unique_answer": {
+    "items": 0,
+    "of": 10500,
+    "share": 0.0
+   },
+   "repaired_in_fix4": false,
+   "rules_pooled": {
+    "largest_counted": [
+     0.0058,
+     "a4:echo_pos_offset",
+     0
+    ],
+    "largest_new_fresh_only": [
+     -0.001,
+     "new:one_op_two_numbers",
+     5
+    ],
+    "largest_not_counted": null,
+    "per_level_counted": [
+     0.0058,
+     -0.0006,
+     -0.0005,
+     -0.0008,
+     -0.0006,
+     -0.0009,
+     -0.0004
+    ],
+    "verdict_at_0.15": "STAYS",
+    "would_drop_if_not_counted_counted": false,
+    "would_drop_on_new": false
+   }
+  },
+  "M1.shopping_r3": {
+   "capacity": {
+    "as_written_fail_levels": {
+     "a4key/cluster_demand_G_minus_1_per_lineage": [],
+     "a4key/cluster_demand_G_per_lineage": [],
+     "a4key/own_part_count": [],
+     "a4key/own_part_count_minus_1": [],
+     "a4key/smaller_part_decides": [],
+     "text/cluster_demand_G_minus_1_per_lineage": [],
+     "text/cluster_demand_G_per_lineage": [],
+     "text/own_part_count": [],
+     "text/own_part_count_minus_1": [],
+     "text/smaller_part_decides": []
+    },
+    "hypothetical_cluster_builder_fails": {
+     "a4key/G=7": {},
+     "a4key/G=8": {},
+     "text/G=7": {},
+     "text/G=8": {}
+    },
+    "n_eff_a4key": [
+     642836,
+     449985000,
+     149995000,
+     149995000,
+     149995000,
+     149995000,
+     149995000
+    ],
+    "n_eff_struct": [
+     1335267,
+     449985000,
+     149995000,
+     149995000,
+     149995000,
+     149995000,
+     149995000
+    ],
+    "n_eff_text": [
+     149995000,
+     149995000,
+     149995000,
+     149995000,
+     149995000,
+     149995000,
+     149995000
+    ],
+    "part": "B"
+   },
+   "cluster": "S2_weighted_sum",
+   "keys": {
+    "items": 10500,
+    "mismatches": 0,
+    "seeds": [
+     2611251,
+     2611257
+    ],
+    "solver_errors": 0
+   },
+   "levels": {
+    "adjacent_pairs_features_differing": [
+     3,
+     3,
+     2,
+     3,
+     1,
+     3
+    ],
+    "identical_level_pairs": [],
+    "mean_log10_answer": [
+     0.979,
+     0.98,
+     0.979,
+     0.981,
+     0.988,
+     0.995,
+     0.975
+    ],
+    "stated_observed_max": [
+     "2",
+     "3",
+     "4",
+     "4",
+     "5",
+     "5",
+     "6"
+    ],
+    "stated_parameter": "number of item lines",
+    "stated_strictly_rising": false
+   },
+   "no_unique_answer": {
+    "items": 0,
+    "of": 10500,
+    "share": 0.0
+   },
+   "repaired_in_fix4": false,
+   "rules_pooled": {
+    "largest_counted": [
+     0.0283,
+     "a3:ignore_counts",
+     0
+    ],
+    "largest_new_fresh_only": [
+     0.002,
+     "new:one_op_two_numbers",
+     0
+    ],
+    "largest_not_counted": null,
+    "per_level_counted": [
+     0.0283,
+     0.0018,
+     -0.0003,
+     -0.0029,
+     -0.0038,
+     -0.0035,
+     -0.0029
+    ],
+    "verdict_at_0.15": "STAYS",
+    "would_drop_if_not_counted_counted": false,
+    "would_drop_on_new": false
+   }
+  },
+  "M1.speed_distance_r3": {
+   "capacity": {
+    "as_written_fail_levels": {
+     "a4key/cluster_demand_G_minus_1_per_lineage": [],
+     "a4key/cluster_demand_G_per_lineage": [],
+     "a4key/own_part_count": [],
+     "a4key/own_part_count_minus_1": [],
+     "a4key/smaller_part_decides": [],
+     "text/cluster_demand_G_minus_1_per_lineage": [],
+     "text/cluster_demand_G_per_lineage": [],
+     "text/own_part_count": [],
+     "text/own_part_count_minus_1": [],
+     "text/smaller_part_decides": []
+    },
+    "hypothetical_cluster_builder_fails": {
+     "a4key/G=7": {},
+     "a4key/G=8": {},
+     "text/G=7": {},
+     "text/G=8": {}
+    },
+    "n_eff_a4key": [
+     35310,
+     72148,
+     9999667,
+     28124062,
+     149995000,
+     149995000,
+     149995000
+    ],
+    "n_eff_struct": [
+     71099,
+     145485,
+     37498750,
+     224992500,
+     149995000,
+     149995000,
+     149995000
+    ],
+    "n_eff_text": [
+     71099,
+     145485,
+     37498750,
+     224992500,
+     149995000,
+     149995000,
+     149995000
+    ],
+    "part": "A"
+   },
+   "cluster": "S2_weighted_sum",
+   "keys": {
+    "items": 10500,
+    "mismatches": 0,
+    "seeds": [
+     2611251,
+     2611257
+    ],
+    "solver_errors": 0
+   },
+   "levels": {
+    "adjacent_pairs_features_differing": [
+     1,
+     3,
+     1,
+     2,
+     1,
+     2
+    ],
+    "identical_level_pairs": [],
+    "mean_log10_answer": [
+     2.469,
+     2.571,
+     2.389,
+     2.478,
+     2.638,
+     2.71,
+     2.821
+    ],
+    "stated_observed_max": [
+     "2",
+     "2",
+     "3",
+     "3",
+     "4",
+     "4",
+     "5"
+    ],
+    "stated_parameter": "number of legs",
+    "stated_strictly_rising": false
+   },
+   "no_unique_answer": {
+    "items": 0,
+    "of": 10500,
+    "share": 0.0
+   },
+   "repaired_in_fix4": false,
+   "rules_pooled": {
+    "largest_counted": [
+     0.0338,
+     "a4:median_speed",
+     2
+    ],
+    "largest_new_fresh_only": [
+     -0.004,
+     "new:one_op_two_numbers",
+     6
+    ],
+    "largest_not_counted": null,
+    "per_level_counted": [
+     0.0287,
+     0.021,
+     0.0338,
+     0.0277,
+     0.0207,
+     0.018,
+     0.0217
+    ],
+    "verdict_at_0.15": "STAYS",
+    "would_drop_if_not_counted_counted": false,
+    "would_drop_on_new": false
+   }
+  },
+  "M1.tiered_pricing": {
+   "capacity": {
+    "as_written_fail_levels": {
+     "a4key/cluster_demand_G_minus_1_per_lineage": [],
+     "a4key/cluster_demand_G_per_lineage": [],
+     "a4key/own_part_count": [],
+     "a4key/own_part_count_minus_1": [],
+     "a4key/smaller_part_decides": [],
+     "text/cluster_demand_G_minus_1_per_lineage": [],
+     "text/cluster_demand_G_per_lineage": [],
+     "text/own_part_count": [],
+     "text/own_part_count_minus_1": [],
+     "text/smaller_part_decides": []
+    },
+    "hypothetical_cluster_builder_fails": {
+     "a4key/G=7": {},
+     "a4key/G=8": {},
+     "text/G=7": {},
+     "text/G=8": {}
+    },
+    "n_eff_a4key": [
+     205943,
+     503903,
+     224992500,
+     149995000,
+     149995000,
+     149995000,
+     149995000
+    ],
+    "n_eff_struct": [
+     205943,
+     503903,
+     224992500,
+     149995000,
+     149995000,
+     149995000,
+     149995000
+    ],
+    "n_eff_text": [
+     205943,
+     503903,
+     224992500,
+     149995000,
+     149995000,
+     149995000,
+     149995000
+    ],
+    "part": "B"
+   },
+   "cluster": "tiered_pricing",
+   "keys": {
+    "items": 10500,
+    "mismatches": 0,
+    "seeds": [
+     2611251,
+     2611257
+    ],
+    "solver_errors": 0
+   },
+   "levels": {
+    "adjacent_pairs_features_differing": [
+     3,
+     4,
+     4,
+     5,
+     4,
+     4
+    ],
+    "identical_level_pairs": [],
+    "mean_log10_answer": [
+     1.011,
+     1.151,
+     1.5,
+     1.762,
+     1.989,
+     2.046,
+     2.109
+    ],
+    "stated_observed_max": [
+     "10060",
+     "10080",
+     "20155",
+     "20181",
+     "30276",
+     "30322",
+     "30357"
+    ],
+    "stated_parameter": "number of tiers x units",
+    "stated_strictly_rising": true
+   },
+   "no_unique_answer": {
+    "items": 0,
+    "of": 10500,
+    "share": 0.0
+   },
+   "repaired_in_fix4": false,
+   "rules_pooled": {
+    "largest_counted": [
+     -0.0048,
+     "a3:all_at_first_rate",
+     3
+    ],
+    "largest_new_fresh_only": [
+     -0.0035,
+     "new:one_op_two_numbers",
+     4
+    ],
+    "largest_not_counted": null,
+    "per_level_counted": [
+     -0.003,
+     -0.0013,
+     -0.0008,
+     -0.0048,
+     -0.0048,
+     -0.0039,
+     -0.0029
+    ],
+    "verdict_at_0.15": "STAYS",
+    "would_drop_if_not_counted_counted": false,
+    "would_drop_on_new": false
+   }
+  },
+  "M1.tip_split_r3": {
+   "capacity": {
+    "as_written_fail_levels": {
+     "a4key/cluster_demand_G_minus_1_per_lineage": [
+      0,
+      1,
+      2,
+      3
+     ],
+     "a4key/cluster_demand_G_per_lineage": [
+      0,
+      1,
+      2
+     ],
+     "a4key/own_part_count": [],
+     "a4key/own_part_count_minus_1": [
+      0
+     ],
+     "a4key/smaller_part_decides": [
+      0
+     ],
+     "text/cluster_demand_G_minus_1_per_lineage": [
+      0,
+      1,
+      2,
+      3
+     ],
+     "text/cluster_demand_G_per_lineage": [
+      0,
+      1,
+      2
+     ],
+     "text/own_part_count": [],
+     "text/own_part_count_minus_1": [
+      0
+     ],
+     "text/smaller_part_decides": [
+      0
+     ]
+    },
+    "hypothetical_cluster_builder_fails": {
+     "a4key/G=7": {
+      "equal_share": [
+       0,
+       1,
+       2
+      ]
+     },
+     "a4key/G=8": {
+      "equal_share": [
+       0,
+       1
+      ]
+     },
+     "text/G=7": {},
+     "text/G=8": {}
+    },
+    "n_eff_a4key": [
+     17617,
+     22288,
+     29076,
+     34823,
+     42356,
+     47377,
+     56723
+    ],
+    "n_eff_struct": [
+     17617,
+     22288,
+     29076,
+     34823,
+     42356,
+     47377,
+     56723
+    ],
+    "n_eff_text": [
+     17617,
+     22288,
+     29076,
+     34823,
+     42356,
+     47377,
+     56723
+    ],
+    "part": "B"
+   },
+   "cluster": "S3_multiplicative_chain",
+   "keys": {
+    "items": 10500,
+    "mismatches": 0,
+    "seeds": [
+     2611251,
+     2611257
+    ],
+    "solver_errors": 0
+   },
+   "levels": {
+    "adjacent_pairs_features_differing": [
+     2,
+     2,
+     2,
+     2,
+     2,
+     2
+    ],
+    "identical_level_pairs": [],
+    "mean_log10_answer": [
+     1.732,
+     1.777,
+     1.819,
+     1.825,
+     1.876,
+     1.865,
+     1.906
+    ],
+    "stated_observed_max": [
+     "400",
+     "500",
+     "600",
+     "700",
+     "800",
+     "900",
+     "1000"
+    ],
+    "stated_parameter": "bill (400 + 100L)",
+    "stated_strictly_rising": true
+   },
+   "no_unique_answer": {
+    "items": 0,
+    "of": 10500,
+    "share": 0.0
+   },
+   "repaired_in_fix4": false,
+   "rules_pooled": {
+    "largest_counted": [
+     -0.0012,
+     "a4:tip_only_per_person",
+     0
+    ],
+    "largest_new_fresh_only": [
+     0.003,
+     "new:one_op_two_numbers",
+     5
+    ],
+    "largest_not_counted": null,
+    "per_level_counted": [
+     -0.0012,
+     -0.0005,
+     -0.001,
+     -0.0002,
+     -0.0004,
+     -0.0005,
+     -0.0003
+    ],
+    "verdict_at_0.15": "STAYS",
+    "would_drop_if_not_counted_counted": false,
+    "would_drop_on_new": false
+   }
+  }
+ },
+ "not_counted_rule_judgements": {
+  "consecutive": "im:mean_plus_step: the procedure for 3 numbers (L0-1, +0.49/+0.50); at L2-3 (4 numbers) a wrong rule right by round-half-even coincidence, +0.12/+0.13 (under 0.15); 0 at L4-6. Agree: not a shortcut.",
+  "division_counting": "k - (N mod k): the procedure without the exact-fit case; 96-97 % right within the bus items. Agree: not a shortcut.",
+  "finite_differences": "next_term_when_asked_later: one extension of the difference table, 100 % within m+1 asks at L0-4 (degree 2); 0 % at L5-6 (degree 3). Agree: the procedure.",
+  "gcd_lcm": "product_over_gcd_of_all (k = 2): the textbook lcm, agree. The k >= 3 false general rules are exact on 100 % of items at L3-6 (+0.47 to +0.49 pooled): not cheaper than the procedure, but a construct-validity issue left unrepaired; PENDING LEAD REVIEW.",
+  "prime_factors": "largest_le_sqrt: needs trial division to sqrt(n); 87-99 % within the 'largest' ask, rising with level (the large-cofactor case almost never occurs). Agree: procedure; construct note.",
+  "ratio_share": "largest/smallest share: a person guess plus the full procedure; observed P(asked = largest-part holder) equals the uniform expectation (L0 0.525 vs 0.531, L6 0.285 vs 0.282). Agree: not a shortcut. My NEW first/last-named rules are the same class (+0.53 at L0-1)."
+ },
+ "not_verified": [
+  "exact support (only sampled n_eff and Chao1)",
+  "model behaviour of any kind",
+  "difficulty for a reader across levels",
+  "the M0 test suite (not run by me)",
+  "the cross-evaluation map",
+  "fixture hashes"
+ ],
+ "rule_verdict": {
+  "drops": [],
+  "stays": [
+   "M1.ages_r3",
+   "M1.arithmetic_series_r3",
+   "M1.average_missing_r4",
+   "M1.change_ways_r3",
+   "M1.clock_duration_r4",
+   "M1.consecutive_r3",
+   "M1.crt_congruence_r3",
+   "M1.division_counting_r3",
+   "M1.finite_differences_r4",
+   "M1.fraction_remainder_r3",
+   "M1.gcd_lcm_r4",
+   "M1.grid_perimeter_r3",
+   "M1.inclusion_exclusion_r3",
+   "M1.last_digit_power_r3",
+   "M1.linear_equation_r3",
+   "M1.median_list_r3",
+   "M1.mixture_r4",
+   "M1.painted_cube_r3",
+   "M1.percent_change_r3",
+   "M1.pipes_work_r3",
+   "M1.prime_factors_r3",
+   "M1.quadratic_area_r3",
+   "M1.ratio_share_r3",
+   "M1.rectangle_r3",
+   "M1.recurrence_iterate_r3",
+   "M1.shopping_r3",
+   "M1.speed_distance_r3",
+   "M1.tiered_pricing",
+   "M1.tip_split_r3"
+  ]
+ },
+ "title": "M0-M1 final independent re-measurement after fix 4 (auditor: arbor-auditor, Claude Opus 5.5). Not Astra validation, not human approval, not a registration."
+}
