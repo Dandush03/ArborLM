@@ -1,0 +1,13 @@
+crt noncoprime 0 allzero 0
+fd ask<=len 0 len-degree [(5, 2, 1), (5, 2, 2), (6, 2, 1), (6, 2, 2), (7, 3, 1), (7, 3, 2)]
+change target0 0 answers0 0
+div empty_seats 147 ans0 0
+div pallets 133 ans0 0
+pallets boxes<crate 0
+consec neg answers 0 steps [1, 2]
+avg answer 0 or =max []
+avg mean formats ['2', '25', '4', '5', '6', '75', '8', 'int']
+ages younger ask 143 k [2, 3, 4, 5, 6, 7, 8, 9]
+clock min gap 5
+frac a,b ranges [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+frac words ['eighth', 'eleventh', 'fifth', 'half', 'ninth', 'quarter', 'seventh', 'sixth', 'tenth', 'third', 'twelfth']

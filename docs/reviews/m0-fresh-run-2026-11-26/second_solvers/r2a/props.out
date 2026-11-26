@@ -1,0 +1,9 @@
+bst {'found': 144, 'ask_sum': 131, 'distinct_sorted': 280, 'notfound': 136, 'ask_values': 149}
+caesar {'kmin': 1, 'kmax': 25}
+ca {'steps2': 80, 'full_table': 280, 'steps3': 80, 'steps4': 80, 'steps5': 40}
+mst {'dup_pairs': 0, 'self_loop': 0, 'tied_costs_items': 280, 'neg': 0}
+cd {'t_in_list_and_div': 280, 'neg': 0, 'ans0': 6, 'dups': 248}
+crt {'noncoprime': 0, 'rem_ge_mod': 0, 'all_zero': 1, 'ans_eq_lcm': 1} max answer 356010
+dict {'L4_n9': 29, 'L4_n10': 20, 'L4_n11': 18, 'L4_n12': 13, 'L5_n9': 29, 'L5_n7': 20, 'L5_n8': 20, 'L5_n10': 11, 'L6_n8': 16, 'L6_n10': 28, 'L6_n9': 26, 'L6_n11': 10, 'L7_n9': 16, 'L7_n11': 12, 'L7_n10': 12}
+expr {'ranked': 134, 'neg_ans': 98, 'nested_parens': 0, 'paren_first_char_minus': 0, 'left_to_right': 146}
+fb {'base2': 49, 'leading0': 0, 'base3': 43, 'base4': 48, 'base8': 35, 'base5': 37, 'base16': 23, 'base7': 18, 'base9': 27}

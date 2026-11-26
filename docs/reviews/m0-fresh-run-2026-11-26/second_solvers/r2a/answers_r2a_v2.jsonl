@@ -1,0 +1,2520 @@
+{"id": "R2.binary_search_trace", "level": 0, "index": 0, "answer": "121"}
+{"id": "R2.binary_search_trace", "level": 0, "index": 1, "answer": "84"}
+{"id": "R2.binary_search_trace", "level": 0, "index": 2, "answer": "25"}
+{"id": "R2.binary_search_trace", "level": 0, "index": 3, "answer": "29, 50, 34, 43"}
+{"id": "R2.binary_search_trace", "level": 0, "index": 4, "answer": "131"}
+{"id": "R2.binary_search_trace", "level": 0, "index": 5, "answer": "105"}
+{"id": "R2.binary_search_trace", "level": 0, "index": 6, "answer": "20"}
+{"id": "R2.binary_search_trace", "level": 0, "index": 7, "answer": "42, 15, 21"}
+{"id": "R2.binary_search_trace", "level": 0, "index": 8, "answer": "31, 17, 25, 18"}
+{"id": "R2.binary_search_trace", "level": 0, "index": 9, "answer": "44, 19, 6, 8"}
+{"id": "R2.binary_search_trace", "level": 0, "index": 10, "answer": "29, 17, 10, 1"}
+{"id": "R2.binary_search_trace", "level": 0, "index": 11, "answer": "34, 14, 8, 10, 12"}
+{"id": "R2.binary_search_trace", "level": 0, "index": 12, "answer": "65"}
+{"id": "R2.binary_search_trace", "level": 0, "index": 13, "answer": "22"}
+{"id": "R2.binary_search_trace", "level": 0, "index": 14, "answer": "285"}
+{"id": "R2.binary_search_trace", "level": 0, "index": 15, "answer": "40, 62, 71, 73"}
+{"id": "R2.binary_search_trace", "level": 0, "index": 16, "answer": "38, 17, 10"}
+{"id": "R2.binary_search_trace", "level": 0, "index": 17, "answer": "140"}
+{"id": "R2.binary_search_trace", "level": 0, "index": 18, "answer": "61"}
+{"id": "R2.binary_search_trace", "level": 0, "index": 19, "answer": "173"}
+{"id": "R2.binary_search_trace", "level": 0, "index": 20, "answer": "38"}
+{"id": "R2.binary_search_trace", "level": 0, "index": 21, "answer": "36, 55, 45, 50, 52"}
+{"id": "R2.binary_search_trace", "level": 0, "index": 22, "answer": "68"}
+{"id": "R2.binary_search_trace", "level": 0, "index": 23, "answer": "235"}
+{"id": "R2.binary_search_trace", "level": 0, "index": 24, "answer": "282"}
+{"id": "R2.binary_search_trace", "level": 0, "index": 25, "answer": "32, 20, 8, 5"}
+{"id": "R2.binary_search_trace", "level": 0, "index": 26, "answer": "47, 22, 30, 41, 42"}
+{"id": "R2.binary_search_trace", "level": 0, "index": 27, "answer": "37, 19, 23, 28, 29"}
+{"id": "R2.binary_search_trace", "level": 0, "index": 28, "answer": "30, 51, 37"}
+{"id": "R2.binary_search_trace", "level": 0, "index": 29, "answer": "34, 50, 62, 60"}
+{"id": "R2.binary_search_trace", "level": 0, "index": 30, "answer": "63"}
+{"id": "R2.binary_search_trace", "level": 0, "index": 31, "answer": "44, 64, 53, 54, 56"}
+{"id": "R2.binary_search_trace", "level": 0, "index": 32, "answer": "26, 6, 15"}
+{"id": "R2.binary_search_trace", "level": 0, "index": 33, "answer": "109"}
+{"id": "R2.binary_search_trace", "level": 0, "index": 34, "answer": "68"}
+{"id": "R2.binary_search_trace", "level": 0, "index": 35, "answer": "22, 40, 58, 67, 71"}
+{"id": "R2.binary_search_trace", "level": 0, "index": 36, "answer": "39, 53, 55, 64, 69"}
+{"id": "R2.binary_search_trace", "level": 0, "index": 37, "answer": "104"}
+{"id": "R2.binary_search_trace", "level": 0, "index": 38, "answer": "101"}
+{"id": "R2.binary_search_trace", "level": 0, "index": 39, "answer": "18, 36, 62, 40"}
+{"id": "R2.binary_search_trace", "level": 1, "index": 0, "answer": "39, 8, 22, 30, 31"}
+{"id": "R2.binary_search_trace", "level": 1, "index": 1, "answer": "33, 14, 21, 27"}
+{"id": "R2.binary_search_trace", "level": 1, "index": 2, "answer": "215"}
+{"id": "R2.binary_search_trace", "level": 1, "index": 3, "answer": "315"}
+{"id": "R2.binary_search_trace", "level": 1, "index": 4, "answer": "164"}
+{"id": "R2.binary_search_trace", "level": 1, "index": 5, "answer": "85"}
+{"id": "R2.binary_search_trace", "level": 1, "index": 6, "answer": "180"}
+{"id": "R2.binary_search_trace", "level": 1, "index": 7, "answer": "35"}
+{"id": "R2.binary_search_trace", "level": 1, "index": 8, "answer": "242"}
+{"id": "R2.binary_search_trace", "level": 1, "index": 9, "answer": "228"}
+{"id": "R2.binary_search_trace", "level": 1, "index": 10, "answer": "208"}
+{"id": "R2.binary_search_trace", "level": 1, "index": 11, "answer": "39, 17"}
+{"id": "R2.binary_search_trace", "level": 1, "index": 12, "answer": "34, 57, 71, 65"}
+{"id": "R2.binary_search_trace", "level": 1, "index": 13, "answer": "27, 16, 19, 21, 25"}
+{"id": "R2.binary_search_trace", "level": 1, "index": 14, "answer": "41, 27, 12, 17"}
+{"id": "R2.binary_search_trace", "level": 1, "index": 15, "answer": "80"}
+{"id": "R2.binary_search_trace", "level": 1, "index": 16, "answer": "20, 10, 4, 5"}
+{"id": "R2.binary_search_trace", "level": 1, "index": 17, "answer": "47, 65, 55, 60, 64"}
+{"id": "R2.binary_search_trace", "level": 1, "index": 18, "answer": "321"}
+{"id": "R2.binary_search_trace", "level": 1, "index": 19, "answer": "329"}
+{"id": "R2.binary_search_trace", "level": 1, "index": 20, "answer": "305"}
+{"id": "R2.binary_search_trace", "level": 1, "index": 21, "answer": "39, 15, 7, 11, 14"}
+{"id": "R2.binary_search_trace", "level": 1, "index": 22, "answer": "44"}
+{"id": "R2.binary_search_trace", "level": 1, "index": 23, "answer": "193"}
+{"id": "R2.binary_search_trace", "level": 1, "index": 24, "answer": "52, 23, 6, 2"}
+{"id": "R2.binary_search_trace", "level": 1, "index": 25, "answer": "120"}
+{"id": "R2.binary_search_trace", "level": 1, "index": 26, "answer": "99"}
+{"id": "R2.binary_search_trace", "level": 1, "index": 27, "answer": "43, 27, 13, 20"}
+{"id": "R2.binary_search_trace", "level": 1, "index": 28, "answer": "95"}
+{"id": "R2.binary_search_trace", "level": 1, "index": 29, "answer": "259"}
+{"id": "R2.binary_search_trace", "level": 1, "index": 30, "answer": "248"}
+{"id": "R2.binary_search_trace", "level": 1, "index": 31, "answer": "40, 20, 28, 36"}
+{"id": "R2.binary_search_trace", "level": 1, "index": 32, "answer": "34, 69, 49"}
+{"id": "R2.binary_search_trace", "level": 1, "index": 33, "answer": "51, 77, 74, 57, 61"}
+{"id": "R2.binary_search_trace", "level": 1, "index": 34, "answer": "86"}
+{"id": "R2.binary_search_trace", "level": 1, "index": 35, "answer": "37, 13, 23, 24, 35"}
+{"id": "R2.binary_search_trace", "level": 1, "index": 36, "answer": "86"}
+{"id": "R2.binary_search_trace", "level": 1, "index": 37, "answer": "42, 73, 54, 66"}
+{"id": "R2.binary_search_trace", "level": 1, "index": 38, "answer": "47, 80, 71, 62, 64"}
+{"id": "R2.binary_search_trace", "level": 1, "index": 39, "answer": "58, 72, 61, 68"}
+{"id": "R2.binary_search_trace", "level": 2, "index": 0, "answer": "161"}
+{"id": "R2.binary_search_trace", "level": 2, "index": 1, "answer": "50, 84, 65, 52, 61"}
+{"id": "R2.binary_search_trace", "level": 2, "index": 2, "answer": "97"}
+{"id": "R2.binary_search_trace", "level": 2, "index": 3, "answer": "79"}
+{"id": "R2.binary_search_trace", "level": 2, "index": 4, "answer": "246"}
+{"id": "R2.binary_search_trace", "level": 2, "index": 5, "answer": "384"}
+{"id": "R2.binary_search_trace", "level": 2, "index": 6, "answer": "144"}
+{"id": "R2.binary_search_trace", "level": 2, "index": 7, "answer": "44, 69, 60, 65, 67"}
+{"id": "R2.binary_search_trace", "level": 2, "index": 8, "answer": "46, 16, 22, 19, 20"}
+{"id": "R2.binary_search_trace", "level": 2, "index": 9, "answer": "48, 20, 15, 17, 18"}
+{"id": "R2.binary_search_trace", "level": 2, "index": 10, "answer": "119"}
+{"id": "R2.binary_search_trace", "level": 2, "index": 11, "answer": "38, 78, 86, 96, 98"}
+{"id": "R2.binary_search_trace", "level": 2, "index": 12, "answer": "46, 20, 32, 28"}
+{"id": "R2.binary_search_trace", "level": 2, "index": 13, "answer": "55, 71, 67, 56, 58"}
+{"id": "R2.binary_search_trace", "level": 2, "index": 14, "answer": "51"}
+{"id": "R2.binary_search_trace", "level": 2, "index": 15, "answer": "54, 22, 35, 37, 49"}
+{"id": "R2.binary_search_trace", "level": 2, "index": 16, "answer": "42, 54, 79, 89, 94"}
+{"id": "R2.binary_search_trace", "level": 2, "index": 17, "answer": "53, 76"}
+{"id": "R2.binary_search_trace", "level": 2, "index": 18, "answer": "34, 22, 27, 32, 33"}
+{"id": "R2.binary_search_trace", "level": 2, "index": 19, "answer": "341"}
+{"id": "R2.binary_search_trace", "level": 2, "index": 20, "answer": "343"}
+{"id": "R2.binary_search_trace", "level": 2, "index": 21, "answer": "155"}
+{"id": "R2.binary_search_trace", "level": 2, "index": 22, "answer": "104"}
+{"id": "R2.binary_search_trace", "level": 2, "index": 23, "answer": "58, 79, 93, 88"}
+{"id": "R2.binary_search_trace", "level": 2, "index": 24, "answer": "44, 62, 76, 82, 77"}
+{"id": "R2.binary_search_trace", "level": 2, "index": 25, "answer": "241"}
+{"id": "R2.binary_search_trace", "level": 2, "index": 26, "answer": "44, 20, 34, 23, 30"}
+{"id": "R2.binary_search_trace", "level": 2, "index": 27, "answer": "365"}
+{"id": "R2.binary_search_trace", "level": 2, "index": 28, "answer": "52, 79, 87, 95"}
+{"id": "R2.binary_search_trace", "level": 2, "index": 29, "answer": "51, 83, 69, 80, 77"}
+{"id": "R2.binary_search_trace", "level": 2, "index": 30, "answer": "203"}
+{"id": "R2.binary_search_trace", "level": 2, "index": 31, "answer": "285"}
+{"id": "R2.binary_search_trace", "level": 2, "index": 32, "answer": "210"}
+{"id": "R2.binary_search_trace", "level": 2, "index": 33, "answer": "40, 68"}
+{"id": "R2.binary_search_trace", "level": 2, "index": 34, "answer": "305"}
+{"id": "R2.binary_search_trace", "level": 2, "index": 35, "answer": "64, 96, 101, 98"}
+{"id": "R2.binary_search_trace", "level": 2, "index": 36, "answer": "306"}
+{"id": "R2.binary_search_trace", "level": 2, "index": 37, "answer": "168"}
+{"id": "R2.binary_search_trace", "level": 2, "index": 38, "answer": "407"}
+{"id": "R2.binary_search_trace", "level": 2, "index": 39, "answer": "50, 25, 17, 2, 15"}
+{"id": "R2.binary_search_trace", "level": 3, "index": 0, "answer": "82"}
+{"id": "R2.binary_search_trace", "level": 3, "index": 1, "answer": "59, 36, 52, 56, 55"}
+{"id": "R2.binary_search_trace", "level": 3, "index": 2, "answer": "51, 87, 71, 68, 57"}
+{"id": "R2.binary_search_trace", "level": 3, "index": 3, "answer": "61, 45, 17, 12"}
+{"id": "R2.binary_search_trace", "level": 3, "index": 4, "answer": "239"}
+{"id": "R2.binary_search_trace", "level": 3, "index": 5, "answer": "49, 23, 35, 44, 47"}
+{"id": "R2.binary_search_trace", "level": 3, "index": 6, "answer": "377"}
+{"id": "R2.binary_search_trace", "level": 3, "index": 7, "answer": "158"}
+{"id": "R2.binary_search_trace", "level": 3, "index": 8, "answer": "46, 22, 10, 8, 9"}
+{"id": "R2.binary_search_trace", "level": 3, "index": 9, "answer": "302"}
+{"id": "R2.binary_search_trace", "level": 3, "index": 10, "answer": "69, 32, 17, 4, 15"}
+{"id": "R2.binary_search_trace", "level": 3, "index": 11, "answer": "421"}
+{"id": "R2.binary_search_trace", "level": 3, "index": 12, "answer": "161"}
+{"id": "R2.binary_search_trace", "level": 3, "index": 13, "answer": "51, 77, 55, 52"}
+{"id": "R2.binary_search_trace", "level": 3, "index": 14, "answer": "443"}
+{"id": "R2.binary_search_trace", "level": 3, "index": 15, "answer": "63, 27, 50, 57"}
+{"id": "R2.binary_search_trace", "level": 3, "index": 16, "answer": "54, 28, 14, 23, 27"}
+{"id": "R2.binary_search_trace", "level": 3, "index": 17, "answer": "54, 84"}
+{"id": "R2.binary_search_trace", "level": 3, "index": 18, "answer": "57"}
+{"id": "R2.binary_search_trace", "level": 3, "index": 19, "answer": "454"}
+{"id": "R2.binary_search_trace", "level": 3, "index": 20, "answer": "427"}
+{"id": "R2.binary_search_trace", "level": 3, "index": 21, "answer": "84"}
+{"id": "R2.binary_search_trace", "level": 3, "index": 22, "answer": "70, 89, 114, 97, 110"}
+{"id": "R2.binary_search_trace", "level": 3, "index": 23, "answer": "468"}
+{"id": "R2.binary_search_trace", "level": 3, "index": 24, "answer": "58, 80, 98, 109, 100"}
+{"id": "R2.binary_search_trace", "level": 3, "index": 25, "answer": "201"}
+{"id": "R2.binary_search_trace", "level": 3, "index": 26, "answer": "56, 85, 69, 60"}
+{"id": "R2.binary_search_trace", "level": 3, "index": 27, "answer": "59, 34, 15, 2, 6"}
+{"id": "R2.binary_search_trace", "level": 3, "index": 28, "answer": "100"}
+{"id": "R2.binary_search_trace", "level": 3, "index": 29, "answer": "56, 75, 64, 57"}
+{"id": "R2.binary_search_trace", "level": 3, "index": 30, "answer": "44, 24, 11, 19, 16"}
+{"id": "R2.binary_search_trace", "level": 3, "index": 31, "answer": "59, 28, 46, 33, 32"}
+{"id": "R2.binary_search_trace", "level": 3, "index": 32, "answer": "66, 85, 98, 103, 108"}
+{"id": "R2.binary_search_trace", "level": 3, "index": 33, "answer": "323"}
+{"id": "R2.binary_search_trace", "level": 3, "index": 34, "answer": "209"}
+{"id": "R2.binary_search_trace", "level": 3, "index": 35, "answer": "106"}
+{"id": "R2.binary_search_trace", "level": 3, "index": 36, "answer": "51, 30, 18, 7"}
+{"id": "R2.binary_search_trace", "level": 3, "index": 37, "answer": "54, 17, 35, 44, 49"}
+{"id": "R2.binary_search_trace", "level": 3, "index": 38, "answer": "58, 22, 36, 34, 26"}
+{"id": "R2.binary_search_trace", "level": 3, "index": 39, "answer": "89"}
+{"id": "R2.binary_search_trace", "level": 4, "index": 0, "answer": "75, 31, 13, 25, 27"}
+{"id": "R2.binary_search_trace", "level": 4, "index": 1, "answer": "59, 99, 111, 105, 110"}
+{"id": "R2.binary_search_trace", "level": 4, "index": 2, "answer": "56, 23, 7, 19, 21"}
+{"id": "R2.binary_search_trace", "level": 4, "index": 3, "answer": "64, 111, 127, 116, 113"}
+{"id": "R2.binary_search_trace", "level": 4, "index": 4, "answer": "64, 98, 109, 115, 117, 130"}
+{"id": "R2.binary_search_trace", "level": 4, "index": 5, "answer": "53, 79, 70, 68, 55"}
+{"id": "R2.binary_search_trace", "level": 4, "index": 6, "answer": "338"}
+{"id": "R2.binary_search_trace", "level": 4, "index": 7, "answer": "96"}
+{"id": "R2.binary_search_trace", "level": 4, "index": 8, "answer": "343"}
+{"id": "R2.binary_search_trace", "level": 4, "index": 9, "answer": "48, 90, 76, 83, 87"}
+{"id": "R2.binary_search_trace", "level": 4, "index": 10, "answer": "186"}
+{"id": "R2.binary_search_trace", "level": 4, "index": 11, "answer": "75, 34, 14, 26"}
+{"id": "R2.binary_search_trace", "level": 4, "index": 12, "answer": "65, 101, 118, 109, 106"}
+{"id": "R2.binary_search_trace", "level": 4, "index": 13, "answer": "67, 32, 43, 55, 44"}
+{"id": "R2.binary_search_trace", "level": 4, "index": 14, "answer": "71, 104, 83, 99, 85"}
+{"id": "R2.binary_search_trace", "level": 4, "index": 15, "answer": "513"}
+{"id": "R2.binary_search_trace", "level": 4, "index": 16, "answer": "83, 41, 22, 12, 20"}
+{"id": "R2.binary_search_trace", "level": 4, "index": 17, "answer": "88, 61, 72, 77"}
+{"id": "R2.binary_search_trace", "level": 4, "index": 18, "answer": "79, 103, 111, 116, 126, 127"}
+{"id": "R2.binary_search_trace", "level": 4, "index": 19, "answer": "58, 26, 41, 46, 57"}
+{"id": "R2.binary_search_trace", "level": 4, "index": 20, "answer": "68, 43"}
+{"id": "R2.binary_search_trace", "level": 4, "index": 21, "answer": "634"}
+{"id": "R2.binary_search_trace", "level": 4, "index": 22, "answer": "65, 29, 10, 6, 2"}
+{"id": "R2.binary_search_trace", "level": 4, "index": 23, "answer": "38, 70, 84, 115, 106"}
+{"id": "R2.binary_search_trace", "level": 4, "index": 24, "answer": "533"}
+{"id": "R2.binary_search_trace", "level": 4, "index": 25, "answer": "76, 30, 53, 39, 37"}
+{"id": "R2.binary_search_trace", "level": 4, "index": 26, "answer": "74, 106, 121, 125, 124"}
+{"id": "R2.binary_search_trace", "level": 4, "index": 27, "answer": "484"}
+{"id": "R2.binary_search_trace", "level": 4, "index": 28, "answer": "74, 42, 53"}
+{"id": "R2.binary_search_trace", "level": 4, "index": 29, "answer": "192"}
+{"id": "R2.binary_search_trace", "level": 4, "index": 30, "answer": "513"}
+{"id": "R2.binary_search_trace", "level": 4, "index": 31, "answer": "144"}
+{"id": "R2.binary_search_trace", "level": 4, "index": 32, "answer": "64, 31, 45, 40, 37"}
+{"id": "R2.binary_search_trace", "level": 4, "index": 33, "answer": "499"}
+{"id": "R2.binary_search_trace", "level": 4, "index": 34, "answer": "188"}
+{"id": "R2.binary_search_trace", "level": 4, "index": 35, "answer": "72, 108, 88"}
+{"id": "R2.binary_search_trace", "level": 4, "index": 36, "answer": "64, 32, 15, 26, 28"}
+{"id": "R2.binary_search_trace", "level": 4, "index": 37, "answer": "335"}
+{"id": "R2.binary_search_trace", "level": 4, "index": 38, "answer": "509"}
+{"id": "R2.binary_search_trace", "level": 4, "index": 39, "answer": "82, 111, 97"}
+{"id": "R2.binary_search_trace", "level": 5, "index": 0, "answer": "489"}
+{"id": "R2.binary_search_trace", "level": 5, "index": 1, "answer": "69, 44, 54, 63, 60"}
+{"id": "R2.binary_search_trace", "level": 5, "index": 2, "answer": "220"}
+{"id": "R2.binary_search_trace", "level": 5, "index": 3, "answer": "524"}
+{"id": "R2.binary_search_trace", "level": 5, "index": 4, "answer": "61, 37, 12, 26, 29, 33"}
+{"id": "R2.binary_search_trace", "level": 5, "index": 5, "answer": "60, 86, 114, 98, 108, 113"}
+{"id": "R2.binary_search_trace", "level": 5, "index": 6, "answer": "80, 45, 17"}
+{"id": "R2.binary_search_trace", "level": 5, "index": 7, "answer": "262"}
+{"id": "R2.binary_search_trace", "level": 5, "index": 8, "answer": "86, 113, 95, 101, 97"}
+{"id": "R2.binary_search_trace", "level": 5, "index": 9, "answer": "477"}
+{"id": "R2.binary_search_trace", "level": 5, "index": 10, "answer": "59, 30, 41, 33"}
+{"id": "R2.binary_search_trace", "level": 5, "index": 11, "answer": "742"}
+{"id": "R2.binary_search_trace", "level": 5, "index": 12, "answer": "324"}
+{"id": "R2.binary_search_trace", "level": 5, "index": 13, "answer": "122"}
+{"id": "R2.binary_search_trace", "level": 5, "index": 14, "answer": "72, 23, 11, 5, 2"}
+{"id": "R2.binary_search_trace", "level": 5, "index": 15, "answer": "206"}
+{"id": "R2.binary_search_trace", "level": 5, "index": 16, "answer": "288"}
+{"id": "R2.binary_search_trace", "level": 5, "index": 17, "answer": "59, 32, 16, 19"}
+{"id": "R2.binary_search_trace", "level": 5, "index": 18, "answer": "99, 126, 140, 132"}
+{"id": "R2.binary_search_trace", "level": 5, "index": 19, "answer": "88, 135, 113, 122, 114"}
+{"id": "R2.binary_search_trace", "level": 5, "index": 20, "answer": "204"}
+{"id": "R2.binary_search_trace", "level": 5, "index": 21, "answer": "84, 115, 132"}
+{"id": "R2.binary_search_trace", "level": 5, "index": 22, "answer": "510"}
+{"id": "R2.binary_search_trace", "level": 5, "index": 23, "answer": "48, 97, 133, 103, 111, 126"}
+{"id": "R2.binary_search_trace", "level": 5, "index": 24, "answer": "107"}
+{"id": "R2.binary_search_trace", "level": 5, "index": 25, "answer": "65, 110, 88, 99, 101"}
+{"id": "R2.binary_search_trace", "level": 5, "index": 26, "answer": "78"}
+{"id": "R2.binary_search_trace", "level": 5, "index": 27, "answer": "676"}
+{"id": "R2.binary_search_trace", "level": 5, "index": 28, "answer": "351"}
+{"id": "R2.binary_search_trace", "level": 5, "index": 29, "answer": "73, 36, 22, 14, 21"}
+{"id": "R2.binary_search_trace", "level": 5, "index": 30, "answer": "269"}
+{"id": "R2.binary_search_trace", "level": 5, "index": 31, "answer": "63, 34, 14, 20, 15"}
+{"id": "R2.binary_search_trace", "level": 5, "index": 32, "answer": "650"}
+{"id": "R2.binary_search_trace", "level": 5, "index": 33, "answer": "81, 32, 55, 45, 46"}
+{"id": "R2.binary_search_trace", "level": 5, "index": 34, "answer": "83, 27, 44, 38, 39, 42"}
+{"id": "R2.binary_search_trace", "level": 5, "index": 35, "answer": "184"}
+{"id": "R2.binary_search_trace", "level": 5, "index": 36, "answer": "311"}
+{"id": "R2.binary_search_trace", "level": 5, "index": 37, "answer": "295"}
+{"id": "R2.binary_search_trace", "level": 5, "index": 38, "answer": "75, 52, 60, 55, 54"}
+{"id": "R2.binary_search_trace", "level": 5, "index": 39, "answer": "80, 42, 23, 5, 8, 15"}
+{"id": "R2.binary_search_trace", "level": 6, "index": 0, "answer": "624"}
+{"id": "R2.binary_search_trace", "level": 6, "index": 1, "answer": "554"}
+{"id": "R2.binary_search_trace", "level": 6, "index": 2, "answer": "74, 128, 152, 157, 153, 155"}
+{"id": "R2.binary_search_trace", "level": 6, "index": 3, "answer": "90, 121, 137"}
+{"id": "R2.binary_search_trace", "level": 6, "index": 4, "answer": "83, 116, 98, 90, 91"}
+{"id": "R2.binary_search_trace", "level": 6, "index": 5, "answer": "78, 26, 46, 61, 53"}
+{"id": "R2.binary_search_trace", "level": 6, "index": 6, "answer": "81, 126, 143, 147, 153"}
+{"id": "R2.binary_search_trace", "level": 6, "index": 7, "answer": "68, 115, 137, 130, 127"}
+{"id": "R2.binary_search_trace", "level": 6, "index": 8, "answer": "164"}
+{"id": "R2.binary_search_trace", "level": 6, "index": 9, "answer": "518"}
+{"id": "R2.binary_search_trace", "level": 6, "index": 10, "answer": "433"}
+{"id": "R2.binary_search_trace", "level": 6, "index": 11, "answer": "90, 34, 17, 23"}
+{"id": "R2.binary_search_trace", "level": 6, "index": 12, "answer": "118, 135, 150, 167, 157, 165"}
+{"id": "R2.binary_search_trace", "level": 6, "index": 13, "answer": "74, 111"}
+{"id": "R2.binary_search_trace", "level": 6, "index": 14, "answer": "85, 132, 141, 151, 156, 159"}
+{"id": "R2.binary_search_trace", "level": 6, "index": 15, "answer": "92, 52, 31, 4, 2"}
+{"id": "R2.binary_search_trace", "level": 6, "index": 16, "answer": "84"}
+{"id": "R2.binary_search_trace", "level": 6, "index": 17, "answer": "173"}
+{"id": "R2.binary_search_trace", "level": 6, "index": 18, "answer": "91, 33, 18, 4, 1"}
+{"id": "R2.binary_search_trace", "level": 6, "index": 19, "answer": "166"}
+{"id": "R2.binary_search_trace", "level": 6, "index": 20, "answer": "81, 114, 99, 108, 106"}
+{"id": "R2.binary_search_trace", "level": 6, "index": 21, "answer": "92, 36, 16, 24, 29"}
+{"id": "R2.binary_search_trace", "level": 6, "index": 22, "answer": "95, 28"}
+{"id": "R2.binary_search_trace", "level": 6, "index": 23, "answer": "81, 42, 57, 71, 59, 67"}
+{"id": "R2.binary_search_trace", "level": 6, "index": 24, "answer": "143"}
+{"id": "R2.binary_search_trace", "level": 6, "index": 25, "answer": "752"}
+{"id": "R2.binary_search_trace", "level": 6, "index": 26, "answer": "97, 50, 21, 9, 5"}
+{"id": "R2.binary_search_trace", "level": 6, "index": 27, "answer": "95"}
+{"id": "R2.binary_search_trace", "level": 6, "index": 28, "answer": "454"}
+{"id": "R2.binary_search_trace", "level": 6, "index": 29, "answer": "61, 93, 73, 70, 67"}
+{"id": "R2.binary_search_trace", "level": 6, "index": 30, "answer": "257"}
+{"id": "R2.binary_search_trace", "level": 6, "index": 31, "answer": "321"}
+{"id": "R2.binary_search_trace", "level": 6, "index": 32, "answer": "337"}
+{"id": "R2.binary_search_trace", "level": 6, "index": 33, "answer": "67, 121, 140, 161, 145"}
+{"id": "R2.binary_search_trace", "level": 6, "index": 34, "answer": "497"}
+{"id": "R2.binary_search_trace", "level": 6, "index": 35, "answer": "90, 120, 145, 134, 121"}
+{"id": "R2.binary_search_trace", "level": 6, "index": 36, "answer": "510"}
+{"id": "R2.binary_search_trace", "level": 6, "index": 37, "answer": "373"}
+{"id": "R2.binary_search_trace", "level": 6, "index": 38, "answer": "538"}
+{"id": "R2.binary_search_trace", "level": 6, "index": 39, "answer": "97, 40, 54, 78, 61"}
+{"id": "R2.caesar_shift", "level": 0, "index": 0, "answer": "wtotk"}
+{"id": "R2.caesar_shift", "level": 0, "index": 1, "answer": "rmkyl"}
+{"id": "R2.caesar_shift", "level": 0, "index": 2, "answer": "jhrzj"}
+{"id": "R2.caesar_shift", "level": 0, "index": 3, "answer": "ylqhn"}
+{"id": "R2.caesar_shift", "level": 0, "index": 4, "answer": "dsomr"}
+{"id": "R2.caesar_shift", "level": 0, "index": 5, "answer": "nqwqz"}
+{"id": "R2.caesar_shift", "level": 0, "index": 6, "answer": "gthdz"}
+{"id": "R2.caesar_shift", "level": 0, "index": 7, "answer": "pizer"}
+{"id": "R2.caesar_shift", "level": 0, "index": 8, "answer": "asfof"}
+{"id": "R2.caesar_shift", "level": 0, "index": 9, "answer": "zeoej"}
+{"id": "R2.caesar_shift", "level": 0, "index": 10, "answer": "jeowt"}
+{"id": "R2.caesar_shift", "level": 0, "index": 11, "answer": "njajo"}
+{"id": "R2.caesar_shift", "level": 0, "index": 12, "answer": "lqbiv"}
+{"id": "R2.caesar_shift", "level": 0, "index": 13, "answer": "jlifu"}
+{"id": "R2.caesar_shift", "level": 0, "index": 14, "answer": "nymcr"}
+{"id": "R2.caesar_shift", "level": 0, "index": 15, "answer": "cdztc"}
+{"id": "R2.caesar_shift", "level": 0, "index": 16, "answer": "vknoh"}
+{"id": "R2.caesar_shift", "level": 0, "index": 17, "answer": "qmqer"}
+{"id": "R2.caesar_shift", "level": 0, "index": 18, "answer": "wdfzm"}
+{"id": "R2.caesar_shift", "level": 0, "index": 19, "answer": "pojcy"}
+{"id": "R2.caesar_shift", "level": 0, "index": 20, "answer": "pqdun"}
+{"id": "R2.caesar_shift", "level": 0, "index": 21, "answer": "tgfkz"}
+{"id": "R2.caesar_shift", "level": 0, "index": 22, "answer": "rlkhe"}
+{"id": "R2.caesar_shift", "level": 0, "index": 23, "answer": "dvqfb"}
+{"id": "R2.caesar_shift", "level": 0, "index": 24, "answer": "owrkj"}
+{"id": "R2.caesar_shift", "level": 0, "index": 25, "answer": "cltvr"}
+{"id": "R2.caesar_shift", "level": 0, "index": 26, "answer": "hxzpm"}
+{"id": "R2.caesar_shift", "level": 0, "index": 27, "answer": "vmpmv"}
+{"id": "R2.caesar_shift", "level": 0, "index": 28, "answer": "mvmrb"}
+{"id": "R2.caesar_shift", "level": 0, "index": 29, "answer": "wxkxo"}
+{"id": "R2.caesar_shift", "level": 0, "index": 30, "answer": "efgtc"}
+{"id": "R2.caesar_shift", "level": 0, "index": 31, "answer": "chvru"}
+{"id": "R2.caesar_shift", "level": 0, "index": 32, "answer": "wpwjs"}
+{"id": "R2.caesar_shift", "level": 0, "index": 33, "answer": "ulkpr"}
+{"id": "R2.caesar_shift", "level": 0, "index": 34, "answer": "shkvy"}
+{"id": "R2.caesar_shift", "level": 0, "index": 35, "answer": "qvmvi"}
+{"id": "R2.caesar_shift", "level": 0, "index": 36, "answer": "bmzwf"}
+{"id": "R2.caesar_shift", "level": 0, "index": 37, "answer": "wjcrt"}
+{"id": "R2.caesar_shift", "level": 0, "index": 38, "answer": "cowsb"}
+{"id": "R2.caesar_shift", "level": 0, "index": 39, "answer": "fmoso"}
+{"id": "R2.caesar_shift", "level": 1, "index": 0, "answer": "pnrnp rfgjw"}
+{"id": "R2.caesar_shift", "level": 1, "index": 1, "answer": "rcjmv zgqyv"}
+{"id": "R2.caesar_shift", "level": 1, "index": 2, "answer": "pgkgi kcryl"}
+{"id": "R2.caesar_shift", "level": 1, "index": 3, "answer": "vahwt nanwn"}
+{"id": "R2.caesar_shift", "level": 1, "index": 4, "answer": "ugxkp bcukt"}
+{"id": "R2.caesar_shift", "level": 1, "index": 5, "answer": "ulphn qdnlu"}
+{"id": "R2.caesar_shift", "level": 1, "index": 6, "answer": "ieiuh hyaeh"}
+{"id": "R2.caesar_shift", "level": 1, "index": 7, "answer": "nkcsh dsnoh"}
+{"id": "R2.caesar_shift", "level": 1, "index": 8, "answer": "qktgd xkjgx"}
+{"id": "R2.caesar_shift", "level": 1, "index": 9, "answer": "tuqgq ygjgd"}
+{"id": "R2.caesar_shift", "level": 1, "index": 10, "answer": "vlyda clyrq"}
+{"id": "R2.caesar_shift", "level": 1, "index": 11, "answer": "imryi kmqci"}
+{"id": "R2.caesar_shift", "level": 1, "index": 12, "answer": "olwbh hlslk"}
+{"id": "R2.caesar_shift", "level": 1, "index": 13, "answer": "fulqz luemz"}
+{"id": "R2.caesar_shift", "level": 1, "index": 14, "answer": "txtja armxg"}
+{"id": "R2.caesar_shift", "level": 1, "index": 15, "answer": "pyzci zcrgp"}
+{"id": "R2.caesar_shift", "level": 1, "index": 16, "answer": "lqhua hecen"}
+{"id": "R2.caesar_shift", "level": 1, "index": 17, "answer": "efejy ublpl"}
+{"id": "R2.caesar_shift", "level": 1, "index": 18, "answer": "gxapm bxzpc"}
+{"id": "R2.caesar_shift", "level": 1, "index": 19, "answer": "ajsps oblpy"}
+{"id": "R2.caesar_shift", "level": 1, "index": 20, "answer": "hwraj vknet"}
+{"id": "R2.caesar_shift", "level": 1, "index": 21, "answer": "gkhej rwvan"}
+{"id": "R2.caesar_shift", "level": 1, "index": 22, "answer": "pqien tyrqn"}
+{"id": "R2.caesar_shift", "level": 1, "index": 23, "answer": "lpefl npufs"}
+{"id": "R2.caesar_shift", "level": 1, "index": 24, "answer": "thahr upgle"}
+{"id": "R2.caesar_shift", "level": 1, "index": 25, "answer": "sfdfo jzjvo"}
+{"id": "R2.caesar_shift", "level": 1, "index": 26, "answer": "sbkxd ghfxg"}
+{"id": "R2.caesar_shift", "level": 1, "index": 27, "answer": "pwrsf ywrol"}
+{"id": "R2.caesar_shift", "level": 1, "index": 28, "answer": "iqjun hqbua"}
+{"id": "R2.caesar_shift", "level": 1, "index": 29, "answer": "hyayn jured"}
+{"id": "R2.caesar_shift", "level": 1, "index": 30, "answer": "tckgp jmkmv"}
+{"id": "R2.caesar_shift", "level": 1, "index": 31, "answer": "lsdyx cockh"}
+{"id": "R2.caesar_shift", "level": 1, "index": 32, "answer": "yhihe tlsvr"}
+{"id": "R2.caesar_shift", "level": 1, "index": 33, "answer": "uvtlr shyhu"}
+{"id": "R2.caesar_shift", "level": 1, "index": 34, "answer": "enynk fvera"}
+{"id": "R2.caesar_shift", "level": 1, "index": 35, "answer": "litue gixul"}
+{"id": "R2.caesar_shift", "level": 1, "index": 36, "answer": "ofifk ilkxk"}
+{"id": "R2.caesar_shift", "level": 1, "index": 37, "answer": "igkgi zmbyi"}
+{"id": "R2.caesar_shift", "level": 1, "index": 38, "answer": "vpezv ctytv"}
+{"id": "R2.caesar_shift", "level": 1, "index": 39, "answer": "cycku dyjkb"}
+{"id": "R2.caesar_shift", "level": 2, "index": 0, "answer": "esjgj vsvaf vwkwj"}
+{"id": "R2.caesar_shift", "level": 2, "index": 1, "answer": "urplq vdnrq ohqha"}
+{"id": "R2.caesar_shift", "level": 2, "index": 2, "answer": "vmsqz livmz amdqv"}
+{"id": "R2.caesar_shift", "level": 2, "index": 3, "answer": "mfivi bfsze krbfb"}
+{"id": "R2.caesar_shift", "level": 2, "index": 4, "answer": "nugyl tuhuh fuecl"}
+{"id": "R2.caesar_shift", "level": 2, "index": 5, "answer": "qgici iclcl pmzgi"}
+{"id": "R2.caesar_shift", "level": 2, "index": 6, "answer": "hijms sqviz vqhmf"}
+{"id": "R2.caesar_shift", "level": 2, "index": 7, "answer": "hogwl bwncb pofwf"}
+{"id": "R2.caesar_shift", "level": 2, "index": 8, "answer": "udgrq gdyha uhqlu"}
+{"id": "R2.caesar_shift", "level": 2, "index": 9, "answer": "lmvmf siziv bmams"}
+{"id": "R2.caesar_shift", "level": 2, "index": 10, "answer": "xixso vmomo pmweo"}
+{"id": "R2.caesar_shift", "level": 2, "index": 11, "answer": "dkjyu bklou jyxoh"}
+{"id": "R2.caesar_shift", "level": 2, "index": 12, "answer": "mhczq uzahm ydsnm"}
+{"id": "R2.caesar_shift", "level": 2, "index": 13, "answer": "edwra vhurq vhnra"}
+{"id": "R2.caesar_shift", "level": 2, "index": 14, "answer": "qbarx qnarx mbyrk"}
+{"id": "R2.caesar_shift", "level": 2, "index": 15, "answer": "osdeb pewir divmv"}
+{"id": "R2.caesar_shift", "level": 2, "index": 16, "answer": "dvbvb dfsfo irqro"}
+{"id": "R2.caesar_shift", "level": 2, "index": 17, "answer": "jnmdw lzmhw qzydw"}
+{"id": "R2.caesar_shift", "level": 2, "index": 18, "answer": "pixer dezib peoev"}
+{"id": "R2.caesar_shift", "level": 2, "index": 19, "answer": "icpmv rgzgi bmzyi"}
+{"id": "R2.caesar_shift", "level": 2, "index": 20, "answer": "tmjiz bwjwf tizmz"}
+{"id": "R2.caesar_shift", "level": 2, "index": 21, "answer": "ivqdi mjgdf ndfzf"}
+{"id": "R2.caesar_shift", "level": 2, "index": 22, "answer": "crpra ploda phwla"}
+{"id": "R2.caesar_shift", "level": 2, "index": 23, "answer": "jglcv zmrgl rmpgv"}
+{"id": "R2.caesar_shift", "level": 2, "index": 24, "answer": "tupih myluh gyfil"}
+{"id": "R2.caesar_shift", "level": 2, "index": 25, "answer": "vwhiv zwdmv bwuiv"}
+{"id": "R2.caesar_shift", "level": 2, "index": 26, "answer": "vncrg enknt vrajg"}
+{"id": "R2.caesar_shift", "level": 2, "index": 27, "answer": "qhnrn erwdn yruha"}
+{"id": "R2.caesar_shift", "level": 2, "index": 28, "answer": "mzypc vtdzv vzoty"}
+{"id": "R2.caesar_shift", "level": 2, "index": 29, "answer": "hqcyh auduh iybya"}
+{"id": "R2.caesar_shift", "level": 2, "index": 30, "answer": "whnlq edpda ydqdu"}
+{"id": "R2.caesar_shift", "level": 2, "index": 31, "answer": "ropoy hwjol zsnob"}
+{"id": "R2.caesar_shift", "level": 2, "index": 32, "answer": "oehir xewsv dmqio"}
+{"id": "R2.caesar_shift", "level": 2, "index": 33, "answer": "clkli ypklv glkzi"}
+{"id": "R2.caesar_shift", "level": 2, "index": 34, "answer": "xqfkm nqocp uqoqt"}
+{"id": "R2.caesar_shift", "level": 2, "index": 35, "answer": "wreja uxvjt brajt"}
+{"id": "R2.caesar_shift", "level": 2, "index": 36, "answer": "ulcla glnrq nludn"}
+{"id": "R2.caesar_shift", "level": 2, "index": 37, "answer": "gkoan oavkn rkgag"}
+{"id": "R2.caesar_shift", "level": 2, "index": 38, "answer": "stfbq mxsxg dhfhq"}
+{"id": "R2.caesar_shift", "level": 2, "index": 39, "answer": "whvlu vlwlu qhpln"}
+{"id": "R2.caesar_shift", "level": 3, "index": 0, "answer": "gwzob gcgsb jcrwl pszoy"}
+{"id": "R2.caesar_shift", "level": 3, "index": 1, "answer": "tcfie vupye tulir numih"}
+{"id": "R2.caesar_shift", "level": 3, "index": 2, "answer": "ytinc snxjw qnrjp yfqnc"}
+{"id": "R2.caesar_shift", "level": 3, "index": 3, "answer": "hyxce mueul gcvyh gupur"}
+{"id": "R2.caesar_shift", "level": 3, "index": 4, "answer": "tcxyr xulcr pylil gymil"}
+{"id": "R2.caesar_shift", "level": 3, "index": 5, "answer": "tqaqd peduh byieh tqiea"}
+{"id": "R2.caesar_shift", "level": 3, "index": 6, "answer": "palad yaxaz duxqz lmfmd"}
+{"id": "R2.caesar_shift", "level": 3, "index": 7, "answer": "dylya tebud deaqa tuaeh"}
+{"id": "R2.caesar_shift", "level": 3, "index": 8, "answer": "mzszq mdsnq knrhm sdldq"}
+{"id": "R2.caesar_shift", "level": 3, "index": 9, "answer": "evebx xrmre inyna mvavx"}
+{"id": "R2.caesar_shift", "level": 3, "index": 10, "answer": "qktgx yuhox fosgd juhgd"}
+{"id": "R2.caesar_shift", "level": 3, "index": 11, "answer": "apsve chulr avkhe gpcpy"}
+{"id": "R2.caesar_shift", "level": 3, "index": 12, "answer": "ognqp bgbkm xgfgp pkxcz"}
+{"id": "R2.caesar_shift", "level": 3, "index": 13, "answer": "ijfjm mjqvs fvwdm gvfzf"}
+{"id": "R2.caesar_shift", "level": 3, "index": 14, "answer": "wleli elyly wpwzc xpwzi"}
+{"id": "R2.caesar_shift", "level": 3, "index": 15, "answer": "tipir xcnih tyhih tcpce"}
+{"id": "R2.caesar_shift", "level": 3, "index": 16, "answer": "gbxbk qbave grene evzra"}
+{"id": "R2.caesar_shift", "level": 3, "index": 17, "answer": "dobyx bkvku nkxkx lowkh"}
+{"id": "R2.caesar_shift", "level": 3, "index": 18, "answer": "gkxaj okjwj oankt vkzwj"}
+{"id": "R2.caesar_shift", "level": 3, "index": 19, "answer": "wfsfu oxobu yfhlh qbwxo"}
+{"id": "R2.caesar_shift", "level": 3, "index": 20, "answer": "vuhir pyeih puhur nupyh"}
+{"id": "R2.caesar_shift", "level": 3, "index": 21, "answer": "pimyh nytil xuful hceyr"}
+{"id": "R2.caesar_shift", "level": 3, "index": 22, "answer": "oedeo vmzib hshio rirmr"}
+{"id": "R2.caesar_shift", "level": 3, "index": 23, "answer": "qbwxo sxklk sbilo wxofu"}
+{"id": "R2.caesar_shift", "level": 3, "index": 24, "answer": "ivgzf nzyvm ovods uvizs"}
+{"id": "R2.caesar_shift", "level": 3, "index": 25, "answer": "nutye xcmue tilir hieih"}
+{"id": "R2.caesar_shift", "level": 3, "index": 26, "answer": "pmfmw nadaj zaxud fmhad"}
+{"id": "R2.caesar_shift", "level": 3, "index": 27, "answer": "ghulu zlalr yvaly ylthu"}
+{"id": "R2.caesar_shift", "level": 3, "index": 28, "answer": "tnknw ajkjg bncrt knejt"}
+{"id": "R2.caesar_shift", "level": 3, "index": 29, "answer": "itqtz sxgtc gxitg axhpg"}
+{"id": "R2.caesar_shift", "level": 3, "index": 30, "answer": "bwjwv smaqv hmawz umbis"}
+{"id": "R2.caesar_shift", "level": 3, "index": 31, "answer": "ydyhq qlqdn nhyla ohqra"}
+{"id": "R2.caesar_shift", "level": 3, "index": 32, "answer": "gzxtc olety elvlv dtgpc"}
+{"id": "R2.caesar_shift", "level": 3, "index": 33, "answer": "xtijc wfgns snpjc itenp"}
+{"id": "R2.caesar_shift", "level": 3, "index": 34, "answer": "ftshg kxebg mbubq obstq"}
+{"id": "R2.caesar_shift", "level": 3, "index": 35, "answer": "fznji fzuji wjhzs ivfdi"}
+{"id": "R2.caesar_shift", "level": 3, "index": 36, "answer": "penkt jwikg hkhag nahwt"}
+{"id": "R2.caesar_shift", "level": 3, "index": 37, "answer": "rvuvu kvapy khtlu shyvy"}
+{"id": "R2.caesar_shift", "level": 3, "index": 38, "answer": "yfjxu hbabu wlofu oxwbh"}
+{"id": "R2.caesar_shift", "level": 3, "index": 39, "answer": "mbmfy njlbl epcfo eftfy"}
+{"id": "R2.caesar_shift", "level": 4, "index": 0, "answer": "btspm hpkpg cpztc ztkdc btkpm"}
+{"id": "R2.caesar_shift", "level": 4, "index": 1, "answer": "svipu tpahy clgly rhtpy zluve"}
+{"id": "R2.caesar_shift", "level": 4, "index": 2, "answer": "gfwnp sfxjs ytxfw ynpfc wjqnw"}
+{"id": "R2.caesar_shift", "level": 4, "index": 3, "answer": "gcgsb yoasl rcboy psyof pozsy"}
+{"id": "R2.caesar_shift", "level": 4, "index": 4, "answer": "nanwj tsjsf ealsc rgcsc vstgp"}
+{"id": "R2.caesar_shift", "level": 4, "index": 5, "answer": "inyfs wfits ajxjp inefc pfgnw"}
+{"id": "R2.caesar_shift", "level": 4, "index": 6, "answer": "jobkx zgfot yubut fofux ygxgt"}
+{"id": "R2.caesar_shift", "level": 4, "index": 7, "answer": "ncfur vunue pulih fuxye pyhye"}
+{"id": "R2.caesar_shift", "level": 4, "index": 8, "answer": "rwdwc kskgc vanwj vacsc vgdgf"}
+{"id": "R2.caesar_shift", "level": 4, "index": 9, "answer": "uzqzm ojgdm ydhvf mdydm hdqds"}
+{"id": "R2.caesar_shift", "level": 4, "index": 10, "answer": "jkvsu xojkx lovyx lsdsu doboh"}
+{"id": "R2.caesar_shift", "level": 4, "index": 11, "answer": "nkboh cswyu vyfox nyjyx jknyu"}
+{"id": "R2.caesar_shift", "level": 4, "index": 12, "answer": "yrgbx ibira inzvk zrmne mrzne"}
+{"id": "R2.caesar_shift", "level": 4, "index": 13, "answer": "qlpra udqrn uhnra pdgdu wlqra"}
+{"id": "R2.caesar_shift", "level": 4, "index": 14, "answer": "axpbo yxwbh jfafo ibybu pbpfk"}
+{"id": "R2.caesar_shift", "level": 4, "index": 15, "answer": "mxara mrvjg vrkxw txwnw irtnt"}
+{"id": "R2.caesar_shift", "level": 4, "index": 16, "answer": "vouox cynox wydsx nouou xynyb"}
+{"id": "R2.caesar_shift", "level": 4, "index": 17, "answer": "xmqev xefmo vspmv defsv fszsv"}
+{"id": "R2.caesar_shift", "level": 4, "index": 18, "answer": "zyxgi rmtcv jgjmp ryrgv xgrml"}
+{"id": "R2.caesar_shift", "level": 4, "index": 19, "answer": "ctxpc kpvzy xtwzv mldzi elxlc"}
+{"id": "R2.caesar_shift", "level": 4, "index": 20, "answer": "ukdkb jkvob cyxkx lsbsb fswsx"}
+{"id": "R2.caesar_shift", "level": 4, "index": 21, "answer": "folku byxyh lycyx cyuyh fyfsu"}
+{"id": "R2.caesar_shift", "level": 4, "index": 22, "answer": "ipbtm kdqxz zdgtm kpstc sxctg"}
+{"id": "R2.caesar_shift", "level": 4, "index": 23, "answer": "gpbdg qxopz qpbpc hpbpm qpbxm"}
+{"id": "R2.caesar_shift", "level": 4, "index": 24, "answer": "kthpc sdgpz oxzdz adkdc ipidz"}
+{"id": "R2.caesar_shift", "level": 4, "index": 25, "answer": "sflfy spcfo mpebl ubnbl njnfy"}
+{"id": "R2.caesar_shift", "level": 4, "index": 26, "answer": "chwdn chelq vdplq cdqrn odchq"}
+{"id": "R2.caesar_shift", "level": 4, "index": 27, "answer": "aqlqs hwuwv hmbms zmawv litqs"}
+{"id": "R2.caesar_shift", "level": 4, "index": 28, "answer": "mchyl nygch hipir lumce tyvih"}
+{"id": "R2.caesar_shift", "level": 4, "index": 29, "answer": "livce nypce tugye pugie lixuh"}
+{"id": "R2.caesar_shift", "level": 4, "index": 30, "answer": "janej havaj vaxet zevkt rajkn"}
+{"id": "R2.caesar_shift", "level": 4, "index": 31, "answer": "yrgrq whcha phnhq nlodu cdchq"}
+{"id": "R2.caesar_shift", "level": 4, "index": 32, "answer": "rfxjw xtpfw yjstp wnrts rfgfp"}
+{"id": "R2.caesar_shift", "level": 4, "index": 33, "answer": "tkrgt zgjkt rgjud fgzud qkjuq"}
+{"id": "R2.caesar_shift", "level": 4, "index": 34, "answer": "zqhiv vwuif dmtqz hqtqs uibwf"}
+{"id": "R2.caesar_shift", "level": 4, "index": 35, "answer": "bncra cjknw cnira mrtxg axtxt"}
+{"id": "R2.caesar_shift", "level": 4, "index": 36, "answer": "xsvso wsosr xefsv fehev hmxiv"}
+{"id": "R2.caesar_shift", "level": 4, "index": 37, "answer": "dpopi ezwzy glkzc glopi ylxtc"}
+{"id": "R2.caesar_shift", "level": 4, "index": 38, "answer": "etkti gtctc czwpi opetv ozvpv"}
+{"id": "R2.caesar_shift", "level": 4, "index": 39, "answer": "ljsbs sfojl cpnpy lfnbo sjmfs"}
+{"id": "R2.caesar_shift", "level": 5, "index": 0, "answer": "bcpyi tmpyv bmzyl zczgv pmpyv iylgv"}
+{"id": "R2.caesar_shift", "level": 5, "index": 1, "answer": "zbqnk evmbx mvivk orarx orxnk evqba"}
+{"id": "R2.caesar_shift", "level": 5, "index": 2, "answer": "iyhud lytyh cyleh petqh byauh lupun"}
+{"id": "R2.caesar_shift", "level": 5, "index": 3, "answer": "hmnaj eqwqw eqhad fmnmw zmhqz zuxqz"}
+{"id": "R2.caesar_shift", "level": 5, "index": 4, "answer": "uncna ijert axcra brejt bnana ankna"}
+{"id": "R2.caesar_shift", "level": 5, "index": 5, "answer": "zkykd sgxkq jurgq jgbgt rgxuq ygjox"}
+{"id": "R2.caesar_shift", "level": 5, "index": 6, "answer": "pylci qcxgi rczgl rctyl tciml zmpgi"}
+{"id": "R2.caesar_shift", "level": 5, "index": 7, "answer": "gzxzy xzxpc vlvzi kpctc opdzy olmtv"}
+{"id": "R2.caesar_shift", "level": 5, "index": 8, "answer": "vnbxa mjixw anmjw tjbxg exaxg unexw"}
+{"id": "R2.caesar_shift", "level": 5, "index": 9, "answer": "tfupo ejtjo mfajs ejcfl cplpl apabs"}
+{"id": "R2.caesar_shift", "level": 5, "index": 10, "answer": "karwf tsnac jwtaf nscwf tgjac egnaj"}
+{"id": "R2.caesar_shift", "level": 5, "index": 11, "answer": "bpsxm sdodc gtixg adatm ztaxg kxqpc"}
+{"id": "R2.caesar_shift", "level": 5, "index": 12, "answer": "rgfuq qoxkx jobgx qutut zofut rkxut"}
+{"id": "R2.caesar_shift", "level": 5, "index": 13, "answer": "sjubl tfwfo obmpy oftpy cjcfs nfopl"}
+{"id": "R2.caesar_shift", "level": 5, "index": 14, "answer": "uvbzo izsvb irere jvmri qfbzb jzefb"}
+{"id": "R2.caesar_shift", "level": 5, "index": 15, "answer": "nwewc kseac vgfwf davgj jsdaj dskwp"}
+{"id": "R2.caesar_shift", "level": 5, "index": 16, "answer": "gdnhq qlylq uhcln yrghu ulvlq plgrq"}
+{"id": "R2.caesar_shift", "level": 5, "index": 17, "answer": "kfdzi cfdfi kvczi mrjzo efuvi mfmze"}
+{"id": "R2.caesar_shift", "level": 5, "index": 18, "answer": "evive czivo ufbfb mrjfb uzeve uvdvo"}
+{"id": "R2.caesar_shift", "level": 5, "index": 19, "answer": "nydoh csnkh wkdkb xscsb xsuoh xscsh"}
+{"id": "R2.caesar_shift", "level": 5, "index": 20, "answer": "clile gpavy yvtpu zhcpy yhkle zpspe"}
+{"id": "R2.caesar_shift", "level": 5, "index": 21, "answer": "gwysb bcnwy fwhol jsbsl zoysb fohwb"}
+{"id": "R2.caesar_shift", "level": 5, "index": 22, "answer": "vcfuh hcmye vcmyh figch xifyl vunie"}
+{"id": "R2.caesar_shift", "level": 5, "index": 23, "answer": "lazuw puyad naxaz fqwaj wmdaw zqyqw"}
+{"id": "R2.caesar_shift", "level": 5, "index": 24, "answer": "nlwdq glodu vrvhq wdqra plqru qrelq"}
+{"id": "R2.caesar_shift", "level": 5, "index": 25, "answer": "kgici pgxyi zcqyl rmiml qybgv rcqmi"}
+{"id": "R2.caesar_shift", "level": 5, "index": 26, "answer": "wvuvf yvovf udfjs nvmjm fjmdi ojgdi"}
+{"id": "R2.caesar_shift", "level": 5, "index": 27, "answer": "mzivb crmvb dfsfe uzcfb kfcfi mvdvo"}
+{"id": "R2.caesar_shift", "level": 5, "index": 28, "answer": "nmeud hupuz fmhqw fanqz zqxuj eayuw"}
+{"id": "R2.caesar_shift", "level": 5, "index": 29, "answer": "yotgq rgsgt bohud bgjot josgq rkxkt"}
+{"id": "R2.caesar_shift", "level": 5, "index": 30, "answer": "lwlap eadgf najwc falgf faeaj lavap"}
+{"id": "R2.caesar_shift", "level": 5, "index": 31, "answer": "oxitm opstz apbpc qtadg iditz otodc"}
+{"id": "R2.caesar_shift", "level": 5, "index": 32, "answer": "awlwf tqhwv amaiz jwziz smams dqaqf"}
+{"id": "R2.caesar_shift", "level": 5, "index": 33, "answer": "qlyhu clolq nlwdq gdndu qrwhq ehulu"}
+{"id": "R2.caesar_shift", "level": 5, "index": 34, "answer": "spcbl ofojy mpcps lpnpl aftfy apafo"}
+{"id": "R2.caesar_shift", "level": 5, "index": 35, "answer": "qgjyl jmzmv rmxci qctmi zmpmv qyiyi"}
+{"id": "R2.caesar_shift", "level": 5, "index": 36, "answer": "uzjfo sriri dvbzb jfefo mfdzo dzive"}
+{"id": "R2.caesar_shift", "level": 5, "index": 37, "answer": "kbibo ofqbo ofpfh pfhxu jfhxo hbyxu"}
+{"id": "R2.caesar_shift", "level": 5, "index": 38, "answer": "trvxa wrtja brmnt urkxw cjejg mrujt"}
+{"id": "R2.caesar_shift", "level": 5, "index": 39, "answer": "pmzev dswsb fspmo dehsr fiqio oexeo"}
+{"id": "R2.caesar_shift", "level": 6, "index": 0, "answer": "fcacb bopcb nwaol ycywy jsrcy acbol ycgob"}
+{"id": "R2.caesar_shift", "level": 6, "index": 1, "answer": "uxwrg tjixt tjmrt wrext artrw wxmrg axwra"}
+{"id": "R2.caesar_shift", "level": 6, "index": 2, "answer": "twrgc rgfaf fgvwj fscwf nwrsf fwkgf fstgj"}
+{"id": "R2.caesar_shift", "level": 6, "index": 3, "answer": "otwhq kbobq dxwxq kxgxk kbmhd lxwxq sxoxd"}
+{"id": "R2.caesar_shift", "level": 6, "index": 4, "answer": "kpzdz spbpc sphxm kpbtm hdcpc gxoxz zxbxm"}
+{"id": "R2.caesar_shift", "level": 6, "index": 5, "answer": "milyr hclil xymur vipuh ecmyr givul nytch"}
+{"id": "R2.caesar_shift", "level": 6, "index": 6, "answer": "tpcbo ljefy afmpy ujljy cbcps tbebo sjcjl"}
+{"id": "R2.caesar_shift", "level": 6, "index": 7, "answer": "ulale zpsvr chsly klgvy shghy ipglr cvyhu"}
+{"id": "R2.caesar_shift", "level": 6, "index": 8, "answer": "xkfgm mkxqm mkxcm mgukt uqtqt dqdkt fcnqt"}
+{"id": "R2.caesar_shift", "level": 6, "index": 9, "answer": "rqbya hubqd aypun terqd aytea bytea cqcen"}
+{"id": "R2.caesar_shift", "level": 6, "index": 10, "answer": "erehq ydedq urpha qlgru yludu nhqla vdqla"}
+{"id": "R2.caesar_shift", "level": 6, "index": 11, "answer": "urehu wlnru wdvhq qrohq ohedq glodu ulvru"}
+{"id": "R2.caesar_shift", "level": 6, "index": 12, "answer": "lnmzm azsdj mzsnj yhynq mzjnm knlhq mnynw"}
+{"id": "R2.caesar_shift", "level": 6, "index": 13, "answer": "rnlnj ldlnm knanm mzyzw jzknw qzrdq anudm"}
+{"id": "R2.caesar_shift", "level": 6, "index": 14, "answer": "ksvsp cwrsp kwvaf kwfaj lwdgp nsjsj nwcwc"}
+{"id": "R2.caesar_shift", "level": 6, "index": 15, "answer": "dtvty elopi klvpi elmzv elmti vpxtv xzmlv"}
+{"id": "R2.caesar_shift", "level": 6, "index": 16, "answer": "czcre ivbzi ufmvi cvbfi qzqve dfdzb uvkfe"}
+{"id": "R2.caesar_shift", "level": 6, "index": 17, "answer": "zmdif dmjqf bwjis tmjwv dwlwv dibwv bqsis"}
+{"id": "R2.caesar_shift", "level": 6, "index": 18, "answer": "ukfkh dsuox bobsh jobsu vyjox uovob lonsu"}
+{"id": "R2.caesar_shift", "level": 6, "index": 19, "answer": "vueue eueye tyeue tieue mifur pytil eince"}
+{"id": "R2.caesar_shift", "level": 6, "index": 20, "answer": "iferi bvufi mzkri bvmve ureze kfure kzbfb"}
+{"id": "R2.caesar_shift", "level": 6, "index": 21, "answer": "kxslu plqfk oxqxu yxqlu abyxh qlwfo oxilk"}
+{"id": "R2.caesar_shift", "level": 6, "index": 22, "answer": "ldrzm qhrdm cdqnm cnqnj rdjdm uhcnw ynsnw"}
+{"id": "R2.caesar_shift", "level": 6, "index": 23, "answer": "yusut ygqkx zozud tkjkd hoxoq ygfoq bkfot"}
+{"id": "R2.caesar_shift", "level": 6, "index": 24, "answer": "eivcr gimir tyfih hieye vipyl gyvyr hygyl"}
+{"id": "R2.caesar_shift", "level": 6, "index": 25, "answer": "vqvkp tgpct ukxkm ukdkp ukpcm fcfqt bcogp"}
+{"id": "R2.caesar_shift", "level": 6, "index": 26, "answer": "vlklc mpeli kpdpc elwzc cpeti vlkly dtmtc"}
+{"id": "R2.caesar_shift", "level": 6, "index": 27, "answer": "omwer psomb wspeo dsxev wszeb wirsb vsver"}
+{"id": "R2.caesar_shift", "level": 6, "index": 28, "answer": "yrgha nhqrn elvla yrndn udpdn vlvhq gdnln"}
+{"id": "R2.caesar_shift", "level": 6, "index": 29, "answer": "ebdhk dhshg gbetd dbdxk ebwtd ktstg lbehg"}
+{"id": "R2.caesar_shift", "level": 6, "index": 30, "answer": "jxjfo yljxu ifjfo sbpbk ifslu kfwbu ibqlo"}
+{"id": "R2.caesar_shift", "level": 6, "index": 31, "answer": "phuha uhwru orpdn ehnlq ehylq cdvrq nlpda"}
+{"id": "R2.caesar_shift", "level": 6, "index": 32, "answer": "dvmfb czcfb jfsfo svbfb qrczo jfbfi krdfe"}
+{"id": "R2.caesar_shift", "level": 6, "index": 33, "answer": "noywl ysfwl pcgsf zsfcb pcgoy jorwb boywy"}
+{"id": "R2.caesar_shift", "level": 6, "index": 34, "answer": "ilafh hxifo aljlo qbsxu ixsbh ibqbk hxybo"}
+{"id": "R2.caesar_shift", "level": 6, "index": 35, "answer": "gwjcy rcfsy bwpob joycb fcfsb pwroy zoacl"}
+{"id": "R2.caesar_shift", "level": 6, "index": 36, "answer": "wbuhd stlxk ktohq gtotd ghftk mbdbq kbstq"}
+{"id": "R2.caesar_shift", "level": 6, "index": 37, "answer": "qcqyp xykgl tclci xyqyp jcqgv pylcl ryzcv"}
+{"id": "R2.caesar_shift", "level": 6, "index": 38, "answer": "xtefp rnqts rngts pnsjp efens afwjp gtitw"}
+{"id": "R2.caesar_shift", "level": 6, "index": 39, "answer": "zurkd hkyuq fuqgq zufkq xkxgt rojkd bofux"}
+{"id": "R2.cellular_automaton", "level": 0, "index": 0, "answer": "00110011111"}
+{"id": "R2.cellular_automaton", "level": 0, "index": 1, "answer": "00111111100"}
+{"id": "R2.cellular_automaton", "level": 0, "index": 2, "answer": "11100111100"}
+{"id": "R2.cellular_automaton", "level": 0, "index": 3, "answer": "00100010011"}
+{"id": "R2.cellular_automaton", "level": 0, "index": 4, "answer": "10101011010"}
+{"id": "R2.cellular_automaton", "level": 0, "index": 5, "answer": "01000001000"}
+{"id": "R2.cellular_automaton", "level": 0, "index": 6, "answer": "10110101001"}
+{"id": "R2.cellular_automaton", "level": 0, "index": 7, "answer": "10110110111"}
+{"id": "R2.cellular_automaton", "level": 0, "index": 8, "answer": "01111111101"}
+{"id": "R2.cellular_automaton", "level": 0, "index": 9, "answer": "11110100011"}
+{"id": "R2.cellular_automaton", "level": 0, "index": 10, "answer": "00110001101"}
+{"id": "R2.cellular_automaton", "level": 0, "index": 11, "answer": "10111111111"}
+{"id": "R2.cellular_automaton", "level": 0, "index": 12, "answer": "00111110101"}
+{"id": "R2.cellular_automaton", "level": 0, "index": 13, "answer": "11001111000"}
+{"id": "R2.cellular_automaton", "level": 0, "index": 14, "answer": "10001100001"}
+{"id": "R2.cellular_automaton", "level": 0, "index": 15, "answer": "00001000100"}
+{"id": "R2.cellular_automaton", "level": 0, "index": 16, "answer": "10000101001"}
+{"id": "R2.cellular_automaton", "level": 0, "index": 17, "answer": "10100110101"}
+{"id": "R2.cellular_automaton", "level": 0, "index": 18, "answer": "11100011110"}
+{"id": "R2.cellular_automaton", "level": 0, "index": 19, "answer": "00100011000"}
+{"id": "R2.cellular_automaton", "level": 0, "index": 20, "answer": "11111111101"}
+{"id": "R2.cellular_automaton", "level": 0, "index": 21, "answer": "01001001000"}
+{"id": "R2.cellular_automaton", "level": 0, "index": 22, "answer": "10101111101"}
+{"id": "R2.cellular_automaton", "level": 0, "index": 23, "answer": "11110011100"}
+{"id": "R2.cellular_automaton", "level": 0, "index": 24, "answer": "10011001101"}
+{"id": "R2.cellular_automaton", "level": 0, "index": 25, "answer": "01100001101"}
+{"id": "R2.cellular_automaton", "level": 0, "index": 26, "answer": "00110011001"}
+{"id": "R2.cellular_automaton", "level": 0, "index": 27, "answer": "01000011100"}
+{"id": "R2.cellular_automaton", "level": 0, "index": 28, "answer": "01010110101"}
+{"id": "R2.cellular_automaton", "level": 0, "index": 29, "answer": "01100110001"}
+{"id": "R2.cellular_automaton", "level": 0, "index": 30, "answer": "11010010110"}
+{"id": "R2.cellular_automaton", "level": 0, "index": 31, "answer": "10101011001"}
+{"id": "R2.cellular_automaton", "level": 0, "index": 32, "answer": "11001010101"}
+{"id": "R2.cellular_automaton", "level": 0, "index": 33, "answer": "00100101000"}
+{"id": "R2.cellular_automaton", "level": 0, "index": 34, "answer": "00111110100"}
+{"id": "R2.cellular_automaton", "level": 0, "index": 35, "answer": "11000011001"}
+{"id": "R2.cellular_automaton", "level": 0, "index": 36, "answer": "10010101101"}
+{"id": "R2.cellular_automaton", "level": 0, "index": 37, "answer": "11010011101"}
+{"id": "R2.cellular_automaton", "level": 0, "index": 38, "answer": "10110101101"}
+{"id": "R2.cellular_automaton", "level": 0, "index": 39, "answer": "11011101100"}
+{"id": "R2.cellular_automaton", "level": 1, "index": 0, "answer": "1001001111100"}
+{"id": "R2.cellular_automaton", "level": 1, "index": 1, "answer": "0110101001101"}
+{"id": "R2.cellular_automaton", "level": 1, "index": 2, "answer": "0010000110000"}
+{"id": "R2.cellular_automaton", "level": 1, "index": 3, "answer": "1001010101011"}
+{"id": "R2.cellular_automaton", "level": 1, "index": 4, "answer": "0111101101101"}
+{"id": "R2.cellular_automaton", "level": 1, "index": 5, "answer": "1011010101111"}
+{"id": "R2.cellular_automaton", "level": 1, "index": 6, "answer": "1010101010110"}
+{"id": "R2.cellular_automaton", "level": 1, "index": 7, "answer": "0110101101001"}
+{"id": "R2.cellular_automaton", "level": 1, "index": 8, "answer": "1101010110100"}
+{"id": "R2.cellular_automaton", "level": 1, "index": 9, "answer": "1100010000101"}
+{"id": "R2.cellular_automaton", "level": 1, "index": 10, "answer": "0100000101011"}
+{"id": "R2.cellular_automaton", "level": 1, "index": 11, "answer": "0001100110001"}
+{"id": "R2.cellular_automaton", "level": 1, "index": 12, "answer": "1000011110000"}
+{"id": "R2.cellular_automaton", "level": 1, "index": 13, "answer": "0110100001011"}
+{"id": "R2.cellular_automaton", "level": 1, "index": 14, "answer": "1001101110011"}
+{"id": "R2.cellular_automaton", "level": 1, "index": 15, "answer": "1110111111011"}
+{"id": "R2.cellular_automaton", "level": 1, "index": 16, "answer": "0000100100100"}
+{"id": "R2.cellular_automaton", "level": 1, "index": 17, "answer": "0010000001000"}
+{"id": "R2.cellular_automaton", "level": 1, "index": 18, "answer": "0110110110111"}
+{"id": "R2.cellular_automaton", "level": 1, "index": 19, "answer": "0000011000001"}
+{"id": "R2.cellular_automaton", "level": 1, "index": 20, "answer": "0010111110010"}
+{"id": "R2.cellular_automaton", "level": 1, "index": 21, "answer": "0100001000000"}
+{"id": "R2.cellular_automaton", "level": 1, "index": 22, "answer": "0110000110101"}
+{"id": "R2.cellular_automaton", "level": 1, "index": 23, "answer": "1011010000000"}
+{"id": "R2.cellular_automaton", "level": 1, "index": 24, "answer": "1101010011011"}
+{"id": "R2.cellular_automaton", "level": 1, "index": 25, "answer": "0011000000100"}
+{"id": "R2.cellular_automaton", "level": 1, "index": 26, "answer": "0100001010101"}
+{"id": "R2.cellular_automaton", "level": 1, "index": 27, "answer": "0010010011001"}
+{"id": "R2.cellular_automaton", "level": 1, "index": 28, "answer": "0011010011010"}
+{"id": "R2.cellular_automaton", "level": 1, "index": 29, "answer": "1001111111100"}
+{"id": "R2.cellular_automaton", "level": 1, "index": 30, "answer": "1001101101100"}
+{"id": "R2.cellular_automaton", "level": 1, "index": 31, "answer": "0011100111001"}
+{"id": "R2.cellular_automaton", "level": 1, "index": 32, "answer": "0010100010101"}
+{"id": "R2.cellular_automaton", "level": 1, "index": 33, "answer": "0011111000100"}
+{"id": "R2.cellular_automaton", "level": 1, "index": 34, "answer": "1100111110011"}
+{"id": "R2.cellular_automaton", "level": 1, "index": 35, "answer": "1000000000111"}
+{"id": "R2.cellular_automaton", "level": 1, "index": 36, "answer": "1100111111001"}
+{"id": "R2.cellular_automaton", "level": 1, "index": 37, "answer": "1011010111011"}
+{"id": "R2.cellular_automaton", "level": 1, "index": 38, "answer": "1001100000100"}
+{"id": "R2.cellular_automaton", "level": 1, "index": 39, "answer": "0100010000100"}
+{"id": "R2.cellular_automaton", "level": 2, "index": 0, "answer": "100110000101010"}
+{"id": "R2.cellular_automaton", "level": 2, "index": 1, "answer": "010101000010101"}
+{"id": "R2.cellular_automaton", "level": 2, "index": 2, "answer": "001000011011100"}
+{"id": "R2.cellular_automaton", "level": 2, "index": 3, "answer": "000000000110100"}
+{"id": "R2.cellular_automaton", "level": 2, "index": 4, "answer": "000110001000000"}
+{"id": "R2.cellular_automaton", "level": 2, "index": 5, "answer": "001010101010100"}
+{"id": "R2.cellular_automaton", "level": 2, "index": 6, "answer": "100011110001110"}
+{"id": "R2.cellular_automaton", "level": 2, "index": 7, "answer": "101110001111000"}
+{"id": "R2.cellular_automaton", "level": 2, "index": 8, "answer": "000100100001001"}
+{"id": "R2.cellular_automaton", "level": 2, "index": 9, "answer": "101101101111011"}
+{"id": "R2.cellular_automaton", "level": 2, "index": 10, "answer": "111111011110100"}
+{"id": "R2.cellular_automaton", "level": 2, "index": 11, "answer": "101110101010110"}
+{"id": "R2.cellular_automaton", "level": 2, "index": 12, "answer": "100011100110011"}
+{"id": "R2.cellular_automaton", "level": 2, "index": 13, "answer": "101111000110110"}
+{"id": "R2.cellular_automaton", "level": 2, "index": 14, "answer": "101111001111001"}
+{"id": "R2.cellular_automaton", "level": 2, "index": 15, "answer": "000001110000001"}
+{"id": "R2.cellular_automaton", "level": 2, "index": 16, "answer": "011000111110110"}
+{"id": "R2.cellular_automaton", "level": 2, "index": 17, "answer": "001111000111101"}
+{"id": "R2.cellular_automaton", "level": 2, "index": 18, "answer": "001010001000000"}
+{"id": "R2.cellular_automaton", "level": 2, "index": 19, "answer": "000100101001000"}
+{"id": "R2.cellular_automaton", "level": 2, "index": 20, "answer": "000000000010000"}
+{"id": "R2.cellular_automaton", "level": 2, "index": 21, "answer": "110100000001100"}
+{"id": "R2.cellular_automaton", "level": 2, "index": 22, "answer": "010101011010110"}
+{"id": "R2.cellular_automaton", "level": 2, "index": 23, "answer": "100100001000100"}
+{"id": "R2.cellular_automaton", "level": 2, "index": 24, "answer": "000110110100100"}
+{"id": "R2.cellular_automaton", "level": 2, "index": 25, "answer": "111001111100110"}
+{"id": "R2.cellular_automaton", "level": 2, "index": 26, "answer": "100001100011000"}
+{"id": "R2.cellular_automaton", "level": 2, "index": 27, "answer": "101000100011110"}
+{"id": "R2.cellular_automaton", "level": 2, "index": 28, "answer": "010101101010101"}
+{"id": "R2.cellular_automaton", "level": 2, "index": 29, "answer": "001001001001001"}
+{"id": "R2.cellular_automaton", "level": 2, "index": 30, "answer": "001011100100010"}
+{"id": "R2.cellular_automaton", "level": 2, "index": 31, "answer": "110010011001101"}
+{"id": "R2.cellular_automaton", "level": 2, "index": 32, "answer": "010001000101000"}
+{"id": "R2.cellular_automaton", "level": 2, "index": 33, "answer": "010101010110101"}
+{"id": "R2.cellular_automaton", "level": 2, "index": 34, "answer": "001010010111010"}
+{"id": "R2.cellular_automaton", "level": 2, "index": 35, "answer": "000011010101101"}
+{"id": "R2.cellular_automaton", "level": 2, "index": 36, "answer": "101001100110110"}
+{"id": "R2.cellular_automaton", "level": 2, "index": 37, "answer": "101111100111001"}
+{"id": "R2.cellular_automaton", "level": 2, "index": 38, "answer": "010101010101100"}
+{"id": "R2.cellular_automaton", "level": 2, "index": 39, "answer": "000000100011000"}
+{"id": "R2.cellular_automaton", "level": 3, "index": 0, "answer": "01110111110111111"}
+{"id": "R2.cellular_automaton", "level": 3, "index": 1, "answer": "11011110111110110"}
+{"id": "R2.cellular_automaton", "level": 3, "index": 2, "answer": "00110101010101010"}
+{"id": "R2.cellular_automaton", "level": 3, "index": 3, "answer": "10010111110011001"}
+{"id": "R2.cellular_automaton", "level": 3, "index": 4, "answer": "11100011010101000"}
+{"id": "R2.cellular_automaton", "level": 3, "index": 5, "answer": "11011111111100011"}
+{"id": "R2.cellular_automaton", "level": 3, "index": 6, "answer": "10011110100001010"}
+{"id": "R2.cellular_automaton", "level": 3, "index": 7, "answer": "11010101001111001"}
+{"id": "R2.cellular_automaton", "level": 3, "index": 8, "answer": "00110011001110001"}
+{"id": "R2.cellular_automaton", "level": 3, "index": 9, "answer": "01010101001011100"}
+{"id": "R2.cellular_automaton", "level": 3, "index": 10, "answer": "00001000110010000"}
+{"id": "R2.cellular_automaton", "level": 3, "index": 11, "answer": "00101011100111000"}
+{"id": "R2.cellular_automaton", "level": 3, "index": 12, "answer": "00011011100011001"}
+{"id": "R2.cellular_automaton", "level": 3, "index": 13, "answer": "11010101011010100"}
+{"id": "R2.cellular_automaton", "level": 3, "index": 14, "answer": "00001100000000000"}
+{"id": "R2.cellular_automaton", "level": 3, "index": 15, "answer": "00010000010000000"}
+{"id": "R2.cellular_automaton", "level": 3, "index": 16, "answer": "00101100111100101"}
+{"id": "R2.cellular_automaton", "level": 3, "index": 17, "answer": "00100111000001000"}
+{"id": "R2.cellular_automaton", "level": 3, "index": 18, "answer": "10100111010110110"}
+{"id": "R2.cellular_automaton", "level": 3, "index": 19, "answer": "00111101101101101"}
+{"id": "R2.cellular_automaton", "level": 3, "index": 20, "answer": "11011100111001100"}
+{"id": "R2.cellular_automaton", "level": 3, "index": 21, "answer": "11110101011100111"}
+{"id": "R2.cellular_automaton", "level": 3, "index": 22, "answer": "10101010101011011"}
+{"id": "R2.cellular_automaton", "level": 3, "index": 23, "answer": "00010010010000010"}
+{"id": "R2.cellular_automaton", "level": 3, "index": 24, "answer": "00101001010101010"}
+{"id": "R2.cellular_automaton", "level": 3, "index": 25, "answer": "11111101111011110"}
+{"id": "R2.cellular_automaton", "level": 3, "index": 26, "answer": "01010101000011000"}
+{"id": "R2.cellular_automaton", "level": 3, "index": 27, "answer": "11111111000111000"}
+{"id": "R2.cellular_automaton", "level": 3, "index": 28, "answer": "10101010110010110"}
+{"id": "R2.cellular_automaton", "level": 3, "index": 29, "answer": "01010011000110101"}
+{"id": "R2.cellular_automaton", "level": 3, "index": 30, "answer": "00000101111101100"}
+{"id": "R2.cellular_automaton", "level": 3, "index": 31, "answer": "10011010011011111"}
+{"id": "R2.cellular_automaton", "level": 3, "index": 32, "answer": "10010101010110101"}
+{"id": "R2.cellular_automaton", "level": 3, "index": 33, "answer": "00100101010110110"}
+{"id": "R2.cellular_automaton", "level": 3, "index": 34, "answer": "00110001100111111"}
+{"id": "R2.cellular_automaton", "level": 3, "index": 35, "answer": "10100111000110011"}
+{"id": "R2.cellular_automaton", "level": 3, "index": 36, "answer": "01010101010101010"}
+{"id": "R2.cellular_automaton", "level": 3, "index": 37, "answer": "01111001110011111"}
+{"id": "R2.cellular_automaton", "level": 3, "index": 38, "answer": "00100110011100101"}
+{"id": "R2.cellular_automaton", "level": 3, "index": 39, "answer": "00000001001001000"}
+{"id": "R2.cellular_automaton", "level": 4, "index": 0, "answer": "0110011001001100000"}
+{"id": "R2.cellular_automaton", "level": 4, "index": 1, "answer": "0001010101010010000"}
+{"id": "R2.cellular_automaton", "level": 4, "index": 2, "answer": "1000100000110001100"}
+{"id": "R2.cellular_automaton", "level": 4, "index": 3, "answer": "1110000001100110111"}
+{"id": "R2.cellular_automaton", "level": 4, "index": 4, "answer": "1010101010100110101"}
+{"id": "R2.cellular_automaton", "level": 4, "index": 5, "answer": "1001110100011011111"}
+{"id": "R2.cellular_automaton", "level": 4, "index": 6, "answer": "1010010101010101001"}
+{"id": "R2.cellular_automaton", "level": 4, "index": 7, "answer": "1100011100111000111"}
+{"id": "R2.cellular_automaton", "level": 4, "index": 8, "answer": "0000000100010010000"}
+{"id": "R2.cellular_automaton", "level": 4, "index": 9, "answer": "0110011001101100101"}
+{"id": "R2.cellular_automaton", "level": 4, "index": 10, "answer": "1111110000000110001"}
+{"id": "R2.cellular_automaton", "level": 4, "index": 11, "answer": "0000101000110110001"}
+{"id": "R2.cellular_automaton", "level": 4, "index": 12, "answer": "1110001011111111110"}
+{"id": "R2.cellular_automaton", "level": 4, "index": 13, "answer": "1010101001010100101"}
+{"id": "R2.cellular_automaton", "level": 4, "index": 14, "answer": "1111101011100110101"}
+{"id": "R2.cellular_automaton", "level": 4, "index": 15, "answer": "1101010101001011011"}
+{"id": "R2.cellular_automaton", "level": 4, "index": 16, "answer": "1100101010100101011"}
+{"id": "R2.cellular_automaton", "level": 4, "index": 17, "answer": "0101000111000000001"}
+{"id": "R2.cellular_automaton", "level": 4, "index": 18, "answer": "0101000010010010000"}
+{"id": "R2.cellular_automaton", "level": 4, "index": 19, "answer": "1000010001000000000"}
+{"id": "R2.cellular_automaton", "level": 4, "index": 20, "answer": "1100110110011001101"}
+{"id": "R2.cellular_automaton", "level": 4, "index": 21, "answer": "0011001001111001111"}
+{"id": "R2.cellular_automaton", "level": 4, "index": 22, "answer": "0101000110010010000"}
+{"id": "R2.cellular_automaton", "level": 4, "index": 23, "answer": "1011111100111110011"}
+{"id": "R2.cellular_automaton", "level": 4, "index": 24, "answer": "1101011011110001011"}
+{"id": "R2.cellular_automaton", "level": 4, "index": 25, "answer": "1011010101010100101"}
+{"id": "R2.cellular_automaton", "level": 4, "index": 26, "answer": "1010101000011010000"}
+{"id": "R2.cellular_automaton", "level": 4, "index": 27, "answer": "0011001100100110010"}
+{"id": "R2.cellular_automaton", "level": 4, "index": 28, "answer": "0000011000110110010"}
+{"id": "R2.cellular_automaton", "level": 4, "index": 29, "answer": "1101101111111111111"}
+{"id": "R2.cellular_automaton", "level": 4, "index": 30, "answer": "0000110000001100111"}
+{"id": "R2.cellular_automaton", "level": 4, "index": 31, "answer": "1101101001010110101"}
+{"id": "R2.cellular_automaton", "level": 4, "index": 32, "answer": "1001000001010101101"}
+{"id": "R2.cellular_automaton", "level": 4, "index": 33, "answer": "1011011101110111111"}
+{"id": "R2.cellular_automaton", "level": 4, "index": 34, "answer": "1011111111100110011"}
+{"id": "R2.cellular_automaton", "level": 4, "index": 35, "answer": "1101100001100011000"}
+{"id": "R2.cellular_automaton", "level": 4, "index": 36, "answer": "1100110100010010000"}
+{"id": "R2.cellular_automaton", "level": 4, "index": 37, "answer": "0000110011111101101"}
+{"id": "R2.cellular_automaton", "level": 4, "index": 38, "answer": "0110000001100011100"}
+{"id": "R2.cellular_automaton", "level": 4, "index": 39, "answer": "0100101010010111111"}
+{"id": "R2.cellular_automaton", "level": 5, "index": 0, "answer": "100110100110100000111"}
+{"id": "R2.cellular_automaton", "level": 5, "index": 1, "answer": "001101001100110010010"}
+{"id": "R2.cellular_automaton", "level": 5, "index": 2, "answer": "110011110011100001111"}
+{"id": "R2.cellular_automaton", "level": 5, "index": 3, "answer": "000011000000111111100"}
+{"id": "R2.cellular_automaton", "level": 5, "index": 4, "answer": "100110011001110000010"}
+{"id": "R2.cellular_automaton", "level": 5, "index": 5, "answer": "011110110111101111011"}
+{"id": "R2.cellular_automaton", "level": 5, "index": 6, "answer": "011000101100111111001"}
+{"id": "R2.cellular_automaton", "level": 5, "index": 7, "answer": "000111100111110011001"}
+{"id": "R2.cellular_automaton", "level": 5, "index": 8, "answer": "000110011000110010101"}
+{"id": "R2.cellular_automaton", "level": 5, "index": 9, "answer": "101011010100101010101"}
+{"id": "R2.cellular_automaton", "level": 5, "index": 10, "answer": "100101010101010101001"}
+{"id": "R2.cellular_automaton", "level": 5, "index": 11, "answer": "111100100100110010010"}
+{"id": "R2.cellular_automaton", "level": 5, "index": 12, "answer": "110111101110101111000"}
+{"id": "R2.cellular_automaton", "level": 5, "index": 13, "answer": "000010000000100000100"}
+{"id": "R2.cellular_automaton", "level": 5, "index": 14, "answer": "110101101100010111001"}
+{"id": "R2.cellular_automaton", "level": 5, "index": 15, "answer": "011011101111011101111"}
+{"id": "R2.cellular_automaton", "level": 5, "index": 16, "answer": "111101110111000000101"}
+{"id": "R2.cellular_automaton", "level": 5, "index": 17, "answer": "000010101001010010101"}
+{"id": "R2.cellular_automaton", "level": 5, "index": 18, "answer": "101111000001011111101"}
+{"id": "R2.cellular_automaton", "level": 5, "index": 19, "answer": "001100110011100110001"}
+{"id": "R2.cellular_automaton", "level": 5, "index": 20, "answer": "001111001001111110010"}
+{"id": "R2.cellular_automaton", "level": 5, "index": 21, "answer": "100101010101001011001"}
+{"id": "R2.cellular_automaton", "level": 5, "index": 22, "answer": "110100000111101011011"}
+{"id": "R2.cellular_automaton", "level": 5, "index": 23, "answer": "111111010011111010010"}
+{"id": "R2.cellular_automaton", "level": 5, "index": 24, "answer": "110101011000110010000"}
+{"id": "R2.cellular_automaton", "level": 5, "index": 25, "answer": "110101110100011011111"}
+{"id": "R2.cellular_automaton", "level": 5, "index": 26, "answer": "101001010010101010000"}
+{"id": "R2.cellular_automaton", "level": 5, "index": 27, "answer": "000011011111100011111"}
+{"id": "R2.cellular_automaton", "level": 5, "index": 28, "answer": "110101101101010010100"}
+{"id": "R2.cellular_automaton", "level": 5, "index": 29, "answer": "101011010011001101100"}
+{"id": "R2.cellular_automaton", "level": 5, "index": 30, "answer": "001011101010110110101"}
+{"id": "R2.cellular_automaton", "level": 5, "index": 31, "answer": "010111000111100101011"}
+{"id": "R2.cellular_automaton", "level": 5, "index": 32, "answer": "001100110011001100111"}
+{"id": "R2.cellular_automaton", "level": 5, "index": 33, "answer": "111000001100101100110"}
+{"id": "R2.cellular_automaton", "level": 5, "index": 34, "answer": "001000000000000100000"}
+{"id": "R2.cellular_automaton", "level": 5, "index": 35, "answer": "100010100111101001011"}
+{"id": "R2.cellular_automaton", "level": 5, "index": 36, "answer": "101011000011110010101"}
+{"id": "R2.cellular_automaton", "level": 5, "index": 37, "answer": "000000110010001000001"}
+{"id": "R2.cellular_automaton", "level": 5, "index": 38, "answer": "110111011111101111111"}
+{"id": "R2.cellular_automaton", "level": 5, "index": 39, "answer": "000010101010101010100"}
+{"id": "R2.cellular_automaton", "level": 6, "index": 0, "answer": "10101010010001000011110"}
+{"id": "R2.cellular_automaton", "level": 6, "index": 1, "answer": "11000010000100001100000"}
+{"id": "R2.cellular_automaton", "level": 6, "index": 2, "answer": "10101001111100110011001"}
+{"id": "R2.cellular_automaton", "level": 6, "index": 3, "answer": "11011101110111111101111"}
+{"id": "R2.cellular_automaton", "level": 6, "index": 4, "answer": "11111100110011001110001"}
+{"id": "R2.cellular_automaton", "level": 6, "index": 5, "answer": "10010101011010101101001"}
+{"id": "R2.cellular_automaton", "level": 6, "index": 6, "answer": "10101010010110000100001"}
+{"id": "R2.cellular_automaton", "level": 6, "index": 7, "answer": "00000010110000000001011"}
+{"id": "R2.cellular_automaton", "level": 6, "index": 8, "answer": "00001100000000110100000"}
+{"id": "R2.cellular_automaton", "level": 6, "index": 9, "answer": "10001100111111000000111"}
+{"id": "R2.cellular_automaton", "level": 6, "index": 10, "answer": "10101010101001010110101"}
+{"id": "R2.cellular_automaton", "level": 6, "index": 11, "answer": "01001001010110101010100"}
+{"id": "R2.cellular_automaton", "level": 6, "index": 12, "answer": "00000010010000001000100"}
+{"id": "R2.cellular_automaton", "level": 6, "index": 13, "answer": "01000010010000000010000"}
+{"id": "R2.cellular_automaton", "level": 6, "index": 14, "answer": "00000100101000100010000"}
+{"id": "R2.cellular_automaton", "level": 6, "index": 15, "answer": "11111001100011000010001"}
+{"id": "R2.cellular_automaton", "level": 6, "index": 16, "answer": "11110110010011111100100"}
+{"id": "R2.cellular_automaton", "level": 6, "index": 17, "answer": "10110101110100010110101"}
+{"id": "R2.cellular_automaton", "level": 6, "index": 18, "answer": "11000011000101001011010"}
+{"id": "R2.cellular_automaton", "level": 6, "index": 19, "answer": "11100000111001100110010"}
+{"id": "R2.cellular_automaton", "level": 6, "index": 20, "answer": "00000000010000010000000"}
+{"id": "R2.cellular_automaton", "level": 6, "index": 21, "answer": "00001010001000010101010"}
+{"id": "R2.cellular_automaton", "level": 6, "index": 22, "answer": "11100110011111111100110"}
+{"id": "R2.cellular_automaton", "level": 6, "index": 23, "answer": "00100110011111111111100"}
+{"id": "R2.cellular_automaton", "level": 6, "index": 24, "answer": "00000000000010001000000"}
+{"id": "R2.cellular_automaton", "level": 6, "index": 25, "answer": "10011001001110011001011"}
+{"id": "R2.cellular_automaton", "level": 6, "index": 26, "answer": "01010111100101101001011"}
+{"id": "R2.cellular_automaton", "level": 6, "index": 27, "answer": "10100110011111001100110"}
+{"id": "R2.cellular_automaton", "level": 6, "index": 28, "answer": "00101010101011010110110"}
+{"id": "R2.cellular_automaton", "level": 6, "index": 29, "answer": "10101011011110010010111"}
+{"id": "R2.cellular_automaton", "level": 6, "index": 30, "answer": "10100110011001111110011"}
+{"id": "R2.cellular_automaton", "level": 6, "index": 31, "answer": "10101010110011100110011"}
+{"id": "R2.cellular_automaton", "level": 6, "index": 32, "answer": "11000011000001100100000"}
+{"id": "R2.cellular_automaton", "level": 6, "index": 33, "answer": "10110111101111001110011"}
+{"id": "R2.cellular_automaton", "level": 6, "index": 34, "answer": "00000011110001100011101"}
+{"id": "R2.cellular_automaton", "level": 6, "index": 35, "answer": "00000100000110100010001"}
+{"id": "R2.cellular_automaton", "level": 6, "index": 36, "answer": "11001101111001100110111"}
+{"id": "R2.cellular_automaton", "level": 6, "index": 37, "answer": "00001000010010001000000"}
+{"id": "R2.cellular_automaton", "level": 6, "index": 38, "answer": "00111000010010011001001"}
+{"id": "R2.cellular_automaton", "level": 6, "index": 39, "answer": "11111101001001001100100"}
+{"id": "R2.cheapest_network", "level": 0, "index": 0, "answer": "60"}
+{"id": "R2.cheapest_network", "level": 0, "index": 1, "answer": "51"}
+{"id": "R2.cheapest_network", "level": 0, "index": 2, "answer": "65"}
+{"id": "R2.cheapest_network", "level": 0, "index": 3, "answer": "51"}
+{"id": "R2.cheapest_network", "level": 0, "index": 4, "answer": "57"}
+{"id": "R2.cheapest_network", "level": 0, "index": 5, "answer": "64"}
+{"id": "R2.cheapest_network", "level": 0, "index": 6, "answer": "58"}
+{"id": "R2.cheapest_network", "level": 0, "index": 7, "answer": "42"}
+{"id": "R2.cheapest_network", "level": 0, "index": 8, "answer": "48"}
+{"id": "R2.cheapest_network", "level": 0, "index": 9, "answer": "62"}
+{"id": "R2.cheapest_network", "level": 0, "index": 10, "answer": "47"}
+{"id": "R2.cheapest_network", "level": 0, "index": 11, "answer": "65"}
+{"id": "R2.cheapest_network", "level": 0, "index": 12, "answer": "90"}
+{"id": "R2.cheapest_network", "level": 0, "index": 13, "answer": "69"}
+{"id": "R2.cheapest_network", "level": 0, "index": 14, "answer": "48"}
+{"id": "R2.cheapest_network", "level": 0, "index": 15, "answer": "56"}
+{"id": "R2.cheapest_network", "level": 0, "index": 16, "answer": "56"}
+{"id": "R2.cheapest_network", "level": 0, "index": 17, "answer": "59"}
+{"id": "R2.cheapest_network", "level": 0, "index": 18, "answer": "48"}
+{"id": "R2.cheapest_network", "level": 0, "index": 19, "answer": "64"}
+{"id": "R2.cheapest_network", "level": 0, "index": 20, "answer": "59"}
+{"id": "R2.cheapest_network", "level": 0, "index": 21, "answer": "56"}
+{"id": "R2.cheapest_network", "level": 0, "index": 22, "answer": "48"}
+{"id": "R2.cheapest_network", "level": 0, "index": 23, "answer": "54"}
+{"id": "R2.cheapest_network", "level": 0, "index": 24, "answer": "53"}
+{"id": "R2.cheapest_network", "level": 0, "index": 25, "answer": "62"}
+{"id": "R2.cheapest_network", "level": 0, "index": 26, "answer": "60"}
+{"id": "R2.cheapest_network", "level": 0, "index": 27, "answer": "66"}
+{"id": "R2.cheapest_network", "level": 0, "index": 28, "answer": "52"}
+{"id": "R2.cheapest_network", "level": 0, "index": 29, "answer": "39"}
+{"id": "R2.cheapest_network", "level": 0, "index": 30, "answer": "58"}
+{"id": "R2.cheapest_network", "level": 0, "index": 31, "answer": "66"}
+{"id": "R2.cheapest_network", "level": 0, "index": 32, "answer": "47"}
+{"id": "R2.cheapest_network", "level": 0, "index": 33, "answer": "54"}
+{"id": "R2.cheapest_network", "level": 0, "index": 34, "answer": "40"}
+{"id": "R2.cheapest_network", "level": 0, "index": 35, "answer": "67"}
+{"id": "R2.cheapest_network", "level": 0, "index": 36, "answer": "67"}
+{"id": "R2.cheapest_network", "level": 0, "index": 37, "answer": "47"}
+{"id": "R2.cheapest_network", "level": 0, "index": 38, "answer": "72"}
+{"id": "R2.cheapest_network", "level": 0, "index": 39, "answer": "71"}
+{"id": "R2.cheapest_network", "level": 1, "index": 0, "answer": "70"}
+{"id": "R2.cheapest_network", "level": 1, "index": 1, "answer": "58"}
+{"id": "R2.cheapest_network", "level": 1, "index": 2, "answer": "58"}
+{"id": "R2.cheapest_network", "level": 1, "index": 3, "answer": "61"}
+{"id": "R2.cheapest_network", "level": 1, "index": 4, "answer": "65"}
+{"id": "R2.cheapest_network", "level": 1, "index": 5, "answer": "82"}
+{"id": "R2.cheapest_network", "level": 1, "index": 6, "answer": "55"}
+{"id": "R2.cheapest_network", "level": 1, "index": 7, "answer": "50"}
+{"id": "R2.cheapest_network", "level": 1, "index": 8, "answer": "68"}
+{"id": "R2.cheapest_network", "level": 1, "index": 9, "answer": "58"}
+{"id": "R2.cheapest_network", "level": 1, "index": 10, "answer": "66"}
+{"id": "R2.cheapest_network", "level": 1, "index": 11, "answer": "55"}
+{"id": "R2.cheapest_network", "level": 1, "index": 12, "answer": "70"}
+{"id": "R2.cheapest_network", "level": 1, "index": 13, "answer": "59"}
+{"id": "R2.cheapest_network", "level": 1, "index": 14, "answer": "48"}
+{"id": "R2.cheapest_network", "level": 1, "index": 15, "answer": "80"}
+{"id": "R2.cheapest_network", "level": 1, "index": 16, "answer": "50"}
+{"id": "R2.cheapest_network", "level": 1, "index": 17, "answer": "62"}
+{"id": "R2.cheapest_network", "level": 1, "index": 18, "answer": "39"}
+{"id": "R2.cheapest_network", "level": 1, "index": 19, "answer": "70"}
+{"id": "R2.cheapest_network", "level": 1, "index": 20, "answer": "62"}
+{"id": "R2.cheapest_network", "level": 1, "index": 21, "answer": "48"}
+{"id": "R2.cheapest_network", "level": 1, "index": 22, "answer": "61"}
+{"id": "R2.cheapest_network", "level": 1, "index": 23, "answer": "61"}
+{"id": "R2.cheapest_network", "level": 1, "index": 24, "answer": "65"}
+{"id": "R2.cheapest_network", "level": 1, "index": 25, "answer": "43"}
+{"id": "R2.cheapest_network", "level": 1, "index": 26, "answer": "52"}
+{"id": "R2.cheapest_network", "level": 1, "index": 27, "answer": "53"}
+{"id": "R2.cheapest_network", "level": 1, "index": 28, "answer": "65"}
+{"id": "R2.cheapest_network", "level": 1, "index": 29, "answer": "64"}
+{"id": "R2.cheapest_network", "level": 1, "index": 30, "answer": "67"}
+{"id": "R2.cheapest_network", "level": 1, "index": 31, "answer": "64"}
+{"id": "R2.cheapest_network", "level": 1, "index": 32, "answer": "52"}
+{"id": "R2.cheapest_network", "level": 1, "index": 33, "answer": "62"}
+{"id": "R2.cheapest_network", "level": 1, "index": 34, "answer": "68"}
+{"id": "R2.cheapest_network", "level": 1, "index": 35, "answer": "71"}
+{"id": "R2.cheapest_network", "level": 1, "index": 36, "answer": "51"}
+{"id": "R2.cheapest_network", "level": 1, "index": 37, "answer": "57"}
+{"id": "R2.cheapest_network", "level": 1, "index": 38, "answer": "76"}
+{"id": "R2.cheapest_network", "level": 1, "index": 39, "answer": "64"}
+{"id": "R2.cheapest_network", "level": 2, "index": 0, "answer": "79"}
+{"id": "R2.cheapest_network", "level": 2, "index": 1, "answer": "81"}
+{"id": "R2.cheapest_network", "level": 2, "index": 2, "answer": "56"}
+{"id": "R2.cheapest_network", "level": 2, "index": 3, "answer": "71"}
+{"id": "R2.cheapest_network", "level": 2, "index": 4, "answer": "71"}
+{"id": "R2.cheapest_network", "level": 2, "index": 5, "answer": "50"}
+{"id": "R2.cheapest_network", "level": 2, "index": 6, "answer": "60"}
+{"id": "R2.cheapest_network", "level": 2, "index": 7, "answer": "68"}
+{"id": "R2.cheapest_network", "level": 2, "index": 8, "answer": "78"}
+{"id": "R2.cheapest_network", "level": 2, "index": 9, "answer": "75"}
+{"id": "R2.cheapest_network", "level": 2, "index": 10, "answer": "52"}
+{"id": "R2.cheapest_network", "level": 2, "index": 11, "answer": "88"}
+{"id": "R2.cheapest_network", "level": 2, "index": 12, "answer": "80"}
+{"id": "R2.cheapest_network", "level": 2, "index": 13, "answer": "82"}
+{"id": "R2.cheapest_network", "level": 2, "index": 14, "answer": "78"}
+{"id": "R2.cheapest_network", "level": 2, "index": 15, "answer": "58"}
+{"id": "R2.cheapest_network", "level": 2, "index": 16, "answer": "54"}
+{"id": "R2.cheapest_network", "level": 2, "index": 17, "answer": "70"}
+{"id": "R2.cheapest_network", "level": 2, "index": 18, "answer": "65"}
+{"id": "R2.cheapest_network", "level": 2, "index": 19, "answer": "54"}
+{"id": "R2.cheapest_network", "level": 2, "index": 20, "answer": "84"}
+{"id": "R2.cheapest_network", "level": 2, "index": 21, "answer": "71"}
+{"id": "R2.cheapest_network", "level": 2, "index": 22, "answer": "59"}
+{"id": "R2.cheapest_network", "level": 2, "index": 23, "answer": "84"}
+{"id": "R2.cheapest_network", "level": 2, "index": 24, "answer": "60"}
+{"id": "R2.cheapest_network", "level": 2, "index": 25, "answer": "66"}
+{"id": "R2.cheapest_network", "level": 2, "index": 26, "answer": "73"}
+{"id": "R2.cheapest_network", "level": 2, "index": 27, "answer": "78"}
+{"id": "R2.cheapest_network", "level": 2, "index": 28, "answer": "56"}
+{"id": "R2.cheapest_network", "level": 2, "index": 29, "answer": "59"}
+{"id": "R2.cheapest_network", "level": 2, "index": 30, "answer": "65"}
+{"id": "R2.cheapest_network", "level": 2, "index": 31, "answer": "72"}
+{"id": "R2.cheapest_network", "level": 2, "index": 32, "answer": "80"}
+{"id": "R2.cheapest_network", "level": 2, "index": 33, "answer": "65"}
+{"id": "R2.cheapest_network", "level": 2, "index": 34, "answer": "65"}
+{"id": "R2.cheapest_network", "level": 2, "index": 35, "answer": "78"}
+{"id": "R2.cheapest_network", "level": 2, "index": 36, "answer": "68"}
+{"id": "R2.cheapest_network", "level": 2, "index": 37, "answer": "50"}
+{"id": "R2.cheapest_network", "level": 2, "index": 38, "answer": "60"}
+{"id": "R2.cheapest_network", "level": 2, "index": 39, "answer": "60"}
+{"id": "R2.cheapest_network", "level": 3, "index": 0, "answer": "71"}
+{"id": "R2.cheapest_network", "level": 3, "index": 1, "answer": "86"}
+{"id": "R2.cheapest_network", "level": 3, "index": 2, "answer": "65"}
+{"id": "R2.cheapest_network", "level": 3, "index": 3, "answer": "76"}
+{"id": "R2.cheapest_network", "level": 3, "index": 4, "answer": "64"}
+{"id": "R2.cheapest_network", "level": 3, "index": 5, "answer": "88"}
+{"id": "R2.cheapest_network", "level": 3, "index": 6, "answer": "73"}
+{"id": "R2.cheapest_network", "level": 3, "index": 7, "answer": "77"}
+{"id": "R2.cheapest_network", "level": 3, "index": 8, "answer": "80"}
+{"id": "R2.cheapest_network", "level": 3, "index": 9, "answer": "65"}
+{"id": "R2.cheapest_network", "level": 3, "index": 10, "answer": "77"}
+{"id": "R2.cheapest_network", "level": 3, "index": 11, "answer": "64"}
+{"id": "R2.cheapest_network", "level": 3, "index": 12, "answer": "69"}
+{"id": "R2.cheapest_network", "level": 3, "index": 13, "answer": "72"}
+{"id": "R2.cheapest_network", "level": 3, "index": 14, "answer": "58"}
+{"id": "R2.cheapest_network", "level": 3, "index": 15, "answer": "82"}
+{"id": "R2.cheapest_network", "level": 3, "index": 16, "answer": "81"}
+{"id": "R2.cheapest_network", "level": 3, "index": 17, "answer": "75"}
+{"id": "R2.cheapest_network", "level": 3, "index": 18, "answer": "66"}
+{"id": "R2.cheapest_network", "level": 3, "index": 19, "answer": "79"}
+{"id": "R2.cheapest_network", "level": 3, "index": 20, "answer": "75"}
+{"id": "R2.cheapest_network", "level": 3, "index": 21, "answer": "87"}
+{"id": "R2.cheapest_network", "level": 3, "index": 22, "answer": "85"}
+{"id": "R2.cheapest_network", "level": 3, "index": 23, "answer": "69"}
+{"id": "R2.cheapest_network", "level": 3, "index": 24, "answer": "79"}
+{"id": "R2.cheapest_network", "level": 3, "index": 25, "answer": "61"}
+{"id": "R2.cheapest_network", "level": 3, "index": 26, "answer": "76"}
+{"id": "R2.cheapest_network", "level": 3, "index": 27, "answer": "90"}
+{"id": "R2.cheapest_network", "level": 3, "index": 28, "answer": "72"}
+{"id": "R2.cheapest_network", "level": 3, "index": 29, "answer": "64"}
+{"id": "R2.cheapest_network", "level": 3, "index": 30, "answer": "73"}
+{"id": "R2.cheapest_network", "level": 3, "index": 31, "answer": "55"}
+{"id": "R2.cheapest_network", "level": 3, "index": 32, "answer": "68"}
+{"id": "R2.cheapest_network", "level": 3, "index": 33, "answer": "63"}
+{"id": "R2.cheapest_network", "level": 3, "index": 34, "answer": "76"}
+{"id": "R2.cheapest_network", "level": 3, "index": 35, "answer": "91"}
+{"id": "R2.cheapest_network", "level": 3, "index": 36, "answer": "65"}
+{"id": "R2.cheapest_network", "level": 3, "index": 37, "answer": "66"}
+{"id": "R2.cheapest_network", "level": 3, "index": 38, "answer": "72"}
+{"id": "R2.cheapest_network", "level": 3, "index": 39, "answer": "71"}
+{"id": "R2.cheapest_network", "level": 4, "index": 0, "answer": "74"}
+{"id": "R2.cheapest_network", "level": 4, "index": 1, "answer": "80"}
+{"id": "R2.cheapest_network", "level": 4, "index": 2, "answer": "77"}
+{"id": "R2.cheapest_network", "level": 4, "index": 3, "answer": "79"}
+{"id": "R2.cheapest_network", "level": 4, "index": 4, "answer": "68"}
+{"id": "R2.cheapest_network", "level": 4, "index": 5, "answer": "48"}
+{"id": "R2.cheapest_network", "level": 4, "index": 6, "answer": "61"}
+{"id": "R2.cheapest_network", "level": 4, "index": 7, "answer": "76"}
+{"id": "R2.cheapest_network", "level": 4, "index": 8, "answer": "80"}
+{"id": "R2.cheapest_network", "level": 4, "index": 9, "answer": "75"}
+{"id": "R2.cheapest_network", "level": 4, "index": 10, "answer": "70"}
+{"id": "R2.cheapest_network", "level": 4, "index": 11, "answer": "69"}
+{"id": "R2.cheapest_network", "level": 4, "index": 12, "answer": "73"}
+{"id": "R2.cheapest_network", "level": 4, "index": 13, "answer": "77"}
+{"id": "R2.cheapest_network", "level": 4, "index": 14, "answer": "69"}
+{"id": "R2.cheapest_network", "level": 4, "index": 15, "answer": "62"}
+{"id": "R2.cheapest_network", "level": 4, "index": 16, "answer": "83"}
+{"id": "R2.cheapest_network", "level": 4, "index": 17, "answer": "86"}
+{"id": "R2.cheapest_network", "level": 4, "index": 18, "answer": "83"}
+{"id": "R2.cheapest_network", "level": 4, "index": 19, "answer": "70"}
+{"id": "R2.cheapest_network", "level": 4, "index": 20, "answer": "83"}
+{"id": "R2.cheapest_network", "level": 4, "index": 21, "answer": "74"}
+{"id": "R2.cheapest_network", "level": 4, "index": 22, "answer": "86"}
+{"id": "R2.cheapest_network", "level": 4, "index": 23, "answer": "67"}
+{"id": "R2.cheapest_network", "level": 4, "index": 24, "answer": "72"}
+{"id": "R2.cheapest_network", "level": 4, "index": 25, "answer": "80"}
+{"id": "R2.cheapest_network", "level": 4, "index": 26, "answer": "71"}
+{"id": "R2.cheapest_network", "level": 4, "index": 27, "answer": "77"}
+{"id": "R2.cheapest_network", "level": 4, "index": 28, "answer": "66"}
+{"id": "R2.cheapest_network", "level": 4, "index": 29, "answer": "80"}
+{"id": "R2.cheapest_network", "level": 4, "index": 30, "answer": "79"}
+{"id": "R2.cheapest_network", "level": 4, "index": 31, "answer": "67"}
+{"id": "R2.cheapest_network", "level": 4, "index": 32, "answer": "73"}
+{"id": "R2.cheapest_network", "level": 4, "index": 33, "answer": "77"}
+{"id": "R2.cheapest_network", "level": 4, "index": 34, "answer": "82"}
+{"id": "R2.cheapest_network", "level": 4, "index": 35, "answer": "64"}
+{"id": "R2.cheapest_network", "level": 4, "index": 36, "answer": "77"}
+{"id": "R2.cheapest_network", "level": 4, "index": 37, "answer": "72"}
+{"id": "R2.cheapest_network", "level": 4, "index": 38, "answer": "86"}
+{"id": "R2.cheapest_network", "level": 4, "index": 39, "answer": "71"}
+{"id": "R2.cheapest_network", "level": 5, "index": 0, "answer": "73"}
+{"id": "R2.cheapest_network", "level": 5, "index": 1, "answer": "89"}
+{"id": "R2.cheapest_network", "level": 5, "index": 2, "answer": "87"}
+{"id": "R2.cheapest_network", "level": 5, "index": 3, "answer": "53"}
+{"id": "R2.cheapest_network", "level": 5, "index": 4, "answer": "84"}
+{"id": "R2.cheapest_network", "level": 5, "index": 5, "answer": "96"}
+{"id": "R2.cheapest_network", "level": 5, "index": 6, "answer": "59"}
+{"id": "R2.cheapest_network", "level": 5, "index": 7, "answer": "66"}
+{"id": "R2.cheapest_network", "level": 5, "index": 8, "answer": "65"}
+{"id": "R2.cheapest_network", "level": 5, "index": 9, "answer": "78"}
+{"id": "R2.cheapest_network", "level": 5, "index": 10, "answer": "73"}
+{"id": "R2.cheapest_network", "level": 5, "index": 11, "answer": "78"}
+{"id": "R2.cheapest_network", "level": 5, "index": 12, "answer": "89"}
+{"id": "R2.cheapest_network", "level": 5, "index": 13, "answer": "63"}
+{"id": "R2.cheapest_network", "level": 5, "index": 14, "answer": "81"}
+{"id": "R2.cheapest_network", "level": 5, "index": 15, "answer": "62"}
+{"id": "R2.cheapest_network", "level": 5, "index": 16, "answer": "79"}
+{"id": "R2.cheapest_network", "level": 5, "index": 17, "answer": "83"}
+{"id": "R2.cheapest_network", "level": 5, "index": 18, "answer": "72"}
+{"id": "R2.cheapest_network", "level": 5, "index": 19, "answer": "82"}
+{"id": "R2.cheapest_network", "level": 5, "index": 20, "answer": "85"}
+{"id": "R2.cheapest_network", "level": 5, "index": 21, "answer": "86"}
+{"id": "R2.cheapest_network", "level": 5, "index": 22, "answer": "91"}
+{"id": "R2.cheapest_network", "level": 5, "index": 23, "answer": "80"}
+{"id": "R2.cheapest_network", "level": 5, "index": 24, "answer": "74"}
+{"id": "R2.cheapest_network", "level": 5, "index": 25, "answer": "82"}
+{"id": "R2.cheapest_network", "level": 5, "index": 26, "answer": "73"}
+{"id": "R2.cheapest_network", "level": 5, "index": 27, "answer": "86"}
+{"id": "R2.cheapest_network", "level": 5, "index": 28, "answer": "69"}
+{"id": "R2.cheapest_network", "level": 5, "index": 29, "answer": "79"}
+{"id": "R2.cheapest_network", "level": 5, "index": 30, "answer": "72"}
+{"id": "R2.cheapest_network", "level": 5, "index": 31, "answer": "87"}
+{"id": "R2.cheapest_network", "level": 5, "index": 32, "answer": "77"}
+{"id": "R2.cheapest_network", "level": 5, "index": 33, "answer": "76"}
+{"id": "R2.cheapest_network", "level": 5, "index": 34, "answer": "67"}
+{"id": "R2.cheapest_network", "level": 5, "index": 35, "answer": "82"}
+{"id": "R2.cheapest_network", "level": 5, "index": 36, "answer": "86"}
+{"id": "R2.cheapest_network", "level": 5, "index": 37, "answer": "81"}
+{"id": "R2.cheapest_network", "level": 5, "index": 38, "answer": "88"}
+{"id": "R2.cheapest_network", "level": 5, "index": 39, "answer": "86"}
+{"id": "R2.cheapest_network", "level": 6, "index": 0, "answer": "81"}
+{"id": "R2.cheapest_network", "level": 6, "index": 1, "answer": "90"}
+{"id": "R2.cheapest_network", "level": 6, "index": 2, "answer": "84"}
+{"id": "R2.cheapest_network", "level": 6, "index": 3, "answer": "99"}
+{"id": "R2.cheapest_network", "level": 6, "index": 4, "answer": "80"}
+{"id": "R2.cheapest_network", "level": 6, "index": 5, "answer": "82"}
+{"id": "R2.cheapest_network", "level": 6, "index": 6, "answer": "96"}
+{"id": "R2.cheapest_network", "level": 6, "index": 7, "answer": "84"}
+{"id": "R2.cheapest_network", "level": 6, "index": 8, "answer": "87"}
+{"id": "R2.cheapest_network", "level": 6, "index": 9, "answer": "75"}
+{"id": "R2.cheapest_network", "level": 6, "index": 10, "answer": "83"}
+{"id": "R2.cheapest_network", "level": 6, "index": 11, "answer": "83"}
+{"id": "R2.cheapest_network", "level": 6, "index": 12, "answer": "57"}
+{"id": "R2.cheapest_network", "level": 6, "index": 13, "answer": "78"}
+{"id": "R2.cheapest_network", "level": 6, "index": 14, "answer": "80"}
+{"id": "R2.cheapest_network", "level": 6, "index": 15, "answer": "102"}
+{"id": "R2.cheapest_network", "level": 6, "index": 16, "answer": "68"}
+{"id": "R2.cheapest_network", "level": 6, "index": 17, "answer": "68"}
+{"id": "R2.cheapest_network", "level": 6, "index": 18, "answer": "76"}
+{"id": "R2.cheapest_network", "level": 6, "index": 19, "answer": "74"}
+{"id": "R2.cheapest_network", "level": 6, "index": 20, "answer": "87"}
+{"id": "R2.cheapest_network", "level": 6, "index": 21, "answer": "77"}
+{"id": "R2.cheapest_network", "level": 6, "index": 22, "answer": "82"}
+{"id": "R2.cheapest_network", "level": 6, "index": 23, "answer": "72"}
+{"id": "R2.cheapest_network", "level": 6, "index": 24, "answer": "88"}
+{"id": "R2.cheapest_network", "level": 6, "index": 25, "answer": "83"}
+{"id": "R2.cheapest_network", "level": 6, "index": 26, "answer": "80"}
+{"id": "R2.cheapest_network", "level": 6, "index": 27, "answer": "92"}
+{"id": "R2.cheapest_network", "level": 6, "index": 28, "answer": "83"}
+{"id": "R2.cheapest_network", "level": 6, "index": 29, "answer": "80"}
+{"id": "R2.cheapest_network", "level": 6, "index": 30, "answer": "84"}
+{"id": "R2.cheapest_network", "level": 6, "index": 31, "answer": "81"}
+{"id": "R2.cheapest_network", "level": 6, "index": 32, "answer": "82"}
+{"id": "R2.cheapest_network", "level": 6, "index": 33, "answer": "83"}
+{"id": "R2.cheapest_network", "level": 6, "index": 34, "answer": "74"}
+{"id": "R2.cheapest_network", "level": 6, "index": 35, "answer": "73"}
+{"id": "R2.cheapest_network", "level": 6, "index": 36, "answer": "78"}
+{"id": "R2.cheapest_network", "level": 6, "index": 37, "answer": "82"}
+{"id": "R2.cheapest_network", "level": 6, "index": 38, "answer": "74"}
+{"id": "R2.cheapest_network", "level": 6, "index": 39, "answer": "80"}
+{"id": "R2.count_divisible", "level": 0, "index": 0, "answer": "488"}
+{"id": "R2.count_divisible", "level": 0, "index": 1, "answer": "258"}
+{"id": "R2.count_divisible", "level": 0, "index": 2, "answer": "168"}
+{"id": "R2.count_divisible", "level": 0, "index": 3, "answer": "92"}
+{"id": "R2.count_divisible", "level": 0, "index": 4, "answer": "72"}
+{"id": "R2.count_divisible", "level": 0, "index": 5, "answer": "384"}
+{"id": "R2.count_divisible", "level": 0, "index": 6, "answer": "220"}
+{"id": "R2.count_divisible", "level": 0, "index": 7, "answer": "426"}
+{"id": "R2.count_divisible", "level": 0, "index": 8, "answer": "294"}
+{"id": "R2.count_divisible", "level": 0, "index": 9, "answer": "228"}
+{"id": "R2.count_divisible", "level": 0, "index": 10, "answer": "120"}
+{"id": "R2.count_divisible", "level": 0, "index": 11, "answer": "52"}
+{"id": "R2.count_divisible", "level": 0, "index": 12, "answer": "438"}
+{"id": "R2.count_divisible", "level": 0, "index": 13, "answer": "480"}
+{"id": "R2.count_divisible", "level": 0, "index": 14, "answer": "534"}
+{"id": "R2.count_divisible", "level": 0, "index": 15, "answer": "176"}
+{"id": "R2.count_divisible", "level": 0, "index": 16, "answer": "0"}
+{"id": "R2.count_divisible", "level": 0, "index": 17, "answer": "350"}
+{"id": "R2.count_divisible", "level": 0, "index": 18, "answer": "156"}
+{"id": "R2.count_divisible", "level": 0, "index": 19, "answer": "366"}
+{"id": "R2.count_divisible", "level": 0, "index": 20, "answer": "0"}
+{"id": "R2.count_divisible", "level": 0, "index": 21, "answer": "408"}
+{"id": "R2.count_divisible", "level": 0, "index": 22, "answer": "0"}
+{"id": "R2.count_divisible", "level": 0, "index": 23, "answer": "362"}
+{"id": "R2.count_divisible", "level": 0, "index": 24, "answer": "552"}
+{"id": "R2.count_divisible", "level": 0, "index": 25, "answer": "304"}
+{"id": "R2.count_divisible", "level": 0, "index": 26, "answer": "310"}
+{"id": "R2.count_divisible", "level": 0, "index": 27, "answer": "120"}
+{"id": "R2.count_divisible", "level": 0, "index": 28, "answer": "369"}
+{"id": "R2.count_divisible", "level": 0, "index": 29, "answer": "342"}
+{"id": "R2.count_divisible", "level": 0, "index": 30, "answer": "656"}
+{"id": "R2.count_divisible", "level": 0, "index": 31, "answer": "52"}
+{"id": "R2.count_divisible", "level": 0, "index": 32, "answer": "454"}
+{"id": "R2.count_divisible", "level": 0, "index": 33, "answer": "346"}
+{"id": "R2.count_divisible", "level": 0, "index": 34, "answer": "280"}
+{"id": "R2.count_divisible", "level": 0, "index": 35, "answer": "416"}
+{"id": "R2.count_divisible", "level": 0, "index": 36, "answer": "446"}
+{"id": "R2.count_divisible", "level": 0, "index": 37, "answer": "414"}
+{"id": "R2.count_divisible", "level": 0, "index": 38, "answer": "165"}
+{"id": "R2.count_divisible", "level": 0, "index": 39, "answer": "428"}
+{"id": "R2.count_divisible", "level": 1, "index": 0, "answer": "156"}
+{"id": "R2.count_divisible", "level": 1, "index": 1, "answer": "56"}
+{"id": "R2.count_divisible", "level": 1, "index": 2, "answer": "465"}
+{"id": "R2.count_divisible", "level": 1, "index": 3, "answer": "321"}
+{"id": "R2.count_divisible", "level": 1, "index": 4, "answer": "84"}
+{"id": "R2.count_divisible", "level": 1, "index": 5, "answer": "603"}
+{"id": "R2.count_divisible", "level": 1, "index": 6, "answer": "0"}
+{"id": "R2.count_divisible", "level": 1, "index": 7, "answer": "378"}
+{"id": "R2.count_divisible", "level": 1, "index": 8, "answer": "140"}
+{"id": "R2.count_divisible", "level": 1, "index": 9, "answer": "240"}
+{"id": "R2.count_divisible", "level": 1, "index": 10, "answer": "84"}
+{"id": "R2.count_divisible", "level": 1, "index": 11, "answer": "294"}
+{"id": "R2.count_divisible", "level": 1, "index": 12, "answer": "0"}
+{"id": "R2.count_divisible", "level": 1, "index": 13, "answer": "538"}
+{"id": "R2.count_divisible", "level": 1, "index": 14, "answer": "0"}
+{"id": "R2.count_divisible", "level": 1, "index": 15, "answer": "702"}
+{"id": "R2.count_divisible", "level": 1, "index": 16, "answer": "212"}
+{"id": "R2.count_divisible", "level": 1, "index": 17, "answer": "222"}
+{"id": "R2.count_divisible", "level": 1, "index": 18, "answer": "200"}
+{"id": "R2.count_divisible", "level": 1, "index": 19, "answer": "438"}
+{"id": "R2.count_divisible", "level": 1, "index": 20, "answer": "638"}
+{"id": "R2.count_divisible", "level": 1, "index": 21, "answer": "135"}
+{"id": "R2.count_divisible", "level": 1, "index": 22, "answer": "598"}
+{"id": "R2.count_divisible", "level": 1, "index": 23, "answer": "234"}
+{"id": "R2.count_divisible", "level": 1, "index": 24, "answer": "216"}
+{"id": "R2.count_divisible", "level": 1, "index": 25, "answer": "220"}
+{"id": "R2.count_divisible", "level": 1, "index": 26, "answer": "284"}
+{"id": "R2.count_divisible", "level": 1, "index": 27, "answer": "404"}
+{"id": "R2.count_divisible", "level": 1, "index": 28, "answer": "316"}
+{"id": "R2.count_divisible", "level": 1, "index": 29, "answer": "159"}
+{"id": "R2.count_divisible", "level": 1, "index": 30, "answer": "766"}
+{"id": "R2.count_divisible", "level": 1, "index": 31, "answer": "789"}
+{"id": "R2.count_divisible", "level": 1, "index": 32, "answer": "300"}
+{"id": "R2.count_divisible", "level": 1, "index": 33, "answer": "402"}
+{"id": "R2.count_divisible", "level": 1, "index": 34, "answer": "56"}
+{"id": "R2.count_divisible", "level": 1, "index": 35, "answer": "84"}
+{"id": "R2.count_divisible", "level": 1, "index": 36, "answer": "288"}
+{"id": "R2.count_divisible", "level": 1, "index": 37, "answer": "322"}
+{"id": "R2.count_divisible", "level": 1, "index": 38, "answer": "836"}
+{"id": "R2.count_divisible", "level": 1, "index": 39, "answer": "384"}
+{"id": "R2.count_divisible", "level": 2, "index": 0, "answer": "268"}
+{"id": "R2.count_divisible", "level": 2, "index": 1, "answer": "1562"}
+{"id": "R2.count_divisible", "level": 2, "index": 2, "answer": "609"}
+{"id": "R2.count_divisible", "level": 2, "index": 3, "answer": "708"}
+{"id": "R2.count_divisible", "level": 2, "index": 4, "answer": "632"}
+{"id": "R2.count_divisible", "level": 2, "index": 5, "answer": "112"}
+{"id": "R2.count_divisible", "level": 2, "index": 6, "answer": "232"}
+{"id": "R2.count_divisible", "level": 2, "index": 7, "answer": "1317"}
+{"id": "R2.count_divisible", "level": 2, "index": 8, "answer": "249"}
+{"id": "R2.count_divisible", "level": 2, "index": 9, "answer": "615"}
+{"id": "R2.count_divisible", "level": 2, "index": 10, "answer": "357"}
+{"id": "R2.count_divisible", "level": 2, "index": 11, "answer": "144"}
+{"id": "R2.count_divisible", "level": 2, "index": 12, "answer": "456"}
+{"id": "R2.count_divisible", "level": 2, "index": 13, "answer": "716"}
+{"id": "R2.count_divisible", "level": 2, "index": 14, "answer": "616"}
+{"id": "R2.count_divisible", "level": 2, "index": 15, "answer": "274"}
+{"id": "R2.count_divisible", "level": 2, "index": 16, "answer": "598"}
+{"id": "R2.count_divisible", "level": 2, "index": 17, "answer": "1071"}
+{"id": "R2.count_divisible", "level": 2, "index": 18, "answer": "642"}
+{"id": "R2.count_divisible", "level": 2, "index": 19, "answer": "928"}
+{"id": "R2.count_divisible", "level": 2, "index": 20, "answer": "1004"}
+{"id": "R2.count_divisible", "level": 2, "index": 21, "answer": "624"}
+{"id": "R2.count_divisible", "level": 2, "index": 22, "answer": "800"}
+{"id": "R2.count_divisible", "level": 2, "index": 23, "answer": "876"}
+{"id": "R2.count_divisible", "level": 2, "index": 24, "answer": "582"}
+{"id": "R2.count_divisible", "level": 2, "index": 25, "answer": "918"}
+{"id": "R2.count_divisible", "level": 2, "index": 26, "answer": "366"}
+{"id": "R2.count_divisible", "level": 2, "index": 27, "answer": "588"}
+{"id": "R2.count_divisible", "level": 2, "index": 28, "answer": "536"}
+{"id": "R2.count_divisible", "level": 2, "index": 29, "answer": "836"}
+{"id": "R2.count_divisible", "level": 2, "index": 30, "answer": "200"}
+{"id": "R2.count_divisible", "level": 2, "index": 31, "answer": "484"}
+{"id": "R2.count_divisible", "level": 2, "index": 32, "answer": "840"}
+{"id": "R2.count_divisible", "level": 2, "index": 33, "answer": "732"}
+{"id": "R2.count_divisible", "level": 2, "index": 34, "answer": "1086"}
+{"id": "R2.count_divisible", "level": 2, "index": 35, "answer": "1156"}
+{"id": "R2.count_divisible", "level": 2, "index": 36, "answer": "375"}
+{"id": "R2.count_divisible", "level": 2, "index": 37, "answer": "402"}
+{"id": "R2.count_divisible", "level": 2, "index": 38, "answer": "586"}
+{"id": "R2.count_divisible", "level": 2, "index": 39, "answer": "424"}
+{"id": "R2.count_divisible", "level": 3, "index": 0, "answer": "585"}
+{"id": "R2.count_divisible", "level": 3, "index": 1, "answer": "1530"}
+{"id": "R2.count_divisible", "level": 3, "index": 2, "answer": "1426"}
+{"id": "R2.count_divisible", "level": 3, "index": 3, "answer": "1140"}
+{"id": "R2.count_divisible", "level": 3, "index": 4, "answer": "744"}
+{"id": "R2.count_divisible", "level": 3, "index": 5, "answer": "1230"}
+{"id": "R2.count_divisible", "level": 3, "index": 6, "answer": "729"}
+{"id": "R2.count_divisible", "level": 3, "index": 7, "answer": "627"}
+{"id": "R2.count_divisible", "level": 3, "index": 8, "answer": "428"}
+{"id": "R2.count_divisible", "level": 3, "index": 9, "answer": "417"}
+{"id": "R2.count_divisible", "level": 3, "index": 10, "answer": "390"}
+{"id": "R2.count_divisible", "level": 3, "index": 11, "answer": "736"}
+{"id": "R2.count_divisible", "level": 3, "index": 12, "answer": "528"}
+{"id": "R2.count_divisible", "level": 3, "index": 13, "answer": "1072"}
+{"id": "R2.count_divisible", "level": 3, "index": 14, "answer": "1392"}
+{"id": "R2.count_divisible", "level": 3, "index": 15, "answer": "808"}
+{"id": "R2.count_divisible", "level": 3, "index": 16, "answer": "748"}
+{"id": "R2.count_divisible", "level": 3, "index": 17, "answer": "1330"}
+{"id": "R2.count_divisible", "level": 3, "index": 18, "answer": "1988"}
+{"id": "R2.count_divisible", "level": 3, "index": 19, "answer": "1552"}
+{"id": "R2.count_divisible", "level": 3, "index": 20, "answer": "1176"}
+{"id": "R2.count_divisible", "level": 3, "index": 21, "answer": "1142"}
+{"id": "R2.count_divisible", "level": 3, "index": 22, "answer": "1676"}
+{"id": "R2.count_divisible", "level": 3, "index": 23, "answer": "642"}
+{"id": "R2.count_divisible", "level": 3, "index": 24, "answer": "1456"}
+{"id": "R2.count_divisible", "level": 3, "index": 25, "answer": "432"}
+{"id": "R2.count_divisible", "level": 3, "index": 26, "answer": "180"}
+{"id": "R2.count_divisible", "level": 3, "index": 27, "answer": "1296"}
+{"id": "R2.count_divisible", "level": 3, "index": 28, "answer": "585"}
+{"id": "R2.count_divisible", "level": 3, "index": 29, "answer": "932"}
+{"id": "R2.count_divisible", "level": 3, "index": 30, "answer": "460"}
+{"id": "R2.count_divisible", "level": 3, "index": 31, "answer": "663"}
+{"id": "R2.count_divisible", "level": 3, "index": 32, "answer": "1168"}
+{"id": "R2.count_divisible", "level": 3, "index": 33, "answer": "819"}
+{"id": "R2.count_divisible", "level": 3, "index": 34, "answer": "1350"}
+{"id": "R2.count_divisible", "level": 3, "index": 35, "answer": "903"}
+{"id": "R2.count_divisible", "level": 3, "index": 36, "answer": "1254"}
+{"id": "R2.count_divisible", "level": 3, "index": 37, "answer": "321"}
+{"id": "R2.count_divisible", "level": 3, "index": 38, "answer": "135"}
+{"id": "R2.count_divisible", "level": 3, "index": 39, "answer": "472"}
+{"id": "R2.count_divisible", "level": 4, "index": 0, "answer": "1680"}
+{"id": "R2.count_divisible", "level": 4, "index": 1, "answer": "1170"}
+{"id": "R2.count_divisible", "level": 4, "index": 2, "answer": "1866"}
+{"id": "R2.count_divisible", "level": 4, "index": 3, "answer": "1557"}
+{"id": "R2.count_divisible", "level": 4, "index": 4, "answer": "888"}
+{"id": "R2.count_divisible", "level": 4, "index": 5, "answer": "1377"}
+{"id": "R2.count_divisible", "level": 4, "index": 6, "answer": "1437"}
+{"id": "R2.count_divisible", "level": 4, "index": 7, "answer": "1146"}
+{"id": "R2.count_divisible", "level": 4, "index": 8, "answer": "1372"}
+{"id": "R2.count_divisible", "level": 4, "index": 9, "answer": "2684"}
+{"id": "R2.count_divisible", "level": 4, "index": 10, "answer": "514"}
+{"id": "R2.count_divisible", "level": 4, "index": 11, "answer": "460"}
+{"id": "R2.count_divisible", "level": 4, "index": 12, "answer": "836"}
+{"id": "R2.count_divisible", "level": 4, "index": 13, "answer": "2462"}
+{"id": "R2.count_divisible", "level": 4, "index": 14, "answer": "1635"}
+{"id": "R2.count_divisible", "level": 4, "index": 15, "answer": "588"}
+{"id": "R2.count_divisible", "level": 4, "index": 16, "answer": "1618"}
+{"id": "R2.count_divisible", "level": 4, "index": 17, "answer": "324"}
+{"id": "R2.count_divisible", "level": 4, "index": 18, "answer": "560"}
+{"id": "R2.count_divisible", "level": 4, "index": 19, "answer": "920"}
+{"id": "R2.count_divisible", "level": 4, "index": 20, "answer": "1706"}
+{"id": "R2.count_divisible", "level": 4, "index": 21, "answer": "1416"}
+{"id": "R2.count_divisible", "level": 4, "index": 22, "answer": "2040"}
+{"id": "R2.count_divisible", "level": 4, "index": 23, "answer": "1572"}
+{"id": "R2.count_divisible", "level": 4, "index": 24, "answer": "1512"}
+{"id": "R2.count_divisible", "level": 4, "index": 25, "answer": "1179"}
+{"id": "R2.count_divisible", "level": 4, "index": 26, "answer": "1656"}
+{"id": "R2.count_divisible", "level": 4, "index": 27, "answer": "3578"}
+{"id": "R2.count_divisible", "level": 4, "index": 28, "answer": "789"}
+{"id": "R2.count_divisible", "level": 4, "index": 29, "answer": "1212"}
+{"id": "R2.count_divisible", "level": 4, "index": 30, "answer": "1280"}
+{"id": "R2.count_divisible", "level": 4, "index": 31, "answer": "896"}
+{"id": "R2.count_divisible", "level": 4, "index": 32, "answer": "714"}
+{"id": "R2.count_divisible", "level": 4, "index": 33, "answer": "1804"}
+{"id": "R2.count_divisible", "level": 4, "index": 34, "answer": "2024"}
+{"id": "R2.count_divisible", "level": 4, "index": 35, "answer": "915"}
+{"id": "R2.count_divisible", "level": 4, "index": 36, "answer": "2534"}
+{"id": "R2.count_divisible", "level": 4, "index": 37, "answer": "2433"}
+{"id": "R2.count_divisible", "level": 4, "index": 38, "answer": "2430"}
+{"id": "R2.count_divisible", "level": 4, "index": 39, "answer": "1946"}
+{"id": "R2.count_divisible", "level": 5, "index": 0, "answer": "726"}
+{"id": "R2.count_divisible", "level": 5, "index": 1, "answer": "987"}
+{"id": "R2.count_divisible", "level": 5, "index": 2, "answer": "2070"}
+{"id": "R2.count_divisible", "level": 5, "index": 3, "answer": "2478"}
+{"id": "R2.count_divisible", "level": 5, "index": 4, "answer": "712"}
+{"id": "R2.count_divisible", "level": 5, "index": 5, "answer": "1160"}
+{"id": "R2.count_divisible", "level": 5, "index": 6, "answer": "384"}
+{"id": "R2.count_divisible", "level": 5, "index": 7, "answer": "2488"}
+{"id": "R2.count_divisible", "level": 5, "index": 8, "answer": "2662"}
+{"id": "R2.count_divisible", "level": 5, "index": 9, "answer": "2388"}
+{"id": "R2.count_divisible", "level": 5, "index": 10, "answer": "3126"}
+{"id": "R2.count_divisible", "level": 5, "index": 11, "answer": "1782"}
+{"id": "R2.count_divisible", "level": 5, "index": 12, "answer": "2822"}
+{"id": "R2.count_divisible", "level": 5, "index": 13, "answer": "1716"}
+{"id": "R2.count_divisible", "level": 5, "index": 14, "answer": "2654"}
+{"id": "R2.count_divisible", "level": 5, "index": 15, "answer": "964"}
+{"id": "R2.count_divisible", "level": 5, "index": 16, "answer": "1216"}
+{"id": "R2.count_divisible", "level": 5, "index": 17, "answer": "1590"}
+{"id": "R2.count_divisible", "level": 5, "index": 18, "answer": "2752"}
+{"id": "R2.count_divisible", "level": 5, "index": 19, "answer": "1695"}
+{"id": "R2.count_divisible", "level": 5, "index": 20, "answer": "2122"}
+{"id": "R2.count_divisible", "level": 5, "index": 21, "answer": "2690"}
+{"id": "R2.count_divisible", "level": 5, "index": 22, "answer": "3352"}
+{"id": "R2.count_divisible", "level": 5, "index": 23, "answer": "2466"}
+{"id": "R2.count_divisible", "level": 5, "index": 24, "answer": "1272"}
+{"id": "R2.count_divisible", "level": 5, "index": 25, "answer": "524"}
+{"id": "R2.count_divisible", "level": 5, "index": 26, "answer": "1548"}
+{"id": "R2.count_divisible", "level": 5, "index": 27, "answer": "1395"}
+{"id": "R2.count_divisible", "level": 5, "index": 28, "answer": "1256"}
+{"id": "R2.count_divisible", "level": 5, "index": 29, "answer": "1348"}
+{"id": "R2.count_divisible", "level": 5, "index": 30, "answer": "1144"}
+{"id": "R2.count_divisible", "level": 5, "index": 31, "answer": "1881"}
+{"id": "R2.count_divisible", "level": 5, "index": 32, "answer": "1581"}
+{"id": "R2.count_divisible", "level": 5, "index": 33, "answer": "660"}
+{"id": "R2.count_divisible", "level": 5, "index": 34, "answer": "1365"}
+{"id": "R2.count_divisible", "level": 5, "index": 35, "answer": "900"}
+{"id": "R2.count_divisible", "level": 5, "index": 36, "answer": "1059"}
+{"id": "R2.count_divisible", "level": 5, "index": 37, "answer": "1216"}
+{"id": "R2.count_divisible", "level": 5, "index": 38, "answer": "396"}
+{"id": "R2.count_divisible", "level": 5, "index": 39, "answer": "2421"}
+{"id": "R2.count_divisible", "level": 6, "index": 0, "answer": "2628"}
+{"id": "R2.count_divisible", "level": 6, "index": 1, "answer": "2910"}
+{"id": "R2.count_divisible", "level": 6, "index": 2, "answer": "3216"}
+{"id": "R2.count_divisible", "level": 6, "index": 3, "answer": "4476"}
+{"id": "R2.count_divisible", "level": 6, "index": 4, "answer": "2200"}
+{"id": "R2.count_divisible", "level": 6, "index": 5, "answer": "1398"}
+{"id": "R2.count_divisible", "level": 6, "index": 6, "answer": "1888"}
+{"id": "R2.count_divisible", "level": 6, "index": 7, "answer": "5018"}
+{"id": "R2.count_divisible", "level": 6, "index": 8, "answer": "1428"}
+{"id": "R2.count_divisible", "level": 6, "index": 9, "answer": "3344"}
+{"id": "R2.count_divisible", "level": 6, "index": 10, "answer": "1860"}
+{"id": "R2.count_divisible", "level": 6, "index": 11, "answer": "1620"}
+{"id": "R2.count_divisible", "level": 6, "index": 12, "answer": "868"}
+{"id": "R2.count_divisible", "level": 6, "index": 13, "answer": "975"}
+{"id": "R2.count_divisible", "level": 6, "index": 14, "answer": "3414"}
+{"id": "R2.count_divisible", "level": 6, "index": 15, "answer": "1668"}
+{"id": "R2.count_divisible", "level": 6, "index": 16, "answer": "3490"}
+{"id": "R2.count_divisible", "level": 6, "index": 17, "answer": "2298"}
+{"id": "R2.count_divisible", "level": 6, "index": 18, "answer": "1944"}
+{"id": "R2.count_divisible", "level": 6, "index": 19, "answer": "2776"}
+{"id": "R2.count_divisible", "level": 6, "index": 20, "answer": "1488"}
+{"id": "R2.count_divisible", "level": 6, "index": 21, "answer": "236"}
+{"id": "R2.count_divisible", "level": 6, "index": 22, "answer": "2180"}
+{"id": "R2.count_divisible", "level": 6, "index": 23, "answer": "3772"}
+{"id": "R2.count_divisible", "level": 6, "index": 24, "answer": "2740"}
+{"id": "R2.count_divisible", "level": 6, "index": 25, "answer": "1768"}
+{"id": "R2.count_divisible", "level": 6, "index": 26, "answer": "2884"}
+{"id": "R2.count_divisible", "level": 6, "index": 27, "answer": "1324"}
+{"id": "R2.count_divisible", "level": 6, "index": 28, "answer": "1248"}
+{"id": "R2.count_divisible", "level": 6, "index": 29, "answer": "1416"}
+{"id": "R2.count_divisible", "level": 6, "index": 30, "answer": "2218"}
+{"id": "R2.count_divisible", "level": 6, "index": 31, "answer": "1468"}
+{"id": "R2.count_divisible", "level": 6, "index": 32, "answer": "3441"}
+{"id": "R2.count_divisible", "level": 6, "index": 33, "answer": "1713"}
+{"id": "R2.count_divisible", "level": 6, "index": 34, "answer": "3210"}
+{"id": "R2.count_divisible", "level": 6, "index": 35, "answer": "2824"}
+{"id": "R2.count_divisible", "level": 6, "index": 36, "answer": "1264"}
+{"id": "R2.count_divisible", "level": 6, "index": 37, "answer": "2362"}
+{"id": "R2.count_divisible", "level": 6, "index": 38, "answer": "4056"}
+{"id": "R2.count_divisible", "level": 6, "index": 39, "answer": "915"}
+{"id": "R2.crt_smallest", "level": 0, "index": 0, "answer": "37"}
+{"id": "R2.crt_smallest", "level": 0, "index": 1, "answer": "200"}
+{"id": "R2.crt_smallest", "level": 0, "index": 2, "answer": "50"}
+{"id": "R2.crt_smallest", "level": 0, "index": 3, "answer": "14"}
+{"id": "R2.crt_smallest", "level": 0, "index": 4, "answer": "49"}
+{"id": "R2.crt_smallest", "level": 0, "index": 5, "answer": "34"}
+{"id": "R2.crt_smallest", "level": 0, "index": 6, "answer": "3"}
+{"id": "R2.crt_smallest", "level": 0, "index": 7, "answer": "41"}
+{"id": "R2.crt_smallest", "level": 0, "index": 8, "answer": "66"}
+{"id": "R2.crt_smallest", "level": 0, "index": 9, "answer": "34"}
+{"id": "R2.crt_smallest", "level": 0, "index": 10, "answer": "3"}
+{"id": "R2.crt_smallest", "level": 0, "index": 11, "answer": "326"}
+{"id": "R2.crt_smallest", "level": 0, "index": 12, "answer": "97"}
+{"id": "R2.crt_smallest", "level": 0, "index": 13, "answer": "27"}
+{"id": "R2.crt_smallest", "level": 0, "index": 14, "answer": "56"}
+{"id": "R2.crt_smallest", "level": 0, "index": 15, "answer": "103"}
+{"id": "R2.crt_smallest", "level": 0, "index": 16, "answer": "53"}
+{"id": "R2.crt_smallest", "level": 0, "index": 17, "answer": "3"}
+{"id": "R2.crt_smallest", "level": 0, "index": 18, "answer": "11"}
+{"id": "R2.crt_smallest", "level": 0, "index": 19, "answer": "10"}
+{"id": "R2.crt_smallest", "level": 0, "index": 20, "answer": "189"}
+{"id": "R2.crt_smallest", "level": 0, "index": 21, "answer": "108"}
+{"id": "R2.crt_smallest", "level": 0, "index": 22, "answer": "315"}
+{"id": "R2.crt_smallest", "level": 0, "index": 23, "answer": "39"}
+{"id": "R2.crt_smallest", "level": 0, "index": 24, "answer": "17"}
+{"id": "R2.crt_smallest", "level": 0, "index": 25, "answer": "2"}
+{"id": "R2.crt_smallest", "level": 0, "index": 26, "answer": "74"}
+{"id": "R2.crt_smallest", "level": 0, "index": 27, "answer": "42"}
+{"id": "R2.crt_smallest", "level": 0, "index": 28, "answer": "19"}
+{"id": "R2.crt_smallest", "level": 0, "index": 29, "answer": "212"}
+{"id": "R2.crt_smallest", "level": 0, "index": 30, "answer": "614"}
+{"id": "R2.crt_smallest", "level": 0, "index": 31, "answer": "49"}
+{"id": "R2.crt_smallest", "level": 0, "index": 32, "answer": "264"}
+{"id": "R2.crt_smallest", "level": 0, "index": 33, "answer": "2"}
+{"id": "R2.crt_smallest", "level": 0, "index": 34, "answer": "19"}
+{"id": "R2.crt_smallest", "level": 0, "index": 35, "answer": "35"}
+{"id": "R2.crt_smallest", "level": 0, "index": 36, "answer": "124"}
+{"id": "R2.crt_smallest", "level": 0, "index": 37, "answer": "44"}
+{"id": "R2.crt_smallest", "level": 0, "index": 38, "answer": "54"}
+{"id": "R2.crt_smallest", "level": 0, "index": 39, "answer": "58"}
+{"id": "R2.crt_smallest", "level": 1, "index": 0, "answer": "128"}
+{"id": "R2.crt_smallest", "level": 1, "index": 1, "answer": "704"}
+{"id": "R2.crt_smallest", "level": 1, "index": 2, "answer": "208"}
+{"id": "R2.crt_smallest", "level": 1, "index": 3, "answer": "151"}
+{"id": "R2.crt_smallest", "level": 1, "index": 4, "answer": "449"}
+{"id": "R2.crt_smallest", "level": 1, "index": 5, "answer": "170"}
+{"id": "R2.crt_smallest", "level": 1, "index": 6, "answer": "74"}
+{"id": "R2.crt_smallest", "level": 1, "index": 7, "answer": "123"}
+{"id": "R2.crt_smallest", "level": 1, "index": 8, "answer": "258"}
+{"id": "R2.crt_smallest", "level": 1, "index": 9, "answer": "331"}
+{"id": "R2.crt_smallest", "level": 1, "index": 10, "answer": "174"}
+{"id": "R2.crt_smallest", "level": 1, "index": 11, "answer": "548"}
+{"id": "R2.crt_smallest", "level": 1, "index": 12, "answer": "580"}
+{"id": "R2.crt_smallest", "level": 1, "index": 13, "answer": "213"}
+{"id": "R2.crt_smallest", "level": 1, "index": 14, "answer": "298"}
+{"id": "R2.crt_smallest", "level": 1, "index": 15, "answer": "115"}
+{"id": "R2.crt_smallest", "level": 1, "index": 16, "answer": "445"}
+{"id": "R2.crt_smallest", "level": 1, "index": 17, "answer": "29"}
+{"id": "R2.crt_smallest", "level": 1, "index": 18, "answer": "120"}
+{"id": "R2.crt_smallest", "level": 1, "index": 19, "answer": "125"}
+{"id": "R2.crt_smallest", "level": 1, "index": 20, "answer": "35"}
+{"id": "R2.crt_smallest", "level": 1, "index": 21, "answer": "370"}
+{"id": "R2.crt_smallest", "level": 1, "index": 22, "answer": "359"}
+{"id": "R2.crt_smallest", "level": 1, "index": 23, "answer": "76"}
+{"id": "R2.crt_smallest", "level": 1, "index": 24, "answer": "236"}
+{"id": "R2.crt_smallest", "level": 1, "index": 25, "answer": "738"}
+{"id": "R2.crt_smallest", "level": 1, "index": 26, "answer": "214"}
+{"id": "R2.crt_smallest", "level": 1, "index": 27, "answer": "1116"}
+{"id": "R2.crt_smallest", "level": 1, "index": 28, "answer": "283"}
+{"id": "R2.crt_smallest", "level": 1, "index": 29, "answer": "66"}
+{"id": "R2.crt_smallest", "level": 1, "index": 30, "answer": "30"}
+{"id": "R2.crt_smallest", "level": 1, "index": 31, "answer": "157"}
+{"id": "R2.crt_smallest", "level": 1, "index": 32, "answer": "207"}
+{"id": "R2.crt_smallest", "level": 1, "index": 33, "answer": "279"}
+{"id": "R2.crt_smallest", "level": 1, "index": 34, "answer": "52"}
+{"id": "R2.crt_smallest", "level": 1, "index": 35, "answer": "580"}
+{"id": "R2.crt_smallest", "level": 1, "index": 36, "answer": "323"}
+{"id": "R2.crt_smallest", "level": 1, "index": 37, "answer": "201"}
+{"id": "R2.crt_smallest", "level": 1, "index": 38, "answer": "395"}
+{"id": "R2.crt_smallest", "level": 1, "index": 39, "answer": "651"}
+{"id": "R2.crt_smallest", "level": 2, "index": 0, "answer": "542"}
+{"id": "R2.crt_smallest", "level": 2, "index": 1, "answer": "741"}
+{"id": "R2.crt_smallest", "level": 2, "index": 2, "answer": "1893"}
+{"id": "R2.crt_smallest", "level": 2, "index": 3, "answer": "986"}
+{"id": "R2.crt_smallest", "level": 2, "index": 4, "answer": "1156"}
+{"id": "R2.crt_smallest", "level": 2, "index": 5, "answer": "473"}
+{"id": "R2.crt_smallest", "level": 2, "index": 6, "answer": "946"}
+{"id": "R2.crt_smallest", "level": 2, "index": 7, "answer": "307"}
+{"id": "R2.crt_smallest", "level": 2, "index": 8, "answer": "1383"}
+{"id": "R2.crt_smallest", "level": 2, "index": 9, "answer": "139"}
+{"id": "R2.crt_smallest", "level": 2, "index": 10, "answer": "1650"}
+{"id": "R2.crt_smallest", "level": 2, "index": 11, "answer": "958"}
+{"id": "R2.crt_smallest", "level": 2, "index": 12, "answer": "306"}
+{"id": "R2.crt_smallest", "level": 2, "index": 13, "answer": "1691"}
+{"id": "R2.crt_smallest", "level": 2, "index": 14, "answer": "296"}
+{"id": "R2.crt_smallest", "level": 2, "index": 15, "answer": "777"}
+{"id": "R2.crt_smallest", "level": 2, "index": 16, "answer": "405"}
+{"id": "R2.crt_smallest", "level": 2, "index": 17, "answer": "453"}
+{"id": "R2.crt_smallest", "level": 2, "index": 18, "answer": "1236"}
+{"id": "R2.crt_smallest", "level": 2, "index": 19, "answer": "87"}
+{"id": "R2.crt_smallest", "level": 2, "index": 20, "answer": "543"}
+{"id": "R2.crt_smallest", "level": 2, "index": 21, "answer": "351"}
+{"id": "R2.crt_smallest", "level": 2, "index": 22, "answer": "708"}
+{"id": "R2.crt_smallest", "level": 2, "index": 23, "answer": "584"}
+{"id": "R2.crt_smallest", "level": 2, "index": 24, "answer": "6"}
+{"id": "R2.crt_smallest", "level": 2, "index": 25, "answer": "325"}
+{"id": "R2.crt_smallest", "level": 2, "index": 26, "answer": "619"}
+{"id": "R2.crt_smallest", "level": 2, "index": 27, "answer": "1251"}
+{"id": "R2.crt_smallest", "level": 2, "index": 28, "answer": "391"}
+{"id": "R2.crt_smallest", "level": 2, "index": 29, "answer": "13"}
+{"id": "R2.crt_smallest", "level": 2, "index": 30, "answer": "657"}
+{"id": "R2.crt_smallest", "level": 2, "index": 31, "answer": "756"}
+{"id": "R2.crt_smallest", "level": 2, "index": 32, "answer": "294"}
+{"id": "R2.crt_smallest", "level": 2, "index": 33, "answer": "784"}
+{"id": "R2.crt_smallest", "level": 2, "index": 34, "answer": "175"}
+{"id": "R2.crt_smallest", "level": 2, "index": 35, "answer": "274"}
+{"id": "R2.crt_smallest", "level": 2, "index": 36, "answer": "1188"}
+{"id": "R2.crt_smallest", "level": 2, "index": 37, "answer": "742"}
+{"id": "R2.crt_smallest", "level": 2, "index": 38, "answer": "1208"}
+{"id": "R2.crt_smallest", "level": 2, "index": 39, "answer": "428"}
+{"id": "R2.crt_smallest", "level": 3, "index": 0, "answer": "477"}
+{"id": "R2.crt_smallest", "level": 3, "index": 1, "answer": "22728"}
+{"id": "R2.crt_smallest", "level": 3, "index": 2, "answer": "32244"}
+{"id": "R2.crt_smallest", "level": 3, "index": 3, "answer": "55291"}
+{"id": "R2.crt_smallest", "level": 3, "index": 4, "answer": "4743"}
+{"id": "R2.crt_smallest", "level": 3, "index": 5, "answer": "11365"}
+{"id": "R2.crt_smallest", "level": 3, "index": 6, "answer": "33642"}
+{"id": "R2.crt_smallest", "level": 3, "index": 7, "answer": "14471"}
+{"id": "R2.crt_smallest", "level": 3, "index": 8, "answer": "16687"}
+{"id": "R2.crt_smallest", "level": 3, "index": 9, "answer": "31326"}
+{"id": "R2.crt_smallest", "level": 3, "index": 10, "answer": "12277"}
+{"id": "R2.crt_smallest", "level": 3, "index": 11, "answer": "35977"}
+{"id": "R2.crt_smallest", "level": 3, "index": 12, "answer": "22185"}
+{"id": "R2.crt_smallest", "level": 3, "index": 13, "answer": "7709"}
+{"id": "R2.crt_smallest", "level": 3, "index": 14, "answer": "35067"}
+{"id": "R2.crt_smallest", "level": 3, "index": 15, "answer": "25822"}
+{"id": "R2.crt_smallest", "level": 3, "index": 16, "answer": "15155"}
+{"id": "R2.crt_smallest", "level": 3, "index": 17, "answer": "44437"}
+{"id": "R2.crt_smallest", "level": 3, "index": 18, "answer": "7695"}
+{"id": "R2.crt_smallest", "level": 3, "index": 19, "answer": "96104"}
+{"id": "R2.crt_smallest", "level": 3, "index": 20, "answer": "45722"}
+{"id": "R2.crt_smallest", "level": 3, "index": 21, "answer": "31893"}
+{"id": "R2.crt_smallest", "level": 3, "index": 22, "answer": "40128"}
+{"id": "R2.crt_smallest", "level": 3, "index": 23, "answer": "38591"}
+{"id": "R2.crt_smallest", "level": 3, "index": 24, "answer": "89254"}
+{"id": "R2.crt_smallest", "level": 3, "index": 25, "answer": "16211"}
+{"id": "R2.crt_smallest", "level": 3, "index": 26, "answer": "22362"}
+{"id": "R2.crt_smallest", "level": 3, "index": 27, "answer": "32493"}
+{"id": "R2.crt_smallest", "level": 3, "index": 28, "answer": "24800"}
+{"id": "R2.crt_smallest", "level": 3, "index": 29, "answer": "37804"}
+{"id": "R2.crt_smallest", "level": 3, "index": 30, "answer": "33498"}
+{"id": "R2.crt_smallest", "level": 3, "index": 31, "answer": "18118"}
+{"id": "R2.crt_smallest", "level": 3, "index": 32, "answer": "4209"}
+{"id": "R2.crt_smallest", "level": 3, "index": 33, "answer": "5376"}
+{"id": "R2.crt_smallest", "level": 3, "index": 34, "answer": "47076"}
+{"id": "R2.crt_smallest", "level": 3, "index": 35, "answer": "24262"}
+{"id": "R2.crt_smallest", "level": 3, "index": 36, "answer": "31969"}
+{"id": "R2.crt_smallest", "level": 3, "index": 37, "answer": "57635"}
+{"id": "R2.crt_smallest", "level": 3, "index": 38, "answer": "23128"}
+{"id": "R2.crt_smallest", "level": 3, "index": 39, "answer": "20510"}
+{"id": "R2.crt_smallest", "level": 4, "index": 0, "answer": "36035"}
+{"id": "R2.crt_smallest", "level": 4, "index": 1, "answer": "45441"}
+{"id": "R2.crt_smallest", "level": 4, "index": 2, "answer": "32293"}
+{"id": "R2.crt_smallest", "level": 4, "index": 3, "answer": "10872"}
+{"id": "R2.crt_smallest", "level": 4, "index": 4, "answer": "8474"}
+{"id": "R2.crt_smallest", "level": 4, "index": 5, "answer": "71139"}
+{"id": "R2.crt_smallest", "level": 4, "index": 6, "answer": "77820"}
+{"id": "R2.crt_smallest", "level": 4, "index": 7, "answer": "7530"}
+{"id": "R2.crt_smallest", "level": 4, "index": 8, "answer": "52368"}
+{"id": "R2.crt_smallest", "level": 4, "index": 9, "answer": "34609"}
+{"id": "R2.crt_smallest", "level": 4, "index": 10, "answer": "22637"}
+{"id": "R2.crt_smallest", "level": 4, "index": 11, "answer": "81693"}
+{"id": "R2.crt_smallest", "level": 4, "index": 12, "answer": "162659"}
+{"id": "R2.crt_smallest", "level": 4, "index": 13, "answer": "10575"}
+{"id": "R2.crt_smallest", "level": 4, "index": 14, "answer": "23769"}
+{"id": "R2.crt_smallest", "level": 4, "index": 15, "answer": "77591"}
+{"id": "R2.crt_smallest", "level": 4, "index": 16, "answer": "58421"}
+{"id": "R2.crt_smallest", "level": 4, "index": 17, "answer": "53132"}
+{"id": "R2.crt_smallest", "level": 4, "index": 18, "answer": "104796"}
+{"id": "R2.crt_smallest", "level": 4, "index": 19, "answer": "5611"}
+{"id": "R2.crt_smallest", "level": 4, "index": 20, "answer": "94662"}
+{"id": "R2.crt_smallest", "level": 4, "index": 21, "answer": "9721"}
+{"id": "R2.crt_smallest", "level": 4, "index": 22, "answer": "23975"}
+{"id": "R2.crt_smallest", "level": 4, "index": 23, "answer": "105355"}
+{"id": "R2.crt_smallest", "level": 4, "index": 24, "answer": "16124"}
+{"id": "R2.crt_smallest", "level": 4, "index": 25, "answer": "60864"}
+{"id": "R2.crt_smallest", "level": 4, "index": 26, "answer": "37657"}
+{"id": "R2.crt_smallest", "level": 4, "index": 27, "answer": "6546"}
+{"id": "R2.crt_smallest", "level": 4, "index": 28, "answer": "211033"}
+{"id": "R2.crt_smallest", "level": 4, "index": 29, "answer": "14646"}
+{"id": "R2.crt_smallest", "level": 4, "index": 30, "answer": "1587"}
+{"id": "R2.crt_smallest", "level": 4, "index": 31, "answer": "84867"}
+{"id": "R2.crt_smallest", "level": 4, "index": 32, "answer": "62793"}
+{"id": "R2.crt_smallest", "level": 4, "index": 33, "answer": "67158"}
+{"id": "R2.crt_smallest", "level": 4, "index": 34, "answer": "37452"}
+{"id": "R2.crt_smallest", "level": 4, "index": 35, "answer": "4948"}
+{"id": "R2.crt_smallest", "level": 4, "index": 36, "answer": "9479"}
+{"id": "R2.crt_smallest", "level": 4, "index": 37, "answer": "18536"}
+{"id": "R2.crt_smallest", "level": 4, "index": 38, "answer": "83948"}
+{"id": "R2.crt_smallest", "level": 4, "index": 39, "answer": "20629"}
+{"id": "R2.crt_smallest", "level": 5, "index": 0, "answer": "65757"}
+{"id": "R2.crt_smallest", "level": 5, "index": 1, "answer": "8587"}
+{"id": "R2.crt_smallest", "level": 5, "index": 2, "answer": "95459"}
+{"id": "R2.crt_smallest", "level": 5, "index": 3, "answer": "31645"}
+{"id": "R2.crt_smallest", "level": 5, "index": 4, "answer": "5250"}
+{"id": "R2.crt_smallest", "level": 5, "index": 5, "answer": "164432"}
+{"id": "R2.crt_smallest", "level": 5, "index": 6, "answer": "81925"}
+{"id": "R2.crt_smallest", "level": 5, "index": 7, "answer": "26019"}
+{"id": "R2.crt_smallest", "level": 5, "index": 8, "answer": "131448"}
+{"id": "R2.crt_smallest", "level": 5, "index": 9, "answer": "92053"}
+{"id": "R2.crt_smallest", "level": 5, "index": 10, "answer": "40713"}
+{"id": "R2.crt_smallest", "level": 5, "index": 11, "answer": "162612"}
+{"id": "R2.crt_smallest", "level": 5, "index": 12, "answer": "30551"}
+{"id": "R2.crt_smallest", "level": 5, "index": 13, "answer": "76899"}
+{"id": "R2.crt_smallest", "level": 5, "index": 14, "answer": "53802"}
+{"id": "R2.crt_smallest", "level": 5, "index": 15, "answer": "78983"}
+{"id": "R2.crt_smallest", "level": 5, "index": 16, "answer": "189403"}
+{"id": "R2.crt_smallest", "level": 5, "index": 17, "answer": "33100"}
+{"id": "R2.crt_smallest", "level": 5, "index": 18, "answer": "7533"}
+{"id": "R2.crt_smallest", "level": 5, "index": 19, "answer": "55213"}
+{"id": "R2.crt_smallest", "level": 5, "index": 20, "answer": "154711"}
+{"id": "R2.crt_smallest", "level": 5, "index": 21, "answer": "131162"}
+{"id": "R2.crt_smallest", "level": 5, "index": 22, "answer": "28648"}
+{"id": "R2.crt_smallest", "level": 5, "index": 23, "answer": "50517"}
+{"id": "R2.crt_smallest", "level": 5, "index": 24, "answer": "129478"}
+{"id": "R2.crt_smallest", "level": 5, "index": 25, "answer": "66615"}
+{"id": "R2.crt_smallest", "level": 5, "index": 26, "answer": "5842"}
+{"id": "R2.crt_smallest", "level": 5, "index": 27, "answer": "7195"}
+{"id": "R2.crt_smallest", "level": 5, "index": 28, "answer": "32520"}
+{"id": "R2.crt_smallest", "level": 5, "index": 29, "answer": "58025"}
+{"id": "R2.crt_smallest", "level": 5, "index": 30, "answer": "94041"}
+{"id": "R2.crt_smallest", "level": 5, "index": 31, "answer": "137457"}
+{"id": "R2.crt_smallest", "level": 5, "index": 32, "answer": "54802"}
+{"id": "R2.crt_smallest", "level": 5, "index": 33, "answer": "26215"}
+{"id": "R2.crt_smallest", "level": 5, "index": 34, "answer": "127080"}
+{"id": "R2.crt_smallest", "level": 5, "index": 35, "answer": "86102"}
+{"id": "R2.crt_smallest", "level": 5, "index": 36, "answer": "31791"}
+{"id": "R2.crt_smallest", "level": 5, "index": 37, "answer": "110512"}
+{"id": "R2.crt_smallest", "level": 5, "index": 38, "answer": "332917"}
+{"id": "R2.crt_smallest", "level": 5, "index": 39, "answer": "96770"}
+{"id": "R2.crt_smallest", "level": 6, "index": 0, "answer": "185915"}
+{"id": "R2.crt_smallest", "level": 6, "index": 1, "answer": "63749"}
+{"id": "R2.crt_smallest", "level": 6, "index": 2, "answer": "57197"}
+{"id": "R2.crt_smallest", "level": 6, "index": 3, "answer": "264305"}
+{"id": "R2.crt_smallest", "level": 6, "index": 4, "answer": "34489"}
+{"id": "R2.crt_smallest", "level": 6, "index": 5, "answer": "182481"}
+{"id": "R2.crt_smallest", "level": 6, "index": 6, "answer": "22359"}
+{"id": "R2.crt_smallest", "level": 6, "index": 7, "answer": "146270"}
+{"id": "R2.crt_smallest", "level": 6, "index": 8, "answer": "327554"}
+{"id": "R2.crt_smallest", "level": 6, "index": 9, "answer": "80954"}
+{"id": "R2.crt_smallest", "level": 6, "index": 10, "answer": "9059"}
+{"id": "R2.crt_smallest", "level": 6, "index": 11, "answer": "108018"}
+{"id": "R2.crt_smallest", "level": 6, "index": 12, "answer": "72119"}
+{"id": "R2.crt_smallest", "level": 6, "index": 13, "answer": "64806"}
+{"id": "R2.crt_smallest", "level": 6, "index": 14, "answer": "168311"}
+{"id": "R2.crt_smallest", "level": 6, "index": 15, "answer": "36316"}
+{"id": "R2.crt_smallest", "level": 6, "index": 16, "answer": "175519"}
+{"id": "R2.crt_smallest", "level": 6, "index": 17, "answer": "3554"}
+{"id": "R2.crt_smallest", "level": 6, "index": 18, "answer": "18787"}
+{"id": "R2.crt_smallest", "level": 6, "index": 19, "answer": "37024"}
+{"id": "R2.crt_smallest", "level": 6, "index": 20, "answer": "356010"}
+{"id": "R2.crt_smallest", "level": 6, "index": 21, "answer": "145501"}
+{"id": "R2.crt_smallest", "level": 6, "index": 22, "answer": "245993"}
+{"id": "R2.crt_smallest", "level": 6, "index": 23, "answer": "97649"}
+{"id": "R2.crt_smallest", "level": 6, "index": 24, "answer": "117961"}
+{"id": "R2.crt_smallest", "level": 6, "index": 25, "answer": "157604"}
+{"id": "R2.crt_smallest", "level": 6, "index": 26, "answer": "181761"}
+{"id": "R2.crt_smallest", "level": 6, "index": 27, "answer": "1189"}
+{"id": "R2.crt_smallest", "level": 6, "index": 28, "answer": "4310"}
+{"id": "R2.crt_smallest", "level": 6, "index": 29, "answer": "221720"}
+{"id": "R2.crt_smallest", "level": 6, "index": 30, "answer": "191386"}
+{"id": "R2.crt_smallest", "level": 6, "index": 31, "answer": "141151"}
+{"id": "R2.crt_smallest", "level": 6, "index": 32, "answer": "182969"}
+{"id": "R2.crt_smallest", "level": 6, "index": 33, "answer": "33310"}
+{"id": "R2.crt_smallest", "level": 6, "index": 34, "answer": "127613"}
+{"id": "R2.crt_smallest", "level": 6, "index": 35, "answer": "191445"}
+{"id": "R2.crt_smallest", "level": 6, "index": 36, "answer": "37681"}
+{"id": "R2.crt_smallest", "level": 6, "index": 37, "answer": "12430"}
+{"id": "R2.crt_smallest", "level": 6, "index": 38, "answer": "44870"}
+{"id": "R2.crt_smallest", "level": 6, "index": 39, "answer": "19141"}
+{"id": "R2.dictionary_rank", "level": 0, "index": 0, "answer": "knga"}
+{"id": "R2.dictionary_rank", "level": 0, "index": 1, "answer": "531"}
+{"id": "R2.dictionary_rank", "level": 0, "index": 2, "answer": "lgmc"}
+{"id": "R2.dictionary_rank", "level": 0, "index": 3, "answer": "dxtb"}
+{"id": "R2.dictionary_rank", "level": 0, "index": 4, "answer": "1218"}
+{"id": "R2.dictionary_rank", "level": 0, "index": 5, "answer": "998"}
+{"id": "R2.dictionary_rank", "level": 0, "index": 6, "answer": "2476"}
+{"id": "R2.dictionary_rank", "level": 0, "index": 7, "answer": "495"}
+{"id": "R2.dictionary_rank", "level": 0, "index": 8, "answer": "qvti"}
+{"id": "R2.dictionary_rank", "level": 0, "index": 9, "answer": "4476"}
+{"id": "R2.dictionary_rank", "level": 0, "index": 10, "answer": "vaxh"}
+{"id": "R2.dictionary_rank", "level": 0, "index": 11, "answer": "2181"}
+{"id": "R2.dictionary_rank", "level": 0, "index": 12, "answer": "vkxt"}
+{"id": "R2.dictionary_rank", "level": 0, "index": 13, "answer": "2378"}
+{"id": "R2.dictionary_rank", "level": 0, "index": 14, "answer": "2883"}
+{"id": "R2.dictionary_rank", "level": 0, "index": 15, "answer": "fyjo"}
+{"id": "R2.dictionary_rank", "level": 0, "index": 16, "answer": "2709"}
+{"id": "R2.dictionary_rank", "level": 0, "index": 17, "answer": "1935"}
+{"id": "R2.dictionary_rank", "level": 0, "index": 18, "answer": "2802"}
+{"id": "R2.dictionary_rank", "level": 0, "index": 19, "answer": "7733"}
+{"id": "R2.dictionary_rank", "level": 0, "index": 20, "answer": "dhej"}
+{"id": "R2.dictionary_rank", "level": 0, "index": 21, "answer": "3137"}
+{"id": "R2.dictionary_rank", "level": 0, "index": 22, "answer": "vafx"}
+{"id": "R2.dictionary_rank", "level": 0, "index": 23, "answer": "937"}
+{"id": "R2.dictionary_rank", "level": 0, "index": 24, "answer": "807"}
+{"id": "R2.dictionary_rank", "level": 0, "index": 25, "answer": "djbf"}
+{"id": "R2.dictionary_rank", "level": 0, "index": 26, "answer": "prwi"}
+{"id": "R2.dictionary_rank", "level": 0, "index": 27, "answer": "4505"}
+{"id": "R2.dictionary_rank", "level": 0, "index": 28, "answer": "olgm"}
+{"id": "R2.dictionary_rank", "level": 0, "index": 29, "answer": "hftm"}
+{"id": "R2.dictionary_rank", "level": 0, "index": 30, "answer": "xags"}
+{"id": "R2.dictionary_rank", "level": 0, "index": 31, "answer": "4528"}
+{"id": "R2.dictionary_rank", "level": 0, "index": 32, "answer": "2994"}
+{"id": "R2.dictionary_rank", "level": 0, "index": 33, "answer": "bjma"}
+{"id": "R2.dictionary_rank", "level": 0, "index": 34, "answer": "urqh"}
+{"id": "R2.dictionary_rank", "level": 0, "index": 35, "answer": "itpq"}
+{"id": "R2.dictionary_rank", "level": 0, "index": 36, "answer": "rzlx"}
+{"id": "R2.dictionary_rank", "level": 0, "index": 37, "answer": "nzdb"}
+{"id": "R2.dictionary_rank", "level": 0, "index": 38, "answer": "blvz"}
+{"id": "R2.dictionary_rank", "level": 0, "index": 39, "answer": "3933"}
+{"id": "R2.dictionary_rank", "level": 1, "index": 0, "answer": "tmcj"}
+{"id": "R2.dictionary_rank", "level": 1, "index": 1, "answer": "urqe"}
+{"id": "R2.dictionary_rank", "level": 1, "index": 2, "answer": "1835"}
+{"id": "R2.dictionary_rank", "level": 1, "index": 3, "answer": "xpjc"}
+{"id": "R2.dictionary_rank", "level": 1, "index": 4, "answer": "brxh"}
+{"id": "R2.dictionary_rank", "level": 1, "index": 5, "answer": "11708"}
+{"id": "R2.dictionary_rank", "level": 1, "index": 6, "answer": "aluc"}
+{"id": "R2.dictionary_rank", "level": 1, "index": 7, "answer": "qczk"}
+{"id": "R2.dictionary_rank", "level": 1, "index": 8, "answer": "4388"}
+{"id": "R2.dictionary_rank", "level": 1, "index": 9, "answer": "fuzj"}
+{"id": "R2.dictionary_rank", "level": 1, "index": 10, "answer": "4227"}
+{"id": "R2.dictionary_rank", "level": 1, "index": 11, "answer": "gyfe"}
+{"id": "R2.dictionary_rank", "level": 1, "index": 12, "answer": "thpg"}
+{"id": "R2.dictionary_rank", "level": 1, "index": 13, "answer": "1249"}
+{"id": "R2.dictionary_rank", "level": 1, "index": 14, "answer": "8724"}
+{"id": "R2.dictionary_rank", "level": 1, "index": 15, "answer": "2765"}
+{"id": "R2.dictionary_rank", "level": 1, "index": 16, "answer": "4290"}
+{"id": "R2.dictionary_rank", "level": 1, "index": 17, "answer": "pryx"}
+{"id": "R2.dictionary_rank", "level": 1, "index": 18, "answer": "2559"}
+{"id": "R2.dictionary_rank", "level": 1, "index": 19, "answer": "cohg"}
+{"id": "R2.dictionary_rank", "level": 1, "index": 20, "answer": "1490"}
+{"id": "R2.dictionary_rank", "level": 1, "index": 21, "answer": "9008"}
+{"id": "R2.dictionary_rank", "level": 1, "index": 22, "answer": "5765"}
+{"id": "R2.dictionary_rank", "level": 1, "index": 23, "answer": "9972"}
+{"id": "R2.dictionary_rank", "level": 1, "index": 24, "answer": "nqlz"}
+{"id": "R2.dictionary_rank", "level": 1, "index": 25, "answer": "qemh"}
+{"id": "R2.dictionary_rank", "level": 1, "index": 26, "answer": "zdqw"}
+{"id": "R2.dictionary_rank", "level": 1, "index": 27, "answer": "7742"}
+{"id": "R2.dictionary_rank", "level": 1, "index": 28, "answer": "10661"}
+{"id": "R2.dictionary_rank", "level": 1, "index": 29, "answer": "6714"}
+{"id": "R2.dictionary_rank", "level": 1, "index": 30, "answer": "2897"}
+{"id": "R2.dictionary_rank", "level": 1, "index": 31, "answer": "5"}
+{"id": "R2.dictionary_rank", "level": 1, "index": 32, "answer": "szhm"}
+{"id": "R2.dictionary_rank", "level": 1, "index": 33, "answer": "urtb"}
+{"id": "R2.dictionary_rank", "level": 1, "index": 34, "answer": "wope"}
+{"id": "R2.dictionary_rank", "level": 1, "index": 35, "answer": "4576"}
+{"id": "R2.dictionary_rank", "level": 1, "index": 36, "answer": "uqik"}
+{"id": "R2.dictionary_rank", "level": 1, "index": 37, "answer": "pynf"}
+{"id": "R2.dictionary_rank", "level": 1, "index": 38, "answer": "4052"}
+{"id": "R2.dictionary_rank", "level": 1, "index": 39, "answer": "2540"}
+{"id": "R2.dictionary_rank", "level": 2, "index": 0, "answer": "ibhnm"}
+{"id": "R2.dictionary_rank", "level": 2, "index": 1, "answer": "mwcjt"}
+{"id": "R2.dictionary_rank", "level": 2, "index": 2, "answer": "bdrfu"}
+{"id": "R2.dictionary_rank", "level": 2, "index": 3, "answer": "mlfav"}
+{"id": "R2.dictionary_rank", "level": 2, "index": 4, "answer": "yfkdx"}
+{"id": "R2.dictionary_rank", "level": 2, "index": 5, "answer": "380"}
+{"id": "R2.dictionary_rank", "level": 2, "index": 6, "answer": "jazcv"}
+{"id": "R2.dictionary_rank", "level": 2, "index": 7, "answer": "rdfsw"}
+{"id": "R2.dictionary_rank", "level": 2, "index": 8, "answer": "haysl"}
+{"id": "R2.dictionary_rank", "level": 2, "index": 9, "answer": "koghq"}
+{"id": "R2.dictionary_rank", "level": 2, "index": 10, "answer": "saglh"}
+{"id": "R2.dictionary_rank", "level": 2, "index": 11, "answer": "juyih"}
+{"id": "R2.dictionary_rank", "level": 2, "index": 12, "answer": "wuvrz"}
+{"id": "R2.dictionary_rank", "level": 2, "index": 13, "answer": "vszpl"}
+{"id": "R2.dictionary_rank", "level": 2, "index": 14, "answer": "893"}
+{"id": "R2.dictionary_rank", "level": 2, "index": 15, "answer": "6517"}
+{"id": "R2.dictionary_rank", "level": 2, "index": 16, "answer": "414"}
+{"id": "R2.dictionary_rank", "level": 2, "index": 17, "answer": "94"}
+{"id": "R2.dictionary_rank", "level": 2, "index": 18, "answer": "2263"}
+{"id": "R2.dictionary_rank", "level": 2, "index": 19, "answer": "1865"}
+{"id": "R2.dictionary_rank", "level": 2, "index": 20, "answer": "gbfrh"}
+{"id": "R2.dictionary_rank", "level": 2, "index": 21, "answer": "lkoad"}
+{"id": "R2.dictionary_rank", "level": 2, "index": 22, "answer": "5153"}
+{"id": "R2.dictionary_rank", "level": 2, "index": 23, "answer": "xwbot"}
+{"id": "R2.dictionary_rank", "level": 2, "index": 24, "answer": "nkyqa"}
+{"id": "R2.dictionary_rank", "level": 2, "index": 25, "answer": "apyvq"}
+{"id": "R2.dictionary_rank", "level": 2, "index": 26, "answer": "289"}
+{"id": "R2.dictionary_rank", "level": 2, "index": 27, "answer": "agmhd"}
+{"id": "R2.dictionary_rank", "level": 2, "index": 28, "answer": "qfsot"}
+{"id": "R2.dictionary_rank", "level": 2, "index": 29, "answer": "4820"}
+{"id": "R2.dictionary_rank", "level": 2, "index": 30, "answer": "djkro"}
+{"id": "R2.dictionary_rank", "level": 2, "index": 31, "answer": "3801"}
+{"id": "R2.dictionary_rank", "level": 2, "index": 32, "answer": "2838"}
+{"id": "R2.dictionary_rank", "level": 2, "index": 33, "answer": "7938"}
+{"id": "R2.dictionary_rank", "level": 2, "index": 34, "answer": "ixbsn"}
+{"id": "R2.dictionary_rank", "level": 2, "index": 35, "answer": "guznr"}
+{"id": "R2.dictionary_rank", "level": 2, "index": 36, "answer": "4950"}
+{"id": "R2.dictionary_rank", "level": 2, "index": 37, "answer": "vbydk"}
+{"id": "R2.dictionary_rank", "level": 2, "index": 38, "answer": "1258"}
+{"id": "R2.dictionary_rank", "level": 2, "index": 39, "answer": "eznhv"}
+{"id": "R2.dictionary_rank", "level": 3, "index": 0, "answer": "jogdy"}
+{"id": "R2.dictionary_rank", "level": 3, "index": 1, "answer": "gabzd"}
+{"id": "R2.dictionary_rank", "level": 3, "index": 2, "answer": "cythu"}
+{"id": "R2.dictionary_rank", "level": 3, "index": 3, "answer": "cyrja"}
+{"id": "R2.dictionary_rank", "level": 3, "index": 4, "answer": "17108"}
+{"id": "R2.dictionary_rank", "level": 3, "index": 5, "answer": "rcaze"}
+{"id": "R2.dictionary_rank", "level": 3, "index": 6, "answer": "4062"}
+{"id": "R2.dictionary_rank", "level": 3, "index": 7, "answer": "cjdwx"}
+{"id": "R2.dictionary_rank", "level": 3, "index": 8, "answer": "pwnjt"}
+{"id": "R2.dictionary_rank", "level": 3, "index": 9, "answer": "gvldo"}
+{"id": "R2.dictionary_rank", "level": 3, "index": 10, "answer": "bxsrd"}
+{"id": "R2.dictionary_rank", "level": 3, "index": 11, "answer": "umevo"}
+{"id": "R2.dictionary_rank", "level": 3, "index": 12, "answer": "9944"}
+{"id": "R2.dictionary_rank", "level": 3, "index": 13, "answer": "yzsvq"}
+{"id": "R2.dictionary_rank", "level": 3, "index": 14, "answer": "hsuwx"}
+{"id": "R2.dictionary_rank", "level": 3, "index": 15, "answer": "335"}
+{"id": "R2.dictionary_rank", "level": 3, "index": 16, "answer": "ydpvz"}
+{"id": "R2.dictionary_rank", "level": 3, "index": 17, "answer": "8035"}
+{"id": "R2.dictionary_rank", "level": 3, "index": 18, "answer": "dzmby"}
+{"id": "R2.dictionary_rank", "level": 3, "index": 19, "answer": "qjebo"}
+{"id": "R2.dictionary_rank", "level": 3, "index": 20, "answer": "khyna"}
+{"id": "R2.dictionary_rank", "level": 3, "index": 21, "answer": "myavh"}
+{"id": "R2.dictionary_rank", "level": 3, "index": 22, "answer": "qurew"}
+{"id": "R2.dictionary_rank", "level": 3, "index": 23, "answer": "isrkc"}
+{"id": "R2.dictionary_rank", "level": 3, "index": 24, "answer": "4645"}
+{"id": "R2.dictionary_rank", "level": 3, "index": 25, "answer": "elutm"}
+{"id": "R2.dictionary_rank", "level": 3, "index": 26, "answer": "kblrv"}
+{"id": "R2.dictionary_rank", "level": 3, "index": 27, "answer": "11818"}
+{"id": "R2.dictionary_rank", "level": 3, "index": 28, "answer": "ebnrx"}
+{"id": "R2.dictionary_rank", "level": 3, "index": 29, "answer": "dpzxt"}
+{"id": "R2.dictionary_rank", "level": 3, "index": 30, "answer": "16137"}
+{"id": "R2.dictionary_rank", "level": 3, "index": 31, "answer": "3574"}
+{"id": "R2.dictionary_rank", "level": 3, "index": 32, "answer": "6451"}
+{"id": "R2.dictionary_rank", "level": 3, "index": 33, "answer": "5452"}
+{"id": "R2.dictionary_rank", "level": 3, "index": 34, "answer": "lcpur"}
+{"id": "R2.dictionary_rank", "level": 3, "index": 35, "answer": "iktyd"}
+{"id": "R2.dictionary_rank", "level": 3, "index": 36, "answer": "17993"}
+{"id": "R2.dictionary_rank", "level": 3, "index": 37, "answer": "1540"}
+{"id": "R2.dictionary_rank", "level": 3, "index": 38, "answer": "16390"}
+{"id": "R2.dictionary_rank", "level": 3, "index": 39, "answer": "1690"}
+{"id": "R2.dictionary_rank", "level": 4, "index": 0, "answer": "kieyml"}
+{"id": "R2.dictionary_rank", "level": 4, "index": 1, "answer": "23414"}
+{"id": "R2.dictionary_rank", "level": 4, "index": 2, "answer": "119223"}
+{"id": "R2.dictionary_rank", "level": 4, "index": 3, "answer": "15014"}
+{"id": "R2.dictionary_rank", "level": 4, "index": 4, "answer": "remlfq"}
+{"id": "R2.dictionary_rank", "level": 4, "index": 5, "answer": "137488"}
+{"id": "R2.dictionary_rank", "level": 4, "index": 6, "answer": "15049"}
+{"id": "R2.dictionary_rank", "level": 4, "index": 7, "answer": "xradfu"}
+{"id": "R2.dictionary_rank", "level": 4, "index": 8, "answer": "idjpbc"}
+{"id": "R2.dictionary_rank", "level": 4, "index": 9, "answer": "8453"}
+{"id": "R2.dictionary_rank", "level": 4, "index": 10, "answer": "17707"}
+{"id": "R2.dictionary_rank", "level": 4, "index": 11, "answer": "stkpqx"}
+{"id": "R2.dictionary_rank", "level": 4, "index": 12, "answer": "2537"}
+{"id": "R2.dictionary_rank", "level": 4, "index": 13, "answer": "29694"}
+{"id": "R2.dictionary_rank", "level": 4, "index": 14, "answer": "121761"}
+{"id": "R2.dictionary_rank", "level": 4, "index": 15, "answer": "21632"}
+{"id": "R2.dictionary_rank", "level": 4, "index": 16, "answer": "hmckya"}
+{"id": "R2.dictionary_rank", "level": 4, "index": 17, "answer": "31101"}
+{"id": "R2.dictionary_rank", "level": 4, "index": 18, "answer": "tcfgsj"}
+{"id": "R2.dictionary_rank", "level": 4, "index": 19, "answer": "101742"}
+{"id": "R2.dictionary_rank", "level": 4, "index": 20, "answer": "qcpjwn"}
+{"id": "R2.dictionary_rank", "level": 4, "index": 21, "answer": "21375"}
+{"id": "R2.dictionary_rank", "level": 4, "index": 22, "answer": "zycwde"}
+{"id": "R2.dictionary_rank", "level": 4, "index": 23, "answer": "ujxlmy"}
+{"id": "R2.dictionary_rank", "level": 4, "index": 24, "answer": "13983"}
+{"id": "R2.dictionary_rank", "level": 4, "index": 25, "answer": "ivwlsg"}
+{"id": "R2.dictionary_rank", "level": 4, "index": 26, "answer": "15397"}
+{"id": "R2.dictionary_rank", "level": 4, "index": 27, "answer": "hrbncw"}
+{"id": "R2.dictionary_rank", "level": 4, "index": 28, "answer": "rjuiwq"}
+{"id": "R2.dictionary_rank", "level": 4, "index": 29, "answer": "18104"}
+{"id": "R2.dictionary_rank", "level": 4, "index": 30, "answer": "sqnudt"}
+{"id": "R2.dictionary_rank", "level": 4, "index": 31, "answer": "6904"}
+{"id": "R2.dictionary_rank", "level": 4, "index": 32, "answer": "4449"}
+{"id": "R2.dictionary_rank", "level": 4, "index": 33, "answer": "pmfloj"}
+{"id": "R2.dictionary_rank", "level": 4, "index": 34, "answer": "71293"}
+{"id": "R2.dictionary_rank", "level": 4, "index": 35, "answer": "17158"}
+{"id": "R2.dictionary_rank", "level": 4, "index": 36, "answer": "39629"}
+{"id": "R2.dictionary_rank", "level": 4, "index": 37, "answer": "17169"}
+{"id": "R2.dictionary_rank", "level": 4, "index": 38, "answer": "ykuzps"}
+{"id": "R2.dictionary_rank", "level": 4, "index": 39, "answer": "40730"}
+{"id": "R2.dictionary_rank", "level": 5, "index": 0, "answer": "pmclvs"}
+{"id": "R2.dictionary_rank", "level": 5, "index": 1, "answer": "pwezvj"}
+{"id": "R2.dictionary_rank", "level": 5, "index": 2, "answer": "qprsfg"}
+{"id": "R2.dictionary_rank", "level": 5, "index": 3, "answer": "311334"}
+{"id": "R2.dictionary_rank", "level": 5, "index": 4, "answer": "ugqbah"}
+{"id": "R2.dictionary_rank", "level": 5, "index": 5, "answer": "100861"}
+{"id": "R2.dictionary_rank", "level": 5, "index": 6, "answer": "uwhgeq"}
+{"id": "R2.dictionary_rank", "level": 5, "index": 7, "answer": "kupvsi"}
+{"id": "R2.dictionary_rank", "level": 5, "index": 8, "answer": "snqhzm"}
+{"id": "R2.dictionary_rank", "level": 5, "index": 9, "answer": "44727"}
+{"id": "R2.dictionary_rank", "level": 5, "index": 10, "answer": "kxnzwg"}
+{"id": "R2.dictionary_rank", "level": 5, "index": 11, "answer": "299543"}
+{"id": "R2.dictionary_rank", "level": 5, "index": 12, "answer": "236156"}
+{"id": "R2.dictionary_rank", "level": 5, "index": 13, "answer": "hqukce"}
+{"id": "R2.dictionary_rank", "level": 5, "index": 14, "answer": "wbfckr"}
+{"id": "R2.dictionary_rank", "level": 5, "index": 15, "answer": "34761"}
+{"id": "R2.dictionary_rank", "level": 5, "index": 16, "answer": "109104"}
+{"id": "R2.dictionary_rank", "level": 5, "index": 17, "answer": "126066"}
+{"id": "R2.dictionary_rank", "level": 5, "index": 18, "answer": "179360"}
+{"id": "R2.dictionary_rank", "level": 5, "index": 19, "answer": "876"}
+{"id": "R2.dictionary_rank", "level": 5, "index": 20, "answer": "gcbnqi"}
+{"id": "R2.dictionary_rank", "level": 5, "index": 21, "answer": "ohfxye"}
+{"id": "R2.dictionary_rank", "level": 5, "index": 22, "answer": "dtaocj"}
+{"id": "R2.dictionary_rank", "level": 5, "index": 23, "answer": "ersuid"}
+{"id": "R2.dictionary_rank", "level": 5, "index": 24, "answer": "59275"}
+{"id": "R2.dictionary_rank", "level": 5, "index": 25, "answer": "znyjqu"}
+{"id": "R2.dictionary_rank", "level": 5, "index": 26, "answer": "ojyawr"}
+{"id": "R2.dictionary_rank", "level": 5, "index": 27, "answer": "ywuzvf"}
+{"id": "R2.dictionary_rank", "level": 5, "index": 28, "answer": "102721"}
+{"id": "R2.dictionary_rank", "level": 5, "index": 29, "answer": "37612"}
+{"id": "R2.dictionary_rank", "level": 5, "index": 30, "answer": "47371"}
+{"id": "R2.dictionary_rank", "level": 5, "index": 31, "answer": "50146"}
+{"id": "R2.dictionary_rank", "level": 5, "index": 32, "answer": "katuqc"}
+{"id": "R2.dictionary_rank", "level": 5, "index": 33, "answer": "18676"}
+{"id": "R2.dictionary_rank", "level": 5, "index": 34, "answer": "gyxlih"}
+{"id": "R2.dictionary_rank", "level": 5, "index": 35, "answer": "ubchyn"}
+{"id": "R2.dictionary_rank", "level": 5, "index": 36, "answer": "bopmri"}
+{"id": "R2.dictionary_rank", "level": 5, "index": 37, "answer": "zeswir"}
+{"id": "R2.dictionary_rank", "level": 5, "index": 38, "answer": "clueib"}
+{"id": "R2.dictionary_rank", "level": 5, "index": 39, "answer": "iyqakj"}
+{"id": "R2.dictionary_rank", "level": 6, "index": 0, "answer": "ucpztde"}
+{"id": "R2.dictionary_rank", "level": 6, "index": 1, "answer": "flybrge"}
+{"id": "R2.dictionary_rank", "level": 6, "index": 2, "answer": "1105507"}
+{"id": "R2.dictionary_rank", "level": 6, "index": 3, "answer": "qcdeszv"}
+{"id": "R2.dictionary_rank", "level": 6, "index": 4, "answer": "81219"}
+{"id": "R2.dictionary_rank", "level": 6, "index": 5, "answer": "17526"}
+{"id": "R2.dictionary_rank", "level": 6, "index": 6, "answer": "77923"}
+{"id": "R2.dictionary_rank", "level": 6, "index": 7, "answer": "543640"}
+{"id": "R2.dictionary_rank", "level": 6, "index": 8, "answer": "ieldpmo"}
+{"id": "R2.dictionary_rank", "level": 6, "index": 9, "answer": "pyjmuzd"}
+{"id": "R2.dictionary_rank", "level": 6, "index": 10, "answer": "vknqtad"}
+{"id": "R2.dictionary_rank", "level": 6, "index": 11, "answer": "167472"}
+{"id": "R2.dictionary_rank", "level": 6, "index": 12, "answer": "cjofepz"}
+{"id": "R2.dictionary_rank", "level": 6, "index": 13, "answer": "xwgutih"}
+{"id": "R2.dictionary_rank", "level": 6, "index": 14, "answer": "scdhtyw"}
+{"id": "R2.dictionary_rank", "level": 6, "index": 15, "answer": "zmanqxw"}
+{"id": "R2.dictionary_rank", "level": 6, "index": 16, "answer": "amyogjw"}
+{"id": "R2.dictionary_rank", "level": 6, "index": 17, "answer": "txosnhd"}
+{"id": "R2.dictionary_rank", "level": 6, "index": 18, "answer": "hcfntib"}
+{"id": "R2.dictionary_rank", "level": 6, "index": 19, "answer": "dtxezmh"}
+{"id": "R2.dictionary_rank", "level": 6, "index": 20, "answer": "315389"}
+{"id": "R2.dictionary_rank", "level": 6, "index": 21, "answer": "plgwaxb"}
+{"id": "R2.dictionary_rank", "level": 6, "index": 22, "answer": "190546"}
+{"id": "R2.dictionary_rank", "level": 6, "index": 23, "answer": "gpkthsa"}
+{"id": "R2.dictionary_rank", "level": 6, "index": 24, "answer": "rnidctp"}
+{"id": "R2.dictionary_rank", "level": 6, "index": 25, "answer": "gqlswrv"}
+{"id": "R2.dictionary_rank", "level": 6, "index": 26, "answer": "hgjfvkc"}
+{"id": "R2.dictionary_rank", "level": 6, "index": 27, "answer": "gbdrqwa"}
+{"id": "R2.dictionary_rank", "level": 6, "index": 28, "answer": "fkwtjeh"}
+{"id": "R2.dictionary_rank", "level": 6, "index": 29, "answer": "jkwxqyh"}
+{"id": "R2.dictionary_rank", "level": 6, "index": 30, "answer": "41898"}
+{"id": "R2.dictionary_rank", "level": 6, "index": 31, "answer": "fjelrsu"}
+{"id": "R2.dictionary_rank", "level": 6, "index": 32, "answer": "354351"}
+{"id": "R2.dictionary_rank", "level": 6, "index": 33, "answer": "ykqsnpx"}
+{"id": "R2.dictionary_rank", "level": 6, "index": 34, "answer": "thxdfob"}
+{"id": "R2.dictionary_rank", "level": 6, "index": 35, "answer": "148785"}
+{"id": "R2.dictionary_rank", "level": 6, "index": 36, "answer": "206407"}
+{"id": "R2.dictionary_rank", "level": 6, "index": 37, "answer": "unezvrp"}
+{"id": "R2.dictionary_rank", "level": 6, "index": 38, "answer": "erglpsi"}
+{"id": "R2.dictionary_rank", "level": 6, "index": 39, "answer": "mxyqrji"}
+{"id": "R2.expression_eval", "level": 0, "index": 0, "answer": "1"}
+{"id": "R2.expression_eval", "level": 0, "index": 1, "answer": "18"}
+{"id": "R2.expression_eval", "level": 0, "index": 2, "answer": "1715"}
+{"id": "R2.expression_eval", "level": 0, "index": 3, "answer": "630"}
+{"id": "R2.expression_eval", "level": 0, "index": 4, "answer": "-276"}
+{"id": "R2.expression_eval", "level": 0, "index": 5, "answer": "0"}
+{"id": "R2.expression_eval", "level": 0, "index": 6, "answer": "1141"}
+{"id": "R2.expression_eval", "level": 0, "index": 7, "answer": "-42"}
+{"id": "R2.expression_eval", "level": 0, "index": 8, "answer": "51"}
+{"id": "R2.expression_eval", "level": 0, "index": 9, "answer": "35"}
+{"id": "R2.expression_eval", "level": 0, "index": 10, "answer": "29"}
+{"id": "R2.expression_eval", "level": 0, "index": 11, "answer": "11"}
+{"id": "R2.expression_eval", "level": 0, "index": 12, "answer": "26"}
+{"id": "R2.expression_eval", "level": 0, "index": 13, "answer": "221"}
+{"id": "R2.expression_eval", "level": 0, "index": 14, "answer": "441"}
+{"id": "R2.expression_eval", "level": 0, "index": 15, "answer": "9"}
+{"id": "R2.expression_eval", "level": 0, "index": 16, "answer": "465"}
+{"id": "R2.expression_eval", "level": 0, "index": 17, "answer": "-77"}
+{"id": "R2.expression_eval", "level": 0, "index": 18, "answer": "-621"}
+{"id": "R2.expression_eval", "level": 0, "index": 19, "answer": "20"}
+{"id": "R2.expression_eval", "level": 0, "index": 20, "answer": "-423"}
+{"id": "R2.expression_eval", "level": 0, "index": 21, "answer": "122"}
+{"id": "R2.expression_eval", "level": 0, "index": 22, "answer": "-12"}
+{"id": "R2.expression_eval", "level": 0, "index": 23, "answer": "-115"}
+{"id": "R2.expression_eval", "level": 0, "index": 24, "answer": "-467"}
+{"id": "R2.expression_eval", "level": 0, "index": 25, "answer": "-22"}
+{"id": "R2.expression_eval", "level": 0, "index": 26, "answer": "61740"}
+{"id": "R2.expression_eval", "level": 0, "index": 27, "answer": "25"}
+{"id": "R2.expression_eval", "level": 0, "index": 28, "answer": "22"}
+{"id": "R2.expression_eval", "level": 0, "index": 29, "answer": "30"}
+{"id": "R2.expression_eval", "level": 0, "index": 30, "answer": "-280"}
+{"id": "R2.expression_eval", "level": 0, "index": 31, "answer": "-1200"}
+{"id": "R2.expression_eval", "level": 0, "index": 32, "answer": "-525"}
+{"id": "R2.expression_eval", "level": 0, "index": 33, "answer": "-48"}
+{"id": "R2.expression_eval", "level": 0, "index": 34, "answer": "67"}
+{"id": "R2.expression_eval", "level": 0, "index": 35, "answer": "3960"}
+{"id": "R2.expression_eval", "level": 0, "index": 36, "answer": "16"}
+{"id": "R2.expression_eval", "level": 0, "index": 37, "answer": "-87"}
+{"id": "R2.expression_eval", "level": 0, "index": 38, "answer": "-5"}
+{"id": "R2.expression_eval", "level": 0, "index": 39, "answer": "1349"}
+{"id": "R2.expression_eval", "level": 1, "index": 0, "answer": "-2775"}
+{"id": "R2.expression_eval", "level": 1, "index": 1, "answer": "27"}
+{"id": "R2.expression_eval", "level": 1, "index": 2, "answer": "-30"}
+{"id": "R2.expression_eval", "level": 1, "index": 3, "answer": "-6"}
+{"id": "R2.expression_eval", "level": 1, "index": 4, "answer": "13"}
+{"id": "R2.expression_eval", "level": 1, "index": 5, "answer": "-18"}
+{"id": "R2.expression_eval", "level": 1, "index": 6, "answer": "333"}
+{"id": "R2.expression_eval", "level": 1, "index": 7, "answer": "22"}
+{"id": "R2.expression_eval", "level": 1, "index": 8, "answer": "504"}
+{"id": "R2.expression_eval", "level": 1, "index": 9, "answer": "72"}
+{"id": "R2.expression_eval", "level": 1, "index": 10, "answer": "-9"}
+{"id": "R2.expression_eval", "level": 1, "index": 11, "answer": "39"}
+{"id": "R2.expression_eval", "level": 1, "index": 12, "answer": "-7"}
+{"id": "R2.expression_eval", "level": 1, "index": 13, "answer": "2352"}
+{"id": "R2.expression_eval", "level": 1, "index": 14, "answer": "36"}
+{"id": "R2.expression_eval", "level": 1, "index": 15, "answer": "48"}
+{"id": "R2.expression_eval", "level": 1, "index": 16, "answer": "24"}
+{"id": "R2.expression_eval", "level": 1, "index": 17, "answer": "-3"}
+{"id": "R2.expression_eval", "level": 1, "index": 18, "answer": "116"}
+{"id": "R2.expression_eval", "level": 1, "index": 19, "answer": "1099"}
+{"id": "R2.expression_eval", "level": 1, "index": 20, "answer": "24"}
+{"id": "R2.expression_eval", "level": 1, "index": 21, "answer": "18"}
+{"id": "R2.expression_eval", "level": 1, "index": 22, "answer": "1359"}
+{"id": "R2.expression_eval", "level": 1, "index": 23, "answer": "-12"}
+{"id": "R2.expression_eval", "level": 1, "index": 24, "answer": "-4"}
+{"id": "R2.expression_eval", "level": 1, "index": 25, "answer": "148"}
+{"id": "R2.expression_eval", "level": 1, "index": 26, "answer": "31"}
+{"id": "R2.expression_eval", "level": 1, "index": 27, "answer": "11"}
+{"id": "R2.expression_eval", "level": 1, "index": 28, "answer": "17"}
+{"id": "R2.expression_eval", "level": 1, "index": 29, "answer": "136080"}
+{"id": "R2.expression_eval", "level": 1, "index": 30, "answer": "6"}
+{"id": "R2.expression_eval", "level": 1, "index": 31, "answer": "-112"}
+{"id": "R2.expression_eval", "level": 1, "index": 32, "answer": "858"}
+{"id": "R2.expression_eval", "level": 1, "index": 33, "answer": "-864"}
+{"id": "R2.expression_eval", "level": 1, "index": 34, "answer": "5"}
+{"id": "R2.expression_eval", "level": 1, "index": 35, "answer": "-15"}
+{"id": "R2.expression_eval", "level": 1, "index": 36, "answer": "98"}
+{"id": "R2.expression_eval", "level": 1, "index": 37, "answer": "16"}
+{"id": "R2.expression_eval", "level": 1, "index": 38, "answer": "388"}
+{"id": "R2.expression_eval", "level": 1, "index": 39, "answer": "804"}
+{"id": "R2.expression_eval", "level": 2, "index": 0, "answer": "-292"}
+{"id": "R2.expression_eval", "level": 2, "index": 1, "answer": "-69"}
+{"id": "R2.expression_eval", "level": 2, "index": 2, "answer": "-14"}
+{"id": "R2.expression_eval", "level": 2, "index": 3, "answer": "529004"}
+{"id": "R2.expression_eval", "level": 2, "index": 4, "answer": "-2"}
+{"id": "R2.expression_eval", "level": 2, "index": 5, "answer": "162"}
+{"id": "R2.expression_eval", "level": 2, "index": 6, "answer": "-5"}
+{"id": "R2.expression_eval", "level": 2, "index": 7, "answer": "-16"}
+{"id": "R2.expression_eval", "level": 2, "index": 8, "answer": "324"}
+{"id": "R2.expression_eval", "level": 2, "index": 9, "answer": "20"}
+{"id": "R2.expression_eval", "level": 2, "index": 10, "answer": "360"}
+{"id": "R2.expression_eval", "level": 2, "index": 11, "answer": "1856"}
+{"id": "R2.expression_eval", "level": 2, "index": 12, "answer": "5"}
+{"id": "R2.expression_eval", "level": 2, "index": 13, "answer": "10"}
+{"id": "R2.expression_eval", "level": 2, "index": 14, "answer": "78"}
+{"id": "R2.expression_eval", "level": 2, "index": 15, "answer": "98"}
+{"id": "R2.expression_eval", "level": 2, "index": 16, "answer": "-19152"}
+{"id": "R2.expression_eval", "level": 2, "index": 17, "answer": "12240"}
+{"id": "R2.expression_eval", "level": 2, "index": 18, "answer": "16"}
+{"id": "R2.expression_eval", "level": 2, "index": 19, "answer": "21"}
+{"id": "R2.expression_eval", "level": 2, "index": 20, "answer": "11"}
+{"id": "R2.expression_eval", "level": 2, "index": 21, "answer": "23"}
+{"id": "R2.expression_eval", "level": 2, "index": 22, "answer": "966"}
+{"id": "R2.expression_eval", "level": 2, "index": 23, "answer": "85"}
+{"id": "R2.expression_eval", "level": 2, "index": 24, "answer": "121"}
+{"id": "R2.expression_eval", "level": 2, "index": 25, "answer": "-42"}
+{"id": "R2.expression_eval", "level": 2, "index": 26, "answer": "-33"}
+{"id": "R2.expression_eval", "level": 2, "index": 27, "answer": "150"}
+{"id": "R2.expression_eval", "level": 2, "index": 28, "answer": "-23"}
+{"id": "R2.expression_eval", "level": 2, "index": 29, "answer": "44"}
+{"id": "R2.expression_eval", "level": 2, "index": 30, "answer": "-322"}
+{"id": "R2.expression_eval", "level": 2, "index": 31, "answer": "-2"}
+{"id": "R2.expression_eval", "level": 2, "index": 32, "answer": "-12"}
+{"id": "R2.expression_eval", "level": 2, "index": 33, "answer": "-875"}
+{"id": "R2.expression_eval", "level": 2, "index": 34, "answer": "115"}
+{"id": "R2.expression_eval", "level": 2, "index": 35, "answer": "500"}
+{"id": "R2.expression_eval", "level": 2, "index": 36, "answer": "-51"}
+{"id": "R2.expression_eval", "level": 2, "index": 37, "answer": "-61"}
+{"id": "R2.expression_eval", "level": 2, "index": 38, "answer": "63"}
+{"id": "R2.expression_eval", "level": 2, "index": 39, "answer": "123"}
+{"id": "R2.expression_eval", "level": 3, "index": 0, "answer": "198"}
+{"id": "R2.expression_eval", "level": 3, "index": 1, "answer": "-4480"}
+{"id": "R2.expression_eval", "level": 3, "index": 2, "answer": "1555"}
+{"id": "R2.expression_eval", "level": 3, "index": 3, "answer": "-16"}
+{"id": "R2.expression_eval", "level": 3, "index": 4, "answer": "108"}
+{"id": "R2.expression_eval", "level": 3, "index": 5, "answer": "7"}
+{"id": "R2.expression_eval", "level": 3, "index": 6, "answer": "672"}
+{"id": "R2.expression_eval", "level": 3, "index": 7, "answer": "214"}
+{"id": "R2.expression_eval", "level": 3, "index": 8, "answer": "-403"}
+{"id": "R2.expression_eval", "level": 3, "index": 9, "answer": "12"}
+{"id": "R2.expression_eval", "level": 3, "index": 10, "answer": "110"}
+{"id": "R2.expression_eval", "level": 3, "index": 11, "answer": "114"}
+{"id": "R2.expression_eval", "level": 3, "index": 12, "answer": "36"}
+{"id": "R2.expression_eval", "level": 3, "index": 13, "answer": "-43"}
+{"id": "R2.expression_eval", "level": 3, "index": 14, "answer": "38"}
+{"id": "R2.expression_eval", "level": 3, "index": 15, "answer": "-10"}
+{"id": "R2.expression_eval", "level": 3, "index": 16, "answer": "12"}
+{"id": "R2.expression_eval", "level": 3, "index": 17, "answer": "28926"}
+{"id": "R2.expression_eval", "level": 3, "index": 18, "answer": "30"}
+{"id": "R2.expression_eval", "level": 3, "index": 19, "answer": "4080"}
+{"id": "R2.expression_eval", "level": 3, "index": 20, "answer": "28"}
+{"id": "R2.expression_eval", "level": 3, "index": 21, "answer": "1876"}
+{"id": "R2.expression_eval", "level": 3, "index": 22, "answer": "75"}
+{"id": "R2.expression_eval", "level": 3, "index": 23, "answer": "-7"}
+{"id": "R2.expression_eval", "level": 3, "index": 24, "answer": "31"}
+{"id": "R2.expression_eval", "level": 3, "index": 25, "answer": "-4767"}
+{"id": "R2.expression_eval", "level": 3, "index": 26, "answer": "4770"}
+{"id": "R2.expression_eval", "level": 3, "index": 27, "answer": "-486"}
+{"id": "R2.expression_eval", "level": 3, "index": 28, "answer": "90"}
+{"id": "R2.expression_eval", "level": 3, "index": 29, "answer": "153"}
+{"id": "R2.expression_eval", "level": 3, "index": 30, "answer": "29"}
+{"id": "R2.expression_eval", "level": 3, "index": 31, "answer": "3424"}
+{"id": "R2.expression_eval", "level": 3, "index": 32, "answer": "288"}
+{"id": "R2.expression_eval", "level": 3, "index": 33, "answer": "-40"}
+{"id": "R2.expression_eval", "level": 3, "index": 34, "answer": "87"}
+{"id": "R2.expression_eval", "level": 3, "index": 35, "answer": "2761"}
+{"id": "R2.expression_eval", "level": 3, "index": 36, "answer": "12076"}
+{"id": "R2.expression_eval", "level": 3, "index": 37, "answer": "1664"}
+{"id": "R2.expression_eval", "level": 3, "index": 38, "answer": "1568"}
+{"id": "R2.expression_eval", "level": 3, "index": 39, "answer": "-62"}
+{"id": "R2.expression_eval", "level": 4, "index": 0, "answer": "3672"}
+{"id": "R2.expression_eval", "level": 4, "index": 1, "answer": "-624"}
+{"id": "R2.expression_eval", "level": 4, "index": 2, "answer": "-292"}
+{"id": "R2.expression_eval", "level": 4, "index": 3, "answer": "4139472"}
+{"id": "R2.expression_eval", "level": 4, "index": 4, "answer": "-6171467"}
+{"id": "R2.expression_eval", "level": 4, "index": 5, "answer": "4425006"}
+{"id": "R2.expression_eval", "level": 4, "index": 6, "answer": "12857"}
+{"id": "R2.expression_eval", "level": 4, "index": 7, "answer": "-261"}
+{"id": "R2.expression_eval", "level": 4, "index": 8, "answer": "60"}
+{"id": "R2.expression_eval", "level": 4, "index": 9, "answer": "277122"}
+{"id": "R2.expression_eval", "level": 4, "index": 10, "answer": "-5657"}
+{"id": "R2.expression_eval", "level": 4, "index": 11, "answer": "4712"}
+{"id": "R2.expression_eval", "level": 4, "index": 12, "answer": "715"}
+{"id": "R2.expression_eval", "level": 4, "index": 13, "answer": "530"}
+{"id": "R2.expression_eval", "level": 4, "index": 14, "answer": "12537874"}
+{"id": "R2.expression_eval", "level": 4, "index": 15, "answer": "-139"}
+{"id": "R2.expression_eval", "level": 4, "index": 16, "answer": "-46806"}
+{"id": "R2.expression_eval", "level": 4, "index": 17, "answer": "65604"}
+{"id": "R2.expression_eval", "level": 4, "index": 18, "answer": "8184968"}
+{"id": "R2.expression_eval", "level": 4, "index": 19, "answer": "311"}
+{"id": "R2.expression_eval", "level": 4, "index": 20, "answer": "-8595"}
+{"id": "R2.expression_eval", "level": 4, "index": 21, "answer": "66"}
+{"id": "R2.expression_eval", "level": 4, "index": 22, "answer": "298"}
+{"id": "R2.expression_eval", "level": 4, "index": 23, "answer": "-35251"}
+{"id": "R2.expression_eval", "level": 4, "index": 24, "answer": "4008"}
+{"id": "R2.expression_eval", "level": 4, "index": 25, "answer": "-188"}
+{"id": "R2.expression_eval", "level": 4, "index": 26, "answer": "-4896004"}
+{"id": "R2.expression_eval", "level": 4, "index": 27, "answer": "-162"}
+{"id": "R2.expression_eval", "level": 4, "index": 28, "answer": "163536048"}
+{"id": "R2.expression_eval", "level": 4, "index": 29, "answer": "-29988"}
+{"id": "R2.expression_eval", "level": 4, "index": 30, "answer": "0"}
+{"id": "R2.expression_eval", "level": 4, "index": 31, "answer": "144928"}
+{"id": "R2.expression_eval", "level": 4, "index": 32, "answer": "2734"}
+{"id": "R2.expression_eval", "level": 4, "index": 33, "answer": "-292320"}
+{"id": "R2.expression_eval", "level": 4, "index": 34, "answer": "856"}
+{"id": "R2.expression_eval", "level": 4, "index": 35, "answer": "-25142"}
+{"id": "R2.expression_eval", "level": 4, "index": 36, "answer": "-275"}
+{"id": "R2.expression_eval", "level": 4, "index": 37, "answer": "-585684"}
+{"id": "R2.expression_eval", "level": 4, "index": 38, "answer": "-267289"}
+{"id": "R2.expression_eval", "level": 4, "index": 39, "answer": "29"}
+{"id": "R2.expression_eval", "level": 5, "index": 0, "answer": "-221"}
+{"id": "R2.expression_eval", "level": 5, "index": 1, "answer": "412"}
+{"id": "R2.expression_eval", "level": 5, "index": 2, "answer": "-214"}
+{"id": "R2.expression_eval", "level": 5, "index": 3, "answer": "1487360"}
+{"id": "R2.expression_eval", "level": 5, "index": 4, "answer": "-459"}
+{"id": "R2.expression_eval", "level": 5, "index": 5, "answer": "1195"}
+{"id": "R2.expression_eval", "level": 5, "index": 6, "answer": "572"}
+{"id": "R2.expression_eval", "level": 5, "index": 7, "answer": "279"}
+{"id": "R2.expression_eval", "level": 5, "index": 8, "answer": "305"}
+{"id": "R2.expression_eval", "level": 5, "index": 9, "answer": "2684"}
+{"id": "R2.expression_eval", "level": 5, "index": 10, "answer": "2229036"}
+{"id": "R2.expression_eval", "level": 5, "index": 11, "answer": "10574"}
+{"id": "R2.expression_eval", "level": 5, "index": 12, "answer": "-88"}
+{"id": "R2.expression_eval", "level": 5, "index": 13, "answer": "36900"}
+{"id": "R2.expression_eval", "level": 5, "index": 14, "answer": "41"}
+{"id": "R2.expression_eval", "level": 5, "index": 15, "answer": "352"}
+{"id": "R2.expression_eval", "level": 5, "index": 16, "answer": "-115534"}
+{"id": "R2.expression_eval", "level": 5, "index": 17, "answer": "-48"}
+{"id": "R2.expression_eval", "level": 5, "index": 18, "answer": "-6454"}
+{"id": "R2.expression_eval", "level": 5, "index": 19, "answer": "89034"}
+{"id": "R2.expression_eval", "level": 5, "index": 20, "answer": "2145"}
+{"id": "R2.expression_eval", "level": 5, "index": 21, "answer": "-391"}
+{"id": "R2.expression_eval", "level": 5, "index": 22, "answer": "-540"}
+{"id": "R2.expression_eval", "level": 5, "index": 23, "answer": "50960"}
+{"id": "R2.expression_eval", "level": 5, "index": 24, "answer": "25"}
+{"id": "R2.expression_eval", "level": 5, "index": 25, "answer": "345"}
+{"id": "R2.expression_eval", "level": 5, "index": 26, "answer": "23546"}
+{"id": "R2.expression_eval", "level": 5, "index": 27, "answer": "195"}
+{"id": "R2.expression_eval", "level": 5, "index": 28, "answer": "16568"}
+{"id": "R2.expression_eval", "level": 5, "index": 29, "answer": "555692"}
+{"id": "R2.expression_eval", "level": 5, "index": 30, "answer": "2374544"}
+{"id": "R2.expression_eval", "level": 5, "index": 31, "answer": "1044"}
+{"id": "R2.expression_eval", "level": 5, "index": 32, "answer": "144"}
+{"id": "R2.expression_eval", "level": 5, "index": 33, "answer": "227"}
+{"id": "R2.expression_eval", "level": 5, "index": 34, "answer": "1483"}
+{"id": "R2.expression_eval", "level": 5, "index": 35, "answer": "733"}
+{"id": "R2.expression_eval", "level": 5, "index": 36, "answer": "-12276"}
+{"id": "R2.expression_eval", "level": 5, "index": 37, "answer": "47862"}
+{"id": "R2.expression_eval", "level": 5, "index": 38, "answer": "7673"}
+{"id": "R2.expression_eval", "level": 5, "index": 39, "answer": "822"}
+{"id": "R2.expression_eval", "level": 6, "index": 0, "answer": "50043"}
+{"id": "R2.expression_eval", "level": 6, "index": 1, "answer": "189"}
+{"id": "R2.expression_eval", "level": 6, "index": 2, "answer": "39861049770"}
+{"id": "R2.expression_eval", "level": 6, "index": 3, "answer": "4191"}
+{"id": "R2.expression_eval", "level": 6, "index": 4, "answer": "23926296"}
+{"id": "R2.expression_eval", "level": 6, "index": 5, "answer": "73"}
+{"id": "R2.expression_eval", "level": 6, "index": 6, "answer": "209"}
+{"id": "R2.expression_eval", "level": 6, "index": 7, "answer": "246246"}
+{"id": "R2.expression_eval", "level": 6, "index": 8, "answer": "-42448476"}
+{"id": "R2.expression_eval", "level": 6, "index": 9, "answer": "6703260"}
+{"id": "R2.expression_eval", "level": 6, "index": 10, "answer": "175"}
+{"id": "R2.expression_eval", "level": 6, "index": 11, "answer": "4236"}
+{"id": "R2.expression_eval", "level": 6, "index": 12, "answer": "-194"}
+{"id": "R2.expression_eval", "level": 6, "index": 13, "answer": "-10026"}
+{"id": "R2.expression_eval", "level": 6, "index": 14, "answer": "-5875543"}
+{"id": "R2.expression_eval", "level": 6, "index": 15, "answer": "-194"}
+{"id": "R2.expression_eval", "level": 6, "index": 16, "answer": "455352"}
+{"id": "R2.expression_eval", "level": 6, "index": 17, "answer": "-452"}
+{"id": "R2.expression_eval", "level": 6, "index": 18, "answer": "-237572"}
+{"id": "R2.expression_eval", "level": 6, "index": 19, "answer": "-650250"}
+{"id": "R2.expression_eval", "level": 6, "index": 20, "answer": "-133"}
+{"id": "R2.expression_eval", "level": 6, "index": 21, "answer": "296"}
+{"id": "R2.expression_eval", "level": 6, "index": 22, "answer": "-1023"}
+{"id": "R2.expression_eval", "level": 6, "index": 23, "answer": "182"}
+{"id": "R2.expression_eval", "level": 6, "index": 24, "answer": "380127"}
+{"id": "R2.expression_eval", "level": 6, "index": 25, "answer": "332"}
+{"id": "R2.expression_eval", "level": 6, "index": 26, "answer": "817"}
+{"id": "R2.expression_eval", "level": 6, "index": 27, "answer": "-125"}
+{"id": "R2.expression_eval", "level": 6, "index": 28, "answer": "-4232"}
+{"id": "R2.expression_eval", "level": 6, "index": 29, "answer": "355140"}
+{"id": "R2.expression_eval", "level": 6, "index": 30, "answer": "-96"}
+{"id": "R2.expression_eval", "level": 6, "index": 31, "answer": "0"}
+{"id": "R2.expression_eval", "level": 6, "index": 32, "answer": "676"}
+{"id": "R2.expression_eval", "level": 6, "index": 33, "answer": "-39137279888"}
+{"id": "R2.expression_eval", "level": 6, "index": 34, "answer": "5682"}
+{"id": "R2.expression_eval", "level": 6, "index": 35, "answer": "113"}
+{"id": "R2.expression_eval", "level": 6, "index": 36, "answer": "0"}
+{"id": "R2.expression_eval", "level": 6, "index": 37, "answer": "-231"}
+{"id": "R2.expression_eval", "level": 6, "index": 38, "answer": "-56208"}
+{"id": "R2.expression_eval", "level": 6, "index": 39, "answer": "-1501"}
+{"id": "R2.from_base", "level": 0, "index": 0, "answer": "15"}
+{"id": "R2.from_base", "level": 0, "index": 1, "answer": "113"}
+{"id": "R2.from_base", "level": 0, "index": 2, "answer": "760"}
+{"id": "R2.from_base", "level": 0, "index": 3, "answer": "202"}
+{"id": "R2.from_base", "level": 0, "index": 4, "answer": "827"}
+{"id": "R2.from_base", "level": 0, "index": 5, "answer": "7"}
+{"id": "R2.from_base", "level": 0, "index": 6, "answer": "98"}
+{"id": "R2.from_base", "level": 0, "index": 7, "answer": "145"}
+{"id": "R2.from_base", "level": 0, "index": 8, "answer": "42"}
+{"id": "R2.from_base", "level": 0, "index": 9, "answer": "860"}
+{"id": "R2.from_base", "level": 0, "index": 10, "answer": "1332"}
+{"id": "R2.from_base", "level": 0, "index": 11, "answer": "380"}
+{"id": "R2.from_base", "level": 0, "index": 12, "answer": "98"}
+{"id": "R2.from_base", "level": 0, "index": 13, "answer": "232"}
+{"id": "R2.from_base", "level": 0, "index": 14, "answer": "108"}
+{"id": "R2.from_base", "level": 0, "index": 15, "answer": "35"}
+{"id": "R2.from_base", "level": 0, "index": 16, "answer": "123"}
+{"id": "R2.from_base", "level": 0, "index": 17, "answer": "237"}
+{"id": "R2.from_base", "level": 0, "index": 18, "answer": "10"}
+{"id": "R2.from_base", "level": 0, "index": 19, "answer": "490"}
+{"id": "R2.from_base", "level": 0, "index": 20, "answer": "2063"}
+{"id": "R2.from_base", "level": 0, "index": 21, "answer": "101"}
+{"id": "R2.from_base", "level": 0, "index": 22, "answer": "4"}
+{"id": "R2.from_base", "level": 0, "index": 23, "answer": "12"}
+{"id": "R2.from_base", "level": 0, "index": 24, "answer": "31"}
+{"id": "R2.from_base", "level": 0, "index": 25, "answer": "39"}
+{"id": "R2.from_base", "level": 0, "index": 26, "answer": "5"}
+{"id": "R2.from_base", "level": 0, "index": 27, "answer": "27"}
+{"id": "R2.from_base", "level": 0, "index": 28, "answer": "14"}
+{"id": "R2.from_base", "level": 0, "index": 29, "answer": "92"}
+{"id": "R2.from_base", "level": 0, "index": 30, "answer": "580"}
+{"id": "R2.from_base", "level": 0, "index": 31, "answer": "29"}
+{"id": "R2.from_base", "level": 0, "index": 32, "answer": "12"}
+{"id": "R2.from_base", "level": 0, "index": 33, "answer": "117"}
+{"id": "R2.from_base", "level": 0, "index": 34, "answer": "25"}
+{"id": "R2.from_base", "level": 0, "index": 35, "answer": "471"}
+{"id": "R2.from_base", "level": 0, "index": 36, "answer": "84"}
+{"id": "R2.from_base", "level": 0, "index": 37, "answer": "246"}
+{"id": "R2.from_base", "level": 0, "index": 38, "answer": "80"}
+{"id": "R2.from_base", "level": 0, "index": 39, "answer": "233"}
+{"id": "R2.from_base", "level": 1, "index": 0, "answer": "90"}
+{"id": "R2.from_base", "level": 1, "index": 1, "answer": "8"}
+{"id": "R2.from_base", "level": 1, "index": 2, "answer": "2744"}
+{"id": "R2.from_base", "level": 1, "index": 3, "answer": "880"}
+{"id": "R2.from_base", "level": 1, "index": 4, "answer": "11"}
+{"id": "R2.from_base", "level": 1, "index": 5, "answer": "613"}
+{"id": "R2.from_base", "level": 1, "index": 6, "answer": "18"}
+{"id": "R2.from_base", "level": 1, "index": 7, "answer": "173"}
+{"id": "R2.from_base", "level": 1, "index": 8, "answer": "29702"}
+{"id": "R2.from_base", "level": 1, "index": 9, "answer": "56"}
+{"id": "R2.from_base", "level": 1, "index": 10, "answer": "72"}
+{"id": "R2.from_base", "level": 1, "index": 11, "answer": "445"}
+{"id": "R2.from_base", "level": 1, "index": 12, "answer": "13"}
+{"id": "R2.from_base", "level": 1, "index": 13, "answer": "21548"}
+{"id": "R2.from_base", "level": 1, "index": 14, "answer": "2162"}
+{"id": "R2.from_base", "level": 1, "index": 15, "answer": "54"}
+{"id": "R2.from_base", "level": 1, "index": 16, "answer": "16"}
+{"id": "R2.from_base", "level": 1, "index": 17, "answer": "34"}
+{"id": "R2.from_base", "level": 1, "index": 18, "answer": "3101"}
+{"id": "R2.from_base", "level": 1, "index": 19, "answer": "1226"}
+{"id": "R2.from_base", "level": 1, "index": 20, "answer": "128100"}
+{"id": "R2.from_base", "level": 1, "index": 21, "answer": "59785"}
+{"id": "R2.from_base", "level": 1, "index": 22, "answer": "1781"}
+{"id": "R2.from_base", "level": 1, "index": 23, "answer": "2317"}
+{"id": "R2.from_base", "level": 1, "index": 24, "answer": "26"}
+{"id": "R2.from_base", "level": 1, "index": 25, "answer": "410"}
+{"id": "R2.from_base", "level": 1, "index": 26, "answer": "259"}
+{"id": "R2.from_base", "level": 1, "index": 27, "answer": "31093"}
+{"id": "R2.from_base", "level": 1, "index": 28, "answer": "27960"}
+{"id": "R2.from_base", "level": 1, "index": 29, "answer": "11365"}
+{"id": "R2.from_base", "level": 1, "index": 30, "answer": "259"}
+{"id": "R2.from_base", "level": 1, "index": 31, "answer": "1398"}
+{"id": "R2.from_base", "level": 1, "index": 32, "answer": "11101"}
+{"id": "R2.from_base", "level": 1, "index": 33, "answer": "864"}
+{"id": "R2.from_base", "level": 1, "index": 34, "answer": "1744"}
+{"id": "R2.from_base", "level": 1, "index": 35, "answer": "106972"}
+{"id": "R2.from_base", "level": 1, "index": 36, "answer": "567"}
+{"id": "R2.from_base", "level": 1, "index": 37, "answer": "139445"}
+{"id": "R2.from_base", "level": 1, "index": 38, "answer": "166"}
+{"id": "R2.from_base", "level": 1, "index": 39, "answer": "255"}
+{"id": "R2.from_base", "level": 2, "index": 0, "answer": "1377"}
+{"id": "R2.from_base", "level": 2, "index": 1, "answer": "13651"}
+{"id": "R2.from_base", "level": 2, "index": 2, "answer": "14536763"}
+{"id": "R2.from_base", "level": 2, "index": 3, "answer": "102"}
+{"id": "R2.from_base", "level": 2, "index": 4, "answer": "227488"}
+{"id": "R2.from_base", "level": 2, "index": 5, "answer": "669715"}
+{"id": "R2.from_base", "level": 2, "index": 6, "answer": "40364"}
+{"id": "R2.from_base", "level": 2, "index": 7, "answer": "28170"}
+{"id": "R2.from_base", "level": 2, "index": 8, "answer": "28128"}
+{"id": "R2.from_base", "level": 2, "index": 9, "answer": "1102"}
+{"id": "R2.from_base", "level": 2, "index": 10, "answer": "1666"}
+{"id": "R2.from_base", "level": 2, "index": 11, "answer": "124"}
+{"id": "R2.from_base", "level": 2, "index": 12, "answer": "582"}
+{"id": "R2.from_base", "level": 2, "index": 13, "answer": "9442"}
+{"id": "R2.from_base", "level": 2, "index": 14, "answer": "97428"}
+{"id": "R2.from_base", "level": 2, "index": 15, "answer": "169"}
+{"id": "R2.from_base", "level": 2, "index": 16, "answer": "119"}
+{"id": "R2.from_base", "level": 2, "index": 17, "answer": "123"}
+{"id": "R2.from_base", "level": 2, "index": 18, "answer": "397525"}
+{"id": "R2.from_base", "level": 2, "index": 19, "answer": "112"}
+{"id": "R2.from_base", "level": 2, "index": 20, "answer": "424"}
+{"id": "R2.from_base", "level": 2, "index": 21, "answer": "272854"}
+{"id": "R2.from_base", "level": 2, "index": 22, "answer": "2048556"}
+{"id": "R2.from_base", "level": 2, "index": 23, "answer": "328990"}
+{"id": "R2.from_base", "level": 2, "index": 24, "answer": "9504659"}
+{"id": "R2.from_base", "level": 2, "index": 25, "answer": "797"}
+{"id": "R2.from_base", "level": 2, "index": 26, "answer": "73"}
+{"id": "R2.from_base", "level": 2, "index": 27, "answer": "2885"}
+{"id": "R2.from_base", "level": 2, "index": 28, "answer": "230"}
+{"id": "R2.from_base", "level": 2, "index": 29, "answer": "1905"}
+{"id": "R2.from_base", "level": 2, "index": 30, "answer": "5052"}
+{"id": "R2.from_base", "level": 2, "index": 31, "answer": "1473"}
+{"id": "R2.from_base", "level": 2, "index": 32, "answer": "2166"}
+{"id": "R2.from_base", "level": 2, "index": 33, "answer": "1284"}
+{"id": "R2.from_base", "level": 2, "index": 34, "answer": "28168"}
+{"id": "R2.from_base", "level": 2, "index": 35, "answer": "376"}
+{"id": "R2.from_base", "level": 2, "index": 36, "answer": "557"}
+{"id": "R2.from_base", "level": 2, "index": 37, "answer": "497"}
+{"id": "R2.from_base", "level": 2, "index": 38, "answer": "450736"}
+{"id": "R2.from_base", "level": 2, "index": 39, "answer": "69"}
+{"id": "R2.from_base", "level": 3, "index": 0, "answer": "2420"}
+{"id": "R2.from_base", "level": 3, "index": 1, "answer": "1900289"}
+{"id": "R2.from_base", "level": 3, "index": 2, "answer": "9161915"}
+{"id": "R2.from_base", "level": 3, "index": 3, "answer": "3594"}
+{"id": "R2.from_base", "level": 3, "index": 4, "answer": "12131"}
+{"id": "R2.from_base", "level": 3, "index": 5, "answer": "98519"}
+{"id": "R2.from_base", "level": 3, "index": 6, "answer": "2734431025"}
+{"id": "R2.from_base", "level": 3, "index": 7, "answer": "2989762"}
+{"id": "R2.from_base", "level": 3, "index": 8, "answer": "117"}
+{"id": "R2.from_base", "level": 3, "index": 9, "answer": "12655680"}
+{"id": "R2.from_base", "level": 3, "index": 10, "answer": "33278"}
+{"id": "R2.from_base", "level": 3, "index": 11, "answer": "155"}
+{"id": "R2.from_base", "level": 3, "index": 12, "answer": "70621"}
+{"id": "R2.from_base", "level": 3, "index": 13, "answer": "6641"}
+{"id": "R2.from_base", "level": 3, "index": 14, "answer": "2780"}
+{"id": "R2.from_base", "level": 3, "index": 15, "answer": "180"}
+{"id": "R2.from_base", "level": 3, "index": 16, "answer": "242373"}
+{"id": "R2.from_base", "level": 3, "index": 17, "answer": "12081718"}
+{"id": "R2.from_base", "level": 3, "index": 18, "answer": "32863591"}
+{"id": "R2.from_base", "level": 3, "index": 19, "answer": "4067564974"}
+{"id": "R2.from_base", "level": 3, "index": 20, "answer": "3864"}
+{"id": "R2.from_base", "level": 3, "index": 21, "answer": "6231"}
+{"id": "R2.from_base", "level": 3, "index": 22, "answer": "2437"}
+{"id": "R2.from_base", "level": 3, "index": 23, "answer": "443"}
+{"id": "R2.from_base", "level": 3, "index": 24, "answer": "42999405"}
+{"id": "R2.from_base", "level": 3, "index": 25, "answer": "1100"}
+{"id": "R2.from_base", "level": 3, "index": 26, "answer": "33644"}
+{"id": "R2.from_base", "level": 3, "index": 27, "answer": "21642"}
+{"id": "R2.from_base", "level": 3, "index": 28, "answer": "480"}
+{"id": "R2.from_base", "level": 3, "index": 29, "answer": "48672"}
+{"id": "R2.from_base", "level": 3, "index": 30, "answer": "26000"}
+{"id": "R2.from_base", "level": 3, "index": 31, "answer": "4814"}
+{"id": "R2.from_base", "level": 3, "index": 32, "answer": "5554"}
+{"id": "R2.from_base", "level": 3, "index": 33, "answer": "563"}
+{"id": "R2.from_base", "level": 3, "index": 34, "answer": "1441211"}
+{"id": "R2.from_base", "level": 3, "index": 35, "answer": "3313205"}
+{"id": "R2.from_base", "level": 3, "index": 36, "answer": "13671555"}
+{"id": "R2.from_base", "level": 3, "index": 37, "answer": "229851"}
+{"id": "R2.from_base", "level": 3, "index": 38, "answer": "3295"}
+{"id": "R2.from_base", "level": 3, "index": 39, "answer": "79"}
+{"id": "R2.from_base", "level": 4, "index": 0, "answer": "309696"}
+{"id": "R2.from_base", "level": 4, "index": 1, "answer": "409"}
+{"id": "R2.from_base", "level": 4, "index": 2, "answer": "42230"}
+{"id": "R2.from_base", "level": 4, "index": 3, "answer": "12574"}
+{"id": "R2.from_base", "level": 4, "index": 4, "answer": "292018"}
+{"id": "R2.from_base", "level": 4, "index": 5, "answer": "14827615"}
+{"id": "R2.from_base", "level": 4, "index": 6, "answer": "169228389"}
+{"id": "R2.from_base", "level": 4, "index": 7, "answer": "3661"}
+{"id": "R2.from_base", "level": 4, "index": 8, "answer": "6060734"}
+{"id": "R2.from_base", "level": 4, "index": 9, "answer": "175420"}
+{"id": "R2.from_base", "level": 4, "index": 10, "answer": "147"}
+{"id": "R2.from_base", "level": 4, "index": 11, "answer": "1092471"}
+{"id": "R2.from_base", "level": 4, "index": 12, "answer": "6952"}
+{"id": "R2.from_base", "level": 4, "index": 13, "answer": "3581098245"}
+{"id": "R2.from_base", "level": 4, "index": 14, "answer": "328"}
+{"id": "R2.from_base", "level": 4, "index": 15, "answer": "191020186"}
+{"id": "R2.from_base", "level": 4, "index": 16, "answer": "658570"}
+{"id": "R2.from_base", "level": 4, "index": 17, "answer": "3275073"}
+{"id": "R2.from_base", "level": 4, "index": 18, "answer": "753691"}
+{"id": "R2.from_base", "level": 4, "index": 19, "answer": "62005"}
+{"id": "R2.from_base", "level": 4, "index": 20, "answer": "313600"}
+{"id": "R2.from_base", "level": 4, "index": 21, "answer": "205873391"}
+{"id": "R2.from_base", "level": 4, "index": 22, "answer": "18290692"}
+{"id": "R2.from_base", "level": 4, "index": 23, "answer": "560441"}
+{"id": "R2.from_base", "level": 4, "index": 24, "answer": "1856"}
+{"id": "R2.from_base", "level": 4, "index": 25, "answer": "113221"}
+{"id": "R2.from_base", "level": 4, "index": 26, "answer": "769834"}
+{"id": "R2.from_base", "level": 4, "index": 27, "answer": "104252131"}
+{"id": "R2.from_base", "level": 4, "index": 28, "answer": "5652497"}
+{"id": "R2.from_base", "level": 4, "index": 29, "answer": "2168933"}
+{"id": "R2.from_base", "level": 4, "index": 30, "answer": "12875606"}
+{"id": "R2.from_base", "level": 4, "index": 31, "answer": "6199"}
+{"id": "R2.from_base", "level": 4, "index": 32, "answer": "285"}
+{"id": "R2.from_base", "level": 4, "index": 33, "answer": "204509"}
+{"id": "R2.from_base", "level": 4, "index": 34, "answer": "46229"}
+{"id": "R2.from_base", "level": 4, "index": 35, "answer": "460029"}
+{"id": "R2.from_base", "level": 4, "index": 36, "answer": "316"}
+{"id": "R2.from_base", "level": 4, "index": 37, "answer": "34117319"}
+{"id": "R2.from_base", "level": 4, "index": 38, "answer": "28314582"}
+{"id": "R2.from_base", "level": 4, "index": 39, "answer": "1186697"}
+{"id": "R2.from_base", "level": 5, "index": 0, "answer": "16350859"}
+{"id": "R2.from_base", "level": 5, "index": 1, "answer": "5204"}
+{"id": "R2.from_base", "level": 5, "index": 2, "answer": "415721"}
+{"id": "R2.from_base", "level": 5, "index": 3, "answer": "18327145"}
+{"id": "R2.from_base", "level": 5, "index": 4, "answer": "217313"}
+{"id": "R2.from_base", "level": 5, "index": 5, "answer": "312170628"}
+{"id": "R2.from_base", "level": 5, "index": 6, "answer": "1309073"}
+{"id": "R2.from_base", "level": 5, "index": 7, "answer": "8974659"}
+{"id": "R2.from_base", "level": 5, "index": 8, "answer": "209147"}
+{"id": "R2.from_base", "level": 5, "index": 9, "answer": "170287"}
+{"id": "R2.from_base", "level": 5, "index": 10, "answer": "137"}
+{"id": "R2.from_base", "level": 5, "index": 11, "answer": "5754916"}
+{"id": "R2.from_base", "level": 5, "index": 12, "answer": "379306642"}
+{"id": "R2.from_base", "level": 5, "index": 13, "answer": "330623304"}
+{"id": "R2.from_base", "level": 5, "index": 14, "answer": "211"}
+{"id": "R2.from_base", "level": 5, "index": 15, "answer": "5335"}
+{"id": "R2.from_base", "level": 5, "index": 16, "answer": "381054851"}
+{"id": "R2.from_base", "level": 5, "index": 17, "answer": "413"}
+{"id": "R2.from_base", "level": 5, "index": 18, "answer": "831105701"}
+{"id": "R2.from_base", "level": 5, "index": 19, "answer": "1287986"}
+{"id": "R2.from_base", "level": 5, "index": 20, "answer": "113279"}
+{"id": "R2.from_base", "level": 5, "index": 21, "answer": "235"}
+{"id": "R2.from_base", "level": 5, "index": 22, "answer": "4270"}
+{"id": "R2.from_base", "level": 5, "index": 23, "answer": "55766"}
+{"id": "R2.from_base", "level": 5, "index": 24, "answer": "257"}
+{"id": "R2.from_base", "level": 5, "index": 25, "answer": "521774866500"}
+{"id": "R2.from_base", "level": 5, "index": 26, "answer": "21219"}
+{"id": "R2.from_base", "level": 5, "index": 27, "answer": "957162072"}
+{"id": "R2.from_base", "level": 5, "index": 28, "answer": "7758920092"}
+{"id": "R2.from_base", "level": 5, "index": 29, "answer": "2751"}
+{"id": "R2.from_base", "level": 5, "index": 30, "answer": "161"}
+{"id": "R2.from_base", "level": 5, "index": 31, "answer": "152"}
+{"id": "R2.from_base", "level": 5, "index": 32, "answer": "117457985"}
+{"id": "R2.from_base", "level": 5, "index": 33, "answer": "50063"}
+{"id": "R2.from_base", "level": 5, "index": 34, "answer": "377349"}
+{"id": "R2.from_base", "level": 5, "index": 35, "answer": "18989952"}
+{"id": "R2.from_base", "level": 5, "index": 36, "answer": "288078194"}
+{"id": "R2.from_base", "level": 5, "index": 37, "answer": "67482989"}
+{"id": "R2.from_base", "level": 5, "index": 38, "answer": "56042"}
+{"id": "R2.from_base", "level": 5, "index": 39, "answer": "427"}
+{"id": "R2.from_base", "level": 6, "index": 0, "answer": "884"}
+{"id": "R2.from_base", "level": 6, "index": 1, "answer": "27906109851"}
+{"id": "R2.from_base", "level": 6, "index": 2, "answer": "961180"}
+{"id": "R2.from_base", "level": 6, "index": 3, "answer": "832793603"}
+{"id": "R2.from_base", "level": 6, "index": 4, "answer": "1042270712516"}
+{"id": "R2.from_base", "level": 6, "index": 5, "answer": "990102105416"}
+{"id": "R2.from_base", "level": 6, "index": 6, "answer": "54520076"}
+{"id": "R2.from_base", "level": 6, "index": 7, "answer": "337"}
+{"id": "R2.from_base", "level": 6, "index": 8, "answer": "1402186"}
+{"id": "R2.from_base", "level": 6, "index": 9, "answer": "138622188"}
+{"id": "R2.from_base", "level": 6, "index": 10, "answer": "1736658439"}
+{"id": "R2.from_base", "level": 6, "index": 11, "answer": "1419902036"}
+{"id": "R2.from_base", "level": 6, "index": 12, "answer": "14692659815"}
+{"id": "R2.from_base", "level": 6, "index": 13, "answer": "241161520"}
+{"id": "R2.from_base", "level": 6, "index": 14, "answer": "1054"}
+{"id": "R2.from_base", "level": 6, "index": 15, "answer": "56582"}
+{"id": "R2.from_base", "level": 6, "index": 16, "answer": "45646"}
+{"id": "R2.from_base", "level": 6, "index": 17, "answer": "558682729"}
+{"id": "R2.from_base", "level": 6, "index": 18, "answer": "504245359393"}
+{"id": "R2.from_base", "level": 6, "index": 19, "answer": "426"}
+{"id": "R2.from_base", "level": 6, "index": 20, "answer": "813"}
+{"id": "R2.from_base", "level": 6, "index": 21, "answer": "104012775"}
+{"id": "R2.from_base", "level": 6, "index": 22, "answer": "13758941491987"}
+{"id": "R2.from_base", "level": 6, "index": 23, "answer": "22710775273"}
+{"id": "R2.from_base", "level": 6, "index": 24, "answer": "627"}
+{"id": "R2.from_base", "level": 6, "index": 25, "answer": "20205681835"}
+{"id": "R2.from_base", "level": 6, "index": 26, "answer": "701"}
+{"id": "R2.from_base", "level": 6, "index": 27, "answer": "257039551"}
+{"id": "R2.from_base", "level": 6, "index": 28, "answer": "474567"}
+{"id": "R2.from_base", "level": 6, "index": 29, "answer": "50569188201"}
+{"id": "R2.from_base", "level": 6, "index": 30, "answer": "21433448572"}
+{"id": "R2.from_base", "level": 6, "index": 31, "answer": "93693803"}
+{"id": "R2.from_base", "level": 6, "index": 32, "answer": "1261872"}
+{"id": "R2.from_base", "level": 6, "index": 33, "answer": "8714198307195"}
+{"id": "R2.from_base", "level": 6, "index": 34, "answer": "18900754954"}
+{"id": "R2.from_base", "level": 6, "index": 35, "answer": "847115"}
+{"id": "R2.from_base", "level": 6, "index": 36, "answer": "172259"}
+{"id": "R2.from_base", "level": 6, "index": 37, "answer": "1247501"}
+{"id": "R2.from_base", "level": 6, "index": 38, "answer": "2416391"}
+{"id": "R2.from_base", "level": 6, "index": 39, "answer": "858"}

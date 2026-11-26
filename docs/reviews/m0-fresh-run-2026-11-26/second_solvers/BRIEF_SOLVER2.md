@@ -1,0 +1,22 @@
+# M0: write second solvers from answer-free fixtures (auditor's task)
+
+You are an `arbor-auditor` context writing SECOND SOLVERS under ADR-0033 addendum 1, section 8 item 1: "A second context ... that has not read the generator's or the first solver's source, writes the second solver from the item's structured form, its schema and fixtures only. The fixtures it receives carry no answer from the first solver."
+
+## What you may read — and nothing else
+ONLY the fixtures tree: `/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_second_solver_fixtures_20261126/` (its `README.md`, and for each of your lineages `<EVAL>/<lineage id>/fixtures.jsonl` and `SCHEMA.md`), this brief, and your own new directory.
+**You must NOT read, list, grep or open anything else on this machine that concerns this project**: not the repository or any worktree (no `studies/`, `tests/`, `docs/`, `AGENTS.md`, git history), not any other directory under `experiments/` or `experiments/_scratch/` (in particular not `m0_second_solver_keys_20261126`, not `m0_second_solver_fixtures_impl_20261126`, not any `m0_fr_*`), not other lineages' fixtures beyond the ones assigned to you. If a tool result shows you such content by accident, stop reading it and report it in your final message. This restriction is the whole point of the task; a solver written after seeing a generator, a key or an earlier solver is void.
+
+## The task
+For each lineage assigned to you: read `SCHEMA.md` and the 280 fixture items (40 per level, levels 0–6; each line has `id`, `level`, `index`, `question`, `structured`). Work out from the question text what is asked and how the answer is derived, and write a solver that computes the answer **from the item alone**. The answer's format (type and exact surface form) is in `SCHEMA.md`.
+- Deliver ONE Python module, standard library only: `solver2_<NAME>.py` with `SOLVERS = {"<lineage id>": fn, ...}` where `fn(question: str, structured: dict) -> str` returns the answer as the exact string to compare. Prefer computing from `structured`; use the question text wherever `structured` does not carry what is needed, and say which you used per lineage. No randomness, no file or network access, no `eval`/`exec` of item content.
+- You have no answers. Check yourself by: solving by hand at least three items per lineage at different levels and comparing with your code; running your solver over all 280 items of each lineage to see it returns a well-formed answer for every item (no exception, format as SCHEMA says); and checking every wording variant in the fixtures is handled (enumerate the distinct question templates you found per lineage).
+- Where the question text is genuinely ambiguous to you (two readings give different answers), do NOT guess silently: implement the reading you judge the text supports best, and list the item ids and the alternative reading in `AMBIGUITIES.md`. That list is evidence about the wording and is valuable.
+- Do not try to make your solver agree with anything; you have nothing to agree with. Later, a different context compares your answers with the builder's keys.
+
+## Output
+A NEW directory `/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_solver2_<NAME>_20261126/` (use a shell heredoc if the Write tool refuses the path): `solver2_<NAME>.py`; `run_solver2.py` (applies the solvers to the fixtures and writes `answers_<NAME>.jsonl` lines `{"id","level","index","answer"}`) and its output; `NOTES.md` (per lineage: the procedure in two or three lines, what you read from `structured` vs text, templates found, hand-checked items); `AMBIGUITIES.md`; `REPORT.md` (what you read — confirm the restriction held or say exactly what you saw; the model you ran as; `Astra review: NOT_PERFORMED`); `SHA256SUMS.txt`.
+
+## Rules
+Python: `python3 -I -B <script>` (system Python 3, standard library only; do not use `uv` and do not `cd` into any repository). Never run `rm`, `mv`, `chmod`, `chown`, `sudo`, `kill`, `pkill`, `killall`, `sed -i` or any delete or permission command, not even on your own files; never retry a blocked command; a wrong file stays and a new one gets a new name. No writes to `/tmp` or `/private/tmp`. Every command ends by itself (use `timeout`), nothing over 10 minutes. No downloads, no web. Never call a result a success.
+
+Final message: lineages done; per lineage whether solved from `structured`, text or both; the number of ambiguities; anything you could not solve; confirmation of what you read.

@@ -1,0 +1,3 @@
+items per lineage: {'R2.binary_search_trace': 280, 'R2.caesar_shift': 280, 'R2.cellular_automaton': 280, 'R2.cheapest_network': 280, 'R2.count_divisible': 280, 'R2.crt_smallest': 280, 'R2.dictionary_rank': 280, 'R2.expression_eval': 280, 'R2.from_base': 280}
+other: {'crt_brute_checked': 280, 'dict_brute_checked': 280}
+problems: 0

@@ -1,0 +1,11 @@
+heap items with duplicate values: 0 []
+heap removals>=len: 0
+grid shapes: [(3, 3), (3, 4), (4, 4), (4, 5), (5, 5), (5, 6), (6, 6)]
+non-square diag: 46
+ragged: 0
+min list_ops len: 4
+min n base: 46
+sort dups: 0
+rewrite overlapping-self patterns: ['a', 'aa', 'ab', 'ac', 'b', 'ba', 'bb', 'bc', 'c', 'ca', 'cb', 'cc']
+luhn lens: [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19] leading zero: 27
+run_length alphabet: ['a', 'b', 'c', 'x', 'y', 'z']

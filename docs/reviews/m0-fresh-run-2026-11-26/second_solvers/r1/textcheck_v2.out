@@ -1,0 +1,66 @@
+== R1.boolean_lights_r4 parsefail 0 field mismatches 0 answer diffs 0
+   template 'answer' 280
+   template 'ask' 280
+   template 'count' 280
+   template 'presses' 280
+   template 'start:all off' 4
+   template 'start:all on' 4
+   template 'start:some on' 272
+   template 'switch' 1040
+== R1.categories_default_exceptions_r4 parsefail 0 field mismatches 0 answer diffs 0
+   template 'answer' 280
+   template 'ask' 280
+   template 'isa' 6880
+   template 'member' 280
+   template 'rule' 5408
+   template 'specificity' 280
+== R1.compass_turns parsefail 0 field mismatches 0 answer diffs 0
+   template 'turn 180 clockwise' 249
+   template 'turn 270 clockwise' 260
+   template 'turn 90 clockwise' 231
+   template 'turn 90 counterclockwise' 268
+   template 'turn around' 273
+   template 'turn left' 267
+   template 'turn right' 221
+   template 'walk' 751
+== R1.conditional_threshold_rule_r4 parsefail 0 field mismatches 0 answer diffs 0
+   template 'single template' 280
+== R1.equivalence_exchange_rates_r6 parsefail 0 field mismatches 0 answer diffs 0
+   template 'ask' 280
+   template 'rate' 2440
+== R1.knights_knaves_r6 parsefail 0 field mismatches 0 answer diffs 0
+   template 'both_knights' 329
+   template 'differ' 318
+   template 'is_knave' 329
+   template 'is_knight' 315
+   template 'same_kind' 339
+   template 'some_knave' 330
+== R1.spatial_grid_walk_r5 parsefail 0 field mismatches 0 answer diffs 0
+   template 'ask' 280
+   template 'choices' 280
+   template 'header' 280
+   template 'moves' 280
+   template 'row' 1040
+   template 'start' 280
+   template 'wallrule' 280
+== R1.swap_tracking_r5 parsefail 0 field mismatches 0 answer diffs 0
+   template 'ask' 280
+   template 'choices' 280
+   template 'rotate' 1686
+   template 'start' 280
+   template 'swap' 1674
+== R1.temporal_weekday_shift_r6 parsefail 0 field mismatches 0 answer diffs 0
+   template 'anchor' 280
+   template 'ask' 280
+   template 'link after' 1485
+   template 'link after 1 day' 4
+   template 'link before' 1502
+   template 'link before 1 day' 9
+== R1.venn_counting_r5 parsefail 0 field mismatches 0 answer diffs 0
+   template '2 groups' 80
+   template '3 groups' 120
+   template '4 groups' 80
+   template 'ask at least two' 40
+   template 'ask exactly one' 40
+   template 'ask exactly two' 80
+   template 'ask none' 120

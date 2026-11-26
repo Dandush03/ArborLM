@@ -1,0 +1,38 @@
+===== grid_sum 280
+100 | A grid has ROWS rows and ROWS columns. The rows, from top to bottom, are: ROWS . What is the sum of the numbers in the diagonal from the top left corner (cells (ROWS ,ROWS ), (ROWS ,ROWS ), and so on)?
+94 | A grid has ROWS rows and ROWS columns. The rows, from top to bottom, are: ROWS . What is the sum of the numbers in column ROWS ?
+86 | A grid has ROWS rows and ROWS columns. The rows, from top to bottom, are: ROWS . What is the sum of the numbers in row ROWS ?
+keys {('grid', 'what'): 280}
+extra {'the diagonal from the top left corner (cells (N,N), (N,N), and so on)': 100, 'column N': 94, 'row N': 86}
+===== list_ops 280
+280 | Start with the list LIST. Do these steps in order: OPS. What is the final list? Give the numbers separated by commas.
+keys {'append': 274, 'drop_first': 274, ('ops', 'xs'): 280, 'reverse': 312, 'first_to_end': 272, 'drop_last': 268}
+extra {'add N at the end': 274, 'remove the first element': 274, 'reverse the list': 312, 'move the first element to the end': 272, 'remove the last element': 268}
+===== luhn_check 280
+147 | Start at the rightmost digit and move left: leave the Nst digit as it is, double the Nnd, leave the Nrd, double the Nth, and so on. Whenever a doubled digit is more than N, subtract N from it. Add up all the results. A number is valid if the total is a multiple of N. One more digit is to be written at the right end of N so that the new number is valid (the digit written there is the rightmost digit of the new number). Which digit must be written?
+133 | Start at the rightmost digit and move left: leave the Nst digit as it is, double the Nnd, leave the Nrd, double the Nth, and so on. Whenever a doubled digit is more than N, subtract N from it. Add up all the results. The number is valid if the total is a multiple of N. Is the number N valid? Answer yes or no.
+keys {('ask', 'digits'): 280}
+extra {'check_digit': 147, 'valid': 133}
+===== min_heap_ops 280
+158 | A heap is a row of numbers in positions LIST, ... where the number in position p is never larger than the numbers in positions Np and Np+N (when those exist). To add a number: put it in the first free position at the end, then, while it is smaller than the number in position (its position divided by N, rounded down), swap the two. To remove the smallest: take out the number in position N, put the number from the last position into position N (the row is now one shorter), then, while it is larger than the smaller of the numbers in positions Np and Np+N (those that exist), swap it with that smaller number. Start with an empty heap and add these numbers in order: LIST. Give the row from position N to the end, separated by commas.
+80 | A heap is a row of numbers in positions LIST, ... where the number in position p is never larger than the numbers in positions Np and Np+N (when those exist). To add a number: put it in the first free position at the end, then, while it is smaller than the number in position (its position divided by N, rounded down), swap the two. To remove the smallest: take out the number in position N, put the number from the last position into position N (the row is now one shorter), then, while it is larger than the smaller of the numbers in positions Np and Np+N (those that exist), swap it with that smaller number. Start with an empty heap and add these numbers in order: LIST. Then remove the smallest N time. Give the row from position N to the end, separated by commas.
+42 | A heap is a row of numbers in positions LIST, ... where the number in position p is never larger than the numbers in positions Np and Np+N (when those exist). To add a number: put it in the first free position at the end, then, while it is smaller than the number in position (its position divided by N, rounded down), swap the two. To remove the smallest: take out the number in position N, put the number from the last position into position N (the row is now one shorter), then, while it is larger than the smaller of the numbers in positions Np and Np+N (those that exist), swap it with that smaller number. Start with an empty heap and add these numbers in order: LIST. Then remove the smallest N times. Give the row from position N to the end, separated by commas.
+keys {('removals', 'xs'): 280}
+extra {1: 80, 0: 158, 2: 42}
+===== run_length 280
+280 | Compress STR by run-length encoding: replace each maximal run of one repeated letter by the letter followed by the run length (for example aaab becomes aNbN). What is the result?
+keys {('s',): 280}
+extra {}
+===== sort_list 280
+141 | Sort these numbers from smallest to largest and give them separated by commas: LIST.
+139 | Sort these numbers from largest to smallest and give them separated by commas: LIST.
+keys {('desc', 'xs'): 280}
+extra {False: 141, True: 139}
+===== string_rewrite_nonidentity 280
+280 | Start with the string STR. Do these steps in order, each step scanning left to right over non-overlapping matches in the string STR it is when the step starts: RULES. What is the final string?
+keys {('rules', 's'): 280}
+extra {"delete every 'S'": 198, "replace every 'S' with 'S'": 562}
+===== to_base_wide 280
+280 | Write the decimal number N in base N. Use digits NN and then lowercase letters a-f for ten to fifteen.
+keys {('base', 'n'): 280}
+extra {5: 34, 6: 21, 9: 22, 4: 22, 3: 33, 8: 28, 2: 27, 7: 21, 12: 26, 13: 21, 16: 14, 11: 11}
