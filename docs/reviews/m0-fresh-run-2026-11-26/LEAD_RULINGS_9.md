@@ -8,3 +8,8 @@ By the coordinating lead (Claude Fable 5.2). Made after the partition of record 
 - **R-64. The solver timeout.** `capacity.py` counts a second-solver call that exceeds 20 s as a disagreement, which removes the lineage. The slowest call the auditor saw was 0.017 s. Any lineage removed for a timeout, and not for a differing answer, is listed apart in the report and goes to the human lead before G-gen's record.
 
 Astra review: NOT_PERFORMED
+
+## Added for stage 6 (2026-11-26)
+
+- **R-65. The "strictest" counts of G-gen's record.** Section 1 item 3 defines them: borderline pairs "are reported with the count they would give if merged". The lead reads that as every borderline pair of the map of record merged, transitively, whatever the status of the lineages it passes through: the strictest count of an evaluation part is the number of borderline groups that hold a registered cluster of that evaluation and part. The count that merges only pairs joining two registered clusters directly is printed beside it as information and is not the strictest count. This fills a field of a report; it changes no status, no part and no G.
+- **R-66. Reasons of lineages dropped before the survivor list.** The status record carries, for a written lineage that is not on the survivor list, a reason only where a committed file states one: from the final checks, the fix-4 manifests and the lineage modules' own tables (83 lineages); "superseded by X" where a committed supersession field says so (39); and otherwise the fixed sentence "not on the survivor list of record; superseded or dropped before it (no single committed reason found)" (141). No reason is written now for a lineage dropped earlier. The earlier rounds' records hold what was found at the time.
