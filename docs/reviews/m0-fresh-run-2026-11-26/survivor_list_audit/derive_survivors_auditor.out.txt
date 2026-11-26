@@ -1,0 +1,17 @@
+sha256 R1 7cd0ac5a:studies/m0/manifests/r1_fix4_survivors.json e1a7a092a709de28e7fdbf07c93f8451543841e1a407b6ff2ae5b9a2bd90749b text=e1a7a092...749b MATCH
+sha256 R2 7cd0ac5a:studies/m0/manifests/r2_fix4_survivors.json 2456dac6fd735f87ef3f4ba55f0c2058ae9226ae458e5be35732fc603425a102 text=2456dac6...a102 MATCH
+sha256 M1 7cd0ac5a:studies/m0/manifests/m1_fix4_survivors.json 153e68374e8f34dfdbd96fdab73085227e29165a7122247748f38331963d1986 text=153e6837...1986 MATCH
+sha256 C1 7cd0ac5a:studies/m0/manifests/c1_fix4_survivors.json eaedec75b53e7d09b486596c1f78af3b2144bfd127a69c2587017fecb70d3603 text=eaedec75...3603 MATCH
+sha256 DROPS b78e58b1:docs/reviews/m0-lineage-decision-2026-11-25/cross_evaluation_map/drops_after_final_checks.txt b714f1026923a4b5f64fd34320d095f1ba0be2aac98218f0b506983cd3bf0bd5 text=b714f102...0bd5 MATCH
+read R1: 12 ids before drops
+read R2: 19 ids before drops
+read M1: 29 ids before drops
+read C1: 27 ids before drops
+drops: 5 ids: ['R1.graph_shortest_route_r6', 'R1.conditional_decision_tree_r6', 'R2.digit_root', 'R2.interval_scheduling', 'C1.sieve_marking_f4']
+count R1: 10 (text 10) OK
+count R2: 17 (text 17) OK
+count M1: 29 (text 29) OK
+count C1: 26 (text 26) OK
+count total: 82 (text 82)
+wrote /Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_survivors_audit_20261126/deliver/survivor_ids_auditor.json sha256 3e096ca20a7316f680ef5fad930f6f5c00c1a41660a4bad3fbc06a3eb45f93c2
+script sha256 eb0020229102456329e4c9fda49643e28a8afc2eca2ce193a3a24266c0e76b48
