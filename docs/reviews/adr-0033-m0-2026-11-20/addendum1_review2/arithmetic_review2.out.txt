@@ -1,0 +1,72 @@
+python 3.12.14 | target 0.99636 | z sum 4.3289
+== t quantiles (0.95): {2: 6.314, 3: 2.92, 5: 2.132, 8: 1.895, 10: 1.833, 13: 1.782, 19: 1.734}
+== (a) floor: largest tau with delta sqrt(G)/tau >= z sum
+  delta=0.02: G=5: 0.0103  G=8: 0.0131  G=10: 0.0146  G=13: 0.0167  G=19: 0.0201
+  delta=0.03: G=5: 0.0155  G=8: 0.0196  G=10: 0.0219  G=13: 0.0250  G=19: 0.0302
+  delta=0.05: G=5: 0.0258  G=8: 0.0327  G=10: 0.0365  G=13: 0.0416  G=19: 0.0503
+== (b) largest tau at which delta reachable within 20,000 (t, exact power, d=0.3)
+  delta=0.02: G=5: none  G=8: 0.0040  G=10: 0.0055  G=13: 0.0071  G=19: 0.0094
+  delta=0.03: G=5: 0.0088  G=8: 0.0136  G=10: 0.0160  G=13: 0.0189  G=19: 0.0236
+  delta=0.05: G=5: 0.0187  G=8: 0.0270  G=10: 0.0312  G=13: 0.0366  G=19: 0.0453
+  power at tau=0, delta=0.02: G=5: 0.9935  G=8: 0.9984  G=10: 0.9990  G=11: 0.9991  G=13: 0.9993  G=19: 0.9995
+  largest tau at any n (n -> inf), delta=0.05: G=5: 0.0232 (approx, normal-in-mean)  G=19: 0.0493 (approx, normal-in-mean)
+== (c) smallest delta reachable within 20,000 (t)
+  tau=0.03: G=5: 0.076  G=8: 0.055  G=10: 0.048  G=13: 0.042  G=19: 0.036
+  tau=0.05: G=5: 0.123  G=8: 0.088  G=10: 0.077  G=13: 0.066  G=19: 0.055
+  tau=0.1: G=5: 0.244  G=8: 0.173  G=10: 0.150  G=13: 0.129  G=19: 0.105
+== (d) chi2 approximation: P(tau_hat = 0) and P(reads reachable), (a) point, (b) chi2 upper bound
+  G=5, m=300.0, chi2_0.05,4=0.711
+    tau=0.00: P0=0.594  (a) 0.000  0.635T 0.751T  (b) 0.000  0.057T 0.084T
+    tau=0.01: P0=0.543  (a) 0.000  0.583F 0.703T  (b) 0.000  0.048F 0.071T
+    tau=0.03: P0=0.283  (a) 0.000  0.313F 0.415F  (b) 0.000  0.018F 0.027F
+    tau=0.05: P0=0.111  (a) 0.000  0.126F 0.180F  (b) 0.000  0.006F 0.009F
+    tau=0.10: P0=0.014  (a) 0.000  0.016F 0.025F  (b) 0.000  0.001F 0.001F
+  G=8, m=187.5, chi2_0.05,7=2.167
+    tau=0.00: P0=0.571  (a) 0.578T 0.651T 0.822T  (b) 0.051T 0.067T 0.130T
+    tau=0.01: P0=0.527  (a) 0.534F 0.607T 0.787T  (b) 0.044F 0.057T 0.112T
+    tau=0.03: P0=0.276  (a) 0.282F 0.340F 0.519F  (b) 0.014F 0.019F 0.041F
+    tau=0.05: P0=0.090  (a) 0.092F 0.118F 0.216F  (b) 0.003F 0.004F 0.010F
+    tau=0.10: P0=0.004  (a) 0.004F 0.006F 0.014F  (b) 0.000F 0.000F 0.000F
+  G=10, m=150.0, chi2_0.05,9=3.325
+    tau=0.00: P0=0.563  (a) 0.575T 0.661T 0.854T  (b) 0.052T 0.073T 0.161T
+    tau=0.01: P0=0.522  (a) 0.534F 0.621T 0.826T  (b) 0.045F 0.063T 0.141T
+    tau=0.03: P0=0.280  (a) 0.290F 0.362F 0.584T  (b) 0.015F 0.021F 0.054T
+    tau=0.05: P0=0.087  (a) 0.091F 0.124F 0.254F  (b) 0.003F 0.004F 0.012F
+    tau=0.10: P0=0.003  (a) 0.003F 0.004F 0.012F  (b) 0.000F 0.000F 0.000F
+  G=13, m=115.4, chi2_0.05,12=5.226
+    tau=0.00: P0=0.554  (a) 0.573T 0.676T 0.889T  (b) 0.054T 0.081T 0.208T
+    tau=0.01: P0=0.518  (a) 0.536F 0.641T 0.868T  (b) 0.046F 0.071T 0.186T
+    tau=0.03: P0=0.289  (a) 0.304F 0.396F 0.666T  (b) 0.016F 0.025F 0.078T
+    tau=0.05: P0=0.089  (a) 0.095F 0.138F 0.319F  (b) 0.003F 0.005F 0.017F
+    tau=0.10: P0=0.002  (a) 0.002F 0.003F 0.012F  (b) 0.000F 0.000F 0.000F
+  G=19, m=78.9, chi2_0.05,18=9.390
+    tau=0.00: P0=0.544  (a) 0.572T 0.702T 0.934T  (b) 0.056T 0.096T 0.302T
+    tau=0.01: P0=0.514  (a) 0.541F 0.673T 0.921T  (b) 0.049F 0.085T 0.277T
+    tau=0.03: P0=0.307  (a) 0.330F 0.455F 0.787T  (b) 0.018F 0.034F 0.138T
+    tau=0.05: P0=0.098  (a) 0.109F 0.175F 0.458F  (b) 0.003F 0.006F 0.034F
+    tau=0.10: P0=0.001  (a) 0.001F 0.002F 0.015F  (b) 0.000F 0.000F 0.000F
+  with s_w^2 = d (not d - tau^2), P0 at tau=0.03: G=5: 0.284  G=8: 0.277  G=10: 0.281  G=13: 0.290  G=19: 0.308
+== section 9 item 1: one-df stratum case P(chi2_1 <= 0.742) = 0.611 ; one stratum G=13 tau=0.03: 0.289
+== section 4 closing (N6): hypergeometric 27 of 116, 58 to A: mean 13.5 sd 2.286
+== section 9 item 3: items per cluster 1500/G: {5: 300.0, 19: 78.9} sealed per cluster 20000/G: {5: 4000.0, 19: 1052.6}
+== section 10: D(G) = 10 (ceil(4000/G) + ceil(20000/G) + 100)
+  D(5) = 49,000
+  D(8) = 31,000
+  D(10) = 25,000
+  D(11) = 22,830
+  D(13) = 19,470
+  D(14) = 18,150
+  D(15) = 17,010
+  D(19) = 13,640
+  D(300) = 1,810
+  ratio to D(300): 7.54 to 27.07
+  D_lin(10,2) = 12,500  D_lin(13,3) = 6,500
+  builder as written (equal per lineage), part of 7 clusters with 3,2,1,1,1,1,1 lineages (L=10): per-lineage demand 25,000 ; cluster of 3 holds 7200 pool items = 0.3 of each pool
+== direct simulation, item level, outcomes in {-1,0,+1}, P(+-1) = 0.15 +- mu_g/2, mu_g ~ N(0, tau^2); seed 20261125
+   reads reachable (a) := tau_hat <= tau*(G, delta) computed at d = 0.3 (the floor is then met as well)
+  G=5 m=300 tau=0.00: P0=0.597  reads reachable (a) 0.02: 0.000 0.03: 0.637 0.05: 0.753   (MC s.e. <= 0.009)
+  G=5 m=300 tau=0.03: P0=0.284  reads reachable (a) 0.02: 0.000 0.03: 0.318 0.05: 0.423   (MC s.e. <= 0.009)
+  G=5 m=300 tau=0.05: P0=0.113  reads reachable (a) 0.02: 0.000 0.03: 0.124 0.05: 0.176   (MC s.e. <= 0.009)
+  G=10 m=150 tau=0.00: P0=0.560  reads reachable (a) 0.02: 0.576 0.03: 0.662 0.05: 0.855   (MC s.e. <= 0.009)
+  G=10 m=150 tau=0.03: P0=0.279  reads reachable (a) 0.02: 0.289 0.03: 0.364 0.05: 0.586   (MC s.e. <= 0.009)
+  G=10 m=150 tau=0.05: P0=0.094  reads reachable (a) 0.02: 0.097 0.03: 0.130 0.05: 0.256   (MC s.e. <= 0.009)
