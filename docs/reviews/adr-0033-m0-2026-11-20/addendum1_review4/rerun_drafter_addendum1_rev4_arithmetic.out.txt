@@ -1,0 +1,32 @@
+== A. CR1 against CR0. Per-test target 1 - 0.2/55 = 0.99636; n = 20,000; d = 0.3
+   power at tau = 0 (the clusters do not differ at all), CR1 / CR0; 'yes' = target met
+   delta 0.02: G=2: 0.5808 no / 0.7410 no; G=3: 0.9285 no / 0.9732 no; G=4: 0.9832 no / 0.9934 no; G=5: 0.9935 no / 0.9971 yes; G=6: 0.9966 yes / 0.9982 yes; G=8: 0.9984 yes / 0.9990 yes; G=10: 0.9990 yes / 0.9993 yes; G=13: 0.9993 yes / 0.9995 yes; G=19: 0.9995 yes / 0.9996 yes
+   delta 0.03: G=2: 0.7744 no / 0.9096 no; G=3: 0.9970 yes / 0.9997 yes; G=4: 0.9999 yes / 1.0000 yes; G=5: 1.0000 yes / 1.0000 yes; G=6: 1.0000 yes / 1.0000 yes; G=8: 1.0000 yes / 1.0000 yes; G=10: 1.0000 yes / 1.0000 yes; G=13: 1.0000 yes / 1.0000 yes; G=19: 1.0000 yes / 1.0000 yes
+   delta 0.05: G=2: 0.9566 no / 0.9952 no; G=3: 1.0000 yes / 1.0000 yes; G=4: 1.0000 yes / 1.0000 yes; G=5: 1.0000 yes / 1.0000 yes; G=6: 1.0000 yes / 1.0000 yes; G=8: 1.0000 yes / 1.0000 yes; G=10: 1.0000 yes / 1.0000 yes; G=13: 1.0000 yes / 1.0000 yes; G=19: 1.0000 yes / 1.0000 yes
+   largest tau at which delta is reachable inside the pool, CR1 / CR0 ('none' = not at any tau)
+   delta 0.02: G=2: none / none; G=3: none / none; G=4: none / none; G=5: none / 0.0016; G=6: 0.0010 / 0.0033; G=8: 0.0040 / 0.0050; G=10: 0.0055 / 0.0062; G=13: 0.0071 / 0.0077; G=19: 0.0094 / 0.0099
+   delta 0.03: G=2: none / none; G=3: 0.0012 / 0.0044; G=4: 0.0063 / 0.0078; G=5: 0.0088 / 0.0100; G=6: 0.0107 / 0.0117; G=8: 0.0136 / 0.0144; G=10: 0.0160 / 0.0166; G=13: 0.0189 / 0.0194; G=19: 0.0236 / 0.0240
+   delta 0.05: G=2: none / none; G=3: 0.0092 / 0.0116; G=4: 0.0147 / 0.0166; G=5: 0.0187 / 0.0203; G=6: 0.0219 / 0.0232; G=8: 0.0270 / 0.0281; G=10: 0.0312 / 0.0321; G=13: 0.0366 / 0.0373; G=19: 0.0453 / 0.0459
+   at G = 5, delta = 0.02 (the case the choice of form decides):
+     CR1: power at tau = 0 is 0.9935 against 0.9964: not reachable at any tau
+     CR0: power at tau = 0 is 0.9971 against 0.9964: reachable for tau up to 0.0016
+   width of every t interval: CR0 / CR1 = sqrt((G-1)/G): G=2: 0.707; G=3: 0.816; G=4: 0.866; G=5: 0.894; G=6: 0.913; G=8: 0.935; G=10: 0.949; G=13: 0.961; G=19: 0.973
+== B. G = 2, 3, 4
+   t quantile 0.95: df=1: 6.314; df=2: 2.920; df=3: 2.353; df=4: 2.132; normal: 1.645
+   (a) floor as written, largest tau = delta x sqrt(G) / 4.3289
+   delta 0.02: G=2: 0.007; G=3: 0.008; G=4: 0.009; G=5: 0.010
+   delta 0.03: G=2: 0.010; G=3: 0.012; G=4: 0.014; G=5: 0.015
+   delta 0.05: G=2: 0.016; G=3: 0.020; G=4: 0.023; G=5: 0.026
+   (c) smallest delta reachable inside the pool with the t test, CR1 (CR0)
+   tau 0.00: G=2: 0.072 (0.052); G=3: 0.029 (0.025); G=4: 0.023 (0.021); G=5: 0.021 (0.020)
+   tau 0.03: G=2: 0.401 (0.287); G=3: 0.135 (0.115); G=4: 0.093 (0.084); G=5: 0.076 (0.071)
+   tau 0.05: G=2: 0.661 (0.473); G=3: 0.222 (0.189); G=4: 0.152 (0.138); G=5: 0.123 (0.115)
+   tau 0.10: G=2: 1.316 (0.942); G=3: 0.441 (0.375); G=4: 0.301 (0.273); G=5: 0.244 (0.228)
+== C. capacity: D(G) per cluster and level; D_lin(G, k) per lineage; slack k x D_lin - D
+   D(G): G=1: 241,000; G=2: 121,000; G=3: 81,010; G=4: 61,000; G=5: 49,000; G=8: 31,000; G=9: 27,680; G=10: 25,000; G=13: 19,470; G=19: 13,640
+   k=2: G=1: D_lin 120,500, slack 0; G=2: D_lin 60,500, slack 0; G=3: D_lin 40,510, slack 10; G=4: D_lin 30,500, slack 0; G=5: D_lin 24,500, slack 0; G=8: D_lin 15,500, slack 0; G=9: D_lin 13,850, slack 20; G=10: D_lin 12,500, slack 0; G=13: D_lin 9,740, slack 10; G=19: D_lin 6,830, slack 20
+   k=3: G=1: D_lin 80,350, slack 50; G=2: D_lin 40,350, slack 50; G=3: D_lin 27,020, slack 50; G=4: D_lin 20,350, slack 50; G=5: D_lin 16,350, slack 50; G=8: D_lin 10,350, slack 50; G=9: D_lin 9,240, slack 40; G=10: D_lin 8,350, slack 50; G=13: D_lin 6,500, slack 30; G=19: D_lin 4,560, slack 40
+   k=4: G=1: D_lin 60,250, slack 0; G=2: D_lin 30,250, slack 0; G=3: D_lin 20,260, slack 30; G=4: D_lin 15,250, slack 0; G=5: D_lin 12,250, slack 0; G=8: D_lin 7,750, slack 0; G=9: D_lin 6,930, slack 40; G=10: D_lin 6,250, slack 0; G=13: D_lin 4,870, slack 10; G=19: D_lin 3,420, slack 40
+   (G, k) with slack exactly 0, G = 1..19, k = 2..4: [(1, 2), (1, 4), (2, 2), (2, 4), (4, 2), (4, 4), (5, 2), (5, 4), (7, 2), (8, 2), (8, 4), (10, 2), (10, 4), (16, 2)]
+   (G, k) with k x D_lin < D, G = 1..39, k = 1..7: []
+   attempt budget of core.draw_items as written, 40 x target + 1,000: target 121,000: 4,841,000; target 49,000: 1,961,000; target 31,000: 1,241,000; target 15,500: 621,000
