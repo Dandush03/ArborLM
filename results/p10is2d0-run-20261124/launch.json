@@ -1,0 +1,17 @@
+{
+ "argv": [
+  "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/p10-i-s2-d0-20261124/studies/p10is2d0/driver.py",
+  "run",
+  "--out",
+  "/Users/daniellaloush/dandush03/ArborLM/experiments/P10IS2D0-run-20261124"
+ ],
+ "branch": "claude/p10-i-s2-d0",
+ "cap_worker_seconds": 28800.0,
+ "commit": "e74cbf25bac019156be34c0a51a416749a4da16a",
+ "python": "3.12.14 (main, Sep  1 2026, 14:09:38) [Clang 22.1.3 ]",
+ "threads_per_worker": 6,
+ "torch": "2.8.0",
+ "utc": "2026-11-25T04:39:41Z",
+ "uv_lock_sha256": "07c61871ce8a049deb83a0c353aae4ac75c193023433b86ade1581921a2af761",
+ "workers": 3
+}

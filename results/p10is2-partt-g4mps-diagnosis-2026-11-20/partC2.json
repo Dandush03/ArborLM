@@ -1,0 +1,39 @@
+{
+ "loss_cpu": 2.8878188133239746,
+ "loss_mps": 2.887850522994995,
+ "tensors": [
+  {
+   "name": "keys",
+   "numel": 65536,
+   "nonzero_fraction": 0.200927734375,
+   "grad_norm_cpu": 3.1688276755526827e-05,
+   "grad_rel_diff": 0.00012991673187500566,
+   "median_abs_grad_nonzero": 1.780437131060353e-08,
+   "fraction_nonzero_below_adam_eps_1e-8": 0.3640643985419198,
+   "sign_disagreement_among_nonzero": 0.0,
+   "elements_where_abs_diff_exceeds_abs_grad": 7.594167679222357e-05
+  },
+  {
+   "name": "values",
+   "numel": 2359296,
+   "nonzero_fraction": 0.200927734375,
+   "grad_norm_cpu": 3.247015649312102e-05,
+   "grad_rel_diff": 0.0001081419350005489,
+   "median_abs_grad_nonzero": 5.341319386786836e-09,
+   "fraction_nonzero_below_adam_eps_1e-8": 0.7159443769407318,
+   "sign_disagreement_among_nonzero": 2.7423383286080735e-05,
+   "elements_where_abs_diff_exceeds_abs_grad": 7.172269474821115e-05
+  },
+  {
+   "name": "gates",
+   "numel": 1,
+   "nonzero_fraction": 1.0,
+   "grad_norm_cpu": 0.0003565509687177837,
+   "grad_rel_diff": 0.0001713329803824962,
+   "median_abs_grad_nonzero": 0.0003565509687177837,
+   "fraction_nonzero_below_adam_eps_1e-8": 0.0,
+   "sign_disagreement_among_nonzero": 0.0,
+   "elements_where_abs_diff_exceeds_abs_grad": 0.0
+  }
+ ]
+}

@@ -260,7 +260,7 @@ def test_against_lookup_rows_boundaries_and_naming() -> None:
     assert L.against_lookup(quantities(s4))["label"] == "MIXED"
     s5 = Spec().set("R-gloss", "-", 1, "A", "full", 0.60)
     r5 = L.against_lookup(quantities(s5))
-    assert r5["label"] == "MEMORY ADDS OVER LOOKUP" and any(x["best"] == "R-gloss" and x["b"] == 0.60 for x in r5["readings"]) and r5["baseline"] == "E-table"  # named by frequency
+    assert r5["label"] == "MEMORY ADDS OVER LOOKUP" and any(x["best"] == "R-gloss" and x["b"] == 0.60 for x in r5["readings"]) and r5["per_cell"]["1AB/A"] == "R-gloss" and r5["per_cell"]["0AB/A"] == "E-table" and r5["baseline"].startswith("per cell and capability: ") and "1AB/A R-gloss" in r5["baseline"]  # named per cell and capability (ruling 5), not by frequency
     assert len(r5["readings"]) == 12  # 6 cells x 2 capabilities
 
 

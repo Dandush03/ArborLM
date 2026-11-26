@@ -1,0 +1,272 @@
+{
+ "torch": "2.8.0",
+ "world_seconds": 3.8477020263671875,
+ "fallback_env": null,
+ "eps_adamw_default": 1e-08,
+ "lr": 0.003,
+ "cpu_seconds_20_updates": 34.908308029174805,
+ "mps_seconds_20_updates": 10.62083911895752,
+ "mps_warnings": [],
+ "tensors": [
+  {
+   "i": 0,
+   "name": "store.keys.0",
+   "shape": [
+    4096,
+    16
+   ],
+   "numel": 65536,
+   "norm_cpu": 5.639765282358003,
+   "norm_init": 5.125101994218437,
+   "diff_mps_cpu": 0.0832962150014099,
+   "change_cpu": 2.3859415148397543,
+   "rel_to_final": 0.014769447101277857,
+   "rel_to_change": 0.03491125598986205
+  },
+  {
+   "i": 1,
+   "name": "store.values.0",
+   "shape": [
+    4096,
+    576
+   ],
+   "numel": 2359296,
+   "norm_cpu": 33.881577053580564,
+   "norm_init": 30.727742009139043,
+   "diff_mps_cpu": 0.3350604609857422,
+   "change_cpu": 14.185028998591813,
+   "rel_to_final": 0.009889163673103978,
+   "rel_to_change": 0.02362071032910857
+  },
+  {
+   "i": 2,
+   "name": "store.gates.0",
+   "shape": [
+    1
+   ],
+   "numel": 1,
+   "norm_cpu": 0.05903121456503868,
+   "norm_init": 0.0,
+   "diff_mps_cpu": 2.1979212760925293e-07,
+   "change_cpu": 0.05903121456503868,
+   "rel_to_final": 3.723320436971411e-06,
+   "rel_to_change": 3.723320436971411e-06
+  }
+ ],
+ "growth": [
+  {
+   "update": 1,
+   "max_rel": 7.761459309579387e-08,
+   "worst_tensor": "store.gates.0",
+   "loss_cpu": 2.836764335632324,
+   "loss_mps": 2.8367974758148193,
+   "loss_diff": 3.314018249511719e-05
+  },
+  {
+   "update": 2,
+   "max_rel": 6.3207049861513355e-06,
+   "worst_tensor": "store.gates.0",
+   "loss_cpu": 2.8878188133239746,
+   "loss_mps": 2.887850522994995,
+   "loss_diff": 3.170967102050781e-05
+  },
+  {
+   "update": 3,
+   "max_rel": 9.954900866350994e-06,
+   "worst_tensor": "store.gates.0",
+   "loss_cpu": 3.0033366680145264,
+   "loss_mps": 3.003369092941284,
+   "loss_diff": 3.24249267578125e-05
+  },
+  {
+   "update": 4,
+   "max_rel": 1.069489320155588e-05,
+   "worst_tensor": "store.keys.0",
+   "loss_cpu": 2.7357118129730225,
+   "loss_mps": 2.7357442378997803,
+   "loss_diff": 3.24249267578125e-05
+  },
+  {
+   "update": 5,
+   "max_rel": 1.4119949238686308e-05,
+   "worst_tensor": "store.keys.0",
+   "loss_cpu": 2.6795690059661865,
+   "loss_mps": 2.6796021461486816,
+   "loss_diff": 3.314018249511719e-05
+  },
+  {
+   "update": 6,
+   "max_rel": 0.0007706379399844412,
+   "worst_tensor": "store.keys.0",
+   "loss_cpu": 2.6976284980773926,
+   "loss_mps": 2.6976613998413086,
+   "loss_diff": 3.2901763916015625e-05
+  },
+  {
+   "update": 7,
+   "max_rel": 0.0014274332716683713,
+   "worst_tensor": "store.keys.0",
+   "loss_cpu": 2.7990493774414062,
+   "loss_mps": 2.7990829944610596,
+   "loss_diff": 3.361701965332031e-05
+  },
+  {
+   "update": 8,
+   "max_rel": 0.0021170406445442827,
+   "worst_tensor": "store.keys.0",
+   "loss_cpu": 2.6193578243255615,
+   "loss_mps": 2.619389533996582,
+   "loss_diff": 3.170967102050781e-05
+  },
+  {
+   "update": 9,
+   "max_rel": 0.00296998061484133,
+   "worst_tensor": "store.keys.0",
+   "loss_cpu": 2.7594738006591797,
+   "loss_mps": 2.7595055103302,
+   "loss_diff": 3.170967102050781e-05
+  },
+  {
+   "update": 10,
+   "max_rel": 0.0037703723795806197,
+   "worst_tensor": "store.keys.0",
+   "loss_cpu": 2.629894733428955,
+   "loss_mps": 2.6299266815185547,
+   "loss_diff": 3.1948089599609375e-05
+  },
+  {
+   "update": 11,
+   "max_rel": 0.004529339397450625,
+   "worst_tensor": "store.keys.0",
+   "loss_cpu": 2.6273319721221924,
+   "loss_mps": 2.62736439704895,
+   "loss_diff": 3.24249267578125e-05
+  },
+  {
+   "update": 12,
+   "max_rel": 0.005366905012206517,
+   "worst_tensor": "store.keys.0",
+   "loss_cpu": 2.940279006958008,
+   "loss_mps": 2.940311908721924,
+   "loss_diff": 3.2901763916015625e-05
+  },
+  {
+   "update": 13,
+   "max_rel": 0.006292192157649297,
+   "worst_tensor": "store.keys.0",
+   "loss_cpu": 2.7585954666137695,
+   "loss_mps": 2.7586281299591064,
+   "loss_diff": 3.266334533691406e-05
+  },
+  {
+   "update": 14,
+   "max_rel": 0.007250175294179268,
+   "worst_tensor": "store.keys.0",
+   "loss_cpu": 2.680882215499878,
+   "loss_mps": 2.6809146404266357,
+   "loss_diff": 3.24249267578125e-05
+  },
+  {
+   "update": 15,
+   "max_rel": 0.008423074030871301,
+   "worst_tensor": "store.keys.0",
+   "loss_cpu": 2.9041242599487305,
+   "loss_mps": 2.9041571617126465,
+   "loss_diff": 3.2901763916015625e-05
+  },
+  {
+   "update": 16,
+   "max_rel": 0.009592030345464637,
+   "worst_tensor": "store.keys.0",
+   "loss_cpu": 2.797800064086914,
+   "loss_mps": 2.7978336811065674,
+   "loss_diff": 3.361701965332031e-05
+  },
+  {
+   "update": 17,
+   "max_rel": 0.010777584358276462,
+   "worst_tensor": "store.keys.0",
+   "loss_cpu": 2.761841058731079,
+   "loss_mps": 2.7618746757507324,
+   "loss_diff": 3.361701965332031e-05
+  },
+  {
+   "update": 18,
+   "max_rel": 0.011951674289025533,
+   "worst_tensor": "store.keys.0",
+   "loss_cpu": 2.7119181156158447,
+   "loss_mps": 2.71195125579834,
+   "loss_diff": 3.314018249511719e-05
+  },
+  {
+   "update": 19,
+   "max_rel": 0.013224230598864895,
+   "worst_tensor": "store.keys.0",
+   "loss_cpu": 2.8178539276123047,
+   "loss_mps": 2.817887306213379,
+   "loss_diff": 3.337860107421875e-05
+  },
+  {
+   "update": 20,
+   "max_rel": 0.014769447101277857,
+   "worst_tensor": "store.keys.0",
+   "loss_cpu": 2.90541672706604,
+   "loss_mps": 2.9054489135742188,
+   "loss_diff": 3.218650817871094e-05
+  }
+ ],
+ "gate_metric_reproduced": 0.014769447101277857,
+ "worst_tensor_elements": {
+  "name": "store.keys.0",
+  "numel": 65536,
+  "lr": 0.003,
+  "share_of_sq_diff_in_top_1pct_elements": 0.9990805822274104,
+  "fraction_with_change_below_1e-9": 0.114013671875,
+  "fraction_elements_moved_over_half_lr_times_updates": 0.003662109375,
+  "mean_abs_diff": 2.1071476530520883e-05,
+  "max_abs_diff": 0.020687129348516464
+ },
+ "control_cpu_cpu_max_rel": 0.0,
+ "control_cpu_cpu_loss_diff": 0.0,
+ "control_mps_mps_max_rel": 2.3088243659543397e-06,
+ "control_mps_mps_loss_diff": 9.5367431640625e-07,
+ "control_mps_mps_per_tensor": [
+  2.3088243659543397e-06,
+  1.2333186683992264e-06,
+  6.310689108318561e-08
+ ],
+ "control_f64_error": "AssertionError: RuntimeError: expected m1 and m2 to have the same dtype, but got: float != double",
+ "first_step_gradients": {
+  "loss_cpu": 2.836764335632324,
+  "loss_mps": 2.8367974758148193,
+  "tensors": [
+   {
+    "name": "store.keys.0",
+    "grad_norm_cpu": 0.0,
+    "grad_rel_diff": 0.0,
+    "fraction_abs_grad_below_adam_eps_1e-8": 1.0,
+    "sign_disagreements_among_abs_grad_below_1e-7": 0.0,
+    "numel": 65536,
+    "max_abs_grad": 0.0
+   },
+   {
+    "name": "store.values.0",
+    "grad_norm_cpu": 0.0,
+    "grad_rel_diff": 0.0,
+    "fraction_abs_grad_below_adam_eps_1e-8": 1.0,
+    "sign_disagreements_among_abs_grad_below_1e-7": 0.0,
+    "numel": 2359296,
+    "max_abs_grad": 0.0
+   },
+   {
+    "name": "store.gates.0",
+    "grad_norm_cpu": 0.00017745207878760993,
+    "grad_rel_diff": 0.00028627861904639287,
+    "fraction_abs_grad_below_adam_eps_1e-8": 0.0,
+    "sign_disagreements_among_abs_grad_below_1e-7": 0.0,
+    "numel": 1,
+    "max_abs_grad": 0.00017745207878760993
+   }
+  ]
+ }
+}

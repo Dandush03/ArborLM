@@ -1,0 +1,59 @@
+"""Part E: does an ABSOLUTE noise floor on the (tiny) key and value gradients reproduce the divergence? CPU runs only, noise added to the nonzero key/value gradients. No code of the study changes."""
+
+import json
+import os
+import sys
+import time
+from pathlib import Path
+
+for k in ("OMP_NUM_THREADS", "MKL_NUM_THREADS", "VECLIB_MAXIMUM_THREADS"):
+    os.environ[k] = "6"
+REPO = Path("/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-acd0bce1f7811562f")
+RUN = Path("/Users/daniellaloush/dandush03/ArborLM/experiments/P10IS2-T-measuring-20261120")
+OUT = REPO / "experiments/_scratch/s2_g4mps"
+sys.path.insert(0, str(REPO))
+
+import torch  # noqa: E402
+
+from studies.p10is2 import engine, partt_real  # noqa: E402
+from studies.p10is2.common import core, gates  # noqa: E402
+from studies.p10is2.common import plan as planmod  # noqa: E402
+
+cfg = core.load_config("T", REPO / core.CONFIG_T)
+gates.apply_platform_settings(cfg)
+plan = planmod.Plan.load(RUN / "measuring_plan.json", "T")
+qdir = partt_real.qdir_of(plan, Path("."))
+calib = partt_real.calibration_of(cfg, plan, "rehearsal", "measuring")
+t0 = time.time()
+w, _g, _q = partt_real.build_world_real(REPO, cfg, qdir, calib, "rehearsal", partt_real.door_of(plan, qdir))
+spec = engine.CellSpec("M1", "AB", 0)
+
+
+def run_abs(dev, sigma=0.0, seed=0):  # type: ignore[no-untyped-def]
+    arm, rows, opts = engine.build_cell_arm(w, spec, None)
+    if sigma:
+        g = torch.Generator().manual_seed(seed)
+        for p in arm.trainable()[:2]:  # keys and values only: the gate's gradient is large
+            p.register_hook(lambda gr: gr + (gr != 0).to(gr.dtype) * sigma * torch.randn(gr.shape, generator=g, dtype=gr.dtype).to(gr.device))
+    keep, w.device = w.device, dev
+    try:
+        rec = engine.train_cell(w, spec, arm, rows, opts, 20, record_losses=20)
+    finally:
+        w.device = keep
+    assert rec["status"] == "COMPLETE"
+    return rec["losses_head"], [p.detach().cpu().clone().double() for p in arm.trainable()]
+
+
+def metric(a, b):  # type: ignore[no-untyped-def]
+    return [float((x - y).norm() / y.norm().clamp_min(1e-30)) for x, y in zip(a, b, strict=True)]
+
+
+bl, bp = run_abs(torch.device("cpu"))
+out = {}
+for sigma in (1e-10, 1e-9, 1e-8):
+    l, p = run_abs(torch.device("cpu"), sigma=sigma)
+    key = f"cpu_with_absolute_gradient_noise_{sigma:g}_on_nonzero_key_value_gradients"
+    out[key] = {"rel_per_tensor_keys_values_gates": metric(p, bp), "loss_diff": max(abs(a - b) for a, b in zip(l, bl, strict=True))}
+    print(sigma, out[key], flush=True)
+json.dump(out, open(OUT / "partE.json", "w"), indent=1)
+print("E written", flush=True)

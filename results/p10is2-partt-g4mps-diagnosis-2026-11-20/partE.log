@@ -1,0 +1,6 @@
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-acd0bce1f7811562f/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+1e-10 {'rel_per_tensor_keys_values_gates': [0.03063943459413038, 0.022214910315568326, 3.597106184870685e-05], 'loss_diff': 2.384185791015625e-06}
+1e-09 {'rel_per_tensor_keys_values_gates': [0.07874226504938084, 0.06224116532849962, 1.596610289074181e-05], 'loss_diff': 9.5367431640625e-07}
+1e-08 {'rel_per_tensor_keys_values_gates': [0.18411807709707095, 0.15966540709997637, 0.00013852014168054655], 'loss_diff': 5.9604644775390625e-06}
+E written

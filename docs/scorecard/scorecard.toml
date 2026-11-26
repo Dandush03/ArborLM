@@ -13,19 +13,20 @@
 # `uv run --locked python docs/scorecard/render_scorecard.py --check` fails when they are out of step
 # (tests/test_scorecard.py runs it).
 
-updated = "2026-11-20"
-basis = "main after the merges of P10-I-R, P10-I-S3, P10-I-S5, P10-I-S2 Part Q, ADR-0032 and P10-I-S0"
+updated = "2026-11-25"
+basis = "main after the merges of P10-I-R, P10-I-S3, P10-I-S5, P10-I-S2 Part Q, ADR-0032, P10-I-S0, P10-I-S6, P10-I-S1, P10-I-S2 Part T and P10-I-S2-D0"
 scale = "0 = nothing shown; 10 = shown at the scale the target architecture needs, replicated and accepted"
 
 [[row]]
 title = "External memory improves prediction"
 score = 7  # lowered from 8 by the human lead on 2026-11-19: the flat memory has not had its own dependence controls
-note = "Shown with a frozen backbone; the flat memory's own dependence controls are still to run."
+note = "Shown with a frozen backbone; the flat memory's dependence control passes before convergence, through harm."
 evidence = [
   "P4: registered capacity and slot-association criteria passed on a frozen backbone ([results](results/p4-2026-11-12/)).",
   "P10-I-S3 line 1: DEPENDENT on fresh data, read on the tree memory, not converged; the control passes largely because wrong values hurt ([outcome](results/p10i-s3-run-2026-11-18/OUTCOME.md)).",
+  "P10-I-S6: D[FLAT] DEPENDENT at 262,144 updates, not converged and not dependence-qualified; it passes through harm (wrong values hurt), and reading the mean value row loses the gain ([outcome](results/p10i-s6-run-2026-11-20/OUTCOME.md)).",
 ]
-next = "The same dependence controls on the flat memory at convergence (P10-I-S6, drafted, not approved)."
+next = "The flat memory's dependence at convergence is still unread: P10-I-S6 did not reach convergence. No study for it exists yet."
 
 [[row]]
 title = "Reliable learned addressing"
@@ -40,31 +41,36 @@ next = "Above one fact per slot nothing is licensed: 8K facts in 4K slots held i
 [[row]]
 title = "Quality versus dense alternatives"
 score = 5
-note = "Flat memory beat dense at 16,384 updates, but neither had converged."
+note = "Flat memory led dense at 16,384 updates; the lead shrank by 262,144 and neither had converged."
 evidence = [
   "P10-I-S3 line 2 [FLAT]: MEMORY AHEAD (DENSE STILL IMPROVING), mean lead +0.0127 against 0.005, 27 of 27 cells ([outcome](results/p10i-s3-run-2026-11-18/OUTCOME.md)).",
+  "P10-I-S6: CONVERGENCE NOT REACHED (BOTH STILL IMPROVING) at 262,144 updates; descriptive only: LEAD SHRINKING, mean lead +0.0124 at 16,384 updates and +0.0068 at 262,144; independently recomputed; accepted as registered ([outcome](results/p10i-s6-run-2026-11-20/OUTCOME.md), [acceptance](results/p10i-s6-run-2026-11-20/ACCEPTANCE.md)).",
+  "P10-I-S1 (trained oracle-addressed store against the dense map, 1,024 to 16,384 slots): the dense map is ahead at its best snapshot in 5 of 5 replicates at 32K/16K (d from -0.80 to -0.85 bits) and at saturation at both loaded cells (d_sat -1.67 or lower), while the flat memory is ahead at equal updates and at matched compute at 32K/16K (+1.7 to +2.7 bits); descriptive; accepted as registered by the human lead on 2026-11-21 ([outcome](results/p10is1-run-2026-11-21/OUTCOME.md)).",
   "P10-I-S3 line 2 [TREE]: INCONCLUSIVE (MEMORY RATE AT EDGE). P10-I-R: the tree is behind the flat memory and no read-time cause is identified ([outcome](results/p10ir-run-2026-11-18/OUTCOME.md)).",
 ]
-next = "P10-I-S6: does the flat lead persist at convergence on fresh data (drafted, not approved). The tree needs a training study that does not exist."
+next = "The ordering at convergence is unknown: sixteen times the duration was not enough, and at the last rung both arms improve per doubling by more than the lead. No further study exists yet. The tree needs a training study that does not exist."
 
 [[row]]
 title = "Useful capacity scaling"
 score = 3
-note = "Still inconclusive; larger stores have not proven superior capacity."
+note = "Capacity steps are present for the flat memory at 1,024 to 16,384 slots, but the registered label is negative: on this task the dense map is the better use of the parameters. Not yet accepted by the human lead."
 evidence = [
   "P10-S1: CAPACITY-INCONCLUSIVE; SATURATION-INCONCLUSIVE; the 16,384 to 65,536 step NOT TESTED ([results](results/p10s1-run-2026-11-17/)).",
+  "P10-I-S1: CAPACITY-NEGATIVE by clause (b), carried by the flat memory (F-OQ) alone; capacity steps present in 5 of 5 replicates; the dense map is ahead only at its best snapshot (D-BEST) and at saturation, while the flat memory is ahead at equal updates and at matched compute at 32K/16K; SATURATION-PROPORTIONAL for the flat memory; 16,384 to 65,536 slots not tested; the labels come from the frozen analysis through a disclosed corrected loader (the registered analysis stage is an engineering stop); independently recomputed; accepted as registered by the human lead on 2026-11-21 ([outcome](results/p10is1-run-2026-11-21/OUTCOME.md)).",
 ]
-next = "P10-I-S1 (capacity): calibrated, not yet frozen; blocked on a quiet-machine limit this machine does not reach."
+next = "What the store offers beyond the dense map has to be shown elsewhere (sparse updates, measured cost, storage), in studies designed for it. Block X (16,384 to 65,536 slots) is not approved."
 
 [[row]]
 title = "Sequential learning from teachers"
 score = 1
-note = "Both teachers now qualify; no student transfer experiment completed yet."
+note = "The transfer was run once, oracle-addressed on a frozen small student: registered negative (a lookup table does as well; retention not shown). Score not yet revisited by the human lead."
 evidence = [
   "P10-S2: TRANSFER-INCONCLUSIVE: TEACHERS-NOT-QUALIFIED; the transfer question was not tested ([ADR-0022](docs/decisions/ADR-0022-p10-s2-two-teacher-transfer.md)).",
   "P10-I-S2 Part Q: TEACHERS-QUALIFIED (DISJOINT DRAWS) on the third registered attempt, independently recomputed; a qualification of teachers and training material, not a transfer result ([outcome](results/p10is2-partq-run-20261119-attempt3/OUTCOME.md)).",
+  "P10-I-S2 Part T: MILESTONE NOT ESTABLISHED (a lookup baseline does as well: E-table); AGAINST-LOOKUP: LOOKUP SUFFICES; AGAINST-DENSE acquisition DENSE AHEAD, retention NOT EVALUABLE; ACQUISITION-INCONCLUSIVE; RETENTION-INCONCLUSIVE: NOT CHALLENGED, SECOND NOT ACQUIRED; GENERAL-QUALITY PRESERVED; not converged at 8,000 updates; independently recomputed; accepted as registered ([outcome](results/p10is2-partt-run-20261124/OUTCOME.md)).",
+  "P10-I-S2-D0 (exploratory, no label): the retention loss on Part T's stores is MIXED; read competition between stages reaches two thirds of it in 0 of 6 cells, and read-time bank isolation fails the retention arithmetic in all six; independently recomputed ([outcome](results/p10is2d0-run-20261124/OUTCOME.md)).",
 ]
-next = "P10-I-S2 Part T (the transfer itself): implemented, never audited or run; its implementation audit is under way, then rehearsals and a registered run."
+next = "No further transfer study is specified. Part T used addresses supplied by rule; learned addressing and a pretrained backbone with expandable memory (P11-S1 draft) are untested. A learned-composition study has been proposed and is not specified or approved."
 
 [[row]]
 title = "SSD-backed neural-memory advantage"

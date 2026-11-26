@@ -1,0 +1,824 @@
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+POST-HOC EXPLORATORY DIAGNOSTIC OF AN OBSERVED RUN; NOT A REGISTERED LABEL
+P10-I-S2-D0 (ADR-0035): interference diagnosis over Part T's frozen M-append snapshots
+status: COMPLETE (report step re-run after a rendering defect; lead decision 1)
+code commit: e74cbf25bac019156be34c0a51a416749a4da16a (launch); finalize commit ffd29d74b6c1ceb5599dd4427ecbbf1e6b8c9e04; report step re-run after a rendering defect; lead decision 1
+Astra review: NOT_PERFORMED. Self-check only; not independent review and not human approval.
+Every pass is under the ORACLE route (as Part T's registered item scores). No training. CPU. All six cells, both panels, no selection. Descriptive; the summary words are not labels.
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+POST-HOC EXPLORATORY DIAGNOSTIC OF AN OBSERVED RUN; NOT A REGISTERED LABEL
+GATE RECORD (pass/fail and the largest deviation only)
+{"identity": {"largest_deviation": 3.814697265625e-06, "pass": true}, "no_write": true, "reproduction": {"largest_deviation": 0.0, "pass": true}}
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+POST-HOC EXPLORATORY DIAGNOSTIC OF AN OBSERVED RUN; NOT A REGISTERED LABEL
+COST (worker-seconds = summed wall time of the computing processes; measured)
+{"cap_worker_hours": 8.0, "orchestrator_wall_seconds": 0.19582258304581046, "worker_hours_total": 7.714113708796148, "worker_seconds_total": 27770.809351666132}
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+POST-HOC EXPLORATORY DIAGNOSTIC OF AN OBSERVED RUN; NOT A REGISTERED LABEL
+READ STATISTICS (section 5.2) cell r0/AB
+r0/AB append|first panel=E_A protected_stage=1 reads=7163 marker_reads=1000 gates=[5.845227241516113, 0.0]
+  words   displaced          n=6163 undefined=0 mean=4.88691 median=5.00000 p5=3.00000 p95=7.00000
+  words   displaced_weight   n=6163 undefined=0 mean=0.25040 median=0.22728 p5=0.07257 p95=0.48978
+  words   mass_p             n=6163 undefined=0 mean=0.62186 median=0.63703 p5=0.35086 p95=0.81001
+  words   n_p                n=6163 undefined=0 mean=3.11309 median=3.00000 p5=1.00000 p95=5.00000
+  words   other_part         n=6163 undefined=0 mean=0.00000 median=0.00000 p5=0.00000 p95=0.00000
+  words   rel_a              n=6163 undefined=0 mean=0.28510 median=0.26310 p5=0.12940 p95=0.53401
+  words   rel_c              n=6163 undefined=0 mean=0.00000 median=0.00000 p5=0.00000 p95=0.00000
+  words   rel_d              n=6163 undefined=0 mean=0.35352 median=0.29054 p5=0.08840 p95=0.81146
+  words   rel_e              n=6163 undefined=0 mean=0.28510 median=0.26310 p5=0.12940 p95=0.53401
+  words   rel_g              n=6163 undefined=0 mean=0.00000 median=0.00000 p5=0.00000 p95=0.00000
+  words   top_kept           n=6163 undefined=0 mean=0.99935 median=1.00000 p5=1.00000 p95=1.00000
+  markers displaced          n=1000 undefined=0 mean=4.00000 median=4.00000 p5=4.00000 p95=4.00000
+  markers displaced_weight   n=1000 undefined=0 mean=0.05232 median=0.05232 p5=0.05232 p95=0.05232
+  markers mass_p             n=1000 undefined=0 mean=0.77999 median=0.77999 p5=0.77999 p95=0.77999
+  markers n_p                n=1000 undefined=0 mean=4.00000 median=4.00000 p5=4.00000 p95=4.00000
+  markers other_part         n=1000 undefined=0 mean=0.00000 median=0.00000 p5=0.00000 p95=0.00000
+  markers rel_a              n=1000 undefined=0 mean=0.17986 median=0.17986 p5=0.17986 p95=0.17986
+  markers rel_c              n=1000 undefined=0 mean=0.00000 median=0.00000 p5=0.00000 p95=0.00000
+  markers rel_d              n=1000 undefined=0 mean=0.06252 median=0.06252 p5=0.06252 p95=0.06252
+  markers rel_e              n=1000 undefined=0 mean=0.17986 median=0.17986 p5=0.17986 p95=0.17986
+  markers rel_g              n=1000 undefined=0 mean=0.00000 median=0.00000 p5=0.00000 p95=0.00000
+  markers top_kept           n=1000 undefined=0 mean=1.00000 median=1.00000 p5=1.00000 p95=1.00000
+r0/AB final|first panel=E_A protected_stage=1 reads=7163 marker_reads=1000 gates=[5.845227241516113, 7.224819660186768]
+  words   displaced          n=6163 undefined=0 mean=4.89745 median=5.00000 p5=3.00000 p95=7.00000
+  words   displaced_weight   n=6163 undefined=0 mean=0.24930 median=0.22262 p5=0.10692 p95=0.48978
+  words   mass_p             n=6163 undefined=0 mean=0.61784 median=0.64581 p5=0.35951 p95=0.78840
+  words   n_p                n=6163 undefined=0 mean=3.10255 median=3.00000 p5=1.00000 p95=5.00000
+  words   other_part         n=6163 undefined=0 mean=0.25037 median=0.21711 p5=0.07213 p95=0.52237
+  words   rel_a              n=6163 undefined=0 mean=0.37944 median=0.33537 p5=0.18287 p95=0.70662
+  words   rel_c              n=6163 undefined=0 mean=0.53097 median=0.52427 p5=0.24746 p95=0.85402
+  words   rel_d              n=6163 undefined=0 mean=0.35112 median=0.28287 p5=0.13927 p95=0.81477
+  words   rel_e              n=6163 undefined=0 mean=0.28874 median=0.26622 p5=0.14668 p95=0.51523
+  words   rel_g              n=6163 undefined=0 mean=0.25037 median=0.21711 p5=0.07213 p95=0.52237
+  words   top_kept           n=6163 undefined=0 mean=0.99984 median=1.00000 p5=1.00000 p95=1.00000
+  markers displaced          n=1000 undefined=0 mean=4.00000 median=4.00000 p5=4.00000 p95=4.00000
+  markers displaced_weight   n=1000 undefined=0 mean=0.05232 median=0.05232 p5=0.05232 p95=0.05232
+  markers mass_p             n=1000 undefined=0 mean=0.82250 median=0.82250 p5=0.82250 p95=0.82250
+  markers n_p                n=1000 undefined=0 mean=4.00000 median=4.00000 p5=4.00000 p95=4.00000
+  markers other_part         n=1000 undefined=0 mean=0.04449 median=0.04449 p5=0.04449 p95=0.04449
+  markers rel_a              n=1000 undefined=0 mean=0.14180 median=0.14180 p5=0.14180 p95=0.14180
+  markers rel_c              n=1000 undefined=0 mean=0.33985 median=0.33985 p5=0.33985 p95=0.33985
+  markers rel_d              n=1000 undefined=0 mean=0.06252 median=0.06252 p5=0.06252 p95=0.06252
+  markers rel_e              n=1000 undefined=0 mean=0.13591 median=0.13591 p5=0.13591 p95=0.13591
+  markers rel_g              n=1000 undefined=0 mean=0.04449 median=0.04449 p5=0.04449 p95=0.04449
+  markers top_kept           n=1000 undefined=0 mean=1.00000 median=1.00000 p5=1.00000 p95=1.00000
+r0/AB final|second panel=E_B protected_stage=2 reads=7050 marker_reads=1000 gates=[5.845227241516113, 7.224819660186768]
+  words   displaced          n=6050 undefined=0 mean=5.47074 median=6.00000 p5=3.00000 p95=7.00000
+  words   displaced_weight   n=6050 undefined=0 mean=0.38493 median=0.36047 p5=0.15701 p95=0.63373
+  words   mass_p             n=6050 undefined=0 mean=0.54757 median=0.56610 p5=0.25118 p95=0.79157
+  words   n_p                n=6050 undefined=0 mean=2.52926 median=2.00000 p5=1.00000 p95=5.00000
+  words   other_part         n=6050 undefined=0 mean=0.31710 median=0.28127 p5=0.14497 p95=0.58758
+  words   rel_a              n=6050 undefined=0 mean=0.42120 median=0.38034 p5=0.18395 p95=0.72809
+  words   rel_c              n=6050 undefined=0 mean=0.60877 median=0.57689 p5=0.34683 p95=0.96348
+  words   rel_d              n=6050 undefined=0 mean=0.68106 median=0.56537 p5=0.22446 p95=1.44809
+  words   rel_e              n=6050 undefined=0 mean=0.28521 median=0.25152 p5=0.12163 p95=0.50908
+  words   rel_g              n=6050 undefined=0 mean=0.31710 median=0.28127 p5=0.14497 p95=0.58758
+  words   top_kept           n=6050 undefined=0 mean=0.99207 median=1.00000 p5=1.00000 p95=1.00000
+  markers displaced          n=1000 undefined=0 mean=5.00000 median=5.00000 p5=5.00000 p95=5.00000
+  markers displaced_weight   n=1000 undefined=0 mean=0.25675 median=0.25675 p5=0.25675 p95=0.25675
+  markers mass_p             n=1000 undefined=0 mean=0.71888 median=0.71888 p5=0.71888 p95=0.71888
+  markers n_p                n=1000 undefined=0 mean=3.00000 median=3.00000 p5=3.00000 p95=3.00000
+  markers other_part         n=1000 undefined=0 mean=0.14935 median=0.14935 p5=0.14935 p95=0.14935
+  markers rel_a              n=1000 undefined=0 mean=0.23788 median=0.23788 p5=0.23788 p95=0.23788
+  markers rel_c              n=1000 undefined=0 mean=0.43996 median=0.43996 p5=0.43996 p95=0.43996
+  markers rel_d              n=1000 undefined=0 mean=0.39320 median=0.39320 p5=0.39320 p95=0.39320
+  markers rel_e              n=1000 undefined=0 mean=0.18654 median=0.18654 p5=0.18654 p95=0.18654
+  markers rel_g              n=1000 undefined=0 mean=0.14935 median=0.14935 p5=0.14935 p95=0.14935
+  markers top_kept           n=1000 undefined=0 mean=1.00000 median=1.00000 p5=1.00000 p95=1.00000
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+POST-HOC EXPLORATORY DIAGNOSTIC OF AN OBSERVED RUN; NOT A REGISTERED LABEL
+READ STATISTICS (section 5.2) cell r0/BA
+r0/BA append|first panel=E_B protected_stage=1 reads=7050 marker_reads=1000 gates=[5.319930076599121, 0.0]
+  words   displaced          n=6050 undefined=0 mean=4.57339 median=5.00000 p5=2.00000 p95=7.00000
+  words   displaced_weight   n=6050 undefined=0 mean=0.24415 median=0.20811 p5=0.07222 p95=0.50355
+  words   mass_p             n=6050 undefined=0 mean=0.64188 median=0.67210 p5=0.34079 p95=0.88431
+  words   n_p                n=6050 undefined=0 mean=3.42661 median=3.00000 p5=1.00000 p95=6.00000
+  words   other_part         n=6050 undefined=0 mean=0.00000 median=0.00000 p5=0.00000 p95=0.00000
+  words   rel_a              n=6050 undefined=0 mean=0.27666 median=0.22996 p5=0.09438 p95=0.55708
+  words   rel_c              n=6050 undefined=0 mean=0.00000 median=0.00000 p5=0.00000 p95=0.00000
+  words   rel_d              n=6050 undefined=0 mean=0.34367 median=0.26347 p5=0.06848 p95=0.82088
+  words   rel_e              n=6050 undefined=0 mean=0.27666 median=0.22996 p5=0.09438 p95=0.55708
+  words   rel_g              n=6050 undefined=0 mean=0.00000 median=0.00000 p5=0.00000 p95=0.00000
+  words   top_kept           n=6050 undefined=0 mean=0.99785 median=1.00000 p5=1.00000 p95=1.00000
+  markers displaced          n=1000 undefined=0 mean=4.00000 median=4.00000 p5=4.00000 p95=4.00000
+  markers displaced_weight   n=1000 undefined=0 mean=0.05785 median=0.05785 p5=0.05785 p95=0.05785
+  markers mass_p             n=1000 undefined=0 mean=0.79011 median=0.79011 p5=0.79011 p95=0.79011
+  markers n_p                n=1000 undefined=0 mean=4.00000 median=4.00000 p5=4.00000 p95=4.00000
+  markers other_part         n=1000 undefined=0 mean=0.00000 median=0.00000 p5=0.00000 p95=0.00000
+  markers rel_a              n=1000 undefined=0 mean=0.17213 median=0.17213 p5=0.17213 p95=0.17213
+  markers rel_c              n=1000 undefined=0 mean=0.00000 median=0.00000 p5=0.00000 p95=0.00000
+  markers rel_d              n=1000 undefined=0 mean=0.06856 median=0.06856 p5=0.06856 p95=0.06856
+  markers rel_e              n=1000 undefined=0 mean=0.17213 median=0.17213 p5=0.17213 p95=0.17213
+  markers rel_g              n=1000 undefined=0 mean=0.00000 median=0.00000 p5=0.00000 p95=0.00000
+  markers top_kept           n=1000 undefined=0 mean=1.00000 median=1.00000 p5=1.00000 p95=1.00000
+r0/BA final|first panel=E_B protected_stage=1 reads=7050 marker_reads=1000 gates=[5.319930076599121, 7.939052104949951]
+  words   displaced          n=6050 undefined=0 mean=4.51289 median=5.00000 p5=2.00000 p95=7.00000
+  words   displaced_weight   n=6050 undefined=0 mean=0.23868 median=0.20811 p5=0.07222 p95=0.48833
+  words   mass_p             n=6050 undefined=0 mean=0.65245 median=0.66894 p5=0.36568 p95=0.89116
+  words   n_p                n=6050 undefined=0 mean=3.48711 median=3.00000 p5=1.00000 p95=6.00000
+  words   other_part         n=6050 undefined=0 mean=0.33389 median=0.27614 p5=0.12219 p95=0.75497
+  words   rel_a              n=6050 undefined=0 mean=0.42429 median=0.37286 p5=0.15038 p95=0.88625
+  words   rel_c              n=6050 undefined=0 mean=0.74078 median=0.69632 p5=0.43703 p95=1.22132
+  words   rel_d              n=6050 undefined=0 mean=0.33668 median=0.26347 p5=0.06848 p95=0.77597
+  words   rel_e              n=6050 undefined=0 mean=0.26761 median=0.23749 p5=0.08359 p95=0.52514
+  words   rel_g              n=6050 undefined=0 mean=0.33389 median=0.27614 p5=0.12219 p95=0.75497
+  words   top_kept           n=6050 undefined=0 mean=0.99934 median=1.00000 p5=1.00000 p95=1.00000
+  markers displaced          n=1000 undefined=0 mean=4.00000 median=4.00000 p5=4.00000 p95=4.00000
+  markers displaced_weight   n=1000 undefined=0 mean=0.05785 median=0.05785 p5=0.05785 p95=0.05785
+  markers mass_p             n=1000 undefined=0 mean=0.84267 median=0.84267 p5=0.84267 p95=0.84267
+  markers n_p                n=1000 undefined=0 mean=4.00000 median=4.00000 p5=4.00000 p95=4.00000
+  markers other_part         n=1000 undefined=0 mean=0.12979 median=0.12979 p5=0.12979 p95=0.12979
+  markers rel_a              n=1000 undefined=0 mean=0.17592 median=0.17592 p5=0.17592 p95=0.17592
+  markers rel_c              n=1000 undefined=0 mean=0.60422 median=0.60422 p5=0.60422 p95=0.60422
+  markers rel_d              n=1000 undefined=0 mean=0.06856 median=0.06856 p5=0.06856 p95=0.06856
+  markers rel_e              n=1000 undefined=0 mean=0.11921 median=0.11921 p5=0.11921 p95=0.11921
+  markers rel_g              n=1000 undefined=0 mean=0.12979 median=0.12979 p5=0.12979 p95=0.12979
+  markers top_kept           n=1000 undefined=0 mean=1.00000 median=1.00000 p5=1.00000 p95=1.00000
+r0/BA final|second panel=E_A protected_stage=2 reads=7163 marker_reads=1000 gates=[5.319930076599121, 7.939052104949951]
+  words   displaced          n=6163 undefined=0 mean=5.77982 median=6.00000 p5=4.00000 p95=7.00000
+  words   displaced_weight   n=6163 undefined=0 mean=0.41494 median=0.41754 p5=0.20279 p95=0.61562
+  words   mass_p             n=6163 undefined=0 mean=0.51871 median=0.51675 p5=0.32568 p95=0.74703
+  words   n_p                n=6163 undefined=0 mean=2.22018 median=2.00000 p5=1.00000 p95=4.00000
+  words   other_part         n=6163 undefined=0 mean=0.25272 median=0.23253 p5=0.12354 p95=0.42767
+  words   rel_a              n=6163 undefined=0 mean=0.38163 median=0.36503 p5=0.18910 p95=0.59175
+  words   rel_c              n=6163 undefined=0 mean=0.46875 median=0.44501 p5=0.28580 p95=0.71441
+  words   rel_d              n=6163 undefined=0 mean=0.74130 median=0.66265 p5=0.27274 p95=1.37985
+  words   rel_e              n=6163 undefined=0 mean=0.29535 median=0.28224 p5=0.14771 p95=0.47827
+  words   rel_g              n=6163 undefined=0 mean=0.25272 median=0.23253 p5=0.12354 p95=0.42767
+  words   top_kept           n=6163 undefined=0 mean=0.99919 median=1.00000 p5=1.00000 p95=1.00000
+  markers displaced          n=1000 undefined=0 mean=3.00000 median=3.00000 p5=3.00000 p95=3.00000
+  markers displaced_weight   n=1000 undefined=0 mean=0.08933 median=0.08933 p5=0.08933 p95=0.08933
+  markers mass_p             n=1000 undefined=0 mean=0.89961 median=0.89961 p5=0.89961 p95=0.89961
+  markers n_p                n=1000 undefined=0 mean=5.00000 median=5.00000 p5=5.00000 p95=5.00000
+  markers other_part         n=1000 undefined=0 mean=0.07445 median=0.07445 p5=0.07445 p95=0.07445
+  markers rel_a              n=1000 undefined=0 mean=0.09184 median=0.09184 p5=0.09184 p95=0.09184
+  markers rel_c              n=1000 undefined=0 mean=0.52453 median=0.52453 p5=0.52453 p95=0.52453
+  markers rel_d              n=1000 undefined=0 mean=0.10863 median=0.10863 p5=0.10863 p95=0.10863
+  markers rel_e              n=1000 undefined=0 mean=0.05372 median=0.05372 p5=0.05372 p95=0.05372
+  markers rel_g              n=1000 undefined=0 mean=0.07445 median=0.07445 p5=0.07445 p95=0.07445
+  markers top_kept           n=1000 undefined=0 mean=1.00000 median=1.00000 p5=1.00000 p95=1.00000
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+POST-HOC EXPLORATORY DIAGNOSTIC OF AN OBSERVED RUN; NOT A REGISTERED LABEL
+READ STATISTICS (section 5.2) cell r1/AB
+r1/AB append|first panel=E_A protected_stage=1 reads=7163 marker_reads=1000 gates=[-5.854608535766602, 0.0]
+  words   displaced          n=6163 undefined=0 mean=4.53626 median=5.00000 p5=2.00000 p95=7.00000
+  words   displaced_weight   n=6163 undefined=0 mean=0.23249 median=0.21866 p5=0.05069 p95=0.48401
+  words   mass_p             n=6163 undefined=0 mean=0.64692 median=0.65225 p5=0.34563 p95=0.90413
+  words   n_p                n=6163 undefined=0 mean=3.46374 median=3.00000 p5=1.00000 p95=6.00000
+  words   other_part         n=6163 undefined=0 mean=0.00000 median=0.00000 p5=0.00000 p95=0.00000
+  words   rel_a              n=6163 undefined=0 mean=0.26688 median=0.25246 p5=0.07034 p95=0.52788
+  words   rel_c              n=6163 undefined=0 mean=0.00000 median=0.00000 p5=0.00000 p95=0.00000
+  words   rel_d              n=6163 undefined=0 mean=0.33113 median=0.28613 p5=0.06325 p95=0.80499
+  words   rel_e              n=6163 undefined=0 mean=0.26688 median=0.25246 p5=0.07034 p95=0.52788
+  words   rel_g              n=6163 undefined=0 mean=0.00000 median=0.00000 p5=0.00000 p95=0.00000
+  words   top_kept           n=6163 undefined=0 mean=0.99984 median=1.00000 p5=1.00000 p95=1.00000
+  markers displaced          n=1000 undefined=0 mean=4.00000 median=4.00000 p5=4.00000 p95=4.00000
+  markers displaced_weight   n=1000 undefined=0 mean=0.05846 median=0.05846 p5=0.05846 p95=0.05846
+  markers mass_p             n=1000 undefined=0 mean=0.78497 median=0.78497 p5=0.78497 p95=0.78497
+  markers n_p                n=1000 undefined=0 mean=4.00000 median=4.00000 p5=4.00000 p95=4.00000
+  markers other_part         n=1000 undefined=0 mean=0.00000 median=0.00000 p5=0.00000 p95=0.00000
+  markers rel_a              n=1000 undefined=0 mean=0.17084 median=0.17084 p5=0.17084 p95=0.17084
+  markers rel_c              n=1000 undefined=0 mean=0.00000 median=0.00000 p5=0.00000 p95=0.00000
+  markers rel_d              n=1000 undefined=0 mean=0.07277 median=0.07277 p5=0.07277 p95=0.07277
+  markers rel_e              n=1000 undefined=0 mean=0.17084 median=0.17084 p5=0.17084 p95=0.17084
+  markers rel_g              n=1000 undefined=0 mean=0.00000 median=0.00000 p5=0.00000 p95=0.00000
+  markers top_kept           n=1000 undefined=0 mean=1.00000 median=1.00000 p5=1.00000 p95=1.00000
+r1/AB final|first panel=E_A protected_stage=1 reads=7163 marker_reads=1000 gates=[-5.854608535766602, 7.253269672393799]
+  words   displaced          n=6163 undefined=0 mean=4.54016 median=5.00000 p5=2.00000 p95=7.00000
+  words   displaced_weight   n=6163 undefined=0 mean=0.23181 median=0.21927 p5=0.05069 p95=0.48044
+  words   mass_p             n=6163 undefined=0 mean=0.64867 median=0.64869 p5=0.34881 p95=0.91051
+  words   n_p                n=6163 undefined=0 mean=3.45984 median=3.00000 p5=1.00000 p95=6.00000
+  words   other_part         n=6163 undefined=0 mean=0.24314 median=0.20329 p5=0.04335 p95=0.55204
+  words   rel_a              n=6163 undefined=0 mean=0.35939 median=0.32914 p5=0.07437 p95=0.72708
+  words   rel_c              n=6163 undefined=0 mean=0.54205 median=0.52703 p5=0.29982 p95=0.87132
+  words   rel_d              n=6163 undefined=0 mean=0.32894 median=0.27929 p5=0.06325 p95=0.80438
+  words   rel_e              n=6163 undefined=0 mean=0.26561 median=0.25590 p5=0.06315 p95=0.52340
+  words   rel_g              n=6163 undefined=0 mean=0.24314 median=0.20329 p5=0.04335 p95=0.55204
+  words   top_kept           n=6163 undefined=0 mean=1.00000 median=1.00000 p5=1.00000 p95=1.00000
+  markers displaced          n=1000 undefined=0 mean=4.00000 median=4.00000 p5=4.00000 p95=4.00000
+  markers displaced_weight   n=1000 undefined=0 mean=0.05846 median=0.05846 p5=0.05846 p95=0.05846
+  markers mass_p             n=1000 undefined=0 mean=0.75196 median=0.75196 p5=0.75196 p95=0.75196
+  markers n_p                n=1000 undefined=0 mean=4.00000 median=4.00000 p5=4.00000 p95=4.00000
+  markers other_part         n=1000 undefined=0 mean=0.14825 median=0.14825 p5=0.14825 p95=0.14825
+  markers rel_a              n=1000 undefined=0 mean=0.26691 median=0.26691 p5=0.26691 p95=0.26691
+  markers rel_c              n=1000 undefined=0 mean=0.48017 median=0.48017 p5=0.48017 p95=0.48017
+  markers rel_d              n=1000 undefined=0 mean=0.07277 median=0.07277 p5=0.07277 p95=0.07277
+  markers rel_e              n=1000 undefined=0 mean=0.20511 median=0.20511 p5=0.20511 p95=0.20511
+  markers rel_g              n=1000 undefined=0 mean=0.14825 median=0.14825 p5=0.14825 p95=0.14825
+  markers top_kept           n=1000 undefined=0 mean=1.00000 median=1.00000 p5=1.00000 p95=1.00000
+r1/AB final|second panel=E_B protected_stage=2 reads=7050 marker_reads=1000 gates=[-5.854608535766602, 7.253269672393799]
+  words   displaced          n=6050 undefined=0 mean=5.33074 median=6.00000 p5=2.00000 p95=7.00000
+  words   displaced_weight   n=6050 undefined=0 mean=0.37940 median=0.37325 p5=0.09119 p95=0.61349
+  words   mass_p             n=6050 undefined=0 mean=0.55608 median=0.54957 p5=0.31766 p95=0.88537
+  words   n_p                n=6050 undefined=0 mean=2.66926 median=2.00000 p5=1.00000 p95=6.00000
+  words   other_part         n=6050 undefined=0 mean=0.31608 median=0.28517 p5=0.09838 p95=0.62844
+  words   rel_a              n=6050 undefined=0 mean=0.41883 median=0.37627 p5=0.12826 p95=0.74771
+  words   rel_c              n=6050 undefined=0 mean=0.60573 median=0.57851 p5=0.33087 p95=0.96965
+  words   rel_d              n=6050 undefined=0 mean=0.66032 median=0.58952 p5=0.14216 p95=1.35807
+  words   rel_e              n=6050 undefined=0 mean=0.28256 median=0.26326 p5=0.07631 p95=0.51044
+  words   rel_g              n=6050 undefined=0 mean=0.31608 median=0.28517 p5=0.09838 p95=0.62844
+  words   top_kept           n=6050 undefined=0 mean=0.98843 median=1.00000 p5=1.00000 p95=1.00000
+  markers displaced          n=1000 undefined=0 mean=5.00000 median=5.00000 p5=5.00000 p95=5.00000
+  markers displaced_weight   n=1000 undefined=0 mean=0.26338 median=0.26338 p5=0.26338 p95=0.26338
+  markers mass_p             n=1000 undefined=0 mean=0.64939 median=0.64939 p5=0.64939 p95=0.64939
+  markers n_p                n=1000 undefined=0 mean=3.00000 median=3.00000 p5=3.00000 p95=3.00000
+  markers other_part         n=1000 undefined=0 mean=0.23471 median=0.23471 p5=0.23471 p95=0.23471
+  markers rel_a              n=1000 undefined=0 mean=0.27428 median=0.27428 p5=0.27428 p95=0.27428
+  markers rel_c              n=1000 undefined=0 mean=0.50487 median=0.50487 p5=0.50487 p95=0.50487
+  markers rel_d              n=1000 undefined=0 mean=0.36569 median=0.36569 p5=0.36569 p95=0.36569
+  markers rel_e              n=1000 undefined=0 mean=0.15155 median=0.15155 p5=0.15155 p95=0.15155
+  markers rel_g              n=1000 undefined=0 mean=0.23471 median=0.23471 p5=0.23471 p95=0.23471
+  markers top_kept           n=1000 undefined=0 mean=1.00000 median=1.00000 p5=1.00000 p95=1.00000
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+POST-HOC EXPLORATORY DIAGNOSTIC OF AN OBSERVED RUN; NOT A REGISTERED LABEL
+READ STATISTICS (section 5.2) cell r1/BA
+r1/BA append|first panel=E_B protected_stage=1 reads=7050 marker_reads=1000 gates=[-5.422910213470459, 0.0]
+  words   displaced          n=6050 undefined=0 mean=4.58826 median=5.00000 p5=2.00000 p95=7.00000
+  words   displaced_weight   n=6050 undefined=0 mean=0.24776 median=0.22355 p5=0.07012 p95=0.50056
+  words   mass_p             n=6050 undefined=0 mean=0.63738 median=0.65267 p5=0.34984 p95=0.87793
+  words   n_p                n=6050 undefined=0 mean=3.41174 median=3.00000 p5=1.00000 p95=6.00000
+  words   other_part         n=6050 undefined=0 mean=0.00000 median=0.00000 p5=0.00000 p95=0.00000
+  words   rel_a              n=6050 undefined=0 mean=0.27927 median=0.25730 p5=0.07761 p95=0.54571
+  words   rel_c              n=6050 undefined=0 mean=0.00000 median=0.00000 p5=0.00000 p95=0.00000
+  words   rel_d              n=6050 undefined=0 mean=0.35244 median=0.28998 p5=0.08804 p95=0.81635
+  words   rel_e              n=6050 undefined=0 mean=0.27927 median=0.25730 p5=0.07761 p95=0.54571
+  words   rel_g              n=6050 undefined=0 mean=0.00000 median=0.00000 p5=0.00000 p95=0.00000
+  words   top_kept           n=6050 undefined=0 mean=0.99851 median=1.00000 p5=1.00000 p95=1.00000
+  markers displaced          n=1000 undefined=0 mean=4.00000 median=4.00000 p5=4.00000 p95=4.00000
+  markers displaced_weight   n=1000 undefined=0 mean=0.04735 median=0.04735 p5=0.04735 p95=0.04735
+  markers mass_p             n=1000 undefined=0 mean=0.78844 median=0.78844 p5=0.78844 p95=0.78844
+  markers n_p                n=1000 undefined=0 mean=4.00000 median=4.00000 p5=4.00000 p95=4.00000
+  markers other_part         n=1000 undefined=0 mean=0.00000 median=0.00000 p5=0.00000 p95=0.00000
+  markers rel_a              n=1000 undefined=0 mean=0.17668 median=0.17668 p5=0.17668 p95=0.17668
+  markers rel_c              n=1000 undefined=0 mean=0.00000 median=0.00000 p5=0.00000 p95=0.00000
+  markers rel_d              n=1000 undefined=0 mean=0.05478 median=0.05478 p5=0.05478 p95=0.05478
+  markers rel_e              n=1000 undefined=0 mean=0.17668 median=0.17668 p5=0.17668 p95=0.17668
+  markers rel_g              n=1000 undefined=0 mean=0.00000 median=0.00000 p5=0.00000 p95=0.00000
+  markers top_kept           n=1000 undefined=0 mean=1.00000 median=1.00000 p5=1.00000 p95=1.00000
+r1/BA final|first panel=E_B protected_stage=1 reads=7050 marker_reads=1000 gates=[-5.422910213470459, 8.124921798706055]
+  words   displaced          n=6050 undefined=0 mean=4.66694 median=5.00000 p5=3.00000 p95=7.00000
+  words   displaced_weight   n=6050 undefined=0 mean=0.25224 median=0.22504 p5=0.07012 p95=0.49254
+  words   mass_p             n=6050 undefined=0 mean=0.63055 median=0.65510 p5=0.35121 p95=0.83841
+  words   n_p                n=6050 undefined=0 mean=3.33306 median=3.00000 p5=1.00000 p95=5.00000
+  words   other_part         n=6050 undefined=0 mean=0.34529 median=0.29102 p5=0.08197 p95=0.77115
+  words   rel_a              n=6050 undefined=0 mean=0.44218 median=0.38034 p5=0.14523 p95=0.89662
+  words   rel_c              n=6050 undefined=0 mean=0.74281 median=0.70510 p5=0.38763 p95=1.19264
+  words   rel_d              n=6050 undefined=0 mean=0.35683 median=0.29198 p5=0.08804 p95=0.78414
+  words   rel_e              n=6050 undefined=0 mean=0.28273 median=0.25331 p5=0.10821 p95=0.53259
+  words   rel_g              n=6050 undefined=0 mean=0.34529 median=0.29102 p5=0.08197 p95=0.77115
+  words   top_kept           n=6050 undefined=0 mean=0.99917 median=1.00000 p5=1.00000 p95=1.00000
+  markers displaced          n=1000 undefined=0 mean=4.00000 median=4.00000 p5=4.00000 p95=4.00000
+  markers displaced_weight   n=1000 undefined=0 mean=0.04735 median=0.04735 p5=0.04735 p95=0.04735
+  markers mass_p             n=1000 undefined=0 mean=0.82062 median=0.82062 p5=0.82062 p95=0.82062
+  markers n_p                n=1000 undefined=0 mean=4.00000 median=4.00000 p5=4.00000 p95=4.00000
+  markers other_part         n=1000 undefined=0 mean=0.10125 median=0.10125 p5=0.10125 p95=0.10125
+  markers rel_a              n=1000 undefined=0 mean=0.17381 median=0.17381 p5=0.17381 p95=0.17381
+  markers rel_c              n=1000 undefined=0 mean=0.54269 median=0.54269 p5=0.54269 p95=0.54269
+  markers rel_d              n=1000 undefined=0 mean=0.05478 median=0.05478 p5=0.05478 p95=0.05478
+  markers rel_e              n=1000 undefined=0 mean=0.14354 median=0.14354 p5=0.14354 p95=0.14354
+  markers rel_g              n=1000 undefined=0 mean=0.10125 median=0.10125 p5=0.10125 p95=0.10125
+  markers top_kept           n=1000 undefined=0 mean=1.00000 median=1.00000 p5=1.00000 p95=1.00000
+r1/BA final|second panel=E_A protected_stage=2 reads=7163 marker_reads=1000 gates=[-5.422910213470459, 8.124921798706055]
+  words   displaced          n=6163 undefined=0 mean=5.92650 median=6.00000 p5=4.00000 p95=7.00000
+  words   displaced_weight   n=6163 undefined=0 mean=0.43234 median=0.42827 p5=0.20120 p95=0.61018
+  words   mass_p             n=6163 undefined=0 mean=0.49735 median=0.49421 p5=0.30112 p95=0.74726
+  words   n_p                n=6163 undefined=0 mean=2.07350 median=2.00000 p5=1.00000 p95=4.00000
+  words   other_part         n=6163 undefined=0 mean=0.25298 median=0.24035 p5=0.10765 p95=0.40973
+  words   rel_a              n=6163 undefined=0 mean=0.39709 median=0.40828 p5=0.19264 p95=0.59995
+  words   rel_c              n=6163 undefined=0 mean=0.45303 median=0.44126 p5=0.23085 p95=0.66867
+  words   rel_d              n=6163 undefined=0 mean=0.79615 median=0.72715 p5=0.25319 p95=1.37850
+  words   rel_e              n=6163 undefined=0 mean=0.31437 median=0.30640 p5=0.14340 p95=0.49681
+  words   rel_g              n=6163 undefined=0 mean=0.25298 median=0.24035 p5=0.10765 p95=0.40973
+  words   top_kept           n=6163 undefined=0 mean=0.99659 median=1.00000 p5=1.00000 p95=1.00000
+  markers displaced          n=1000 undefined=0 mean=6.00000 median=6.00000 p5=6.00000 p95=6.00000
+  markers displaced_weight   n=1000 undefined=0 mean=0.38353 median=0.38353 p5=0.38353 p95=0.38353
+  markers mass_p             n=1000 undefined=0 mean=0.56251 median=0.56251 p5=0.56251 p95=0.56251
+  markers n_p                n=1000 undefined=0 mean=2.00000 median=2.00000 p5=2.00000 p95=2.00000
+  markers other_part         n=1000 undefined=0 mean=0.18870 median=0.18870 p5=0.18870 p95=0.18870
+  markers rel_a              n=1000 undefined=0 mean=0.27163 median=0.27163 p5=0.27163 p95=0.27163
+  markers rel_c              n=1000 undefined=0 mean=0.36519 median=0.36519 p5=0.36519 p95=0.36519
+  markers rel_d              n=1000 undefined=0 mean=0.55811 median=0.55811 p5=0.55811 p95=0.55811
+  markers rel_e              n=1000 undefined=0 mean=0.20591 median=0.20591 p5=0.20591 p95=0.20591
+  markers rel_g              n=1000 undefined=0 mean=0.18870 median=0.18870 p5=0.18870 p95=0.18870
+  markers top_kept           n=1000 undefined=0 mean=1.00000 median=1.00000 p5=1.00000 p95=1.00000
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+POST-HOC EXPLORATORY DIAGNOSTIC OF AN OBSERVED RUN; NOT A REGISTERED LABEL
+READ STATISTICS (section 5.2) cell r2/AB
+r2/AB append|first panel=E_A protected_stage=1 reads=7163 marker_reads=1000 gates=[5.799789905548096, 0.0]
+  words   displaced          n=6163 undefined=0 mean=4.73065 median=5.00000 p5=2.00000 p95=7.00000
+  words   displaced_weight   n=6163 undefined=0 mean=0.24182 median=0.22917 p5=0.06967 p95=0.47232
+  words   mass_p             n=6163 undefined=0 mean=0.63312 median=0.64621 p5=0.36373 p95=0.87161
+  words   n_p                n=6163 undefined=0 mean=3.26935 median=3.00000 p5=1.00000 p95=6.00000
+  words   other_part         n=6163 undefined=0 mean=0.00000 median=0.00000 p5=0.00000 p95=0.00000
+  words   rel_a              n=6163 undefined=0 mean=0.27522 median=0.25087 p5=0.09652 p95=0.50304
+  words   rel_c              n=6163 undefined=0 mean=0.00000 median=0.00000 p5=0.00000 p95=0.00000
+  words   rel_d              n=6163 undefined=0 mean=0.33849 median=0.28827 p5=0.08503 p95=0.76812
+  words   rel_e              n=6163 undefined=0 mean=0.27522 median=0.25087 p5=0.09652 p95=0.50304
+  words   rel_g              n=6163 undefined=0 mean=0.00000 median=0.00000 p5=0.00000 p95=0.00000
+  words   top_kept           n=6163 undefined=0 mean=0.99968 median=1.00000 p5=1.00000 p95=1.00000
+  markers displaced          n=1000 undefined=0 mean=4.00000 median=4.00000 p5=4.00000 p95=4.00000
+  markers displaced_weight   n=1000 undefined=0 mean=0.08951 median=0.08951 p5=0.08951 p95=0.08951
+  markers mass_p             n=1000 undefined=0 mean=0.79544 median=0.79544 p5=0.79544 p95=0.79544
+  markers n_p                n=1000 undefined=0 mean=4.00000 median=4.00000 p5=4.00000 p95=4.00000
+  markers other_part         n=1000 undefined=0 mean=0.00000 median=0.00000 p5=0.00000 p95=0.00000
+  markers rel_a              n=1000 undefined=0 mean=0.16093 median=0.16093 p5=0.16093 p95=0.16093
+  markers rel_c              n=1000 undefined=0 mean=0.00000 median=0.00000 p5=0.00000 p95=0.00000
+  markers rel_d              n=1000 undefined=0 mean=0.07298 median=0.07298 p5=0.07298 p95=0.07298
+  markers rel_e              n=1000 undefined=0 mean=0.16093 median=0.16093 p5=0.16093 p95=0.16093
+  markers rel_g              n=1000 undefined=0 mean=0.00000 median=0.00000 p5=0.00000 p95=0.00000
+  markers top_kept           n=1000 undefined=0 mean=1.00000 median=1.00000 p5=1.00000 p95=1.00000
+r2/AB final|first panel=E_A protected_stage=1 reads=7163 marker_reads=1000 gates=[5.799789905548096, 7.054641246795654]
+  words   displaced          n=6163 undefined=0 mean=4.70063 median=5.00000 p5=2.00000 p95=7.00000
+  words   displaced_weight   n=6163 undefined=0 mean=0.23921 median=0.22105 p5=0.06967 p95=0.46018
+  words   mass_p             n=6163 undefined=0 mean=0.63693 median=0.64605 p5=0.38067 p95=0.87706
+  words   n_p                n=6163 undefined=0 mean=3.29937 median=3.00000 p5=1.00000 p95=6.00000
+  words   other_part         n=6163 undefined=0 mean=0.24170 median=0.19610 p5=0.07108 p95=0.55363
+  words   rel_a              n=6163 undefined=0 mean=0.36150 median=0.31680 p5=0.13123 p95=0.70792
+  words   rel_c              n=6163 undefined=0 mean=0.53586 median=0.51179 p5=0.30058 p95=0.87912
+  words   rel_d              n=6163 undefined=0 mean=0.33370 median=0.29457 p5=0.08503 p95=0.72971
+  words   rel_e              n=6163 undefined=0 mean=0.27196 median=0.25594 p5=0.09165 p95=0.48891
+  words   rel_g              n=6163 undefined=0 mean=0.24170 median=0.19610 p5=0.07108 p95=0.55363
+  words   top_kept           n=6163 undefined=0 mean=0.99919 median=1.00000 p5=1.00000 p95=1.00000
+  markers displaced          n=1000 undefined=0 mean=3.00000 median=3.00000 p5=3.00000 p95=3.00000
+  markers displaced_weight   n=1000 undefined=0 mean=0.03772 median=0.03772 p5=0.03772 p95=0.03772
+  markers mass_p             n=1000 undefined=0 mean=0.84221 median=0.84221 p5=0.84221 p95=0.84221
+  markers n_p                n=1000 undefined=0 mean=5.00000 median=5.00000 p5=5.00000 p95=5.00000
+  markers other_part         n=1000 undefined=0 mean=0.14734 median=0.14734 p5=0.14734 p95=0.14734
+  markers rel_a              n=1000 undefined=0 mean=0.19954 median=0.19954 p5=0.19954 p95=0.19954
+  markers rel_c              n=1000 undefined=0 mean=0.50521 median=0.50521 p5=0.50521 p95=0.50521
+  markers rel_d              n=1000 undefined=0 mean=0.04893 median=0.04893 p5=0.04893 p95=0.04893
+  markers rel_e              n=1000 undefined=0 mean=0.12794 median=0.12794 p5=0.12794 p95=0.12794
+  markers rel_g              n=1000 undefined=0 mean=0.14734 median=0.14734 p5=0.14734 p95=0.14734
+  markers top_kept           n=1000 undefined=0 mean=1.00000 median=1.00000 p5=1.00000 p95=1.00000
+r2/AB final|second panel=E_B protected_stage=2 reads=7050 marker_reads=1000 gates=[5.799789905548096, 7.054641246795654]
+  words   displaced          n=6050 undefined=0 mean=5.47322 median=6.00000 p5=3.00000 p95=7.00000
+  words   displaced_weight   n=6050 undefined=0 mean=0.39372 median=0.37892 p5=0.19046 p95=0.59395
+  words   mass_p             n=6050 undefined=0 mean=0.53592 median=0.55830 p5=0.31129 p95=0.75666
+  words   n_p                n=6050 undefined=0 mean=2.52678 median=2.00000 p5=1.00000 p95=5.00000
+  words   other_part         n=6050 undefined=0 mean=0.32858 median=0.30384 p5=0.16070 p95=0.59507
+  words   rel_a              n=6050 undefined=0 mean=0.43964 median=0.40092 p5=0.22341 p95=0.75823
+  words   rel_c              n=6050 undefined=0 mean=0.61410 median=0.57874 p5=0.39290 p95=0.95405
+  words   rel_d              n=6050 undefined=0 mean=0.68439 median=0.56591 p5=0.25826 p95=1.33520
+  words   rel_e              n=6050 undefined=0 mean=0.29947 median=0.26622 p5=0.14485 p95=0.52676
+  words   rel_g              n=6050 undefined=0 mean=0.32858 median=0.30384 p5=0.16070 p95=0.59507
+  words   top_kept           n=6050 undefined=0 mean=0.99124 median=1.00000 p5=1.00000 p95=1.00000
+  markers displaced          n=1000 undefined=0 mean=5.00000 median=5.00000 p5=5.00000 p95=5.00000
+  markers displaced_weight   n=1000 undefined=0 mean=0.30526 median=0.30526 p5=0.30526 p95=0.30526
+  markers mass_p             n=1000 undefined=0 mean=0.64287 median=0.64287 p5=0.64287 p95=0.64287
+  markers n_p                n=1000 undefined=0 mean=3.00000 median=3.00000 p5=3.00000 p95=3.00000
+  markers other_part         n=1000 undefined=0 mean=0.17665 median=0.17665 p5=0.17665 p95=0.17665
+  markers rel_a              n=1000 undefined=0 mean=0.19600 median=0.19600 p5=0.19600 p95=0.19600
+  markers rel_c              n=1000 undefined=0 mean=0.41257 median=0.41257 p5=0.41257 p95=0.41257
+  markers rel_d              n=1000 undefined=0 mean=0.44474 median=0.44474 p5=0.44474 p95=0.44474
+  markers rel_e              n=1000 undefined=0 mean=0.09569 median=0.09569 p5=0.09569 p95=0.09569
+  markers rel_g              n=1000 undefined=0 mean=0.17665 median=0.17665 p5=0.17665 p95=0.17665
+  markers top_kept           n=1000 undefined=0 mean=1.00000 median=1.00000 p5=1.00000 p95=1.00000
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+POST-HOC EXPLORATORY DIAGNOSTIC OF AN OBSERVED RUN; NOT A REGISTERED LABEL
+READ STATISTICS (section 5.2) cell r2/BA
+r2/BA append|first panel=E_B protected_stage=1 reads=7050 marker_reads=1000 gates=[-5.281773567199707, 0.0]
+  words   displaced          n=6050 undefined=0 mean=4.60463 median=5.00000 p5=2.00000 p95=7.00000
+  words   displaced_weight   n=6050 undefined=0 mean=0.24417 median=0.23099 p5=0.05508 p95=0.49386
+  words   mass_p             n=6050 undefined=0 mean=0.63783 median=0.64163 p5=0.36053 p95=0.87844
+  words   n_p                n=6050 undefined=0 mean=3.39537 median=3.00000 p5=1.00000 p95=6.00000
+  words   other_part         n=6050 undefined=0 mean=0.00000 median=0.00000 p5=0.00000 p95=0.00000
+  words   rel_a              n=6050 undefined=0 mean=0.28134 median=0.26864 p5=0.09705 p95=0.53062
+  words   rel_c              n=6050 undefined=0 mean=0.00000 median=0.00000 p5=0.00000 p95=0.00000
+  words   rel_d              n=6050 undefined=0 mean=0.34512 median=0.30825 p5=0.06385 p95=0.81345
+  words   rel_e              n=6050 undefined=0 mean=0.28134 median=0.26864 p5=0.09705 p95=0.53062
+  words   rel_g              n=6050 undefined=0 mean=0.00000 median=0.00000 p5=0.00000 p95=0.00000
+  words   top_kept           n=6050 undefined=0 mean=0.99934 median=1.00000 p5=1.00000 p95=1.00000
+  markers displaced          n=1000 undefined=0 mean=4.00000 median=4.00000 p5=4.00000 p95=4.00000
+  markers displaced_weight   n=1000 undefined=0 mean=0.05312 median=0.05312 p5=0.05312 p95=0.05312
+  markers mass_p             n=1000 undefined=0 mean=0.77414 median=0.77414 p5=0.77414 p95=0.77414
+  markers n_p                n=1000 undefined=0 mean=4.00000 median=4.00000 p5=4.00000 p95=4.00000
+  markers other_part         n=1000 undefined=0 mean=0.00000 median=0.00000 p5=0.00000 p95=0.00000
+  markers rel_a              n=1000 undefined=0 mean=0.18627 median=0.18627 p5=0.18627 p95=0.18627
+  markers rel_c              n=1000 undefined=0 mean=0.00000 median=0.00000 p5=0.00000 p95=0.00000
+  markers rel_d              n=1000 undefined=0 mean=0.06260 median=0.06260 p5=0.06260 p95=0.06260
+  markers rel_e              n=1000 undefined=0 mean=0.18627 median=0.18627 p5=0.18627 p95=0.18627
+  markers rel_g              n=1000 undefined=0 mean=0.00000 median=0.00000 p5=0.00000 p95=0.00000
+  markers top_kept           n=1000 undefined=0 mean=1.00000 median=1.00000 p5=1.00000 p95=1.00000
+r2/BA final|first panel=E_B protected_stage=1 reads=7050 marker_reads=1000 gates=[-5.281773567199707, 8.13672161102295]
+  words   displaced          n=6050 undefined=0 mean=4.59521 median=5.00000 p5=2.00000 p95=7.00000
+  words   displaced_weight   n=6050 undefined=0 mean=0.24391 median=0.23099 p5=0.07332 p95=0.49494
+  words   mass_p             n=6050 undefined=0 mean=0.63555 median=0.63833 p5=0.36675 p95=0.87882
+  words   n_p                n=6050 undefined=0 mean=3.40479 median=3.00000 p5=1.00000 p95=6.00000
+  words   other_part         n=6050 undefined=0 mean=0.34587 median=0.28728 p5=0.08904 p95=0.77073
+  words   rel_a              n=6050 undefined=0 mean=0.44457 median=0.38625 p5=0.16017 p95=0.89769
+  words   rel_c              n=6050 undefined=0 mean=0.73680 median=0.66579 p5=0.38045 p95=1.23289
+  words   rel_d              n=6050 undefined=0 mean=0.34447 median=0.30961 p5=0.08790 p95=0.81372
+  words   rel_e              n=6050 undefined=0 mean=0.28264 median=0.26545 p5=0.09668 p95=0.53730
+  words   rel_g              n=6050 undefined=0 mean=0.34587 median=0.28728 p5=0.08904 p95=0.77073
+  words   top_kept           n=6050 undefined=0 mean=0.99967 median=1.00000 p5=1.00000 p95=1.00000
+  markers displaced          n=1000 undefined=0 mean=4.00000 median=4.00000 p5=4.00000 p95=4.00000
+  markers displaced_weight   n=1000 undefined=0 mean=0.05312 median=0.05312 p5=0.05312 p95=0.05312
+  markers mass_p             n=1000 undefined=0 mean=0.71633 median=0.71633 p5=0.71633 p95=0.71633
+  markers n_p                n=1000 undefined=0 mean=4.00000 median=4.00000 p5=4.00000 p95=4.00000
+  markers other_part         n=1000 undefined=0 mean=0.32214 median=0.32214 p5=0.32214 p95=0.32214
+  markers rel_a              n=1000 undefined=0 mean=0.40436 median=0.40436 p5=0.40436 p95=0.40436
+  markers rel_c              n=1000 undefined=0 mean=0.70018 median=0.70018 p5=0.70018 p95=0.70018
+  markers rel_d              n=1000 undefined=0 mean=0.06260 median=0.06260 p5=0.06260 p95=0.06260
+  markers rel_e              n=1000 undefined=0 mean=0.24656 median=0.24656 p5=0.24656 p95=0.24656
+  markers rel_g              n=1000 undefined=0 mean=0.32214 median=0.32214 p5=0.32214 p95=0.32214
+  markers top_kept           n=1000 undefined=0 mean=1.00000 median=1.00000 p5=1.00000 p95=1.00000
+r2/BA final|second panel=E_A protected_stage=2 reads=7163 marker_reads=1000 gates=[-5.281773567199707, 8.13672161102295]
+  words   displaced          n=6163 undefined=0 mean=5.82379 median=6.00000 p5=3.00000 p95=7.00000
+  words   displaced_weight   n=6163 undefined=0 mean=0.42422 median=0.40979 p5=0.15056 p95=0.60477
+  words   mass_p             n=6163 undefined=0 mean=0.50886 median=0.51626 p5=0.29938 p95=0.82324
+  words   n_p                n=6163 undefined=0 mean=2.17621 median=2.00000 p5=1.00000 p95=5.00000
+  words   other_part         n=6163 undefined=0 mean=0.24292 median=0.23511 p5=0.09629 p95=0.40690
+  words   rel_a              n=6163 undefined=0 mean=0.38196 median=0.38214 p5=0.14031 p95=0.58781
+  words   rel_c              n=6163 undefined=0 mean=0.43832 median=0.42869 p5=0.23091 p95=0.65121
+  words   rel_d              n=6163 undefined=0 mean=0.78067 median=0.66942 p5=0.17031 p95=1.41330
+  words   rel_e              n=6163 undefined=0 mean=0.30306 median=0.30016 p5=0.11027 p95=0.47041
+  words   rel_g              n=6163 undefined=0 mean=0.24292 median=0.23511 p5=0.09629 p95=0.40690
+  words   top_kept           n=6163 undefined=0 mean=0.99643 median=1.00000 p5=1.00000 p95=1.00000
+  markers displaced          n=1000 undefined=0 mean=7.00000 median=7.00000 p5=7.00000 p95=7.00000
+  markers displaced_weight   n=1000 undefined=0 mean=0.59164 median=0.59164 p5=0.59164 p95=0.59164
+  markers mass_p             n=1000 undefined=0 mean=0.36697 median=0.36697 p5=0.36697 p95=0.36697
+  markers n_p                n=1000 undefined=0 mean=1.00000 median=1.00000 p5=1.00000 p95=1.00000
+  markers other_part         n=1000 undefined=0 mean=0.31011 median=0.31011 p5=0.31011 p95=0.31011
+  markers rel_a              n=1000 undefined=0 mean=0.46482 median=0.46482 p5=0.46482 p95=0.46482
+  markers rel_c              n=1000 undefined=0 mean=0.46406 median=0.46406 p5=0.46406 p95=0.46406
+  markers rel_d              n=1000 undefined=0 mean=1.15522 median=1.15522 p5=1.15522 p95=1.15522
+  markers rel_e              n=1000 undefined=0 mean=0.34904 median=0.34904 p5=0.34904 p95=0.34904
+  markers rel_g              n=1000 undefined=0 mean=0.31011 median=0.31011 p5=0.31011 p95=0.31011
+  markers top_kept           n=1000 undefined=0 mean=1.00000 median=1.00000 p5=1.00000 p95=1.00000
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+POST-HOC EXPLORATORY DIAGNOSTIC OF AN OBSERVED RUN; NOT A REGISTERED LABEL
+SCORES (section 5.3) cell r0/AB
+E_first=E_A E_second=E_B
+first|M1|a         s=0.4534 G=0.5135 differs_from[M1|a]=0.0000 contrast_vs_ref=+0.00000 se=0.00000
+first|append|a     s=0.4268 G=0.4698 differs_from[M1|a]=0.8880 contrast_vs_ref=-0.02657 se=0.00456
+first|append|d1    s=0.4102 G=0.4424 differs_from[M1|a]=0.8840 contrast_vs_ref=-0.04319 se=0.00469
+first|final|a      s=0.3815 G=0.3953 differs_from[M1|a]=0.9350 contrast_vs_ref=-0.07188 se=0.00515
+first|final|b1     s=0.4534 G=0.5135 differs_from[M1|a]=0.0000 contrast_vs_ref=+0.00000 se=0.00000
+first|final|c      s=0.2141 G=0.1200 differs_from[M1|a]=0.9890 contrast_vs_ref=-0.23924 se=0.00721
+first|final|d1     s=0.4075 G=0.4380 differs_from[M1|a]=0.8860 contrast_vs_ref=-0.04591 se=0.00449
+first|final|e1     s=0.4256 G=0.4678 differs_from[M1|a]=0.8850 contrast_vs_ref=-0.02776 se=0.00447
+first|final|g1     s=0.4068 G=0.4368 differs_from[M1|a]=0.8890 contrast_vs_ref=-0.04662 se=0.00443
+second|final|a     s=0.4349 G=0.4890 differs_from[final|a]=0.0000 contrast_vs_ref=+0.00000 se=0.00000
+second|final|b2    s=0.3512 G=0.3554 differs_from[final|a]=0.9390 contrast_vs_ref=-0.08370 se=0.00588
+second|final|c     s=0.2961 G=0.2674 differs_from[final|a]=0.9680 contrast_vs_ref=-0.13879 se=0.00659
+second|final|d2    s=0.1946 G=0.1054 differs_from[final|a]=0.9880 contrast_vs_ref=-0.24023 se=0.00754
+second|final|e2    s=0.3850 G=0.4095 differs_from[final|a]=0.8980 contrast_vs_ref=-0.04984 se=0.00509
+second|final|g2    s=0.3888 G=0.4155 differs_from[final|a]=0.8820 contrast_vs_ref=-0.04603 se=0.00525
+second|final|e1    s=0.1464 G=0.0284 differs_from[final|a]=0.9980 contrast_vs_ref=-0.28846 se=0.00763
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+POST-HOC EXPLORATORY DIAGNOSTIC OF AN OBSERVED RUN; NOT A REGISTERED LABEL
+SCORES (section 5.3) cell r0/BA
+E_first=E_B E_second=E_A
+first|M1|a         s=0.4425 G=0.5012 differs_from[M1|a]=0.0000 contrast_vs_ref=+0.00000 se=0.00000
+first|append|a     s=0.4345 G=0.4884 differs_from[M1|a]=0.8410 contrast_vs_ref=-0.00799 se=0.00478
+first|append|d1    s=0.4025 G=0.4374 differs_from[M1|a]=0.8430 contrast_vs_ref=-0.03998 se=0.00528
+first|final|a      s=0.3796 G=0.4007 differs_from[M1|a]=0.9210 contrast_vs_ref=-0.06291 se=0.00574
+first|final|b1     s=0.4425 G=0.5012 differs_from[M1|a]=0.0000 contrast_vs_ref=+0.00000 se=0.00000
+first|final|c      s=0.1483 G=0.0315 differs_from[M1|a]=1.0000 contrast_vs_ref=-0.29415 se=0.00771
+first|final|d1     s=0.4011 G=0.4352 differs_from[M1|a]=0.8330 contrast_vs_ref=-0.04133 se=0.00516
+first|final|e1     s=0.4327 G=0.4856 differs_from[M1|a]=0.8240 contrast_vs_ref=-0.00978 se=0.00471
+first|final|g1     s=0.3876 G=0.4136 differs_from[M1|a]=0.8850 contrast_vs_ref=-0.05486 se=0.00530
+second|final|a     s=0.4530 G=0.5129 differs_from[final|a]=0.0000 contrast_vs_ref=+0.00000 se=0.00000
+second|final|b2    s=0.3776 G=0.3888 differs_from[final|a]=0.9340 contrast_vs_ref=-0.07544 se=0.00535
+second|final|c     s=0.3247 G=0.3019 differs_from[final|a]=0.9600 contrast_vs_ref=-0.12826 se=0.00619
+second|final|d2    s=0.2458 G=0.1721 differs_from[final|a]=0.9930 contrast_vs_ref=-0.20719 se=0.00668
+second|final|e2    s=0.4062 G=0.4359 differs_from[final|a]=0.8920 contrast_vs_ref=-0.04679 se=0.00484
+second|final|g2    s=0.3912 G=0.4111 differs_from[final|a]=0.9090 contrast_vs_ref=-0.06185 se=0.00503
+second|final|e1    s=0.1537 G=0.0206 differs_from[final|a]=1.0000 contrast_vs_ref=-0.29936 se=0.00719
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+POST-HOC EXPLORATORY DIAGNOSTIC OF AN OBSERVED RUN; NOT A REGISTERED LABEL
+SCORES (section 5.3) cell r1/AB
+E_first=E_A E_second=E_B
+first|M1|a         s=0.4537 G=0.5139 differs_from[M1|a]=0.0000 contrast_vs_ref=+0.00000 se=0.00000
+first|append|a     s=0.4193 G=0.4574 differs_from[M1|a]=0.8850 contrast_vs_ref=-0.03437 se=0.00446
+first|append|d1    s=0.4026 G=0.4299 differs_from[M1|a]=0.8830 contrast_vs_ref=-0.05108 se=0.00467
+first|final|a      s=0.3856 G=0.4020 differs_from[M1|a]=0.9340 contrast_vs_ref=-0.06803 se=0.00519
+first|final|b1     s=0.4537 G=0.5139 differs_from[M1|a]=0.0000 contrast_vs_ref=+0.00000 se=0.00000
+first|final|c      s=0.2626 G=0.1997 differs_from[M1|a]=0.9880 contrast_vs_ref=-0.19104 se=0.00660
+first|final|d1     s=0.4073 G=0.4377 differs_from[M1|a]=0.8690 contrast_vs_ref=-0.04635 se=0.00460
+first|final|e1     s=0.4234 G=0.4641 differs_from[M1|a]=0.8870 contrast_vs_ref=-0.03029 se=0.00442
+first|final|g1     s=0.4108 G=0.4435 differs_from[M1|a]=0.8870 contrast_vs_ref=-0.04280 se=0.00474
+second|final|a     s=0.4422 G=0.5008 differs_from[final|a]=0.0000 contrast_vs_ref=+0.00000 se=0.00000
+second|final|b2    s=0.3161 G=0.2993 differs_from[final|a]=0.9530 contrast_vs_ref=-0.12619 se=0.00660
+second|final|c     s=0.3239 G=0.3119 differs_from[final|a]=0.9700 contrast_vs_ref=-0.11830 se=0.00608
+second|final|d2    s=0.2121 G=0.1333 differs_from[final|a]=0.9960 contrast_vs_ref=-0.23014 se=0.00737
+second|final|e2    s=0.3052 G=0.2821 differs_from[final|a]=0.9460 contrast_vs_ref=-0.13700 se=0.00674
+second|final|g2    s=0.3876 G=0.4136 differs_from[final|a]=0.8820 contrast_vs_ref=-0.05464 se=0.00488
+second|final|e1    s=0.1473 G=0.0299 differs_from[final|a]=1.0000 contrast_vs_ref=-0.29493 se=0.00771
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+POST-HOC EXPLORATORY DIAGNOSTIC OF AN OBSERVED RUN; NOT A REGISTERED LABEL
+SCORES (section 5.3) cell r1/BA
+E_first=E_B E_second=E_A
+first|M1|a         s=0.4443 G=0.5040 differs_from[M1|a]=0.0000 contrast_vs_ref=+0.00000 se=0.00000
+first|append|a     s=0.4351 G=0.4895 differs_from[M1|a]=0.8500 contrast_vs_ref=-0.00913 se=0.00509
+first|append|d1    s=0.3998 G=0.4330 differs_from[M1|a]=0.8510 contrast_vs_ref=-0.04447 se=0.00507
+first|final|a      s=0.3887 G=0.4154 differs_from[M1|a]=0.9090 contrast_vs_ref=-0.05552 se=0.00565
+first|final|b1     s=0.4443 G=0.5040 differs_from[M1|a]=0.0000 contrast_vs_ref=+0.00000 se=0.00000
+first|final|c      s=0.0775 G=-0.0816 differs_from[M1|a]=1.0000 contrast_vs_ref=-0.36678 se=0.00839
+first|final|d1     s=0.3964 G=0.4277 differs_from[M1|a]=0.8520 contrast_vs_ref=-0.04781 se=0.00510
+first|final|e1     s=0.4364 G=0.4915 differs_from[M1|a]=0.8510 contrast_vs_ref=-0.00786 se=0.00509
+first|final|g1     s=0.3870 G=0.4126 differs_from[M1|a]=0.8940 contrast_vs_ref=-0.05729 se=0.00528
+second|final|a     s=0.4490 G=0.5062 differs_from[final|a]=0.0000 contrast_vs_ref=+0.00000 se=0.00000
+second|final|b2    s=0.3179 G=0.2907 differs_from[final|a]=0.9560 contrast_vs_ref=-0.13104 se=0.00642
+second|final|c     s=0.3393 G=0.3259 differs_from[final|a]=0.9590 contrast_vs_ref=-0.10969 se=0.00559
+second|final|d2    s=0.1699 G=0.0473 differs_from[final|a]=1.0000 contrast_vs_ref=-0.27908 se=0.00734
+second|final|e2    s=0.3815 G=0.3953 differs_from[final|a]=0.9280 contrast_vs_ref=-0.06746 se=0.00529
+second|final|g2    s=0.3732 G=0.3816 differs_from[final|a]=0.9220 contrast_vs_ref=-0.07576 se=0.00507
+second|final|e1    s=0.1411 G=-0.0001 differs_from[final|a]=1.0000 contrast_vs_ref=-0.30790 se=0.00703
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+POST-HOC EXPLORATORY DIAGNOSTIC OF AN OBSERVED RUN; NOT A REGISTERED LABEL
+SCORES (section 5.3) cell r2/AB
+E_first=E_A E_second=E_B
+first|M1|a         s=0.4489 G=0.5061 differs_from[M1|a]=0.0000 contrast_vs_ref=+0.00000 se=0.00000
+first|append|a     s=0.4208 G=0.4600 differs_from[M1|a]=0.8750 contrast_vs_ref=-0.02807 se=0.00472
+first|append|d1    s=0.4077 G=0.4384 differs_from[M1|a]=0.8590 contrast_vs_ref=-0.04116 se=0.00475
+first|final|a      s=0.3769 G=0.3876 differs_from[M1|a]=0.9370 contrast_vs_ref=-0.07206 se=0.00541
+first|final|b1     s=0.4489 G=0.5061 differs_from[M1|a]=0.0000 contrast_vs_ref=+0.00000 se=0.00000
+first|final|c      s=0.1338 G=-0.0121 differs_from[M1|a]=0.9970 contrast_vs_ref=-0.31509 se=0.00799
+first|final|d1     s=0.4107 G=0.4432 differs_from[M1|a]=0.8640 contrast_vs_ref=-0.03823 se=0.00468
+first|final|e1     s=0.4249 G=0.4667 differs_from[M1|a]=0.8600 contrast_vs_ref=-0.02399 se=0.00476
+first|final|g1     s=0.3914 G=0.4116 differs_from[M1|a]=0.8950 contrast_vs_ref=-0.05746 se=0.00488
+second|final|a     s=0.4314 G=0.4836 differs_from[final|a]=0.0000 contrast_vs_ref=+0.00000 se=0.00000
+second|final|b2    s=0.3412 G=0.3395 differs_from[final|a]=0.9310 contrast_vs_ref=-0.09022 se=0.00648
+second|final|c     s=0.3279 G=0.3183 differs_from[final|a]=0.9670 contrast_vs_ref=-0.10348 se=0.00628
+second|final|d2    s=0.1768 G=0.0770 differs_from[final|a]=1.0000 contrast_vs_ref=-0.25458 se=0.00768
+second|final|e2    s=0.3763 G=0.3956 differs_from[final|a]=0.8880 contrast_vs_ref=-0.05510 se=0.00592
+second|final|g2    s=0.3690 G=0.3838 differs_from[final|a]=0.8810 contrast_vs_ref=-0.06247 se=0.00543
+second|final|e1    s=0.1514 G=0.0364 differs_from[final|a]=1.0000 contrast_vs_ref=-0.28000 se=0.00785
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+POST-HOC EXPLORATORY DIAGNOSTIC OF AN OBSERVED RUN; NOT A REGISTERED LABEL
+SCORES (section 5.3) cell r2/BA
+E_first=E_B E_second=E_A
+first|M1|a         s=0.4438 G=0.5032 differs_from[M1|a]=0.0000 contrast_vs_ref=+0.00000 se=0.00000
+first|append|a     s=0.4249 G=0.4732 differs_from[M1|a]=0.8290 contrast_vs_ref=-0.01883 se=0.00501
+first|append|d1    s=0.3960 G=0.4270 differs_from[M1|a]=0.8330 contrast_vs_ref=-0.04777 se=0.00471
+first|final|a      s=0.3573 G=0.3653 differs_from[M1|a]=0.9410 contrast_vs_ref=-0.08640 se=0.00658
+first|final|b1     s=0.4438 G=0.5032 differs_from[M1|a]=0.0000 contrast_vs_ref=+0.00000 se=0.00000
+first|final|c      s=0.1786 G=0.0799 differs_from[M1|a]=0.9980 contrast_vs_ref=-0.26513 se=0.00779
+first|final|d1     s=0.3987 G=0.4312 differs_from[M1|a]=0.8370 contrast_vs_ref=-0.04509 se=0.00472
+first|final|e1     s=0.4272 G=0.4768 differs_from[M1|a]=0.8300 contrast_vs_ref=-0.01654 se=0.00522
+first|final|g1     s=0.3883 G=0.4147 differs_from[M1|a]=0.8920 contrast_vs_ref=-0.05548 se=0.00538
+second|final|a     s=0.4444 G=0.4987 differs_from[final|a]=0.0000 contrast_vs_ref=+0.00000 se=0.00000
+second|final|b2    s=0.3461 G=0.3370 differs_from[final|a]=0.9530 contrast_vs_ref=-0.09830 se=0.00586
+second|final|c     s=0.3265 G=0.3047 differs_from[final|a]=0.9660 contrast_vs_ref=-0.11795 se=0.00599
+second|final|d2    s=0.2292 G=0.1448 differs_from[final|a]=0.9990 contrast_vs_ref=-0.21517 se=0.00699
+second|final|e2    s=0.3818 G=0.3957 differs_from[final|a]=0.9220 contrast_vs_ref=-0.06264 se=0.00546
+second|final|g2    s=0.3793 G=0.3916 differs_from[final|a]=0.9160 contrast_vs_ref=-0.06510 se=0.00515
+second|final|e1    s=0.1608 G=0.0323 differs_from[final|a]=1.0000 contrast_vs_ref=-0.28358 se=0.00721
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+POST-HOC EXPLORATORY DIAGNOSTIC OF AN OBSERVED RUN; NOT A REGISTERED LABEL
+DECOMPOSITION (section 6) first capability, cell r0/AB
+T=+0.07188 (i) slots=+0.04591 (ii) renormalisation=-0.01815 (iii) values=+0.04412 (iv) residual vs registered F=+0.000000000
+values first: values=+0.04662 competition given values=+0.02526 interaction=-0.00250
+shares of T: (i)=+0.639 (ii)=-0.252 (iii)=+0.614 competition(path)=+0.386 competition(values first)=+0.351 values(values first)=+0.649
+G units: {"T": 0.1182116058214592, "i": 0.07549783248804456, "ii": -0.029842922344529947, "iii": 0.07255669567794458, "interaction": -0.004111726494451682, "values_first_competition": 0.04154318364906293, "values_first_values": 0.07666842217239626}
+paired contrast T: mean=+0.07188 se=0.00515 n=1000
+paired contrast i: mean=+0.04591 se=0.00449 n=1000
+paired contrast ii: mean=-0.01815 se=0.00503 n=1000
+paired contrast iii: mean=+0.04412 se=0.00438 n=1000
+paired contrast values_first_values: mean=+0.04662 se=0.00443 n=1000
+paired contrast values_first_competition: mean=+0.02526 se=0.00470 n=1000
+append point: T=+0.02657 (i)=+0.04319 (ii)=-0.01662 (iii)=+0.00000; ((i)+(ii)) final minus append = +0.00119 (effect of trained stage-2 keys on competition)
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+POST-HOC EXPLORATORY DIAGNOSTIC OF AN OBSERVED RUN; NOT A REGISTERED LABEL
+DECOMPOSITION (section 6) first capability, cell r0/BA
+T=+0.06291 (i) slots=+0.04133 (ii) renormalisation=-0.03154 (iii) values=+0.05312 (iv) residual vs registered F=+0.000000000
+values first: values=+0.05486 competition given values=+0.00804 interaction=-0.00174
+shares of T: (i)=+0.657 (ii)=-0.501 (iii)=+0.844 competition(path)=+0.156 competition(values first)=+0.128 values(values first)=+0.872
+G units: {"T": 0.10045026078200063, "i": 0.06599221836052142, "ii": -0.050368176907644585, "iii": 0.08482621932912379, "interaction": -0.0027837438298278943, "values_first_competition": 0.012840297623048945, "values_first_values": 0.08760996315895168}
+paired contrast T: mean=+0.06291 se=0.00574 n=1000
+paired contrast i: mean=+0.04133 se=0.00516 n=1000
+paired contrast ii: mean=-0.03154 se=0.00564 n=1000
+paired contrast iii: mean=+0.05312 se=0.00507 n=1000
+paired contrast values_first_values: mean=+0.05486 se=0.00530 n=1000
+paired contrast values_first_competition: mean=+0.00804 se=0.00502 n=1000
+append point: T=+0.00799 (i)=+0.03998 (ii)=-0.03199 (iii)=+0.00000; ((i)+(ii)) final minus append = +0.00180 (effect of trained stage-2 keys on competition)
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+POST-HOC EXPLORATORY DIAGNOSTIC OF AN OBSERVED RUN; NOT A REGISTERED LABEL
+DECOMPOSITION (section 6) first capability, cell r1/AB
+T=+0.06803 (i) slots=+0.04635 (ii) renormalisation=-0.01606 (iii) values=+0.03774 (iv) residual vs registered F=+0.000000000
+values first: values=+0.04280 competition given values=+0.02523 interaction=-0.00506
+shares of T: (i)=+0.681 (ii)=-0.236 (iii)=+0.555 competition(path)=+0.445 competition(values first)=+0.371 values(values first)=+0.629
+G units: {"T": 0.11188032285888015, "i": 0.07621567524882024, "ii": -0.02640457834595087, "iii": 0.062069225956010776, "interaction": -0.00831858832910894, "values_first_competition": 0.04149250857376043, "values_first_values": 0.07038781428511971}
+paired contrast T: mean=+0.06803 se=0.00519 n=1000
+paired contrast i: mean=+0.04635 se=0.00460 n=1000
+paired contrast ii: mean=-0.01606 se=0.00527 n=1000
+paired contrast iii: mean=+0.03774 se=0.00474 n=1000
+paired contrast values_first_values: mean=+0.04280 se=0.00474 n=1000
+paired contrast values_first_competition: mean=+0.02523 se=0.00470 n=1000
+append point: T=+0.03437 (i)=+0.05108 (ii)=-0.01671 (iii)=+0.00000; ((i)+(ii)) final minus append = -0.00408 (effect of trained stage-2 keys on competition)
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+POST-HOC EXPLORATORY DIAGNOSTIC OF AN OBSERVED RUN; NOT A REGISTERED LABEL
+DECOMPOSITION (section 6) first capability, cell r1/BA
+T=+0.05552 (i) slots=+0.04781 (ii) renormalisation=-0.03995 (iii) values=+0.04766 (iv) residual vs registered F=+0.000000000
+values first: values=+0.05729 competition given values=-0.00177 interaction=-0.00963
+shares of T: (i)=+0.861 (ii)=-0.720 (iii)=+0.858 competition(path)=+0.142 competition(values first)=-0.032 values(values first)=+1.032
+G units: {"T": 0.08865718720522735, "i": 0.0763367790704579, "ii": -0.06378930376258504, "iii": 0.07610971189735448, "interaction": -0.015371755796704299, "values_first_competition": -0.002824280488831441, "values_first_values": 0.09148146769405878}
+paired contrast T: mean=+0.05552 se=0.00565 n=1000
+paired contrast i: mean=+0.04781 se=0.00510 n=1000
+paired contrast ii: mean=-0.03995 se=0.00565 n=1000
+paired contrast iii: mean=+0.04766 se=0.00543 n=1000
+paired contrast values_first_values: mean=+0.05729 se=0.00528 n=1000
+paired contrast values_first_competition: mean=-0.00177 se=0.00490 n=1000
+append point: T=+0.00913 (i)=+0.04447 (ii)=-0.03533 (iii)=+0.00000; ((i)+(ii)) final minus append = -0.00127 (effect of trained stage-2 keys on competition)
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+POST-HOC EXPLORATORY DIAGNOSTIC OF AN OBSERVED RUN; NOT A REGISTERED LABEL
+DECOMPOSITION (section 6) first capability, cell r2/AB
+T=+0.07206 (i) slots=+0.03823 (ii) renormalisation=-0.01424 (iii) values=+0.04807 (iv) residual vs registered F=+0.000000000
+values first: values=+0.05746 competition given values=+0.01460 interaction=-0.00939
+shares of T: (i)=+0.531 (ii)=-0.198 (iii)=+0.667 competition(path)=+0.333 competition(values first)=+0.203 values(values first)=+0.797
+G units: {"T": 0.11850001536228795, "i": 0.06287667882175729, "ii": -0.023424578109425737, "iii": 0.07904791464995639, "interaction": -0.015448783750476007, "values_first_competition": 0.024003316961855554, "values_first_values": 0.0944966984004324}
+paired contrast T: mean=+0.07206 se=0.00541 n=1000
+paired contrast i: mean=+0.03823 se=0.00468 n=1000
+paired contrast ii: mean=-0.01424 se=0.00510 n=1000
+paired contrast iii: mean=+0.04807 se=0.00478 n=1000
+paired contrast values_first_values: mean=+0.05746 se=0.00488 n=1000
+paired contrast values_first_competition: mean=+0.01460 se=0.00477 n=1000
+append point: T=+0.02807 (i)=+0.04116 (ii)=-0.01310 (iii)=+0.00000; ((i)+(ii)) final minus append = -0.00408 (effect of trained stage-2 keys on competition)
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+POST-HOC EXPLORATORY DIAGNOSTIC OF AN OBSERVED RUN; NOT A REGISTERED LABEL
+DECOMPOSITION (section 6) first capability, cell r2/BA
+T=+0.08640 (i) slots=+0.04509 (ii) renormalisation=-0.02855 (iii) values=+0.06986 (iv) residual vs registered F=+0.000000000
+values first: values=+0.05548 competition given values=+0.03093 interaction=+0.01439
+shares of T: (i)=+0.522 (ii)=-0.330 (iii)=+0.809 competition(path)=+0.191 competition(values first)=+0.358 values(values first)=+0.642
+G units: {"T": 0.13797232202771695, "i": 0.07200713449614758, "ii": -0.04559275267532072, "iii": 0.11155794020689011, "interaction": 0.022973380652456764, "values_first_competition": 0.049387762473283615, "values_first_values": 0.08858455955443334}
+paired contrast T: mean=+0.08640 se=0.00658 n=1000
+paired contrast i: mean=+0.04509 se=0.00472 n=1000
+paired contrast ii: mean=-0.02855 se=0.00567 n=1000
+paired contrast iii: mean=+0.06986 se=0.00601 n=1000
+paired contrast values_first_values: mean=+0.05548 se=0.00538 n=1000
+paired contrast values_first_competition: mean=+0.03093 se=0.00556 n=1000
+append point: T=+0.01883 (i)=+0.04777 (ii)=-0.02894 (iii)=+0.00000; ((i)+(ii)) final minus append = -0.00228 (effect of trained stage-2 keys on competition)
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+POST-HOC EXPLORATORY DIAGNOSTIC OF AN OBSERVED RUN; NOT A REGISTERED LABEL
+SECOND CAPABILITY, cell r0/AB
+effect of stage-1 rows on the second capability's read (not a retention loss; either sign): T2=s[b2]-s[a]=-0.08370 (i)=+0.15653 (ii)=-0.19039 (iii)=-0.04984 values first: -0.03767/-0.04603 interaction=-0.01217
+stage 2 switched off (trained keys) e(1) on E_second: s=0.1464 s[a]-s[e1]=+0.28846 G=0.0284
+paired contrast T: mean=-0.08370 se=0.00588
+paired contrast i: mean=+0.15653 se=0.00714
+paired contrast ii: mean=-0.19039 se=0.00737
+paired contrast iii: mean=-0.04984 se=0.00509
+paired contrast values_first_values: mean=-0.03767 se=0.00537
+paired contrast values_first_competition: mean=-0.04603 se=0.00525
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+POST-HOC EXPLORATORY DIAGNOSTIC OF AN OBSERVED RUN; NOT A REGISTERED LABEL
+SECOND CAPABILITY, cell r0/BA
+effect of stage-1 rows on the second capability's read (not a retention loss; either sign): T2=s[b2]-s[a]=-0.07544 (i)=+0.13175 (ii)=-0.16041 (iii)=-0.04679 values first: -0.01360/-0.06185 interaction=-0.03319
+stage 2 switched off (trained keys) e(1) on E_second: s=0.1537 s[a]-s[e1]=+0.29936 G=0.0206
+paired contrast T: mean=-0.07544 se=0.00535
+paired contrast i: mean=+0.13175 se=0.00589
+paired contrast ii: mean=-0.16041 se=0.00618
+paired contrast iii: mean=-0.04679 se=0.00484
+paired contrast values_first_values: mean=-0.01360 se=0.00429
+paired contrast values_first_competition: mean=-0.06185 se=0.00503
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+POST-HOC EXPLORATORY DIAGNOSTIC OF AN OBSERVED RUN; NOT A REGISTERED LABEL
+SECOND CAPABILITY, cell r1/AB
+effect of stage-1 rows on the second capability's read (not a retention loss; either sign): T2=s[b2]-s[a]=-0.12619 (i)=+0.10395 (ii)=-0.09314 (iii)=-0.13700 values first: -0.07156/-0.05464 interaction=-0.06545
+stage 2 switched off (trained keys) e(1) on E_second: s=0.1473 s[a]-s[e1]=+0.29493 G=0.0299
+paired contrast T: mean=-0.12619 se=0.00660
+paired contrast i: mean=+0.10395 se=0.00634
+paired contrast ii: mean=-0.09314 se=0.00689
+paired contrast iii: mean=-0.13700 se=0.00674
+paired contrast values_first_values: mean=-0.07156 se=0.00621
+paired contrast values_first_competition: mean=-0.05464 se=0.00488
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+POST-HOC EXPLORATORY DIAGNOSTIC OF AN OBSERVED RUN; NOT A REGISTERED LABEL
+SECOND CAPABILITY, cell r1/BA
+effect of stage-1 rows on the second capability's read (not a retention loss; either sign): T2=s[b2]-s[a]=-0.13104 (i)=+0.14804 (ii)=-0.21162 (iii)=-0.06746 values first: -0.05529/-0.07576 interaction=-0.01218
+stage 2 switched off (trained keys) e(1) on E_second: s=0.1411 s[a]-s[e1]=+0.30790 G=-0.0001
+paired contrast T: mean=-0.13104 se=0.00642
+paired contrast i: mean=+0.14804 se=0.00659
+paired contrast ii: mean=-0.21162 se=0.00695
+paired contrast iii: mean=-0.06746 se=0.00529
+paired contrast values_first_values: mean=-0.05529 se=0.00555
+paired contrast values_first_competition: mean=-0.07576 se=0.00507
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+POST-HOC EXPLORATORY DIAGNOSTIC OF AN OBSERVED RUN; NOT A REGISTERED LABEL
+SECOND CAPABILITY, cell r2/AB
+effect of stage-1 rows on the second capability's read (not a retention loss; either sign): T2=s[b2]-s[a]=-0.09022 (i)=+0.16436 (ii)=-0.19948 (iii)=-0.05510 values first: -0.02775/-0.06247 interaction=-0.02735
+stage 2 switched off (trained keys) e(1) on E_second: s=0.1514 s[a]-s[e1]=+0.28000 G=0.0364
+paired contrast T: mean=-0.09022 se=0.00648
+paired contrast i: mean=+0.16436 se=0.00663
+paired contrast ii: mean=-0.19948 se=0.00727
+paired contrast iii: mean=-0.05510 se=0.00592
+paired contrast values_first_values: mean=-0.02775 se=0.00537
+paired contrast values_first_competition: mean=-0.06247 se=0.00543
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+POST-HOC EXPLORATORY DIAGNOSTIC OF AN OBSERVED RUN; NOT A REGISTERED LABEL
+SECOND CAPABILITY, cell r2/BA
+effect of stage-1 rows on the second capability's read (not a retention loss; either sign): T2=s[b2]-s[a]=-0.09830 (i)=+0.11687 (ii)=-0.15253 (iii)=-0.06264 values first: -0.03320/-0.06510 interaction=-0.02944
+stage 2 switched off (trained keys) e(1) on E_second: s=0.1608 s[a]-s[e1]=+0.28358 G=0.0323
+paired contrast T: mean=-0.09830 se=0.00586
+paired contrast i: mean=+0.11687 se=0.00596
+paired contrast ii: mean=-0.15253 se=0.00637
+paired contrast iii: mean=-0.06264 se=0.00546
+paired contrast values_first_values: mean=-0.03320 se=0.00505
+paired contrast values_first_competition: mean=-0.06510 se=0.00515
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+POST-HOC EXPLORATORY DIAGNOSTIC OF AN OBSERVED RUN; NOT A REGISTERED LABEL
+COUNTERFACTUAL RET ARITHMETIC (not RET), cell r0/AB
+read c: COUNTERFACTUAL RET ARITHMETIC: DOES NOT HOLD (F=+0.23924 rho=0.2338 evaluable=True) beside second capability: cost s[a]-s[c]=+0.13879 G_second(c)=0.2674 (G_second(a)=0.4890); under g(2): cost=+0.04603 G_second(g2)=0.4155
+read g1: COUNTERFACTUAL RET ARITHMETIC: DOES NOT HOLD (F=+0.04662 rho=0.8507 evaluable=True) beside second capability: cost s[a]-s[c]=+0.13879 G_second(c)=0.2674 (G_second(a)=0.4890); under g(2): cost=+0.04603 G_second(g2)=0.4155
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+POST-HOC EXPLORATORY DIAGNOSTIC OF AN OBSERVED RUN; NOT A REGISTERED LABEL
+COUNTERFACTUAL RET ARITHMETIC (not RET), cell r0/BA
+read c: COUNTERFACTUAL RET ARITHMETIC: DOES NOT HOLD (F=+0.29415 rho=0.0628 evaluable=True) beside second capability: cost s[a]-s[c]=+0.12826 G_second(c)=0.3019 (G_second(a)=0.5129); under g(2): cost=+0.06185 G_second(g2)=0.4111
+read g1: COUNTERFACTUAL RET ARITHMETIC: DOES NOT HOLD (F=+0.05486 rho=0.8252 evaluable=True) beside second capability: cost s[a]-s[c]=+0.12826 G_second(c)=0.3019 (G_second(a)=0.5129); under g(2): cost=+0.06185 G_second(g2)=0.4111
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+POST-HOC EXPLORATORY DIAGNOSTIC OF AN OBSERVED RUN; NOT A REGISTERED LABEL
+COUNTERFACTUAL RET ARITHMETIC (not RET), cell r1/AB
+read c: COUNTERFACTUAL RET ARITHMETIC: DOES NOT HOLD (F=+0.19104 rho=0.3887 evaluable=True) beside second capability: cost s[a]-s[c]=+0.11830 G_second(c)=0.3119 (G_second(a)=0.5008); under g(2): cost=+0.05464 G_second(g2)=0.4136
+read g1: COUNTERFACTUAL RET ARITHMETIC: DOES NOT HOLD (F=+0.04280 rho=0.8630 evaluable=True) beside second capability: cost s[a]-s[c]=+0.11830 G_second(c)=0.3119 (G_second(a)=0.5008); under g(2): cost=+0.05464 G_second(g2)=0.4136
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+POST-HOC EXPLORATORY DIAGNOSTIC OF AN OBSERVED RUN; NOT A REGISTERED LABEL
+COUNTERFACTUAL RET ARITHMETIC (not RET), cell r1/BA
+read c: COUNTERFACTUAL RET ARITHMETIC: DOES NOT HOLD (F=+0.36678 rho=-0.1620 evaluable=True) beside second capability: cost s[a]-s[c]=+0.10969 G_second(c)=0.3259 (G_second(a)=0.5062); under g(2): cost=+0.07576 G_second(g2)=0.3816
+read g1: COUNTERFACTUAL RET ARITHMETIC: DOES NOT HOLD (F=+0.05729 rho=0.8185 evaluable=True) beside second capability: cost s[a]-s[c]=+0.10969 G_second(c)=0.3259 (G_second(a)=0.5062); under g(2): cost=+0.07576 G_second(g2)=0.3816
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+POST-HOC EXPLORATORY DIAGNOSTIC OF AN OBSERVED RUN; NOT A REGISTERED LABEL
+COUNTERFACTUAL RET ARITHMETIC (not RET), cell r2/AB
+read c: COUNTERFACTUAL RET ARITHMETIC: DOES NOT HOLD (F=+0.31509 rho=-0.0238 evaluable=True) beside second capability: cost s[a]-s[c]=+0.10348 G_second(c)=0.3183 (G_second(a)=0.4836); under g(2): cost=+0.06247 G_second(g2)=0.3838
+read g1: COUNTERFACTUAL RET ARITHMETIC: DOES NOT HOLD (F=+0.05746 rho=0.8133 evaluable=True) beside second capability: cost s[a]-s[c]=+0.10348 G_second(c)=0.3183 (G_second(a)=0.4836); under g(2): cost=+0.06247 G_second(g2)=0.3838
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+POST-HOC EXPLORATORY DIAGNOSTIC OF AN OBSERVED RUN; NOT A REGISTERED LABEL
+COUNTERFACTUAL RET ARITHMETIC (not RET), cell r2/BA
+read c: COUNTERFACTUAL RET ARITHMETIC: DOES NOT HOLD (F=+0.26513 rho=0.1587 evaluable=True) beside second capability: cost s[a]-s[c]=+0.11795 G_second(c)=0.3047 (G_second(a)=0.4987); under g(2): cost=+0.06510 G_second(g2)=0.3916
+read g1: COUNTERFACTUAL RET ARITHMETIC: DOES NOT HOLD (F=+0.05548 rho=0.8240 evaluable=True) beside second capability: cost s[a]-s[c]=+0.11795 G_second(c)=0.3047 (G_second(a)=0.4987); under g(2): cost=+0.06510 G_second(g2)=0.3916
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+POST-HOC EXPLORATORY DIAGNOSTIC OF AN OBSERVED RUN; NOT A REGISTERED LABEL
+SUMMARY WORDS (section 7; descriptive; none is a label)
+path order: MIXED
+values-first order: MIXED
+final wording: MIXED
+cells with T not positive (share undefined, never counted): []
+means beside the per-cell values: {"T": 0.06946701207277318, "i": 0.04411896264439422, "ii": -0.02474816862258165, "iii": 0.0500962180509606, "interaction": -0.002322589573252496, "values_first_competition": 0.01704820444856008, "values_first_values": 0.0524188076242131}
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+POST-HOC EXPLORATORY DIAGNOSTIC OF AN OBSERVED RUN; NOT A REGISTERED LABEL
+REGISTERED SCORES FOR SCALE (taken from Part T's registry; not recomputed), cell r0/AB
+first: S0=0.1412 TEACHER=0.7492 M1_registered=0.4534 M-append_registered=0.3815 M-sep=0.4534 E-table=0.4527 D-append=0.1473 D-seq=0.1551 D-sep=0.5298 M-seq=0.1806 M-ii=0.4555 M-joint=0.4740
+second: S0=0.1286 TEACHER=0.7548 M1_registered=0.1243 M-append_registered=0.4349 M-sep=0.4425 E-table=0.4579 D-append=0.4873 D-seq=0.5179 D-sep=0.5019 M-seq=0.4477 M-ii=0.4389 M-joint=0.4539
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+POST-HOC EXPLORATORY DIAGNOSTIC OF AN OBSERVED RUN; NOT A REGISTERED LABEL
+REGISTERED SCORES FOR SCALE (taken from Part T's registry; not recomputed), cell r0/BA
+first: S0=0.1286 TEACHER=0.7548 M1_registered=0.4425 M-append_registered=0.3796 M-sep=0.4425 E-table=0.4579 D-append=0.1421 D-seq=0.1510 D-sep=0.5019 M-seq=0.1287 M-ii=0.4458 M-joint=0.4539
+second: S0=0.1412 TEACHER=0.7492 M1_registered=0.1401 M-append_registered=0.4530 M-sep=0.4534 E-table=0.4527 D-append=0.5304 D-seq=0.5250 D-sep=0.5298 M-seq=0.4610 M-ii=0.4586 M-joint=0.4740
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+POST-HOC EXPLORATORY DIAGNOSTIC OF AN OBSERVED RUN; NOT A REGISTERED LABEL
+REGISTERED SCORES FOR SCALE (taken from Part T's registry; not recomputed), cell r1/AB
+first: S0=0.1412 TEACHER=0.7492 M1_registered=0.4537 M-append_registered=0.3856 M-sep=0.4537 E-table=0.4598 D-append=0.1566 D-seq=0.1609 D-sep=0.5290 M-seq=0.1673 M-ii=0.4608 M-joint=0.4594
+second: S0=0.1286 TEACHER=0.7548 M1_registered=0.1238 M-append_registered=0.4422 M-sep=0.4443 E-table=0.4466 D-append=0.4909 D-seq=0.5077 D-sep=0.5037 M-seq=0.4466 M-ii=0.4438 M-joint=0.4578
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+POST-HOC EXPLORATORY DIAGNOSTIC OF AN OBSERVED RUN; NOT A REGISTERED LABEL
+REGISTERED SCORES FOR SCALE (taken from Part T's registry; not recomputed), cell r1/BA
+first: S0=0.1286 TEACHER=0.7548 M1_registered=0.4443 M-append_registered=0.3887 M-sep=0.4443 E-table=0.4466 D-append=0.1463 D-seq=0.1504 D-sep=0.5037 M-seq=0.0989 M-ii=0.4439 M-joint=0.4578
+second: S0=0.1412 TEACHER=0.7492 M1_registered=0.1403 M-append_registered=0.4490 M-sep=0.4537 E-table=0.4598 D-append=0.5245 D-seq=0.5284 D-sep=0.5290 M-seq=0.4566 M-ii=0.4492 M-joint=0.4594
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+POST-HOC EXPLORATORY DIAGNOSTIC OF AN OBSERVED RUN; NOT A REGISTERED LABEL
+REGISTERED SCORES FOR SCALE (taken from Part T's registry; not recomputed), cell r2/AB
+first: S0=0.1412 TEACHER=0.7492 M1_registered=0.4489 M-append_registered=0.3769 M-sep=0.4489 E-table=0.4554 D-append=0.1464 D-seq=0.1496 D-sep=0.5386 M-seq=0.0009 M-ii=0.4566 M-joint=0.4622
+second: S0=0.1286 TEACHER=0.7548 M1_registered=0.1219 M-append_registered=0.4314 M-sep=0.4438 E-table=0.4390 D-append=0.4931 D-seq=0.4924 D-sep=0.4836 M-seq=0.4506 M-ii=0.4342 M-joint=0.4449
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+POST-HOC EXPLORATORY DIAGNOSTIC OF AN OBSERVED RUN; NOT A REGISTERED LABEL
+REGISTERED SCORES FOR SCALE (taken from Part T's registry; not recomputed), cell r2/BA
+first: S0=0.1286 TEACHER=0.7548 M1_registered=0.4438 M-append_registered=0.3573 M-sep=0.4438 E-table=0.4390 D-append=0.1435 D-seq=0.1511 D-sep=0.4836 M-seq=0.1101 M-ii=0.4354 M-joint=0.4449
+second: S0=0.1412 TEACHER=0.7492 M1_registered=0.1277 M-append_registered=0.4444 M-sep=0.4489 E-table=0.4554 D-append=0.5252 D-seq=0.5520 D-sep=0.5386 M-seq=0.4641 M-ii=0.4522 M-joint=0.4622

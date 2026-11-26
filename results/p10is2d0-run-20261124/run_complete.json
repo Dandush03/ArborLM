@@ -1,0 +1,8 @@
+{
+ "engineering_stop": false,
+ "finalize_commit": "ffd29d74b6c1ceb5599dd4427ecbbf1e6b8c9e04",
+ "launch_commit": "e74cbf25bac019156be34c0a51a416749a4da16a",
+ "note": "report step re-run after a rendering defect; lead decision 1",
+ "part_t_run_dir_changed": false,
+ "worker_hours": 7.714214141064699
+}

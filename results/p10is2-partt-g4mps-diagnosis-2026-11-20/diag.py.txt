@@ -1,0 +1,181 @@
+"""Diagnosis of the failed G4-MPS gate of the measuring rehearsal (no code, config or tolerance is changed; nothing under <run-dir>/sealed is opened; no evaluation item is scored).
+
+Part A: the gate's own construction (M1, replicate 0, order AB, 20 updates, the rehearsal world) with per-tensor norms, the growth of the difference per update, controls (CPU/CPU, MPS/MPS, CPU float32/float64)
+and the first-step gradients. Part B: seconds per update of every trained cell type on CPU and on MPS.
+Usage: python diag.py A|B
+"""
+
+import json
+import os
+import sys
+import time
+import warnings
+from pathlib import Path
+
+for k in ("OMP_NUM_THREADS", "MKL_NUM_THREADS", "VECLIB_MAXIMUM_THREADS"):
+    os.environ[k] = "6"
+REPO = Path("/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-acd0bce1f7811562f")
+RUN = Path("/Users/daniellaloush/dandush03/ArborLM/experiments/P10IS2-T-measuring-20261120")
+OUT = REPO / "experiments/_scratch/s2_g4mps"
+sys.path.insert(0, str(REPO))
+
+import torch  # noqa: E402
+
+from studies.p10is2 import engine, partt_real  # noqa: E402
+from studies.p10is2.common import core, gates  # noqa: E402
+from studies.p10is2.common import plan as planmod  # noqa: E402
+from studies.p10s2 import train as p10train  # noqa: E402
+
+part = sys.argv[1]
+cfg = core.load_config("T", REPO / core.CONFIG_T)
+gates.apply_platform_settings(cfg)
+plan = planmod.Plan.load(RUN / "measuring_plan.json", "T")
+qdir = partt_real.qdir_of(plan, Path("."))
+calib = partt_real.calibration_of(cfg, plan, "rehearsal", "measuring")
+t0 = time.time()
+w, _gloss, _q = partt_real.build_world_real(REPO, cfg, qdir, calib, "rehearsal", partt_real.door_of(plan, qdir))
+print(f"world built in {time.time() - t0:.0f} s; device {w.device}; torch {torch.__version__}; PYTORCH_ENABLE_MPS_FALLBACK={os.environ.get('PYTORCH_ENABLE_MPS_FALLBACK')}", flush=True)
+spec = engine.CellSpec("M1", "AB", 0)
+res: dict = {"torch": torch.__version__, "world_seconds": time.time() - t0, "fallback_env": os.environ.get("PYTORCH_ENABLE_MPS_FALLBACK"), "eps_adamw_default": 1e-8, "lr": None}
+
+
+def names_of(arm):  # type: ignore[no-untyped-def]
+    ids = {}
+    for attr in ("store", "adapter", "module"):
+        m = getattr(arm, attr, None)
+        if m is not None and hasattr(m, "named_parameters"):
+            ids.update({id(p): f"{attr}.{n}" for n, p in m.named_parameters()})
+    return [ids.get(id(p), f"param{i}") for i, p in enumerate(arm.trainable())]
+
+
+def run(dev, hist=False, dtype=None):  # type: ignore[no-untyped-def]
+    if dtype is not None:
+        torch.set_default_dtype(dtype)
+        w.student.to(dtype)
+    arm, rows, opts = engine.build_cell_arm(w, spec, None)
+    res["lr"] = float(opts["rate"])
+    names = names_of(arm)
+    init = [p.detach().cpu().clone().double() for p in arm.trainable()]
+    keep, w.device = w.device, dev
+    snaps: list = []
+    kw = {"snapshots": list(range(1, 21)), "on_snapshot": lambda u, a: snaps.append([p.detach().cpu().clone().double() for p in a.trainable()])} if hist else {}
+    with warnings.catch_warnings(record=True) as caught:
+        warnings.simplefilter("always")
+        try:
+            rec = engine.train_cell(w, spec, arm, rows, opts, 20, record_losses=20, **kw)
+        finally:
+            w.device = keep
+            if dtype is not None:
+                torch.set_default_dtype(torch.float32)
+                w.student.to(torch.float32)
+    mps_warn = sorted({str(c.message)[:160] for c in caught if "MPS" in str(c.message) or "mps" in str(c.message)})
+    assert rec["status"] == "COMPLETE", rec["error"]
+    return {"losses": rec["losses_head"], "final": [p.detach().cpu().clone().double() for p in arm.trainable()], "init": init, "snaps": snaps, "names": names, "warn": mps_warn}
+
+
+def rel(a, b):  # type: ignore[no-untyped-def]
+    return [float((x - y).norm() / y.norm().clamp_min(1e-30)) for x, y in zip(a, b, strict=True)]
+
+
+if part == "A":
+    t = time.time()
+    cpu = run(torch.device("cpu"), hist=True)
+    res["cpu_seconds_20_updates"] = time.time() - t
+    t = time.time()
+    mps = run(w.device, hist=True)
+    res["mps_seconds_20_updates"] = time.time() - t
+    res["mps_warnings"] = mps["warn"]
+    # 1. per tensor
+    rows = []
+    for i, n in enumerate(cpu["names"]):
+        pc, pm, p0 = cpu["final"][i], mps["final"][i], cpu["init"][i]
+        diff, nc, ch = float((pm - pc).norm()), float(pc.norm()), float((pc - p0).norm())
+        rows.append({"i": i, "name": n, "shape": list(pc.shape), "numel": pc.numel(), "norm_cpu": nc, "norm_init": float(p0.norm()), "diff_mps_cpu": diff, "change_cpu": ch, "rel_to_final": diff / max(nc, 1e-30), "rel_to_change": diff / max(ch, 1e-30)})
+    res["tensors"] = rows
+    # 2. growth per update and per-update loss differences
+    growth = []
+    for u in range(20):
+        r = rel(mps["snaps"][u], cpu["snaps"][u])
+        worst = max(range(len(r)), key=lambda j: r[j])
+        growth.append({"update": u + 1, "max_rel": max(r), "worst_tensor": cpu["names"][worst], "loss_cpu": cpu["losses"][u], "loss_mps": mps["losses"][u], "loss_diff": abs(cpu["losses"][u] - mps["losses"][u])})
+    res["growth"] = growth
+    res["gate_metric_reproduced"] = max(rel(mps["final"], cpu["final"]))
+    # elementwise structure of the worst tensor
+    worst = max(rows, key=lambda r: r["rel_to_final"])["i"]
+    pc, pm, p0 = cpu["final"][worst], mps["final"][worst], cpu["init"][worst]
+    d = (pm - pc).abs().flatten()
+    chg = (pc - p0).abs().flatten()
+    lr = res["lr"]
+    sat = chg > 0.5 * lr * 20
+    res["worst_tensor_elements"] = {"name": cpu["names"][worst], "numel": int(d.numel()), "lr": lr, "share_of_sq_diff_in_top_1pct_elements": float((d.sort(descending=True).values[: max(1, d.numel() // 100)] ** 2).sum() / (d**2).sum().clamp_min(1e-60)), "fraction_with_change_below_1e-9": float((chg < 1e-9).double().mean()), "fraction_elements_moved_over_half_lr_times_updates": float(sat.double().mean()), "mean_abs_diff": float(d.mean()), "max_abs_diff": float(d.max())}
+    # 3. controls
+    cpu2 = run(torch.device("cpu"))
+    res["control_cpu_cpu_max_rel"] = max(rel(cpu2["final"], cpu["final"]))
+    res["control_cpu_cpu_loss_diff"] = max(abs(a - b) for a, b in zip(cpu2["losses"], cpu["losses"], strict=True))
+    mps2 = run(w.device)
+    res["control_mps_mps_max_rel"] = max(rel(mps2["final"], mps["final"]))
+    res["control_mps_mps_loss_diff"] = max(abs(a - b) for a, b in zip(mps2["losses"], mps["losses"], strict=True))
+    res["control_mps_mps_per_tensor"] = rel(mps2["final"], mps["final"])
+    try:
+        f64 = run(torch.device("cpu"), dtype=torch.float64)
+        rr = rel(f64["final"], cpu["final"])
+        res["control_cpu_f32_vs_f64_max_rel"] = max(rr)
+        res["control_cpu_f32_vs_f64_per_tensor"] = rr
+        res["control_cpu_f32_vs_f64_loss_diff"] = max(abs(a - b) for a, b in zip(f64["losses"], cpu["losses"], strict=True))
+        res["control_mps_vs_f64_max_rel"] = max(rel(mps["final"], f64["final"]))
+    except Exception as e:  # noqa: BLE001
+        res["control_f64_error"] = f"{type(e).__name__}: {e}"[:300]
+    json.dump(res, open(OUT / "partA.json", "w"), indent=1)
+    print("part A written", flush=True)
+    # 4. first-step gradients on the same first batch, CPU against MPS
+    plan_s = w.plan(0)
+    arm0, rows0, opts0 = engine.build_cell_arm(w, spec, None)
+    batches = p10train.batch_plan(len(rows0), 20, w.batch, plan_s.gen(2, "batch order"))
+    ex = [rows0[i] for i in batches[0]]
+    grads = {}
+    for name, dev in (("cpu", torch.device("cpu")), ("mps", w.device)):
+        arm, _r, _o = engine.build_cell_arm(w, spec, None)
+        w.student.to(dev)
+        arm.to(dev)
+        loss = p10train.loss_of(w.student, arm, ex, w.marker_index, dev)
+        for p in arm.trainable():
+            p.grad = None
+        loss.backward()
+        grads[name] = (float(loss.detach().cpu()), [p.grad.detach().cpu().double().clone() for p in arm.trainable()])
+        arm.to(torch.device("cpu"))
+        w.student.to(torch.device("cpu"))
+    gl = []
+    for i, n in enumerate(cpu["names"]):
+        gc, gm = grads["cpu"][1][i], grads["mps"][1][i]
+        small = gc.abs() < 1e-8
+        sign_flip_small = ((gc.sign() != gm.sign()) & (gc.abs() < 1e-7)).double().sum()
+        gl.append({"name": n, "grad_norm_cpu": float(gc.norm()), "grad_rel_diff": float((gm - gc).norm() / gc.norm().clamp_min(1e-30)), "fraction_abs_grad_below_adam_eps_1e-8": float(small.double().mean()), "sign_disagreements_among_abs_grad_below_1e-7": float(sign_flip_small), "numel": gc.numel(), "max_abs_grad": float(gc.abs().max())})
+    res["first_step_gradients"] = {"loss_cpu": grads["cpu"][0], "loss_mps": grads["mps"][0], "tensors": gl}
+    json.dump(res, open(OUT / "partA.json", "w"), indent=1)
+    print("part A complete", flush=True)
+else:
+    def build_parent(sp):  # type: ignore[no-untyped-def]
+        if sp.parent is None:
+            return None
+        return engine.build_cell_arm(w, sp.parent, build_parent(sp.parent))[0]
+
+    out = []
+    for arm_name, order, cap in (("M1", "AB", ""), ("D1", "AB", ""), ("M-append", "AB", ""), ("M-seq", "AB", ""), ("M-ii", "AB", ""), ("D-append", "AB", ""), ("D-seq", "AB", ""), ("M-joint", "-", ""), ("D-joint", "-", ""), ("E-table", "-", "A")):
+        sp = engine.CellSpec(arm_name, order, 0, cap)
+        row = {"arm": arm_name}
+        for dname, dev in (("cpu", torch.device("cpu")), ("mps", w.device)):
+            walls = {}
+            for n in (2, 4):
+                parent = build_parent(sp)
+                arm, rows, opts = engine.build_cell_arm(w, sp, parent)
+                keep, w.device = w.device, dev
+                try:
+                    rec = engine.train_cell(w, sp, arm, rows, opts, n)
+                finally:
+                    w.device = keep
+                walls[n] = float(rec["wall_seconds"])
+            row[dname] = {"wall_2": walls[2], "wall_4": walls[4], "steady_seconds_per_update": (walls[4] - walls[2]) / 2.0}
+        out.append(row)
+        print(row, flush=True)
+        json.dump(out, open(OUT / "partB.json", "w"), indent=1)
+    print("part B complete", flush=True)

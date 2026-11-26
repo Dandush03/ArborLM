@@ -1,0 +1,97 @@
+{
+ "utc": "20261125T021419Z",
+ "tolerance": 1e-06,
+ "tasks_expected": 101,
+ "tasks_missing": [],
+ "task_seconds_sum": 56975.67670358089,
+ "counts": {
+  "item_records_stored": 468,
+  "item_records_compared": 468,
+  "sequences_compared": 219525,
+  "item_scores_compared": 241350,
+  "exact_flags_compared": 209525,
+  "texts_compared": 2625,
+  "edit1_flags_compared": 6000,
+  "gen_windows_compared": 8640,
+  "registry_keys": 592,
+  "registry_compared": 592,
+  "combined_records_stored": 38,
+  "combined_records_compared": 38,
+  "combined_item_ids_compared": 74000,
+  "combined_item_scores_compared": 74000,
+  "combined_single_sequences_compared": 37000,
+  "combined_means_compared": 304,
+  "rexact_hits_compared": 6
+ },
+ "maxima_abs_diff": {
+  "item_score": 4.440892098500626e-16,
+  "gen_nll_f32": 0.0,
+  "registry": 5.551115123125783e-17,
+  "combined_score": 3.3306690738754696e-16,
+  "combined_mean": 1.1102230246251565e-16
+ },
+ "float64_variant": {
+  "gen_window_max": 4.5201291002161526e-05,
+  "gen_window_over_tol": 17280,
+  "gen_value_max": 0.0,
+  "modification_max": 1.1426673748426985e-05,
+  "modification_over_tol": 6
+ },
+ "differences": 0,
+ "m_ii_rejected_by_my_dcon": [],
+ "mine_not_stored_item_keys": [],
+ "mine_not_in_registry": [
+  "E-table|-|0|em:E_A",
+  "E-table|-|0|em:E_B",
+  "E-table|-|1|em:E_A",
+  "E-table|-|1|em:E_B",
+  "E-table|-|2|em:E_A",
+  "E-table|-|2|em:E_B"
+ ],
+ "notes": [
+  {
+   "modification": "M-ii|AB|0|modification",
+   "registered": 0.6092991232872009,
+   "mine_f32": 0.6092991232872009,
+   "mine_f64": 0.6093080938664481,
+   "rows_changed_share_mine": 0.9970703125
+  },
+  {
+   "modification": "M-ii|BA|0|modification",
+   "registered": 0.6590895652770996,
+   "mine_f32": 0.6590895652770996,
+   "mine_f64": 0.6590857645991857,
+   "rows_changed_share_mine": 0.999267578125
+  },
+  {
+   "modification": "M-ii|AB|1|modification",
+   "registered": 0.6021572947502136,
+   "mine_f32": 0.6021572947502136,
+   "mine_f64": 0.602168721423962,
+   "rows_changed_share_mine": 0.9970703125
+  },
+  {
+   "modification": "M-ii|BA|1|modification",
+   "registered": 0.665758490562439,
+   "mine_f32": 0.665758490562439,
+   "mine_f64": 0.665755934219505,
+   "rows_changed_share_mine": 0.999267578125
+  },
+  {
+   "modification": "M-ii|AB|2|modification",
+   "registered": 0.6074060201644897,
+   "mine_f32": 0.6074060201644897,
+   "mine_f64": 0.607412750336973,
+   "rows_changed_share_mine": 0.998046875
+  },
+  {
+   "modification": "M-ii|BA|2|modification",
+   "registered": 0.6539234519004822,
+   "mine_f32": 0.6539234519004822,
+   "mine_f64": 0.6539174956005436,
+   "rows_changed_share_mine": 0.999755859375
+  }
+ ],
+ "verdict_float32_variant": "RECOMPUTATION AGREES",
+ "difference_list": []
+}

@@ -1,0 +1,102 @@
+{
+ "largest_deviation": 0.0,
+ "pass": true,
+ "passes": {
+  "G|0|AB|M1|first": {
+   "largest_deviation": 0.0,
+   "pass": true
+  },
+  "G|0|AB|append|first": {
+   "largest_deviation": 0.0,
+   "pass": true
+  },
+  "G|0|AB|final|first": {
+   "largest_deviation": 0.0,
+   "pass": true
+  },
+  "G|0|AB|final|second": {
+   "largest_deviation": 0.0,
+   "pass": true
+  },
+  "G|0|BA|M1|first": {
+   "largest_deviation": 0.0,
+   "pass": true
+  },
+  "G|0|BA|append|first": {
+   "largest_deviation": 0.0,
+   "pass": true
+  },
+  "G|0|BA|final|first": {
+   "largest_deviation": 0.0,
+   "pass": true
+  },
+  "G|0|BA|final|second": {
+   "largest_deviation": 0.0,
+   "pass": true
+  },
+  "G|1|AB|M1|first": {
+   "largest_deviation": 0.0,
+   "pass": true
+  },
+  "G|1|AB|append|first": {
+   "largest_deviation": 0.0,
+   "pass": true
+  },
+  "G|1|AB|final|first": {
+   "largest_deviation": 0.0,
+   "pass": true
+  },
+  "G|1|AB|final|second": {
+   "largest_deviation": 0.0,
+   "pass": true
+  },
+  "G|1|BA|M1|first": {
+   "largest_deviation": 0.0,
+   "pass": true
+  },
+  "G|1|BA|append|first": {
+   "largest_deviation": 0.0,
+   "pass": true
+  },
+  "G|1|BA|final|first": {
+   "largest_deviation": 0.0,
+   "pass": true
+  },
+  "G|1|BA|final|second": {
+   "largest_deviation": 0.0,
+   "pass": true
+  },
+  "G|2|AB|M1|first": {
+   "largest_deviation": 0.0,
+   "pass": true
+  },
+  "G|2|AB|append|first": {
+   "largest_deviation": 0.0,
+   "pass": true
+  },
+  "G|2|AB|final|first": {
+   "largest_deviation": 0.0,
+   "pass": true
+  },
+  "G|2|AB|final|second": {
+   "largest_deviation": 0.0,
+   "pass": true
+  },
+  "G|2|BA|M1|first": {
+   "largest_deviation": 0.0,
+   "pass": true
+  },
+  "G|2|BA|append|first": {
+   "largest_deviation": 0.0,
+   "pass": true
+  },
+  "G|2|BA|final|first": {
+   "largest_deviation": 0.0,
+   "pass": true
+  },
+  "G|2|BA|final|second": {
+   "largest_deviation": 0.0,
+   "pass": true
+  }
+ }
+}

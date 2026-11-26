@@ -77,8 +77,8 @@ class SeedPlanT:
 
     def route_pieces_gen(self) -> torch.Generator:
         """The generator that draws the 200 WikiText-2 train pieces of the route accuracy on general text: the listed seed 250918 in a registered run; in any other mode the replicate's router stream (250918 is a registered-mode seed)."""
-        seed = int(self.cfg["seeds"]["route_accuracy_pieces"]) if self.mode == "registered" else int(self.values["data"]["router"])
-        return core.seeded_generator(seed, "route accuracy pieces", self.allowed | ({seed} if self.mode == "registered" else set()))
+        seed = int(self.values["route_pieces"])
+        return core.seeded_generator(seed, "route accuracy pieces", self.allowed | {seed})
 
     def code_seed(self) -> int:
         return int(self.values["data"]["code_hash"])
@@ -122,8 +122,14 @@ def build_world_t(bundle: DataBundle, cfg: Mapping[str, Any], draws: Sequence[Ma
     w.cfg_t, w.plan_mode, w.extra_seeds = cfg, plan_mode, tuple(extra_seeds)
     w.streams = [Streams({c: list(d[c]) for c in core.TASKS}, {c: [] for c in core.TASKS}) for d in draws]  # type: ignore[assignment]
     w.replicates = len(draws)
-    n_seen = 300
-    w.seen_items = [{c: [x for x in s.t[c]][:n_seen] for c in core.TASKS} for s in w.streams]  # type: ignore[attr-defined]
+    n_seen = int(cfg["data"]["seen_items"])
+    w.seen_items = []
+    for s in w.streams:  # the seen items are Part Q's seed-250912 order (stored in the bundle) restricted to the replicate's draw, not the first 300 of the draw (audit A4)
+        per: dict[str, list[TrainItem]] = {}
+        for c in core.TASKS:
+            in_draw = {x.key: x for x in s.t[c]}
+            per[c] = [in_draw[k] for k in bundle.seen_order[c] if k in in_draw][:n_seen]
+        w.seen_items.append(per)  # type: ignore[attr-defined]
     return w
 
 
@@ -194,6 +200,9 @@ def load_t(world: WorldT, r: int, directory: Path, name: str) -> Arm:
 
     from arborlm.io import file_sha256
 
+    alias = getattr(world, "snapshot_alias", None)  # a rehearsal reads the cells it did not train from the trained cell of the same arm (partt_rehearsal.AliasMap); a registered world has none
+    if alias is not None:
+        name = alias.get(name, name)
     safe = name.replace("/", "__").replace("@", "_at_")
     data, manifest = directory / f"{safe}.pt", directory / f"{safe}.manifest.json"
     m = json.loads(manifest.read_text())

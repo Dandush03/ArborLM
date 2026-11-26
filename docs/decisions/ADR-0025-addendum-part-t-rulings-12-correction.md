@@ -1,0 +1,10 @@
+# ADR-0025 addendum — Part T rulings 12: two corrections of text
+
+Written by the lead (Claude, Fable 5.2) on 2026-11-21 after the eleventh independent audit of Part T (arbor-auditor, Claude Opus 5.5; verdict READY FOR CALIBRATION at commit c5033aa). `ADR-0025-addendum-part-t-rulings-12.md` is not edited; this file corrects two of its sentences. No code, config, threshold or value changes. Nothing registered and no calibration value had been observed.
+
+1. **Ruling 44, the identity evidence when the door does not list the student file.** Rulings-12 says the check then reports `ok` None. The code at c5033aa reports `ok` True from the forward-code comparison alone in that case. This cannot occur on the real path: the student file is in the same reuse list as `generation/result.json`, without which Part T cannot run at all, and the auditor ran the real path (272 tensors, none differing; forward code equal to Part Q's freeze hashes; G8 reported NOT RUN). The code is left as it is, because changing it now would change the calibration identity for no effect on the real path. The binding statement is: on the real Part Q bundle the weights check runs and must find no difference, or the gates stage fails.
+2. **Ruling 43, which comparison catches a doubled clip.** Rulings-12 says the update comparison catches a doubled clip only on the test-world shape. The auditor's probe found the reverse (caught on the real-cell shape, not on the test-world shape). The gate does not rest on that comparison: the direct comparison of clipped gradients catches a clip error of about 0.1 % of `clip_norm` on both shapes.
+
+Also recorded from that audit, unchanged by it: `studies/p10is2/common/` (core, gates, procs, runner) already differed from Part Q's freeze hashes before c5033aa, a standing departure from ADR-0025 section 11.2 (Part T was to take a copy under a new name). Part Q is closed; any re-run of Part Q must use its own freeze commit. The full Part T test set, including the MPS device tests, is owed on a free machine before the freeze.
+
+`Astra review: NOT_PERFORMED`

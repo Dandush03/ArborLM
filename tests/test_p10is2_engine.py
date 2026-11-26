@@ -112,7 +112,7 @@ def test_a_code_error_is_recorded_with_its_cause(tmp_path: Path, monkeypatch: py
 
 def test_seed_plan_serves_only_listed_offsets_and_roles() -> None:
     plan = engine.SeedPlanT(CFG_T, "test", 0)
-    assert plan.init_seed("D1") == 330298 + 3 and plan.code_seed() == 934001 + 10
+    assert plan.init_seed("D1") == 330281 + 3 and plan.code_seed() == 934001 + 10
     with pytest.raises(core.SeedRefused):
         plan.gen(7, "x")
     with pytest.raises(core.SeedRefused):
