@@ -1,0 +1,246 @@
+PART 1. M1 scripts in the tree of b78e58b1 (70 .py files under studies/m0/m1_* and the M1 audit folders)
+  columns: draws-items | names-rules | seeds-in-text | first-commit | path
+  D -                      7  a325156e  docs/reviews/m0-lineage-decision-2026-11-25/audit3_m1/capacity_a3.py
+  D -                      -  a325156e  docs/reviews/m0-lineage-decision-2026-11-25/audit3_m1/capacity_clusters_a3.py
+  - -                      -  a325156e  docs/reviews/m0-lineage-decision-2026-11-25/audit3_m1/check_fixtures_a3.py
+  D -                      3  a325156e  docs/reviews/m0-lineage-decision-2026-11-25/audit3_m1/check_keys_a3.py
+  D -                      -  a325156e  docs/reviews/m0-lineage-decision-2026-11-25/audit3_m1/common_a3.py
+  D R                      9  a325156e  docs/reviews/m0-lineage-decision-2026-11-25/audit3_m1/digit_puzzle_extra_a3.py
+  D -                      9  a325156e  docs/reviews/m0-lineage-decision-2026-11-25/audit3_m1/failing_first_a3.py
+  D R                      -  a325156e  docs/reviews/m0-lineage-decision-2026-11-25/audit3_m1/short_summary_a3.py
+  D R                      5  a325156e  docs/reviews/m0-lineage-decision-2026-11-25/audit3_m1/shortcuts_a3.py
+  D R                      5  a325156e  docs/reviews/m0-lineage-decision-2026-11-25/audit3_m1/shortcuts_a3_attempt1.py
+  D -                      -  a325156e  docs/reviews/m0-lineage-decision-2026-11-25/audit3_m1/solve_text_a3.py
+  D -                     23  03233114  docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/capacity_a4.py
+  D -                      -  03233114  docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/capacity_clusters_a4.py
+  D -                     11  03233114  docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/check_keys_a4.py
+  D -                      -  03233114  docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/common_a4.py
+  - -                      -  03233114  docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/cross_eval_present_a4.py
+  D -                      -  03233114  docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/exact_a4.py
+  - -                     13  03233114  docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/level_noop_before_a4.py
+  D -                     13  03233114  docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/level_profile_a4.py
+  D R                      -  03233114  docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/short_summary_a4.py
+  D R                     17  03233114  docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/shortcuts_a4.py
+  D R                     17  03233114  docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/shortcuts_a4_attempt1.py
+  D R                      -  03233114  docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/solve_text_a4.py
+  D R                     29  03233114  docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/subclass_a4.py
+  D R                      -  9e32b317  docs/reviews/m0-lineage-decision-2026-11-25/audit_m1/audit_solvers.py
+  D R                      -  9e32b317  docs/reviews/m0-lineage-decision-2026-11-25/audit_m1/audit_solvers_attempt1.py
+  D -                 777005  9e32b317  docs/reviews/m0-lineage-decision-2026-11-25/audit_m1/capacity_audit.py
+  D -                 777005  9e32b317  docs/reviews/m0-lineage-decision-2026-11-25/audit_m1/capacity_audit_v2.py
+  D -                      -  9e32b317  docs/reviews/m0-lineage-decision-2026-11-25/audit_m1/check_fixtures.py
+  - -                      -  9e32b317  docs/reviews/m0-lineage-decision-2026-11-25/audit_m1/fixture_dups.py
+  - -                      -  9e32b317  docs/reviews/m0-lineage-decision-2026-11-25/audit_m1/fixture_dups_v2.py
+  D R                      -  9e32b317  docs/reviews/m0-lineage-decision-2026-11-25/audit_m1/overshoot_audit.py
+  D R                      -  9e32b317  docs/reviews/m0-lineage-decision-2026-11-25/audit_m1/pairs_table.py
+  D -                 777001  9e32b317  docs/reviews/m0-lineage-decision-2026-11-25/audit_m1/render_samples.py
+  D -                      -  9e32b317  docs/reviews/m0-lineage-decision-2026-11-25/audit_m1/shape_mix.py
+  D R                 777003  9e32b317  docs/reviews/m0-lineage-decision-2026-11-25/audit_m1/shortcuts_audit.py
+  D R                      -  9e32b317  docs/reviews/m0-lineage-decision-2026-11-25/audit_m1/shortcuts_summarise.py
+  D R                      -  9e32b317  docs/reviews/m0-lineage-decision-2026-11-25/audit_m1/shortcuts_summarise_v2.py
+  D -                      -  b78e58b1  docs/reviews/m0-lineage-decision-2026-11-25/final_m1/asks_a5.py
+  D R                      -  b78e58b1  docs/reviews/m0-lineage-decision-2026-11-25/final_m1/build_final_a5.py
+  D -                      -  b78e58b1  docs/reviews/m0-lineage-decision-2026-11-25/final_m1/cap_cascade_a5.py
+  D R                      -  b78e58b1  docs/reviews/m0-lineage-decision-2026-11-25/final_m1/cap_summary_a5.py
+  D -                      -  b78e58b1  docs/reviews/m0-lineage-decision-2026-11-25/final_m1/capacity_a5.py
+  D -                      -  b78e58b1  docs/reviews/m0-lineage-decision-2026-11-25/final_m1/check_keys_a5.py
+  D R                      -  b78e58b1  docs/reviews/m0-lineage-decision-2026-11-25/final_m1/compare_repro_a5.py
+  D -                      -  b78e58b1  docs/reviews/m0-lineage-decision-2026-11-25/final_m1/exclusion_a5.py
+  D R                      -  b78e58b1  docs/reviews/m0-lineage-decision-2026-11-25/final_m1/fm1_common.py
+  D -                      -  b78e58b1  docs/reviews/m0-lineage-decision-2026-11-25/final_m1/levels_a5.py
+  D R    17,2611252,410302,5  b78e58b1  docs/reviews/m0-lineage-decision-2026-11-25/final_m1/pool_a5.py
+  D -                      -  b78e58b1  docs/reviews/m0-lineage-decision-2026-11-25/final_m1/repro_a5.py
+  D R                   17,5  b78e58b1  docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5.py
+  D R                   17,5  b78e58b1  docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5_attempt1.py
+  - R                      -  b78e58b1  docs/reviews/m0-lineage-decision-2026-11-25/final_m1/solve_text_a5.py
+  - R                      -  b78e58b1  docs/reviews/m0-lineage-decision-2026-11-25/final_m1/solve_text_a5_attempt1.py
+  D -                      -  b78e58b1  docs/reviews/m0-lineage-decision-2026-11-25/final_m1/templates_a5.py
+  D R                      -  1b33b7b2  studies/m0/m1_batch1_gates.py
+  D R                 410303  a790e503  studies/m0/m1_fix3_build.py
+  D R                      -  a790e503  studies/m0/m1_fix3_checks.py
+  D R                      -  a790e503  studies/m0/m1_fix3_failing_first.py
+  D -                 410301  a790e503  studies/m0/m1_fix3_gates.py
+  D R                 410302  a790e503  studies/m0/m1_fix3_shortcuts.py
+  - R                      -  a790e503  studies/m0/m1_fix3_verify.py
+  D R                      -  7cd0ac5a  studies/m0/m1_fix4_battery.py
+  D R                 400004  7cd0ac5a  studies/m0/m1_fix4_capacity.py
+  D R                      -  7cd0ac5a  studies/m0/m1_fix4_checks.py
+  D R                   4001  7cd0ac5a  studies/m0/m1_fix4_survivors.py
+  - -                      -  7cd0ac5a  studies/m0/m1_fix4_verify.py
+  D R                 777105  163fa419  studies/m0/m1_rev2_gates.py
+  D R                 953703  1b33b7b2  studies/m0/m1_shortcut_check.py
+  D R                 777103  163fa419  studies/m0/m1_shortcut_check_rev2.py
+
+  proxy 'draws items AND names rules': 35 scripts. The proxy is not the text's test; REVIEW.md scope 2 gives the judgement each needs.
+
+PART 2. point 1: where each proxy rule script is mentioned (a mention is not yet a record of command + seed + N)
+  docs/reviews/m0-lineage-decision-2026-11-25/audit3_m1/digit_puzzle_extra_a3.py
+     named record files mentioning it: 1  ['audit3_m1/AUDIT3_M1.md']
+     NOT-named files mentioning it   : 0  []
+     own text has a Run/Usage line   : False
+  docs/reviews/m0-lineage-decision-2026-11-25/audit3_m1/short_summary_a3.py
+     named record files mentioning it: 1  ['audit3_m1/AUDIT3_M1.md']
+     NOT-named files mentioning it   : 0  []
+     own text has a Run/Usage line   : False
+  docs/reviews/m0-lineage-decision-2026-11-25/audit3_m1/shortcuts_a3.py
+     named record files mentioning it: 3  ['audit3_m1/AUDIT3_M1.md', 'final_m1/FINAL_M1.md', 'studies/m0/NOTES_FIX4_M1.md']
+     NOT-named files mentioning it   : 0  []
+     own text has a Run/Usage line   : True
+  docs/reviews/m0-lineage-decision-2026-11-25/audit3_m1/shortcuts_a3_attempt1.py
+     named record files mentioning it: 1  ['audit3_m1/AUDIT3_M1.md']
+     NOT-named files mentioning it   : 0  []
+     own text has a Run/Usage line   : True
+  docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/short_summary_a4.py
+     named record files mentioning it: 1  ['audit4_m1/AUDIT4_M1.md']
+     NOT-named files mentioning it   : 0  []
+     own text has a Run/Usage line   : True
+  docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/shortcuts_a4.py
+     named record files mentioning it: 3  ['audit4_m1/AUDIT4_M1.md', 'final_m1/FINAL_M1.md', 'studies/m0/NOTES_FIX4_M1.md']
+     NOT-named files mentioning it   : 0  []
+     own text has a Run/Usage line   : True
+  docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/shortcuts_a4_attempt1.py
+     named record files mentioning it: 1  ['audit4_m1/AUDIT4_M1.md']
+     NOT-named files mentioning it   : 0  []
+     own text has a Run/Usage line   : True
+  docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/solve_text_a4.py
+     named record files mentioning it: 3  ['audit4_m1/AUDIT4_M1.md', 'final_m1/FINAL_M1.md', 'studies/m0/NOTES_FIX4_M1.md']
+     NOT-named files mentioning it   : 0  []
+     own text has a Run/Usage line   : False
+  docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/subclass_a4.py
+     named record files mentioning it: 1  ['audit4_m1/AUDIT4_M1.md']
+     NOT-named files mentioning it   : 0  []
+     own text has a Run/Usage line   : True
+  docs/reviews/m0-lineage-decision-2026-11-25/audit_m1/audit_solvers.py
+     named record files mentioning it: 2  ['audit_m1/AUDIT_M0_M1_1.md', 'audit_m1/JUDGEMENT_2_quality_shortcuts_capacity.txt']
+     NOT-named files mentioning it   : 0  []
+     own text has a Run/Usage line   : False
+  docs/reviews/m0-lineage-decision-2026-11-25/audit_m1/audit_solvers_attempt1.py
+     named record files mentioning it: 0  []
+     NOT-named files mentioning it   : 0  []
+     own text has a Run/Usage line   : False
+  docs/reviews/m0-lineage-decision-2026-11-25/audit_m1/overshoot_audit.py
+     named record files mentioning it: 1  ['audit_m1/AUDIT_M0_M1_1.md']
+     NOT-named files mentioning it   : 0  []
+     own text has a Run/Usage line   : False
+  docs/reviews/m0-lineage-decision-2026-11-25/audit_m1/pairs_table.py
+     named record files mentioning it: 1  ['audit_m1/AUDIT_M0_M1_1.md']
+     NOT-named files mentioning it   : 0  []
+     own text has a Run/Usage line   : True
+  docs/reviews/m0-lineage-decision-2026-11-25/audit_m1/shortcuts_audit.py
+     named record files mentioning it: 1  ['audit_m1/AUDIT_M0_M1_1.md']
+     NOT-named files mentioning it   : 0  []
+     own text has a Run/Usage line   : False
+  docs/reviews/m0-lineage-decision-2026-11-25/audit_m1/shortcuts_summarise.py
+     named record files mentioning it: 1  ['audit_m1/AUDIT_M0_M1_1.md']
+     NOT-named files mentioning it   : 0  []
+     own text has a Run/Usage line   : True
+  docs/reviews/m0-lineage-decision-2026-11-25/audit_m1/shortcuts_summarise_v2.py
+     named record files mentioning it: 1  ['audit_m1/AUDIT_M0_M1_1.md']
+     NOT-named files mentioning it   : 0  []
+     own text has a Run/Usage line   : True
+  docs/reviews/m0-lineage-decision-2026-11-25/final_m1/build_final_a5.py
+     named record files mentioning it: 1  ['final_m1/FINAL_M1.md']
+     NOT-named files mentioning it   : 0  []
+     own text has a Run/Usage line   : False
+  docs/reviews/m0-lineage-decision-2026-11-25/final_m1/cap_summary_a5.py
+     named record files mentioning it: 1  ['final_m1/FINAL_M1.md']
+     NOT-named files mentioning it   : 0  []
+     own text has a Run/Usage line   : False
+  docs/reviews/m0-lineage-decision-2026-11-25/final_m1/compare_repro_a5.py
+     named record files mentioning it: 1  ['final_m1/FINAL_M1.md']
+     NOT-named files mentioning it   : 0  []
+     own text has a Run/Usage line   : False
+  docs/reviews/m0-lineage-decision-2026-11-25/final_m1/fm1_common.py
+     named record files mentioning it: 0  []
+     NOT-named files mentioning it   : 0  []
+     own text has a Run/Usage line   : False
+  docs/reviews/m0-lineage-decision-2026-11-25/final_m1/pool_a5.py
+     named record files mentioning it: 1  ['final_m1/FINAL_M1.md']
+     NOT-named files mentioning it   : 0  []
+     own text has a Run/Usage line   : False
+  docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5.py
+     named record files mentioning it: 1  ['final_m1/FINAL_M1.md']
+     NOT-named files mentioning it   : 0  []
+     own text has a Run/Usage line   : False
+  docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5_attempt1.py
+     named record files mentioning it: 1  ['final_m1/FINAL_M1.md']
+     NOT-named files mentioning it   : 0  []
+     own text has a Run/Usage line   : False
+  studies/m0/m1_batch1_gates.py
+     named record files mentioning it: 0  []
+     NOT-named files mentioning it   : 1  ['studies/m0/manifests/m1_batch1_manifest.json']
+     own text has a Run/Usage line   : True
+  studies/m0/m1_fix3_build.py
+     named record files mentioning it: 0  []
+     NOT-named files mentioning it   : 2  ['studies/m0/NOTES_FIX3_M1.md', 'studies/m0/manifests/m1_fix3_manifest.json']
+     own text has a Run/Usage line   : True
+  studies/m0/m1_fix3_checks.py
+     named record files mentioning it: 0  []
+     NOT-named files mentioning it   : 1  ['studies/m0/NOTES_FIX3_M1.md']
+     own text has a Run/Usage line   : False
+  studies/m0/m1_fix3_failing_first.py
+     named record files mentioning it: 1  ['audit4_m1/AUDIT4_M1.md']
+     NOT-named files mentioning it   : 1  ['studies/m0/NOTES_FIX3_M1.md']
+     own text has a Run/Usage line   : True
+  studies/m0/m1_fix3_shortcuts.py
+     named record files mentioning it: 1  ['final_m1/FINAL_M1.md']
+     NOT-named files mentioning it   : 2  ['studies/m0/NOTES_FIX3_M1.md', 'studies/m0/manifests/m1_fix3_manifest.json']
+     own text has a Run/Usage line   : True
+  studies/m0/m1_fix4_battery.py
+     named record files mentioning it: 1  ['studies/m0/NOTES_FIX4_M1.md']
+     NOT-named files mentioning it   : 0  []
+     own text has a Run/Usage line   : True
+  studies/m0/m1_fix4_capacity.py
+     named record files mentioning it: 1  ['studies/m0/NOTES_FIX4_M1.md']
+     NOT-named files mentioning it   : 0  []
+     own text has a Run/Usage line   : False
+  studies/m0/m1_fix4_checks.py
+     named record files mentioning it: 1  ['studies/m0/NOTES_FIX4_M1.md']
+     NOT-named files mentioning it   : 0  []
+     own text has a Run/Usage line   : False
+  studies/m0/m1_fix4_survivors.py
+     named record files mentioning it: 1  ['studies/m0/NOTES_FIX4_M1.md']
+     NOT-named files mentioning it   : 0  []
+     own text has a Run/Usage line   : False
+  studies/m0/m1_rev2_gates.py
+     named record files mentioning it: 3  ['audit3_r1/AUDIT3_R1.md', 'audit4_r1/AUDIT4_R1.md', 'studies/m0/NOTES_FIX4_M1.md']
+     NOT-named files mentioning it   : 4  ['studies/m0/NOTES_FIX3_M1.md', 'studies/m0/NOTES_FIX3_R1.md', 'studies/m0/NOTES_FIX3_R2.md', 'studies/m0/manifests/m1_batch1_rev2_manifest.json']
+     own text has a Run/Usage line   : True
+  studies/m0/m1_shortcut_check.py
+     named record files mentioning it: 0  []
+     NOT-named files mentioning it   : 2  ['studies/m0/manifests/m1_batch1_manifest.json', 'studies/m0/manifests/m1_batch1_rev2_manifest.json']
+     own text has a Run/Usage line   : True
+  studies/m0/m1_shortcut_check_rev2.py
+     named record files mentioning it: 0  []
+     NOT-named files mentioning it   : 1  ['studies/m0/manifests/m1_batch1_rev2_manifest.json']
+     own text has a Run/Usage line   : True
+
+PART 3. point 5, first class: files of the M1 record whose names carry attempt / FAILED / SLIP / _try / _v1
+   docs/reviews/m0-lineage-decision-2026-11-25/audit3_m1/shortcuts_a3_attempt1.py
+   docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/shortcuts_a4_attempt1.py
+   docs/reviews/m0-lineage-decision-2026-11-25/audit_m1/audit_solvers_attempt1.py
+   docs/reviews/m0-lineage-decision-2026-11-25/audit_m1/fixture_check_attempt1.txt
+   docs/reviews/m0-lineage-decision-2026-11-25/audit_m1/fixture_check_attempt2.txt
+   docs/reviews/m0-lineage-decision-2026-11-25/final_m1/compare_repro_attempt1.txt
+   docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5_attempt1.py
+   docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_repro_n2000_attempt1.json
+   docs/reviews/m0-lineage-decision-2026-11-25/final_m1/solve_text_a5_attempt1.py
+  files named in the text for M1: audit3_m1/shortcuts_a3_attempt1.py; audit4_m1/shortcuts_a4_attempt1.py + short_trial_n200.json; final_m1/rules_a5_attempt1.py + rules_repro_n2000_attempt1.json
+   in the tree of b78e58b1: audit4_m1/short_trial_n200.json: False
+   in the tree of b78e58b1: audit3_m1/short_trial_n200.json: False
+   in the tree of b78e58b1: final_m1/rules_repro_n2000_attempt1.json: True
+  headers naming a superseded version or a kept attempt (point 5: 'every header or report that names a superseded version'):
+    docs/reviews/m0-lineage-decision-2026-11-25/audit3_m1/shortcuts_a3.py: 'attempt 1 kept'
+    docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/shortcuts_a4.py: 'ATTEMPT 2'
+
+PART 4. point 4(b) static proxy: did any M1 generator file or core.py change between a round's commit and 7cd0ac5a?
+  1b33b7b2 M1 batch 1 (implementer screen m1_shortcut_check.py): generator files present then and changed by 7cd0ac5a: none; added since: 10
+  9e32b317 first audits (audit_m1/shortcuts_audit.py): generator files present then and changed by 7cd0ac5a: none; added since: 10
+  163fa419 M1 fix round rev2 (m1_shortcut_check_rev2.py): generator files present then and changed by 7cd0ac5a: none; added since: 8
+  a325156e third audits (audit3_m1): generator files present then and changed by 7cd0ac5a: none; added since: 8
+  a790e503 M1 fix round 3 (m1_fix3_shortcuts.py): generator files present then and changed by 7cd0ac5a: ['studies/m0/lineages_m1_fix3_c.py']; added since: 2
+  03233114 fourth audits (audit4_m1): generator files present then and changed by 7cd0ac5a: ['studies/m0/lineages_m1_fix3_c.py']; added since: 2
+  M1.tiered_pricing (carried over unchanged since batch 1) is defined in: ['studies/m0/lineages_m1_pricing.py']
+  -> static proxy only; byte identity of items, as point 4(b) asks, needs execution at both trees (not done here).
+
+PART 5. nothing here is a rate, a pooled figure or a status.

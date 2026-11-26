@@ -1,0 +1,20 @@
+PART 1. derived integers
+  drafter's made-up example, base name
+    '400002|cheap-rule|example_rules.py' -> 1035349750409085599
+  drafter's made-up example, path (not the rule)
+    '400002|cheap-rule|docs/reviews/some_folder/example_rules.py' -> 15176297000423028348
+  named script of the record (M1 fix-3 battery; it is seeded, 410302, so point 7 does not apply to it)
+    '400002|cheap-rule|m1_fix3_shortcuts.py' -> 3326396545411272323
+  same script, without extension (not the rule)
+    '400002|cheap-rule|m1_fix3_shortcuts' -> 3494842782195840892
+
+PART 2. agreement with the drafter's printed part B (addendum1_rev5_arithmetic.out.txt)
+  example_rules.py: mine 1035349750409085599 printed 1035349750409085599 equal True
+  docs/reviews/some_folder/example_rules.py: mine 15176297000423028348 printed 15176297000423028348 equal True
+
+PART 3. the integer seeds random.Random; first three draws of random() for m1_fix3_shortcuts.py, for the record
+   [0.55870383097, 0.298000891008, 0.464877401956]
+
+PART 4. label collision check: the new first labels against the one existing stream on 400002 (check 4 scope 4)
+  'cheap-rule' == 'development': False; contains '|': False
+  'capacity' == 'development': False; contains '|': False
