@@ -1,0 +1,9 @@
+[
+ {
+  "cause": "report step crashed after the 96 passes (finalize.render statistics loop, TypeError); lead decision 1",
+  "finalize_commit": "ffd29d74b6c1ceb5599dd4427ecbbf1e6b8c9e04",
+  "kind": "finalize_only",
+  "launch_commit": "e74cbf25bac019156be34c0a51a416749a4da16a",
+  "utc": "2026-11-25T07:24:20Z"
+ }
+]

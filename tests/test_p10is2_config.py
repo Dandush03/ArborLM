@@ -101,7 +101,7 @@ def test_grids_and_lists_equal_the_adr() -> None:
     assert T["seeds"]["replicate_bases"] == [250001, 250101, 250201] and T["seeds"]["offsets"] == [1, 2, 4, 10, 13] and "+1 training draw" in section("6") and "+13 router" in section("6")
     assert T["seeds"]["calibration_bases"] == [251001, 251101] and T["seeds"]["repeat_calibration_bases"] == [251201, 251301] and "251001 + 100·i, i = 0, 1" in section("6") and "251201 and 251301" in section("6")
     assert T["seeds"]["init_registered"] == [330201, 330211, 330221] and T["seeds"]["init_calibration"] == [330231, 330241] and T["seeds"]["init_repeat_calibration"] == [330261, 330271]
-    assert "330261 + j and 330271 + j" in section("6") and T["seeds"]["init_test"] == [330298, 330299] and "330298, 330299" in section("6")
+    assert "330261 + j and 330271 + j" in section("6") and T["seeds"]["init_test"] == [330281, 330289] and "330298, 330299" in section("6")  # the ADR text is immutable; registry revision 5 moved test mode to 330281 + 8 i + j
     assert T["seeds"]["init_roles"] == ["stage-1 store", "appended rows", "M-joint store", "D1", "second adapter of D-append", "D-joint", "E-table", "router projection and keys"]
     assert T["memory"]["read_layers"] == [4, 12] and Q["seeds"]["test_low"] == 934001 and Q["seeds"]["test_high"] == 934999 and "934001–934999" in section("6")
     assert T["arms"]["lookup_best_of"] == ["R-gloss", "R-gloss-icl", "R-nn", "R-icl", "E-table"] and "R-gloss, R-gloss-icl, R-nn, R-icl and E-table" in section("8.3")
@@ -126,12 +126,12 @@ def test_config_identity_fields() -> None:
         assert cfg["platform"] == {"system": "Darwin", "machine": "arm64", "torch": "2.8.0", "torch_num_threads": 6, "deterministic_algorithms": True}
         caps = cfg["stage_caps"]
         if cfg["caps"]["provisional"]:  # before the lead enters the caps computed by code from the measuring record
-            assert all(v == 0.0 for v in caps.values())
+            assert all(v == 0.0 for k, v in caps.items() if k != "calibration_hours") and caps["calibration_hours"] in (0.0, 13.18)  # 0.0 or exactly the figure ruling 41's setup recorded; the calibration cap is the one cap written while provisional (rulings 22 and 41's setup)
         else:  # after: every cap is set, and the total is the pre-freeze charge plus twice every stage (the rule of the caps proposal), so it is not below the sum of the stage caps up to the rounding of each (0.01 h)
             stage = {k: v for k, v in caps.items() if k != "total_hours"}
             used = {k: v for k, v in caps.items() if k != "reuse_hours"}  # reuse_hours belongs to a plan that reuses completed stages (attempt 3); the stages a plan does not run keep 0.0
             assert (all(v > 0.0 for v in used.values()) or caps["total_hours"] > 0.0 and any(v > 0.0 for v in stage.values())) and caps["total_hours"] >= sum(stage.values()) - 0.01 * len(stage)
-    assert Q["seeds"]["registry_checker_sha256"] == "e462360420321aa284b0e4d47b106806419ab616794a5c632fee70f122c67594" == T["seeds"]["registry_checker_sha256"]
+    assert Q["seeds"]["registry_checker_sha256"] == "e462360420321aa284b0e4d47b106806419ab616794a5c632fee70f122c67594" != T["seeds"]["registry_checker_sha256"] == "1f3b2de22ef3ff9bd01d81d67d7fcccac27710ed3394b62bec9c0688bc8b8f8f"  # Part Q froze on r3; Part T cites r7 (rulings 42 and 45)
     assert core.load_config("Q")["paths"]["durable_packages"] == "/Users/daniellaloush/dandush03/ArborLM/data/datagen-packages"
     with pytest.raises(ValueError):
         core.load_config("T", ROOT / core.CONFIG_Q)

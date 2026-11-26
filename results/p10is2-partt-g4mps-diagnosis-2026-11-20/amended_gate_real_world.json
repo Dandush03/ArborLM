@@ -1,0 +1,46 @@
+{
+ "passed": true,
+ "max_loss_difference": 3.361701965332031e-05,
+ "loss_tolerance": 0.001,
+ "loss_ok": true,
+ "gradient_agreement": {
+  "passed": true,
+  "tolerance": 0.001,
+  "largest": {
+   "relative_difference": 0.00028636062380693324,
+   "tensor": "store.gates.0",
+   "update": 1
+  },
+  "violations_over_tolerance": [],
+  "n_violations_over_tolerance": 0,
+  "exact_zero_clause": {
+   "cases": 2,
+   "violations": [],
+   "n_violations": 0,
+   "ok": true
+  }
+ },
+ "parameters_recorded_not_gating": {
+  "max_relative_parameter_difference": 0.014769398607313633,
+  "parameter_relative_difference_per_tensor": [
+   0.014769398607313633,
+   0.00989016517996788,
+   3.84953455068171e-06
+  ],
+  "parameter_tolerance_superseded": 0.0001,
+  "tensors": [
+   "store.keys.0",
+   "store.values.0",
+   "store.gates.0"
+  ],
+  "gating": false
+ },
+ "mps_repeat_recorded_not_gating": {
+  "max_loss_difference": 4.76837158203125e-07,
+  "max_relative_parameter_difference": 2.238302158730221e-06
+ },
+ "updates": 20,
+ "device": "mps",
+ "seconds_world": 3.8263189792633057,
+ "seconds_gate": 88.76547312736511
+}

@@ -6,6 +6,7 @@ is in ``configs/p10is2_partq.toml`` or ``configs/p10is2_partt.toml``. Every gene
 purpose (section 6). No seed is derived by hashing or arithmetic beyond the listed offsets.
 """
 
+import json
 import math
 import subprocess
 import tomllib
@@ -133,9 +134,10 @@ def partt_replicate_values(cfg: Mapping[str, Any], mode: str, index: int = 0) ->
         base, init0 = int(s["test_low"]) + 100 * index, int(s["init_test"][index % 2])
     else:
         raise ValueError(f"unknown mode {mode!r}")
+    pieces = int(s["route_accuracy_pieces"]) if mode == "registered" else base + int(s["route_pieces_offset"])  # never the router seed (base + 13) outside registered mode
     data = {"training_draw": base + offs[0], "batch_order": base + offs[1], "permutation_controls": base + offs[2], "code_hash": base + offs[3], "router": base + offs[4]}
     init = {r: init0 + j for j, r in enumerate(roles)}
-    return {"base": base, "data": data, "init": init, "init_base": init0}
+    return {"base": base, "data": data, "init": init, "init_base": init0, "route_pieces": pieces}
 
 
 def partt_listed_seeds(cfg: Mapping[str, Any], mode: str) -> frozenset[int]:
@@ -147,6 +149,11 @@ def partt_listed_seeds(cfg: Mapping[str, Any], mode: str) -> frozenset[int]:
     if mode == "registered":
         out |= {int(cfg["seeds"]["analysis_bootstrap"]), int(cfg["seeds"]["route_accuracy_pieces"])}
     return frozenset(out)
+
+
+def g5_probe_seed(cfg: Mapping[str, Any], mode: str) -> int:
+    """Gate G5's probe seed: 250919 in a registered run, the test value elsewhere (no literal in code)."""
+    return int(cfg["seeds"]["g5_probe"] if mode == "registered" else cfg["seeds"]["g5_probe_test"])
 
 
 _RECORDED: list[tuple[int, str]] = []
@@ -233,8 +240,47 @@ def under_line(*lines: str) -> str:
 
 
 # --- git and run directory -------------------------------------------------------------------------------------------------------------------
+GIT_TIMEOUT = 60.0
+
+
+def git_env() -> dict[str, str]:
+    """Ruling 37: a non-interactive environment for every git subprocess (no terminal prompt, no askpass or pinentry wait)."""
+    import os
+
+    env = dict(os.environ)
+    env.update(GIT_TERMINAL_PROMPT="0", GIT_ASKPASS="true", SSH_ASKPASS="true", SSH_ASKPASS_REQUIRE="never", GCM_INTERACTIVE="never")
+    env.pop("GPG_TTY", None)
+    return env
+
+
 def git(repo: Path, *argv: str) -> subprocess.CompletedProcess[bytes]:
-    return subprocess.run(["git", "-C", str(repo), *argv], capture_output=True, check=False)  # noqa: S603, S607
+    return subprocess.run(["git", "-C", str(repo), *argv], capture_output=True, check=False, timeout=GIT_TIMEOUT, env=git_env())  # noqa: S603, S607
+
+
+def records_dir(run_dir: Path) -> Path:
+    """Where a run's registry, per-item records, side and combined records, analysis and report go: the run directory itself in a registered run, its ``sealed/`` subdirectory in a rehearsal (ADR section 10: the
+    rehearsal's scores are sealed and not displayed; its label-worded report is plumbing)."""
+    marker = run_dir / "run_mode.json"
+    if marker.is_file() and json.loads(marker.read_text()).get("mode") == "rehearsal":
+        d = run_dir / "sealed"
+        d.mkdir(parents=True, exist_ok=True)
+        return d
+    return run_dir
+
+
+CALIBRATION_NAME = "P10IS2-T-calibration"
+CALIBRATION_LOG = Path("results/p10is2-partt-calibration/CALIBRATION_LOG.jsonl")
+
+
+def experiments_dir(repo: Path) -> Path:
+    """The experiments directory of the repository this worktree belongs to (the main checkout's, where Part Q's run directories are), derived from git, never typed."""
+    common = git(repo, "rev-parse", "--path-format=absolute", "--git-common-dir").stdout.decode().strip()
+    return Path(common).parent / "experiments"
+
+
+def calibration_dir(repo: Path) -> Path:
+    """Ruling 21: the ONE calibration directory (no free path on the real path)."""
+    return experiments_dir(repo) / CALIBRATION_NAME
 
 
 def require_ignored_run_dir(repo: Path, run_dir: Path) -> None:

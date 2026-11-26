@@ -1,0 +1,1 @@
+{"charged_seconds":7049.555819960078,"finished_utc":"2026-11-21T14:45:36.920167+00:00","kind":"stage_manifest","mode":"registered","result":{"u_run":{"2K/256":196608,"32K/4K":393216,"8K/1K":98304}},"schema":1,"stage":"ladder","started_utc":"2026-11-21T12:48:07.245226+00:00","status":"COMPLETE","study":"P10IS1","waited_seconds_not_charged":0.0}

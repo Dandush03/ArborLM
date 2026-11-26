@@ -1,0 +1,24 @@
+{
+ "status": "COMPLETE",
+ "lines": {
+  "C-CAPACITY": "CAPACITY-NEGATIVE",
+  "C-SATURATION": "SATURATION-PROPORTIONAL",
+  "C-EFFICIENCY": "EFFICIENCY-INCONCLUSIVE"
+ },
+ "missing_count": 0,
+ "ladder_stop_check": {
+  "2K/256": {
+   "recorded": 196608,
+   "recomputed": 196608
+  },
+  "32K/4K": {
+   "recorded": 393216,
+   "recomputed": 393216
+  },
+  "8K/1K": {
+   "recorded": 98304,
+   "recomputed": 98304
+  }
+ }
+}
+recompute exit 0

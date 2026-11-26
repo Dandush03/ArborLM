@@ -1,0 +1,11 @@
+{
+ "changed_files": [
+  "docs/reviews/adr-0035-p10-i-s2-d0-2026-11-24/LEAD_DECISION_1.md",
+  "studies/p10is2d0/finalize.py",
+  "studies/p10is2d0/finalize_only.py",
+  "tests/test_p10is2d0_finalize_fix.py",
+  "tests/test_p10is2d0_finalize_only.py"
+ ],
+ "finalize_commit": "ffd29d74b6c1ceb5599dd4427ecbbf1e6b8c9e04",
+ "launch_commit": "e74cbf25bac019156be34c0a51a416749a4da16a"
+}

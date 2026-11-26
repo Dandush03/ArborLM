@@ -1,0 +1,287 @@
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+MILESTONE (sequential acquisition with retention): NOT ESTABLISHED — a lookup baseline does as well: E-table (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+AGAINST-DENSE: acquisition: DENSE AHEAD; retention: NOT EVALUABLE. Reading: at matched updates; the memory receives the task identity by rule in its address; the dense arm receives it only through the prompt. (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+AGAINST-DENSE (M-seq against D-seq): acquisition: DENSE AHEAD; retention: MIXED (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+AGAINST-LOOKUP: LOOKUP SUFFICES (best baseline by frequency: E-table) (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+ACQUISITION: ACQUISITION-INCONCLUSIVE (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+RETENTION: RETENTION-INCONCLUSIVE: NOT CHALLENGED — SECOND NOT ACQUIRED (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+GENERAL-QUALITY: PRESERVED (the keyword router stayed silent) (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+MODIFICATION (M-ii, descriptive): INTERMEDIATE (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+COMPANION ACQUISITION table, G_first(M1): {0AB: 0.513, 0BA: 0.501, 1AB: 0.514, 1BA: 0.504, 2AB: 0.506, 2BA: 0.503} (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+COMPANION ACQUISITION table, G_second(M-append): {0AB: 0.489, 0BA: 0.513, 1AB: 0.501, 1BA: 0.506, 2AB: 0.484, 2BA: 0.499} (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+COMPANION ACQUISITION table, ACQ1: {0AB: True, 0BA: True, 1AB: True, 1BA: True, 2AB: True, 2BA: True} (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+COMPANION ACQUISITION table, ACQ2: {0AB: False, 0BA: True, 1AB: True, 1BA: True, 2AB: False, 2BA: False} (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+COMPANION ACQUISITION table, CONTROLS UNDEFINED: [] (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+COMPANION ACQUISITION passing cells per order: {ACQ1: {AB: [0, 1, 2], BA: [0, 1, 2]}, ACQ2: {AB: [1], BA: [0, 1]}} (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+COMPANION RETENTION table, G_first(M1): {0AB: 0.513, 0BA: 0.501, 1AB: 0.514, 1BA: 0.504, 2AB: 0.506, 2BA: 0.503} (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+COMPANION RETENTION table, ACQ1: {0AB: True, 0BA: True, 1AB: True, 1BA: True, 2AB: True, 2BA: True} (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+COMPANION RETENTION table, G_second(M-append): {0AB: 0.489, 0BA: 0.513, 1AB: 0.501, 1BA: 0.506, 2AB: 0.484, 2BA: 0.499} (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+COMPANION RETENTION table, F: {0AB: 0.072, 0BA: 0.063, 1AB: 0.068, 1BA: 0.056, 2AB: 0.072, 2BA: 0.086} (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+COMPANION RETENTION table, rho: {0AB: 0.770, 0BA: 0.800, 1AB: 0.782, 1BA: 0.824, 2AB: 0.766, 2BA: 0.726} (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+COMPANION RETENTION table, evaluable_cells: 6 (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+COMPANION RETENTION table, evaluable_cells_in_negative_zone: 0 (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+COMPANION AGAINST-DENSE per-cell delta_G: [-0.084, -0.127, -0.078, -0.124, -0.098, -0.133] (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+COMPANION AGAINST-DENSE per-cell delta_rho: None (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+COMPANION AGAINST-DENSE (M-seq vs D-seq) per-cell delta_G: [-0.112, -0.105, -0.098, -0.118, -0.067, -0.145] (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+COMPANION AGAINST-DENSE (M-seq vs D-seq) per-cell delta_rho: [0.090, -0.060, 0.033, -0.152, -0.477, -0.122] (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+COMPANION GENERAL-QUALITY per-cell loss increases (token64 and first marker): {0AB:token64: 0.000, 0AB:first_marker: 0.000, 0BA:token64: 0.000, 0BA:first_marker: 0.000, 1AB:token64: 0.000, 1AB:first_marker: 0.000, 1BA:token64: 0.000, 1BA:first_marker: 0.000, 2AB:token64: 0.000, 2AB:first_marker: 0.000, 2BA:token64: 0.000, 2BA:first_marker: 0.000} (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+COMPANION AGAINST-LOOKUP per cell: {0AB/A: E-table, 0AB/B: E-table, 0BA/A: E-table, 0BA/B: E-table, 1AB/A: E-table, 1AB/B: E-table, 1BA/A: E-table, 1BA/B: E-table, 2AB/A: E-table, 2AB/B: E-table, 2BA/A: E-table, 2BA/B: E-table} (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+ANNOTATION APPEND COST: holds True; {change_in_G_first: {0AB: -0.044, 0BA: -0.013, 1AB: -0.057, 1BA: -0.015, 2AB: -0.046, 2BA: -0.030}} (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+ANNOTATION BELOW ADAPTER JOINT: holds True; {cells: [0-A, 0-B, 1-A, 2-A]} (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+ANNOTATION BELOW JOINT BOUND: holds True; {cells: [0ABA, 0BAB, 1ABA, 1BAB, 2ABA, 2BAB]} (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+ANNOTATION COMPOSES: holds None; {C1|M-append: {label: NOT_EVALUATED, reasons: [order AB, replicate 0: single-task gap below 0.50 (A), order AB, replicate 0: single-task gap below 0.50 (B), order AB, replicate 1: single-task gap below 0.50 (A), order AB, replicate 1: single-task gap below 0.50 (B), order AB, replicate 2: single-task gap below 0.50 (A), order AB, replicate 2: single-task gap below 0.50 (B), order BA, replicate 0: single-task gap below 0.50 (B), order BA, replicate 1: single-task gap below 0.50 (B), order BA, replicate 2: single-task gap below 0.50 (B)]}, C1|M-ii: {label: NOT_EVALUATED, reasons: [order AB, replicate 0: single-task gap below 0.50 (B), order AB, replicate 2: single-task gap below 0.50 (B), order BA, replicate 2: single-task gap below 0.50 (B)]}, C1|D-seq: {label: NOT_EVALUATED, reasons: [order AB, replicate 0: single-task gap below 0.50 (A), order AB, replicate 1: single-task gap below 0.50 (A), order AB, replicate 2: single-task gap below 0.50 (A), order BA, replicate 0: single-task gap below 0.50 (B), order BA, replicate 1: single-task gap below 0.50 (B), order BA, replicate 2: single-task gap below 0.50 (B)]}, C1|D-append: {label: NOT_EVALUATED, reasons: [order AB, replicate 0: single-task gap below 0.50 (A), order AB, replicate 1: single-task gap below 0.50 (A), order AB, replicate 2: single-task gap below 0.50 (A), order BA, replicate 0: single-task gap below 0.50 (B), order BA, replicate 1: single-task gap below 0.50 (B), order BA, replicate 2: single-task gap below 0.50 (B)]}, C2|M-append: {label: NOT_EVALUATED, reasons: [order AB, replicate 0: single-task gap below 0.50 (A), order AB, replicate 0: single-task gap below 0.50 (B), order AB, replicate 1: single-task gap below 0.50 (A), order AB, replicate 2: single-task gap below 0.50 (A), order BA, replicate 0: single-task gap below 0.50 (B), order BA, replicate 1: single-task gap below 0.50 (B), order BA, replicate 2: single-task gap below 0.50 (B)]}, C2|M-ii: {label: NOT_EVALUATED, reasons: [order AB, replicate 0: single-task gap below 0.50 (B)]}, C2|D-seq: {label: NOT_EVALUATED, reasons: [order AB, replicate 0: single-task gap below 0.50 (A), order AB, replicate 1: single-task gap below 0.50 (A), order AB, replicate 2: single-task gap below 0.50 (A), order BA, replicate 0: single-task gap below 0.50 (B), order BA, replicate 1: single-task gap below 0.50 (B), order BA, replicate 2: single-task gap below 0.50 (B)]}, C2|D-append: {label: NOT_EVALUATED, reasons: [order AB, replicate 0: single-task gap below 0.50 (A), order AB, replicate 1: single-task gap below 0.50 (A), order AB, replicate 2: single-task gap below 0.50 (A), order BA, replicate 0: single-task gap below 0.50 (B), order BA, replicate 1: single-task gap below 0.50 (B), order BA, replicate 2: single-task gap below 0.50 (B)]}} (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+ANNOTATION EQUIVALENT TO A WORD TABLE: holds True; {} (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+ANNOTATION EXACT-MATCH WEAK: holds False; {gap_closed: {A: 0.114, B: 0.119}} (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+ANNOTATION LEXICON-EQUIVALENT: holds False; {} (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+ANNOTATION NO ADVANTAGE OVER SEPARATE ADAPTERS: holds True; {per_order: {AB: True, BA: True}} (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+ANNOTATION RETRIEVAL SUFFICES: holds False; {} (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+ANNOTATION ROUTER (keyword-level): holds False; {route_accuracy: {0AB: {A: 1.000, B: 1.000, general: 1.000}, 0BA: {A: 1.000, B: 1.000, general: 1.000}, 1AB: {A: 1.000, B: 1.000, general: 1.000}, 1BA: {A: 1.000, B: 1.000, general: 1.000}, 2AB: {A: 1.000, B: 1.000, general: 1.000}, 2BA: {A: 1.000, B: 1.000, general: 1.000}}, learned_route_acq2_and_ret: False} (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+ANNOTATION TASK-CODED SPARSE RETENTION: holds False; {mean_difference: 0.046} (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): E_open score (oracle route, descriptive), M-append open:A: 0.3130 over 6 cells (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): E_open score (oracle route, descriptive), M-append open:B: 0.3304 over 6 cells (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): seen-item score (300 training items of Part Q's seen order), M-append seen:A: 0.8388 over 6 cells (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): seen-item score (300 training items of Part Q's seen order), M-append seen:B: 0.8903 over 6 cells (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): E_open score (oracle route, descriptive), M1 open:A: 0.2454 over 6 cells (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): E_open score (oracle route, descriptive), M1 open:B: 0.2626 over 6 cells (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): seen-item score (300 training items of Part Q's seen order), M1 seen:A: 0.5731 over 6 cells (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): seen-item score (300 training items of Part Q's seen order), M1 seen:B: 0.5698 over 6 cells (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): E_open score (oracle route, descriptive), S0 open:A: 0.1571 over 1 cells (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): E_open score (oracle route, descriptive), S0 open:B: 0.1498 over 1 cells (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): E_open score (oracle route, descriptive), TEACHER open:A: 0.6864 over 1 cells (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): E_open score (oracle route, descriptive), TEACHER open:B: 0.7361 over 1 cells (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): edit-distance-1 share of E_A, replicate 0: 0.0750 (75 of 1000 items have a training source at word-level edit distance 1) (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): edit-distance-1 share of E_B, replicate 0: 0.0780 (78 of 1000 items have a training source at word-level edit distance 1) (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): edit-distance-1 share of E_A, replicate 1: 0.0740 (74 of 1000 items have a training source at word-level edit distance 1) (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): edit-distance-1 share of E_B, replicate 1: 0.0780 (78 of 1000 items have a training source at word-level edit distance 1) (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): edit-distance-1 share of E_A, replicate 2: 0.0850 (85 of 1000 items have a training source at word-level edit distance 1) (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): edit-distance-1 share of E_B, replicate 2: 0.0770 (77 of 1000 items have a training source at word-level edit distance 1) (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): D-append s:E_A with all items 0.3384, without the edit-distance-1 items 0.3273 (mean over 6 cells) (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): D-append s:E_B with all items 0.3172, without the edit-distance-1 items 0.3063 (mean over 6 cells) (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): D-joint s:E_A with all items 0.5483, without the edit-distance-1 items 0.5276 (mean over 3 cells) (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): D-joint s:E_B with all items 0.4836, without the edit-distance-1 items 0.4649 (mean over 3 cells) (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): D-sep s:E_A with all items 0.5325, without the edit-distance-1 items 0.5119 (mean over 3 cells) (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): D-sep s:E_B with all items 0.4964, without the edit-distance-1 items 0.4770 (mean over 3 cells) (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): D-seq s:E_A with all items 0.3452, without the edit-distance-1 items 0.3343 (mean over 6 cells) (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): D-seq s:E_B with all items 0.3284, without the edit-distance-1 items 0.3186 (mean over 6 cells) (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): D1 s:E_A with all items 0.3412, without the edit-distance-1 items 0.3303 (mean over 6 cells) (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): D1 s:E_B with all items 0.3184, without the edit-distance-1 items 0.3079 (mean over 6 cells) (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): E-table s:E_A with all items 0.4559, without the edit-distance-1 items 0.4350 (mean over 3 cells) (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): E-table s:E_B with all items 0.4478, without the edit-distance-1 items 0.4292 (mean over 3 cells) (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): M-append s:E_A with all items 0.4151, without the edit-distance-1 items 0.3952 (mean over 6 cells) (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): M-append s:E_B with all items 0.4057, without the edit-distance-1 items 0.3883 (mean over 6 cells) (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): M-append@append s:E_A with all items 0.2831, without the edit-distance-1 items 0.2719 (mean over 6 cells) (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): M-append@append s:E_B with all items 0.2859, without the edit-distance-1 items 0.2773 (mean over 6 cells) (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): M-ii s:E_A with all items 0.4555, without the edit-distance-1 items 0.4338 (mean over 6 cells) (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): M-ii s:E_B with all items 0.4403, without the edit-distance-1 items 0.4211 (mean over 6 cells) (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): M-joint s:E_A with all items 0.4652, without the edit-distance-1 items 0.4427 (mean over 3 cells) (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): M-joint s:E_B with all items 0.4522, without the edit-distance-1 items 0.4320 (mean over 3 cells) (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): M-sep s:E_A with all items 0.4520, without the edit-distance-1 items 0.4314 (mean over 3 cells) (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): M-sep s:E_B with all items 0.4435, without the edit-distance-1 items 0.4235 (mean over 3 cells) (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): M-seq s:E_A with all items 0.2884, without the edit-distance-1 items 0.2769 (mean over 6 cells) (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): M-seq s:E_B with all items 0.2804, without the edit-distance-1 items 0.2702 (mean over 6 cells) (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): M1 s:E_A with all items 0.2940, without the edit-distance-1 items 0.2827 (mean over 6 cells) (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): M1 s:E_B with all items 0.2834, without the edit-distance-1 items 0.2732 (mean over 6 cells) (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): R-exact s:E_A with all items 0.0000, without the edit-distance-1 items 0.0000 (mean over 3 cells) (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): R-exact s:E_B with all items 0.0000, without the edit-distance-1 items 0.0000 (mean over 3 cells) (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): R-gloss s:E_A with all items 0.4373, without the edit-distance-1 items 0.4237 (mean over 3 cells) (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): R-gloss s:E_B with all items 0.3974, without the edit-distance-1 items 0.3900 (mean over 3 cells) (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): R-gloss-icl s:E_A with all items 0.2047, without the edit-distance-1 items 0.1987 (mean over 3 cells) (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): R-gloss-icl s:E_B with all items 0.1887, without the edit-distance-1 items 0.1861 (mean over 3 cells) (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): R-icl s:E_A with all items 0.3133, without the edit-distance-1 items 0.2998 (mean over 3 cells) (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): R-icl s:E_B with all items 0.2733, without the edit-distance-1 items 0.2578 (mean over 3 cells) (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): R-nn s:E_A with all items 0.3298, without the edit-distance-1 items 0.3169 (mean over 3 cells) (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+A4 READING (reported, enters no label): R-nn s:E_B with all items 0.2982, without the edit-distance-1 items 0.2842 (mean over 3 cells) (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+DISCLOSED LIMITATION (rehearsal world, audit 4c): the caps and the per-unit rates were measured by rehearsals whose evaluation panels were stand-ins made of four disjoint parts of D_cal (both-reference sentences whose lengths may differ from E_A and E_B; about 125 items, not 1,000); the rehearsals' combined task paired each sentence with itself (the identity pairing: plumbing only); their analysis ran on D_cal-based numbers and is sealed (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+DISCLOSED LIMITATION (untrained cells in rehearsals, audit 4d): the rehearsals trained one cell of each of the ten types and read the cells they did not train (order BA, E-table on capability B, M-ii's BA parent chain) from the trained cell of the same arm; the first real loading of those cells is in this registered run (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+DISCLOSED LIMITATION (ruling 19): gate G1 tests Q_check against the training streams by English key only: Part Q stored no Q_check identity groups, so a paraphrase that shares an identity group with a training item is not detected (3 replicates, U = 8000) NOT CONVERGED AT U
+
+oracle-assisted (word-level addresses supplied by rule); lexical translation of short closed-vocabulary sentences, two capabilities of one kind; frozen English student; teacher-only training material verified by measured-precision filter; not autonomous learned memory.
+Astra review: NOT_PERFORMED. Self-check only; not independent review and not human approval.

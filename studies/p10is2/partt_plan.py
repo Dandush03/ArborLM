@@ -14,7 +14,7 @@ from .common import core
 from .common import plan as planmod
 from .quantities import CELLS, GEN_POSITIONS, NONE, ORDERS, PANEL, REPLICATES, first, second
 
-STAGES = ("gates", "train", "evaluate", "controls", "combined", "analysis", "report")
+STAGES = ("gates", "train", "evaluate", "controls", "combined", "recompute", "analysis", "report")  # section 10: the recomputation (stage 8) is its own stage with its own cap, before the analysis
 TWO_STAGE_ARMS = ("M-append", "M-seq", "M-ii", "D-append", "D-seq")
 STAGE1_ARMS = ("M1", "D1")
 JOINT_ARMS = ("M-joint", "D-joint")
@@ -95,7 +95,7 @@ def stage_items(ctx: Mapping[str, Any]) -> dict[str, list[dict[str, Any]]]:
         items["train"].append({**c, "stage_name": "train", "updates": int(ctx["U"]) * (2 if c["arm"] in JOINT_ARMS else 1), "rate": rate, "read_layer": ctx["read_layer"] if c["type"] == "store-type" else None, "device": "mps", "checkpoint_every": 500})
         items["evaluate"].append({"id": f"evaluate|{c['id']}", "stage": "evaluate", "of": c["id"], "scoring_device": "cpu", "panels": ["E_A", "E_B"], "reads": ["s", "gen", "dcon"]})
         if c["arm"] in MEMORY_TRAINED:
-            items["controls"].append({"id": f"controls|{c['id']}", "stage": "controls", "of": c["id"], "subsample": 300, "conditions": list(CONTROL_KINDS)})
+            items["controls"].append({"id": f"controls|{c['id']}", "stage": "controls", "of": c["id"], "subsample": 300, "conditions": list(CONTROL_KINDS), "scored_in": "evaluate"})  # ruling 12: scored on the registered subsamples by the evaluate task; this stage checks that they are there, it scores nothing again
     for r in REPLICATES:
         for arm in (*SEPARATE_ARMS, *LOOKUP_ARMS):
             items["evaluate"].append({"id": f"evaluate|{arm}|-|r{r}", "stage": "evaluate", "of": arm, "rep": r, "built_not_trained": True})
@@ -106,6 +106,7 @@ def stage_items(ctx: Mapping[str, Any]) -> dict[str, list[dict[str, Any]]]:
             items["combined"].append({"id": f"combined|{arm}|-|r{r}", "stage": "combined", "arm": arm, "rep": r})
     items["evaluate"].append({"id": "evaluate|reference", "stage": "evaluate", "reference": True, "what": "S0 and the teachers' stored outputs on the full panels and the 300-item subsample: the floor and the ceiling of every gap"})
     items["combined"] += [{"id": "combined|S0", "stage": "combined", "arm": "S0"}, {"id": "combined|ensemble", "stage": "combined", "arm": "ensemble"}]
+    items["recompute"] = [{"id": "recompute", "stage": "recompute", "what": "every registered score and combined record re-scored on CPU from the snapshots and routers the stages stored, compared with the registry (section 8.6)"}]
     items["analysis"] = [{"id": "analysis", "stage": "analysis"}]
     items["report"] = [{"id": "report", "stage": "report"}]
     ids = [i["id"] for v in items.values() for i in v]
@@ -119,14 +120,14 @@ def combined_arm_cells_per_replicate() -> int:
     return 4 * len(ORDERS) + len(JOINT_ARMS) + len(SEPARATE_ARMS)
 
 
-def build_candidate(repo: Path, run_dir: Path, cfg: Mapping[str, Any], calibration: Mapping[str, Any], *, mode: str = planmod.REGISTERED, walk: Mapping[str, Any] | None = None, manifests: Mapping[str, Any] | None = None) -> dict[str, Any]:
+def build_candidate(repo: Path, run_dir: Path, cfg: Mapping[str, Any], calibration: Mapping[str, Any], *, mode: str = planmod.REGISTERED, walk: Mapping[str, Any] | None = None, manifests: Mapping[str, Any] | None = None, charge_before_freeze: Mapping[str, Any] | None = None, part_q: Mapping[str, Any] | None = None, counting_allowance_hours: float | None = None, measuring_rehearsal: Mapping[str, Any] | None = None) -> dict[str, Any]:
     """The plan record. ``calibration`` holds U (and NOT CONVERGED AT U), the rates, the layer, the calibration records' hashes (refused if stand-in or if their code hashes differ from the frozen files) and the pilot
     outcome. ``manifests`` names the Part Q manifest, the shared panel ledger and the calibration records by path and SHA-256."""
     if calibration.get("pilot", {}).get("passed") is not True:
         raise core.StageRefused("refused: the pilot gate did not pass (NOT STARTED: PILOT): Part T has no plan")
     return planmod.build_plan(
         part="T", mode=mode, cfg=cfg, repo=repo, items=stage_items(calibration), run_dir=run_dir, walk=walk,
-        extra={"calibration": dict(calibration), "manifests": dict(manifests or {}), "registry_keys": sorted(required_keys()), "units_of_U": units_of_training(), "seeds": {"replicates": [core.partt_replicate_values(cfg, "registered", r) for r in range(3)]}},
+        extra={**({"charge_before_freeze": dict(charge_before_freeze)} if charge_before_freeze else {}), **({"counting_allowance_hours": float(counting_allowance_hours)} if counting_allowance_hours is not None else {}), **({"measuring_rehearsal": dict(measuring_rehearsal)} if measuring_rehearsal else {}), **({"part_q": dict(part_q)} if part_q else {}), "task_units_basis": {k: int(cfg["data"][k]) for k in ("eval_panel", "control_subsample", "d_con_panel", "seen_items", "e_open_panel")}, "calibration": dict(calibration), "manifests": dict(manifests or {}), "registry_keys": sorted(required_keys()), "units_of_U": units_of_training(), "seeds": {"replicates": [core.partt_replicate_values(cfg, "registered", r) for r in range(3)]}},
     )  # fmt: skip
 
 

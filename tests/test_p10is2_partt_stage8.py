@@ -40,9 +40,13 @@ def rep0(values):  # type: ignore[no-untyped-def]
     return {k: v for k, v in values.items() if k.endswith("|0|" + k.split("|", 3)[3]) or k.startswith(("S0|", "TEACHER|"))}
 
 
+def recompute_built(*a, **k):  # type: ignore[no-untyped-def]
+    return partt_recompute.recompute(*a, routers_mode="build", **k)  # these tests score without router snapshots
+
+
 def test_recomputation_is_bit_identical_with_the_frozen_code(trained) -> None:  # type: ignore[no-untyped-def]
     w, d, recs, gloss, reg, side, comb = trained
-    rec = partt_recompute.recompute(w, d, gloss, rep0(reg.values), {k: v for k, v in comb.items() if k in ("S0", "ensemble") or k.endswith("|0")}, replicates=(0,))
+    rec = recompute_built(w, d, gloss, rep0(reg.values), {k: v for k, v in comb.items() if k in ("S0", "ensemble") or k.endswith("|0")}, replicates=(0,))
     assert rec["ok"] and rec["tolerance"] == 0.0 and rec["code"] == "frozen" and rec["differences"] == [] and rec["checked"] == len(rep0(reg.values)) and rec["outcome"] is None
 
 
@@ -51,16 +55,16 @@ def test_a_difference_is_an_engineering_stop_and_nothing_is_labelled(trained, tm
     bad = rep0(reg.values)
     k = "M-append|AB|0|s:E_B"
     bad[k] = bad[k] + 1e-9
-    rec = partt_recompute.recompute(w, d, gloss, bad, None, replicates=(0,))
+    rec = recompute_built(w, d, gloss, bad, None, replicates=(0,))
     assert not rec["ok"] and rec["outcome"] == "ENGINEERING STOP — RECOMPUTATION" and rec["differences"][0]["key"] == k and rec["differences"][0]["registered"] == bad[k]  # both values and the cell are recorded
     partt_recompute.write(tmp_path, rec)
     with pytest.raises(core.StageRefused, match="ENGINEERING STOP — RECOMPUTATION"):
         partt_real.require_recomputation(tmp_path)  # the analysis refuses: no line, condition or annotation
-    own5 = partt_recompute.recompute(w, d, gloss, {**rep0(reg.values), k: reg.values[k] + 5e-7}, None, own_code=True, replicates=(0,))
+    own5 = recompute_built(w, d, gloss, {**rep0(reg.values), k: reg.values[k] + 5e-7}, None, own_code=True, replicates=(0,))
     assert own5["ok"] and own5["tolerance"] == 1e-6 and own5["code"] == "own"  # the auditor's own code: within 1e-6
-    assert not partt_recompute.recompute(w, d, gloss, {**rep0(reg.values), k: reg.values[k] + 2e-6}, None, own_code=True, replicates=(0,))["ok"]
+    assert not recompute_built(w, d, gloss, {**rep0(reg.values), k: reg.values[k] + 2e-6}, None, own_code=True, replicates=(0,))["ok"]
     missing = {kk: v for kk, v in rep0(reg.values).items() if kk != k}
-    assert not partt_recompute.recompute(w, d, gloss, missing, None, replicates=(0,))["ok"]  # a key the run has and the registry lacks is a difference
+    assert not recompute_built(w, d, gloss, missing, None, replicates=(0,))["ok"]  # a key the run has and the registry lacks is a difference
 
 
 def test_compare_and_combined_means_by_hand() -> None:

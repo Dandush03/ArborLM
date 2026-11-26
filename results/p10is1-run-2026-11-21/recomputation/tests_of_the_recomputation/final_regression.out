@@ -1,0 +1,38 @@
+== rehearsal (1 replicate)
+compared 628 values; differences: 0
+== fuzz seed 1
+compared 1582 values; differences: 0
+== fuzz seed 2
+compared 2512 values; differences: 0
+== fuzz seed 3
+compared 1676 values; differences: 0
+== fuzz seed 4
+compared 1624 values; differences: 0
+== fuzz seed 5
+compared 832 values; differences: 0
+== fuzz seed 6
+compared 1190 values; differences: 0
+== fuzz seed 101
+compared 2652 values; differences: 0
+== fuzz seed 102
+compared 2650 values; differences: 0
+== fuzz seed 103
+compared 2650 values; differences: 0
+== fuzz seed 104
+compared 2652 values; differences: 0
+== fuzz seed 105
+compared 2652 values; differences: 0
+== fuzz seed 106
+compared 2652 values; differences: 0
+== fuzz seed 201
+compared 2640 values; differences: 0
+== fuzz seed 202
+compared 2642 values; differences: 0
+== fuzz seed 203
+compared 2640 values; differences: 0
+== fuzz seed 204
+compared 2646 values; differences: 0
+== fuzz seed 205
+compared 2646 values; differences: 0
+== fuzz seed 206
+compared 2634 values; differences: 0

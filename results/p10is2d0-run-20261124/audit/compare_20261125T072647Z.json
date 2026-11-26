@@ -1,0 +1,281 @@
+{
+ "utc": "20261125T072647Z",
+ "pass_pairs_compared": 120,
+ "sequence_mismatches_total": 0,
+ "maxima": {
+  "item": 4.440892098500626e-16,
+  "pass_mean": 5.551115123125783e-17,
+  "derived": 1.5543122344752192e-15,
+  "registered_scale": 0.0,
+  "stat_gate": 0.0,
+  "stat": 5.0,
+  "stat_n": 0.0
+ },
+ "counts": {
+  "sequences": 120000,
+  "item": 120000,
+  "pass_mean": 120,
+  "derived": 702,
+  "registered_scale": 144,
+  "stat_gate": 18,
+  "stat": 1584,
+  "stat_n": 360
+ },
+ "stat_keys_unmatched": [],
+ "differences": 36,
+ "difference_list": [
+  {
+   "class": "stat",
+   "where": "r0AB append|first words displaced p5 (= 8 - n_p)",
+   "mine": 7.0,
+   "theirs": 3.0,
+   "diff": 4.0
+  },
+  {
+   "class": "stat",
+   "where": "r0AB append|first words displaced p95 (= 8 - n_p)",
+   "mine": 3.0,
+   "theirs": 7.0,
+   "diff": 4.0
+  },
+  {
+   "class": "stat",
+   "where": "r0AB final|first words displaced p5 (= 8 - n_p)",
+   "mine": 7.0,
+   "theirs": 3.0,
+   "diff": 4.0
+  },
+  {
+   "class": "stat",
+   "where": "r0AB final|first words displaced p95 (= 8 - n_p)",
+   "mine": 3.0,
+   "theirs": 7.0,
+   "diff": 4.0
+  },
+  {
+   "class": "stat",
+   "where": "r0AB final|second words displaced p5 (= 8 - n_p)",
+   "mine": 7.0,
+   "theirs": 3.0,
+   "diff": 4.0
+  },
+  {
+   "class": "stat",
+   "where": "r0AB final|second words displaced p95 (= 8 - n_p)",
+   "mine": 3.0,
+   "theirs": 7.0,
+   "diff": 4.0
+  },
+  {
+   "class": "stat",
+   "where": "r0BA append|first words displaced p5 (= 8 - n_p)",
+   "mine": 7.0,
+   "theirs": 2.0,
+   "diff": 5.0
+  },
+  {
+   "class": "stat",
+   "where": "r0BA append|first words displaced p95 (= 8 - n_p)",
+   "mine": 2.0,
+   "theirs": 7.0,
+   "diff": 5.0
+  },
+  {
+   "class": "stat",
+   "where": "r0BA final|first words displaced p5 (= 8 - n_p)",
+   "mine": 7.0,
+   "theirs": 2.0,
+   "diff": 5.0
+  },
+  {
+   "class": "stat",
+   "where": "r0BA final|first words displaced p95 (= 8 - n_p)",
+   "mine": 2.0,
+   "theirs": 7.0,
+   "diff": 5.0
+  },
+  {
+   "class": "stat",
+   "where": "r0BA final|second words displaced p5 (= 8 - n_p)",
+   "mine": 7.0,
+   "theirs": 4.0,
+   "diff": 3.0
+  },
+  {
+   "class": "stat",
+   "where": "r0BA final|second words displaced p95 (= 8 - n_p)",
+   "mine": 4.0,
+   "theirs": 7.0,
+   "diff": 3.0
+  },
+  {
+   "class": "stat",
+   "where": "r1AB append|first words displaced p5 (= 8 - n_p)",
+   "mine": 7.0,
+   "theirs": 2.0,
+   "diff": 5.0
+  },
+  {
+   "class": "stat",
+   "where": "r1AB append|first words displaced p95 (= 8 - n_p)",
+   "mine": 2.0,
+   "theirs": 7.0,
+   "diff": 5.0
+  },
+  {
+   "class": "stat",
+   "where": "r1AB final|first words displaced p5 (= 8 - n_p)",
+   "mine": 7.0,
+   "theirs": 2.0,
+   "diff": 5.0
+  },
+  {
+   "class": "stat",
+   "where": "r1AB final|first words displaced p95 (= 8 - n_p)",
+   "mine": 2.0,
+   "theirs": 7.0,
+   "diff": 5.0
+  },
+  {
+   "class": "stat",
+   "where": "r1AB final|second words displaced p5 (= 8 - n_p)",
+   "mine": 7.0,
+   "theirs": 2.0,
+   "diff": 5.0
+  },
+  {
+   "class": "stat",
+   "where": "r1AB final|second words displaced p95 (= 8 - n_p)",
+   "mine": 2.0,
+   "theirs": 7.0,
+   "diff": 5.0
+  },
+  {
+   "class": "stat",
+   "where": "r1BA append|first words displaced p5 (= 8 - n_p)",
+   "mine": 7.0,
+   "theirs": 2.0,
+   "diff": 5.0
+  },
+  {
+   "class": "stat",
+   "where": "r1BA append|first words displaced p95 (= 8 - n_p)",
+   "mine": 2.0,
+   "theirs": 7.0,
+   "diff": 5.0
+  },
+  {
+   "class": "stat",
+   "where": "r1BA final|first words displaced p5 (= 8 - n_p)",
+   "mine": 7.0,
+   "theirs": 3.0,
+   "diff": 4.0
+  },
+  {
+   "class": "stat",
+   "where": "r1BA final|first words displaced p95 (= 8 - n_p)",
+   "mine": 3.0,
+   "theirs": 7.0,
+   "diff": 4.0
+  },
+  {
+   "class": "stat",
+   "where": "r1BA final|second words displaced p5 (= 8 - n_p)",
+   "mine": 7.0,
+   "theirs": 4.0,
+   "diff": 3.0
+  },
+  {
+   "class": "stat",
+   "where": "r1BA final|second words displaced p95 (= 8 - n_p)",
+   "mine": 4.0,
+   "theirs": 7.0,
+   "diff": 3.0
+  },
+  {
+   "class": "stat",
+   "where": "r2AB append|first words displaced p5 (= 8 - n_p)",
+   "mine": 7.0,
+   "theirs": 2.0,
+   "diff": 5.0
+  },
+  {
+   "class": "stat",
+   "where": "r2AB append|first words displaced p95 (= 8 - n_p)",
+   "mine": 2.0,
+   "theirs": 7.0,
+   "diff": 5.0
+  },
+  {
+   "class": "stat",
+   "where": "r2AB final|first words displaced p5 (= 8 - n_p)",
+   "mine": 7.0,
+   "theirs": 2.0,
+   "diff": 5.0
+  },
+  {
+   "class": "stat",
+   "where": "r2AB final|first words displaced p95 (= 8 - n_p)",
+   "mine": 2.0,
+   "theirs": 7.0,
+   "diff": 5.0
+  },
+  {
+   "class": "stat",
+   "where": "r2AB final|second words displaced p5 (= 8 - n_p)",
+   "mine": 7.0,
+   "theirs": 3.0,
+   "diff": 4.0
+  },
+  {
+   "class": "stat",
+   "where": "r2AB final|second words displaced p95 (= 8 - n_p)",
+   "mine": 3.0,
+   "theirs": 7.0,
+   "diff": 4.0
+  },
+  {
+   "class": "stat",
+   "where": "r2BA append|first words displaced p5 (= 8 - n_p)",
+   "mine": 7.0,
+   "theirs": 2.0,
+   "diff": 5.0
+  },
+  {
+   "class": "stat",
+   "where": "r2BA append|first words displaced p95 (= 8 - n_p)",
+   "mine": 2.0,
+   "theirs": 7.0,
+   "diff": 5.0
+  },
+  {
+   "class": "stat",
+   "where": "r2BA final|first words displaced p5 (= 8 - n_p)",
+   "mine": 7.0,
+   "theirs": 2.0,
+   "diff": 5.0
+  },
+  {
+   "class": "stat",
+   "where": "r2BA final|first words displaced p95 (= 8 - n_p)",
+   "mine": 2.0,
+   "theirs": 7.0,
+   "diff": 5.0
+  },
+  {
+   "class": "stat",
+   "where": "r2BA final|second words displaced p5 (= 8 - n_p)",
+   "mine": 7.0,
+   "theirs": 3.0,
+   "diff": 4.0
+  },
+  {
+   "class": "stat",
+   "where": "r2BA final|second words displaced p95 (= 8 - n_p)",
+   "mine": 3.0,
+   "theirs": 7.0,
+   "diff": 4.0
+  }
+ ],
+ "verdict": "RECOMPUTATION DIFFERS"
+}

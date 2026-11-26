@@ -1,0 +1,26 @@
+{
+ "cpu_with_absolute_gradient_noise_1e-13_on_nonzero_key_value_gradients": {
+  "rel_per_tensor_keys_values_gates": [
+   2.2149819363267045e-06,
+   1.6571330201888112e-06,
+   0.0
+  ],
+  "loss_diff": 1.1920928955078125e-06
+ },
+ "cpu_with_absolute_gradient_noise_1e-12_on_nonzero_key_value_gradients": {
+  "rel_per_tensor_keys_values_gates": [
+   0.01074231131461288,
+   0.006826715530282619,
+   5.048570084029031e-07
+  ],
+  "loss_diff": 7.152557373046875e-07
+ },
+ "cpu_with_absolute_gradient_noise_1e-11_on_nonzero_key_value_gradients": {
+  "rel_per_tensor_keys_values_gates": [
+   0.015050211857445072,
+   0.010705793728424546,
+   4.4174988235254024e-07
+  ],
+  "loss_diff": 9.5367431640625e-07
+ }
+}

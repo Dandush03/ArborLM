@@ -80,11 +80,12 @@ def named_values(part: str, cfg: Mapping[str, Any]) -> dict[str, frozenset[int]]
         return {"partition side and analysis": reg, "Part Q rehearsal partition side": reh, "test": core.test_range(cfg)}
     seeds = cfg["seeds"]
     reg_data = {v for r in range(3) for v in core.partt_replicate_values(cfg, "registered", r)["data"].values()}
-    cal_data = {v for i in range(4) for v in core.partt_replicate_values(cfg, "calibration", i)["data"].values()}
-    reh_data = set(core.partt_replicate_values(cfg, "rehearsal", 0)["data"].values())
-    init = {v for mode, n in (("registered", 3), ("calibration", 4), ("rehearsal", 1)) for i in range(n) for v in core.partt_replicate_values(cfg, mode, i)["init"].values()} | {int(x) for x in seeds["init_test"]}
+    cal_data = {v for i in range(4) for v in core.partt_replicate_values(cfg, "calibration", i)["data"].values()} | {int(core.partt_replicate_values(cfg, "calibration", i)["route_pieces"]) for i in range(4)}
+    reh_data = set(core.partt_replicate_values(cfg, "rehearsal", 0)["data"].values()) | {int(core.partt_replicate_values(cfg, "rehearsal", 0)["route_pieces"])}
+    # every derived initialisation value (base + j for every role in every mode, test mode included), never only the bases
+    init = {v for mode, n in (("registered", 3), ("calibration", 4), ("rehearsal", 1), ("test", 2)) for i in range(n) for v in core.partt_replicate_values(cfg, mode, i)["init"].values()}
     return {
-        "registered replicate sets": frozenset(reg_data), "analysis and route accuracy (inside the partition-side row)": frozenset({int(seeds["analysis_bootstrap"]), int(seeds["route_accuracy_pieces"])}),
+        "registered replicate sets": frozenset(reg_data), "analysis and route accuracy (inside the partition-side row)": frozenset({int(seeds["analysis_bootstrap"]), int(seeds["route_accuracy_pieces"]), int(seeds["g5_probe"])}),
         "calibration": frozenset(cal_data), "Part T rehearsal sets": frozenset(reh_data), "initialisation": frozenset(init), "test": core.test_range(cfg),
     }  # fmt: skip
 
@@ -135,9 +136,44 @@ def run_checker_copy(path: Path, root: Path, timeout: float) -> dict[str, Any]:
     }  # fmt: skip
 
 
+def run_checker_unedited(path: Path, root: Path, timeout: float) -> dict[str, Any]:
+    """Revision 5 of the registry's checker, UNEDITED (P10-I-S2 is a built-in owner of its own files: the own-file globs are the checker's, recorded here). It must print ``RESULT: PASS``."""
+    proc = subprocess.run([sys.executable, str(path), "--root", str(root)], cwd=root, capture_output=True, text=True, timeout=timeout, check=False)  # noqa: S603
+    result = next((line for line in proc.stdout.splitlines() if line.startswith("RESULT:")), None)
+    return {"returncode": proc.returncode, "result_line": result, "problems": len(fail_lines(proc.stdout)), "fail_lines": fail_lines(proc.stdout)[:20], "unedited": True}
+
+
+def seed_gate_r5(part: str, cfg: Mapping[str, Any], *, root: Path | None = None, run_checker: bool = True, timeout: float = 600.0) -> dict[str, Any]:
+    """Gate G9 against registry revision 5: the checker and the addendum are cited by SHA-256, the checker runs unedited and prints ``RESULT: PASS``, and every named value (every derived value of every mode)
+    lies inside the registry row of its role."""
+    base = root or core.ROOT
+    s = cfg["seeds"]
+    problems: list[str] = []
+    checker: dict[str, Any] = {"path": s["registry_checker"], "expected_sha256": s["registry_checker_sha256"], "addendum": s["registry_addendum"], "addendum_expected_sha256": s["registry_addendum_sha256"], "own_file_globs": list(s["own_file_globs"])}
+    cp, ap = base / s["registry_checker"], base / s["registry_addendum"]
+    rows: list[tuple[str, int, int]] = []
+    for label, p, want in (("checker", cp, s["registry_checker_sha256"]), ("addendum", ap, s["registry_addendum_sha256"])):
+        if not p.is_file():
+            problems.append(f"the registry {label} is not at {p.relative_to(base)}")
+        elif file_sha256(p) != want:
+            problems.append(f"the registry {label} differs from the SHA-256 the config cites")
+    if not problems:
+        rows = allocation_rows(cp.read_text(encoding="utf-8"))
+        checker["allocation_rows"] = len(rows)
+        problems += allocation_problems(part, cfg, rows)
+        if run_checker:
+            checker.update(run_checker_unedited(cp, base, timeout))
+            if checker["returncode"] != 0 or checker["result_line"] != "RESULT: PASS":
+                problems.append(f"the registry checker ({Path(str(cp)).name}, the revision the config cites, unedited) did not print RESULT: PASS: {checker['result_line']!r}")
+    named = named_values(part, cfg)
+    return {"passed": not problems, "problems": problems, "roles": {k: len(v) for k, v in named.items()}, "checker": checker}
+
+
 def seed_gate(part: str, cfg: Mapping[str, Any], *, root: Path | None = None, run_checker: bool = True, timeout: float = 300.0) -> dict[str, Any]:
     """Gate G9: (1) the registry checker's SHA-256 equals the config's; (2) this part's named values lie inside the registry's rows; (3) the extended copy reports no problem naming this study (problems of other
     implemented studies are counted and listed, not hidden)."""
+    if "registry_addendum" in cfg["seeds"]:
+        return seed_gate_r5(part, cfg, root=root, run_checker=run_checker, timeout=max(timeout, 600.0))
     base = root or core.ROOT
     s = cfg["seeds"]
     checker_path = base / s["registry_checker"]

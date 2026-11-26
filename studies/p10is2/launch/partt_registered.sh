@@ -5,8 +5,8 @@
 # Part T uses the lock ALONE: PYTHONPATH is unset here and the entry point refuses if the durable package copy is on it. Training runs on MPS, scoring and recomputation on CPU at six threads with
 # deterministic algorithms (configs/p10is2_partt.toml). Charged time is the sum of each worker process's wall time. At most three workers (two while another study runs). No word splitting.
 set -eu
-if [ "$#" -ne 3 ]; then
-    echo "usage: $0 <stage> <run-dir> <freeze-commit>" >&2
+if [ "$#" -lt 3 ]; then
+    echo "usage: $0 <stage> <run-dir> <freeze-commit | -> [--rehearsal --rehearsal-kind <measuring|counting> [--plan-file <plan>] [--pause-after-updates <n>]]" >&2
     exit 2
 fi
 STAGE=$1
@@ -15,7 +15,12 @@ case "$2" in
     *) RUN_DIR=$PWD/$2 ;;
 esac
 FREEZE_COMMIT=$3
+shift 3  # what remains is the rehearsal's flags (a registered launch has none: the entry point refuses them)
 cd "$(dirname "$0")/../../.."
 unset PYTHONPATH
 export OMP_NUM_THREADS=6 MKL_NUM_THREADS=6 VECLIB_MAXIMUM_THREADS=6  # the ADR's six threads for scoring and recomputation
-exec uv run --locked python -m studies.p10is2.partt_stages work --stage "$STAGE" --run-dir "$RUN_DIR" --freeze-commit "$FREEZE_COMMIT"
+# keep the machine awake for exactly the life of this stage: the watcher follows THIS shell's pid, which the exec below keeps, and ends when the stage ends (caffeinate -i -w <pid>); never a bare caffeinate
+if command -v caffeinate >/dev/null 2>&1; then
+    caffeinate -i -w $$ >/dev/null 2>&1 &
+fi
+exec uv run --locked python -m studies.p10is2.partt_stages work --stage "$STAGE" --run-dir "$RUN_DIR" --freeze-commit "$FREEZE_COMMIT" "$@"

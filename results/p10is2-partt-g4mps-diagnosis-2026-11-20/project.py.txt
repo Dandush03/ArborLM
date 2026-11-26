@@ -1,0 +1,15 @@
+import json
+
+D = "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-acd0bce1f7811562f/experiments/_scratch/s2_g4mps/"
+rows = json.load(open(D + "partB2.json"))
+CELLS = {"M1": 6, "D1": 6, "M-append": 6, "M-seq": 6, "M-ii": 6, "D-append": 6, "D-seq": 6, "M-joint": 3, "D-joint": 3, "E-table": 6}  # cells per arm over 3 replicates
+X = {"M-joint": 2, "D-joint": 2}  # joint arms train 2U
+for U in (2000, 4000, 8000):
+    tc = tm = 0.0
+    for r in rows:
+        n = CELLS[r["arm"]] * U * X.get(r["arm"], 1)
+        tc += n * r["cpu"]["steady_seconds_per_update"]
+        tm += n * r["mps"]["steady_seconds_per_update"]
+    print(f"U={U}: updates={sum(CELLS[r['arm']] * U * X.get(r['arm'], 1) for r in rows)} cpu_hours={tc / 3600:.1f} mps_hours={tm / 3600:.1f} ratio={tc / tm:.1f}")
+for r in rows:
+    print(r["arm"], "cpu %.3f s/update  mps %.3f s/update  ratio %.1f" % (r["cpu"]["steady_seconds_per_update"], r["mps"]["steady_seconds_per_update"], r["cpu"]["steady_seconds_per_update"] / max(1e-9, r["mps"]["steady_seconds_per_update"])))

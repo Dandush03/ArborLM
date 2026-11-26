@@ -143,15 +143,17 @@ def test_the_forced_identity_probe_pauses_for_identity_in_a_run_dir_that_is_not_
 
 
 def test_the_part_t_identity_probe_is_the_same(tmp_path: Path) -> None:
-    from studies.p10is2 import partt_stages
+    from studies.p10is2 import partt_counting
 
     r = make_repo(tmp_path)
     freeze(r, "T")
     plan = planmod.Plan.load(r / core.PLAN_T, "T")
     other = tmp_path / "rehearsal_run"
     other.mkdir()
-    with pytest.raises(core.ForcedIdentityPause):
-        partt_stages.identity_probe(plan, r, other)()
+    alt = planmod.Plan.load(partt_counting.altered_plan_file(plan, other), "T")  # one frozen hash altered: PAUSED - IDENTITY; the real plan verifies (the restore)
+    with pytest.raises(core.StageRefused, match="PAUSED — IDENTITY"):
+        planmod.verify_plan(alt, r, Path(plan.data["run_dir"]), candidate=True)
+    planmod.verify_plan(plan, r, Path(plan.data["run_dir"]), candidate=True)
 
 
 # --- B3-c --------------------------------------------------------------------------------------------------------------------------------------------
