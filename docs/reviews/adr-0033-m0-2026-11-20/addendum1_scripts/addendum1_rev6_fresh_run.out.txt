@@ -1,0 +1,147 @@
+PART A. Seed integers
+derivation: int.from_bytes(sha256('|'.join([str(seed), *labels])).digest()[:8], 'big')
+  base 1: '400002|fresh-shortcut|1' -> 16103270370041696293
+  base 2: '400002|fresh-shortcut|2' -> 10773834973117025986
+  base 3: '400002|fresh-shortcut|3' -> 619660634241804713
+  dry-run base: '400002|fresh-shortcut-dry-run' -> 3342082268851962967
+  seed index 1 (base 16103270370041696293):
+    R1a  aud_seed    '16103270370041696293|R1a|aud_seed' -> 99048509648598239
+    R1a  aud_fit     '16103270370041696293|R1a|aud_fit' -> 6032306416612730161
+    R1a  impl_seed   '16103270370041696293|R1a|impl_seed' -> 12566962013181140364
+    R1a  impl_fit    '16103270370041696293|R1a|impl_fit' -> 12461268354864723031
+    R1a  feat1_fit   '16103270370041696293|R1a|feat1_fit' -> 6469840755979506486
+    R1a  feat1_test  '16103270370041696293|R1a|feat1_test' -> 10571332153293090484
+    R1a  feat2_fit   '16103270370041696293|R1a|feat2_fit' -> 11061043458860071861
+    R1a  feat2_test  '16103270370041696293|R1a|feat2_test' -> 18275690757346002124
+    R1b  aud_seed    '16103270370041696293|R1b|aud_seed' -> 12633447773416252968
+    R1b  aud_fit     '16103270370041696293|R1b|aud_fit' -> 15662509032710366897
+    R1b  impl_seed   '16103270370041696293|R1b|impl_seed' -> 7321755159240066509
+    R1b  impl_fit    '16103270370041696293|R1b|impl_fit' -> 12504020912554481155
+    R1b  feat_fit    '16103270370041696293|R1b|feat_fit' -> 6829310525523613266
+    R1b  feat_test   '16103270370041696293|R1b|feat_test' -> 11958246379345624081
+    R1c  fit         '16103270370041696293|R1c|fit' -> 7098925521966581502
+    R1c  test        '16103270370041696293|R1c|test' -> 11363439643167260082
+    R2a  tag         '16103270370041696293|R2a|tag' -> 3303861629583630800
+    R2b  tag         '16103270370041696293|R2b|tag' -> 6538060889923897314
+    M1a  own         '16103270370041696293|M1a|own' -> 1637941703677772290
+    M1a  a4          '16103270370041696293|M1a|a4' -> 5867002204648119092
+    M1a  a3          '16103270370041696293|M1a|a3' -> 13184004603204289140
+    M1b  seed        '16103270370041696293|M1b|seed' -> 3575613678330855709
+    M1c  seed        '16103270370041696293|M1c|seed' -> 17979566934457877595
+    C1a  seed        '16103270370041696293|C1a|seed' -> 15317518887688698906
+    C1b  seed        '16103270370041696293|C1b|seed' -> 15849150491529327846
+    C1c  seed        '16103270370041696293|C1c|seed' -> 15556498823527031533
+  seed index 2 (base 10773834973117025986):
+    R1a  aud_seed    '10773834973117025986|R1a|aud_seed' -> 14347082073681892530
+    R1a  aud_fit     '10773834973117025986|R1a|aud_fit' -> 2224176057436576068
+    R1a  impl_seed   '10773834973117025986|R1a|impl_seed' -> 7782504331758928262
+    R1a  impl_fit    '10773834973117025986|R1a|impl_fit' -> 16444283175071476023
+    R1a  feat1_fit   '10773834973117025986|R1a|feat1_fit' -> 5225609312723397878
+    R1a  feat1_test  '10773834973117025986|R1a|feat1_test' -> 16030931605067442171
+    R1a  feat2_fit   '10773834973117025986|R1a|feat2_fit' -> 12489037258477810574
+    R1a  feat2_test  '10773834973117025986|R1a|feat2_test' -> 865697799531135293
+    R1b  aud_seed    '10773834973117025986|R1b|aud_seed' -> 15734805376014682024
+    R1b  aud_fit     '10773834973117025986|R1b|aud_fit' -> 12963459380180449447
+    R1b  impl_seed   '10773834973117025986|R1b|impl_seed' -> 18089437057444261177
+    R1b  impl_fit    '10773834973117025986|R1b|impl_fit' -> 4769750804237396719
+    R1b  feat_fit    '10773834973117025986|R1b|feat_fit' -> 3444571596514372147
+    R1b  feat_test   '10773834973117025986|R1b|feat_test' -> 17095152871330472031
+    R1c  fit         '10773834973117025986|R1c|fit' -> 11694447839586258658
+    R1c  test        '10773834973117025986|R1c|test' -> 5895888421579424137
+    R2a  tag         '10773834973117025986|R2a|tag' -> 17051368523337511763
+    R2b  tag         '10773834973117025986|R2b|tag' -> 11494992246446908677
+    M1a  own         '10773834973117025986|M1a|own' -> 13140911470970635274
+    M1a  a4          '10773834973117025986|M1a|a4' -> 13503461994546098136
+    M1a  a3          '10773834973117025986|M1a|a3' -> 2546003605200785130
+    M1b  seed        '10773834973117025986|M1b|seed' -> 8105556028213206108
+    M1c  seed        '10773834973117025986|M1c|seed' -> 13134464261783326640
+    C1a  seed        '10773834973117025986|C1a|seed' -> 2772179830693926807
+    C1b  seed        '10773834973117025986|C1b|seed' -> 11784920074789832903
+    C1c  seed        '10773834973117025986|C1c|seed' -> 2469149718263429896
+  seed index 3 (base 619660634241804713):
+    R1a  aud_seed    '619660634241804713|R1a|aud_seed' -> 7111840952242223467
+    R1a  aud_fit     '619660634241804713|R1a|aud_fit' -> 6804878371397271302
+    R1a  impl_seed   '619660634241804713|R1a|impl_seed' -> 4822110630992176125
+    R1a  impl_fit    '619660634241804713|R1a|impl_fit' -> 1795870029610947483
+    R1a  feat1_fit   '619660634241804713|R1a|feat1_fit' -> 7085969302918067133
+    R1a  feat1_test  '619660634241804713|R1a|feat1_test' -> 3127496725241669653
+    R1a  feat2_fit   '619660634241804713|R1a|feat2_fit' -> 16878966379758776199
+    R1a  feat2_test  '619660634241804713|R1a|feat2_test' -> 7431094289611699802
+    R1b  aud_seed    '619660634241804713|R1b|aud_seed' -> 18225617958570964578
+    R1b  aud_fit     '619660634241804713|R1b|aud_fit' -> 8084222951577580954
+    R1b  impl_seed   '619660634241804713|R1b|impl_seed' -> 8827054058015078882
+    R1b  impl_fit    '619660634241804713|R1b|impl_fit' -> 10302189262929586023
+    R1b  feat_fit    '619660634241804713|R1b|feat_fit' -> 327423375539466466
+    R1b  feat_test   '619660634241804713|R1b|feat_test' -> 9691051152120427905
+    R1c  fit         '619660634241804713|R1c|fit' -> 16061091096005909391
+    R1c  test        '619660634241804713|R1c|test' -> 12881872630696060536
+    R2a  tag         '619660634241804713|R2a|tag' -> 18441618160095884807
+    R2b  tag         '619660634241804713|R2b|tag' -> 14917411578424160827
+    M1a  own         '619660634241804713|M1a|own' -> 1028721077783548436
+    M1a  a4          '619660634241804713|M1a|a4' -> 9145316429393446378
+    M1a  a3          '619660634241804713|M1a|a3' -> 9109837224184449127
+    M1b  seed        '619660634241804713|M1b|seed' -> 12934049156249325814
+    M1c  seed        '619660634241804713|M1c|seed' -> 4498135121280209952
+    C1a  seed        '619660634241804713|C1a|seed' -> 11452172200908511852
+    C1b  seed        '619660634241804713|C1b|seed' -> 16847630869195040316
+    C1c  seed        '619660634241804713|C1c|seed' -> 878078140576336163
+  seed index dry (base 3342082268851962967):
+    R1a  aud_seed    '3342082268851962967|R1a|aud_seed' -> 9642052695109018261
+    R1a  aud_fit     '3342082268851962967|R1a|aud_fit' -> 5898926463622394619
+    R1a  impl_seed   '3342082268851962967|R1a|impl_seed' -> 688429447831865614
+    R1a  impl_fit    '3342082268851962967|R1a|impl_fit' -> 7004828903879332565
+    R1a  feat1_fit   '3342082268851962967|R1a|feat1_fit' -> 10959895370947507904
+    R1a  feat1_test  '3342082268851962967|R1a|feat1_test' -> 7104822719368297370
+    R1a  feat2_fit   '3342082268851962967|R1a|feat2_fit' -> 18288342007524452630
+    R1a  feat2_test  '3342082268851962967|R1a|feat2_test' -> 17667116593709713417
+    R1b  aud_seed    '3342082268851962967|R1b|aud_seed' -> 18269349003600537885
+    R1b  aud_fit     '3342082268851962967|R1b|aud_fit' -> 4715202151070200041
+    R1b  impl_seed   '3342082268851962967|R1b|impl_seed' -> 13066872143408108431
+    R1b  impl_fit    '3342082268851962967|R1b|impl_fit' -> 3203262675427405743
+    R1b  feat_fit    '3342082268851962967|R1b|feat_fit' -> 5193989310436402216
+    R1b  feat_test   '3342082268851962967|R1b|feat_test' -> 6327086452646249430
+    R1c  fit         '3342082268851962967|R1c|fit' -> 12357770532595769842
+    R1c  test        '3342082268851962967|R1c|test' -> 7298742721039615523
+    R2a  tag         '3342082268851962967|R2a|tag' -> 4560779698795767882
+    R2b  tag         '3342082268851962967|R2b|tag' -> 16488324911911726946
+    M1a  own         '3342082268851962967|M1a|own' -> 6111490567131004701
+    M1a  a4          '3342082268851962967|M1a|a4' -> 12709778287562225103
+    M1a  a3          '3342082268851962967|M1a|a3' -> 17357159002069502984
+    M1b  seed        '3342082268851962967|M1b|seed' -> 8454236620983312371
+    M1c  seed        '3342082268851962967|M1c|seed' -> 3628434571009372890
+    C1a  seed        '3342082268851962967|C1a|seed' -> 16285973059536970087
+    C1b  seed        '3342082268851962967|C1b|seed' -> 17121936060044334293
+    C1c  seed        '3342082268851962967|C1c|seed' -> 7114544774340950214
+  108 integers, all distinct; none equals 400002 or the development label's integer 12216038847476683015
+
+PART B. Binomial standard error of a pooled rate at the bound (one rule scored on every item of a lineage and level)
+chance: 0 for an open answer, 1/k for k offered options. 'above': rate = chance + 0.15; 'below': rate = chance - 0.15 (none if negative)
+  items per level and seed: 2000  (C1)
+    seeds 1  n   2000  worst case (rate 0.5) 0.0112   above/below: open 0.0080/-  k=2 0.0107/0.0107  k=3 0.0112/0.0087  k=4 0.0110/0.0067  k=5 0.0107/0.0049  k=7 0.0102/-
+    seeds 2  n   4000  worst case (rate 0.5) 0.0079   above/below: open 0.0056/-  k=2 0.0075/0.0075  k=3 0.0079/0.0061  k=4 0.0077/0.0047  k=5 0.0075/0.0034  k=7 0.0072/-
+    seeds 3  n   6000  worst case (rate 0.5) 0.0065   above/below: open 0.0046/-  k=2 0.0062/0.0062  k=3 0.0065/0.0050  k=4 0.0063/0.0039  k=5 0.0062/0.0028  k=7 0.0059/-  <- plan
+    seeds 4  n   8000  worst case (rate 0.5) 0.0056   above/below: open 0.0040/-  k=2 0.0053/0.0053  k=3 0.0056/0.0043  k=4 0.0055/0.0034  k=5 0.0053/0.0024  k=7 0.0051/-
+    seeds 5  n  10000  worst case (rate 0.5) 0.0050   above/below: open 0.0036/-  k=2 0.0048/0.0048  k=3 0.0050/0.0039  k=4 0.0049/0.0030  k=5 0.0048/0.0022  k=7 0.0046/-
+  items per level and seed: 3000  (R1)
+    seeds 1  n   3000  worst case (rate 0.5) 0.0091   above/below: open 0.0065/-  k=2 0.0087/0.0087  k=3 0.0091/0.0071  k=4 0.0089/0.0055  k=5 0.0087/0.0040  k=7 0.0083/-
+    seeds 2  n   6000  worst case (rate 0.5) 0.0065   above/below: open 0.0046/-  k=2 0.0062/0.0062  k=3 0.0065/0.0050  k=4 0.0063/0.0039  k=5 0.0062/0.0028  k=7 0.0059/-
+    seeds 3  n   9000  worst case (rate 0.5) 0.0053   above/below: open 0.0038/-  k=2 0.0050/0.0050  k=3 0.0053/0.0041  k=4 0.0052/0.0032  k=5 0.0050/0.0023  k=7 0.0048/-  <- plan
+    seeds 4  n  12000  worst case (rate 0.5) 0.0046   above/below: open 0.0033/-  k=2 0.0044/0.0044  k=3 0.0046/0.0035  k=4 0.0045/0.0027  k=5 0.0044/0.0020  k=7 0.0042/-
+    seeds 5  n  15000  worst case (rate 0.5) 0.0041   above/below: open 0.0029/-  k=2 0.0039/0.0039  k=3 0.0041/0.0032  k=4 0.0040/0.0024  k=5 0.0039/0.0018  k=7 0.0037/-
+  items per level and seed: 4000  (M1, R2)
+    seeds 1  n   4000  worst case (rate 0.5) 0.0079   above/below: open 0.0056/-  k=2 0.0075/0.0075  k=3 0.0079/0.0061  k=4 0.0077/0.0047  k=5 0.0075/0.0034  k=7 0.0072/-
+    seeds 2  n   8000  worst case (rate 0.5) 0.0056   above/below: open 0.0040/-  k=2 0.0053/0.0053  k=3 0.0056/0.0043  k=4 0.0055/0.0034  k=5 0.0053/0.0024  k=7 0.0051/-
+    seeds 3  n  12000  worst case (rate 0.5) 0.0046   above/below: open 0.0033/-  k=2 0.0044/0.0044  k=3 0.0046/0.0035  k=4 0.0045/0.0027  k=5 0.0044/0.0020  k=7 0.0042/-  <- plan
+    seeds 4  n  16000  worst case (rate 0.5) 0.0040   above/below: open 0.0028/-  k=2 0.0038/0.0038  k=3 0.0040/0.0031  k=4 0.0039/0.0024  k=5 0.0038/0.0017  k=7 0.0036/-
+    seeds 5  n  20000  worst case (rate 0.5) 0.0035   above/below: open 0.0025/-  k=2 0.0034/0.0034  k=3 0.0035/0.0027  k=4 0.0035/0.0021  k=5 0.0034/0.0015  k=7 0.0032/-
+  the figure is larger for a rule scored on part of the items (one shape, or the items where it applies): multiply by sqrt(n / items scored)
+  dry run: 20 items per level, one seed; standard error at rate 0.15: 0.080; at rate 0.5: 0.112
+
+  rounding: a script that writes figures rounded to d decimals leaves an error of at most half a unit of the last decimal in each figure,
+  and so in their item-weighted mean: 0.00005 at d = 4, 0.0005 at d = 3
+
+PART C. The path patterns of the script listing (applied to the output of: git ls-tree -r --name-only b78e58b1)
+  (a) ^studies/m0/(r1|r2|m1|c1)_fix4_(measure|battery|draw|a3_run)\.py$
+  (b) ^docs/reviews/m0-lineage-decision-2026-11-25/final_(r1|r2|m1|c1)/[^/]*(rules|closed_forms|_draw|_a3_run|heur)[^/]*\.py$
+  (c) by name: docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py, .../audit4_c1/s5_analyse_v2.py, .../audit3_c1/a3_shortcuts.py
+  items per lineage and level over the run: R1a 9000, R1b 9000, R1c 9000, R2a 12000, R2b 12000, M1a 12000, M1b 12000, M1c 12000, C1a 6000, C1b 6000, C1c 6000
