@@ -1,0 +1,48 @@
+python 3.12.14
+== 1. derived integers
+  '400004|cluster-partition|cross': sha256 2b2e7fda4c2b8ac8296c16e5da7f5c0556b8aa9249e1fd1723aa0869a6688c22 -> 3111564968117111496
+  '400004|cluster-partition|R1': sha256 a8a6ff4e9fd266b0b4cd4964d1f987f7b6c1ec1ed67a8904bf675db077fa5f15 -> 12152681357659760304
+  '400004|cluster-partition|R2': sha256 60945893c6c7dd503e7b4287570a8a716d04dc9852d0891d8573ee88562beb33 -> 6959284715912682832
+  '400004|cluster-partition|M1': sha256 4fc5e9a2f13a28b070b502d92bedf82f0aa6243775b934cd5c21fa722d564d0a -> 5748257385449400496
+  '400004|cluster-partition|C1': sha256 cb5b79bbd99f3bd1381699b21728be1af4510cfc2e6b79b6e911066f31e69207 -> 14653439660296977361
+== 2. shuffle of a..h on each stream (random.shuffle, and the hand-written loop of the text)
+  cross: ['e', 'c', 'b', 'h', 'd', 'f', 'g', 'a']
+     R1: ['d', 'a', 'g', 'h', 'c', 'b', 'e', 'f']
+     R2: ['h', 'd', 'e', 'f', 'b', 'c', 'g', 'a']
+     M1: ['h', 'g', 'e', 'a', 'f', 'd', 'b', 'c']
+     C1: ['e', 'f', 'a', 'd', 'h', 'c', 'g', 'b']
+  text claims cross -> e,c,b,h,d,f,g,a: match
+== 3. reconstructed made-up map (from partition_vector.out.txt only)
+  nodes: ['C1.alpha', 'C1.beta', 'C1.delta', 'C1.epsilon', 'C1.gamma', 'M1.alpha', 'M1.beta', 'M1.delta', 'M1.gamma', 'R1.alpha', 'R1.beta', 'R1.delta', 'R1.epsilon', 'R1.gamma', 'R1.zeta', 'R2.alpha', 'R2.beta', 'R2.delta', 'R2.epsilon', 'R2.gamma']
+  NOT REGISTERED (reconstruction): ['C1.epsilon']
+  -- reading of 'X clusters of e': by registered lineages
+  component C1.alpha: ['C1.alpha', 'R2.alpha']
+  component C1.beta: ['C1.beta', 'R2.beta']
+  component C1.epsilon: ['C1.epsilon', 'R1.epsilon']
+  component C1.gamma: ['C1.gamma', 'M1.beta']
+  component M1.alpha: ['M1.alpha', 'R2.gamma']
+  component R1.alpha: ['R1.alpha', 'R1.beta']
+  component R1.delta: ['R1.delta', 'R1.gamma']
+  cross-evaluation clusters in shuffled order: ['M1.alpha', 'C1.beta', 'C1.gamma', 'C1.alpha']
+  part A: ['C1.delta', 'C1.epsilon', 'C1.gamma', 'M1.alpha', 'R1.alpha', 'R2.epsilon']
+  part B: ['C1.alpha', 'C1.beta', 'M1.delta', 'M1.gamma', 'R1.delta', 'R1.zeta', 'R2.delta']
+  unassigned: []
+  per evaluation (G_e, A, B): {'R1': (4, 2, 2), 'R2': (5, 2, 3), 'M1': (4, 2, 2), 'C1': (4, 2, 2)}
+  compared with partition_vector.out.txt: IDENTICAL
+  -- reading of 'X clusters of e': by any lineages
+  component C1.alpha: ['C1.alpha', 'R2.alpha']
+  component C1.beta: ['C1.beta', 'R2.beta']
+  component C1.epsilon: ['C1.epsilon', 'R1.epsilon']
+  component C1.gamma: ['C1.gamma', 'M1.beta']
+  component M1.alpha: ['M1.alpha', 'R2.gamma']
+  component R1.alpha: ['R1.alpha', 'R1.beta']
+  component R1.delta: ['R1.delta', 'R1.gamma']
+  cross-evaluation clusters in shuffled order: ['M1.alpha', 'C1.beta', 'C1.gamma', 'C1.alpha']
+  part A: ['C1.delta', 'C1.epsilon', 'C1.gamma', 'M1.alpha', 'R1.alpha', 'R2.epsilon']
+  part B: ['C1.alpha', 'C1.beta', 'M1.delta', 'M1.gamma', 'R1.delta', 'R1.zeta', 'R2.delta']
+  unassigned: []
+  per evaluation (G_e, A, B): {'R1': (4, 2, 2), 'R2': (5, 2, 3), 'M1': (4, 2, 2), 'C1': (4, 2, 2)}
+  compared with partition_vector.out.txt: IDENTICAL
+== 4. ambiguity probe: the two readings of 'X clusters of e' on a map where they differ
+  registered: X ['C1.k'] parts {'C1.a': 'B', 'C1.b': 'B', 'C1.c': 'A', 'C1.d': 'A', 'C1.k': 'A'} per-eval {'R1': (1, 1, 0), 'R2': (1, 1, 0), 'M1': (0, 0, 0), 'C1': (4, 2, 2)}
+         any: X ['C1.k'] parts {'C1.a': 'B', 'C1.b': 'B', 'C1.c': 'A', 'C1.d': 'B', 'C1.k': 'A'} per-eval {'R1': (1, 1, 0), 'R2': (1, 1, 0), 'M1': (0, 0, 0), 'C1': (4, 1, 3)}

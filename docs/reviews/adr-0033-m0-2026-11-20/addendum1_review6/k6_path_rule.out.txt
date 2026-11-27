@@ -1,0 +1,117 @@
+commit b78e58b1f47619f070dfc6c0a88999d345b1a34b; 12788 paths in tree
+(a) 6:
+    studies/m0/c1_fix4_a3_run.py
+    studies/m0/c1_fix4_battery.py
+    studies/m0/c1_fix4_draw.py
+    studies/m0/m1_fix4_battery.py
+    studies/m0/r1_fix4_measure.py
+    studies/m0/r2_fix4_battery.py
+(b) 11:
+    docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f1_draw.py
+    docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f3_a3_run.py
+    docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f5_closed_forms.py
+    docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f5b_closed_forms_v2.py
+    docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5.py
+    docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5_attempt1.py
+    docs/reviews/m0-lineage-decision-2026-11-25/final_r1/new_rules_final.py
+    docs/reviews/m0-lineage-decision-2026-11-25/final_r1/run_rules_final.py
+    docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_new_heur.py
+    docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules.py
+    docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules_new.py
+(c) 3 present, missing []:
+    docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py
+    docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py
+    docs/reviews/m0-lineage-decision-2026-11-25/audit3_c1/a3_shortcuts.py
+union 20; drafter's list 20
+  in rule, not in drafter's list: []
+  in drafter's list, not in rule: []
+
+Unmatched .py files in final_*/ and studies/m0/*fix4*: static signal (count of rule-scoring words; first docstring line)
+     4  final_c1/f10_assemble.py  | Final C1 audit (fix 4), step 10: assemble final_c1.json from my outputs (stdlib only). Usage: python3 f10_asse
+     0  final_c1/f2_keys.py  | Final C1 audit (fix 4), step 2: independent key check from the item TEXT alone (stdlib only; imports nothing f
+    34  final_c1/f4_pool.py  | Final C1 audit (fix 4), step 4: pooled cheap-rule excess per lineage and level (R-31, R-32, R-34), from the RA
+    35  final_c1/f4b_pool_v2.py  | VERSION 2 (v1 = f4_pool.py, kept with its output f4_pooled_out.txt: it put the audit-3 mutation rules in the p
+     0  final_c1/f6_capacity.py  | Final C1 audit (fix 4), step 6: capacity against studies.m0.core.generate_pool AS WRITTEN (R-22, R-28, R-30).
+     0  final_c1/f6b_collisions.py  | Final C1 audit (fix 4), step 6b: summarise f6_capacity.py and check collisions BETWEEN jobs (core.generate_poo
+     0  final_c1/f6d_capacity_all_levels.py  | Final C1 audit (fix 4), step 6d: capacity with ONE shared `taken` across the seven levels of a lineage, as cor
+     0  final_c1/f7_levels.py  | Final C1 audit (fix 4), step 7: are the levels distinct, and does difficulty rise with the level? (stdlib only
+     0  final_c1/f8_consistency.py  | Final C1 audit (fix 4), step 8: set and cluster consistency (R-12, R-20, R-26): dropped lineages and shapes ex
+     0  final_c1/f9_repro_pool.py  | Final C1 audit (fix 4), step 9 helper: build, in THIS process, one small pool per surviving lineage with core.
+     0  final_m1/asks_a5.py  | Final M1 audit: distinct question sentences and distinct masked sentences per lineage (digits -> #, capitalise
+     9  final_m1/build_final_a5.py  | Final M1 audit: assemble final_m1.json and the per-lineage markdown table from the outputs in this directory. 
+     0  final_m1/cap_cascade_a5.py  | Final M1 audit: what remains under core.generate_pool AS WRITTEN if every failing lineage is dropped, iterated
+     1  final_m1/cap_summary_a5.py  | Final M1 audit: capacity verdicts from capacity_M30000.json.
+     0  final_m1/capacity_a5.py  | Final M1 audit: capacity sampling. M draws per lineage and level from core.stream(SEEDS['capacity']=2611254, '
+     0  final_m1/check_keys_a5.py  | Final M1 audit: compare the text solver (solve_text_a5) with the stored key, N items per lineage and level at 
+     2  final_m1/compare_repro_a5.py  | Final M1 audit: compare my recomputation at the implementer's seeds (rules_repro_n2000.json) with the implemen
+     0  final_m1/exclusion_a5.py  | Final M1 audit: are the dropped lineages excluded everywhere the fix-4 set is built? Reads the code's loaders,
+     1  final_m1/fm1_common.py  | Final M1 audit (fix 4), shared loader. Auditor: arbor-auditor (Claude Opus 5.5). Imports only the generators o
+     0  final_m1/levels_a5.py  | Final M1 audit: levels.
+    12  final_m1/pool_a5.py  | Final M1 audit: R-32 pooled excess per lineage and level, R-31 classes, verdict at 0.15 two-sided. Standard li
+     0  final_m1/repro_a5.py  | Final M1 audit: reproducibility. In one process, for every survivor and level: 300 items from core.stream(SEED
+     3  final_m1/solve_text_a5.py  | Final M1 audit (fix 4): second solver from a separate context. Written by the auditor from item TEXTS only (sa
+     3  final_m1/solve_text_a5_attempt1.py  | Final M1 audit (fix 4): second solver from a separate context. Written by the auditor from item TEXTS only (sa
+     0  final_m1/templates_a5.py  | Final M1 audit: list the distinct text templates per surviving lineage (digits -> #, capitalised words -> W, t
+     0  final_r1/a4copy/gen.py  | Shim (as audit 4's gen.py): audit-3 scripts import `gen`; here it serves the fix-4 set through gen4."""
+     2  final_r1/a4copy/gen4.py  | Final R1 audit: shim replacing audit 4's gen4.py so that its unchanged heuristics3.py / heuristics4.py run on 
+    41  final_r1/a4copy/heuristics3.py  | Audit 3 (R1): the auditor's own shortcut battery, per lineage and level, two-sided.
+    35  final_r1/a4copy/heuristics4.py  | Audit 4 (R1): the auditor's shortcut battery for the fix-round-3 set, per lineage and level, two-sided.
+    18  final_r1/a4copy/solvers3.py  | Audit 3 (R1): independent solvers that read ONLY the rendered question text (never the structured form, never 
+     7  final_r1/build_final_json.py  | Final R1 audit: assemble final_r1.json from this audit's raw outputs (check_keys_run1.jsonl.counts.json, pool_
+     0  final_r1/capacity_final.py  | Final R1 audit: capacity against core.generate_pool AS WRITTEN (R-28, R-30).
+     0  final_r1/check_keys_final.py  | Final R1 audit: compare the stored key with solvers_final (text only) on n items per shape and level at seed b
+     0  final_r1/exclusion_final.py  | Final R1 audit: are the dropped shapes excluded wherever the fix-4 set is built? Checks registered_v4(), the c
+     0  final_r1/fgen.py  | Final R1 audit (fix 4): item generation through the repository's builders, throwaway seeds chosen by this audi
+     3  final_r1/levels_final.py  | Final R1 audit: levels. For each survivor and level, n items at seed base B (Random(B + level)).
+    64  final_r1/pool_final.py  | Final R1 audit: R-32 pooled excess per lineage (= shape, R-34) and level, over the implementer's primary and r
+     0  final_r1/repro_final.py  | Final R1 audit: reproducibility. For every survivor (and the two stage-2 drops) and level, 300 items at seed b
+     0  final_r1/samples.py  | Print item texts (question, options, key) for reading; usage: python samples.py <seed_base> <per_level> <level
+     8  final_r1/solvers_final.py  | Final R1 audit (fix 4): second solvers written from a separate context, from item TEXT only.
+     0  final_r1/weekday_hops.py  | Final R1 audit: temporal_weekday_shift_r6, from the text only: distribution of the number of links on the (uni
+     0  final_r2/f_capacity.py  | Final R2 audit: capacity against studies.m0.core.generate_pool AS WRITTEN (R-22, R-28, R-30).
+     1  final_r2/f_final_json.py  | Final R2 audit: assemble final_r2.json from my own outputs (f_keys_1000_k1.json, f_pool.json, f_new_summ.json,
+     0  final_r2/f_frombase_digits.py  | Final R2 audit: from_base digit-count and base distribution per level (text only), and examples of texts share
+     4  final_r2/f_harness_check.py  | Final R2 audit: does my harness (f_rules.py) reproduce the implementer's counts when given the implementer's s
+     1  final_r2/f_interval_diag.py  | Final R2 audit, DIAGNOSTIC ONLY (not pooled into the R-32 estimate): the '[impl] shortest first' rule on inter
+     0  final_r2/f_keys.py  | Final R2 audit: key check of the stored answers against the text-only solver f_solver.py, and wording flags.
+     1  final_r2/f_levels.py  | Final R2 audit: are the 7 levels distinct, and does a difficulty parameter rise? My own test, from the questio
+    12  final_r2/f_new_summ.py  | Final R2 audit: summary of the NEW rules (f_rules_new_4000.json, my fresh seeds only, 4,000 test items per lev
+     0  final_r2/f_phrases.py  | Final R2 audit: distinct phrase inventory (ops, asks) from question texts only, to make sure the text solver c
+    35  final_r2/f_pool.py  | Final R2 audit: pooled shortcut effects (R-32) per lineage and level, classes per R-31.
+     0  final_r2/f_render.py  | Final R2 audit: render sample items (question text, answer) of the 19 fix-4 survivors, to write the text-only 
+     0  final_r2/f_repro.py  | Final R2 audit: reproducibility. Per survivor and level, 300 items from random.Random(f"finalr2-repro|{lid}|{l
+     0  final_r2/f_shapes.py  | Final R2 audit: one example per question shape (structured 'ask'/'convention'/'kind' etc.) per lineage, levels
+     2  final_r2/f_solver.py  | Final R2 audit (M0-R2, fix 4): an independent second solver that reads ONLY the question text.
+     0  studies/m0/c1_fix4_capacity.py  | C1 fix 4: capacity against ``core.generate_pool`` as written (ruling R-28).
+     0  studies/m0/c1_fix4_exec.py  | C1 fix 4: re-check the answer keys of the surviving lineages by EXECUTING the programs.
+     0  studies/m0/c1_fix4_levels.py  | C1 fix 4: do the seven levels of each lineage produce distinct items with rising difficulty? (ruling R-21, rep
+    46  studies/m0/c1_fix4_rules_table.py  | C1 fix 4: the table of cheap-rule and closed-form rates per lineage, level and shape, from the three rule scri
+    19  studies/m0/c1_fix4_survivors.py  | C1 fix 4: assemble ``manifests/c1_fix4_survivors.json`` from the fix-4 measurements (no new measurement is mad
+    20  studies/m0/lineages_c1_fix4.py  | C1, narrow repair round ("fix 4"; lead rulings 5, R-24 to R-29; the human lead's fifth decision: shortcut boun
+     0  studies/m0/lineages_c1_fix4_clusters.py  | C1 cluster map after fix round 4 (ruling R-20: the two variants are NEW lineages in their OWN clusters, not fi
+    23  studies/m0/lineages_m1_fix4.py  | M1 fix round 4 (the narrow repair round; lead rulings R-24 to R-29, the human lead's fifth decision).
+     0  studies/m0/lineages_m1_fix4_clusters.py  | M1 strict cluster map for the fix-round-4 set (R-24, R-25, R-26). Same strict map as round 3 (``lineages_m1_fi
+     3  studies/m0/lineages_r1_fix4_a.py  | R1 fix round 4: seven shapes whose levels were not distinct (audit 4, section 4 'Levels'; lead rulings R-21, R
+    12  studies/m0/lineages_r1_fix4_clusters.py  | The R1 set after fix round 4 (the human lead's fifth decision, lead rulings R-24 to R-29): which of the 37 fix
+     1  studies/m0/lineages_r1_fix4_common.py  | Registry and helpers of the R1 fix-round-4 shapes (ids end in ``_r6``; the human lead's fifth decision, lead r
+     5  studies/m0/lineages_r2_fix4.py  | R2 fix round 4 (the narrow repair round of ``LEAD_RULINGS_5.md``: R-24 to R-29). Same ids ``R2.<name>``, own r
+     3  studies/m0/m1_fix4_capacity.py  | M1 fix round 4: capacity of the surviving lineages (R-22, R-28), against ``core.generate_pool`` AS WRITTEN and
+     3  studies/m0/m1_fix4_checks.py  | M1 fix round 4: checks as functions that RETURN problems (the tests pass when the list is empty). Self-check o
+    18  studies/m0/m1_fix4_survivors.py  | M1 fix round 4: checks stage and the survivors manifest (R-24 to R-29). Standard library, torch and ``studies`
+     0  studies/m0/m1_fix4_verify.py  | M1 fix round 4: the implementer's existing second derivation (``m1_fix3_verify``) extended to the fix-4 builde
+    43  studies/m0/r1_fix4_a3_heur.py  | Audit 3 (R1): the auditor's own shortcut battery, per lineage and level, two-sided.
+    18  studies/m0/r1_fix4_a3_solvers.py  | Audit 3 (R1): independent solvers that read ONLY the rendered question text (never the structured form, never 
+    38  studies/m0/r1_fix4_a4_heur.py  | Audit 4 (R1): the auditor's shortcut battery for the fix-round-3 set, per lineage and level, two-sided.
+     0  studies/m0/r1_fix4_capacity.py  | Capacity of the surviving R1 shapes against ``core.generate_pool`` AS WRITTEN (lead rulings R-22, R-28, R-11, 
+     0  studies/m0/r1_fix4_gen.py  | Item generation for the round-4 measurements (throwaway seeds, never registered study seeds). Adapted from the
+     0  studies/m0/r1_fix4_levels.py  | Are the levels of a shape distinct? (lead ruling R-21, R-25 (c), R-26.) Adapted from the fourth auditor's ``le
+    13  studies/m0/r1_fix4_survivors.py  | Builds ``manifests/r1_fix4_survivors.json`` (lead rulings R-24 to R-29): for every shape of the fix-round-3 se
+    26  studies/m0/r1_fix4_table.py  | Per-shape, per-level excess of the best counted shortcut rule over the base rate, by rule class (round 4; lead
+     9  studies/m0/r1_fix4_tells.py  | Fitted count-feature lookups (round 4). COPIED from the fourth auditor's ``feature_tells4.py`` and ``kept_tell
+    25  studies/m0/r2_fix4_a3_heur.py  | Audit 3 (R2): cheap-rule heuristics per lineage. Each returns an answer string or None (not applicable). Stdli
+     2  studies/m0/r2_fix4_a3_solvers.py  | Audit 3 (R2): independent solvers. Stdlib only; imports NOTHING from studies.m0. Each takes (structured dict, 
+    16  studies/m0/r2_fix4_a4_heur.py  | Audit 4 (R2): my own cheap-rule battery. Each heuristic takes (structured, question) and returns an answer str
+    22  studies/m0/r2_fix4_build.py  | R2 fix round 4: builds ``manifests/r2_fix4_survivors.json`` from the recorded measurements (battery JSONs, lev
+     1  studies/m0/r2_fix4_capacity.py  | R2 fix round 4: capacity against ``core.generate_pool`` AS WRITTEN (R-28), for the lineages that survive the s
+     0  studies/m0/r2_fix4_levels.py  | R2 fix round 4, repair (c): are the levels of a lineage distinct, with difficulty rising by a stated parameter
+     0  studies/m0/r2_fix4_set.py  | The R2 set of fix round 4: the fix-round-3 set (``r2_fix3_set.fix3_set``, 40 lineages) with the six repaired s

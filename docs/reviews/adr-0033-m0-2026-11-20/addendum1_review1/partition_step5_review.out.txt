@@ -1,0 +1,15 @@
+scenario 1: |X| = 14, mostly R2-C1 (C1 programs implementing R2 algorithms)
+  R1: G=13, X touching=2: P(parts differ from floor/ceil half)=0.000; largest |A-B|=1; smaller part: 1st percentile 6, minimum 6
+  R2: G=19, X touching=12: P(parts differ from floor/ceil half)=0.000; largest |A-B|=1; smaller part: 1st percentile 9, minimum 9
+  M1: G=11, X touching=2: P(parts differ from floor/ceil half)=0.000; largest |A-B|=1; smaller part: 1st percentile 5, minimum 5
+  C1: G=14, X touching=12: P(parts differ from floor/ceil half)=0.000; largest |A-B|=0; smaller part: 1st percentile 7, minimum 7
+scenario 2: |X| = 21; C1 has 11 clusters, 10 of them cross
+  R1: G=13, X touching=7: P(parts differ from floor/ceil half)=0.003; largest |A-B|=1; smaller part: 1st percentile 6, minimum 6
+  R2: G=19, X touching=18: P(parts differ from floor/ceil half)=0.459; largest |A-B|=3; smaller part: 1st percentile 8, minimum 8
+  M1: G=11, X touching=7: P(parts differ from floor/ceil half)=0.043; largest |A-B|=3; smaller part: 1st percentile 5, minimum 4
+  C1: G=11, X touching=10: P(parts differ from floor/ceil half)=0.471; largest |A-B|=9; smaller part: 1st percentile 3, minimum 1
+scenario 3: |X| = 21; C1 has 14 clusters, 8 of them cross
+  R1: G=13, X touching=9: P(parts differ from floor/ceil half)=0.059; largest |A-B|=5; smaller part: 1st percentile 6, minimum 4
+  R2: G=19, X touching=18: P(parts differ from floor/ceil half)=0.461; largest |A-B|=3; smaller part: 1st percentile 8, minimum 8
+  M1: G=11, X touching=7: P(parts differ from floor/ceil half)=0.042; largest |A-B|=3; smaller part: 1st percentile 5, minimum 4
+  C1: G=14, X touching=8: P(parts differ from floor/ceil half)=0.001; largest |A-B|=2; smaller part: 1st percentile 7, minimum 6

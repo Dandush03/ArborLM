@@ -1,0 +1,41 @@
+ADR-0033 addendum 1, draft 7: closed list of uncounted rules, from committed code at b78e58b1f47619f070dfc6c0a88999d345b1a34b
+table SHA-256: ccea7d78754480830f3887d27ac808e207c60ef4c4a444e47fe6a3fc4c2cd24d
+
+Part A. Source files read (git show), SHA-256
+  29ff7b07f98392457b6fe05fe06682e1bf413d20e94f696fe14d84271a3691eb  docs/reviews/m0-lineage-decision-2026-11-25/audit3_c1/a3_shortcuts.py
+  7182713b0932ef6615bacf281c91eb73a37e8bca8098802a43cbafe0bba98a83  docs/reviews/m0-lineage-decision-2026-11-25/audit3_m1/shortcuts_a3.py
+  3fa429c9fb8415e4e20da6a14f2a6067162cac7cbd4c8c90aa7dc8e9f9ecc385  docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py
+  b6ed2ec95426058a79a8f39ffeff55f7dbc0c4f93fc350a273ca2166a0c6f0df  docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py
+  a85567eee0749cbdaeb00f123773b374e8967774b477e5a3444f4147c8d3e142  docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/short_summary_a4.py
+  35bc60a66ce7f907a06c9b42139d3ed770351e1d19dfbb54a2c5d205e0fcdd9d  docs/reviews/m0-lineage-decision-2026-11-25/audit4_r1/final_table4.py
+  6ca4bcf5054f6ec673e9f30f458067795eb6b42b7781131e4631b13fb3d4254d  docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f4b_pool_v2.py
+  9c9936546d9abe70446370ba35301fc00b3c357ea9662bcf218deffe1ab74d75  docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f5_closed_forms.py
+  c7d4c7fbf40b6e5df6eef82ca7103dea5774870eeeec955d99fed0cc54e50564  docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f5b_closed_forms_v2.py
+  f6c0c3c3faf8fd385e2c296b8a3fa313da4b87c5c1554c13df36d99fbc43f5b1  docs/reviews/m0-lineage-decision-2026-11-25/final_m1/pool_a5.py
+  bbb0c233b607df80049a3a659007e846401630551f21fe3cb5518c7550d1975c  docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_new_heur.py
+  4d523e59256909746edc540699bb1022abd3f2edaa379ac99e5ef3c93143f788  docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_pool.py
+  fb91e7992dbdde46ae02fb6698b004f4140a7f8f259835cab8f01f7a5454abfb  studies/m0/c1_fix3_battery.py
+  7eef7c7cb64195376d2424ce51b22db97c52b0164d894875310c3576a2552936  studies/m0/m1_fix3_shortcuts.py
+  dca205333bd89aad3823968d1bd273bfe94066c02d27a4c8e628743080a61c0d  studies/m0/r1_fix3_battery.py
+  2e48179bf194be7e00411e44e982e7be1c35ab2b0f1a0434fdee8a288ef8b618  studies/m0/r2_fix4_battery.py
+
+Part B. Sizes of the closed list
+  R1: 35 bare names (EXCL 16 of 16, of which limited to named lineage stems: 13; M 19 of 19); considered and counted: 0
+      implementer's exclusions equal EXCL as a set of names: True; M names with a class in r1_fix3_battery.py: 0
+  R2: 35 entries of klass() (P 16, artifact 6, partial 13; shape-dependent 1, level-dependent 3) and 3 of 21 new rules by name; total 38
+      klass() bodies identical in f_pool.py and r2_fix4_battery.py: True; construct entries counted: 2
+  M1: 13 (lineage stem, key) pairs (12 of 13 PROC pairs; 1 audit-3 pairs by name and definition); considered and counted: 6
+      counted: finite_differences im:next_term_only: in PROC, but its reason string in short_summary_a4.py reads 'kept as a rule': a doubt, so it counts
+      counted: division_counting a3:k_minus_remainder_ignores_exact_fit: same name; the definition differs between audit3_m1/shortcuts_a3.py and studies/m0/m1_fix3_shortcuts.py at the lines given (right-hand side, or a statement that binds a name it reads) [a3 lines [304, 305], implementer lines [376, 377]]
+      counted: finite_differences a3:next_term_only: the PROC rule of the same name is itself counted [a3 lines [118, 121, 122, 123], implementer lines [188, 191, 192, 193]]
+      counted: last_digit_power a3:fermat_misapplied_e_mod_p_plus_1: same name; the definition differs between audit3_m1/shortcuts_a3.py and studies/m0/m1_fix3_shortcuts.py at the lines given (right-hand side, or a statement that binds a name it reads) [a3 lines [175, 176, 181], implementer lines [252, 254, 260]]
+      counted: prime_factors a3:largest_le_sqrt: same name; the definition differs between audit3_m1/shortcuts_a3.py and studies/m0/m1_fix3_shortcuts.py at the lines given (right-hand side, or a statement that binds a name it reads) [a3 lines [162, 169], implementer lines [238, 245]]
+      counted: slot_permutations a3:parity_fraction_of_total: same name; the definition differs between audit3_m1/shortcuts_a3.py and studies/m0/m1_fix3_shortcuts.py at the lines given (right-hand side, or a statement that binds a name it reads) [a3 lines [205, 206, 207, 209, 211], implementer lines [278, 280, 281, 282, 284, 285]]
+      entry:   ratio_share a3:largest_share [a3 lines [82], implementer lines [143]]
+  C1: 63 names (a4 52, battery 4, a3 4, closed 3); considered and counted: 22
+      M.* or H.* names built at run time in s4_rules_v2.py: []
+      s5_analyse_v2.py writes single rules only for prefixes S, F, M, H: True; EFF_F is eff over (S, G, M, F): True
+
+Part C. Binomial standard error sqrt(p(1-p)/n) for the two item counts written into the scripts (three seeds)
+  M1a, digit_puzzle lineages: 300 per level and seed: n = 900: p = 0.15: 0.0119, p = 0.65: 0.0159, p = 0.5: 0.0167
+  R1a, fitted feature lookups: tested on 1,000 per level and seed: n = 3000: p = 0.15: 0.0065, p = 0.65: 0.0087, p = 0.5: 0.0091

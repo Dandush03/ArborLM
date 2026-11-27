@@ -1,0 +1,48 @@
+python 3.12.14
+== 1. shuffle check: explicit _randbelow loop equals random.shuffle on 'a'..'h' for all five labels
+   cross: ecbhdfga
+   R1: daghcbef
+   R2: hdefbcga
+   M1: hgeafdbc
+   C1: efadhcgb
+== 2. vectors, every option; '=drafter' / '!=drafter' compares part A with the drafter's printed output
+   V1 nc=pass   rule=a  A=['C1.alpha', 'C1.beta', 'C1.epsilon', 'M1.delta', 'M1.gamma', 'R1.alpha'] per-eval(N,A,B)={'R1': (4, 2, 2), 'R2': (5, 2, 3), 'M1': (4, 2, 2), 'C1': (4, 2, 2)} step2(A,B)=(2, 2) =rev3
+   V2 nc=pass   rule=a  A=['C1.a', 'C1.b', 'M1.c', 'R1.b'] per-eval(N,A,B)={'R1': (3, 1, 2), 'R2': (5, 2, 3), 'M1': (3, 1, 2), 'C1': (5, 2, 3)} step2(A,B)=(2, 3) =rev3
+   V3 nc=pass   rule=a  A=['C1.c', 'C1.d', 'C1.e'] per-eval(N,A,B)={'R1': (2, 1, 1), 'R2': (1, 1, 0), 'M1': (1, 0, 1), 'C1': (4, 2, 2)} step2(A,B)=(1, 1) =rev3
+   V4 nc=pass   rule=a  A=['C1.p', 'M1.q', 'R1.s'] per-eval(N,A,B)={'R1': (3, 1, 2), 'R2': (2, 1, 1), 'M1': (2, 1, 1), 'C1': (2, 1, 1)} step2(A,B)=(1, 1) =rev3
+   V5 nc=pass   rule=a  A=['C1.a', 'C1.c', 'C1.f', 'M1.z1', 'R1.z0'] per-eval(N,A,B)={'R1': (4, 1, 3), 'R2': (4, 3, 1), 'M1': (3, 1, 2), 'C1': (7, 3, 4)} step2(A,B)=(3, 4) =rev3
+   V6 nc=pass   rule=a  A=['C1.a', 'C1.d', 'M1.c', 'M1.d', 'R1.a', 'R1.b', 'R1.e', 'R2.e'] per-eval(N,A,B)={'R1': (7, 3, 4), 'R2': (5, 2, 3), 'M1': (4, 2, 2), 'C1': (4, 2, 2)} step2(A,B)=(3, 3)  =drafter
+   V6 nc=pass   rule=b  A=['C1.a', 'C1.d', 'M1.c', 'M1.d', 'R1.a', 'R1.b', 'R1.e', 'R2.e'] per-eval(N,A,B)={'R1': (7, 3, 4), 'R2': (5, 2, 3), 'M1': (4, 2, 2), 'C1': (4, 2, 2)} step2(A,B)=(3, 3)  =drafter
+   V6 nc=pass   rule=c  A=['C1.a', 'C1.d', 'M1.d', 'R1.a', 'R1.b', 'R1.e', 'R2.e'] per-eval(N,A,B)={'R1': (7, 3, 4), 'R2': (5, 2, 3), 'M1': (4, 1, 3), 'C1': (4, 2, 2)} step2(A,B)=(3, 3) 
+   V6 nc=pass   rule=c* A=['C1.a', 'C1.d', 'M1.d', 'R1.a', 'R1.b', 'R1.e', 'R2.e'] per-eval(N,A,B)={'R1': (7, 3, 4), 'R2': (5, 2, 3), 'M1': (4, 1, 3), 'C1': (4, 2, 2)} step2(A,B)=(3, 3)  =drafter
+   V6 nc=ignore rule=a  A=['C1.a', 'C1.d', 'M1.c', 'M1.d', 'R1.a', 'R1.b', 'R1.g', 'R2.e'] per-eval(N,A,B)={'R1': (7, 3, 4), 'R2': (5, 2, 3), 'M1': (4, 2, 2), 'C1': (4, 2, 2)} step2(A,B)=(2, 3)  =drafter
+   V6 nc=ignore rule=b  A=['C1.a', 'C1.d', 'M1.c', 'M1.d', 'R1.a', 'R1.b', 'R1.g', 'R2.e'] per-eval(N,A,B)={'R1': (7, 3, 4), 'R2': (5, 2, 3), 'M1': (4, 2, 2), 'C1': (4, 2, 2)} step2(A,B)=(2, 3) 
+   V6 nc=ignore rule=c  A=['C1.a', 'C1.d', 'M1.d', 'R1.a', 'R1.b', 'R1.g', 'R2.e'] per-eval(N,A,B)={'R1': (7, 3, 4), 'R2': (5, 2, 3), 'M1': (4, 1, 3), 'C1': (4, 2, 2)} step2(A,B)=(2, 3) 
+   V6 nc=ignore rule=c* A=['C1.a', 'C1.d', 'M1.d', 'R1.a', 'R1.b', 'R1.g', 'R2.e'] per-eval(N,A,B)={'R1': (7, 3, 4), 'R2': (5, 2, 3), 'M1': (4, 1, 3), 'C1': (4, 2, 2)} step2(A,B)=(2, 3) 
+   V7 nc=pass   rule=a  A=['R1.c', 'R1.d'] per-eval(N,A,B)={'R1': (4, 2, 2)} step2(A,B)=(0, 0)  =drafter
+   V7 nc=pass   rule=b  A=['R1.d'] per-eval(N,A,B)={'R1': (4, 1, 3)} step2(A,B)=(0, 0) 
+   V7 nc=pass   rule=c  A=['R1.d'] per-eval(N,A,B)={'R1': (4, 1, 3)} step2(A,B)=(0, 0) 
+   V7 nc=pass   rule=c* A=['R1.d'] per-eval(N,A,B)={'R1': (4, 1, 3)} step2(A,B)=(0, 0)  =drafter
+   V7 nc=ignore rule=a  A=['R1.a', 'R1.b'] per-eval(N,A,B)={'R1': (4, 2, 2)} step2(A,B)=(0, 0)  =drafter
+   V7 nc=ignore rule=b  A=['R1.a', 'R1.b'] per-eval(N,A,B)={'R1': (4, 2, 2)} step2(A,B)=(0, 0) 
+   V7 nc=ignore rule=c  A=['R1.a', 'R1.b'] per-eval(N,A,B)={'R1': (4, 2, 2)} step2(A,B)=(0, 0) 
+   V7 nc=ignore rule=c* A=['R1.a', 'R1.b'] per-eval(N,A,B)={'R1': (4, 2, 2)} step2(A,B)=(0, 0) 
+   V8 nc=pass   rule=a  A=['R1.d', 'R1.e', 'R1.f'] per-eval(N,A,B)={'R1': (6, 3, 3)} step2(A,B)=(0, 0)  =drafter
+   V8 nc=pass   rule=b  A=['R1.d'] per-eval(N,A,B)={'R1': (6, 1, 5)} step2(A,B)=(0, 0)  =drafter
+   V8 nc=pass   rule=c  A=['R1.a', 'R1.b', 'R1.c', 'R1.d'] per-eval(N,A,B)={'R1': (6, 4, 2)} step2(A,B)=(0, 0) 
+   V8 nc=pass   rule=c* A=['R1.a', 'R1.b', 'R1.c', 'R1.d'] per-eval(N,A,B)={'R1': (6, 4, 2)} step2(A,B)=(0, 0)  =drafter
+   V8 nc=ignore rule=a  A=['R1.d', 'R1.e', 'R1.f'] per-eval(N,A,B)={'R1': (6, 3, 3)} step2(A,B)=(0, 0) 
+   V8 nc=ignore rule=b  A=['R1.d'] per-eval(N,A,B)={'R1': (6, 1, 5)} step2(A,B)=(0, 0) 
+   V8 nc=ignore rule=c  A=['R1.a', 'R1.b', 'R1.c', 'R1.d'] per-eval(N,A,B)={'R1': (6, 4, 2)} step2(A,B)=(0, 0) 
+   V8 nc=ignore rule=c* A=['R1.a', 'R1.b', 'R1.c', 'R1.d'] per-eval(N,A,B)={'R1': (6, 4, 2)} step2(A,B)=(0, 0) 
+   mismatches against drafter / rev3: 0
+== 3. 4000 random maps (seed 20261126; 0-9 lineages per evaluation, candidate p=0.8, random links and borderline pairs)
+   disagreements with the drafter's partition(), per option (nc/rule): {'pass/a': 0, 'ignore/a': 0, 'pass/b': 0, 'ignore/b': 0, 'pass/c*': 0, 'ignore/c*': 0}
+   rule (c) literal (identity over all clusters) differs from the drafter's (c*) in 269 maps
+   with the borderline pairs removed, the eight option combinations differ in 0 maps (text: identical)
+   groups split across parts under (a)/pass: 0
+   (a)/pass, per evaluation with N_e > 0: {'evals': 14091, 'A>B': 1345, 'A>B with a_e<=floor': 0, 'A>B with a_e>floor': 1345, 'A>floor with a_e<=floor': 0}
+   (a)/pass with borderline pairs removed: evaluations with A > B: 270
+   (c)/pass literal, per evaluation: {'A>B': 1999, 'A>floor': 1999}
+   step 2 ends with B < A (clusters, all evaluations together): {'a': 973, 'a no borderline': 0}
+   (a)/pass, B < A in clusters summed over the four evaluations: 461

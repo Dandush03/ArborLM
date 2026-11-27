@@ -1,0 +1,25 @@
+/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+t_0.95,10: integrated 1.8125  table 1.8125
+t_0.95,12: integrated 1.7823  table 1.7823
+t_0.95,14: integrated 1.7613  table 1.7613
+t_0.95,18: integrated 1.7341  table 1.7341
+
+== A. known power, n = 20,000, d = 0.3, discrete outcomes, 400,000 reps each (exact noncentral t beside)
+  G=13 tau=0.0071 delta=0.02: simulated 0.9964 (MC se 0.0001); exact 0.9964
+  G=13 tau=0.0189 delta=0.03: simulated 0.9964 (MC se 0.0001); exact 0.9964
+  G=13 tau=0.0366 delta=0.05: simulated 0.9964 (MC se 0.0001); exact 0.9964
+  G=13 tau=0.02 delta=0.02: simulated 0.8731 (MC se 0.0005); exact 0.8726
+  G=13 tau=0.03 delta=0.02: simulated 0.6584 (MC se 0.0007); exact 0.6588
+  G=13 tau=0.05 delta=0.05: simulated 0.9477 (MC se 0.0004); exact 0.9477
+  G=19 tau=0.05 delta=0.05: simulated 0.9901 (MC se 0.0002); exact 0.9899
+  G=19 tau=0.0453 delta=0.05: simulated 0.9963 (MC se 0.0001); exact 0.9964
+  G=11 tau=0.0331 delta=0.05: simulated 0.9964 (MC se 0.0001); exact 0.9964
+
+== B. registered reading from synthetic M0 draws (1,500 items over G clusters), point estimate tau_hat
+   share of draws with tau_hat = 0, and share reading 'reachable within 20,000' at each delta; 4,000 sims per draw
+  G=13 true tau=0.00: P(tau_hat=0)=0.532; tau_hat median 0.0000, 90th pct 0.0386; reach@0.02=0.542  reach@0.03=0.667  reach@0.05=0.905
+  G=13 true tau=0.01: P(tau_hat=0)=0.525; tau_hat median 0.0000, 90th pct 0.0384; reach@0.02=0.552  reach@0.03=0.670  reach@0.05=0.902
+  G=13 true tau=0.03: P(tau_hat=0)=0.295; tau_hat median 0.0277, 90th pct 0.0531; reach@0.02=0.315  reach@0.03=0.407  reach@0.05=0.713
+  G=13 true tau=0.05: P(tau_hat=0)=0.072; tau_hat median 0.0479, 90th pct 0.0707; reach@0.02=0.080  reach@0.03=0.117  reach@0.05=0.352
+  G=13 true tau=0.10: P(tau_hat=0)=0.003; tau_hat median 0.0943, 90th pct 0.1257; reach@0.02=0.003  reach@0.03=0.005  reach@0.05=0.018

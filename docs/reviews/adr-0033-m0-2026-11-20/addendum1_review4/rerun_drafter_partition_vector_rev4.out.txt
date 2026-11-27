@@ -1,0 +1,115 @@
+python 3.12.14
+== 1. derived integers (first 8 bytes of SHA-256, big-endian); unchanged from drafts 2 and 3
+  '400004|cluster-partition|cross'  ->  3111564968117111496
+  '400004|cluster-partition|R1'  ->  12152681357659760304
+  '400004|cluster-partition|R2'  ->  6959284715912682832
+  '400004|cluster-partition|M1'  ->  5748257385449400496
+  '400004|cluster-partition|C1'  ->  14653439660296977361
+== 2. V1 to V5 (no borderline pair): the draft-4 rule against partition_vector_rev3.out.txt
+  V1: part A ['C1.alpha', 'C1.beta', 'C1.epsilon', 'M1.delta', 'M1.gamma', 'R1.alpha']; per evaluation {'R1': (4, 2, 2), 'R2': (5, 2, 3), 'M1': (4, 2, 2), 'C1': (4, 2, 2)}: identical under every reading computed here
+  V2: part A ['C1.a', 'C1.b', 'M1.c', 'R1.b']; per evaluation {'R1': (3, 1, 2), 'R2': (5, 2, 3), 'M1': (3, 1, 2), 'C1': (5, 2, 3)}: identical under every reading computed here
+  V3: part A ['C1.c', 'C1.d', 'C1.e']; per evaluation {'R1': (2, 1, 1), 'R2': (1, 1, 0), 'M1': (1, 0, 1), 'C1': (4, 2, 2)}: identical under every reading computed here
+  V4: part A ['C1.p', 'M1.q', 'R1.s']; per evaluation {'R1': (3, 1, 2), 'R2': (2, 1, 1), 'M1': (2, 1, 1), 'C1': (2, 1, 1)}: identical under every reading computed here
+  V5: part A ['C1.a', 'C1.c', 'C1.f', 'M1.z1', 'R1.z0']; per evaluation {'R1': (4, 1, 3), 'R2': (4, 3, 1), 'M1': (3, 1, 2), 'C1': (7, 3, 4)}: identical under every reading computed here
+== 3. vectors with borderline pairs. Drafted: a cluster with no candidate lineage passes a group on and
+      takes no part ('pass'); balance counted in clusters ('clusters')
+-- V6
+   lineages (! = not a candidate): C1.a C1.b C1.c C1.d C1.x! M1.a M1.b M1.c M1.d R1.a R1.b R1.c R1.d R1.e R1.f R1.g R2.a R2.b R2.c R2.d R2.e
+   cluster C1.a: ['C1.a', 'R2.a']
+   cluster C1.b: ['C1.b', 'R2.c']
+   cluster M1.a: ['M1.a', 'R2.b']
+   borderline pairs: [('R1.a', 'C1.x'), ('C1.x', 'R1.b'), ('R1.b', 'C1.a'), ('R1.c', 'R1.d'), ('M1.b', 'R2.b')]
+   groups of more than one cluster (clusters with a candidate lineage only): {'C1.a': ['C1.a', 'R1.a', 'R1.b'], 'M1.a': ['M1.a', 'M1.b'], 'R1.c': ['R1.c', 'R1.d']}
+   cross-evaluation groups in shuffled order: ['C1.b', 'C1.a', 'M1.a']
+   part A: ['C1.a', 'C1.d', 'M1.c', 'M1.d', 'R1.a', 'R1.b', 'R1.e', 'R2.e']
+   part B: ['C1.b', 'C1.c', 'M1.a', 'M1.b', 'R1.c', 'R1.d', 'R1.f', 'R1.g', 'R2.d']
+   no part (no candidate lineage): ['C1.x']
+   per evaluation (N_e, clusters in A, clusters in B): {'R1': (7, 3, 4), 'R2': (5, 2, 3), 'M1': (4, 2, 2), 'C1': (4, 2, 2)}
+-- V7
+   lineages (! = not a candidate): C1.x! R1.a R1.b R1.c R1.d
+   borderline pairs: [('R1.a', 'C1.x'), ('C1.x', 'R1.b')]
+   groups of more than one cluster (clusters with a candidate lineage only): {'R1.a': ['R1.a', 'R1.b']}
+   cross-evaluation groups in shuffled order: []
+   part A: ['R1.c', 'R1.d']
+   part B: ['R1.a', 'R1.b']
+   no part (no candidate lineage): ['C1.x']
+   per evaluation (N_e, clusters in A, clusters in B): {'R1': (4, 2, 2), 'R2': (0, 0, 0), 'M1': (0, 0, 0), 'C1': (0, 0, 0)}
+-- V8
+   lineages (! = not a candidate): R1.a R1.b R1.c R1.d R1.e R1.f
+   borderline pairs: [('R1.a', 'R1.b'), ('R1.b', 'R1.c')]
+   groups of more than one cluster (clusters with a candidate lineage only): {'R1.a': ['R1.a', 'R1.b', 'R1.c']}
+   cross-evaluation groups in shuffled order: []
+   part A: ['R1.d', 'R1.e', 'R1.f']
+   part B: ['R1.a', 'R1.b', 'R1.c']
+   no part (no candidate lineage): []
+   per evaluation (N_e, clusters in A, clusters in B): {'R1': (6, 3, 3), 'R2': (0, 0, 0), 'M1': (0, 0, 0), 'C1': (0, 0, 0)}
+== 3b. the other option for a cluster with no candidate lineage: it is not a node of the group graph ('ignore')
+-- V6  [ignore]
+   groups of more than one cluster (clusters with a candidate lineage only): {'C1.a': ['C1.a', 'R1.b'], 'M1.a': ['M1.a', 'M1.b'], 'R1.c': ['R1.c', 'R1.d']}
+   cross-evaluation groups in shuffled order: ['C1.b', 'C1.a', 'M1.a']
+   part A: ['C1.a', 'C1.d', 'M1.c', 'M1.d', 'R1.a', 'R1.b', 'R1.g', 'R2.e']
+   part B: ['C1.b', 'C1.c', 'M1.a', 'M1.b', 'R1.c', 'R1.d', 'R1.e', 'R1.f', 'R2.d']
+   no part (no candidate lineage): ['C1.x']
+   per evaluation (N_e, clusters in A, clusters in B): {'R1': (7, 3, 4), 'R2': (5, 2, 3), 'M1': (4, 2, 2), 'C1': (4, 2, 2)}
+-- V7  [ignore]
+   groups of more than one cluster (clusters with a candidate lineage only): none
+   cross-evaluation groups in shuffled order: []
+   part A: ['R1.a', 'R1.b']
+   part B: ['R1.c', 'R1.d']
+   no part (no candidate lineage): ['C1.x']
+   per evaluation (N_e, clusters in A, clusters in B): {'R1': (4, 2, 2), 'R2': (0, 0, 0), 'M1': (0, 0, 0), 'C1': (0, 0, 0)}
+== 3c. placement rules NOT drafted, for comparison, with 'pass'
+-- V6  [draft 3's item 9: counted in groups]
+   groups of more than one cluster (clusters with a candidate lineage only): {'C1.a': ['C1.a', 'R1.a', 'R1.b'], 'M1.a': ['M1.a', 'M1.b'], 'R1.c': ['R1.c', 'R1.d']}
+   cross-evaluation groups in shuffled order: ['C1.b', 'C1.a', 'M1.a']
+   part A: ['C1.a', 'C1.d', 'M1.d', 'R1.a', 'R1.b', 'R1.e', 'R2.e']
+   part B: ['C1.b', 'C1.c', 'M1.a', 'M1.b', 'M1.c', 'R1.c', 'R1.d', 'R1.f', 'R1.g', 'R2.d']
+   no part (no candidate lineage): ['C1.x']
+   per evaluation (N_e, clusters in A, clusters in B): {'R1': (7, 3, 4), 'R2': (5, 2, 3), 'M1': (4, 1, 3), 'C1': (4, 2, 2)}
+-- V7  [draft 3's item 9: counted in groups]
+   groups of more than one cluster (clusters with a candidate lineage only): {'R1.a': ['R1.a', 'R1.b']}
+   cross-evaluation groups in shuffled order: []
+   part A: ['R1.d']
+   part B: ['R1.a', 'R1.b', 'R1.c']
+   no part (no candidate lineage): ['C1.x']
+   per evaluation (N_e, clusters in A, clusters in B): {'R1': (4, 1, 3), 'R2': (0, 0, 0), 'M1': (0, 0, 0), 'C1': (0, 0, 0)}
+-- V8  [draft 3's item 9: counted in groups]
+   groups of more than one cluster (clusters with a candidate lineage only): {'R1.a': ['R1.a', 'R1.b', 'R1.c']}
+   cross-evaluation groups in shuffled order: []
+   part A: ['R1.a', 'R1.b', 'R1.c', 'R1.d']
+   part B: ['R1.e', 'R1.f']
+   no part (no candidate lineage): []
+   per evaluation (N_e, clusters in A, clusters in B): {'R1': (6, 4, 2), 'R2': (0, 0, 0), 'M1': (0, 0, 0), 'C1': (0, 0, 0)}
+-- V6  [step 3 stops at the first group that does not fit]
+   groups of more than one cluster (clusters with a candidate lineage only): {'C1.a': ['C1.a', 'R1.a', 'R1.b'], 'M1.a': ['M1.a', 'M1.b'], 'R1.c': ['R1.c', 'R1.d']}
+   cross-evaluation groups in shuffled order: ['C1.b', 'C1.a', 'M1.a']
+   part A: ['C1.a', 'C1.d', 'M1.c', 'M1.d', 'R1.a', 'R1.b', 'R1.e', 'R2.e']
+   part B: ['C1.b', 'C1.c', 'M1.a', 'M1.b', 'R1.c', 'R1.d', 'R1.f', 'R1.g', 'R2.d']
+   no part (no candidate lineage): ['C1.x']
+   per evaluation (N_e, clusters in A, clusters in B): {'R1': (7, 3, 4), 'R2': (5, 2, 3), 'M1': (4, 2, 2), 'C1': (4, 2, 2)}
+-- V8  [step 3 stops at the first group that does not fit]
+   groups of more than one cluster (clusters with a candidate lineage only): {'R1.a': ['R1.a', 'R1.b', 'R1.c']}
+   cross-evaluation groups in shuffled order: []
+   part A: ['R1.d']
+   part B: ['R1.a', 'R1.b', 'R1.c', 'R1.e', 'R1.f']
+   no part (no candidate lineage): []
+   per evaluation (N_e, clusters in A, clusters in B): {'R1': (6, 1, 5), 'R2': (0, 0, 0), 'M1': (0, 0, 0), 'C1': (0, 0, 0)}
+== 3d. review 3's probe B2 under draft 3's counting in groups: R1 (N, A, B) with 'ignore' / 'pass'
+   (4, 2, 2) / (4, 1, 3)   (the reviewer's 2/2 against 1/3)
+== 4. stage 4 with independent counts, made-up capacities, weakest level only
+   4a. V1 with the capacities of partition_vector_rev3.py and no shared key
+   R1 part A: candidate clusters 2 -> registered G = 1   [G=2: below D_lin: ['R1.beta'] | G=2: below D_lin: ['R1.alpha'] | G=1: nothing fails]
+   R1 part B: candidate clusters 2 -> registered G = 2   [G=2: nothing fails]
+   R2 part A: candidate clusters 2 -> registered G = 2   [G=2: nothing fails]
+   R2 part B: candidate clusters 3 -> registered G = 1   [G=3: below D_lin: ['R2.delta'] | G=2: below D_lin: ['R2.gamma'] | G=1: nothing fails]
+   M1 part A: candidate clusters 2 -> registered G = 2   [G=2: nothing fails]
+   M1 part B: candidate clusters 2 -> registered G = 2   [G=2: nothing fails]
+   C1 part A: candidate clusters 2 -> registered G = 2   [G=2: nothing fails]
+   C1 part B: candidate clusters 2 -> registered G = 0   [G=2: below D_lin: ['C1.delta'] | G=1: below D_lin: ['C1.gamma'] | G=0: nothing fails]
+   registered lineages identical to partition_vector_rev3.out.txt part 4 in all eight parts (asserted)
+   4b. one made-up part: a weak sibling does not take a strong lineage with it; one shared key does
+      D(5) = 49,000; D_lin(5, 2) = 24,500; 2 x D_lin(5, 2) - D(5) = 0
+      clusters 5 -> registered G = 4   [G=5: below D_lin: ['c1.y']; union below D(5) = 49,000: ['c2.x', 'c2.y'] | G=4: nothing fails]
+      registered: {'c1': ['c1.x'], 'c3': ['c3.x'], 'c4': ['c4.x'], 'c5': ['c5.x']}
+      the same with no shared key: registered G = 5   [G=5: below D_lin: ['c1.y'] | G=5: nothing fails]
+      registered: {'c1': ['c1.x'], 'c2': ['c2.x', 'c2.y'], 'c3': ['c3.x'], 'c4': ['c4.x'], 'c5': ['c5.x']}

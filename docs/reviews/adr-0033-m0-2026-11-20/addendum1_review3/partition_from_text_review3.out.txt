@@ -1,0 +1,87 @@
+python 3.12.14
+== 1. derived integers
+  '400004|cluster-partition|cross' -> 3111564968117111496
+  '400004|cluster-partition|R1' -> 12152681357659760304
+  '400004|cluster-partition|R2' -> 6959284715912682832
+  '400004|cluster-partition|M1' -> 5748257385449400496
+  '400004|cluster-partition|C1' -> 14653439660296977361
+== 2. shuffle of a..h
+  cross: ['e', 'c', 'b', 'h', 'd', 'f', 'g', 'a']
+     R1: ['d', 'a', 'g', 'h', 'c', 'b', 'e', 'f']
+     R2: ['h', 'd', 'e', 'f', 'b', 'c', 'g', 'a']
+     M1: ['h', 'g', 'e', 'a', 'f', 'd', 'b', 'c']
+     C1: ['e', 'f', 'a', 'd', 'h', 'c', 'g', 'b']
+== 3. section 4 on V1..V5, from the text
+-- V1
+   X shuffled (index 0 -> B): ['M1.alpha', 'C1.beta', 'C1.gamma', 'C1.alpha']
+   part A: ['C1.alpha', 'C1.beta', 'C1.epsilon', 'M1.delta', 'M1.gamma', 'R1.alpha']
+   part B: ['C1.delta', 'C1.gamma', 'M1.alpha', 'R1.delta', 'R1.zeta', 'R2.delta', 'R2.epsilon']
+   no part: []
+   per evaluation (N_e, A, B), in clusters: {'R1': (4, 2, 2), 'R2': (5, 2, 3), 'M1': (4, 2, 2), 'C1': (4, 2, 2)}
+-- V2
+   X shuffled (index 0 -> B): ['C1.d', 'C1.b', 'C1.c', 'C1.a', 'C1.e']
+   part A: ['C1.a', 'C1.b', 'M1.c', 'R1.b']
+   part B: ['C1.c', 'C1.d', 'C1.e', 'M1.b', 'R1.c', 'R2.d', 'R2.e']
+   no part: ['C1.f']
+   per evaluation (N_e, A, B), in clusters: {'R1': (3, 1, 2), 'R2': (5, 2, 3), 'M1': (3, 1, 2), 'C1': (5, 2, 3)}
+-- V3
+   X shuffled (index 0 -> B): ['M1.a', 'C1.e']
+   part A: ['C1.c', 'C1.d', 'C1.e']
+   part B: ['C1.a', 'C1.b', 'M1.a']
+   no part: []
+   per evaluation (N_e, A, B), in clusters: {'R1': (2, 1, 1), 'R2': (1, 1, 0), 'M1': (1, 0, 1), 'C1': (4, 2, 2)}
+-- V4
+   X shuffled (index 0 -> B): ['C1.q', 'C1.p']
+   part A: ['C1.p', 'M1.q', 'R1.s']
+   part B: ['C1.q', 'R1.p', 'R1.r', 'R2.r']
+   no part: []
+   per evaluation (N_e, A, B), in clusters: {'R1': (3, 1, 2), 'R2': (2, 1, 1), 'M1': (2, 1, 1), 'C1': (2, 1, 1)}
+-- V5
+   X shuffled (index 0 -> B): ['C1.g', 'C1.c', 'C1.b', 'C1.f', 'C1.d', 'C1.a', 'C1.e']
+   part A: ['C1.a', 'C1.c', 'C1.f', 'M1.z1', 'R1.z0']
+   part B: ['C1.b', 'C1.d', 'C1.e', 'C1.g', 'M1.z0', 'R2.z0']
+   no part: []
+   per evaluation (N_e, A, B), in clusters: {'R1': (4, 1, 3), 'R2': (4, 3, 1), 'M1': (3, 1, 2), 'C1': (7, 3, 4)}
+== 3b. V3 under the rejected reading of a_e (any lineage in e)
+-- V3-any
+   X shuffled (index 0 -> B): ['M1.a', 'C1.e']
+   part A: ['C1.c', 'C1.e']
+   part B: ['C1.a', 'C1.b', 'C1.d', 'M1.a']
+   no part: []
+   per evaluation (N_e, A, B), in clusters: {'R1': (2, 1, 1), 'R2': (1, 1, 0), 'M1': (1, 0, 1), 'C1': (4, 1, 3)}
+== 4. item 9 (borderline pairs kept in one part; decided 2026-11-26), made-up probes
+-- B1 = V1 + borderline {R1.alpha~R1.zeta, C1.delta~M1.delta}
+   groups: {'C1.delta': ['C1.delta', 'M1.delta'], 'R1.alpha': ['R1.alpha', 'R1.zeta']}
+   X shuffled (index 0 -> B): ['C1.gamma', 'C1.beta', 'C1.delta', 'C1.alpha', 'M1.alpha']
+   part A: ['C1.alpha', 'C1.beta', 'M1.gamma', 'R1.delta']
+   part B: ['C1.delta', 'C1.epsilon', 'C1.gamma', 'M1.alpha', 'M1.delta', 'R1.alpha', 'R1.zeta', 'R2.delta', 'R2.epsilon']
+   no part: []
+   per evaluation (N_e, A, B), in clusters: {'R1': (4, 1, 3), 'R2': (5, 2, 3), 'M1': (4, 1, 3), 'C1': (4, 2, 2)}
+   probe B2: R1.a ~ C1.x borderline and C1.x ~ R1.b borderline; C1.x has no candidate lineage
+-- B2 non-candidate cluster does not transmit the group
+   X shuffled (index 0 -> B): []
+   part A: ['R1.a', 'R1.b']
+   part B: ['R1.c', 'R1.d']
+   no part: ['C1.x']
+   per evaluation (N_e, A, B), in clusters: {'R1': (4, 2, 2), 'R2': (0, 0, 0), 'M1': (0, 0, 0), 'C1': (0, 0, 0)}
+-- B2 non-candidate cluster transmits the group
+   groups: {'R1.a': ['R1.a', 'R1.b']}
+   X shuffled (index 0 -> B): []
+   part A: ['R1.d']
+   part B: ['R1.a', 'R1.b', 'R1.c']
+   no part: ['C1.x']
+   per evaluation (N_e, A, B), in clusters: {'R1': (4, 1, 3), 'R2': (0, 0, 0), 'M1': (0, 0, 0), 'C1': (0, 0, 0)}
+   probe B3: groups are counted as one unit in N_e, so clusters per part can be unbalanced
+-- B3 without item 9
+   X shuffled (index 0 -> B): []
+   part A: ['R1.a', 'R1.d', 'R1.f']
+   part B: ['R1.b', 'R1.c', 'R1.e']
+   no part: []
+   per evaluation (N_e, A, B), in clusters: {'R1': (6, 3, 3), 'R2': (0, 0, 0), 'M1': (0, 0, 0), 'C1': (0, 0, 0)}
+-- B3 with R1.a~R1.b~R1.c borderline
+   groups: {'R1.a': ['R1.a', 'R1.b', 'R1.c']}
+   X shuffled (index 0 -> B): []
+   part A: ['R1.a', 'R1.b', 'R1.c', 'R1.d']
+   part B: ['R1.e', 'R1.f']
+   no part: []
+   per evaluation (N_e, A, B), in clusters: {'R1': (6, 4, 2), 'R2': (0, 0, 0), 'M1': (0, 0, 0), 'C1': (0, 0, 0)}

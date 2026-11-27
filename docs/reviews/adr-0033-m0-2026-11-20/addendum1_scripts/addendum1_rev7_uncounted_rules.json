@@ -1,0 +1,1326 @@
+{
+ "C1": {
+  "considered_and_counted": [
+   {
+    "source": "a4",
+    "text": "EFF_F",
+    "why": "no class in f4b_pool_v2.py, which does not read it; counts as written (see notes)"
+   },
+   {
+    "source": "battery",
+    "text": "S.all_ones_start",
+    "why": "BATTERY_MUT: partial trace in f4b_pool_v2.py's strict reading, cheap in the implementer's: two readings"
+   },
+   {
+    "source": "battery",
+    "text": "S.always_skip",
+    "why": "BATTERY_MUT: partial trace in f4b_pool_v2.py's strict reading, cheap in the implementer's: two readings"
+   },
+   {
+    "source": "battery",
+    "text": "S.ignore_step",
+    "why": "BATTERY_MUT: partial trace in f4b_pool_v2.py's strict reading, cheap in the implementer's: two readings"
+   },
+   {
+    "source": "battery",
+    "text": "S.naive_copy",
+    "why": "BATTERY_MUT: partial trace in f4b_pool_v2.py's strict reading, cheap in the implementer's: two readings"
+   },
+   {
+    "source": "battery",
+    "text": "S.no_back",
+    "why": "BATTERY_MUT: partial trace in f4b_pool_v2.py's strict reading, cheap in the implementer's: two readings"
+   },
+   {
+    "source": "battery",
+    "text": "S.no_c_term",
+    "why": "BATTERY_MUT: partial trace in f4b_pool_v2.py's strict reading, cheap in the implementer's: two readings"
+   },
+   {
+    "source": "battery",
+    "text": "S.no_halving",
+    "why": "BATTERY_MUT: partial trace in f4b_pool_v2.py's strict reading, cheap in the implementer's: two readings"
+   },
+   {
+    "source": "battery",
+    "text": "S.no_mod",
+    "why": "BATTERY_MUT: partial trace in f4b_pool_v2.py's strict reading, cheap in the implementer's: two readings"
+   },
+   {
+    "source": "battery",
+    "text": "S.no_skips",
+    "why": "BATTERY_MUT: partial trace in f4b_pool_v2.py's strict reading, cheap in the implementer's: two readings"
+   },
+   {
+    "source": "battery",
+    "text": "S.no_turns",
+    "why": "BATTERY_MUT: partial trace in f4b_pool_v2.py's strict reading, cheap in the implementer's: two readings"
+   },
+   {
+    "source": "battery",
+    "text": "S.run_inc_1",
+    "why": "BATTERY_MUT: partial trace in f4b_pool_v2.py's strict reading, cheap in the implementer's: two readings"
+   },
+   {
+    "source": "battery",
+    "text": "S.thr0_run",
+    "why": "BATTERY_MUT: partial trace in f4b_pool_v2.py's strict reading, cheap in the implementer's: two readings"
+   },
+   {
+    "source": "closed forms",
+    "text": "F.order_free_strikesum",
+    "why": "prefix F or S: closed form or cheap"
+   },
+   {
+    "source": "closed forms",
+    "text": "F.pow_res_c0",
+    "why": "prefix F or S: closed form or cheap"
+   },
+   {
+    "source": "closed forms",
+    "text": "F.prefix_hist",
+    "why": "prefix F or S: closed form or cheap"
+   },
+   {
+    "source": "closed forms",
+    "text": "F.residue_hist",
+    "why": "prefix F or S: closed form or cheap"
+   },
+   {
+    "source": "closed forms",
+    "text": "S.always_high_branch",
+    "why": "prefix F or S: closed form or cheap"
+   },
+   {
+    "source": "closed forms",
+    "text": "S.initial_flags_series",
+    "why": "prefix F or S: closed form or cheap"
+   },
+   {
+    "source": "closed forms",
+    "text": "S.last_b_power",
+    "why": "prefix F or S: closed form or cheap"
+   },
+   {
+    "source": "closed forms",
+    "text": "S.pow_terms_plus_c",
+    "why": "prefix F or S: closed form or cheap"
+   },
+   {
+    "source": "closed forms",
+    "text": "S.uniform",
+    "why": "prefix F or S: closed form or cheap"
+   }
+  ],
+  "entries": [
+   {
+    "label": "partial",
+    "match": "measure equal",
+    "source": "a4 (s5_analyse_v2.py output)",
+    "text": "EFF_SM"
+   },
+   {
+    "label": "hazard",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a4 (s5_analyse_v2.py output, field rules)",
+    "text": "H.c_semantics"
+   },
+   {
+    "label": "partial",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a4 (s5_analyse_v2.py output, field rules)",
+    "text": "M.all_ones_start"
+   },
+   {
+    "label": "partial",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a4 (s5_analyse_v2.py output, field rules)",
+    "text": "M.all_rems"
+   },
+   {
+    "label": "partial",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a4 (s5_analyse_v2.py output, field rules)",
+    "text": "M.all_rounds_weighted"
+   },
+   {
+    "label": "partial",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a4 (s5_analyse_v2.py output, field rules)",
+    "text": "M.always_skip"
+   },
+   {
+    "label": "partial",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a4 (s5_analyse_v2.py output, field rules)",
+    "text": "M.arg_minus_1"
+   },
+   {
+    "label": "partial",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a4 (s5_analyse_v2.py output, field rules)",
+    "text": "M.arg_plus_1"
+   },
+   {
+    "label": "partial",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a4 (s5_analyse_v2.py output, field rules)",
+    "text": "M.copy_on_alias"
+   },
+   {
+    "label": "partial",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a4 (s5_analyse_v2.py output, field rules)",
+    "text": "M.count_only"
+   },
+   {
+    "label": "partial",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a4 (s5_analyse_v2.py output, field rules)",
+    "text": "M.digit_sum"
+   },
+   {
+    "label": "partial",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a4 (s5_analyse_v2.py output, field rules)",
+    "text": "M.drop_even_branch"
+   },
+   {
+    "label": "partial",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a4 (s5_analyse_v2.py output, field rules)",
+    "text": "M.drop_mod"
+   },
+   {
+    "label": "partial",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a4 (s5_analyse_v2.py output, field rules)",
+    "text": "M.drop_outer_mod"
+   },
+   {
+    "label": "partial",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a4 (s5_analyse_v2.py output, field rules)",
+    "text": "M.flip_rule"
+   },
+   {
+    "label": "partial",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a4 (s5_analyse_v2.py output, field rules)",
+    "text": "M.ignore_dead_initial"
+   },
+   {
+    "label": "partial",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a4 (s5_analyse_v2.py output, field rules)",
+    "text": "M.ignore_step"
+   },
+   {
+    "label": "partial",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a4 (s5_analyse_v2.py output, field rules)",
+    "text": "M.msd_first_fold"
+   },
+   {
+    "label": "partial",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a4 (s5_analyse_v2.py output, field rules)",
+    "text": "M.msd_first_wsum"
+   },
+   {
+    "label": "partial",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a4 (s5_analyse_v2.py output, field rules)",
+    "text": "M.never_pop"
+   },
+   {
+    "label": "partial",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a4 (s5_analyse_v2.py output, field rules)",
+    "text": "M.no_back"
+   },
+   {
+    "label": "partial",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a4 (s5_analyse_v2.py output, field rules)",
+    "text": "M.no_condition"
+   },
+   {
+    "label": "partial",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a4 (s5_analyse_v2.py output, field rules)",
+    "text": "M.no_filter"
+   },
+   {
+    "label": "partial",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a4 (s5_analyse_v2.py output, field rules)",
+    "text": "M.no_final_close"
+   },
+   {
+    "label": "partial",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a4 (s5_analyse_v2.py output, field rules)",
+    "text": "M.no_find"
+   },
+   {
+    "label": "partial",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a4 (s5_analyse_v2.py output, field rules)",
+    "text": "M.no_halving"
+   },
+   {
+    "label": "partial",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a4 (s5_analyse_v2.py output, field rules)",
+    "text": "M.no_mod_term"
+   },
+   {
+    "label": "partial",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a4 (s5_analyse_v2.py output, field rules)",
+    "text": "M.no_skips"
+   },
+   {
+    "label": "partial",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a4 (s5_analyse_v2.py output, field rules)",
+    "text": "M.no_tail"
+   },
+   {
+    "label": "partial",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a4 (s5_analyse_v2.py output, field rules)",
+    "text": "M.no_turns"
+   },
+   {
+    "label": "partial",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a4 (s5_analyse_v2.py output, field rules)",
+    "text": "M.one_generation"
+   },
+   {
+    "label": "partial",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a4 (s5_analyse_v2.py output, field rules)",
+    "text": "M.one_less_iter"
+   },
+   {
+    "label": "partial",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a4 (s5_analyse_v2.py output, field rules)",
+    "text": "M.one_less_round"
+   },
+   {
+    "label": "partial",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a4 (s5_analyse_v2.py output, field rules)",
+    "text": "M.one_more_iter"
+   },
+   {
+    "label": "partial",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a4 (s5_analyse_v2.py output, field rules)",
+    "text": "M.one_more_round"
+   },
+   {
+    "label": "partial",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a4 (s5_analyse_v2.py output, field rules)",
+    "text": "M.one_pass_only"
+   },
+   {
+    "label": "partial",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a4 (s5_analyse_v2.py output, field rules)",
+    "text": "M.other_order"
+   },
+   {
+    "label": "partial",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a4 (s5_analyse_v2.py output, field rules)",
+    "text": "M.pop_any_closer"
+   },
+   {
+    "label": "partial",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a4 (s5_analyse_v2.py output, field rules)",
+    "text": "M.prefix_sum_histogram"
+   },
+   {
+    "label": "partial",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a4 (s5_analyse_v2.py output, field rules)",
+    "text": "M.rounds_x_final"
+   },
+   {
+    "label": "partial",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a4 (s5_analyse_v2.py output, field rules)",
+    "text": "M.sorted_neighbours_last"
+   },
+   {
+    "label": "partial",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a4 (s5_analyse_v2.py output, field rules)",
+    "text": "M.sorted_neighbours_order"
+   },
+   {
+    "label": "partial",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a4 (s5_analyse_v2.py output, field rules)",
+    "text": "M.start_at_0"
+   },
+   {
+    "label": "partial",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a4 (s5_analyse_v2.py output, field rules)",
+    "text": "M.step1"
+   },
+   {
+    "label": "partial",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a4 (s5_analyse_v2.py output, field rules)",
+    "text": "M.sum_before_step"
+   },
+   {
+    "label": "partial",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a4 (s5_analyse_v2.py output, field rules)",
+    "text": "M.swap_combos_orders"
+   },
+   {
+    "label": "partial",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a4 (s5_analyse_v2.py output, field rules)",
+    "text": "M.undirected_dist"
+   },
+   {
+    "label": "partial",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a4 (s5_analyse_v2.py output, field rules)",
+    "text": "M.undirected_distsum"
+   },
+   {
+    "label": "partial",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a4 (s5_analyse_v2.py output, field rules)",
+    "text": "M.undirected_order"
+   },
+   {
+    "label": "partial",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a4 (s5_analyse_v2.py output, field rules)",
+    "text": "M.unweighted_R"
+   },
+   {
+    "label": "partial",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a4 (s5_analyse_v2.py output, field rules)",
+    "text": "M.use_initial_flags"
+   },
+   {
+    "label": "partial",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a4 (s5_analyse_v2.py output, field rules)",
+    "text": "M.weight_k"
+   },
+   {
+    "label": "control",
+    "match": "rule name equal (after 'shape|')",
+    "source": "battery (c1_fix4_battery.py output, field S)",
+    "text": "C.algorithm_rerun"
+   },
+   {
+    "label": "control",
+    "match": "rule name equal (after 'shape|')",
+    "source": "battery (c1_fix4_battery.py output, field S)",
+    "text": "C.algorithm_rerun_after"
+   },
+   {
+    "label": "control",
+    "match": "rule name equal (after 'shape|')",
+    "source": "battery (c1_fix4_battery.py output, field S)",
+    "text": "C.algorithm_rerun_before"
+   },
+   {
+    "label": "control",
+    "match": "rule name equal (after 'shape|')",
+    "source": "battery (c1_fix4_battery.py output, field S)",
+    "text": "C.self_check"
+   },
+   {
+    "label": "artefact_a3",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a3 (a3_shortcuts.py output, field S)",
+    "text": "S.all_ones_start"
+   },
+   {
+    "label": "artefact_a3",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a3 (a3_shortcuts.py output, field S)",
+    "text": "S.no_back"
+   },
+   {
+    "label": "artefact_a3",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a3 (a3_shortcuts.py output, field S)",
+    "text": "S.no_skips"
+   },
+   {
+    "label": "artefact_a3",
+    "match": "rule name equal (after 'shape|')",
+    "source": "a3 (a3_shortcuts.py output, field S)",
+    "text": "S.no_turns"
+   },
+   {
+    "label": "hazard",
+    "match": "rule name equal",
+    "source": "closed forms (f5_closed_forms.py and f5b_closed_forms_v2.py output)",
+    "text": "H.negative_step_as_positive"
+   },
+   {
+    "label": "partial",
+    "match": "rule name equal",
+    "source": "closed forms (f5_closed_forms.py and f5b_closed_forms_v2.py output)",
+    "text": "M.no_even_branch"
+   },
+   {
+    "label": "partial",
+    "match": "rule name equal",
+    "source": "closed forms (f5_closed_forms.py and f5b_closed_forms_v2.py output)",
+    "text": "M.style0_everywhere"
+   }
+  ],
+  "name_rule": "an entry applies only to outputs of its source; the same name in another source is counted unless it is an entry there",
+  "notes": {
+   "EFF_F": "its G.* component rules are not written one by one by s5_analyse_v2.py, and the per-shape choice among classes is written nowhere else, so its components cannot all be read separately",
+   "EFF_F_is_eff_over_S_G_M_F": true,
+   "X_rules": "s5_analyse_v2.py writes no X.* rule and f4b_pool_v2.py has no class for one; none is an entry, so one that appeared would count",
+   "every_other_rule": "counted: EFF_S, MF, MFsh, MF_cv, MF_shape_cv, BEST_generic_cv, every S.* and F.* rule, and any rule that is not an entry",
+   "prefix_classes_in_f4b_pool_v2": {
+    "F": "closed",
+    "H": "hazard",
+    "M": "partial",
+    "S": "cheap"
+   },
+   "s4_rules_v2_M_or_H_names_built_at_run_time": [],
+   "s5_analyse_v2_writes_single_rules_only_for_prefixes_S_F_M_H": true
+  },
+  "units": [
+   "C1a",
+   "C1b",
+   "C1c"
+  ]
+ },
+ "M1": {
+  "considered_and_counted": [
+   {
+    "lineage_stem": "finite_differences",
+    "rule": "im:next_term_only",
+    "why": "in PROC, but its reason string in short_summary_a4.py reads 'kept as a rule': a doubt, so it counts"
+   },
+   {
+    "audit3_lines": [
+     304,
+     305
+    ],
+    "implementer_lines": [
+     376,
+     377
+    ],
+    "lineage_stem": "division_counting",
+    "rule": "a3:k_minus_remainder_ignores_exact_fit",
+    "why": "same name; the definition differs between audit3_m1/shortcuts_a3.py and studies/m0/m1_fix3_shortcuts.py at the lines given (right-hand side, or a statement that binds a name it reads)"
+   },
+   {
+    "audit3_lines": [
+     118,
+     121,
+     122,
+     123
+    ],
+    "implementer_lines": [
+     188,
+     191,
+     192,
+     193
+    ],
+    "lineage_stem": "finite_differences",
+    "rule": "a3:next_term_only",
+    "why": "the PROC rule of the same name is itself counted"
+   },
+   {
+    "audit3_lines": [
+     175,
+     176,
+     181
+    ],
+    "implementer_lines": [
+     252,
+     254,
+     260
+    ],
+    "lineage_stem": "last_digit_power",
+    "rule": "a3:fermat_misapplied_e_mod_p_plus_1",
+    "why": "same name; the definition differs between audit3_m1/shortcuts_a3.py and studies/m0/m1_fix3_shortcuts.py at the lines given (right-hand side, or a statement that binds a name it reads)"
+   },
+   {
+    "audit3_lines": [
+     162,
+     169
+    ],
+    "implementer_lines": [
+     238,
+     245
+    ],
+    "lineage_stem": "prime_factors",
+    "rule": "a3:largest_le_sqrt",
+    "why": "same name; the definition differs between audit3_m1/shortcuts_a3.py and studies/m0/m1_fix3_shortcuts.py at the lines given (right-hand side, or a statement that binds a name it reads)"
+   },
+   {
+    "audit3_lines": [
+     205,
+     206,
+     207,
+     209,
+     211
+    ],
+    "implementer_lines": [
+     278,
+     280,
+     281,
+     282,
+     284,
+     285
+    ],
+    "lineage_stem": "slot_permutations",
+    "rule": "a3:parity_fraction_of_total",
+    "why": "same name; the definition differs between audit3_m1/shortcuts_a3.py and studies/m0/m1_fix3_shortcuts.py at the lines given (right-hand side, or a statement that binds a name it reads)"
+   }
+  ],
+  "entries": [
+   {
+    "label": "PROC",
+    "lineage_stem": "consecutive",
+    "match": "prefixed key equal",
+    "rule": "im:mean_plus_step"
+   },
+   {
+    "label": "PROC",
+    "lineage_stem": "division_counting",
+    "match": "prefixed key equal",
+    "rule": "im:k_minus_remainder_ignores_exact_fit"
+   },
+   {
+    "label": "PROC",
+    "lineage_stem": "finite_differences",
+    "match": "prefixed key equal",
+    "rule": "im:next_term_when_asked_later"
+   },
+   {
+    "label": "PROC",
+    "lineage_stem": "gcd_lcm",
+    "match": "prefixed key equal",
+    "rule": "a4:product_over_gcd_pow_k_minus_1 (k>=3; a false general rule)"
+   },
+   {
+    "label": "PROC",
+    "lineage_stem": "gcd_lcm",
+    "match": "prefixed key equal",
+    "rule": "a4:product_over_lcm_pow_k_minus_1 (k>=3; a false general rule)"
+   },
+   {
+    "label": "PROC",
+    "lineage_stem": "gcd_lcm",
+    "match": "prefixed key equal",
+    "rule": "im:product_over_gcd_of_all"
+   },
+   {
+    "label": "PROC",
+    "lineage_stem": "last_digit_power",
+    "match": "prefixed key equal",
+    "rule": "im:fermat_misapplied_e_mod_p_plus_1"
+   },
+   {
+    "label": "PROC",
+    "lineage_stem": "prime_factors",
+    "match": "prefixed key equal",
+    "rule": "im:largest_le_sqrt"
+   },
+   {
+    "label": "PROC",
+    "lineage_stem": "ratio_share",
+    "match": "prefixed key equal",
+    "rule": "im:largest_share"
+   },
+   {
+    "label": "PROC",
+    "lineage_stem": "ratio_share",
+    "match": "prefixed key equal",
+    "rule": "im:smallest_share"
+   },
+   {
+    "label": "PROC",
+    "lineage_stem": "slot_permutations",
+    "match": "prefixed key equal",
+    "rule": "im:ignore_first_rule"
+   },
+   {
+    "label": "PROC",
+    "lineage_stem": "slot_permutations",
+    "match": "prefixed key equal",
+    "rule": "im:parity_fraction_of_total"
+   },
+   {
+    "audit3_lines": [
+     82
+    ],
+    "implementer_lines": [
+     143
+    ],
+    "label": "PROC, by name and definition",
+    "lineage_stem": "ratio_share",
+    "match": "prefixed key equal",
+    "rule": "a3:largest_share"
+   }
+  ],
+  "name_rule": "lineage stem = the id without 'M1.' and without a trailing _r4, _r3 or _r2, as stem() of final_m1/pool_a5.py; in M1a's output the section 'own' gives the prefix 'im:', 'a3' gives 'a3:', and keys of section 'a4' are taken as written",
+  "notes": {
+   "PROC_pairs": 13,
+   "definition_test": "an audit-3 rule is an entry only if the implementer rule of the same name is an entry and the two assignments h[name] = ... are equal as parsed (ast.dump), together with, recursively, the last statement before each that binds every name it reads inside spec(); a name bound at module level must be the same name",
+   "every_other_rule": "counted, the 'new:' rules included"
+  },
+  "units": [
+   "M1a",
+   "M1b",
+   "M1c"
+  ]
+ },
+ "R1": {
+  "considered_and_counted": [],
+  "entries": [
+   {
+    "label": "M",
+    "lineage_stems": "every R1 lineage",
+    "match": "bare name equal",
+    "rule": "abstain_as_no"
+   },
+   {
+    "label": "M",
+    "lineage_stems": "every R1 lineage",
+    "match": "bare name equal",
+    "rule": "abstain_as_yes"
+   },
+   {
+    "label": "M",
+    "lineage_stems": "every R1 lineage",
+    "match": "bare name equal",
+    "rule": "all_and"
+   },
+   {
+    "label": "M",
+    "lineage_stems": "every R1 lineage",
+    "match": "bare name equal",
+    "rule": "all_or"
+   },
+   {
+    "label": "EXCL",
+    "lineage_stems": [
+     "compass_turns"
+    ],
+    "match": "bare name equal",
+    "rule": "ccw_as_cw"
+   },
+   {
+    "label": "M",
+    "lineage_stems": "every R1 lineage",
+    "match": "bare name equal",
+    "rule": "chebyshev"
+   },
+   {
+    "label": "EXCL",
+    "lineage_stems": [
+     "compass_turns"
+    ],
+    "match": "bare name equal",
+    "rule": "cw270_as_90"
+   },
+   {
+    "label": "M",
+    "lineage_stems": "every R1 lineage",
+    "match": "bare name equal",
+    "rule": "direction_ignored_p_over_q"
+   },
+   {
+    "label": "M",
+    "lineage_stems": "every R1 lineage",
+    "match": "bare name equal",
+    "rule": "direction_slip"
+   },
+   {
+    "label": "M",
+    "lineage_stems": "every R1 lineage",
+    "match": "bare name equal",
+    "rule": "drop_negation"
+   },
+   {
+    "label": "EXCL",
+    "lineage_stems": "every R1 lineage",
+    "match": "bare name equal",
+    "rule": "duration_end_off_by_one"
+   },
+   {
+    "label": "M",
+    "lineage_stems": "every R1 lineage",
+    "match": "bare name equal",
+    "rule": "east_west_mirrored"
+   },
+   {
+    "label": "M",
+    "lineage_stems": "every R1 lineage",
+    "match": "bare name equal",
+    "rule": "euclid_rounded"
+   },
+   {
+    "label": "EXCL",
+    "lineage_stems": [
+     "conditional_decision_tree"
+    ],
+    "match": "bare name equal",
+    "rule": "first_cond_only_then_first"
+   },
+   {
+    "label": "EXCL",
+    "lineage_stems": [
+     "compass_turns"
+    ],
+    "match": "bare name equal",
+    "rule": "ignore_180s"
+   },
+   {
+    "label": "EXCL",
+    "lineage_stems": [
+     "conditional_decision_tree"
+    ],
+    "match": "bare name equal",
+    "rule": "ignore_last_condition"
+   },
+   {
+    "label": "EXCL",
+    "lineage_stems": "every R1 lineage",
+    "match": "bare name equal",
+    "rule": "inclusive_day_reading"
+   },
+   {
+    "label": "M",
+    "lineage_stems": "every R1 lineage",
+    "match": "bare name equal",
+    "rule": "inverse_answer"
+   },
+   {
+    "label": "M",
+    "lineage_stems": "every R1 lineage",
+    "match": "bare name equal",
+    "rule": "k_minus_1"
+   },
+   {
+    "label": "M",
+    "lineage_stems": "every R1 lineage",
+    "match": "bare name equal",
+    "rule": "k_plus_1"
+   },
+   {
+    "label": "EXCL",
+    "lineage_stems": "every R1 lineage",
+    "match": "bare name equal",
+    "rule": "latest_start_first"
+   },
+   {
+    "label": "EXCL",
+    "lineage_stems": [
+     "compass_turns"
+    ],
+    "match": "bare name equal",
+    "rule": "left_right_only"
+   },
+   {
+    "label": "EXCL",
+    "lineage_stems": [
+     "conditional_threshold_rule"
+    ],
+    "match": "bare name equal",
+    "rule": "off_by_one_low"
+   },
+   {
+    "label": "M",
+    "lineage_stems": "every R1 lineage",
+    "match": "bare name equal",
+    "rule": "off_by_one_plus"
+   },
+   {
+    "label": "EXCL",
+    "lineage_stems": [
+     "categories_default_exceptions"
+    ],
+    "match": "bare name equal",
+    "rule": "partial_walk_3"
+   },
+   {
+    "label": "M",
+    "lineage_stems": "every R1 lineage",
+    "match": "bare name equal",
+    "rule": "rotation_reversed"
+   },
+   {
+    "label": "M",
+    "lineage_stems": "every R1 lineage",
+    "match": "bare name equal",
+    "rule": "rotations_reversed"
+   },
+   {
+    "label": "EXCL",
+    "lineage_stems": [
+     "categories_default_exceptions"
+    ],
+    "match": "bare name equal",
+    "rule": "rule_at_distance_1"
+   },
+   {
+    "label": "EXCL",
+    "lineage_stems": [
+     "categories_default_exceptions"
+    ],
+    "match": "bare name equal",
+    "rule": "second_nearest_rule"
+   },
+   {
+    "label": "M",
+    "lineage_stems": "every R1 lineage",
+    "match": "bare name equal",
+    "rule": "signed_axis_merged"
+   },
+   {
+    "label": "EXCL",
+    "lineage_stems": [
+     "conditional_threshold_rule"
+    ],
+    "match": "bare name equal",
+    "rule": "strict_gt_D"
+   },
+   {
+    "label": "EXCL",
+    "lineage_stems": [
+     "categories_default_exceptions"
+    ],
+    "match": "bare name equal",
+    "rule": "third_nearest_rule"
+   },
+   {
+    "label": "M",
+    "lineage_stems": "every R1 lineage",
+    "match": "bare name equal",
+    "rule": "total_minus_union_wrong_sign"
+   },
+   {
+    "label": "EXCL",
+    "lineage_stems": [
+     "containers_stack_piles"
+    ],
+    "match": "bare name equal",
+    "rule": "turn_moves_bottom_to_top"
+   },
+   {
+    "label": "M",
+    "lineage_stems": "every R1 lineage",
+    "match": "bare name equal",
+    "rule": "wrong_first_mover"
+   }
+  ],
+  "name_rule": "bare name = the rule name with a leading 'a3:' or 'a4:' removed, as bare() of final_table4.py; lineage stem = the id without 'R1.' and without a trailing _r<digits>, as r1_fix3_battery.summarise",
+  "notes": {
+   "EXCL_size": 16,
+   "M_names_with_a_class_in_r1_fix3_battery": [],
+   "M_size": 19,
+   "every_other_rule": "counted: classes C and A, every 'feat:' row, every rule of new_rules_final.py (R1c), every exact row whose rule is not an entry",
+   "implementer_exclusions_equal_EXCL_as_names": true
+  },
+  "units": [
+   "R1a",
+   "R1b"
+  ]
+ },
+ "R2": {
+  "considered_and_counted": [
+   {
+    "label": "construct",
+    "match": "name contains",
+    "text": "t mod (n-1) applications",
+    "why": "none of the four classes of item 18"
+   },
+   {
+    "label": "construct",
+    "match": "name contains",
+    "text": "t mod 10 applications",
+    "why": "none of the four classes of item 18"
+   }
+  ],
+  "entries": [
+   {
+    "label": "P",
+    "match": "name contains",
+    "order": 1,
+    "text": "(P"
+   },
+   {
+    "label": "artifact",
+    "match": "name equal",
+    "order": 2,
+    "text": "[a3] ignore reverses"
+   },
+   {
+    "label": "artifact",
+    "match": "name equal",
+    "order": 2,
+    "text": "[a3] ignore moves to the end"
+   },
+   {
+    "label": "artifact",
+    "match": "name equal, and shape equal",
+    "order": 3,
+    "shape": "removals=0",
+    "text": "[a3] removal by deleting the minimum and keeping the order of the rest"
+   },
+   {
+    "label": "artifact",
+    "match": "name equal, and level 0",
+    "order": 4,
+    "text": "[a3] only the first rule"
+   },
+   {
+    "label": "artifact",
+    "match": "name equal, and level 0",
+    "order": 4,
+    "text": "[a3] only the last rule, on the start string"
+   },
+   {
+    "label": "artifact",
+    "match": "name equal, and level 0",
+    "order": 4,
+    "text": "[a3] rules in reverse order"
+   },
+   {
+    "label": "P",
+    "match": "name equal",
+    "order": 5,
+    "text": "[a3] rules in reverse order"
+   },
+   {
+    "label": "P",
+    "match": "name equal",
+    "order": 5,
+    "text": "[mine] [cond] rules in reverse order"
+   },
+   {
+    "label": "P",
+    "match": "name equal",
+    "order": 5,
+    "text": "[mine] [cond] all rules applied to the start string at once (left to right, first matching rule)"
+   },
+   {
+    "label": "P",
+    "match": "name starts with",
+    "order": 6,
+    "text": "[a3] digits read right to left"
+   },
+   {
+    "label": "P",
+    "match": "name starts with",
+    "order": 6,
+    "text": "[a3] k-th largest"
+   },
+   {
+    "label": "P",
+    "match": "name starts with",
+    "order": 6,
+    "text": "[a3] syndrome read with the bits reversed"
+   },
+   {
+    "label": "P",
+    "match": "name starts with",
+    "order": 6,
+    "text": "[a3] doubling the other parity"
+   },
+   {
+    "label": "P",
+    "match": "name starts with",
+    "order": 6,
+    "text": "[a3] check digit: payload total without the new digit"
+   },
+   {
+    "label": "P",
+    "match": "name starts with",
+    "order": 6,
+    "text": "[mine] check digit: payload's own last digit not doubled"
+   },
+   {
+    "label": "P",
+    "match": "name starts with",
+    "order": 6,
+    "text": "[a3] first occurrence only per rule"
+   },
+   {
+    "label": "P",
+    "match": "name starts with",
+    "order": 6,
+    "text": "[a3] largest: largest prime <= sqrt(n) dividing n"
+   },
+   {
+    "label": "P",
+    "match": "name starts with",
+    "order": 6,
+    "text": "[a3] (b-a)//m + 1"
+   },
+   {
+    "label": "P",
+    "match": "name starts with",
+    "order": 6,
+    "text": "[mine] latest start first"
+   },
+   {
+    "label": "P",
+    "match": "name starts with",
+    "order": 6,
+    "text": "[mine] Floyd bottom-up heapify"
+   },
+   {
+    "label": "P",
+    "match": "name starts with",
+    "order": 6,
+    "text": "[mine] inverse mapping t times"
+   },
+   {
+    "label": "partial",
+    "match": "name contains",
+    "order": 7,
+    "text": "letter pairs"
+   },
+   {
+    "label": "partial",
+    "match": "name contains",
+    "order": 7,
+    "text": "[a3] outer two letters each side match"
+   },
+   {
+    "label": "partial",
+    "match": "name contains",
+    "order": 7,
+    "text": "[a3] first letter equals last letter"
+   },
+   {
+    "label": "partial",
+    "match": "name contains",
+    "order": 7,
+    "text": "centres only"
+   },
+   {
+    "label": "partial",
+    "match": "name contains",
+    "order": 7,
+    "text": "[a3] longest odd palindrome only"
+   },
+   {
+    "label": "partial",
+    "match": "name contains",
+    "order": 7,
+    "text": "[a3] longest even palindrome only"
+   },
+   {
+    "label": "partial",
+    "match": "name contains",
+    "order": 7,
+    "text": "longest palindrome of length <= 7"
+   },
+   {
+    "label": "partial",
+    "match": "name contains",
+    "order": 7,
+    "text": "scanning only primes up to 61"
+   },
+   {
+    "label": "partial",
+    "match": "name contains",
+    "order": 7,
+    "text": "first failing check"
+   },
+   {
+    "label": "partial",
+    "match": "name contains",
+    "order": 7,
+    "text": "plain digit sum"
+   },
+   {
+    "label": "partial",
+    "match": "name contains",
+    "order": 7,
+    "text": "count of piles that are a win alone is odd"
+   },
+   {
+    "label": "partial",
+    "match": "name contains",
+    "order": 7,
+    "text": "odd number of piles that are first-player wins alone"
+   },
+   {
+    "label": "partial",
+    "match": "name contains",
+    "order": 7,
+    "text": "[cond] ignore"
+   }
+  ],
+  "name_rule": "the entries are klass() of final_r2/f_pool.py, in its order; the first entry that matches gives the class; a rule that reaches 'construct' or 'cue' is counted. A rule whose name starts with '[NEW] ' is classed by the entries under new_rules only",
+  "new_rules": {
+   "counted": [
+    {
+     "label": "cue",
+     "lineage_stem": "crt_smallest",
+     "rule": "[NEW] (cue) common offset: equal remainders -> r; equal (m - r) -> lcm - (m - r)"
+    },
+    {
+     "label": "cue",
+     "lineage_stem": "crt_smallest",
+     "rule": "[NEW] (cue) largest remainder + its modulus"
+    },
+    {
+     "label": "cue",
+     "lineage_stem": "interval_scheduling",
+     "rule": "[NEW] (cue) fewest clashes first (ties by end, then number)"
+    },
+    {
+     "label": "cue",
+     "lineage_stem": "interval_scheduling",
+     "rule": "[NEW] (cue) keep every meeting that clashes with no shorter meeting"
+    },
+    {
+     "label": "cue",
+     "lineage_stem": "digit_root",
+     "rule": "[NEW] (cue) digit sum once, last digit"
+    },
+    {
+     "label": "cue",
+     "lineage_stem": "digit_root",
+     "rule": "[NEW] (cue) digit sum once, first digit"
+    },
+    {
+     "label": "cue",
+     "lineage_stem": "expression_eval",
+     "rule": "[NEW] (cue) parentheses ignored, the item's own convention otherwise"
+    },
+    {
+     "label": "cue",
+     "lineage_stem": "expression_eval",
+     "rule": "[NEW] (cue) the other convention (ranked item worked left to right, left-to-right item worked with precedence)"
+    },
+    {
+     "label": "cue",
+     "lineage_stem": "cheapest_network",
+     "rule": "[NEW] (cue) nearest-neighbour path from the first listed town"
+    },
+    {
+     "label": "cue",
+     "lineage_stem": "run_length",
+     "rule": "[NEW] (cue) each letter with its total count, in order of first appearance"
+    },
+    {
+     "label": "cue",
+     "lineage_stem": "min_heap_ops",
+     "rule": "[NEW] (cue) row sorted ascending except positions 2 and 3 swapped when out of order"
+    },
+    {
+     "label": "cue",
+     "lineage_stem": "binary_search_trace",
+     "rule": "[NEW] (cue) sum ask: target x ceil(log2(n+1)) ; values ask: midpoints by position only, target appended"
+    },
+    {
+     "label": "cue",
+     "lineage_stem": "grid_sum",
+     "rule": "[NEW] (cue) the asked row/column/diagonal read with the index off by one (next one)"
+    },
+    {
+     "label": "artifact",
+     "lineage_stem": "list_ops",
+     "rule": "[NEW] (artifact) final list = start list with adds appended and removals applied, all moves and reverses ignored"
+    },
+    {
+     "label": "cue",
+     "lineage_stem": "luhn_check",
+     "rule": "[NEW] (cue) check digit: (10 - digit sum mod 10) mod 10 with every digit doubled"
+    },
+    {
+     "label": "cue",
+     "lineage_stem": "from_base",
+     "rule": "[NEW] (cue) digits read as a decimal number"
+    },
+    {
+     "label": "cue",
+     "lineage_stem": "to_base_wide",
+     "rule": "[NEW] (cue) remainders of repeated division by the base, written in the order produced"
+    },
+    {
+     "label": "cue",
+     "lineage_stem": "list_ops",
+     "rule": "[NEW] [cond] (cue) moves and reverses ignored (items with at least one move or reverse)"
+    }
+   ],
+   "entries": [
+    {
+     "label": "partial",
+     "lineage_stem": "crt_smallest",
+     "rule": "[NEW] (partial) largest modulus: try r, r+m, r+2m against the other congruences, else r"
+    },
+    {
+     "label": "P",
+     "lineage_stem": "count_divisible",
+     "rule": "[NEW] (P) misread: each distinct value counted once (the wording now excludes it)"
+    },
+    {
+     "label": "P",
+     "lineage_stem": "string_rewrite_nonidentity",
+     "rule": "[NEW] (P) misread: each step repeated until no match is left (capped at 50 rounds)"
+    }
+   ]
+  },
+  "notes": {
+   "klass_bodies_identical_in_f_pool_and_r2_fix4_battery": true,
+   "klass_source_sha256": "85feb2333bf6affc7b6b75fbf8a35ab4a267569a8da923fb8a07df1ad83dce03",
+   "level_dependent_entries": 3,
+   "new_rules_counted_for_a_label_the_header_of_f_new_heur_does_not_define": [
+    "[NEW] (artifact) final list = start list with adds appended and removals applied, all moves and reverses ignored"
+   ],
+   "shape_dependent_entries": 1
+  },
+  "units": [
+   "R2a",
+   "R2b"
+  ]
+ },
+ "commit": "b78e58b1f47619f070dfc6c0a88999d345b1a34b",
+ "source_sha256": {
+  "docs/reviews/m0-lineage-decision-2026-11-25/audit3_c1/a3_shortcuts.py": "29ff7b07f98392457b6fe05fe06682e1bf413d20e94f696fe14d84271a3691eb",
+  "docs/reviews/m0-lineage-decision-2026-11-25/audit3_m1/shortcuts_a3.py": "7182713b0932ef6615bacf281c91eb73a37e8bca8098802a43cbafe0bba98a83",
+  "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py": "3fa429c9fb8415e4e20da6a14f2a6067162cac7cbd4c8c90aa7dc8e9f9ecc385",
+  "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py": "b6ed2ec95426058a79a8f39ffeff55f7dbc0c4f93fc350a273ca2166a0c6f0df",
+  "docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/short_summary_a4.py": "a85567eee0749cbdaeb00f123773b374e8967774b477e5a3444f4147c8d3e142",
+  "docs/reviews/m0-lineage-decision-2026-11-25/audit4_r1/final_table4.py": "35bc60a66ce7f907a06c9b42139d3ed770351e1d19dfbb54a2c5d205e0fcdd9d",
+  "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f4b_pool_v2.py": "6ca4bcf5054f6ec673e9f30f458067795eb6b42b7781131e4631b13fb3d4254d",
+  "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f5_closed_forms.py": "9c9936546d9abe70446370ba35301fc00b3c357ea9662bcf218deffe1ab74d75",
+  "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f5b_closed_forms_v2.py": "c7d4c7fbf40b6e5df6eef82ca7103dea5774870eeeec955d99fed0cc54e50564",
+  "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/pool_a5.py": "f6c0c3c3faf8fd385e2c296b8a3fa313da4b87c5c1554c13df36d99fbc43f5b1",
+  "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_new_heur.py": "bbb0c233b607df80049a3a659007e846401630551f21fe3cb5518c7550d1975c",
+  "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_pool.py": "4d523e59256909746edc540699bb1022abd3f2edaa379ac99e5ef3c93143f788",
+  "studies/m0/c1_fix3_battery.py": "fb91e7992dbdde46ae02fb6698b004f4140a7f8f259835cab8f01f7a5454abfb",
+  "studies/m0/m1_fix3_shortcuts.py": "7eef7c7cb64195376d2424ce51b22db97c52b0164d894875310c3576a2552936",
+  "studies/m0/r1_fix3_battery.py": "dca205333bd89aad3823968d1bd273bfe94066c02d27a4c8e628743080a61c0d",
+  "studies/m0/r2_fix4_battery.py": "2e48179bf194be7e00411e44e982e7be1c35ab2b0f1a0434fdee8a288ef8b618"
+ }
+}

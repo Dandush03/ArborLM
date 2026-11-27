@@ -1,0 +1,30 @@
+SCOPE 3. Seeds
+  base 1: 16103270370041696293  text 16103270370041696293  AGREE
+  base 2: 10773834973117025986  text 10773834973117025986  AGREE
+  base 3: 619660634241804713  text 619660634241804713  AGREE
+  dry: 3342082268851962967  text 3342082268851962967  AGREE
+  roles per seed 26; integers 108; distinct 108
+  all below 2**64: True; smallest 99048509648598239; largest 18441618160095884807
+  drafter's per-unit rows read: 104; differences from mine: 0; mine not in drafter's: 0
+  sample (mine):
+    ('1', 'R1a', 'aud_seed'): 99048509648598239
+    ('2', 'M1a', 'a3'): 2546003605200785130
+    ('3', 'C1c', 'seed'): 878078140576336163
+    ('dry', 'R2b', 'tag'): 16488324911911726946
+    ('3', 'R1b', 'feat_test'): 9691051152120427905
+  collisions with registered values of ADR-0033 section 12 (400001-400013, 400031, 400032, 409001-409099, 953001-953999): 0
+  collisions with the integers of other labels: []
+  smallest integer of the 108 is 99048509648598239, so none lies in any registered range (all registered values are < 10**6)
+  R1 effective per-level integers under both forms: 896; shared by two roles: 0
+  smallest gap between two R1 role integers: 3038042042970482 (streams overlap only if a gap is <= 6)
+
+SCOPE 4. Binomial standard error sqrt(p(1-p)/n) at the bound
+  R1: n = 9000: open p=0.15 0.0038; yes/no p=0.65 0.0050; p=0.5 0.0053
+  R2/M1: n = 12000: open p=0.15 0.0033; yes/no p=0.65 0.0044; p=0.5 0.0046
+  C1: n = 6000: open p=0.15 0.0046; yes/no p=0.65 0.0062; p=0.5 0.0065
+  dry run n = 20: p=0.15 0.080; p=0.5 0.112
+  M1a digit_puzzle lineages (m1_fix4_battery caps n at 300 per level and seed): n = 900: p=0.15 0.0119; p=0.5 0.0167
+  M1 rate - base, both near 0.15 apart (rate 0.30, base 0.15), as if independent: 0.0053
+  double rounding in new_rules_final.py: |error| <= 0.00005 + 0.0005 = 0.00055 (the text says 0.0005);
+  with three seeds of equal n the pooled mean lies on a grid of 1/3000, and 0.149 + 0.00055 < 0.15 <= 0.1500 - so the outcome is the same
+  count recovered from a share at 4 decimals is exact iff n * 0.00005 < 0.5, i.e. n < 10000; at 2,000 per level: exact

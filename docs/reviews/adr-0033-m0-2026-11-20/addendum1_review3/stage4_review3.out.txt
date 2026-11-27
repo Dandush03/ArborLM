@@ -1,0 +1,15 @@
+== (1) drafter's part-4 example, cluster condition included
+  R1 A: start G=2 -> G=1; rounds [(2, ['R1.alpha', 'R1.beta']), (1, [])]
+  R1 B: start G=2 -> G=2; rounds [(2, [])]
+  R2 A: start G=2 -> G=2; rounds [(2, [])]
+  R2 B: start G=3 -> G=1; rounds [(3, ['R2.delta']), (2, ['R2.gamma']), (1, [])]
+  M1 A: start G=2 -> G=2; rounds [(2, [])]
+  M1 B: start G=2 -> G=2; rounds [(2, [])]
+  C1 A: start G=2 -> G=2; rounds [(2, [])]
+  C1 B: start G=2 -> G=0; rounds [(2, ['C1.delta']), (1, ['C1.gamma']), (0, [])]
+== (2) independent counts: fixed point vs brute-force largest consistent set
+  1500 instances: mismatches 0
+== (3) counts that depend on the other lineages in S (shared used-text set)
+  4000 instances: 519 with a self-consistent set not contained in the fixed point
+  first example: clusters {'x0': 'c1', 'x1': 'c1', 'x2': 'c1', 'x3': 'c2', 'x4': 'c0'} base {'x0': 250000, 'x1': 150000, 'x2': 80000, 'x3': 250000, 'x4': 150000} overlaps {('x0', 'x1'): 20000, ('x0', 'x2'): 60000, ('x0', 'x3'): 60000, ('x1', 'x2'): 40000, ('x1', 'x4'): 60000, ('x2', 'x3'): 20000, ('x3', 'x4'): 40000}
+    fixed point ['x0', 'x1', 'x3'] ; a consistent set outside it ['x0', 'x4']
