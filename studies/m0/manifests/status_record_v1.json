@@ -7272,7 +7272,7 @@
       "sha256": "0b658145a825490647b99eeab449bd442057fcd177a0be848fafa1868a87be0d"
     }
   },
-  "script_sha256": "eb4bf944d2d2e6a570f9ef7265b8449048d59de5ff7593762ac3723b3dff2b19",
+  "script_sha256": "3b0c241f6a50a181131612de69d194e381890cd7ed1afbb7d8a5ed1ee2c84548",
   "status": "First version of the status record, part of G-gen's record of record made at the human lead's domain list of 2026-11-26",
   "version": 1,
   "what": "First version of the status record of ADR-0033 addendum 1 section 3 item 6 and section 4A stage 6: for each of the 345 written lineages of the map of record, the evaluation, the global cluster, the cluster's part and the status with its stage and reason. Assembled by code from committed records; no judgement. The map carries no status and is not changed by this file."

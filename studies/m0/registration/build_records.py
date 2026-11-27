@@ -55,6 +55,7 @@ RULINGS_8 = f"{RUN_DIR}/LEAD_RULINGS_8.md"
 RULINGS_9 = f"{RUN_DIR}/LEAD_RULINGS_9.md"
 DOMAIN_LIST = f"{MANIFESTS}/domain_list.json"
 WORDS_13 = "docs/reviews/m0-lineage-decision-2026-11-25/HUMAN_LEAD_WORDS_13.md"
+WORDS_14 = "docs/reviews/m0-lineage-decision-2026-11-25/HUMAN_LEAD_WORDS_14.md"
 ADR_0033 = "docs/decisions/ADR-0033-m0-reference-models-and-evaluation-harness.md"
 RECORDS_CHECK = f"{RUN_DIR}/records_check/RECORDS_CHECK.md"
 GENERATOR_FILES = f"{RUN_DIR}/records_check/registered_generator_files.json"
@@ -1412,7 +1413,14 @@ def build(inp: Inputs, script_sha: str) -> dict[str, str]:
             "every_hash_of_stage_0": stage_0_hashes,
         },
         "departures": departures,
-        "awaiting_human_lead_confirmation": ["R-62 (c)"],
+        "awaiting_human_lead_confirmation": [],
+        "confirmed_by_the_human_lead": [
+            {
+                "ruling": "R-62 (c)",
+                "his_words": "Confirm it",
+                "record": {"path": WORDS_14, "sha256": inp.sha(WORDS_14)},
+            }
+        ],
         "gap_filling_rulings_that_lean_toward_passing": gap_filling,
         "frozen_generator_files": frozen_generator_files,
         "independent_check_of_the_records": {
