@@ -192,7 +192,7 @@
       "sha256": "c8f372a63d7f10c420d5aeeb0e630682348994a902130b4d0e0c7e39a12d6c59"
     },
     "lead_ruling_R_62_c": {
-      "classification_of_the_records_check": "the R2.caesar_shift exception: favourable to that registered part-B lineage, written with the partition possibly in view; awaiting the human lead's confirmation (PENDING LEAD REVIEW)",
+      "classification_of_the_records_check": "the R2.caesar_shift exception: favourable to that registered part-B lineage, written with the partition possibly in view; confirmed by the human lead on 2026-11-26 (HUMAN_LEAD_WORDS_14.md) (PENDING LEAD REVIEW)",
       "path": "docs/reviews/m0-fresh-run-2026-11-26/LEAD_RULINGS_9.md",
       "records_check": {
         "path": "docs/reviews/m0-fresh-run-2026-11-26/records_check/RECORDS_CHECK.md",
@@ -588,7 +588,7 @@
       "sha256": "c8f372a63d7f10c420d5aeeb0e630682348994a902130b4d0e0c7e39a12d6c59"
     }
   ],
-  "script_sha256": "3b0c241f6a50a181131612de69d194e381890cd7ed1afbb7d8a5ed1ee2c84548",
+  "script_sha256": "66b271d88649399079935f8f9fbf16bd2ca36e062158d3f7f6f2d7230ef5c283",
   "section_9_item_5_reading_per_part": {
     "C1.A": "computed as written, with 12 degrees of freedom printed beside every figure (section 9 item 5)",
     "C1.B": "computed as written, with 3 degrees of freedom printed beside every figure (section 9 item 5)",
@@ -1467,7 +1467,7 @@
     },
     "registration_record": {
       "path": "studies/m0/manifests/registration_record.json",
-      "sha256": "0c676d56bf69865c6dcc5789f2bf9c21632d6b9d63670a6e736d206fd7a9bb82"
+      "sha256": "55fac375ee6e8d10a936f8685ab23b452b497020dac68d05b317bab1b084c170"
     },
     "rounds_of_stage_4_with_every_count": {
       "capacity_record": {
@@ -2785,7 +2785,7 @@
     },
     "status_record_first_version": {
       "path": "studies/m0/manifests/status_record_v1.json",
-      "sha256": "ac0532459f35e568215b83c3939a909e9dc6384c61ed1a989d7b5745a6497eff",
+      "sha256": "46423504fe4d974936fbc8d480fabfbd91255adf2a588553d9e6244b2d272400",
       "version": 1
     },
     "survivor_list_of_record": {

@@ -1,0 +1,2805 @@
+{
+  "awaiting_human_lead_confirmation": [],
+  "confirmed_by_the_human_lead": [
+    {
+      "his_words": "Confirm it",
+      "record": {
+        "path": "docs/reviews/m0-lineage-decision-2026-11-25/HUMAN_LEAD_WORDS_14.md",
+        "sha256": "5b1e24fa0b32c0dffae02d4c687ff333b98fcf956718b4f28caf24b2624b49c4"
+      },
+      "ruling": "R-62 (c)"
+    }
+  ],
+  "departures": {
+    "family_count_fewer_than_12_is_a_departure_from_ADR_0033_line_268": {
+      "applies": true,
+      "entries": [
+        {
+          "evaluation": "R1",
+          "families": [
+            "boolean_state",
+            "categories",
+            "conditional",
+            "spatial",
+            "truth"
+          ],
+          "n_families": 5,
+          "part": "A"
+        },
+        {
+          "evaluation": "R1",
+          "families": [
+            "temporal"
+          ],
+          "n_families": 1,
+          "part": "B"
+        },
+        {
+          "evaluation": "R1",
+          "families": [
+            "boolean_state",
+            "categories",
+            "conditional",
+            "spatial",
+            "temporal",
+            "truth"
+          ],
+          "n_families": 6,
+          "part": "both (union of the two parts' families)"
+        },
+        {
+          "evaluation": "R2",
+          "families": [
+            "base",
+            "combinatorics",
+            "counting",
+            "graphs",
+            "grid",
+            "numtheory",
+            "parsing",
+            "rewrite"
+          ],
+          "n_families": 8,
+          "part": "A"
+        },
+        {
+          "evaluation": "R2",
+          "families": [
+            "caesar",
+            "codes",
+            "rle",
+            "search",
+            "sorting",
+            "structures"
+          ],
+          "n_families": 6,
+          "part": "B"
+        },
+        {
+          "evaluation": "M1",
+          "families": [
+            "algebra",
+            "counting",
+            "geometry",
+            "percent",
+            "remainder",
+            "sequences",
+            "statistics"
+          ],
+          "n_families": 7,
+          "part": "B"
+        },
+        {
+          "evaluation": "C1",
+          "families": [
+            "accumulators",
+            "functions",
+            "lists",
+            "nested",
+            "simulation",
+            "slices",
+            "stacks",
+            "string_methods",
+            "strings",
+            "while"
+          ],
+          "n_families": 10,
+          "part": "A"
+        },
+        {
+          "evaluation": "C1",
+          "families": [
+            "functions",
+            "lists",
+            "strings"
+          ],
+          "n_families": 3,
+          "part": "B"
+        },
+        {
+          "evaluation": "C1",
+          "families": [
+            "accumulators",
+            "functions",
+            "lists",
+            "nested",
+            "simulation",
+            "slices",
+            "stacks",
+            "string_methods",
+            "strings",
+            "while"
+          ],
+          "n_families": 10,
+          "part": "both (union of the two parts' families)"
+        }
+      ],
+      "source": "registration_record.json, family_count",
+      "stops_nothing": true
+    },
+    "lead_ruling_R_56": {
+      "path": "docs/reviews/m0-fresh-run-2026-11-26/LEAD_RULINGS_8.md",
+      "sha256": "2c443281d129fbb630c8f175834b3cf3586c9a24fb112de1a9daa9b8a356de60",
+      "title": "R-56. The M1a echo rule (audit P3): a departure from the text, in the direction unfavourable to passing.",
+      "what": "a departure from the text of stage 1S point 6, in the direction unfavourable to passing, made before any fresh figure existed"
+    },
+    "lead_ruling_R_60": {
+      "classification_of_the_records_check": "departure from ADR-0033 section 6.2 (\"Every process runs with PYTHONHASHSEED=0\"): five C1 scripts run with -I ignore PYTHONHASHSEED (PENDING LEAD REVIEW)",
+      "path": "docs/reviews/m0-fresh-run-2026-11-26/LEAD_RULINGS_8.md",
+      "records_check": {
+        "path": "docs/reviews/m0-fresh-run-2026-11-26/records_check/RECORDS_CHECK.md",
+        "sha256": "2c5028994bc69b5e0c7b249442430bfdcfafa5c6f9b86e9f063639a1a48c27c7"
+      },
+      "ruling": "R-60",
+      "ruling_text_excerpts": [
+        "The C1 commands that the final auditor ran with `python -I` ignore `PYTHONHASHSEED`.",
+        "reproducibility across runs is not claimed for those five scripts"
+      ],
+      "sha256": "2c443281d129fbb630c8f175834b3cf3586c9a24fb112de1a9daa9b8a356de60"
+    },
+    "lead_ruling_R_61": {
+      "hashed_late": {
+        "capacity_runner": {
+          "path": "studies/m0/registration/capacity.py",
+          "sha256": "00638afa8b4143e0379decd2ecaa80cfeaecc35ae1dd0bf9657dc6e9ef882152"
+        },
+        "distinct_item_key": {
+          "path": "studies/m0/registration/distinct_key.py",
+          "sha256": "08a0526b8b05742e748f0ce8c10c9ff7c6e06ad28afae2f0417743b8388342e1"
+        },
+        "pool_builder": {
+          "path": "studies/m0/registration/pool_builder.py",
+          "sha256": "728856b632f27d7a88885f08126bc31070261f7e41d7ab446591764a3e364862"
+        }
+      },
+      "path": "docs/reviews/m0-fresh-run-2026-11-26/LEAD_RULINGS_9.md",
+      "sha256": "c8f372a63d7f10c420d5aeeb0e630682348994a902130b4d0e0c7e39a12d6c59",
+      "title": "R-61. A departure from stage 0: three pieces of code hashed late.",
+      "what": "a departure from stage 0: the distinct-item key, the pool builder and the capacity runner were hashed after the partition of record was computed"
+    },
+    "lead_ruling_R_62_b": {
+      "classification_of_the_records_check": "departure from the decided reading (i), 'names relabelled only': the key relabels object, event and invented words as well as names; wider, less favourable to passing (PENDING LEAD REVIEW)",
+      "path": "docs/reviews/m0-fresh-run-2026-11-26/LEAD_RULINGS_9.md",
+      "records_check": {
+        "path": "docs/reviews/m0-fresh-run-2026-11-26/records_check/RECORDS_CHECK.md",
+        "sha256": "2c5028994bc69b5e0c7b249442430bfdcfafa5c6f9b86e9f063639a1a48c27c7"
+      },
+      "ruling": "R-62",
+      "ruling_text_excerpts": [
+        "The key also relabels object words, event words and invented category words, as well as personal and place names.",
+        "which is less favourable to passing"
+      ],
+      "sha256": "c8f372a63d7f10c420d5aeeb0e630682348994a902130b4d0e0c7e39a12d6c59"
+    },
+    "lead_ruling_R_62_c": {
+      "classification_of_the_records_check": "the R2.caesar_shift exception: favourable to that registered part-B lineage, written with the partition possibly in view; awaiting the human lead's confirmation (PENDING LEAD REVIEW)",
+      "path": "docs/reviews/m0-fresh-run-2026-11-26/LEAD_RULINGS_9.md",
+      "records_check": {
+        "path": "docs/reviews/m0-fresh-run-2026-11-26/records_check/RECORDS_CHECK.md",
+        "sha256": "2c5028994bc69b5e0c7b249442430bfdcfafa5c6f9b86e9f063639a1a48c27c7"
+      },
+      "ruling": "R-62",
+      "ruling_text_excerpts": [
+        "`R2.caesar_shift` keeps its invented words: there they are the text being shifted, and relabelling them changes the answer",
+        "is reported to the human lead for his confirmation with the capacity results"
+      ],
+      "sha256": "c8f372a63d7f10c420d5aeeb0e630682348994a902130b4d0e0c7e39a12d6c59"
+    },
+    "lead_ruling_R_66": {
+      "classification_of_the_records_check": "against section 8 and section 3 item 6: 141 lineages carry no single committed reason (180 counting the superseded-by tier, 39) (PENDING LEAD REVIEW)",
+      "path": "docs/reviews/m0-fresh-run-2026-11-26/LEAD_RULINGS_9.md",
+      "records_check": {
+        "path": "docs/reviews/m0-fresh-run-2026-11-26/records_check/RECORDS_CHECK.md",
+        "sha256": "2c5028994bc69b5e0c7b249442430bfdcfafa5c6f9b86e9f063639a1a48c27c7"
+      },
+      "ruling": "R-66",
+      "ruling_text_excerpts": [
+        "otherwise the fixed sentence \"not on the survivor list of record; superseded or dropped before it (no single committed reason found)\" (141)"
+      ],
+      "sha256": "c8f372a63d7f10c420d5aeeb0e630682348994a902130b4d0e0c7e39a12d6c59"
+    }
+  },
+  "domain_list": {
+    "checked_against_section_6_8_of_the_file_at": {
+      "path": "docs/decisions/ADR-0033-m0-reference-models-and-evaluation-harness.md",
+      "sha256": "7719f6d456113385a44dac37abeb28b36d6d9fb7eb569a65c7e6ccaaf19ec90b"
+    },
+    "code_writing": "NOT MEASURED",
+    "decided_by": "the human lead, 2026-11-26; his words: \"Yes, the five\"",
+    "decision": "ADR-0033 choice 2, option (a): the five rows of section 6.8; code writing NOT MEASURED; no further domain",
+    "domains": [
+      {
+        "domain": "Reasoning",
+        "gate_candidates": [
+          "R1",
+          "R2"
+        ],
+        "gate_candidates_as_written": "R1, R2",
+        "printed_beside": "BIG-Bench Hard",
+        "private": [
+          "R1",
+          "R2"
+        ],
+        "public": []
+      },
+      {
+        "domain": "Mathematics (a candidate addition in ADR-0032; recommended)",
+        "gate_candidates": [
+          "M1"
+        ],
+        "gate_candidates_as_written": "M1",
+        "printed_beside": "GSM8K",
+        "private": [
+          "M1"
+        ],
+        "public": []
+      },
+      {
+        "domain": "Code tracing (output prediction)",
+        "gate_candidates": [
+          "C1"
+        ],
+        "gate_candidates_as_written": "C1",
+        "printed_beside": "CRUXEval output prediction",
+        "private": [
+          "C1"
+        ],
+        "public": []
+      },
+      {
+        "domain": "Language understanding",
+        "gate_candidates": [
+          "L1"
+        ],
+        "gate_candidates_as_written": "L1 (public)",
+        "printed_beside": "—",
+        "private": [],
+        "public": [
+          "L1"
+        ]
+      },
+      {
+        "domain": "Factual knowledge",
+        "gate_candidates": [
+          "K1",
+          "K2"
+        ],
+        "gate_candidates_as_written": "K1, K2 (public)",
+        "printed_beside": "K0 as a floor check",
+        "private": [],
+        "public": [
+          "K1",
+          "K2"
+        ]
+      }
+    ],
+    "file": {
+      "path": "studies/m0/manifests/domain_list.json",
+      "sha256": "bd9a4e58ae38e606621181667e952a65e3203b11329396a88da830808a146069"
+    },
+    "private_evaluations_stay_gate_candidates": true,
+    "record": {
+      "commit": "600c5215 on claude/m0-impl",
+      "path": "docs/reviews/m0-lineage-decision-2026-11-25/HUMAN_LEAD_WORDS_13.md",
+      "sha256": "5c5c0c31c1e8b95d98777e7663cac16483264fd89a4ecc620b5c62949a48e6e2"
+    },
+    "specification": {
+      "path": "docs/decisions/ADR-0033-m0-reference-models-and-evaluation-harness.md",
+      "section": "6.8",
+      "sha256": "7719f6d456113385a44dac37abeb28b36d6d9fb7eb569a65c7e6ccaaf19ec90b"
+    },
+    "what": "The domain list of ADR-0033 choice 2, as decided by the human lead on 2026-11-26: the input of build_records.py for G-gen's record."
+  },
+  "frozen_generator_files": {
+    "commit": "7cd0ac5a",
+    "commit_full": "7cd0ac5a2a2c5261352e66b4a41650576dcfe1be",
+    "count": 49,
+    "files": [
+      {
+        "path": "studies/m0/__init__.py",
+        "sha256": "56e493099672d2c3628af55cbf456c53b12c43ba8e601d602c4ebe2731dbcb2d"
+      },
+      {
+        "path": "studies/m0/c1grammar.py",
+        "sha256": "5832f18cdbc76626007aa9cbeb7c2a788cacf36a89a610c81e62171313c1d0ca"
+      },
+      {
+        "path": "studies/m0/core.py",
+        "sha256": "07907f1e559f6814e52b1307d6b009003130ba7297f0c1fa04fa3185441cc81d"
+      },
+      {
+        "path": "studies/m0/lineages_c1.py",
+        "sha256": "71acde8c46eabf7f1fa5e49f5b2b0f065b3800a20b2878943e21c8f07f623f61"
+      },
+      {
+        "path": "studies/m0/lineages_c1_common.py",
+        "sha256": "230311688960cc781a7ffff28f6ad621afc743ff8c91834df6d33781c1d147e6"
+      },
+      {
+        "path": "studies/m0/lineages_c1_fix3.py",
+        "sha256": "f72d85753d920510dec9cce3867497bb190e153f6a11d4365ea5fe98bd0a116e"
+      },
+      {
+        "path": "studies/m0/lineages_c1_fix3_lists.py",
+        "sha256": "65d96441f70307f805a03b23efde2db37b6c87837e06e2986367c693ebcac2f9"
+      },
+      {
+        "path": "studies/m0/lineages_c1_fix3_numbers.py",
+        "sha256": "d241ca4dab216ceaee8322ca16fc8ce0efc40011d86b2cd9d55bd9468f23b296"
+      },
+      {
+        "path": "studies/m0/lineages_c1_fix3_other.py",
+        "sha256": "f80fa5d7968eeb13341c122ef6eca721cd305053903c9476e12a1ab47a537e61"
+      },
+      {
+        "path": "studies/m0/lineages_c1_fix4.py",
+        "sha256": "2372627593ee6944fe981e16b88e84607d4c59ea429dd661b88b0c8bc23072ab"
+      },
+      {
+        "path": "studies/m0/lineages_c1_rev2.py",
+        "sha256": "6f0a4b412b4475fad35ce625657999fa4ee8dbff20a2f94b9c046728ad309aa5"
+      },
+      {
+        "path": "studies/m0/lineages_c1_rev2_traced.py",
+        "sha256": "4706de7dfdb1ab2636f1e94770b5eee0503a09ade24c0622a9065eec4cfaed0f"
+      },
+      {
+        "path": "studies/m0/lineages_c1_stacks.py",
+        "sha256": "c3df7045acaa9b116cb236875fbee370e39f5addea3f0d28ced8e1a2a8eb65df"
+      },
+      {
+        "path": "studies/m0/lineages_c1_strings.py",
+        "sha256": "3df35e101293ec7b3585d830c81986fd0a614a03724ac3cf5c2eda977e800e16"
+      },
+      {
+        "path": "studies/m0/lineages_k0.py",
+        "sha256": "594c1867f519cd6598ab67126338d869c8966f32da333bbae341f355a9419d08"
+      },
+      {
+        "path": "studies/m0/lineages_m1.py",
+        "sha256": "0001c72b2f2944aee4c1a85b6126df3d204049a8b41262e9f2b15d8cdbe269af"
+      },
+      {
+        "path": "studies/m0/lineages_m1_common.py",
+        "sha256": "06aa138807d88b950bcceb19526e3f5b75be26e737d2e341b38dabbf5d8546fe"
+      },
+      {
+        "path": "studies/m0/lineages_m1_fix3.py",
+        "sha256": "041fab82d0f4cb1dd14205bd774f032dbd678c92803511b06afc200999d458c1"
+      },
+      {
+        "path": "studies/m0/lineages_m1_fix3_a.py",
+        "sha256": "c48b51253a035881013907f48e3ca8f9aa5a5d1ba297c09534dbe43abe948ebb"
+      },
+      {
+        "path": "studies/m0/lineages_m1_fix3_b.py",
+        "sha256": "7ade8498571d07c91faaa7496d9b6fcb661c06d674b44949896782bad0187b93"
+      },
+      {
+        "path": "studies/m0/lineages_m1_fix3_c.py",
+        "sha256": "0c297cd8edf34aebeb9f93f5324ce42088cff821e2e8b12ca40339ba5693fe12"
+      },
+      {
+        "path": "studies/m0/lineages_m1_fix3_common.py",
+        "sha256": "3406737f0c258f75ecf064885c6a6be287b39e9475d60d29962cb399fc0ee773"
+      },
+      {
+        "path": "studies/m0/lineages_m1_fix4.py",
+        "sha256": "da6027f4718e0898f9b05be87e1ab4f146d3c9994b2c97fe4a96f7258ec977f5"
+      },
+      {
+        "path": "studies/m0/lineages_m1_pricing.py",
+        "sha256": "4590a6476aaf9085d900159879137e1b95283e4092be562756bbeaaf54b44742"
+      },
+      {
+        "path": "studies/m0/lineages_r1.py",
+        "sha256": "19360b3512baeec84af00afac39d3b843c7d4448d2dfbc24ffdb793ff7b966e4"
+      },
+      {
+        "path": "studies/m0/lineages_r1_common.py",
+        "sha256": "9153c13004ed8c222be5fd8d0dbde6e718483478553a779298a760437e4dad23"
+      },
+      {
+        "path": "studies/m0/lineages_r1_conditional.py",
+        "sha256": "09a4b715e4b591dc95227dd38553c660bc63f0f255235c79e1c5a6a55160f2c9"
+      },
+      {
+        "path": "studies/m0/lineages_r1_fix3_b.py",
+        "sha256": "10d7e98e64cc7eb6226c72e4fc6c3832d0e4c619f5a5230cf4df2953116f13dc"
+      },
+      {
+        "path": "studies/m0/lineages_r1_fix3_c.py",
+        "sha256": "ce9f52d260cd17eba50d380116d8223e08dfe097ecfcb25d69b62be1e69498b8"
+      },
+      {
+        "path": "studies/m0/lineages_r1_fix3_common.py",
+        "sha256": "fa87936f535cdf4843c41c4e507638b095ab291b10fb9ce402302ae5293a33cc"
+      },
+      {
+        "path": "studies/m0/lineages_r1_fix4_a.py",
+        "sha256": "81cbb05a3393a6457f1a4c30e33714c71036d7628fe899ece0b8dbbbf240540a"
+      },
+      {
+        "path": "studies/m0/lineages_r1_fix4_common.py",
+        "sha256": "137479efd834debc1fc956acebfe079ccf4591330f2e6c43a28f17ffb4fe501f"
+      },
+      {
+        "path": "studies/m0/lineages_r1_rev4.py",
+        "sha256": "e14e21eaae16a87f644d3c712d92ea89e0c4fc2172b66857a10de399fba09a24"
+      },
+      {
+        "path": "studies/m0/lineages_r1_rev4_common.py",
+        "sha256": "91faaad025290762e7e0757520aa2e279fdeb7d75f62adbadb9a4673a927bfba"
+      },
+      {
+        "path": "studies/m0/lineages_r2.py",
+        "sha256": "d667aecce8bc0071852350bfc1dad0fb03ff8fe7970b04fdfa10fdd611a6c573"
+      },
+      {
+        "path": "studies/m0/lineages_r2_codes.py",
+        "sha256": "6cef04cd11d15109d07228a9f6da9498e8f68aa54e72fde6c5255bf526eac4a4"
+      },
+      {
+        "path": "studies/m0/lineages_r2_common.py",
+        "sha256": "1c0008fb070913a64daecd73070be03605a77b9efc0fece8259508dd69ee75ff"
+      },
+      {
+        "path": "studies/m0/lineages_r2_dynprog.py",
+        "sha256": "526e99602af7e23ec80268f0eff0c082555f1cf0767f6fad01b2c41792fd4767"
+      },
+      {
+        "path": "studies/m0/lineages_r2_fix3.py",
+        "sha256": "c833639b36c2a54c31156cbb22cee6acfc1407cd96036132ab1fa12f8cf67310"
+      },
+      {
+        "path": "studies/m0/lineages_r2_fix3_b.py",
+        "sha256": "581f5585eca2b03eaf0f5b90ce936bf04ad24e8f9359c3e362994f65ded71920"
+      },
+      {
+        "path": "studies/m0/lineages_r2_fix3_c.py",
+        "sha256": "7f64139719a33c5c0f7f5a702de862590fb6056095074c4dd531fea94f2227c2"
+      },
+      {
+        "path": "studies/m0/lineages_r2_fix4.py",
+        "sha256": "e9ee7fdbaa57d92aee4cff21b3e525fda3da7d53b646388cdf04ddf280a7b8e6"
+      },
+      {
+        "path": "studies/m0/lineages_r2_graphs.py",
+        "sha256": "b3232aa25084e7c38a49a57dd44744293a28b9881fb5c13e0a6776c5788102b9"
+      },
+      {
+        "path": "studies/m0/lineages_r2_parsing.py",
+        "sha256": "10ac4c89e2a8c8a97cb6a1b9485bab18af8c5f3ebcb6b1fab3cc5d21447e55b4"
+      },
+      {
+        "path": "studies/m0/lineages_r2_rev2.py",
+        "sha256": "690e790eddcf5386ecf0876c9bcb41f9ff7b4e9b143f2f57c864871d268e6dfa"
+      },
+      {
+        "path": "studies/m0/lineages_r2_structures.py",
+        "sha256": "88b524efc9651f1cce09bb6fb1d5128bd5c4c9bebfc109b97929b96fbe70eddb"
+      },
+      {
+        "path": "studies/m0/scoring.py",
+        "sha256": "e5007eb53456849b45b142a6789ccf933be26e103a2384281253486b615e97a7"
+      },
+      {
+        "path": "studies/m0/solvers_c1.py",
+        "sha256": "aafedb5be92a8dcdfaa4f6ed8587d2fed2eb980a78d9d71791364e1ed2f2360d"
+      },
+      {
+        "path": "studies/m0/vocab.py",
+        "sha256": "2c4036bea7770727b3ec0582f361723c243c145de3479e8d610a384a7a93c286"
+      }
+    ],
+    "rehashed_in_the_worktree_and_equal": true,
+    "source_list": {
+      "path": "docs/reviews/m0-fresh-run-2026-11-26/records_check/registered_generator_files.json",
+      "sha256": "4050dd6a6cb2c8ad82d77144df1e261858a035a1b606a11b928e1ed927aef585"
+    },
+    "unchanged_since_the_commit": "git diff --name-status 7cd0ac5a HEAD -- studies/m0 shows only additions (51, all under fresh_run/, registration/, solvers2/); every file below is byte-identical at 7cd0ac5a and HEAD, and the working tree is clean for them",
+    "what": "the static import closure of the functions behind the builders of the 65 registered lineages"
+  },
+  "gap_filling_rulings_that_lean_toward_passing": [
+    {
+      "classification_of_the_records_check": "fills a gap (what a 'rule' is); leans toward passing; not a departure (PENDING LEAD REVIEW)",
+      "path": "docs/reviews/m0-fresh-run-2026-11-26/LEAD_RULINGS_8.md",
+      "records_check": {
+        "path": "docs/reviews/m0-fresh-run-2026-11-26/records_check/RECORDS_CHECK.md",
+        "sha256": "2c5028994bc69b5e0c7b249442430bfdcfafa5c6f9b86e9f063639a1a48c27c7"
+      },
+      "ruling": "R-46",
+      "ruling_text_excerpts": [
+        "a field is a rule only if its prediction for an item can be computed without that item's answer",
+        "This ruling leans toward passing for the two fields it leaves unread"
+      ],
+      "sha256": "2c443281d129fbb630c8f175834b3cf3586c9a24fb112de1a9daa9b8a356de60"
+    },
+    {
+      "classification_of_the_records_check": "reads 'fixtures carry no answer' as allowing aggregate format lines from the keys; favourable to the lineages; a reading, not a departure (PENDING LEAD REVIEW)",
+      "path": "docs/reviews/m0-fresh-run-2026-11-26/LEAD_RULINGS_8.md",
+      "records_check": {
+        "path": "docs/reviews/m0-fresh-run-2026-11-26/records_check/RECORDS_CHECK.md",
+        "sha256": "2c5028994bc69b5e0c7b249442430bfdcfafa5c6f9b86e9f063639a1a48c27c7"
+      },
+      "ruling": "R-54",
+      "ruling_text_excerpts": [
+        "This reading is the one favourable to the lineages and is reported to the human lead as such"
+      ],
+      "sha256": "2c443281d129fbb630c8f175834b3cf3586c9a24fb112de1a9daa9b8a356de60"
+    }
+  ],
+  "independent_check_of_the_records": {
+    "path": "docs/reviews/m0-fresh-run-2026-11-26/records_check/RECORDS_CHECK.md",
+    "sha256": "2c5028994bc69b5e0c7b249442430bfdcfafa5c6f9b86e9f063639a1a48c27c7",
+    "what": "independent engineering evidence, not Astra validation and not human approval"
+  },
+  "inputs_sha256": {
+    "docs/decisions/ADR-0033-m0-reference-models-and-evaluation-harness.md": "7719f6d456113385a44dac37abeb28b36d6d9fb7eb569a65c7e6ccaaf19ec90b",
+    "docs/reviews/m0-fresh-run-2026-11-26/HASH_RECORD.json": "7e00cf45d77dba75e15d8ee0645d4e5ed519dc871a64d1e2fd04cc0098b4ce4b",
+    "docs/reviews/m0-fresh-run-2026-11-26/HASH_RECORD_STAGES_2_TO_4.json": "396dd8d170de17a75413ab6678bb526aaf4b5412f3c8a0557515bc0c51be6f7b",
+    "docs/reviews/m0-fresh-run-2026-11-26/LEAD_RULINGS_8.md": "2c443281d129fbb630c8f175834b3cf3586c9a24fb112de1a9daa9b8a356de60",
+    "docs/reviews/m0-fresh-run-2026-11-26/LEAD_RULINGS_9.md": "c8f372a63d7f10c420d5aeeb0e630682348994a902130b4d0e0c7e39a12d6c59",
+    "docs/reviews/m0-fresh-run-2026-11-26/records_check/RECORDS_CHECK.md": "2c5028994bc69b5e0c7b249442430bfdcfafa5c6f9b86e9f063639a1a48c27c7",
+    "docs/reviews/m0-fresh-run-2026-11-26/records_check/registered_generator_files.json": "4050dd6a6cb2c8ad82d77144df1e261858a035a1b606a11b928e1ed927aef585",
+    "docs/reviews/m0-fresh-run-2026-11-26/run/hashes_seed1.json": "90f02a8bfbbca7c89756250d3316e1fa2dae5deea3000c6438d96d5529232b63",
+    "docs/reviews/m0-fresh-run-2026-11-26/run/hashes_seed2.json": "87f28a8aa46813d8273328d32bed3b55ee978228dc02c1b7e3d93eec2c0318cd",
+    "docs/reviews/m0-fresh-run-2026-11-26/run/hashes_seed3.json": "f720ac2145da8aea3b8a7068bbcefd799a1d0c1ecbfb2dd7436e19353d5b07f5",
+    "docs/reviews/m0-fresh-run-2026-11-26/run/pooled/SHA256SUMS_pooled.txt": "dea207cd3cae654542e7a411416a91f867d5ef4eb1b50a300459140bbe21301a",
+    "docs/reviews/m0-fresh-run-2026-11-26/run/pooled/dropped.json": "248ee3f0b2e4433a40cc6a720de935e5ae9154a96bb4168d95d3156a61f5f83b",
+    "docs/reviews/m0-fresh-run-2026-11-26/run/pooled/pooled_table.json.gz": "89958f3b70b935e9b2b5bef9a7ae0a352c1102c4cba3e11084672caed0c58f27",
+    "docs/reviews/m0-lineage-decision-2026-11-25/HUMAN_LEAD_WORDS_11.md": "37d927727c1f3203d738672158d262e625d0e9a284ee6471bed2e27bb3255e5b",
+    "docs/reviews/m0-lineage-decision-2026-11-25/HUMAN_LEAD_WORDS_13.md": "5c5c0c31c1e8b95d98777e7663cac16483264fd89a4ecc620b5c62949a48e6e2",
+    "studies/m0/manifests/capacity_of_record.json": "33c393fbd0770520c489c8bd8591a1a0febd3f4273961499619a1d6eaa12fb34",
+    "studies/m0/manifests/domain_list.json": "bd9a4e58ae38e606621181667e952a65e3203b11329396a88da830808a146069",
+    "studies/m0/manifests/map_of_record.json": "1ba6ddd520dfe6514dfd282883ce4bc84660b7dca1abfefdac58285dcab5809c",
+    "studies/m0/manifests/partition_of_record.json": "750715d846a086f901ccf2525ab8c87c13f61b543f44e44dca2aeb0d401a37e9",
+    "studies/m0/manifests/stage2_conditions.json": "81d454a2c7045c7ad9bad9a18b2d9f18e5f3e5c02a4590b5a76ebc1368ae3e55",
+    "studies/m0/manifests/survivor_list_of_record.json": "0b658145a825490647b99eeab449bd442057fcd177a0be848fafa1868a87be0d",
+    "studies/m0/registration/candidate_list.json": "8dcc796c0dc8554fab52a5e3093f73c6f2838fe5b965e2b3743fea6291f8946a"
+  },
+  "lead_rulings": [
+    {
+      "path": "docs/reviews/m0-fresh-run-2026-11-26/LEAD_RULINGS_8.md",
+      "sha256": "2c443281d129fbb630c8f175834b3cf3586c9a24fb112de1a9daa9b8a356de60"
+    },
+    {
+      "path": "docs/reviews/m0-fresh-run-2026-11-26/LEAD_RULINGS_9.md",
+      "sha256": "c8f372a63d7f10c420d5aeeb0e630682348994a902130b4d0e0c7e39a12d6c59"
+    }
+  ],
+  "script_sha256": "3b0c241f6a50a181131612de69d194e381890cd7ed1afbb7d8a5ed1ee2c84548",
+  "section_9_item_5_reading_per_part": {
+    "C1.A": "computed as written, with 12 degrees of freedom printed beside every figure (section 9 item 5)",
+    "C1.B": "computed as written, with 3 degrees of freedom printed beside every figure (section 9 item 5)",
+    "M1.A": "computed as written, with 7 degrees of freedom printed beside every figure (section 9 item 5)",
+    "M1.B": "computed as written, with 5 degrees of freedom printed beside every figure (section 9 item 5)",
+    "R1.A": "computed as written, with 3 degrees of freedom printed beside every figure (section 9 item 5)",
+    "R1.B": "ONE CLUSTER: accuracies only; every outcome that needs an interval reads NOT EVALUABLE with the reason ONE CLUSTER (section 9 item 5)",
+    "R2.A": "computed as written, with 7 degrees of freedom printed beside every figure (section 9 item 5)",
+    "R2.B": "computed as written, with 5 degrees of freedom printed beside every figure (section 9 item 5)"
+  },
+  "stage_6_items": {
+    "G_per_part_with_the_strictest_counts_beside_it": {
+      "reading": "strictest = the count if borderline pairs were merged (section 1 item 3; lead ruling R-65): the number of groups (components of the graph whose links are the borderline pairs, over all clusters of the map, whatever the status of the lineages a chain passes through) that hold a cluster with a registered lineage of the evaluation in the part. `strictest_G_direct_pairs_only` is printed as information and is not the strictest count.",
+      "values": {
+        "C1.A": {
+          "G": 13,
+          "direct_pairs_count_information_only_not_the_strictest_count": 3,
+          "lineages": 17,
+          "strictest_G": 1
+        },
+        "C1.B": {
+          "G": 4,
+          "direct_pairs_count_information_only_not_the_strictest_count": 4,
+          "lineages": 4,
+          "strictest_G": 4
+        },
+        "M1.A": {
+          "G": 8,
+          "direct_pairs_count_information_only_not_the_strictest_count": 4,
+          "lineages": 15,
+          "strictest_G": 1
+        },
+        "M1.B": {
+          "G": 6,
+          "direct_pairs_count_information_only_not_the_strictest_count": 6,
+          "lineages": 8,
+          "strictest_G": 6
+        },
+        "R1.A": {
+          "G": 4,
+          "direct_pairs_count_information_only_not_the_strictest_count": 4,
+          "lineages": 5,
+          "strictest_G": 1
+        },
+        "R1.B": {
+          "G": 1,
+          "direct_pairs_count_information_only_not_the_strictest_count": 1,
+          "lineages": 1,
+          "strictest_G": 1
+        },
+        "R2.A": {
+          "G": 8,
+          "direct_pairs_count_information_only_not_the_strictest_count": 6,
+          "lineages": 9,
+          "strictest_G": 1
+        },
+        "R2.B": {
+          "G": 6,
+          "direct_pairs_count_information_only_not_the_strictest_count": 6,
+          "lineages": 6,
+          "strictest_G": 6
+        }
+      }
+    },
+    "N_e": {
+      "C1": 17,
+      "M1": 14,
+      "R1": 5,
+      "R2": 15
+    },
+    "candidates": {
+      "counts": {
+        "C1": 21,
+        "M1": 24,
+        "R1": 6,
+        "R2": 16
+      },
+      "path": "studies/m0/registration/candidate_list.json",
+      "sha256": "8dcc796c0dc8554fab52a5e3093f73c6f2838fe5b965e2b3743fea6291f8946a",
+      "total": 67
+    },
+    "counts_of_each_part_in_clusters_and_in_groups": {
+      "C1": {
+        "candidate_clusters_and_groups_as_the_partition_record_carries_them": {
+          "N_e": 17,
+          "clusters_A": 13,
+          "clusters_B": 4,
+          "groups_A": 1,
+          "groups_B": 4,
+          "half_floor": 8,
+          "recomputed_from_map_and_candidates_equal": true
+        },
+        "registered_clusters_and_groups": {
+          "A": {
+            "clusters": 13,
+            "groups": 1
+          },
+          "B": {
+            "clusters": 4,
+            "groups": 4
+          }
+        }
+      },
+      "M1": {
+        "candidate_clusters_and_groups_as_the_partition_record_carries_them": {
+          "N_e": 14,
+          "clusters_A": 8,
+          "clusters_B": 6,
+          "groups_A": 1,
+          "groups_B": 6,
+          "half_floor": 7,
+          "recomputed_from_map_and_candidates_equal": true
+        },
+        "registered_clusters_and_groups": {
+          "A": {
+            "clusters": 8,
+            "groups": 1
+          },
+          "B": {
+            "clusters": 6,
+            "groups": 6
+          }
+        }
+      },
+      "R1": {
+        "candidate_clusters_and_groups_as_the_partition_record_carries_them": {
+          "N_e": 5,
+          "clusters_A": 4,
+          "clusters_B": 1,
+          "groups_A": 1,
+          "groups_B": 1,
+          "half_floor": 2,
+          "recomputed_from_map_and_candidates_equal": true
+        },
+        "registered_clusters_and_groups": {
+          "A": {
+            "clusters": 4,
+            "groups": 1
+          },
+          "B": {
+            "clusters": 1,
+            "groups": 1
+          }
+        }
+      },
+      "R2": {
+        "candidate_clusters_and_groups_as_the_partition_record_carries_them": {
+          "N_e": 15,
+          "clusters_A": 8,
+          "clusters_B": 7,
+          "groups_A": 1,
+          "groups_B": 7,
+          "half_floor": 7,
+          "recomputed_from_map_and_candidates_equal": true
+        },
+        "registered_clusters_and_groups": {
+          "A": {
+            "clusters": 8,
+            "groups": 1
+          },
+          "B": {
+            "clusters": 6,
+            "groups": 6
+          }
+        }
+      }
+    },
+    "every_hash_of_stage_0": {
+      "approved_text": {
+        "commit": "2c944302cf8c81e081e14b33a42d4dfc994da8ba",
+        "sha256": "154d16a0597dc8b2d41179ded63a5da3e6e92aa4f7b414fefda1f93cd4d0923c"
+      },
+      "capacity_label": "capacity",
+      "capacity_runner": {
+        "path": "studies/m0/registration/capacity.py",
+        "sha256": "00638afa8b4143e0379decd2ecaa80cfeaecc35ae1dd0bf9657dc6e9ef882152"
+      },
+      "capacity_seed": 400002,
+      "distinct_item_key": {
+        "path": "studies/m0/registration/distinct_key.py",
+        "sha256": "08a0526b8b05742e748f0ce8c10c9ff7c6e06ad28afae2f0417743b8388342e1"
+      },
+      "fresh_run_hashes_stage_1S_point_9": {
+        "i_survivor_list": {
+          "path": "studies/m0/manifests/survivor_list_of_record.json",
+          "sha256": "0b658145a825490647b99eeab449bd442057fcd177a0be848fafa1868a87be0d"
+        },
+        "ii_script_listing": {
+          "path": "docs/reviews/m0-fresh-run-2026-11-26/script_listing/script_listing.json",
+          "sha256": "43657fa19e061276198d5f8fafaf9c90b50f3e7f1dc24f6f4e458238e4049e12"
+        },
+        "iii_run_copies": {
+          "copy_audit": {
+            "path": "docs/reviews/m0-fresh-run-2026-11-26/copy_audit/copy_hashes.json",
+            "sha256": "4ef58a395cd77d496806fd4d9d0131d8e3be99a10462e117619e24fe45469eac"
+          },
+          "run_copies": {
+            "studies/m0/fresh_run/c1/f5_closed_forms.py": "7e9455104d0cdb2f2b4cf6f51a2dc2a5abbf50befbbad44d38a00aa1f2604e49",
+            "studies/m0/fresh_run/c1/f5b_closed_forms_v2.py": "3429dcda6f69921d789be38607a8af81a42d4d0562f7e86466b32fe385790a37",
+            "studies/m0/fresh_run/m1/m1_fix3_shortcuts.py": "5961ccfc3388267d6d50a4d32e542b9ca3ed05ab5c24ae9306b50098a327c1ee",
+            "studies/m0/fresh_run/m1/m1_fix4_battery.py": "17c3de3775bd888dccdd6cb46cea2f6138b4dc0227cd4d3900e0527f15e23d30",
+            "studies/m0/fresh_run/m1/shortcuts_a3.py": "c3d0bd399cd35e36caee6eaab7e8b163fd3bce538388bfd7804d569d2505aeb2",
+            "studies/m0/fresh_run/m1/shortcuts_a4.py": "f6f63e1aaed5a5bc8d02a89f1c65ba5868b6da0b6d6bc74e9d173452adbf6743",
+            "studies/m0/fresh_run/r1/new_rules_final.py": "a57be6728a81f710d001437eaad624243bd8362a4f683fe9c30e6aa5129bdf60",
+            "studies/m0/fresh_run/r1/r1_fix4_measure.py": "cce2747a072a8aef83862f9e95f925f493d23a280ec491ebaa3a04127507ef72",
+            "studies/m0/fresh_run/r1/r1_fix4_tells.py": "812e0d38c3c1c167e586091dfceac95b63943e43889b97c0e5eaf311f4eab45a",
+            "studies/m0/fresh_run/r2/f_new_heur.py": "30710a0f7e0efd0af79e946f099a7071eb89d73c39c47f7b12d23b611bb2e62b",
+            "studies/m0/fresh_run/r2/f_rules.py": "5f5fcee11234d40c4df1d603bc851ce6cfdf0a92f506f135a74281b0f93d297f",
+            "studies/m0/fresh_run/r2/f_rules_new.py": "5b3019ced2307d9ab7776158151df14f7e33e74e2fcac73d527352f60c487dc0",
+            "studies/m0/fresh_run/r2/r2_fix4_battery.py": "920d246080a23e36e412a3ae2c669c9864cc1184c4a170cc17f741bbacfed0f9"
+          }
+        },
+        "iv_class_table_and_amendment_list": {
+          "amendment_list": {
+            "path": "docs/reviews/m0-fresh-run-2026-11-26/amendment_audit/amendment_list.json",
+            "sha256": "a861df02fb54662b0aa6f8ff151ec12c7f627fa3c8cc532a09db78f7516ccaf1"
+          },
+          "class_table": {
+            "path": "docs/reviews/adr-0033-m0-2026-11-20/addendum1_scripts/addendum1_rev7_uncounted_rules.json (claude/m0-spec)",
+            "sha256": "ccea7d78754480830f3887d27ac808e207c60ef4c4a444e47fe6a3fc4c2cd24d"
+          }
+        },
+        "v_pooling_script_and_field_table": {
+          "field_table": {
+            "path": "studies/m0/fresh_run/field_table.json",
+            "sha256": "1f64ac39427c18efc25e0eb134ab3cae23a2b7671957bf73505baca3ccd1bafe"
+          },
+          "pooling_script": {
+            "path": "studies/m0/fresh_run/pool_fresh.py",
+            "sha256": "19e6f61f2da4e1eda448b7fb0bdcb33f85ad7159855884d8927198ab471347aa"
+          }
+        },
+        "vi_dry_run": {
+          "exclusions": [],
+          "path": "docs/reviews/m0-fresh-run-2026-11-26/dry_run/hashes_dry.json",
+          "sha256": "c9420f6452a53afe260a54c8c6dcb8db2dd1a996d18f03cd4b7e8151a0cc4be6"
+        },
+        "vii_run_plan": {
+          "path": "studies/m0/fresh_run/run_plan.json",
+          "sha256": "316f1026f1987d14792116ad4f3271efe0047d4c0d0a0a26d30e98b681caf389"
+        }
+      },
+      "generators_commit": "7cd0ac5a",
+      "hash_record_stage_0_and_1S": {
+        "path": "docs/reviews/m0-fresh-run-2026-11-26/HASH_RECORD.json",
+        "sha256": "7e00cf45d77dba75e15d8ee0645d4e5ed519dc871a64d1e2fd04cc0098b4ce4b",
+        "what": "The hashes of ADR-0033 addendum 1, section 4A, stage 1S point 9, taken before any item of the three run seeds is generated"
+      },
+      "hash_record_stages_2_to_4": {
+        "path": "docs/reviews/m0-fresh-run-2026-11-26/HASH_RECORD_STAGES_2_TO_4.json",
+        "sha256": "396dd8d170de17a75413ab6678bb526aaf4b5412f3c8a0557515bc0c51be6f7b",
+        "what": "Hashes for stages 2 to 4 of ADR-0033 addendum 1, section 4A. The candidate list and the partition code were hashed before the partition of record was computed (commit 6885e800); the distinct-item key, the capacity runner and the pool builder are hashed here, after it: a departure from stage 0 recorded as lead ruling R-61."
+      },
+      "lead_rulings_8": {
+        "path": "docs/reviews/m0-fresh-run-2026-11-26/LEAD_RULINGS_8.md",
+        "sha256": "2c443281d129fbb630c8f175834b3cf3586c9a24fb112de1a9daa9b8a356de60"
+      },
+      "map_of_record": {
+        "path": "studies/m0/manifests/map_of_record.json",
+        "sha256": "1ba6ddd520dfe6514dfd282883ce4bc84660b7dca1abfefdac58285dcab5809c"
+      },
+      "partition_code": {
+        "path": "studies/m0/registration/partition.py",
+        "sha256": "4e43d280f60730ead54922be1a3687cca99468758d5a75417944cb6b58714d03"
+      },
+      "pool_builder": {
+        "path": "studies/m0/registration/pool_builder.py",
+        "sha256": "728856b632f27d7a88885f08126bc31070261f7e41d7ab446591764a3e364862"
+      },
+      "recorded_but_not_checked_here_because_the_file_is_not_in_this_worktree": [
+        "docs/reviews/adr-0033-m0-2026-11-20/addendum1_scripts/addendum1_rev7_uncounted_rules.json (claude/m0-spec)"
+      ],
+      "rule_scripts_commit": "b78e58b1f47619f070dfc6c0a88999d345b1a34b",
+      "runner": {
+        "path": "studies/m0/fresh_run/run_fresh.py",
+        "sha256": "12fd29aa6defcbe408d14abcd3e9c277bddb764560882d685284ec3422685f8b"
+      },
+      "second_solvers": {
+        "studies/m0/solvers2/solver2_c1.py": "6615f6d878fe67d5434aaecccf644b7287e1913c5b4c0cca52ba1e82faf4b135",
+        "studies/m0/solvers2/solver2_m1a.py": "2ee46ee4e1284016fe8ee0878775deff2a204415855708d37aecce087b1b9dfb",
+        "studies/m0/solvers2/solver2_m1b.py": "d4ddb3b1e3b5c6af01eea9a5a89ae634a92da112d6047535a4996262bba4eae5",
+        "studies/m0/solvers2/solver2_m1c.py": "9a7dc6e0ce04768e46ff285cc3cbff805f190b053cb2e2129783da722c11100c",
+        "studies/m0/solvers2/solver2_r1.py": "9d18a713bfa010f874f31ff370d5d5aa94fc4ea5eb91eca26b79b63821e5cc0b",
+        "studies/m0/solvers2/solver2_r2a.py": "04e297eed65e34c51e13289b4d892c1794c006bcec1703cf48e7c95fc0ce1706",
+        "studies/m0/solvers2/solver2_r2b.py": "a44c690176ba0c3c13b49f8587e8751e8708994272b126c7d2c6e74a0d39228f"
+      },
+      "survivor_list": {
+        "path": "studies/m0/manifests/survivor_list_of_record.json",
+        "sha256": "0b658145a825490647b99eeab449bd442057fcd177a0be848fafa1868a87be0d"
+      },
+      "verified_against_files_in_this_worktree": {
+        "docs/reviews/m0-fresh-run-2026-11-26/LEAD_RULINGS_8.md": "2c443281d129fbb630c8f175834b3cf3586c9a24fb112de1a9daa9b8a356de60",
+        "docs/reviews/m0-fresh-run-2026-11-26/amendment_audit/amendment_list.json": "a861df02fb54662b0aa6f8ff151ec12c7f627fa3c8cc532a09db78f7516ccaf1",
+        "docs/reviews/m0-fresh-run-2026-11-26/copy_audit/copy_hashes.json": "4ef58a395cd77d496806fd4d9d0131d8e3be99a10462e117619e24fe45469eac",
+        "docs/reviews/m0-fresh-run-2026-11-26/dry_run/hashes_dry.json": "c9420f6452a53afe260a54c8c6dcb8db2dd1a996d18f03cd4b7e8151a0cc4be6",
+        "docs/reviews/m0-fresh-run-2026-11-26/script_listing/script_listing.json": "43657fa19e061276198d5f8fafaf9c90b50f3e7f1dc24f6f4e458238e4049e12",
+        "studies/m0/fresh_run/c1/f5_closed_forms.py": "7e9455104d0cdb2f2b4cf6f51a2dc2a5abbf50befbbad44d38a00aa1f2604e49",
+        "studies/m0/fresh_run/c1/f5b_closed_forms_v2.py": "3429dcda6f69921d789be38607a8af81a42d4d0562f7e86466b32fe385790a37",
+        "studies/m0/fresh_run/field_table.json": "1f64ac39427c18efc25e0eb134ab3cae23a2b7671957bf73505baca3ccd1bafe",
+        "studies/m0/fresh_run/m1/m1_fix3_shortcuts.py": "5961ccfc3388267d6d50a4d32e542b9ca3ed05ab5c24ae9306b50098a327c1ee",
+        "studies/m0/fresh_run/m1/m1_fix4_battery.py": "17c3de3775bd888dccdd6cb46cea2f6138b4dc0227cd4d3900e0527f15e23d30",
+        "studies/m0/fresh_run/m1/shortcuts_a3.py": "c3d0bd399cd35e36caee6eaab7e8b163fd3bce538388bfd7804d569d2505aeb2",
+        "studies/m0/fresh_run/m1/shortcuts_a4.py": "f6f63e1aaed5a5bc8d02a89f1c65ba5868b6da0b6d6bc74e9d173452adbf6743",
+        "studies/m0/fresh_run/pool_fresh.py": "19e6f61f2da4e1eda448b7fb0bdcb33f85ad7159855884d8927198ab471347aa",
+        "studies/m0/fresh_run/r1/new_rules_final.py": "a57be6728a81f710d001437eaad624243bd8362a4f683fe9c30e6aa5129bdf60",
+        "studies/m0/fresh_run/r1/r1_fix4_measure.py": "cce2747a072a8aef83862f9e95f925f493d23a280ec491ebaa3a04127507ef72",
+        "studies/m0/fresh_run/r1/r1_fix4_tells.py": "812e0d38c3c1c167e586091dfceac95b63943e43889b97c0e5eaf311f4eab45a",
+        "studies/m0/fresh_run/r2/f_new_heur.py": "30710a0f7e0efd0af79e946f099a7071eb89d73c39c47f7b12d23b611bb2e62b",
+        "studies/m0/fresh_run/r2/f_rules.py": "5f5fcee11234d40c4df1d603bc851ce6cfdf0a92f506f135a74281b0f93d297f",
+        "studies/m0/fresh_run/r2/f_rules_new.py": "5b3019ced2307d9ab7776158151df14f7e33e74e2fcac73d527352f60c487dc0",
+        "studies/m0/fresh_run/r2/r2_fix4_battery.py": "920d246080a23e36e412a3ae2c669c9864cc1184c4a170cc17f741bbacfed0f9",
+        "studies/m0/fresh_run/run_fresh.py": "12fd29aa6defcbe408d14abcd3e9c277bddb764560882d685284ec3422685f8b",
+        "studies/m0/fresh_run/run_plan.json": "316f1026f1987d14792116ad4f3271efe0047d4c0d0a0a26d30e98b681caf389",
+        "studies/m0/manifests/map_of_record.json": "1ba6ddd520dfe6514dfd282883ce4bc84660b7dca1abfefdac58285dcab5809c",
+        "studies/m0/manifests/partition_of_record.json": "750715d846a086f901ccf2525ab8c87c13f61b543f44e44dca2aeb0d401a37e9",
+        "studies/m0/manifests/stage2_conditions.json": "81d454a2c7045c7ad9bad9a18b2d9f18e5f3e5c02a4590b5a76ebc1368ae3e55",
+        "studies/m0/manifests/survivor_list_of_record.json": "0b658145a825490647b99eeab449bd442057fcd177a0be848fafa1868a87be0d",
+        "studies/m0/registration/candidate_list.json": "8dcc796c0dc8554fab52a5e3093f73c6f2838fe5b965e2b3743fea6291f8946a",
+        "studies/m0/registration/capacity.py": "00638afa8b4143e0379decd2ecaa80cfeaecc35ae1dd0bf9657dc6e9ef882152",
+        "studies/m0/registration/distinct_key.py": "08a0526b8b05742e748f0ce8c10c9ff7c6e06ad28afae2f0417743b8388342e1",
+        "studies/m0/registration/partition.py": "4e43d280f60730ead54922be1a3687cca99468758d5a75417944cb6b58714d03",
+        "studies/m0/registration/pool_builder.py": "728856b632f27d7a88885f08126bc31070261f7e41d7ab446591764a3e364862",
+        "studies/m0/solvers2/solver2_c1.py": "6615f6d878fe67d5434aaecccf644b7287e1913c5b4c0cca52ba1e82faf4b135",
+        "studies/m0/solvers2/solver2_m1a.py": "2ee46ee4e1284016fe8ee0878775deff2a204415855708d37aecce087b1b9dfb",
+        "studies/m0/solvers2/solver2_m1b.py": "d4ddb3b1e3b5c6af01eea9a5a89ae634a92da112d6047535a4996262bba4eae5",
+        "studies/m0/solvers2/solver2_m1c.py": "9a7dc6e0ce04768e46ff285cc3cbff805f190b053cb2e2129783da722c11100c",
+        "studies/m0/solvers2/solver2_r1.py": "9d18a713bfa010f874f31ff370d5d5aa94fc4ea5eb91eca26b79b63821e5cc0b",
+        "studies/m0/solvers2/solver2_r2a.py": "04e297eed65e34c51e13289b4d892c1794c006bcec1703cf48e7c95fc0ce1706",
+        "studies/m0/solvers2/solver2_r2b.py": "a44c690176ba0c3c13b49f8587e8751e8708994272b126c7d2c6e74a0d39228f"
+      }
+    },
+    "fresh_run_seven_hashes_stage_1S_point_9": {
+      "i_survivor_list": {
+        "path": "studies/m0/manifests/survivor_list_of_record.json",
+        "sha256": "0b658145a825490647b99eeab449bd442057fcd177a0be848fafa1868a87be0d"
+      },
+      "ii_script_listing": {
+        "path": "docs/reviews/m0-fresh-run-2026-11-26/script_listing/script_listing.json",
+        "sha256": "43657fa19e061276198d5f8fafaf9c90b50f3e7f1dc24f6f4e458238e4049e12"
+      },
+      "iii_run_copies": {
+        "copy_audit": {
+          "path": "docs/reviews/m0-fresh-run-2026-11-26/copy_audit/copy_hashes.json",
+          "sha256": "4ef58a395cd77d496806fd4d9d0131d8e3be99a10462e117619e24fe45469eac"
+        },
+        "run_copies": {
+          "studies/m0/fresh_run/c1/f5_closed_forms.py": "7e9455104d0cdb2f2b4cf6f51a2dc2a5abbf50befbbad44d38a00aa1f2604e49",
+          "studies/m0/fresh_run/c1/f5b_closed_forms_v2.py": "3429dcda6f69921d789be38607a8af81a42d4d0562f7e86466b32fe385790a37",
+          "studies/m0/fresh_run/m1/m1_fix3_shortcuts.py": "5961ccfc3388267d6d50a4d32e542b9ca3ed05ab5c24ae9306b50098a327c1ee",
+          "studies/m0/fresh_run/m1/m1_fix4_battery.py": "17c3de3775bd888dccdd6cb46cea2f6138b4dc0227cd4d3900e0527f15e23d30",
+          "studies/m0/fresh_run/m1/shortcuts_a3.py": "c3d0bd399cd35e36caee6eaab7e8b163fd3bce538388bfd7804d569d2505aeb2",
+          "studies/m0/fresh_run/m1/shortcuts_a4.py": "f6f63e1aaed5a5bc8d02a89f1c65ba5868b6da0b6d6bc74e9d173452adbf6743",
+          "studies/m0/fresh_run/r1/new_rules_final.py": "a57be6728a81f710d001437eaad624243bd8362a4f683fe9c30e6aa5129bdf60",
+          "studies/m0/fresh_run/r1/r1_fix4_measure.py": "cce2747a072a8aef83862f9e95f925f493d23a280ec491ebaa3a04127507ef72",
+          "studies/m0/fresh_run/r1/r1_fix4_tells.py": "812e0d38c3c1c167e586091dfceac95b63943e43889b97c0e5eaf311f4eab45a",
+          "studies/m0/fresh_run/r2/f_new_heur.py": "30710a0f7e0efd0af79e946f099a7071eb89d73c39c47f7b12d23b611bb2e62b",
+          "studies/m0/fresh_run/r2/f_rules.py": "5f5fcee11234d40c4df1d603bc851ce6cfdf0a92f506f135a74281b0f93d297f",
+          "studies/m0/fresh_run/r2/f_rules_new.py": "5b3019ced2307d9ab7776158151df14f7e33e74e2fcac73d527352f60c487dc0",
+          "studies/m0/fresh_run/r2/r2_fix4_battery.py": "920d246080a23e36e412a3ae2c669c9864cc1184c4a170cc17f741bbacfed0f9"
+        }
+      },
+      "iv_class_table_and_amendment_list": {
+        "amendment_list": {
+          "path": "docs/reviews/m0-fresh-run-2026-11-26/amendment_audit/amendment_list.json",
+          "sha256": "a861df02fb54662b0aa6f8ff151ec12c7f627fa3c8cc532a09db78f7516ccaf1"
+        },
+        "class_table": {
+          "path": "docs/reviews/adr-0033-m0-2026-11-20/addendum1_scripts/addendum1_rev7_uncounted_rules.json (claude/m0-spec)",
+          "sha256": "ccea7d78754480830f3887d27ac808e207c60ef4c4a444e47fe6a3fc4c2cd24d"
+        }
+      },
+      "v_pooling_script_and_field_table": {
+        "field_table": {
+          "path": "studies/m0/fresh_run/field_table.json",
+          "sha256": "1f64ac39427c18efc25e0eb134ab3cae23a2b7671957bf73505baca3ccd1bafe"
+        },
+        "pooling_script": {
+          "path": "studies/m0/fresh_run/pool_fresh.py",
+          "sha256": "19e6f61f2da4e1eda448b7fb0bdcb33f85ad7159855884d8927198ab471347aa"
+        }
+      },
+      "vi_dry_run": {
+        "exclusions": [],
+        "path": "docs/reviews/m0-fresh-run-2026-11-26/dry_run/hashes_dry.json",
+        "sha256": "c9420f6452a53afe260a54c8c6dcb8db2dd1a996d18f03cd4b7e8151a0cc4be6"
+      },
+      "vii_run_plan": {
+        "path": "studies/m0/fresh_run/run_plan.json",
+        "sha256": "316f1026f1987d14792116ad4f3271efe0047d4c0d0a0a26d30e98b681caf389"
+      }
+    },
+    "hash_of_every_output_file_of_the_run_as_taken_when_its_unit_ended": {
+      "hash_records": [
+        {
+          "all_exit_statuses_zero": true,
+          "all_units_ok": true,
+          "n_attempts": 11,
+          "n_commands": 20,
+          "n_output_files_hashed": 325,
+          "path": "docs/reviews/m0-fresh-run-2026-11-26/run/hashes_seed1.json",
+          "plan_sha256": "316f1026f1987d14792116ad4f3271efe0047d4c0d0a0a26d30e98b681caf389",
+          "seed_set": "1",
+          "sha256": "90f02a8bfbbca7c89756250d3316e1fa2dae5deea3000c6438d96d5529232b63",
+          "units": [
+            "C1a",
+            "C1b",
+            "C1c",
+            "M1a",
+            "M1b",
+            "M1c",
+            "R1a",
+            "R1b",
+            "R1c",
+            "R2a",
+            "R2b"
+          ]
+        },
+        {
+          "all_exit_statuses_zero": true,
+          "all_units_ok": true,
+          "n_attempts": 11,
+          "n_commands": 20,
+          "n_output_files_hashed": 325,
+          "path": "docs/reviews/m0-fresh-run-2026-11-26/run/hashes_seed2.json",
+          "plan_sha256": "316f1026f1987d14792116ad4f3271efe0047d4c0d0a0a26d30e98b681caf389",
+          "seed_set": "2",
+          "sha256": "87f28a8aa46813d8273328d32bed3b55ee978228dc02c1b7e3d93eec2c0318cd",
+          "units": [
+            "C1a",
+            "C1b",
+            "C1c",
+            "M1a",
+            "M1b",
+            "M1c",
+            "R1a",
+            "R1b",
+            "R1c",
+            "R2a",
+            "R2b"
+          ]
+        },
+        {
+          "all_exit_statuses_zero": true,
+          "all_units_ok": true,
+          "n_attempts": 11,
+          "n_commands": 20,
+          "n_output_files_hashed": 325,
+          "path": "docs/reviews/m0-fresh-run-2026-11-26/run/hashes_seed3.json",
+          "plan_sha256": "316f1026f1987d14792116ad4f3271efe0047d4c0d0a0a26d30e98b681caf389",
+          "seed_set": "3",
+          "sha256": "f720ac2145da8aea3b8a7068bbcefd799a1d0c1ecbfb2dd7436e19353d5b07f5",
+          "units": [
+            "C1a",
+            "C1b",
+            "C1c",
+            "M1a",
+            "M1b",
+            "M1c",
+            "R1a",
+            "R1b",
+            "R1c",
+            "R2a",
+            "R2b"
+          ]
+        }
+      ],
+      "run_plan": {
+        "path": "studies/m0/fresh_run/run_plan.json",
+        "sha256": "316f1026f1987d14792116ad4f3271efe0047d4c0d0a0a26d30e98b681caf389"
+      },
+      "the_files_themselves": "under the directories named in the `dir` fields of the hash records, in the git-ignored experiments/ tree; they are not committed",
+      "total_output_files_hashed": 975
+    },
+    "lineages_dropped_by_the_fresh_run": {
+      "count": 15,
+      "file": {
+        "path": "docs/reviews/m0-fresh-run-2026-11-26/run/pooled/dropped.json",
+        "sha256": "248ee3f0b2e4433a40cc6a720de935e5ae9154a96bb4168d95d3156a61f5f83b"
+      },
+      "lineages": [
+        "C1.circle_elimination_r2",
+        "C1.cond_chain_f3",
+        "C1.func_branch_f4",
+        "C1.shared_lists_f3",
+        "C1.union_find_links_f3",
+        "M1.division_counting_r3",
+        "M1.grid_perimeter_r3",
+        "M1.last_digit_power_r3",
+        "M1.prime_factors_r3",
+        "M1.ratio_share_r3",
+        "R1.equivalence_exchange_rates_r6",
+        "R1.spatial_grid_walk_r5",
+        "R1.swap_tracking_r5",
+        "R1.venn_counting_r5",
+        "R2.list_ops"
+      ],
+      "per_evaluation": {
+        "C1": 5,
+        "M1": 5,
+        "R1": 4,
+        "R2": 1
+      },
+      "the_seven_that_come_from_the_rules_wording": {
+        "ids": [
+          "C1.circle_elimination_r2",
+          "C1.cond_chain_f3",
+          "C1.shared_lists_f3",
+          "C1.union_find_links_f3",
+          "R1.spatial_grid_walk_r5",
+          "R1.swap_tracking_r5",
+          "R2.list_ops"
+        ],
+        "note_source": {
+          "path": "docs/reviews/m0-lineage-decision-2026-11-25/HUMAN_LEAD_WORDS_11.md",
+          "sha256": "37d927727c1f3203d738672158d262e625d0e9a284ee6471bed2e27bb3255e5b"
+        }
+      }
+    },
+    "map_of_record": {
+      "borderline_pairs": 99,
+      "clusters": 92,
+      "groups": 30,
+      "links": 294,
+      "path": "studies/m0/manifests/map_of_record.json",
+      "sha256": "1ba6ddd520dfe6514dfd282883ce4bc84660b7dca1abfefdac58285dcab5809c",
+      "written_lineages": 345
+    },
+    "partition": {
+      "code": {
+        "path": "studies/m0/registration/partition.py",
+        "sha256": "4e43d280f60730ead54922be1a3687cca99468758d5a75417944cb6b58714d03"
+      },
+      "counts": {
+        "C1": {
+          "N_e": 17,
+          "clusters_A": 13,
+          "clusters_B": 4,
+          "group_sizes_in_candidate_clusters": [
+            1,
+            1,
+            1,
+            1,
+            13
+          ],
+          "groups_A": 1,
+          "groups_B": 4,
+          "groups_with_candidate_cluster": 5,
+          "half_floor": 8,
+          "step3": {
+            "L_e_groups": 1,
+            "a_e": 13,
+            "order": [
+              "C1.func_branch"
+            ],
+            "p_placed_in_A": 0,
+            "trace": [
+              {
+                "fits": false,
+                "group": "C1.func_branch",
+                "part": "B",
+                "w_e": 1
+              }
+            ]
+          }
+        },
+        "M1": {
+          "N_e": 14,
+          "clusters_A": 8,
+          "clusters_B": 6,
+          "group_sizes_in_candidate_clusters": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            8
+          ],
+          "groups_A": 1,
+          "groups_B": 6,
+          "groups_with_candidate_cluster": 7,
+          "half_floor": 7,
+          "step3": {
+            "L_e_groups": 4,
+            "a_e": 8,
+            "order": [
+              "M1.inclusion_exclusion",
+              "M1.quadratic_area",
+              "M1.finite_differences",
+              "M1.grid_perimeter"
+            ],
+            "p_placed_in_A": 0,
+            "trace": [
+              {
+                "fits": false,
+                "group": "M1.inclusion_exclusion",
+                "part": "B",
+                "w_e": 1
+              },
+              {
+                "fits": false,
+                "group": "M1.quadratic_area",
+                "part": "B",
+                "w_e": 1
+              },
+              {
+                "fits": false,
+                "group": "M1.finite_differences",
+                "part": "B",
+                "w_e": 1
+              },
+              {
+                "fits": false,
+                "group": "M1.grid_perimeter",
+                "part": "B",
+                "w_e": 1
+              }
+            ]
+          }
+        },
+        "R1": {
+          "N_e": 5,
+          "clusters_A": 4,
+          "clusters_B": 1,
+          "group_sizes_in_candidate_clusters": [
+            1,
+            4
+          ],
+          "groups_A": 1,
+          "groups_B": 1,
+          "groups_with_candidate_cluster": 2,
+          "half_floor": 2,
+          "step3": {
+            "L_e_groups": 0,
+            "a_e": 4,
+            "order": [],
+            "p_placed_in_A": 0,
+            "trace": []
+          }
+        },
+        "R2": {
+          "N_e": 15,
+          "clusters_A": 8,
+          "clusters_B": 7,
+          "group_sizes_in_candidate_clusters": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            8
+          ],
+          "groups_A": 1,
+          "groups_B": 7,
+          "groups_with_candidate_cluster": 8,
+          "half_floor": 7,
+          "step3": {
+            "L_e_groups": 4,
+            "a_e": 8,
+            "order": [
+              "R2.luhn_check",
+              "R2.min_heap_ops",
+              "R2.caesar_shift",
+              "C1.cellular_update"
+            ],
+            "p_placed_in_A": 0,
+            "trace": [
+              {
+                "fits": false,
+                "group": "R2.luhn_check",
+                "part": "B",
+                "w_e": 1
+              },
+              {
+                "fits": false,
+                "group": "R2.min_heap_ops",
+                "part": "B",
+                "w_e": 1
+              },
+              {
+                "fits": false,
+                "group": "R2.caesar_shift",
+                "part": "B",
+                "w_e": 1
+              },
+              {
+                "fits": false,
+                "group": "C1.cellular_update",
+                "part": "B",
+                "w_e": 1
+              }
+            ]
+          }
+        }
+      },
+      "derived_integers": {
+        "C1": 14653439660296977361,
+        "M1": 5748257385449400496,
+        "R1": 12152681357659760304,
+        "R2": 6959284715912682832,
+        "cross": 3111564968117111496
+      },
+      "record": {
+        "path": "studies/m0/manifests/partition_of_record.json",
+        "sha256": "750715d846a086f901ccf2525ab8c87c13f61b543f44e44dca2aeb0d401a37e9"
+      },
+      "seed": 400004,
+      "step2": {
+        "clusters_in_A": 29,
+        "clusters_in_B": 6,
+        "order": [
+          "C1.run_length_scan",
+          "C1.bracket_matching",
+          "C1.merge_two_sorted",
+          "C1.binary_search",
+          "M1.fraction_remainder"
+        ],
+        "trace": [
+          {
+            "a_before": 0,
+            "b_before": 0,
+            "group": "C1.run_length_scan",
+            "part": "B",
+            "w": 1
+          },
+          {
+            "a_before": 0,
+            "b_before": 1,
+            "group": "C1.bracket_matching",
+            "part": "A",
+            "w": 29
+          },
+          {
+            "a_before": 29,
+            "b_before": 1,
+            "group": "C1.merge_two_sorted",
+            "part": "B",
+            "w": 2
+          },
+          {
+            "a_before": 29,
+            "b_before": 3,
+            "group": "C1.binary_search",
+            "part": "B",
+            "w": 1
+          },
+          {
+            "a_before": 29,
+            "b_before": 4,
+            "group": "M1.fraction_remainder",
+            "part": "B",
+            "w": 2
+          }
+        ]
+      }
+    },
+    "pooled_table": {
+      "every_hash_in_the_sums_file": {
+        "SUMMARY.md": "9fa90fdd402cc20581a3b7f5e16ea1fc771b266239b4321cae0d71404ec71c6f",
+        "dropped.json": "248ee3f0b2e4433a40cc6a720de935e5ae9154a96bb4168d95d3156a61f5f83b",
+        "per_lineage.json": "908ed0fe29deb589ea06ea1443ef7104e4283d97697368b1bb16b85b67408708",
+        "pooled_table.json": "688940167fff6feceb4aa6b52f27a7958c2c04d971a31a4048f17a1361f3b13d",
+        "report_extras.json": "44989fd35ecbd2008df32a3eb642b8fbf0ce3f71058f3680925c948ad8bc2135"
+      },
+      "gz_decompresses_to_the_hash_above": true,
+      "pooled_table_json_gz_committed": {
+        "path": "docs/reviews/m0-fresh-run-2026-11-26/run/pooled/pooled_table.json.gz",
+        "sha256": "89958f3b70b935e9b2b5bef9a7ae0a352c1102c4cba3e11084672caed0c58f27"
+      },
+      "pooled_table_json_sha256_from_SHA256SUMS_pooled": "688940167fff6feceb4aa6b52f27a7958c2c04d971a31a4048f17a1361f3b13d",
+      "sums_file": {
+        "path": "docs/reviews/m0-fresh-run-2026-11-26/run/pooled/SHA256SUMS_pooled.txt",
+        "sha256": "dea207cd3cae654542e7a411416a91f867d5ef4eb1b50a300459140bbe21301a"
+      }
+    },
+    "record_of_the_stage_2_conditions": {
+      "lineages_read": 82,
+      "path": "studies/m0/manifests/stage2_conditions.json",
+      "sha256": "81d454a2c7045c7ad9bad9a18b2d9f18e5f3e5c02a4590b5a76ebc1368ae3e55"
+    },
+    "registered_lineages": {
+      "per_evaluation_and_part": {
+        "C1": {
+          "A": [
+            "C1.bracket_matching_f3",
+            "C1.bytecode_loop_f3",
+            "C1.counter_list_f3",
+            "C1.digit_peel_f3",
+            "C1.euclid_gcd_traced_f3",
+            "C1.fast_power_f4",
+            "C1.fib_like_f3",
+            "C1.fib_shapes_recursive_f3",
+            "C1.list_build_f3",
+            "C1.nested_pairs_f3",
+            "C1.postfix_evaluation",
+            "C1.recursive_calls_r2",
+            "C1.slices_f4",
+            "C1.string_build_f3",
+            "C1.string_methods_f3",
+            "C1.turtle_walk_f3",
+            "C1.while_counter_f3"
+          ],
+          "B": [
+            "C1.binary_search_f3",
+            "C1.func_compose_f4",
+            "C1.merge_two_sorted_f3",
+            "C1.run_length_scan"
+          ]
+        },
+        "M1": {
+          "A": [
+            "M1.ages_r3",
+            "M1.arithmetic_series_r3",
+            "M1.average_missing_r4",
+            "M1.change_ways_r3",
+            "M1.clock_duration_r4",
+            "M1.consecutive_r3",
+            "M1.crt_congruence_r3",
+            "M1.gcd_lcm_r4",
+            "M1.linear_equation_r3",
+            "M1.mixture_r4",
+            "M1.pipes_work_r3",
+            "M1.recurrence_iterate_r3",
+            "M1.shopping_r3",
+            "M1.speed_distance_r3",
+            "M1.tiered_pricing"
+          ],
+          "B": [
+            "M1.finite_differences_r4",
+            "M1.fraction_remainder_r3",
+            "M1.inclusion_exclusion_r3",
+            "M1.median_list_r3",
+            "M1.painted_cube_r3",
+            "M1.percent_change_r3",
+            "M1.quadratic_area_r3",
+            "M1.tip_split_r3"
+          ]
+        },
+        "R1": {
+          "A": [
+            "R1.boolean_lights_r4",
+            "R1.categories_default_exceptions_r4",
+            "R1.compass_turns",
+            "R1.conditional_threshold_rule_r4",
+            "R1.knights_knaves_r6"
+          ],
+          "B": [
+            "R1.temporal_weekday_shift_r6"
+          ]
+        },
+        "R2": {
+          "A": [
+            "R2.cheapest_network",
+            "R2.count_divisible",
+            "R2.crt_smallest",
+            "R2.dictionary_rank",
+            "R2.expression_eval",
+            "R2.from_base",
+            "R2.grid_sum",
+            "R2.string_rewrite_nonidentity",
+            "R2.to_base_wide"
+          ],
+          "B": [
+            "R2.binary_search_trace",
+            "R2.caesar_shift",
+            "R2.luhn_check",
+            "R2.min_heap_ops",
+            "R2.run_length",
+            "R2.sort_list"
+          ]
+        }
+      },
+      "total": 65
+    },
+    "registration_record": {
+      "path": "studies/m0/manifests/registration_record.json",
+      "sha256": "0c676d56bf69865c6dcc5789f2bf9c21632d6b9d63670a6e736d206fd7a9bb82"
+    },
+    "rounds_of_stage_4_with_every_count": {
+      "capacity_record": {
+        "path": "studies/m0/manifests/capacity_of_record.json",
+        "sha256": "33c393fbd0770520c489c8bd8591a1a0febd3f4273961499619a1d6eaa12fb34"
+      },
+      "every_count_is_in_the_capacity_record": "per round, cluster, lineage and level: target, attempts, count, ended, solver_disagreements; and the union by level",
+      "inputs_recorded_in_it": {
+        "cache_tag": null,
+        "candidates": "studies/m0/registration/candidate_list.json",
+        "map": "studies/m0/manifests/map_of_record.json",
+        "partition": "studies/m0/manifests/partition_of_record.json",
+        "sha256": {
+          "candidates": "8dcc796c0dc8554fab52a5e3093f73c6f2838fe5b965e2b3743fea6291f8946a",
+          "map": "1ba6ddd520dfe6514dfd282883ce4bc84660b7dca1abfefdac58285dcab5809c",
+          "partition": "750715d846a086f901ccf2525ab8c87c13f61b543f44e44dca2aeb0d401a37e9"
+        }
+      },
+      "per_part": {
+        "C1.A": {
+          "G_registered": 13,
+          "G_start": 13,
+          "removed": [],
+          "rounds": [
+            {
+              "D_G": 19470,
+              "G": 13,
+              "clusters": {
+                "C1.bracket_matching": {
+                  "D_lin": 9740,
+                  "k": 2,
+                  "union_by_level": {
+                    "0": 19480,
+                    "1": 19480,
+                    "2": 19480,
+                    "3": 19480,
+                    "4": 19480,
+                    "5": 19480,
+                    "6": 19480
+                  },
+                  "union_evaluated": true
+                },
+                "C1.bytecode_loop": {
+                  "D_lin": 19470,
+                  "k": 1,
+                  "union_by_level": {
+                    "0": 19470,
+                    "1": 19470,
+                    "2": 19470,
+                    "3": 19470,
+                    "4": 19470,
+                    "5": 19470,
+                    "6": 19470
+                  },
+                  "union_evaluated": true
+                },
+                "C1.counter_list_f3": {
+                  "D_lin": 19470,
+                  "k": 1,
+                  "union_by_level": {
+                    "0": 19470,
+                    "1": 19470,
+                    "2": 19470,
+                    "3": 19470,
+                    "4": 19470,
+                    "5": 19470,
+                    "6": 19470
+                  },
+                  "union_evaluated": true
+                },
+                "C1.digit_peel": {
+                  "D_lin": 19470,
+                  "k": 1,
+                  "union_by_level": {
+                    "0": 19470,
+                    "1": 19470,
+                    "2": 19470,
+                    "3": 19470,
+                    "4": 19470,
+                    "5": 19470,
+                    "6": 19470
+                  },
+                  "union_evaluated": true
+                },
+                "C1.euclid_gcd": {
+                  "D_lin": 19470,
+                  "k": 1,
+                  "union_by_level": {
+                    "0": 19470,
+                    "1": 19470,
+                    "2": 19470,
+                    "3": 19470,
+                    "4": 19470,
+                    "5": 19470,
+                    "6": 19470
+                  },
+                  "union_evaluated": true
+                },
+                "C1.fast_power": {
+                  "D_lin": 19470,
+                  "k": 1,
+                  "union_by_level": {
+                    "0": 19470,
+                    "1": 19470,
+                    "2": 19470,
+                    "3": 19470,
+                    "4": 19470,
+                    "5": 19470,
+                    "6": 19470
+                  },
+                  "union_evaluated": true
+                },
+                "C1.fib_like": {
+                  "D_lin": 6500,
+                  "k": 3,
+                  "union_by_level": {
+                    "0": 19500,
+                    "1": 19500,
+                    "2": 19500,
+                    "3": 19500,
+                    "4": 19500,
+                    "5": 19500,
+                    "6": 19500
+                  },
+                  "union_evaluated": true
+                },
+                "C1.list_build": {
+                  "D_lin": 19470,
+                  "k": 1,
+                  "union_by_level": {
+                    "0": 19470,
+                    "1": 19470,
+                    "2": 19470,
+                    "3": 19470,
+                    "4": 19470,
+                    "5": 19470,
+                    "6": 19470
+                  },
+                  "union_evaluated": true
+                },
+                "C1.nested_pairs": {
+                  "D_lin": 19470,
+                  "k": 1,
+                  "union_by_level": {
+                    "0": 19470,
+                    "1": 19470,
+                    "2": 19470,
+                    "3": 19470,
+                    "4": 19470,
+                    "5": 19470,
+                    "6": 19470
+                  },
+                  "union_evaluated": true
+                },
+                "C1.slices": {
+                  "D_lin": 9740,
+                  "k": 2,
+                  "union_by_level": {
+                    "0": 19480,
+                    "1": 19480,
+                    "2": 19480,
+                    "3": 19480,
+                    "4": 19480,
+                    "5": 19480,
+                    "6": 19480
+                  },
+                  "union_evaluated": true
+                },
+                "C1.string_build": {
+                  "D_lin": 19470,
+                  "k": 1,
+                  "union_by_level": {
+                    "0": 19470,
+                    "1": 19470,
+                    "2": 19470,
+                    "3": 19470,
+                    "4": 19470,
+                    "5": 19470,
+                    "6": 19470
+                  },
+                  "union_evaluated": true
+                },
+                "C1.turtle_walk": {
+                  "D_lin": 19470,
+                  "k": 1,
+                  "union_by_level": {
+                    "0": 19470,
+                    "1": 19470,
+                    "2": 19470,
+                    "3": 19470,
+                    "4": 19470,
+                    "5": 19470,
+                    "6": 19470
+                  },
+                  "union_evaluated": true
+                },
+                "C1.while_counter": {
+                  "D_lin": 19470,
+                  "k": 1,
+                  "union_by_level": {
+                    "0": 19470,
+                    "1": 19470,
+                    "2": 19470,
+                    "3": 19470,
+                    "4": 19470,
+                    "5": 19470,
+                    "6": 19470
+                  },
+                  "union_evaluated": true
+                }
+              },
+              "failing": [],
+              "round": 1
+            }
+          ],
+          "start": {
+            "C1.bracket_matching": [
+              "C1.bracket_matching_f3",
+              "C1.postfix_evaluation"
+            ],
+            "C1.bytecode_loop": [
+              "C1.bytecode_loop_f3"
+            ],
+            "C1.counter_list_f3": [
+              "C1.counter_list_f3"
+            ],
+            "C1.digit_peel": [
+              "C1.digit_peel_f3"
+            ],
+            "C1.euclid_gcd": [
+              "C1.euclid_gcd_traced_f3"
+            ],
+            "C1.fast_power": [
+              "C1.fast_power_f4"
+            ],
+            "C1.fib_like": [
+              "C1.fib_like_f3",
+              "C1.fib_shapes_recursive_f3",
+              "C1.recursive_calls_r2"
+            ],
+            "C1.list_build": [
+              "C1.list_build_f3"
+            ],
+            "C1.nested_pairs": [
+              "C1.nested_pairs_f3"
+            ],
+            "C1.slices": [
+              "C1.slices_f4",
+              "C1.string_methods_f3"
+            ],
+            "C1.string_build": [
+              "C1.string_build_f3"
+            ],
+            "C1.turtle_walk": [
+              "C1.turtle_walk_f3"
+            ],
+            "C1.while_counter": [
+              "C1.while_counter_f3"
+            ]
+          }
+        },
+        "C1.B": {
+          "G_registered": 4,
+          "G_start": 4,
+          "removed": [],
+          "rounds": [
+            {
+              "D_G": 61000,
+              "G": 4,
+              "clusters": {
+                "C1.binary_search": {
+                  "D_lin": 61000,
+                  "k": 1,
+                  "union_by_level": {
+                    "0": 61000,
+                    "1": 61000,
+                    "2": 61000,
+                    "3": 61000,
+                    "4": 61000,
+                    "5": 61000,
+                    "6": 61000
+                  },
+                  "union_evaluated": true
+                },
+                "C1.func_branch": {
+                  "D_lin": 61000,
+                  "k": 1,
+                  "union_by_level": {
+                    "0": 61000,
+                    "1": 61000,
+                    "2": 61000,
+                    "3": 61000,
+                    "4": 61000,
+                    "5": 61000,
+                    "6": 61000
+                  },
+                  "union_evaluated": true
+                },
+                "C1.merge_two_sorted": {
+                  "D_lin": 61000,
+                  "k": 1,
+                  "union_by_level": {
+                    "0": 61000,
+                    "1": 61000,
+                    "2": 61000,
+                    "3": 61000,
+                    "4": 61000,
+                    "5": 61000,
+                    "6": 61000
+                  },
+                  "union_evaluated": true
+                },
+                "C1.run_length_scan": {
+                  "D_lin": 61000,
+                  "k": 1,
+                  "union_by_level": {
+                    "0": 61000,
+                    "1": 61000,
+                    "2": 61000,
+                    "3": 61000,
+                    "4": 61000,
+                    "5": 61000,
+                    "6": 61000
+                  },
+                  "union_evaluated": true
+                }
+              },
+              "failing": [],
+              "round": 1
+            }
+          ],
+          "start": {
+            "C1.binary_search": [
+              "C1.binary_search_f3"
+            ],
+            "C1.func_branch": [
+              "C1.func_compose_f4"
+            ],
+            "C1.merge_two_sorted": [
+              "C1.merge_two_sorted_f3"
+            ],
+            "C1.run_length_scan": [
+              "C1.run_length_scan"
+            ]
+          }
+        },
+        "M1.A": {
+          "G_registered": 8,
+          "G_start": 8,
+          "removed": [
+            {
+              "G": 8,
+              "cluster": "M1.ages",
+              "k": 6,
+              "lineage": "M1.rectangle_r3",
+              "reasons": [
+                {
+                  "kind": "own_demand",
+                  "levels": {
+                    "0": {
+                      "count": 4189,
+                      "demand": 5180,
+                      "ended": "budget"
+                    },
+                    "1": {
+                      "count": 4899,
+                      "demand": 5180,
+                      "ended": "budget"
+                    }
+                  }
+                }
+              ],
+              "round": 1
+            }
+          ],
+          "rounds": [
+            {
+              "D_G": 31000,
+              "G": 8,
+              "clusters": {
+                "C1.coin_change_table": {
+                  "D_lin": 31000,
+                  "k": 1,
+                  "union_by_level": {
+                    "0": 31000,
+                    "1": 31000,
+                    "2": 31000,
+                    "3": 31000,
+                    "4": 31000,
+                    "5": 31000,
+                    "6": 31000
+                  },
+                  "union_evaluated": true
+                },
+                "C1.euclid_gcd": {
+                  "D_lin": 31000,
+                  "k": 1,
+                  "union_by_level": {
+                    "0": 31000,
+                    "1": 31000,
+                    "2": 31000,
+                    "3": 31000,
+                    "4": 31000,
+                    "5": 31000,
+                    "6": 31000
+                  },
+                  "union_evaluated": true
+                },
+                "C1.fib_like": {
+                  "D_lin": 15500,
+                  "k": 2,
+                  "union_by_level": {
+                    "0": 31000,
+                    "1": 31000,
+                    "2": 31000,
+                    "3": 31000,
+                    "4": 31000,
+                    "5": 31000,
+                    "6": 31000
+                  },
+                  "union_evaluated": true
+                },
+                "M1.ages": {
+                  "D_lin": 5180,
+                  "k": 6,
+                  "union_by_level": null,
+                  "union_evaluated": false
+                },
+                "M1.clock_duration": {
+                  "D_lin": 31000,
+                  "k": 1,
+                  "union_by_level": {
+                    "0": 31000,
+                    "1": 31000,
+                    "2": 31000,
+                    "3": 31000,
+                    "4": 31000,
+                    "5": 31000,
+                    "6": 31000
+                  },
+                  "union_evaluated": true
+                },
+                "M1.crt_congruence": {
+                  "D_lin": 31000,
+                  "k": 1,
+                  "union_by_level": {
+                    "0": 31000,
+                    "1": 31000,
+                    "2": 31000,
+                    "3": 31000,
+                    "4": 31000,
+                    "5": 31000,
+                    "6": 31000
+                  },
+                  "union_evaluated": true
+                },
+                "M1.mixture": {
+                  "D_lin": 10350,
+                  "k": 3,
+                  "union_by_level": {
+                    "0": 31050,
+                    "1": 31050,
+                    "2": 31050,
+                    "3": 31050,
+                    "4": 31050,
+                    "5": 31050,
+                    "6": 31050
+                  },
+                  "union_evaluated": true
+                },
+                "M1.tiered_pricing": {
+                  "D_lin": 31000,
+                  "k": 1,
+                  "union_by_level": {
+                    "0": 31000,
+                    "1": 31000,
+                    "2": 31000,
+                    "3": 31000,
+                    "4": 31000,
+                    "5": 31000,
+                    "6": 31000
+                  },
+                  "union_evaluated": true
+                }
+              },
+              "failing": [
+                "M1.rectangle_r3"
+              ],
+              "round": 1
+            },
+            {
+              "D_G": 31000,
+              "G": 8,
+              "clusters": {
+                "C1.coin_change_table": {
+                  "D_lin": 31000,
+                  "k": 1,
+                  "union_by_level": {
+                    "0": 31000,
+                    "1": 31000,
+                    "2": 31000,
+                    "3": 31000,
+                    "4": 31000,
+                    "5": 31000,
+                    "6": 31000
+                  },
+                  "union_evaluated": true
+                },
+                "C1.euclid_gcd": {
+                  "D_lin": 31000,
+                  "k": 1,
+                  "union_by_level": {
+                    "0": 31000,
+                    "1": 31000,
+                    "2": 31000,
+                    "3": 31000,
+                    "4": 31000,
+                    "5": 31000,
+                    "6": 31000
+                  },
+                  "union_evaluated": true
+                },
+                "C1.fib_like": {
+                  "D_lin": 15500,
+                  "k": 2,
+                  "union_by_level": {
+                    "0": 31000,
+                    "1": 31000,
+                    "2": 31000,
+                    "3": 31000,
+                    "4": 31000,
+                    "5": 31000,
+                    "6": 31000
+                  },
+                  "union_evaluated": true
+                },
+                "M1.ages": {
+                  "D_lin": 6200,
+                  "k": 5,
+                  "union_by_level": {
+                    "0": 31000,
+                    "1": 31000,
+                    "2": 31000,
+                    "3": 31000,
+                    "4": 31000,
+                    "5": 31000,
+                    "6": 31000
+                  },
+                  "union_evaluated": true
+                },
+                "M1.clock_duration": {
+                  "D_lin": 31000,
+                  "k": 1,
+                  "union_by_level": {
+                    "0": 31000,
+                    "1": 31000,
+                    "2": 31000,
+                    "3": 31000,
+                    "4": 31000,
+                    "5": 31000,
+                    "6": 31000
+                  },
+                  "union_evaluated": true
+                },
+                "M1.crt_congruence": {
+                  "D_lin": 31000,
+                  "k": 1,
+                  "union_by_level": {
+                    "0": 31000,
+                    "1": 31000,
+                    "2": 31000,
+                    "3": 31000,
+                    "4": 31000,
+                    "5": 31000,
+                    "6": 31000
+                  },
+                  "union_evaluated": true
+                },
+                "M1.mixture": {
+                  "D_lin": 10350,
+                  "k": 3,
+                  "union_by_level": {
+                    "0": 31050,
+                    "1": 31050,
+                    "2": 31050,
+                    "3": 31050,
+                    "4": 31050,
+                    "5": 31050,
+                    "6": 31050
+                  },
+                  "union_evaluated": true
+                },
+                "M1.tiered_pricing": {
+                  "D_lin": 31000,
+                  "k": 1,
+                  "union_by_level": {
+                    "0": 31000,
+                    "1": 31000,
+                    "2": 31000,
+                    "3": 31000,
+                    "4": 31000,
+                    "5": 31000,
+                    "6": 31000
+                  },
+                  "union_evaluated": true
+                }
+              },
+              "failing": [],
+              "round": 2
+            }
+          ],
+          "start": {
+            "C1.coin_change_table": [
+              "M1.change_ways_r3"
+            ],
+            "C1.euclid_gcd": [
+              "M1.gcd_lcm_r4"
+            ],
+            "C1.fib_like": [
+              "M1.arithmetic_series_r3",
+              "M1.recurrence_iterate_r3"
+            ],
+            "M1.ages": [
+              "M1.ages_r3",
+              "M1.average_missing_r4",
+              "M1.consecutive_r3",
+              "M1.linear_equation_r3",
+              "M1.pipes_work_r3",
+              "M1.rectangle_r3"
+            ],
+            "M1.clock_duration": [
+              "M1.clock_duration_r4"
+            ],
+            "M1.crt_congruence": [
+              "M1.crt_congruence_r3"
+            ],
+            "M1.mixture": [
+              "M1.mixture_r4",
+              "M1.shopping_r3",
+              "M1.speed_distance_r3"
+            ],
+            "M1.tiered_pricing": [
+              "M1.tiered_pricing"
+            ]
+          }
+        },
+        "M1.B": {
+          "G_registered": 6,
+          "G_start": 6,
+          "removed": [],
+          "rounds": [
+            {
+              "D_G": 41010,
+              "G": 6,
+              "clusters": {
+                "M1.finite_differences": {
+                  "D_lin": 41010,
+                  "k": 1,
+                  "union_by_level": {
+                    "0": 41010,
+                    "1": 41010,
+                    "2": 41010,
+                    "3": 41010,
+                    "4": 41010,
+                    "5": 41010,
+                    "6": 41010
+                  },
+                  "union_evaluated": true
+                },
+                "M1.fraction_remainder": {
+                  "D_lin": 13690,
+                  "k": 3,
+                  "union_by_level": {
+                    "0": 41070,
+                    "1": 41070,
+                    "2": 41070,
+                    "3": 41070,
+                    "4": 41070,
+                    "5": 41070,
+                    "6": 41070
+                  },
+                  "union_evaluated": true
+                },
+                "M1.grid_perimeter": {
+                  "D_lin": 41010,
+                  "k": 1,
+                  "union_by_level": {
+                    "0": 41010,
+                    "1": 41010,
+                    "2": 41010,
+                    "3": 41010,
+                    "4": 41010,
+                    "5": 41010,
+                    "6": 41010
+                  },
+                  "union_evaluated": true
+                },
+                "M1.inclusion_exclusion": {
+                  "D_lin": 41010,
+                  "k": 1,
+                  "union_by_level": {
+                    "0": 41010,
+                    "1": 41010,
+                    "2": 41010,
+                    "3": 41010,
+                    "4": 41010,
+                    "5": 41010,
+                    "6": 41010
+                  },
+                  "union_evaluated": true
+                },
+                "M1.median_list": {
+                  "D_lin": 41010,
+                  "k": 1,
+                  "union_by_level": {
+                    "0": 41010,
+                    "1": 41010,
+                    "2": 41010,
+                    "3": 41010,
+                    "4": 41010,
+                    "5": 41010,
+                    "6": 41010
+                  },
+                  "union_evaluated": true
+                },
+                "M1.quadratic_area": {
+                  "D_lin": 41010,
+                  "k": 1,
+                  "union_by_level": {
+                    "0": 41010,
+                    "1": 41010,
+                    "2": 41010,
+                    "3": 41010,
+                    "4": 41010,
+                    "5": 41010,
+                    "6": 41010
+                  },
+                  "union_evaluated": true
+                }
+              },
+              "failing": [],
+              "round": 1
+            }
+          ],
+          "start": {
+            "M1.finite_differences": [
+              "M1.finite_differences_r4"
+            ],
+            "M1.fraction_remainder": [
+              "M1.fraction_remainder_r3",
+              "M1.percent_change_r3",
+              "M1.tip_split_r3"
+            ],
+            "M1.grid_perimeter": [
+              "M1.painted_cube_r3"
+            ],
+            "M1.inclusion_exclusion": [
+              "M1.inclusion_exclusion_r3"
+            ],
+            "M1.median_list": [
+              "M1.median_list_r3"
+            ],
+            "M1.quadratic_area": [
+              "M1.quadratic_area_r3"
+            ]
+          }
+        },
+        "R1.A": {
+          "G_registered": 4,
+          "G_start": 4,
+          "removed": [],
+          "rounds": [
+            {
+              "D_G": 61000,
+              "G": 4,
+              "clusters": {
+                "R1.boolean_lights": {
+                  "D_lin": 30500,
+                  "k": 2,
+                  "union_by_level": {
+                    "0": 61000,
+                    "1": 61000,
+                    "2": 61000,
+                    "3": 61000,
+                    "4": 61000,
+                    "5": 61000,
+                    "6": 61000
+                  },
+                  "union_evaluated": true
+                },
+                "R1.categories_default_exceptions": {
+                  "D_lin": 61000,
+                  "k": 1,
+                  "union_by_level": {
+                    "0": 61000,
+                    "1": 61000,
+                    "2": 61000,
+                    "3": 61000,
+                    "4": 61000,
+                    "5": 61000,
+                    "6": 61000
+                  },
+                  "union_evaluated": true
+                },
+                "R1.conditional_chain": {
+                  "D_lin": 61000,
+                  "k": 1,
+                  "union_by_level": {
+                    "0": 61000,
+                    "1": 61000,
+                    "2": 61000,
+                    "3": 61000,
+                    "4": 61000,
+                    "5": 61000,
+                    "6": 61000
+                  },
+                  "union_evaluated": true
+                },
+                "R1.conditional_threshold_rule": {
+                  "D_lin": 61000,
+                  "k": 1,
+                  "union_by_level": {
+                    "0": 61000,
+                    "1": 61000,
+                    "2": 61000,
+                    "3": 61000,
+                    "4": 61000,
+                    "5": 61000,
+                    "6": 61000
+                  },
+                  "union_evaluated": true
+                }
+              },
+              "failing": [],
+              "round": 1
+            }
+          ],
+          "start": {
+            "R1.boolean_lights": [
+              "R1.boolean_lights_r4",
+              "R1.compass_turns"
+            ],
+            "R1.categories_default_exceptions": [
+              "R1.categories_default_exceptions_r4"
+            ],
+            "R1.conditional_chain": [
+              "R1.knights_knaves_r6"
+            ],
+            "R1.conditional_threshold_rule": [
+              "R1.conditional_threshold_rule_r4"
+            ]
+          }
+        },
+        "R1.B": {
+          "G_registered": 1,
+          "G_start": 1,
+          "removed": [],
+          "rounds": [
+            {
+              "D_G": 241000,
+              "G": 1,
+              "clusters": {
+                "R1.equivalence_exchange_rates": {
+                  "D_lin": 241000,
+                  "k": 1,
+                  "union_by_level": {
+                    "0": 241000,
+                    "1": 241000,
+                    "2": 241000,
+                    "3": 241000,
+                    "4": 241000,
+                    "5": 241000,
+                    "6": 241000
+                  },
+                  "union_evaluated": true
+                }
+              },
+              "failing": [],
+              "round": 1
+            }
+          ],
+          "start": {
+            "R1.equivalence_exchange_rates": [
+              "R1.temporal_weekday_shift_r6"
+            ]
+          }
+        },
+        "R2.A": {
+          "G_registered": 8,
+          "G_start": 8,
+          "removed": [],
+          "rounds": [
+            {
+              "D_G": 31000,
+              "G": 8,
+              "clusters": {
+                "C1.digit_peel": {
+                  "D_lin": 15500,
+                  "k": 2,
+                  "union_by_level": {
+                    "0": 31000,
+                    "1": 31000,
+                    "2": 31000,
+                    "3": 31000,
+                    "4": 31000,
+                    "5": 31000,
+                    "6": 31000
+                  },
+                  "union_evaluated": true
+                },
+                "M1.crt_congruence": {
+                  "D_lin": 31000,
+                  "k": 1,
+                  "union_by_level": {
+                    "0": 31000,
+                    "1": 31000,
+                    "2": 31000,
+                    "3": 31000,
+                    "4": 31000,
+                    "5": 31000,
+                    "6": 31000
+                  },
+                  "union_evaluated": true
+                },
+                "R1.mst_cost": {
+                  "D_lin": 31000,
+                  "k": 1,
+                  "union_by_level": {
+                    "0": 31000,
+                    "1": 31000,
+                    "2": 31000,
+                    "3": 31000,
+                    "4": 31000,
+                    "5": 31000,
+                    "6": 31000
+                  },
+                  "union_evaluated": true
+                },
+                "R2.count_divisible": {
+                  "D_lin": 31000,
+                  "k": 1,
+                  "union_by_level": {
+                    "0": 31000,
+                    "1": 31000,
+                    "2": 31000,
+                    "3": 31000,
+                    "4": 31000,
+                    "5": 31000,
+                    "6": 31000
+                  },
+                  "union_evaluated": true
+                },
+                "R2.dictionary_rank": {
+                  "D_lin": 31000,
+                  "k": 1,
+                  "union_by_level": {
+                    "0": 31000,
+                    "1": 31000,
+                    "2": 31000,
+                    "3": 31000,
+                    "4": 31000,
+                    "5": 31000,
+                    "6": 31000
+                  },
+                  "union_evaluated": true
+                },
+                "R2.expression_eval": {
+                  "D_lin": 31000,
+                  "k": 1,
+                  "union_by_level": {
+                    "0": 31000,
+                    "1": 31000,
+                    "2": 31000,
+                    "3": 31000,
+                    "4": 31000,
+                    "5": 31000,
+                    "6": 31000
+                  },
+                  "union_evaluated": true
+                },
+                "R2.grid_sum": {
+                  "D_lin": 31000,
+                  "k": 1,
+                  "union_by_level": {
+                    "0": 31000,
+                    "1": 31000,
+                    "2": 31000,
+                    "3": 31000,
+                    "4": 31000,
+                    "5": 31000,
+                    "6": 31000
+                  },
+                  "union_evaluated": true
+                },
+                "R2.string_rewrite": {
+                  "D_lin": 31000,
+                  "k": 1,
+                  "union_by_level": {
+                    "0": 31000,
+                    "1": 31000,
+                    "2": 31000,
+                    "3": 31000,
+                    "4": 31000,
+                    "5": 31000,
+                    "6": 31000
+                  },
+                  "union_evaluated": true
+                }
+              },
+              "failing": [],
+              "round": 1
+            }
+          ],
+          "start": {
+            "C1.digit_peel": [
+              "R2.from_base",
+              "R2.to_base_wide"
+            ],
+            "M1.crt_congruence": [
+              "R2.crt_smallest"
+            ],
+            "R1.mst_cost": [
+              "R2.cheapest_network"
+            ],
+            "R2.count_divisible": [
+              "R2.count_divisible"
+            ],
+            "R2.dictionary_rank": [
+              "R2.dictionary_rank"
+            ],
+            "R2.expression_eval": [
+              "R2.expression_eval"
+            ],
+            "R2.grid_sum": [
+              "R2.grid_sum"
+            ],
+            "R2.string_rewrite": [
+              "R2.string_rewrite_nonidentity"
+            ]
+          }
+        },
+        "R2.B": {
+          "G_registered": 6,
+          "G_start": 7,
+          "removed": [
+            {
+              "G": 7,
+              "cluster": "C1.cellular_update",
+              "k": 1,
+              "lineage": "R2.cellular_automaton",
+              "reasons": [
+                {
+                  "kind": "own_demand",
+                  "levels": {
+                    "0": {
+                      "count": 32768,
+                      "demand": 35300,
+                      "ended": "budget"
+                    }
+                  }
+                }
+              ],
+              "round": 1
+            }
+          ],
+          "rounds": [
+            {
+              "D_G": 35300,
+              "G": 7,
+              "clusters": {
+                "C1.binary_search": {
+                  "D_lin": 35300,
+                  "k": 1,
+                  "union_by_level": {
+                    "0": 35300,
+                    "1": 35300,
+                    "2": 35300,
+                    "3": 35300,
+                    "4": 35300,
+                    "5": 35300,
+                    "6": 35300
+                  },
+                  "union_evaluated": true
+                },
+                "C1.cellular_update": {
+                  "D_lin": 35300,
+                  "k": 1,
+                  "union_by_level": null,
+                  "union_evaluated": false
+                },
+                "C1.run_length_scan": {
+                  "D_lin": 35300,
+                  "k": 1,
+                  "union_by_level": {
+                    "0": 35300,
+                    "1": 35300,
+                    "2": 35300,
+                    "3": 35300,
+                    "4": 35300,
+                    "5": 35300,
+                    "6": 35300
+                  },
+                  "union_evaluated": true
+                },
+                "M1.median_list": {
+                  "D_lin": 35300,
+                  "k": 1,
+                  "union_by_level": {
+                    "0": 35300,
+                    "1": 35300,
+                    "2": 35300,
+                    "3": 35300,
+                    "4": 35300,
+                    "5": 35300,
+                    "6": 35300
+                  },
+                  "union_evaluated": true
+                },
+                "R2.caesar_shift": {
+                  "D_lin": 35300,
+                  "k": 1,
+                  "union_by_level": {
+                    "0": 35300,
+                    "1": 35300,
+                    "2": 35300,
+                    "3": 35300,
+                    "4": 35300,
+                    "5": 35300,
+                    "6": 35300
+                  },
+                  "union_evaluated": true
+                },
+                "R2.luhn_check": {
+                  "D_lin": 35300,
+                  "k": 1,
+                  "union_by_level": {
+                    "0": 35300,
+                    "1": 35300,
+                    "2": 35300,
+                    "3": 35300,
+                    "4": 35300,
+                    "5": 35300,
+                    "6": 35300
+                  },
+                  "union_evaluated": true
+                },
+                "R2.min_heap_ops": {
+                  "D_lin": 35300,
+                  "k": 1,
+                  "union_by_level": {
+                    "0": 35300,
+                    "1": 35300,
+                    "2": 35300,
+                    "3": 35300,
+                    "4": 35300,
+                    "5": 35300,
+                    "6": 35300
+                  },
+                  "union_evaluated": true
+                }
+              },
+              "failing": [
+                "R2.cellular_automaton"
+              ],
+              "round": 1
+            },
+            {
+              "D_G": 41010,
+              "G": 6,
+              "clusters": {
+                "C1.binary_search": {
+                  "D_lin": 41010,
+                  "k": 1,
+                  "union_by_level": {
+                    "0": 41010,
+                    "1": 41010,
+                    "2": 41010,
+                    "3": 41010,
+                    "4": 41010,
+                    "5": 41010,
+                    "6": 41010
+                  },
+                  "union_evaluated": true
+                },
+                "C1.run_length_scan": {
+                  "D_lin": 41010,
+                  "k": 1,
+                  "union_by_level": {
+                    "0": 41010,
+                    "1": 41010,
+                    "2": 41010,
+                    "3": 41010,
+                    "4": 41010,
+                    "5": 41010,
+                    "6": 41010
+                  },
+                  "union_evaluated": true
+                },
+                "M1.median_list": {
+                  "D_lin": 41010,
+                  "k": 1,
+                  "union_by_level": {
+                    "0": 41010,
+                    "1": 41010,
+                    "2": 41010,
+                    "3": 41010,
+                    "4": 41010,
+                    "5": 41010,
+                    "6": 41010
+                  },
+                  "union_evaluated": true
+                },
+                "R2.caesar_shift": {
+                  "D_lin": 41010,
+                  "k": 1,
+                  "union_by_level": {
+                    "0": 41010,
+                    "1": 41010,
+                    "2": 41010,
+                    "3": 41010,
+                    "4": 41010,
+                    "5": 41010,
+                    "6": 41010
+                  },
+                  "union_evaluated": true
+                },
+                "R2.luhn_check": {
+                  "D_lin": 41010,
+                  "k": 1,
+                  "union_by_level": {
+                    "0": 41010,
+                    "1": 41010,
+                    "2": 41010,
+                    "3": 41010,
+                    "4": 41010,
+                    "5": 41010,
+                    "6": 41010
+                  },
+                  "union_evaluated": true
+                },
+                "R2.min_heap_ops": {
+                  "D_lin": 41010,
+                  "k": 1,
+                  "union_by_level": {
+                    "0": 41010,
+                    "1": 41010,
+                    "2": 41010,
+                    "3": 41010,
+                    "4": 41010,
+                    "5": 41010,
+                    "6": 41010
+                  },
+                  "union_evaluated": true
+                }
+              },
+              "failing": [],
+              "round": 2
+            }
+          ],
+          "start": {
+            "C1.binary_search": [
+              "R2.binary_search_trace"
+            ],
+            "C1.cellular_update": [
+              "R2.cellular_automaton"
+            ],
+            "C1.run_length_scan": [
+              "R2.run_length"
+            ],
+            "M1.median_list": [
+              "R2.sort_list"
+            ],
+            "R2.caesar_shift": [
+              "R2.caesar_shift"
+            ],
+            "R2.luhn_check": [
+              "R2.luhn_check"
+            ],
+            "R2.min_heap_ops": [
+              "R2.min_heap_ops"
+            ]
+          }
+        }
+      },
+      "spec": {
+        "attempt_budget": "40 * T + 1000",
+        "counting": "capacity.count",
+        "development_sealed_tuning": [
+          4000,
+          20000,
+          100
+        ],
+        "key": "distinct-key-v1 reading (i)",
+        "key_bytes": 16,
+        "levels": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "reduced_levels": false,
+        "retry_limit": 500,
+        "seed": 400002,
+        "solvers_checked": true,
+        "stream_labels": [
+          "capacity",
+          "<e>",
+          "<lineage id>",
+          "<level>"
+        ]
+      }
+    },
+    "status_record_first_version": {
+      "path": "studies/m0/manifests/status_record_v1.json",
+      "sha256": "ac0532459f35e568215b83c3939a909e9dc6384c61ed1a989d7b5745a6497eff",
+      "version": 1
+    },
+    "survivor_list_of_record": {
+      "lineages": {
+        "C1": 26,
+        "M1": 29,
+        "R1": 10,
+        "R2": 17
+      },
+      "path": "studies/m0/manifests/survivor_list_of_record.json",
+      "sha256": "0b658145a825490647b99eeab449bd442057fcd177a0be848fafa1868a87be0d",
+      "total": 82
+    }
+  },
+  "status": "G-GEN'S RECORD OF RECORD (ADR-0033 addendum 1, section 4A stage 6), made at the human lead's domain list of 2026-11-26. It freezes the generators at commit 7cd0ac5a. No model has been run on any M0 item.",
+  "what": "G-gen's record of record (ADR-0033 addendum 1 section 4A stage 6), assembled by code. It lists, as a path and a SHA-256 or as the value itself, every item of stage 6's sentence, with the human lead's domain list. It is not a result. Astra review: NOT_PERFORMED."
+}

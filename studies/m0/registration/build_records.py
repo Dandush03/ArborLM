@@ -1243,7 +1243,7 @@ def build(inp: Inputs, script_sha: str) -> dict[str, str]:
                 "`R2.caesar_shift` keeps its invented words: there they are the text being shifted, and relabelling them changes the answer",
                 "is reported to the human lead for his confirmation with the capacity results",
             ],
-            "the R2.caesar_shift exception: favourable to that registered part-B lineage, written with the partition possibly in view; awaiting the human lead's confirmation",
+            "the R2.caesar_shift exception: favourable to that registered part-B lineage, written with the partition possibly in view; confirmed by the human lead on 2026-11-26 (HUMAN_LEAD_WORDS_14.md)",
         ),
         "lead_ruling_R_66": ruling_entry(
             RULINGS_9,
