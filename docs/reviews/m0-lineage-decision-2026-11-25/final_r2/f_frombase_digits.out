@@ -1,0 +1,13 @@
+0 digits: [(3, 353), (4, 331), (5, 316)]
+1 digits: [(4, 333), (5, 338), (6, 329)]
+2 digits: [(5, 324), (6, 331), (7, 345)]
+3 digits: [(6, 330), (7, 320), (8, 350)]
+4 digits: [(7, 337), (8, 334), (9, 329)]
+5 digits: [(8, 347), (9, 338), (10, 315)]
+6 digits: [(9, 326), (10, 336), (11, 338)]
+shared L0/L1: 99
+What is the base-2 number 1000 written in decimal? (Digits above 9 are lowercase letters: a is ten, b is eleven, and so on.)
+What is the base-2 number 10000 written in decimal? (Digits above 9 are lowercase letters: a is ten, b is eleven, and so on.)
+What is the base-2 number 10001 written in decimal? (Digits above 9 are lowercase letters: a is ten, b is eleven, and so on.)
+What is the base-2 number 1001 written in decimal? (Digits above 9 are lowercase letters: a is ten, b is eleven, and so on.)
+What is the base-2 number 10010 written in decimal? (Digits above 9 are lowercase letters: a is ten, b is eleven, and so on.)

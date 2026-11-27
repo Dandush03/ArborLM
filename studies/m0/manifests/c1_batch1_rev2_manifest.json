@@ -1,0 +1,980 @@
+{
+ "base_commit": "e11ce14dc4a1d76634f865e22fd4e5ebe60ca8c4",
+ "batch": "c1_batch1_rev2",
+ "capacity": {
+  "below_need_even": [
+   {
+    "distinct": 2020,
+    "level": 1,
+    "lineage": "C1.cond_chain",
+    "need": 3400
+   },
+   {
+    "distinct": 2022,
+    "level": 2,
+    "lineage": "C1.cond_chain",
+    "need": 3400
+   },
+   {
+    "distinct": 2226,
+    "level": 1,
+    "lineage": "C1.list_build",
+    "need": 3400
+   },
+   {
+    "distinct": 2244,
+    "level": 2,
+    "lineage": "C1.list_build",
+    "need": 3400
+   },
+   {
+    "distinct": 2220,
+    "level": 3,
+    "lineage": "C1.list_build",
+    "need": 3400
+   },
+   {
+    "distinct": 2222,
+    "level": 4,
+    "lineage": "C1.list_build",
+    "need": 3400
+   },
+   {
+    "distinct": 2212,
+    "level": 5,
+    "lineage": "C1.list_build",
+    "need": 3400
+   },
+   {
+    "distinct": 389,
+    "level": 0,
+    "lineage": "C1.nested_pairs",
+    "need": 1000
+   },
+   {
+    "distinct": 704,
+    "level": 1,
+    "lineage": "C1.nested_pairs",
+    "need": 3400
+   },
+   {
+    "distinct": 1093,
+    "level": 2,
+    "lineage": "C1.nested_pairs",
+    "need": 3400
+   },
+   {
+    "distinct": 1546,
+    "level": 3,
+    "lineage": "C1.nested_pairs",
+    "need": 3400
+   },
+   {
+    "distinct": 2018,
+    "level": 4,
+    "lineage": "C1.nested_pairs",
+    "need": 3400
+   },
+   {
+    "distinct": 2528,
+    "level": 5,
+    "lineage": "C1.nested_pairs",
+    "need": 3400
+   }
+  ],
+  "cells_below_need_even": 13,
+  "cells_total": 280,
+  "demand_even": {
+   "0": 100,
+   "1": 340,
+   "2": 340,
+   "3": 340,
+   "4": 340,
+   "5": 340,
+   "6": 100
+  },
+  "demand_worst": {
+   "0": 100,
+   "1": 1300,
+   "2": 1300,
+   "3": 1300,
+   "4": 1300,
+   "5": 1300,
+   "6": 100
+  },
+  "factor": 10,
+  "g_part": 20,
+  "lineages_written": 40,
+  "need_even": {
+   "0": 1000,
+   "1": 3400,
+   "2": 3400,
+   "3": 3400,
+   "4": 3400,
+   "5": 3400,
+   "6": 1000
+  },
+  "need_worst": {
+   "0": 1000,
+   "1": 13000,
+   "2": 13000,
+   "3": 13000,
+   "4": 13000,
+   "5": 13000,
+   "6": 1000
+  },
+  "pools_per_part": 24000,
+  "tuning_per_level": 100
+ },
+ "clusters": {
+  "author_disagreements_not_unmerging": {
+   "B1": "I would keep nested_pairs apart: it counts or adds over PAIRS (i, j) of a double loop, a different iteration space from a fold over one index; the other three are the same single-index fold.",
+   "B3": "slices and string_methods use different primitive sets (index arithmetic with start, stop, step versus method chains); they are the same 'evaluate an expression on a literal' only at the level of the whole program.",
+   "B4": "the three tables have different state shapes (one row of amounts, a two-dimensional table over two strings, a row over a grid) and different recurrences (sum of two earlier cells, min of three, max of two plus a local value); the audit merges them as 'fill a table from earlier cells'.",
+   "B5": "cond_chain stops after a fixed number of rounds and doubles on equality, so its key is the gcd in only 43-68 % of items (audit); I accept the merge as the audit's strict reading but read the two as the same reduction family, not the same procedure.",
+   "B6": "agreed in part: 'two' and 'tri' are the recurrence; the other three shapes are not. Resolved by splitting, not by merging (see module docstring).",
+   "B7": "both read a command sequence and update a small state, but the state is different (position and heading versus accumulator, register and program counter); the audit merges them at the level of 'dispatch on a command'.",
+   "B8": "bracket matching asks whether a closing token matches the top; postfix evaluation replaces the top two by a result; same data structure (stack in a list with a pointer), different invariants."
+  },
+  "current_set": {
+   "joined_family_groups": [
+    [
+     "accumulators"
+    ],
+    [
+     "conditionals",
+     "while"
+    ],
+    [
+     "functions"
+    ],
+    [
+     "graphs"
+    ],
+    [
+     "lists",
+     "loops",
+     "nested",
+     "strings"
+    ],
+    [
+     "minmax"
+    ],
+    [
+     "references"
+    ],
+    [
+     "simulation"
+    ],
+    [
+     "slices",
+     "string_methods"
+    ],
+    [
+     "stacks"
+    ],
+    [
+     "swaps"
+    ],
+    [
+     "tables"
+    ]
+   ],
+   "lineages": 40,
+   "strict_clusters": 29,
+   "strictest_clusters": 23
+  },
+  "strict_map_over_39": {
+   "count": 28,
+   "groups": {
+    "B1": [
+     "C1.loop_sum",
+     "C1.string_build",
+     "C1.list_build",
+     "C1.nested_pairs"
+    ],
+    "B2": [
+     "C1.func_branch",
+     "C1.func_compose"
+    ],
+    "B3": [
+     "C1.slices",
+     "C1.string_methods"
+    ],
+    "B4": [
+     "C1.coin_change_table",
+     "C1.string_pair_table",
+     "C1.grid_path_table"
+    ],
+    "B5": [
+     "C1.euclid_gcd",
+     "C1.cond_chain"
+    ],
+    "B6": [
+     "C1.recursive_calls",
+     "C1.fib_like"
+    ],
+    "B7": [
+     "C1.bytecode_loop",
+     "C1.turtle_walk"
+    ],
+    "B8": [
+     "C1.bracket_matching",
+     "C1.postfix_evaluation"
+    ]
+   }
+  },
+  "strictest_over_39": {
+   "count": 22,
+   "extra_groups": {
+    "S1": [
+     "B5",
+     "C1.while_counter",
+     "C1.digit_peel",
+     "C1.fast_power"
+    ],
+    "S2": [
+     "C1.bubble_pass",
+     "C1.insertion_sort",
+     "C1.partition_pass"
+    ],
+    "S3": [
+     "C1.mirror_pointers",
+     "C1.run_length_scan"
+    ]
+   }
+  }
+ },
+ "commands": [
+  "PYTHONHASHSEED=0 uv run --locked --offline python -m studies.m0.c1_batch1_rev2_capacity --g-part 20 --out studies/m0/manifests/c1_batch1_rev2_capacity_g20.json",
+  "PYTHONHASHSEED=0 uv run --locked --offline python -m studies.m0.c1_shortcut_check_rev2 --per-level 2000 --out studies/m0/manifests/c1_batch1_rev2_shortcuts.json",
+  "PYTHONHASHSEED=0 uv run --locked --offline python -m studies.m0.c1_batch1_rev2_build",
+  "uv run --locked --offline pytest tests/test_m0_*.py"
+ ],
+ "environment": {
+  "hash_seed": "PYTHONHASHSEED=0",
+  "platform": "macOS-27.2.1-arm64-arm-64bit",
+  "python": "3.12.14"
+ },
+ "not_registered": {
+  "C1.majority_vote_scan[cand shape]": "the final candidate equals the LAST element in 0.75-0.79 of the shape (battery num[-k] rule, levels 1-5) once the old redraws are gone; it is inherent to the pairing scan (whenever the count is 0 before the last element the last element becomes the candidate); the old redraws that hid it were conditional on heuristic outcomes (R-1) and moved the tell to the elements next to the last",
+  "C1.merge_two_sorted[cmp shape]": "the comparison count is len(a) + len(b) minus the leftover, and the leftover is usually one element: 'len(a) + len(b) - 1' hits 0.50-0.57 of the shape at levels 1, 3 and 5 (battery R.len_a+len_b-1); the leftover cannot be hidden by construction",
+  "C1.merge_two_sorted[out shape]": "the partial output list is sorted(a + b) without the leftover; 'sorted all but last' hits 0.50-0.52 of that shape (audit R.sorted_all_but_last); the leftover cannot be hidden by construction",
+  "C1.sieve_marking[count shape]": "the count of flags still 1 after striking is, in 36-48 % of the shape, the count of ones at indices 0, 1 and at primes (audit R.ones_minus_strikes_naive); with an all-ones start it would be a prime-count lookup",
+  "C1.turtle_walk[far shape]": "same reason as the manhattan shape (audit count_F 0.81 in the shape at level 1)",
+  "C1.turtle_walk[manhattan shape]": "distance equals the number of F commands whenever the path does not double back (audit count_F 0.79 in the shape at level 1); turns do not remove it by construction at short lengths"
+ },
+ "note": "Fix round after the independent audit AUDIT_M0_C1_1 under lead rulings 2 (R-1 no redraw conditional on a heuristic's outcome; R-2 strict map; R-3 per-level shape measurement; R-5 structural capacity). No new lineage: revised shapes of existing lineages plus PROPOSED traced shapes. Self-checked only.",
+ "revised": [
+  {
+   "family": "stacks",
+   "fixture": {
+    "isolated_runs_twice_and_second_solver_disagreements": 0,
+    "items": 140,
+    "sha256": "495b560949bde1373074dc6f536f6af137cf79edc80444a0b7041c316de06832"
+   },
+   "id": "C1.bracket_matching_traced",
+   "proposed": true,
+   "supersedes": null
+  },
+  {
+   "family": "simulation",
+   "fixture": {
+    "isolated_runs_twice_and_second_solver_disagreements": 0,
+    "items": 140,
+    "sha256": "0f73379c1eb1f5875ab91c42209745c655faae4cf721dd61f165903d8915c6b6"
+   },
+   "id": "C1.bytecode_loop_r2",
+   "proposed": false,
+   "supersedes": "C1.bytecode_loop"
+  },
+  {
+   "family": "simulation",
+   "fixture": {
+    "isolated_runs_twice_and_second_solver_disagreements": 0,
+    "items": 140,
+    "sha256": "a26709f01645e1bab3de57f14aaf5a9b02a130c011428746d135202c16671d9c"
+   },
+   "id": "C1.cellular_update_r2",
+   "proposed": false,
+   "supersedes": "C1.cellular_update"
+  },
+  {
+   "family": "simulation",
+   "fixture": {
+    "isolated_runs_twice_and_second_solver_disagreements": 0,
+    "items": 140,
+    "sha256": "485b7bc03c709c1118d829401682182be2ad3e050ee04717da2001be57a5fb4e"
+   },
+   "id": "C1.circle_elimination_r2",
+   "proposed": false,
+   "supersedes": "C1.circle_elimination"
+  },
+  {
+   "family": "while",
+   "fixture": {
+    "isolated_runs_twice_and_second_solver_disagreements": 0,
+    "items": 140,
+    "sha256": "e370695e2c0388081290bc10e848f6cab7f439079f913a463c438bdef8301310"
+   },
+   "id": "C1.euclid_gcd_traced",
+   "proposed": true,
+   "supersedes": null
+  },
+  {
+   "family": "while",
+   "fixture": {
+    "isolated_runs_twice_and_second_solver_disagreements": 0,
+    "items": 140,
+    "sha256": "8f54c60f3041d0b55cec74b925c5a16886989cc6c3893c8ac4f16f0561874cb4"
+   },
+   "id": "C1.fast_power_r2",
+   "proposed": false,
+   "supersedes": "C1.fast_power"
+  },
+  {
+   "family": "while",
+   "fixture": {
+    "isolated_runs_twice_and_second_solver_disagreements": 0,
+    "items": 140,
+    "sha256": "cc5ed652905667944e918101cb4c3d8891ad2c9f314a5ee439c49fc2364f8a0f"
+   },
+   "id": "C1.fast_power_traced",
+   "proposed": true,
+   "supersedes": null
+  },
+  {
+   "family": "accumulators",
+   "fixture": {
+    "isolated_runs_twice_and_second_solver_disagreements": 0,
+    "items": 140,
+    "sha256": "fb808302260d4e29351795f862a03030a260b6cfc87bd0cd5b9c67e0fad288d0"
+   },
+   "id": "C1.fib_shapes_recursive",
+   "proposed": false,
+   "supersedes": "C1.recursive_calls"
+  },
+  {
+   "family": "swaps",
+   "fixture": {
+    "isolated_runs_twice_and_second_solver_disagreements": 0,
+    "items": 140,
+    "sha256": "cc974375b063d7d8d674e9b8cf40803b7c4106718029ae4df6b6de23a7a44eae"
+   },
+   "id": "C1.insertion_sort_traced",
+   "proposed": true,
+   "supersedes": null
+  },
+  {
+   "family": "minmax",
+   "fixture": {
+    "isolated_runs_twice_and_second_solver_disagreements": 0,
+    "items": 140,
+    "sha256": "f4530a8cbb86c95270f1ddc843840af2250097b6e802798ea1dfad0589947b49"
+   },
+   "id": "C1.kadane_scan_traced",
+   "proposed": true,
+   "supersedes": null
+  },
+  {
+   "family": "minmax",
+   "fixture": {
+    "isolated_runs_twice_and_second_solver_disagreements": 0,
+    "items": 140,
+    "sha256": "09e6afff301d9b554a164e83887bbe12ab7fecc50869ca9e59055a3ffbcb5ab1"
+   },
+   "id": "C1.majority_vote_scan_r2",
+   "proposed": false,
+   "supersedes": "C1.majority_vote_scan"
+  },
+  {
+   "family": "lists",
+   "fixture": {
+    "isolated_runs_twice_and_second_solver_disagreements": 0,
+    "items": 140,
+    "sha256": "2949a4000dec22fa2e2ffe6b399b5639048a6af168e4a9e3471386cfa9491f15"
+   },
+   "id": "C1.merge_two_sorted_r2",
+   "proposed": false,
+   "supersedes": "C1.merge_two_sorted"
+  },
+  {
+   "family": "functions",
+   "fixture": {
+    "isolated_runs_twice_and_second_solver_disagreements": 0,
+    "items": 140,
+    "sha256": "18df123fca02c9f3748f3538b3ef454600d986f01472c5fdefcc4903721dda09"
+   },
+   "id": "C1.recursive_calls_r2",
+   "proposed": false,
+   "supersedes": "C1.recursive_calls"
+  },
+  {
+   "family": "lists",
+   "fixture": {
+    "isolated_runs_twice_and_second_solver_disagreements": 0,
+    "items": 140,
+    "sha256": "4c442c55c0e3793c0788b87903ef4d7a5e575f6733fbc2884e5ee1e1c081fd53"
+   },
+   "id": "C1.sieve_marking_r2",
+   "proposed": false,
+   "supersedes": "C1.sieve_marking"
+  },
+  {
+   "family": "simulation",
+   "fixture": {
+    "isolated_runs_twice_and_second_solver_disagreements": 0,
+    "items": 140,
+    "sha256": "0f948893aef2e3a5b182e4c8dee733bec944e49c3b77a9edc53a28f16c46cf5c"
+   },
+   "id": "C1.turtle_walk_r2",
+   "proposed": false,
+   "supersedes": "C1.turtle_walk"
+  }
+ ],
+ "seconds": 1.8,
+ "shortcut_summary_core_levels": {
+  "C1.bfs_queue": {
+   "O1_max": 0.242,
+   "O5_max": 0.163,
+   "O7_all_max": 0.247,
+   "O7_max": 0.247,
+   "cell_n": 516,
+   "constant_in_that_cell": 0.4903,
+   "level": "1",
+   "min_distinct_keys": 374,
+   "rule": "O.const_2",
+   "shape": "Subscript(Name('v1', Load()), Constant('int'), Load())",
+   "worst_cell_rule_rate": 0.4903
+  },
+  "C1.binary_search": {
+   "O1_max": 0.125,
+   "O5_max": 0.076,
+   "O7_all_max": 0.133,
+   "O7_max": 0.133,
+   "cell_n": 652,
+   "constant_in_that_cell": 0.2531,
+   "level": "1",
+   "min_distinct_keys": 104,
+   "rule": "O.const_2",
+   "shape": "Name('v4', Load())|Constant('int')@-|Name('v5', Load())@-",
+   "worst_cell_rule_rate": 0.2531
+  },
+  "C1.bracket_matching": {
+   "O1_max": 0.2475,
+   "O5_max": 0.251,
+   "O7_all_max": 1.0,
+   "O7_max": 0.2475,
+   "cell_n": 1164,
+   "constant_in_that_cell": 0.2019,
+   "level": "1",
+   "min_distinct_keys": 20,
+   "rule": "R.standard_code",
+   "shape": "BinOp(BinOp(Name('v4', Load()), Mult(), Constant('int')), Add(), Name('v3', Load()))",
+   "worst_cell_rule_rate": 1.0
+  },
+  "C1.bracket_matching_traced": {
+   "O1_max": 0.188,
+   "O5_max": 0.176,
+   "O7_all_max": 0.188,
+   "O7_max": 0.188,
+   "cell_n": 1014,
+   "constant_in_that_cell": 0.3008,
+   "level": "2",
+   "min_distinct_keys": 16,
+   "rule": "A.lit_last",
+   "shape": "Name('v3', Load())|Constant('int')@-|Constant('int')@BoolOp(And(), [Compare(Name('v3', Loa",
+   "worst_cell_rule_rate": 0.3008
+  },
+  "C1.bytecode_loop": {
+   "O1_max": 0.0915,
+   "O5_max": 0.0695,
+   "O7_all_max": 0.5045,
+   "O7_max": 0.1085,
+   "cell_n": 1003,
+   "constant_in_that_cell": 0.0469,
+   "level": "2",
+   "min_distinct_keys": 127,
+   "rule": "R.sum_all_args",
+   "shape": "Name('v3', Load())|Constant('int')@-|Name('v5', Load())@-",
+   "worst_cell_rule_rate": 0.8704
+  },
+  "C1.bytecode_loop_r2": {
+   "O1_max": 0.1105,
+   "O5_max": 0.0925,
+   "O7_all_max": 0.1555,
+   "O7_max": 0.1185,
+   "cell_n": 422,
+   "constant_in_that_cell": 0.2109,
+   "level": "3",
+   "min_distinct_keys": 99,
+   "rule": "O.num[1]",
+   "shape": "Name('v3', Load())|Constant('int')@-|Name('v2', Load())@Compare(Name('v4', Load()), [Eq()]",
+   "worst_cell_rule_rate": 0.2915
+  },
+  "C1.cellular_update": {
+   "O1_max": 0.1015,
+   "O5_max": 0.093,
+   "O7_all_max": 0.104,
+   "O7_max": 0.104,
+   "cell_n": 844,
+   "constant_in_that_cell": 0.1066,
+   "level": "1",
+   "min_distinct_keys": 80,
+   "rule": "O.len_list1_minus1",
+   "shape": "Name('v5', Load())|BinOp(Name('v4', Load()), Mult(), Subscript(Name('v0', Load()), Name('v",
+   "worst_cell_rule_rate": 0.1066
+  },
+  "C1.cellular_update_r2": {
+   "O1_max": 0.082,
+   "O5_max": 0.0905,
+   "O7_all_max": 0.0815,
+   "O7_max": 0.082,
+   "cell_n": 991,
+   "constant_in_that_cell": 0.1019,
+   "level": "2",
+   "min_distinct_keys": 80,
+   "rule": "A.echo_printed_initial",
+   "shape": "Name('v5', Load())|BinOp(Name('v4', Load()), Mult(), Subscript(Name('v0', Load()), Name('v",
+   "worst_cell_rule_rate": 0.1019
+  },
+  "C1.circle_elimination": {
+   "O1_max": 0.1345,
+   "O5_max": 0.107,
+   "O7_all_max": 0.1475,
+   "O7_max": 0.1325,
+   "cell_n": 687,
+   "constant_in_that_cell": 0.2329,
+   "level": "1",
+   "min_distinct_keys": 45,
+   "rule": "R.first_live_index",
+   "shape": "Name('v5', Load())|Name('v4', Load())@Compare(Subscript(Name('v0', Load()), Name('v4', Loa",
+   "worst_cell_rule_rate": 0.2737
+  },
+  "C1.circle_elimination_r2": {
+   "O1_max": 0.0795,
+   "O5_max": 0.072,
+   "O7_all_max": 0.09,
+   "O7_max": 0.081,
+   "cell_n": 652,
+   "constant_in_that_cell": 0.1212,
+   "level": "1",
+   "min_distinct_keys": 46,
+   "rule": "R.last_live_index",
+   "shape": "Name('v5', Load())|Name('v4', Load())@Compare(Subscript(Name('v0', Load()), Name('v4', Loa",
+   "worst_cell_rule_rate": 0.138
+  },
+  "C1.coin_change_table": {
+   "O1_max": 0.1625,
+   "O5_max": 0.148,
+   "O7_all_max": 0.223,
+   "O7_max": 0.1655,
+   "cell_n": 1466,
+   "constant_in_that_cell": 0.2156,
+   "level": "1",
+   "min_distinct_keys": 124,
+   "rule": "R.greedy_fewest",
+   "shape": "Subscript(Name('v1', Load()), Constant('int'), Load())",
+   "worst_cell_rule_rate": 0.2804
+  },
+  "C1.digit_peel": {
+   "O1_max": 0.1285,
+   "O5_max": 0.128,
+   "O7_all_max": 0.2535,
+   "O7_max": 0.1285,
+   "cell_n": 503,
+   "constant_in_that_cell": 0.0517,
+   "level": "4",
+   "min_distinct_keys": 478,
+   "rule": "R.decimal_digit_sum_of_literal",
+   "shape": "Name('v1', Load())|Constant('int')@-|Name('v2', Load())@-",
+   "worst_cell_rule_rate": 0.6103
+  },
+  "C1.euclid_gcd": {
+   "O1_max": 0.124,
+   "O5_max": 0.084,
+   "O7_all_max": 0.4925,
+   "O7_max": 0.1915,
+   "cell_n": 633,
+   "constant_in_that_cell": 0.1438,
+   "level": "1",
+   "min_distinct_keys": 87,
+   "rule": "R.gcd_of_literals",
+   "shape": "Name('v0', Load())|Constant('int')@-|Name('v1', Load())@-",
+   "worst_cell_rule_rate": 1.0
+  },
+  "C1.euclid_gcd_traced": {
+   "O1_max": 0.098,
+   "O5_max": 0.0955,
+   "O7_all_max": 0.098,
+   "O7_max": 0.098,
+   "cell_n": 978,
+   "constant_in_that_cell": 0.1953,
+   "level": "4",
+   "min_distinct_keys": 484,
+   "rule": "O.count_nums",
+   "shape": "Name('v3', Load())|BinOp(Name('v0', Load()), FloorDiv(), Name('v1', Load()))@Compare(BinOp",
+   "worst_cell_rule_rate": 0.1953
+  },
+  "C1.fast_power": {
+   "O1_max": 0.1285,
+   "O5_max": 0.131,
+   "O7_all_max": 0.697,
+   "O7_max": 0.1545,
+   "cell_n": 648,
+   "constant_in_that_cell": 0.1157,
+   "level": "1",
+   "min_distinct_keys": 76,
+   "rule": "R.pow(base,exp,mod)",
+   "shape": "Name('v0', Load())|BinOp(BinOp(Name('v0', Load()), Mult(), Name('v1', Load())), Mod(), Nam",
+   "worst_cell_rule_rate": 1.0
+  },
+  "C1.fast_power_r2": {
+   "O1_max": 0.1225,
+   "O5_max": 0.1255,
+   "O7_all_max": 0.6935,
+   "O7_max": 0.142,
+   "cell_n": 646,
+   "constant_in_that_cell": 0.1331,
+   "level": "1",
+   "min_distinct_keys": 76,
+   "rule": "R.pow(base,exp,mod)",
+   "shape": "Name('v0', Load())|BinOp(BinOp(Name('v0', Load()), Mult(), Name('v1', Load())), Mod(), Nam",
+   "worst_cell_rule_rate": 1.0
+  },
+  "C1.fast_power_traced": {
+   "O1_max": 0.144,
+   "O5_max": 0.1455,
+   "O7_all_max": 0.2205,
+   "O7_max": 0.1435,
+   "cell_n": 964,
+   "constant_in_that_cell": 0.2905,
+   "level": "1",
+   "min_distinct_keys": 538,
+   "rule": "R.base_mod",
+   "shape": "Name('v0', Load())|BinOp(BinOp(Name('v0', Load()), Mult(), Name('v1', Load())), Mod(), Nam",
+   "worst_cell_rule_rate": 0.3133
+  },
+  "C1.fib_shapes_recursive": {
+   "O1_max": 0.006,
+   "O5_max": 0.0065,
+   "O7_all_max": 0.006,
+   "O7_max": 0.006,
+   "cell_n": 2000,
+   "constant_in_that_cell": 0.0115,
+   "level": "1",
+   "min_distinct_keys": 907,
+   "rule": "O.max#2",
+   "shape": "Call(Name('v0', Load()), [Constant('int')], [])",
+   "worst_cell_rule_rate": 0.0125
+  },
+  "C1.grid_path_table": {
+   "O1_max": 0.0875,
+   "O5_max": 0.1075,
+   "O7_all_max": 0.3115,
+   "O7_max": 0.1075,
+   "cell_n": 2000,
+   "constant_in_that_cell": 0.0875,
+   "level": "1",
+   "min_distinct_keys": 40,
+   "rule": "R.greedy_max_path",
+   "shape": "Subscript(Name('v1', Load()), Constant('int'), Load())",
+   "worst_cell_rule_rate": 0.323
+  },
+  "C1.insertion_sort": {
+   "O1_max": 0.1075,
+   "O5_max": 0.147,
+   "O7_all_max": 1.0,
+   "O7_max": 0.2485,
+   "cell_n": 659,
+   "constant_in_that_cell": 0.003,
+   "level": "1",
+   "min_distinct_keys": 629,
+   "rule": "R.sorted_prefix_list",
+   "shape": "Name('v0', Load())|List([Constant('int'), Constant('int'), Constant('int'), Constant('int'",
+   "worst_cell_rule_rate": 1.0
+  },
+  "C1.insertion_sort_traced": {
+   "O1_max": 0.252,
+   "O5_max": 0.252,
+   "O7_all_max": 0.252,
+   "O7_max": 0.252,
+   "cell_n": 1005,
+   "constant_in_that_cell": 0.2716,
+   "level": "1",
+   "min_distinct_keys": 11,
+   "rule": "A.lit_min",
+   "shape": "Name('v3', Load())|BinOp(Name('v1', Load()), Sub(), Constant('int'))@-|BinOp(Name('v3', Lo",
+   "worst_cell_rule_rate": 0.2716
+  },
+  "C1.kadane_scan": {
+   "O1_max": 0.0305,
+   "O5_max": 0.105,
+   "O7_all_max": 0.435,
+   "O7_max": 0.1195,
+   "cell_n": 544,
+   "constant_in_that_cell": 0.0717,
+   "level": "1",
+   "min_distinct_keys": 183,
+   "rule": "R.max_subarray",
+   "shape": "Name('v2', Load())|Call(Name('max', Load()), [Name('v2', Load()), Name('v1', Load())], [])",
+   "worst_cell_rule_rate": 1.0
+  },
+  "C1.kadane_scan_traced": {
+   "O1_max": 0.194,
+   "O5_max": 0.191,
+   "O7_all_max": 0.2055,
+   "O7_max": 0.2,
+   "cell_n": 964,
+   "constant_in_that_cell": 0.3371,
+   "level": "1",
+   "min_distinct_keys": 50,
+   "rule": "A.echo_printed_initial",
+   "shape": "Name('v3', Load())|Constant('int')@-|Name('v4', Load())@Compare(Name('v1', Load()), [Lt()]",
+   "worst_cell_rule_rate": 0.3371
+  },
+  "C1.majority_vote_scan": {
+   "O1_max": 0.254,
+   "O5_max": 0.2105,
+   "O7_all_max": 0.451,
+   "O7_max": 0.3715,
+   "cell_n": 379,
+   "constant_in_that_cell": 0.2322,
+   "level": "4",
+   "min_distinct_keys": 26,
+   "rule": "O.num[-9]",
+   "shape": "Name('v1', Load())|Constant('int')@-|Subscript(Name('v0', Load()), Name('v3', Load()), Loa",
+   "worst_cell_rule_rate": 0.8496
+  },
+  "C1.majority_vote_scan_r2": {
+   "O1_max": 0.122,
+   "O5_max": 0.045,
+   "O7_all_max": 0.1845,
+   "O7_max": 0.1215,
+   "cell_n": 1005,
+   "constant_in_that_cell": 0.1761,
+   "level": "1",
+   "min_distinct_keys": 41,
+   "rule": "R.mode_space_0",
+   "shape": "BinOp(BinOp(Call(Name('str', Load()), [Name('v1', Load())], []), Add(), Constant('str')), ",
+   "worst_cell_rule_rate": 0.2935
+  },
+  "C1.merge_two_sorted": {
+   "O1_max": 0.181,
+   "O5_max": 0.1125,
+   "O7_all_max": 0.481,
+   "O7_max": 0.198,
+   "cell_n": 690,
+   "constant_in_that_cell": 0.0043,
+   "level": "1",
+   "min_distinct_keys": 642,
+   "rule": "R.sorted_all_but_last",
+   "shape": "Name('v4', Load())|List([], Load())@-",
+   "worst_cell_rule_rate": 0.5681
+  },
+  "C1.merge_two_sorted_r2": {
+   "O1_max": 0.296,
+   "O5_max": 0.2835,
+   "O7_all_max": 0.2925,
+   "O7_max": 0.2925,
+   "cell_n": 2000,
+   "constant_in_that_cell": 0.296,
+   "level": "1",
+   "min_distinct_keys": 9,
+   "rule": "O.const_3",
+   "shape": "Name('v5', Load())|Constant('int')@-|Constant('int')@Compare(Name('v6', Load()), [NotEq()]",
+   "worst_cell_rule_rate": 0.296
+  },
+  "C1.mirror_pointers": {
+   "O1_max": 0.1095,
+   "O5_max": 0.1,
+   "O7_all_max": 0.241,
+   "O7_max": 0.1095,
+   "cell_n": 677,
+   "constant_in_that_cell": 0.0399,
+   "level": "1",
+   "min_distinct_keys": 630,
+   "rule": "A.str1_first",
+   "shape": "Name('v3', Load())|BinOp(Name('v3', Load()), Add(), Subscript(Name('v0', Load()), Name('v1",
+   "worst_cell_rule_rate": 0.3826
+  },
+  "C1.partition_pass": {
+   "O1_max": 0.1045,
+   "O5_max": 0.1045,
+   "O7_all_max": 0.3315,
+   "O7_max": 0.144,
+   "cell_n": 1191,
+   "constant_in_that_cell": 0.0008,
+   "level": "1",
+   "min_distinct_keys": 1202,
+   "rule": "R.stable_partition",
+   "shape": "Name('v0', Load())|List([Constant('int'), Constant('int'), Constant('int'), Constant('int'",
+   "worst_cell_rule_rate": 0.3812
+  },
+  "C1.postfix_evaluation": {
+   "O1_max": 0.0205,
+   "O5_max": 0.019,
+   "O7_all_max": 0.023,
+   "O7_max": 0.0195,
+   "cell_n": 1017,
+   "constant_in_that_cell": 0.0206,
+   "level": "1",
+   "min_distinct_keys": 520,
+   "rule": "A.list1_posum",
+   "shape": "Subscript(Name('v1', Load()), BinOp(Name('v3', Load()), Sub(), Constant('int')), Load())",
+   "worst_cell_rule_rate": 0.0383
+  },
+  "C1.recursive_calls": {
+   "O1_max": 0.0135,
+   "O5_max": 0.0185,
+   "O7_all_max": 0.0205,
+   "O7_max": 0.0205,
+   "cell_n": 1583,
+   "constant_in_that_cell": 0.0221,
+   "level": "1",
+   "min_distinct_keys": 329,
+   "rule": "O.min#3",
+   "shape": "Call(Name('v0', Load()), [Constant('int')], [])",
+   "worst_cell_rule_rate": 0.0234
+  },
+  "C1.recursive_calls_r2": {
+   "O1_max": 0.002,
+   "O5_max": 0.0035,
+   "O7_all_max": 0.0055,
+   "O7_max": 0.0055,
+   "cell_n": 662,
+   "constant_in_that_cell": 0.0076,
+   "level": "1",
+   "min_distinct_keys": 1178,
+   "rule": "A.lit_first",
+   "shape": "Call(Name('v0', Load()), [List([Constant('int'), Constant('int'), Constant('int'), Constan",
+   "worst_cell_rule_rate": 0.0136
+  },
+  "C1.run_length_scan": {
+   "O1_max": 0.003,
+   "O5_max": 0.0,
+   "O7_all_max": 0.003,
+   "O7_max": 0.003,
+   "cell_n": 0,
+   "constant_in_that_cell": 0.0,
+   "level": "",
+   "min_distinct_keys": 1360,
+   "rule": "",
+   "shape": "",
+   "worst_cell_rule_rate": -1.0
+  },
+  "C1.shared_lists": {
+   "O1_max": 0.058,
+   "O5_max": 0.029,
+   "O7_all_max": 0.066,
+   "O7_max": 0.066,
+   "cell_n": 103,
+   "constant_in_that_cell": 0.1165,
+   "level": "5",
+   "min_distinct_keys": 771,
+   "rule": "O.last_set_int",
+   "shape": "Subscript(Name('v5', Load()), Constant('int'), Load())",
+   "worst_cell_rule_rate": 0.1748
+  },
+  "C1.sieve_marking": {
+   "O1_max": 0.2655,
+   "O5_max": 0.0575,
+   "O7_all_max": 0.332,
+   "O7_max": 0.2655,
+   "cell_n": 670,
+   "constant_in_that_cell": 0.3,
+   "level": "1",
+   "min_distinct_keys": 64,
+   "rule": "R.ones_minus_strikes_naive",
+   "shape": "Call(Name('sum', Load()), [Name('v0', Load())], [])",
+   "worst_cell_rule_rate": 0.4985
+  },
+  "C1.sieve_marking_r2": {
+   "O1_max": 0.159,
+   "O5_max": 0.0185,
+   "O7_all_max": 0.159,
+   "O7_max": 0.159,
+   "cell_n": 950,
+   "constant_in_that_cell": 0.1305,
+   "level": "1",
+   "min_distinct_keys": 60,
+   "rule": "R.mine_allones_dbl_indexsum",
+   "shape": "Name('v1', Load())|Constant('int')@-|Name('v4', Load())@Compare(Subscript(Name('v0', Load(",
+   "worst_cell_rule_rate": 0.1305
+  },
+  "C1.string_pair_table": {
+   "O1_max": 0.197,
+   "O5_max": 0.1505,
+   "O7_all_max": 0.2325,
+   "O7_max": 0.197,
+   "cell_n": 643,
+   "constant_in_that_cell": 0.465,
+   "level": "1",
+   "min_distinct_keys": 91,
+   "rule": "R.multiset_overlap",
+   "shape": "Subscript(Name('v5', Load()), BinOp(BinOp(Name('v2', Load()), Mult(), Name('v4', Load())),",
+   "worst_cell_rule_rate": 0.5754
+  },
+  "C1.turtle_walk": {
+   "O1_max": 0.153,
+   "O5_max": 0.139,
+   "O7_all_max": 0.5365,
+   "O7_max": 0.1445,
+   "cell_n": 673,
+   "constant_in_that_cell": 0.2273,
+   "level": "1",
+   "min_distinct_keys": 97,
+   "rule": "R.F_minus_B",
+   "shape": "Name('v4', Load())|Call(Name('max', Load()), [Name('v4', Load()), BinOp(Call(Name('abs', L",
+   "worst_cell_rule_rate": 0.8158
+  },
+  "C1.turtle_walk_r2": {
+   "O1_max": 0.1735,
+   "O5_max": 0.169,
+   "O7_all_max": 0.1945,
+   "O7_max": 0.166,
+   "cell_n": 507,
+   "constant_in_that_cell": 0.2071,
+   "level": "1",
+   "min_distinct_keys": 233,
+   "rule": "R.sum_forward_minus_back",
+   "shape": "Name('v4', Load())|Constant('int')@-|Name('v6', Load())@Compare(Name('v3', Load()), [GtE()",
+   "worst_cell_rule_rate": 0.2899
+  },
+  "C1.union_find_links": {
+   "O1_max": 0.0865,
+   "O5_max": 0.0575,
+   "O7_all_max": 0.1065,
+   "O7_max": 0.0865,
+   "cell_n": 333,
+   "constant_in_that_cell": 0.3333,
+   "level": "1",
+   "min_distinct_keys": 901,
+   "rule": "A.list1_first",
+   "shape": "Call(Name('v0', Load()), [Name('v1', Load()), Constant('int')], [])",
+   "worst_cell_rule_rate": 0.3333
+  }
+ },
+ "source_sha256": {
+  "c1_batch1_build.py": "9be08200c9ab09faf4c3f5a5f8ee94ed2a22e48aa16059d6cd68e1e84bc81a8c",
+  "c1_batch1_rev2_build.py": "af955b1ffa6e9a65d270c7037ad1505a17f3647056c10497da9b9058fd8ff9e6",
+  "c1_batch1_rev2_capacity.py": "7d50fc84e541f4dde103b41d5b570a39dec31b32e529a8241e4f05bddf6877e5",
+  "c1_shortcut_check.py": "2b31e2502329f186256eee07a2ab483206441ace121aa6b2b16f1917feecb6f6",
+  "c1_shortcut_check_rev2.py": "e67421bb78443e8a5ca161cf54a677e82ce824902bcd04d85aa0348318596ad3",
+  "lineages_c1_clusters.py": "872d7440818869257310d46bfb200b2714a55936ba9f037945d1c767215f5a98",
+  "lineages_c1_common.py": "230311688960cc781a7ffff28f6ad621afc743ff8c91834df6d33781c1d147e6",
+  "lineages_c1_rev2.py": "6f0a4b412b4475fad35ce625657999fa4ee8dbff20a2f94b9c046728ad309aa5",
+  "lineages_c1_rev2_traced.py": "4706de7dfdb1ab2636f1e94770b5eee0503a09ade24c0622a9065eec4cfaed0f"
+ },
+ "superseded_kept_on_file": [
+  "C1.bytecode_loop",
+  "C1.cellular_update",
+  "C1.circle_elimination",
+  "C1.fast_power",
+  "C1.majority_vote_scan",
+  "C1.merge_two_sorted",
+  "C1.recursive_calls",
+  "C1.sieve_marking",
+  "C1.turtle_walk"
+ ]
+}

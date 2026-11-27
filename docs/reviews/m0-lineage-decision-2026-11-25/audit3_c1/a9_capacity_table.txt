@@ -1,0 +1,127 @@
+## Per lineage and level: K1 (names do not count) / K2 (literals that do not change control flow do not count); * = draw budget exhausted
+lineage | L0 K1/K2 | L1 K1/K2 | L2 K1/K2 | L3 K1/K2 | L4 K1/K2 | L5 K1/K2 | L6 K1/K2
+C1.bfs_queue | 25000/21981 | 25000/24811 | 25000/24991 | 25000/24998 | 25000/24999 | 25000/25000 | 25000/25000
+C1.binary_search | 25000/357 | 25000/483 | 25000/670 | 25000/973 | 25000/1385 | 25000/1833 | 25000/2462
+C1.bracket_matching | 18256/18256* | 25000/25000 | 25000/25000 | 25000/25000 | 25000/25000 | 25000/25000 | 25000/25000
+C1.bracket_matching_traced | 19120/10853* | 25000/14920 | 25000/18686 | 25000/21326 | 25000/22441 | 25000/23076 | 25000/23530
+C1.bubble_pass | 25000/128 | 25000/248 | 25000/2179 | 25000/3933 | 25000/14259 | 25000/17804 | 25000/24028
+C1.bytecode_loop_r2 | 25000/162 | 25000/4957 | 25000/16152 | 25000/24432 | 25000/24916 | 25000/24998 | 25000/25000
+C1.cellular_update_r2 | 25000/13 | 25000/13 | 25000/13 | 25000/13 | 25000/13 | 25000/13 | 25000/13
+C1.circle_elimination_r2 | 25000/15843 | 25000/14874 | 25000/16023 | 25000/17020 | 25000/18064 | 25000/19014 | 25000/19856
+C1.coin_change_table | 19274/13842* | 19411/19411* | 19538/19538* | 19590/19590* | 19774/19774* | 19375/19375* | 19634/19634*
+C1.cond_chain | 6495/84* | 6492/180* | 6543/371* | 25000/1263 | 25000/2031 | 25000/2858 | 25000/3416
+C1.counter_list | 25000/12 | 25000/12 | 25000/12 | 25000/12 | 25000/12 | 25000/12 | 25000/12
+C1.digit_peel | 16555/331* | 25000/547 | 25000/818 | 25000/1278 | 25000/1906 | 25000/2779 | 25000/3912
+C1.euclid_gcd | 12186/70* | 14808/84* | 16962/70* | 24302/70* | 25000/66 | 25000/75 | 25000/67
+C1.euclid_gcd_traced | 12377/157* | 15439/179* | 16269/161* | 23891/243* | 25000/229 | 25000/333 | 25000/446
+C1.fast_power_r2 | 25000/96 | 18289/64* | 25000/128 | 25000/256 | 25000/512 | 25000/1016 | 25000/1887
+C1.fast_power_traced | 25000/64 | 25000/140 | 25000/292 | 25000/580 | 25000/1084 | 25000/1849 | 25000/2971
+C1.fib_like | 16667/100* | 16660/100* | 16736/100* | 16578/100* | 16700/100* | 16620/100* | 16664/100*
+C1.fib_shapes_recursive | 8319/10* | 8278/10* | 8311/10* | 8281/10* | 8298/10* | 8337/10* | 8308/10*
+C1.func_branch | 25000/16 | 25000/16 | 25000/36 | 25000/211 | 25000/214 | 25000/212 | 25000/215
+C1.func_compose | 8541/4* | 8450/4* | 8511/4* | 25000/4 | 25000/4 | 25000/4 | 25000/4
+C1.grid_path_table | 25000/52 | 25000/247 | 25000/834 | 25000/2865 | 25000/5241 | 25000/6373 | 25000/6502
+C1.insertion_sort | 25000/1345 | 25000/3639 | 25000/7465 | 25000/11357 | 25000/13960 | 25000/15960 | 25000/17134
+C1.insertion_sort_traced | 25000/1237 | 25000/3255 | 25000/7311 | 25000/11168 | 25000/13816 | 25000/15744 | 25000/17271
+C1.kadane_scan | 25000/16 | 25000/16 | 25000/16 | 25000/16 | 25000/16 | 25000/16 | 25000/16
+C1.kadane_scan_traced | 25000/203 | 25000/515 | 25000/997 | 25000/1604 | 25000/2123 | 25000/2530 | 25000/2820
+C1.list_build | 4627/72* | 4728/72* | 4662/72* | 4684/72* | 4637/72* | 4632/72* | 4638/72*
+C1.loop_sum | 25000/1842 | 25000/1946 | 25000/2082 | 25000/2146 | 25000/2193 | 25000/2174 | 25000/2139
+C1.majority_vote_scan_r2 | 25000/213 | 25000/548 | 25000/1149 | 25000/2075 | 25000/3306 | 25000/4773 | 25000/6639
+C1.merge_two_sorted_r2 | 25000/2299 | 25000/5689 | 25000/10294 | 25000/15598 | 25000/20570 | 25000/22767 | 25000/24342
+C1.minmax_track | 25000/459 | 25000/784 | 25000/1184 | 25000/1708 | 25000/2287 | 25000/2955 | 25000/3554
+C1.mirror_pointers | 25000/45 | 25000/105 | 25000/225 | 25000/449 | 25000/836 | 25000/1393 | 25000/2195
+C1.nested_pairs | 1552/1279* | 2586/2277* | 3682/3342* | 4804/4503* | 5879/5647* | 6991/6779* | 8106/7921*
+C1.partition_pass | 25000/595 | 25000/1298 | 25000/2265 | 25000/3434 | 25000/4856 | 25000/6686 | 25000/8822
+C1.postfix_evaluation | 25000/306 | 25000/2022 | 25000/6856 | 25000/15601 | 25000/22290 | 25000/24470 | 25000/24918
+C1.recursive_calls_r2 | 25000/66 | 25000/209 | 25000/610 | 25000/1589 | 25000/3683 | 25000/6056 | 25000/7845
+C1.run_length_scan | 25000/480 | 25000/1428 | 25000/6899 | 25000/14389 | 25000/24144 | 25000/24836 | 25000/24993
+C1.shared_lists | 25000/14958 | 25000/24132 | 25000/24969 | 25000/24999 | 25000/25000 | 25000/25000 | 25000/25000
+C1.sieve_marking_r2 | 10371/3204* | 24990/5746* | 25000/6083 | 25000/8454 | 25000/10669 | 25000/14221 | 25000/16055
+C1.slices | 25000/245 | 25000/250 | 25000/249 | 25000/244 | 25000/240 | 25000/250 | 25000/236
+C1.string_build | 25000/466 | 25000/495 | 25000/535 | 25000/538 | 25000/538 | 25000/537 | 25000/540
+C1.string_methods | 25000/42 | 25000/294 | 25000/1604 | 25000/7793 | 25000/20064 | 25000/24216 | 25000/24884
+C1.string_pair_table | 25000/4439 | 25000/7539 | 25000/12424 | 25000/18272 | 25000/22308 | 25000/24064 | 25000/24666
+C1.turtle_walk_r2 | 25000/21662 | 25000/24594 | 25000/24954 | 25000/25000 | 25000/25000 | 25000/25000 | 25000/25000
+C1.union_find_links | 25000/6800 | 25000/13052 | 25000/19051 | 25000/22670 | 25000/24432 | 25000/24875 | 25000/24981
+C1.while_counter | 25000/192 | 25000/285 | 25000/369 | 25000/454 | 25000/528 | 25000/624 | 25000/703
+
+## Failing cells under K1, per CLUSTER (my strict map incl. the PROPOSED traced shapes in their clusters), core levels 1-5
+G=10 need=25000: 1 failing cluster-levels of 140: C1.sieve_marking_r2:L1=24990
+G=11 need=22820: 0 failing cluster-levels of 140: 
+G=14 need=18150: 0 failing cluster-levels of 140: 
+G=15 need=17000: 0 failing cluster-levels of 140: 
+G=20 need=13000: 0 failing cluster-levels of 140: 
+
+## Failing cells under K2, per CLUSTER (my strict map incl. the PROPOSED traced shapes in their clusters), core levels 1-5
+G=10 need=25000: 120 failing cluster-levels of 140: B1:L1=4790, B1:L2=6031, B1:L3=7259, B1:L4=8450, B1:L5=9562, B2:L1=20, B2:L2=40, B2:L3=215, B2:L4=218, B2:L5=216, B3:L1=544, B3:L2=1853, B3:L3=8037, B3:L4=20304, B3:L5=24466, B5:L1=443, B5:L2=602, B5:L3=1576, B5:L4=2326, B5:L5=3266, B6+:L1=319, B6+:L2=720, B6+:L3=1699, B6+:L4=3793, B6+:L5=6166, C1.bfs_queue:L1=24811, C1.bfs_queue:L2=24991, C1.bfs_queue:L3=24998, C1.bfs_queue:L4=24999, C1.binary_search:L1=483, C1.binary_search:L2=670, C1.binary_search:L3=973, C1.binary_search:L4=1385, C1.binary_search:L5=1833, C1.bubble_pass:L1=248, C1.bubble_pass:L2=2179, C1.bubble_pass:L3=3933, C1.bubble_pass:L4=14259, C1.bubble_pass:L5=17804, C1.cellular_update_r2:L1=13, C1.cellular_update_r2:L2=13, C1.cellular_update_r2:L3=13, C1.cellular_update_r2:L4=13, C1.cellular_update_r2:L5=13, C1.circle_elimination_r2:L1=14874, C1.circle_elimination_r2:L2=16023, C1.circle_elimination_r2:L3=17020, C1.circle_elimination_r2:L4=18064, C1.circle_elimination_r2:L5=19014, C1.counter_list:L1=12, C1.counter_list:L2=12, C1.counter_list:L3=12, C1.counter_list:L4=12, C1.counter_list:L5=12, C1.digit_peel:L1=547, C1.digit_peel:L2=818, C1.digit_peel:L3=1278, C1.digit_peel:L4=1906, C1.digit_peel:L5=2779, C1.majority_vote_scan_r2:L1=548, C1.majority_vote_scan_r2:L2=1149, C1.majority_vote_scan_r2:L3=2075, C1.majority_vote_scan_r2:L4=3306, C1.majority_vote_scan_r2:L5=4773, C1.merge_two_sorted_r2:L1=5689, C1.merge_two_sorted_r2:L2=10294, C1.merge_two_sorted_r2:L3=15598, C1.merge_two_sorted_r2:L4=20570, C1.merge_two_sorted_r2:L5=22767, C1.minmax_track:L1=784, C1.minmax_track:L2=1184, C1.minmax_track:L3=1708, C1.minmax_track:L4=2287, C1.minmax_track:L5=2955, C1.mirror_pointers:L1=105, C1.mirror_pointers:L2=225, C1.mirror_pointers:L3=449, C1.mirror_pointers:L4=836, C1.mirror_pointers:L5=1393, C1.partition_pass:L1=1298, C1.partition_pass:L2=2265, C1.partition_pass:L3=3434, C1.partition_pass:L4=4856, C1.partition_pass:L5=6686, C1.run_length_scan:L1=1428, C1.run_length_scan:L2=6899, C1.run_length_scan:L3=14389, C1.run_length_scan:L4=24144, C1.run_length_scan:L5=24836, C1.shared_lists:L1=24132, C1.shared_lists:L2=24969, C1.shared_lists:L3=24999, C1.sieve_marking_r2:L1=5746, C1.sieve_marking_r2:L2=6083, C1.sieve_marking_r2:L3=8454, C1.sieve_marking_r2:L4=10669, C1.sieve_marking_r2:L5=14221, C1.union_find_links:L1=13052, C1.union_find_links:L2=19051, C1.union_find_links:L3=22670, C1.union_find_links:L4=24432, C1.union_find_links:L5=24875, C1.while_counter:L1=285, C1.while_counter:L2=369, C1.while_counter:L3=454, C1.while_counter:L4=528, C1.while_counter:L5=624, fast_power:L1=204, fast_power:L2=420, fast_power:L3=836, fast_power:L4=1596, fast_power:L5=2865, insertion:L1=6894, insertion:L2=14776, insertion:L3=22525, kadane:L1=531, kadane:L2=1013, kadane:L3=1620, kadane:L4=2139, kadane:L5=2546
+G=11 need=22820: 108 failing cluster-levels of 140: B1:L1=4790, B1:L2=6031, B1:L3=7259, B1:L4=8450, B1:L5=9562, B2:L1=20, B2:L2=40, B2:L3=215, B2:L4=218, B2:L5=216, B3:L1=544, B3:L2=1853, B3:L3=8037, B3:L4=20304, B5:L1=443, B5:L2=602, B5:L3=1576, B5:L4=2326, B5:L5=3266, B6+:L1=319, B6+:L2=720, B6+:L3=1699, B6+:L4=3793, B6+:L5=6166, C1.binary_search:L1=483, C1.binary_search:L2=670, C1.binary_search:L3=973, C1.binary_search:L4=1385, C1.binary_search:L5=1833, C1.bubble_pass:L1=248, C1.bubble_pass:L2=2179, C1.bubble_pass:L3=3933, C1.bubble_pass:L4=14259, C1.bubble_pass:L5=17804, C1.cellular_update_r2:L1=13, C1.cellular_update_r2:L2=13, C1.cellular_update_r2:L3=13, C1.cellular_update_r2:L4=13, C1.cellular_update_r2:L5=13, C1.circle_elimination_r2:L1=14874, C1.circle_elimination_r2:L2=16023, C1.circle_elimination_r2:L3=17020, C1.circle_elimination_r2:L4=18064, C1.circle_elimination_r2:L5=19014, C1.counter_list:L1=12, C1.counter_list:L2=12, C1.counter_list:L3=12, C1.counter_list:L4=12, C1.counter_list:L5=12, C1.digit_peel:L1=547, C1.digit_peel:L2=818, C1.digit_peel:L3=1278, C1.digit_peel:L4=1906, C1.digit_peel:L5=2779, C1.majority_vote_scan_r2:L1=548, C1.majority_vote_scan_r2:L2=1149, C1.majority_vote_scan_r2:L3=2075, C1.majority_vote_scan_r2:L4=3306, C1.majority_vote_scan_r2:L5=4773, C1.merge_two_sorted_r2:L1=5689, C1.merge_two_sorted_r2:L2=10294, C1.merge_two_sorted_r2:L3=15598, C1.merge_two_sorted_r2:L4=20570, C1.merge_two_sorted_r2:L5=22767, C1.minmax_track:L1=784, C1.minmax_track:L2=1184, C1.minmax_track:L3=1708, C1.minmax_track:L4=2287, C1.minmax_track:L5=2955, C1.mirror_pointers:L1=105, C1.mirror_pointers:L2=225, C1.mirror_pointers:L3=449, C1.mirror_pointers:L4=836, C1.mirror_pointers:L5=1393, C1.partition_pass:L1=1298, C1.partition_pass:L2=2265, C1.partition_pass:L3=3434, C1.partition_pass:L4=4856, C1.partition_pass:L5=6686, C1.run_length_scan:L1=1428, C1.run_length_scan:L2=6899, C1.run_length_scan:L3=14389, C1.sieve_marking_r2:L1=5746, C1.sieve_marking_r2:L2=6083, C1.sieve_marking_r2:L3=8454, C1.sieve_marking_r2:L4=10669, C1.sieve_marking_r2:L5=14221, C1.union_find_links:L1=13052, C1.union_find_links:L2=19051, C1.union_find_links:L3=22670, C1.while_counter:L1=285, C1.while_counter:L2=369, C1.while_counter:L3=454, C1.while_counter:L4=528, C1.while_counter:L5=624, fast_power:L1=204, fast_power:L2=420, fast_power:L3=836, fast_power:L4=1596, fast_power:L5=2865, insertion:L1=6894, insertion:L2=14776, insertion:L3=22525, kadane:L1=531, kadane:L2=1013, kadane:L3=1620, kadane:L4=2139, kadane:L5=2546
+G=14 need=18150: 101 failing cluster-levels of 140: B1:L1=4790, B1:L2=6031, B1:L3=7259, B1:L4=8450, B1:L5=9562, B2:L1=20, B2:L2=40, B2:L3=215, B2:L4=218, B2:L5=216, B3:L1=544, B3:L2=1853, B3:L3=8037, B5:L1=443, B5:L2=602, B5:L3=1576, B5:L4=2326, B5:L5=3266, B6+:L1=319, B6+:L2=720, B6+:L3=1699, B6+:L4=3793, B6+:L5=6166, C1.binary_search:L1=483, C1.binary_search:L2=670, C1.binary_search:L3=973, C1.binary_search:L4=1385, C1.binary_search:L5=1833, C1.bubble_pass:L1=248, C1.bubble_pass:L2=2179, C1.bubble_pass:L3=3933, C1.bubble_pass:L4=14259, C1.bubble_pass:L5=17804, C1.cellular_update_r2:L1=13, C1.cellular_update_r2:L2=13, C1.cellular_update_r2:L3=13, C1.cellular_update_r2:L4=13, C1.cellular_update_r2:L5=13, C1.circle_elimination_r2:L1=14874, C1.circle_elimination_r2:L2=16023, C1.circle_elimination_r2:L3=17020, C1.circle_elimination_r2:L4=18064, C1.counter_list:L1=12, C1.counter_list:L2=12, C1.counter_list:L3=12, C1.counter_list:L4=12, C1.counter_list:L5=12, C1.digit_peel:L1=547, C1.digit_peel:L2=818, C1.digit_peel:L3=1278, C1.digit_peel:L4=1906, C1.digit_peel:L5=2779, C1.majority_vote_scan_r2:L1=548, C1.majority_vote_scan_r2:L2=1149, C1.majority_vote_scan_r2:L3=2075, C1.majority_vote_scan_r2:L4=3306, C1.majority_vote_scan_r2:L5=4773, C1.merge_two_sorted_r2:L1=5689, C1.merge_two_sorted_r2:L2=10294, C1.merge_two_sorted_r2:L3=15598, C1.minmax_track:L1=784, C1.minmax_track:L2=1184, C1.minmax_track:L3=1708, C1.minmax_track:L4=2287, C1.minmax_track:L5=2955, C1.mirror_pointers:L1=105, C1.mirror_pointers:L2=225, C1.mirror_pointers:L3=449, C1.mirror_pointers:L4=836, C1.mirror_pointers:L5=1393, C1.partition_pass:L1=1298, C1.partition_pass:L2=2265, C1.partition_pass:L3=3434, C1.partition_pass:L4=4856, C1.partition_pass:L5=6686, C1.run_length_scan:L1=1428, C1.run_length_scan:L2=6899, C1.run_length_scan:L3=14389, C1.sieve_marking_r2:L1=5746, C1.sieve_marking_r2:L2=6083, C1.sieve_marking_r2:L3=8454, C1.sieve_marking_r2:L4=10669, C1.sieve_marking_r2:L5=14221, C1.union_find_links:L1=13052, C1.while_counter:L1=285, C1.while_counter:L2=369, C1.while_counter:L3=454, C1.while_counter:L4=528, C1.while_counter:L5=624, fast_power:L1=204, fast_power:L2=420, fast_power:L3=836, fast_power:L4=1596, fast_power:L5=2865, insertion:L1=6894, insertion:L2=14776, kadane:L1=531, kadane:L2=1013, kadane:L3=1620, kadane:L4=2139, kadane:L5=2546
+G=15 need=17000: 98 failing cluster-levels of 140: B1:L1=4790, B1:L2=6031, B1:L3=7259, B1:L4=8450, B1:L5=9562, B2:L1=20, B2:L2=40, B2:L3=215, B2:L4=218, B2:L5=216, B3:L1=544, B3:L2=1853, B3:L3=8037, B5:L1=443, B5:L2=602, B5:L3=1576, B5:L4=2326, B5:L5=3266, B6+:L1=319, B6+:L2=720, B6+:L3=1699, B6+:L4=3793, B6+:L5=6166, C1.binary_search:L1=483, C1.binary_search:L2=670, C1.binary_search:L3=973, C1.binary_search:L4=1385, C1.binary_search:L5=1833, C1.bubble_pass:L1=248, C1.bubble_pass:L2=2179, C1.bubble_pass:L3=3933, C1.bubble_pass:L4=14259, C1.cellular_update_r2:L1=13, C1.cellular_update_r2:L2=13, C1.cellular_update_r2:L3=13, C1.cellular_update_r2:L4=13, C1.cellular_update_r2:L5=13, C1.circle_elimination_r2:L1=14874, C1.circle_elimination_r2:L2=16023, C1.counter_list:L1=12, C1.counter_list:L2=12, C1.counter_list:L3=12, C1.counter_list:L4=12, C1.counter_list:L5=12, C1.digit_peel:L1=547, C1.digit_peel:L2=818, C1.digit_peel:L3=1278, C1.digit_peel:L4=1906, C1.digit_peel:L5=2779, C1.majority_vote_scan_r2:L1=548, C1.majority_vote_scan_r2:L2=1149, C1.majority_vote_scan_r2:L3=2075, C1.majority_vote_scan_r2:L4=3306, C1.majority_vote_scan_r2:L5=4773, C1.merge_two_sorted_r2:L1=5689, C1.merge_two_sorted_r2:L2=10294, C1.merge_two_sorted_r2:L3=15598, C1.minmax_track:L1=784, C1.minmax_track:L2=1184, C1.minmax_track:L3=1708, C1.minmax_track:L4=2287, C1.minmax_track:L5=2955, C1.mirror_pointers:L1=105, C1.mirror_pointers:L2=225, C1.mirror_pointers:L3=449, C1.mirror_pointers:L4=836, C1.mirror_pointers:L5=1393, C1.partition_pass:L1=1298, C1.partition_pass:L2=2265, C1.partition_pass:L3=3434, C1.partition_pass:L4=4856, C1.partition_pass:L5=6686, C1.run_length_scan:L1=1428, C1.run_length_scan:L2=6899, C1.run_length_scan:L3=14389, C1.sieve_marking_r2:L1=5746, C1.sieve_marking_r2:L2=6083, C1.sieve_marking_r2:L3=8454, C1.sieve_marking_r2:L4=10669, C1.sieve_marking_r2:L5=14221, C1.union_find_links:L1=13052, C1.while_counter:L1=285, C1.while_counter:L2=369, C1.while_counter:L3=454, C1.while_counter:L4=528, C1.while_counter:L5=624, fast_power:L1=204, fast_power:L2=420, fast_power:L3=836, fast_power:L4=1596, fast_power:L5=2865, insertion:L1=6894, insertion:L2=14776, kadane:L1=531, kadane:L2=1013, kadane:L3=1620, kadane:L4=2139, kadane:L5=2546
+G=20 need=13000: 90 failing cluster-levels of 140: B1:L1=4790, B1:L2=6031, B1:L3=7259, B1:L4=8450, B1:L5=9562, B2:L1=20, B2:L2=40, B2:L3=215, B2:L4=218, B2:L5=216, B3:L1=544, B3:L2=1853, B3:L3=8037, B5:L1=443, B5:L2=602, B5:L3=1576, B5:L4=2326, B5:L5=3266, B6+:L1=319, B6+:L2=720, B6+:L3=1699, B6+:L4=3793, B6+:L5=6166, C1.binary_search:L1=483, C1.binary_search:L2=670, C1.binary_search:L3=973, C1.binary_search:L4=1385, C1.binary_search:L5=1833, C1.bubble_pass:L1=248, C1.bubble_pass:L2=2179, C1.bubble_pass:L3=3933, C1.cellular_update_r2:L1=13, C1.cellular_update_r2:L2=13, C1.cellular_update_r2:L3=13, C1.cellular_update_r2:L4=13, C1.cellular_update_r2:L5=13, C1.counter_list:L1=12, C1.counter_list:L2=12, C1.counter_list:L3=12, C1.counter_list:L4=12, C1.counter_list:L5=12, C1.digit_peel:L1=547, C1.digit_peel:L2=818, C1.digit_peel:L3=1278, C1.digit_peel:L4=1906, C1.digit_peel:L5=2779, C1.majority_vote_scan_r2:L1=548, C1.majority_vote_scan_r2:L2=1149, C1.majority_vote_scan_r2:L3=2075, C1.majority_vote_scan_r2:L4=3306, C1.majority_vote_scan_r2:L5=4773, C1.merge_two_sorted_r2:L1=5689, C1.merge_two_sorted_r2:L2=10294, C1.minmax_track:L1=784, C1.minmax_track:L2=1184, C1.minmax_track:L3=1708, C1.minmax_track:L4=2287, C1.minmax_track:L5=2955, C1.mirror_pointers:L1=105, C1.mirror_pointers:L2=225, C1.mirror_pointers:L3=449, C1.mirror_pointers:L4=836, C1.mirror_pointers:L5=1393, C1.partition_pass:L1=1298, C1.partition_pass:L2=2265, C1.partition_pass:L3=3434, C1.partition_pass:L4=4856, C1.partition_pass:L5=6686, C1.run_length_scan:L1=1428, C1.run_length_scan:L2=6899, C1.sieve_marking_r2:L1=5746, C1.sieve_marking_r2:L2=6083, C1.sieve_marking_r2:L3=8454, C1.sieve_marking_r2:L4=10669, C1.while_counter:L1=285, C1.while_counter:L2=369, C1.while_counter:L3=454, C1.while_counter:L4=528, C1.while_counter:L5=624, fast_power:L1=204, fast_power:L2=420, fast_power:L3=836, fast_power:L4=1596, fast_power:L5=2865, insertion:L1=6894, kadane:L1=531, kadane:L2=1013, kadane:L3=1620, kadane:L4=2139, kadane:L5=2546
+
+## Reserve levels 0 and 6 (K1): vs 1,000 and vs the core need at G=14 (18,150), per cluster
+  C1.digit_peel L0: K1=16555 passes 1,000; fails 18,150
+  C1.sieve_marking_r2 L0: K1=10371 passes 1,000; fails 18,150
+
+## Per LINEAGE failing core cells (K1), in case the pool is allocated per lineage rather than per cluster (code: generate_pool allocates per lineage)
+G=14 need=18150: 28: C1.cond_chain:L1=6492, C1.cond_chain:L2=6543, C1.euclid_gcd:L1=14808, C1.euclid_gcd:L2=16962, C1.euclid_gcd_traced:L1=15439, C1.euclid_gcd_traced:L2=16269, C1.fib_like:L1=16660, C1.fib_like:L2=16736, C1.fib_like:L3=16578, C1.fib_like:L4=16700, C1.fib_like:L5=16620, C1.fib_shapes_recursive:L1=8278, C1.fib_shapes_recursive:L2=8311, C1.fib_shapes_recursive:L3=8281, C1.fib_shapes_recursive:L4=8298, C1.fib_shapes_recursive:L5=8337, C1.func_compose:L1=8450, C1.func_compose:L2=8511, C1.list_build:L1=4728, C1.list_build:L2=4662, C1.list_build:L3=4684, C1.list_build:L4=4637, C1.list_build:L5=4632, C1.nested_pairs:L1=2586, C1.nested_pairs:L2=3682, C1.nested_pairs:L3=4804, C1.nested_pairs:L4=5879, C1.nested_pairs:L5=6991
+G=15 need=17000: 28: C1.cond_chain:L1=6492, C1.cond_chain:L2=6543, C1.euclid_gcd:L1=14808, C1.euclid_gcd:L2=16962, C1.euclid_gcd_traced:L1=15439, C1.euclid_gcd_traced:L2=16269, C1.fib_like:L1=16660, C1.fib_like:L2=16736, C1.fib_like:L3=16578, C1.fib_like:L4=16700, C1.fib_like:L5=16620, C1.fib_shapes_recursive:L1=8278, C1.fib_shapes_recursive:L2=8311, C1.fib_shapes_recursive:L3=8281, C1.fib_shapes_recursive:L4=8298, C1.fib_shapes_recursive:L5=8337, C1.func_compose:L1=8450, C1.func_compose:L2=8511, C1.list_build:L1=4728, C1.list_build:L2=4662, C1.list_build:L3=4684, C1.list_build:L4=4637, C1.list_build:L5=4632, C1.nested_pairs:L1=2586, C1.nested_pairs:L2=3682, C1.nested_pairs:L3=4804, C1.nested_pairs:L4=5879, C1.nested_pairs:L5=6991
+G=20 need=13000: 19: C1.cond_chain:L1=6492, C1.cond_chain:L2=6543, C1.fib_shapes_recursive:L1=8278, C1.fib_shapes_recursive:L2=8311, C1.fib_shapes_recursive:L3=8281, C1.fib_shapes_recursive:L4=8298, C1.fib_shapes_recursive:L5=8337, C1.func_compose:L1=8450, C1.func_compose:L2=8511, C1.list_build:L1=4728, C1.list_build:L2=4662, C1.list_build:L3=4684, C1.list_build:L4=4637, C1.list_build:L5=4632, C1.nested_pairs:L1=2586, C1.nested_pairs:L2=3682, C1.nested_pairs:L3=4804, C1.nested_pairs:L4=5879, C1.nested_pairs:L5=6991
+
+## Late new-class rates (K1, K2 per draw over the last checkpoint interval) for budget-exhausted cells
+  C1.bracket_matching L0: draws 75000 K1 18256 (chao1 32815) K2 18256 late (0.133, 0.133)
+  C1.bracket_matching_traced L0: draws 75000 K1 19120 (chao1 35181) K2 10853 late (0.15, 0.072)
+  C1.coin_change_table L0: draws 75000 K1 19274 (chao1 33708) K2 13842 late (0.124, 0.087)
+  C1.coin_change_table L1: draws 75000 K1 19411 (chao1 34593) K2 19411 late (0.13, 0.13)
+  C1.coin_change_table L2: draws 75000 K1 19538 (chao1 34480) K2 19538 late (0.126, 0.126)
+  C1.coin_change_table L3: draws 75000 K1 19590 (chao1 34385) K2 19590 late (0.133, 0.133)
+  C1.coin_change_table L4: draws 75000 K1 19774 (chao1 34960) K2 19774 late (0.131, 0.131)
+  C1.coin_change_table L5: draws 75000 K1 19375 (chao1 34158) K2 19375 late (0.124, 0.124)
+  C1.coin_change_table L6: draws 75000 K1 19634 (chao1 34504) K2 19634 late (0.129, 0.129)
+  C1.cond_chain L0: draws 75000 K1 6495 (chao1 8087) K2 84 late (0.031, 0.0)
+  C1.cond_chain L1: draws 75000 K1 6492 (chao1 8126) K2 180 late (0.033, 0.0)
+  C1.cond_chain L2: draws 75000 K1 6543 (chao1 8185) K2 371 late (0.034, 0.0)
+  C1.digit_peel L0: draws 75000 K1 16555 (chao1 27662) K2 331 late (0.109, 0.001)
+  C1.euclid_gcd L0: draws 75000 K1 12186 (chao1 21956) K2 70 late (0.077, 0.0)
+  C1.euclid_gcd L1: draws 75000 K1 14808 (chao1 29931) K2 84 late (0.095, 0.0)
+  C1.euclid_gcd L2: draws 75000 K1 16962 (chao1 34893) K2 70 late (0.098, 0.0)
+  C1.euclid_gcd L3: draws 75000 K1 24302 (chao1 38130) K2 70 late (0.139, 0.0)
+  C1.euclid_gcd_traced L0: draws 75000 K1 12377 (chao1 19918) K2 157 late (0.074, 0.0)
+  C1.euclid_gcd_traced L1: draws 75000 K1 15439 (chao1 27038) K2 179 late (0.098, 0.0)
+  C1.euclid_gcd_traced L2: draws 75000 K1 16269 (chao1 28506) K2 161 late (0.103, 0.0)
+  C1.euclid_gcd_traced L3: draws 75000 K1 23891 (chao1 39611) K2 243 late (0.161, 0.0)
+  C1.fast_power_r2 L1: draws 75000 K1 18289 (chao1 38336) K2 64 late (0.119, 0.0)
+  C1.fib_like L0: draws 75000 K1 16667 (chao1 23927) K2 100 late (0.098, 0.0)
+  C1.fib_like L1: draws 75000 K1 16660 (chao1 24099) K2 100 late (0.099, 0.0)
+  C1.fib_like L2: draws 75000 K1 16736 (chao1 24112) K2 100 late (0.098, 0.0)
+  C1.fib_like L3: draws 75000 K1 16578 (chao1 23586) K2 100 late (0.091, 0.0)
+  C1.fib_like L4: draws 75000 K1 16700 (chao1 23971) K2 100 late (0.095, 0.0)
+  C1.fib_like L5: draws 75000 K1 16620 (chao1 24145) K2 100 late (0.093, 0.0)
+  C1.fib_like L6: draws 75000 K1 16664 (chao1 23807) K2 100 late (0.093, 0.0)
+  C1.fib_shapes_recursive L0: draws 75000 K1 8319 (chao1 9609) K2 10 late (0.018, 0.0)
+  C1.fib_shapes_recursive L1: draws 75000 K1 8278 (chao1 9522) K2 10 late (0.019, 0.0)
+  C1.fib_shapes_recursive L2: draws 75000 K1 8311 (chao1 9695) K2 10 late (0.018, 0.0)
+  C1.fib_shapes_recursive L3: draws 75000 K1 8281 (chao1 9636) K2 10 late (0.019, 0.0)
+  C1.fib_shapes_recursive L4: draws 75000 K1 8298 (chao1 9593) K2 10 late (0.019, 0.0)
+  C1.fib_shapes_recursive L5: draws 75000 K1 8337 (chao1 9650) K2 10 late (0.02, 0.0)
+  C1.fib_shapes_recursive L6: draws 75000 K1 8308 (chao1 9698) K2 10 late (0.017, 0.0)
+  C1.func_compose L0: draws 75000 K1 8541 (chao1 12589) K2 4 late (0.024, 0.0)
+  C1.func_compose L1: draws 75000 K1 8450 (chao1 12265) K2 4 late (0.022, 0.0)
+  C1.func_compose L2: draws 75000 K1 8511 (chao1 12787) K2 4 late (0.025, 0.0)
+  C1.list_build L0: draws 75000 K1 4627 (chao1 7177) K2 72 late (0.021, 0.0)
+  C1.list_build L1: draws 75000 K1 4728 (chao1 7633) K2 72 late (0.022, 0.0)
+  C1.list_build L2: draws 75000 K1 4662 (chao1 7545) K2 72 late (0.023, 0.0)
+  C1.list_build L3: draws 75000 K1 4684 (chao1 7524) K2 72 late (0.022, 0.0)
+  C1.list_build L4: draws 75000 K1 4637 (chao1 7236) K2 72 late (0.022, 0.0)
+  C1.list_build L5: draws 75000 K1 4632 (chao1 7500) K2 72 late (0.022, 0.0)
+  C1.list_build L6: draws 75000 K1 4638 (chao1 7503) K2 72 late (0.021, 0.0)
+  C1.nested_pairs L0: draws 75000 K1 1552 (chao1 1587) K2 1279 late (0.002, 0.002)
+  C1.nested_pairs L1: draws 75000 K1 2586 (chao1 2828) K2 2277 late (0.007, 0.006)
+  C1.nested_pairs L2: draws 75000 K1 3682 (chao1 4223) K2 3342 late (0.014, 0.012)
+  C1.nested_pairs L3: draws 75000 K1 4804 (chao1 5996) K2 4503 late (0.021, 0.019)
+  C1.nested_pairs L4: draws 75000 K1 5879 (chao1 8040) K2 5647 late (0.029, 0.027)
+  C1.nested_pairs L5: draws 75000 K1 6991 (chao1 10508) K2 6779 late (0.036, 0.035)
+  C1.nested_pairs L6: draws 75000 K1 8106 (chao1 13615) K2 7921 late (0.041, 0.04)
+  C1.sieve_marking_r2 L0: draws 75000 K1 10371 (chao1 16289) K2 3204 late (0.068, 0.017)
+  C1.sieve_marking_r2 L1: draws 75000 K1 24990 (chao1 52410) K2 5746 late (0.211, 0.038)

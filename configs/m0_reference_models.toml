@@ -1,0 +1,112 @@
+# M0 (ADR-0033 revision 4), stage I0-a: every number of the specification, as a PROPOSAL.
+#
+# Nothing here is confirmed. The human lead confirms or changes every number marked below before the freeze (ADR-0033 section 14,
+# choices 5, 9 and 10). No value was tuned after seeing any score: no model has been run and no score exists.
+# The file name is that of ADR-0033 section 13 (audit R7; the first implementation used configs/m0_references.toml, as the brief said).
+# Self-checked implementation only: not independent review, not Astra validation, not human approval.
+
+[meta]
+adr = "ADR-0033"
+revision = 4
+status = "PROPOSED, nothing confirmed"
+stage = "I0-a"
+
+[seeds]
+# PROPOSED: the block 400001-409999 (data) and 953001-953999 (test) of ADR-0033 section 12. The registry revision (R6) is not written here.
+tuning_draw = 400001
+development_pool = 400002
+sealed_pool = 400003
+family_partition = 400004
+public_split = 400005
+m0_draw_and_nuisance_order = 400006
+answer_order = 400007
+bootstrap = 400008
+power_simulation = 400009
+sampling_nuisance = [400011, 400012]
+scorer_hand_label_sample = 400013
+reserved_m5_sealed_draw = 400031          # not used in M0
+reserved_composition_supplement = 400032  # not used in M0
+rehearsal_first = 409001
+rehearsal_last = 409099
+test_first = 953001
+test_last = 953999
+
+[levels]
+core = [1, 2, 3, 4, 5]
+reserve_easier = 0
+reserve_harder = 6
+
+[sizes]
+tuning_items_per_level_and_part = 100      # PROPOSED: the human lead's to confirm before the freeze
+format_choice_items_per_part = 50          # PROPOSED: the human lead's to confirm before the freeze
+development_pool_per_part = 4000           # PROPOSED: the human lead's to confirm before the freeze
+m0_draw_per_part = 1500                    # PROPOSED: the human lead's to confirm before the freeze
+sealed_pool_per_part = 20000               # PROPOSED: the human lead's to confirm before the freeze
+k0_development = 500                       # PROPOSED: the human lead's to confirm before the freeze
+k0_sealed_pool = 20000                     # PROPOSED: the human lead's to confirm before the freeze
+nuisance_items = 150                       # PROPOSED: the human lead's to confirm before the freeze
+public_development = 1650                  # PROPOSED: the human lead's to confirm before the freeze
+public_reserve = 1000                      # PROPOSED: the human lead's to confirm before the freeze
+min_families = 12                          # PROPOSED: ADR-0032 / ADR-0033 section 6.2
+min_clusters_per_part = 300                # PROPOSED: the human lead's to confirm before the freeze (choice 10): lineages per private part
+
+[generators]
+capacity_factor = 10                       # PROPOSED: the human lead's to confirm before the freeze
+solver_agreement_required = true
+hash_seed_env = "PYTHONHASHSEED=0"
+ngram_length = 13                          # fingerprint n-gram length (ADR-0033 section 8)
+salt_bytes = 32
+
+[stats]
+bootstrap_resamples = 10000                # PROPOSED: the human lead's to confirm before the freeze
+simulation_samples = 20000                 # PROPOSED: the human lead's to confirm before the freeze
+confirmation_samples = 2000                # PROPOSED: the human lead's to confirm before the freeze
+min_clusters_for_bootstrap = 30            # below this the t-quantile branch replaces the percentile bootstrap (section 9.2)
+alpha = 0.05                               # PROPOSED: the human lead's to confirm before the freeze
+power = 0.8                                # PROPOSED: the human lead's to confirm before the freeze
+cap_fraction = 0.5                         # PROPOSED: the human lead's to confirm before the freeze
+margin_grid = [0.02, 0.03, 0.05]           # PROPOSED: the human lead's to confirm before the freeze
+size_ladder = [500, 1000, 1500, 2000, 3000, 4000, 6000, 8000, 12000, 16000, 20000]
+planning_worst_case_tau = 0.10             # PROPOSED: the human lead's to confirm before the freeze (choice 10)
+retention_placeholder_tests_per_part = 2   # PROPOSED placeholder (choice 15)
+
+[bands]
+floor_ceiling_low = 0.10                   # PROPOSED: the human lead's to confirm before the freeze (choice 9): band lower edge is c + 0.10 (1 - c)
+floor_ceiling_high = 0.90                  # PROPOSED: the human lead's to confirm before the freeze (choice 9)
+
+[limits]
+active_compute_bound = 1.25                # PROPOSED: the human lead's to confirm before the freeze
+projection_hours = 336                     # PROPOSED: the human lead's to confirm before the freeze
+per_reference_hours = 72                   # PROPOSED: the human lead's to confirm before the freeze
+whole_measurement_hours = 168              # PROPOSED: the human lead's to confirm before the freeze
+rehearsal_hours = 48                       # PROPOSED: the human lead's to confirm before the freeze
+memory_peak_gib = 34                       # PROPOSED: the human lead's to confirm before the freeze
+batch_memory_gib = 24                      # PROPOSED: the human lead's to confirm before the freeze
+free_memory_margin_gib = 4                 # PROPOSED: the human lead's to confirm before the freeze
+download_limit_bytes = 50000000000         # standing delegation of 2026-11-18
+prompt_token_limit = 2048                  # PROPOSED: the human lead's to confirm before the freeze
+direct_token_limit = 32                    # PROPOSED: the human lead's to confirm before the freeze
+worked_token_limits = [384, 512, 768, 1024]  # PROPOSED: the human lead's to confirm before the freeze
+worked_limit_hit_rate_max = 0.02           # PROPOSED: the human lead's to confirm before the freeze
+
+[projection]
+retrieval_prompt_factor = 2.0              # PROPOSED until M1.5 fixes the retrieval prompt length
+n_tier1_systems = 5
+n_taught_single_teacher_systems = 2
+
+[knowntruth]
+# The six scenarios of Review 3 (checks/shrink_check3c.py, SHA-256 ff7025778476612912b9c4173f61ba3175e4e0a186722993d8bd4863ad7f5440).
+tolerance = 0.03                           # PROPOSED: the human lead's to confirm before the freeze (choice 10)
+max_monte_carlo_se = 0.01                  # PROPOSED: the human lead's to confirm before the freeze
+clusters = 300
+n_items = 6000
+draws = 400                                # PROPOSED: number of independent synthetic M0 draws behind each recovered power
+sims_per_draw = 1000                       # PROPOSED: simulated samples per draw
+truth_runs = 20000                         # PROPOSED: fresh-cluster runs behind each known power
+seed = 953101                              # test seed, inside 953001-953999
+# per scenario: name, d, tau, cluster-size pattern, delta
+scenario_names = ["S1", "S2", "S3", "S4", "S5", "S6"]
+scenario_d = [0.30, 0.30, 0.30, 0.02, 0.50, 0.30]
+scenario_tau = [0.05, 0.00, 0.05, 0.01, 0.05, 0.00]
+scenario_sizes = ["balanced5", "balanced5", "unbalanced", "balanced5", "balanced5", "unbalanced"]
+scenario_delta = [0.020, 0.018, 0.020, 0.004, 0.025, 0.018]

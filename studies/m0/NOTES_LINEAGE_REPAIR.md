@@ -1,0 +1,173 @@
+# M0 lineage repair: pilot batch 1 (R1), notes (implementer: Claude Sonnet 5.5; self-checked, not independent review)
+
+Nothing here is a result about any model; no model was run, nothing downloaded. Not Astra review, not human approval.
+
+## Basis and rulings (arbor-lead, Fable 5.2, for the pilot only; none is human approval)
+
+The human lead decided on 2026-11-25 that lineages stay CLUSTERS and M0 is repaired to hundreds of lineages (`docs/reviews/m0-lineage-decision-2026-11-25/HUMAN_LEAD_WORDS.md`). For the pilot the lead ruled:
+
+- Ruling 6: cross-family and cross-part distinctness checks are mandatory, beside (not instead of) section 6.2's within-family 50-pair check.
+- Ruling 7: second-solver interface confirmed: structured form + schema doc + a fixture of 20 items per lineage and level; the solver reads only `structured`; registry by lineage id; one module per family. I write no solver. A separate agent writes them, a third audits the pairs.
+- Ruling 5: no new threshold is registered. The pilot MEASURES skeleton-overlap and answer-distribution statistics; values may be proposed afterwards, noting they would be set after seeing generator statistics (not any model score).
+- Rulings 1, 2, 3, 4, 8 (gate operating point, estimator, items per lineage, lineage target, family count) are not acted on here.
+- New-lineage definition: the algorithm, the data structure or the dependency graph must differ; parameter space at least 2,000 distinct items per level (the G = 300 demand is 1,800 per core level); rejection at authoring time.
+
+## What was delivered
+
+- 20 new R1 lineages, 10 intended for part A and 10 for part B (the registered partition is by seed over the final families), in 12 families (4 of them new: containers, elimination, boolean_state, equivalence): `studies/m0/lineages_r1_<family>.py`, registered in their own registry (`lineages_r1_common.PILOT`), NOT in `core.REGISTRY`, because they have no second solvers yet and the existing suite parametrises over the core registry. Ids are `R1.<name>`.
+- `studies/m0/lineage_gates.py`: the mechanical gates and measurements (builder signature, operation profile, sentence skeletons, answer statistics, capacity exhibition at the G = 300 demand, fixtures, schema document, per-family checks).
+- `studies/m0/manifests/r1_pilot_manifest.json` (per lineage: family, intended part, file, signature, capacity result, fixture hash), `r1_pilot_stats.json` and `r1_pilot_stats_table.md` (the measurements for the 15 old and 20 new R1 lineages).
+- For the solver agent: `studies/m0/fixtures/R1_PILOT_SCHEMA.md` and `studies/m0/fixtures/r1_pilot/<id>.jsonl` (140 items per lineage: 20 per level 0 to 6).
+- Tests: `tests/test_m0_r1_<family>.py` (12 files) and `tests/test_m0_r1_pilot_gates.py`.
+- Time log (scratch, not in git): `experiments/_scratch/m0/pilot_timelog.txt`.
+
+## Attempts, rejections, time (measured; read the caveat)
+
+- Drafted and delivered: 20. Drafted then rejected by a mechanical gate: 0. No lineage failed the capacity gate (all 140 lineage-levels reached 10 x the G = 300 demand), none had an equal signature, none raised in 7 levels x 30 items.
+- Rejected at DESIGN time, before a line of code (my own judgement, not a gate), 6: inclusion-exclusion counting (open numeric answers); parity chains (the same procedure as `equivalence_classes`); kin-term composition (ambiguous composition table); topological-order questions (the same procedure as reachability); numeric rank from differences (the same procedure as `event_timeline`); alibi/liar variants (the same procedure as `one_culprit`).
+- Cosmetic defects found by reading one rendered item per lineage and fixed (not rejections): "1 blocks/days/dollars", "lamps 3", "is true is false", an awkward "the job of A and B are all finished".
+- Wall clock from the tool log: first line to the 20th lineage drafted 07:17:16 to 07:19:11 (115 s, about 6 s per lineage); gate module written 07:19:11 to 07:20:08; first gate run, cosmetic fixes, family and gate tests to 07:21:45. **Caveat: these are tool-visible timestamps; they do not include the design reasoning I did before the first line was written, which I could not clock and which was the larger part of the effort. Per-lineage start/end times were not separately logged (files were written in family batches). Read the 6 s as a floor, not as an authoring cost.**
+- Machine time (measured, niced): sampling and building 2,000 items per lineage, median 0.02 s (range 0.01 to 0.06 s) for the new, median 0.03 s (up to 0.23 s) for the old; answer statistics under 5 ms per lineage; capacity exhibition over 7 levels, median 0.17 s (0.09 to 0.37) for the new, 3.7 s in all; fixtures 0.04 s for 2,800 items; the whole `pilot-r1` run (35 lineages) 14.6 s; the 12 family test files 0.24 s together; the gate test file 3.8 s.
+
+## The statistics (full table: `manifests/r1_pilot_stats_table.md`)
+
+- **Answer distribution.** For the 20 new lineages the share of the commonest key divided by the mean chance 1/k is at most 1.25 (`conditional_threshold_rule`; then 1.10, 1.10, 1.09, 1.03, and below 1 for open-ish name lists). Among the 15 old lineages one stands out: `categories_follow`, 2.33 (top key "cannot be determined", share 0.776 against chance 1/3); the next old lineage is 1.10. So this measurement, computed mechanically, separates the known defect from every other R1 lineage by a wide margin. A value for a rule would be chosen after seeing this; a bound anywhere from about 1.3 to about 2.0 separates these 35, so the choice is a judgement, not a result.
+- **Sentence-skeleton overlap.** The largest sentence-skeleton Jaccard with any other R1 lineage is 0.19 for the new and 0.17 for the old; no pair shares more than a fifth of its sentence templates. Cross-family and cross-part pairs are included (all 35 against all 35).
+- **Builder signature.** All 35 builders have different abstracted-AST hashes (no two are the same code up to names and constants). This catches only literal re-skins.
+- **Operation-profile similarity is NOT discriminating.** The weighted Jaccard of operation multisets lies between 0.71 and 0.87 for every lineage's nearest neighbour, new or old; the best-matching pairs are not the pairs I judge similar. I propose to drop it as a gate.
+- **Item-skeleton diversity** (distinct skeletons among 400 level-3 items): from 2 to 400 for both old and new; a lineage with a single sentence template scores 2 whether it is good or bad (`order_compare` 2, `elimination_bracket` 2). It measures surface variety of one rule and says nothing about procedure distinctness. Not a gate.
+- **Capacity.** All 20 new lineages pass at G = 300 (1,800 per core level, 1,000 per reserve level). So does every old R1 lineage. Because names and numbers count as distinct items under the ADR's wording, the gate is weak for R1-type rules: only small-parameter-space rules (the M1 and R2 failures found before) fail it. It does not measure procedural distinctness.
+
+## Candid assessment of distinctness (my judgement, not mechanical; a separate auditor must repeat it)
+
+Of the 20, I judge about 12 to 14 to be genuinely distinct procedures against each other and the 15 old ones. The mechanical gates did not find the overlaps I see by reading:
+
+- Offset propagation along a spanning tree: `temporal_weekday_shift`, `spatial_relative_directions`, `equivalence_exchange_rates` (and the old `event_timeline`): one procedure in four skins (additive mod 7, 2-D additive, multiplicative, additive).
+- Simulating a short operation list on a small state: `containers_stack_piles`, `containers_queue_line`, `tracking_accounts` (and the old `swap_tracking`): one family of procedure, three to four data structures.
+- Evaluating a stated formula on given values: `conditional_threshold_rule` with the old `attribute_rule`.
+- `kinship_descendants` is the downward counterpart of the old `kinship_ancestor` (a tree walk).
+
+On that reading the 20 yield 12 to 14 distinct procedures, and 35 R1 lineages in all yield about 25 to 28.
+
+## Defects and limits of the pilot (not hidden)
+
+- **Not verified by any independent solver.** Keys are what the builders compute from the same data they print. I read one rendered item per lineage; no separate context checked the wording or the keys. The 20 fixtures x 7 levels are for the solver agent. Until then a key error in a lineage would be undetected by me. Uniqueness of the answer is enforced inside builders by rejection (unique extreme, unique shortest path, forced answers by construction) and is not verified independently.
+- **Answer balance.** `conditional_threshold_rule` is 62.6 % "no" although the target is drawn uniformly (rejection at high levels is uneven); not fixed (no threshold exists).
+- The intended parts are mine; part B is not yet checked for procedure overlap with part A as ruling 6 requires beyond the signature and skeleton measures above (the judgement above is the only cross-check, and it is mine).
+- The first-person reading of "distinct procedure" is subjective; a mechanical test for it does not exist yet (see the operation-profile finding).
+
+## Revised estimate [E] for the full repair (replaces the earlier plan's figures)
+
+Inputs: measured machine times above (negligible: under a minute per 100 lineages for every gate); the tool-visible authoring time (a floor); the judged yield of distinct procedures (12 to 14 of 20, about 65 %, in the FIRST pilot, with the easiest procedures taken first).
+
+- Machine time for 2,400 lineages (600 per evaluation x 4): authoring gates under one machine-hour in all; pools, solvers, fixtures a few machine-hours [E].
+- Agent time [E, range]: authoring about 5 to 15 agent-minutes per lineage when the procedure is already decided, plus the design effort of finding a new procedure, which I could not measure; solver 10 to 20; audit 5 to 10. For 2,400 lineages: about 800 to 2,400 agent-hours, if the yield stayed at 65 %. **It will not:** procedures I can state as distinct get scarcer quickly.
+- Candid estimate of what is reachable: with several authors and a taxonomy, I think a further 25 to 45 genuinely distinct procedures per evaluation (so about 40 to 75 per evaluation, about 20 to 40 per part) are reachable before new lineages are mostly variants of old ones; reaching 300 per part would need either far more than I can list as distinct procedures or a reading of "distinct" that section 6.2 forbids (mechanical variants share a lineage). I do not expect 300 genuinely distinct procedures per part from hand-writing alone. This is an estimate, not a measurement; a second pilot with different authors would test it.
+- What this implies for the design (not decided here): at G of 20 to 40 per part the cluster floor of section 8 applies (the table there: for tau = 0.10, G = 60 reaches 0.058, G = 150 reaches 0.039), so 0.02 and 0.03 margins would be NOT EVALUABLE (UNDERPOWERED) on private parts, which is the registered outcome and not a reason to relax a threshold.
+
+## Not done
+
+No solver, no registration of the pilot lineages in the core registry, no partition seed run over the new families, no pools, no change to any existing file under `studies/m0/` other than new files, no threshold.
+
+---
+
+## 2026-11-25, round 2: pilot repair, shortcut gate, strict clusters, eight further lineages (implementer: Claude Sonnet 5.5; self-checked)
+
+Basis: the human lead's two statements (`docs/reviews/m0-lineage-decision-2026-11-25/HUMAN_LEAD_WORDS.md`, `HUMAN_LEAD_WORDS_2.md`: "2", then "m0 I already said cluster"); the independent audit of the pilot (`.../audit1/AUDIT_M0_LINEAGES_1.md`, with its judgement, pair table and scripts, copied into the repo). Lead rulings recorded here (arbor-lead, Fable 5.2; not human approval): A strict reading of "a distinct solution procedure", with strictly merged lineages registered as ONE cluster with several shapes and nothing deleted (`lineages_r1_clusters.STRICT_MERGES`); B no strict cluster in both parts, parts by `core.family_partition`'s rule; C a mandatory shortcut gate, measured and not thresholded; D fix or mark NOT REGISTERED the audit's defects, each with a failing-first test; E drop the operation-profile similarity and item-skeleton diversity as distinctness evidence (kept as code, marked `non_evidence_of_distinctness` in `manifests/r1_pilot_stats.json`).
+
+### What was done
+
+- **Strict clusters and parts** (`lineages_r1_clusters.py`, `manifests/r1_clusters.json`). The nine strict merge groups of the audit (23 clusters from its 35 lineages, reproduced by a test). Ruling B read as: a strict cluster that joins two families makes those families ONE key of `core.family_partition`'s rule (shuffle of the sorted keys with the stream of seed 400004, first half A). **This reading is mine (ruling needed).** Result at this commit: 43 registered R1 lineages (13 core and 30 pilot-registry lineages; 12 shapes superseded, 2 core and 10 pilot), **31 strict clusters: part A 13, part B 18**, over 14 family keys. The strict merges tie six families into one key (boolean_state, categories, equivalence, kinship, spatial, temporal), which makes the split lopsided (that key is in part B). The raw `core.family_partition` rule over the 16 original families (not cluster-closed) would place the clusters differently and split two cross-part clusters; I did not use it.
+- **Shortcut gate** (`lineages_r1_shortcuts.py`; table `manifests/r1_shortcuts_table.md`, data `r1_shortcuts.json`). Generic text battery (constant most-frequent key; first, last, most, least mentioned option; option never the first word of a sentence; alphabetically first and last; asked pair stated verbatim; asked entity never mentioned; largest, smallest, last number) plus lineage-specific heuristics read from the structured form. 2,000 items per lineage (400 per core level); a heuristic that does not fire guesses at 1/k; open answers have chance 0. **Measured, not thresholded.** The gate found one defect the audit did not: in the core lineage `R1.kinship_ancestor` the answer was ALWAYS the one parentless person (accuracy 1.000: the chain had k+1 people with the asked child at the bottom).
+- **Shape revisions** (`lineages_r1_rev2.py`, ids ending `_r2`; old files kept; old shapes marked SUPERSEDED, none deleted). Each has a test in `tests/test_m0_r1_rev2.py` asserting the defect in the old shape and its absence in the new (so the new-shape assertions fail on the old shape). Worst relevant heuristic, 2,000 items, before then after:
+
+| Lineage | Defect | Before | After |
+|---|---|---|---|
+| kinship_descendants | answer was the parentless root | parentless 0.947 acc | root excluded from the candidates; worst now alphabetical_first 0.157 acc (excess 0.008) |
+| kinship_ancestor (core) | answer always the parentless root | 1.000 acc | line above the child 1 to 2 generations longer; worst first_mentioned excess 0.076 |
+| equivalence_classes | asked pair stated verbatim; unmentioned entity | verbatim 0.656 acc (excess 0.322) | never stated, both items mentioned; worst constant key excess 0.026 |
+| elimination_bracket | runner-up = best rating of the other half | 0.595 acc (excess 0.420) | matches decided by head-to-head results of a random (non-transitive) tournament; most_wins excess -0.075 |
+| containers_queue_line | last joiner / last let in | 0.685 acc (excess 0.558) | asks position j from the front, plus "front goes to the back"; worst excess 0.041 |
+| categories_default_exceptions | priority rule unused; own group decides; majority sign | majority 0.848 acc (excess 0.348) | asked verb has rules in 2+ groups above the member, of both signs, never in the member's own group; worst excess 0.0015 |
+| conditional_threshold_rule | vetoing no decides | 0.663 acc (excess 0.163) | veto removed; weighted margin rule; worst (yes-count majority) excess 0.059 |
+| boolean_lights | asked lamp never toggled; "the rest are off" | never-toggled 0.610 acc | asked lamp always toggled; wording fixed; worst excess 0.022 |
+| graph_shortest_route | nearest neighbour right | 0.703 acc (excess 0.527) | asks the route length (open numeric answer); worst excess 0.060 |
+| containers_stack_piles | "orange" is a pile and a block; last block moved onto the pile | last-moved 0.558 acc (excess 0.409) | blocks never named like a colour; worst excess 0.053 |
+| spatial_grid_walk | column convention unstated (113/140 keys flip) | n/a | "(column 1 is the westernmost)" in the item |
+| categories_follow (core) | existential import unstated; "cannot be determined" 77.5 % | constant key 0.775 acc | convention stated, answer chosen first (balanced), asked statement never verbatim; constant-key excess 0.065 |
+
+  The generator-side repair `_anti` rejects (with probability 0.6 to 0.95) draws that a named heuristic answers correctly. This pushes those heuristics toward chance but shifts the item distribution toward the cases where the heuristic is wrong; it is a repair of the generator, not of the scorer, and is **a choice I made (ruling needed)**. It repairs only the shortcuts the gate named.
+- **Eight further lineages** (`lineages_r1_new2.py`; six new families): topological_order, activity_selection, mst_cost, instant_runoff, stable_matching, nim_xor, minimax_tree, venn_counting. The module docstring gives the strict-distinctness defence of each and the strict merges an auditor may still make (minimax_tree with other tree evaluations; activity_selection with interval_overlap; topological_order with temporal_critical_path). Checked by hand against one rendered item each: topological_order (Oscar), activity_selection (5), mst_cost (44), instant_runoff (Jon), nim_xor (first), minimax_tree (-2) and venn_counting (2) are correct; stable_matching was not hand-checked. Nim was first built with piles too small for the capacity gate (it failed at levels 0 to 5) and then enlarged; the even-total constraint makes the parity of the total uninformative.
+- **Manifests, fixtures, schema doc** regenerated for the registered pilot lineages (`manifests/r1_pilot_manifest.json`, `fixtures/r1_pilot/*.jsonl`, `fixtures/R1_PILOT_SCHEMA.md`); `fixtures/r1_pilot/SUPERSEDED.txt` lists shapes whose older fixtures must not be solved.
+
+### Results (measured)
+
+- Capacity at G = 300 (1,800 per core level, 1,000 per reserve level): every registered pilot lineage passes at every level; no failures in the final manifest.
+- Shortcut gate, registered lineages only: median worst-heuristic excess 0.026. Largest remaining: `activity_selection` greedy-by-start 0.256 (open numeric answer, chance 0; the answer range is narrow), `minimax_tree` smallest leaf 0.159 (open), `temporal_critical_path` longest job 0.151, `conditional_decision_tree` most-mentioned action 0.149, `spatial_relative_directions` least mentioned 0.134, `tracking_accounts` richest at the start 0.128, `stable_matching` first choice 0.109 (about 0.11 to 0.13 over chance: a measured residual), `venn_counting` constant key 0.090, `order_compare` (core) verbatim pair 0.087. None was fixed; no threshold exists. Unrepaired core lineages cannot be edited here; the list is for the lead.
+- NOT REGISTERED: none (`lineages_r1_clusters.NOT_REGISTERED` is empty). Superseded shapes: 12 (2 core, 10 pilot).
+
+### Distinctness evidence (ruling E)
+
+Operation-profile similarity (0.71 to 0.87 for every nearest neighbour) and item-skeleton diversity are not evidence of distinctness and are kept only as code. The sentence-skeleton Jaccard and the builder signature remain as weak evidence (they catch only literal re-skins). The evidence is the strict-cluster judgement above (the auditor's, plus mine for the eight new lineages, which the auditor has not read).
+
+### Authoring stopped: why
+
+I looked for further strict procedures and judged the remaining candidates merge-prone under the strict reading: Borda or Condorcet tallies (a tally of a pairwise or ranked relation: the `order_tournament_wins` cluster), a sweep for the maximum number of overlapping intervals (the interval family), implicit state-space search (reachability), tree traversal order (pointer chasing), logic-gate circuit evaluation (formula evaluation), calendar and clock arithmetic (a cyclic accumulator), counting paths on a grid (a DAG dynamic programme with a different semiring). Of the eight new lineages I already expect one or two strict merges by an auditor. On this evidence the pace is: first pilot, 20 drafted for about 12 to 14 strict-new; this round, 8 drafted for about 6 to 8; the next round would yield mostly merges. So I stop here at 31 strict clusters in R1 (A 13, B 18) and expect R1 to saturate in the 40s of clusters (about 20 per part) under the strict reading, as the audit estimated. [E]
+
+### Time and machine cost (from the tool log; the caveat in the first section applies: design reasoning is not clocked)
+
+Round 2, tool-visible: fixes, clusters, shortcut gate, 14 revision tests 07:22 to 08:31 (69 min, including my own design work for the repairs); the eight new lineages, their heuristics, the capacity fix, tests and manifests 08:31 to 08:37 (6 min, about 45 s each as written, excluding design). Machine: the full `pilot-r1` run over 55 R1 lineages takes about 52 s (the shortcut gate 11 s); the R1 test files take 26 s.
+
+### Rulings needed (least favourable reading stated)
+
+1. **Partition of strict clusters.** I made the families joined by a cluster one key of the partition rule (result A 13, B 18, lopsided). Alternative: apply the rule to the raw families and move each cross-part cluster whole to part B (the held-out part: least favourable to a held-out claim, because it moves more procedures into the held-out part). Which?
+2. **Generator-side shortcut repair** (`_anti`) as a legitimate fix versus marking such lineages NOT REGISTERED. Least favourable: mark NOT REGISTERED when a named heuristic stays above a bound the lead sets.
+3. **A shortcut-gate bound.** None is registered. Which excess over chance (per heuristic, per level) fails a lineage? Least favourable: the smallest bound that rejects no more than the known defects.
+4. **Residual shortcuts** listed above (nothing fixed): fix, accept, or mark NOT REGISTERED.
+5. **Open-answer chance.** Open answers have chance 0 in section 10.2, so a heuristic's exact-match rate on them reads as pure excess; the gate reports that without a floor. Whether a floor (the answer range) should replace 0 is a specification question.
+
+---
+
+## 2026-11-25, rulings on the five questions and the two-sided check (arbor-lead, Fable 5.2; not human approval)
+
+1. **Partition.** My reading stands for now (families joined by a strict cluster form one key of `core.family_partition`'s rule): it uses the registered rule and guarantees no cluster spans parts. The 13/18 imbalance and the six-family key are recorded as a consequence. The independent auditor will be asked to challenge this reading. PENDING until that audit.
+2. **Generator-side repair.** Redrawing items that a named heuristic answers correctly is allowed ONLY if the heuristic then sits near chance on BOTH sides; a heuristic pushed clearly below chance is as exploitable as one above (answer its opposite) and is a defect. For every repaired shape each heuristic is recorded with a two-sided reading, and for closed answers also the accuracy of "pick uniformly among the options the heuristic did NOT choose". Where a redraw probability overshot, it is retuned (new revision with a failing-first test of the band; the band is a measurement, not a registered threshold). **This repair conditions the item distribution on a heuristic's outcome; that sentence is in the manifest entry of each repaired lineage (`repair_note`).**
+3. **No shortcut bound is registered.** It is a new registered number and goes to the human lead with the distributions of all four evaluations.
+4. **Residual shortcuts** stay measured and flagged; no fix and no NOT REGISTERED until a bound exists.
+5. **Open answers:** report the heuristic's absolute exact-match rate beside the most-frequent-answer rate and the per-level share; never "excess over chance".
+
+### What was done for the two-sided check
+
+- `lineages_r1_shortcuts.py`: `anti_credit` (the accuracy of picking uniformly among the options a heuristic did not choose; a heuristic that chose every option, or named an option the item does not offer, does not fire), the validity filter (a predicted name that is not among the item's options, or among the entities it mentions when no list is given, is "no prediction": this removed an artefact in which a constant name looked far below chance), `two_sided_markdown`, and a `markdown` that no longer calls open-answer rates "excess".
+- `manifests/r1_two_sided_table.md` (registered lineages and the superseded shapes side by side), `r1_two_sided.json` (per retuned shape: redraw probabilities, before and after), `r1_stats_table_v2.md` (generator statistics for all R1 shapes; replaces `r1_pilot_stats_table.md`, which is kept unchanged and marked SUPERSEDED in `fixtures/r1_pilot/SUPERSEDED.txt`), `r1_shortcuts_table.md` regenerated.
+
+### What overshot, and what was retuned (accuracy minus chance, before then after; anti reading beside)
+
+| Shape | Heuristic | Before (acc - chance) | After (acc - chance / anti - chance) |
+|---|---|---|---|
+| categories_default_exceptions_r2 | least specific rule | -0.488 (the answer's opposite right 99 %) | r3 rebuilt by construction: +0.010 / -0.010 |
+| categories_default_exceptions_r2 | last listed rule | -0.351 | +0.016 |
+| categories_default_exceptions_r2 | majority sign | -0.065 | -0.003 |
+| elimination_bracket_r2 | most wins | -0.075 | -0.012 / +0.001 |
+| topological_order | j-th alphabetical | -0.071 | +0.003 / -0.000 |
+| kinship_descendants_r2 | first mentioned | -0.070 | -0.013 / +0.003 |
+| stable_matching | first choice | +0.109 | -0.004 / +0.002 |
+| instant_runoff | plurality winner | +0.068 | +0.022 / -0.017 |
+| conditional_threshold_rule_r2 | yes-count majority | +0.059 | +0.004 / -0.004 |
+| containers_stack_piles_r2 | last block moved onto the pile | +0.053 | +0.004 / -0.000 |
+| containers_stack_piles_r2 | initial top | +0.043 | -0.009 |
+
+  The new shapes are `kinship_descendants_r3`, `kinship_ancestor_r3`, `elimination_bracket_r3`, `categories_default_exceptions_r3`, `conditional_threshold_rule_r3`, `containers_stack_piles_r3` (`lineages_r1_rev3.py`), and `topological_order_r2`, `instant_runoff_r2`, `stable_matching_r2`; each earlier shape is SUPERSEDED, in the same strict cluster. The redraw probabilities were fitted by iterating generate, measure, adjust (24 rounds of 1,500 test-seed items, mean of the last 8) and are fixed constants in `lineages_r1_rev3.P`. Fitting the probabilities to the measured heuristics uses generator statistics only, no model score.
+- **A repair by redraw cannot fix a coupling.** In `categories_default_exceptions` the majority sign, the last listed rule and the least specific rule are correlated; redrawing to unbias the majority pushed the least specific rule to 0.35 accuracy whatever its own probability. The r3 shape therefore fixes it by construction (five rules; the least specific rule a fair coin against the answer; none or two of the three middle rules agree), with no redraw, and all three heuristics are within 0.02 of chance.
+
+### Residual two-sided departures not caused by a redraw (flagged, not fixed, ruling 4)
+
+These are structural properties of the rule that make a heuristic wrong (or right) more often than chance; "answer its opposite" is an exploit where a heuristic is below chance. Registered closed lineages with a departure above 0.08 on either side: `kinship_descendants_r3` least-mentioned and never-the-subject (accuracy 0, the answer is never a leaf: the opposite reading gains +0.17), `kinship_ancestor_r3` parentless person (-0.10) and least mentioned (-0.10), `spatial_relative_directions` least mentioned (+0.13) and most mentioned (-0.15), `conditional_decision_tree` most mentioned (+0.15) and least mentioned (-0.12), `containers_queue_line_r2` most/least mentioned (-0.11 / +0.04, anti -0.11), `tracking_accounts` richest at the start (+0.13), `temporal_critical_path` longest job (-0.09), `stable_matching_r2` first mentioned (-0.10), `order_compare` (core) verbatim pair (+0.09). The unrepaired core lineages cannot be edited here.
+
+### Open answers (ruling 5)
+
+Reported as the heuristic's absolute exact-match rate beside the most-frequent-answer rate and the per-level rate (`r1_two_sided_table.md`): `activity_selection` greedy-by-start 0.256 exact (most frequent answer 0.208; per level 0.40 / 0.34 / 0.22 / 0.17 / 0.14), `minimax_tree` smallest leaf 0.159 (0.091), `graph_shortest_route_r2` constant key 0.060 (0.060), `mst_cost` smallest n-1 roads 0.057 (0.037), `venn_counting` constant 0.090 (0.090). A greedy rule coinciding with the right answer on a share of items is a property of the item distribution; the per-level shares above are that report.
+
+### Not done
+
+Nothing registered; no fix of the residual shortcuts; the open-answer lineages were not retuned (ruling 5). The calibration script (`experiments/_scratch/m0/calibrate*.py`) is scratch, not in git.

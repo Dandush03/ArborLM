@@ -1,0 +1,7 @@
+MINE: 23 clusters; identical to the implementer's map: True; parts A 11 / B 12; G = 11
+   A: ['attribute_rule', 'conditional_chain', 'conditional_threshold_rule', 'containers_stack_piles', 'kinship_descendants', 'mst_cost', 'seating_row', 'spatial_grid_walk', 'temporal_interval_overlap', 'topological_order', 'venn_counting']
+   B: ['activity_selection', 'boolean_lights', 'categories_default_exceptions', 'categories_follow', 'containers_queue_line', 'equivalence_exchange_rates', 'graph_bipartite', 'graph_shortest_route', 'nim_xor', 'swap_tracking', 'temporal_critical_path', 'tracking_accounts']
+ALT: 23 clusters; identical to the implementer's map: False; parts A 11 / B 12; G = 11
+   A: ['attribute_rule', 'conditional_threshold_rule', 'containers_queue_line', 'equivalence_exchange_rates', 'knights_knaves', 'mst_cost', 'seating_row', 'spatial_grid_walk', 'temporal_interval_overlap', 'topological_order', 'venn_counting']
+   B: ['activity_selection', 'boolean_lights', 'categories_default_exceptions', 'categories_follow', 'containers_stack_piles', 'graph_bipartite', 'graph_shortest_route', 'kinship_descendants', 'nim_xor', 'swap_tracking', 'temporal_critical_path', 'tracking_accounts']
+borderline pairs (not merged): [('seating_row', 'knights_knaves/one_culprit'), ('tracking_accounts', 'swap_tracking', 'containers_queue_line', 'containers_stack_piles'), ('spatial_grid_walk', 'compass_turns'), ('temporal_critical_path', 'topological_order'), ('graph_bipartite', 'equivalence_classes'), ('kinship_descendants', 'kinship_ancestor')]

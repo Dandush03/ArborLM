@@ -1,0 +1,58 @@
+shape                                max|eff|  where / by                                  per-level gain (L0..L6)              low (min eff)  const
+R1.activity_selection_r5                0.399  L1 a4:round_0_75n                           +0.39 +0.40 +0.21 +0.27 +0.21 +0.23 +0.19   +0.00 +0.00 +0.00 +0.00 +0.00 +0.00 +0.00   +0.13 +0.12 +0.10 +0.09 +0.09 +0.10 +0.08
+R1.attribute_rule_r5                    0.580  L1 a4:fewest_negated_matches                +0.55 +0.58 +0.48 +0.50 +0.45 +0.47 +0.37   -0.01 -0.01 -0.03 -0.02 -0.03 -0.01 -0.01   -0.24 -0.20 -0.16 -0.13 -0.12 -0.11 -0.12
+R1.boolean_lights_r4                    0.099  L0 a3:wired_switch_count_parity             +0.10 +0.09 +0.07 +0.04 +0.04 +0.04 +0.02   -0.04 -0.03 -0.02 -0.04 -0.04 -0.04 -0.01   -0.01 +0.01 +0.02 -0.01 -0.01 +0.00 +0.00
+R1.categories_default_exceptions_r4     0.077  L0 a3:first_rule_group_in_chain_text        +0.08 +0.06 +0.06 +0.05 +0.05 +0.04 +0.04   -0.04 -0.06 -0.06 -0.05 -0.01 -0.02 -0.03   -0.01 -0.01 +0.01 -0.01 -0.01 +0.02 +0.03
+R1.categories_follow_r5                 0.448  L0 a4:lift_no_only                          +0.45 +0.44 +0.41 +0.44 +0.42 +0.42 +0.43   -0.11 -0.10 -0.11 -0.11 -0.11 -0.13 -0.11   +0.01 -0.01 +0.00 +0.01 +0.00 -0.02 +0.01
+R1.compass_turns                        0.087  L0 a3:last_turn_only                        +0.09 +0.02 +0.01 +0.02 +0.02 +0.02 +0.01   -0.03 -0.01 -0.01 -0.00 -0.03 -0.02 -0.01   +0.00 +0.01 -0.00 +0.01 -0.01 +0.01 -0.03
+R1.conditional_chain_r5                 0.345  L6 a4:q_rule_with_fact                      +0.34 +0.33 +0.34 +0.34 +0.31 +0.32 +0.34   -0.02 -0.02 -0.03 -0.01 -0.04 -0.03 -0.03   +0.03 +0.02 +0.02 -0.00 -0.04 -0.03 +0.03
+R1.conditional_decision_tree_r4         0.045  L5 a3:all_else                              +0.04 +0.04 +0.02 +0.03 +0.02 +0.04 +0.01   -0.12 -0.13 -0.07 -0.05 -0.04 -0.02 -0.02   -0.15 -0.16 -0.17 -0.15 -0.15 -0.14 -0.01
+R1.conditional_threshold_rule_r4        0.135  L0 a3:abstain_as_yes                        +0.14 +0.13 +0.10 +0.08 +0.09 +0.08 +0.06   -0.00 -0.02 -0.03 -0.01 -0.02 -0.03 -0.03   -0.00 -0.01 +0.01 +0.01 -0.03 -0.04 -0.00
+R1.containers_queue_line_r5             0.794  L0 a4:arith_original_index                  +0.79 +0.71 +0.71 +0.63 +0.66 +0.59 +0.60   -0.08 -0.08 -0.07 -0.06 -0.06 -0.05 -0.05   -0.07 -0.07 -0.06 -0.05 -0.05 -0.04 -0.04
+R1.containers_stack_piles_r4            0.205  L1 a3:ignore_turns                          +0.09 +0.21 +0.19 +0.15 +0.13 +0.11 +0.11   -0.01 -0.01 -0.02 -0.01 -0.01 -0.00 -0.01   -0.16 -0.12 -0.10 -0.08 -0.07 -0.06 -0.05
+R1.elimination_bracket_r5               0.430  L1 a4:half_best_then_h2h                    +0.33 +0.43 +0.37 +0.36 +0.38 +0.39 +0.35   -0.01 -0.01 -0.01 +0.00 -0.00 -0.00 -0.01   -0.12 -0.12 -0.12 -0.06 -0.05 -0.05 -0.06
+R1.equivalence_classes_r5               0.616  L0 a4:bfs_path_one_diff_no                  +0.62 +0.61 +0.58 +0.58 +0.54 +0.55 +0.52   -0.01 -0.02 -0.01 -0.01 -0.01 +0.00 -0.02   -0.01 +0.01 +0.03 +0.01 +0.00 +0.01 -0.02
+R1.equivalence_exchange_rates_r5        0.058  L0 constant_mfk_fitted                      +0.05 +0.05 +0.04 +0.04 +0.03 +0.04 +0.04   +0.00 +0.00 +0.00 +0.00 +0.00 +0.00 +0.00   +0.06 +0.05 +0.06 +0.04 +0.05 +0.06 +0.04
+R1.event_timeline_r5                    0.149  L1 a4:path_alt_signs                        +0.14 +0.15 +0.07 +0.07 +0.05 +0.05 +0.03   +0.00 +0.00 +0.00 +0.00 +0.00 +0.00 +0.00   +0.01 +0.01 +0.01 +0.01 +0.01 +0.01 +0.01
+R1.graph_bipartite_r5                   0.474  L0 a4:odd_cycle_le_7_no                     +0.47 +0.45 +0.46 +0.45 +0.45 +0.44 +0.44   -0.01 -0.03 -0.02 -0.01 -0.01 -0.02 -0.01   -0.01 +0.03 -0.02 -0.01 +0.01 +0.02 -0.01
+R1.graph_shortest_route_r4              0.134  L0 a3:fewest_roads_then_length              +0.13 +0.13 +0.07 +0.06 +0.05 +0.05 +0.05   +0.00 +0.00 +0.00 +0.00 +0.00 +0.00 +0.00   +0.09 +0.09 +0.08 +0.10 +0.08 +0.09 +0.08
+R1.kinship_ancestor_r4                  0.074  L6 a3:root_of_family                        +0.07 +0.04 +0.03 +0.05 +0.04 +0.07 +0.07   -0.12 -0.12 -0.09 -0.08 -0.07 -0.07 -0.06   -0.24 -0.24 -0.23 -0.23 -0.22 -0.23 -0.22
+R1.kinship_cousins_r5                   0.444  L0 a4:same_generation_diff_parents          +0.44 +0.43 +0.42 +0.42 +0.43 +0.43 +0.42   -0.17 -0.14 -0.18 -0.15 -0.18 -0.17 -0.15   +0.17 +0.14 +0.18 +0.15 +0.18 +0.17 +0.15
+R1.kinship_descendants_r5               0.304  L4 a4:widest_generation                     +0.28 +0.29 +0.30 +0.29 +0.30 +0.28 +0.28   -0.01 -0.02 -0.01 -0.03 -0.03 -0.02 -0.02   -0.33 -0.33 -0.24 -0.24 -0.19 -0.19 -0.16
+R1.knights_knaves_r5                    0.129  L0 a3:accuses_someone_means_knave           +0.13 +0.12 +0.09 +0.11 +0.11 +0.10 +0.09   -0.13 -0.12 -0.09 -0.10 -0.11 -0.10 -0.07   -0.03 -0.00 +0.00 -0.00 -0.01 +0.02 -0.02
+R1.minimax_tree_r5                      0.182  L0 a3:greedy_best_leaf                      +0.18 +0.11 +0.10 +0.06 +0.07 +0.03 +0.03   +0.00 +0.00 +0.00 +0.00 +0.00 +0.00 +0.00   +0.02 +0.02 +0.01 +0.03 +0.02 +0.02 +0.03
+R1.mst_cost_r4                          0.191  L2 a3:nearest_neighbour_path                +0.17 +0.18 +0.19 +0.02 +0.01 +0.02 +0.00   +0.00 +0.00 +0.00 +0.00 +0.00 +0.00 +0.00   +0.07 +0.07 +0.07 +0.05 +0.05 +0.06 +0.04
+R1.nim_xor_r5                           0.330  L3 a4:xor_high_bits_only                    +0.30 +0.33 +0.32 +0.33 +0.32 +0.33 +0.33   -0.03 -0.02 -0.05 -0.01 -0.02 -0.01 -0.01   +0.02 +0.01 -0.01 +0.01 +0.01 +0.01 -0.01
+R1.one_culprit                          0.191  L6 a3:most_accused                          +0.07 +0.08 +0.11 +0.10 +0.15 +0.14 +0.19   -0.02 -0.01 -0.03 -0.02 -0.02 -0.03 -0.05   -0.24 -0.25 -0.19 -0.19 -0.16 -0.16 -0.13
+R1.order_compare_r5                     0.454  L0 a4:search_5_else_cbd                     +0.45 +0.35 +0.32 +0.33 +0.32 +0.34 +0.33   -0.03 -0.01 -0.01 -0.02 -0.01 -0.02 -0.00   +0.00 -0.01 -0.00 -0.02 +0.01 +0.01 -0.00
+R1.road_reachability_r5                 0.438  L0 a4:within_5                              +0.44 +0.38 +0.33 +0.25 +0.21 +0.19 +0.18   -0.00 -0.01 -0.00 -0.01 -0.01 -0.01 -0.02   +0.00 +0.01 -0.00 -0.01 +0.01 -0.01 +0.02
+R1.seating_row_r5                       0.192  L6 a4:not_placed_end_consistent             +0.18 +0.17 +0.16 +0.17 +0.19 +0.17 +0.19   -0.02 -0.03 -0.01 -0.02 -0.01 -0.01 -0.02   -0.16 -0.13 -0.14 -0.13 -0.14 -0.13 -0.14
+R1.spatial_grid_walk_r5                 0.056  L6 a3:east_west_mirrored                    +0.05 +0.05 +0.05 +0.05 +0.05 +0.04 +0.06   -0.03 -0.03 -0.02 -0.01 -0.00 -0.01 -0.01   -0.16 -0.16 -0.12 -0.09 -0.09 -0.07 -0.06
+R1.spatial_relative_directions_r5       0.579  L1 a4:signed_axis_merged                    +0.55 +0.58 +0.54 +0.54 +0.56 +0.53 +0.55   +0.00 +0.00 +0.00 +0.00 +0.00 +0.00 +0.00   +0.03 +0.04 +0.05 +0.06 +0.06 +0.05 +0.04
+R1.swap_tracking_r5                     0.033  L2 a4:last_half_only                        +0.02 +0.01 +0.03 +0.01 +0.01 +0.02 +0.01   -0.09 -0.06 -0.05 -0.03 -0.03 -0.03 -0.01   -0.15 -0.15 -0.12 -0.12 -0.11 -0.10 -0.09
+R1.temporal_critical_path_r5            0.208  L0 a3:greedy_backward                       +0.21 +0.15 +0.10 +0.09 +0.06 +0.04 +0.05   +0.00 +0.00 +0.00 +0.00 +0.00 +0.00 +0.00   +0.04 +0.04 +0.05 +0.03 +0.03 +0.03 +0.03
+R1.temporal_interval_overlap_r5         0.151  L6 a4:earlier_long_20                       +0.13 +0.14 +0.13 +0.13 +0.13 +0.14 +0.15   -0.01 -0.02 -0.02 -0.03 -0.02 -0.02 -0.01   -0.01 -0.02 -0.03 +0.01 +0.01 +0.02 -0.02
+R1.temporal_weekday_shift_r5            0.047  L1 a3:ignore_before_after                   +0.02 +0.05 +0.02 +0.02 +0.02 +0.02 +0.02   -0.14 -0.14 -0.14 -0.14 -0.14 -0.14 -0.14   +0.02 -0.01 -0.02 +0.00 -0.01 -0.01 +0.00
+R1.topological_order_r5                 0.187  L0 a3:layered_depth_then_name               +0.19 +0.16 +0.15 +0.16 +0.13 +0.17 +0.15   -0.04 -0.03 -0.04 -0.02 -0.02 -0.02 -0.03   -0.09 -0.08 -0.08 -0.06 -0.06 -0.05 -0.05
+R1.tracking_accounts_r5                 0.390  L0 a4:half_of_start_balance                 +0.39 +0.28 +0.23 +0.19 +0.21 +0.15 +0.17   +0.00 +0.00 +0.00 +0.00 +0.00 +0.00 +0.00   +0.00 +0.01 +0.01 +0.01 +0.00 +0.00 +0.00
+R1.venn_counting_r5                     0.056  L0 fitted_ratio_times_size                  +0.06 +0.04 +0.03 +0.03 +0.03 +0.03 +0.01   +0.00 +0.00 +0.00 +0.00 +0.00 +0.00 +0.00   +0.04 +0.03 +0.04 +0.02 +0.02 +0.03 +0.01
+
+max |effect| <=0.10: 10  [('boolean_lights_r4', 0.099), ('categories_default_exceptions_r4', 0.077), ('compass_turns', 0.087), ('conditional_decision_tree_r4', 0.045), ('equivalence_exchange_rates_r5', 0.058), ('kinship_ancestor_r4', 0.074), ('spatial_grid_walk_r5', 0.056), ('swap_tracking_r5', 0.033), ('temporal_weekday_shift_r5', 0.047), ('venn_counting_r5', 0.056)]
+max |effect| <=0.15: 4  [('conditional_threshold_rule_r4', 0.135), ('event_timeline_r5', 0.149), ('graph_shortest_route_r4', 0.134), ('knights_knaves_r5', 0.129)]
+max |effect| <=0.25: 8  [('containers_stack_piles_r4', 0.205), ('minimax_tree_r5', 0.182), ('mst_cost_r4', 0.191), ('one_culprit', 0.191), ('seating_row_r5', 0.192), ('temporal_critical_path_r5', 0.208), ('temporal_interval_overlap_r5', 0.151), ('topological_order_r5', 0.187)]
+max |effect| >0.25: 15  [('activity_selection_r5', 0.399), ('attribute_rule_r5', 0.58), ('categories_follow_r5', 0.448), ('conditional_chain_r5', 0.345), ('containers_queue_line_r5', 0.794), ('elimination_bracket_r5', 0.43), ('equivalence_classes_r5', 0.616), ('graph_bipartite_r5', 0.474), ('kinship_cousins_r5', 0.444), ('kinship_descendants_r5', 0.304), ('nim_xor_r5', 0.33), ('order_compare_r5', 0.454), ('road_reachability_r5', 0.438), ('spatial_relative_directions_r5', 0.579), ('tracking_accounts_r5', 0.39)]
+
+excluded as exact / convention / misreading / prefix (per shape):
+  R1.activity_selection_r5: ['a3:latest_start_first']
+  R1.attribute_rule_r5: ['a4:most_top_operands']
+  R1.categories_default_exceptions_r4: ['a3:partial_walk_3', 'a3:rule_at_distance_1', 'a3:second_nearest_rule', 'a3:third_nearest_rule']
+  R1.compass_turns: ['a3:ccw_as_cw', 'a3:cw270_as_90', 'a3:ignore_180s', 'a3:left_right_only']
+  R1.conditional_chain_r5: ['a4:forward_chaining']
+  R1.conditional_decision_tree_r4: ['a3:first_cond_only_then_first', 'a3:ignore_last_condition']
+  R1.conditional_threshold_rule_r4: ['a3:off_by_one_low', 'a3:strict_gt_D']
+  R1.containers_stack_piles_r4: ['a3:ignore_turns', 'a3:turn_moves_bottom_to_top']
+  R1.elimination_bracket_r5: ['a4:quarter_best_then_h2h']
+  R1.equivalence_exchange_rates_r5: ['a4:direction_ignored_q_over_p']
+  R1.temporal_critical_path_r5: ['a3:inclusive_day_reading', 'a4:sinks_only_max']
+  R1.temporal_interval_overlap_r5: ['a3:duration_end_off_by_one']
+  R1.venn_counting_r5: ['a3:ignore_triples', 'a3:pairs_minus_2triples', 'a3:pairs_minus_3triples', 'a3:sizes_minus_2pairs', 'a3:total_minus_union_wrong_sign']

@@ -1,0 +1,36 @@
+files 25 items 3500
+duplicate ids []
+cells 175 per-cell counts [20]
+duplicate questions within lineage 0
+keys ['answer', 'answer_type', 'id', 'k', 'level', 'lineage', 'question', 'structured']
+problems 0
+hazards per lineage (items with >=1 occurrence):
+   C1.bytecode_loop {'floor_div_mixed_sign': 16}
+constructs the second solver lacks:
+max evaluator steps / max call depth per lineage:
+   C1.bfs_queue                 steps     705 depth 0
+   C1.binary_search             steps     238 depth 0
+   C1.bracket_matching          steps     561 depth 0
+   C1.bytecode_loop             steps     547 depth 0
+   C1.cellular_update           steps    1564 depth 0
+   C1.circle_elimination        steps    2646 depth 0
+   C1.coin_change_table         steps    1849 depth 0
+   C1.digit_peel                steps     197 depth 0
+   C1.euclid_gcd                steps     132 depth 0
+   C1.fast_power                steps     220 depth 0
+   C1.grid_path_table           steps     972 depth 0
+   C1.insertion_sort            steps     714 depth 0
+   C1.kadane_scan               steps     288 depth 0
+   C1.majority_vote_scan        steps     247 depth 0
+   C1.merge_two_sorted          steps     539 depth 0
+   C1.mirror_pointers           steps     187 depth 0
+   C1.partition_pass            steps     237 depth 0
+   C1.postfix_evaluation        steps     526 depth 0
+   C1.recursive_calls           steps    1936 depth 17
+   C1.run_length_scan           steps     436 depth 0
+   C1.shared_lists              steps     107 depth 1
+   C1.sieve_marking             steps     928 depth 0
+   C1.string_pair_table         steps    2288 depth 0
+   C1.turtle_walk               steps     548 depth 0
+   C1.union_find_links          steps     767 depth 1
+isolated: nondeterministic 0 run1 != key 0

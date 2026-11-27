@@ -1,0 +1,36 @@
+old family partition (seed 400004, current registry): {'truth': 'A', 'spatial': 'A', 'rules': 'A', 'culprit': 'A', 'temporal': 'A', 'arrangement': 'A', 'order': 'B', 'kinship': 'B', 'tracking': 'B', 'conditional': 'B', 'graph': 'B', 'categories': 'B'}
+OLD R1.attribute_rule rules A
+OLD R1.categories_follow categories B
+OLD R1.compass_turns spatial A
+OLD R1.conditional_chain conditional B
+OLD R1.event_timeline temporal A
+OLD R1.kinship_ancestor kinship B
+OLD R1.kinship_cousins kinship B
+OLD R1.knights_knaves truth A
+OLD R1.one_culprit culprit A
+OLD R1.order_compare order B
+OLD R1.order_extreme order B
+OLD R1.pet_owners arrangement A
+OLD R1.road_reachability graph B
+OLD R1.seating_row arrangement A
+OLD R1.swap_tracking tracking B
+NEW R1.boolean_lights A
+NEW R1.categories_default_exceptions B
+NEW R1.conditional_decision_tree B
+NEW R1.conditional_threshold_rule B
+NEW R1.containers_queue_line A
+NEW R1.containers_stack_piles A
+NEW R1.elimination_bracket A
+NEW R1.elimination_josephus A
+NEW R1.equivalence_classes B
+NEW R1.equivalence_exchange_rates B
+NEW R1.graph_bipartite B
+NEW R1.graph_shortest_route B
+NEW R1.kinship_descendants B
+NEW R1.order_tournament_wins B
+NEW R1.spatial_grid_walk A
+NEW R1.spatial_relative_directions A
+NEW R1.temporal_critical_path A
+NEW R1.temporal_interval_overlap A
+NEW R1.temporal_weekday_shift A
+NEW R1.tracking_accounts B

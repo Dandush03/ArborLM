@@ -1,0 +1,813 @@
+{
+  "R1.boolean_lights_r4": [
+    {
+      "lamps": {
+        "max": 4,
+        "mean": 4.0,
+        "min": 4
+      },
+      "presses": {
+        "max": 3,
+        "mean": 3.0,
+        "min": 3
+      },
+      "switches": {
+        "max": 3,
+        "mean": 3.0,
+        "min": 3
+      }
+    },
+    {
+      "lamps": {
+        "max": 5,
+        "mean": 5.0,
+        "min": 5
+      },
+      "presses": {
+        "max": 5,
+        "mean": 5.0,
+        "min": 5
+      },
+      "switches": {
+        "max": 3,
+        "mean": 3.0,
+        "min": 3
+      }
+    },
+    {
+      "lamps": {
+        "max": 6,
+        "mean": 6.0,
+        "min": 6
+      },
+      "presses": {
+        "max": 7,
+        "mean": 7.0,
+        "min": 7
+      },
+      "switches": {
+        "max": 3,
+        "mean": 3.0,
+        "min": 3
+      }
+    },
+    {
+      "lamps": {
+        "max": 7,
+        "mean": 7.0,
+        "min": 7
+      },
+      "presses": {
+        "max": 9,
+        "mean": 9.0,
+        "min": 9
+      },
+      "switches": {
+        "max": 4,
+        "mean": 4.0,
+        "min": 4
+      }
+    },
+    {
+      "lamps": {
+        "max": 8,
+        "mean": 8.0,
+        "min": 8
+      },
+      "presses": {
+        "max": 11,
+        "mean": 11.0,
+        "min": 11
+      },
+      "switches": {
+        "max": 4,
+        "mean": 4.0,
+        "min": 4
+      }
+    },
+    {
+      "lamps": {
+        "max": 9,
+        "mean": 9.0,
+        "min": 9
+      },
+      "presses": {
+        "max": 13,
+        "mean": 13.0,
+        "min": 13
+      },
+      "switches": {
+        "max": 4,
+        "mean": 4.0,
+        "min": 4
+      }
+    },
+    {
+      "lamps": {
+        "max": 10,
+        "mean": 10.0,
+        "min": 10
+      },
+      "presses": {
+        "max": 15,
+        "mean": 15.0,
+        "min": 15
+      },
+      "switches": {
+        "max": 5,
+        "mean": 5.0,
+        "min": 5
+      }
+    }
+  ],
+  "R1.categories_default_exceptions_r4": [
+    {
+      "chain": {
+        "max": 17,
+        "mean": 17.0,
+        "min": 17
+      },
+      "rules_on_asked_verb": {
+        "max": 9,
+        "mean": 9.0,
+        "min": 9
+      }
+    },
+    {
+      "chain": {
+        "max": 19,
+        "mean": 19.0,
+        "min": 19
+      },
+      "rules_on_asked_verb": {
+        "max": 9,
+        "mean": 9.0,
+        "min": 9
+      }
+    },
+    {
+      "chain": {
+        "max": 23,
+        "mean": 23.0,
+        "min": 23
+      },
+      "rules_on_asked_verb": {
+        "max": 11,
+        "mean": 11.0,
+        "min": 11
+      }
+    },
+    {
+      "chain": {
+        "max": 25,
+        "mean": 25.0,
+        "min": 25
+      },
+      "rules_on_asked_verb": {
+        "max": 11,
+        "mean": 11.0,
+        "min": 11
+      }
+    },
+    {
+      "chain": {
+        "max": 29,
+        "mean": 29.0,
+        "min": 29
+      },
+      "rules_on_asked_verb": {
+        "max": 13,
+        "mean": 13.0,
+        "min": 13
+      }
+    },
+    {
+      "chain": {
+        "max": 31,
+        "mean": 31.0,
+        "min": 31
+      },
+      "rules_on_asked_verb": {
+        "max": 13,
+        "mean": 13.0,
+        "min": 13
+      }
+    },
+    {
+      "chain": {
+        "max": 35,
+        "mean": 35.0,
+        "min": 35
+      },
+      "rules_on_asked_verb": {
+        "max": 15,
+        "mean": 15.0,
+        "min": 15
+      }
+    }
+  ],
+  "R1.compass_turns": [
+    {
+      "commands": {
+        "max": 3,
+        "mean": 3.0,
+        "min": 3
+      }
+    },
+    {
+      "commands": {
+        "max": 5,
+        "mean": 5.0,
+        "min": 5
+      }
+    },
+    {
+      "commands": {
+        "max": 7,
+        "mean": 7.0,
+        "min": 7
+      }
+    },
+    {
+      "commands": {
+        "max": 9,
+        "mean": 9.0,
+        "min": 9
+      }
+    },
+    {
+      "commands": {
+        "max": 11,
+        "mean": 11.0,
+        "min": 11
+      }
+    },
+    {
+      "commands": {
+        "max": 13,
+        "mean": 13.0,
+        "min": 13
+      }
+    },
+    {
+      "commands": {
+        "max": 15,
+        "mean": 15.0,
+        "min": 15
+      }
+    }
+  ],
+  "R1.conditional_threshold_rule_r4": [
+    {
+      "members": {
+        "max": 6,
+        "mean": 6.0,
+        "min": 6
+      }
+    },
+    {
+      "members": {
+        "max": 7,
+        "mean": 7.0,
+        "min": 7
+      }
+    },
+    {
+      "members": {
+        "max": 8,
+        "mean": 8.0,
+        "min": 8
+      }
+    },
+    {
+      "members": {
+        "max": 9,
+        "mean": 9.0,
+        "min": 9
+      }
+    },
+    {
+      "members": {
+        "max": 10,
+        "mean": 10.0,
+        "min": 10
+      }
+    },
+    {
+      "members": {
+        "max": 11,
+        "mean": 11.0,
+        "min": 11
+      }
+    },
+    {
+      "members": {
+        "max": 12,
+        "mean": 12.0,
+        "min": 12
+      }
+    }
+  ],
+  "R1.equivalence_exchange_rates_r6": [
+    {
+      "hops_x_y": {
+        "max": 3,
+        "mean": 3.0,
+        "min": 3
+      },
+      "rates": {
+        "max": 5,
+        "mean": 5.0,
+        "min": 5
+      }
+    },
+    {
+      "hops_x_y": {
+        "max": 4,
+        "mean": 4.0,
+        "min": 4
+      },
+      "rates": {
+        "max": 6,
+        "mean": 6.0,
+        "min": 6
+      }
+    },
+    {
+      "hops_x_y": {
+        "max": 5,
+        "mean": 5.0,
+        "min": 5
+      },
+      "rates": {
+        "max": 7,
+        "mean": 7.0,
+        "min": 7
+      }
+    },
+    {
+      "hops_x_y": {
+        "max": 6,
+        "mean": 6.0,
+        "min": 6
+      },
+      "rates": {
+        "max": 9,
+        "mean": 9.0,
+        "min": 9
+      }
+    },
+    {
+      "hops_x_y": {
+        "max": 7,
+        "mean": 7.0,
+        "min": 7
+      },
+      "rates": {
+        "max": 10,
+        "mean": 10.0,
+        "min": 10
+      }
+    },
+    {
+      "hops_x_y": {
+        "max": 8,
+        "mean": 8.0,
+        "min": 8
+      },
+      "rates": {
+        "max": 11,
+        "mean": 11.0,
+        "min": 11
+      }
+    },
+    {
+      "hops_x_y": {
+        "max": 9,
+        "mean": 9.0,
+        "min": 9
+      },
+      "rates": {
+        "max": 13,
+        "mean": 13.0,
+        "min": 13
+      }
+    }
+  ],
+  "R1.knights_knaves_r6": [
+    {
+      "people": {
+        "max": 4,
+        "mean": 4.0,
+        "min": 4
+      }
+    },
+    {
+      "people": {
+        "max": 5,
+        "mean": 5.0,
+        "min": 5
+      }
+    },
+    {
+      "people": {
+        "max": 6,
+        "mean": 6.0,
+        "min": 6
+      }
+    },
+    {
+      "people": {
+        "max": 7,
+        "mean": 7.0,
+        "min": 7
+      }
+    },
+    {
+      "people": {
+        "max": 8,
+        "mean": 8.0,
+        "min": 8
+      }
+    },
+    {
+      "people": {
+        "max": 9,
+        "mean": 9.0,
+        "min": 9
+      }
+    },
+    {
+      "people": {
+        "max": 10,
+        "mean": 10.0,
+        "min": 10
+      }
+    }
+  ],
+  "R1.spatial_grid_walk_r5": [
+    {
+      "cells": {
+        "max": 9,
+        "mean": 9.0,
+        "min": 9
+      },
+      "moves": {
+        "max": 10,
+        "mean": 8.84,
+        "min": 7
+      }
+    },
+    {
+      "cells": {
+        "max": 9,
+        "mean": 9.0,
+        "min": 9
+      },
+      "moves": {
+        "max": 11,
+        "mean": 9.34,
+        "min": 8
+      }
+    },
+    {
+      "cells": {
+        "max": 12,
+        "mean": 12.0,
+        "min": 12
+      },
+      "moves": {
+        "max": 12,
+        "mean": 10.72,
+        "min": 9
+      }
+    },
+    {
+      "cells": {
+        "max": 16,
+        "mean": 16.0,
+        "min": 16
+      },
+      "moves": {
+        "max": 14,
+        "mean": 12.6,
+        "min": 11
+      }
+    },
+    {
+      "cells": {
+        "max": 16,
+        "mean": 16.0,
+        "min": 16
+      },
+      "moves": {
+        "max": 15,
+        "mean": 13.72,
+        "min": 12
+      }
+    },
+    {
+      "cells": {
+        "max": 20,
+        "mean": 20.0,
+        "min": 20
+      },
+      "moves": {
+        "max": 16,
+        "mean": 14.44,
+        "min": 13
+      }
+    },
+    {
+      "cells": {
+        "max": 25,
+        "mean": 25.0,
+        "min": 25
+      },
+      "moves": {
+        "max": 18,
+        "mean": 16.4,
+        "min": 15
+      }
+    }
+  ],
+  "R1.swap_tracking_r5": [
+    {
+      "ops": {
+        "max": 6,
+        "mean": 6.0,
+        "min": 6
+      },
+      "people": {
+        "max": 5,
+        "mean": 5.0,
+        "min": 5
+      }
+    },
+    {
+      "ops": {
+        "max": 8,
+        "mean": 8.0,
+        "min": 8
+      },
+      "people": {
+        "max": 5,
+        "mean": 5.0,
+        "min": 5
+      }
+    },
+    {
+      "ops": {
+        "max": 10,
+        "mean": 10.0,
+        "min": 10
+      },
+      "people": {
+        "max": 6,
+        "mean": 6.0,
+        "min": 6
+      }
+    },
+    {
+      "ops": {
+        "max": 12,
+        "mean": 12.0,
+        "min": 12
+      },
+      "people": {
+        "max": 6,
+        "mean": 6.0,
+        "min": 6
+      }
+    },
+    {
+      "ops": {
+        "max": 14,
+        "mean": 14.0,
+        "min": 14
+      },
+      "people": {
+        "max": 7,
+        "mean": 7.0,
+        "min": 7
+      }
+    },
+    {
+      "ops": {
+        "max": 16,
+        "mean": 16.0,
+        "min": 16
+      },
+      "people": {
+        "max": 7,
+        "mean": 7.0,
+        "min": 7
+      }
+    },
+    {
+      "ops": {
+        "max": 18,
+        "mean": 18.0,
+        "min": 18
+      },
+      "people": {
+        "max": 8,
+        "mean": 8.0,
+        "min": 8
+      }
+    }
+  ],
+  "R1.temporal_weekday_shift_r6": [
+    {
+      "hops_anchor_ask": {
+        "max": 5,
+        "mean": 5.0,
+        "min": 5
+      },
+      "links": {
+        "max": 7,
+        "mean": 7.0,
+        "min": 7
+      }
+    },
+    {
+      "hops_anchor_ask": {
+        "max": 6,
+        "mean": 6.0,
+        "min": 6
+      },
+      "links": {
+        "max": 8,
+        "mean": 8.0,
+        "min": 8
+      }
+    },
+    {
+      "hops_anchor_ask": {
+        "max": 7,
+        "mean": 7.0,
+        "min": 7
+      },
+      "links": {
+        "max": 9,
+        "mean": 9.0,
+        "min": 9
+      }
+    },
+    {
+      "hops_anchor_ask": {
+        "max": 8,
+        "mean": 8.0,
+        "min": 8
+      },
+      "links": {
+        "max": 11,
+        "mean": 11.0,
+        "min": 11
+      }
+    },
+    {
+      "hops_anchor_ask": {
+        "max": 9,
+        "mean": 9.0,
+        "min": 9
+      },
+      "links": {
+        "max": 12,
+        "mean": 12.0,
+        "min": 12
+      }
+    },
+    {
+      "hops_anchor_ask": {
+        "max": 10,
+        "mean": 10.0,
+        "min": 10
+      },
+      "links": {
+        "max": 13,
+        "mean": 13.0,
+        "min": 13
+      }
+    },
+    {
+      "hops_anchor_ask": {
+        "max": 11,
+        "mean": 11.0,
+        "min": 11
+      },
+      "links": {
+        "max": 15,
+        "mean": 15.0,
+        "min": 15
+      }
+    }
+  ],
+  "R1.venn_counting_r5": [
+    {
+      "ask": [
+        "none"
+      ],
+      "groups": {
+        "max": 2,
+        "mean": 2.0,
+        "min": 2
+      },
+      "total": {
+        "max": 88,
+        "mean": 53.4,
+        "min": 20
+      }
+    },
+    {
+      "ask": [
+        "one"
+      ],
+      "groups": {
+        "max": 2,
+        "mean": 2.0,
+        "min": 2
+      },
+      "total": {
+        "max": 107,
+        "mean": 62.7,
+        "min": 14
+      }
+    },
+    {
+      "ask": [
+        "none"
+      ],
+      "groups": {
+        "max": 3,
+        "mean": 3.0,
+        "min": 3
+      },
+      "total": {
+        "max": 190,
+        "mean": 130.76,
+        "min": 59
+      }
+    },
+    {
+      "ask": [
+        "two"
+      ],
+      "groups": {
+        "max": 3,
+        "mean": 3.0,
+        "min": 3
+      },
+      "total": {
+        "max": 212,
+        "mean": 147.24,
+        "min": 63
+      }
+    },
+    {
+      "ask": [
+        "atleast_two"
+      ],
+      "groups": {
+        "max": 3,
+        "mean": 3.0,
+        "min": 3
+      },
+      "total": {
+        "max": 234,
+        "mean": 164.18,
+        "min": 112
+      }
+    },
+    {
+      "ask": [
+        "none"
+      ],
+      "groups": {
+        "max": 4,
+        "mean": 4.0,
+        "min": 4
+      },
+      "total": {
+        "max": 476,
+        "mean": 359.68,
+        "min": 266
+      }
+    },
+    {
+      "ask": [
+        "two"
+      ],
+      "groups": {
+        "max": 4,
+        "mean": 4.0,
+        "min": 4
+      },
+      "total": {
+        "max": 543,
+        "mean": 379.02,
+        "min": 263
+      }
+    }
+  ]
+}

@@ -1,0 +1,5990 @@
+{
+ "bound": 0.15,
+ "proc_list_source": "audit4_m1/short_summary_a4.py PROC",
+ "results": {
+  "M1.ages_r3": {
+   "largest_counted": [
+    0.0217,
+    "a4:sum_over_k_plus_1",
+    6
+   ],
+   "largest_new": [
+    -0.005,
+    "new:mode_by_template",
+    0
+   ],
+   "largest_notcounted": null,
+   "per_level": {
+    "0": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.017,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0155,
+     "counted_max_rule": "a3:ignore_years",
+     "extra": {
+      "one_op_best": [
+       "(0, 1, '*')",
+       "(0, 1, '*')"
+      ]
+     },
+     "fresh_only_max": -0.017,
+     "fresh_only_max_rule": "im:ignore_years",
+     "new_all": {
+      "new:mode_by_template": -0.005,
+      "new:one_op_two_numbers": -0.0035
+     },
+     "new_max_fresh": -0.005,
+     "new_max_rule": "new:mode_by_template",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "1": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.01325,
+     "counted_max_N": 8000,
+     "counted_max_pooled": -0.0124,
+     "counted_max_rule": "im:ignore_years",
+     "extra": {
+      "one_op_best": [
+       "(0, 1, '*')",
+       "(0, 1, '*')"
+      ]
+     },
+     "fresh_only_max": -0.0132,
+     "fresh_only_max_rule": "a3:years_once",
+     "new_all": {
+      "new:mode_by_template": -0.0008,
+      "new:one_op_two_numbers": 0.0025
+     },
+     "new_max_fresh": 0.0025,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "2": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00725,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0165,
+     "counted_max_rule": "a4:sum_over_k_plus_1",
+     "extra": {
+      "one_op_best": [
+       "(0, 1, '*')",
+       "(-2, -3, '+')"
+      ]
+     },
+     "fresh_only_max": 0.019,
+     "fresh_only_max_rule": "a4:sum_over_k_plus_1",
+     "new_all": {
+      "new:mode_by_template": -0.0003,
+      "new:one_op_two_numbers": 0.0013
+     },
+     "new_max_fresh": 0.0013,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "3": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.01025,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0123,
+     "counted_max_rule": "a4:sum_over_k_plus_1",
+     "extra": {
+      "one_op_best": [
+       "(0, 1, '*')",
+       "(0, 1, '*')"
+      ]
+     },
+     "fresh_only_max": 0.0112,
+     "fresh_only_max_rule": "a4:sum_over_k_plus_1",
+     "new_all": {
+      "new:mode_by_template": -0.0005,
+      "new:one_op_two_numbers": -0.002
+     },
+     "new_max_fresh": -0.002,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "4": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.006,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0212,
+     "counted_max_rule": "a4:sum_over_k_plus_1",
+     "extra": {
+      "one_op_best": [
+       "(0, 1, '*')",
+       "(0, 1, '*')"
+      ]
+     },
+     "fresh_only_max": 0.0208,
+     "fresh_only_max_rule": "a4:sum_over_k_plus_1",
+     "new_all": {
+      "new:mode_by_template": -0.002,
+      "new:one_op_two_numbers": 0.004
+     },
+     "new_max_fresh": 0.004,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "5": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00425,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0167,
+     "counted_max_rule": "a4:sum_over_k_plus_1",
+     "extra": {
+      "one_op_best": [
+       "(0, 1, '*')",
+       "(-2, -3, '+')"
+      ]
+     },
+     "fresh_only_max": 0.022,
+     "fresh_only_max_rule": "a4:sum_over_k_plus_1",
+     "new_all": {
+      "new:mode_by_template": -0.0008,
+      "new:one_op_two_numbers": 0.0013
+     },
+     "new_max_fresh": 0.0013,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "6": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0075,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0217,
+     "counted_max_rule": "a4:sum_over_k_plus_1",
+     "extra": {
+      "one_op_best": [
+       "(0, 1, '*')",
+       "(0, 1, '*')"
+      ]
+     },
+     "fresh_only_max": 0.0213,
+     "fresh_only_max_rule": "a4:sum_over_k_plus_1",
+     "new_all": {
+      "new:mode_by_template": -0.0003,
+      "new:one_op_two_numbers": 0.0
+     },
+     "new_max_fresh": -0.0003,
+     "new_max_rule": "new:mode_by_template",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    }
+   },
+   "verdict": "STAYS",
+   "would_drop_if_notcounted_counted": false,
+   "would_drop_on_new": false
+  },
+  "M1.arithmetic_series_r3": {
+   "largest_counted": [
+    -0.0028,
+    "a3:last_day_only",
+    0
+   ],
+   "largest_new": [
+    -0.0022,
+    "new:one_op_two_numbers",
+    2
+   ],
+   "largest_notcounted": null,
+   "per_level": {
+    "0": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0025,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0028,
+     "counted_max_rule": "a3:last_day_only",
+     "extra": {
+      "one_op_best": [
+       "(2, 0, '*')",
+       "(2, 0, '*')"
+      ]
+     },
+     "fresh_only_max": -0.0025,
+     "fresh_only_max_rule": "a3:last_day_only",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": 0.0
+     },
+     "new_max_fresh": 0.0,
+     "new_max_rule": "new:mode_by_template",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "1": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00125,
+     "counted_max_N": 8000,
+     "counted_max_pooled": -0.0016,
+     "counted_max_rule": "im:last_day_only",
+     "extra": {
+      "one_op_best": [
+       "(2, 0, '*')",
+       "(3, -1, '*')"
+      ]
+     },
+     "fresh_only_max": -0.0013,
+     "fresh_only_max_rule": "a3:last_day_only",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.0013
+     },
+     "new_max_fresh": -0.0013,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "2": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00225,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0018,
+     "counted_max_rule": "a3:last_day_only",
+     "extra": {
+      "one_op_best": [
+       "None",
+       "(2, 0, '*')"
+      ]
+     },
+     "fresh_only_max": -0.0022,
+     "fresh_only_max_rule": "a3:last_day_only",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.0022
+     },
+     "new_max_fresh": -0.0022,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "3": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00025,
+     "counted_max_N": 8000,
+     "counted_max_pooled": -0.001,
+     "counted_max_rule": "im:last_day_only",
+     "extra": {
+      "one_op_best": [
+       "(3, -1, '*')",
+       "(3, -1, '*')"
+      ]
+     },
+     "fresh_only_max": -0.0003,
+     "fresh_only_max_rule": "a3:last_day_only",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": 0.0005
+     },
+     "new_max_fresh": 0.0005,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "4": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0015,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0013,
+     "counted_max_rule": "a3:last_day_only",
+     "extra": {
+      "one_op_best": [
+       "(3, -1, '*')",
+       "(2, 0, '*')"
+      ]
+     },
+     "fresh_only_max": -0.0015,
+     "fresh_only_max_rule": "a3:last_day_only",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.0013
+     },
+     "new_max_fresh": -0.0013,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "5": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0005,
+     "counted_max_N": 8000,
+     "counted_max_pooled": -0.0008,
+     "counted_max_rule": "echo_best_position",
+     "extra": {
+      "one_op_best": [
+       "None",
+       "(2, 0, '*')"
+      ]
+     },
+     "fresh_only_max": -0.0005,
+     "fresh_only_max_rule": "a3:last_day_only",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.0005
+     },
+     "new_max_fresh": -0.0005,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "6": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00125,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0013,
+     "counted_max_rule": "a3:last_day_only",
+     "extra": {
+      "one_op_best": [
+       "None",
+       "None"
+      ]
+     },
+     "fresh_only_max": -0.0013,
+     "fresh_only_max_rule": "a3:last_day_only",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.0013
+     },
+     "new_max_fresh": -0.0013,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    }
+   },
+   "verdict": "STAYS",
+   "would_drop_if_notcounted_counted": false,
+   "would_drop_on_new": false
+  },
+  "M1.average_missing_r4": {
+   "largest_counted": [
+    0.0077,
+    "a3:target_mean_rounded",
+    0
+   ],
+   "largest_new": [
+    -0.0105,
+    "new:avg_ignore_count",
+    1
+   ],
+   "largest_notcounted": null,
+   "per_level": {
+    "0": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.01675,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0077,
+     "counted_max_rule": "a3:target_mean_rounded",
+     "extra": {
+      "one_op_best": [
+       "(4, 3, '-')",
+       "(2, 5, '+')"
+      ]
+     },
+     "fresh_only_max": 0.0095,
+     "fresh_only_max_rule": "a3:target_mean_rounded",
+     "new_all": {
+      "new:avg_ignore_count": -0.0097,
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.0013
+     },
+     "new_max_fresh": -0.0097,
+     "new_max_rule": "new:avg_ignore_count",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "1": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.01425,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.005,
+     "counted_max_rule": "a3:target_mean_rounded",
+     "extra": {
+      "one_op_best": [
+       "(2, 5, '+')",
+       "(4, -2, '-')"
+      ]
+     },
+     "fresh_only_max": 0.0027,
+     "fresh_only_max_rule": "a3:target_mean_rounded",
+     "new_all": {
+      "new:avg_ignore_count": -0.0105,
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.0013
+     },
+     "new_max_fresh": -0.0105,
+     "new_max_rule": "new:avg_ignore_count",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "2": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.013,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0053,
+     "counted_max_rule": "a3:target_mean_rounded",
+     "extra": {
+      "one_op_best": [
+       "(1, 4, '-')",
+       "(1, 4, '-')"
+      ]
+     },
+     "fresh_only_max": 0.0045,
+     "fresh_only_max_rule": "a3:target_mean_rounded",
+     "new_all": {
+      "new:avg_ignore_count": -0.009,
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": 0.0035
+     },
+     "new_max_fresh": -0.009,
+     "new_max_rule": "new:avg_ignore_count",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "3": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.01075,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0033,
+     "counted_max_rule": "a4:target_mean",
+     "extra": {
+      "one_op_best": [
+       "(3, 4, '+')",
+       "(1, 4, '-')"
+      ]
+     },
+     "fresh_only_max": 0.0032,
+     "fresh_only_max_rule": "a3:target_mean_rounded",
+     "new_all": {
+      "new:avg_ignore_count": -0.0088,
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.0055
+     },
+     "new_max_fresh": -0.0088,
+     "new_max_rule": "new:avg_ignore_count",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "4": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00875,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0062,
+     "counted_max_rule": "a4:target_mean",
+     "extra": {
+      "one_op_best": [
+       "(4, -2, '-')",
+       "(2, -2, '-')"
+      ]
+     },
+     "fresh_only_max": 0.006,
+     "fresh_only_max_rule": "a3:target_mean_rounded",
+     "new_all": {
+      "new:avg_ignore_count": -0.0015,
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": 0.003
+     },
+     "new_max_fresh": 0.003,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "5": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00675,
+     "counted_max_N": 8000,
+     "counted_max_pooled": 0.0041,
+     "counted_max_rule": "im:target_mean_rounded",
+     "extra": {
+      "one_op_best": [
+       "(5, 0, '+')",
+       "(-3, -2, '-')"
+      ]
+     },
+     "fresh_only_max": 0.0037,
+     "fresh_only_max_rule": "a3:target_mean_rounded",
+     "new_all": {
+      "new:avg_ignore_count": -0.0015,
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.0005
+     },
+     "new_max_fresh": -0.0015,
+     "new_max_rule": "new:avg_ignore_count",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "6": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00975,
+     "counted_max_N": 8000,
+     "counted_max_pooled": 0.0031,
+     "counted_max_rule": "im:target_mean_rounded",
+     "extra": {
+      "one_op_best": [
+       "(0, -2, '-')",
+       "(-1, -2, '-')"
+      ]
+     },
+     "fresh_only_max": 0.0015,
+     "fresh_only_max_rule": "a3:target_mean_rounded",
+     "new_all": {
+      "new:avg_ignore_count": 0.0015,
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.0027
+     },
+     "new_max_fresh": -0.0027,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    }
+   },
+   "verdict": "STAYS",
+   "would_drop_if_notcounted_counted": false,
+   "would_drop_on_new": false
+  },
+  "M1.change_ways_r3": {
+   "largest_counted": [
+    -0.0358,
+    "a4:T_over_min_coin",
+    0
+   ],
+   "largest_new": [
+    -0.0195,
+    "new:one_op_two_numbers",
+    0
+   ],
+   "largest_notcounted": null,
+   "per_level": {
+    "0": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.052,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0358,
+     "counted_max_rule": "a4:T_over_min_coin",
+     "extra": {
+      "one_op_best": [
+       "(-3, 0, '-')",
+       "(-3, 0, '-')"
+      ]
+     },
+     "fresh_only_max": -0.0352,
+     "fresh_only_max_rule": "a4:T_over_min_coin",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.0195
+     },
+     "new_max_fresh": -0.0195,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "1": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.028,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0138,
+     "counted_max_rule": "a4:T_over_min_coin",
+     "extra": {
+      "one_op_best": [
+       "(0, 1, '+')",
+       "(-2, 0, '-')"
+      ]
+     },
+     "fresh_only_max": -0.0158,
+     "fresh_only_max_rule": "a4:T_over_min_coin",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.0097
+     },
+     "new_max_fresh": -0.0097,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "2": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0205,
+     "counted_max_N": 8000,
+     "counted_max_pooled": -0.0119,
+     "counted_max_rule": "im:two_smallest_coins_only",
+     "extra": {
+      "one_op_best": [
+       "(-2, 0, '-')",
+       "(0, 1, '+')"
+      ]
+     },
+     "fresh_only_max": -0.009,
+     "fresh_only_max_rule": "a3:two_smallest_coins_only",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.0075
+     },
+     "new_max_fresh": -0.0075,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "3": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.012,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0097,
+     "counted_max_rule": "a3:T_over_max_plus_1",
+     "extra": {
+      "one_op_best": [
+       "(0, 1, '+')",
+       "(-2, 0, '-')"
+      ]
+     },
+     "fresh_only_max": 0.0092,
+     "fresh_only_max_rule": "a3:T_over_max_plus_1",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.0018
+     },
+     "new_max_fresh": -0.0018,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "4": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.013,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0092,
+     "counted_max_rule": "a3:two_smallest_coins_only",
+     "extra": {
+      "one_op_best": [
+       "(0, 1, '+')",
+       "(0, 1, '+')"
+      ]
+     },
+     "fresh_only_max": -0.0075,
+     "fresh_only_max_rule": "a3:two_smallest_coins_only",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.001
+     },
+     "new_max_fresh": -0.001,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "5": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.008,
+     "counted_max_N": 8000,
+     "counted_max_pooled": -0.0055,
+     "counted_max_rule": "im:two_smallest_coins_only",
+     "extra": {
+      "one_op_best": [
+       "(0, 1, '+')",
+       "(-2, 0, '-')"
+      ]
+     },
+     "fresh_only_max": -0.005,
+     "fresh_only_max_rule": "a3:two_smallest_coins_only",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.0025
+     },
+     "new_max_fresh": -0.0025,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "6": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.007,
+     "counted_max_N": 8000,
+     "counted_max_pooled": -0.0065,
+     "counted_max_rule": "im:two_smallest_coins_only",
+     "extra": {
+      "one_op_best": [
+       "(-2, 0, '-')",
+       "(0, 1, '+')"
+      ]
+     },
+     "fresh_only_max": -0.0043,
+     "fresh_only_max_rule": "a3:two_smallest_coins_only",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.0027
+     },
+     "new_max_fresh": -0.0027,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    }
+   },
+   "verdict": "STAYS",
+   "would_drop_if_notcounted_counted": false,
+   "would_drop_on_new": false
+  },
+  "M1.clock_duration_r4": {
+   "largest_counted": [
+    -0.0153,
+    "a3:span_incl_waits",
+    0
+   ],
+   "largest_new": [
+    0.019,
+    "new:clock_hhmm_subtract",
+    1
+   ],
+   "largest_notcounted": null,
+   "per_level": {
+    "0": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.017,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0153,
+     "counted_max_rule": "a3:span_incl_waits",
+     "extra": {
+      "one_op_best": [
+       "(4, -2, '*')",
+       "(2, 4, '*')"
+      ]
+     },
+     "fresh_only_max": -0.017,
+     "fresh_only_max_rule": "a3:span_incl_waits",
+     "new_all": {
+      "new:clock_hhmm_subtract": 0.0135,
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.0118
+     },
+     "new_max_fresh": 0.0135,
+     "new_max_rule": "new:clock_hhmm_subtract",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "1": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.009,
+     "counted_max_N": 8000,
+     "counted_max_pooled": -0.0089,
+     "counted_max_rule": "im:span_incl_waits",
+     "extra": {
+      "one_op_best": [
+       "(-2, 2, '*')",
+       "(2, 4, '*')"
+      ]
+     },
+     "fresh_only_max": -0.009,
+     "fresh_only_max_rule": "a3:span_incl_waits",
+     "new_all": {
+      "new:clock_hhmm_subtract": 0.019,
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.0047
+     },
+     "new_max_fresh": 0.019,
+     "new_max_rule": "new:clock_hhmm_subtract",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "2": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.009,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0083,
+     "counted_max_rule": "a3:span_incl_waits",
+     "extra": {
+      "one_op_best": [
+       "(2, 0, '*')",
+       "(2, 0, '*')"
+      ]
+     },
+     "fresh_only_max": -0.009,
+     "fresh_only_max_rule": "a3:span_incl_waits",
+     "new_all": {
+      "new:clock_hhmm_subtract": -0.0053,
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.0032
+     },
+     "new_max_fresh": -0.0053,
+     "new_max_rule": "new:clock_hhmm_subtract",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "3": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00675,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.007,
+     "counted_max_rule": "a3:span_incl_waits",
+     "extra": {
+      "one_op_best": [
+       "(-2, 2, '*')",
+       "(2, 0, '*')"
+      ]
+     },
+     "fresh_only_max": -0.0067,
+     "fresh_only_max_rule": "a3:span_incl_waits",
+     "new_all": {
+      "new:clock_hhmm_subtract": -0.0008,
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.0035
+     },
+     "new_max_fresh": -0.0035,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "4": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.006,
+     "counted_max_N": 8000,
+     "counted_max_pooled": -0.0056,
+     "counted_max_rule": "im:span_incl_waits",
+     "extra": {
+      "one_op_best": [
+       "(4, 0, '*')",
+       "(-2, 0, '*')"
+      ]
+     },
+     "fresh_only_max": -0.006,
+     "fresh_only_max_rule": "a3:span_incl_waits",
+     "new_all": {
+      "new:clock_hhmm_subtract": -0.0057,
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.001
+     },
+     "new_max_fresh": -0.0057,
+     "new_max_rule": "new:clock_hhmm_subtract",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "5": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0065,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0057,
+     "counted_max_rule": "a3:span_incl_waits",
+     "extra": {
+      "one_op_best": [
+       "(4, 0, '*')",
+       "(-2, 0, '*')"
+      ]
+     },
+     "fresh_only_max": -0.0065,
+     "fresh_only_max_rule": "a3:span_incl_waits",
+     "new_all": {
+      "new:clock_hhmm_subtract": -0.0063,
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.003
+     },
+     "new_max_fresh": -0.0063,
+     "new_max_rule": "new:clock_hhmm_subtract",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "6": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00425,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0042,
+     "counted_max_rule": "a3:span_incl_waits",
+     "extra": {
+      "one_op_best": [
+       "(-2, 0, '*')",
+       "(-2, 0, '*')"
+      ]
+     },
+     "fresh_only_max": -0.0043,
+     "fresh_only_max_rule": "a3:span_incl_waits",
+     "new_all": {
+      "new:clock_hhmm_subtract": -0.0043,
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": 0.0013
+     },
+     "new_max_fresh": -0.0043,
+     "new_max_rule": "new:clock_hhmm_subtract",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    }
+   },
+   "verdict": "STAYS",
+   "would_drop_if_notcounted_counted": false,
+   "would_drop_on_new": false
+  },
+  "M1.consecutive_r3": {
+   "largest_counted": [
+    0.0004,
+    "echo_best_position",
+    0
+   ],
+   "largest_new": [
+    0.0005,
+    "new:one_op_two_numbers",
+    0
+   ],
+   "largest_notcounted": [
+    0.5006,
+    "im:mean_plus_step",
+    1
+   ],
+   "per_level": {
+    "0": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0,
+     "counted_max_N": 8000,
+     "counted_max_pooled": 0.0004,
+     "counted_max_rule": "echo_best_position",
+     "extra": {
+      "one_op_best": [
+       "(0, 1, '-')",
+       "(1, 0, '-')"
+      ]
+     },
+     "fresh_only_max": 0.0008,
+     "fresh_only_max_rule": "a4:echo_pos",
+     "new_all": {
+      "new:mode_by_template": 0.0003,
+      "new:one_op_two_numbers": 0.0005
+     },
+     "new_max_fresh": 0.0005,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {
+      "im:mean_plus_step": [
+       0.4909,
+       8000
+      ]
+     },
+     "notcounted_max_pooled": 0.4909,
+     "notcounted_max_rule": "im:mean_plus_step"
+    },
+    "1": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0002,
+     "counted_max_rule": "a4:mode_by_visible_ask",
+     "extra": {
+      "one_op_best": [
+       "None",
+       "None"
+      ]
+     },
+     "fresh_only_max": 0.0003,
+     "fresh_only_max_rule": "a4:mode_by_visible_ask",
+     "new_all": {
+      "new:mode_by_template": 0.0005,
+      "new:one_op_two_numbers": 0.0
+     },
+     "new_max_fresh": 0.0005,
+     "new_max_rule": "new:mode_by_template",
+     "notcounted_all": {
+      "im:mean_plus_step": [
+       0.5006,
+       8000
+      ]
+     },
+     "notcounted_max_pooled": 0.5006,
+     "notcounted_max_rule": "im:mean_plus_step"
+    },
+    "2": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00025,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0003,
+     "counted_max_rule": "a4:middle_or_mean",
+     "extra": {
+      "one_op_best": [
+       "(0, 1, '/')",
+       "(0, 1, '/')"
+      ]
+     },
+     "fresh_only_max": -0.0003,
+     "fresh_only_max_rule": "a3:mean_rounded",
+     "new_all": {
+      "new:mode_by_template": 0.0005,
+      "new:one_op_two_numbers": 0.0003
+     },
+     "new_max_fresh": 0.0005,
+     "new_max_rule": "new:mode_by_template",
+     "notcounted_all": {
+      "im:mean_plus_step": [
+       0.1242,
+       8000
+      ]
+     },
+     "notcounted_max_pooled": 0.1242,
+     "notcounted_max_rule": "im:mean_plus_step"
+    },
+    "3": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0003,
+     "counted_max_rule": "a4:mode_by_visible_ask",
+     "extra": {
+      "one_op_best": [
+       "None",
+       "(1, 0, '-')"
+      ]
+     },
+     "fresh_only_max": 0.0005,
+     "fresh_only_max_rule": "a4:mode_by_visible_ask",
+     "new_all": {
+      "new:mode_by_template": 0.0005,
+      "new:one_op_two_numbers": 0.0
+     },
+     "new_max_fresh": 0.0005,
+     "new_max_rule": "new:mode_by_template",
+     "notcounted_all": {
+      "im:mean_plus_step": [
+       0.127,
+       8000
+      ]
+     },
+     "notcounted_max_pooled": 0.127,
+     "notcounted_max_rule": "im:mean_plus_step"
+    },
+    "4": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0002,
+     "counted_max_rule": "a4:mode_by_visible_ask",
+     "extra": {
+      "one_op_best": [
+       "None",
+       "None"
+      ]
+     },
+     "fresh_only_max": 0.0,
+     "fresh_only_max_rule": "a3:mean_rounded",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": 0.0
+     },
+     "new_max_fresh": 0.0,
+     "new_max_rule": "new:mode_by_template",
+     "notcounted_all": {
+      "im:mean_plus_step": [
+       0.0,
+       8000
+      ]
+     },
+     "notcounted_max_pooled": 0.0,
+     "notcounted_max_rule": "im:mean_plus_step"
+    },
+    "5": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0003,
+     "counted_max_rule": "a4:mode_by_visible_ask",
+     "extra": {
+      "one_op_best": [
+       "None",
+       "None"
+      ]
+     },
+     "fresh_only_max": 0.0003,
+     "fresh_only_max_rule": "a4:mode_by_visible_ask",
+     "new_all": {
+      "new:mode_by_template": 0.0003,
+      "new:one_op_two_numbers": 0.0
+     },
+     "new_max_fresh": 0.0003,
+     "new_max_rule": "new:mode_by_template",
+     "notcounted_all": {
+      "im:mean_plus_step": [
+       0.0,
+       8000
+      ]
+     },
+     "notcounted_max_pooled": 0.0,
+     "notcounted_max_rule": "im:mean_plus_step"
+    },
+    "6": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0002,
+     "counted_max_rule": "a4:echo_pos_offset",
+     "extra": {
+      "one_op_best": [
+       "None",
+       "None"
+      ]
+     },
+     "fresh_only_max": 0.0003,
+     "fresh_only_max_rule": "a4:mode_by_visible_ask",
+     "new_all": {
+      "new:mode_by_template": 0.0003,
+      "new:one_op_two_numbers": 0.0
+     },
+     "new_max_fresh": 0.0003,
+     "new_max_rule": "new:mode_by_template",
+     "notcounted_all": {
+      "im:mean_plus_step": [
+       0.0,
+       8000
+      ]
+     },
+     "notcounted_max_pooled": 0.0,
+     "notcounted_max_rule": "im:mean_plus_step"
+    }
+   },
+   "verdict": "STAYS",
+   "would_drop_if_notcounted_counted": true,
+   "would_drop_on_new": false
+  },
+  "M1.crt_congruence_r3": {
+   "largest_counted": [
+    0.0543,
+    "a3:largest_mod_remainder",
+    0
+   ],
+   "largest_new": [
+    0.037,
+    "new:one_op_two_numbers",
+    0
+   ],
+   "largest_notcounted": null,
+   "per_level": {
+    "0": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00275,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0543,
+     "counted_max_rule": "a3:largest_mod_remainder",
+     "extra": {
+      "one_op_best": [
+       "(3, -2, '+')",
+       "(0, 1, '+')"
+      ]
+     },
+     "fresh_only_max": 0.0503,
+     "fresh_only_max_rule": "a3:largest_mod_remainder",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": 0.037
+     },
+     "new_max_fresh": 0.037,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "1": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00075,
+     "counted_max_N": 8000,
+     "counted_max_pooled": 0.0484,
+     "counted_max_rule": "im:largest_mod_remainder",
+     "extra": {
+      "one_op_best": [
+       "(3, -2, '+')",
+       "(0, 1, '+')"
+      ]
+     },
+     "fresh_only_max": 0.0467,
+     "fresh_only_max_rule": "a3:largest_mod_remainder",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": 0.0338
+     },
+     "new_max_fresh": 0.0338,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "2": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.001,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0445,
+     "counted_max_rule": "a3:largest_mod_remainder",
+     "extra": {
+      "one_op_best": [
+       "(0, 1, '+')",
+       "(3, -2, '+')"
+      ]
+     },
+     "fresh_only_max": 0.0425,
+     "fresh_only_max_rule": "a3:largest_mod_remainder",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": 0.0265
+     },
+     "new_max_fresh": 0.0265,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "3": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0,
+     "counted_max_N": 8000,
+     "counted_max_pooled": 0.0529,
+     "counted_max_rule": "im:drop_last_condition",
+     "extra": {
+      "one_op_best": [
+       "(5, -2, '+')",
+       "(2, -3, '+')"
+      ]
+     },
+     "fresh_only_max": 0.0565,
+     "fresh_only_max_rule": "a3:drop_last_condition",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": 0.002
+     },
+     "new_max_fresh": 0.002,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "4": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00025,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.052,
+     "counted_max_rule": "a3:drop_last_condition",
+     "extra": {
+      "one_op_best": [
+       "(2, -3, '+')",
+       "(2, -3, '+')"
+      ]
+     },
+     "fresh_only_max": 0.051,
+     "fresh_only_max_rule": "a3:drop_last_condition",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": 0.003
+     },
+     "new_max_fresh": 0.003,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "5": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0462,
+     "counted_max_rule": "a3:drop_last_condition",
+     "extra": {
+      "one_op_best": [
+       "(-1, 3, '*')",
+       "None"
+      ]
+     },
+     "fresh_only_max": 0.044,
+     "fresh_only_max_rule": "im:drop_first_condition",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": 0.0
+     },
+     "new_max_fresh": 0.0,
+     "new_max_rule": "new:mode_by_template",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "6": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0427,
+     "counted_max_rule": "a3:drop_last_condition",
+     "extra": {
+      "one_op_best": [
+       "(-3, 4, '+')",
+       "None"
+      ]
+     },
+     "fresh_only_max": 0.0462,
+     "fresh_only_max_rule": "im:drop_first_condition",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": 0.0
+     },
+     "new_max_fresh": 0.0,
+     "new_max_rule": "new:mode_by_template",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    }
+   },
+   "verdict": "STAYS",
+   "would_drop_if_notcounted_counted": false,
+   "would_drop_on_new": false
+  },
+  "M1.division_counting_r3": {
+   "largest_counted": [
+    -0.0663,
+    "echo_best_position",
+    0
+   ],
+   "largest_new": [
+    -0.052,
+    "new:one_op_two_numbers",
+    0
+   ],
+   "largest_notcounted": [
+    0.438,
+    "im:k_minus_remainder_ignores_exact_fit",
+    6
+   ],
+   "per_level": {
+    "0": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.06925,
+     "counted_max_N": 8000,
+     "counted_max_pooled": -0.0663,
+     "counted_max_rule": "echo_best_position",
+     "extra": {
+      "one_op_best": [
+       "(1, 2, '-')",
+       "(-3, 2, '/')"
+      ]
+     },
+     "fresh_only_max": -0.059,
+     "fresh_only_max_rule": "a4:echo_pos",
+     "new_all": {
+      "new:mode_by_template": -0.0015,
+      "new:one_op_two_numbers": -0.052
+     },
+     "new_max_fresh": -0.052,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {
+      "a3:k_minus_remainder_ignores_exact_fit": [
+       0.41,
+       6000
+      ],
+      "im:k_minus_remainder_ignores_exact_fit": [
+       0.4061,
+       8000
+      ]
+     },
+     "notcounted_max_pooled": 0.41,
+     "notcounted_max_rule": "a3:k_minus_remainder_ignores_exact_fit"
+    },
+    "1": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.065,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0555,
+     "counted_max_rule": "a4:echo_pos",
+     "extra": {
+      "one_op_best": [
+       "(-3, 2, '/')",
+       "(-3, 2, '/')"
+      ]
+     },
+     "fresh_only_max": -0.0545,
+     "fresh_only_max_rule": "a4:echo_pos",
+     "new_all": {
+      "new:mode_by_template": 0.0025,
+      "new:one_op_two_numbers": -0.0467
+     },
+     "new_max_fresh": -0.0467,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {
+      "a3:k_minus_remainder_ignores_exact_fit": [
+       0.4158,
+       6000
+      ],
+      "im:k_minus_remainder_ignores_exact_fit": [
+       0.4265,
+       8000
+      ]
+     },
+     "notcounted_max_pooled": 0.4265,
+     "notcounted_max_rule": "im:k_minus_remainder_ignores_exact_fit"
+    },
+    "2": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0645,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0593,
+     "counted_max_rule": "a4:echo_pos",
+     "extra": {
+      "one_op_best": [
+       "(-3, 2, '/')",
+       "(-3, 2, '/')"
+      ]
+     },
+     "fresh_only_max": -0.0558,
+     "fresh_only_max_rule": "a4:echo_pos",
+     "new_all": {
+      "new:mode_by_template": 0.0053,
+      "new:one_op_two_numbers": -0.049
+     },
+     "new_max_fresh": -0.049,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {
+      "a3:k_minus_remainder_ignores_exact_fit": [
+       0.4208,
+       6000
+      ],
+      "im:k_minus_remainder_ignores_exact_fit": [
+       0.4071,
+       8000
+      ]
+     },
+     "notcounted_max_pooled": 0.4208,
+     "notcounted_max_rule": "a3:k_minus_remainder_ignores_exact_fit"
+    },
+    "3": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.06,
+     "counted_max_N": 8000,
+     "counted_max_pooled": -0.0575,
+     "counted_max_rule": "echo_best_position",
+     "extra": {
+      "one_op_best": [
+       "(-1, -3, '-')",
+       "(-3, 2, '/')"
+      ]
+     },
+     "fresh_only_max": -0.051,
+     "fresh_only_max_rule": "a4:echo_pos",
+     "new_all": {
+      "new:mode_by_template": 0.0035,
+      "new:one_op_two_numbers": -0.0473
+     },
+     "new_max_fresh": -0.0473,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {
+      "a3:k_minus_remainder_ignores_exact_fit": [
+       0.4283,
+       6000
+      ],
+      "im:k_minus_remainder_ignores_exact_fit": [
+       0.4261,
+       8000
+      ]
+     },
+     "notcounted_max_pooled": 0.4283,
+     "notcounted_max_rule": "a3:k_minus_remainder_ignores_exact_fit"
+    },
+    "4": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.06375,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0532,
+     "counted_max_rule": "a4:echo_pos",
+     "extra": {
+      "one_op_best": [
+       "(-3, 2, '/')",
+       "(-3, 2, '/')"
+      ]
+     },
+     "fresh_only_max": -0.058,
+     "fresh_only_max_rule": "a4:echo_pos",
+     "new_all": {
+      "new:mode_by_template": -0.0022,
+      "new:one_op_two_numbers": -0.0467
+     },
+     "new_max_fresh": -0.0467,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {
+      "a3:k_minus_remainder_ignores_exact_fit": [
+       0.4292,
+       6000
+      ],
+      "im:k_minus_remainder_ignores_exact_fit": [
+       0.4261,
+       8000
+      ]
+     },
+     "notcounted_max_pooled": 0.4292,
+     "notcounted_max_rule": "a3:k_minus_remainder_ignores_exact_fit"
+    },
+    "5": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.057,
+     "counted_max_N": 8000,
+     "counted_max_pooled": -0.0505,
+     "counted_max_rule": "echo_best_position",
+     "extra": {
+      "one_op_best": [
+       "(-3, 2, '/')",
+       "(-3, 2, '/')"
+      ]
+     },
+     "fresh_only_max": -0.0485,
+     "fresh_only_max_rule": "a4:echo_pos",
+     "new_all": {
+      "new:mode_by_template": 0.006,
+      "new:one_op_two_numbers": -0.0405
+     },
+     "new_max_fresh": -0.0405,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {
+      "a3:k_minus_remainder_ignores_exact_fit": [
+       0.4268,
+       6000
+      ],
+      "im:k_minus_remainder_ignores_exact_fit": [
+       0.4296,
+       8000
+      ]
+     },
+     "notcounted_max_pooled": 0.4296,
+     "notcounted_max_rule": "im:k_minus_remainder_ignores_exact_fit"
+    },
+    "6": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.053,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0462,
+     "counted_max_rule": "a4:echo_pos",
+     "extra": {
+      "one_op_best": [
+       "(-3, 2, '/')",
+       "(-1, -3, '-')"
+      ]
+     },
+     "fresh_only_max": -0.046,
+     "fresh_only_max_rule": "a4:echo_pos",
+     "new_all": {
+      "new:mode_by_template": -0.0115,
+      "new:one_op_two_numbers": -0.0408
+     },
+     "new_max_fresh": -0.0408,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {
+      "a3:k_minus_remainder_ignores_exact_fit": [
+       0.419,
+       6000
+      ],
+      "im:k_minus_remainder_ignores_exact_fit": [
+       0.438,
+       8000
+      ]
+     },
+     "notcounted_max_pooled": 0.438,
+     "notcounted_max_rule": "im:k_minus_remainder_ignores_exact_fit"
+    }
+   },
+   "verdict": "STAYS",
+   "would_drop_if_notcounted_counted": true,
+   "would_drop_on_new": false
+  },
+  "M1.finite_differences_r4": {
+   "largest_counted": [
+    -0.0022,
+    "a4:echo_pos",
+    0
+   ],
+   "largest_new": [
+    0.0085,
+    "new:one_op_two_numbers",
+    2
+   ],
+   "largest_notcounted": [
+    0.5048,
+    "im:next_term_when_asked_later",
+    3
+   ],
+   "per_level": {
+    "0": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0025,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0022,
+     "counted_max_rule": "a4:echo_pos",
+     "extra": {
+      "one_op_best": [
+       "(1, -1, '*')",
+       "(2, 0, '*')"
+      ]
+     },
+     "fresh_only_max": -0.0025,
+     "fresh_only_max_rule": "a3:linear_extrapolation",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": 0.0035
+     },
+     "new_max_fresh": 0.0035,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {
+      "a3:next_term_only": [
+       -0.0018,
+       6000
+      ],
+      "im:next_term_only": [
+       -0.0016,
+       8000
+      ],
+      "im:next_term_when_asked_later": [
+       0.5006,
+       8000
+      ]
+     },
+     "notcounted_max_pooled": 0.5006,
+     "notcounted_max_rule": "im:next_term_when_asked_later"
+    },
+    "1": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00175,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0022,
+     "counted_max_rule": "a4:echo_pos",
+     "extra": {
+      "one_op_best": [
+       "(1, -1, '*')",
+       "(1, -1, '*')"
+      ]
+     },
+     "fresh_only_max": -0.0018,
+     "fresh_only_max_rule": "a3:linear_extrapolation",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": 0.0075
+     },
+     "new_max_fresh": 0.0075,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {
+      "a3:next_term_only": [
+       -0.0013,
+       6000
+      ],
+      "im:next_term_only": [
+       -0.0022,
+       8000
+      ],
+      "im:next_term_when_asked_later": [
+       0.4941,
+       8000
+      ]
+     },
+     "notcounted_max_pooled": 0.4941,
+     "notcounted_max_rule": "im:next_term_when_asked_later"
+    },
+    "2": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00075,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0013,
+     "counted_max_rule": "a3:linear_extrapolation",
+     "extra": {
+      "one_op_best": [
+       "(1, -1, '*')",
+       "(1, -1, '*')"
+      ]
+     },
+     "fresh_only_max": -0.0008,
+     "fresh_only_max_rule": "a3:linear_extrapolation",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": 0.0085
+     },
+     "new_max_fresh": 0.0085,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {
+      "a3:next_term_only": [
+       -0.0013,
+       6000
+      ],
+      "im:next_term_only": [
+       -0.001,
+       8000
+      ],
+      "im:next_term_when_asked_later": [
+       0.5015,
+       8000
+      ]
+     },
+     "notcounted_max_pooled": 0.5015,
+     "notcounted_max_rule": "im:next_term_when_asked_later"
+    },
+    "3": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0005,
+     "counted_max_rule": "a4:echo_pos",
+     "extra": {
+      "one_op_best": [
+       "(2, 0, '*')",
+       "(1, -1, '*')"
+      ]
+     },
+     "fresh_only_max": 0.0,
+     "fresh_only_max_rule": "a3:linear_extrapolation",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": 0.0053
+     },
+     "new_max_fresh": 0.0053,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {
+      "a3:next_term_only": [
+       -0.0002,
+       6000
+      ],
+      "im:next_term_only": [
+       -0.0004,
+       8000
+      ],
+      "im:next_term_when_asked_later": [
+       0.5048,
+       8000
+      ]
+     },
+     "notcounted_max_pooled": 0.5048,
+     "notcounted_max_rule": "im:next_term_when_asked_later"
+    },
+    "4": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00075,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0012,
+     "counted_max_rule": "a4:echo_pos",
+     "extra": {
+      "one_op_best": [
+       "(2, 0, '*')",
+       "(2, 0, '*')"
+      ]
+     },
+     "fresh_only_max": -0.0008,
+     "fresh_only_max_rule": "a3:linear_extrapolation",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": 0.0055
+     },
+     "new_max_fresh": 0.0055,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {
+      "a3:next_term_only": [
+       -0.0007,
+       6000
+      ],
+      "im:next_term_only": [
+       -0.0009,
+       8000
+      ],
+      "im:next_term_when_asked_later": [
+       0.4955,
+       8000
+      ]
+     },
+     "notcounted_max_pooled": 0.4955,
+     "notcounted_max_rule": "im:next_term_when_asked_later"
+    },
+    "5": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00075,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0008,
+     "counted_max_rule": "a3:linear_extrapolation",
+     "extra": {
+      "one_op_best": [
+       "(4, -1, '*')",
+       "(5, -3, '*')"
+      ]
+     },
+     "fresh_only_max": -0.0008,
+     "fresh_only_max_rule": "a3:linear_extrapolation",
+     "new_all": {
+      "new:fd_deg2_last3": -0.0008,
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.0008
+     },
+     "new_max_fresh": -0.0008,
+     "new_max_rule": "new:fd_deg2_last3",
+     "notcounted_all": {
+      "a3:next_term_only": [
+       -0.0008,
+       6000
+      ],
+      "im:next_term_only": [
+       -0.0006,
+       8000
+      ],
+      "im:next_term_when_asked_later": [
+       -0.0006,
+       8000
+      ]
+     },
+     "notcounted_max_pooled": -0.0008,
+     "notcounted_max_rule": "a3:next_term_only"
+    },
+    "6": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00025,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0003,
+     "counted_max_rule": "a3:linear_extrapolation",
+     "extra": {
+      "one_op_best": [
+       "(5, -3, '*')",
+       "(-1, 3, '*')"
+      ]
+     },
+     "fresh_only_max": -0.0003,
+     "fresh_only_max_rule": "a3:linear_extrapolation",
+     "new_all": {
+      "new:fd_deg2_last3": -0.0003,
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": 0.0005
+     },
+     "new_max_fresh": 0.0005,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {
+      "a3:next_term_only": [
+       -0.0003,
+       6000
+      ],
+      "im:next_term_only": [
+       -0.0003,
+       8000
+      ],
+      "im:next_term_when_asked_later": [
+       -0.0003,
+       8000
+      ]
+     },
+     "notcounted_max_pooled": -0.0003,
+     "notcounted_max_rule": "a3:next_term_only"
+    }
+   },
+   "verdict": "STAYS",
+   "would_drop_if_notcounted_counted": true,
+   "would_drop_on_new": false
+  },
+  "M1.fraction_remainder_r3": {
+   "largest_counted": [
+    0.0173,
+    "a4:spends_not_left",
+    6
+   ],
+   "largest_new": [
+    0.011,
+    "new:mode_by_template",
+    1
+   ],
+   "largest_notcounted": null,
+   "per_level": {
+    "0": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.004,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0112,
+     "counted_max_rule": "a4:spends_not_left",
+     "extra": {
+      "one_op_best": [
+       "None",
+       "None"
+      ]
+     },
+     "fresh_only_max": 0.0112,
+     "fresh_only_max_rule": "a4:spends_not_left",
+     "new_all": {
+      "new:mode_by_template": 0.0088,
+      "new:one_op_two_numbers": -0.004
+     },
+     "new_max_fresh": 0.0088,
+     "new_max_rule": "new:mode_by_template",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "1": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00175,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0142,
+     "counted_max_rule": "a4:spends_not_left",
+     "extra": {
+      "one_op_best": [
+       "None",
+       "None"
+      ]
+     },
+     "fresh_only_max": 0.013,
+     "fresh_only_max_rule": "a4:spends_not_left",
+     "new_all": {
+      "new:mode_by_template": 0.011,
+      "new:one_op_two_numbers": -0.0018
+     },
+     "new_max_fresh": 0.011,
+     "new_max_rule": "new:mode_by_template",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "2": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0035,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0135,
+     "counted_max_rule": "a4:spends_not_left",
+     "extra": {
+      "one_op_best": [
+       "None",
+       "None"
+      ]
+     },
+     "fresh_only_max": 0.0127,
+     "fresh_only_max_rule": "a4:spends_not_left",
+     "new_all": {
+      "new:mode_by_template": 0.0037,
+      "new:one_op_two_numbers": -0.0035
+     },
+     "new_max_fresh": 0.0037,
+     "new_max_rule": "new:mode_by_template",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "3": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00175,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0152,
+     "counted_max_rule": "a4:spends_not_left",
+     "extra": {
+      "one_op_best": [
+       "None",
+       "None"
+      ]
+     },
+     "fresh_only_max": 0.0123,
+     "fresh_only_max_rule": "a4:spends_not_left",
+     "new_all": {
+      "new:mode_by_template": 0.005,
+      "new:one_op_two_numbers": -0.0018
+     },
+     "new_max_fresh": 0.005,
+     "new_max_rule": "new:mode_by_template",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "4": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00225,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0133,
+     "counted_max_rule": "a4:spends_not_left",
+     "extra": {
+      "one_op_best": [
+       "None",
+       "None"
+      ]
+     },
+     "fresh_only_max": 0.0115,
+     "fresh_only_max_rule": "a4:spends_not_left",
+     "new_all": {
+      "new:mode_by_template": 0.005,
+      "new:one_op_two_numbers": -0.0022
+     },
+     "new_max_fresh": 0.005,
+     "new_max_rule": "new:mode_by_template",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "5": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.003,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.015,
+     "counted_max_rule": "a4:spends_not_left",
+     "extra": {
+      "one_op_best": [
+       "None",
+       "None"
+      ]
+     },
+     "fresh_only_max": 0.0143,
+     "fresh_only_max_rule": "a4:spends_not_left",
+     "new_all": {
+      "new:mode_by_template": 0.0022,
+      "new:one_op_two_numbers": -0.003
+     },
+     "new_max_fresh": -0.003,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "6": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00275,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0173,
+     "counted_max_rule": "a4:spends_not_left",
+     "extra": {
+      "one_op_best": [
+       "None",
+       "None"
+      ]
+     },
+     "fresh_only_max": 0.0165,
+     "fresh_only_max_rule": "a4:spends_not_left",
+     "new_all": {
+      "new:mode_by_template": 0.0037,
+      "new:one_op_two_numbers": -0.0027
+     },
+     "new_max_fresh": 0.0037,
+     "new_max_rule": "new:mode_by_template",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    }
+   },
+   "verdict": "STAYS",
+   "would_drop_if_notcounted_counted": false,
+   "would_drop_on_new": false
+  },
+  "M1.gcd_lcm_r4": {
+   "largest_counted": [
+    -0.0225,
+    "a4:smallest_pairwise_gcd",
+    5
+   ],
+   "largest_new": [
+    -0.0217,
+    "new:one_op_two_numbers",
+    5
+   ],
+   "largest_notcounted": [
+    0.4931,
+    "im:product_over_gcd_of_all",
+    1
+   ],
+   "per_level": {
+    "0": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.01925,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0182,
+     "counted_max_rule": "a4:smallest_pairwise_gcd",
+     "extra": {
+      "one_op_best": [
+       "(1, 2, '-')",
+       "(2, 1, '-')"
+      ]
+     },
+     "fresh_only_max": -0.0192,
+     "fresh_only_max_rule": "a3:gcd_of_two_smallest",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.0045
+     },
+     "new_max_fresh": -0.0045,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {
+      "a4:product_over_gcd_pow_k_minus_1 (k>=3; a false general rule)": [
+       -0.0182,
+       6000
+      ],
+      "a4:product_over_lcm_pow_k_minus_1 (k>=3; a false general rule)": [
+       -0.0182,
+       6000
+      ],
+      "im:product_over_gcd_of_all": [
+       0.4814,
+       8000
+      ]
+     },
+     "notcounted_max_pooled": 0.4814,
+     "notcounted_max_rule": "im:product_over_gcd_of_all"
+    },
+    "1": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.008,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.019,
+     "counted_max_rule": "a3:min_difference",
+     "extra": {
+      "one_op_best": [
+       "(1, 2, '-')",
+       "(1, 2, '-')"
+      ]
+     },
+     "fresh_only_max": 0.0163,
+     "fresh_only_max_rule": "a3:min_difference",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": 0.0053
+     },
+     "new_max_fresh": 0.0053,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {
+      "a4:product_over_gcd_pow_k_minus_1 (k>=3; a false general rule)": [
+       -0.0077,
+       6000
+      ],
+      "a4:product_over_lcm_pow_k_minus_1 (k>=3; a false general rule)": [
+       -0.0077,
+       6000
+      ],
+      "im:product_over_gcd_of_all": [
+       0.4931,
+       8000
+      ]
+     },
+     "notcounted_max_pooled": 0.4931,
+     "notcounted_max_rule": "im:product_over_gcd_of_all"
+    },
+    "2": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00925,
+     "counted_max_N": 8000,
+     "counted_max_pooled": 0.0159,
+     "counted_max_rule": "im:min_difference",
+     "extra": {
+      "one_op_best": [
+       "(2, 1, '-')",
+       "(2, 1, '-')"
+      ]
+     },
+     "fresh_only_max": 0.0132,
+     "fresh_only_max_rule": "a3:min_difference",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": 0.0035
+     },
+     "new_max_fresh": 0.0035,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {
+      "a4:product_over_gcd_pow_k_minus_1 (k>=3; a false general rule)": [
+       -0.0082,
+       6000
+      ],
+      "a4:product_over_lcm_pow_k_minus_1 (k>=3; a false general rule)": [
+       -0.0082,
+       6000
+      ],
+      "im:product_over_gcd_of_all": [
+       0.4929,
+       8000
+      ]
+     },
+     "notcounted_max_pooled": 0.4929,
+     "notcounted_max_rule": "im:product_over_gcd_of_all"
+    },
+    "3": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0225,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0223,
+     "counted_max_rule": "a3:gcd_of_two_smallest",
+     "extra": {
+      "one_op_best": [
+       "(1, 3, '*')",
+       "(1, 3, '*')"
+      ]
+     },
+     "fresh_only_max": -0.0225,
+     "fresh_only_max_rule": "a3:gcd_of_two_smallest",
+     "new_all": {
+      "new:mode_by_template": 0.0003,
+      "new:one_op_two_numbers": -0.0022
+     },
+     "new_max_fresh": -0.0022,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {
+      "a4:product_over_gcd_pow_k_minus_1 (k>=3; a false general rule)": [
+       0.4833,
+       6000
+      ],
+      "a4:product_over_lcm_pow_k_minus_1 (k>=3; a false general rule)": [
+       0.473,
+       6000
+      ],
+      "im:product_over_gcd_of_all": [
+       -0.0215,
+       8000
+      ]
+     },
+     "notcounted_max_pooled": 0.4833,
+     "notcounted_max_rule": "a4:product_over_gcd_pow_k_minus_1 (k>=3; a false general rule)"
+    },
+    "4": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.01375,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.016,
+     "counted_max_rule": "a3:gcd_of_two_smallest",
+     "extra": {
+      "one_op_best": [
+       "(1, 2, '*')",
+       "(2, 3, '*')"
+      ]
+     },
+     "fresh_only_max": -0.0138,
+     "fresh_only_max_rule": "a3:gcd_of_two_smallest",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": 0.0013
+     },
+     "new_max_fresh": 0.0013,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {
+      "a4:product_over_gcd_pow_k_minus_1 (k>=3; a false general rule)": [
+       0.4832,
+       6000
+      ],
+      "a4:product_over_lcm_pow_k_minus_1 (k>=3; a false general rule)": [
+       0.4905,
+       6000
+      ],
+      "im:product_over_gcd_of_all": [
+       -0.0149,
+       8000
+      ]
+     },
+     "notcounted_max_pooled": 0.4905,
+     "notcounted_max_rule": "a4:product_over_lcm_pow_k_minus_1 (k>=3; a false general rule)"
+    },
+    "5": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.02225,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0225,
+     "counted_max_rule": "a4:smallest_pairwise_gcd",
+     "extra": {
+      "one_op_best": [
+       "(3, -2, '*')",
+       "(1, 2, '*')"
+      ]
+     },
+     "fresh_only_max": -0.0222,
+     "fresh_only_max_rule": "a3:gcd_of_two_smallest",
+     "new_all": {
+      "new:mode_by_template": 0.0003,
+      "new:one_op_two_numbers": -0.0217
+     },
+     "new_max_fresh": -0.0217,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {
+      "a4:product_over_gcd_pow_k_minus_1 (k>=3; a false general rule)": [
+       0.4703,
+       6000
+      ],
+      "a4:product_over_lcm_pow_k_minus_1 (k>=3; a false general rule)": [
+       0.4847,
+       6000
+      ],
+      "im:product_over_gcd_of_all": [
+       -0.022,
+       8000
+      ]
+     },
+     "notcounted_max_pooled": 0.4847,
+     "notcounted_max_rule": "a4:product_over_lcm_pow_k_minus_1 (k>=3; a false general rule)"
+    },
+    "6": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.01475,
+     "counted_max_N": 8000,
+     "counted_max_pooled": -0.0161,
+     "counted_max_rule": "im:gcd_of_first_two_printed",
+     "extra": {
+      "one_op_best": [
+       "(1, 2, '*')",
+       "(-2, 2, '*')"
+      ]
+     },
+     "fresh_only_max": -0.0147,
+     "fresh_only_max_rule": "a3:gcd_of_two_smallest",
+     "new_all": {
+      "new:mode_by_template": 0.0003,
+      "new:one_op_two_numbers": -0.0143
+     },
+     "new_max_fresh": -0.0143,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {
+      "a4:product_over_gcd_pow_k_minus_1 (k>=3; a false general rule)": [
+       0.4845,
+       6000
+      ],
+      "a4:product_over_lcm_pow_k_minus_1 (k>=3; a false general rule)": [
+       0.4838,
+       6000
+      ],
+      "im:product_over_gcd_of_all": [
+       -0.0161,
+       8000
+      ]
+     },
+     "notcounted_max_pooled": 0.4845,
+     "notcounted_max_rule": "a4:product_over_gcd_pow_k_minus_1 (k>=3; a false general rule)"
+    }
+   },
+   "verdict": "STAYS",
+   "would_drop_if_notcounted_counted": true,
+   "would_drop_on_new": false
+  },
+  "M1.grid_perimeter_r3": {
+   "largest_counted": [
+    -0.0867,
+    "a3:bbox",
+    2
+   ],
+   "largest_new": [
+    0.1008,
+    "new:mode_by_template",
+    0
+   ],
+   "largest_notcounted": null,
+   "per_level": {
+    "0": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.07825,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0777,
+     "counted_max_rule": "a4:echo_pos",
+     "extra": {
+      "one_op_best": [
+       "(-1, -3, '*')",
+       "(-1, -3, '*')"
+      ]
+     },
+     "fresh_only_max": -0.0727,
+     "fresh_only_max_rule": "a4:echo_pos",
+     "new_all": {
+      "new:mode_by_template": 0.1008,
+      "new:one_op_two_numbers": -0.0435
+     },
+     "new_max_fresh": 0.1008,
+     "new_max_rule": "new:mode_by_template",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "1": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.07675,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0793,
+     "counted_max_rule": "a4:echo_pos",
+     "extra": {
+      "one_op_best": [
+       "(-1, -3, '*')",
+       "(-1, -3, '*')"
+      ]
+     },
+     "fresh_only_max": -0.0767,
+     "fresh_only_max_rule": "a4:echo_pos",
+     "new_all": {
+      "new:mode_by_template": 0.0158,
+      "new:one_op_two_numbers": -0.0542
+     },
+     "new_max_fresh": -0.0542,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "2": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.08875,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0867,
+     "counted_max_rule": "a3:bbox",
+     "extra": {
+      "one_op_best": [
+       "(-1, -3, '*')",
+       "(-1, -3, '*')"
+      ]
+     },
+     "fresh_only_max": -0.0887,
+     "fresh_only_max_rule": "a3:bbox",
+     "new_all": {
+      "new:mode_by_template": 0.0018,
+      "new:one_op_two_numbers": -0.0675
+     },
+     "new_max_fresh": -0.0675,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "3": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.06475,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0727,
+     "counted_max_rule": "a3:bbox",
+     "extra": {
+      "one_op_best": [
+       "(3, -3, '*')",
+       "(-2, -3, '*')"
+      ]
+     },
+     "fresh_only_max": -0.0648,
+     "fresh_only_max_rule": "a3:bbox",
+     "new_all": {
+      "new:mode_by_template": 0.0015,
+      "new:one_op_two_numbers": -0.057
+     },
+     "new_max_fresh": -0.057,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "4": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.081,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.078,
+     "counted_max_rule": "a3:bbox",
+     "extra": {
+      "one_op_best": [
+       "(-1, -3, '*')",
+       "(-1, -3, '*')"
+      ]
+     },
+     "fresh_only_max": -0.081,
+     "fresh_only_max_rule": "a3:bbox",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.0675
+     },
+     "new_max_fresh": -0.0675,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "5": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.05975,
+     "counted_max_N": 8000,
+     "counted_max_pooled": -0.0659,
+     "counted_max_rule": "im:bbox",
+     "extra": {
+      "one_op_best": [
+       "(-1, -3, '*')",
+       "(-1, -3, '*')"
+      ]
+     },
+     "fresh_only_max": -0.0597,
+     "fresh_only_max_rule": "a3:bbox",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.045
+     },
+     "new_max_fresh": -0.045,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "6": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0655,
+     "counted_max_N": 8000,
+     "counted_max_pooled": -0.0646,
+     "counted_max_rule": "echo_best_position",
+     "extra": {
+      "one_op_best": [
+       "(-1, -3, '*')",
+       "(-1, -3, '*')"
+      ]
+     },
+     "fresh_only_max": -0.0655,
+     "fresh_only_max_rule": "a3:bbox",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.0532
+     },
+     "new_max_fresh": -0.0532,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    }
+   },
+   "verdict": "STAYS",
+   "would_drop_if_notcounted_counted": false,
+   "would_drop_on_new": false
+  },
+  "M1.inclusion_exclusion_r3": {
+   "largest_counted": [
+    -0.0362,
+    "a3:any_ignore_overlap",
+    0
+   ],
+   "largest_new": [
+    0.0135,
+    "new:mode_by_template",
+    1
+   ],
+   "largest_notcounted": null,
+   "per_level": {
+    "0": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0375,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0362,
+     "counted_max_rule": "a3:any_ignore_overlap",
+     "extra": {
+      "one_op_best": [
+       "(3, 1, '+')",
+       "(3, 1, '+')"
+      ]
+     },
+     "fresh_only_max": -0.0375,
+     "fresh_only_max_rule": "a3:any_ignore_overlap",
+     "new_all": {
+      "new:mode_by_template": 0.0027,
+      "new:one_op_two_numbers": -0.0005
+     },
+     "new_max_fresh": 0.0027,
+     "new_max_rule": "new:mode_by_template",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "1": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0195,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0232,
+     "counted_max_rule": "a3:any_ignore_overlap",
+     "extra": {
+      "one_op_best": [
+       "(1, 3, '-')",
+       "(0, 3, '-')"
+      ]
+     },
+     "fresh_only_max": -0.0195,
+     "fresh_only_max_rule": "a3:any_ignore_overlap",
+     "new_all": {
+      "new:mode_by_template": 0.0135,
+      "new:one_op_two_numbers": 0.0005
+     },
+     "new_max_fresh": 0.0135,
+     "new_max_rule": "new:mode_by_template",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "2": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.017,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0197,
+     "counted_max_rule": "a3:any_ignore_overlap",
+     "extra": {
+      "one_op_best": [
+       "(0, 3, '-')",
+       "(3, 1, '+')"
+      ]
+     },
+     "fresh_only_max": -0.017,
+     "fresh_only_max_rule": "a3:any_ignore_overlap",
+     "new_all": {
+      "new:mode_by_template": 0.0065,
+      "new:one_op_two_numbers": -0.0008
+     },
+     "new_max_fresh": 0.0065,
+     "new_max_rule": "new:mode_by_template",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "3": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.01025,
+     "counted_max_N": 8000,
+     "counted_max_pooled": -0.0111,
+     "counted_max_rule": "im:forget_triple",
+     "extra": {
+      "one_op_best": [
+       "(-3, -2, '-')",
+       "(5, -2, '-')"
+      ]
+     },
+     "fresh_only_max": -0.0103,
+     "fresh_only_max_rule": "a3:forget_triple",
+     "new_all": {
+      "new:mode_by_template": 0.0032,
+      "new:one_op_two_numbers": 0.0
+     },
+     "new_max_fresh": 0.0032,
+     "new_max_rule": "new:mode_by_template",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "4": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.01075,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0098,
+     "counted_max_rule": "a4:both_read_as_exactly_two",
+     "extra": {
+      "one_op_best": [
+       "(-3, -2, '-')",
+       "(-1, -2, '-')"
+      ]
+     },
+     "fresh_only_max": -0.0107,
+     "fresh_only_max_rule": "a3:forget_triple",
+     "new_all": {
+      "new:mode_by_template": -0.0008,
+      "new:one_op_two_numbers": -0.0025
+     },
+     "new_max_fresh": -0.0025,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "5": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00825,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.007,
+     "counted_max_rule": "a3:forget_triple",
+     "extra": {
+      "one_op_best": [
+       "(2, -2, '-')",
+       "(-3, -2, '-')"
+      ]
+     },
+     "fresh_only_max": -0.0083,
+     "fresh_only_max_rule": "a3:forget_triple",
+     "new_all": {
+      "new:mode_by_template": 0.0015,
+      "new:one_op_two_numbers": -0.0025
+     },
+     "new_max_fresh": -0.0025,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "6": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00625,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0067,
+     "counted_max_rule": "a4:both_read_as_exactly_two",
+     "extra": {
+      "one_op_best": [
+       "(2, -2, '-')",
+       "(3, -2, '-')"
+      ]
+     },
+     "fresh_only_max": -0.0063,
+     "fresh_only_max_rule": "a3:forget_triple",
+     "new_all": {
+      "new:mode_by_template": 0.004,
+      "new:one_op_two_numbers": -0.0013
+     },
+     "new_max_fresh": 0.004,
+     "new_max_rule": "new:mode_by_template",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    }
+   },
+   "verdict": "STAYS",
+   "would_drop_if_notcounted_counted": false,
+   "would_drop_on_new": false
+  },
+  "M1.last_digit_power_r3": {
+   "largest_counted": [
+    0.0862,
+    "a3:exp_mod_p",
+    0
+   ],
+   "largest_new": [
+    0.0125,
+    "new:mode_by_template",
+    3
+   ],
+   "largest_notcounted": [
+    0.1137,
+    "a3:fermat_misapplied_e_mod_p_plus_1",
+    0
+   ],
+   "per_level": {
+    "0": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0835,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0862,
+     "counted_max_rule": "a3:exp_mod_p",
+     "extra": {
+      "one_op_best": [
+       "(2, -1, '-')",
+       "(2, -1, '-')"
+      ]
+     },
+     "fresh_only_max": 0.0828,
+     "fresh_only_max_rule": "a3:exp_mod_p",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": 0.0
+     },
+     "new_max_fresh": 0.0,
+     "new_max_rule": "new:mode_by_template",
+     "notcounted_all": {
+      "a3:fermat_misapplied_e_mod_p_plus_1": [
+       0.1137,
+       6000
+      ],
+      "im:fermat_misapplied_e_mod_p_plus_1": [
+       0.1075,
+       8000
+      ]
+     },
+     "notcounted_max_pooled": 0.1137,
+     "notcounted_max_rule": "a3:fermat_misapplied_e_mod_p_plus_1"
+    },
+    "1": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.08725,
+     "counted_max_N": 8000,
+     "counted_max_pooled": 0.0586,
+     "counted_max_rule": "im:exp_mod_p",
+     "extra": {
+      "one_op_best": [
+       "(2, -1, '-')",
+       "(2, -1, '-')"
+      ]
+     },
+     "fresh_only_max": 0.0515,
+     "fresh_only_max_rule": "a3:exp_mod_p",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": 0.0
+     },
+     "new_max_fresh": 0.0,
+     "new_max_rule": "new:mode_by_template",
+     "notcounted_all": {
+      "a3:fermat_misapplied_e_mod_p_plus_1": [
+       0.0788,
+       6000
+      ],
+      "im:fermat_misapplied_e_mod_p_plus_1": [
+       0.0894,
+       8000
+      ]
+     },
+     "notcounted_max_pooled": 0.0894,
+     "notcounted_max_rule": "im:fermat_misapplied_e_mod_p_plus_1"
+    },
+    "2": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.02575,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0187,
+     "counted_max_rule": "a3:exp_last_digit",
+     "extra": {
+      "one_op_best": [
+       "(4, -1, '-')",
+       "(4, -1, '-')"
+      ]
+     },
+     "fresh_only_max": 0.0175,
+     "fresh_only_max_rule": "a3:exp_last_digit",
+     "new_all": {
+      "new:mode_by_template": 0.0063,
+      "new:one_op_two_numbers": 0.0035
+     },
+     "new_max_fresh": 0.0063,
+     "new_max_rule": "new:mode_by_template",
+     "notcounted_all": {
+      "a3:fermat_misapplied_e_mod_p_plus_1": [
+       0.0285,
+       6000
+      ],
+      "im:fermat_misapplied_e_mod_p_plus_1": [
+       0.0302,
+       8000
+      ]
+     },
+     "notcounted_max_pooled": 0.0302,
+     "notcounted_max_rule": "im:fermat_misapplied_e_mod_p_plus_1"
+    },
+    "3": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0185,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0267,
+     "counted_max_rule": "a3:exp_last_digit",
+     "extra": {
+      "one_op_best": [
+       "(5, -1, '+')",
+       "(5, -1, '+')"
+      ]
+     },
+     "fresh_only_max": 0.03,
+     "fresh_only_max_rule": "a3:exp_last_digit",
+     "new_all": {
+      "new:mode_by_template": 0.0125,
+      "new:one_op_two_numbers": 0.0092
+     },
+     "new_max_fresh": 0.0125,
+     "new_max_rule": "new:mode_by_template",
+     "notcounted_all": {
+      "a3:fermat_misapplied_e_mod_p_plus_1": [
+       0.0302,
+       6000
+      ],
+      "im:fermat_misapplied_e_mod_p_plus_1": [
+       0.0272,
+       8000
+      ]
+     },
+     "notcounted_max_pooled": 0.0302,
+     "notcounted_max_rule": "a3:fermat_misapplied_e_mod_p_plus_1"
+    },
+    "4": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0225,
+     "counted_max_N": 8000,
+     "counted_max_pooled": 0.0205,
+     "counted_max_rule": "im:exp_last_digit",
+     "extra": {
+      "one_op_best": [
+       "(4, -1, '-')",
+       "(5, -1, '+')"
+      ]
+     },
+     "fresh_only_max": 0.0213,
+     "fresh_only_max_rule": "a3:exp_last_digit",
+     "new_all": {
+      "new:mode_by_template": 0.002,
+      "new:one_op_two_numbers": 0.0003
+     },
+     "new_max_fresh": 0.002,
+     "new_max_rule": "new:mode_by_template",
+     "notcounted_all": {
+      "a3:fermat_misapplied_e_mod_p_plus_1": [
+       0.033,
+       6000
+      ],
+      "im:fermat_misapplied_e_mod_p_plus_1": [
+       0.0316,
+       8000
+      ]
+     },
+     "notcounted_max_pooled": 0.033,
+     "notcounted_max_rule": "a3:fermat_misapplied_e_mod_p_plus_1"
+    },
+    "5": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.02275,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0145,
+     "counted_max_rule": "a3:exp_last_digit",
+     "extra": {
+      "one_op_best": [
+       "(-3, -1, '-')",
+       "(-3, -1, '-')"
+      ]
+     },
+     "fresh_only_max": 0.0123,
+     "fresh_only_max_rule": "a3:exp_last_digit",
+     "new_all": {
+      "new:mode_by_template": -0.001,
+      "new:one_op_two_numbers": 0.0022
+     },
+     "new_max_fresh": 0.0022,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {
+      "a3:fermat_misapplied_e_mod_p_plus_1": [
+       0.018,
+       6000
+      ],
+      "im:fermat_misapplied_e_mod_p_plus_1": [
+       0.0156,
+       8000
+      ]
+     },
+     "notcounted_max_pooled": 0.018,
+     "notcounted_max_rule": "a3:fermat_misapplied_e_mod_p_plus_1"
+    },
+    "6": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.02125,
+     "counted_max_N": 8000,
+     "counted_max_pooled": 0.0152,
+     "counted_max_rule": "im:exp_last_digit",
+     "extra": {
+      "one_op_best": [
+       "(-1, -2, '+')",
+       "(-3, -1, '-')"
+      ]
+     },
+     "fresh_only_max": 0.017,
+     "fresh_only_max_rule": "a3:exp_last_digit",
+     "new_all": {
+      "new:mode_by_template": 0.0025,
+      "new:one_op_two_numbers": -0.002
+     },
+     "new_max_fresh": 0.0025,
+     "new_max_rule": "new:mode_by_template",
+     "notcounted_all": {
+      "a3:fermat_misapplied_e_mod_p_plus_1": [
+       0.0117,
+       6000
+      ],
+      "im:fermat_misapplied_e_mod_p_plus_1": [
+       0.0109,
+       8000
+      ]
+     },
+     "notcounted_max_pooled": 0.0117,
+     "notcounted_max_rule": "a3:fermat_misapplied_e_mod_p_plus_1"
+    }
+   },
+   "verdict": "STAYS",
+   "would_drop_if_notcounted_counted": false,
+   "would_drop_on_new": false
+  },
+  "M1.linear_equation_r3": {
+   "largest_counted": [
+    -0.016,
+    "a3:ignore_constant",
+    0
+   ],
+   "largest_new": [
+    0.1095,
+    "new:one_op_two_numbers",
+    3
+   ],
+   "largest_notcounted": null,
+   "per_level": {
+    "0": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.01575,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.016,
+     "counted_max_rule": "a3:ignore_constant",
+     "extra": {
+      "one_op_best": [
+       "(1, 2, '-')",
+       "(1, 2, '-')"
+      ]
+     },
+     "fresh_only_max": -0.0158,
+     "fresh_only_max_rule": "a3:ignore_constant",
+     "new_all": {
+      "new:mode_by_template": 0.0168,
+      "new:one_op_two_numbers": 0.006
+     },
+     "new_max_fresh": 0.0168,
+     "new_max_rule": "new:mode_by_template",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "1": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.01275,
+     "counted_max_N": 8000,
+     "counted_max_pooled": -0.0123,
+     "counted_max_rule": "im:ignore_constant",
+     "extra": {
+      "one_op_best": [
+       "(1, 2, '-')",
+       "(1, 2, '-')"
+      ]
+     },
+     "fresh_only_max": -0.0127,
+     "fresh_only_max_rule": "a3:ignore_constant",
+     "new_all": {
+      "new:mode_by_template": 0.0083,
+      "new:one_op_two_numbers": 0.0037
+     },
+     "new_max_fresh": 0.0083,
+     "new_max_rule": "new:mode_by_template",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "2": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0065,
+     "counted_max_N": 8000,
+     "counted_max_pooled": -0.0077,
+     "counted_max_rule": "im:ignore_constant",
+     "extra": {
+      "one_op_best": [
+       "(1, 0, '-')",
+       "(2, 1, '-')"
+      ]
+     },
+     "fresh_only_max": -0.0065,
+     "fresh_only_max_rule": "a3:ignore_constant",
+     "new_all": {
+      "new:mode_by_template": 0.0075,
+      "new:one_op_two_numbers": 0.0013
+     },
+     "new_max_fresh": 0.0075,
+     "new_max_rule": "new:mode_by_template",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "3": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00525,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.005,
+     "counted_max_rule": "a4:echo_pos",
+     "extra": {
+      "one_op_best": [
+       "(1, 3, '-')",
+       "(-3, 3, '-')"
+      ]
+     },
+     "fresh_only_max": 0.0035,
+     "fresh_only_max_rule": "a4:echo_pos_offset",
+     "new_all": {
+      "new:mode_by_template": 0.0037,
+      "new:one_op_two_numbers": 0.1095
+     },
+     "new_max_fresh": 0.1095,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "4": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.007,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.006,
+     "counted_max_rule": "a4:echo_pos_offset",
+     "extra": {
+      "one_op_best": [
+       "(1, 3, '-')",
+       "(1, 3, '-')"
+      ]
+     },
+     "fresh_only_max": 0.0053,
+     "fresh_only_max_rule": "a4:echo_pos_offset",
+     "new_all": {
+      "new:mode_by_template": -0.0003,
+      "new:one_op_two_numbers": 0.0935
+     },
+     "new_max_fresh": 0.0935,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "5": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00425,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.006,
+     "counted_max_rule": "a4:echo_pos",
+     "extra": {
+      "one_op_best": [
+       "(1, 3, '-')",
+       "(1, 3, '-')"
+      ]
+     },
+     "fresh_only_max": 0.0057,
+     "fresh_only_max_rule": "a4:echo_pos",
+     "new_all": {
+      "new:mode_by_template": 0.0035,
+      "new:one_op_two_numbers": 0.0968
+     },
+     "new_max_fresh": 0.0968,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "6": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00525,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0053,
+     "counted_max_rule": "a4:echo_pos_offset",
+     "extra": {
+      "one_op_best": [
+       "(1, 3, '-')",
+       "(-3, 3, '-')"
+      ]
+     },
+     "fresh_only_max": 0.006,
+     "fresh_only_max_rule": "a4:echo_pos",
+     "new_all": {
+      "new:mode_by_template": 0.0018,
+      "new:one_op_two_numbers": 0.096
+     },
+     "new_max_fresh": 0.096,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    }
+   },
+   "verdict": "STAYS",
+   "would_drop_if_notcounted_counted": false,
+   "would_drop_on_new": false
+  },
+  "M1.median_list_r3": {
+   "largest_counted": [
+    0.0821,
+    "im:mode_value",
+    0
+   ],
+   "largest_new": [
+    -0.0055,
+    "new:one_op_two_numbers",
+    2
+   ],
+   "largest_notcounted": null,
+   "per_level": {
+    "0": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00775,
+     "counted_max_N": 8000,
+     "counted_max_pooled": 0.0821,
+     "counted_max_rule": "im:mode_value",
+     "extra": {
+      "one_op_best": [
+       "(5, 2, '-')",
+       "(3, 2, '-')"
+      ]
+     },
+     "fresh_only_max": 0.0798,
+     "fresh_only_max_rule": "a3:mode_value",
+     "new_all": {
+      "new:median_midrange": -0.0005,
+      "new:mode_by_template": -0.0005,
+      "new:one_op_two_numbers": -0.0053
+     },
+     "new_max_fresh": -0.0053,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "1": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00575,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0532,
+     "counted_max_rule": "a3:mode_value",
+     "extra": {
+      "one_op_best": [
+       "(5, -2, '+')",
+       "(3, 0, '+')"
+      ]
+     },
+     "fresh_only_max": 0.0517,
+     "fresh_only_max_rule": "a3:mode_value",
+     "new_all": {
+      "new:median_midrange": -0.0022,
+      "new:mode_by_template": -0.0005,
+      "new:one_op_two_numbers": -0.0043
+     },
+     "new_max_fresh": -0.0043,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "2": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00725,
+     "counted_max_N": 8000,
+     "counted_max_pooled": 0.0635,
+     "counted_max_rule": "im:mode_value",
+     "extra": {
+      "one_op_best": [
+       "(3, 1, '-')",
+       "(3, 2, '-')"
+      ]
+     },
+     "fresh_only_max": 0.065,
+     "fresh_only_max_rule": "a3:mode_value",
+     "new_all": {
+      "new:median_midrange": -0.002,
+      "new:mode_by_template": -0.0005,
+      "new:one_op_two_numbers": -0.0055
+     },
+     "new_max_fresh": -0.0055,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "3": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0035,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.045,
+     "counted_max_rule": "a3:mode_value",
+     "extra": {
+      "one_op_best": [
+       "(-1, 1, '+')",
+       "(-1, 1, '-')"
+      ]
+     },
+     "fresh_only_max": 0.0425,
+     "fresh_only_max_rule": "a3:mode_value",
+     "new_all": {
+      "new:median_midrange": 0.0018,
+      "new:mode_by_template": 0.0022,
+      "new:one_op_two_numbers": -0.0027
+     },
+     "new_max_fresh": -0.0027,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "4": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.005,
+     "counted_max_N": 8000,
+     "counted_max_pooled": 0.0517,
+     "counted_max_rule": "im:mode_value",
+     "extra": {
+      "one_op_best": [
+       "(-3, 4, '-')",
+       "(4, 3, '-')"
+      ]
+     },
+     "fresh_only_max": 0.0525,
+     "fresh_only_max_rule": "a3:mode_value",
+     "new_all": {
+      "new:median_midrange": 0.0005,
+      "new:mode_by_template": -0.002,
+      "new:one_op_two_numbers": -0.0035
+     },
+     "new_max_fresh": -0.0035,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "5": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.006,
+     "counted_max_N": 8000,
+     "counted_max_pooled": 0.0374,
+     "counted_max_rule": "im:mode_value",
+     "extra": {
+      "one_op_best": [
+       "(2, -3, '+')",
+       "(2, -2, '-')"
+      ]
+     },
+     "fresh_only_max": 0.0377,
+     "fresh_only_max_rule": "a3:mode_value",
+     "new_all": {
+      "new:median_midrange": -0.003,
+      "new:mode_by_template": -0.0022,
+      "new:one_op_two_numbers": -0.005
+     },
+     "new_max_fresh": -0.005,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "6": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0055,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0395,
+     "counted_max_rule": "a3:mode_value",
+     "extra": {
+      "one_op_best": [
+       "(5, -1, '+')",
+       "(-2, 2, '-')"
+      ]
+     },
+     "fresh_only_max": 0.0403,
+     "fresh_only_max_rule": "a3:mode_value",
+     "new_all": {
+      "new:median_midrange": -0.0025,
+      "new:mode_by_template": -0.0032,
+      "new:one_op_two_numbers": -0.0053
+     },
+     "new_max_fresh": -0.0053,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    }
+   },
+   "verdict": "STAYS",
+   "would_drop_if_notcounted_counted": false,
+   "would_drop_on_new": false
+  },
+  "M1.mixture_r4": {
+   "largest_counted": [
+    0.0332,
+    "a3:unweighted_mean",
+    4
+   ],
+   "largest_new": [
+    0.0077,
+    "new:one_op_two_numbers",
+    0
+   ],
+   "largest_notcounted": null,
+   "per_level": {
+    "0": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00725,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.031,
+     "counted_max_rule": "a4:swapped_weights",
+     "extra": {
+      "one_op_best": [
+       "(2, -3, '+')",
+       "(2, -3, '+')"
+      ]
+     },
+     "fresh_only_max": 0.0315,
+     "fresh_only_max_rule": "a3:unweighted_mean",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": 0.0077
+     },
+     "new_max_fresh": 0.0077,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "1": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0025,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0267,
+     "counted_max_rule": "a4:swapped_weights",
+     "extra": {
+      "one_op_best": [
+       "(2, -3, '+')",
+       "(1, 2, '-')"
+      ]
+     },
+     "fresh_only_max": 0.0262,
+     "fresh_only_max_rule": "a3:unweighted_mean",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": 0.0073
+     },
+     "new_max_fresh": 0.0073,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "2": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0025,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0297,
+     "counted_max_rule": "a4:swapped_weights",
+     "extra": {
+      "one_op_best": [
+       "(2, -3, '+')",
+       "(1, 2, '-')"
+      ]
+     },
+     "fresh_only_max": 0.0315,
+     "fresh_only_max_rule": "a3:unweighted_mean",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": 0.0067
+     },
+     "new_max_fresh": 0.0067,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "3": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00425,
+     "counted_max_N": 8000,
+     "counted_max_pooled": 0.0307,
+     "counted_max_rule": "im:unweighted_mean",
+     "extra": {
+      "one_op_best": [
+       "(-2, -1, '-')",
+       "(3, 0, '+')"
+      ]
+     },
+     "fresh_only_max": 0.0312,
+     "fresh_only_max_rule": "a3:unweighted_mean",
+     "new_all": {
+      "new:mode_by_template": -0.0008,
+      "new:one_op_two_numbers": -0.0015
+     },
+     "new_max_fresh": -0.0015,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "4": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00175,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0332,
+     "counted_max_rule": "a3:unweighted_mean",
+     "extra": {
+      "one_op_best": [
+       "(0, 1, '+')",
+       "(1, 2, '+')"
+      ]
+     },
+     "fresh_only_max": 0.0352,
+     "fresh_only_max_rule": "a3:unweighted_mean",
+     "new_all": {
+      "new:mode_by_template": -0.0008,
+      "new:one_op_two_numbers": 0.0015
+     },
+     "new_max_fresh": 0.0015,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "5": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00125,
+     "counted_max_N": 8000,
+     "counted_max_pooled": 0.03,
+     "counted_max_rule": "im:unweighted_mean",
+     "extra": {
+      "one_op_best": [
+       "(1, -1, '-')",
+       "(-2, 4, '-')"
+      ]
+     },
+     "fresh_only_max": 0.0295,
+     "fresh_only_max_rule": "a3:unweighted_mean",
+     "new_all": {
+      "new:mode_by_template": 0.002,
+      "new:one_op_two_numbers": 0.001
+     },
+     "new_max_fresh": 0.002,
+     "new_max_rule": "new:mode_by_template",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "6": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00175,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.03,
+     "counted_max_rule": "a3:unweighted_mean",
+     "extra": {
+      "one_op_best": [
+       "(1, 2, '-')",
+       "(3, 0, '+')"
+      ]
+     },
+     "fresh_only_max": 0.032,
+     "fresh_only_max_rule": "a3:unweighted_mean",
+     "new_all": {
+      "new:mode_by_template": -0.0008,
+      "new:one_op_two_numbers": 0.0
+     },
+     "new_max_fresh": -0.0008,
+     "new_max_rule": "new:mode_by_template",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    }
+   },
+   "verdict": "STAYS",
+   "would_drop_if_notcounted_counted": false,
+   "would_drop_on_new": false
+  },
+  "M1.painted_cube_r3": {
+   "largest_counted": [
+    -0.0068,
+    "a3:inner_block_on_unpainted_bottom",
+    3
+   ],
+   "largest_new": [
+    -0.0065,
+    "new:one_op_two_numbers",
+    3
+   ],
+   "largest_notcounted": null,
+   "per_level": {
+    "0": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00625,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0065,
+     "counted_max_rule": "a3:inner_block_on_unpainted_bottom",
+     "extra": {
+      "one_op_best": [
+       "(2, 0, '*')",
+       "(-3, 0, '*')"
+      ]
+     },
+     "fresh_only_max": -0.0063,
+     "fresh_only_max_rule": "a3:inner_block_on_unpainted_bottom",
+     "new_all": {
+      "new:mode_by_template": 0.001,
+      "new:one_op_two_numbers": -0.0047
+     },
+     "new_max_fresh": -0.0047,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "1": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00425,
+     "counted_max_N": 8000,
+     "counted_max_pooled": -0.0053,
+     "counted_max_rule": "echo_best_position",
+     "extra": {
+      "one_op_best": [
+       "(0, -3, '*')",
+       "(-3, 2, '*')"
+      ]
+     },
+     "fresh_only_max": -0.0043,
+     "fresh_only_max_rule": "a4:echo_pos",
+     "new_all": {
+      "new:mode_by_template": 0.0025,
+      "new:one_op_two_numbers": -0.003
+     },
+     "new_max_fresh": -0.003,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "2": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00475,
+     "counted_max_N": 8000,
+     "counted_max_pooled": -0.0054,
+     "counted_max_rule": "im:ignore_bottom_rule",
+     "extra": {
+      "one_op_best": [
+       "(2, 0, '*')",
+       "(-3, 2, '*')"
+      ]
+     },
+     "fresh_only_max": -0.0047,
+     "fresh_only_max_rule": "a3:ignore_bottom_rule_ONLY_on_unpainted_bottom_items",
+     "new_all": {
+      "new:mode_by_template": 0.002,
+      "new:one_op_two_numbers": -0.004
+     },
+     "new_max_fresh": -0.004,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "3": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0085,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0068,
+     "counted_max_rule": "a3:inner_block_on_unpainted_bottom",
+     "extra": {
+      "one_op_best": [
+       "(-3, 2, '*')",
+       "(-3, 2, '*')"
+      ]
+     },
+     "fresh_only_max": -0.0085,
+     "fresh_only_max_rule": "a4:echo_pos",
+     "new_all": {
+      "new:mode_by_template": -0.0018,
+      "new:one_op_two_numbers": -0.0065
+     },
+     "new_max_fresh": -0.0065,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "4": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00275,
+     "counted_max_N": 8000,
+     "counted_max_pooled": -0.0029,
+     "counted_max_rule": "echo_best_position",
+     "extra": {
+      "one_op_best": [
+       "(-3, 2, '*')",
+       "(-3, 2, '*')"
+      ]
+     },
+     "fresh_only_max": -0.0027,
+     "fresh_only_max_rule": "a3:ignore_bottom_rule_ONLY_on_unpainted_bottom_items",
+     "new_all": {
+      "new:mode_by_template": 0.001,
+      "new:one_op_two_numbers": -0.001
+     },
+     "new_max_fresh": 0.001,
+     "new_max_rule": "new:mode_by_template",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "5": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00475,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0047,
+     "counted_max_rule": "a3:inner_block_on_unpainted_bottom",
+     "extra": {
+      "one_op_best": [
+       "(2, 0, '*')",
+       "(-3, 2, '*')"
+      ]
+     },
+     "fresh_only_max": -0.0047,
+     "fresh_only_max_rule": "a3:inner_block_on_unpainted_bottom",
+     "new_all": {
+      "new:mode_by_template": -0.0005,
+      "new:one_op_two_numbers": -0.0045
+     },
+     "new_max_fresh": -0.0045,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "6": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00225,
+     "counted_max_N": 8000,
+     "counted_max_pooled": -0.003,
+     "counted_max_rule": "echo_best_position",
+     "extra": {
+      "one_op_best": [
+       "(2, 0, '*')",
+       "(-3, 2, '*')"
+      ]
+     },
+     "fresh_only_max": 0.0025,
+     "fresh_only_max_rule": "a4:mode_by_visible_ask",
+     "new_all": {
+      "new:mode_by_template": 0.0025,
+      "new:one_op_two_numbers": -0.001
+     },
+     "new_max_fresh": 0.0025,
+     "new_max_rule": "new:mode_by_template",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    }
+   },
+   "verdict": "STAYS",
+   "would_drop_if_notcounted_counted": false,
+   "would_drop_on_new": false
+  },
+  "M1.percent_change_r3": {
+   "largest_counted": [
+    0.006,
+    "a3:first_step_only",
+    5
+   ],
+   "largest_new": [
+    -0.003,
+    "new:one_op_two_numbers",
+    3
+   ],
+   "largest_notcounted": null,
+   "per_level": {
+    "0": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.002,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0022,
+     "counted_max_rule": "a3:additive_percents",
+     "extra": {
+      "one_op_best": [
+       "(0, 2, '-')",
+       "(1, 0, '-')"
+      ]
+     },
+     "fresh_only_max": -0.002,
+     "fresh_only_max_rule": "a3:additive_percents",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.002
+     },
+     "new_max_fresh": -0.002,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "1": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00275,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0025,
+     "counted_max_rule": "a4:additive_percents",
+     "extra": {
+      "one_op_best": [
+       "(-3, -2, '-')",
+       "(2, -3, '+')"
+      ]
+     },
+     "fresh_only_max": -0.0027,
+     "fresh_only_max_rule": "a3:additive_percents",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.0025
+     },
+     "new_max_fresh": -0.0025,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "2": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0005,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0033,
+     "counted_max_rule": "a4:echo_pos",
+     "extra": {
+      "one_op_best": [
+       "(0, 2, '-')",
+       "(-3, -2, '-')"
+      ]
+     },
+     "fresh_only_max": 0.0027,
+     "fresh_only_max_rule": "a4:echo_pos",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.0003
+     },
+     "new_max_fresh": -0.0003,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "3": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00325,
+     "counted_max_N": 8000,
+     "counted_max_pooled": 0.0049,
+     "counted_max_rule": "im:first_step_only",
+     "extra": {
+      "one_op_best": [
+       "(-1, -3, '+')",
+       "(0, 1, '+')"
+      ]
+     },
+     "fresh_only_max": 0.0027,
+     "fresh_only_max_rule": "a3:first_step_only",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.003
+     },
+     "new_max_fresh": -0.003,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "4": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0035,
+     "counted_max_N": 8000,
+     "counted_max_pooled": -0.003,
+     "counted_max_rule": "echo_best_position",
+     "extra": {
+      "one_op_best": [
+       "(0, 2, '-')",
+       "(0, 2, '-')"
+      ]
+     },
+     "fresh_only_max": -0.0032,
+     "fresh_only_max_rule": "a4:echo_pos",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.0022
+     },
+     "new_max_fresh": -0.0022,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "5": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.001,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.006,
+     "counted_max_rule": "a3:first_step_only",
+     "extra": {
+      "one_op_best": [
+       "(0, 1, '+')",
+       "(0, 2, '-')"
+      ]
+     },
+     "fresh_only_max": 0.0065,
+     "fresh_only_max_rule": "a3:first_step_only",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.0005
+     },
+     "new_max_fresh": -0.0005,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "6": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00125,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0043,
+     "counted_max_rule": "a3:first_step_only",
+     "extra": {
+      "one_op_best": [
+       "(0, 2, '-')",
+       "(0, -3, '-')"
+      ]
+     },
+     "fresh_only_max": 0.0035,
+     "fresh_only_max_rule": "a3:first_step_only",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.001
+     },
+     "new_max_fresh": -0.001,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    }
+   },
+   "verdict": "STAYS",
+   "would_drop_if_notcounted_counted": false,
+   "would_drop_on_new": false
+  },
+  "M1.pipes_work_r3": {
+   "largest_counted": [
+    -0.0284,
+    "im:ignore_drain",
+    0
+   ],
+   "largest_new": [
+    0.023,
+    "new:one_op_two_numbers",
+    3
+   ],
+   "largest_notcounted": null,
+   "per_level": {
+    "0": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.028,
+     "counted_max_N": 8000,
+     "counted_max_pooled": -0.0284,
+     "counted_max_rule": "im:ignore_drain",
+     "extra": {
+      "one_op_best": [
+       "(-2, -3, '+')",
+       "(-2, -3, '+')"
+      ]
+     },
+     "fresh_only_max": -0.028,
+     "fresh_only_max_rule": "a3:ignore_drain",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.0037
+     },
+     "new_max_fresh": -0.0037,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "1": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.02,
+     "counted_max_N": 8000,
+     "counted_max_pooled": -0.0219,
+     "counted_max_rule": "im:ignore_drain",
+     "extra": {
+      "one_op_best": [
+       "(-2, -3, '+')",
+       "(-2, -3, '+')"
+      ]
+     },
+     "fresh_only_max": -0.02,
+     "fresh_only_max_rule": "a3:ignore_drain",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": 0.0075
+     },
+     "new_max_fresh": 0.0075,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "2": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.02175,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0215,
+     "counted_max_rule": "a3:ignore_drain",
+     "extra": {
+      "one_op_best": [
+       "(-2, -3, '+')",
+       "(-2, -3, '+')"
+      ]
+     },
+     "fresh_only_max": -0.0217,
+     "fresh_only_max_rule": "a3:ignore_drain",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.0005
+     },
+     "new_max_fresh": -0.0005,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "3": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.02,
+     "counted_max_N": 8000,
+     "counted_max_pooled": 0.025,
+     "counted_max_rule": "echo_best_position",
+     "extra": {
+      "one_op_best": [
+       "(3, 1, '/')",
+       "(3, 1, '/')"
+      ]
+     },
+     "fresh_only_max": 0.0215,
+     "fresh_only_max_rule": "a4:echo_pos",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": 0.023
+     },
+     "new_max_fresh": 0.023,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "4": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.017,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0255,
+     "counted_max_rule": "a4:echo_pos",
+     "extra": {
+      "one_op_best": [
+       "(3, 0, '/')",
+       "(3, 0, '/')"
+      ]
+     },
+     "fresh_only_max": 0.023,
+     "fresh_only_max_rule": "a3:one_pipe",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": 0.023
+     },
+     "new_max_fresh": 0.023,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "5": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.015,
+     "counted_max_N": 8000,
+     "counted_max_pooled": 0.0219,
+     "counted_max_rule": "im:one_pipe",
+     "extra": {
+      "one_op_best": [
+       "(3, 0, '/')",
+       "(3, 1, '/')"
+      ]
+     },
+     "fresh_only_max": 0.0225,
+     "fresh_only_max_rule": "a3:one_pipe",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": 0.0205
+     },
+     "new_max_fresh": 0.0205,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "6": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.01375,
+     "counted_max_N": 8000,
+     "counted_max_pooled": 0.0226,
+     "counted_max_rule": "echo_best_position",
+     "extra": {
+      "one_op_best": [
+       "(3, 1, '/')",
+       "(-1, 0, '/')"
+      ]
+     },
+     "fresh_only_max": 0.0238,
+     "fresh_only_max_rule": "a4:echo_pos",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": 0.0198
+     },
+     "new_max_fresh": 0.0198,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    }
+   },
+   "verdict": "STAYS",
+   "would_drop_if_notcounted_counted": false,
+   "would_drop_on_new": false
+  },
+  "M1.prime_factors_r3": {
+   "largest_counted": [
+    -0.077,
+    "im:omega_plus_one",
+    0
+   ],
+   "largest_new": [
+    0.0625,
+    "new:mode_by_template",
+    2
+   ],
+   "largest_notcounted": [
+    0.1915,
+    "im:largest_le_sqrt",
+    5
+   ],
+   "per_level": {
+    "0": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0795,
+     "counted_max_N": 8000,
+     "counted_max_pooled": -0.077,
+     "counted_max_rule": "im:omega_plus_one",
+     "extra": {
+      "one_op_best": [
+       "(2, 3, '*')",
+       "(2, 3, '*')"
+      ]
+     },
+     "fresh_only_max": -0.0795,
+     "fresh_only_max_rule": "a3:omega_plus_one",
+     "new_all": {
+      "new:mode_by_template": 0.054,
+      "new:one_op_two_numbers": -0.0095
+     },
+     "new_max_fresh": 0.054,
+     "new_max_rule": "new:mode_by_template",
+     "notcounted_all": {
+      "a3:largest_le_sqrt": [
+       0.1527,
+       6000
+      ],
+      "im:largest_le_sqrt": [
+       0.142,
+       8000
+      ]
+     },
+     "notcounted_max_pooled": 0.1527,
+     "notcounted_max_rule": "a3:largest_le_sqrt"
+    },
+    "1": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0755,
+     "counted_max_N": 8000,
+     "counted_max_pooled": -0.0734,
+     "counted_max_rule": "im:omega_plus_one",
+     "extra": {
+      "one_op_best": [
+       "(2, 3, '*')",
+       "(2, 3, '*')"
+      ]
+     },
+     "fresh_only_max": -0.0755,
+     "fresh_only_max_rule": "a3:omega_plus_one",
+     "new_all": {
+      "new:mode_by_template": 0.0485,
+      "new:one_op_two_numbers": -0.0073
+     },
+     "new_max_fresh": 0.0485,
+     "new_max_rule": "new:mode_by_template",
+     "notcounted_all": {
+      "a3:largest_le_sqrt": [
+       0.1585,
+       6000
+      ],
+      "im:largest_le_sqrt": [
+       0.1588,
+       8000
+      ]
+     },
+     "notcounted_max_pooled": 0.1588,
+     "notcounted_max_rule": "im:largest_le_sqrt"
+    },
+    "2": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0595,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0613,
+     "counted_max_rule": "a3:omega_plus_one",
+     "extra": {
+      "one_op_best": [
+       "(3, -1, '+')",
+       "(2, 3, '*')"
+      ]
+     },
+     "fresh_only_max": 0.0625,
+     "fresh_only_max_rule": "a4:mode_by_visible_ask",
+     "new_all": {
+      "new:mode_by_template": 0.0625,
+      "new:one_op_two_numbers": -0.0043
+     },
+     "new_max_fresh": 0.0625,
+     "new_max_rule": "new:mode_by_template",
+     "notcounted_all": {
+      "a3:largest_le_sqrt": [
+       0.1758,
+       6000
+      ],
+      "im:largest_le_sqrt": [
+       0.171,
+       8000
+      ]
+     },
+     "notcounted_max_pooled": 0.1758,
+     "notcounted_max_rule": "a3:largest_le_sqrt"
+    },
+    "3": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.05875,
+     "counted_max_N": 8000,
+     "counted_max_pooled": -0.0601,
+     "counted_max_rule": "im:omega_plus_one",
+     "extra": {
+      "one_op_best": [
+       "(2, 3, '*')",
+       "(3, -1, '+')"
+      ]
+     },
+     "fresh_only_max": -0.0587,
+     "fresh_only_max_rule": "a3:omega_plus_one",
+     "new_all": {
+      "new:mode_by_template": 0.0475,
+      "new:one_op_two_numbers": -0.0043
+     },
+     "new_max_fresh": 0.0475,
+     "new_max_rule": "new:mode_by_template",
+     "notcounted_all": {
+      "a3:largest_le_sqrt": [
+       0.1842,
+       6000
+      ],
+      "im:largest_le_sqrt": [
+       0.178,
+       8000
+      ]
+     },
+     "notcounted_max_pooled": 0.1842,
+     "notcounted_max_rule": "a3:largest_le_sqrt"
+    },
+    "4": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.06525,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0608,
+     "counted_max_rule": "a3:omega_plus_one",
+     "extra": {
+      "one_op_best": [
+       "(3, -1, '+')",
+       "(3, -1, '+')"
+      ]
+     },
+     "fresh_only_max": -0.0653,
+     "fresh_only_max_rule": "a3:omega_plus_one",
+     "new_all": {
+      "new:mode_by_template": 0.0483,
+      "new:one_op_two_numbers": -0.0018
+     },
+     "new_max_fresh": 0.0483,
+     "new_max_rule": "new:mode_by_template",
+     "notcounted_all": {
+      "a3:largest_le_sqrt": [
+       0.1857,
+       6000
+      ],
+      "im:largest_le_sqrt": [
+       0.1815,
+       8000
+      ]
+     },
+     "notcounted_max_pooled": 0.1857,
+     "notcounted_max_rule": "a3:largest_le_sqrt"
+    },
+    "5": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.05275,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0562,
+     "counted_max_rule": "a3:omega_plus_one",
+     "extra": {
+      "one_op_best": [
+       "(3, -1, '+')",
+       "(3, -1, '+')"
+      ]
+     },
+     "fresh_only_max": -0.0527,
+     "fresh_only_max_rule": "a3:omega_plus_one",
+     "new_all": {
+      "new:mode_by_template": 0.0465,
+      "new:one_op_two_numbers": -0.0018
+     },
+     "new_max_fresh": 0.0465,
+     "new_max_rule": "new:mode_by_template",
+     "notcounted_all": {
+      "a3:largest_le_sqrt": [
+       0.1865,
+       6000
+      ],
+      "im:largest_le_sqrt": [
+       0.1915,
+       8000
+      ]
+     },
+     "notcounted_max_pooled": 0.1915,
+     "notcounted_max_rule": "im:largest_le_sqrt"
+    },
+    "6": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.05725,
+     "counted_max_N": 8000,
+     "counted_max_pooled": -0.056,
+     "counted_max_rule": "im:omega_plus_one",
+     "extra": {
+      "one_op_best": [
+       "(3, -1, '+')",
+       "(2, -1, '*')"
+      ]
+     },
+     "fresh_only_max": -0.0573,
+     "fresh_only_max_rule": "a3:omega_plus_one",
+     "new_all": {
+      "new:mode_by_template": 0.0418,
+      "new:one_op_two_numbers": -0.0015
+     },
+     "new_max_fresh": 0.0418,
+     "new_max_rule": "new:mode_by_template",
+     "notcounted_all": {
+      "a3:largest_le_sqrt": [
+       0.186,
+       6000
+      ],
+      "im:largest_le_sqrt": [
+       0.1896,
+       8000
+      ]
+     },
+     "notcounted_max_pooled": 0.1896,
+     "notcounted_max_rule": "im:largest_le_sqrt"
+    }
+   },
+   "verdict": "STAYS",
+   "would_drop_if_notcounted_counted": true,
+   "would_drop_on_new": false
+  },
+  "M1.quadratic_area_r3": {
+   "largest_counted": [
+    -0.0072,
+    "a3:quarter_perimeter",
+    3
+   ],
+   "largest_new": [
+    -0.0083,
+    "new:one_op_two_numbers",
+    3
+   ],
+   "largest_notcounted": null,
+   "per_level": {
+    "0": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0075,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.007,
+     "counted_max_rule": "a3:quarter_perimeter",
+     "extra": {
+      "one_op_best": [
+       "None",
+       "None"
+      ]
+     },
+     "fresh_only_max": -0.0075,
+     "fresh_only_max_rule": "a3:quarter_perimeter",
+     "new_all": {
+      "new:mode_by_template": -0.001,
+      "new:one_op_two_numbers": -0.0075
+     },
+     "new_max_fresh": -0.0075,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "1": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00375,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0058,
+     "counted_max_rule": "a3:quarter_perimeter",
+     "extra": {
+      "one_op_best": [
+       "None",
+       "None"
+      ]
+     },
+     "fresh_only_max": -0.0037,
+     "fresh_only_max_rule": "a3:quarter_perimeter",
+     "new_all": {
+      "new:mode_by_template": 0.002,
+      "new:one_op_two_numbers": -0.0037
+     },
+     "new_max_fresh": -0.0037,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "2": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0035,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0045,
+     "counted_max_rule": "a3:quarter_perimeter",
+     "extra": {
+      "one_op_best": [
+       "None",
+       "None"
+      ]
+     },
+     "fresh_only_max": -0.0035,
+     "fresh_only_max_rule": "a3:quarter_perimeter",
+     "new_all": {
+      "new:mode_by_template": 0.0005,
+      "new:one_op_two_numbers": -0.0035
+     },
+     "new_max_fresh": -0.0035,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "3": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00825,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0072,
+     "counted_max_rule": "a3:quarter_perimeter",
+     "extra": {
+      "one_op_best": [
+       "None",
+       "None"
+      ]
+     },
+     "fresh_only_max": -0.0083,
+     "fresh_only_max_rule": "a3:quarter_perimeter",
+     "new_all": {
+      "new:mode_by_template": -0.004,
+      "new:one_op_two_numbers": -0.0083
+     },
+     "new_max_fresh": -0.0083,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "4": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.003,
+     "counted_max_N": 8000,
+     "counted_max_pooled": -0.0032,
+     "counted_max_rule": "im:quarter_perimeter",
+     "extra": {
+      "one_op_best": [
+       "None",
+       "None"
+      ]
+     },
+     "fresh_only_max": -0.003,
+     "fresh_only_max_rule": "a3:quarter_perimeter",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.003
+     },
+     "new_max_fresh": -0.003,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "5": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00425,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.004,
+     "counted_max_rule": "a3:quarter_perimeter",
+     "extra": {
+      "one_op_best": [
+       "None",
+       "None"
+      ]
+     },
+     "fresh_only_max": -0.0043,
+     "fresh_only_max_rule": "a3:quarter_perimeter",
+     "new_all": {
+      "new:mode_by_template": 0.0003,
+      "new:one_op_two_numbers": -0.0043
+     },
+     "new_max_fresh": -0.0043,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "6": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00275,
+     "counted_max_N": 8000,
+     "counted_max_pooled": -0.0034,
+     "counted_max_rule": "im:quarter_perimeter",
+     "extra": {
+      "one_op_best": [
+       "None",
+       "None"
+      ]
+     },
+     "fresh_only_max": -0.0027,
+     "fresh_only_max_rule": "a3:quarter_perimeter",
+     "new_all": {
+      "new:mode_by_template": 0.0008,
+      "new:one_op_two_numbers": -0.0027
+     },
+     "new_max_fresh": -0.0027,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    }
+   },
+   "verdict": "STAYS",
+   "would_drop_if_notcounted_counted": false,
+   "would_drop_on_new": false
+  },
+  "M1.ratio_share_r3": {
+   "largest_counted": [
+    0.0572,
+    "a3:equal_split",
+    0
+   ],
+   "largest_new": [
+    0.5312,
+    "new:ratio_last_named",
+    0
+   ],
+   "largest_notcounted": [
+    0.5319,
+    "im:largest_share",
+    1
+   ],
+   "per_level": {
+    "0": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00425,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0572,
+     "counted_max_rule": "a3:equal_split",
+     "extra": {
+      "asked_is_largest_observed_vs_uniform": [
+       0.525,
+       0.5306
+      ],
+      "one_op_best": [
+       "(2, -2, '*')",
+       "(2, -2, '*')"
+      ]
+     },
+     "fresh_only_max": 0.057,
+     "fresh_only_max_rule": "a3:equal_split",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": 0.0147,
+      "new:ratio_first_named": 0.5215,
+      "new:ratio_last_named": 0.5312
+     },
+     "new_max_fresh": 0.5312,
+     "new_max_rule": "new:ratio_last_named",
+     "notcounted_all": {
+      "a3:largest_share": [
+       0.523,
+       6000
+      ],
+      "im:largest_share": [
+       0.5258,
+       8000
+      ],
+      "im:smallest_share": [
+       0.5229,
+       8000
+      ]
+     },
+     "notcounted_max_pooled": 0.5258,
+     "notcounted_max_rule": "im:largest_share"
+    },
+    "1": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0065,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.054,
+     "counted_max_rule": "a3:equal_split",
+     "extra": {
+      "asked_is_largest_observed_vs_uniform": [
+       0.5375,
+       0.53
+      ],
+      "one_op_best": [
+       "(2, -2, '*')",
+       "(2, -2, '*')"
+      ]
+     },
+     "fresh_only_max": 0.0535,
+     "fresh_only_max_rule": "a3:equal_split",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": 0.0035,
+      "new:ratio_first_named": 0.5195,
+      "new:ratio_last_named": 0.5275
+     },
+     "new_max_fresh": 0.5275,
+     "new_max_rule": "new:ratio_last_named",
+     "notcounted_all": {
+      "a3:largest_share": [
+       0.5297,
+       6000
+      ],
+      "im:largest_share": [
+       0.5319,
+       8000
+      ],
+      "im:smallest_share": [
+       0.5135,
+       8000
+      ]
+     },
+     "notcounted_max_pooled": 0.5319,
+     "notcounted_max_rule": "im:largest_share"
+    },
+    "2": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00375,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0297,
+     "counted_max_rule": "a3:equal_split",
+     "extra": {
+      "asked_is_largest_observed_vs_uniform": [
+       0.3633,
+       0.3647
+      ],
+      "one_op_best": [
+       "(0, 2, '/')",
+       "(0, -1, '/')"
+      ]
+     },
+     "fresh_only_max": 0.0305,
+     "fresh_only_max_rule": "a3:equal_split",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": 0.0057,
+      "new:ratio_first_named": 0.3757,
+      "new:ratio_last_named": 0.3663
+     },
+     "new_max_fresh": 0.3757,
+     "new_max_rule": "new:ratio_first_named",
+     "notcounted_all": {
+      "a3:largest_share": [
+       0.3663,
+       6000
+      ],
+      "im:largest_share": [
+       0.3641,
+       8000
+      ],
+      "im:smallest_share": [
+       0.3624,
+       8000
+      ]
+     },
+     "notcounted_max_pooled": 0.3663,
+     "notcounted_max_rule": "a3:largest_share"
+    },
+    "3": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0035,
+     "counted_max_N": 8000,
+     "counted_max_pooled": 0.0267,
+     "counted_max_rule": "im:equal_split",
+     "extra": {
+      "asked_is_largest_observed_vs_uniform": [
+       0.3623,
+       0.3658
+      ],
+      "one_op_best": [
+       "(0, -2, '/')",
+       "(0, 1, '/')"
+      ]
+     },
+     "fresh_only_max": 0.0272,
+     "fresh_only_max_rule": "a3:equal_split",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": 0.0063,
+      "new:ratio_first_named": 0.3725,
+      "new:ratio_last_named": 0.3713
+     },
+     "new_max_fresh": 0.3725,
+     "new_max_rule": "new:ratio_first_named",
+     "notcounted_all": {
+      "a3:largest_share": [
+       0.3643,
+       6000
+      ],
+      "im:largest_share": [
+       0.3543,
+       8000
+      ],
+      "im:smallest_share": [
+       0.3664,
+       8000
+      ]
+     },
+     "notcounted_max_pooled": 0.3664,
+     "notcounted_max_rule": "im:smallest_share"
+    },
+    "4": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00275,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.019,
+     "counted_max_rule": "a4:equal_split",
+     "extra": {
+      "asked_is_largest_observed_vs_uniform": [
+       0.285,
+       0.2819
+      ],
+      "one_op_best": [
+       "(0, -2, '/')",
+       "(0, -1, '/')"
+      ]
+     },
+     "fresh_only_max": 0.0177,
+     "fresh_only_max_rule": "a3:equal_split",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": 0.0043,
+      "new:ratio_first_named": 0.3035,
+      "new:ratio_last_named": 0.2943
+     },
+     "new_max_fresh": 0.3035,
+     "new_max_rule": "new:ratio_first_named",
+     "notcounted_all": {
+      "a3:largest_share": [
+       0.2752,
+       6000
+      ],
+      "im:largest_share": [
+       0.2791,
+       8000
+      ],
+      "im:smallest_share": [
+       0.2762,
+       8000
+      ]
+     },
+     "notcounted_max_pooled": 0.2791,
+     "notcounted_max_rule": "im:largest_share"
+    },
+    "5": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.003,
+     "counted_max_N": 8000,
+     "counted_max_pooled": 0.0185,
+     "counted_max_rule": "im:equal_split",
+     "extra": {
+      "asked_is_largest_observed_vs_uniform": [
+       0.2807,
+       0.2824
+      ],
+      "one_op_best": [
+       "(0, 1, '/')",
+       "(0, 1, '/')"
+      ]
+     },
+     "fresh_only_max": 0.0175,
+     "fresh_only_max_rule": "a3:equal_split",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": 0.009,
+      "new:ratio_first_named": 0.2903,
+      "new:ratio_last_named": 0.2883
+     },
+     "new_max_fresh": 0.2903,
+     "new_max_rule": "new:ratio_first_named",
+     "notcounted_all": {
+      "a3:largest_share": [
+       0.2782,
+       6000
+      ],
+      "im:largest_share": [
+       0.279,
+       8000
+      ],
+      "im:smallest_share": [
+       0.279,
+       8000
+      ]
+     },
+     "notcounted_max_pooled": 0.279,
+     "notcounted_max_rule": "im:largest_share"
+    },
+    "6": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00325,
+     "counted_max_N": 8000,
+     "counted_max_pooled": 0.0194,
+     "counted_max_rule": "im:equal_split",
+     "extra": {
+      "asked_is_largest_observed_vs_uniform": [
+       0.285,
+       0.2816
+      ],
+      "one_op_best": [
+       "(0, 2, '/')",
+       "(0, -1, '/')"
+      ]
+     },
+     "fresh_only_max": 0.0195,
+     "fresh_only_max_rule": "a3:equal_split",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": 0.0063,
+      "new:ratio_first_named": 0.2797,
+      "new:ratio_last_named": 0.2893
+     },
+     "new_max_fresh": 0.2893,
+     "new_max_rule": "new:ratio_last_named",
+     "notcounted_all": {
+      "a3:largest_share": [
+       0.2797,
+       6000
+      ],
+      "im:largest_share": [
+       0.2772,
+       8000
+      ],
+      "im:smallest_share": [
+       0.2757,
+       8000
+      ]
+     },
+     "notcounted_max_pooled": 0.2797,
+     "notcounted_max_rule": "a3:largest_share"
+    }
+   },
+   "verdict": "STAYS",
+   "would_drop_if_notcounted_counted": true,
+   "would_drop_on_new": true
+  },
+  "M1.rectangle_r3": {
+   "largest_counted": [
+    0.0143,
+    "a4:echo_pos_offset",
+    0
+   ],
+   "largest_new": [
+    0.0055,
+    "new:one_op_two_numbers",
+    1
+   ],
+   "largest_notcounted": null,
+   "per_level": {
+    "0": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.002,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0143,
+     "counted_max_rule": "a4:echo_pos_offset",
+     "extra": {
+      "one_op_best": [
+       "(0, 1, '*')",
+       "(0, 1, '*')"
+      ]
+     },
+     "fresh_only_max": 0.0165,
+     "fresh_only_max_rule": "a4:echo_pos_offset",
+     "new_all": {
+      "new:mode_by_template": 0.0008,
+      "new:one_op_two_numbers": 0.0025
+     },
+     "new_max_fresh": 0.0025,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "1": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00075,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0137,
+     "counted_max_rule": "a4:echo_pos_offset",
+     "extra": {
+      "one_op_best": [
+       "(0, 1, '*')",
+       "(0, 1, '*')"
+      ]
+     },
+     "fresh_only_max": 0.015,
+     "fresh_only_max_rule": "a4:echo_pos_offset",
+     "new_all": {
+      "new:mode_by_template": 0.0005,
+      "new:one_op_two_numbers": 0.0055
+     },
+     "new_max_fresh": 0.0055,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "2": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0015,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0135,
+     "counted_max_rule": "a4:echo_pos_offset",
+     "extra": {
+      "one_op_best": [
+       "(0, 1, '*')",
+       "(0, 1, '*')"
+      ]
+     },
+     "fresh_only_max": 0.0127,
+     "fresh_only_max_rule": "a4:echo_pos_offset",
+     "new_all": {
+      "new:mode_by_template": -0.0003,
+      "new:one_op_two_numbers": 0.001
+     },
+     "new_max_fresh": 0.001,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "3": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00125,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0107,
+     "counted_max_rule": "a4:square_area",
+     "extra": {
+      "one_op_best": [
+       "(0, 1, '*')",
+       "(0, 1, '*')"
+      ]
+     },
+     "fresh_only_max": 0.0103,
+     "fresh_only_max_rule": "a4:echo_pos_offset",
+     "new_all": {
+      "new:mode_by_template": -0.0008,
+      "new:one_op_two_numbers": 0.003
+     },
+     "new_max_fresh": 0.003,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "4": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00025,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0105,
+     "counted_max_rule": "a4:square_area",
+     "extra": {
+      "one_op_best": [
+       "(0, 1, '*')",
+       "(0, 1, '*')"
+      ]
+     },
+     "fresh_only_max": 0.0112,
+     "fresh_only_max_rule": "a4:square_area",
+     "new_all": {
+      "new:mode_by_template": 0.0008,
+      "new:one_op_two_numbers": 0.0037
+     },
+     "new_max_fresh": 0.0037,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "5": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.001,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.012,
+     "counted_max_rule": "a4:square_area",
+     "extra": {
+      "one_op_best": [
+       "(0, 1, '*')",
+       "(0, 1, '*')"
+      ]
+     },
+     "fresh_only_max": 0.012,
+     "fresh_only_max_rule": "a4:square_area",
+     "new_all": {
+      "new:mode_by_template": -0.0008,
+      "new:one_op_two_numbers": 0.0013
+     },
+     "new_max_fresh": 0.0013,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "6": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0005,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0115,
+     "counted_max_rule": "a4:square_area",
+     "extra": {
+      "one_op_best": [
+       "(0, 1, '*')",
+       "(0, 1, '*')"
+      ]
+     },
+     "fresh_only_max": 0.012,
+     "fresh_only_max_rule": "a4:square_area",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": 0.0022
+     },
+     "new_max_fresh": 0.0022,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    }
+   },
+   "verdict": "STAYS",
+   "would_drop_if_notcounted_counted": false,
+   "would_drop_on_new": false
+  },
+  "M1.recurrence_iterate_r3": {
+   "largest_counted": [
+    0.0058,
+    "a4:echo_pos_offset",
+    0
+   ],
+   "largest_new": [
+    -0.001,
+    "new:one_op_two_numbers",
+    5
+   ],
+   "largest_notcounted": null,
+   "per_level": {
+    "0": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00075,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0058,
+     "counted_max_rule": "a4:echo_pos_offset",
+     "extra": {
+      "one_op_best": [
+       "(-2, 0, '*')",
+       "(-2, 0, '*')"
+      ]
+     },
+     "fresh_only_max": 0.0063,
+     "fresh_only_max_rule": "a4:echo_pos_offset",
+     "new_all": {
+      "new:mode_by_template": -0.0003,
+      "new:one_op_two_numbers": 0.0008
+     },
+     "new_max_fresh": 0.0008,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "1": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0,
+     "counted_max_N": 8000,
+     "counted_max_pooled": -0.0006,
+     "counted_max_rule": "im:next_term",
+     "extra": {
+      "one_op_best": [
+       "(2, 0, '*')",
+       "(1, 0, '*')"
+      ]
+     },
+     "fresh_only_max": 0.0,
+     "fresh_only_max_rule": "a4:echo_pos",
+     "new_all": {
+      "new:mode_by_template": 0.0003,
+      "new:one_op_two_numbers": 0.0003
+     },
+     "new_max_fresh": 0.0003,
+     "new_max_rule": "new:mode_by_template",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "2": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00075,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0005,
+     "counted_max_rule": "a4:echo_pos",
+     "extra": {
+      "one_op_best": [
+       "(1, 0, '*')",
+       "(1, 0, '*')"
+      ]
+     },
+     "fresh_only_max": -0.0008,
+     "fresh_only_max_rule": "a4:echo_pos",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.0003
+     },
+     "new_max_fresh": -0.0003,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "3": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.001,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0008,
+     "counted_max_rule": "a4:echo_pos",
+     "extra": {
+      "one_op_best": [
+       "(1, 0, '*')",
+       "(1, 0, '*')"
+      ]
+     },
+     "fresh_only_max": -0.001,
+     "fresh_only_max_rule": "a4:echo_pos",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.0003
+     },
+     "new_max_fresh": -0.0003,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "4": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0005,
+     "counted_max_N": 8000,
+     "counted_max_pooled": -0.0006,
+     "counted_max_rule": "echo_best_position",
+     "extra": {
+      "one_op_best": [
+       "(4, 0, '*')",
+       "(4, 0, '*')"
+      ]
+     },
+     "fresh_only_max": -0.0005,
+     "fresh_only_max_rule": "a4:echo_pos",
+     "new_all": {
+      "new:mode_by_template": -0.0003,
+      "new:one_op_two_numbers": 0.0005
+     },
+     "new_max_fresh": 0.0005,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "5": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.001,
+     "counted_max_N": 8000,
+     "counted_max_pooled": -0.0009,
+     "counted_max_rule": "echo_best_position",
+     "extra": {
+      "one_op_best": [
+       "(4, 0, '*')",
+       "None"
+      ]
+     },
+     "fresh_only_max": -0.001,
+     "fresh_only_max_rule": "a4:echo_pos",
+     "new_all": {
+      "new:mode_by_template": 0.0003,
+      "new:one_op_two_numbers": -0.001
+     },
+     "new_max_fresh": -0.001,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "6": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0,
+     "counted_max_N": 8000,
+     "counted_max_pooled": -0.0004,
+     "counted_max_rule": "echo_best_position",
+     "extra": {
+      "one_op_best": [
+       "(4, 0, '*')",
+       "(1, 0, '*')"
+      ]
+     },
+     "fresh_only_max": 0.0,
+     "fresh_only_max_rule": "a4:echo_pos",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": 0.0003
+     },
+     "new_max_fresh": 0.0003,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    }
+   },
+   "verdict": "STAYS",
+   "would_drop_if_notcounted_counted": false,
+   "would_drop_on_new": false
+  },
+  "M1.shopping_r3": {
+   "largest_counted": [
+    0.0283,
+    "a3:ignore_counts",
+    0
+   ],
+   "largest_new": [
+    0.002,
+    "new:one_op_two_numbers",
+    0
+   ],
+   "largest_notcounted": null,
+   "per_level": {
+    "0": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00025,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0283,
+     "counted_max_rule": "a3:ignore_counts",
+     "extra": {
+      "one_op_best": [
+       "(-1, -3, '-')",
+       "(4, 0, '-')"
+      ]
+     },
+     "fresh_only_max": 0.027,
+     "fresh_only_max_rule": "a3:ignore_counts",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": 0.002
+     },
+     "new_max_fresh": 0.002,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "1": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.001,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0018,
+     "counted_max_rule": "a3:ignore_counts",
+     "extra": {
+      "one_op_best": [
+       "(-1, -3, '-')",
+       "(-1, 0, '-')"
+      ]
+     },
+     "fresh_only_max": 0.0018,
+     "fresh_only_max_rule": "a3:ignore_counts",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.0003
+     },
+     "new_max_fresh": -0.0003,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "2": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0005,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0003,
+     "counted_max_rule": "a3:one_item_only",
+     "extra": {
+      "one_op_best": [
+       "(5, -2, '+')",
+       "(-3, -1, '/')"
+      ]
+     },
+     "fresh_only_max": -0.0005,
+     "fresh_only_max_rule": "a3:one_item_only",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.0005
+     },
+     "new_max_fresh": -0.0005,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "3": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0035,
+     "counted_max_N": 8000,
+     "counted_max_pooled": -0.0029,
+     "counted_max_rule": "im:one_item_only",
+     "extra": {
+      "one_op_best": [
+       "(3, -2, '+')",
+       "(5, 3, '+')"
+      ]
+     },
+     "fresh_only_max": -0.0035,
+     "fresh_only_max_rule": "a3:one_item_only",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.0005
+     },
+     "new_max_fresh": -0.0005,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "4": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0035,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0038,
+     "counted_max_rule": "a3:ignore_counts",
+     "extra": {
+      "one_op_best": [
+       "(-3, 0, '+')",
+       "(3, -3, '-')"
+      ]
+     },
+     "fresh_only_max": -0.0035,
+     "fresh_only_max_rule": "a3:ignore_counts",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.002
+     },
+     "new_max_fresh": -0.002,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "5": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0035,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0035,
+     "counted_max_rule": "a3:ignore_counts",
+     "extra": {
+      "one_op_best": [
+       "(-3, 0, '+')",
+       "(1, 2, '+')"
+      ]
+     },
+     "fresh_only_max": -0.0035,
+     "fresh_only_max_rule": "a3:ignore_counts",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.0018
+     },
+     "new_max_fresh": -0.0018,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "6": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00325,
+     "counted_max_N": 8000,
+     "counted_max_pooled": -0.0029,
+     "counted_max_rule": "im:ignore_counts",
+     "extra": {
+      "one_op_best": [
+       "(-2, 3, '-')",
+       "(1, -3, '-')"
+      ]
+     },
+     "fresh_only_max": -0.0032,
+     "fresh_only_max_rule": "a3:ignore_counts",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.002
+     },
+     "new_max_fresh": -0.002,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    }
+   },
+   "verdict": "STAYS",
+   "would_drop_if_notcounted_counted": false,
+   "would_drop_on_new": false
+  },
+  "M1.speed_distance_r3": {
+   "largest_counted": [
+    0.0338,
+    "a4:median_speed",
+    2
+   ],
+   "largest_new": [
+    -0.004,
+    "new:one_op_two_numbers",
+    6
+   ],
+   "largest_notcounted": null,
+   "per_level": {
+    "0": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.005,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0287,
+     "counted_max_rule": "a4:total_hours_x_mean_speed_rounded",
+     "extra": {
+      "one_op_best": [
+       "(-3, 2, '*')",
+       "(-3, 2, '*')"
+      ]
+     },
+     "fresh_only_max": 0.03,
+     "fresh_only_max_rule": "a4:total_hours_x_mean_speed_rounded",
+     "new_all": {
+      "new:mode_by_template": 0.0003,
+      "new:one_op_two_numbers": -0.0037
+     },
+     "new_max_fresh": -0.0037,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "1": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0025,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.021,
+     "counted_max_rule": "a4:total_hours_x_mean_speed_rounded",
+     "extra": {
+      "one_op_best": [
+       "(-3, 2, '*')",
+       "(3, 0, '*')"
+      ]
+     },
+     "fresh_only_max": 0.0232,
+     "fresh_only_max_rule": "a4:total_hours_x_mean_speed_rounded",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.002
+     },
+     "new_max_fresh": -0.002,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "2": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0115,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0338,
+     "counted_max_rule": "a4:median_speed",
+     "extra": {
+      "one_op_best": [
+       "(0, 5, '+')",
+       "(-3, -2, '-')"
+      ]
+     },
+     "fresh_only_max": 0.034,
+     "fresh_only_max_rule": "a4:median_speed",
+     "new_all": {
+      "new:mode_by_template": -0.0022,
+      "new:one_op_two_numbers": 0.0015
+     },
+     "new_max_fresh": -0.0022,
+     "new_max_rule": "new:mode_by_template",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "3": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.01175,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0277,
+     "counted_max_rule": "a4:mean_speed_rounded",
+     "extra": {
+      "one_op_best": [
+       "(1, 4, '-')",
+       "(1, 4, '+')"
+      ]
+     },
+     "fresh_only_max": 0.0238,
+     "fresh_only_max_rule": "a4:mean_speed_rounded",
+     "new_all": {
+      "new:mode_by_template": 0.0003,
+      "new:one_op_two_numbers": -0.002
+     },
+     "new_max_fresh": -0.002,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "4": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.01025,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0207,
+     "counted_max_rule": "a4:mean_speed_rounded",
+     "extra": {
+      "one_op_best": [
+       "(3, 4, '+')",
+       "(1, 4, '+')"
+      ]
+     },
+     "fresh_only_max": 0.0185,
+     "fresh_only_max_rule": "a4:mean_speed_rounded",
+     "new_all": {
+      "new:mode_by_template": -0.0,
+      "new:one_op_two_numbers": -0.0037
+     },
+     "new_max_fresh": -0.0037,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "5": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00825,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.018,
+     "counted_max_rule": "a4:mean_speed_rounded",
+     "extra": {
+      "one_op_best": [
+       "(3, -2, '+')",
+       "(1, 2, '-')"
+      ]
+     },
+     "fresh_only_max": 0.016,
+     "fresh_only_max_rule": "a4:mean_speed_rounded",
+     "new_all": {
+      "new:mode_by_template": 0.001,
+      "new:one_op_two_numbers": -0.0035
+     },
+     "new_max_fresh": -0.0035,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "6": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00975,
+     "counted_max_N": 6000,
+     "counted_max_pooled": 0.0217,
+     "counted_max_rule": "a4:mean_speed_rounded",
+     "extra": {
+      "one_op_best": [
+       "(5, -2, '+')",
+       "(1, 0, '-')"
+      ]
+     },
+     "fresh_only_max": 0.0227,
+     "fresh_only_max_rule": "a4:mean_speed_rounded",
+     "new_all": {
+      "new:mode_by_template": 0.002,
+      "new:one_op_two_numbers": -0.004
+     },
+     "new_max_fresh": -0.004,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    }
+   },
+   "verdict": "STAYS",
+   "would_drop_if_notcounted_counted": false,
+   "would_drop_on_new": false
+  },
+  "M1.tiered_pricing": {
+   "largest_counted": [
+    -0.0048,
+    "a3:all_at_first_rate",
+    3
+   ],
+   "largest_new": [
+    -0.0035,
+    "new:one_op_two_numbers",
+    4
+   ],
+   "largest_notcounted": null,
+   "per_level": {
+    "0": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00275,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.003,
+     "counted_max_rule": "a3:all_at_first_rate",
+     "extra": {
+      "one_op_best": [
+       "(3, 0, '-')",
+       "(3, 0, '-')"
+      ]
+     },
+     "fresh_only_max": -0.0027,
+     "fresh_only_max_rule": "a3:all_at_first_rate",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": 0.0005
+     },
+     "new_max_fresh": 0.0005,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "1": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0015,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0013,
+     "counted_max_rule": "a3:all_at_first_rate",
+     "extra": {
+      "one_op_best": [
+       "(3, 0, '-')",
+       "(-2, 0, '-')"
+      ]
+     },
+     "fresh_only_max": -0.0015,
+     "fresh_only_max_rule": "a3:all_at_first_rate",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": 0.0
+     },
+     "new_max_fresh": 0.0,
+     "new_max_rule": "new:mode_by_template",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "2": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00125,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0008,
+     "counted_max_rule": "a3:all_at_first_rate",
+     "extra": {
+      "one_op_best": [
+       "(-3, 1, '-')",
+       "(0, 1, '-')"
+      ]
+     },
+     "fresh_only_max": -0.0013,
+     "fresh_only_max_rule": "a3:all_at_first_rate",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.0008
+     },
+     "new_max_fresh": -0.0008,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "3": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00375,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0048,
+     "counted_max_rule": "a3:all_at_first_rate",
+     "extra": {
+      "one_op_best": [
+       "(0, -3, '+')",
+       "(0, -3, '+')"
+      ]
+     },
+     "fresh_only_max": -0.0037,
+     "fresh_only_max_rule": "a3:all_at_first_rate",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": 0.0025
+     },
+     "new_max_fresh": 0.0025,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "4": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0045,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0048,
+     "counted_max_rule": "a4:echo_pos",
+     "extra": {
+      "one_op_best": [
+       "(-2, 2, '+')",
+       "(-3, 3, '+')"
+      ]
+     },
+     "fresh_only_max": -0.0045,
+     "fresh_only_max_rule": "a3:all_at_first_rate",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.0035
+     },
+     "new_max_fresh": -0.0035,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "5": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0035,
+     "counted_max_N": 8000,
+     "counted_max_pooled": -0.0039,
+     "counted_max_rule": "im:all_at_first_rate",
+     "extra": {
+      "one_op_best": [
+       "(5, -2, '+')",
+       "(5, -2, '+')"
+      ]
+     },
+     "fresh_only_max": -0.0035,
+     "fresh_only_max_rule": "a3:all_at_first_rate",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.0015
+     },
+     "new_max_fresh": -0.0015,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "6": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00275,
+     "counted_max_N": 8000,
+     "counted_max_pooled": -0.0029,
+     "counted_max_rule": "im:all_at_first_rate",
+     "extra": {
+      "one_op_best": [
+       "(5, -2, '+')",
+       "(5, -2, '+')"
+      ]
+     },
+     "fresh_only_max": -0.0027,
+     "fresh_only_max_rule": "a3:all_at_first_rate",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": 0.0013
+     },
+     "new_max_fresh": 0.0013,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    }
+   },
+   "verdict": "STAYS",
+   "would_drop_if_notcounted_counted": false,
+   "would_drop_on_new": false
+  },
+  "M1.tip_split_r3": {
+   "largest_counted": [
+    -0.0012,
+    "a4:tip_only_per_person",
+    0
+   ],
+   "largest_new": [
+    0.003,
+    "new:one_op_two_numbers",
+    5
+   ],
+   "largest_notcounted": null,
+   "per_level": {
+    "0": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00125,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0012,
+     "counted_max_rule": "a4:tip_only_per_person",
+     "extra": {
+      "one_op_best": [
+       "(-2, -1, '/')",
+       "(2, -2, '+')"
+      ]
+     },
+     "fresh_only_max": -0.0013,
+     "fresh_only_max_rule": "a3:ignore_tip",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.0013
+     },
+     "new_max_fresh": -0.0013,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "1": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0005,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0005,
+     "counted_max_rule": "a3:ignore_tip",
+     "extra": {
+      "one_op_best": [
+       "None",
+       "(2, -2, '+')"
+      ]
+     },
+     "fresh_only_max": -0.0005,
+     "fresh_only_max_rule": "a3:ignore_tip",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.0005
+     },
+     "new_max_fresh": -0.0005,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "2": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00125,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.001,
+     "counted_max_rule": "a4:echo_pos",
+     "extra": {
+      "one_op_best": [
+       "(2, -2, '+')",
+       "None"
+      ]
+     },
+     "fresh_only_max": -0.0013,
+     "fresh_only_max_rule": "a3:ignore_tip",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.0013
+     },
+     "new_max_fresh": -0.0013,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "3": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0002,
+     "counted_max_rule": "a4:echo_pos",
+     "extra": {
+      "one_op_best": [
+       "(2, -2, '+')",
+       "(2, -2, '*')"
+      ]
+     },
+     "fresh_only_max": 0.0003,
+     "fresh_only_max_rule": "a4:echo_pos_offset",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": 0.0
+     },
+     "new_max_fresh": 0.0,
+     "new_max_rule": "new:mode_by_template",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "4": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.00025,
+     "counted_max_N": 8000,
+     "counted_max_pooled": -0.0004,
+     "counted_max_rule": "echo_best_position",
+     "extra": {
+      "one_op_best": [
+       "None",
+       "None"
+      ]
+     },
+     "fresh_only_max": -0.0003,
+     "fresh_only_max_rule": "a3:ignore_tip",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": -0.0003
+     },
+     "new_max_fresh": -0.0003,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "5": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0005,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0005,
+     "counted_max_rule": "a4:echo_pos",
+     "extra": {
+      "one_op_best": [
+       "(0, -2, '/')",
+       "(0, -2, '/')"
+      ]
+     },
+     "fresh_only_max": -0.0005,
+     "fresh_only_max_rule": "a3:ignore_tip",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": 0.003
+     },
+     "new_max_fresh": 0.003,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    },
+    "6": {
+     "a3_skipped_items_fresh": 0,
+     "base_fresh": 0.0005,
+     "counted_max_N": 6000,
+     "counted_max_pooled": -0.0003,
+     "counted_max_rule": "a3:ignore_tip",
+     "extra": {
+      "one_op_best": [
+       "(0, -2, '/')",
+       "(0, -2, '/')"
+      ]
+     },
+     "fresh_only_max": -0.0005,
+     "fresh_only_max_rule": "a3:ignore_tip",
+     "new_all": {
+      "new:mode_by_template": 0.0,
+      "new:one_op_two_numbers": 0.003
+     },
+     "new_max_fresh": 0.003,
+     "new_max_rule": "new:one_op_two_numbers",
+     "notcounted_all": {},
+     "notcounted_max_pooled": null,
+     "notcounted_max_rule": null
+    }
+   },
+   "verdict": "STAYS",
+   "would_drop_if_notcounted_counted": false,
+   "would_drop_on_new": false
+  }
+ }
+}

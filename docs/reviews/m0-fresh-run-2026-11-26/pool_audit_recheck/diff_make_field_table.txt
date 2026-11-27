@@ -1,0 +1,57 @@
+--- superseded_v1/make_field_table.py	2026-11-26 12:56:28
++++ make_field_table.py	2026-11-26 12:56:28
+@@ -23,6 +23,11 @@
+     return {"status": "read", "role": role, "note": note, **kw}
+ 
+ 
++def P(role: str, note: str = "", **kw: Any) -> dict[str, Any]:
++    """Written into the report only (R-57: rates within one shape); never a rule, enters no decision."""
++    return {"status": "report_only", "role": role, "note": note, **kw}
++
++
+ def N(reason: str, note: str = "", **kw: Any) -> dict[str, Any]:
+     return {"status": "not_read", "reason": reason, "note": note, **kw}
+ 
+@@ -164,7 +169,7 @@
+                 "n_shape": R("items_in_shape"),
+                 "share_of_level": R("alt_recovery_share", "read only for the report: f4b_pool_v2.py recovers hits as round(share_of_level x n); the report lists rules whose decision would change under it", decimals=3, unsure=True),
+             },
+-            "rule_name": {"MF_in_shape_cv": N("R-34: an in-shape rate is reported and not counted; the rule row has no share_of_level")},
++            "rule_name": {"MF_in_shape_cv": P("shape_rate_row", "R-34 and R-57: an in-shape rate is reported (report_extras.json, rates_within_one_shape_reported_only) and not counted; the row has no share_of_level")},
+         },
+     },
+     "c1_a3": {
+@@ -186,11 +191,11 @@
+             "S_row": {
+                 "hit": R("hits", "items on which the rule's answer equals the key; summed over shapes"),
+                 "applies": N(DESC, "items on which the rule gives an answer; a non-applicable item is a miss and is inside n"),
+-                "n_shape": N(DESC),
+-                "rate_in_shape": N("R-34: an in-shape rate"),
++                "n_shape": P("shape_items", "R-57: items of the shape, reported with the in-shape rates"),
++                "rate_in_shape": P("shape_rate", "R-34 and R-57: an in-shape rate, reported and not counted"),
+                 "ci": N(DESC),
+                 "share_of_level": N("R-46 note: the shape's share of the level (len(sub) / n), not a hit share; hits are read from hit"),
+-                "mf_in_shape_cv": N("R-34: an in-shape rate"),
++                "mf_in_shape_cv": P("shape_rate_mf", "R-34 and R-57: an in-shape rate, reported and not counted"),
+             },
+             "run_log": {
+                 "alias": N(DESC, "the draw id the wrapper ran under"),
+@@ -219,8 +224,8 @@
+             },
+             "S_row": {
+                 "hit": R("hits"),
+-                "n_shape": N(DESC),
+-                "rate": N("R-34: an in-shape rate"),
++                "n_shape": P("shape_items", "R-57: items of the shape, reported with the in-shape rates"),
++                "rate": P("shape_rate", "R-34 and R-57: an in-shape rate, reported and not counted"),
+             },
+         },
+     },
+@@ -250,6 +255,7 @@
+     return {
+         "table_kind": "field table of stage 1S point 2 (ADR-0033 addendum 1, approved 2026-11-26); hashed with the pooling script",
+         "rulings": {"R-46": "A field is a rule only if its prediction for an item can be computed without that item's answer. oracle_any_literal (both C1 outputs) and best_generic_in_shape (C1 battery) are not read; MF_printform_cv counts; BEST_generic_cv counts; share_of_level in the a3 output is not a hit share and hits are read from hit.",
++                    "R-57": "Rates within one shape (C1 rate_in_shape, mf_in_shape_cv, rate, MF_in_shape_cv; the battery's MF_shape_cv per shape; R2 per-shape counts) are written into report_extras.json under rates_within_one_shape_reported_only and enter no decision.",
+                     "K7": "M1: keys ending __within_applicable, within_applicable, one_op_best and asked_is_largest_observed_vs_uniform are not rules and are not read."},
+         "verification": "names checked against the committed code at b78e58b1 (and the run copies under studies/m0/fresh_run) and against the keys, not the values, of the implementers' dry outputs; fields marked unsure are listed in the report of the task",
+         "forms": FORMS,

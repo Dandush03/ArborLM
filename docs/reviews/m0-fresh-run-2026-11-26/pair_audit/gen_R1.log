@@ -1,0 +1,80 @@
+R1.boolean_lights_r4 L0 seed=15033214622124146882 items=200
+R1.boolean_lights_r4 L1 seed=10528007806356248898 items=200
+R1.boolean_lights_r4 L2 seed=15981095303985754963 items=200
+R1.boolean_lights_r4 L3 seed=15319655912421915283 items=200
+R1.boolean_lights_r4 L4 seed=15787695644863773805 items=200
+R1.boolean_lights_r4 L5 seed=8201736086169940485 items=200
+R1.boolean_lights_r4 L6 seed=3166531151384654824 items=200
+R1.boolean_lights_r4 done 0.0s
+R1.categories_default_exceptions_r4 L0 seed=1414591211072903359 items=200
+R1.categories_default_exceptions_r4 L1 seed=7817568437074500758 items=200
+R1.categories_default_exceptions_r4 L2 seed=16401516457453564414 items=200
+R1.categories_default_exceptions_r4 L3 seed=2192178791766202984 items=200
+R1.categories_default_exceptions_r4 L4 seed=10129601565323053681 items=200
+R1.categories_default_exceptions_r4 L5 seed=10447090567356981747 items=200
+R1.categories_default_exceptions_r4 L6 seed=12498428121466031905 items=200
+R1.categories_default_exceptions_r4 done 0.1s
+R1.compass_turns L0 seed=195310198128291351 items=200
+R1.compass_turns L1 seed=14053919137352530827 items=200
+R1.compass_turns L2 seed=9934889558610213588 items=200
+R1.compass_turns L3 seed=3509159236123834337 items=200
+R1.compass_turns L4 seed=8869816371946699420 items=200
+R1.compass_turns L5 seed=16348804635809152624 items=200
+R1.compass_turns L6 seed=13542812513075247786 items=200
+R1.compass_turns done 0.0s
+R1.conditional_threshold_rule_r4 L0 seed=16330222407332709446 items=200
+R1.conditional_threshold_rule_r4 L1 seed=15568373451562814033 items=200
+R1.conditional_threshold_rule_r4 L2 seed=8391422590945474114 items=200
+R1.conditional_threshold_rule_r4 L3 seed=10844651480748715671 items=200
+R1.conditional_threshold_rule_r4 L4 seed=4813333848929849239 items=200
+R1.conditional_threshold_rule_r4 L5 seed=5855810926423142950 items=200
+R1.conditional_threshold_rule_r4 L6 seed=10953378107602327481 items=200
+R1.conditional_threshold_rule_r4 done 0.0s
+R1.equivalence_exchange_rates_r6 L0 seed=9758943849221572714 items=200
+R1.equivalence_exchange_rates_r6 L1 seed=9763861956445732679 items=200
+R1.equivalence_exchange_rates_r6 L2 seed=12033109291118134196 items=200
+R1.equivalence_exchange_rates_r6 L3 seed=16385118939351640683 items=200
+R1.equivalence_exchange_rates_r6 L4 seed=14831834722077651382 items=200
+R1.equivalence_exchange_rates_r6 L5 seed=14027720555945917716 items=200
+R1.equivalence_exchange_rates_r6 L6 seed=8712127091018620070 items=200
+R1.equivalence_exchange_rates_r6 done 0.1s
+R1.knights_knaves_r6 L0 seed=6177993817232654400 items=200
+R1.knights_knaves_r6 L1 seed=9988998394372393132 items=200
+R1.knights_knaves_r6 L2 seed=17078527953808068430 items=200
+R1.knights_knaves_r6 L3 seed=7178317246459407280 items=200
+R1.knights_knaves_r6 L4 seed=927403897963133722 items=200
+R1.knights_knaves_r6 L5 seed=5942276862516273716 items=200
+R1.knights_knaves_r6 L6 seed=14828603803628500345 items=200
+R1.knights_knaves_r6 done 0.5s
+R1.spatial_grid_walk_r5 L0 seed=734126656121323909 items=200
+R1.spatial_grid_walk_r5 L1 seed=17749128315202489973 items=200
+R1.spatial_grid_walk_r5 L2 seed=11910337059876099237 items=200
+R1.spatial_grid_walk_r5 L3 seed=11258294551560244852 items=200
+R1.spatial_grid_walk_r5 L4 seed=15598483390646871359 items=200
+R1.spatial_grid_walk_r5 L5 seed=11400842229861237072 items=200
+R1.spatial_grid_walk_r5 L6 seed=15852003236319446077 items=200
+R1.spatial_grid_walk_r5 done 0.1s
+R1.swap_tracking_r5 L0 seed=4286082004805943434 items=200
+R1.swap_tracking_r5 L1 seed=2261445482910470802 items=200
+R1.swap_tracking_r5 L2 seed=14992312426733158442 items=200
+R1.swap_tracking_r5 L3 seed=13847942247870776912 items=200
+R1.swap_tracking_r5 L4 seed=14911079736345315425 items=200
+R1.swap_tracking_r5 L5 seed=13339245415562816058 items=200
+R1.swap_tracking_r5 L6 seed=165948031715200031 items=200
+R1.swap_tracking_r5 done 0.1s
+R1.temporal_weekday_shift_r6 L0 seed=16258579738019511573 items=200
+R1.temporal_weekday_shift_r6 L1 seed=724348973900299099 items=200
+R1.temporal_weekday_shift_r6 L2 seed=2527536732398370519 items=200
+R1.temporal_weekday_shift_r6 L3 seed=17347838624229045673 items=200
+R1.temporal_weekday_shift_r6 L4 seed=7667569471254372648 items=200
+R1.temporal_weekday_shift_r6 L5 seed=555021657411173816 items=200
+R1.temporal_weekday_shift_r6 L6 seed=14904983231393114176 items=200
+R1.temporal_weekday_shift_r6 done 0.0s
+R1.venn_counting_r5 L0 seed=324577098961655746 items=200
+R1.venn_counting_r5 L1 seed=2556091346229560392 items=200
+R1.venn_counting_r5 L2 seed=12258408320392526243 items=200
+R1.venn_counting_r5 L3 seed=15731245422034114340 items=200
+R1.venn_counting_r5 L4 seed=1686120557655343699 items=200
+R1.venn_counting_r5 L5 seed=330285139405549854 items=200
+R1.venn_counting_r5 L6 seed=9184141240779032383 items=200
+R1.venn_counting_r5 done 0.1s

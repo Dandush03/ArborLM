@@ -1,0 +1,206 @@
+{
+ "plan_sha256": "4d29392e9ba83a0ab1ef53d38bf79f1144daa019d2191eda41390fc9bef15681",
+ "seed_set": "1",
+ "units": {
+  "R1a": {
+   "attempts": [
+    {
+     "commands": [
+      {
+       "exit_status": 0,
+       "name": "R1a-w",
+       "wall_seconds": 0.029
+      }
+     ],
+     "dir": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_pool_audit_20261126/deliver/runner_test/t2/run/R1a/seed1",
+     "end_utc": "2026-11-26T17:49:00Z",
+     "files": {
+      "R1a-w.stderr.txt": {
+       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+       "size": 0
+      },
+      "R1a-w.stdout.txt": {
+       "sha256": "4f4cced996dcebba88eee44ce62a03373c5f255ef7bd45f911353ded925124d6",
+       "size": 14
+      },
+      "out.txt": {
+       "sha256": "4f4cced996dcebba88eee44ce62a03373c5f255ef7bd45f911353ded925124d6",
+       "size": 14
+      }
+     },
+     "ok": true,
+     "start_utc": "2026-11-26T17:49:00Z"
+    }
+   ],
+   "ok": true
+  },
+  "R1b": {
+   "attempts": [
+    {
+     "commands": [
+      {
+       "exit_status": 0,
+       "name": "R1b-w",
+       "wall_seconds": 0.029
+      },
+      {
+       "exit_status": 1,
+       "name": "R1b-retry",
+       "wall_seconds": 0.027
+      }
+     ],
+     "dir": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_pool_audit_20261126/deliver/runner_test/t2/run/R1b/seed1",
+     "end_utc": "2026-11-26T17:49:00Z",
+     "files": {
+      "R1b-retry.stderr.txt": {
+       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+       "size": 0
+      },
+      "R1b-retry.stdout.txt": {
+       "sha256": "4f4cced996dcebba88eee44ce62a03373c5f255ef7bd45f911353ded925124d6",
+       "size": 14
+      },
+      "R1b-w.stderr.txt": {
+       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+       "size": 0
+      },
+      "R1b-w.stdout.txt": {
+       "sha256": "4f4cced996dcebba88eee44ce62a03373c5f255ef7bd45f911353ded925124d6",
+       "size": 14
+      },
+      "out.txt": {
+       "sha256": "4f4cced996dcebba88eee44ce62a03373c5f255ef7bd45f911353ded925124d6",
+       "size": 14
+      }
+     },
+     "ok": false,
+     "start_utc": "2026-11-26T17:49:00Z"
+    },
+    {
+     "commands": [
+      {
+       "exit_status": 0,
+       "name": "R1b-w",
+       "wall_seconds": 0.027
+      },
+      {
+       "exit_status": 0,
+       "name": "R1b-retry",
+       "wall_seconds": 0.028
+      }
+     ],
+     "dir": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_pool_audit_20261126/deliver/runner_test/t2/run/R1b/seed1_retry1",
+     "end_utc": "2026-11-26T17:49:00Z",
+     "files": {
+      "R1b-retry.stderr.txt": {
+       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+       "size": 0
+      },
+      "R1b-retry.stdout.txt": {
+       "sha256": "4f4cced996dcebba88eee44ce62a03373c5f255ef7bd45f911353ded925124d6",
+       "size": 14
+      },
+      "R1b-w.stderr.txt": {
+       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+       "size": 0
+      },
+      "R1b-w.stdout.txt": {
+       "sha256": "4f4cced996dcebba88eee44ce62a03373c5f255ef7bd45f911353ded925124d6",
+       "size": 14
+      },
+      "out.txt": {
+       "sha256": "4f4cced996dcebba88eee44ce62a03373c5f255ef7bd45f911353ded925124d6",
+       "size": 14
+      }
+     },
+     "ok": true,
+     "start_utc": "2026-11-26T17:49:00Z"
+    }
+   ],
+   "ok": true
+  },
+  "R1c": {
+   "attempts": [
+    {
+     "commands": [
+      {
+       "exit_status": 2,
+       "name": "R1c-fail",
+       "wall_seconds": 0.027
+      }
+     ],
+     "dir": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_pool_audit_20261126/deliver/runner_test/t2/run/R1c/seed1",
+     "end_utc": "2026-11-26T17:49:00Z",
+     "files": {
+      "R1c-fail.stderr.txt": {
+       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+       "size": 0
+      },
+      "R1c-fail.stdout.txt": {
+       "sha256": "4f4cced996dcebba88eee44ce62a03373c5f255ef7bd45f911353ded925124d6",
+       "size": 14
+      }
+     },
+     "ok": false,
+     "start_utc": "2026-11-26T17:49:00Z"
+    },
+    {
+     "commands": [
+      {
+       "exit_status": 2,
+       "name": "R1c-fail",
+       "wall_seconds": 0.027
+      }
+     ],
+     "dir": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_pool_audit_20261126/deliver/runner_test/t2/run/R1c/seed1_retry1",
+     "end_utc": "2026-11-26T17:49:00Z",
+     "files": {
+      "R1c-fail.stderr.txt": {
+       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+       "size": 0
+      },
+      "R1c-fail.stdout.txt": {
+       "sha256": "4f4cced996dcebba88eee44ce62a03373c5f255ef7bd45f911353ded925124d6",
+       "size": 14
+      }
+     },
+     "ok": false,
+     "start_utc": "2026-11-26T17:49:00Z"
+    }
+   ],
+   "ok": false
+  },
+  "R2a": {
+   "attempts": [
+    {
+     "commands": [
+      {
+       "exit_status": 0,
+       "name": "R2a-w",
+       "wall_seconds": 0.034
+      }
+     ],
+     "dir": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_pool_audit_20261126/deliver/runner_test/t2/run/R2a/seed1",
+     "end_utc": "2026-11-26T17:49:00Z",
+     "files": {
+      "R2a-w.stderr.txt": {
+       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+       "size": 0
+      },
+      "R2a-w.stdout.txt": {
+       "sha256": "4f4cced996dcebba88eee44ce62a03373c5f255ef7bd45f911353ded925124d6",
+       "size": 14
+      },
+      "out.txt": {
+       "sha256": "4f4cced996dcebba88eee44ce62a03373c5f255ef7bd45f911353ded925124d6",
+       "size": 14
+      }
+     },
+     "ok": true,
+     "start_utc": "2026-11-26T17:49:00Z"
+    }
+   ],
+   "ok": true
+  }
+ }
+}

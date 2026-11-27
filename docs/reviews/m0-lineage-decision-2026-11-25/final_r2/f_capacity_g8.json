@@ -1,0 +1,261 @@
+{
+ "G": 8,
+ "cross_lineage_shared_texts": {},
+ "demand_per_level": 31000,
+ "lineages": {
+  "R2.binary_search_trace": {
+   "seconds": 17.8,
+   "shortfalls": [],
+   "supplied": [
+    31000,
+    31000,
+    31000,
+    31000,
+    31000,
+    31000,
+    31000
+   ]
+  },
+  "R2.caesar_shift": {
+   "seconds": 5.1,
+   "shortfalls": [],
+   "supplied": [
+    31000,
+    31000,
+    31000,
+    31000,
+    31000,
+    31000,
+    31000
+   ]
+  },
+  "R2.cellular_automaton": {
+   "seconds": 18.5,
+   "shortfalls": [],
+   "supplied": [
+    31000,
+    31000,
+    31000,
+    31000,
+    31000,
+    31000,
+    31000
+   ]
+  },
+  "R2.cheapest_network": {
+   "seconds": 33.3,
+   "shortfalls": [],
+   "supplied": [
+    31000,
+    31000,
+    31000,
+    31000,
+    31000,
+    31000,
+    31000
+   ]
+  },
+  "R2.count_divisible": {
+   "seconds": 12.4,
+   "shortfalls": [],
+   "supplied": [
+    31000,
+    31000,
+    31000,
+    31000,
+    31000,
+    31000,
+    31000
+   ]
+  },
+  "R2.crt_smallest": {
+   "seconds": 7.1,
+   "shortfalls": [],
+   "supplied": [
+    31000,
+    31000,
+    31000,
+    31000,
+    31000,
+    31000,
+    31000
+   ]
+  },
+  "R2.dictionary_rank": {
+   "seconds": 9.7,
+   "shortfalls": [],
+   "supplied": [
+    31000,
+    31000,
+    31000,
+    31000,
+    31000,
+    31000,
+    31000
+   ]
+  },
+  "R2.digit_root": {
+   "seconds": 4.1,
+   "shortfalls": [],
+   "supplied": [
+    31000,
+    31000,
+    31000,
+    31000,
+    31000,
+    31000,
+    31000
+   ]
+  },
+  "R2.expression_eval": {
+   "seconds": 13.1,
+   "shortfalls": [],
+   "supplied": [
+    31000,
+    31000,
+    31000,
+    31000,
+    31000,
+    31000,
+    31000
+   ]
+  },
+  "R2.from_base": {
+   "seconds": 13.5,
+   "shortfalls": [],
+   "supplied": [
+    31000,
+    31000,
+    31000,
+    31000,
+    31000,
+    31000,
+    31000
+   ]
+  },
+  "R2.grid_sum": {
+   "seconds": 8.2,
+   "shortfalls": [],
+   "supplied": [
+    31000,
+    31000,
+    31000,
+    31000,
+    31000,
+    31000,
+    31000
+   ]
+  },
+  "R2.interval_scheduling": {
+   "seconds": 45.0,
+   "shortfalls": [],
+   "supplied": [
+    31000,
+    31000,
+    31000,
+    31000,
+    31000,
+    31000,
+    31000
+   ]
+  },
+  "R2.list_ops": {
+   "seconds": 7.8,
+   "shortfalls": [],
+   "supplied": [
+    31000,
+    31000,
+    31000,
+    31000,
+    31000,
+    31000,
+    31000
+   ]
+  },
+  "R2.luhn_check": {
+   "seconds": 8.5,
+   "shortfalls": [],
+   "supplied": [
+    31000,
+    31000,
+    31000,
+    31000,
+    31000,
+    31000,
+    31000
+   ]
+  },
+  "R2.min_heap_ops": {
+   "seconds": 12.3,
+   "shortfalls": [],
+   "supplied": [
+    31000,
+    31000,
+    31000,
+    31000,
+    31000,
+    31000,
+    31000
+   ]
+  },
+  "R2.run_length": {
+   "seconds": 5.8,
+   "shortfalls": [],
+   "supplied": [
+    31000,
+    31000,
+    31000,
+    31000,
+    31000,
+    31000,
+    31000
+   ]
+  },
+  "R2.sort_list": {
+   "seconds": 3.7,
+   "shortfalls": [],
+   "supplied": [
+    31000,
+    31000,
+    31000,
+    31000,
+    31000,
+    31000,
+    31000
+   ]
+  },
+  "R2.string_rewrite_nonidentity": {
+   "seconds": 7.1,
+   "shortfalls": [],
+   "supplied": [
+    31000,
+    31000,
+    31000,
+    31000,
+    31000,
+    31000,
+    31000
+   ]
+  },
+  "R2.to_base_wide": {
+   "seconds": 9.5,
+   "shortfalls": [
+    [
+     "R2.to_base_wide",
+     0,
+     31000,
+     15928
+    ]
+   ],
+   "supplied": [
+    15928,
+    31000,
+    31000,
+    31000,
+    31000,
+    31000,
+    31000
+   ]
+  }
+ }
+}

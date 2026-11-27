@@ -1,0 +1,1093 @@
+{
+  "copies_record": "studies/m0/fresh_run/r2/COPIES.md",
+  "copies_sha256": {
+    "studies/m0/fresh_run/r2/f_new_heur.py": "30710a0f7e0efd0af79e946f099a7071eb89d73c39c47f7b12d23b611bb2e62b",
+    "studies/m0/fresh_run/r2/f_rules.py": "5f5fcee11234d40c4df1d603bc851ce6cfdf0a92f506f135a74281b0f93d297f",
+    "studies/m0/fresh_run/r2/f_rules_new.py": "5b3019ced2307d9ab7776158151df14f7e33e74e2fcac73d527352f60c487dc0",
+    "studies/m0/fresh_run/r2/r2_fix4_battery.py": "920d246080a23e36e412a3ae2c669c9864cc1184c4a170cc17f741bbacfed0f9"
+  },
+  "dry_run_exclusions": [],
+  "dry_run_exclusions_note": "empty until the dry run of point 10 (all of stage 1S points 9 (i) to (v) existing) is made by the lead",
+  "dry_run_scratch_attempt": "attempt1",
+  "lineage_id_map": {
+    "R2a:r2a.json": {
+      "map": {
+        "R2.binary_search_trace": "R2.binary_search_trace",
+        "R2.caesar_shift": "R2.caesar_shift",
+        "R2.cellular_automaton": "R2.cellular_automaton",
+        "R2.cheapest_network": "R2.cheapest_network",
+        "R2.count_divisible": "R2.count_divisible",
+        "R2.crt_smallest": "R2.crt_smallest",
+        "R2.dictionary_rank": "R2.dictionary_rank",
+        "R2.expression_eval": "R2.expression_eval",
+        "R2.from_base": "R2.from_base",
+        "R2.grid_sum": "R2.grid_sum",
+        "R2.list_ops": "R2.list_ops",
+        "R2.luhn_check": "R2.luhn_check",
+        "R2.min_heap_ops": "R2.min_heap_ops",
+        "R2.run_length": "R2.run_length",
+        "R2.sort_list": "R2.sort_list",
+        "R2.string_rewrite_nonidentity": "R2.string_rewrite_nonidentity",
+        "R2.to_base_wide": "R2.to_base_wide"
+      },
+      "rule": "the output writes the id as the script's fix4_set() key, which is the survivor-list id; identity"
+    },
+    "R2b:f_rules.json": {
+      "map": {
+        "R2.binary_search_trace": "R2.binary_search_trace",
+        "R2.caesar_shift": "R2.caesar_shift",
+        "R2.cellular_automaton": "R2.cellular_automaton",
+        "R2.cheapest_network": "R2.cheapest_network",
+        "R2.count_divisible": "R2.count_divisible",
+        "R2.crt_smallest": "R2.crt_smallest",
+        "R2.dictionary_rank": "R2.dictionary_rank",
+        "R2.expression_eval": "R2.expression_eval",
+        "R2.from_base": "R2.from_base",
+        "R2.grid_sum": "R2.grid_sum",
+        "R2.list_ops": "R2.list_ops",
+        "R2.luhn_check": "R2.luhn_check",
+        "R2.min_heap_ops": "R2.min_heap_ops",
+        "R2.run_length": "R2.run_length",
+        "R2.sort_list": "R2.sort_list",
+        "R2.string_rewrite_nonidentity": "R2.string_rewrite_nonidentity",
+        "R2.to_base_wide": "R2.to_base_wide"
+      },
+      "rule": "the output writes 'R2.' + the name given on the command line; identity"
+    },
+    "R2b:f_rules_new.json": {
+      "map": {
+        "R2.binary_search_trace": "R2.binary_search_trace",
+        "R2.cheapest_network": "R2.cheapest_network",
+        "R2.count_divisible": "R2.count_divisible",
+        "R2.crt_smallest": "R2.crt_smallest",
+        "R2.expression_eval": "R2.expression_eval",
+        "R2.from_base": "R2.from_base",
+        "R2.grid_sum": "R2.grid_sum",
+        "R2.list_ops": "R2.list_ops",
+        "R2.luhn_check": "R2.luhn_check",
+        "R2.min_heap_ops": "R2.min_heap_ops",
+        "R2.run_length": "R2.run_length",
+        "R2.string_rewrite_nonidentity": "R2.string_rewrite_nonidentity",
+        "R2.to_base_wide": "R2.to_base_wide"
+      },
+      "rule": "the output writes 'R2.' + a key of NEW of the copy of f_new_heur.py (13 survivors; digit_root and interval_scheduling entries removed by S2b); identity"
+    },
+    "alias_tables": "none: the R2 scripts have no RULE_ALIAS, ALIAS, A3_ALIAS or A3_OLD; no file name carries a lineage id"
+  },
+  "output_formats": {
+    "f_rules.json": {
+      "cond_rules": "k / napp from k and napp; k / n_all from k and the shape's `n`",
+      "lineages": "{lid: {level '0'..'6': {shape: {n, answer_type, distinct_answers, rules: {name: {k, napp, nerr}}}}}}",
+      "rule_names": "'[mine] ...', '[a3] ...', '[impl] ...' and 'most frequent answer (train draw)'; every rule is written, napp = 0 included",
+      "seeds_field": "the literal text 'finalr2|<lid>|<level>|5 train, |6 test'; not the seed. The seed is the tag in the plan",
+      "stdout": "one line '<lid> <seconds>s' per lineage",
+      "top": [
+        "n",
+        "seeds",
+        "lineages"
+      ]
+    },
+    "f_rules_new.json": {
+      "cond_rules": "k / napp from k and napp; k / n_all from k and the shape's `n` (the script's own printed figure for an open answer is k / n)",
+      "lineages": "{lid: {level '0'..'6': {shape: {n, answer_type, rules: {'[NEW] <name>': {k, napp, nerr}}}}}}",
+      "stdout": "lines '<lid> L<level> [<shape>] <eff> nerr=<nerr> <name>' for effect above 0.05 or nerr > 0 (not complete; read the json)",
+      "top": [
+        "n",
+        "lineages"
+      ]
+    },
+    "r2a.json": {
+      "cond_rules": "k / napp = acc_app (napp is the item count of that figure); k / n_all = acc_all, n_all = the shape's `n`; both recoverable from k, napp and the shape's n",
+      "lineages": "{lid: {level '0'..'6': {shape: {n, answer_type, distinct_answers, [yes_share when answer_type == 'yn'], rules: {name: {k, napp, nerr, acc_all, acc_app}}}}}}",
+      "rule_names": "'[mine] ...' (audit 4), '[a3] ...' (audit 3), '[impl] ...' (fix-3 implementer), and 'most frequent answer (train draw)'; a rule with napp = 0 is not written",
+      "seeds_field": "the literal 'f4'; not the seed. The seed is the tag in the plan",
+      "stderr": "'wrote <path>'",
+      "top": [
+        "n",
+        "seeds",
+        "lineages"
+      ]
+    }
+  },
+  "plan_for": "ADR-0033 addendum 1, stage 1S points 3, 4, 9 and 10; units R2a and R2b only (a fragment of the run plan)",
+  "scripts_commit": "b78e58b1f47619f070dfc6c0a88999d345b1a34b",
+  "seed_file": {
+    "path": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/arborlm-consolidation-experiment-2b31c1/docs/reviews/adr-0033-m0-2026-11-20/addendum1_scripts/addendum1_rev6_fresh_run.out.txt",
+    "sha256": "4d20979e2181720da36583a4fe18c3f79031939925c1d4da5cc79bad22678919"
+  },
+  "survivor_list_of_record": {
+    "R2": [
+      "R2.binary_search_trace",
+      "R2.caesar_shift",
+      "R2.cellular_automaton",
+      "R2.cheapest_network",
+      "R2.count_divisible",
+      "R2.crt_smallest",
+      "R2.dictionary_rank",
+      "R2.expression_eval",
+      "R2.from_base",
+      "R2.grid_sum",
+      "R2.list_ops",
+      "R2.luhn_check",
+      "R2.min_heap_ops",
+      "R2.run_length",
+      "R2.sort_list",
+      "R2.string_rewrite_nonidentity",
+      "R2.to_base_wide"
+    ],
+    "path": "studies/m0/manifests/survivor_list_of_record.json",
+    "sha256": "0b658145a825490647b99eeab449bd442057fcd177a0be848fafa1868a87be0d"
+  },
+  "survivors_without_entry_in_NEW": [
+    "R2.caesar_shift",
+    "R2.cellular_automaton",
+    "R2.dictionary_rank",
+    "R2.sort_list"
+  ],
+  "units": {
+    "R2a": {
+      "runs": {
+        "1": {
+          "base_integer": 16103270370041696293,
+          "commands": [
+            {
+              "argv": [
+                "uv",
+                "run",
+                "--locked",
+                "python",
+                "-m",
+                "studies.m0.fresh_run.r2.r2_fix4_battery",
+                "run",
+                "--n",
+                "4000",
+                "--seeds",
+                "f4",
+                "--out",
+                "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R2a/seed1/r2a.json",
+                "--only",
+                "R2.binary_search_trace,R2.caesar_shift,R2.cellular_automaton,R2.cheapest_network,R2.count_divisible,R2.crt_smallest,R2.dictionary_rank,R2.expression_eval,R2.from_base,R2.grid_sum,R2.list_ops,R2.luhn_check,R2.min_heap_ops,R2.run_length,R2.sort_list,R2.string_rewrite_nonidentity,R2.to_base_wide",
+                "--procs",
+                "8"
+              ],
+              "lineage_ids_in_output": [
+                "R2.binary_search_trace",
+                "R2.caesar_shift",
+                "R2.cellular_automaton",
+                "R2.cheapest_network",
+                "R2.count_divisible",
+                "R2.crt_smallest",
+                "R2.dictionary_rank",
+                "R2.expression_eval",
+                "R2.from_base",
+                "R2.grid_sum",
+                "R2.list_ops",
+                "R2.luhn_check",
+                "R2.min_heap_ops",
+                "R2.run_length",
+                "R2.sort_list",
+                "R2.string_rewrite_nonidentity",
+                "R2.to_base_wide"
+              ],
+              "must_contain": [
+                "R2.binary_search_trace",
+                "R2.caesar_shift",
+                "R2.cellular_automaton",
+                "R2.cheapest_network",
+                "R2.count_divisible",
+                "R2.crt_smallest",
+                "R2.dictionary_rank",
+                "R2.expression_eval",
+                "R2.from_base",
+                "R2.grid_sum",
+                "R2.list_ops",
+                "R2.luhn_check",
+                "R2.min_heap_ops",
+                "R2.run_length",
+                "R2.sort_list",
+                "R2.string_rewrite_nonidentity",
+                "R2.to_base_wide"
+              ],
+              "name": "r2_fix4_battery",
+              "stderr_file": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R2a/seed1/r2a.stderr.txt",
+              "stdout_file": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R2a/seed1/r2a.stdout.txt",
+              "writes": [
+                "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R2a/seed1/r2a.json"
+              ]
+            }
+          ],
+          "environment": {
+            "M0_FR_TAG": "3303861629583630800",
+            "PYTHONDONTWRITEBYTECODE": "1",
+            "PYTHONHASHSEED": "0",
+            "PYTHONPATH": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f"
+          },
+          "environment_note": "only these variables are set by the plan; PATH and HOME are inherited; the runner makes the output directory (mkdir -p) before the first command; commands run in the order listed, each to its end; stdout and stderr of each command go to the files named",
+          "items_per_level": 4000,
+          "levels": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "output_directory": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R2a/seed1",
+          "seed_label": "fresh-shortcut|1",
+          "seeds": [
+            {
+              "formula": "int.from_bytes(sha256('16103270370041696293|R2a|tag')[:8], 'big')",
+              "integer": 3303861629583630800,
+              "role": "tag",
+              "used_as": "decimal text of the integer, in env M0_FR_TAG; string seed '<tag>|<lid>|<level>|5' (train) and '|6' (test)"
+            }
+          ],
+          "working_directory": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f"
+        },
+        "2": {
+          "base_integer": 10773834973117025986,
+          "commands": [
+            {
+              "argv": [
+                "uv",
+                "run",
+                "--locked",
+                "python",
+                "-m",
+                "studies.m0.fresh_run.r2.r2_fix4_battery",
+                "run",
+                "--n",
+                "4000",
+                "--seeds",
+                "f4",
+                "--out",
+                "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R2a/seed2/r2a.json",
+                "--only",
+                "R2.binary_search_trace,R2.caesar_shift,R2.cellular_automaton,R2.cheapest_network,R2.count_divisible,R2.crt_smallest,R2.dictionary_rank,R2.expression_eval,R2.from_base,R2.grid_sum,R2.list_ops,R2.luhn_check,R2.min_heap_ops,R2.run_length,R2.sort_list,R2.string_rewrite_nonidentity,R2.to_base_wide",
+                "--procs",
+                "8"
+              ],
+              "lineage_ids_in_output": [
+                "R2.binary_search_trace",
+                "R2.caesar_shift",
+                "R2.cellular_automaton",
+                "R2.cheapest_network",
+                "R2.count_divisible",
+                "R2.crt_smallest",
+                "R2.dictionary_rank",
+                "R2.expression_eval",
+                "R2.from_base",
+                "R2.grid_sum",
+                "R2.list_ops",
+                "R2.luhn_check",
+                "R2.min_heap_ops",
+                "R2.run_length",
+                "R2.sort_list",
+                "R2.string_rewrite_nonidentity",
+                "R2.to_base_wide"
+              ],
+              "must_contain": [
+                "R2.binary_search_trace",
+                "R2.caesar_shift",
+                "R2.cellular_automaton",
+                "R2.cheapest_network",
+                "R2.count_divisible",
+                "R2.crt_smallest",
+                "R2.dictionary_rank",
+                "R2.expression_eval",
+                "R2.from_base",
+                "R2.grid_sum",
+                "R2.list_ops",
+                "R2.luhn_check",
+                "R2.min_heap_ops",
+                "R2.run_length",
+                "R2.sort_list",
+                "R2.string_rewrite_nonidentity",
+                "R2.to_base_wide"
+              ],
+              "name": "r2_fix4_battery",
+              "stderr_file": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R2a/seed2/r2a.stderr.txt",
+              "stdout_file": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R2a/seed2/r2a.stdout.txt",
+              "writes": [
+                "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R2a/seed2/r2a.json"
+              ]
+            }
+          ],
+          "environment": {
+            "M0_FR_TAG": "17051368523337511763",
+            "PYTHONDONTWRITEBYTECODE": "1",
+            "PYTHONHASHSEED": "0",
+            "PYTHONPATH": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f"
+          },
+          "environment_note": "only these variables are set by the plan; PATH and HOME are inherited; the runner makes the output directory (mkdir -p) before the first command; commands run in the order listed, each to its end; stdout and stderr of each command go to the files named",
+          "items_per_level": 4000,
+          "levels": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "output_directory": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R2a/seed2",
+          "seed_label": "fresh-shortcut|2",
+          "seeds": [
+            {
+              "formula": "int.from_bytes(sha256('10773834973117025986|R2a|tag')[:8], 'big')",
+              "integer": 17051368523337511763,
+              "role": "tag",
+              "used_as": "decimal text of the integer, in env M0_FR_TAG; string seed '<tag>|<lid>|<level>|5' (train) and '|6' (test)"
+            }
+          ],
+          "working_directory": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f"
+        },
+        "3": {
+          "base_integer": 619660634241804713,
+          "commands": [
+            {
+              "argv": [
+                "uv",
+                "run",
+                "--locked",
+                "python",
+                "-m",
+                "studies.m0.fresh_run.r2.r2_fix4_battery",
+                "run",
+                "--n",
+                "4000",
+                "--seeds",
+                "f4",
+                "--out",
+                "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R2a/seed3/r2a.json",
+                "--only",
+                "R2.binary_search_trace,R2.caesar_shift,R2.cellular_automaton,R2.cheapest_network,R2.count_divisible,R2.crt_smallest,R2.dictionary_rank,R2.expression_eval,R2.from_base,R2.grid_sum,R2.list_ops,R2.luhn_check,R2.min_heap_ops,R2.run_length,R2.sort_list,R2.string_rewrite_nonidentity,R2.to_base_wide",
+                "--procs",
+                "8"
+              ],
+              "lineage_ids_in_output": [
+                "R2.binary_search_trace",
+                "R2.caesar_shift",
+                "R2.cellular_automaton",
+                "R2.cheapest_network",
+                "R2.count_divisible",
+                "R2.crt_smallest",
+                "R2.dictionary_rank",
+                "R2.expression_eval",
+                "R2.from_base",
+                "R2.grid_sum",
+                "R2.list_ops",
+                "R2.luhn_check",
+                "R2.min_heap_ops",
+                "R2.run_length",
+                "R2.sort_list",
+                "R2.string_rewrite_nonidentity",
+                "R2.to_base_wide"
+              ],
+              "must_contain": [
+                "R2.binary_search_trace",
+                "R2.caesar_shift",
+                "R2.cellular_automaton",
+                "R2.cheapest_network",
+                "R2.count_divisible",
+                "R2.crt_smallest",
+                "R2.dictionary_rank",
+                "R2.expression_eval",
+                "R2.from_base",
+                "R2.grid_sum",
+                "R2.list_ops",
+                "R2.luhn_check",
+                "R2.min_heap_ops",
+                "R2.run_length",
+                "R2.sort_list",
+                "R2.string_rewrite_nonidentity",
+                "R2.to_base_wide"
+              ],
+              "name": "r2_fix4_battery",
+              "stderr_file": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R2a/seed3/r2a.stderr.txt",
+              "stdout_file": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R2a/seed3/r2a.stdout.txt",
+              "writes": [
+                "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R2a/seed3/r2a.json"
+              ]
+            }
+          ],
+          "environment": {
+            "M0_FR_TAG": "18441618160095884807",
+            "PYTHONDONTWRITEBYTECODE": "1",
+            "PYTHONHASHSEED": "0",
+            "PYTHONPATH": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f"
+          },
+          "environment_note": "only these variables are set by the plan; PATH and HOME are inherited; the runner makes the output directory (mkdir -p) before the first command; commands run in the order listed, each to its end; stdout and stderr of each command go to the files named",
+          "items_per_level": 4000,
+          "levels": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "output_directory": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R2a/seed3",
+          "seed_label": "fresh-shortcut|3",
+          "seeds": [
+            {
+              "formula": "int.from_bytes(sha256('619660634241804713|R2a|tag')[:8], 'big')",
+              "integer": 18441618160095884807,
+              "role": "tag",
+              "used_as": "decimal text of the integer, in env M0_FR_TAG; string seed '<tag>|<lid>|<level>|5' (train) and '|6' (test)"
+            }
+          ],
+          "working_directory": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f"
+        },
+        "dry": {
+          "base_integer": 3342082268851962967,
+          "commands": [
+            {
+              "argv": [
+                "uv",
+                "run",
+                "--locked",
+                "python",
+                "-m",
+                "studies.m0.fresh_run.r2.r2_fix4_battery",
+                "run",
+                "--n",
+                "20",
+                "--seeds",
+                "f4",
+                "--out",
+                "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r2_20261126/attempt1/r2a/dry/r2a.json",
+                "--only",
+                "R2.binary_search_trace,R2.caesar_shift,R2.cellular_automaton,R2.cheapest_network,R2.count_divisible,R2.crt_smallest,R2.dictionary_rank,R2.expression_eval,R2.from_base,R2.grid_sum,R2.list_ops,R2.luhn_check,R2.min_heap_ops,R2.run_length,R2.sort_list,R2.string_rewrite_nonidentity,R2.to_base_wide",
+                "--procs",
+                "8"
+              ],
+              "lineage_ids_in_output": [
+                "R2.binary_search_trace",
+                "R2.caesar_shift",
+                "R2.cellular_automaton",
+                "R2.cheapest_network",
+                "R2.count_divisible",
+                "R2.crt_smallest",
+                "R2.dictionary_rank",
+                "R2.expression_eval",
+                "R2.from_base",
+                "R2.grid_sum",
+                "R2.list_ops",
+                "R2.luhn_check",
+                "R2.min_heap_ops",
+                "R2.run_length",
+                "R2.sort_list",
+                "R2.string_rewrite_nonidentity",
+                "R2.to_base_wide"
+              ],
+              "must_contain": [
+                "R2.binary_search_trace",
+                "R2.caesar_shift",
+                "R2.cellular_automaton",
+                "R2.cheapest_network",
+                "R2.count_divisible",
+                "R2.crt_smallest",
+                "R2.dictionary_rank",
+                "R2.expression_eval",
+                "R2.from_base",
+                "R2.grid_sum",
+                "R2.list_ops",
+                "R2.luhn_check",
+                "R2.min_heap_ops",
+                "R2.run_length",
+                "R2.sort_list",
+                "R2.string_rewrite_nonidentity",
+                "R2.to_base_wide"
+              ],
+              "name": "r2_fix4_battery",
+              "stderr_file": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r2_20261126/attempt1/r2a/dry/r2a.stderr.txt",
+              "stdout_file": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r2_20261126/attempt1/r2a/dry/r2a.stdout.txt",
+              "writes": [
+                "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r2_20261126/attempt1/r2a/dry/r2a.json"
+              ]
+            }
+          ],
+          "environment": {
+            "M0_FR_TAG": "4560779698795767882",
+            "PYTHONDONTWRITEBYTECODE": "1",
+            "PYTHONHASHSEED": "0",
+            "PYTHONPATH": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f"
+          },
+          "environment_note": "only these variables are set by the plan; PATH and HOME are inherited; the runner makes the output directory (mkdir -p) before the first command; commands run in the order listed, each to its end; stdout and stderr of each command go to the files named",
+          "items_per_level": 20,
+          "levels": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "output_directory": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r2_20261126/attempt1/r2a/dry",
+          "seed_label": "fresh-shortcut-dry-run",
+          "seeds": [
+            {
+              "formula": "int.from_bytes(sha256('3342082268851962967|R2a|tag')[:8], 'big')",
+              "integer": 4560779698795767882,
+              "role": "tag",
+              "used_as": "decimal text of the integer, in env M0_FR_TAG; string seed '<tag>|<lid>|<level>|5' (train) and '|6' (test)"
+            }
+          ],
+          "working_directory": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f"
+        }
+      }
+    },
+    "R2b": {
+      "runs": {
+        "1": {
+          "base_integer": 16103270370041696293,
+          "commands": [
+            {
+              "argv": [
+                "uv",
+                "run",
+                "--locked",
+                "python",
+                "studies/m0/fresh_run/r2/f_rules.py",
+                "4000",
+                "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R2b/seed1/f_rules.json",
+                "binary_search_trace,caesar_shift,cellular_automaton,cheapest_network,count_divisible,crt_smallest,dictionary_rank,expression_eval,from_base,grid_sum,list_ops,luhn_check,min_heap_ops,run_length,sort_list,string_rewrite_nonidentity,to_base_wide"
+              ],
+              "lineage_ids_in_output": [
+                "R2.binary_search_trace",
+                "R2.caesar_shift",
+                "R2.cellular_automaton",
+                "R2.cheapest_network",
+                "R2.count_divisible",
+                "R2.crt_smallest",
+                "R2.dictionary_rank",
+                "R2.expression_eval",
+                "R2.from_base",
+                "R2.grid_sum",
+                "R2.list_ops",
+                "R2.luhn_check",
+                "R2.min_heap_ops",
+                "R2.run_length",
+                "R2.sort_list",
+                "R2.string_rewrite_nonidentity",
+                "R2.to_base_wide"
+              ],
+              "must_contain": [
+                "R2.binary_search_trace",
+                "R2.caesar_shift",
+                "R2.cellular_automaton",
+                "R2.cheapest_network",
+                "R2.count_divisible",
+                "R2.crt_smallest",
+                "R2.dictionary_rank",
+                "R2.expression_eval",
+                "R2.from_base",
+                "R2.grid_sum",
+                "R2.list_ops",
+                "R2.luhn_check",
+                "R2.min_heap_ops",
+                "R2.run_length",
+                "R2.sort_list",
+                "R2.string_rewrite_nonidentity",
+                "R2.to_base_wide"
+              ],
+              "name": "f_rules",
+              "stderr_file": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R2b/seed1/f_rules.stderr.txt",
+              "stdout_file": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R2b/seed1/f_rules.stdout.txt",
+              "writes": [
+                "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R2b/seed1/f_rules.json"
+              ]
+            },
+            {
+              "argv": [
+                "uv",
+                "run",
+                "--locked",
+                "python",
+                "studies/m0/fresh_run/r2/f_rules_new.py",
+                "4000",
+                "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R2b/seed1/f_rules_new.json"
+              ],
+              "lineage_ids_in_output": [
+                "R2.binary_search_trace",
+                "R2.cheapest_network",
+                "R2.count_divisible",
+                "R2.crt_smallest",
+                "R2.expression_eval",
+                "R2.from_base",
+                "R2.grid_sum",
+                "R2.list_ops",
+                "R2.luhn_check",
+                "R2.min_heap_ops",
+                "R2.run_length",
+                "R2.string_rewrite_nonidentity",
+                "R2.to_base_wide"
+              ],
+              "must_contain": [
+                "R2.binary_search_trace",
+                "R2.cheapest_network",
+                "R2.count_divisible",
+                "R2.crt_smallest",
+                "R2.expression_eval",
+                "R2.from_base",
+                "R2.grid_sum",
+                "R2.list_ops",
+                "R2.luhn_check",
+                "R2.min_heap_ops",
+                "R2.run_length",
+                "R2.string_rewrite_nonidentity",
+                "R2.to_base_wide"
+              ],
+              "name": "f_rules_new",
+              "stderr_file": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R2b/seed1/f_rules_new.stderr.txt",
+              "stdout_file": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R2b/seed1/f_rules_new.stdout.txt",
+              "writes": [
+                "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R2b/seed1/f_rules_new.json"
+              ]
+            }
+          ],
+          "environment": {
+            "M0_FR_TAG": "6538060889923897314",
+            "PYTHONDONTWRITEBYTECODE": "1",
+            "PYTHONHASHSEED": "0",
+            "PYTHONPATH": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f"
+          },
+          "environment_note": "only these variables are set by the plan; PATH and HOME are inherited; the runner makes the output directory (mkdir -p) before the first command; commands run in the order listed, each to its end; stdout and stderr of each command go to the files named",
+          "items_per_level": 4000,
+          "levels": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "output_directory": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R2b/seed1",
+          "seed_label": "fresh-shortcut|1",
+          "seeds": [
+            {
+              "formula": "int.from_bytes(sha256('16103270370041696293|R2b|tag')[:8], 'big')",
+              "integer": 6538060889923897314,
+              "role": "tag",
+              "used_as": "decimal text of the integer, in env M0_FR_TAG; string seed '<tag>|<lid>|<level>|5' (train) and '|6' (test); the f_rules_new copy uses |6 only"
+            }
+          ],
+          "working_directory": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f"
+        },
+        "2": {
+          "base_integer": 10773834973117025986,
+          "commands": [
+            {
+              "argv": [
+                "uv",
+                "run",
+                "--locked",
+                "python",
+                "studies/m0/fresh_run/r2/f_rules.py",
+                "4000",
+                "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R2b/seed2/f_rules.json",
+                "binary_search_trace,caesar_shift,cellular_automaton,cheapest_network,count_divisible,crt_smallest,dictionary_rank,expression_eval,from_base,grid_sum,list_ops,luhn_check,min_heap_ops,run_length,sort_list,string_rewrite_nonidentity,to_base_wide"
+              ],
+              "lineage_ids_in_output": [
+                "R2.binary_search_trace",
+                "R2.caesar_shift",
+                "R2.cellular_automaton",
+                "R2.cheapest_network",
+                "R2.count_divisible",
+                "R2.crt_smallest",
+                "R2.dictionary_rank",
+                "R2.expression_eval",
+                "R2.from_base",
+                "R2.grid_sum",
+                "R2.list_ops",
+                "R2.luhn_check",
+                "R2.min_heap_ops",
+                "R2.run_length",
+                "R2.sort_list",
+                "R2.string_rewrite_nonidentity",
+                "R2.to_base_wide"
+              ],
+              "must_contain": [
+                "R2.binary_search_trace",
+                "R2.caesar_shift",
+                "R2.cellular_automaton",
+                "R2.cheapest_network",
+                "R2.count_divisible",
+                "R2.crt_smallest",
+                "R2.dictionary_rank",
+                "R2.expression_eval",
+                "R2.from_base",
+                "R2.grid_sum",
+                "R2.list_ops",
+                "R2.luhn_check",
+                "R2.min_heap_ops",
+                "R2.run_length",
+                "R2.sort_list",
+                "R2.string_rewrite_nonidentity",
+                "R2.to_base_wide"
+              ],
+              "name": "f_rules",
+              "stderr_file": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R2b/seed2/f_rules.stderr.txt",
+              "stdout_file": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R2b/seed2/f_rules.stdout.txt",
+              "writes": [
+                "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R2b/seed2/f_rules.json"
+              ]
+            },
+            {
+              "argv": [
+                "uv",
+                "run",
+                "--locked",
+                "python",
+                "studies/m0/fresh_run/r2/f_rules_new.py",
+                "4000",
+                "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R2b/seed2/f_rules_new.json"
+              ],
+              "lineage_ids_in_output": [
+                "R2.binary_search_trace",
+                "R2.cheapest_network",
+                "R2.count_divisible",
+                "R2.crt_smallest",
+                "R2.expression_eval",
+                "R2.from_base",
+                "R2.grid_sum",
+                "R2.list_ops",
+                "R2.luhn_check",
+                "R2.min_heap_ops",
+                "R2.run_length",
+                "R2.string_rewrite_nonidentity",
+                "R2.to_base_wide"
+              ],
+              "must_contain": [
+                "R2.binary_search_trace",
+                "R2.cheapest_network",
+                "R2.count_divisible",
+                "R2.crt_smallest",
+                "R2.expression_eval",
+                "R2.from_base",
+                "R2.grid_sum",
+                "R2.list_ops",
+                "R2.luhn_check",
+                "R2.min_heap_ops",
+                "R2.run_length",
+                "R2.string_rewrite_nonidentity",
+                "R2.to_base_wide"
+              ],
+              "name": "f_rules_new",
+              "stderr_file": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R2b/seed2/f_rules_new.stderr.txt",
+              "stdout_file": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R2b/seed2/f_rules_new.stdout.txt",
+              "writes": [
+                "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R2b/seed2/f_rules_new.json"
+              ]
+            }
+          ],
+          "environment": {
+            "M0_FR_TAG": "11494992246446908677",
+            "PYTHONDONTWRITEBYTECODE": "1",
+            "PYTHONHASHSEED": "0",
+            "PYTHONPATH": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f"
+          },
+          "environment_note": "only these variables are set by the plan; PATH and HOME are inherited; the runner makes the output directory (mkdir -p) before the first command; commands run in the order listed, each to its end; stdout and stderr of each command go to the files named",
+          "items_per_level": 4000,
+          "levels": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "output_directory": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R2b/seed2",
+          "seed_label": "fresh-shortcut|2",
+          "seeds": [
+            {
+              "formula": "int.from_bytes(sha256('10773834973117025986|R2b|tag')[:8], 'big')",
+              "integer": 11494992246446908677,
+              "role": "tag",
+              "used_as": "decimal text of the integer, in env M0_FR_TAG; string seed '<tag>|<lid>|<level>|5' (train) and '|6' (test); the f_rules_new copy uses |6 only"
+            }
+          ],
+          "working_directory": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f"
+        },
+        "3": {
+          "base_integer": 619660634241804713,
+          "commands": [
+            {
+              "argv": [
+                "uv",
+                "run",
+                "--locked",
+                "python",
+                "studies/m0/fresh_run/r2/f_rules.py",
+                "4000",
+                "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R2b/seed3/f_rules.json",
+                "binary_search_trace,caesar_shift,cellular_automaton,cheapest_network,count_divisible,crt_smallest,dictionary_rank,expression_eval,from_base,grid_sum,list_ops,luhn_check,min_heap_ops,run_length,sort_list,string_rewrite_nonidentity,to_base_wide"
+              ],
+              "lineage_ids_in_output": [
+                "R2.binary_search_trace",
+                "R2.caesar_shift",
+                "R2.cellular_automaton",
+                "R2.cheapest_network",
+                "R2.count_divisible",
+                "R2.crt_smallest",
+                "R2.dictionary_rank",
+                "R2.expression_eval",
+                "R2.from_base",
+                "R2.grid_sum",
+                "R2.list_ops",
+                "R2.luhn_check",
+                "R2.min_heap_ops",
+                "R2.run_length",
+                "R2.sort_list",
+                "R2.string_rewrite_nonidentity",
+                "R2.to_base_wide"
+              ],
+              "must_contain": [
+                "R2.binary_search_trace",
+                "R2.caesar_shift",
+                "R2.cellular_automaton",
+                "R2.cheapest_network",
+                "R2.count_divisible",
+                "R2.crt_smallest",
+                "R2.dictionary_rank",
+                "R2.expression_eval",
+                "R2.from_base",
+                "R2.grid_sum",
+                "R2.list_ops",
+                "R2.luhn_check",
+                "R2.min_heap_ops",
+                "R2.run_length",
+                "R2.sort_list",
+                "R2.string_rewrite_nonidentity",
+                "R2.to_base_wide"
+              ],
+              "name": "f_rules",
+              "stderr_file": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R2b/seed3/f_rules.stderr.txt",
+              "stdout_file": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R2b/seed3/f_rules.stdout.txt",
+              "writes": [
+                "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R2b/seed3/f_rules.json"
+              ]
+            },
+            {
+              "argv": [
+                "uv",
+                "run",
+                "--locked",
+                "python",
+                "studies/m0/fresh_run/r2/f_rules_new.py",
+                "4000",
+                "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R2b/seed3/f_rules_new.json"
+              ],
+              "lineage_ids_in_output": [
+                "R2.binary_search_trace",
+                "R2.cheapest_network",
+                "R2.count_divisible",
+                "R2.crt_smallest",
+                "R2.expression_eval",
+                "R2.from_base",
+                "R2.grid_sum",
+                "R2.list_ops",
+                "R2.luhn_check",
+                "R2.min_heap_ops",
+                "R2.run_length",
+                "R2.string_rewrite_nonidentity",
+                "R2.to_base_wide"
+              ],
+              "must_contain": [
+                "R2.binary_search_trace",
+                "R2.cheapest_network",
+                "R2.count_divisible",
+                "R2.crt_smallest",
+                "R2.expression_eval",
+                "R2.from_base",
+                "R2.grid_sum",
+                "R2.list_ops",
+                "R2.luhn_check",
+                "R2.min_heap_ops",
+                "R2.run_length",
+                "R2.string_rewrite_nonidentity",
+                "R2.to_base_wide"
+              ],
+              "name": "f_rules_new",
+              "stderr_file": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R2b/seed3/f_rules_new.stderr.txt",
+              "stdout_file": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R2b/seed3/f_rules_new.stdout.txt",
+              "writes": [
+                "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R2b/seed3/f_rules_new.json"
+              ]
+            }
+          ],
+          "environment": {
+            "M0_FR_TAG": "14917411578424160827",
+            "PYTHONDONTWRITEBYTECODE": "1",
+            "PYTHONHASHSEED": "0",
+            "PYTHONPATH": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f"
+          },
+          "environment_note": "only these variables are set by the plan; PATH and HOME are inherited; the runner makes the output directory (mkdir -p) before the first command; commands run in the order listed, each to its end; stdout and stderr of each command go to the files named",
+          "items_per_level": 4000,
+          "levels": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "output_directory": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/experiments/m0_fresh_run_20261126/R2b/seed3",
+          "seed_label": "fresh-shortcut|3",
+          "seeds": [
+            {
+              "formula": "int.from_bytes(sha256('619660634241804713|R2b|tag')[:8], 'big')",
+              "integer": 14917411578424160827,
+              "role": "tag",
+              "used_as": "decimal text of the integer, in env M0_FR_TAG; string seed '<tag>|<lid>|<level>|5' (train) and '|6' (test); the f_rules_new copy uses |6 only"
+            }
+          ],
+          "working_directory": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f"
+        },
+        "dry": {
+          "base_integer": 3342082268851962967,
+          "commands": [
+            {
+              "argv": [
+                "uv",
+                "run",
+                "--locked",
+                "python",
+                "studies/m0/fresh_run/r2/f_rules.py",
+                "20",
+                "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r2_20261126/attempt1/r2b/dry/f_rules.json",
+                "binary_search_trace,caesar_shift,cellular_automaton,cheapest_network,count_divisible,crt_smallest,dictionary_rank,expression_eval,from_base,grid_sum,list_ops,luhn_check,min_heap_ops,run_length,sort_list,string_rewrite_nonidentity,to_base_wide"
+              ],
+              "lineage_ids_in_output": [
+                "R2.binary_search_trace",
+                "R2.caesar_shift",
+                "R2.cellular_automaton",
+                "R2.cheapest_network",
+                "R2.count_divisible",
+                "R2.crt_smallest",
+                "R2.dictionary_rank",
+                "R2.expression_eval",
+                "R2.from_base",
+                "R2.grid_sum",
+                "R2.list_ops",
+                "R2.luhn_check",
+                "R2.min_heap_ops",
+                "R2.run_length",
+                "R2.sort_list",
+                "R2.string_rewrite_nonidentity",
+                "R2.to_base_wide"
+              ],
+              "must_contain": [
+                "R2.binary_search_trace",
+                "R2.caesar_shift",
+                "R2.cellular_automaton",
+                "R2.cheapest_network",
+                "R2.count_divisible",
+                "R2.crt_smallest",
+                "R2.dictionary_rank",
+                "R2.expression_eval",
+                "R2.from_base",
+                "R2.grid_sum",
+                "R2.list_ops",
+                "R2.luhn_check",
+                "R2.min_heap_ops",
+                "R2.run_length",
+                "R2.sort_list",
+                "R2.string_rewrite_nonidentity",
+                "R2.to_base_wide"
+              ],
+              "name": "f_rules",
+              "stderr_file": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r2_20261126/attempt1/r2b/dry/f_rules.stderr.txt",
+              "stdout_file": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r2_20261126/attempt1/r2b/dry/f_rules.stdout.txt",
+              "writes": [
+                "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r2_20261126/attempt1/r2b/dry/f_rules.json"
+              ]
+            },
+            {
+              "argv": [
+                "uv",
+                "run",
+                "--locked",
+                "python",
+                "studies/m0/fresh_run/r2/f_rules_new.py",
+                "20",
+                "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r2_20261126/attempt1/r2b/dry/f_rules_new.json"
+              ],
+              "lineage_ids_in_output": [
+                "R2.binary_search_trace",
+                "R2.cheapest_network",
+                "R2.count_divisible",
+                "R2.crt_smallest",
+                "R2.expression_eval",
+                "R2.from_base",
+                "R2.grid_sum",
+                "R2.list_ops",
+                "R2.luhn_check",
+                "R2.min_heap_ops",
+                "R2.run_length",
+                "R2.string_rewrite_nonidentity",
+                "R2.to_base_wide"
+              ],
+              "must_contain": [
+                "R2.binary_search_trace",
+                "R2.cheapest_network",
+                "R2.count_divisible",
+                "R2.crt_smallest",
+                "R2.expression_eval",
+                "R2.from_base",
+                "R2.grid_sum",
+                "R2.list_ops",
+                "R2.luhn_check",
+                "R2.min_heap_ops",
+                "R2.run_length",
+                "R2.string_rewrite_nonidentity",
+                "R2.to_base_wide"
+              ],
+              "name": "f_rules_new",
+              "stderr_file": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r2_20261126/attempt1/r2b/dry/f_rules_new.stderr.txt",
+              "stdout_file": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r2_20261126/attempt1/r2b/dry/f_rules_new.stdout.txt",
+              "writes": [
+                "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r2_20261126/attempt1/r2b/dry/f_rules_new.json"
+              ]
+            }
+          ],
+          "environment": {
+            "M0_FR_TAG": "16488324911911726946",
+            "PYTHONDONTWRITEBYTECODE": "1",
+            "PYTHONHASHSEED": "0",
+            "PYTHONPATH": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f"
+          },
+          "environment_note": "only these variables are set by the plan; PATH and HOME are inherited; the runner makes the output directory (mkdir -p) before the first command; commands run in the order listed, each to its end; stdout and stderr of each command go to the files named",
+          "items_per_level": 20,
+          "levels": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "output_directory": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_r2_20261126/attempt1/r2b/dry",
+          "seed_label": "fresh-shortcut-dry-run",
+          "seeds": [
+            {
+              "formula": "int.from_bytes(sha256('3342082268851962967|R2b|tag')[:8], 'big')",
+              "integer": 16488324911911726946,
+              "role": "tag",
+              "used_as": "decimal text of the integer, in env M0_FR_TAG; string seed '<tag>|<lid>|<level>|5' (train) and '|6' (test); the f_rules_new copy uses |6 only"
+            }
+          ],
+          "working_directory": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f"
+        }
+      }
+    }
+  }
+}

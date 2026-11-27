@@ -1,0 +1,29 @@
+==== r1 (agent-a0a39fa7049de297d): models {'claude-opus-5-5': 40}; tool calls 20; lineages named in its brief: 10
+  flagged calls: 1
+   FLAG Bash: "O=/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_solver2_r1_20261126\ncat > $O/REPORT.md <<'EOF'\n# Report: R1 second solvers (NAME = r1, EVAL = R1)\n\n- Ran as: Claude Opus 5.5 (model id claude-opus-5-5), arbor-auditor context, 2026-11-26.\n- Astra review: NOT_PERFORMED. This is not Astra validation and not human approval. No result here is a success claim; the answers have not been co" -> ['AGENTS\\.md', 'CLAUDE\\.md', '\\bgit\\b']
+  tool RESULTS containing markers (marker: count): {'run_inprocess\\(': 1}
+==== r2a (agent-ac3245ec6b3bff4d9): models {'claude-opus-5-5': 32}; tool calls 17; lineages named in its brief: 9
+  flagged calls: 1
+   FLAG Bash: "D=/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_solver2_r2a_20261126; cat > $D/REPORT.md <<'EOF'\n# REPORT: second solvers r2a (EVAL R2)\n\nModel: Claude Opus 5.5 (claude-opus-5-5), run as an `arbor-auditor` context, 2026-11-26.\nAstra review: NOT_PERFORMED. This is not Astra validation and not human approval. No result here is called a success; the answers have not been compared with" -> ['CLAUDE\\.md', '\\bgit\\b', 'm0_fr_(?!briefs_20261126/SOLVER2\\.md)']
+  tool RESULTS containing markers (marker: count): {'run_inprocess\\(': 1}
+==== r2b (agent-a97587d8e6861f387): models {'claude-opus-5-5': 19}; tool calls 10; lineages named in its brief: 8
+  flagged calls: 1
+   FLAG Bash: "D=/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_solver2_r2b_20261126\ncat > $D/NOTES.md <<'EOF'\n# NOTES: second solvers r2b (EVAL R2), 8 lineages\n\nEnvironment: system `python3 -I -B` (Python 3.15.1), standard library only. Commands:\n`timeout 120 python3 -I -B .../m0_solver2_r2b_20261126/run_solver2.py` (output `run_solver2.out`: items 2240, bad 0, text_struct_mismatch 0);\n`template" -> ['AGENTS\\.md', 'CLAUDE\\.md', '\\bgit\\b', 'm0_fr_(?!briefs_20261126/SOLVER2\\.md)']
+  tool RESULTS containing markers (marker: count): {'run_inprocess\\(': 1}
+==== m1a (agent-a90da052935dbd22d): models {'claude-opus-5-5': 34}; tool calls 16; lineages named in its brief: 10
+  flagged calls: 1
+   FLAG Bash: "D=/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_solver2_m1a_20261126\ncat > $D/NOTES.md <<'EOF'\n# NOTES: second solvers, NAME=m1a, EVAL=M1 (10 lineages)\n\nEnvironment: macOS (darwin), system `python3` 3.15.1, run as `python3 -I -B <script>` from this directory; standard library only.\nCommands: `timeout 300 python3 -I -B run_solver2.py` (output `run_solver2_attempt1.out`, `answers_m1" -> ['AGENTS\\.md', 'CLAUDE\\.md', 'm0_fr_(?!briefs_20261126/SOLVER2\\.md)']
+  tool RESULTS containing markers (marker: count): {'run_inprocess\\(': 1}
+==== m1b (agent-a81e926c35707d9b4): models {'claude-opus-5-5': 28}; tool calls 14; lineages named in its brief: 10
+  flagged calls: 1
+   FLAG Bash: "D=/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_solver2_m1b_20261126; cat > $D/REPORT.md <<'EOF'\n# Report: second solvers m1b (EVAL M1), ADR-0033 addendum 1 section 8 item 1\n\nModel: Claude Opus 5.5 (claude-opus-5-5), running as an arbor-auditor context. This is independent engineering evidence only. Astra review: NOT_PERFORMED. Not human approval. No result here is called a succes" -> ['AGENTS\\.md', 'CLAUDE\\.md', '\\bgit\\b', 'm0_fr_(?!briefs_20261126/SOLVER2\\.md)']
+  tool RESULTS containing markers (marker: count): {'run_inprocess\\(': 1}
+==== m1c (agent-a731dc5ec95fae7c2): models {'claude-opus-5-5': 26}; tool calls 14; lineages named in its brief: 9
+  flagged calls: 2
+   FLAG Bash: 'ls /Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/ | grep m0_solver2' -> ['_scratch/(?!m0_second_solver_fixtures_20261126|m0_solver2_|m0_fr_briefs_20261126/SOLVER2\\.md)']
+   FLAG Bash: "D=/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_solver2_m1c_20261126; cat > $D/NOTES.md <<'EOF'\n# Second solvers, NAME = m1c, EVAL = M1 (9 lineages)\n\nWritten by an `arbor-auditor` context (Claude Opus 5.5) from the answer-free fixtures and SCHEMA.md only.\nNot Astra validation, not human approval. `Astra review: NOT_PERFORMED`.\n\nItems are keyed by (`id`, `level`, `index`): in these" -> ['AGENTS\\.md', 'CLAUDE\\.md', '\\bgit\\b', '_scratch/(?!m0_second_solver_fixtures_20261126|m0_solver2_|m0_fr_briefs_20261126/SOLVER2\\.md)']
+  tool RESULTS containing markers (marker: count): {'run_inprocess\\(': 1}
+==== c1 (agent-a5304ab5549718b32): models {'claude-opus-5-5': 54}; tool calls 27; lineages named in its brief: 0
+  flagged calls: 1
+   FLAG Bash: 'D=/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_solver2_c1_20261126; python3 -I -B - <<\'EOF\'\np = "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_solver2_c1_20261126/AMBIGUITIES.md"\ns = open(p).read()\ns = s.replace("- Recursion depth and int-to-str digit limits of CPython: no item comes near either (no exception raised by my caps).",\n "- Recursion depth and int-to-s' -> ['AGENTS\\.md', 'CLAUDE\\.md', '\\bgit\\b', 'm0_fr_(?!briefs_20261126/SOLVER2\\.md)']
+  tool RESULTS containing markers (marker: count): {'run_inprocess\\(': 1, 'ANSWER:': 7}

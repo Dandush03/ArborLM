@@ -1,0 +1,46 @@
+comparison files: 431
+== solver2_c1.py: long lines 308; shared verbatim with generator/first-solver/earlier-solver files: 9
+   'elif isinstance(n, ast.FunctionDef):'  in 4 file(s): ['studies/m0/c1_fix3_battery.py', 'docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s6_capacity.py', 'docs/reviews/m0-lineage-decision-2026-11-25/audit3_c1/a3_shortcuts.py']
+   'from __future__ import annotations'  in 182 file(s): ['studies/m0/m1_fix3_shortcuts.py', 'studies/m0/lineages_r2_fix4.py', 'studies/m0/lineages_c1_simulation.py']
+   'if isinstance(a, list) and isinstance(b, list):'  in 1 file(s): ['docs/reviews/m0-lineage-decision-2026-11-25/audit_c1/a02_myeval.py']
+   'if isinstance(a, str) and isinstance(b, str):'  in 1 file(s): ['docs/reviews/m0-lineage-decision-2026-11-25/audit_c1/a02_myeval.py']
+   'if isinstance(e, ast.Compare):'  in 1 file(s): ['docs/reviews/m0-lineage-decision-2026-11-25/audit_c1/a02_myeval.py']
+   'if isinstance(e, ast.Constant):'  in 1 file(s): ['docs/reviews/m0-lineage-decision-2026-11-25/audit_c1/a02_myeval.py']
+   'if isinstance(e, ast.Subscript):'  in 1 file(s): ['docs/reviews/m0-lineage-decision-2026-11-25/audit_c1/a02_myeval.py']
+   'if isinstance(e.func, ast.Attribute):'  in 1 file(s): ['docs/reviews/m0-lineage-decision-2026-11-25/audit_c1/a02_myeval.py']
+   'if isinstance(e.slice, ast.Slice):'  in 1 file(s): ['docs/reviews/m0-lineage-decision-2026-11-25/audit_c1/a02_myeval.py']
+== solver2_m1a.py: long lines 141; shared verbatim with generator/first-solver/earlier-solver files: 4
+   'diffs = [b - a for a, b in zip(diffs, diffs[1:])]'  in 2 file(s): ['docs/reviews/m0-lineage-decision-2026-11-25/final_m1/solve_text_a5_attempt1.py', 'docs/reviews/m0-lineage-decision-2026-11-25/final_m1/solve_text_a5.py']
+   'from fractions import Fraction'  in 29 file(s): ['studies/m0/m1_shortcut_check.py', 'studies/m0/m1_fix4_verify.py', 'studies/m0/r1_fix4_a4_heur.py']
+   'legs = re.findall(r"leg (\\d+) leaves at (\\d\\d):(\\d\\d) and arrives at (\\d\\d):(\\d\\d)", q)'  in 2 file(s): ['docs/reviews/m0-lineage-decision-2026-11-25/final_m1/solve_text_a5_attempt1.py', 'docs/reviews/m0-lineage-decision-2026-11-25/final_m1/solve_text_a5.py']
+   'p *= Fraction(x - xj, xi - xj)'  in 2 file(s): ['docs/reviews/m0-lineage-decision-2026-11-25/audit_m1/audit_solvers_attempt1.py', 'docs/reviews/m0-lineage-decision-2026-11-25/audit_m1/audit_solvers.py']
+== solver2_m1b.py: long lines 79; shared verbatim with generator/first-solver/earlier-solver files: 1
+   'from fractions import Fraction'  in 29 file(s): ['studies/m0/m1_shortcut_check.py', 'studies/m0/m1_fix4_verify.py', 'studies/m0/r1_fix4_a4_heur.py']
+== solver2_m1c.py: long lines 153; shared verbatim with generator/first-solver/earlier-solver files: 7
+   'elif "How many primes are multiplied" in q:'  in 2 file(s): ['docs/reviews/m0-lineage-decision-2026-11-25/audit_m1/audit_solvers_attempt1.py', 'docs/reviews/m0-lineage-decision-2026-11-25/audit_m1/audit_solvers.py']
+   'from fractions import Fraction'  in 29 file(s): ['studies/m0/m1_shortcut_check.py', 'studies/m0/m1_fix4_verify.py', 'studies/m0/r1_fix4_a4_heur.py']
+   'if "Add up the different prime numbers" in q:'  in 2 file(s): ['docs/reviews/m0-lineage-decision-2026-11-25/final_m1/solve_text_a5_attempt1.py', 'docs/reviews/m0-lineage-decision-2026-11-25/final_m1/solve_text_a5.py']
+   'm = re.search(r"Two positive whole numbers differ by (\\d+), and their product is (\\d+)\\. What is the smaller", q)'  in 2 file(s): ['docs/reviews/m0-lineage-decision-2026-11-25/final_m1/solve_text_a5_attempt1.py', 'docs/reviews/m0-lineage-decision-2026-11-25/final_m1/solve_text_a5.py']
+   'n = int(re.search(r"Consider the number (\\d+)\\.", q).group(1))'  in 2 file(s): ['docs/reviews/m0-lineage-decision-2026-11-25/audit_m1/audit_solvers_attempt1.py', 'docs/reviews/m0-lineage-decision-2026-11-25/audit_m1/audit_solvers.py']
+   'names = re.split(r", | and ", m.group(1))'  in 4 file(s): ['docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/solve_text_a4.py', 'docs/reviews/m0-lineage-decision-2026-11-25/final_m1/solve_text_a5_attempt1.py', 'docs/reviews/m0-lineage-decision-2026-11-25/final_m1/solve_text_a5.py']
+   'raise ValueError("more than two decimals")'  in 1 file(s): ['studies/m0/solvers_m1.py']
+== solver2_r1.py: long lines 87; shared verbatim with generator/first-solver/earlier-solver files: 5
+   '"R1.boolean_lights_r4": boolean_lights,'  in 1 file(s): ['docs/reviews/m0-lineage-decision-2026-11-25/final_r1/solvers_final.py']
+   '"R1.swap_tracking_r5": swap_tracking,'  in 1 file(s): ['docs/reviews/m0-lineage-decision-2026-11-25/final_r1/solvers_final.py']
+   '_STEP = {"north": (-1, 0), "south": (1, 0), "east": (0, 1), "west": (0, -1)}'  in 2 file(s): ['studies/m0/lineages_r1_fix3_b.py', 'studies/m0/lineages_r1_rev4_b.py']
+   'elif b in val and a not in val:'  in 1 file(s): ['docs/reviews/m0-lineage-decision-2026-11-25/audit1/text_solvers.py']
+   'from fractions import Fraction'  in 29 file(s): ['studies/m0/m1_shortcut_check.py', 'studies/m0/m1_fix4_verify.py', 'studies/m0/r1_fix4_a4_heur.py']
+== solver2_r2a.py: long lines 140; shared verbatim with generator/first-solver/earlier-solver files: 5
+   'out.append(chr((ord(ch) - 97 + k) % 26 + 97))'  in 1 file(s): ['docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_solver.py']
+   'parent = {t: t for t in towns}'  in 1 file(s): ['docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_solver.py']
+   'raise ValueError("no solution")'  in 1 file(s): ['docs/reviews/m0-lineage-decision-2026-11-25/audit_r2/solvers.py']
+   'raise ValueError("unknown ask")'  in 2 file(s): ['docs/reviews/m0-lineage-decision-2026-11-25/audit_m1/audit_solvers_attempt1.py', 'docs/reviews/m0-lineage-decision-2026-11-25/audit_m1/audit_solvers.py']
+   'return toks[pos[0]] if pos[0] < len(toks) else None'  in 1 file(s): ['docs/reviews/m0-lineage-decision-2026-11-25/audit4_r1/solvers4.py']
+== solver2_r2b.py: long lines 107; shared verbatim with generator/first-solver/earlier-solver files: 7
+   'R, C = int(m.group(1)), int(m.group(2))'  in 2 file(s): ['docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_solver.py', 'docs/reviews/m0-lineage-decision-2026-11-25/final_r1/solvers_final.py']
+   'h[p], h[p // 2] = h[p // 2], h[p]'  in 2 file(s): ['docs/reviews/m0-lineage-decision-2026-11-25/audit_r2/solvers.py', 'docs/reviews/m0-lineage-decision-2026-11-25/audit4_r2/a4_solvers.py']
+   'if len(kids) == 2 and vals[0] == vals[1]:'  in 1 file(s): ['docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_solver.py']
+   'kids = [c for c in (2 * p, 2 * p + 1) if c <= n]'  in 2 file(s): ['docs/reviews/m0-lineage-decision-2026-11-25/audit_r2/solvers.py', 'docs/reviews/m0-lineage-decision-2026-11-25/audit4_r2/a4_solvers.py']
+   'm = re.search(r"One more digit is to be written at the right end of (\\d+) so that", q)'  in 1 file(s): ['docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_solver.py']
+   'return ", ".join(str(x) for x in xs)'  in 10 file(s): ['studies/m0/r2_fix4_a3_solvers.py', 'studies/m0/r2_audit_heuristics_copy.py', 'studies/m0/r2_shortcut_check.py']
+   'while j < len(s) and s[j] == s[i]:'  in 1 file(s): ['docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_solver.py']

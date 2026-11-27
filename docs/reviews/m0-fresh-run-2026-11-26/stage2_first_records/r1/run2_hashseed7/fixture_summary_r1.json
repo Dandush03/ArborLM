@@ -1,0 +1,977 @@
+{
+  "fixture_seed": 14961762383913329776,
+  "items_per_level": 50,
+  "lineages": {
+    "R1.boolean_lights_r4": {
+      "ambiguous_ids": [],
+      "cross_level_shared_texts": {
+        "0-1": 0,
+        "0-2": 0,
+        "0-3": 0,
+        "0-4": 0,
+        "0-5": 0,
+        "0-6": 0,
+        "1-2": 0,
+        "1-3": 0,
+        "1-4": 0,
+        "1-5": 0,
+        "1-6": 0,
+        "2-3": 0,
+        "2-4": 0,
+        "2-5": 0,
+        "2-6": 0,
+        "3-4": 0,
+        "3-5": 0,
+        "3-6": 0,
+        "4-5": 0,
+        "4-6": 0,
+        "5-6": 0
+      },
+      "identity_equal_level_pairs": [],
+      "mismatch_ids": [],
+      "parse_ids": [],
+      "per_level": [
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        }
+      ],
+      "retries": [
+        6,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "solver_covers": true,
+      "totals": {
+        "agree": 350,
+        "ambiguous": 0,
+        "mismatch": 0,
+        "n": 350,
+        "parse": 0
+      }
+    },
+    "R1.categories_default_exceptions_r4": {
+      "ambiguous_ids": [],
+      "cross_level_shared_texts": {
+        "0-1": 0,
+        "0-2": 0,
+        "0-3": 0,
+        "0-4": 0,
+        "0-5": 0,
+        "0-6": 0,
+        "1-2": 0,
+        "1-3": 0,
+        "1-4": 0,
+        "1-5": 0,
+        "1-6": 0,
+        "2-3": 0,
+        "2-4": 0,
+        "2-5": 0,
+        "2-6": 0,
+        "3-4": 0,
+        "3-5": 0,
+        "3-6": 0,
+        "4-5": 0,
+        "4-6": 0,
+        "5-6": 0
+      },
+      "identity_equal_level_pairs": [],
+      "mismatch_ids": [],
+      "parse_ids": [],
+      "per_level": [
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        }
+      ],
+      "retries": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "solver_covers": true,
+      "totals": {
+        "agree": 350,
+        "ambiguous": 0,
+        "mismatch": 0,
+        "n": 350,
+        "parse": 0
+      }
+    },
+    "R1.compass_turns": {
+      "ambiguous_ids": [],
+      "cross_level_shared_texts": {
+        "0-1": 0,
+        "0-2": 0,
+        "0-3": 0,
+        "0-4": 0,
+        "0-5": 0,
+        "0-6": 0,
+        "1-2": 0,
+        "1-3": 0,
+        "1-4": 0,
+        "1-5": 0,
+        "1-6": 0,
+        "2-3": 0,
+        "2-4": 0,
+        "2-5": 0,
+        "2-6": 0,
+        "3-4": 0,
+        "3-5": 0,
+        "3-6": 0,
+        "4-5": 0,
+        "4-6": 0,
+        "5-6": 0
+      },
+      "identity_equal_level_pairs": [],
+      "mismatch_ids": [],
+      "parse_ids": [],
+      "per_level": [
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        }
+      ],
+      "retries": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "solver_covers": true,
+      "totals": {
+        "agree": 350,
+        "ambiguous": 0,
+        "mismatch": 0,
+        "n": 350,
+        "parse": 0
+      }
+    },
+    "R1.conditional_threshold_rule_r4": {
+      "ambiguous_ids": [],
+      "cross_level_shared_texts": {
+        "0-1": 0,
+        "0-2": 0,
+        "0-3": 0,
+        "0-4": 0,
+        "0-5": 0,
+        "0-6": 0,
+        "1-2": 0,
+        "1-3": 0,
+        "1-4": 0,
+        "1-5": 0,
+        "1-6": 0,
+        "2-3": 0,
+        "2-4": 0,
+        "2-5": 0,
+        "2-6": 0,
+        "3-4": 0,
+        "3-5": 0,
+        "3-6": 0,
+        "4-5": 0,
+        "4-6": 0,
+        "5-6": 0
+      },
+      "identity_equal_level_pairs": [],
+      "mismatch_ids": [],
+      "parse_ids": [],
+      "per_level": [
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        }
+      ],
+      "retries": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "solver_covers": true,
+      "totals": {
+        "agree": 350,
+        "ambiguous": 0,
+        "mismatch": 0,
+        "n": 350,
+        "parse": 0
+      }
+    },
+    "R1.equivalence_exchange_rates_r6": {
+      "ambiguous_ids": [],
+      "cross_level_shared_texts": {
+        "0-1": 0,
+        "0-2": 0,
+        "0-3": 0,
+        "0-4": 0,
+        "0-5": 0,
+        "0-6": 0,
+        "1-2": 0,
+        "1-3": 0,
+        "1-4": 0,
+        "1-5": 0,
+        "1-6": 0,
+        "2-3": 0,
+        "2-4": 0,
+        "2-5": 0,
+        "2-6": 0,
+        "3-4": 0,
+        "3-5": 0,
+        "3-6": 0,
+        "4-5": 0,
+        "4-6": 0,
+        "5-6": 0
+      },
+      "identity_equal_level_pairs": [],
+      "mismatch_ids": [],
+      "parse_ids": [],
+      "per_level": [
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        }
+      ],
+      "retries": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "solver_covers": true,
+      "totals": {
+        "agree": 350,
+        "ambiguous": 0,
+        "mismatch": 0,
+        "n": 350,
+        "parse": 0
+      }
+    },
+    "R1.knights_knaves_r6": {
+      "ambiguous_ids": [],
+      "cross_level_shared_texts": {
+        "0-1": 0,
+        "0-2": 0,
+        "0-3": 0,
+        "0-4": 0,
+        "0-5": 0,
+        "0-6": 0,
+        "1-2": 0,
+        "1-3": 0,
+        "1-4": 0,
+        "1-5": 0,
+        "1-6": 0,
+        "2-3": 0,
+        "2-4": 0,
+        "2-5": 0,
+        "2-6": 0,
+        "3-4": 0,
+        "3-5": 0,
+        "3-6": 0,
+        "4-5": 0,
+        "4-6": 0,
+        "5-6": 0
+      },
+      "identity_equal_level_pairs": [],
+      "mismatch_ids": [],
+      "parse_ids": [],
+      "per_level": [
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        }
+      ],
+      "retries": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "solver_covers": true,
+      "totals": {
+        "agree": 350,
+        "ambiguous": 0,
+        "mismatch": 0,
+        "n": 350,
+        "parse": 0
+      }
+    },
+    "R1.spatial_grid_walk_r5": {
+      "ambiguous_ids": [],
+      "cross_level_shared_texts": {
+        "0-1": 0,
+        "0-2": 0,
+        "0-3": 0,
+        "0-4": 0,
+        "0-5": 0,
+        "0-6": 0,
+        "1-2": 0,
+        "1-3": 0,
+        "1-4": 0,
+        "1-5": 0,
+        "1-6": 0,
+        "2-3": 0,
+        "2-4": 0,
+        "2-5": 0,
+        "2-6": 0,
+        "3-4": 0,
+        "3-5": 0,
+        "3-6": 0,
+        "4-5": 0,
+        "4-6": 0,
+        "5-6": 0
+      },
+      "identity_equal_level_pairs": [],
+      "mismatch_ids": [],
+      "parse_ids": [],
+      "per_level": [
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        }
+      ],
+      "retries": [
+        5,
+        11,
+        4,
+        7,
+        0,
+        3,
+        4
+      ],
+      "solver_covers": true,
+      "totals": {
+        "agree": 350,
+        "ambiguous": 0,
+        "mismatch": 0,
+        "n": 350,
+        "parse": 0
+      }
+    },
+    "R1.swap_tracking_r5": {
+      "ambiguous_ids": [],
+      "cross_level_shared_texts": {
+        "0-1": 0,
+        "0-2": 0,
+        "0-3": 0,
+        "0-4": 0,
+        "0-5": 0,
+        "0-6": 0,
+        "1-2": 0,
+        "1-3": 0,
+        "1-4": 0,
+        "1-5": 0,
+        "1-6": 0,
+        "2-3": 0,
+        "2-4": 0,
+        "2-5": 0,
+        "2-6": 0,
+        "3-4": 0,
+        "3-5": 0,
+        "3-6": 0,
+        "4-5": 0,
+        "4-6": 0,
+        "5-6": 0
+      },
+      "identity_equal_level_pairs": [],
+      "mismatch_ids": [],
+      "parse_ids": [],
+      "per_level": [
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        }
+      ],
+      "retries": [
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "solver_covers": true,
+      "totals": {
+        "agree": 350,
+        "ambiguous": 0,
+        "mismatch": 0,
+        "n": 350,
+        "parse": 0
+      }
+    },
+    "R1.temporal_weekday_shift_r6": {
+      "ambiguous_ids": [],
+      "cross_level_shared_texts": {
+        "0-1": 0,
+        "0-2": 0,
+        "0-3": 0,
+        "0-4": 0,
+        "0-5": 0,
+        "0-6": 0,
+        "1-2": 0,
+        "1-3": 0,
+        "1-4": 0,
+        "1-5": 0,
+        "1-6": 0,
+        "2-3": 0,
+        "2-4": 0,
+        "2-5": 0,
+        "2-6": 0,
+        "3-4": 0,
+        "3-5": 0,
+        "3-6": 0,
+        "4-5": 0,
+        "4-6": 0,
+        "5-6": 0
+      },
+      "identity_equal_level_pairs": [],
+      "mismatch_ids": [],
+      "parse_ids": [],
+      "per_level": [
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        }
+      ],
+      "retries": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "solver_covers": true,
+      "totals": {
+        "agree": 350,
+        "ambiguous": 0,
+        "mismatch": 0,
+        "n": 350,
+        "parse": 0
+      }
+    },
+    "R1.venn_counting_r5": {
+      "ambiguous_ids": [],
+      "cross_level_shared_texts": {
+        "0-1": 0,
+        "0-2": 0,
+        "0-3": 0,
+        "0-4": 0,
+        "0-5": 0,
+        "0-6": 0,
+        "1-2": 0,
+        "1-3": 0,
+        "1-4": 0,
+        "1-5": 0,
+        "1-6": 0,
+        "2-3": 0,
+        "2-4": 0,
+        "2-5": 0,
+        "2-6": 0,
+        "3-4": 0,
+        "3-5": 0,
+        "3-6": 0,
+        "4-5": 0,
+        "4-6": 0,
+        "5-6": 0
+      },
+      "identity_equal_level_pairs": [],
+      "mismatch_ids": [],
+      "parse_ids": [],
+      "per_level": [
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        },
+        {
+          "agree": 50,
+          "ambiguous": 0,
+          "mismatch": 0,
+          "n": 50,
+          "parse": 0
+        }
+      ],
+      "retries": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "solver_covers": true,
+      "totals": {
+        "agree": 350,
+        "ambiguous": 0,
+        "mismatch": 0,
+        "n": 350,
+        "parse": 0
+      }
+    }
+  },
+  "uncovered": []
+}

@@ -1,0 +1,3 @@
+R1a R1.theta_r4 a3:latest_start_first counted [False, False] PASS
+R2a R2.a_open [a3] ignore reverses counted [False] PASS
+R2b R2.crt_smallest [NEW] (partial) largest modulu counted [False] PASS

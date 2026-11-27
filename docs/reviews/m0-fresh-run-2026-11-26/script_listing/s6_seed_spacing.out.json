@@ -1,0 +1,23 @@
+{
+  "all_distinct": true,
+  "bases": {
+    "1": 16103270370041696293,
+    "2": 10773834973117025986,
+    "3": 619660634241804713,
+    "dry": 3342082268851962967
+  },
+  "bases_match_text": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "dry": true
+  },
+  "n_role_integers": {
+    "1": 26,
+    "2": 26,
+    "3": 26,
+    "dry": 26
+  },
+  "r1_min_gap_between_plus_level_roots": 3038042042970482,
+  "r1_stream_collisions": []
+}

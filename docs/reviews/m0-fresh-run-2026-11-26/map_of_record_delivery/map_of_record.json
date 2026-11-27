@@ -1,0 +1,3576 @@
+{
+  "borderline_pairs": [
+    [
+      "C1.bfs_queue",
+      "R1.categories_follow"
+    ],
+    [
+      "C1.bfs_queue",
+      "R1.graph_shortest_route"
+    ],
+    [
+      "C1.bubble_pass",
+      "C1.insertion_sort"
+    ],
+    [
+      "C1.bubble_pass",
+      "C1.partition_pass"
+    ],
+    [
+      "C1.bubble_pass",
+      "M1.median_list"
+    ],
+    [
+      "C1.bubble_pass",
+      "R2.sort_list"
+    ],
+    [
+      "C1.bytecode_loop",
+      "C1.counter_list_f3"
+    ],
+    [
+      "C1.bytecode_loop",
+      "C1.postfix_evaluation"
+    ],
+    [
+      "C1.bytecode_loop",
+      "C1.turtle_walk"
+    ],
+    [
+      "C1.coin_change_table",
+      "C1.grid_path_table"
+    ],
+    [
+      "C1.coin_change_table",
+      "C1.string_pair_table"
+    ],
+    [
+      "C1.cond_chain",
+      "C1.euclid_gcd"
+    ],
+    [
+      "C1.counter_list",
+      "C1.counter_list_f3"
+    ],
+    [
+      "C1.counter_list_f3",
+      "M1.mode_tally"
+    ],
+    [
+      "C1.digit_peel",
+      "C1.fast_power"
+    ],
+    [
+      "C1.digit_peel",
+      "C1.while_counter"
+    ],
+    [
+      "C1.digit_peel",
+      "M1.division_counting"
+    ],
+    [
+      "C1.digit_peel",
+      "R2.digit_root"
+    ],
+    [
+      "C1.digit_peel_f3",
+      "C1.fast_power_f3"
+    ],
+    [
+      "C1.euclid_gcd",
+      "C1.fast_power"
+    ],
+    [
+      "C1.euclid_gcd",
+      "C1.while_counter"
+    ],
+    [
+      "C1.fast_power",
+      "C1.while_counter"
+    ],
+    [
+      "C1.fast_power_f3",
+      "C1.while_counter_f3"
+    ],
+    [
+      "C1.grid_path_table",
+      "C1.string_pair_table"
+    ],
+    [
+      "C1.grid_path_table",
+      "R1.temporal_critical_path"
+    ],
+    [
+      "C1.insertion_sort",
+      "C1.partition_pass"
+    ],
+    [
+      "C1.insertion_sort",
+      "R2.sort_list"
+    ],
+    [
+      "C1.kadane_scan",
+      "C1.minmax_track"
+    ],
+    [
+      "C1.list_build",
+      "C1.loop_sum"
+    ],
+    [
+      "C1.list_build",
+      "C1.nested_pairs"
+    ],
+    [
+      "C1.list_build",
+      "C1.string_build"
+    ],
+    [
+      "C1.list_build",
+      "R2.count_divisible"
+    ],
+    [
+      "C1.loop_sum",
+      "C1.nested_pairs"
+    ],
+    [
+      "C1.loop_sum",
+      "C1.string_build"
+    ],
+    [
+      "C1.loop_sum",
+      "R2.count_divisible"
+    ],
+    [
+      "C1.majority_vote_scan",
+      "M1.mode_tally"
+    ],
+    [
+      "C1.merge_two_sorted",
+      "R2.sort_list"
+    ],
+    [
+      "C1.minmax_track",
+      "R1.order_extreme"
+    ],
+    [
+      "C1.mirror_pointers",
+      "C1.run_length_scan"
+    ],
+    [
+      "C1.nested_pairs",
+      "C1.string_build"
+    ],
+    [
+      "C1.nested_pairs",
+      "R2.count_divisible"
+    ],
+    [
+      "C1.postfix_evaluation",
+      "R2.expression_eval"
+    ],
+    [
+      "C1.slices",
+      "R2.list_ops"
+    ],
+    [
+      "C1.string_methods",
+      "R2.list_ops"
+    ],
+    [
+      "C1.string_methods",
+      "R2.string_rewrite"
+    ],
+    [
+      "C1.turtle_walk",
+      "R1.compass_turns"
+    ],
+    [
+      "C1.turtle_walk",
+      "R1.spatial_grid_walk"
+    ],
+    [
+      "C1.union_find_links",
+      "R1.categories_default_exceptions"
+    ],
+    [
+      "C1.union_find_links",
+      "R1.categories_follow"
+    ],
+    [
+      "C1.union_find_links",
+      "R2.cheapest_network"
+    ],
+    [
+      "C1.while_counter",
+      "M1.recurrence_iterate"
+    ],
+    [
+      "M1.arithmetic_series",
+      "M1.consecutive"
+    ],
+    [
+      "M1.binomial_choose",
+      "M1.slot_permutations"
+    ],
+    [
+      "M1.binomial_choose",
+      "R2.dictionary_rank"
+    ],
+    [
+      "M1.clock_duration",
+      "M1.shopping"
+    ],
+    [
+      "M1.crt_congruence",
+      "M1.gcd_lcm"
+    ],
+    [
+      "M1.digit_puzzle",
+      "R1.one_culprit"
+    ],
+    [
+      "M1.division_counting",
+      "R2.multiples_between"
+    ],
+    [
+      "M1.fraction_remainder",
+      "R1.equivalence_exchange_rates"
+    ],
+    [
+      "M1.mode_tally",
+      "R2.count_divisible"
+    ],
+    [
+      "M1.mode_tally",
+      "R2.count_letter"
+    ],
+    [
+      "M1.percent_change",
+      "R1.equivalence_exchange_rates"
+    ],
+    [
+      "M1.shopping",
+      "M1.tiered_pricing"
+    ],
+    [
+      "M1.shopping",
+      "R1.conditional_threshold_rule"
+    ],
+    [
+      "M1.slot_permutations",
+      "R2.dictionary_rank"
+    ],
+    [
+      "M1.speed_distance",
+      "R1.conditional_threshold_rule"
+    ],
+    [
+      "R1.activity_selection",
+      "R1.mst_cost"
+    ],
+    [
+      "R1.boolean_lights",
+      "R1.nim_xor"
+    ],
+    [
+      "R1.compass_turns",
+      "R1.spatial_grid_walk"
+    ],
+    [
+      "R1.conditional_chain",
+      "R1.order_compare"
+    ],
+    [
+      "R1.conditional_threshold_rule",
+      "R1.instant_runoff"
+    ],
+    [
+      "R1.containers_queue_line",
+      "R1.containers_stack_piles"
+    ],
+    [
+      "R1.containers_queue_line",
+      "R1.swap_tracking"
+    ],
+    [
+      "R1.containers_queue_line",
+      "R1.tracking_accounts"
+    ],
+    [
+      "R1.containers_stack_piles",
+      "R1.swap_tracking"
+    ],
+    [
+      "R1.containers_stack_piles",
+      "R1.tracking_accounts"
+    ],
+    [
+      "R1.equivalence_classes",
+      "R1.graph_bipartite"
+    ],
+    [
+      "R1.graph_shortest_route",
+      "R1.mst_cost"
+    ],
+    [
+      "R1.graph_shortest_route",
+      "R1.temporal_critical_path"
+    ],
+    [
+      "R1.graph_shortest_route",
+      "R2.cheapest_network"
+    ],
+    [
+      "R1.instant_runoff",
+      "R1.order_tournament_wins"
+    ],
+    [
+      "R1.kinship_ancestor",
+      "R1.kinship_descendants"
+    ],
+    [
+      "R1.kinship_descendants",
+      "R1.order_tournament_wins"
+    ],
+    [
+      "R1.knights_knaves",
+      "R1.seating_row"
+    ],
+    [
+      "R1.one_culprit",
+      "R1.seating_row"
+    ],
+    [
+      "R1.order_tournament_wins",
+      "R1.topological_order"
+    ],
+    [
+      "R1.swap_tracking",
+      "R1.tracking_accounts"
+    ],
+    [
+      "R1.swap_tracking",
+      "R2.permutation_power"
+    ],
+    [
+      "R1.temporal_critical_path",
+      "R1.topological_order"
+    ],
+    [
+      "R2.bracket_match",
+      "R2.list_ops"
+    ],
+    [
+      "R2.bracket_match",
+      "R2.stack_machine"
+    ],
+    [
+      "R2.coin_change_min",
+      "R2.lcs_length"
+    ],
+    [
+      "R2.coin_change_min",
+      "R2.subtraction_game"
+    ],
+    [
+      "R2.count_divisible",
+      "R2.grid_sum"
+    ],
+    [
+      "R2.count_letter",
+      "R2.grid_sum"
+    ],
+    [
+      "R2.dictionary_rank",
+      "R2.to_base"
+    ],
+    [
+      "R2.digit_root",
+      "R2.from_base"
+    ],
+    [
+      "R2.digit_root",
+      "R2.to_base"
+    ],
+    [
+      "R2.list_ops",
+      "R2.stack_machine"
+    ]
+  ],
+  "clusters": [
+    {
+      "cluster_id": "C1.bfs_queue",
+      "members": [
+        "C1.bfs_queue",
+        "C1.union_find_links",
+        "C1.union_find_links_f3",
+        "R1.categories_follow",
+        "R1.categories_follow_r2",
+        "R1.categories_follow_r4",
+        "R1.categories_follow_r5",
+        "R1.equivalence_classes",
+        "R1.equivalence_classes_r2",
+        "R1.equivalence_classes_r5",
+        "R1.order_compare",
+        "R1.order_compare_r4",
+        "R1.order_compare_r5",
+        "R1.road_reachability",
+        "R1.road_reachability_r5"
+      ]
+    },
+    {
+      "cluster_id": "C1.binary_search",
+      "members": [
+        "C1.binary_search",
+        "C1.binary_search_f3",
+        "R2.binary_search_trace"
+      ]
+    },
+    {
+      "cluster_id": "C1.bracket_matching",
+      "members": [
+        "C1.bracket_matching",
+        "C1.bracket_matching_f3",
+        "C1.bracket_matching_traced",
+        "C1.postfix_evaluation",
+        "R2.bracket_match",
+        "R2.stack_machine"
+      ]
+    },
+    {
+      "cluster_id": "C1.bubble_pass",
+      "members": [
+        "C1.bubble_pass"
+      ]
+    },
+    {
+      "cluster_id": "C1.bytecode_loop",
+      "members": [
+        "C1.bytecode_loop",
+        "C1.bytecode_loop_f3",
+        "C1.bytecode_loop_r2"
+      ]
+    },
+    {
+      "cluster_id": "C1.cellular_update",
+      "members": [
+        "C1.cellular_update",
+        "C1.cellular_update_f3",
+        "C1.cellular_update_r2",
+        "R2.cellular_automaton"
+      ]
+    },
+    {
+      "cluster_id": "C1.circle_elimination",
+      "members": [
+        "C1.circle_elimination",
+        "C1.circle_elimination_r2",
+        "R1.containers_queue_line",
+        "R1.containers_queue_line_r2",
+        "R1.containers_queue_line_r5",
+        "R1.elimination_josephus",
+        "R2.list_ops"
+      ]
+    },
+    {
+      "cluster_id": "C1.coin_change_table",
+      "members": [
+        "C1.coin_change_table",
+        "C1.coin_change_table_f3",
+        "M1.change_ways",
+        "M1.change_ways_r2",
+        "M1.change_ways_r3",
+        "M1.min_cost_packs",
+        "M1.min_cost_packs_r2",
+        "R2.coin_change_min"
+      ]
+    },
+    {
+      "cluster_id": "C1.cond_chain",
+      "members": [
+        "C1.cond_chain",
+        "C1.cond_chain_f3"
+      ]
+    },
+    {
+      "cluster_id": "C1.counter_list",
+      "members": [
+        "C1.counter_list",
+        "M1.mode_tally",
+        "M1.mode_tally_r2",
+        "M1.mode_tally_r3"
+      ]
+    },
+    {
+      "cluster_id": "C1.counter_list_f3",
+      "members": [
+        "C1.counter_list_f3"
+      ]
+    },
+    {
+      "cluster_id": "C1.digit_peel",
+      "members": [
+        "C1.digit_peel",
+        "C1.digit_peel_f3",
+        "R2.from_base",
+        "R2.to_base",
+        "R2.to_base_wide"
+      ]
+    },
+    {
+      "cluster_id": "C1.euclid_gcd",
+      "members": [
+        "C1.euclid_gcd",
+        "C1.euclid_gcd_traced",
+        "C1.euclid_gcd_traced_f3",
+        "M1.gcd_lcm",
+        "M1.gcd_lcm_r2",
+        "M1.gcd_lcm_r3",
+        "M1.gcd_lcm_r4",
+        "R2.gcd_euclid"
+      ]
+    },
+    {
+      "cluster_id": "C1.fast_power",
+      "members": [
+        "C1.fast_power",
+        "C1.fast_power_f3",
+        "C1.fast_power_f4",
+        "C1.fast_power_r2",
+        "C1.fast_power_traced",
+        "M1.last_digit_power",
+        "M1.last_digit_power_r3",
+        "M1.power_remainder_r2",
+        "R2.modular_power",
+        "R2.permutation_power"
+      ]
+    },
+    {
+      "cluster_id": "C1.fib_like",
+      "members": [
+        "C1.fib_like",
+        "C1.fib_like_f3",
+        "C1.fib_shapes_recursive",
+        "C1.fib_shapes_recursive_f3",
+        "C1.loop_sum",
+        "C1.recursive_calls",
+        "C1.recursive_calls_r2",
+        "M1.arithmetic_series",
+        "M1.arithmetic_series_r3",
+        "M1.recurrence_iterate",
+        "M1.recurrence_iterate_r3"
+      ]
+    },
+    {
+      "cluster_id": "C1.func_branch",
+      "members": [
+        "C1.func_branch",
+        "C1.func_branch_f4",
+        "C1.func_compose",
+        "C1.func_compose_f3",
+        "C1.func_compose_f4"
+      ]
+    },
+    {
+      "cluster_id": "C1.grid_path_table",
+      "members": [
+        "C1.grid_path_table"
+      ]
+    },
+    {
+      "cluster_id": "C1.insertion_sort",
+      "members": [
+        "C1.insertion_sort",
+        "C1.insertion_sort_traced"
+      ]
+    },
+    {
+      "cluster_id": "C1.kadane_scan",
+      "members": [
+        "C1.kadane_scan",
+        "C1.kadane_scan_traced",
+        "R2.max_subarray_sum"
+      ]
+    },
+    {
+      "cluster_id": "C1.list_build",
+      "members": [
+        "C1.list_build",
+        "C1.list_build_f3"
+      ]
+    },
+    {
+      "cluster_id": "C1.majority_vote_scan",
+      "members": [
+        "C1.majority_vote_scan",
+        "C1.majority_vote_scan_f3",
+        "C1.majority_vote_scan_r2"
+      ]
+    },
+    {
+      "cluster_id": "C1.merge_two_sorted",
+      "members": [
+        "C1.merge_two_sorted",
+        "C1.merge_two_sorted_f3",
+        "C1.merge_two_sorted_r2"
+      ]
+    },
+    {
+      "cluster_id": "C1.minmax_track",
+      "members": [
+        "C1.minmax_track"
+      ]
+    },
+    {
+      "cluster_id": "C1.mirror_pointers",
+      "members": [
+        "C1.mirror_pointers",
+        "R2.palindrome_check"
+      ]
+    },
+    {
+      "cluster_id": "C1.nested_pairs",
+      "members": [
+        "C1.nested_pairs",
+        "C1.nested_pairs_f3"
+      ]
+    },
+    {
+      "cluster_id": "C1.partition_pass",
+      "members": [
+        "C1.partition_pass",
+        "C1.partition_pass_f3"
+      ]
+    },
+    {
+      "cluster_id": "C1.run_length_scan",
+      "members": [
+        "C1.run_length_scan",
+        "R2.run_length"
+      ]
+    },
+    {
+      "cluster_id": "C1.shared_lists",
+      "members": [
+        "C1.shared_lists",
+        "C1.shared_lists_f3"
+      ]
+    },
+    {
+      "cluster_id": "C1.sieve_marking",
+      "members": [
+        "C1.sieve_marking",
+        "C1.sieve_marking_f3",
+        "C1.sieve_marking_f4",
+        "C1.sieve_marking_r2"
+      ]
+    },
+    {
+      "cluster_id": "C1.slices",
+      "members": [
+        "C1.slices",
+        "C1.slices_f4",
+        "C1.string_methods",
+        "C1.string_methods_f3"
+      ]
+    },
+    {
+      "cluster_id": "C1.string_build",
+      "members": [
+        "C1.string_build",
+        "C1.string_build_f3"
+      ]
+    },
+    {
+      "cluster_id": "C1.string_pair_table",
+      "members": [
+        "C1.string_pair_table",
+        "R2.lcs_length"
+      ]
+    },
+    {
+      "cluster_id": "C1.turtle_walk",
+      "members": [
+        "C1.turtle_walk",
+        "C1.turtle_walk_f3",
+        "C1.turtle_walk_r2"
+      ]
+    },
+    {
+      "cluster_id": "C1.while_counter",
+      "members": [
+        "C1.while_counter",
+        "C1.while_counter_f3"
+      ]
+    },
+    {
+      "cluster_id": "M1.ages",
+      "members": [
+        "M1.ages",
+        "M1.ages_r3",
+        "M1.average_missing",
+        "M1.average_missing_r3",
+        "M1.average_missing_r4",
+        "M1.coins",
+        "M1.coins_r3",
+        "M1.consecutive",
+        "M1.consecutive_r3",
+        "M1.linear_equation",
+        "M1.linear_equation_r3",
+        "M1.pipes_work",
+        "M1.pipes_work_r3",
+        "M1.rectangle",
+        "M1.rectangle_r3"
+      ]
+    },
+    {
+      "cluster_id": "M1.binomial_choose",
+      "members": [
+        "M1.binomial_choose",
+        "M1.binomial_choose_r2",
+        "M1.binomial_choose_r3"
+      ]
+    },
+    {
+      "cluster_id": "M1.clock_duration",
+      "members": [
+        "M1.clock_duration",
+        "M1.clock_duration_r3",
+        "M1.clock_duration_r4"
+      ]
+    },
+    {
+      "cluster_id": "M1.crt_congruence",
+      "members": [
+        "M1.crt_congruence",
+        "M1.crt_congruence_r2",
+        "M1.crt_congruence_r3",
+        "R2.crt_smallest"
+      ]
+    },
+    {
+      "cluster_id": "M1.digit_puzzle",
+      "members": [
+        "M1.digit_puzzle",
+        "M1.digit_puzzle_r2",
+        "M1.digit_puzzle_r3"
+      ]
+    },
+    {
+      "cluster_id": "M1.division_counting",
+      "members": [
+        "M1.division_counting",
+        "M1.division_counting_r2",
+        "M1.division_counting_r3"
+      ]
+    },
+    {
+      "cluster_id": "M1.finite_differences",
+      "members": [
+        "M1.finite_differences",
+        "M1.finite_differences_r3",
+        "M1.finite_differences_r4"
+      ]
+    },
+    {
+      "cluster_id": "M1.fraction_remainder",
+      "members": [
+        "M1.fraction_remainder",
+        "M1.fraction_remainder_r3",
+        "M1.percent_change",
+        "M1.percent_change_r3",
+        "M1.ratio_share",
+        "M1.ratio_share_r3",
+        "M1.tip_split",
+        "M1.tip_split_r3"
+      ]
+    },
+    {
+      "cluster_id": "M1.grid_perimeter",
+      "members": [
+        "M1.grid_perimeter",
+        "M1.grid_perimeter_r2",
+        "M1.grid_perimeter_r3",
+        "M1.painted_cube",
+        "M1.painted_cube_r2",
+        "M1.painted_cube_r3"
+      ]
+    },
+    {
+      "cluster_id": "M1.inclusion_exclusion",
+      "members": [
+        "M1.inclusion_exclusion",
+        "M1.inclusion_exclusion_r2",
+        "M1.inclusion_exclusion_r3",
+        "R1.venn_counting",
+        "R1.venn_counting_r4",
+        "R1.venn_counting_r5"
+      ]
+    },
+    {
+      "cluster_id": "M1.median_list",
+      "members": [
+        "M1.median_list",
+        "M1.median_list_r2",
+        "M1.median_list_r3",
+        "R2.kth_smallest",
+        "R2.sort_list"
+      ]
+    },
+    {
+      "cluster_id": "M1.mixture",
+      "members": [
+        "M1.mixture",
+        "M1.mixture_r3",
+        "M1.mixture_r4",
+        "M1.shopping",
+        "M1.shopping_r3",
+        "M1.speed_distance",
+        "M1.speed_distance_r3"
+      ]
+    },
+    {
+      "cluster_id": "M1.pigeonhole_worst_case",
+      "members": [
+        "M1.pigeonhole_worst_case",
+        "M1.pigeonhole_worst_case_r2",
+        "M1.pigeonhole_worst_case_r3"
+      ]
+    },
+    {
+      "cluster_id": "M1.prime_factors",
+      "members": [
+        "M1.prime_factors",
+        "M1.prime_factors_r2",
+        "M1.prime_factors_r3",
+        "R2.prime_factor_query"
+      ]
+    },
+    {
+      "cluster_id": "M1.pythagoras",
+      "members": [
+        "M1.pythagoras",
+        "M1.pythagoras_r2",
+        "M1.pythagoras_r3"
+      ]
+    },
+    {
+      "cluster_id": "M1.quadratic_area",
+      "members": [
+        "M1.quadratic_area",
+        "M1.quadratic_area_r3"
+      ]
+    },
+    {
+      "cluster_id": "M1.slot_permutations",
+      "members": [
+        "M1.slot_permutations",
+        "M1.slot_permutations_r2",
+        "M1.slot_permutations_r3",
+        "M1.slot_permutations_r4"
+      ]
+    },
+    {
+      "cluster_id": "M1.tiered_pricing",
+      "members": [
+        "M1.tiered_pricing"
+      ]
+    },
+    {
+      "cluster_id": "R1.activity_selection",
+      "members": [
+        "R1.activity_selection",
+        "R1.activity_selection_r4",
+        "R1.activity_selection_r5",
+        "R2.interval_scheduling"
+      ]
+    },
+    {
+      "cluster_id": "R1.attribute_rule",
+      "members": [
+        "R1.attribute_rule",
+        "R1.attribute_rule_r5",
+        "R1.conditional_decision_tree",
+        "R1.conditional_decision_tree_r4",
+        "R1.conditional_decision_tree_r6",
+        "R1.elimination_bracket",
+        "R1.elimination_bracket_r2",
+        "R1.elimination_bracket_r3",
+        "R1.elimination_bracket_r4",
+        "R1.elimination_bracket_r5",
+        "R1.minimax_tree",
+        "R1.minimax_tree_r4",
+        "R1.minimax_tree_r5"
+      ]
+    },
+    {
+      "cluster_id": "R1.boolean_lights",
+      "members": [
+        "R1.boolean_lights",
+        "R1.boolean_lights_r2",
+        "R1.boolean_lights_r4",
+        "R1.compass_turns"
+      ]
+    },
+    {
+      "cluster_id": "R1.categories_default_exceptions",
+      "members": [
+        "R1.categories_default_exceptions",
+        "R1.categories_default_exceptions_r2",
+        "R1.categories_default_exceptions_r3",
+        "R1.categories_default_exceptions_r4",
+        "R1.kinship_ancestor",
+        "R1.kinship_ancestor_r2",
+        "R1.kinship_ancestor_r3",
+        "R1.kinship_ancestor_r4",
+        "R1.kinship_cousins",
+        "R1.kinship_cousins_r5"
+      ]
+    },
+    {
+      "cluster_id": "R1.conditional_chain",
+      "members": [
+        "R1.conditional_chain",
+        "R1.conditional_chain_r5",
+        "R1.knights_knaves",
+        "R1.knights_knaves_r5",
+        "R1.knights_knaves_r6",
+        "R1.one_culprit"
+      ]
+    },
+    {
+      "cluster_id": "R1.conditional_threshold_rule",
+      "members": [
+        "R1.conditional_threshold_rule",
+        "R1.conditional_threshold_rule_r2",
+        "R1.conditional_threshold_rule_r3",
+        "R1.conditional_threshold_rule_r4"
+      ]
+    },
+    {
+      "cluster_id": "R1.containers_stack_piles",
+      "members": [
+        "R1.containers_stack_piles",
+        "R1.containers_stack_piles_r2",
+        "R1.containers_stack_piles_r3",
+        "R1.containers_stack_piles_r4"
+      ]
+    },
+    {
+      "cluster_id": "R1.equivalence_exchange_rates",
+      "members": [
+        "R1.equivalence_exchange_rates",
+        "R1.equivalence_exchange_rates_r5",
+        "R1.equivalence_exchange_rates_r6",
+        "R1.event_timeline",
+        "R1.event_timeline_r5",
+        "R1.event_timeline_r6",
+        "R1.spatial_relative_directions",
+        "R1.spatial_relative_directions_r4",
+        "R1.spatial_relative_directions_r5",
+        "R1.spatial_relative_directions_r6",
+        "R1.temporal_weekday_shift",
+        "R1.temporal_weekday_shift_r5",
+        "R1.temporal_weekday_shift_r6"
+      ]
+    },
+    {
+      "cluster_id": "R1.graph_bipartite",
+      "members": [
+        "R1.graph_bipartite",
+        "R1.graph_bipartite_r5"
+      ]
+    },
+    {
+      "cluster_id": "R1.graph_shortest_route",
+      "members": [
+        "R1.graph_shortest_route",
+        "R1.graph_shortest_route_r2",
+        "R1.graph_shortest_route_r4",
+        "R1.graph_shortest_route_r6"
+      ]
+    },
+    {
+      "cluster_id": "R1.instant_runoff",
+      "members": [
+        "R1.instant_runoff",
+        "R1.instant_runoff_r2",
+        "R1.instant_runoff_r4",
+        "R1.instant_runoff_r5"
+      ]
+    },
+    {
+      "cluster_id": "R1.kinship_descendants",
+      "members": [
+        "R1.kinship_descendants",
+        "R1.kinship_descendants_r2",
+        "R1.kinship_descendants_r3",
+        "R1.kinship_descendants_r4",
+        "R1.kinship_descendants_r5"
+      ]
+    },
+    {
+      "cluster_id": "R1.mst_cost",
+      "members": [
+        "R1.mst_cost",
+        "R1.mst_cost_r4",
+        "R2.cheapest_network"
+      ]
+    },
+    {
+      "cluster_id": "R1.nim_xor",
+      "members": [
+        "R1.nim_xor",
+        "R1.nim_xor_r4",
+        "R1.nim_xor_r5",
+        "R2.subtraction_game"
+      ]
+    },
+    {
+      "cluster_id": "R1.order_extreme",
+      "members": [
+        "R1.order_extreme",
+        "R1.order_tournament_wins",
+        "R1.topological_order",
+        "R1.topological_order_r2",
+        "R1.topological_order_r4",
+        "R1.topological_order_r5"
+      ]
+    },
+    {
+      "cluster_id": "R1.pet_owners",
+      "members": [
+        "R1.pet_owners",
+        "R1.pet_owners_r5",
+        "R1.seating_row",
+        "R1.seating_row_r5"
+      ]
+    },
+    {
+      "cluster_id": "R1.spatial_grid_walk",
+      "members": [
+        "R1.spatial_grid_walk",
+        "R1.spatial_grid_walk_r2",
+        "R1.spatial_grid_walk_r5"
+      ]
+    },
+    {
+      "cluster_id": "R1.stable_matching",
+      "members": [
+        "R1.stable_matching",
+        "R1.stable_matching_r2",
+        "R1.stable_matching_r4",
+        "R1.stable_matching_r5",
+        "R2.deferred_acceptance_partner"
+      ]
+    },
+    {
+      "cluster_id": "R1.swap_tracking",
+      "members": [
+        "R1.swap_tracking",
+        "R1.swap_tracking_r5"
+      ]
+    },
+    {
+      "cluster_id": "R1.temporal_critical_path",
+      "members": [
+        "R1.temporal_critical_path",
+        "R1.temporal_critical_path_r4",
+        "R1.temporal_critical_path_r5"
+      ]
+    },
+    {
+      "cluster_id": "R1.temporal_interval_overlap",
+      "members": [
+        "R1.temporal_interval_overlap",
+        "R1.temporal_interval_overlap_r5"
+      ]
+    },
+    {
+      "cluster_id": "R1.tracking_accounts",
+      "members": [
+        "R1.tracking_accounts",
+        "R1.tracking_accounts_r5"
+      ]
+    },
+    {
+      "cluster_id": "R2.bst_traversal",
+      "members": [
+        "R2.bst_traversal"
+      ]
+    },
+    {
+      "cluster_id": "R2.cache_eviction",
+      "members": [
+        "R2.cache_eviction"
+      ]
+    },
+    {
+      "cluster_id": "R2.caesar_shift",
+      "members": [
+        "R2.caesar_shift"
+      ]
+    },
+    {
+      "cluster_id": "R2.chip_toppling",
+      "members": [
+        "R2.chip_toppling"
+      ]
+    },
+    {
+      "cluster_id": "R2.count_divisible",
+      "members": [
+        "R2.count_divisible",
+        "R2.count_letter"
+      ]
+    },
+    {
+      "cluster_id": "R2.dictionary_rank",
+      "members": [
+        "R2.dictionary_rank"
+      ]
+    },
+    {
+      "cluster_id": "R2.digit_root",
+      "members": [
+        "R2.digit_root"
+      ]
+    },
+    {
+      "cluster_id": "R2.expression_eval",
+      "members": [
+        "R2.expression_eval"
+      ]
+    },
+    {
+      "cluster_id": "R2.grid_sum",
+      "members": [
+        "R2.grid_sum"
+      ]
+    },
+    {
+      "cluster_id": "R2.hamming_error_position",
+      "members": [
+        "R2.hamming_error_position"
+      ]
+    },
+    {
+      "cluster_id": "R2.hash_probe",
+      "members": [
+        "R2.hash_probe"
+      ]
+    },
+    {
+      "cluster_id": "R2.lis_length",
+      "members": [
+        "R2.lis_length"
+      ]
+    },
+    {
+      "cluster_id": "R2.longest_palindromic_substring",
+      "members": [
+        "R2.longest_palindromic_substring"
+      ]
+    },
+    {
+      "cluster_id": "R2.luhn_check",
+      "members": [
+        "R2.luhn_check"
+      ]
+    },
+    {
+      "cluster_id": "R2.merge_smallest_cost",
+      "members": [
+        "R2.merge_smallest_cost"
+      ]
+    },
+    {
+      "cluster_id": "R2.min_heap_ops",
+      "members": [
+        "R2.min_heap_ops"
+      ]
+    },
+    {
+      "cluster_id": "R2.multiples_between",
+      "members": [
+        "R2.multiples_between"
+      ]
+    },
+    {
+      "cluster_id": "R2.string_rewrite",
+      "members": [
+        "R2.string_rewrite",
+        "R2.string_rewrite_nonidentity"
+      ]
+    }
+  ],
+  "groups": [
+    [
+      "C1.bfs_queue",
+      "C1.bracket_matching",
+      "C1.bytecode_loop",
+      "C1.circle_elimination",
+      "C1.coin_change_table",
+      "C1.cond_chain",
+      "C1.counter_list",
+      "C1.counter_list_f3",
+      "C1.digit_peel",
+      "C1.euclid_gcd",
+      "C1.fast_power",
+      "C1.fib_like",
+      "C1.grid_path_table",
+      "C1.kadane_scan",
+      "C1.list_build",
+      "C1.majority_vote_scan",
+      "C1.minmax_track",
+      "C1.nested_pairs",
+      "C1.slices",
+      "C1.string_build",
+      "C1.string_pair_table",
+      "C1.turtle_walk",
+      "C1.while_counter",
+      "M1.ages",
+      "M1.binomial_choose",
+      "M1.clock_duration",
+      "M1.crt_congruence",
+      "M1.digit_puzzle",
+      "M1.division_counting",
+      "M1.mixture",
+      "M1.slot_permutations",
+      "M1.tiered_pricing",
+      "R1.activity_selection",
+      "R1.boolean_lights",
+      "R1.categories_default_exceptions",
+      "R1.conditional_chain",
+      "R1.conditional_threshold_rule",
+      "R1.containers_stack_piles",
+      "R1.graph_bipartite",
+      "R1.graph_shortest_route",
+      "R1.instant_runoff",
+      "R1.kinship_descendants",
+      "R1.mst_cost",
+      "R1.nim_xor",
+      "R1.order_extreme",
+      "R1.pet_owners",
+      "R1.spatial_grid_walk",
+      "R1.swap_tracking",
+      "R1.temporal_critical_path",
+      "R1.tracking_accounts",
+      "R2.count_divisible",
+      "R2.dictionary_rank",
+      "R2.digit_root",
+      "R2.expression_eval",
+      "R2.grid_sum",
+      "R2.multiples_between",
+      "R2.string_rewrite"
+    ],
+    [
+      "C1.binary_search"
+    ],
+    [
+      "C1.bubble_pass",
+      "C1.insertion_sort",
+      "C1.merge_two_sorted",
+      "C1.partition_pass",
+      "M1.median_list"
+    ],
+    [
+      "C1.cellular_update"
+    ],
+    [
+      "C1.func_branch"
+    ],
+    [
+      "C1.mirror_pointers",
+      "C1.run_length_scan"
+    ],
+    [
+      "C1.shared_lists"
+    ],
+    [
+      "C1.sieve_marking"
+    ],
+    [
+      "M1.finite_differences"
+    ],
+    [
+      "M1.fraction_remainder",
+      "R1.equivalence_exchange_rates"
+    ],
+    [
+      "M1.grid_perimeter"
+    ],
+    [
+      "M1.inclusion_exclusion"
+    ],
+    [
+      "M1.pigeonhole_worst_case"
+    ],
+    [
+      "M1.prime_factors"
+    ],
+    [
+      "M1.pythagoras"
+    ],
+    [
+      "M1.quadratic_area"
+    ],
+    [
+      "R1.attribute_rule"
+    ],
+    [
+      "R1.stable_matching"
+    ],
+    [
+      "R1.temporal_interval_overlap"
+    ],
+    [
+      "R2.bst_traversal"
+    ],
+    [
+      "R2.cache_eviction"
+    ],
+    [
+      "R2.caesar_shift"
+    ],
+    [
+      "R2.chip_toppling"
+    ],
+    [
+      "R2.hamming_error_position"
+    ],
+    [
+      "R2.hash_probe"
+    ],
+    [
+      "R2.lis_length"
+    ],
+    [
+      "R2.longest_palindromic_substring"
+    ],
+    [
+      "R2.luhn_check"
+    ],
+    [
+      "R2.merge_smallest_cost"
+    ],
+    [
+      "R2.min_heap_ops"
+    ]
+  ],
+  "lineages": {
+    "C1.bfs_queue": {
+      "evaluation": "C1"
+    },
+    "C1.binary_search": {
+      "evaluation": "C1"
+    },
+    "C1.binary_search_f3": {
+      "evaluation": "C1"
+    },
+    "C1.bracket_matching": {
+      "evaluation": "C1"
+    },
+    "C1.bracket_matching_f3": {
+      "evaluation": "C1"
+    },
+    "C1.bracket_matching_traced": {
+      "evaluation": "C1"
+    },
+    "C1.bubble_pass": {
+      "evaluation": "C1"
+    },
+    "C1.bytecode_loop": {
+      "evaluation": "C1"
+    },
+    "C1.bytecode_loop_f3": {
+      "evaluation": "C1"
+    },
+    "C1.bytecode_loop_r2": {
+      "evaluation": "C1"
+    },
+    "C1.cellular_update": {
+      "evaluation": "C1"
+    },
+    "C1.cellular_update_f3": {
+      "evaluation": "C1"
+    },
+    "C1.cellular_update_r2": {
+      "evaluation": "C1"
+    },
+    "C1.circle_elimination": {
+      "evaluation": "C1"
+    },
+    "C1.circle_elimination_r2": {
+      "evaluation": "C1"
+    },
+    "C1.coin_change_table": {
+      "evaluation": "C1"
+    },
+    "C1.coin_change_table_f3": {
+      "evaluation": "C1"
+    },
+    "C1.cond_chain": {
+      "evaluation": "C1"
+    },
+    "C1.cond_chain_f3": {
+      "evaluation": "C1"
+    },
+    "C1.counter_list": {
+      "evaluation": "C1"
+    },
+    "C1.counter_list_f3": {
+      "evaluation": "C1"
+    },
+    "C1.digit_peel": {
+      "evaluation": "C1"
+    },
+    "C1.digit_peel_f3": {
+      "evaluation": "C1"
+    },
+    "C1.euclid_gcd": {
+      "evaluation": "C1"
+    },
+    "C1.euclid_gcd_traced": {
+      "evaluation": "C1"
+    },
+    "C1.euclid_gcd_traced_f3": {
+      "evaluation": "C1"
+    },
+    "C1.fast_power": {
+      "evaluation": "C1"
+    },
+    "C1.fast_power_f3": {
+      "evaluation": "C1"
+    },
+    "C1.fast_power_f4": {
+      "evaluation": "C1"
+    },
+    "C1.fast_power_r2": {
+      "evaluation": "C1"
+    },
+    "C1.fast_power_traced": {
+      "evaluation": "C1"
+    },
+    "C1.fib_like": {
+      "evaluation": "C1"
+    },
+    "C1.fib_like_f3": {
+      "evaluation": "C1"
+    },
+    "C1.fib_shapes_recursive": {
+      "evaluation": "C1"
+    },
+    "C1.fib_shapes_recursive_f3": {
+      "evaluation": "C1"
+    },
+    "C1.func_branch": {
+      "evaluation": "C1"
+    },
+    "C1.func_branch_f4": {
+      "evaluation": "C1"
+    },
+    "C1.func_compose": {
+      "evaluation": "C1"
+    },
+    "C1.func_compose_f3": {
+      "evaluation": "C1"
+    },
+    "C1.func_compose_f4": {
+      "evaluation": "C1"
+    },
+    "C1.grid_path_table": {
+      "evaluation": "C1"
+    },
+    "C1.insertion_sort": {
+      "evaluation": "C1"
+    },
+    "C1.insertion_sort_traced": {
+      "evaluation": "C1"
+    },
+    "C1.kadane_scan": {
+      "evaluation": "C1"
+    },
+    "C1.kadane_scan_traced": {
+      "evaluation": "C1"
+    },
+    "C1.list_build": {
+      "evaluation": "C1"
+    },
+    "C1.list_build_f3": {
+      "evaluation": "C1"
+    },
+    "C1.loop_sum": {
+      "evaluation": "C1"
+    },
+    "C1.majority_vote_scan": {
+      "evaluation": "C1"
+    },
+    "C1.majority_vote_scan_f3": {
+      "evaluation": "C1"
+    },
+    "C1.majority_vote_scan_r2": {
+      "evaluation": "C1"
+    },
+    "C1.merge_two_sorted": {
+      "evaluation": "C1"
+    },
+    "C1.merge_two_sorted_f3": {
+      "evaluation": "C1"
+    },
+    "C1.merge_two_sorted_r2": {
+      "evaluation": "C1"
+    },
+    "C1.minmax_track": {
+      "evaluation": "C1"
+    },
+    "C1.mirror_pointers": {
+      "evaluation": "C1"
+    },
+    "C1.nested_pairs": {
+      "evaluation": "C1"
+    },
+    "C1.nested_pairs_f3": {
+      "evaluation": "C1"
+    },
+    "C1.partition_pass": {
+      "evaluation": "C1"
+    },
+    "C1.partition_pass_f3": {
+      "evaluation": "C1"
+    },
+    "C1.postfix_evaluation": {
+      "evaluation": "C1"
+    },
+    "C1.recursive_calls": {
+      "evaluation": "C1"
+    },
+    "C1.recursive_calls_r2": {
+      "evaluation": "C1"
+    },
+    "C1.run_length_scan": {
+      "evaluation": "C1"
+    },
+    "C1.shared_lists": {
+      "evaluation": "C1"
+    },
+    "C1.shared_lists_f3": {
+      "evaluation": "C1"
+    },
+    "C1.sieve_marking": {
+      "evaluation": "C1"
+    },
+    "C1.sieve_marking_f3": {
+      "evaluation": "C1"
+    },
+    "C1.sieve_marking_f4": {
+      "evaluation": "C1"
+    },
+    "C1.sieve_marking_r2": {
+      "evaluation": "C1"
+    },
+    "C1.slices": {
+      "evaluation": "C1"
+    },
+    "C1.slices_f4": {
+      "evaluation": "C1"
+    },
+    "C1.string_build": {
+      "evaluation": "C1"
+    },
+    "C1.string_build_f3": {
+      "evaluation": "C1"
+    },
+    "C1.string_methods": {
+      "evaluation": "C1"
+    },
+    "C1.string_methods_f3": {
+      "evaluation": "C1"
+    },
+    "C1.string_pair_table": {
+      "evaluation": "C1"
+    },
+    "C1.turtle_walk": {
+      "evaluation": "C1"
+    },
+    "C1.turtle_walk_f3": {
+      "evaluation": "C1"
+    },
+    "C1.turtle_walk_r2": {
+      "evaluation": "C1"
+    },
+    "C1.union_find_links": {
+      "evaluation": "C1"
+    },
+    "C1.union_find_links_f3": {
+      "evaluation": "C1"
+    },
+    "C1.while_counter": {
+      "evaluation": "C1"
+    },
+    "C1.while_counter_f3": {
+      "evaluation": "C1"
+    },
+    "M1.ages": {
+      "evaluation": "M1"
+    },
+    "M1.ages_r3": {
+      "evaluation": "M1"
+    },
+    "M1.arithmetic_series": {
+      "evaluation": "M1"
+    },
+    "M1.arithmetic_series_r3": {
+      "evaluation": "M1"
+    },
+    "M1.average_missing": {
+      "evaluation": "M1"
+    },
+    "M1.average_missing_r3": {
+      "evaluation": "M1"
+    },
+    "M1.average_missing_r4": {
+      "evaluation": "M1"
+    },
+    "M1.binomial_choose": {
+      "evaluation": "M1"
+    },
+    "M1.binomial_choose_r2": {
+      "evaluation": "M1"
+    },
+    "M1.binomial_choose_r3": {
+      "evaluation": "M1"
+    },
+    "M1.change_ways": {
+      "evaluation": "M1"
+    },
+    "M1.change_ways_r2": {
+      "evaluation": "M1"
+    },
+    "M1.change_ways_r3": {
+      "evaluation": "M1"
+    },
+    "M1.clock_duration": {
+      "evaluation": "M1"
+    },
+    "M1.clock_duration_r3": {
+      "evaluation": "M1"
+    },
+    "M1.clock_duration_r4": {
+      "evaluation": "M1"
+    },
+    "M1.coins": {
+      "evaluation": "M1"
+    },
+    "M1.coins_r3": {
+      "evaluation": "M1"
+    },
+    "M1.consecutive": {
+      "evaluation": "M1"
+    },
+    "M1.consecutive_r3": {
+      "evaluation": "M1"
+    },
+    "M1.crt_congruence": {
+      "evaluation": "M1"
+    },
+    "M1.crt_congruence_r2": {
+      "evaluation": "M1"
+    },
+    "M1.crt_congruence_r3": {
+      "evaluation": "M1"
+    },
+    "M1.digit_puzzle": {
+      "evaluation": "M1"
+    },
+    "M1.digit_puzzle_r2": {
+      "evaluation": "M1"
+    },
+    "M1.digit_puzzle_r3": {
+      "evaluation": "M1"
+    },
+    "M1.division_counting": {
+      "evaluation": "M1"
+    },
+    "M1.division_counting_r2": {
+      "evaluation": "M1"
+    },
+    "M1.division_counting_r3": {
+      "evaluation": "M1"
+    },
+    "M1.finite_differences": {
+      "evaluation": "M1"
+    },
+    "M1.finite_differences_r3": {
+      "evaluation": "M1"
+    },
+    "M1.finite_differences_r4": {
+      "evaluation": "M1"
+    },
+    "M1.fraction_remainder": {
+      "evaluation": "M1"
+    },
+    "M1.fraction_remainder_r3": {
+      "evaluation": "M1"
+    },
+    "M1.gcd_lcm": {
+      "evaluation": "M1"
+    },
+    "M1.gcd_lcm_r2": {
+      "evaluation": "M1"
+    },
+    "M1.gcd_lcm_r3": {
+      "evaluation": "M1"
+    },
+    "M1.gcd_lcm_r4": {
+      "evaluation": "M1"
+    },
+    "M1.grid_perimeter": {
+      "evaluation": "M1"
+    },
+    "M1.grid_perimeter_r2": {
+      "evaluation": "M1"
+    },
+    "M1.grid_perimeter_r3": {
+      "evaluation": "M1"
+    },
+    "M1.inclusion_exclusion": {
+      "evaluation": "M1"
+    },
+    "M1.inclusion_exclusion_r2": {
+      "evaluation": "M1"
+    },
+    "M1.inclusion_exclusion_r3": {
+      "evaluation": "M1"
+    },
+    "M1.last_digit_power": {
+      "evaluation": "M1"
+    },
+    "M1.last_digit_power_r3": {
+      "evaluation": "M1"
+    },
+    "M1.linear_equation": {
+      "evaluation": "M1"
+    },
+    "M1.linear_equation_r3": {
+      "evaluation": "M1"
+    },
+    "M1.median_list": {
+      "evaluation": "M1"
+    },
+    "M1.median_list_r2": {
+      "evaluation": "M1"
+    },
+    "M1.median_list_r3": {
+      "evaluation": "M1"
+    },
+    "M1.min_cost_packs": {
+      "evaluation": "M1"
+    },
+    "M1.min_cost_packs_r2": {
+      "evaluation": "M1"
+    },
+    "M1.mixture": {
+      "evaluation": "M1"
+    },
+    "M1.mixture_r3": {
+      "evaluation": "M1"
+    },
+    "M1.mixture_r4": {
+      "evaluation": "M1"
+    },
+    "M1.mode_tally": {
+      "evaluation": "M1"
+    },
+    "M1.mode_tally_r2": {
+      "evaluation": "M1"
+    },
+    "M1.mode_tally_r3": {
+      "evaluation": "M1"
+    },
+    "M1.painted_cube": {
+      "evaluation": "M1"
+    },
+    "M1.painted_cube_r2": {
+      "evaluation": "M1"
+    },
+    "M1.painted_cube_r3": {
+      "evaluation": "M1"
+    },
+    "M1.percent_change": {
+      "evaluation": "M1"
+    },
+    "M1.percent_change_r3": {
+      "evaluation": "M1"
+    },
+    "M1.pigeonhole_worst_case": {
+      "evaluation": "M1"
+    },
+    "M1.pigeonhole_worst_case_r2": {
+      "evaluation": "M1"
+    },
+    "M1.pigeonhole_worst_case_r3": {
+      "evaluation": "M1"
+    },
+    "M1.pipes_work": {
+      "evaluation": "M1"
+    },
+    "M1.pipes_work_r3": {
+      "evaluation": "M1"
+    },
+    "M1.power_remainder_r2": {
+      "evaluation": "M1"
+    },
+    "M1.prime_factors": {
+      "evaluation": "M1"
+    },
+    "M1.prime_factors_r2": {
+      "evaluation": "M1"
+    },
+    "M1.prime_factors_r3": {
+      "evaluation": "M1"
+    },
+    "M1.pythagoras": {
+      "evaluation": "M1"
+    },
+    "M1.pythagoras_r2": {
+      "evaluation": "M1"
+    },
+    "M1.pythagoras_r3": {
+      "evaluation": "M1"
+    },
+    "M1.quadratic_area": {
+      "evaluation": "M1"
+    },
+    "M1.quadratic_area_r3": {
+      "evaluation": "M1"
+    },
+    "M1.ratio_share": {
+      "evaluation": "M1"
+    },
+    "M1.ratio_share_r3": {
+      "evaluation": "M1"
+    },
+    "M1.rectangle": {
+      "evaluation": "M1"
+    },
+    "M1.rectangle_r3": {
+      "evaluation": "M1"
+    },
+    "M1.recurrence_iterate": {
+      "evaluation": "M1"
+    },
+    "M1.recurrence_iterate_r3": {
+      "evaluation": "M1"
+    },
+    "M1.shopping": {
+      "evaluation": "M1"
+    },
+    "M1.shopping_r3": {
+      "evaluation": "M1"
+    },
+    "M1.slot_permutations": {
+      "evaluation": "M1"
+    },
+    "M1.slot_permutations_r2": {
+      "evaluation": "M1"
+    },
+    "M1.slot_permutations_r3": {
+      "evaluation": "M1"
+    },
+    "M1.slot_permutations_r4": {
+      "evaluation": "M1"
+    },
+    "M1.speed_distance": {
+      "evaluation": "M1"
+    },
+    "M1.speed_distance_r3": {
+      "evaluation": "M1"
+    },
+    "M1.tiered_pricing": {
+      "evaluation": "M1"
+    },
+    "M1.tip_split": {
+      "evaluation": "M1"
+    },
+    "M1.tip_split_r3": {
+      "evaluation": "M1"
+    },
+    "R1.activity_selection": {
+      "evaluation": "R1"
+    },
+    "R1.activity_selection_r4": {
+      "evaluation": "R1"
+    },
+    "R1.activity_selection_r5": {
+      "evaluation": "R1"
+    },
+    "R1.attribute_rule": {
+      "evaluation": "R1"
+    },
+    "R1.attribute_rule_r5": {
+      "evaluation": "R1"
+    },
+    "R1.boolean_lights": {
+      "evaluation": "R1"
+    },
+    "R1.boolean_lights_r2": {
+      "evaluation": "R1"
+    },
+    "R1.boolean_lights_r4": {
+      "evaluation": "R1"
+    },
+    "R1.categories_default_exceptions": {
+      "evaluation": "R1"
+    },
+    "R1.categories_default_exceptions_r2": {
+      "evaluation": "R1"
+    },
+    "R1.categories_default_exceptions_r3": {
+      "evaluation": "R1"
+    },
+    "R1.categories_default_exceptions_r4": {
+      "evaluation": "R1"
+    },
+    "R1.categories_follow": {
+      "evaluation": "R1"
+    },
+    "R1.categories_follow_r2": {
+      "evaluation": "R1"
+    },
+    "R1.categories_follow_r4": {
+      "evaluation": "R1"
+    },
+    "R1.categories_follow_r5": {
+      "evaluation": "R1"
+    },
+    "R1.compass_turns": {
+      "evaluation": "R1"
+    },
+    "R1.conditional_chain": {
+      "evaluation": "R1"
+    },
+    "R1.conditional_chain_r5": {
+      "evaluation": "R1"
+    },
+    "R1.conditional_decision_tree": {
+      "evaluation": "R1"
+    },
+    "R1.conditional_decision_tree_r4": {
+      "evaluation": "R1"
+    },
+    "R1.conditional_decision_tree_r6": {
+      "evaluation": "R1"
+    },
+    "R1.conditional_threshold_rule": {
+      "evaluation": "R1"
+    },
+    "R1.conditional_threshold_rule_r2": {
+      "evaluation": "R1"
+    },
+    "R1.conditional_threshold_rule_r3": {
+      "evaluation": "R1"
+    },
+    "R1.conditional_threshold_rule_r4": {
+      "evaluation": "R1"
+    },
+    "R1.containers_queue_line": {
+      "evaluation": "R1"
+    },
+    "R1.containers_queue_line_r2": {
+      "evaluation": "R1"
+    },
+    "R1.containers_queue_line_r5": {
+      "evaluation": "R1"
+    },
+    "R1.containers_stack_piles": {
+      "evaluation": "R1"
+    },
+    "R1.containers_stack_piles_r2": {
+      "evaluation": "R1"
+    },
+    "R1.containers_stack_piles_r3": {
+      "evaluation": "R1"
+    },
+    "R1.containers_stack_piles_r4": {
+      "evaluation": "R1"
+    },
+    "R1.elimination_bracket": {
+      "evaluation": "R1"
+    },
+    "R1.elimination_bracket_r2": {
+      "evaluation": "R1"
+    },
+    "R1.elimination_bracket_r3": {
+      "evaluation": "R1"
+    },
+    "R1.elimination_bracket_r4": {
+      "evaluation": "R1"
+    },
+    "R1.elimination_bracket_r5": {
+      "evaluation": "R1"
+    },
+    "R1.elimination_josephus": {
+      "evaluation": "R1"
+    },
+    "R1.equivalence_classes": {
+      "evaluation": "R1"
+    },
+    "R1.equivalence_classes_r2": {
+      "evaluation": "R1"
+    },
+    "R1.equivalence_classes_r5": {
+      "evaluation": "R1"
+    },
+    "R1.equivalence_exchange_rates": {
+      "evaluation": "R1"
+    },
+    "R1.equivalence_exchange_rates_r5": {
+      "evaluation": "R1"
+    },
+    "R1.equivalence_exchange_rates_r6": {
+      "evaluation": "R1"
+    },
+    "R1.event_timeline": {
+      "evaluation": "R1"
+    },
+    "R1.event_timeline_r5": {
+      "evaluation": "R1"
+    },
+    "R1.event_timeline_r6": {
+      "evaluation": "R1"
+    },
+    "R1.graph_bipartite": {
+      "evaluation": "R1"
+    },
+    "R1.graph_bipartite_r5": {
+      "evaluation": "R1"
+    },
+    "R1.graph_shortest_route": {
+      "evaluation": "R1"
+    },
+    "R1.graph_shortest_route_r2": {
+      "evaluation": "R1"
+    },
+    "R1.graph_shortest_route_r4": {
+      "evaluation": "R1"
+    },
+    "R1.graph_shortest_route_r6": {
+      "evaluation": "R1"
+    },
+    "R1.instant_runoff": {
+      "evaluation": "R1"
+    },
+    "R1.instant_runoff_r2": {
+      "evaluation": "R1"
+    },
+    "R1.instant_runoff_r4": {
+      "evaluation": "R1"
+    },
+    "R1.instant_runoff_r5": {
+      "evaluation": "R1"
+    },
+    "R1.kinship_ancestor": {
+      "evaluation": "R1"
+    },
+    "R1.kinship_ancestor_r2": {
+      "evaluation": "R1"
+    },
+    "R1.kinship_ancestor_r3": {
+      "evaluation": "R1"
+    },
+    "R1.kinship_ancestor_r4": {
+      "evaluation": "R1"
+    },
+    "R1.kinship_cousins": {
+      "evaluation": "R1"
+    },
+    "R1.kinship_cousins_r5": {
+      "evaluation": "R1"
+    },
+    "R1.kinship_descendants": {
+      "evaluation": "R1"
+    },
+    "R1.kinship_descendants_r2": {
+      "evaluation": "R1"
+    },
+    "R1.kinship_descendants_r3": {
+      "evaluation": "R1"
+    },
+    "R1.kinship_descendants_r4": {
+      "evaluation": "R1"
+    },
+    "R1.kinship_descendants_r5": {
+      "evaluation": "R1"
+    },
+    "R1.knights_knaves": {
+      "evaluation": "R1"
+    },
+    "R1.knights_knaves_r5": {
+      "evaluation": "R1"
+    },
+    "R1.knights_knaves_r6": {
+      "evaluation": "R1"
+    },
+    "R1.minimax_tree": {
+      "evaluation": "R1"
+    },
+    "R1.minimax_tree_r4": {
+      "evaluation": "R1"
+    },
+    "R1.minimax_tree_r5": {
+      "evaluation": "R1"
+    },
+    "R1.mst_cost": {
+      "evaluation": "R1"
+    },
+    "R1.mst_cost_r4": {
+      "evaluation": "R1"
+    },
+    "R1.nim_xor": {
+      "evaluation": "R1"
+    },
+    "R1.nim_xor_r4": {
+      "evaluation": "R1"
+    },
+    "R1.nim_xor_r5": {
+      "evaluation": "R1"
+    },
+    "R1.one_culprit": {
+      "evaluation": "R1"
+    },
+    "R1.order_compare": {
+      "evaluation": "R1"
+    },
+    "R1.order_compare_r4": {
+      "evaluation": "R1"
+    },
+    "R1.order_compare_r5": {
+      "evaluation": "R1"
+    },
+    "R1.order_extreme": {
+      "evaluation": "R1"
+    },
+    "R1.order_tournament_wins": {
+      "evaluation": "R1"
+    },
+    "R1.pet_owners": {
+      "evaluation": "R1"
+    },
+    "R1.pet_owners_r5": {
+      "evaluation": "R1"
+    },
+    "R1.road_reachability": {
+      "evaluation": "R1"
+    },
+    "R1.road_reachability_r5": {
+      "evaluation": "R1"
+    },
+    "R1.seating_row": {
+      "evaluation": "R1"
+    },
+    "R1.seating_row_r5": {
+      "evaluation": "R1"
+    },
+    "R1.spatial_grid_walk": {
+      "evaluation": "R1"
+    },
+    "R1.spatial_grid_walk_r2": {
+      "evaluation": "R1"
+    },
+    "R1.spatial_grid_walk_r5": {
+      "evaluation": "R1"
+    },
+    "R1.spatial_relative_directions": {
+      "evaluation": "R1"
+    },
+    "R1.spatial_relative_directions_r4": {
+      "evaluation": "R1"
+    },
+    "R1.spatial_relative_directions_r5": {
+      "evaluation": "R1"
+    },
+    "R1.spatial_relative_directions_r6": {
+      "evaluation": "R1"
+    },
+    "R1.stable_matching": {
+      "evaluation": "R1"
+    },
+    "R1.stable_matching_r2": {
+      "evaluation": "R1"
+    },
+    "R1.stable_matching_r4": {
+      "evaluation": "R1"
+    },
+    "R1.stable_matching_r5": {
+      "evaluation": "R1"
+    },
+    "R1.swap_tracking": {
+      "evaluation": "R1"
+    },
+    "R1.swap_tracking_r5": {
+      "evaluation": "R1"
+    },
+    "R1.temporal_critical_path": {
+      "evaluation": "R1"
+    },
+    "R1.temporal_critical_path_r4": {
+      "evaluation": "R1"
+    },
+    "R1.temporal_critical_path_r5": {
+      "evaluation": "R1"
+    },
+    "R1.temporal_interval_overlap": {
+      "evaluation": "R1"
+    },
+    "R1.temporal_interval_overlap_r5": {
+      "evaluation": "R1"
+    },
+    "R1.temporal_weekday_shift": {
+      "evaluation": "R1"
+    },
+    "R1.temporal_weekday_shift_r5": {
+      "evaluation": "R1"
+    },
+    "R1.temporal_weekday_shift_r6": {
+      "evaluation": "R1"
+    },
+    "R1.topological_order": {
+      "evaluation": "R1"
+    },
+    "R1.topological_order_r2": {
+      "evaluation": "R1"
+    },
+    "R1.topological_order_r4": {
+      "evaluation": "R1"
+    },
+    "R1.topological_order_r5": {
+      "evaluation": "R1"
+    },
+    "R1.tracking_accounts": {
+      "evaluation": "R1"
+    },
+    "R1.tracking_accounts_r5": {
+      "evaluation": "R1"
+    },
+    "R1.venn_counting": {
+      "evaluation": "R1"
+    },
+    "R1.venn_counting_r4": {
+      "evaluation": "R1"
+    },
+    "R1.venn_counting_r5": {
+      "evaluation": "R1"
+    },
+    "R2.binary_search_trace": {
+      "evaluation": "R2"
+    },
+    "R2.bracket_match": {
+      "evaluation": "R2"
+    },
+    "R2.bst_traversal": {
+      "evaluation": "R2"
+    },
+    "R2.cache_eviction": {
+      "evaluation": "R2"
+    },
+    "R2.caesar_shift": {
+      "evaluation": "R2"
+    },
+    "R2.cellular_automaton": {
+      "evaluation": "R2"
+    },
+    "R2.cheapest_network": {
+      "evaluation": "R2"
+    },
+    "R2.chip_toppling": {
+      "evaluation": "R2"
+    },
+    "R2.coin_change_min": {
+      "evaluation": "R2"
+    },
+    "R2.count_divisible": {
+      "evaluation": "R2"
+    },
+    "R2.count_letter": {
+      "evaluation": "R2"
+    },
+    "R2.crt_smallest": {
+      "evaluation": "R2"
+    },
+    "R2.deferred_acceptance_partner": {
+      "evaluation": "R2"
+    },
+    "R2.dictionary_rank": {
+      "evaluation": "R2"
+    },
+    "R2.digit_root": {
+      "evaluation": "R2"
+    },
+    "R2.expression_eval": {
+      "evaluation": "R2"
+    },
+    "R2.from_base": {
+      "evaluation": "R2"
+    },
+    "R2.gcd_euclid": {
+      "evaluation": "R2"
+    },
+    "R2.grid_sum": {
+      "evaluation": "R2"
+    },
+    "R2.hamming_error_position": {
+      "evaluation": "R2"
+    },
+    "R2.hash_probe": {
+      "evaluation": "R2"
+    },
+    "R2.interval_scheduling": {
+      "evaluation": "R2"
+    },
+    "R2.kth_smallest": {
+      "evaluation": "R2"
+    },
+    "R2.lcs_length": {
+      "evaluation": "R2"
+    },
+    "R2.lis_length": {
+      "evaluation": "R2"
+    },
+    "R2.list_ops": {
+      "evaluation": "R2"
+    },
+    "R2.longest_palindromic_substring": {
+      "evaluation": "R2"
+    },
+    "R2.luhn_check": {
+      "evaluation": "R2"
+    },
+    "R2.max_subarray_sum": {
+      "evaluation": "R2"
+    },
+    "R2.merge_smallest_cost": {
+      "evaluation": "R2"
+    },
+    "R2.min_heap_ops": {
+      "evaluation": "R2"
+    },
+    "R2.modular_power": {
+      "evaluation": "R2"
+    },
+    "R2.multiples_between": {
+      "evaluation": "R2"
+    },
+    "R2.palindrome_check": {
+      "evaluation": "R2"
+    },
+    "R2.permutation_power": {
+      "evaluation": "R2"
+    },
+    "R2.prime_factor_query": {
+      "evaluation": "R2"
+    },
+    "R2.run_length": {
+      "evaluation": "R2"
+    },
+    "R2.sort_list": {
+      "evaluation": "R2"
+    },
+    "R2.stack_machine": {
+      "evaluation": "R2"
+    },
+    "R2.string_rewrite": {
+      "evaluation": "R2"
+    },
+    "R2.string_rewrite_nonidentity": {
+      "evaluation": "R2"
+    },
+    "R2.subtraction_game": {
+      "evaluation": "R2"
+    },
+    "R2.to_base": {
+      "evaluation": "R2"
+    },
+    "R2.to_base_wide": {
+      "evaluation": "R2"
+    }
+  },
+  "links": [
+    [
+      "C1.bfs_queue",
+      "R1.road_reachability"
+    ],
+    [
+      "C1.binary_search",
+      "C1.binary_search_f3"
+    ],
+    [
+      "C1.binary_search",
+      "R2.binary_search_trace"
+    ],
+    [
+      "C1.bracket_matching",
+      "C1.bracket_matching_f3"
+    ],
+    [
+      "C1.bracket_matching",
+      "C1.bracket_matching_traced"
+    ],
+    [
+      "C1.bracket_matching",
+      "C1.postfix_evaluation"
+    ],
+    [
+      "C1.bracket_matching",
+      "R2.bracket_match"
+    ],
+    [
+      "C1.bytecode_loop",
+      "C1.bytecode_loop_f3"
+    ],
+    [
+      "C1.bytecode_loop",
+      "C1.bytecode_loop_r2"
+    ],
+    [
+      "C1.cellular_update",
+      "C1.cellular_update_f3"
+    ],
+    [
+      "C1.cellular_update",
+      "C1.cellular_update_r2"
+    ],
+    [
+      "C1.cellular_update",
+      "R2.cellular_automaton"
+    ],
+    [
+      "C1.circle_elimination",
+      "C1.circle_elimination_r2"
+    ],
+    [
+      "C1.circle_elimination",
+      "R1.elimination_josephus"
+    ],
+    [
+      "C1.coin_change_table",
+      "C1.coin_change_table_f3"
+    ],
+    [
+      "C1.coin_change_table",
+      "M1.change_ways"
+    ],
+    [
+      "C1.coin_change_table",
+      "R2.coin_change_min"
+    ],
+    [
+      "C1.cond_chain",
+      "C1.cond_chain_f3"
+    ],
+    [
+      "C1.counter_list",
+      "M1.mode_tally"
+    ],
+    [
+      "C1.digit_peel",
+      "C1.digit_peel_f3"
+    ],
+    [
+      "C1.digit_peel",
+      "R2.from_base"
+    ],
+    [
+      "C1.digit_peel",
+      "R2.to_base"
+    ],
+    [
+      "C1.euclid_gcd",
+      "C1.euclid_gcd_traced"
+    ],
+    [
+      "C1.euclid_gcd",
+      "C1.euclid_gcd_traced_f3"
+    ],
+    [
+      "C1.euclid_gcd",
+      "M1.gcd_lcm"
+    ],
+    [
+      "C1.euclid_gcd",
+      "R2.gcd_euclid"
+    ],
+    [
+      "C1.fast_power",
+      "C1.fast_power_f3"
+    ],
+    [
+      "C1.fast_power",
+      "C1.fast_power_f4"
+    ],
+    [
+      "C1.fast_power",
+      "C1.fast_power_r2"
+    ],
+    [
+      "C1.fast_power",
+      "C1.fast_power_traced"
+    ],
+    [
+      "C1.fast_power",
+      "M1.last_digit_power"
+    ],
+    [
+      "C1.fast_power",
+      "R2.modular_power"
+    ],
+    [
+      "C1.fast_power_f3",
+      "R2.modular_power"
+    ],
+    [
+      "C1.fast_power_f4",
+      "M1.last_digit_power"
+    ],
+    [
+      "C1.fib_like",
+      "C1.fib_like_f3"
+    ],
+    [
+      "C1.fib_like",
+      "C1.fib_shapes_recursive"
+    ],
+    [
+      "C1.fib_like",
+      "C1.recursive_calls"
+    ],
+    [
+      "C1.fib_like",
+      "C1.recursive_calls_r2"
+    ],
+    [
+      "C1.fib_like",
+      "M1.recurrence_iterate"
+    ],
+    [
+      "C1.fib_shapes_recursive",
+      "C1.recursive_calls"
+    ],
+    [
+      "C1.fib_shapes_recursive",
+      "C1.recursive_calls_r2"
+    ],
+    [
+      "C1.fib_shapes_recursive_f3",
+      "C1.recursive_calls"
+    ],
+    [
+      "C1.func_branch",
+      "C1.func_branch_f4"
+    ],
+    [
+      "C1.func_branch",
+      "C1.func_compose"
+    ],
+    [
+      "C1.func_compose",
+      "C1.func_compose_f3"
+    ],
+    [
+      "C1.func_compose",
+      "C1.func_compose_f4"
+    ],
+    [
+      "C1.insertion_sort",
+      "C1.insertion_sort_traced"
+    ],
+    [
+      "C1.kadane_scan",
+      "C1.kadane_scan_traced"
+    ],
+    [
+      "C1.kadane_scan",
+      "R2.max_subarray_sum"
+    ],
+    [
+      "C1.list_build",
+      "C1.list_build_f3"
+    ],
+    [
+      "C1.loop_sum",
+      "M1.arithmetic_series"
+    ],
+    [
+      "C1.majority_vote_scan",
+      "C1.majority_vote_scan_f3"
+    ],
+    [
+      "C1.majority_vote_scan",
+      "C1.majority_vote_scan_r2"
+    ],
+    [
+      "C1.merge_two_sorted",
+      "C1.merge_two_sorted_f3"
+    ],
+    [
+      "C1.merge_two_sorted",
+      "C1.merge_two_sorted_r2"
+    ],
+    [
+      "C1.mirror_pointers",
+      "R2.palindrome_check"
+    ],
+    [
+      "C1.nested_pairs",
+      "C1.nested_pairs_f3"
+    ],
+    [
+      "C1.partition_pass",
+      "C1.partition_pass_f3"
+    ],
+    [
+      "C1.postfix_evaluation",
+      "R2.stack_machine"
+    ],
+    [
+      "C1.recursive_calls",
+      "C1.recursive_calls_r2"
+    ],
+    [
+      "C1.run_length_scan",
+      "R2.run_length"
+    ],
+    [
+      "C1.shared_lists",
+      "C1.shared_lists_f3"
+    ],
+    [
+      "C1.sieve_marking",
+      "C1.sieve_marking_f3"
+    ],
+    [
+      "C1.sieve_marking",
+      "C1.sieve_marking_f4"
+    ],
+    [
+      "C1.sieve_marking",
+      "C1.sieve_marking_r2"
+    ],
+    [
+      "C1.slices",
+      "C1.slices_f4"
+    ],
+    [
+      "C1.slices",
+      "C1.string_methods"
+    ],
+    [
+      "C1.string_build",
+      "C1.string_build_f3"
+    ],
+    [
+      "C1.string_methods",
+      "C1.string_methods_f3"
+    ],
+    [
+      "C1.string_pair_table",
+      "R2.lcs_length"
+    ],
+    [
+      "C1.turtle_walk",
+      "C1.turtle_walk_f3"
+    ],
+    [
+      "C1.turtle_walk",
+      "C1.turtle_walk_r2"
+    ],
+    [
+      "C1.union_find_links",
+      "C1.union_find_links_f3"
+    ],
+    [
+      "C1.union_find_links",
+      "R1.equivalence_classes"
+    ],
+    [
+      "C1.while_counter",
+      "C1.while_counter_f3"
+    ],
+    [
+      "M1.ages",
+      "M1.ages_r3"
+    ],
+    [
+      "M1.ages",
+      "M1.average_missing"
+    ],
+    [
+      "M1.ages",
+      "M1.coins"
+    ],
+    [
+      "M1.ages",
+      "M1.consecutive"
+    ],
+    [
+      "M1.ages",
+      "M1.linear_equation"
+    ],
+    [
+      "M1.ages",
+      "M1.pipes_work"
+    ],
+    [
+      "M1.ages",
+      "M1.rectangle"
+    ],
+    [
+      "M1.arithmetic_series",
+      "M1.arithmetic_series_r3"
+    ],
+    [
+      "M1.arithmetic_series",
+      "M1.recurrence_iterate"
+    ],
+    [
+      "M1.average_missing",
+      "M1.average_missing_r3"
+    ],
+    [
+      "M1.average_missing",
+      "M1.average_missing_r4"
+    ],
+    [
+      "M1.average_missing",
+      "M1.coins"
+    ],
+    [
+      "M1.average_missing",
+      "M1.consecutive"
+    ],
+    [
+      "M1.average_missing",
+      "M1.linear_equation"
+    ],
+    [
+      "M1.average_missing",
+      "M1.pipes_work"
+    ],
+    [
+      "M1.average_missing",
+      "M1.rectangle"
+    ],
+    [
+      "M1.binomial_choose",
+      "M1.binomial_choose_r2"
+    ],
+    [
+      "M1.binomial_choose",
+      "M1.binomial_choose_r3"
+    ],
+    [
+      "M1.change_ways",
+      "M1.change_ways_r2"
+    ],
+    [
+      "M1.change_ways",
+      "M1.change_ways_r3"
+    ],
+    [
+      "M1.change_ways",
+      "M1.min_cost_packs"
+    ],
+    [
+      "M1.change_ways",
+      "R2.coin_change_min"
+    ],
+    [
+      "M1.clock_duration",
+      "M1.clock_duration_r3"
+    ],
+    [
+      "M1.clock_duration",
+      "M1.clock_duration_r4"
+    ],
+    [
+      "M1.coins",
+      "M1.coins_r3"
+    ],
+    [
+      "M1.coins",
+      "M1.consecutive"
+    ],
+    [
+      "M1.coins",
+      "M1.linear_equation"
+    ],
+    [
+      "M1.coins",
+      "M1.pipes_work"
+    ],
+    [
+      "M1.coins",
+      "M1.rectangle"
+    ],
+    [
+      "M1.consecutive",
+      "M1.consecutive_r3"
+    ],
+    [
+      "M1.consecutive",
+      "M1.linear_equation"
+    ],
+    [
+      "M1.consecutive",
+      "M1.pipes_work"
+    ],
+    [
+      "M1.consecutive",
+      "M1.rectangle"
+    ],
+    [
+      "M1.crt_congruence",
+      "M1.crt_congruence_r2"
+    ],
+    [
+      "M1.crt_congruence",
+      "M1.crt_congruence_r3"
+    ],
+    [
+      "M1.crt_congruence",
+      "R2.crt_smallest"
+    ],
+    [
+      "M1.digit_puzzle",
+      "M1.digit_puzzle_r2"
+    ],
+    [
+      "M1.digit_puzzle",
+      "M1.digit_puzzle_r3"
+    ],
+    [
+      "M1.division_counting",
+      "M1.division_counting_r2"
+    ],
+    [
+      "M1.division_counting",
+      "M1.division_counting_r3"
+    ],
+    [
+      "M1.finite_differences",
+      "M1.finite_differences_r3"
+    ],
+    [
+      "M1.finite_differences",
+      "M1.finite_differences_r4"
+    ],
+    [
+      "M1.fraction_remainder",
+      "M1.fraction_remainder_r3"
+    ],
+    [
+      "M1.fraction_remainder",
+      "M1.percent_change"
+    ],
+    [
+      "M1.fraction_remainder",
+      "M1.ratio_share"
+    ],
+    [
+      "M1.fraction_remainder",
+      "M1.tip_split"
+    ],
+    [
+      "M1.gcd_lcm",
+      "M1.gcd_lcm_r2"
+    ],
+    [
+      "M1.gcd_lcm",
+      "M1.gcd_lcm_r3"
+    ],
+    [
+      "M1.gcd_lcm",
+      "M1.gcd_lcm_r4"
+    ],
+    [
+      "M1.gcd_lcm",
+      "R2.gcd_euclid"
+    ],
+    [
+      "M1.grid_perimeter",
+      "M1.grid_perimeter_r2"
+    ],
+    [
+      "M1.grid_perimeter",
+      "M1.grid_perimeter_r3"
+    ],
+    [
+      "M1.grid_perimeter",
+      "M1.painted_cube"
+    ],
+    [
+      "M1.inclusion_exclusion",
+      "M1.inclusion_exclusion_r2"
+    ],
+    [
+      "M1.inclusion_exclusion",
+      "M1.inclusion_exclusion_r3"
+    ],
+    [
+      "M1.inclusion_exclusion",
+      "R1.venn_counting"
+    ],
+    [
+      "M1.last_digit_power",
+      "M1.last_digit_power_r3"
+    ],
+    [
+      "M1.last_digit_power",
+      "M1.power_remainder_r2"
+    ],
+    [
+      "M1.last_digit_power",
+      "R2.modular_power"
+    ],
+    [
+      "M1.last_digit_power",
+      "R2.permutation_power"
+    ],
+    [
+      "M1.linear_equation",
+      "M1.linear_equation_r3"
+    ],
+    [
+      "M1.linear_equation",
+      "M1.pipes_work"
+    ],
+    [
+      "M1.linear_equation",
+      "M1.rectangle"
+    ],
+    [
+      "M1.median_list",
+      "M1.median_list_r2"
+    ],
+    [
+      "M1.median_list",
+      "M1.median_list_r3"
+    ],
+    [
+      "M1.median_list",
+      "R2.kth_smallest"
+    ],
+    [
+      "M1.median_list",
+      "R2.sort_list"
+    ],
+    [
+      "M1.min_cost_packs",
+      "M1.min_cost_packs_r2"
+    ],
+    [
+      "M1.mixture",
+      "M1.mixture_r3"
+    ],
+    [
+      "M1.mixture",
+      "M1.mixture_r4"
+    ],
+    [
+      "M1.mixture",
+      "M1.shopping"
+    ],
+    [
+      "M1.mixture",
+      "M1.speed_distance"
+    ],
+    [
+      "M1.mode_tally",
+      "M1.mode_tally_r2"
+    ],
+    [
+      "M1.mode_tally",
+      "M1.mode_tally_r3"
+    ],
+    [
+      "M1.painted_cube",
+      "M1.painted_cube_r2"
+    ],
+    [
+      "M1.painted_cube",
+      "M1.painted_cube_r3"
+    ],
+    [
+      "M1.percent_change",
+      "M1.percent_change_r3"
+    ],
+    [
+      "M1.percent_change",
+      "M1.ratio_share"
+    ],
+    [
+      "M1.percent_change",
+      "M1.tip_split"
+    ],
+    [
+      "M1.pigeonhole_worst_case",
+      "M1.pigeonhole_worst_case_r2"
+    ],
+    [
+      "M1.pigeonhole_worst_case",
+      "M1.pigeonhole_worst_case_r3"
+    ],
+    [
+      "M1.pipes_work",
+      "M1.pipes_work_r3"
+    ],
+    [
+      "M1.pipes_work",
+      "M1.rectangle"
+    ],
+    [
+      "M1.prime_factors",
+      "M1.prime_factors_r2"
+    ],
+    [
+      "M1.prime_factors",
+      "M1.prime_factors_r3"
+    ],
+    [
+      "M1.prime_factors",
+      "R2.prime_factor_query"
+    ],
+    [
+      "M1.pythagoras",
+      "M1.pythagoras_r2"
+    ],
+    [
+      "M1.pythagoras",
+      "M1.pythagoras_r3"
+    ],
+    [
+      "M1.quadratic_area",
+      "M1.quadratic_area_r3"
+    ],
+    [
+      "M1.ratio_share",
+      "M1.ratio_share_r3"
+    ],
+    [
+      "M1.ratio_share",
+      "M1.tip_split"
+    ],
+    [
+      "M1.rectangle",
+      "M1.rectangle_r3"
+    ],
+    [
+      "M1.recurrence_iterate",
+      "M1.recurrence_iterate_r3"
+    ],
+    [
+      "M1.shopping",
+      "M1.shopping_r3"
+    ],
+    [
+      "M1.shopping",
+      "M1.speed_distance"
+    ],
+    [
+      "M1.slot_permutations",
+      "M1.slot_permutations_r2"
+    ],
+    [
+      "M1.slot_permutations",
+      "M1.slot_permutations_r3"
+    ],
+    [
+      "M1.slot_permutations",
+      "M1.slot_permutations_r4"
+    ],
+    [
+      "M1.speed_distance",
+      "M1.speed_distance_r3"
+    ],
+    [
+      "M1.tip_split",
+      "M1.tip_split_r3"
+    ],
+    [
+      "R1.activity_selection",
+      "R1.activity_selection_r4"
+    ],
+    [
+      "R1.activity_selection",
+      "R1.activity_selection_r5"
+    ],
+    [
+      "R1.activity_selection",
+      "R2.interval_scheduling"
+    ],
+    [
+      "R1.attribute_rule",
+      "R1.attribute_rule_r5"
+    ],
+    [
+      "R1.attribute_rule",
+      "R1.conditional_decision_tree"
+    ],
+    [
+      "R1.attribute_rule",
+      "R1.elimination_bracket"
+    ],
+    [
+      "R1.attribute_rule",
+      "R1.minimax_tree"
+    ],
+    [
+      "R1.boolean_lights",
+      "R1.boolean_lights_r2"
+    ],
+    [
+      "R1.boolean_lights",
+      "R1.boolean_lights_r4"
+    ],
+    [
+      "R1.boolean_lights",
+      "R1.compass_turns"
+    ],
+    [
+      "R1.categories_default_exceptions",
+      "R1.categories_default_exceptions_r2"
+    ],
+    [
+      "R1.categories_default_exceptions",
+      "R1.categories_default_exceptions_r3"
+    ],
+    [
+      "R1.categories_default_exceptions",
+      "R1.categories_default_exceptions_r4"
+    ],
+    [
+      "R1.categories_default_exceptions",
+      "R1.kinship_ancestor"
+    ],
+    [
+      "R1.categories_default_exceptions",
+      "R1.kinship_cousins"
+    ],
+    [
+      "R1.categories_follow",
+      "R1.categories_follow_r2"
+    ],
+    [
+      "R1.categories_follow",
+      "R1.categories_follow_r4"
+    ],
+    [
+      "R1.categories_follow",
+      "R1.categories_follow_r5"
+    ],
+    [
+      "R1.categories_follow",
+      "R1.equivalence_classes"
+    ],
+    [
+      "R1.categories_follow",
+      "R1.order_compare"
+    ],
+    [
+      "R1.categories_follow",
+      "R1.road_reachability"
+    ],
+    [
+      "R1.conditional_chain",
+      "R1.conditional_chain_r5"
+    ],
+    [
+      "R1.conditional_chain",
+      "R1.knights_knaves"
+    ],
+    [
+      "R1.conditional_chain",
+      "R1.one_culprit"
+    ],
+    [
+      "R1.conditional_decision_tree",
+      "R1.conditional_decision_tree_r4"
+    ],
+    [
+      "R1.conditional_decision_tree",
+      "R1.conditional_decision_tree_r6"
+    ],
+    [
+      "R1.conditional_decision_tree",
+      "R1.elimination_bracket"
+    ],
+    [
+      "R1.conditional_decision_tree",
+      "R1.minimax_tree"
+    ],
+    [
+      "R1.conditional_threshold_rule",
+      "R1.conditional_threshold_rule_r2"
+    ],
+    [
+      "R1.conditional_threshold_rule",
+      "R1.conditional_threshold_rule_r3"
+    ],
+    [
+      "R1.conditional_threshold_rule",
+      "R1.conditional_threshold_rule_r4"
+    ],
+    [
+      "R1.containers_queue_line",
+      "R1.containers_queue_line_r2"
+    ],
+    [
+      "R1.containers_queue_line",
+      "R1.containers_queue_line_r5"
+    ],
+    [
+      "R1.containers_queue_line",
+      "R1.elimination_josephus"
+    ],
+    [
+      "R1.containers_queue_line",
+      "R2.list_ops"
+    ],
+    [
+      "R1.containers_stack_piles",
+      "R1.containers_stack_piles_r2"
+    ],
+    [
+      "R1.containers_stack_piles",
+      "R1.containers_stack_piles_r3"
+    ],
+    [
+      "R1.containers_stack_piles",
+      "R1.containers_stack_piles_r4"
+    ],
+    [
+      "R1.elimination_bracket",
+      "R1.elimination_bracket_r2"
+    ],
+    [
+      "R1.elimination_bracket",
+      "R1.elimination_bracket_r3"
+    ],
+    [
+      "R1.elimination_bracket",
+      "R1.elimination_bracket_r4"
+    ],
+    [
+      "R1.elimination_bracket",
+      "R1.elimination_bracket_r5"
+    ],
+    [
+      "R1.elimination_bracket",
+      "R1.minimax_tree"
+    ],
+    [
+      "R1.equivalence_classes",
+      "R1.equivalence_classes_r2"
+    ],
+    [
+      "R1.equivalence_classes",
+      "R1.equivalence_classes_r5"
+    ],
+    [
+      "R1.equivalence_classes",
+      "R1.order_compare"
+    ],
+    [
+      "R1.equivalence_classes",
+      "R1.road_reachability"
+    ],
+    [
+      "R1.equivalence_exchange_rates",
+      "R1.equivalence_exchange_rates_r5"
+    ],
+    [
+      "R1.equivalence_exchange_rates",
+      "R1.equivalence_exchange_rates_r6"
+    ],
+    [
+      "R1.equivalence_exchange_rates",
+      "R1.event_timeline"
+    ],
+    [
+      "R1.equivalence_exchange_rates",
+      "R1.spatial_relative_directions"
+    ],
+    [
+      "R1.equivalence_exchange_rates",
+      "R1.temporal_weekday_shift"
+    ],
+    [
+      "R1.event_timeline",
+      "R1.event_timeline_r5"
+    ],
+    [
+      "R1.event_timeline",
+      "R1.event_timeline_r6"
+    ],
+    [
+      "R1.event_timeline",
+      "R1.spatial_relative_directions"
+    ],
+    [
+      "R1.event_timeline",
+      "R1.temporal_weekday_shift"
+    ],
+    [
+      "R1.graph_bipartite",
+      "R1.graph_bipartite_r5"
+    ],
+    [
+      "R1.graph_shortest_route",
+      "R1.graph_shortest_route_r2"
+    ],
+    [
+      "R1.graph_shortest_route",
+      "R1.graph_shortest_route_r4"
+    ],
+    [
+      "R1.graph_shortest_route",
+      "R1.graph_shortest_route_r6"
+    ],
+    [
+      "R1.instant_runoff",
+      "R1.instant_runoff_r2"
+    ],
+    [
+      "R1.instant_runoff",
+      "R1.instant_runoff_r4"
+    ],
+    [
+      "R1.instant_runoff",
+      "R1.instant_runoff_r5"
+    ],
+    [
+      "R1.kinship_ancestor",
+      "R1.kinship_ancestor_r2"
+    ],
+    [
+      "R1.kinship_ancestor",
+      "R1.kinship_ancestor_r3"
+    ],
+    [
+      "R1.kinship_ancestor",
+      "R1.kinship_ancestor_r4"
+    ],
+    [
+      "R1.kinship_ancestor",
+      "R1.kinship_cousins"
+    ],
+    [
+      "R1.kinship_cousins",
+      "R1.kinship_cousins_r5"
+    ],
+    [
+      "R1.kinship_descendants",
+      "R1.kinship_descendants_r2"
+    ],
+    [
+      "R1.kinship_descendants",
+      "R1.kinship_descendants_r3"
+    ],
+    [
+      "R1.kinship_descendants",
+      "R1.kinship_descendants_r4"
+    ],
+    [
+      "R1.kinship_descendants",
+      "R1.kinship_descendants_r5"
+    ],
+    [
+      "R1.knights_knaves",
+      "R1.knights_knaves_r5"
+    ],
+    [
+      "R1.knights_knaves",
+      "R1.knights_knaves_r6"
+    ],
+    [
+      "R1.knights_knaves",
+      "R1.one_culprit"
+    ],
+    [
+      "R1.minimax_tree",
+      "R1.minimax_tree_r4"
+    ],
+    [
+      "R1.minimax_tree",
+      "R1.minimax_tree_r5"
+    ],
+    [
+      "R1.mst_cost",
+      "R1.mst_cost_r4"
+    ],
+    [
+      "R1.mst_cost",
+      "R2.cheapest_network"
+    ],
+    [
+      "R1.nim_xor",
+      "R1.nim_xor_r4"
+    ],
+    [
+      "R1.nim_xor",
+      "R1.nim_xor_r5"
+    ],
+    [
+      "R1.nim_xor",
+      "R2.subtraction_game"
+    ],
+    [
+      "R1.order_compare",
+      "R1.order_compare_r4"
+    ],
+    [
+      "R1.order_compare",
+      "R1.order_compare_r5"
+    ],
+    [
+      "R1.order_compare",
+      "R1.road_reachability"
+    ],
+    [
+      "R1.order_extreme",
+      "R1.order_tournament_wins"
+    ],
+    [
+      "R1.order_extreme",
+      "R1.topological_order"
+    ],
+    [
+      "R1.pet_owners",
+      "R1.pet_owners_r5"
+    ],
+    [
+      "R1.pet_owners",
+      "R1.seating_row"
+    ],
+    [
+      "R1.road_reachability",
+      "R1.road_reachability_r5"
+    ],
+    [
+      "R1.seating_row",
+      "R1.seating_row_r5"
+    ],
+    [
+      "R1.spatial_grid_walk",
+      "R1.spatial_grid_walk_r2"
+    ],
+    [
+      "R1.spatial_grid_walk",
+      "R1.spatial_grid_walk_r5"
+    ],
+    [
+      "R1.spatial_relative_directions",
+      "R1.spatial_relative_directions_r4"
+    ],
+    [
+      "R1.spatial_relative_directions",
+      "R1.spatial_relative_directions_r5"
+    ],
+    [
+      "R1.spatial_relative_directions",
+      "R1.spatial_relative_directions_r6"
+    ],
+    [
+      "R1.spatial_relative_directions",
+      "R1.temporal_weekday_shift"
+    ],
+    [
+      "R1.stable_matching",
+      "R1.stable_matching_r2"
+    ],
+    [
+      "R1.stable_matching",
+      "R1.stable_matching_r4"
+    ],
+    [
+      "R1.stable_matching",
+      "R1.stable_matching_r5"
+    ],
+    [
+      "R1.stable_matching",
+      "R2.deferred_acceptance_partner"
+    ],
+    [
+      "R1.swap_tracking",
+      "R1.swap_tracking_r5"
+    ],
+    [
+      "R1.temporal_critical_path",
+      "R1.temporal_critical_path_r4"
+    ],
+    [
+      "R1.temporal_critical_path",
+      "R1.temporal_critical_path_r5"
+    ],
+    [
+      "R1.temporal_interval_overlap",
+      "R1.temporal_interval_overlap_r5"
+    ],
+    [
+      "R1.temporal_weekday_shift",
+      "R1.temporal_weekday_shift_r5"
+    ],
+    [
+      "R1.temporal_weekday_shift",
+      "R1.temporal_weekday_shift_r6"
+    ],
+    [
+      "R1.topological_order",
+      "R1.topological_order_r2"
+    ],
+    [
+      "R1.topological_order",
+      "R1.topological_order_r4"
+    ],
+    [
+      "R1.topological_order",
+      "R1.topological_order_r5"
+    ],
+    [
+      "R1.tracking_accounts",
+      "R1.tracking_accounts_r5"
+    ],
+    [
+      "R1.venn_counting",
+      "R1.venn_counting_r4"
+    ],
+    [
+      "R1.venn_counting",
+      "R1.venn_counting_r5"
+    ],
+    [
+      "R2.count_divisible",
+      "R2.count_letter"
+    ],
+    [
+      "R2.from_base",
+      "R2.to_base"
+    ],
+    [
+      "R2.kth_smallest",
+      "R2.sort_list"
+    ],
+    [
+      "R2.modular_power",
+      "R2.permutation_power"
+    ],
+    [
+      "R2.string_rewrite",
+      "R2.string_rewrite_nonidentity"
+    ],
+    [
+      "R2.to_base",
+      "R2.to_base_wide"
+    ]
+  ]
+}

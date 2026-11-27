@@ -1,0 +1,474 @@
+{
+  "errors": 0,
+  "eval": "M1",
+  "interpreter": "3.15.1",
+  "items": 40600,
+  "items_file_sha256": "0ff2fbe11ee6149754b01e60a0e6ada835cbf60543167e8c4b2c55894837b953",
+  "lineages": {
+    "M1.ages_r3": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.0,
+      "solver": "studies/m0/solvers2/solver2_m1a.py"
+    },
+    "M1.arithmetic_series_r3": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.0,
+      "solver": "studies/m0/solvers2/solver2_m1a.py"
+    },
+    "M1.average_missing_r4": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.01,
+      "solver": "studies/m0/solvers2/solver2_m1a.py"
+    },
+    "M1.change_ways_r3": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.02,
+      "solver": "studies/m0/solvers2/solver2_m1a.py"
+    },
+    "M1.clock_duration_r4": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.0,
+      "solver": "studies/m0/solvers2/solver2_m1a.py"
+    },
+    "M1.consecutive_r3": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.0,
+      "solver": "studies/m0/solvers2/solver2_m1a.py"
+    },
+    "M1.crt_congruence_r3": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.37,
+      "solver": "studies/m0/solvers2/solver2_m1a.py"
+    },
+    "M1.division_counting_r3": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.0,
+      "solver": "studies/m0/solvers2/solver2_m1a.py"
+    },
+    "M1.finite_differences_r4": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.03,
+      "solver": "studies/m0/solvers2/solver2_m1a.py"
+    },
+    "M1.fraction_remainder_r3": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.0,
+      "solver": "studies/m0/solvers2/solver2_m1a.py"
+    },
+    "M1.gcd_lcm_r4": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.0,
+      "solver": "studies/m0/solvers2/solver2_m1b.py"
+    },
+    "M1.grid_perimeter_r3": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.01,
+      "solver": "studies/m0/solvers2/solver2_m1b.py"
+    },
+    "M1.inclusion_exclusion_r3": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.0,
+      "solver": "studies/m0/solvers2/solver2_m1b.py"
+    },
+    "M1.last_digit_power_r3": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.0,
+      "solver": "studies/m0/solvers2/solver2_m1b.py"
+    },
+    "M1.linear_equation_r3": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.0,
+      "solver": "studies/m0/solvers2/solver2_m1b.py"
+    },
+    "M1.median_list_r3": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.01,
+      "solver": "studies/m0/solvers2/solver2_m1b.py"
+    },
+    "M1.mixture_r4": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.01,
+      "solver": "studies/m0/solvers2/solver2_m1b.py"
+    },
+    "M1.painted_cube_r3": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.01,
+      "solver": "studies/m0/solvers2/solver2_m1b.py"
+    },
+    "M1.percent_change_r3": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.01,
+      "solver": "studies/m0/solvers2/solver2_m1b.py"
+    },
+    "M1.pipes_work_r3": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.0,
+      "solver": "studies/m0/solvers2/solver2_m1b.py"
+    },
+    "M1.prime_factors_r3": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.0,
+      "solver": "studies/m0/solvers2/solver2_m1c.py"
+    },
+    "M1.quadratic_area_r3": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.0,
+      "solver": "studies/m0/solvers2/solver2_m1c.py"
+    },
+    "M1.ratio_share_r3": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.0,
+      "solver": "studies/m0/solvers2/solver2_m1c.py"
+    },
+    "M1.rectangle_r3": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.0,
+      "solver": "studies/m0/solvers2/solver2_m1c.py"
+    },
+    "M1.recurrence_iterate_r3": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.0,
+      "solver": "studies/m0/solvers2/solver2_m1c.py"
+    },
+    "M1.shopping_r3": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.0,
+      "solver": "studies/m0/solvers2/solver2_m1c.py"
+    },
+    "M1.speed_distance_r3": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.0,
+      "solver": "studies/m0/solvers2/solver2_m1c.py"
+    },
+    "M1.tiered_pricing": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.01,
+      "solver": "studies/m0/solvers2/solver2_m1c.py"
+    },
+    "M1.tip_split_r3": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.0,
+      "solver": "studies/m0/solvers2/solver2_m1c.py"
+    }
+  },
+  "mismatches": 0
+}

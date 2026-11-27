@@ -1,0 +1,12 @@
+topological_order_r2 [unc]: 3500/3500 agree; notes {}
+activity_selection [unc]: 3500/3500 agree; notes {'touch_convention_matters': 1589}
+   note touch_convention_matters e.g. ['R1.activity_selection/audit2unc/L0/2', 'R1.activity_selection/audit2unc/L0/4', 'R1.activity_selection/audit2unc/L0/9']
+mst_cost [unc]: 3500/3500 agree; notes {}
+instant_runoff_r2 [unc]: 3500/3500 agree; notes {}
+stable_matching_r2 [unc]: 3500/3500 agree; notes {}
+kinship_descendants_r3 [unc]: 3500/3500 agree; notes {}
+kinship_ancestor_r3 [unc]: 3500/3500 agree; notes {}
+elimination_bracket_r3 [unc]: 3500/3500 agree; notes {}
+conditional_threshold_rule_r3 [unc]: 3500/3500 agree; notes {}
+containers_stack_piles_r3 [unc]: 3500/3500 agree; notes {}
+TOTAL mismatches 0

@@ -1,0 +1,56 @@
+C1.binary_search_f3 done
+C1.bracket_matching_f3 done
+C1.bytecode_loop_f3 done
+C1.circle_elimination_r2 done
+C1.cond_chain_f3 done
+C1.counter_list_f3 done
+C1.digit_peel_f3 done
+C1.euclid_gcd_traced_f3 done
+C1.fast_power_f4 done
+C1.fib_like_f3 done
+C1.fib_shapes_recursive_f3 done
+C1.func_branch_f4 done
+C1.func_compose_f4 done
+C1.list_build_f3 done
+C1.merge_two_sorted_f3 done
+C1.nested_pairs_f3 done
+C1.postfix_evaluation done
+C1.recursive_calls_r2 done
+C1.run_length_scan done
+C1.shared_lists_f3 done
+C1.sieve_marking_f4 done
+C1.slices_f4 done
+C1.string_build_f3 done
+C1.string_methods_f3 done
+C1.turtle_walk_f3 done
+C1.union_find_links_f3 done
+C1.while_counter_f3 done
+lineage | worst rule in shape (rate, level) | worst generic in shape | MF_cv max over levels | MF|shape max | BEST generic max | any-literal oracle max
+---|---|---|---|---|---|---
+C1.binary_search_f3 | 0.07 probes_closed|S.mid_only L2 | 0.05 sum_closed|lit5 L0 | 0.03 | 0.22 | 0.01 | 0.02
+C1.bracket_matching_f3 | 0.13 remain_at|S.all_opens L0 | 0.05 popsum|lit0 L1 | 0.02 | 0.06 | 0.01 | 0.03
+C1.bytecode_loop_f3 | 0.12 other|S.no_skips L6 | 0.10 other|lit1 L2 | 0.03 | 0.04 | 0.05 | 0.17
+C1.circle_elimination_r2 | 0.00 - L-1 | 0.09 all|pair14.prod L0 | 0.09 | 0.09 | 0.09 | 0.33
+C1.cond_chain_f3 | 0.08 tot|S.k_times_gcd L0 | 0.03 tot|pair13.prod L0 | 0.02 | 0.02 | 0.03 | 0.05
+C1.counter_list_f3 | 0.06 counts|S.uniform L0 | 0.00 - L-1 | 0.06 | 0.06 | 0.00 | 0.00
+C1.digit_peel_f3 | 0.03 wsum|S.decimal_digits_wsum L0 | 0.01 wsum|pair24.sum L0 | 0.01 | 0.04 | 0.00 | 0.00
+C1.euclid_gcd_traced_f3 | 0.00 rsum|S.literal_y L4 | 0.01 rsum|pair15.prod L5 | 0.01 | 0.02 | 0.00 | 0.00
+C1.fast_power_f4 | 0.04 res|S.no_c_term L0 | 0.06 res|lit4 L6 | 0.06 | 0.06 | 0.06 | 0.09
+C1.fib_like_f3 | 0.09 all|S.plain_fibonacci_a L0 | 0.04 all|lit1 L6 | 0.02 | 0.02 | 0.04 | 0.09
+C1.fib_shapes_recursive_f3 | 0.00 - L-1 | 0.01 all|pair01.prod L0 | 0.01 | 0.01 | 0.01 | 0.03
+C1.func_branch_f4 | 0.00 - L-1 | 0.06 all|pair45.diff L0 | 0.03 | 0.03 | 0.06 | 0.07
+C1.func_compose_f4 | 0.06 mod|S.no_mod L3 | 0.09 mod|const0 L3 | 0.09 | 0.09 | 0.09 | 0.21
+C1.list_build_f3 | 0.10 sum|S.n_times_half L2 | 0.06 sum|pair01.sum L0 | 0.02 | 0.05 | 0.02 | 0.07
+C1.merge_two_sorted_f3 | 0.10 diffsum|S.zip_heads L0 | 0.10 diffsum|pair14.diff L0 | 0.04 | 0.07 | 0.04 | 0.20
+C1.nested_pairs_f3 | 0.06 count|S.run_inc_1 L0 | 0.05 count|lit0 L0 | 0.05 | 0.05 | 0.05 | 0.07
+C1.postfix_evaluation | 0.00 - L-1 | 0.09 all|lit0 L0 | 0.04 | 0.04 | 0.09 | 0.18
+C1.recursive_calls_r2 | 0.00 - L-1 | 0.01 all|pair15.prod L0 | 0.01 | 0.01 | 0.01 | 0.02
+C1.run_length_scan | 0.00 - L-1 | 0.00 - L-1 | 0.01 | 0.01 | 0.00 | 0.00
+C1.shared_lists_f3 | 0.08 sum|S.naive_copy L3 | 0.05 sum|L.sum L0 | 0.02 | 0.05 | 0.03 | 0.02
+C1.sieve_marking_f4 | 0.03 strikesum|S.all_ones_start L0 | 0.00 - L-1 | 0.10 | 0.10 | 0.00 | 0.00
+C1.slices_f4 | 0.00 - L-1 | 0.08 all|const0 L0 | 0.08 | 0.08 | 0.08 | 0.06
+C1.string_build_f3 | 0.00 - L-1 | 0.00 - L-1 | 0.00 | 0.01 | 0.00 | 0.00
+C1.string_methods_f3 | 0.06 text|S.word_lower L0 | 0.06 text|S0.echo L0 | 0.00 | 0.00 | 0.06 | 0.00
+C1.turtle_walk_f3 | 0.06 pathsum|S.no_turns L0 | 0.01 pathsum|litr2 L0 | 0.00 | 0.01 | 0.00 | 0.02
+C1.union_find_links_f3 | 0.10 wsum|S.naive_node_links L0 | 0.05 rootsum|pair45.prod L0 | 0.01 | 0.04 | 0.01 | 0.00
+C1.while_counter_f3 | 0.06 collatz|S.sum_even_only L0 | 0.07 collatz|pair02.diff L0 | 0.01 | 0.04 | 0.03 | 0.02

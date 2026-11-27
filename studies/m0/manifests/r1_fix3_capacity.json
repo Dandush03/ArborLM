@@ -1,0 +1,5319 @@
+{
+ "G": 11,
+ "cells": {
+  "R1.activity_selection_r5|0": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.activity_selection_r5|1": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.activity_selection_r5|2": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.activity_selection_r5|3": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.activity_selection_r5|4": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.activity_selection_r5|5": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.activity_selection_r5|6": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.attribute_rule_r5|0": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": 22211,
+    "chao1": 31180,
+    "distinct": 1924,
+    "lower_bound_if_no_collision": null,
+    "pairs": 90
+   },
+   "pass_a": true,
+   "pass_b": false
+  },
+  "R1.attribute_rule_r5|1": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": 30288,
+    "chao1": 39072,
+    "distinct": 1941,
+    "lower_bound_if_no_collision": null,
+    "pairs": 66
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.attribute_rule_r5|2": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": 1999000,
+    "chao1": 1998001,
+    "distinct": 1999,
+    "lower_bound_if_no_collision": null,
+    "pairs": 1
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.attribute_rule_r5|3": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": 1999000,
+    "chao1": 1998001,
+    "distinct": 1999,
+    "lower_bound_if_no_collision": null,
+    "pairs": 1
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.attribute_rule_r5|4": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.attribute_rule_r5|5": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.attribute_rule_r5|6": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.boolean_lights_r4|0": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": 30754,
+    "chao1": 30227,
+    "distinct": 1936,
+    "lower_bound_if_no_collision": null,
+    "pairs": 65
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.boolean_lights_r4|1": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": 499750,
+    "chao1": 498004,
+    "distinct": 1996,
+    "lower_bound_if_no_collision": null,
+    "pairs": 4
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.boolean_lights_r4|2": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.boolean_lights_r4|3": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.boolean_lights_r4|4": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.boolean_lights_r4|5": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.boolean_lights_r4|6": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.categories_default_exceptions_r4|0": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.categories_default_exceptions_r4|1": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.categories_default_exceptions_r4|2": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.categories_default_exceptions_r4|3": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.categories_default_exceptions_r4|4": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.categories_default_exceptions_r4|5": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.categories_default_exceptions_r4|6": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.categories_follow_r5|0": {
+   "a": {
+    "S_collision": 95190,
+    "chao1": 108800,
+    "distinct": 1980,
+    "lower_bound_if_no_collision": null,
+    "pairs": 21
+   },
+   "b": {
+    "S_collision": 95190,
+    "chao1": 108800,
+    "distinct": 1980,
+    "lower_bound_if_no_collision": null,
+    "pairs": 21
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.categories_follow_r5|1": {
+   "a": {
+    "S_collision": 166583,
+    "chao1": 164679,
+    "distinct": 1988,
+    "lower_bound_if_no_collision": null,
+    "pairs": 12
+   },
+   "b": {
+    "S_collision": 166583,
+    "chao1": 164679,
+    "distinct": 1988,
+    "lower_bound_if_no_collision": null,
+    "pairs": 12
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.categories_follow_r5|2": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.categories_follow_r5|3": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.categories_follow_r5|4": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.categories_follow_r5|5": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.categories_follow_r5|6": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.compass_turns|0": {
+   "a": {
+    "S_collision": 11230,
+    "chao1": 13523,
+    "distinct": 1842,
+    "lower_bound_if_no_collision": null,
+    "pairs": 178
+   },
+   "b": {
+    "S_collision": 11230,
+    "chao1": 13523,
+    "distinct": 1842,
+    "lower_bound_if_no_collision": null,
+    "pairs": 178
+   },
+   "pass_a": false,
+   "pass_b": false
+  },
+  "R1.compass_turns|1": {
+   "a": {
+    "S_collision": 1999000,
+    "chao1": 1998001,
+    "distinct": 1999,
+    "lower_bound_if_no_collision": null,
+    "pairs": 1
+   },
+   "b": {
+    "S_collision": 1999000,
+    "chao1": 1998001,
+    "distinct": 1999,
+    "lower_bound_if_no_collision": null,
+    "pairs": 1
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.compass_turns|2": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.compass_turns|3": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.compass_turns|4": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.compass_turns|5": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.compass_turns|6": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.conditional_chain_r5|0": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.conditional_chain_r5|1": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.conditional_chain_r5|2": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.conditional_chain_r5|3": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.conditional_chain_r5|4": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.conditional_chain_r5|5": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.conditional_chain_r5|6": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.conditional_decision_tree_r4|0": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.conditional_decision_tree_r4|1": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.conditional_decision_tree_r4|2": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.conditional_decision_tree_r4|3": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.conditional_decision_tree_r4|4": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.conditional_decision_tree_r4|5": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.conditional_decision_tree_r4|6": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.conditional_threshold_rule_r4|0": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.conditional_threshold_rule_r4|1": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.conditional_threshold_rule_r4|2": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.conditional_threshold_rule_r4|3": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.conditional_threshold_rule_r4|4": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.conditional_threshold_rule_r4|5": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.conditional_threshold_rule_r4|6": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.containers_queue_line_r5|0": {
+   "a": {
+    "S_collision": 499750,
+    "chao1": 498004,
+    "distinct": 1996,
+    "lower_bound_if_no_collision": null,
+    "pairs": 4
+   },
+   "b": {
+    "S_collision": 499750,
+    "chao1": 498004,
+    "distinct": 1996,
+    "lower_bound_if_no_collision": null,
+    "pairs": 4
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.containers_queue_line_r5|1": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.containers_queue_line_r5|2": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.containers_queue_line_r5|3": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.containers_queue_line_r5|4": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.containers_queue_line_r5|5": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.containers_queue_line_r5|6": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.containers_stack_piles_r4|0": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.containers_stack_piles_r4|1": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.containers_stack_piles_r4|2": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.containers_stack_piles_r4|3": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.containers_stack_piles_r4|4": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.containers_stack_piles_r4|5": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.containers_stack_piles_r4|6": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.elimination_bracket_r5|0": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.elimination_bracket_r5|1": {
+   "a": {
+    "S_collision": 999500,
+    "chao1": 998002,
+    "distinct": 1998,
+    "lower_bound_if_no_collision": null,
+    "pairs": 2
+   },
+   "b": {
+    "S_collision": 999500,
+    "chao1": 998002,
+    "distinct": 1998,
+    "lower_bound_if_no_collision": null,
+    "pairs": 2
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.elimination_bracket_r5|2": {
+   "a": {
+    "S_collision": 1999000,
+    "chao1": 1998001,
+    "distinct": 1999,
+    "lower_bound_if_no_collision": null,
+    "pairs": 1
+   },
+   "b": {
+    "S_collision": 1999000,
+    "chao1": 1998001,
+    "distinct": 1999,
+    "lower_bound_if_no_collision": null,
+    "pairs": 1
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.elimination_bracket_r5|3": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.elimination_bracket_r5|4": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.elimination_bracket_r5|5": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.elimination_bracket_r5|6": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.equivalence_classes_r5|0": {
+   "a": {
+    "S_collision": 32242,
+    "chao1": 35534,
+    "distinct": 1942,
+    "lower_bound_if_no_collision": null,
+    "pairs": 62
+   },
+   "b": {
+    "S_collision": 32242,
+    "chao1": 35534,
+    "distinct": 1942,
+    "lower_bound_if_no_collision": null,
+    "pairs": 62
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.equivalence_classes_r5|1": {
+   "a": {
+    "S_collision": 47595,
+    "chao1": 64045,
+    "distinct": 1963,
+    "lower_bound_if_no_collision": null,
+    "pairs": 42
+   },
+   "b": {
+    "S_collision": 47595,
+    "chao1": 64045,
+    "distinct": 1963,
+    "lower_bound_if_no_collision": null,
+    "pairs": 42
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.equivalence_classes_r5|2": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.equivalence_classes_r5|3": {
+   "a": {
+    "S_collision": 666333,
+    "chao1": 664670,
+    "distinct": 1997,
+    "lower_bound_if_no_collision": null,
+    "pairs": 3
+   },
+   "b": {
+    "S_collision": 666333,
+    "chao1": 664670,
+    "distinct": 1997,
+    "lower_bound_if_no_collision": null,
+    "pairs": 3
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.equivalence_classes_r5|4": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.equivalence_classes_r5|5": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.equivalence_classes_r5|6": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.equivalence_exchange_rates_r5|0": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.equivalence_exchange_rates_r5|1": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.equivalence_exchange_rates_r5|2": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.equivalence_exchange_rates_r5|3": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.equivalence_exchange_rates_r5|4": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.equivalence_exchange_rates_r5|5": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.equivalence_exchange_rates_r5|6": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.event_timeline_r5|0": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.event_timeline_r5|1": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.event_timeline_r5|2": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.event_timeline_r5|3": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.event_timeline_r5|4": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.event_timeline_r5|5": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.event_timeline_r5|6": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.graph_bipartite_r5|0": {
+   "a": {
+    "S_collision": 60576,
+    "chao1": 92322,
+    "distinct": 1972,
+    "lower_bound_if_no_collision": null,
+    "pairs": 33
+   },
+   "b": {
+    "S_collision": 60576,
+    "chao1": 92322,
+    "distinct": 1972,
+    "lower_bound_if_no_collision": null,
+    "pairs": 33
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.graph_bipartite_r5|1": {
+   "a": {
+    "S_collision": 199900,
+    "chao1": 198010,
+    "distinct": 1990,
+    "lower_bound_if_no_collision": null,
+    "pairs": 10
+   },
+   "b": {
+    "S_collision": 199900,
+    "chao1": 198010,
+    "distinct": 1990,
+    "lower_bound_if_no_collision": null,
+    "pairs": 10
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.graph_bipartite_r5|2": {
+   "a": {
+    "S_collision": 999500,
+    "chao1": 998002,
+    "distinct": 1998,
+    "lower_bound_if_no_collision": null,
+    "pairs": 2
+   },
+   "b": {
+    "S_collision": 999500,
+    "chao1": 998002,
+    "distinct": 1998,
+    "lower_bound_if_no_collision": null,
+    "pairs": 2
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.graph_bipartite_r5|3": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.graph_bipartite_r5|4": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.graph_bipartite_r5|5": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.graph_bipartite_r5|6": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.graph_shortest_route_r4|0": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.graph_shortest_route_r4|1": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.graph_shortest_route_r4|2": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.graph_shortest_route_r4|3": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.graph_shortest_route_r4|4": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.graph_shortest_route_r4|5": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.graph_shortest_route_r4|6": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.kinship_ancestor_r4|0": {
+   "a": {
+    "S_collision": 2067,
+    "chao1": 4174,
+    "distinct": 1441,
+    "lower_bound_if_no_collision": null,
+    "pairs": 967
+   },
+   "b": {
+    "S_collision": 2067,
+    "chao1": 4174,
+    "distinct": 1441,
+    "lower_bound_if_no_collision": null,
+    "pairs": 967
+   },
+   "pass_a": false,
+   "pass_b": false
+  },
+  "R1.kinship_ancestor_r4|1": {
+   "a": {
+    "S_collision": 15496,
+    "chao1": 20981,
+    "distinct": 1888,
+    "lower_bound_if_no_collision": null,
+    "pairs": 129
+   },
+   "b": {
+    "S_collision": 15496,
+    "chao1": 20981,
+    "distinct": 1888,
+    "lower_bound_if_no_collision": null,
+    "pairs": 129
+   },
+   "pass_a": false,
+   "pass_b": false
+  },
+  "R1.kinship_ancestor_r4|2": {
+   "a": {
+    "S_collision": 666333,
+    "chao1": 664670,
+    "distinct": 1997,
+    "lower_bound_if_no_collision": null,
+    "pairs": 3
+   },
+   "b": {
+    "S_collision": 666333,
+    "chao1": 664670,
+    "distinct": 1997,
+    "lower_bound_if_no_collision": null,
+    "pairs": 3
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.kinship_ancestor_r4|3": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.kinship_ancestor_r4|4": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.kinship_ancestor_r4|5": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.kinship_ancestor_r4|6": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.kinship_cousins_r5|0": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.kinship_cousins_r5|1": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.kinship_cousins_r5|2": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.kinship_cousins_r5|3": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.kinship_cousins_r5|4": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.kinship_cousins_r5|5": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.kinship_cousins_r5|6": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.kinship_descendants_r5|0": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.kinship_descendants_r5|1": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.kinship_descendants_r5|2": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.kinship_descendants_r5|3": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.kinship_descendants_r5|4": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.kinship_descendants_r5|5": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.kinship_descendants_r5|6": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.knights_knaves_r5|0": {
+   "a": {
+    "S_collision": 34466,
+    "chao1": 32541,
+    "distinct": 1942,
+    "lower_bound_if_no_collision": null,
+    "pairs": 58
+   },
+   "b": {
+    "S_collision": 34466,
+    "chao1": 32541,
+    "distinct": 1942,
+    "lower_bound_if_no_collision": null,
+    "pairs": 58
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.knights_knaves_r5|1": {
+   "a": {
+    "S_collision": 41646,
+    "chao1": 42360,
+    "distinct": 1953,
+    "lower_bound_if_no_collision": null,
+    "pairs": 48
+   },
+   "b": {
+    "S_collision": 41646,
+    "chao1": 42360,
+    "distinct": 1953,
+    "lower_bound_if_no_collision": null,
+    "pairs": 48
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.knights_knaves_r5|2": {
+   "a": {
+    "S_collision": 999500,
+    "chao1": 998002,
+    "distinct": 1998,
+    "lower_bound_if_no_collision": null,
+    "pairs": 2
+   },
+   "b": {
+    "S_collision": 999500,
+    "chao1": 998002,
+    "distinct": 1998,
+    "lower_bound_if_no_collision": null,
+    "pairs": 2
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.knights_knaves_r5|3": {
+   "a": {
+    "S_collision": 999500,
+    "chao1": 998002,
+    "distinct": 1998,
+    "lower_bound_if_no_collision": null,
+    "pairs": 2
+   },
+   "b": {
+    "S_collision": 999500,
+    "chao1": 998002,
+    "distinct": 1998,
+    "lower_bound_if_no_collision": null,
+    "pairs": 2
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.knights_knaves_r5|4": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.knights_knaves_r5|5": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.knights_knaves_r5|6": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.minimax_tree_r5|0": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.minimax_tree_r5|1": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.minimax_tree_r5|2": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.minimax_tree_r5|3": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.minimax_tree_r5|4": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.minimax_tree_r5|5": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.minimax_tree_r5|6": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.mst_cost_r4|0": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.mst_cost_r4|1": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.mst_cost_r4|2": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.mst_cost_r4|3": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.mst_cost_r4|4": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.mst_cost_r4|5": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.mst_cost_r4|6": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.nim_xor_r5|0": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.nim_xor_r5|1": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.nim_xor_r5|2": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.nim_xor_r5|3": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.nim_xor_r5|4": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.nim_xor_r5|5": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.nim_xor_r5|6": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.one_culprit|0": {
+   "a": {
+    "S_collision": 2408,
+    "chao1": 2563,
+    "distinct": 1371,
+    "lower_bound_if_no_collision": null,
+    "pairs": 830
+   },
+   "b": {
+    "S_collision": 2408,
+    "chao1": 2563,
+    "distinct": 1371,
+    "lower_bound_if_no_collision": null,
+    "pairs": 830
+   },
+   "pass_a": false,
+   "pass_b": false
+  },
+  "R1.one_culprit|1": {
+   "a": {
+    "S_collision": 2493,
+    "chao1": 2668,
+    "distinct": 1388,
+    "lower_bound_if_no_collision": null,
+    "pairs": 802
+   },
+   "b": {
+    "S_collision": 2493,
+    "chao1": 2668,
+    "distinct": 1388,
+    "lower_bound_if_no_collision": null,
+    "pairs": 802
+   },
+   "pass_a": false,
+   "pass_b": false
+  },
+  "R1.one_culprit|2": {
+   "a": {
+    "S_collision": 29397,
+    "chao1": 27480,
+    "distinct": 1932,
+    "lower_bound_if_no_collision": null,
+    "pairs": 68
+   },
+   "b": {
+    "S_collision": 29397,
+    "chao1": 27480,
+    "distinct": 1932,
+    "lower_bound_if_no_collision": null,
+    "pairs": 68
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.one_culprit|3": {
+   "a": {
+    "S_collision": 21728,
+    "chao1": 23731,
+    "distinct": 1914,
+    "lower_bound_if_no_collision": null,
+    "pairs": 92
+   },
+   "b": {
+    "S_collision": 21728,
+    "chao1": 23731,
+    "distinct": 1914,
+    "lower_bound_if_no_collision": null,
+    "pairs": 92
+   },
+   "pass_a": false,
+   "pass_b": false
+  },
+  "R1.one_culprit|4": {
+   "a": {
+    "S_collision": 333167,
+    "chao1": 331339,
+    "distinct": 1994,
+    "lower_bound_if_no_collision": null,
+    "pairs": 6
+   },
+   "b": {
+    "S_collision": 333167,
+    "chao1": 331339,
+    "distinct": 1994,
+    "lower_bound_if_no_collision": null,
+    "pairs": 6
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.one_culprit|5": {
+   "a": {
+    "S_collision": 222111,
+    "chao1": 220231,
+    "distinct": 1991,
+    "lower_bound_if_no_collision": null,
+    "pairs": 9
+   },
+   "b": {
+    "S_collision": 222111,
+    "chao1": 220231,
+    "distinct": 1991,
+    "lower_bound_if_no_collision": null,
+    "pairs": 9
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.one_culprit|6": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.order_compare_r5|0": {
+   "a": {
+    "S_collision": 199900,
+    "chao1": 198010,
+    "distinct": 1990,
+    "lower_bound_if_no_collision": null,
+    "pairs": 10
+   },
+   "b": {
+    "S_collision": 199900,
+    "chao1": 198010,
+    "distinct": 1990,
+    "lower_bound_if_no_collision": null,
+    "pairs": 10
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.order_compare_r5|1": {
+   "a": {
+    "S_collision": 249875,
+    "chao1": 248008,
+    "distinct": 1992,
+    "lower_bound_if_no_collision": null,
+    "pairs": 8
+   },
+   "b": {
+    "S_collision": 249875,
+    "chao1": 248008,
+    "distinct": 1992,
+    "lower_bound_if_no_collision": null,
+    "pairs": 8
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.order_compare_r5|2": {
+   "a": {
+    "S_collision": 285571,
+    "chao1": 283721,
+    "distinct": 1993,
+    "lower_bound_if_no_collision": null,
+    "pairs": 7
+   },
+   "b": {
+    "S_collision": 285571,
+    "chao1": 283721,
+    "distinct": 1993,
+    "lower_bound_if_no_collision": null,
+    "pairs": 7
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.order_compare_r5|3": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.order_compare_r5|4": {
+   "a": {
+    "S_collision": 1999000,
+    "chao1": 1998001,
+    "distinct": 1999,
+    "lower_bound_if_no_collision": null,
+    "pairs": 1
+   },
+   "b": {
+    "S_collision": 1999000,
+    "chao1": 1998001,
+    "distinct": 1999,
+    "lower_bound_if_no_collision": null,
+    "pairs": 1
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.order_compare_r5|5": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.order_compare_r5|6": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.road_reachability_r5|0": {
+   "a": {
+    "S_collision": 499750,
+    "chao1": 498004,
+    "distinct": 1996,
+    "lower_bound_if_no_collision": null,
+    "pairs": 4
+   },
+   "b": {
+    "S_collision": 499750,
+    "chao1": 498004,
+    "distinct": 1996,
+    "lower_bound_if_no_collision": null,
+    "pairs": 4
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.road_reachability_r5|1": {
+   "a": {
+    "S_collision": 1999000,
+    "chao1": 1998001,
+    "distinct": 1999,
+    "lower_bound_if_no_collision": null,
+    "pairs": 1
+   },
+   "b": {
+    "S_collision": 1999000,
+    "chao1": 1998001,
+    "distinct": 1999,
+    "lower_bound_if_no_collision": null,
+    "pairs": 1
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.road_reachability_r5|2": {
+   "a": {
+    "S_collision": 1999000,
+    "chao1": 1998001,
+    "distinct": 1999,
+    "lower_bound_if_no_collision": null,
+    "pairs": 1
+   },
+   "b": {
+    "S_collision": 1999000,
+    "chao1": 1998001,
+    "distinct": 1999,
+    "lower_bound_if_no_collision": null,
+    "pairs": 1
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.road_reachability_r5|3": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.road_reachability_r5|4": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.road_reachability_r5|5": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.road_reachability_r5|6": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.seating_row_r5|0": {
+   "a": {
+    "S_collision": 79960,
+    "chao1": 150338,
+    "distinct": 1980,
+    "lower_bound_if_no_collision": null,
+    "pairs": 25
+   },
+   "b": {
+    "S_collision": 79960,
+    "chao1": 150338,
+    "distinct": 1980,
+    "lower_bound_if_no_collision": null,
+    "pairs": 25
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.seating_row_r5|1": {
+   "a": {
+    "S_collision": 86913,
+    "chao1": 391652,
+    "distinct": 1984,
+    "lower_bound_if_no_collision": null,
+    "pairs": 23
+   },
+   "b": {
+    "S_collision": 86913,
+    "chao1": 391652,
+    "distinct": 1984,
+    "lower_bound_if_no_collision": null,
+    "pairs": 23
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.seating_row_r5|2": {
+   "a": {
+    "S_collision": 181727,
+    "chao1": 396412,
+    "distinct": 1992,
+    "lower_bound_if_no_collision": null,
+    "pairs": 11
+   },
+   "b": {
+    "S_collision": 181727,
+    "chao1": 396412,
+    "distinct": 1992,
+    "lower_bound_if_no_collision": null,
+    "pairs": 11
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.seating_row_r5|3": {
+   "a": {
+    "S_collision": 181727,
+    "chao1": 395617,
+    "distinct": 1991,
+    "lower_bound_if_no_collision": null,
+    "pairs": 11
+   },
+   "b": {
+    "S_collision": 181727,
+    "chao1": 395617,
+    "distinct": 1991,
+    "lower_bound_if_no_collision": null,
+    "pairs": 11
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.seating_row_r5|4": {
+   "a": {
+    "S_collision": 52605,
+    "chao1": 243305,
+    "distinct": 1978,
+    "lower_bound_if_no_collision": null,
+    "pairs": 38
+   },
+   "b": {
+    "S_collision": 52605,
+    "chao1": 243305,
+    "distinct": 1978,
+    "lower_bound_if_no_collision": null,
+    "pairs": 38
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.seating_row_r5|5": {
+   "a": {
+    "S_collision": 60576,
+    "chao1": 215835,
+    "distinct": 1977,
+    "lower_bound_if_no_collision": null,
+    "pairs": 33
+   },
+   "b": {
+    "S_collision": 60576,
+    "chao1": 215835,
+    "distinct": 1977,
+    "lower_bound_if_no_collision": null,
+    "pairs": 33
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.seating_row_r5|6": {
+   "a": {
+    "S_collision": 99950,
+    "chao1": 178568,
+    "distinct": 1984,
+    "lower_bound_if_no_collision": null,
+    "pairs": 20
+   },
+   "b": {
+    "S_collision": 99950,
+    "chao1": 178568,
+    "distinct": 1984,
+    "lower_bound_if_no_collision": null,
+    "pairs": 20
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.spatial_grid_walk_r5|0": {
+   "a": {
+    "S_collision": 999500,
+    "chao1": 998002,
+    "distinct": 1998,
+    "lower_bound_if_no_collision": null,
+    "pairs": 2
+   },
+   "b": {
+    "S_collision": 999500,
+    "chao1": 998002,
+    "distinct": 1998,
+    "lower_bound_if_no_collision": null,
+    "pairs": 2
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.spatial_grid_walk_r5|1": {
+   "a": {
+    "S_collision": 1999000,
+    "chao1": 1998001,
+    "distinct": 1999,
+    "lower_bound_if_no_collision": null,
+    "pairs": 1
+   },
+   "b": {
+    "S_collision": 1999000,
+    "chao1": 1998001,
+    "distinct": 1999,
+    "lower_bound_if_no_collision": null,
+    "pairs": 1
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.spatial_grid_walk_r5|2": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.spatial_grid_walk_r5|3": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.spatial_grid_walk_r5|4": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.spatial_grid_walk_r5|5": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.spatial_grid_walk_r5|6": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.spatial_relative_directions_r5|0": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.spatial_relative_directions_r5|1": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.spatial_relative_directions_r5|2": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.spatial_relative_directions_r5|3": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.spatial_relative_directions_r5|4": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.spatial_relative_directions_r5|5": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.spatial_relative_directions_r5|6": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.swap_tracking_r5|0": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.swap_tracking_r5|1": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.swap_tracking_r5|2": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.swap_tracking_r5|3": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.swap_tracking_r5|4": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.swap_tracking_r5|5": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.swap_tracking_r5|6": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.temporal_critical_path_r5|0": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.temporal_critical_path_r5|1": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.temporal_critical_path_r5|2": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.temporal_critical_path_r5|3": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.temporal_critical_path_r5|4": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.temporal_critical_path_r5|5": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.temporal_critical_path_r5|6": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.temporal_interval_overlap_r5|0": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.temporal_interval_overlap_r5|1": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.temporal_interval_overlap_r5|2": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.temporal_interval_overlap_r5|3": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.temporal_interval_overlap_r5|4": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.temporal_interval_overlap_r5|5": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.temporal_interval_overlap_r5|6": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.temporal_weekday_shift_r5|0": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.temporal_weekday_shift_r5|1": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.temporal_weekday_shift_r5|2": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.temporal_weekday_shift_r5|3": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.temporal_weekday_shift_r5|4": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.temporal_weekday_shift_r5|5": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.temporal_weekday_shift_r5|6": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.topological_order_r5|0": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.topological_order_r5|1": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.topological_order_r5|2": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.topological_order_r5|3": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.topological_order_r5|4": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.topological_order_r5|5": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.topological_order_r5|6": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.tracking_accounts_r5|0": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.tracking_accounts_r5|1": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.tracking_accounts_r5|2": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.tracking_accounts_r5|3": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.tracking_accounts_r5|4": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.tracking_accounts_r5|5": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.tracking_accounts_r5|6": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.venn_counting_r5|0": {
+   "a": {
+    "S_collision": 499750,
+    "chao1": 498004,
+    "distinct": 1996,
+    "lower_bound_if_no_collision": null,
+    "pairs": 4
+   },
+   "b": {
+    "S_collision": 499750,
+    "chao1": 498004,
+    "distinct": 1996,
+    "lower_bound_if_no_collision": null,
+    "pairs": 4
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.venn_counting_r5|1": {
+   "a": {
+    "S_collision": 499750,
+    "chao1": 498004,
+    "distinct": 1996,
+    "lower_bound_if_no_collision": null,
+    "pairs": 4
+   },
+   "b": {
+    "S_collision": 499750,
+    "chao1": 498004,
+    "distinct": 1996,
+    "lower_bound_if_no_collision": null,
+    "pairs": 4
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.venn_counting_r5|2": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.venn_counting_r5|3": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.venn_counting_r5|4": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.venn_counting_r5|5": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  },
+  "R1.venn_counting_r5|6": {
+   "a": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "b": {
+    "S_collision": null,
+    "chao1": 2001000,
+    "distinct": 2000,
+    "lower_bound_if_no_collision": 666333,
+    "pairs": 0
+   },
+   "pass_a": true,
+   "pass_b": true
+  }
+ },
+ "clusters": {
+  "R1.activity_selection": {
+   "even_share": 22830,
+   "fail_levels_a": [],
+   "fail_levels_b": [],
+   "shapes": [
+    "R1.activity_selection_r5"
+   ],
+   "shapes_below_even_share_a": {},
+   "sum_a": [
+    666333,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333
+   ],
+   "sum_b": [
+    666333,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333
+   ]
+  },
+  "R1.attribute_rule": {
+   "even_share": 5708,
+   "fail_levels_a": [],
+   "fail_levels_b": [],
+   "shapes": [
+    "R1.attribute_rule_r5",
+    "R1.conditional_decision_tree_r4",
+    "R1.elimination_bracket_r5",
+    "R1.minimax_tree_r5"
+   ],
+   "shapes_below_even_share_a": {},
+   "sum_a": [
+    2665332,
+    2998499,
+    3997999,
+    2665332,
+    2665332,
+    2665332,
+    2665332
+   ],
+   "sum_b": [
+    2021210,
+    2362454,
+    5330666,
+    3997999,
+    2665332,
+    2665332,
+    2665332
+   ]
+  },
+  "R1.boolean_lights": {
+   "even_share": 11415,
+   "fail_levels_a": [],
+   "fail_levels_b": [],
+   "shapes": [
+    "R1.boolean_lights_r4",
+    "R1.compass_turns"
+   ],
+   "shapes_below_even_share_a": {
+    "compass_turns": [
+     0
+    ]
+   },
+   "sum_a": [
+    677563,
+    2665333,
+    1332666,
+    1332666,
+    1332666,
+    1332666,
+    1332666
+   ],
+   "sum_b": [
+    41984,
+    2498750,
+    1332666,
+    1332666,
+    1332666,
+    1332666,
+    1332666
+   ]
+  },
+  "R1.categories_default_exceptions": {
+   "even_share": 7610,
+   "fail_levels_a": [],
+   "fail_levels_b": [],
+   "shapes": [
+    "R1.categories_default_exceptions_r4",
+    "R1.kinship_ancestor_r4",
+    "R1.kinship_cousins_r5"
+   ],
+   "shapes_below_even_share_a": {
+    "kinship_ancestor_r4": [
+     0
+    ]
+   },
+   "sum_a": [
+    1334733,
+    1348162,
+    1998999,
+    1998999,
+    1998999,
+    1998999,
+    1998999
+   ],
+   "sum_b": [
+    1334733,
+    1348162,
+    1998999,
+    1998999,
+    1998999,
+    1998999,
+    1998999
+   ]
+  },
+  "R1.categories_follow": {
+   "even_share": 5708,
+   "fail_levels_a": [],
+   "fail_levels_b": [],
+   "shapes": [
+    "R1.categories_follow_r5",
+    "R1.equivalence_classes_r5",
+    "R1.order_compare_r5",
+    "R1.road_reachability_r5"
+   ],
+   "shapes_below_even_share_a": {},
+   "sum_a": [
+    827082,
+    2463053,
+    3617237,
+    2665332,
+    3997999,
+    2665332,
+    2665332
+   ],
+   "sum_b": [
+    827082,
+    2463053,
+    3617237,
+    2665332,
+    3997999,
+    2665332,
+    2665332
+   ]
+  },
+  "R1.conditional_chain": {
+   "even_share": 7610,
+   "fail_levels_a": [],
+   "fail_levels_b": [],
+   "shapes": [
+    "R1.conditional_chain_r5",
+    "R1.knights_knaves_r5",
+    "R1.one_culprit"
+   ],
+   "shapes_below_even_share_a": {
+    "one_culprit": [
+     0,
+     1
+    ]
+   },
+   "sum_a": [
+    703207,
+    710472,
+    1695230,
+    1687561,
+    1665833,
+    1554777,
+    1998999
+   ],
+   "sum_b": [
+    703207,
+    710472,
+    1695230,
+    1687561,
+    1665833,
+    1554777,
+    1998999
+   ]
+  },
+  "R1.conditional_threshold_rule": {
+   "even_share": 22830,
+   "fail_levels_a": [],
+   "fail_levels_b": [],
+   "shapes": [
+    "R1.conditional_threshold_rule_r4"
+   ],
+   "shapes_below_even_share_a": {},
+   "sum_a": [
+    666333,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333
+   ],
+   "sum_b": [
+    666333,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333
+   ]
+  },
+  "R1.containers_queue_line": {
+   "even_share": 22830,
+   "fail_levels_a": [],
+   "fail_levels_b": [],
+   "shapes": [
+    "R1.containers_queue_line_r5"
+   ],
+   "shapes_below_even_share_a": {},
+   "sum_a": [
+    499750,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333
+   ],
+   "sum_b": [
+    499750,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333
+   ]
+  },
+  "R1.containers_stack_piles": {
+   "even_share": 22830,
+   "fail_levels_a": [],
+   "fail_levels_b": [],
+   "shapes": [
+    "R1.containers_stack_piles_r4"
+   ],
+   "shapes_below_even_share_a": {},
+   "sum_a": [
+    666333,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333
+   ],
+   "sum_b": [
+    666333,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333
+   ]
+  },
+  "R1.equivalence_exchange_rates": {
+   "even_share": 5708,
+   "fail_levels_a": [],
+   "fail_levels_b": [],
+   "shapes": [
+    "R1.equivalence_exchange_rates_r5",
+    "R1.event_timeline_r5",
+    "R1.spatial_relative_directions_r5",
+    "R1.temporal_weekday_shift_r5"
+   ],
+   "shapes_below_even_share_a": {},
+   "sum_a": [
+    2665332,
+    2665332,
+    2665332,
+    2665332,
+    2665332,
+    2665332,
+    2665332
+   ],
+   "sum_b": [
+    2665332,
+    2665332,
+    2665332,
+    2665332,
+    2665332,
+    2665332,
+    2665332
+   ]
+  },
+  "R1.graph_bipartite": {
+   "even_share": 22830,
+   "fail_levels_a": [],
+   "fail_levels_b": [],
+   "shapes": [
+    "R1.graph_bipartite_r5"
+   ],
+   "shapes_below_even_share_a": {},
+   "sum_a": [
+    60576,
+    199900,
+    999500,
+    666333,
+    666333,
+    666333,
+    666333
+   ],
+   "sum_b": [
+    60576,
+    199900,
+    999500,
+    666333,
+    666333,
+    666333,
+    666333
+   ]
+  },
+  "R1.graph_shortest_route": {
+   "even_share": 22830,
+   "fail_levels_a": [],
+   "fail_levels_b": [],
+   "shapes": [
+    "R1.graph_shortest_route_r4"
+   ],
+   "shapes_below_even_share_a": {},
+   "sum_a": [
+    666333,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333
+   ],
+   "sum_b": [
+    666333,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333
+   ]
+  },
+  "R1.kinship_descendants": {
+   "even_share": 22830,
+   "fail_levels_a": [],
+   "fail_levels_b": [],
+   "shapes": [
+    "R1.kinship_descendants_r5"
+   ],
+   "shapes_below_even_share_a": {},
+   "sum_a": [
+    666333,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333
+   ],
+   "sum_b": [
+    666333,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333
+   ]
+  },
+  "R1.mst_cost": {
+   "even_share": 22830,
+   "fail_levels_a": [],
+   "fail_levels_b": [],
+   "shapes": [
+    "R1.mst_cost_r4"
+   ],
+   "shapes_below_even_share_a": {},
+   "sum_a": [
+    666333,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333
+   ],
+   "sum_b": [
+    666333,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333
+   ]
+  },
+  "R1.nim_xor": {
+   "even_share": 22830,
+   "fail_levels_a": [],
+   "fail_levels_b": [],
+   "shapes": [
+    "R1.nim_xor_r5"
+   ],
+   "shapes_below_even_share_a": {},
+   "sum_a": [
+    666333,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333
+   ],
+   "sum_b": [
+    666333,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333
+   ]
+  },
+  "R1.seating_row": {
+   "even_share": 22830,
+   "fail_levels_a": [],
+   "fail_levels_b": [],
+   "shapes": [
+    "R1.seating_row_r5"
+   ],
+   "shapes_below_even_share_a": {},
+   "sum_a": [
+    79960,
+    86913,
+    181727,
+    181727,
+    52605,
+    60576,
+    99950
+   ],
+   "sum_b": [
+    79960,
+    86913,
+    181727,
+    181727,
+    52605,
+    60576,
+    99950
+   ]
+  },
+  "R1.spatial_grid_walk": {
+   "even_share": 22830,
+   "fail_levels_a": [],
+   "fail_levels_b": [],
+   "shapes": [
+    "R1.spatial_grid_walk_r5"
+   ],
+   "shapes_below_even_share_a": {},
+   "sum_a": [
+    999500,
+    1999000,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333
+   ],
+   "sum_b": [
+    999500,
+    1999000,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333
+   ]
+  },
+  "R1.swap_tracking": {
+   "even_share": 22830,
+   "fail_levels_a": [],
+   "fail_levels_b": [],
+   "shapes": [
+    "R1.swap_tracking_r5"
+   ],
+   "shapes_below_even_share_a": {},
+   "sum_a": [
+    666333,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333
+   ],
+   "sum_b": [
+    666333,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333
+   ]
+  },
+  "R1.temporal_critical_path": {
+   "even_share": 22830,
+   "fail_levels_a": [],
+   "fail_levels_b": [],
+   "shapes": [
+    "R1.temporal_critical_path_r5"
+   ],
+   "shapes_below_even_share_a": {},
+   "sum_a": [
+    666333,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333
+   ],
+   "sum_b": [
+    666333,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333
+   ]
+  },
+  "R1.temporal_interval_overlap": {
+   "even_share": 22830,
+   "fail_levels_a": [],
+   "fail_levels_b": [],
+   "shapes": [
+    "R1.temporal_interval_overlap_r5"
+   ],
+   "shapes_below_even_share_a": {},
+   "sum_a": [
+    666333,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333
+   ],
+   "sum_b": [
+    666333,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333
+   ]
+  },
+  "R1.topological_order": {
+   "even_share": 22830,
+   "fail_levels_a": [],
+   "fail_levels_b": [],
+   "shapes": [
+    "R1.topological_order_r5"
+   ],
+   "shapes_below_even_share_a": {},
+   "sum_a": [
+    666333,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333
+   ],
+   "sum_b": [
+    666333,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333
+   ]
+  },
+  "R1.tracking_accounts": {
+   "even_share": 22830,
+   "fail_levels_a": [],
+   "fail_levels_b": [],
+   "shapes": [
+    "R1.tracking_accounts_r5"
+   ],
+   "shapes_below_even_share_a": {},
+   "sum_a": [
+    666333,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333
+   ],
+   "sum_b": [
+    666333,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333
+   ]
+  },
+  "R1.venn_counting": {
+   "even_share": 22830,
+   "fail_levels_a": [],
+   "fail_levels_b": [],
+   "shapes": [
+    "R1.venn_counting_r5"
+   ],
+   "shapes_below_even_share_a": {},
+   "sum_a": [
+    499750,
+    499750,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333
+   ],
+   "sum_b": [
+    499750,
+    499750,
+    666333,
+    666333,
+    666333,
+    666333,
+    666333
+   ]
+  }
+ },
+ "demand": 22830,
+ "note": "N = 2000 draws per cell, seed 7300 (throwaway). Estimates: max(distinct keys seen, collision estimate or, with no collision, the 95 % lower bound N(N-1)/6). Reading (a): names, settings, order relabelled; reading (b): labels and letters also relabelled. A shape is below its even share when its estimate is under demand / (shapes in its cluster)."
+}

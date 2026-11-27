@@ -1,0 +1,8 @@
+critical_path L1-5: author credit() mean 0.0831 | my credit 0.3035
+  example R1.temporal_critical_path/audit2reg/L1/0 key Flynn author pred ['Cyrus'] author _valid ['Cyrus'] parse_options None
+minimax L1-5: author generic smallest_number exact 0.1708 | signed smallest leaf exact 0.0296
+  example body numbers parsed by the author's regex: ['2', '1', '4', '8', '0'] key -4
+order_compare L1-5: author verbatim fires 1301 / 2500 correct 635
+  direction-aware: asked order stated 635 (key yes: 635 ) reverse stated 666 (key no: 666 )
+queue_line_r2 L1-5 author most_mentioned: mean credit 0.0297, chance 0.1340
+queue_line_r2 L1-5 author least_mentioned: mean credit 0.1729, chance 0.1340

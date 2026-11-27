@@ -1,0 +1,1289 @@
+{
+ "bases": {
+  "1": {
+   "integer": 16103270370041696293,
+   "text": "400002|fresh-shortcut|1"
+  },
+  "2": {
+   "integer": 10773834973117025986,
+   "text": "400002|fresh-shortcut|2"
+  },
+  "3": {
+   "integer": 619660634241804713,
+   "text": "400002|fresh-shortcut|3"
+  },
+  "dry": {
+   "integer": 3342082268851962967,
+   "text": "400002|fresh-shortcut-dry-run"
+  }
+ },
+ "environment_note": "the variables listed per command are set in addition to the inherited environment (PATH, HOME); nothing else is set; the process must start with cwd = worktree_and_cwd",
+ "id_map_to_survivor_id": {
+  "M1a": {
+   "M1.ages_r3": "M1.ages_r3",
+   "M1.arithmetic_series_r3": "M1.arithmetic_series_r3",
+   "M1.average_missing_r4": "M1.average_missing_r4",
+   "M1.change_ways_r3": "M1.change_ways_r3",
+   "M1.clock_duration_r4": "M1.clock_duration_r4",
+   "M1.consecutive_r3": "M1.consecutive_r3",
+   "M1.crt_congruence_r3": "M1.crt_congruence_r3",
+   "M1.division_counting_r3": "M1.division_counting_r3",
+   "M1.finite_differences_r4": "M1.finite_differences_r4",
+   "M1.fraction_remainder_r3": "M1.fraction_remainder_r3",
+   "M1.gcd_lcm_r4": "M1.gcd_lcm_r4",
+   "M1.grid_perimeter_r3": "M1.grid_perimeter_r3",
+   "M1.inclusion_exclusion_r3": "M1.inclusion_exclusion_r3",
+   "M1.last_digit_power_r3": "M1.last_digit_power_r3",
+   "M1.linear_equation_r3": "M1.linear_equation_r3",
+   "M1.median_list_r3": "M1.median_list_r3",
+   "M1.mixture_r4": "M1.mixture_r4",
+   "M1.painted_cube_r3": "M1.painted_cube_r3",
+   "M1.percent_change_r3": "M1.percent_change_r3",
+   "M1.pipes_work_r3": "M1.pipes_work_r3",
+   "M1.prime_factors_r3": "M1.prime_factors_r3",
+   "M1.quadratic_area_r3": "M1.quadratic_area_r3",
+   "M1.ratio_share_r3": "M1.ratio_share_r3",
+   "M1.rectangle_r3": "M1.rectangle_r3",
+   "M1.recurrence_iterate_r3": "M1.recurrence_iterate_r3",
+   "M1.shopping_r3": "M1.shopping_r3",
+   "M1.speed_distance_r3": "M1.speed_distance_r3",
+   "M1.tiered_pricing": "M1.tiered_pricing",
+   "M1.tip_split_r3": "M1.tip_split_r3"
+  },
+  "M1b": {
+   "M1.ages_r3": "M1.ages_r3",
+   "M1.arithmetic_series_r3": "M1.arithmetic_series_r3",
+   "M1.average_missing_r4": "M1.average_missing_r4",
+   "M1.change_ways_r3": "M1.change_ways_r3",
+   "M1.clock_duration_r4": "M1.clock_duration_r4",
+   "M1.consecutive_r3": "M1.consecutive_r3",
+   "M1.crt_congruence_r3": "M1.crt_congruence_r3",
+   "M1.division_counting_r3": "M1.division_counting_r3",
+   "M1.finite_differences_r4": "M1.finite_differences_r4",
+   "M1.fraction_remainder_r3": "M1.fraction_remainder_r3",
+   "M1.gcd_lcm_r4": "M1.gcd_lcm_r4",
+   "M1.grid_perimeter_r3": "M1.grid_perimeter_r3",
+   "M1.inclusion_exclusion_r3": "M1.inclusion_exclusion_r3",
+   "M1.last_digit_power_r3": "M1.last_digit_power_r3",
+   "M1.linear_equation_r3": "M1.linear_equation_r3",
+   "M1.median_list_r3": "M1.median_list_r3",
+   "M1.mixture_r4": "M1.mixture_r4",
+   "M1.painted_cube_r3": "M1.painted_cube_r3",
+   "M1.percent_change_r3": "M1.percent_change_r3",
+   "M1.pipes_work_r3": "M1.pipes_work_r3",
+   "M1.prime_factors_r3": "M1.prime_factors_r3",
+   "M1.quadratic_area_r3": "M1.quadratic_area_r3",
+   "M1.ratio_share_r3": "M1.ratio_share_r3",
+   "M1.rectangle_r3": "M1.rectangle_r3",
+   "M1.recurrence_iterate_r3": "M1.recurrence_iterate_r3",
+   "M1.shopping_r3": "M1.shopping_r3",
+   "M1.speed_distance_r3": "M1.speed_distance_r3",
+   "M1.tiered_pricing": "M1.tiered_pricing",
+   "M1.tip_split_r3": "M1.tip_split_r3"
+  },
+  "M1c": {
+   "M1.ages_r3": "M1.ages_r3",
+   "M1.arithmetic_series_r3": "M1.arithmetic_series_r3",
+   "M1.average_missing_r4": "M1.average_missing_r4",
+   "M1.change_ways_r3": "M1.change_ways_r3",
+   "M1.clock_duration_r4": "M1.clock_duration_r4",
+   "M1.consecutive_r3": "M1.consecutive_r3",
+   "M1.crt_congruence_r3": "M1.crt_congruence_r3",
+   "M1.division_counting_r3": "M1.division_counting_r3",
+   "M1.finite_differences_r4": "M1.finite_differences_r4",
+   "M1.fraction_remainder_r3": "M1.fraction_remainder_r3",
+   "M1.gcd_lcm_r4": "M1.gcd_lcm_r4",
+   "M1.grid_perimeter_r3": "M1.grid_perimeter_r3",
+   "M1.inclusion_exclusion_r3": "M1.inclusion_exclusion_r3",
+   "M1.last_digit_power_r3": "M1.last_digit_power_r3",
+   "M1.linear_equation_r3": "M1.linear_equation_r3",
+   "M1.median_list_r3": "M1.median_list_r3",
+   "M1.mixture_r4": "M1.mixture_r4",
+   "M1.painted_cube_r3": "M1.painted_cube_r3",
+   "M1.percent_change_r3": "M1.percent_change_r3",
+   "M1.pipes_work_r3": "M1.pipes_work_r3",
+   "M1.prime_factors_r3": "M1.prime_factors_r3",
+   "M1.quadratic_area_r3": "M1.quadratic_area_r3",
+   "M1.ratio_share_r3": "M1.ratio_share_r3",
+   "M1.rectangle_r3": "M1.rectangle_r3",
+   "M1.recurrence_iterate_r3": "M1.recurrence_iterate_r3",
+   "M1.shopping_r3": "M1.shopping_r3",
+   "M1.speed_distance_r3": "M1.speed_distance_r3",
+   "M1.tiered_pricing": "M1.tiered_pricing",
+   "M1.tip_split_r3": "M1.tip_split_r3"
+  },
+  "note": "identity for every unit: m1_fix4_battery.py, rules_a5.py and rules_a5_attempt1.py write ids as lineages_m1_fix4 names them, which are the survivor-list ids; no alias table is involved. Other keys in the outputs are not lineage ids: M1a 'exclusions' keys are lineage stems, 'seeds' holds the original's literals."
+ },
+ "plan": "M0 fresh run, evaluation M1: units M1a, M1b, M1c",
+ "rule_scripts_commit": "b78e58b1f47619f070dfc6c0a88999d345b1a34b",
+ "seed_formula": "int.from_bytes(sha256('<base integer as decimal text>|<unit>|<role>')[:8], 'big'); asserted equal to part A of addendum1_rev6_fresh_run.out.txt",
+ "specification": "ADR-0033 addendum 1 (approved 2026-11-26), section 4A stage 1S, at 2c944302 on claude/m0-spec",
+ "status": "FRAGMENT: self-check by the implementer, not reviewed; not hashed; nothing here was run on any run seed",
+ "survivor_list": {
+  "ids": [
+   "M1.ages_r3",
+   "M1.arithmetic_series_r3",
+   "M1.average_missing_r4",
+   "M1.change_ways_r3",
+   "M1.clock_duration_r4",
+   "M1.consecutive_r3",
+   "M1.crt_congruence_r3",
+   "M1.division_counting_r3",
+   "M1.finite_differences_r4",
+   "M1.fraction_remainder_r3",
+   "M1.gcd_lcm_r4",
+   "M1.grid_perimeter_r3",
+   "M1.inclusion_exclusion_r3",
+   "M1.last_digit_power_r3",
+   "M1.linear_equation_r3",
+   "M1.median_list_r3",
+   "M1.mixture_r4",
+   "M1.painted_cube_r3",
+   "M1.percent_change_r3",
+   "M1.pipes_work_r3",
+   "M1.prime_factors_r3",
+   "M1.quadratic_area_r3",
+   "M1.ratio_share_r3",
+   "M1.rectangle_r3",
+   "M1.recurrence_iterate_r3",
+   "M1.shopping_r3",
+   "M1.speed_distance_r3",
+   "M1.tiered_pricing",
+   "M1.tip_split_r3"
+  ],
+  "source": "studies/m0/manifests/survivor_list_of_record.json, evaluations.M1"
+ },
+ "units": {
+  "M1a": {
+   "runs": {
+    "dry": {
+     "argv": [
+      "uv",
+      "run",
+      "--locked",
+      "python",
+      "-m",
+      "studies.m0.fresh_run.m1.m1_fix4_battery",
+      "--n",
+      "20",
+      "--workers",
+      "6",
+      "--out",
+      "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_m1_20261126/attempt1/M1a/dry/battery.json",
+      "--only",
+      "M1.ages_r3,M1.arithmetic_series_r3,M1.average_missing_r4,M1.change_ways_r3,M1.clock_duration_r4,M1.consecutive_r3,M1.crt_congruence_r3,M1.division_counting_r3,M1.finite_differences_r4,M1.fraction_remainder_r3,M1.gcd_lcm_r4,M1.grid_perimeter_r3,M1.inclusion_exclusion_r3,M1.last_digit_power_r3,M1.linear_equation_r3,M1.median_list_r3,M1.mixture_r4,M1.painted_cube_r3,M1.percent_change_r3,M1.pipes_work_r3,M1.prime_factors_r3,M1.quadratic_area_r3,M1.ratio_share_r3,M1.rectangle_r3,M1.recurrence_iterate_r3,M1.shopping_r3,M1.speed_distance_r3,M1.tiered_pricing,M1.tip_split_r3"
+     ],
+     "cwd": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f",
+     "dry_attempt": 1,
+     "env": {
+      "M1A_SEED_A3": "17357159002069502984",
+      "M1A_SEED_A4": "12709778287562225103",
+      "M1A_SEED_OWN": "6111490567131004701",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONHASHSEED": "0",
+      "PYTHONPATH": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f"
+     },
+     "items_per_level": 20,
+     "levels": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ],
+     "must_contain": {
+      "each_holds": "every survivor lineage id, each with level keys '0'..'6'",
+      "expected_row_N": 20,
+      "file": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_m1_20261126/attempt1/M1a/dry/battery.json",
+      "json_paths": [
+       "raw.own",
+       "raw.a4",
+       "raw.a3"
+      ]
+     },
+     "output_directory_created_by_runner_before_start": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_m1_20261126/attempt1/M1a/dry",
+     "output_files_written_by_the_command": [
+      "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_m1_20261126/attempt1/M1a/dry/battery.json"
+     ],
+     "output_format": "JSON object: n, seeds (the ORIGINAL's literals {own 410302, a4 17, a3 5}, not the true seeds), exclusions, raw.own.<lineage>.<level 0..6>.{N, base, mode_insample, halfwidth95, rates, minus_base, answer_echoed_anywhere}; raw.a4.<lineage>.<level>.{N, base, best_echo, answer_echoed_anywhere, rates, minus_base, within_applicable}; raw.a3.<lineage>.<level>.{N, base, rates, minus_base} and raw.a3.<lineage>.a3_skipped_items; summary.<lineage>.<level>.{max_abs_excess, signed, rule, base_by_source, excluded_procedure_max_signed, excluded_procedure_rule}",
+     "seed_note": "stored seed of the original is written into output.seeds and is NOT the true seed",
+     "seeds": [
+      {
+       "enters_as": "environment variable M1A_SEED_OWN",
+       "integer": 6111490567131004701,
+       "role": "own"
+      },
+      {
+       "enters_as": "environment variable M1A_SEED_A4",
+       "integer": 12709778287562225103,
+       "role": "a4"
+      },
+      {
+       "enters_as": "environment variable M1A_SEED_A3",
+       "integer": 17357159002069502984,
+       "role": "a3"
+      }
+     ],
+     "stderr_redirected_to": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_m1_20261126/attempt1/M1a/dry/stderr.txt",
+     "stdout_redirected_to": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_m1_20261126/attempt1/M1a/dry/stdout.txt",
+     "survivor_lineages_the_output_must_contain": [
+      "M1.ages_r3",
+      "M1.arithmetic_series_r3",
+      "M1.average_missing_r4",
+      "M1.change_ways_r3",
+      "M1.clock_duration_r4",
+      "M1.consecutive_r3",
+      "M1.crt_congruence_r3",
+      "M1.division_counting_r3",
+      "M1.finite_differences_r4",
+      "M1.fraction_remainder_r3",
+      "M1.gcd_lcm_r4",
+      "M1.grid_perimeter_r3",
+      "M1.inclusion_exclusion_r3",
+      "M1.last_digit_power_r3",
+      "M1.linear_equation_r3",
+      "M1.median_list_r3",
+      "M1.mixture_r4",
+      "M1.painted_cube_r3",
+      "M1.percent_change_r3",
+      "M1.pipes_work_r3",
+      "M1.prime_factors_r3",
+      "M1.quadratic_area_r3",
+      "M1.ratio_share_r3",
+      "M1.rectangle_r3",
+      "M1.recurrence_iterate_r3",
+      "M1.shopping_r3",
+      "M1.speed_distance_r3",
+      "M1.tiered_pricing",
+      "M1.tip_split_r3"
+     ],
+     "timeout_seconds": 600
+    },
+    "seed1": {
+     "argv": [
+      "uv",
+      "run",
+      "--locked",
+      "python",
+      "-m",
+      "studies.m0.fresh_run.m1.m1_fix4_battery",
+      "--n",
+      "4000",
+      "--workers",
+      "6",
+      "--out",
+      "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1a/seed1/battery.json",
+      "--only",
+      "M1.ages_r3,M1.arithmetic_series_r3,M1.average_missing_r4,M1.change_ways_r3,M1.clock_duration_r4,M1.consecutive_r3,M1.crt_congruence_r3,M1.division_counting_r3,M1.finite_differences_r4,M1.fraction_remainder_r3,M1.gcd_lcm_r4,M1.grid_perimeter_r3,M1.inclusion_exclusion_r3,M1.last_digit_power_r3,M1.linear_equation_r3,M1.median_list_r3,M1.mixture_r4,M1.painted_cube_r3,M1.percent_change_r3,M1.pipes_work_r3,M1.prime_factors_r3,M1.quadratic_area_r3,M1.ratio_share_r3,M1.rectangle_r3,M1.recurrence_iterate_r3,M1.shopping_r3,M1.speed_distance_r3,M1.tiered_pricing,M1.tip_split_r3"
+     ],
+     "cwd": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f",
+     "env": {
+      "M1A_SEED_A3": "13184004603204289140",
+      "M1A_SEED_A4": "5867002204648119092",
+      "M1A_SEED_OWN": "1637941703677772290",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONHASHSEED": "0",
+      "PYTHONPATH": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f"
+     },
+     "items_per_level": 4000,
+     "levels": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ],
+     "must_contain": {
+      "each_holds": "every survivor lineage id, each with level keys '0'..'6'",
+      "expected_row_N": 4000,
+      "file": "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1a/seed1/battery.json",
+      "json_paths": [
+       "raw.own",
+       "raw.a4",
+       "raw.a3"
+      ]
+     },
+     "output_directory_created_by_runner_before_start": "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1a/seed1",
+     "output_files_written_by_the_command": [
+      "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1a/seed1/battery.json"
+     ],
+     "output_format": "JSON object: n, seeds (the ORIGINAL's literals {own 410302, a4 17, a3 5}, not the true seeds), exclusions, raw.own.<lineage>.<level 0..6>.{N, base, mode_insample, halfwidth95, rates, minus_base, answer_echoed_anywhere}; raw.a4.<lineage>.<level>.{N, base, best_echo, answer_echoed_anywhere, rates, minus_base, within_applicable}; raw.a3.<lineage>.<level>.{N, base, rates, minus_base} and raw.a3.<lineage>.a3_skipped_items; summary.<lineage>.<level>.{max_abs_excess, signed, rule, base_by_source, excluded_procedure_max_signed, excluded_procedure_rule}",
+     "seed_note": "stored seed of the original is written into output.seeds and is NOT the true seed",
+     "seeds": [
+      {
+       "enters_as": "environment variable M1A_SEED_OWN",
+       "integer": 1637941703677772290,
+       "role": "own"
+      },
+      {
+       "enters_as": "environment variable M1A_SEED_A4",
+       "integer": 5867002204648119092,
+       "role": "a4"
+      },
+      {
+       "enters_as": "environment variable M1A_SEED_A3",
+       "integer": 13184004603204289140,
+       "role": "a3"
+      }
+     ],
+     "stderr_redirected_to": "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1a/seed1/stderr.txt",
+     "stdout_redirected_to": "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1a/seed1/stdout.txt",
+     "survivor_lineages_the_output_must_contain": [
+      "M1.ages_r3",
+      "M1.arithmetic_series_r3",
+      "M1.average_missing_r4",
+      "M1.change_ways_r3",
+      "M1.clock_duration_r4",
+      "M1.consecutive_r3",
+      "M1.crt_congruence_r3",
+      "M1.division_counting_r3",
+      "M1.finite_differences_r4",
+      "M1.fraction_remainder_r3",
+      "M1.gcd_lcm_r4",
+      "M1.grid_perimeter_r3",
+      "M1.inclusion_exclusion_r3",
+      "M1.last_digit_power_r3",
+      "M1.linear_equation_r3",
+      "M1.median_list_r3",
+      "M1.mixture_r4",
+      "M1.painted_cube_r3",
+      "M1.percent_change_r3",
+      "M1.pipes_work_r3",
+      "M1.prime_factors_r3",
+      "M1.quadratic_area_r3",
+      "M1.ratio_share_r3",
+      "M1.rectangle_r3",
+      "M1.recurrence_iterate_r3",
+      "M1.shopping_r3",
+      "M1.speed_distance_r3",
+      "M1.tiered_pricing",
+      "M1.tip_split_r3"
+     ]
+    },
+    "seed2": {
+     "argv": [
+      "uv",
+      "run",
+      "--locked",
+      "python",
+      "-m",
+      "studies.m0.fresh_run.m1.m1_fix4_battery",
+      "--n",
+      "4000",
+      "--workers",
+      "6",
+      "--out",
+      "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1a/seed2/battery.json",
+      "--only",
+      "M1.ages_r3,M1.arithmetic_series_r3,M1.average_missing_r4,M1.change_ways_r3,M1.clock_duration_r4,M1.consecutive_r3,M1.crt_congruence_r3,M1.division_counting_r3,M1.finite_differences_r4,M1.fraction_remainder_r3,M1.gcd_lcm_r4,M1.grid_perimeter_r3,M1.inclusion_exclusion_r3,M1.last_digit_power_r3,M1.linear_equation_r3,M1.median_list_r3,M1.mixture_r4,M1.painted_cube_r3,M1.percent_change_r3,M1.pipes_work_r3,M1.prime_factors_r3,M1.quadratic_area_r3,M1.ratio_share_r3,M1.rectangle_r3,M1.recurrence_iterate_r3,M1.shopping_r3,M1.speed_distance_r3,M1.tiered_pricing,M1.tip_split_r3"
+     ],
+     "cwd": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f",
+     "env": {
+      "M1A_SEED_A3": "2546003605200785130",
+      "M1A_SEED_A4": "13503461994546098136",
+      "M1A_SEED_OWN": "13140911470970635274",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONHASHSEED": "0",
+      "PYTHONPATH": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f"
+     },
+     "items_per_level": 4000,
+     "levels": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ],
+     "must_contain": {
+      "each_holds": "every survivor lineage id, each with level keys '0'..'6'",
+      "expected_row_N": 4000,
+      "file": "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1a/seed2/battery.json",
+      "json_paths": [
+       "raw.own",
+       "raw.a4",
+       "raw.a3"
+      ]
+     },
+     "output_directory_created_by_runner_before_start": "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1a/seed2",
+     "output_files_written_by_the_command": [
+      "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1a/seed2/battery.json"
+     ],
+     "output_format": "JSON object: n, seeds (the ORIGINAL's literals {own 410302, a4 17, a3 5}, not the true seeds), exclusions, raw.own.<lineage>.<level 0..6>.{N, base, mode_insample, halfwidth95, rates, minus_base, answer_echoed_anywhere}; raw.a4.<lineage>.<level>.{N, base, best_echo, answer_echoed_anywhere, rates, minus_base, within_applicable}; raw.a3.<lineage>.<level>.{N, base, rates, minus_base} and raw.a3.<lineage>.a3_skipped_items; summary.<lineage>.<level>.{max_abs_excess, signed, rule, base_by_source, excluded_procedure_max_signed, excluded_procedure_rule}",
+     "seed_note": "stored seed of the original is written into output.seeds and is NOT the true seed",
+     "seeds": [
+      {
+       "enters_as": "environment variable M1A_SEED_OWN",
+       "integer": 13140911470970635274,
+       "role": "own"
+      },
+      {
+       "enters_as": "environment variable M1A_SEED_A4",
+       "integer": 13503461994546098136,
+       "role": "a4"
+      },
+      {
+       "enters_as": "environment variable M1A_SEED_A3",
+       "integer": 2546003605200785130,
+       "role": "a3"
+      }
+     ],
+     "stderr_redirected_to": "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1a/seed2/stderr.txt",
+     "stdout_redirected_to": "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1a/seed2/stdout.txt",
+     "survivor_lineages_the_output_must_contain": [
+      "M1.ages_r3",
+      "M1.arithmetic_series_r3",
+      "M1.average_missing_r4",
+      "M1.change_ways_r3",
+      "M1.clock_duration_r4",
+      "M1.consecutive_r3",
+      "M1.crt_congruence_r3",
+      "M1.division_counting_r3",
+      "M1.finite_differences_r4",
+      "M1.fraction_remainder_r3",
+      "M1.gcd_lcm_r4",
+      "M1.grid_perimeter_r3",
+      "M1.inclusion_exclusion_r3",
+      "M1.last_digit_power_r3",
+      "M1.linear_equation_r3",
+      "M1.median_list_r3",
+      "M1.mixture_r4",
+      "M1.painted_cube_r3",
+      "M1.percent_change_r3",
+      "M1.pipes_work_r3",
+      "M1.prime_factors_r3",
+      "M1.quadratic_area_r3",
+      "M1.ratio_share_r3",
+      "M1.rectangle_r3",
+      "M1.recurrence_iterate_r3",
+      "M1.shopping_r3",
+      "M1.speed_distance_r3",
+      "M1.tiered_pricing",
+      "M1.tip_split_r3"
+     ]
+    },
+    "seed3": {
+     "argv": [
+      "uv",
+      "run",
+      "--locked",
+      "python",
+      "-m",
+      "studies.m0.fresh_run.m1.m1_fix4_battery",
+      "--n",
+      "4000",
+      "--workers",
+      "6",
+      "--out",
+      "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1a/seed3/battery.json",
+      "--only",
+      "M1.ages_r3,M1.arithmetic_series_r3,M1.average_missing_r4,M1.change_ways_r3,M1.clock_duration_r4,M1.consecutive_r3,M1.crt_congruence_r3,M1.division_counting_r3,M1.finite_differences_r4,M1.fraction_remainder_r3,M1.gcd_lcm_r4,M1.grid_perimeter_r3,M1.inclusion_exclusion_r3,M1.last_digit_power_r3,M1.linear_equation_r3,M1.median_list_r3,M1.mixture_r4,M1.painted_cube_r3,M1.percent_change_r3,M1.pipes_work_r3,M1.prime_factors_r3,M1.quadratic_area_r3,M1.ratio_share_r3,M1.rectangle_r3,M1.recurrence_iterate_r3,M1.shopping_r3,M1.speed_distance_r3,M1.tiered_pricing,M1.tip_split_r3"
+     ],
+     "cwd": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f",
+     "env": {
+      "M1A_SEED_A3": "9109837224184449127",
+      "M1A_SEED_A4": "9145316429393446378",
+      "M1A_SEED_OWN": "1028721077783548436",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONHASHSEED": "0",
+      "PYTHONPATH": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f"
+     },
+     "items_per_level": 4000,
+     "levels": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ],
+     "must_contain": {
+      "each_holds": "every survivor lineage id, each with level keys '0'..'6'",
+      "expected_row_N": 4000,
+      "file": "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1a/seed3/battery.json",
+      "json_paths": [
+       "raw.own",
+       "raw.a4",
+       "raw.a3"
+      ]
+     },
+     "output_directory_created_by_runner_before_start": "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1a/seed3",
+     "output_files_written_by_the_command": [
+      "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1a/seed3/battery.json"
+     ],
+     "output_format": "JSON object: n, seeds (the ORIGINAL's literals {own 410302, a4 17, a3 5}, not the true seeds), exclusions, raw.own.<lineage>.<level 0..6>.{N, base, mode_insample, halfwidth95, rates, minus_base, answer_echoed_anywhere}; raw.a4.<lineage>.<level>.{N, base, best_echo, answer_echoed_anywhere, rates, minus_base, within_applicable}; raw.a3.<lineage>.<level>.{N, base, rates, minus_base} and raw.a3.<lineage>.a3_skipped_items; summary.<lineage>.<level>.{max_abs_excess, signed, rule, base_by_source, excluded_procedure_max_signed, excluded_procedure_rule}",
+     "seed_note": "stored seed of the original is written into output.seeds and is NOT the true seed",
+     "seeds": [
+      {
+       "enters_as": "environment variable M1A_SEED_OWN",
+       "integer": 1028721077783548436,
+       "role": "own"
+      },
+      {
+       "enters_as": "environment variable M1A_SEED_A4",
+       "integer": 9145316429393446378,
+       "role": "a4"
+      },
+      {
+       "enters_as": "environment variable M1A_SEED_A3",
+       "integer": 9109837224184449127,
+       "role": "a3"
+      }
+     ],
+     "stderr_redirected_to": "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1a/seed3/stderr.txt",
+     "stdout_redirected_to": "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1a/seed3/stdout.txt",
+     "survivor_lineages_the_output_must_contain": [
+      "M1.ages_r3",
+      "M1.arithmetic_series_r3",
+      "M1.average_missing_r4",
+      "M1.change_ways_r3",
+      "M1.clock_duration_r4",
+      "M1.consecutive_r3",
+      "M1.crt_congruence_r3",
+      "M1.division_counting_r3",
+      "M1.finite_differences_r4",
+      "M1.fraction_remainder_r3",
+      "M1.gcd_lcm_r4",
+      "M1.grid_perimeter_r3",
+      "M1.inclusion_exclusion_r3",
+      "M1.last_digit_power_r3",
+      "M1.linear_equation_r3",
+      "M1.median_list_r3",
+      "M1.mixture_r4",
+      "M1.painted_cube_r3",
+      "M1.percent_change_r3",
+      "M1.pipes_work_r3",
+      "M1.prime_factors_r3",
+      "M1.quadratic_area_r3",
+      "M1.ratio_share_r3",
+      "M1.rectangle_r3",
+      "M1.recurrence_iterate_r3",
+      "M1.shopping_r3",
+      "M1.speed_distance_r3",
+      "M1.tiered_pricing",
+      "M1.tip_split_r3"
+     ]
+    }
+   },
+   "scripts": [
+    {
+     "kind": "run copy (see COPIES.md)",
+     "path": "studies/m0/fresh_run/m1/m1_fix3_shortcuts.py",
+     "sha256": "5961ccfc3388267d6d50a4d32e542b9ca3ed05ab5c24ae9306b50098a327c1ee"
+    },
+    {
+     "kind": "run copy (see COPIES.md)",
+     "path": "studies/m0/fresh_run/m1/m1_fix4_battery.py",
+     "sha256": "17c3de3775bd888dccdd6cb46cea2f6138b4dc0227cd4d3900e0527f15e23d30"
+    },
+    {
+     "kind": "run copy (see COPIES.md)",
+     "path": "studies/m0/fresh_run/m1/shortcuts_a3.py",
+     "sha256": "c3d0bd399cd35e36caee6eaab7e8b163fd3bce538388bfd7804d569d2505aeb2"
+    },
+    {
+     "kind": "run copy (see COPIES.md)",
+     "path": "studies/m0/fresh_run/m1/shortcuts_a4.py",
+     "sha256": "f6f63e1aaed5a5bc8d02a89f1c65ba5868b6da0b6d6bc74e9d173452adbf6743"
+    }
+   ]
+  },
+  "M1b": {
+   "runs": {
+    "dry": {
+     "argv": [
+      "uv",
+      "run",
+      "--locked",
+      "python",
+      "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5.py",
+      "fresh",
+      "20",
+      "8454236620983312371",
+      "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_m1_20261126/attempt1/M1b/dry/out.json"
+     ],
+     "cwd": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f",
+     "dry_attempt": 1,
+     "env": {
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONHASHSEED": "0",
+      "PYTHONPATH": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f"
+     },
+     "items_per_level": 20,
+     "levels": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ],
+     "must_contain": {
+      "each_holds": "every survivor lineage id, each with level keys '0'..'6'",
+      "expected_row_N": 20,
+      "file": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_m1_20261126/attempt1/M1b/dry/out.json",
+      "json_paths": [
+       "results"
+      ]
+     },
+     "output_directory_created_by_runner_before_start": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_m1_20261126/attempt1/M1b/dry",
+     "output_files_written_by_the_command": [
+      "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_m1_20261126/attempt1/M1b/dry/out.json"
+     ],
+     "output_format": "JSON object: mode, N, seed, label, results.<lineage>.<level 0..6>.{N, base, rates, minus_base, within_applicable, a3_skipped_items, [one_op_best], [asked_is_largest_observed_vs_uniform]}",
+     "seed_note": "the true seed is written to output.seed",
+     "seeds": [
+      {
+       "enters_as": "command-line argument 4 (python <script> fresh N SEED out.json)",
+       "integer": 8454236620983312371,
+       "role": "seed"
+      }
+     ],
+     "stderr_redirected_to": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_m1_20261126/attempt1/M1b/dry/stderr.txt",
+     "stdout_redirected_to": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_m1_20261126/attempt1/M1b/dry/stdout.txt",
+     "survivor_lineages_the_output_must_contain": [
+      "M1.ages_r3",
+      "M1.arithmetic_series_r3",
+      "M1.average_missing_r4",
+      "M1.change_ways_r3",
+      "M1.clock_duration_r4",
+      "M1.consecutive_r3",
+      "M1.crt_congruence_r3",
+      "M1.division_counting_r3",
+      "M1.finite_differences_r4",
+      "M1.fraction_remainder_r3",
+      "M1.gcd_lcm_r4",
+      "M1.grid_perimeter_r3",
+      "M1.inclusion_exclusion_r3",
+      "M1.last_digit_power_r3",
+      "M1.linear_equation_r3",
+      "M1.median_list_r3",
+      "M1.mixture_r4",
+      "M1.painted_cube_r3",
+      "M1.percent_change_r3",
+      "M1.pipes_work_r3",
+      "M1.prime_factors_r3",
+      "M1.quadratic_area_r3",
+      "M1.ratio_share_r3",
+      "M1.rectangle_r3",
+      "M1.recurrence_iterate_r3",
+      "M1.shopping_r3",
+      "M1.speed_distance_r3",
+      "M1.tiered_pricing",
+      "M1.tip_split_r3"
+     ],
+     "timeout_seconds": 600
+    },
+    "seed1": {
+     "argv": [
+      "uv",
+      "run",
+      "--locked",
+      "python",
+      "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5.py",
+      "fresh",
+      "4000",
+      "3575613678330855709",
+      "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1b/seed1/out.json"
+     ],
+     "cwd": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f",
+     "env": {
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONHASHSEED": "0",
+      "PYTHONPATH": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f"
+     },
+     "items_per_level": 4000,
+     "levels": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ],
+     "must_contain": {
+      "each_holds": "every survivor lineage id, each with level keys '0'..'6'",
+      "expected_row_N": 4000,
+      "file": "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1b/seed1/out.json",
+      "json_paths": [
+       "results"
+      ]
+     },
+     "output_directory_created_by_runner_before_start": "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1b/seed1",
+     "output_files_written_by_the_command": [
+      "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1b/seed1/out.json"
+     ],
+     "output_format": "JSON object: mode, N, seed, label, results.<lineage>.<level 0..6>.{N, base, rates, minus_base, within_applicable, a3_skipped_items, [one_op_best], [asked_is_largest_observed_vs_uniform]}",
+     "seed_note": "the true seed is written to output.seed",
+     "seeds": [
+      {
+       "enters_as": "command-line argument 4 (python <script> fresh N SEED out.json)",
+       "integer": 3575613678330855709,
+       "role": "seed"
+      }
+     ],
+     "stderr_redirected_to": "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1b/seed1/stderr.txt",
+     "stdout_redirected_to": "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1b/seed1/stdout.txt",
+     "survivor_lineages_the_output_must_contain": [
+      "M1.ages_r3",
+      "M1.arithmetic_series_r3",
+      "M1.average_missing_r4",
+      "M1.change_ways_r3",
+      "M1.clock_duration_r4",
+      "M1.consecutive_r3",
+      "M1.crt_congruence_r3",
+      "M1.division_counting_r3",
+      "M1.finite_differences_r4",
+      "M1.fraction_remainder_r3",
+      "M1.gcd_lcm_r4",
+      "M1.grid_perimeter_r3",
+      "M1.inclusion_exclusion_r3",
+      "M1.last_digit_power_r3",
+      "M1.linear_equation_r3",
+      "M1.median_list_r3",
+      "M1.mixture_r4",
+      "M1.painted_cube_r3",
+      "M1.percent_change_r3",
+      "M1.pipes_work_r3",
+      "M1.prime_factors_r3",
+      "M1.quadratic_area_r3",
+      "M1.ratio_share_r3",
+      "M1.rectangle_r3",
+      "M1.recurrence_iterate_r3",
+      "M1.shopping_r3",
+      "M1.speed_distance_r3",
+      "M1.tiered_pricing",
+      "M1.tip_split_r3"
+     ]
+    },
+    "seed2": {
+     "argv": [
+      "uv",
+      "run",
+      "--locked",
+      "python",
+      "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5.py",
+      "fresh",
+      "4000",
+      "8105556028213206108",
+      "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1b/seed2/out.json"
+     ],
+     "cwd": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f",
+     "env": {
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONHASHSEED": "0",
+      "PYTHONPATH": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f"
+     },
+     "items_per_level": 4000,
+     "levels": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ],
+     "must_contain": {
+      "each_holds": "every survivor lineage id, each with level keys '0'..'6'",
+      "expected_row_N": 4000,
+      "file": "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1b/seed2/out.json",
+      "json_paths": [
+       "results"
+      ]
+     },
+     "output_directory_created_by_runner_before_start": "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1b/seed2",
+     "output_files_written_by_the_command": [
+      "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1b/seed2/out.json"
+     ],
+     "output_format": "JSON object: mode, N, seed, label, results.<lineage>.<level 0..6>.{N, base, rates, minus_base, within_applicable, a3_skipped_items, [one_op_best], [asked_is_largest_observed_vs_uniform]}",
+     "seed_note": "the true seed is written to output.seed",
+     "seeds": [
+      {
+       "enters_as": "command-line argument 4 (python <script> fresh N SEED out.json)",
+       "integer": 8105556028213206108,
+       "role": "seed"
+      }
+     ],
+     "stderr_redirected_to": "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1b/seed2/stderr.txt",
+     "stdout_redirected_to": "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1b/seed2/stdout.txt",
+     "survivor_lineages_the_output_must_contain": [
+      "M1.ages_r3",
+      "M1.arithmetic_series_r3",
+      "M1.average_missing_r4",
+      "M1.change_ways_r3",
+      "M1.clock_duration_r4",
+      "M1.consecutive_r3",
+      "M1.crt_congruence_r3",
+      "M1.division_counting_r3",
+      "M1.finite_differences_r4",
+      "M1.fraction_remainder_r3",
+      "M1.gcd_lcm_r4",
+      "M1.grid_perimeter_r3",
+      "M1.inclusion_exclusion_r3",
+      "M1.last_digit_power_r3",
+      "M1.linear_equation_r3",
+      "M1.median_list_r3",
+      "M1.mixture_r4",
+      "M1.painted_cube_r3",
+      "M1.percent_change_r3",
+      "M1.pipes_work_r3",
+      "M1.prime_factors_r3",
+      "M1.quadratic_area_r3",
+      "M1.ratio_share_r3",
+      "M1.rectangle_r3",
+      "M1.recurrence_iterate_r3",
+      "M1.shopping_r3",
+      "M1.speed_distance_r3",
+      "M1.tiered_pricing",
+      "M1.tip_split_r3"
+     ]
+    },
+    "seed3": {
+     "argv": [
+      "uv",
+      "run",
+      "--locked",
+      "python",
+      "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5.py",
+      "fresh",
+      "4000",
+      "12934049156249325814",
+      "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1b/seed3/out.json"
+     ],
+     "cwd": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f",
+     "env": {
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONHASHSEED": "0",
+      "PYTHONPATH": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f"
+     },
+     "items_per_level": 4000,
+     "levels": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ],
+     "must_contain": {
+      "each_holds": "every survivor lineage id, each with level keys '0'..'6'",
+      "expected_row_N": 4000,
+      "file": "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1b/seed3/out.json",
+      "json_paths": [
+       "results"
+      ]
+     },
+     "output_directory_created_by_runner_before_start": "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1b/seed3",
+     "output_files_written_by_the_command": [
+      "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1b/seed3/out.json"
+     ],
+     "output_format": "JSON object: mode, N, seed, label, results.<lineage>.<level 0..6>.{N, base, rates, minus_base, within_applicable, a3_skipped_items, [one_op_best], [asked_is_largest_observed_vs_uniform]}",
+     "seed_note": "the true seed is written to output.seed",
+     "seeds": [
+      {
+       "enters_as": "command-line argument 4 (python <script> fresh N SEED out.json)",
+       "integer": 12934049156249325814,
+       "role": "seed"
+      }
+     ],
+     "stderr_redirected_to": "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1b/seed3/stderr.txt",
+     "stdout_redirected_to": "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1b/seed3/stdout.txt",
+     "survivor_lineages_the_output_must_contain": [
+      "M1.ages_r3",
+      "M1.arithmetic_series_r3",
+      "M1.average_missing_r4",
+      "M1.change_ways_r3",
+      "M1.clock_duration_r4",
+      "M1.consecutive_r3",
+      "M1.crt_congruence_r3",
+      "M1.division_counting_r3",
+      "M1.finite_differences_r4",
+      "M1.fraction_remainder_r3",
+      "M1.gcd_lcm_r4",
+      "M1.grid_perimeter_r3",
+      "M1.inclusion_exclusion_r3",
+      "M1.last_digit_power_r3",
+      "M1.linear_equation_r3",
+      "M1.median_list_r3",
+      "M1.mixture_r4",
+      "M1.painted_cube_r3",
+      "M1.percent_change_r3",
+      "M1.pipes_work_r3",
+      "M1.prime_factors_r3",
+      "M1.quadratic_area_r3",
+      "M1.ratio_share_r3",
+      "M1.rectangle_r3",
+      "M1.recurrence_iterate_r3",
+      "M1.shopping_r3",
+      "M1.speed_distance_r3",
+      "M1.tiered_pricing",
+      "M1.tip_split_r3"
+     ]
+    }
+   },
+   "scripts": [
+    {
+     "kind": "as committed at b78e58b1",
+     "path": "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5.py",
+     "sha256": "7d84f7cf74799674669e58c2d0167defea2eff961b59796f3075fd98f537bbf5"
+    }
+   ]
+  },
+  "M1c": {
+   "runs": {
+    "dry": {
+     "argv": [
+      "uv",
+      "run",
+      "--locked",
+      "python",
+      "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5_attempt1.py",
+      "fresh",
+      "20",
+      "3628434571009372890",
+      "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_m1_20261126/attempt1/M1c/dry/out.json"
+     ],
+     "cwd": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f",
+     "dry_attempt": 1,
+     "env": {
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONHASHSEED": "0",
+      "PYTHONPATH": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f"
+     },
+     "items_per_level": 20,
+     "levels": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ],
+     "must_contain": {
+      "each_holds": "every survivor lineage id, each with level keys '0'..'6'",
+      "expected_row_N": 20,
+      "file": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_m1_20261126/attempt1/M1c/dry/out.json",
+      "json_paths": [
+       "results"
+      ]
+     },
+     "output_directory_created_by_runner_before_start": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_m1_20261126/attempt1/M1c/dry",
+     "output_files_written_by_the_command": [
+      "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_m1_20261126/attempt1/M1c/dry/out.json"
+     ],
+     "output_format": "JSON object: mode, N, seed, label, results.<lineage>.<level 0..6>.{N, base, rates, minus_base, within_applicable, a3_skipped_items, [one_op_best], [asked_is_largest_observed_vs_uniform]}",
+     "seed_note": "the true seed is written to output.seed",
+     "seeds": [
+      {
+       "enters_as": "command-line argument 4 (python <script> fresh N SEED out.json)",
+       "integer": 3628434571009372890,
+       "role": "seed"
+      }
+     ],
+     "stderr_redirected_to": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_m1_20261126/attempt1/M1c/dry/stderr.txt",
+     "stdout_redirected_to": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_dry_m1_20261126/attempt1/M1c/dry/stdout.txt",
+     "survivor_lineages_the_output_must_contain": [
+      "M1.ages_r3",
+      "M1.arithmetic_series_r3",
+      "M1.average_missing_r4",
+      "M1.change_ways_r3",
+      "M1.clock_duration_r4",
+      "M1.consecutive_r3",
+      "M1.crt_congruence_r3",
+      "M1.division_counting_r3",
+      "M1.finite_differences_r4",
+      "M1.fraction_remainder_r3",
+      "M1.gcd_lcm_r4",
+      "M1.grid_perimeter_r3",
+      "M1.inclusion_exclusion_r3",
+      "M1.last_digit_power_r3",
+      "M1.linear_equation_r3",
+      "M1.median_list_r3",
+      "M1.mixture_r4",
+      "M1.painted_cube_r3",
+      "M1.percent_change_r3",
+      "M1.pipes_work_r3",
+      "M1.prime_factors_r3",
+      "M1.quadratic_area_r3",
+      "M1.ratio_share_r3",
+      "M1.rectangle_r3",
+      "M1.recurrence_iterate_r3",
+      "M1.shopping_r3",
+      "M1.speed_distance_r3",
+      "M1.tiered_pricing",
+      "M1.tip_split_r3"
+     ],
+     "timeout_seconds": 600
+    },
+    "seed1": {
+     "argv": [
+      "uv",
+      "run",
+      "--locked",
+      "python",
+      "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5_attempt1.py",
+      "fresh",
+      "4000",
+      "17979566934457877595",
+      "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1c/seed1/out.json"
+     ],
+     "cwd": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f",
+     "env": {
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONHASHSEED": "0",
+      "PYTHONPATH": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f"
+     },
+     "items_per_level": 4000,
+     "levels": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ],
+     "must_contain": {
+      "each_holds": "every survivor lineage id, each with level keys '0'..'6'",
+      "expected_row_N": 4000,
+      "file": "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1c/seed1/out.json",
+      "json_paths": [
+       "results"
+      ]
+     },
+     "output_directory_created_by_runner_before_start": "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1c/seed1",
+     "output_files_written_by_the_command": [
+      "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1c/seed1/out.json"
+     ],
+     "output_format": "JSON object: mode, N, seed, label, results.<lineage>.<level 0..6>.{N, base, rates, minus_base, within_applicable, a3_skipped_items, [one_op_best], [asked_is_largest_observed_vs_uniform]}",
+     "seed_note": "the true seed is written to output.seed",
+     "seeds": [
+      {
+       "enters_as": "command-line argument 4 (python <script> fresh N SEED out.json)",
+       "integer": 17979566934457877595,
+       "role": "seed"
+      }
+     ],
+     "stderr_redirected_to": "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1c/seed1/stderr.txt",
+     "stdout_redirected_to": "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1c/seed1/stdout.txt",
+     "survivor_lineages_the_output_must_contain": [
+      "M1.ages_r3",
+      "M1.arithmetic_series_r3",
+      "M1.average_missing_r4",
+      "M1.change_ways_r3",
+      "M1.clock_duration_r4",
+      "M1.consecutive_r3",
+      "M1.crt_congruence_r3",
+      "M1.division_counting_r3",
+      "M1.finite_differences_r4",
+      "M1.fraction_remainder_r3",
+      "M1.gcd_lcm_r4",
+      "M1.grid_perimeter_r3",
+      "M1.inclusion_exclusion_r3",
+      "M1.last_digit_power_r3",
+      "M1.linear_equation_r3",
+      "M1.median_list_r3",
+      "M1.mixture_r4",
+      "M1.painted_cube_r3",
+      "M1.percent_change_r3",
+      "M1.pipes_work_r3",
+      "M1.prime_factors_r3",
+      "M1.quadratic_area_r3",
+      "M1.ratio_share_r3",
+      "M1.rectangle_r3",
+      "M1.recurrence_iterate_r3",
+      "M1.shopping_r3",
+      "M1.speed_distance_r3",
+      "M1.tiered_pricing",
+      "M1.tip_split_r3"
+     ]
+    },
+    "seed2": {
+     "argv": [
+      "uv",
+      "run",
+      "--locked",
+      "python",
+      "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5_attempt1.py",
+      "fresh",
+      "4000",
+      "13134464261783326640",
+      "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1c/seed2/out.json"
+     ],
+     "cwd": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f",
+     "env": {
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONHASHSEED": "0",
+      "PYTHONPATH": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f"
+     },
+     "items_per_level": 4000,
+     "levels": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ],
+     "must_contain": {
+      "each_holds": "every survivor lineage id, each with level keys '0'..'6'",
+      "expected_row_N": 4000,
+      "file": "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1c/seed2/out.json",
+      "json_paths": [
+       "results"
+      ]
+     },
+     "output_directory_created_by_runner_before_start": "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1c/seed2",
+     "output_files_written_by_the_command": [
+      "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1c/seed2/out.json"
+     ],
+     "output_format": "JSON object: mode, N, seed, label, results.<lineage>.<level 0..6>.{N, base, rates, minus_base, within_applicable, a3_skipped_items, [one_op_best], [asked_is_largest_observed_vs_uniform]}",
+     "seed_note": "the true seed is written to output.seed",
+     "seeds": [
+      {
+       "enters_as": "command-line argument 4 (python <script> fresh N SEED out.json)",
+       "integer": 13134464261783326640,
+       "role": "seed"
+      }
+     ],
+     "stderr_redirected_to": "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1c/seed2/stderr.txt",
+     "stdout_redirected_to": "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1c/seed2/stdout.txt",
+     "survivor_lineages_the_output_must_contain": [
+      "M1.ages_r3",
+      "M1.arithmetic_series_r3",
+      "M1.average_missing_r4",
+      "M1.change_ways_r3",
+      "M1.clock_duration_r4",
+      "M1.consecutive_r3",
+      "M1.crt_congruence_r3",
+      "M1.division_counting_r3",
+      "M1.finite_differences_r4",
+      "M1.fraction_remainder_r3",
+      "M1.gcd_lcm_r4",
+      "M1.grid_perimeter_r3",
+      "M1.inclusion_exclusion_r3",
+      "M1.last_digit_power_r3",
+      "M1.linear_equation_r3",
+      "M1.median_list_r3",
+      "M1.mixture_r4",
+      "M1.painted_cube_r3",
+      "M1.percent_change_r3",
+      "M1.pipes_work_r3",
+      "M1.prime_factors_r3",
+      "M1.quadratic_area_r3",
+      "M1.ratio_share_r3",
+      "M1.rectangle_r3",
+      "M1.recurrence_iterate_r3",
+      "M1.shopping_r3",
+      "M1.speed_distance_r3",
+      "M1.tiered_pricing",
+      "M1.tip_split_r3"
+     ]
+    },
+    "seed3": {
+     "argv": [
+      "uv",
+      "run",
+      "--locked",
+      "python",
+      "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5_attempt1.py",
+      "fresh",
+      "4000",
+      "4498135121280209952",
+      "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1c/seed3/out.json"
+     ],
+     "cwd": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f",
+     "env": {
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONHASHSEED": "0",
+      "PYTHONPATH": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f"
+     },
+     "items_per_level": 4000,
+     "levels": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ],
+     "must_contain": {
+      "each_holds": "every survivor lineage id, each with level keys '0'..'6'",
+      "expected_row_N": 4000,
+      "file": "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1c/seed3/out.json",
+      "json_paths": [
+       "results"
+      ]
+     },
+     "output_directory_created_by_runner_before_start": "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1c/seed3",
+     "output_files_written_by_the_command": [
+      "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1c/seed3/out.json"
+     ],
+     "output_format": "JSON object: mode, N, seed, label, results.<lineage>.<level 0..6>.{N, base, rates, minus_base, within_applicable, a3_skipped_items, [one_op_best], [asked_is_largest_observed_vs_uniform]}",
+     "seed_note": "the true seed is written to output.seed",
+     "seeds": [
+      {
+       "enters_as": "command-line argument 4 (python <script> fresh N SEED out.json)",
+       "integer": 4498135121280209952,
+       "role": "seed"
+      }
+     ],
+     "stderr_redirected_to": "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1c/seed3/stderr.txt",
+     "stdout_redirected_to": "/Users/daniellaloush/dandush03/ArborLM/experiments/m0_fresh_run_20261126/M1c/seed3/stdout.txt",
+     "survivor_lineages_the_output_must_contain": [
+      "M1.ages_r3",
+      "M1.arithmetic_series_r3",
+      "M1.average_missing_r4",
+      "M1.change_ways_r3",
+      "M1.clock_duration_r4",
+      "M1.consecutive_r3",
+      "M1.crt_congruence_r3",
+      "M1.division_counting_r3",
+      "M1.finite_differences_r4",
+      "M1.fraction_remainder_r3",
+      "M1.gcd_lcm_r4",
+      "M1.grid_perimeter_r3",
+      "M1.inclusion_exclusion_r3",
+      "M1.last_digit_power_r3",
+      "M1.linear_equation_r3",
+      "M1.median_list_r3",
+      "M1.mixture_r4",
+      "M1.painted_cube_r3",
+      "M1.percent_change_r3",
+      "M1.pipes_work_r3",
+      "M1.prime_factors_r3",
+      "M1.quadratic_area_r3",
+      "M1.ratio_share_r3",
+      "M1.rectangle_r3",
+      "M1.recurrence_iterate_r3",
+      "M1.shopping_r3",
+      "M1.speed_distance_r3",
+      "M1.tiered_pricing",
+      "M1.tip_split_r3"
+     ]
+    }
+   },
+   "scripts": [
+    {
+     "kind": "as committed at b78e58b1",
+     "path": "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5_attempt1.py",
+     "sha256": "7c8e79e51c2d76f3cdcf70914bfd406c00d3f9136c5484f88162344be62b4f17"
+    }
+   ]
+  }
+ },
+ "worktree_and_cwd": "/Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f"
+}

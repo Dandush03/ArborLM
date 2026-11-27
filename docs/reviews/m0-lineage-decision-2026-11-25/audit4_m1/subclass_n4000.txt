@@ -1,0 +1,14 @@
+slot: share of items with no first-digit rule ('any'): 0.182 0.194 0.188 0.183 0.182 0.174 0.193
+slot: ignore_first_rule right, within 'any' / within the rest: 1.000/0.014 1.000/0.014 1.000/0.018 1.000/0.015 1.000/0.017 1.000/0.018 1.000/0.017
+slot: no-overlap-correction rule right (share of ALL items; no-repeat items only): 0.120 0.113 0.126 0.118 0.123 0.120 0.116
+slot: leading-zero convention unstated and key-relevant (0 allowed, first rule even or < 5): 0.190 0.181 0.176 0.177 0.182 0.178 0.183
+mode_tally 'others': key = the most frequent key for the printed list length n (in-sample / held-out), within the ask: 0.808/0.808 0.801/0.788 0.792/0.791 0.808/0.787 0.800/0.795 0.806/0.785 0.799/0.781
+mode_tally: share of 'others' asks: 0.500 0.479 0.508 0.523 0.507 0.503 0.505
+pigeonhole 'same': every colour but the largest has <= k-1 marbles (rule 'others, then k' exact): 0.590 0.589 0.523 0.534 0.481 0.490 0.490
+pigeonhole 'same': every colour has >= k-1 marbles (rule 'ignore caps' exact): 0.160 0.169 0.095 0.083 0.053 0.049 0.045
+coins 'hi' ask: floor(total/hi) right / floor(total/hi) - 1 right: 0.000/0.177 0.000/0.173 0.000/0.146 0.000/0.125 0.000/0.116 0.000/0.112 0.000/0.104
+coins 'lo' ask: count - (floor(total/hi) - 1) right: 0.195 0.175 0.161 0.146 0.126 0.112 0.106
+power: every exponent <= p (Fermat reduction idle): 0.137 0.100 0.008 0.007 0.004 0.000 0.000
+division 'empty seats': exact fit (k - N mod k wrong): 0.038 0.042 0.035 0.030 0.033 0.029 0.029
+speed average ask: key equals one of the printed speeds: - - 0.094 0.080 0.068 0.059 0.063
+gcd_lcm: items with k >= 3 (false rule product/gcd^(k-1) or product/lcm^(k-1) exact): 0.000 0.000 0.000 1.000 1.000 1.000 1.000

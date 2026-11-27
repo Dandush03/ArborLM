@@ -1,0 +1,64 @@
+R1.activity_selection_r5  no rejection line executed (2100 items)
+R1.attribute_rule_r5  (lineages_r1_fix3_a.py, 2100 items)
+    line  135 x   486  raise Retry
+R1.boolean_lights_r4  (lineages_r1_rev4.py, 2100 items)
+    line   48 x    23  raise Retry
+R1.categories_default_exceptions_r4  no rejection line executed (2100 items)
+R1.categories_follow_r5  (lineages_r1_fix3_e.py, 2100 items)
+    line   86 x   470  continue
+    line   89 x  5715  continue
+R1.compass_turns  no rejection line executed (2100 items)
+R1.conditional_chain_r5  (lineages_r1_fix3_a.py, 2100 items)
+    line  159 x4786272  continue
+    line  218 x    79  raise Retry
+R1.conditional_decision_tree_r4  no rejection line executed (2100 items)
+R1.conditional_threshold_rule_r4  no rejection line executed (2100 items)
+R1.containers_queue_line_r5  (lineages_r1_fix3_d.py, 2100 items)
+    line  110 x    29  raise Retry  # validity: every planned operation must be possible
+R1.containers_stack_piles_r4  (lineages_r1_rev4_c.py, 2100 items)
+    line   46 x 13052  continue
+    line   55 x   247  raise Retry
+R1.elimination_bracket_r5  no rejection line executed (2100 items)
+R1.equivalence_classes_r5  (lineages_r1_fix3_a.py, 2100 items)
+    line  403 x   150  continue
+    line  421 x    10  raise Retry
+R1.equivalence_exchange_rates_r5  no rejection line executed (2100 items)
+R1.event_timeline_r5  (lineages_r1_fix3_b.py, 2100 items)
+    line   55 x    10  raise Retry
+R1.graph_bipartite_r5  (lineages_r1_fix3_e.py, 2100 items)
+    line  372 x     1  raise Retry
+    line  382 x 31500  continue
+R1.graph_shortest_route_r4  no rejection line executed (2100 items)
+R1.kinship_ancestor_r4  (lineages_r1_rev4.py, 2100 items)
+    line  161 x    68  raise Retry
+    line  176 x  4538  raise Retry
+R1.kinship_cousins_r5  (lineages_r1_fix3_c.py, 2100 items)
+    line   55 x 74413  continue
+R1.kinship_descendants_r5  no rejection line executed (2100 items)
+R1.knights_knaves_r5  no rejection line executed (2100 items)
+R1.minimax_tree_r5  no rejection line executed (2100 items)
+R1.mst_cost_r4  no rejection line executed (2100 items)
+R1.nim_xor_r5  no rejection line executed (2100 items)
+R1.one_culprit  (lineages_r1.py, 2100 items)
+    line  540 x  4593  continue
+R1.order_compare_r5  no rejection line executed (2100 items)
+R1.road_reachability_r5  no rejection line executed (2100 items)
+R1.seating_row_r5  (lineages_r1_fix3_c.py, 2100 items)
+    line  239 x   590  continue
+    line  252 x     3  raise Retry
+R1.spatial_grid_walk_r5  (lineages_r1_fix3_d.py, 2100 items)
+    line  211 x    20  raise Retry
+    line  236 x   110  raise Retry
+    line  254 x    82  raise Retry
+R1.spatial_relative_directions_r5  (lineages_r1_fix3_b.py, 2100 items)
+    line  104 x     7  raise Retry
+R1.swap_tracking_r5  (lineages_r1_fix3_e.py, 2100 items)
+    line  429 x    11  raise Retry
+R1.temporal_critical_path_r5  no rejection line executed (2100 items)
+R1.temporal_interval_overlap_r5  no rejection line executed (2100 items)
+R1.temporal_weekday_shift_r5  no rejection line executed (2100 items)
+R1.topological_order_r5  no rejection line executed (2100 items)
+R1.tracking_accounts_r5  (lineages_r1_fix3_d.py, 2100 items)
+    line  170 x    88  raise Retry
+    line  176 x    20  raise Retry
+R1.venn_counting_r5  no rejection line executed (2100 items)

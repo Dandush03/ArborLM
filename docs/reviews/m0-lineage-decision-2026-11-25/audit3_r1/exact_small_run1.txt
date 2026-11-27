@@ -1,0 +1,17 @@
+swap_tracking L0 (3 people, 2 operations): orbits, labelled = (13, 75)
+swap_tracking L1 (4 people, 4 operations): orbits, labelled = (6416, 153664)
+R1.pet_owners L0: distinct exact structures seen 329 in 20,000 draws
+R1.pet_owners L1: distinct exact structures seen 7,840 in 20,000 draws
+R1.seating_row L0: distinct exact structures seen 420 in 20,000 draws
+R1.seating_row L1: distinct exact structures seen 7,167 in 20,000 draws
+R1.graph_bipartite L0: distinct exact structures seen 5 in 20,000 draws; graphs on 4 vertices (upper bound) 11
+R1.graph_bipartite L1: distinct exact structures seen 16 in 20,000 draws; graphs on 5 vertices (upper bound) 34
+R1.graph_bipartite L2: distinct exact structures seen 58 in 20,000 draws; graphs on 6 vertices (upper bound) 156
+R1.graph_bipartite L3: distinct exact structures seen 231 in 5,000 draws; graphs on 7 vertices (upper bound) 1,044
+R1.graph_bipartite L0: upper bound (graphs on 4 vertices) 11
+R1.graph_bipartite L1: upper bound (graphs on 5 vertices) 34
+R1.graph_bipartite L2: upper bound (graphs on 6 vertices) 156
+R1.graph_bipartite L3: upper bound (graphs on 7 vertices) 1,044
+R1.graph_bipartite L4: upper bound (graphs on 8 vertices) 12,346
+R1.graph_bipartite L5: upper bound (graphs on 9 vertices) 274,668
+R1.graph_bipartite L6: upper bound (graphs on 10 vertices) 12,005,168

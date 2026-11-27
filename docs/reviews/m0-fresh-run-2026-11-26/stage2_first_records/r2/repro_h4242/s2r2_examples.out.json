@@ -1,0 +1,716 @@
+[
+  {
+    "answer": "107",
+    "answer_type": "number",
+    "id": "R2.binary_search_trace/stage2-check/L0/0",
+    "question": "A sorted list of 19 numbers (smallest first) is searched for 23. The positions are numbered 1 to 19. The search keeps a lower position (first 1) and an upper position (first 19). Each round it looks at the number in the position halfway between them, rounded down when needed (the sum of the two positions divided by 2, rounded down). If that number is the target the search stops; if the target is smaller, the upper position becomes one less than the position just looked at; otherwise the lower position becomes one more. If the lower position ever exceeds the upper position the search stops, having found nothing. The list: 8, 9, 15, 19, 21, 23, 24, 27, 35, 39, 44, 49, 59, 61, 62, 65, 69, 72, 75. What is the sum of all the numbers the search looks at (a number looked at twice would count twice)?"
+  },
+  {
+    "answer": "237",
+    "answer_type": "number",
+    "id": "R2.binary_search_trace/stage2-check/L1/0",
+    "question": "A sorted list of 21 numbers (smallest first) is searched for 67. The positions are numbered 1 to 21. The search keeps a lower position (first 1) and an upper position (first 21). Each round it looks at the number in the position halfway between them, rounded down when needed (the sum of the two positions divided by 2, rounded down). If that number is the target the search stops; if the target is smaller, the upper position becomes one less than the position just looked at; otherwise the lower position becomes one more. If the lower position ever exceeds the upper position the search stops, having found nothing. The list: 2, 3, 19, 21, 22, 23, 26, 30, 31, 33, 35, 37, 44, 45, 53, 57, 67, 69, 78, 80, 82. What is the sum of all the numbers the search looks at (a number looked at twice would count twice)?"
+  },
+  {
+    "answer": "49, 81, 89, 87",
+    "answer_type": "list",
+    "id": "R2.binary_search_trace/stage2-check/L2/0",
+    "question": "A sorted list of 27 numbers (smallest first) is searched for 87. The positions are numbered 1 to 27. The search keeps a lower position (first 1) and an upper position (first 27). Each round it looks at the number in the position halfway between them, rounded down when needed (the sum of the two positions divided by 2, rounded down). If that number is the target the search stops; if the target is smaller, the upper position becomes one less than the position just looked at; otherwise the lower position becomes one more. If the lower position ever exceeds the upper position the search stops, having found nothing. The list: 1, 4, 7, 9, 14, 16, 18, 20, 29, 31, 35, 38, 41, 49, 55, 59, 65, 72, 77, 78, 81, 87, 88, 89, 93, 97, 98. Which numbers does the search look at, in order? Give them separated by commas."
+  },
+  {
+    "answer": "61, 75, 68, 73, 70",
+    "answer_type": "list",
+    "id": "R2.binary_search_trace/stage2-check/L3/0",
+    "question": "A sorted list of 28 numbers (smallest first) is searched for 70. The positions are numbered 1 to 28. The search keeps a lower position (first 1) and an upper position (first 28). Each round it looks at the number in the position halfway between them, rounded down when needed (the sum of the two positions divided by 2, rounded down). If that number is the target the search stops; if the target is smaller, the upper position becomes one less than the position just looked at; otherwise the lower position becomes one more. If the lower position ever exceeds the upper position the search stops, having found nothing. The list: 3, 5, 14, 18, 22, 23, 37, 38, 50, 55, 56, 57, 60, 61, 65, 66, 68, 70, 73, 74, 75, 86, 91, 94, 95, 100, 103, 108. Which numbers does the search look at, in order? Give them separated by commas."
+  },
+  {
+    "answer": "78, 24, 19, 7, 4",
+    "answer_type": "list",
+    "id": "R2.binary_search_trace/stage2-check/L4/0",
+    "question": "A sorted list of 34 numbers (smallest first) is searched for 3. The positions are numbered 1 to 34. The search keeps a lower position (first 1) and an upper position (first 34). Each round it looks at the number in the position halfway between them, rounded down when needed (the sum of the two positions divided by 2, rounded down). If that number is the target the search stops; if the target is smaller, the upper position becomes one less than the position just looked at; otherwise the lower position becomes one more. If the lower position ever exceeds the upper position the search stops, having found nothing. The list: 4, 7, 17, 19, 20, 22, 23, 24, 25, 34, 39, 48, 52, 54, 58, 69, 78, 83, 87, 90, 97, 99, 102, 104, 105, 108, 111, 113, 116, 119, 120, 129, 132, 135. Which numbers does the search look at, in order? Give them separated by commas."
+  },
+  {
+    "answer": "64, 36, 47, 40, 41, 44",
+    "answer_type": "list",
+    "id": "R2.binary_search_trace/stage2-check/L5/0",
+    "question": "A sorted list of 39 numbers (smallest first) is searched for 45. The positions are numbered 1 to 39. The search keeps a lower position (first 1) and an upper position (first 39). Each round it looks at the number in the position halfway between them, rounded down when needed (the sum of the two positions divided by 2, rounded down). If that number is the target the search stops; if the target is smaller, the upper position becomes one less than the position just looked at; otherwise the lower position becomes one more. If the lower position ever exceeds the upper position the search stops, having found nothing. The list: 4, 5, 12, 17, 19, 20, 21, 32, 33, 36, 37, 40, 41, 44, 47, 53, 56, 59, 60, 64, 66, 72, 73, 75, 78, 80, 84, 97, 100, 102, 105, 113, 121, 124, 138, 139, 140, 141, 155. Which numbers does the search look at, in order? Give them separated by commas."
+  },
+  {
+    "answer": "79, 132, 142, 134, 133",
+    "answer_type": "list",
+    "id": "R2.binary_search_trace/stage2-check/L6/0",
+    "question": "A sorted list of 42 numbers (smallest first) is searched for 133. The positions are numbered 1 to 42. The search keeps a lower position (first 1) and an upper position (first 42). Each round it looks at the number in the position halfway between them, rounded down when needed (the sum of the two positions divided by 2, rounded down). If that number is the target the search stops; if the target is smaller, the upper position becomes one less than the position just looked at; otherwise the lower position becomes one more. If the lower position ever exceeds the upper position the search stops, having found nothing. The list: 1, 2, 4, 5, 6, 9, 11, 13, 14, 15, 21, 23, 26, 32, 37, 57, 66, 69, 75, 77, 79, 82, 83, 94, 101, 103, 113, 116, 117, 122, 125, 132, 133, 134, 137, 138, 142, 146, 151, 154, 160, 163. Which numbers does the search look at, in order? Give them separated by commas."
+  },
+  {
+    "answer": "dlyti",
+    "answer_type": "text",
+    "id": "R2.caesar_shift/stage2-check/L0/0",
+    "question": "Shift every letter of 'sanix' forward by 11 places in the alphabet, wrapping from z back to a. Spaces stay. What is the result?"
+  },
+  {
+    "answer": "hxalo jlwxk",
+    "answer_type": "text",
+    "id": "R2.caesar_shift/stage2-check/L1/0",
+    "question": "Shift every letter of 'kador mozan' forward by 23 places in the alphabet, wrapping from z back to a. Spaces stay. What is the result?"
+  },
+  {
+    "answer": "gwxaj naraj oexkt",
+    "answer_type": "text",
+    "id": "R2.caesar_shift/stage2-check/L2/0",
+    "question": "Shift every letter of 'kaben reven sibox' forward by 22 places in the alphabet, wrapping from z back to a. Spaces stay. What is the result?"
+  },
+  {
+    "answer": "ydmzi hvhds hvuvm wdmdm",
+    "answer_type": "text",
+    "id": "R2.caesar_shift/stage2-check/L3/0",
+    "question": "Shift every letter of 'diren mamix mazar birir' forward by 21 places in the alphabet, wrapping from z back to a. Spaces stay. What is the result?"
+  },
+  {
+    "answer": "zbzre onqra inena qbgbk qrqve",
+    "answer_type": "text",
+    "id": "R2.caesar_shift/stage2-check/L4/0",
+    "question": "Shift every letter of 'momer baden varan dotox dedir' forward by 13 places in the alphabet, wrapping from z back to a. Spaces stay. What is the result?"
+  },
+  {
+    "answer": "sqhmz uizms zidis hqtqv twhwz zqhwf",
+    "answer_type": "text",
+    "id": "R2.caesar_shift/stage2-check/L5/0",
+    "question": "Shift every letter of 'kizer marek ravak zilin lozor rizox' forward by 8 places in the alphabet, wrapping from z back to a. Spaces stay. What is the result?"
+  },
+  {
+    "answer": "wlurq glyla edpda qhgrn wrvrn crndq grcdn",
+    "answer_type": "text",
+    "id": "R2.caesar_shift/stage2-check/L6/0",
+    "question": "Shift every letter of 'tiron divix bamax nedok tosok zokan dozak' forward by 3 places in the alphabet, wrapping from z back to a. Spaces stay. What is the result?"
+  },
+  {
+    "answer": "11001110011",
+    "answer_type": "text",
+    "id": "R2.cellular_automaton/stage2-check/L0/0",
+    "question": "A row of 11 cells holds 0s and 1s: 11110111101. In one step every cell changes at the same moment, according to the three digits (left neighbour, the cell itself, right neighbour): 111 becomes 1, 110 becomes 0, 101 becomes 0, 100 becomes 0, 011 becomes 1, 010 becomes 1, 001 becomes 1, 000 becomes 1. The cells beyond the two ends of the row count as 0. After 2 steps, what does the row look like? Give the digits with no spaces."
+  },
+  {
+    "answer": "0010100000110",
+    "answer_type": "text",
+    "id": "R2.cellular_automaton/stage2-check/L1/0",
+    "question": "A row of 13 cells holds 0s and 1s: 1010000011001. In one step every cell changes at the same moment, according to the three digits (left neighbour, the cell itself, right neighbour): 111 becomes 0, 110 becomes 1, 101 becomes 1, 100 becomes 1, 011 becomes 0, 010 becomes 0, 001 becomes 0, 000 becomes 0. The cells beyond the two ends of the row count as 0. After 2 steps, what does the row look like? Give the digits with no spaces."
+  },
+  {
+    "answer": "001000000011000",
+    "answer_type": "text",
+    "id": "R2.cellular_automaton/stage2-check/L2/0",
+    "question": "A row of 15 cells holds 0s and 1s: 111001000000011. In one step every cell changes at the same moment, according to the three digits (left neighbour, the cell itself, right neighbour): 111 becomes 0, 110 becomes 0, 101 becomes 1, 100 becomes 0, 011 becomes 1, 010 becomes 0, 001 becomes 1, 000 becomes 0. The cells beyond the two ends of the row count as 0. After 3 steps, what does the row look like? Give the digits with no spaces."
+  },
+  {
+    "answer": "11100000101010100",
+    "answer_type": "text",
+    "id": "R2.cellular_automaton/stage2-check/L3/0",
+    "question": "A row of 17 cells holds 0s and 1s: 10011001011010011. In one step every cell changes at the same moment, according to the three digits (left neighbour, the cell itself, right neighbour): 111 becomes 0, 110 becomes 0, 101 becomes 1, 100 becomes 1, 011 becomes 1, 010 becomes 1, 001 becomes 0, 000 becomes 1. The cells beyond the two ends of the row count as 0. After 3 steps, what does the row look like? Give the digits with no spaces."
+  },
+  {
+    "answer": "1010110101010101011",
+    "answer_type": "text",
+    "id": "R2.cellular_automaton/stage2-check/L4/0",
+    "question": "A row of 19 cells holds 0s and 1s: 1011000101010101111. In one step every cell changes at the same moment, according to the three digits (left neighbour, the cell itself, right neighbour): 111 becomes 0, 110 becomes 0, 101 becomes 0, 100 becomes 1, 011 becomes 1, 010 becomes 1, 001 becomes 0, 000 becomes 0. The cells beyond the two ends of the row count as 0. After 4 steps, what does the row look like? Give the digits with no spaces."
+  },
+  {
+    "answer": "101010111011011001101",
+    "answer_type": "text",
+    "id": "R2.cellular_automaton/stage2-check/L5/0",
+    "question": "A row of 21 cells holds 0s and 1s: 101110110110011011011. In one step every cell changes at the same moment, according to the three digits (left neighbour, the cell itself, right neighbour): 111 becomes 0, 110 becomes 0, 101 becomes 0, 100 becomes 0, 011 becomes 1, 010 becomes 1, 001 becomes 1, 000 becomes 1. The cells beyond the two ends of the row count as 0. After 4 steps, what does the row look like? Give the digits with no spaces."
+  },
+  {
+    "answer": "01011010101101010111111",
+    "answer_type": "text",
+    "id": "R2.cellular_automaton/stage2-check/L6/0",
+    "question": "A row of 23 cells holds 0s and 1s: 11001010100101010000001. In one step every cell changes at the same moment, according to the three digits (left neighbour, the cell itself, right neighbour): 111 becomes 0, 110 becomes 1, 101 becomes 0, 100 becomes 0, 011 becomes 0, 010 becomes 1, 001 becomes 1, 000 becomes 1. The cells beyond the two ends of the row count as 0. After 5 steps, what does the row look like? Give the digits with no spaces."
+  },
+  {
+    "answer": "69",
+    "answer_type": "number",
+    "id": "R2.cheapest_network/stage2-check/L0/0",
+    "question": "The towns Fenwick, Garth, Harrow, Norwick, Ravenna, Selby, Thornbury and Upton must be joined by cables so that anyone can get from any town to any other town, directly or through other towns. A cable between Thornbury and Upton would cost 9. A cable between Selby and Ravenna would cost 8. A cable between Harrow and Garth would cost 13. A cable between Fenwick and Selby would cost 20. A cable between Fenwick and Thornbury would cost 22. A cable between Garth and Upton would cost 10. A cable between Harrow and Thornbury would cost 14. A cable between Fenwick and Norwick would cost 7. A cable between Thornbury and Garth would cost 11. A cable between Fenwick and Upton would cost 17. A cable between Harrow and Fenwick would cost 14. A cable between Harrow and Norwick would cost 21. A cable between Fenwick and Ravenna would cost 16. A cable between Harrow and Upton would cost 5. A cable between Thornbury and Norwick would cost 23. A cable between Norwick and Ravenna would cost 19. What is the smallest total cost of a set of cables that joins all the towns?"
+  },
+  {
+    "answer": "74",
+    "answer_type": "number",
+    "id": "R2.cheapest_network/stage2-check/L1/0",
+    "question": "The towns Arden, Brook, Larkin, Marlow, Oakham, Quarry, Ravenna, Upton and Westmere must be joined by cables so that anyone can get from any town to any other town, directly or through other towns. A cable between Oakham and Quarry would cost 18. A cable between Larkin and Brook would cost 3. A cable between Larkin and Arden would cost 16. A cable between Ravenna and Quarry would cost 14. A cable between Marlow and Arden would cost 3. A cable between Brook and Ravenna would cost 5. A cable between Larkin and Marlow would cost 17. A cable between Brook and Arden would cost 17. A cable between Westmere and Upton would cost 8. A cable between Marlow and Quarry would cost 7. A cable between Ravenna and Arden would cost 18. A cable between Ravenna and Marlow would cost 15. A cable between Oakham and Upton would cost 16. A cable between Ravenna and Upton would cost 18. A cable between Ravenna and Westmere would cost 18. A cable between Larkin and Ravenna would cost 8. A cable between Arden and Quarry would cost 10. A cable between Brook and Marlow would cost 14. What is the smallest total cost of a set of cables that joins all the towns?"
+  },
+  {
+    "answer": "65",
+    "answer_type": "number",
+    "id": "R2.cheapest_network/stage2-check/L2/0",
+    "question": "The towns Calder, Eastvale, Harrow, Kelso, Larkin, Penrith, Ravenna, Selby, Upton and Westmere must be joined by cables so that anyone can get from any town to any other town, directly or through other towns. A cable between Calder and Harrow would cost 11. A cable between Calder and Kelso would cost 11. A cable between Selby and Kelso would cost 12. A cable between Selby and Larkin would cost 10. A cable between Calder and Larkin would cost 9. A cable between Penrith and Selby would cost 9. A cable between Upton and Harrow would cost 2. A cable between Ravenna and Penrith would cost 4. A cable between Calder and Westmere would cost 14. A cable between Larkin and Westmere would cost 13. A cable between Kelso and Westmere would cost 11. A cable between Eastvale and Harrow would cost 11. A cable between Selby and Westmere would cost 11. A cable between Calder and Selby would cost 11. A cable between Ravenna and Selby would cost 11. A cable between Kelso and Larkin would cost 2. A cable between Calder and Eastvale would cost 12. A cable between Selby and Eastvale would cost 11. A cable between Calder and Upton would cost 9. A cable between Upton and Eastvale would cost 9. What is the smallest total cost of a set of cables that joins all the towns?"
+  },
+  {
+    "answer": "75",
+    "answer_type": "number",
+    "id": "R2.cheapest_network/stage2-check/L3/0",
+    "question": "The towns Brook, Calder, Harrow, Kelso, Marlow, Norwick, Oakham, Penrith, Thornbury, Upton and Yarrow must be joined by cables so that anyone can get from any town to any other town, directly or through other towns. A cable between Calder and Upton would cost 17. A cable between Calder and Kelso would cost 11. A cable between Harrow and Penrith would cost 12. A cable between Harrow and Norwick would cost 4. A cable between Harrow and Calder would cost 11. A cable between Oakham and Upton would cost 7. A cable between Oakham and Brook would cost 12. A cable between Penrith and Norwick would cost 8. A cable between Yarrow and Harrow would cost 17. A cable between Oakham and Thornbury would cost 7. A cable between Yarrow and Calder would cost 10. A cable between Brook and Kelso would cost 11. A cable between Kelso and Thornbury would cost 14. A cable between Upton and Thornbury would cost 14. A cable between Marlow and Penrith would cost 3. A cable between Marlow and Norwick would cost 11. A cable between Brook and Thornbury would cost 5. A cable between Brook and Upton would cost 11. A cable between Marlow and Harrow would cost 15. A cable between Yarrow and Kelso would cost 9. A cable between Calder and Norwick would cost 13. A cable between Upton and Kelso would cost 18. What is the smallest total cost of a set of cables that joins all the towns?"
+  },
+  {
+    "answer": "76",
+    "answer_type": "number",
+    "id": "R2.cheapest_network/stage2-check/L4/0",
+    "question": "The towns Brook, Fenwick, Garth, Harrow, Ivybridge, Marlow, Oakham, Quarry, Ravenna, Vale, Westmere and Yarrow must be joined by cables so that anyone can get from any town to any other town, directly or through other towns. A cable between Ivybridge and Garth would cost 14. A cable between Oakham and Vale would cost 7. A cable between Ivybridge and Westmere would cost 2. A cable between Ravenna and Vale would cost 9. A cable between Yarrow and Ivybridge would cost 11. A cable between Yarrow and Garth would cost 3. A cable between Westmere and Fenwick would cost 6. A cable between Ravenna and Garth would cost 12. A cable between Vale and Harrow would cost 14. A cable between Marlow and Fenwick would cost 6. A cable between Westmere and Harrow would cost 13. A cable between Ravenna and Harrow would cost 13. A cable between Brook and Harrow would cost 13. A cable between Oakham and Ravenna would cost 8. A cable between Ivybridge and Harrow would cost 13. A cable between Garth and Harrow would cost 5. A cable between Yarrow and Westmere would cost 11. A cable between Brook and Quarry would cost 6. A cable between Yarrow and Harrow would cost 2. A cable between Marlow and Ivybridge would cost 10. A cable between Vale and Garth would cost 13. A cable between Marlow and Westmere would cost 10. A cable between Garth and Westmere would cost 14. A cable between Ivybridge and Fenwick would cost 6. What is the smallest total cost of a set of cables that joins all the towns?"
+  },
+  {
+    "answer": "65",
+    "answer_type": "number",
+    "id": "R2.cheapest_network/stage2-check/L5/0",
+    "question": "The towns Arden, Brook, Calder, Eastvale, Kelso, Larkin, Norwick, Penrith, Quarry, Ravenna, Selby, Thornbury and Vale must be joined by cables so that anyone can get from any town to any other town, directly or through other towns. A cable between Quarry and Norwick would cost 9. A cable between Calder and Arden would cost 9. A cable between Selby and Larkin would cost 9. A cable between Thornbury and Quarry would cost 12. A cable between Calder and Penrith would cost 7. A cable between Thornbury and Larkin would cost 6. A cable between Kelso and Larkin would cost 12. A cable between Selby and Norwick would cost 6. A cable between Calder and Brook would cost 11. A cable between Larkin and Eastvale would cost 9. A cable between Selby and Quarry would cost 3. A cable between Thornbury and Kelso would cost 8. A cable between Penrith and Norwick would cost 12. A cable between Penrith and Thornbury would cost 5. A cable between Quarry and Larkin would cost 6. A cable between Thornbury and Norwick would cost 9. A cable between Ravenna and Eastvale would cost 2. A cable between Calder and Thornbury would cost 12. A cable between Arden and Brook would cost 2. A cable between Vale and Arden would cost 2. A cable between Ravenna and Larkin would cost 9. A cable between Calder and Kelso would cost 12. A cable between Calder and Vale would cost 11. A cable between Vale and Brook would cost 4. A cable between Penrith and Kelso would cost 11. A cable between Penrith and Larkin would cost 11. What is the smallest total cost of a set of cables that joins all the towns?"
+  },
+  {
+    "answer": "72",
+    "answer_type": "number",
+    "id": "R2.cheapest_network/stage2-check/L6/0",
+    "question": "The towns Brook, Calder, Dunmore, Eastvale, Garth, Harrow, Ivybridge, Kelso, Marlow, Norwick, Quarry, Ravenna, Thornbury and Upton must be joined by cables so that anyone can get from any town to any other town, directly or through other towns. A cable between Marlow and Thornbury would cost 9. A cable between Norwick and Quarry would cost 1. A cable between Calder and Garth would cost 11. A cable between Ivybridge and Harrow would cost 1. A cable between Quarry and Kelso would cost 11. A cable between Calder and Eastvale would cost 7. A cable between Marlow and Eastvale would cost 6. A cable between Marlow and Ravenna would cost 10. A cable between Ravenna and Garth would cost 6. A cable between Calder and Ravenna would cost 9. A cable between Upton and Ivybridge would cost 10. A cable between Quarry and Eastvale would cost 8. A cable between Upton and Harrow would cost 10. A cable between Marlow and Kelso would cost 11. A cable between Kelso and Garth would cost 5. A cable between Norwick and Calder would cost 4. A cable between Kelso and Calder would cost 10. A cable between Norwick and Ravenna would cost 11. A cable between Kelso and Ravenna would cost 1. A cable between Quarry and Ravenna would cost 10. A cable between Dunmore and Brook would cost 6. A cable between Quarry and Calder would cost 5. A cable between Dunmore and Ivybridge would cost 9. A cable between Dunmore and Harrow would cost 9. A cable between Kelso and Eastvale would cost 7. A cable between Eastvale and Ravenna would cost 6. A cable between Norwick and Eastvale would cost 9. A cable between Marlow and Brook would cost 7. What is the smallest total cost of a set of cables that joins all the towns?"
+  },
+  {
+    "answer": "447",
+    "answer_type": "number",
+    "id": "R2.count_divisible/stage2-check/L0/0",
+    "question": "What is the sum of the numbers in this list that are divisible by 3 and greater than 27? Every entry of the list counts each time it appears: a number that is listed twice is added twice if it qualifies. List: 23, 58, 98, 31, 16, 48, 66, 41, 48, 35, 27, 41, 75, 60, 84, 66, 89, 88."
+  },
+  {
+    "answer": "519",
+    "answer_type": "number",
+    "id": "R2.count_divisible/stage2-check/L1/0",
+    "question": "What is the sum of the numbers in this list that are divisible by 3 and greater than 54? Every entry of the list counts each time it appears: a number that is listed twice is added twice if it qualifies. List: 88, 91, 40, 26, 93, 37, 66, 93, 54, 33, 27, 92, 79, 16, 28, 93, 36, 53, 48, 93, 81, 58."
+  },
+  {
+    "answer": "783",
+    "answer_type": "number",
+    "id": "R2.count_divisible/stage2-check/L2/0",
+    "question": "What is the sum of the numbers in this list that are divisible by 3 and greater than 117? Every entry of the list counts each time it appears: a number that is listed twice is added twice if it qualifies. List: 65, 184, 94, 118, 119, 31, 122, 79, 123, 168, 117, 137, 16, 124, 158, 15, 52, 172, 74, 165, 86, 179, 131, 168, 26, 159."
+  },
+  {
+    "answer": "258",
+    "answer_type": "number",
+    "id": "R2.count_divisible/stage2-check/L3/0",
+    "question": "What is the sum of the numbers in this list that are divisible by 3 and greater than 51? Every entry of the list counts each time it appears: a number that is listed twice is added twice if it qualifies. List: 73, 39, 115, 169, 30, 67, 152, 135, 112, 61, 125, 64, 118, 152, 115, 89, 51, 197, 26, 65, 151, 122, 59, 13, 63, 143, 42, 21, 164, 60."
+  },
+  {
+    "answer": "1950",
+    "answer_type": "number",
+    "id": "R2.count_divisible/stage2-check/L4/0",
+    "question": "What is the sum of the numbers in this list that are divisible by 3 and greater than 96? Every entry of the list counts each time it appears: a number that is listed twice is added twice if it qualifies. List: 208, 100, 243, 264, 219, 85, 256, 190, 41, 96, 205, 235, 70, 240, 226, 85, 268, 258, 181, 236, 166, 44, 195, 140, 61, 258, 29, 57, 101, 273, 97, 70, 12, 136."
+  },
+  {
+    "answer": "2766",
+    "answer_type": "number",
+    "id": "R2.count_divisible/stage2-check/L5/0",
+    "question": "What is the sum of the numbers in this list that are divisible by 2 and greater than 122? Every entry of the list counts each time it appears: a number that is listed twice is added twice if it qualifies. List: 103, 224, 290, 211, 34, 24, 117, 247, 154, 192, 292, 229, 252, 176, 191, 14, 256, 277, 93, 49, 131, 122, 100, 161, 82, 214, 92, 20, 298, 177, 169, 126, 123, 12, 38, 59, 292, 117."
+  },
+  {
+    "answer": "3240",
+    "answer_type": "number",
+    "id": "R2.count_divisible/stage2-check/L6/0",
+    "question": "What is the sum of the numbers in this list that are divisible by 4 and greater than 112? Every entry of the list counts each time it appears: a number that is listed twice is added twice if it qualifies. List: 398, 268, 112, 146, 316, 64, 296, 25, 169, 130, 175, 235, 318, 103, 184, 196, 124, 121, 117, 136, 69, 219, 11, 168, 367, 183, 324, 178, 102, 260, 314, 384, 303, 213, 356, 385, 228, 46, 203, 60, 282, 22."
+  },
+  {
+    "answer": "104",
+    "answer_type": "number",
+    "id": "R2.crt_smallest/stage2-check/L0/0",
+    "question": "What is the smallest positive whole number that leaves remainder 4 when divided by 5, and leaves remainder 8 when divided by 24?"
+  },
+  {
+    "answer": "140",
+    "answer_type": "number",
+    "id": "R2.crt_smallest/stage2-check/L1/0",
+    "question": "What is the smallest positive whole number that leaves remainder 10 when divided by 13, and leaves remainder 20 when divided by 30?"
+  },
+  {
+    "answer": "553",
+    "answer_type": "number",
+    "id": "R2.crt_smallest/stage2-check/L2/0",
+    "question": "What is the smallest positive whole number that leaves remainder 7 when divided by 42, and leaves remainder 36 when divided by 47?"
+  },
+  {
+    "answer": "34785",
+    "answer_type": "number",
+    "id": "R2.crt_smallest/stage2-check/L3/0",
+    "question": "What is the smallest positive whole number that leaves remainder 9 when divided by 23, and leaves remainder 3 when divided by 31, and leaves remainder 15 when divided by 57?"
+  },
+  {
+    "answer": "10792",
+    "answer_type": "number",
+    "id": "R2.crt_smallest/stage2-check/L4/0",
+    "question": "What is the smallest positive whole number that leaves remainder 2 when divided by 26, and leaves remainder 19 when divided by 27, and leaves remainder 9 when divided by 41?"
+  },
+  {
+    "answer": "76182",
+    "answer_type": "number",
+    "id": "R2.crt_smallest/stage2-check/L5/0",
+    "question": "What is the smallest positive whole number that leaves remainder 22 when divided by 32, and leaves remainder 39 when divided by 51, and leaves remainder 21 when divided by 53?"
+  },
+  {
+    "answer": "165559",
+    "answer_type": "number",
+    "id": "R2.crt_smallest/stage2-check/L6/0",
+    "question": "What is the smallest positive whole number that leaves remainder 25 when divided by 47, and leaves remainder 40 when divided by 53, and leaves remainder 34 when divided by 75?"
+  },
+  {
+    "answer": "dxal",
+    "answer_type": "text",
+    "id": "R2.dictionary_rank/stage2-check/L0/0",
+    "question": "Write every word of 4 letters that can be made from the letters a, d, e, g, l, m, o, t, x, y, z when no letter is used twice in the same word, and list all the words in dictionary order (as in a dictionary, comparing letter by letter from the left, with a before b before c and so on). Number the words 1, 2, 3, ... in that list. Which word has number 1227?"
+  },
+  {
+    "answer": "948",
+    "answer_type": "number",
+    "id": "R2.dictionary_rank/stage2-check/L1/0",
+    "question": "Write every word of 4 letters that can be made from the letters a, b, d, j, l, n, o, p, v, z when no letter is used twice in the same word, and list all the words in dictionary order (as in a dictionary, comparing letter by letter from the left, with a before b before c and so on). Number the words 1, 2, 3, ... in that list. What is the number of the word bvzj?"
+  },
+  {
+    "answer": "12168",
+    "answer_type": "number",
+    "id": "R2.dictionary_rank/stage2-check/L2/0",
+    "question": "Write every word of 5 letters that can be made from the letters c, d, e, f, n, s, t, u, w when no letter is used twice in the same word, and list all the words in dictionary order (as in a dictionary, comparing letter by letter from the left, with a before b before c and so on). Number the words 1, 2, 3, ... in that list. What is the number of the word udwnf?"
+  },
+  {
+    "answer": "14237",
+    "answer_type": "number",
+    "id": "R2.dictionary_rank/stage2-check/L3/0",
+    "question": "Write every word of 5 letters that can be made from the letters c, h, m, o, s, t, w, y, z when no letter is used twice in the same word, and list all the words in dictionary order (as in a dictionary, comparing letter by letter from the left, with a before b before c and so on). Number the words 1, 2, 3, ... in that list. What is the number of the word zowsh?"
+  },
+  {
+    "answer": "57505",
+    "answer_type": "number",
+    "id": "R2.dictionary_rank/stage2-check/L4/0",
+    "question": "Write every word of 6 letters that can be made from the letters a, k, m, n, r, s, u, v, x, y when no letter is used twice in the same word, and list all the words in dictionary order (as in a dictionary, comparing letter by letter from the left, with a before b before c and so on). Number the words 1, 2, 3, ... in that list. What is the number of the word nxkvuy?"
+  },
+  {
+    "answer": "13494",
+    "answer_type": "number",
+    "id": "R2.dictionary_rank/stage2-check/L5/0",
+    "question": "Write every word of 6 letters that can be made from the letters b, e, h, k, l, m, o, s, x when no letter is used twice in the same word, and list all the words in dictionary order (as in a dictionary, comparing letter by letter from the left, with a before b before c and so on). Number the words 1, 2, 3, ... in that list. What is the number of the word hbemsl?"
+  },
+  {
+    "answer": "dlefrtc",
+    "answer_type": "text",
+    "id": "R2.dictionary_rank/stage2-check/L6/0",
+    "question": "Write every word of 7 letters that can be made from the letters c, d, e, f, l, n, q, r, s, t, w when no letter is used twice in the same word, and list all the words in dictionary order (as in a dictionary, comparing letter by letter from the left, with a before b before c and so on). Number the words 1, 2, 3, ... in that list. Which word has number 198561?"
+  },
+  {
+    "answer": "69",
+    "answer_type": "number",
+    "id": "R2.expression_eval/stage2-check/L0/0",
+    "question": "Work out 4 - 4 + (5 + 3) * 9 - 3. Use these rules, in this order, also inside every pair of parentheses: do what is inside parentheses first, innermost first; then do all the multiplications, from left to right; then do all the additions and subtractions together as one group, strictly from left to right (so 8 - 3 + 2 is worked as (8 - 3) + 2 = 7, and 8 + 3 - 2 as (8 + 3) - 2 = 9). What is the result?"
+  },
+  {
+    "answer": "-63",
+    "answer_type": "number",
+    "id": "R2.expression_eval/stage2-check/L1/0",
+    "question": "Work out 4 + 3 * 4 + 8 - (2 + 9 * 9) by this rule, which is not the usual one: work out each pair of parentheses first, innermost first, and inside a pair of parentheses use the same rule as outside; the rule is that the operators are done strictly in the order they are written, from left to right, and multiplication gets no priority over addition or subtraction (so 2 + 3 * 4 is worked as (2 + 3) * 4 = 20). What is the result?"
+  },
+  {
+    "answer": "-92",
+    "answer_type": "number",
+    "id": "R2.expression_eval/stage2-check/L2/0",
+    "question": "Work out 6 * 3 + 6 - 2 - (6 + 4) * 6 * 2 + 9 - 3. Use these rules, in this order, also inside every pair of parentheses: do what is inside parentheses first, innermost first; then do all the multiplications, from left to right; then do all the additions and subtractions together as one group, strictly from left to right (so 8 - 3 + 2 is worked as (8 - 3) + 2 = 7, and 8 + 3 - 2 as (8 + 3) - 2 = 9). What is the result?"
+  },
+  {
+    "answer": "108",
+    "answer_type": "number",
+    "id": "R2.expression_eval/stage2-check/L3/0",
+    "question": "Work out 4 - 5 + 2 - 5 + 7 + 3 * (2 + 5) * 5. Use these rules, in this order, also inside every pair of parentheses: do what is inside parentheses first, innermost first; then do all the multiplications, from left to right; then do all the additions and subtractions together as one group, strictly from left to right (so 8 - 3 + 2 is worked as (8 - 3) + 2 = 7, and 8 + 3 - 2 as (8 + 3) - 2 = 9). What is the result?"
+  },
+  {
+    "answer": "4882",
+    "answer_type": "number",
+    "id": "R2.expression_eval/stage2-check/L4/0",
+    "question": "Work out 17 * 15 - 10 * 20 + (17 + 16) + 10 - (17 - 5 * 6) + 11 by this rule, which is not the usual one: work out each pair of parentheses first, innermost first, and inside a pair of parentheses use the same rule as outside; the rule is that the operators are done strictly in the order they are written, from left to right, and multiplication gets no priority over addition or subtraction (so 2 + 3 * 4 is worked as (2 + 3) * 4 = 20). What is the result?"
+  },
+  {
+    "answer": "70097",
+    "answer_type": "number",
+    "id": "R2.expression_eval/stage2-check/L5/0",
+    "question": "Work out 2 - 4 + 12 + 20 * 17 - 20 * (19 - 8 * 13) + 7 + 20 by this rule, which is not the usual one: work out each pair of parentheses first, innermost first, and inside a pair of parentheses use the same rule as outside; the rule is that the operators are done strictly in the order they are written, from left to right, and multiplication gets no priority over addition or subtraction (so 2 + 3 * 4 is worked as (2 + 3) * 4 = 20). What is the result?"
+  },
+  {
+    "answer": "-798",
+    "answer_type": "number",
+    "id": "R2.expression_eval/stage2-check/L6/0",
+    "question": "Work out 7 * 14 - 20 * (15 + 12) * (17 - 15) + 19 * 12 - (13 - 19) * 10 + 19 + 15 + 10 - 15 * 10 + 2. Use these rules, in this order, also inside every pair of parentheses: do what is inside parentheses first, innermost first; then do all the multiplications, from left to right; then do all the additions and subtractions together as one group, strictly from left to right (so 8 - 3 + 2 is worked as (8 - 3) + 2 = 7, and 8 + 3 - 2 as (8 + 3) - 2 = 9). What is the result?"
+  },
+  {
+    "answer": "935",
+    "answer_type": "number",
+    "id": "R2.from_base/stage2-check/L0/0",
+    "question": "What is the base-4 number 32213 written in decimal? (Digits above 9 are lowercase letters: a is ten, b is eleven, and so on.)"
+  },
+  {
+    "answer": "171",
+    "answer_type": "number",
+    "id": "R2.from_base/stage2-check/L1/0",
+    "question": "What is the base-4 number 2223 written in decimal? (Digits above 9 are lowercase letters: a is ten, b is eleven, and so on.)"
+  },
+  {
+    "answer": "5958",
+    "answer_type": "number",
+    "id": "R2.from_base/stage2-check/L2/0",
+    "question": "What is the base-5 number 142313 written in decimal? (Digits above 9 are lowercase letters: a is ten, b is eleven, and so on.)"
+  },
+  {
+    "answer": "2982",
+    "answer_type": "number",
+    "id": "R2.from_base/stage2-check/L3/0",
+    "question": "What is the base-4 number 232212 written in decimal? (Digits above 9 are lowercase letters: a is ten, b is eleven, and so on.)"
+  },
+  {
+    "answer": "2834193",
+    "answer_type": "number",
+    "id": "R2.from_base/stage2-check/L4/0",
+    "question": "What is the base-7 number 33042645 written in decimal? (Digits above 9 are lowercase letters: a is ten, b is eleven, and so on.)"
+  },
+  {
+    "answer": "1294734",
+    "answer_type": "number",
+    "id": "R2.from_base/stage2-check/L5/0",
+    "question": "What is the base-5 number 312412414 written in decimal? (Digits above 9 are lowercase letters: a is ten, b is eleven, and so on.)"
+  },
+  {
+    "answer": "16596",
+    "answer_type": "number",
+    "id": "R2.from_base/stage2-check/L6/0",
+    "question": "What is the base-3 number 211202200 written in decimal? (Digits above 9 are lowercase letters: a is ten, b is eleven, and so on.)"
+  },
+  {
+    "answer": "21",
+    "answer_type": "number",
+    "id": "R2.grid_sum/stage2-check/L0/0",
+    "question": "A grid has 3 rows and 3 columns. The rows, from top to bottom, are: 7 8 6 / 6 5 9 / 0 1 9. What is the sum of the numbers in the diagonal from the top left corner (cells (1,1), (2,2), and so on)?"
+  },
+  {
+    "answer": "13",
+    "answer_type": "number",
+    "id": "R2.grid_sum/stage2-check/L1/0",
+    "question": "A grid has 3 rows and 4 columns. The rows, from top to bottom, are: 4 8 9 4 / 6 1 1 0 / 0 8 8 1. What is the sum of the numbers in the diagonal from the top left corner (cells (1,1), (2,2), and so on)?"
+  },
+  {
+    "answer": "15",
+    "answer_type": "number",
+    "id": "R2.grid_sum/stage2-check/L2/0",
+    "question": "A grid has 4 rows and 4 columns. The rows, from top to bottom, are: 5 8 2 8 / 8 4 0 4 / 4 1 1 3 / 9 8 9 0. What is the sum of the numbers in column 4?"
+  },
+  {
+    "answer": "11",
+    "answer_type": "number",
+    "id": "R2.grid_sum/stage2-check/L3/0",
+    "question": "A grid has 4 rows and 5 columns. The rows, from top to bottom, are: 2 5 3 9 9 / 4 3 4 0 2 / 0 6 4 6 5 / 5 5 3 2 5. What is the sum of the numbers in the diagonal from the top left corner (cells (1,1), (2,2), and so on)?"
+  },
+  {
+    "answer": "18",
+    "answer_type": "number",
+    "id": "R2.grid_sum/stage2-check/L4/0",
+    "question": "A grid has 5 rows and 5 columns. The rows, from top to bottom, are: 3 0 6 9 7 / 4 0 9 0 3 / 8 6 4 9 9 / 2 4 1 6 1 / 5 2 8 4 5. What is the sum of the numbers in the diagonal from the top left corner (cells (1,1), (2,2), and so on)?"
+  },
+  {
+    "answer": "19",
+    "answer_type": "number",
+    "id": "R2.grid_sum/stage2-check/L5/0",
+    "question": "A grid has 5 rows and 6 columns. The rows, from top to bottom, are: 5 5 1 0 3 6 / 2 7 8 2 0 7 / 9 8 1 0 1 6 / 1 1 3 6 0 4 / 0 4 0 8 0 2. What is the sum of the numbers in the diagonal from the top left corner (cells (1,1), (2,2), and so on)?"
+  },
+  {
+    "answer": "15",
+    "answer_type": "number",
+    "id": "R2.grid_sum/stage2-check/L6/0",
+    "question": "A grid has 6 rows and 6 columns. The rows, from top to bottom, are: 9 8 2 8 0 2 / 0 9 9 4 9 9 / 3 6 1 8 3 0 / 5 6 5 5 2 0 / 9 3 7 5 8 9 / 3 2 9 0 0 1. What is the sum of the numbers in row 6?"
+  },
+  {
+    "answer": "89, 46, 60",
+    "answer_type": "list",
+    "id": "R2.list_ops/stage2-check/L0/0",
+    "question": "Start with the list 60, 1, 89, 46. Do these steps in order: move the first element to the end; remove the first element. What is the final list? Give the numbers separated by commas."
+  },
+  {
+    "answer": "38, 21, 33",
+    "answer_type": "list",
+    "id": "R2.list_ops/stage2-check/L1/0",
+    "question": "Start with the list 4, 33, 21, 38. Do these steps in order: move the first element to the end; remove the last element; reverse the list. What is the final list? Give the numbers separated by commas."
+  },
+  {
+    "answer": "25, 85, 86, 82",
+    "answer_type": "list",
+    "id": "R2.list_ops/stage2-check/L2/0",
+    "question": "Start with the list 85, 86, 82, 8, 25. Do these steps in order: reverse the list; move the first element to the end; reverse the list; remove the last element. What is the final list? Give the numbers separated by commas."
+  },
+  {
+    "answer": "87, 53, 86, 1, 61, 91",
+    "answer_type": "list",
+    "id": "R2.list_ops/stage2-check/L3/0",
+    "question": "Start with the list 53, 87, 61, 1, 86. Do these steps in order: reverse the list; move the first element to the end; move the first element to the end; move the first element to the end; add 91 at the end. What is the final list? Give the numbers separated by commas."
+  },
+  {
+    "answer": "84, 50, 84",
+    "answer_type": "list",
+    "id": "R2.list_ops/stage2-check/L4/0",
+    "question": "Start with the list 98, 84, 64, 84, 50, 13. Do these steps in order: remove the first element; remove the last element; move the first element to the end; reverse the list; reverse the list; remove the first element. What is the final list? Give the numbers separated by commas."
+  },
+  {
+    "answer": "46, 74, 84, 64, 5, 37, 90, 68, 7, 73, 97",
+    "answer_type": "list",
+    "id": "R2.list_ops/stage2-check/L5/0",
+    "question": "Start with the list 64, 97, 73, 7, 68, 90. Do these steps in order: add 37 at the end; add 5 at the end; move the first element to the end; add 84 at the end; add 74 at the end; add 46 at the end; reverse the list. What is the final list? Give the numbers separated by commas."
+  },
+  {
+    "answer": "6, 96, 6, 41, 18",
+    "answer_type": "list",
+    "id": "R2.list_ops/stage2-check/L6/0",
+    "question": "Start with the list 6, 18, 41, 51, 50, 96, 52. Do these steps in order: reverse the list; remove the first element; move the first element to the end; remove the first element; remove the first element; add 6 at the end; move the first element to the end; move the first element to the end. What is the final list? Give the numbers separated by commas."
+  },
+  {
+    "answer": "no",
+    "answer_type": "yn",
+    "id": "R2.luhn_check/stage2-check/L0/0",
+    "question": "Start at the rightmost digit and move left: leave the 1st digit as it is, double the 2nd, leave the 3rd, double the 4th, and so on. Whenever a doubled digit is more than 9, subtract 9 from it. Add up all the results. The number is valid if the total is a multiple of 10. Is the number 0945761 valid? Answer yes or no."
+  },
+  {
+    "answer": "no",
+    "answer_type": "yn",
+    "id": "R2.luhn_check/stage2-check/L1/0",
+    "question": "Start at the rightmost digit and move left: leave the 1st digit as it is, double the 2nd, leave the 3rd, double the 4th, and so on. Whenever a doubled digit is more than 9, subtract 9 from it. Add up all the results. The number is valid if the total is a multiple of 10. Is the number 787012207 valid? Answer yes or no."
+  },
+  {
+    "answer": "5",
+    "answer_type": "number",
+    "id": "R2.luhn_check/stage2-check/L2/0",
+    "question": "Start at the rightmost digit and move left: leave the 1st digit as it is, double the 2nd, leave the 3rd, double the 4th, and so on. Whenever a doubled digit is more than 9, subtract 9 from it. Add up all the results. A number is valid if the total is a multiple of 10. One more digit is to be written at the right end of 3110243239 so that the new number is valid (the digit written there is the rightmost digit of the new number). Which digit must be written?"
+  },
+  {
+    "answer": "2",
+    "answer_type": "number",
+    "id": "R2.luhn_check/stage2-check/L3/0",
+    "question": "Start at the rightmost digit and move left: leave the 1st digit as it is, double the 2nd, leave the 3rd, double the 4th, and so on. Whenever a doubled digit is more than 9, subtract 9 from it. Add up all the results. A number is valid if the total is a multiple of 10. One more digit is to be written at the right end of 625639202610 so that the new number is valid (the digit written there is the rightmost digit of the new number). Which digit must be written?"
+  },
+  {
+    "answer": "yes",
+    "answer_type": "yn",
+    "id": "R2.luhn_check/stage2-check/L4/0",
+    "question": "Start at the rightmost digit and move left: leave the 1st digit as it is, double the 2nd, leave the 3rd, double the 4th, and so on. Whenever a doubled digit is more than 9, subtract 9 from it. Add up all the results. The number is valid if the total is a multiple of 10. Is the number 735783529406921 valid? Answer yes or no."
+  },
+  {
+    "answer": "yes",
+    "answer_type": "yn",
+    "id": "R2.luhn_check/stage2-check/L5/0",
+    "question": "Start at the rightmost digit and move left: leave the 1st digit as it is, double the 2nd, leave the 3rd, double the 4th, and so on. Whenever a doubled digit is more than 9, subtract 9 from it. Add up all the results. The number is valid if the total is a multiple of 10. Is the number 85999421156514111 valid? Answer yes or no."
+  },
+  {
+    "answer": "no",
+    "answer_type": "yn",
+    "id": "R2.luhn_check/stage2-check/L6/0",
+    "question": "Start at the rightmost digit and move left: leave the 1st digit as it is, double the 2nd, leave the 3rd, double the 4th, and so on. Whenever a doubled digit is more than 9, subtract 9 from it. Add up all the results. The number is valid if the total is a multiple of 10. Is the number 1674716482649418708 valid? Answer yes or no."
+  },
+  {
+    "answer": "38, 53, 43, 59, 54, 45, 94, 78, 72",
+    "answer_type": "list",
+    "id": "R2.min_heap_ops/stage2-check/L0/0",
+    "question": "A heap is a row of numbers in positions 1, 2, 3, ... where the number in position p is never larger than the numbers in positions 2p and 2p+1 (when those exist). To add a number: put it in the first free position at the end, then, while it is smaller than the number in position (its position divided by 2, rounded down), swap the two. To remove the smallest: take out the number in position 1, put the number from the last position into position 1 (the row is now one shorter), then, while it is larger than the smaller of the numbers in positions 2p and 2p+1 (those that exist), swap it with that smaller number. Start with an empty heap and add these numbers in order: 43, 54, 45, 78, 53, 38, 94, 72, 18, 59. Then remove the smallest 1 time. Give the row from position 1 to the end, separated by commas."
+  },
+  {
+    "answer": "22, 35, 40, 67, 63, 98, 77, 87, 84, 81",
+    "answer_type": "list",
+    "id": "R2.min_heap_ops/stage2-check/L1/0",
+    "question": "A heap is a row of numbers in positions 1, 2, 3, ... where the number in position p is never larger than the numbers in positions 2p and 2p+1 (when those exist). To add a number: put it in the first free position at the end, then, while it is smaller than the number in position (its position divided by 2, rounded down), swap the two. To remove the smallest: take out the number in position 1, put the number from the last position into position 1 (the row is now one shorter), then, while it is larger than the smaller of the numbers in positions 2p and 2p+1 (those that exist), swap it with that smaller number. Start with an empty heap and add these numbers in order: 67, 35, 98, 63, 22, 40, 77, 18, 84, 81, 87. Then remove the smallest 1 time. Give the row from position 1 to the end, separated by commas."
+  },
+  {
+    "answer": "5, 8, 10, 12, 36, 44, 49, 85, 76, 64, 38, 66",
+    "answer_type": "list",
+    "id": "R2.min_heap_ops/stage2-check/L2/0",
+    "question": "A heap is a row of numbers in positions 1, 2, 3, ... where the number in position p is never larger than the numbers in positions 2p and 2p+1 (when those exist). To add a number: put it in the first free position at the end, then, while it is smaller than the number in position (its position divided by 2, rounded down), swap the two. To remove the smallest: take out the number in position 1, put the number from the last position into position 1 (the row is now one shorter), then, while it is larger than the smaller of the numbers in positions 2p and 2p+1 (those that exist), swap it with that smaller number. Start with an empty heap and add these numbers in order: 64, 5, 44, 85, 12, 10, 49, 8, 76, 36, 38, 66. Give the row from position 1 to the end, separated by commas."
+  },
+  {
+    "answer": "6, 26, 24, 38, 63, 43, 32, 93, 79, 66, 81, 46, 45",
+    "answer_type": "list",
+    "id": "R2.min_heap_ops/stage2-check/L3/0",
+    "question": "A heap is a row of numbers in positions 1, 2, 3, ... where the number in position p is never larger than the numbers in positions 2p and 2p+1 (when those exist). To add a number: put it in the first free position at the end, then, while it is smaller than the number in position (its position divided by 2, rounded down), swap the two. To remove the smallest: take out the number in position 1, put the number from the last position into position 1 (the row is now one shorter), then, while it is larger than the smaller of the numbers in positions 2p and 2p+1 (those that exist), swap it with that smaller number. Start with an empty heap and add these numbers in order: 93, 46, 38, 63, 24, 6, 32, 26, 79, 66, 81, 43, 45. Give the row from position 1 to the end, separated by commas."
+  },
+  {
+    "answer": "12, 47, 21, 61, 54, 60, 23, 69, 94, 95, 56, 90, 92, 46",
+    "answer_type": "list",
+    "id": "R2.min_heap_ops/stage2-check/L4/0",
+    "question": "A heap is a row of numbers in positions 1, 2, 3, ... where the number in position p is never larger than the numbers in positions 2p and 2p+1 (when those exist). To add a number: put it in the first free position at the end, then, while it is smaller than the number in position (its position divided by 2, rounded down), swap the two. To remove the smallest: take out the number in position 1, put the number from the last position into position 1 (the row is now one shorter), then, while it is larger than the smaller of the numbers in positions 2p and 2p+1 (those that exist), swap it with that smaller number. Start with an empty heap and add these numbers in order: 69, 56, 90, 54, 12, 46, 21, 61, 94, 95, 47, 60, 92, 23. Give the row from position 1 to the end, separated by commas."
+  },
+  {
+    "answer": "7, 24, 22, 38, 33, 35, 29, 86, 49, 44, 76, 87, 70, 90, 64",
+    "answer_type": "list",
+    "id": "R2.min_heap_ops/stage2-check/L5/0",
+    "question": "A heap is a row of numbers in positions 1, 2, 3, ... where the number in position p is never larger than the numbers in positions 2p and 2p+1 (when those exist). To add a number: put it in the first free position at the end, then, while it is smaller than the number in position (its position divided by 2, rounded down), swap the two. To remove the smallest: take out the number in position 1, put the number from the last position into position 1 (the row is now one shorter), then, while it is larger than the smaller of the numbers in positions 2p and 2p+1 (those that exist), swap it with that smaller number. Start with an empty heap and add these numbers in order: 33, 29, 24, 38, 44, 70, 90, 86, 49, 22, 76, 87, 35, 64, 7. Give the row from position 1 to the end, separated by commas."
+  },
+  {
+    "answer": "6, 15, 16, 22, 21, 48, 20, 24, 44, 93, 85, 69, 54, 75, 62",
+    "answer_type": "list",
+    "id": "R2.min_heap_ops/stage2-check/L6/0",
+    "question": "A heap is a row of numbers in positions 1, 2, 3, ... where the number in position p is never larger than the numbers in positions 2p and 2p+1 (when those exist). To add a number: put it in the first free position at the end, then, while it is smaller than the number in position (its position divided by 2, rounded down), swap the two. To remove the smallest: take out the number in position 1, put the number from the last position into position 1 (the row is now one shorter), then, while it is larger than the smaller of the numbers in positions 2p and 2p+1 (those that exist), swap it with that smaller number. Start with an empty heap and add these numbers in order: 16, 24, 20, 44, 93, 69, 1, 75, 15, 21, 85, 48, 54, 6, 62, 22. Then remove the smallest 1 time. Give the row from position 1 to the end, separated by commas."
+  },
+  {
+    "answer": "z4b3c4x4a2b2",
+    "answer_type": "text",
+    "id": "R2.run_length/stage2-check/L0/0",
+    "question": "Compress zzzzbbbccccxxxxaabb by run-length encoding: replace each maximal run of one repeated letter by the letter followed by the run length (for example aaab becomes a3b1). What is the result?"
+  },
+  {
+    "answer": "x1z2a1b2y1c4b2",
+    "answer_type": "text",
+    "id": "R2.run_length/stage2-check/L1/0",
+    "question": "Compress xzzabbyccccbb by run-length encoding: replace each maximal run of one repeated letter by the letter followed by the run length (for example aaab becomes a3b1). What is the result?"
+  },
+  {
+    "answer": "c1a4c1a5b3a3z5x2",
+    "answer_type": "text",
+    "id": "R2.run_length/stage2-check/L2/0",
+    "question": "Compress caaaacaaaaabbbaaazzzzzxx by run-length encoding: replace each maximal run of one repeated letter by the letter followed by the run length (for example aaab becomes a3b1). What is the result?"
+  },
+  {
+    "answer": "b2c4b2y4z5y2c2x1a4",
+    "answer_type": "text",
+    "id": "R2.run_length/stage2-check/L3/0",
+    "question": "Compress bbccccbbyyyyzzzzzyyccxaaaa by run-length encoding: replace each maximal run of one repeated letter by the letter followed by the run length (for example aaab becomes a3b1). What is the result?"
+  },
+  {
+    "answer": "b4y5a3c4b1y1z1c5z4y3",
+    "answer_type": "text",
+    "id": "R2.run_length/stage2-check/L4/0",
+    "question": "Compress bbbbyyyyyaaaccccbyzccccczzzzyyy by run-length encoding: replace each maximal run of one repeated letter by the letter followed by the run length (for example aaab becomes a3b1). What is the result?"
+  },
+  {
+    "answer": "a6z2b5c1b2c3y1z5c3y1z6",
+    "answer_type": "text",
+    "id": "R2.run_length/stage2-check/L5/0",
+    "question": "Compress aaaaaazzbbbbbcbbcccyzzzzzcccyzzzzzz by run-length encoding: replace each maximal run of one repeated letter by the letter followed by the run length (for example aaab becomes a3b1). What is the result?"
+  },
+  {
+    "answer": "a3c5y1c2y3b7x4c2b6y2c6z4",
+    "answer_type": "text",
+    "id": "R2.run_length/stage2-check/L6/0",
+    "question": "Compress aaacccccyccyyybbbbbbbxxxxccbbbbbbyycccccczzzz by run-length encoding: replace each maximal run of one repeated letter by the letter followed by the run length (for example aaab becomes a3b1). What is the result?"
+  },
+  {
+    "answer": "-34, -19, 32, 72",
+    "answer_type": "list",
+    "id": "R2.sort_list/stage2-check/L0/0",
+    "question": "Sort these numbers from smallest to largest and give them separated by commas: 72, -19, -34, 32."
+  },
+  {
+    "answer": "-7, 37, 49, 119, 136",
+    "answer_type": "list",
+    "id": "R2.sort_list/stage2-check/L1/0",
+    "question": "Sort these numbers from smallest to largest and give them separated by commas: 37, 136, 119, -7, 49."
+  },
+  {
+    "answer": "140, 54, 19, 2, -14, -50",
+    "answer_type": "list",
+    "id": "R2.sort_list/stage2-check/L2/0",
+    "question": "Sort these numbers from largest to smallest and give them separated by commas: 2, -14, 19, -50, 54, 140."
+  },
+  {
+    "answer": "382, 228, 190, 133, 84, -10, -18",
+    "answer_type": "list",
+    "id": "R2.sort_list/stage2-check/L3/0",
+    "question": "Sort these numbers from largest to smallest and give them separated by commas: 190, 228, -18, -10, 133, 84, 382."
+  },
+  {
+    "answer": "-41, -30, 156, 297, 306, 371, 414, 491",
+    "answer_type": "list",
+    "id": "R2.sort_list/stage2-check/L4/0",
+    "question": "Sort these numbers from smallest to largest and give them separated by commas: 371, 306, -30, 156, 491, -41, 414, 297."
+  },
+  {
+    "answer": "549, 488, 232, 104, 98, 70, 49, -21, -48",
+    "answer_type": "list",
+    "id": "R2.sort_list/stage2-check/L5/0",
+    "question": "Sort these numbers from largest to smallest and give them separated by commas: -48, 232, 104, 98, 70, 488, 49, 549, -21."
+  },
+  {
+    "answer": "27, 110, 484, 492, 508, 605, 614, 660, 685, 694",
+    "answer_type": "list",
+    "id": "R2.sort_list/stage2-check/L6/0",
+    "question": "Sort these numbers from smallest to largest and give them separated by commas: 685, 660, 614, 508, 605, 492, 484, 27, 110, 694."
+  },
+  {
+    "answer": "aabb",
+    "answer_type": "text",
+    "id": "R2.string_rewrite_nonidentity/stage2-check/L0/0",
+    "question": "Start with the string abcabb. Do these steps in order, each step scanning left to right over non-overlapping matches in the string as it is when the step starts: delete every 'bc'. What is the final string?"
+  },
+  {
+    "answer": "aaac",
+    "answer_type": "text",
+    "id": "R2.string_rewrite_nonidentity/stage2-check/L1/0",
+    "question": "Start with the string abbaabcb. Do these steps in order, each step scanning left to right over non-overlapping matches in the string as it is when the step starts: delete every 'bb'; delete every 'b'. What is the final string?"
+  },
+  {
+    "answer": "bbbbbabbabaa",
+    "answer_type": "text",
+    "id": "R2.string_rewrite_nonidentity/stage2-check/L2/0",
+    "question": "Start with the string ababcacaaa. Do these steps in order, each step scanning left to right over non-overlapping matches in the string as it is when the step starts: replace every 'ab' with 'bb'; replace every 'ca' with 'bab'. What is the final string?"
+  },
+  {
+    "answer": "aaac",
+    "answer_type": "text",
+    "id": "R2.string_rewrite_nonidentity/stage2-check/L3/0",
+    "question": "Start with the string baacacbccbbc. Do these steps in order, each step scanning left to right over non-overlapping matches in the string as it is when the step starts: delete every 'c'; replace every 'bb' with 'bcb'; delete every 'b'. What is the final string?"
+  },
+  {
+    "answer": "bccccbbcc",
+    "answer_type": "text",
+    "id": "R2.string_rewrite_nonidentity/stage2-check/L4/0",
+    "question": "Start with the string ccbbbbbaabaccb. Do these steps in order, each step scanning left to right over non-overlapping matches in the string as it is when the step starts: replace every 'c' with 'bab'; replace every 'bb' with 'c'; delete every 'a'. What is the final string?"
+  },
+  {
+    "answer": "abcbcbcbcccbcb",
+    "answer_type": "text",
+    "id": "R2.string_rewrite_nonidentity/stage2-check/L5/0",
+    "question": "Start with the string cbcaacaaaccaabab. Do these steps in order, each step scanning left to right over non-overlapping matches in the string as it is when the step starts: delete every 'cb'; replace every 'a' with 'c'; replace every 'cc' with 'ac'; replace every 'ca' with 'bc'. What is the final string?"
+  },
+  {
+    "answer": "bcabca",
+    "answer_type": "text",
+    "id": "R2.string_rewrite_nonidentity/stage2-check/L6/0",
+    "question": "Start with the string bcbcababcccccbaacb. Do these steps in order, each step scanning left to right over non-overlapping matches in the string as it is when the step starts: replace every 'cc' with 'a'; delete every 'a'; replace every 'cb' with 'a'; replace every 'ba' with 'bc'. What is the final string?"
+  },
+  {
+    "answer": "4525",
+    "answer_type": "text",
+    "id": "R2.to_base_wide/stage2-check/L0/0",
+    "question": "Write the decimal number 1636 in base 7. Use digits 0-9 and then lowercase letters a-f for ten to fifteen."
+  },
+  {
+    "answer": "32144",
+    "answer_type": "text",
+    "id": "R2.to_base_wide/stage2-check/L1/0",
+    "question": "Write the decimal number 7970 in base 7. Use digits 0-9 and then lowercase letters a-f for ten to fifteen."
+  },
+  {
+    "answer": "312113",
+    "answer_type": "text",
+    "id": "R2.to_base_wide/stage2-check/L2/0",
+    "question": "Write the decimal number 3479 in base 4. Use digits 0-9 and then lowercase letters a-f for ten to fifteen."
+  },
+  {
+    "answer": "1002121010",
+    "answer_type": "text",
+    "id": "R2.to_base_wide/stage2-check/L3/0",
+    "question": "Write the decimal number 21576 in base 3. Use digits 0-9 and then lowercase letters a-f for ten to fifteen."
+  },
+  {
+    "answer": "1110111110110011011",
+    "answer_type": "text",
+    "id": "R2.to_base_wide/stage2-check/L4/0",
+    "question": "Write the decimal number 490907 in base 2. Use digits 0-9 and then lowercase letters a-f for ten to fifteen."
+  },
+  {
+    "answer": "100100000111000100101",
+    "answer_type": "text",
+    "id": "R2.to_base_wide/stage2-check/L5/0",
+    "question": "Write the decimal number 1183269 in base 2. Use digits 0-9 and then lowercase letters a-f for ten to fifteen."
+  },
+  {
+    "answer": "994008",
+    "answer_type": "text",
+    "id": "R2.to_base_wide/stage2-check/L6/0",
+    "question": "Write the decimal number 2433032 in base 12. Use digits 0-9 and then lowercase letters a-f for ten to fifteen."
+  }
+]

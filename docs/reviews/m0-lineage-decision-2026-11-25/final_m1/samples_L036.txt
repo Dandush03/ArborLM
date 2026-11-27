@@ -1,0 +1,261 @@
+== M1.ages_r3 L0 ans=47
+Milo is 2 times as old as Xan now. In 3 years from now, their two ages added together will be 147. All ages are whole numbers of years. How old is Xan now, in years? Answer with a whole number.
+
+== M1.ages_r3 L3 ans=45
+Wade is 3 times as old as Lila now. In 18 years from now, their two ages added together will be 96. All ages are whole numbers of years. How old is Wade now, in years? Answer with a whole number.
+
+== M1.ages_r3 L6 ans=152
+Zara is 2 times as old as Alva now. In 10 years from now, their two ages added together will be 248. All ages are whole numbers of years. How old is Zara now, in years? Answer with a whole number.
+
+== M1.arithmetic_series_r3 L0 ans=1140
+Zara saves 73 dollars on day 1 and then saves 4 dollars more each day than on the day before. How many dollars has Zara saved in total after 12 days (counting day 1 to day 12, both included)? Answer with a whole number.
+
+== M1.arithmetic_series_r3 L3 ans=575
+Flynn saves 99 dollars on day 1 and then saves 8 dollars more each day than on the day before. How many dollars has Flynn saved in total after 5 days (counting day 1 to day 5, both included)? Answer with a whole number.
+
+== M1.arithmetic_series_r3 L6 ans=665
+Vic saves 35 dollars on day 1 and then saves 20 dollars more each day than on the day before. How many dollars has Vic saved in total after 7 days (counting day 1 to day 7, both included)? Answer with a whole number.
+
+== M1.average_missing_r4 L0 ans=95
+Tina has scored 93, 72, 82 on 3 tests, each marked out of 100 with whole-number marks. What score is needed on the next test to make the mean of all 4 tests exactly 85.5? Answer with a whole number.
+
+== M1.average_missing_r4 L3 ans=47
+Hana has scored 51, 64, 87, 91 on 4 tests, each marked out of 130 with whole-number marks. What score is needed on the next test to make the mean of all 5 tests exactly 68? Answer with a whole number.
+
+== M1.average_missing_r4 L6 ans=96
+Zane has scored 71, 124, 120, 149, 122, 67 on 6 tests, each marked out of 160 with whole-number marks. What score is needed on the next test to make the mean of all 7 tests exactly 107? Answer with a whole number.
+
+== M1.change_ways_r3 L0 ans=11
+Lila from Zennor found this problem in a puzzle book. Using only coins worth 5, 8 and 12 cents, with as many coins of each value available as you like, in how many different ways can exactly 94 cents be paid? (Two ways are the same if they use the same number of coins of each value; the order does not matter.) Answer with a whole number.
+
+== M1.change_ways_r3 L3 ans=89
+This problem comes from a quiz held in Ravenna, set by Eli. Using only coins worth 4, 7 and 40 cents, with as many coins of each value available as you like, in how many different ways can exactly 426 cents be paid? (Two ways are the same if they use the same number of coins of each value; the order does not matter.) Answer with a whole number.
+
+== M1.change_ways_r3 L6 ans=24
+At a maths club in Vale, Zara is asked this. Using only coins worth 2, 25 and 40 cents, with as many coins of each value available as you like, in how many different ways can exactly 289 cents be paid? (Two ways are the same if they use the same number of coins of each value; the order does not matter.) Answer with a whole number.
+
+== M1.clock_duration_r4 L0 ans=102
+A journey has several legs on the same day (times on a 24-hour clock): leg 1 leaves at 12:35 and arrives at 13:40; leg 2 leaves at 14:09 and arrives at 14:46. How many minutes in total is the traveller actually on the move (the time between each leg's departure and its arrival, not counting the waiting between legs)? Answer with a whole number.
+
+== M1.clock_duration_r4 L3 ans=313
+A journey has several legs on the same day (times on a 24-hour clock): leg 1 leaves at 14:12 and arrives at 16:09; leg 2 leaves at 16:44 and arrives at 17:54; leg 3 leaves at 18:15 and arrives at 20:21. How many minutes in total is the traveller actually on the move (the time between each leg's departure and its arrival, not counting the waiting between legs)? Answer with a whole number.
+
+== M1.clock_duration_r4 L6 ans=509
+A journey has several legs on the same day (times on a 24-hour clock): leg 1 leaves at 05:54 and arrives at 06:35; leg 2 leaves at 07:02 and arrives at 09:01; leg 3 leaves at 09:12 and arrives at 11:25; leg 4 leaves at 12:13 and arrives at 13:55; leg 5 leaves at 14:19 and arrives at 16:13. How many minutes in total is the traveller actually on the move (the time between each leg's departure and its arrival, not counting the waiting between legs)? Answer with a whole number.
+
+== M1.consecutive_r3 L0 ans=3222
+The sum of 3 consecutive integers (listed from smallest to largest, positive or negative whole numbers) is 9669. What is the smallest of them? Answer with a whole number (write a minus sign if it is negative).
+
+== M1.consecutive_r3 L3 ans=5750
+The sum of 4 consecutive numbers that each differ from the next by 2 (listed from smallest to largest, positive or negative whole numbers) is 23012. What is the smallest of them? Answer with a whole number (write a minus sign if it is negative).
+
+== M1.consecutive_r3 L6 ans=3113
+The sum of 6 consecutive numbers that each differ from the next by 2 (listed from smallest to largest, positive or negative whole numbers) is 18708. What is the smallest of them? Answer with a whole number (write a minus sign if it is negative).
+
+== M1.crt_congruence_r3 L0 ans=48
+Stan is thinking of a positive whole number. Dividing it by 41 leaves remainder 7; dividing it by 49 leaves remainder 48. What is the smallest positive whole number that Stan could be thinking of? Answer with a whole number.
+
+== M1.crt_congruence_r3 L3 ans=1593
+Nico is thinking of a positive whole number. Dividing it by 29 leaves remainder 27; dividing it by 15 leaves remainder 3; dividing it by 14 leaves remainder 11. What is the smallest positive whole number that Nico could be thinking of? Answer with a whole number.
+
+== M1.crt_congruence_r3 L6 ans=153954
+Yuri is thinking of a positive whole number. Dividing it by 31 leaves remainder 8; dividing it by 48 leaves remainder 18; dividing it by 43 leaves remainder 14; dividing it by 11 leaves remainder 9. What is the smallest positive whole number that Yuri could be thinking of? Answer with a whole number.
+
+== M1.division_counting_r3 L0 ans=24
+348 people must travel by bus, and Raul hires as few buses as possible. Each bus has 31 seats, and nobody stands. When all 348 people are on board, how many seats in total are empty? Answer with a whole number.
+
+== M1.division_counting_r3 L3 ans=5
+Bram from Selby found this problem in a puzzle book. A factory makes 1474 books. They are packed into boxes that each hold exactly 14 books; books that do not fill a box are left out. The boxes are then put on pallets that each hold 20 boxes, and as many full pallets as possible are made. How many boxes are not on a full pallet? Answer with a whole number.
+
+== M1.division_counting_r3 L6 ans=5
+528 people must travel by bus, and Otto hires as few buses as possible. Each bus has 13 seats, and nobody stands. When all 528 people are on board, how many seats in total are empty? Answer with a whole number.
+
+== M1.finite_differences_r4 L0 ans=418
+Pearl of Dunmore wrote this problem for a maths club. The first 5 numbers of a pattern are 40, 78, 126, 184 and 252. The pattern continues in the same way, and each number is given by a polynomial of degree 2 in its position (position 1 is the first number). What is the number in position 7? Answer with a whole number.
+
+== M1.finite_differences_r4 L3 ans=235
+Vera of Thornbury wrote this problem for a maths club. The first 6 numbers of a pattern are 25, 50, 79, 112, 149 and 190. The pattern continues in the same way, and each number is given by a polynomial of degree 2 in its position (position 1 is the first number). What is the number in position 7? Answer with a whole number.
+
+== M1.finite_differences_r4 L6 ans=2138
+Sven from Kelso found this problem in a puzzle book. The first 7 numbers of a pattern are 66, 122, 228, 402, 662, 1026 and 1512. The pattern continues in the same way, and each number is given by a polynomial of degree 3 in its position (position 1 is the first number). What is the number in position 8? Answer with a whole number.
+
+== M1.fraction_remainder_r3 L0 ans=1793
+Dev has 2445 dollars. Dev spends one fifth of it on books, then one twelfth of what is left on lunch. How many dollars does Dev have left? Answer with a whole number.
+
+== M1.fraction_remainder_r3 L3 ans=1752
+Kenji has 3942 dollars. Kenji spends one half of it on books, then one ninth of what is left on lunch. How many dollars does Kenji have left? Answer with a whole number.
+
+== M1.fraction_remainder_r3 L6 ans=1652
+Marc has 2360 dollars. Marc spends one eighth of it on books, then one fifth of what is left on lunch. How many dollars does Marc have left? Answer with a whole number.
+
+== M1.gcd_lcm_r4 L0 ans=2520
+Wren of Brook wrote this problem for a maths club. 2 lights flash at the same moment. After that, one flashes every 105 seconds, the other every 504 seconds. After how many seconds do all 2 flash together again for the first time (counting from the moment they all flashed)? Answer with a whole number.
+
+== M1.gcd_lcm_r4 L3 ans=24
+Jon has 3 ribbons of lengths 2856, 9384 and 3864 centimetres. Jon cuts every ribbon into pieces that all have the same whole-number length in centimetres, with nothing left over from any ribbon. What is the greatest possible length of a piece, in centimetres? Answer with a whole number.
+
+== M1.gcd_lcm_r4 L6 ans=141570
+Xavi of Eastvale wrote this problem for a maths club. 4 lights flash at the same moment. After that, one flashes every 286 seconds, another every 198 seconds, another every 110 seconds, and the last every 242 seconds. After how many seconds do all 4 flash together again for the first time (counting from the moment they all flashed)? Answer with a whole number.
+
+== M1.grid_perimeter_r3 L0 ans=30
+Unit squares (each side 1 unit long) are placed on a grid. Row 1 (counting from the top): column 2. Row 2 (counting from the top): column 1, column 4. Row 3 (counting from the top): column 1. Row 4 (counting from the top): columns 1 to 3. Row 5 (counting from the top): no squares. Row 6 (counting from the top): column 2, column 6. Row 7 (counting from the top): column 6. Squares with the same column number in neighbouring rows sit directly above and below each other. Two squares that share a side are glued together along that side (squares that meet only at a corner share no side). The perimeter of the whole figure is the number of unit-length sides that belong to exactly one square: a side shared by two squares is not counted at all. What is the perimeter of the figure, in units? Answer with a whole number.
+
+== M1.grid_perimeter_r3 L3 ans=62
+Unit squares (each side 1 unit long) are placed on a grid. Row 1 (counting from the top): columns 3 to 5. Row 2 (counting from the top): columns 5 to 6. Row 3 (counting from the top): column 1, column 3, columns 6 to 7. Row 4 (counting from the top): column 1, column 4. Row 5 (counting from the top): columns 2 to 3, column 6. Row 6 (counting from the top): column 7. Row 7 (counting from the top): columns 2 to 4, column 6, column 8. Row 8 (counting from the top): column 6. Squares with the same column number in neighbouring rows sit directly above and below each other. Two squares that share a side are glued together along that side (squares that meet only at a corner share no side). The perimeter of the whole figure is the number of unit-length sides that belong to exactly one square: a side shared by two squares is not counted at all. What is the perimeter of the figure, in units? Answer with a whole number.
+
+== M1.grid_perimeter_r3 L6 ans=74
+Unit squares (each side 1 unit long) are placed on a grid. Row 1 (counting from the top): columns 1 to 2, columns 4 to 5, columns 7 to 8. Row 2 (counting from the top): columns 6 to 8. Row 3 (counting from the top): columns 4 to 5, columns 7 to 8. Row 4 (counting from the top): columns 1 to 2, column 4, columns 6 to 7. Row 5 (counting from the top): column 1, columns 7 to 8. Row 6 (counting from the top): column 3, column 7. Row 7 (counting from the top): column 2, columns 4 to 5, column 7. Row 8 (counting from the top): column 1, columns 7 to 8. Squares with the same column number in neighbouring rows sit directly above and below each other. Two squares that share a side are glued together along that side (squares that meet only at a corner share no side). The perimeter of the whole figure is the number of unit-length sides that belong to exactly one square: a side shared by two squares is not counted at all. What is the perimeter of the figure, in units? Answer with a whole number.
+
+== M1.inclusion_exclusion_r3 L0 ans=22
+31 people were asked what they do. 12 of them read comics, 14 of them paint, and 4 of them do both. How many of the 31 people do at least one of these things? Answer with a whole number.
+
+== M1.inclusion_exclusion_r3 L3 ans=33
+204 people were asked what they do. 80 play chess, 87 paint and 139 sing in the choir; 35 do both the first and the second, 65 do both the first and the third, 67 do both the second and the third, and 32 do all three (each 'do both' number includes the people who do all three). How many of the 204 people do none of these things? Answer with a whole number.
+
+== M1.inclusion_exclusion_r3 L6 ans=35
+266 people were asked what they do. 80 play tennis, 147 sing in the choir and 122 swim; 63 do both the first and the second, 37 do both the first and the third, 45 do both the second and the third, and 27 do all three (each 'do both' number includes the people who do all three). How many of the 266 people do none of these things? Answer with a whole number.
+
+== M1.last_digit_power_r3 L0 ans=5
+Sam from Arden found this problem in a puzzle book. Let X be the product of 177 factors, each equal to 11. What is the remainder when X is divided by 67 (a whole number from 0 to 66)? Answer with a whole number.
+
+== M1.last_digit_power_r3 L3 ans=25
+At a maths club in Penrith, Finn is asked this. Let X be the sum of the product of 21 factors, each equal to 29 and the product of 367 factors, each equal to 147. What is the remainder when X is divided by 43 (a whole number from 0 to 42)? Answer with a whole number.
+
+== M1.last_digit_power_r3 L6 ans=26
+Quinn of Arden wrote this problem for a maths club. Let X be the product of all the following factors: 270 factors equal to 2, 656 factors equal to 98 and 191 factors equal to 201. What is the remainder when X is divided by 29 (a whole number from 0 to 28)? Answer with a whole number.
+
+== M1.linear_equation_r3 L0 ans=6
+I think of a number. Multiplying it by 9 and then adding 28 gives 82. What is my number? Answer with a whole number (write a minus sign if it is negative).
+
+== M1.linear_equation_r3 L3 ans=60
+I think of a number. Multiplying it by 4 and then subtracting 154 gives the same result as multiplying it by 2 and then subtracting 34. What is my number? Answer with a whole number (write a minus sign if it is negative).
+
+== M1.linear_equation_r3 L6 ans=145
+I think of a number. Multiplying it by 4 and then subtracting 419 gives the same result as multiplying it by 1 and then adding 16. What is my number? Answer with a whole number (write a minus sign if it is negative).
+
+== M1.median_list_r3 L0 ans=119.5
+Sven from Marlow found this problem in a puzzle book. The values are 27, 82, 110, 124, 191, 143, 156 and 115. What is the median of all the values (the middle value once they are sorted from smallest to largest; if there are two middle values, the number halfway between them)? Answer with a number; if it is not whole, write it as a decimal with no more than two decimal places and no trailing zeros.
+
+== M1.median_list_r3 L3 ans=76.5
+Leo of Fenwick wrote this problem for a maths club. The values are 2, 331, 44, 107, 11, 170, 168, 38, 46 and 223. What is the median of all the values (the middle value once they are sorted from smallest to largest; if there are two middle values, the number halfway between them)? Answer with a number; if it is not whole, write it as a decimal with no more than two decimal places and no trailing zeros.
+
+== M1.median_list_r3 L6 ans=181
+Uma from Dunmore found this problem in a puzzle book. The values are 18, 218, 56, 68, 174, 85, 541, 181, 361, 318, 20, 304, 39, 179, 248, 479, 137, 450, 273, 107 and 312. What is the median of all the values (the middle value once they are sorted from smallest to largest; if there are two middle values, the number halfway between them)? Answer with a number; if it is not whole, write it as a decimal with no more than two decimal places and no trailing zeros.
+
+== M1.mixture_r4 L0 ans=14.25
+A shop mixes 65 kilograms of nuts costing 16 dollars per kilogram with 35 kilograms of raisins costing 11 dollars per kilogram. What is the cost of one kilogram of the finished mixture, in dollars? Answer with a number; if it is not whole, write it as a decimal with no more than two decimal places and no trailing zeros.
+
+== M1.mixture_r4 L3 ans=23.2
+A shop mixes 85 kilograms of nuts costing 18 dollars per kilogram with 15 kilograms of raisins costing 46 dollars per kilogram, then adds a flat packing cost of 1 dollar per kilogram of the finished mixture. What is the cost of one kilogram of the finished mixture, in dollars? Answer with a number; if it is not whole, write it as a decimal with no more than two decimal places and no trailing zeros.
+
+== M1.mixture_r4 L6 ans=53.2
+A shop mixes 6 kilograms of nuts costing 43 dollars per kilogram with 4 kilograms of raisins costing 61 dollars per kilogram, then adds a flat packing cost of 3 dollars per kilogram of the finished mixture. What is the cost of one kilogram of the finished mixture, in dollars? Answer with a number; if it is not whole, write it as a decimal with no more than two decimal places and no trailing zeros.
+
+== M1.painted_cube_r3 L0 ans=140
+Marc of Upton wrote this problem for a maths club. A block is made from small cubes of the same size glued together into a box 28 cubes long, 5 cubes wide and 8 cubes high. The whole box is placed on a table and every outer face (including the bottom face on the table) is painted red. Then the box is taken apart into the small cubes. How many small cubes have exactly 2 painted faces? Answer with a whole number.
+
+== M1.painted_cube_r3 L3 ans=272
+This problem comes from a quiz held in Upton, set by Cara. A block is made from small cubes of the same size glued together into a box 26 cubes long, 27 cubes wide and 21 cubes high. The whole box is placed on a table and every outer face (including the bottom face on the table) is painted red. Then the box is taken apart into the small cubes. How many small cubes have exactly 2 painted faces? Answer with a whole number.
+
+== M1.painted_cube_r3 L6 ans=402
+Sam from Norwick found this problem in a puzzle book. A block is made from small cubes of the same size glued together into a box 5 cubes long, 6 cubes wide and 29 cubes high. The whole box is placed on a table and every outer face (including the bottom face on the table) is painted red. Then the box is taken apart into the small cubes. How many small cubes have exactly 1 painted face? Answer with a whole number.
+
+== M1.percent_change_r3 L0 ans=52.78
+A jacket costs 116 dollars. Its price rises by 30 percent, then falls by 65 percent, each change applied to the price just before it. What is the final price in dollars? Answer with a number; if it is not whole, write it as a decimal with no more than two decimal places and no trailing zeros.
+
+== M1.percent_change_r3 L3 ans=207.06
+A jacket costs 240 dollars. Its price rises by 70 percent, then falls by 65 percent, then rises by 45 percent, each change applied to the price just before it. What is the final price in dollars? Answer with a number; if it is not whole, write it as a decimal with no more than two decimal places and no trailing zeros.
+
+== M1.percent_change_r3 L6 ans=448.5
+A jacket costs 400 dollars. Its price rises by 50 percent, then falls by 35 percent, then rises by 15 percent, each change applied to the price just before it. What is the final price in dollars? Answer with a number; if it is not whole, write it as a decimal with no more than two decimal places and no trailing zeros.
+
+== M1.pipes_work_r3 L0 ans=28
+A tank is empty. One pipe adds 24 litres of water every minute and a second pipe adds 13 litres every minute, all at the same time and at a steady rate. How many minutes does it take for the tank to hold 1036 litres? Answer with a whole number.
+
+== M1.pipes_work_r3 L3 ans=11
+A tank is empty. One pipe adds 21 litres of water every minute and a second pipe adds 16 litres every minute, while a drain removes 33 litres every minute, all at the same time and at a steady rate. How many minutes does it take for the tank to hold 44 litres? Answer with a whole number.
+
+== M1.pipes_work_r3 L6 ans=14
+A tank is empty. One pipe adds 8 litres of water every minute and a second pipe adds 35 litres every minute, while a drain removes 7 litres every minute, all at the same time and at a steady rate. How many minutes does it take for the tank to hold 504 litres? Answer with a whole number.
+
+== M1.prime_factors_r3 L0 ans=16
+Tom from Ivybridge found this problem in a puzzle book. Consider the number 18250. How many different positive whole numbers divide it exactly (counting 1 and the number itself)? Answer with a whole number.
+
+== M1.prime_factors_r3 L3 ans=2
+At a maths club in Arden, Esme is asked this. Consider the number 803. Write it as a product of prime numbers, repeating a prime as often as needed (for example 12 = 2 x 2 x 3 uses three primes). How many primes are multiplied? Answer with a whole number.
+
+== M1.prime_factors_r3 L6 ans=73
+At a maths club in Penrith, Ugo is asked this. Consider the number 353804. Add up the different prime numbers that divide it exactly (each different prime counted once). What is the sum? Answer with a whole number.
+
+== M1.quadratic_area_r3 L0 ans=61
+At a maths club in Eastvale, Ulf is asked this. A rectangular banner has an area of 5490 square metres. Its length is 29 metres more than its width. What is its width, in metres? Answer with a whole number.
+
+== M1.quadratic_area_r3 L3 ans=176
+Pru of Upton wrote this problem for a maths club. A rectangular garden has an area of 39952 square metres. Its length is 51 metres more than its width. What is its width, in metres? Answer with a whole number.
+
+== M1.quadratic_area_r3 L6 ans=24
+Emil from Westmere found this problem in a puzzle book. A rectangular banner has an area of 4368 square metres. Its length is 158 metres more than its width. What is its width, in metres? Answer with a whole number.
+
+== M1.ratio_share_r3 L0 ans=129
+Xavi and Zed share 301 stickers in the ratio 3:4 (in that order: the first named person gets the first number of parts, and so on; every part has the same number of stickers, and the shares are whole numbers of stickers). How many stickers does Xavi get? Answer with a whole number.
+
+== M1.ratio_share_r3 L3 ans=370
+Viv, Cyrus and Cleo share 1073 stickers in the ratio 16:10:3 (in that order: the first named person gets the first number of parts, and so on; every part has the same number of stickers, and the shares are whole numbers of stickers). How many stickers does Cyrus get? Answer with a whole number.
+
+== M1.ratio_share_r3 L6 ans=148
+Elsa, Will, Hal and Dev share 740 stickers in the ratio 4:2:3:11 (in that order: the first named person gets the first number of parts, and so on; every part has the same number of stickers, and the shares are whole numbers of stickers). How many stickers does Elsa get? Answer with a whole number.
+
+== M1.rectangle_r3 L0 ans=4200
+A rectangle has a perimeter of 262 centimetres and its length is 19 centimetres more than its width. What is its area in square centimetres? Answer with a whole number.
+
+== M1.rectangle_r3 L3 ans=650
+A rectangle has a perimeter of 150 centimetres and its length is 55 centimetres more than its width. What is its area in square centimetres? Answer with a whole number.
+
+== M1.rectangle_r3 L6 ans=51076
+A rectangle has a perimeter of 1130 centimetres and its length is 4 times its width. What is its area in square centimetres? Answer with a whole number.
+
+== M1.recurrence_iterate_r3 L0 ans=945
+Zoe from Penrith found this problem in a puzzle book. A list of numbers is built by a rule. The first two numbers are 285 and 18. Every number after those is the sum of the two numbers just before it. What is the number in position 6 of the list (position 1 is the first number)? Answer with a whole number.
+
+== M1.recurrence_iterate_r3 L3 ans=21247
+At a maths club in Thornbury, Hank is asked this. A list of numbers is built by a rule. The first number is 72. Every number after it is 3 times the number just before it, plus 31. What is the number in position 6 of the list (position 1 is the first number)? Answer with a whole number.
+
+== M1.recurrence_iterate_r3 L6 ans=230747
+Pia of Harrow wrote this problem for a maths club. A list of numbers is built by a rule. The first number is 124. Every number after it is 3 times the number just before it, minus 37. What is the number in position 8 of the list (position 1 is the first number)? Answer with a whole number.
+
+== M1.shopping_r3 L0 ans=12.19
+Tina buys 3 lanterns at $0.67 each, 5 scarfs at $0.16 each. Tina pays with $15.00. How many dollars of change does Tina get back? Answer with a number; if it is not whole, write it as a decimal with no more than two decimal places and no trailing zeros.
+
+== M1.shopping_r3 L3 ans=21.55
+Ugo buys 1 flute at $8.00 each, 7 oranges at $8.70 each, 7 hammers at $7.65 each, 5 kettles at $4.20 each. Ugo pays with $165.00. How many dollars of change does Ugo get back? Answer with a number; if it is not whole, write it as a decimal with no more than two decimal places and no trailing zeros.
+
+== M1.shopping_r3 L6 ans=13.75
+Cleo buys 9 violins at $1.30 each, 11 umbrellas at $11.05 each, 1 needle at $19.40 each, 6 books at $4.10 each, 1 apple at $11.30 each, 2 lanterns at $13.85 each. Cleo pays with $230.00. How many dollars of change does Cleo get back? Answer with a number; if it is not whole, write it as a decimal with no more than two decimal places and no trailing zeros.
+
+== M1.speed_distance_r3 L0 ans=346
+A van drives for 6 hours at 51 kilometres per hour, then drives for 1 hour at 40 kilometres per hour. How many kilometres does it travel in total? Answer with a whole number.
+
+== M1.speed_distance_r3 L3 ans=492
+A van drives for 8 hours at 37 kilometres per hour, then drives for 2 hours at 65 kilometres per hour, then drives for 1 hour at 66 kilometres per hour. How many kilometres does it travel in total? Answer with a whole number.
+
+== M1.speed_distance_r3 L6 ans=31
+A van drives for 14 hours at 25 kilometres per hour, then drives for 7 hours at 29 kilometres per hour, then drives for 3 hours at 69 kilometres per hour, then drives for 13 hours at 27 kilometres per hour, then drives for 2 hours at 49 kilometres per hour. What is its average speed over the whole trip (the total distance divided by the total time), in kilometres per hour? Answer with a whole number.
+
+== M1.tiered_pricing L0 ans=4.6
+A utility charges for use in steps: the first 17 units cost 12 cents each, and every unit after that costs 16 cents each. Each unit costs the rate of the step it falls in (a higher step does not change what earlier units cost). What is the bill for 33 units, in dollars? Answer with a number; if it is not whole, write it as a decimal with no more than two decimal places and no trailing zeros.
+
+== M1.tiered_pricing L3 ans=42
+A utility charges for use in steps: the first 21 units cost 18 cents each, the next 49 units cost 28 cents each, and every unit after that costs 70 cents each. Each unit costs the rate of the step it falls in (a higher step does not change what earlier units cost). What is the bill for 105 units, in dollars? Answer with a number; if it is not whole, write it as a decimal with no more than two decimal places and no trailing zeros.
+
+== M1.tiered_pricing L6 ans=189
+A utility charges for use in steps: the first 82 units cost 52 cents each, the next 66 units cost 56 cents each, the next 27 units cost 66 cents each, and every unit after that costs 78 cents each. Each unit costs the rate of the step it falls in (a higher step does not change what earlier units cost). A customer's bill is 108.34 dollars. How many units did the customer use? Answer with a whole number.
+
+== M1.tip_split_r3 L0 ans=99.06
+A dinner bill is 312 dollars before tip. The group adds a 27 percent tip, calculated on the bill before tip, and splits the total (bill plus tip) equally between 4 people. How many dollars does each person pay? Answer with a number; if it is not whole, write it as a decimal with no more than two decimal places and no trailing zeros.
+
+== M1.tip_split_r3 L3 ans=35.97
+A dinner bill is 132 dollars before tip. The group adds a 9 percent tip, calculated on the bill before tip, and splits the total (bill plus tip) equally between 4 people. How many dollars does each person pay? Answer with a number; if it is not whole, write it as a decimal with no more than two decimal places and no trailing zeros.
+
+== M1.tip_split_r3 L6 ans=39.22
+A dinner bill is 111 dollars before tip. The group adds a 6 percent tip, calculated on the bill before tip, and splits the total (bill plus tip) equally between 3 people. How many dollars does each person pay? Answer with a number; if it is not whole, write it as a decimal with no more than two decimal places and no trailing zeros.
+

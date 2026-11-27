@@ -1,0 +1,12 @@
+unit R1c seed-set dry: exit statuses per attempt [[0]]; ok=True
+unit R2a seed-set dry: exit statuses per attempt [[0]]; ok=True
+unit R2b seed-set dry: exit statuses per attempt [[0, 0]]; ok=True
+unit M1a seed-set dry: exit statuses per attempt [[0]]; ok=True
+unit M1b seed-set dry: exit statuses per attempt [[0]]; ok=True
+unit M1c seed-set dry: exit statuses per attempt [[0]]; ok=True
+unit C1b seed-set dry: exit statuses per attempt [[0]]; ok=True
+unit R1b seed-set dry: exit statuses per attempt [[0]]; ok=True
+unit C1c seed-set dry: exit statuses per attempt [[0, 0, 0, 0, 0, 0]]; ok=True
+unit C1a seed-set dry: exit statuses per attempt [[0, 0, 0, 0]]; ok=True
+unit R1a seed-set dry: exit statuses per attempt [[0]]; ok=True
+timeout 580 uv run --locked python studies/m0/fresh_run/run_fresh.py --plan $  87.07s user 5.02s system 330% cpu 27.840 total

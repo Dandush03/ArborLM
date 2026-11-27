@@ -1,0 +1,20 @@
+items 133000, mismatches+errors 0
+R2.binary_search_trace             n=7000 mismatch=0 errors=0 format_only=0 flags={}
+R2.caesar_shift                    n=7000 mismatch=0 errors=0 format_only=0 flags={}
+R2.cellular_automaton              n=7000 mismatch=0 errors=0 format_only=0 flags={}
+R2.cheapest_network                n=7000 mismatch=0 errors=0 format_only=0 flags={}
+R2.count_divisible                 n=7000 mismatch=0 errors=0 format_only=0 flags={'set_reading_differs_but_stated': 2203}
+R2.crt_smallest                    n=7000 mismatch=0 errors=0 format_only=0 flags={}
+R2.dictionary_rank                 n=7000 mismatch=0 errors=0 format_only=0 flags={}
+R2.digit_root                      n=7000 mismatch=0 errors=0 format_only=0 flags={}
+R2.expression_eval                 n=7000 mismatch=0 errors=0 format_only=0 flags={}
+R2.from_base                       n=7000 mismatch=0 errors=0 format_only=0 flags={}
+R2.grid_sum                        n=7000 mismatch=0 errors=0 format_only=0 flags={'diagonal_of_non_square_grid': 1019}
+R2.interval_scheduling             n=7000 mismatch=0 errors=0 format_only=0 flags={}
+R2.list_ops                        n=7000 mismatch=0 errors=0 format_only=0 flags={}
+R2.luhn_check                      n=7000 mismatch=0 errors=0 format_only=0 flags={}
+R2.min_heap_ops                    n=7000 mismatch=0 errors=0 format_only=0 flags={}
+R2.run_length                      n=7000 mismatch=0 errors=0 format_only=0 flags={}
+R2.sort_list                       n=7000 mismatch=0 errors=0 format_only=0 flags={}
+R2.string_rewrite_nonidentity      n=7000 mismatch=0 errors=0 format_only=0 flags={}
+R2.to_base_wide                    n=7000 mismatch=0 errors=0 format_only=0 flags={}

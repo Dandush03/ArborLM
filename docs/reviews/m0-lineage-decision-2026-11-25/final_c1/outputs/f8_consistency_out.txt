@@ -1,0 +1,72 @@
+{
+ "manifests": {
+  "c1_fix4_capacity_raw": {
+   "dropped_present": [],
+   "equals_27": true,
+   "extra": [],
+   "missing": [],
+   "n": 27
+  },
+  "c1_fix4_clusters": {
+   "dropped_present": [],
+   "equals_27": true,
+   "extra": [],
+   "missing": [],
+   "n": 27
+  },
+  "c1_fix4_exec": {
+   "dropped_present": [],
+   "equals_27": true,
+   "extra": [],
+   "missing": [],
+   "n": 27
+  },
+  "c1_fix4_levels_final_set": {
+   "dropped_present": [],
+   "equals_27": true,
+   "extra": [],
+   "missing": [],
+   "n": 27
+  },
+  "c1_fix4_rules_final_set": {
+   "dropped_present": [],
+   "equals_27": true,
+   "extra": [],
+   "missing": [],
+   "n": 27
+  },
+  "c1_fix4_survivors": {
+   "dropped_present": [],
+   "equals_27": true,
+   "extra": [],
+   "missing": [],
+   "n": 27
+  }
+ },
+ "my_current_equals_27": true,
+ "my_current_equals_members": true,
+ "n_clusters": 18,
+ "n_clusters_wo_variants": 16,
+ "n_members": 27,
+ "one_shape_check": {
+  "C1.fast_power_f4": {
+   "items": 14000,
+   "other_shape": 0
+  },
+  "C1.sieve_marking_f4": {
+   "items": 14000,
+   "other_shape": 0
+  }
+ },
+ "registry_c1_ids_in_survivors": [],
+ "registry_has_fix4": [],
+ "their_check_consistency": [],
+ "variant_clusters": {
+  "C1.counter_list_state_machine": [
+   "C1.counter_list_f3"
+  ],
+  "C1.fast_power_square_map": [
+   "C1.fast_power_f4"
+  ]
+ }
+}

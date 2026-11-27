@@ -1,0 +1,11 @@
+R1.boolean_lights_r4: items 1400 mismatches 0 errors 0 (0.0s)
+R1.categories_default_exceptions_r4: items 1400 mismatches 0 errors 0 (0.0s)
+R1.compass_turns: items 1400 mismatches 0 errors 0 (0.0s)
+R1.conditional_threshold_rule_r4: items 1400 mismatches 0 errors 0 (0.0s)
+R1.equivalence_exchange_rates_r6: items 1400 mismatches 0 errors 0 (0.05s)
+R1.knights_knaves_r6: items 1400 mismatches 0 errors 0 (0.12s)
+R1.spatial_grid_walk_r5: items 1400 mismatches 0 errors 0 (0.0s)
+R1.swap_tracking_r5: items 1400 mismatches 0 errors 0 (0.0s)
+R1.temporal_weekday_shift_r6: items 1400 mismatches 0 errors 0 (0.01s)
+R1.venn_counting_r5: items 1400 mismatches 0 errors 0 (0.03s)
+TOTAL R1 [py315 3.15.1]: items 14000 mismatches 0 errors 0 wall 0.4s

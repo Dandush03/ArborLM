@@ -1,0 +1,10 @@
+R1a: survivors in candidates_v4: True; selection is exact (gen.lineages()[lid])
+R1b: survivors in registered_v4: True; registered_v4 minus survivors: ['R1.conditional_decision_tree_r6', 'R1.graph_shortest_route_r6']; substring filter selects exactly its own id for every survivor: True
+M1a: load_all 36 ids; --only (29 survivor ids, substring rule) selects 29; equal to survivors: True; extra: []
+M1a: survivor ids that are substrings of another load_all id: {}
+M1b/M1c: survivors() asserts load_registered == m1_fix4_survivors.json 'survivors'; that field equals the survivor list: True; load_registered equals it: True
+R2a: survivors in fix4_set: True; --only is an exact-membership filter (want set)
+R2b f_rules: 'R2.'+name looked up exactly in fix4_set; all 17 present: True
+C1a/C1c draws: survivors in lineages_c1_fix4.all_written: True; missing []
+C1b: --only names (RULE_ALIAS names) all known to the battery (all_lineages() plus the patched SWAP names): True; missing []; alias names already in unpatched all_lineages(): ['C1.fast_power_f3', 'C1.func_branch', 'C1.func_compose_f3', 'C1.sieve_marking_f3', 'C1.slices']
+C1b: survivor ids ending _f4 passed raw would fail (not in all_lineages): [] (empty = they would fail; plan passes alias names)

@@ -1,0 +1,4302 @@
+{
+ "C1.slices": {
+  "0": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "1": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "2": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.1,
+   "MFsh": 0.1,
+   "EFF_S": 0.1,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.2,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    },
+    "A|S.lo": {
+     "rate_in_shape": 0.25,
+     "share_of_level": 0.1,
+     "n_shape": 16
+    },
+    "B|F.lo": {
+     "rate_in_shape": 0.125,
+     "share_of_level": 0.075,
+     "n_shape": 24
+    }
+   }
+  },
+  "3": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "4": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "5": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "6": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  }
+ },
+ "C1.c_effsm": {
+  "0": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "1": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "2": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.5,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    },
+    "A|M.no_back": {
+     "rate_in_shape": 1.0,
+     "share_of_level": 0.4,
+     "n_shape": 16
+    },
+    "B|H.c_semantics": {
+     "rate_in_shape": 1.0,
+     "share_of_level": 0.6,
+     "n_shape": 24
+    }
+   }
+  },
+  "3": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "4": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "5": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "6": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  }
+ },
+ "C1.c_mnot": {
+  "0": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "1": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "2": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    },
+    "A|M.not_entry": {
+     "rate_in_shape": 1.0,
+     "share_of_level": 0.4,
+     "n_shape": 16
+    }
+   }
+  },
+  "3": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "4": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "5": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "6": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  }
+ },
+ "C1.c_s5rec": {
+  "0": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "1": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "2": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    },
+    "A|S.foo": {
+     "rate_in_shape": 0.25,
+     "share_of_level": 0.1,
+     "n_shape": 16
+    },
+    "B|S.foo": {
+     "rate_in_shape": 0.125,
+     "share_of_level": 0.075,
+     "n_shape": 24
+    }
+   }
+  },
+  "3": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "4": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "5": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "6": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  }
+ },
+ "C1.c_s5keep": {
+  "0": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "1": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "2": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    },
+    "A|S.foo": {
+     "rate_in_shape": 0.25,
+     "share_of_level": 0.1,
+     "n_shape": 16
+    },
+    "B|S.foo": {
+     "rate_in_shape": 0.042,
+     "share_of_level": 0.025,
+     "n_shape": 24
+    }
+   }
+  },
+  "3": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "4": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "5": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "6": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  }
+ },
+ "C1.c_s5edge": {
+  "0": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "1": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "2": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    },
+    "A|S.foo": {
+     "rate_in_shape": 0.25,
+     "share_of_level": 0.1,
+     "n_shape": 16
+    },
+    "B|S.foo": {
+     "rate_in_shape": 0.083,
+     "share_of_level": 0.05,
+     "n_shape": 24
+    }
+   }
+  },
+  "3": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "4": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "5": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "6": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  }
+ },
+ "C1.c_err": {
+  "0": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "1": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "2": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    },
+    "RULE_ERROR:ValueError:x|S.bad": {
+     "rate_in_shape": 1.0,
+     "share_of_level": 1.0,
+     "n_shape": 40
+    }
+   }
+  },
+  "3": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "4": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "5": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "6": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  }
+ },
+ "C1.c_a3fb": {
+  "0": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "1": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "2": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "3": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "4": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "5": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "6": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  }
+ },
+ "C1.c_a3ok": {
+  "0": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "1": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "2": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "3": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "4": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "5": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "6": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  }
+ },
+ "C1.c_a3exact": {
+  "0": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "1": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "2": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "3": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "4": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "5": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "6": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  }
+ },
+ "C1.c_a3above": {
+  "0": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "1": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "2": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "3": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "4": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "5": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "6": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  }
+ },
+ "C1.c_srcs": {
+  "0": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "1": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "2": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "3": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "4": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "5": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "6": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  }
+ },
+ "C1.c_srcs2": {
+  "0": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "1": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "2": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "3": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "4": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "5": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "6": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  }
+ },
+ "C1.c_srcs3": {
+  "0": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "1": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "2": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "3": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "4": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "5": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "6": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  }
+ },
+ "C1.c_closed": {
+  "0": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "1": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "2": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "3": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "4": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "5": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "6": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  }
+ },
+ "C1.c_closed2": {
+  "0": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "1": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "2": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "3": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "4": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "5": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "6": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  }
+ },
+ "C1.c_msh": {
+  "0": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "1": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "2": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "3": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "4": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "5": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "6": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  }
+ },
+ "C1.c_bkeep": {
+  "0": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "1": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "2": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "3": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "4": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "5": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "6": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  }
+ },
+ "C1.c_printform": {
+  "0": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "1": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "2": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "3": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "4": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "5": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "6": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  }
+ },
+ "C1.zz_not": {
+  "0": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "1": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "2": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "3": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "4": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "5": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  },
+  "6": {
+   "n": 40,
+   "parse_fail": 0,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "distinct_keys": 5,
+   "MF": 0.0,
+   "MFsh": 0.0,
+   "EFF_S": 0.0,
+   "EFF_SM": 0.0,
+   "EFF_F": 0.0,
+   "rules": {
+    "A|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 16
+    },
+    "B|S.base": {
+     "rate_in_shape": 0.0,
+     "share_of_level": 0.0,
+     "n_shape": 24
+    },
+    "A|MF_in_shape_cv": {
+     "rate_in_shape": 0.9,
+     "n_shape": 16
+    }
+   }
+  }
+ }
+}

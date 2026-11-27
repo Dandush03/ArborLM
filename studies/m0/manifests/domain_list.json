@@ -1,0 +1,83 @@
+{
+  "code_writing": "NOT MEASURED",
+  "decided_by": "the human lead, 2026-11-26; his words: \"Yes, the five\"",
+  "decision": "ADR-0033 choice 2, option (a): the five rows of section 6.8; code writing NOT MEASURED; no further domain",
+  "domains": [
+    {
+      "domain": "Reasoning",
+      "gate_candidates": [
+        "R1",
+        "R2"
+      ],
+      "gate_candidates_as_written": "R1, R2",
+      "printed_beside": "BIG-Bench Hard",
+      "private": [
+        "R1",
+        "R2"
+      ],
+      "public": []
+    },
+    {
+      "domain": "Mathematics (a candidate addition in ADR-0032; recommended)",
+      "gate_candidates": [
+        "M1"
+      ],
+      "gate_candidates_as_written": "M1",
+      "printed_beside": "GSM8K",
+      "private": [
+        "M1"
+      ],
+      "public": []
+    },
+    {
+      "domain": "Code tracing (output prediction)",
+      "gate_candidates": [
+        "C1"
+      ],
+      "gate_candidates_as_written": "C1",
+      "printed_beside": "CRUXEval output prediction",
+      "private": [
+        "C1"
+      ],
+      "public": []
+    },
+    {
+      "domain": "Language understanding",
+      "gate_candidates": [
+        "L1"
+      ],
+      "gate_candidates_as_written": "L1 (public)",
+      "printed_beside": "—",
+      "private": [],
+      "public": [
+        "L1"
+      ]
+    },
+    {
+      "domain": "Factual knowledge",
+      "gate_candidates": [
+        "K1",
+        "K2"
+      ],
+      "gate_candidates_as_written": "K1, K2 (public)",
+      "printed_beside": "K0 as a floor check",
+      "private": [],
+      "public": [
+        "K1",
+        "K2"
+      ]
+    }
+  ],
+  "private_evaluations_stay_gate_candidates": true,
+  "record": {
+    "commit": "600c5215 on claude/m0-impl",
+    "path": "docs/reviews/m0-lineage-decision-2026-11-25/HUMAN_LEAD_WORDS_13.md",
+    "sha256": "5c5c0c31c1e8b95d98777e7663cac16483264fd89a4ecc620b5c62949a48e6e2"
+  },
+  "specification": {
+    "path": "docs/decisions/ADR-0033-m0-reference-models-and-evaluation-harness.md",
+    "section": "6.8",
+    "sha256": "7719f6d456113385a44dac37abeb28b36d6d9fb7eb569a65c7e6ccaaf19ec90b"
+  },
+  "what": "The domain list of ADR-0033 choice 2, as decided by the human lead on 2026-11-26: the input of build_records.py for G-gen's record."
+}

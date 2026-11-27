@@ -1,0 +1,185 @@
+{
+ "note": "This repair CONDITIONS THE ITEM DISTRIBUTION ON A HEURISTIC'S OUTCOME: items that a named trivial heuristic answers correctly are drawn again with a probability fitted so that the heuristic sits near chance on both sides, so the kept items are not a plain sample of the lineage's rule. The band is a measurement, not a registered threshold.",
+ "retuned": {
+  "R1.conditional_threshold_rule_r3": {
+   "after": {
+    "yes_count_majority": {
+     "accuracy_minus_chance": 0.0042,
+     "anti_minus_chance": -0.0042
+    }
+   },
+   "before": {
+    "yes_count_majority": {
+     "accuracy_minus_chance": 0.0587,
+     "anti_minus_chance": -0.0588
+    }
+   },
+   "redraw_probabilities": {
+    "yes_count_majority": 0.873
+   },
+   "retunes": "R1.conditional_threshold_rule_r2"
+  },
+  "R1.containers_stack_piles_r3": {
+   "after": {
+    "initial_top": {
+     "accuracy_minus_chance": -0.0089,
+     "anti_minus_chance": 0.0015
+    },
+    "last_block_moved_onto_asked": {
+     "accuracy_minus_chance": 0.0035,
+     "anti_minus_chance": -0.0003
+    }
+   },
+   "before": {
+    "initial_top": {
+     "accuracy_minus_chance": 0.0433,
+     "anti_minus_chance": -0.0083
+    },
+    "last_block_moved_onto_asked": {
+     "accuracy_minus_chance": 0.0531,
+     "anti_minus_chance": -0.0089
+    }
+   },
+   "redraw_probabilities": {
+    "initial_top": 0.36,
+    "last_block_moved_onto_asked": 0.87
+   },
+   "retunes": "R1.containers_stack_piles_r2"
+  },
+  "R1.elimination_bracket_r3": {
+   "after": {
+    "most_wins_logic": {
+     "accuracy_minus_chance": -0.012,
+     "anti_minus_chance": 0.0011
+    }
+   },
+   "before": {
+    "most_wins_logic": {
+     "accuracy_minus_chance": -0.075,
+     "anti_minus_chance": 0.0201
+    }
+   },
+   "redraw_probabilities": {
+    "most_wins_logic": 0.649
+   },
+   "retunes": "R1.elimination_bracket_r2"
+  },
+  "R1.instant_runoff_r2": {
+   "after": {
+    "plurality_winner": {
+     "accuracy_minus_chance": 0.0216,
+     "anti_minus_chance": -0.0172
+    }
+   },
+   "before": {
+    "plurality_winner": {
+     "accuracy_minus_chance": 0.0676,
+     "anti_minus_chance": -0.0373
+    }
+   },
+   "redraw_probabilities": {
+    "plurality_winner": 0.921
+   },
+   "retunes": "R1.instant_runoff"
+  },
+  "R1.kinship_ancestor_r3": {
+   "after": {
+    "most_mentioned": {
+     "accuracy_minus_chance": -0.0022,
+     "anti_minus_chance": -0.0098
+    }
+   },
+   "before": {
+    "most_mentioned": {
+     "accuracy_minus_chance": -0.0021,
+     "anti_minus_chance": -0.0101
+    }
+   },
+   "redraw_probabilities": {
+    "most_mentioned": 0.785
+   },
+   "retunes": "R1.kinship_ancestor_r2"
+  },
+  "R1.kinship_descendants_r3": {
+   "after": {
+    "first_mentioned": {
+     "accuracy_minus_chance": -0.0131,
+     "anti_minus_chance": 0.003
+    },
+    "most_children": {
+     "accuracy_minus_chance": 0.0004,
+     "anti_minus_chance": -0.0483
+    },
+    "most_mentioned": {
+     "accuracy_minus_chance": 0.0004,
+     "anti_minus_chance": -0.0483
+    }
+   },
+   "before": {
+    "first_mentioned": {
+     "accuracy_minus_chance": -0.0701,
+     "anti_minus_chance": 0.0128
+    },
+    "most_children": {
+     "accuracy_minus_chance": -0.0021,
+     "anti_minus_chance": -0.0466
+    },
+    "most_mentioned": {
+     "accuracy_minus_chance": -0.0021,
+     "anti_minus_chance": -0.0466
+    }
+   },
+   "redraw_probabilities": {
+    "first_mentioned": 0.64,
+    "most_children": 0.829,
+    "most_mentioned": 0.829
+   },
+   "retunes": "R1.kinship_descendants_r2"
+  },
+  "R1.stable_matching_r2": {
+   "after": {
+    "first_choice": {
+     "accuracy_minus_chance": -0.0037,
+     "anti_minus_chance": 0.0018
+    },
+    "first_mentioned": {
+     "accuracy_minus_chance": -0.1042,
+     "anti_minus_chance": 0.0375
+    }
+   },
+   "before": {
+    "first_choice": {
+     "accuracy_minus_chance": 0.1088,
+     "anti_minus_chance": -0.034
+    },
+    "first_mentioned": {
+     "accuracy_minus_chance": -0.0602,
+     "anti_minus_chance": 0.023
+    }
+   },
+   "redraw_probabilities": {
+    "first_choice": 0.757,
+    "first_mentioned": 0.0
+   },
+   "retunes": "R1.stable_matching"
+  },
+  "R1.topological_order_r2": {
+   "after": {
+    "jth_alphabetical": {
+     "accuracy_minus_chance": 0.0029,
+     "anti_minus_chance": -0.0001
+    }
+   },
+   "before": {
+    "jth_alphabetical": {
+     "accuracy_minus_chance": -0.0711,
+     "anti_minus_chance": 0.013
+    }
+   },
+   "redraw_probabilities": {
+    "jth_alphabetical": 0.566
+   },
+   "retunes": "R1.topological_order"
+  }
+ }
+}

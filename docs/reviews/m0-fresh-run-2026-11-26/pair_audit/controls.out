@@ -1,0 +1,90 @@
+== R1
+  R1.boolean_lights_r4: fresh items equal to an authoring fixture question: 0; distinct keys 2; modal-key share 0.513
+  R1.categories_default_exceptions_r4: fresh items equal to an authoring fixture question: 0; distinct keys 2; modal-key share 0.501
+  R1.compass_turns: fresh items equal to an authoring fixture question: 1; distinct keys 4; modal-key share 0.279
+  R1.conditional_threshold_rule_r4: fresh items equal to an authoring fixture question: 0; distinct keys 2; modal-key share 0.511
+  R1.equivalence_exchange_rates_r6: fresh items equal to an authoring fixture question: 0; distinct keys 79; modal-key share 0.056
+  R1.knights_knaves_r6: fresh items equal to an authoring fixture question: 0; distinct keys 2; modal-key share 0.514
+  R1.spatial_grid_walk_r5: fresh items equal to an authoring fixture question: 0; distinct keys 1290; modal-key share 0.002
+  R1.swap_tracking_r5: fresh items equal to an authoring fixture question: 0; distinct keys 24; modal-key share 0.052
+  R1.temporal_weekday_shift_r6: fresh items equal to an authoring fixture question: 0; distinct keys 7; modal-key share 0.157
+  R1.venn_counting_r5: fresh items equal to an authoring fixture question: 0; distinct keys 199; modal-key share 0.021
+  R1 overlap total 1; shifted-key control: 10450/13930 differ; nondeterministic repeats 0
+== R2
+  R2.binary_search_trace: fresh items equal to an authoring fixture question: 0; distinct keys 1084; modal-key share 0.004
+  R2.caesar_shift: fresh items equal to an authoring fixture question: 0; distinct keys 1400; modal-key share 0.001
+  R2.cellular_automaton: fresh items equal to an authoring fixture question: 1; distinct keys 1362; modal-key share 0.003
+  R2.cheapest_network: fresh items equal to an authoring fixture question: 0; distinct keys 68; modal-key share 0.039
+  R2.count_divisible: fresh items equal to an authoring fixture question: 0; distinct keys 899; modal-key share 0.010
+  R2.crt_smallest: fresh items equal to an authoring fixture question: 0; distinct keys 1196; modal-key share 0.005
+  R2.dictionary_rank: fresh items equal to an authoring fixture question: 0; distinct keys 1393; modal-key share 0.001
+  R2.expression_eval: fresh items equal to an authoring fixture question: 0; distinct keys 977; modal-key share 0.007
+  R2.from_base: fresh items equal to an authoring fixture question: 28; distinct keys 1311; modal-key share 0.003
+  R2.grid_sum: fresh items equal to an authoring fixture question: 0; distinct keys 44; modal-key share 0.058
+  R2.list_ops: fresh items equal to an authoring fixture question: 0; distinct keys 1398; modal-key share 0.001
+  R2.luhn_check: fresh items equal to an authoring fixture question: 0; distinct keys 12; modal-key share 0.247
+  R2.min_heap_ops: fresh items equal to an authoring fixture question: 0; distinct keys 1400; modal-key share 0.001
+  R2.run_length: fresh items equal to an authoring fixture question: 0; distinct keys 1400; modal-key share 0.001
+  R2.sort_list: fresh items equal to an authoring fixture question: 0; distinct keys 1400; modal-key share 0.001
+  R2.string_rewrite_nonidentity: fresh items equal to an authoring fixture question: 0; distinct keys 1203; modal-key share 0.013
+  R2.to_base_wide: fresh items equal to an authoring fixture question: 0; distinct keys 1393; modal-key share 0.001
+  R2 overlap total 29; shifted-key control: 23371/23681 differ; nondeterministic repeats 0
+== M1
+  M1.ages_r3: fresh items equal to an authoring fixture question: 0; distinct keys 356; modal-key share 0.014
+  M1.arithmetic_series_r3: fresh items equal to an authoring fixture question: 0; distinct keys 1004; modal-key share 0.004
+  M1.average_missing_r4: fresh items equal to an authoring fixture question: 0; distinct keys 119; modal-key share 0.016
+  M1.change_ways_r3: fresh items equal to an authoring fixture question: 0; distinct keys 259; modal-key share 0.024
+  M1.clock_duration_r4: fresh items equal to an authoring fixture question: 0; distinct keys 432; modal-key share 0.006
+  M1.consecutive_r3: fresh items equal to an authoring fixture question: 5; distinct keys 1324; modal-key share 0.002
+  M1.crt_congruence_r3: fresh items equal to an authoring fixture question: 0; distinct keys 1259; modal-key share 0.003
+  M1.division_counting_r3: fresh items equal to an authoring fixture question: 0; distinct keys 78; modal-key share 0.071
+  M1.finite_differences_r4: fresh items equal to an authoring fixture question: 0; distinct keys 1021; modal-key share 0.004
+  M1.fraction_remainder_r3: fresh items equal to an authoring fixture question: 0; distinct keys 836; modal-key share 0.006
+  M1.gcd_lcm_r4: fresh items equal to an authoring fixture question: 0; distinct keys 721; modal-key share 0.022
+  M1.grid_perimeter_r3: fresh items equal to an authoring fixture question: 0; distinct keys 47; modal-key share 0.042
+  M1.inclusion_exclusion_r3: fresh items equal to an authoring fixture question: 0; distinct keys 262; modal-key share 0.019
+  M1.last_digit_power_r3: fresh items equal to an authoring fixture question: 0; distinct keys 76; modal-key share 0.048
+  M1.linear_equation_r3: fresh items equal to an authoring fixture question: 0; distinct keys 219; modal-key share 0.018
+  M1.median_list_r3: fresh items equal to an authoring fixture question: 0; distinct keys 510; modal-key share 0.007
+  M1.mixture_r4: fresh items equal to an authoring fixture question: 2; distinct keys 874; modal-key share 0.006
+  M1.painted_cube_r3: fresh items equal to an authoring fixture question: 0; distinct keys 911; modal-key share 0.009
+  M1.percent_change_r3: fresh items equal to an authoring fixture question: 8; distinct keys 1128; modal-key share 0.004
+  M1.pipes_work_r3: fresh items equal to an authoring fixture question: 3; distinct keys 68; modal-key share 0.026
+  M1.prime_factors_r3: fresh items equal to an authoring fixture question: 0; distinct keys 156; modal-key share 0.065
+  M1.quadratic_area_r3: fresh items equal to an authoring fixture question: 0; distinct keys 336; modal-key share 0.011
+  M1.ratio_share_r3: fresh items equal to an authoring fixture question: 0; distinct keys 642; modal-key share 0.009
+  M1.rectangle_r3: fresh items equal to an authoring fixture question: 65; distinct keys 1254; modal-key share 0.004
+  M1.recurrence_iterate_r3: fresh items equal to an authoring fixture question: 0; distinct keys 1271; modal-key share 0.003
+  M1.shopping_r3: fresh items equal to an authoring fixture question: 0; distinct keys 761; modal-key share 0.006
+  M1.speed_distance_r3: fresh items equal to an authoring fixture question: 1; distinct keys 844; modal-key share 0.012
+  M1.tiered_pricing: fresh items equal to an authoring fixture question: 0; distinct keys 1111; modal-key share 0.004
+  M1.tip_split_r3: fresh items equal to an authoring fixture question: 11; distinct keys 1257; modal-key share 0.002
+  M1 overlap total 95; shifted-key control: 40085/40397 differ; nondeterministic repeats 0
+== C1
+  C1.binary_search_f3: fresh items equal to an authoring fixture question: 0; distinct keys 568; modal-key share 0.014
+  C1.bracket_matching_f3: fresh items equal to an authoring fixture question: 0; distinct keys 638; modal-key share 0.014
+  C1.bytecode_loop_f3: fresh items equal to an authoring fixture question: 0; distinct keys 146; modal-key share 0.024
+  C1.circle_elimination_r2: fresh items equal to an authoring fixture question: 0; distinct keys 81; modal-key share 0.079
+  C1.cond_chain_f3: fresh items equal to an authoring fixture question: 0; distinct keys 552; modal-key share 0.016
+  C1.counter_list_f3: fresh items equal to an authoring fixture question: 0; distinct keys 1049; modal-key share 0.007
+  C1.digit_peel_f3: fresh items equal to an authoring fixture question: 0; distinct keys 1054; modal-key share 0.006
+  C1.euclid_gcd_traced_f3: fresh items equal to an authoring fixture question: 0; distinct keys 942; modal-key share 0.010
+  C1.fast_power_f4: fresh items equal to an authoring fixture question: 0; distinct keys 322; modal-key share 0.042
+  C1.fib_like_f3: fresh items equal to an authoring fixture question: 0; distinct keys 714; modal-key share 0.020
+  C1.fib_shapes_recursive_f3: fresh items equal to an authoring fixture question: 0; distinct keys 1211; modal-key share 0.004
+  C1.func_branch_f4: fresh items equal to an authoring fixture question: 0; distinct keys 499; modal-key share 0.013
+  C1.func_compose_f4: fresh items equal to an authoring fixture question: 0; distinct keys 286; modal-key share 0.052
+  C1.list_build_f3: fresh items equal to an authoring fixture question: 0; distinct keys 595; modal-key share 0.020
+  C1.merge_two_sorted_f3: fresh items equal to an authoring fixture question: 0; distinct keys 213; modal-key share 0.024
+  C1.nested_pairs_f3: fresh items equal to an authoring fixture question: 0; distinct keys 565; modal-key share 0.047
+  C1.postfix_evaluation: fresh items equal to an authoring fixture question: 0; distinct keys 776; modal-key share 0.016
+  C1.recursive_calls_r2: fresh items equal to an authoring fixture question: 0; distinct keys 1226; modal-key share 0.004
+  C1.run_length_scan: fresh items equal to an authoring fixture question: 0; distinct keys 1328; modal-key share 0.004
+  C1.shared_lists_f3: fresh items equal to an authoring fixture question: 0; distinct keys 735; modal-key share 0.024
+  C1.slices_f4: fresh items equal to an authoring fixture question: 0; distinct keys 1139; modal-key share 0.059
+  C1.string_build_f3: fresh items equal to an authoring fixture question: 0; distinct keys 1333; modal-key share 0.003
+  C1.string_methods_f3: fresh items equal to an authoring fixture question: 0; distinct keys 1392; modal-key share 0.002
+  C1.turtle_walk_f3: fresh items equal to an authoring fixture question: 0; distinct keys 838; modal-key share 0.005
+  C1.union_find_links_f3: fresh items equal to an authoring fixture question: 0; distinct keys 1084; modal-key share 0.009
+  C1.while_counter_f3: fresh items equal to an authoring fixture question: 0; distinct keys 857; modal-key share 0.006
+  C1 overlap total 0; shifted-key control: 36001/36218 differ; nondeterministic repeats 0

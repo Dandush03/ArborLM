@@ -1,0 +1,15 @@
+PASS load_registered has none of the NOT REGISTERED (fix3 + fix4)
+PASS load_registered == manifest survivors (29)  [29]
+PASS min_cost_packs absent from load_all
+PASS replaced r3 ids (mixture, gcd_lcm, finite_differences, slot_permutations, average_missing, clock_duration) absent from load_all
+PASS strict_clusters(load_registered) has no dropped id and 17 clusters  [17]
+PASS core.REGISTRY['M1'] holds no fix-3/fix-4 id  [16]
+PASS manifest surviving_clusters members == survivors
+PASS manifest section 'survivors' mentions no dropped id
+PASS manifest section 'surviving_clusters' mentions no dropped id
+PASS manifest section 'surviving_cluster_names' mentions no dropped id
+PASS manifest section 'capacity' mentions no dropped id
+PASS manifest section 'capacity_as_written_failures_listed_for_the_lead' mentions no dropped id
+PASS manifest as-written partition counts 14 + 15 = 29 (survivors only)  [{'A': 14, 'B': 15}]
+FAIL fixtures/m1_fix3 holds no dropped lineage  [['M1.coins_r3', 'M1.mode_tally_r3', 'M1.pigeonhole_worst_case_r3']]
+FAIL a fix-4 fixture set exists (r4 revisions)  [['m1_batch1', 'm1_fix3', 'M1_BATCH1_REV2_SCHEMA.md', 'M1_BATCH1_SCHEMA.md', 'm1_batch1_rev2']]

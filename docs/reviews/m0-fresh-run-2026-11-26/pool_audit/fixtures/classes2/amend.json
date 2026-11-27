@@ -1,0 +1,10 @@
+{
+ "commit": "made-up",
+ "entries": [
+  {
+   "unit": "R1a",
+   "lineage": "R1.alpha_r4",
+   "rule": "my_rule"
+  }
+ ]
+}

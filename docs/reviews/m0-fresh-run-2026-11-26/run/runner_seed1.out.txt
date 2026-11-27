@@ -1,0 +1,11 @@
+unit R1c seed-set 1: exit statuses per attempt [[0]]; ok=True
+unit R1a seed-set 1: exit statuses per attempt [[0]]; ok=True
+unit R1b seed-set 1: exit statuses per attempt [[0]]; ok=True
+unit R2a seed-set 1: exit statuses per attempt [[0]]; ok=True
+unit R2b seed-set 1: exit statuses per attempt [[0, 0]]; ok=True
+unit M1b seed-set 1: exit statuses per attempt [[0]]; ok=True
+unit M1a seed-set 1: exit statuses per attempt [[0]]; ok=True
+unit M1c seed-set 1: exit statuses per attempt [[0]]; ok=True
+unit C1b seed-set 1: exit statuses per attempt [[0]]; ok=True
+unit C1c seed-set 1: exit statuses per attempt [[0, 0, 0, 0, 0, 0]]; ok=True
+unit C1a seed-set 1: exit statuses per attempt [[0, 0, 0, 0]]; ok=True

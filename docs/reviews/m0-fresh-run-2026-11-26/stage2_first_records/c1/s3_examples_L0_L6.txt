@@ -1,0 +1,873 @@
+===== C1.binary_search_f3/L0/0  key='65'
+Here is a Python program.
+
+w = [2, 3, 10, 15, 17, 23, 27, 29, 33, 37, 46, 47]
+k = 27
+b = 0
+d = len(w)
+c = 0
+while b < d:
+    s = (b + d) // 2
+    c += w[s]
+    if w[s] < k:
+        b = s + 1
+    else:
+        d = s
+print(c)
+
+What exactly does it print? It prints a single line.
+===== C1.binary_search_f3/L6/0  key='llrh'
+Here is a Python program.
+
+a = [4, 6, 9, 10, 11, 13, 20, 23, 26, 27, 32, 33, 38, 48, 49, 53, 59, 64, 67, 69, 70, 73, 79, 81, 87, 89, 92, 93, 94, 100, 101, 103, 105, 108, 109, 110, 111, 118, 123, 124, 127, 128, 134, 136, 137, 141, 144, 152]
+cur = 123
+w = 0
+n = len(a) - 1
+c = ''
+while w <= n:
+    val = (w + n) // 2
+    if a[val] == cur:
+        c = c + 'h'
+        w = n + 1
+    elif a[val] < cur:
+        c = c + 'l'
+        w = val + 1
+    else:
+        c = c + 'r'
+        n = val - 1
+print(c)
+
+What exactly does it print? It prints a single line.
+===== C1.bracket_matching_f3/L0/0  key='[2, 3, 4, 4, 2, 3, 1, 2, 3, 4]'
+Here is a Python program.
+
+n = '(>)[{<<[{([{<>'
+total = []
+for v in range(len(n)):
+    total.append(0)
+t = 0
+r = 0
+m = 0
+for v in range(13):
+    s = n[v]
+    if s == '(':
+        total[t] = 1
+        t += 1
+    elif s == '[':
+        total[t] = 2
+        t += 1
+    elif s == '{':
+        total[t] = 3
+        t += 1
+    elif s == '<':
+        total[t] = 4
+        t += 1
+    elif s == ')':
+        if t > 0 and total[t - 1] == 1:
+            t -= 1
+        else:
+            r += 1
+    elif s == ']':
+        if t > 0 and total[t - 1] == 2:
+            t -= 1
+        else:
+            r += 1
+    elif s == '}':
+        if t > 0 and total[t - 1] == 3:
+            t -= 1
+        else:
+            r += 1
+    elif t > 0 and total[t - 1] == 4:
+        t -= 1
+    else:
+        r += 1
+print(total[0:t])
+
+What exactly does it print? It prints a single line.
+===== C1.bracket_matching_f3/L6/0  key='[2, 4, 1, 1, 1, 3]'
+Here is a Python program.
+
+count = '[<])(])(}((>([)]()){{}()'
+r = []
+for k in range(len(count)):
+    r.append(0)
+p = 0
+a = 0
+acc = 0
+for k in range(20):
+    d = count[k]
+    if d == '(':
+        r[p] = 1
+        p += 1
+    elif d == '[':
+        r[p] = 2
+        p += 1
+    elif d == '{':
+        r[p] = 3
+        p += 1
+    elif d == '<':
+        r[p] = 4
+        p += 1
+    elif d == ')':
+        if p > 0 and r[p - 1] == 1:
+            p -= 1
+        else:
+            a += 1
+    elif d == ']':
+        if p > 0 and r[p - 1] == 2:
+            p -= 1
+        else:
+            a += 1
+    elif d == '}':
+        if p > 0 and r[p - 1] == 3:
+            p -= 1
+        else:
+            a += 1
+    elif p > 0 and r[p - 1] == 4:
+        p -= 1
+    else:
+        a += 1
+print(r[0:p])
+
+What exactly does it print? It prints a single line.
+===== C1.bytecode_loop_f3/L0/0  key='19'
+Here is a Python program.
+
+u = [7, 6, 7, 4, 3, 2, 1, 1]
+out = 0
+a = 0
+while out < len(u):
+    e = u[out]
+    val = u[out + 1]
+    out = out + 2
+    if e == 7:
+        a = a + val
+    elif e == 3:
+        a = a * val
+    elif e == 1:
+        a = a - val
+print(a)
+
+What exactly does it print? It prints a single line.
+===== C1.bytecode_loop_f3/L6/0  key='6'
+Here is a Python program.
+
+z = [3, 4, 9, 6, 3, 5, 3, 5, 9, 8, 3, 1, 2, 2, 9, 3, 3, 9, 9, 0, 7, 8, 8, 16, 9, 8, 3, 1]
+n = 0
+b = 0
+v = 0
+while n < len(z):
+    w = z[n]
+    e = z[n + 1]
+    n = n + 2
+    if w == 3:
+        b = b + e
+    elif w == 2:
+        b = b * e
+    elif w == 7:
+        b = b - e
+    elif w == 9:
+        if b % 2 == e % 2:
+            n = n + 2
+    elif w == 8:
+        b = b % e
+    elif w == 6:
+        v = b
+    elif w == 1:
+        b = b + v
+print(b)
+
+What exactly does it print? It prints a single line.
+===== C1.circle_elimination_r2/L0/0  key='6'
+Here is a Python program.
+
+val = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+y = 5
+for c in range(8):
+    count = 0
+    while count < 2:
+        y = (y + 1) % 10
+        if val[y] == 1:
+            count += 1
+    val[y] = 0
+print(y)
+
+What exactly does it print? It prints a single line.
+===== C1.circle_elimination_r2/L6/0  key='11'
+Here is a Python program.
+
+a = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0]
+b = 8
+p = 0
+for n in range(2):
+    e = 0
+    while e < 3:
+        b = (b + 1) % 15
+        if a[b] == 1:
+            e += 1
+    a[b] = 0
+    p += b
+print(p)
+
+What exactly does it print? It prints a single line.
+===== C1.cond_chain_f3/L0/0  key='-15'
+Here is a Python program.
+
+s = 40
+p = 19
+w = 0
+for acc in range(2):
+    if s > p:
+        s = s - p
+    elif s == p:
+        s = s * 4
+    else:
+        p = p - s
+    w += s - p
+print(w)
+
+What exactly does it print? It prints a single line.
+===== C1.cond_chain_f3/L6/0  key='258'
+Here is a Python program.
+
+n = 283
+r = 168
+total = 0
+for v in range(9):
+    if n > r:
+        n = n - r
+    elif n == r:
+        n = n * 2
+    else:
+        r = r - n
+    if n + r > 41:
+        r = r // 2
+    total += n
+print(total)
+
+What exactly does it print? It prints a single line.
+===== C1.counter_list_f3/L0/0  key='[1, 2, 1, 3, 1]'
+Here is a Python program.
+
+k = [26, 11, 2, 24, 24, 15, 12, 27]
+n = [0, 0, 0, 0, 0]
+j = 0
+for e in range(len(k)):
+    d = k[e]
+    if d % 2 == 0:
+        j = (j * 8 + d) % 5
+    else:
+        j = (j + 1 + d // 2) % 5
+    n[j] = n[j] + 1
+print(n)
+
+What exactly does it print? It prints a single line.
+===== C1.counter_list_f3/L6/0  key='[5, 4, 6, 5, 6]'
+Here is a Python program.
+
+a = [4, 14, 14, 16, 25, 7, 17, 24, 20, 28, 15, 29, 19, 21, 16, 12, 25, 28, 25, 6, 27, 17, 22, 11, 16, 26]
+t = [0, 0, 0, 0, 0]
+q = 0
+for x in range(len(a)):
+    e = a[x]
+    q = (q * 12 + e) % 5
+    t[q] = t[q] + 1
+print(t)
+
+What exactly does it print? It prints a single line.
+===== C1.digit_peel_f3/L0/0  key='32'
+Here is a Python program.
+
+s = 492
+p = 0
+n = 1
+while s > 0:
+    c = s % 5
+    p += c * n
+    n += 1
+    s = s // 5
+print(p)
+
+What exactly does it print? It prints a single line.
+===== C1.digit_peel_f3/L6/0  key='63'
+Here is a Python program.
+
+x = 221636
+b = 0
+e = 1
+while x != 0:
+    total = x % 3
+    b += total * e
+    e += 1
+    x = x // 3
+print(b)
+
+What exactly does it print? It prints a single line.
+===== C1.euclid_gcd_traced_f3/L0/0  key='108 20'
+Here is a Python program.
+
+v = 108
+n = 128
+a = 0
+while n > 0 and a < 2:
+    m = n
+    n = v % n
+    v = m
+    a += 1
+print(str(v) + ' ' + str(n))
+
+What exactly does it print? It prints a single line.
+===== C1.euclid_gcd_traced_f3/L6/0  key='8 4'
+Here is a Python program.
+
+x = 100
+z = 256
+r = 0
+while z != 0 and r < 6:
+    val = x % z
+    x = z
+    z = val
+    r += 1
+print(str(x) + ' ' + str(z))
+
+What exactly does it print? It prints a single line.
+===== C1.fast_power_f4/L0/0  key='143'
+Here is a Python program.
+
+val = 1
+count = 27
+s = 6
+p = 158
+while s > 0:
+    if s % 2 == 1:
+        val = val * count % p
+    count = (count * count + 6) % p
+    s = s // 2
+print(val)
+
+What exactly does it print? It prints a single line.
+===== C1.fast_power_f4/L6/0  key='120'
+Here is a Python program.
+
+j = 1
+cur = 120
+d = 400
+count = 452
+while d > 0:
+    if d % 2 == 1:
+        j = j * cur % count
+    cur = (cur * cur + 5) % count
+    d = d // 2
+print(j)
+
+What exactly does it print? It prints a single line.
+===== C1.fib_like_f3/L0/0  key='111'
+Here is a Python program.
+
+j = 2
+u = 3
+for acc in range(5):
+    d = j + 2 * u
+    j = u
+    u = d
+print(j)
+
+What exactly does it print? It prints a single line.
+===== C1.fib_like_f3/L6/0  key='167772159'
+Here is a Python program.
+
+total = 6
+b = 9
+for count in range(24):
+    out = 2 * total + b
+    total = b
+    b = out
+print(b)
+
+What exactly does it print? It prints a single line.
+===== C1.fib_shapes_recursive_f3/L0/0  key='6250'
+Here is a Python program.
+
+def score(val):
+    if val < 2:
+        return val + 13
+    else:
+        return score(val - 1) * 5 + score(val - 2) * 7 + 16
+print(score(4))
+
+What exactly does it print? It prints a single line.
+===== C1.fib_shapes_recursive_f3/L6/0  key='525830'
+Here is a Python program.
+
+def mix(u):
+    if u < 2:
+        return u + 4
+    else:
+        return mix(u - 1) * 2 + mix(u - 2) * 5 + 0
+print(mix(10))
+
+What exactly does it print? It prints a single line.
+===== C1.func_branch_f4/L0/0  key='-8'
+Here is a Python program.
+
+def mix(total):
+    if total > 5:
+        return total * 4 - 5
+    else:
+        return total + 3
+print(mix(7) - mix(9))
+
+What exactly does it print? It prints a single line.
+===== C1.func_branch_f4/L6/0  key='26'
+Here is a Python program.
+
+def shift(cur):
+    if cur > 13:
+        return cur * 5 - 8
+    elif cur % 2 == 0:
+        return cur // 2
+    else:
+        return cur + 12
+print(shift(16) + shift(20) - shift(2) - shift(29))
+
+What exactly does it print? It prints a single line.
+===== C1.func_compose_f4/L0/0  key='74'
+Here is a Python program.
+
+def shift(b):
+    return b * 2 + 12
+def f(b):
+    return shift(shift(b) % 38) + 2
+print(f(9))
+
+What exactly does it print? It prints a single line.
+===== C1.func_compose_f4/L6/0  key='12'
+Here is a Python program.
+
+def mix(x):
+    return x * 4 + 6
+def calc(x):
+    return mix(mix(x)) + 12
+def shift(x):
+    return calc(x) % 14
+print(shift(13))
+
+What exactly does it print? It prints a single line.
+===== C1.list_build_f3/L0/0  key='0'
+Here is a Python program.
+
+j = []
+for acc in range(5):
+    if acc % 2 != 1:
+        j.append((acc * acc + 6 * acc + 8) % 4)
+out = 0
+for acc in range(len(j)):
+    out += acc * j[acc]
+print(out)
+
+What exactly does it print? It prints a single line.
+===== C1.list_build_f3/L6/0  key='[0, 1, 4, 9, 4, 1, 0, 1, 4, 9, 4]'
+Here is a Python program.
+
+acc = []
+for j in range(11):
+    acc.append(j * j % 12)
+print(acc)
+
+What exactly does it print? It prints a single line.
+===== C1.merge_two_sorted_f3/L0/0  key='-3'
+Here is a Python program.
+
+t = [1, 2, 4, 5]
+x = [1, 5, 6]
+w = 0
+d = 0
+n = []
+best = 0
+while w < len(t) and d < len(x):
+    best += t[w] - x[d]
+    if t[w] <= x[d]:
+        n.append(t[w])
+        w += 1
+    else:
+        n.append(x[d])
+        d += 1
+print(best)
+
+What exactly does it print? It prints a single line.
+===== C1.merge_two_sorted_f3/L6/0  key='101'
+Here is a Python program.
+
+n = [5, 6, 8, 14, 14, 17]
+s = [1, 4, 4, 5, 7, 8, 9, 9, 12]
+count = 0
+out = 0
+r = []
+x = 0
+while count < len(n) and out < len(s):
+    x += max(n[count], s[out])
+    if n[count] < s[out]:
+        r.append(n[count])
+        count += 1
+    else:
+        r.append(s[out])
+        out += 1
+print(x)
+
+What exactly does it print? It prints a single line.
+===== C1.nested_pairs_f3/L0/0  key='575'
+Here is a Python program.
+
+x = 0
+for val in range(8):
+    for out in range(5):
+        if val + out > 6:
+            x += val * val + out + 2
+print(x)
+
+What exactly does it print? It prints a single line.
+===== C1.nested_pairs_f3/L6/0  key='18'
+Here is a Python program.
+
+val = 0
+for s in range(13):
+    for d in range(4):
+        if s - d == (-1):
+            val += s + d + 3
+print(val)
+
+What exactly does it print? It prints a single line.
+===== C1.postfix_evaluation/L0/0  key='12'
+Here is a Python program.
+
+u = [6, 4, (-1), 6, (-2)]
+y = []
+for q in range(len(u)):
+    y.append(0)
+t = 0
+for q in range(len(u)):
+    a = u[q]
+    if a >= 0:
+        y[t] = a
+        t += 1
+    else:
+        c = y[t - 1]
+        v = y[t - 2]
+        t -= 1
+        if a == (-3):
+            y[t - 1] = v + c
+        elif a == (-1):
+            y[t - 1] = v - c
+        else:
+            y[t - 1] = v * c
+print(y[t - 1])
+
+What exactly does it print? It prints a single line.
+===== C1.postfix_evaluation/L6/0  key='130'
+Here is a Python program.
+
+v = [5, 1, (-3), 6, 7, (-1), (-2), 2, 8, 6, (-2), 6, (-3), 3, (-3), (-2), (-1)]
+n = []
+for res in range(len(v)):
+    n.append(0)
+q = 0
+for res in range(len(v)):
+    e = v[res]
+    if e >= 0:
+        n[q] = e
+        q += 1
+    else:
+        p = n[q - 1]
+        d = n[q - 2]
+        q -= 1
+        if e == (-1):
+            n[q - 1] = d + p
+        elif e == (-3):
+            n[q - 1] = d - p
+        else:
+            n[q - 1] = d * p
+print(n[q - 1])
+
+What exactly does it print? It prints a single line.
+===== C1.recursive_calls_r2/L0/0  key='2126'
+Here is a Python program.
+
+def h(u):
+    if u < 2:
+        return 5
+    else:
+        return h(u // 2) * 4 + h(u - u // 2) * 4 + u % 5
+print(h(7))
+
+What exactly does it print? It prints a single line.
+===== C1.recursive_calls_r2/L6/0  key='111889147'
+Here is a Python program.
+
+def g(r, val):
+    if val >= len(r):
+        return 2
+    elif r[val] % 5 == 0:
+        return r[val] + g(r, val + 1)
+    else:
+        return 4 * g(r, val + 1) - 1
+print(g([2, 6, 5, 3, 2, 6, 1, 5, 5, 3, 6, 4, 4, 6, 2, 4], 0))
+
+What exactly does it print? It prints a single line.
+===== C1.run_length_scan/L0/0  key='o2b2s2'
+Here is a Python program.
+
+q = 'oobbss'
+out = ''
+count = q[0]
+s = 1
+for val in range(1, len(q)):
+    if q[val] == count:
+        s += 1
+    else:
+        out = out + count + str(s)
+        count = q[val]
+        s = 1
+out = out + count + str(s)
+print(out)
+
+What exactly does it print? It prints a single line.
+===== C1.run_length_scan/L6/0  key='g3o2x6g6o2g5o6x2o4'
+Here is a Python program.
+
+count = 'gggooxxxxxxggggggoogggggooooooxxoooo'
+c = ''
+z = count[0]
+cur = 1
+for p in range(1, len(count)):
+    if count[p] == z:
+        cur += 1
+    else:
+        c = c + z + str(cur)
+        z = count[p]
+        cur = 1
+c = c + z + str(cur)
+print(c)
+
+What exactly does it print? It prints a single line.
+===== C1.shared_lists_f3/L0/0  key='14'
+Here is a Python program.
+
+a = [9, 7, 2]
+x = [8, 4]
+x = a
+a[0] = 5
+print(sum(x))
+
+What exactly does it print? It prints a single line.
+===== C1.shared_lists_f3/L6/0  key='24'
+Here is a Python program.
+
+def g(best, k, r):
+    best[k] = best[k] + r
+    return best
+d = [2, 4]
+cur = [7, 3]
+cur = d[:]
+d = cur + [2]
+cur[1] = 3
+d = d + [5]
+cur = d + [2]
+cur = cur + [9]
+d = g(d, 3, 6)
+d = cur
+print(sum(d))
+
+What exactly does it print? It prints a single line.
+===== C1.slices_f4/L0/0  key='20'
+Here is a Python program.
+
+a = [15, 9, 5, 11, 12, 15]
+print(sum(a[:(-3):2]))
+
+What exactly does it print? It prints a single line.
+===== C1.slices_f4/L6/0  key='k'
+Here is a Python program.
+
+x = 'bizaxzozixverokdabiknirin'
+print(x[(-13):(-17)] + x[(-6):(-3):3])
+
+What exactly does it print? It prints a single line.
+===== C1.string_build_f3/L0/0  key='avaaa'
+Here is a Python program.
+
+cur = ''
+for d in range(3, 8):
+    if d % 4 == 0:
+        cur = cur + 'v'
+    else:
+        cur = cur + 'a'
+print(cur)
+
+What exactly does it print? It prints a single line.
+===== C1.string_build_f3/L6/0  key='xrrxrrxrr'
+Here is a Python program.
+
+out = ''
+for k in range(18):
+    if k % 3 == 0:
+        out = out + 'x'
+    elif k % 4 == 1:
+        out = out + 's'
+    else:
+        out = out + 'r'
+print(out[::2])
+
+What exactly does it print? It prints a single line.
+===== C1.string_methods_f3/L0/0  key='obirzobirbv'
+Here is a Python program.
+
+z = 'zobir' * 2 + 'bv'
+print(z.lower()[1:])
+
+What exactly does it print? It prints a single line.
+===== C1.string_methods_f3/L6/0  key='ozfzeecxxt'
+Here is a Python program.
+
+y = ((('bakox' + 'fx').replace('x', 'z') + 'uc').replace('u', 'ee')[2:].lower() + 'bt').replace('b', 'xx')
+print(y.lower()[1:])
+
+What exactly does it print? It prints a single line.
+===== C1.turtle_walk_f3/L0/0  key='-20'
+Here is a Python program.
+
+w = [3, 5, 5, 3, 5, 2, 1, 5, 4, 4, 3, 1, 5, 5]
+val = 0
+x = 0
+m = 1
+v = 0
+for a in range(len(w)):
+    k = w[a]
+    if k <= 3:
+        if m == 0:
+            val += k
+        elif m == 1:
+            x -= k
+        elif m == 2:
+            val -= k
+        else:
+            x += k
+    elif k == 4:
+        m = (m + 1) % 4
+    elif k == 5:
+        m = (m + 3) % 4
+    elif k == 6:
+        if m == 0:
+            val -= 1
+        elif m == 1:
+            x += 1
+        elif m == 2:
+            val += 1
+        else:
+            x -= 1
+    v += val * 1 + x * 1
+print(v)
+
+What exactly does it print? It prints a single line.
+===== C1.turtle_walk_f3/L6/0  key='990'
+Here is a Python program.
+
+best = [5, 5, 2, 2, 2, 6, 2, 3, 1, 3, 3, 4, 3, 4, 4, 5, 3, 5, 5, 1, 6, 2, 5, 4, 2, 4]
+w = 0
+res = 0
+j = 0
+count = 0
+for a in range(len(best)):
+    u = best[a]
+    if u <= 3:
+        if j == 0:
+            w -= u
+        elif j == 1:
+            res += u
+        elif j == 2:
+            w += u
+        else:
+            res -= u
+    elif u == 4:
+        j = (j + 3) % 4
+    elif u == 5:
+        j = (j + 1) % 4
+    elif u == 6:
+        if j == 0:
+            w += 1
+        elif j == 1:
+            res -= 1
+        elif j == 2:
+            w -= 1
+        else:
+            res += 1
+    count += w * 3 + res * 1
+print(count)
+
+What exactly does it print? It prints a single line.
+===== C1.union_find_links_f3/L0/0  key='40'
+Here is a Python program.
+
+def find(d, k):
+    while d[k] != k:
+        k = d[k]
+    return k
+d = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+u = [4, 0, 6, 6]
+count = [2, 7, 4, 3]
+for out in range(len(u)):
+    j = find(d, u[out])
+    s = find(d, count[out])
+    if j != s:
+        d[j] = s
+n = 0
+for out in range(9):
+    n += find(d, out)
+print(n)
+
+What exactly does it print? It prints a single line.
+===== C1.union_find_links_f3/L6/0  key='[2, 1, 2, 1, 3, 5, 3, 5, 1, 12, 9, 11, 3, 10, 14]'
+Here is a Python program.
+
+def find(y, c):
+    while y[c] != c:
+        c = y[c]
+    return c
+y = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+w = [0, 13, 13, 8, 4, 7, 6, 10, 9, 13]
+acc = [2, 10, 9, 1, 3, 5, 3, 12, 3, 8]
+for s in range(len(w)):
+    res = find(y, w[s])
+    best = find(y, acc[s])
+    if res != best:
+        y[res] = best
+print(y)
+
+What exactly does it print? It prints a single line.
+===== C1.while_counter_f3/L0/0  key='6'
+Here is a Python program.
+
+n = 4
+a = 0
+while n != 1:
+    a += n
+    if n % 2 == 0:
+        n = n // 2
+    else:
+        n = n * 3 + 1
+print(a)
+
+What exactly does it print? It prints a single line.
+===== C1.while_counter_f3/L6/0  key='104321'
+Here is a Python program.
+
+m = 143
+cur = 0
+while m != 1:
+    if m % 2 == 1:
+        m = m * 3 + 1
+    else:
+        m = m // 2
+    cur += m
+print(cur)
+
+What exactly does it print? It prints a single line.

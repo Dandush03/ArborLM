@@ -1,0 +1,12 @@
+guard: the formula rate of the shape must be <= 0.25.  OLD lineage (guard FAILS) vs NEW lineage (guard passes)
+string_build length          old C1.string_build              formula rate  1.00 -> FAIL | new C1.string_build_f3           worst battery rule  0.00 -> pass
+while_counter shrink         old C1.while_counter             formula rate  1.00 -> FAIL | new C1.while_counter_f3          worst battery rule  0.04 -> pass
+euclid gcd                   old C1.euclid_gcd                formula rate  1.00 -> FAIL | new C1.euclid_gcd_traced_f3      worst battery rule  0.00 -> pass
+fast_power result            old C1.fast_power_r2             formula rate  1.00 -> FAIL | new C1.fast_power_f3             worst battery rule  0.06 -> pass
+partition swap positions     old C1.partition_pass            formula rate  1.00 -> FAIL | new C1.partition_pass_f3         worst battery rule  0.00 -> pass
+digit_peel base 10           old C1.digit_peel                formula rate  1.00 -> FAIL | new C1.digit_peel_f3             worst battery rule  0.07 -> pass
+binary_search last probe     old C1.binary_search             formula rate  1.00 -> FAIL | new C1.binary_search_f3          worst battery rule  0.05 -> pass
+counter_list histogram       old C1.counter_list              formula rate  1.00 -> FAIL | new C1.counter_list_f3           worst battery rule  0.05 -> pass
+insertion_sort list          old C1.insertion_sort            formula rate  1.00 -> FAIL (NOT REGISTERED)
+minmax_track                 old C1.minmax_track              formula rate  1.00 -> FAIL (NOT REGISTERED)
+kadane_scan                  old C1.kadane_scan               formula rate  1.00 -> FAIL (NOT REGISTERED)

@@ -1,0 +1,5 @@
+pooled_table identical to v1 apart from bracket_stripped: True 5641 5641 any stripped: False
+dropped identical: True
+per_lineage identical: True
+classes2 dropped identical to v1 run: True
+echo dropped identical to v1 run: False

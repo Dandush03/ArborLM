@@ -1,0 +1,62 @@
+== mode_tally (ask = mode): P(first repeated value is the mode), P(last number is the mode), mean number of distinct values
+  L0: real first_rep 0.135 vs counterfactual 0.504 | real last_number 0.396 vs cf 0.356 | distinct values 5.1 (uniform guess 0.197, excluding first_rep 0.245)
+  L1: real first_rep 0.132 vs counterfactual 0.466 | real last_number 0.354 vs cf 0.329 | distinct values 5.7 (uniform guess 0.177, excluding first_rep 0.215)
+  L2: real first_rep 0.113 vs counterfactual 0.450 | real last_number 0.360 vs cf 0.321 | distinct values 6.1 (uniform guess 0.163, excluding first_rep 0.194)
+  L3: real first_rep 0.108 vs counterfactual 0.431 | real last_number 0.303 vs cf 0.285 | distinct values 6.6 (uniform guess 0.151, excluding first_rep 0.177)
+  L4: real first_rep 0.100 vs counterfactual 0.411 | real last_number 0.292 vs cf 0.263 | distinct values 7.2 (uniform guess 0.139, excluding first_rep 0.161)
+  L5: real first_rep 0.080 vs counterfactual 0.391 | real last_number 0.243 vs cf 0.258 | distinct values 7.9 (uniform guess 0.127, excluding first_rep 0.146)
+  L6: real first_rep 0.080 vs counterfactual 0.364 | real last_number 0.252 vs cf 0.234 | distinct values 8.3 (uniform guess 0.120, excluding first_rep 0.137)
+== last_digit_power: answer distribution and base-digit/exponent structure
+  L0: top answers [('4', 348), ('9', 332), ('6', 331), ('1', 319)] | terms with base digit 4/9 (exponent forced even, value forced 6/1): 0/2000 | 'square of base digit' guess 0.340 | 'base digit' guess 0.000 | e mod 4 by digit: [((2, 0), 174), ((2, 2), 159), ((2, 3), 149), ((3, 0), 151), ((3, 2), 172), ((3, 3), 172), ((7, 0), 168), ((7, 2), 160), ((7, 3), 194), ((8, 0), 157), ((8, 2), 189), ((8, 3), 155)]
+  L1: top answers [('1', 347), ('9', 342), ('6', 337), ('4', 335)] | terms with base digit 4/9 (exponent forced even, value forced 6/1): 0/2000 | 'square of base digit' guess 0.339 | 'base digit' guess 0.000 | e mod 4 by digit: [((2, 0), 187), ((2, 2), 188), ((2, 3), 182), ((3, 0), 185), ((3, 2), 183), ((3, 3), 159), ((7, 0), 162), ((7, 2), 159), ((7, 3), 155), ((8, 0), 150), ((8, 2), 147), ((8, 3), 143)]
+  L2: top answers [('2', 299), ('4', 267), ('8', 264), ('6', 247)] | terms with base digit 4/9 (exponent forced even, value forced 6/1): 983/4000 | 'square of base digit' guess 0.368 | 'base digit' guess 0.000 | e mod 4 by digit: [((2, 0), 256), ((2, 2), 302), ((2, 3), 199), ((3, 0), 252), ((3, 2), 293), ((3, 3), 208), ((4, 0), 257), ((4, 2), 239), ((7, 0), 258), ((7, 2), 286), ((7, 3), 199), ((8, 0), 269)]
+  L3: top answers [('2', 324), ('8', 283), ('4', 249), ('7', 232)] | terms with base digit 4/9 (exponent forced even, value forced 6/1): 954/4000 | 'square of base digit' guess 0.346 | 'base digit' guess 0.000 | e mod 4 by digit: [((2, 0), 276), ((2, 2), 294), ((2, 3), 239), ((3, 0), 262), ((3, 2), 287), ((3, 3), 247), ((4, 0), 232), ((4, 2), 238), ((7, 0), 270), ((7, 2), 271), ((7, 3), 192), ((8, 0), 249)]
+  L4: top answers [('4', 312), ('2', 291), ('8', 268), ('6', 219)] | terms with base digit 4/9 (exponent forced even, value forced 6/1): 982/4000 | 'square of base digit' guess 0.361 | 'base digit' guess 0.000 | e mod 4 by digit: [((2, 0), 267), ((2, 2), 312), ((2, 3), 223), ((3, 0), 249), ((3, 2), 270), ((3, 3), 205), ((4, 0), 263), ((4, 2), 266), ((7, 0), 231), ((7, 2), 335), ((7, 3), 227), ((8, 0), 239)]
+  L5: top answers [('6', 428), ('4', 323), ('8', 299), ('2', 240)] | terms with base digit 4/9 (exponent forced even, value forced 6/1): 1504/6000 | 'square of base digit' guess 0.245 | 'base digit' guess 0.000 | e mod 4 by digit: [((2, 0), 406), ((2, 2), 340), ((2, 3), 450), ((3, 0), 385), ((3, 2), 390), ((3, 3), 417), ((4, 0), 393), ((4, 2), 395), ((7, 0), 366), ((7, 2), 331), ((7, 3), 362), ((8, 0), 357)]
+  L6: top answers [('6', 424), ('4', 339), ('8', 290), ('2', 258)] | terms with base digit 4/9 (exponent forced even, value forced 6/1): 1516/6000 | 'square of base digit' guess 0.246 | 'base digit' guess 0.000 | e mod 4 by digit: [((2, 0), 351), ((2, 2), 361), ((2, 3), 422), ((3, 0), 356), ((3, 2), 356), ((3, 3), 380), ((4, 0), 379), ((4, 2), 385), ((7, 0), 342), ((7, 2), 352), ((7, 3), 384), ((8, 0), 388)]
+  counterfactual (no rejection, t=1): P(answer == base digit) for base digits 2,3,7,8 is 1/4 (e = 1 mod 4); generator makes it 0, so the answer set is the 3 other cycle values.
+== gcd_lcm: share of gcd items whose gcd equals the smallest pairwise difference (real vs counterfactual), lcm items with coprime pair
+  L0: real 'smallest pairwise difference' 0.000 vs counterfactual 0.329
+  L1: real 'smallest pairwise difference' 0.000 vs counterfactual 0.265
+  L2: real 'smallest pairwise difference' 0.000 vs counterfactual 0.226
+  L3: real 'smallest pairwise difference' 0.000 vs counterfactual 0.264
+  L4: real 'smallest pairwise difference' 0.000 vs counterfactual 0.215
+  L5: real 'smallest pairwise difference' 0.000 vs counterfactual 0.292
+  L6: real 'smallest pairwise difference' 0.000 vs counterfactual 0.255
+== change_ways: rate of 'target // biggest coin + 1' real vs counterfactual (no ans==that rejection; 4<=ans<=150 kept)
+  L0: real 0.000 vs counterfactual 0.139
+  L1: real 0.000 vs counterfactual 0.129
+  L2: real 0.000 vs counterfactual 0.105
+  L3: real 0.000 vs counterfactual 0.100
+  L4: real 0.000 vs counterfactual 0.075
+  L5: real 0.000 vs counterfactual 0.082
+  L6: real 0.000 vs counterfactual 0.073
+== median_list (table shape): 'median of distinct values' real vs counterfactual; even-count share
+  L3: real 0.000 vs counterfactual 0.248; list items with even count 0.589
+  L4: real 0.000 vs counterfactual 0.301; list items with even count 0.516
+  L5: real 0.000 vs counterfactual 0.339; list items with even count 0.593
+  L6: real 0.000 vs counterfactual 0.264; list items with even count 0.504
+== quadratic_area: author's isqrt heuristics real vs counterfactual d ~ U[3, 3 + max(2, hi//2)]; and P(answer < d)
+  L0: real 0.000 vs counterfactual 0.000; P(answer < d) 0.580
+  L1: real 0.000 vs counterfactual 0.000; P(answer < d) 0.493
+  L2: real 0.000 vs counterfactual 0.000; P(answer < d) 0.475
+  L3: real 0.000 vs counterfactual 0.000; P(answer < d) 0.482
+  L4: real 0.000 vs counterfactual 0.000; P(answer < d) 0.403
+  L5: real 0.000 vs counterfactual 0.000; P(answer < d) 0.392
+  L6: real 0.000 vs counterfactual 0.000; P(answer < d) 0.369
+== min_cost_packs: share of items where the optimum equals each naive plan, real (redrawn) vs counterfactual (first draw accepted)
+  L0: real naive-plan hit rates [0.118, 0.025, 0.0, 0.135, 0.115] none 0.608 | counterfactual [0.064, 0.334, 0.157, 0.713, 0.361] none 0.108 | real min-of-naive 0.392
+  L1: real naive-plan hit rates [0.128, 0.038, 0.002, 0.117, 0.129] none 0.587 | counterfactual [0.059, 0.333, 0.166, 0.706, 0.357] none 0.109 | real min-of-naive 0.413
+  L2: real naive-plan hit rates [0.11, 0.043, 0.003, 0.115, 0.11] none 0.621 | counterfactual [0.058, 0.315, 0.14, 0.708, 0.341] none 0.110 | real min-of-naive 0.379
+  L3: real naive-plan hit rates [0.131, 0.051, 0.003, 0.11, 0.127] none 0.580 | counterfactual [0.062, 0.292, 0.142, 0.669, 0.338] none 0.117 | real min-of-naive 0.420
+  L4: real naive-plan hit rates [0.122, 0.056, 0.004, 0.116, 0.117] none 0.586 | counterfactual [0.05, 0.317, 0.158, 0.663, 0.341] none 0.108 | real min-of-naive 0.414
+  L5: real naive-plan hit rates [0.106, 0.059, 0.008, 0.126, 0.121] none 0.580 | counterfactual [0.015, 0.156, 0.098, 0.56, 0.328] none 0.230 | real min-of-naive 0.420
+  L6: real naive-plan hit rates [0.1, 0.067, 0.011, 0.118, 0.105] none 0.600 | counterfactual [0.017, 0.138, 0.083, 0.556, 0.316] none 0.236 | real min-of-naive 0.401
+== tiered_pricing: no rejection in the builder; used > every tier boundary always. Shares: 'units mode' and answer stated anywhere
+  L0: units-mode share 0.000
+  L1: units-mode share 0.000
+  L2: units-mode share 0.000
+  L3: units-mode share 0.406
+  L4: units-mode share 0.406
+  L5: units-mode share 0.398
+  L6: units-mode share 0.387

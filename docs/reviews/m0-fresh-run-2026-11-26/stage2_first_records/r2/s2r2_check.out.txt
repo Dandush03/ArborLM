@@ -1,0 +1,18 @@
+seed 5773622561510341714; items 5950; mismatches+errors 0
+R2.binary_search_trace             covered=True items=350 mismatch=0 errors=0 flags={}
+R2.caesar_shift                    covered=True items=350 mismatch=0 errors=0 flags={}
+R2.cellular_automaton              covered=True items=350 mismatch=0 errors=0 flags={}
+R2.cheapest_network                covered=True items=350 mismatch=0 errors=0 flags={}
+R2.count_divisible                 covered=True items=350 mismatch=0 errors=0 flags={'set_reading_differs_but_stated': 108}
+R2.crt_smallest                    covered=True items=350 mismatch=0 errors=0 flags={}
+R2.dictionary_rank                 covered=True items=350 mismatch=0 errors=0 flags={}
+R2.expression_eval                 covered=True items=350 mismatch=0 errors=0 flags={}
+R2.from_base                       covered=True items=350 mismatch=0 errors=0 flags={}
+R2.grid_sum                        covered=True items=350 mismatch=0 errors=0 flags={'diagonal_of_non_square_grid': 54}
+R2.list_ops                        covered=True items=350 mismatch=0 errors=0 flags={}
+R2.luhn_check                      covered=True items=350 mismatch=0 errors=0 flags={}
+R2.min_heap_ops                    covered=True items=350 mismatch=0 errors=0 flags={}
+R2.run_length                      covered=True items=350 mismatch=0 errors=0 flags={}
+R2.sort_list                       covered=True items=350 mismatch=0 errors=0 flags={}
+R2.string_rewrite_nonidentity      covered=True items=350 mismatch=0 errors=0 flags={}
+R2.to_base_wide                    covered=True items=350 mismatch=0 errors=0 flags={}

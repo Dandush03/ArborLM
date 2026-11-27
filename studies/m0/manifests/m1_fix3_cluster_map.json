@@ -1,0 +1,268 @@
+{
+ "all_written_lineages": 36,
+ "borderline_not_merged": {
+  "clock_duration + S2_weighted_sum": "clock_duration is a sum of differences of clock readings; the author's batch-1 log put it with the weighted sums. The auditor keeps it apart. If merged the strict count is one lower.",
+  "gcd_lcm + crt_congruence": "The lcm ask of gcd_lcm is the CRT sieve with every remainder 0 (auditor, AUDIT3_M1 section 4). If merged the strict count is one lower."
+ },
+ "clusters": {
+  "S1_linear_solve": {
+   "cross_evaluation_same_algorithm": [],
+   "members": [
+    "M1.ages_r3",
+    "M1.average_missing_r3",
+    "M1.coins_r3",
+    "M1.consecutive_r3",
+    "M1.linear_equation_r3",
+    "M1.pipes_work_r3",
+    "M1.rectangle_r3"
+   ]
+  },
+  "S2_weighted_sum": {
+   "cross_evaluation_same_algorithm": [],
+   "members": [
+    "M1.mixture_r3",
+    "M1.shopping_r3",
+    "M1.speed_distance_r3"
+   ]
+  },
+  "S3_multiplicative_chain": {
+   "cross_evaluation_same_algorithm": [],
+   "members": [
+    "M1.fraction_remainder_r3",
+    "M1.percent_change_r3",
+    "M1.ratio_share_r3",
+    "M1.tip_split_r3"
+   ]
+  },
+  "S4_product_rule_counting": {
+   "cross_evaluation_same_algorithm": [],
+   "members": [
+    "M1.slot_permutations_r3"
+   ]
+  },
+  "S5_unbounded_table": {
+   "cross_evaluation_same_algorithm": [
+    "C1.coin_change_table (the ways[T] shape)",
+    "R2.coin_change_min (by S5's own count-versus-min merge)"
+   ],
+   "members": [
+    "M1.change_ways_r3"
+   ]
+  },
+  "S6_exposed_faces": {
+   "cross_evaluation_same_algorithm": [],
+   "members": [
+    "M1.grid_perimeter_r3",
+    "M1.painted_cube_r3"
+   ]
+  },
+  "S7_step_rule": {
+   "cross_evaluation_same_algorithm": [
+    "C1.fib_like",
+    "C1.loop_sum"
+   ],
+   "members": [
+    "M1.arithmetic_series_r3",
+    "M1.recurrence_iterate_r3"
+   ]
+  },
+  "clock_duration": {
+   "cross_evaluation_same_algorithm": [],
+   "members": [
+    "M1.clock_duration_r3"
+   ]
+  },
+  "crt_congruence": {
+   "cross_evaluation_same_algorithm": [
+    "R2.crt_smallest"
+   ],
+   "members": [
+    "M1.crt_congruence_r3"
+   ]
+  },
+  "division_counting": {
+   "cross_evaluation_same_algorithm": [
+    "R2.multiples_between (borderline)"
+   ],
+   "members": [
+    "M1.division_counting_r3"
+   ]
+  },
+  "finite_differences": {
+   "cross_evaluation_same_algorithm": [],
+   "members": [
+    "M1.finite_differences_r3"
+   ]
+  },
+  "gcd_lcm": {
+   "cross_evaluation_same_algorithm": [
+    "R2.gcd_euclid (gcd and lcm asks)",
+    "C1.euclid_gcd",
+    "C1.euclid_gcd_traced"
+   ],
+   "members": [
+    "M1.gcd_lcm_r3"
+   ]
+  },
+  "inclusion_exclusion": {
+   "cross_evaluation_same_algorithm": [
+    "R1.venn_counting",
+    "R1.venn_counting_r4"
+   ],
+   "members": [
+    "M1.inclusion_exclusion_r3"
+   ]
+  },
+  "last_digit_power": {
+   "cross_evaluation_same_algorithm": [
+    "R2.modular_power (cluster with permutation_power)",
+    "C1.fast_power",
+    "C1.fast_power_r2"
+   ],
+   "members": [
+    "M1.last_digit_power_r3"
+   ]
+  },
+  "median_list": {
+   "cross_evaluation_same_algorithm": [
+    "R2.sort_list",
+    "R2.kth_smallest (the audit's R2 sort / kth-smallest cluster)"
+   ],
+   "members": [
+    "M1.median_list_r3"
+   ]
+  },
+  "mode_tally": {
+   "cross_evaluation_same_algorithm": [
+    "C1.counter_list (borderline)",
+    "R2.count_letter (borderline)"
+   ],
+   "members": [
+    "M1.mode_tally_r3"
+   ]
+  },
+  "pigeonhole_worst_case": {
+   "cross_evaluation_same_algorithm": [],
+   "members": [
+    "M1.pigeonhole_worst_case_r3"
+   ]
+  },
+  "prime_factors": {
+   "cross_evaluation_same_algorithm": [
+    "R2.prime_factor_query"
+   ],
+   "members": [
+    "M1.prime_factors_r3"
+   ]
+  },
+  "quadratic_area": {
+   "cross_evaluation_same_algorithm": [],
+   "members": [
+    "M1.quadratic_area_r3"
+   ]
+  },
+  "tiered_pricing": {
+   "cross_evaluation_same_algorithm": [],
+   "members": [
+    "M1.tiered_pricing"
+   ]
+  }
+ },
+ "cross_evaluation": {
+  "S5_unbounded_table": [
+   "C1.coin_change_table (the ways[T] shape)",
+   "R2.coin_change_min (by S5's own count-versus-min merge)"
+  ],
+  "S7_step_rule": [
+   "C1.fib_like",
+   "C1.loop_sum"
+  ],
+  "crt_congruence": [
+   "R2.crt_smallest"
+  ],
+  "gcd_lcm": [
+   "R2.gcd_euclid (gcd and lcm asks)",
+   "C1.euclid_gcd",
+   "C1.euclid_gcd_traced"
+  ],
+  "inclusion_exclusion": [
+   "R1.venn_counting",
+   "R1.venn_counting_r4"
+  ],
+  "last_digit_power": [
+   "R2.modular_power (cluster with permutation_power)",
+   "C1.fast_power",
+   "C1.fast_power_r2"
+  ],
+  "median_list": [
+   "R2.sort_list",
+   "R2.kth_smallest (the audit's R2 sort / kth-smallest cluster)"
+  ],
+  "prime_factors": [
+   "R2.prime_factor_query"
+  ]
+ },
+ "cross_evaluation_borderline": {
+  "division_counting": [
+   "R2.multiples_between"
+  ],
+  "mode_tally": [
+   "C1.counter_list",
+   "R2.count_letter"
+  ]
+ },
+ "excluded_everywhere": [
+  "M1.min_cost_packs_r2",
+  "M1.min_cost_packs"
+ ],
+ "groups": {
+  "S1_linear_solve": [
+   "linear_equation",
+   "ages",
+   "consecutive",
+   "average_missing",
+   "pipes_work",
+   "rectangle",
+   "coins"
+  ],
+  "S2_weighted_sum": [
+   "shopping",
+   "speed_distance",
+   "mixture"
+  ],
+  "S3_multiplicative_chain": [
+   "percent_change",
+   "fraction_remainder",
+   "tip_split",
+   "ratio_share"
+  ],
+  "S4_product_rule_counting": [
+   "binomial_choose",
+   "slot_permutations"
+  ],
+  "S5_unbounded_table": [
+   "change_ways"
+  ],
+  "S6_exposed_faces": [
+   "grid_perimeter",
+   "painted_cube"
+  ],
+  "S7_step_rule": [
+   "arithmetic_series",
+   "recurrence_iterate"
+  ]
+ },
+ "not_registered": {
+  "M1.binomial_choose_r3": "Capacity at the low levels cannot be reached without changing the difficulty. The plain and 'must include' shapes of rev2 are a few hundred items; the group-product shape that replaces them has exact support 620, 892 and 1,982 at levels 0-2 (caps 10^4..10^6, groups of at most 14..18 people); even groups of 30 people picking up to 5 (answers up to 10^10) give 9,447. Measured n_eff 613, 883, 1,957 at levels 0-2 against 22,830 (and against 11,415 as one of two members of S4). Cluster S4 continues with slot_permutations alone (a one-member cluster; the cluster count is unchanged).",
+  "M1.digit_puzzle_r3": "Capacity and the tell, both measured. The wording and the 'exactly once / at least once' ambiguity are fixed, and the printed clue set is minimal, but (a) the number of distinct puzzles is bounded by the 90 two-digit and 900 three-digit secrets times their clue sets: measured n_eff (final set) is far below 22,830 at levels 0-2 (see the manifest; the best attempt reached 18,000 at levels 3-4 and 26,000 at levels 5-6), so no 'partial level' set exists; (b) with three or more necessary clues the first two printed clues still leave only a few numbers, so 'the smallest number meeting the first two clues' scores +0.12 to +0.28 (requiring 8 left over by every all-but-one set made a valid draw take seconds at levels 5-6; 4 was kept). The builder stays on file as an attempt.",
+  "M1.pythagoras_r3": "Capacity and the memorised-triple tell cannot both be fixed. Integer right triangles are sparse: 294 with hypotenuse <= 400, 1,981 with <= 2,000, 3,414 with <= 3,200 (exact enumeration). The mixture of the five shapes needs about 8,300 triangles for the demand with margin (n_eff = 3.57 x the number of triangles), which needs hypotenuse <= about 7,000 (squares of 5 x 10^7) even at level 0, so no level-meaningful widening exists. Measured n_eff of the primitive-first attempt: 345, 704, 1,066, 1,431, 1,743, 2,098, 2,491 (levels 0-6) against 22,830. The catalogue of the 16 primitive triples scaled still scores +0.23 at level 0 (+0.13 at level 1). The builder stays on file as an attempt."
+ },
+ "note": "Strict cluster map of the fix-round-3 M1 set (auditor's strict map, rulings R-2 and R-12). Counts are over REGISTERED candidates only; a lineage marked NOT REGISTERED is excluded from the map's count; min_cost_packs is excluded everywhere. Not human approval; not Astra review.",
+ "registered_lineages": 33,
+ "strict_cluster_count": 20,
+ "strict_cluster_count_if_borderline_merged": {
+  "both": 18,
+  "clock_duration + S2_weighted_sum": 19,
+  "gcd_lcm + crt_congruence": 19
+ }
+}

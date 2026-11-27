@@ -1,0 +1,905 @@
+{
+ "a_files_that_define_Lineage_build": {
+  "count": 20,
+  "sha256": {
+   "studies/m0/lineages_c1_fix3_lists.py": "65d96441f70307f805a03b23efde2db37b6c87837e06e2986367c693ebcac2f9",
+   "studies/m0/lineages_c1_fix3_numbers.py": "d241ca4dab216ceaee8322ca16fc8ce0efc40011d86b2cd9d55bd9468f23b296",
+   "studies/m0/lineages_c1_fix3_other.py": "f80fa5d7968eeb13341c122ef6eca721cd305053903c9476e12a1ab47a537e61",
+   "studies/m0/lineages_c1_fix4.py": "2372627593ee6944fe981e16b88e84607d4c59ea429dd661b88b0c8bc23072ab",
+   "studies/m0/lineages_c1_rev2.py": "6f0a4b412b4475fad35ce625657999fa4ee8dbff20a2f94b9c046728ad309aa5",
+   "studies/m0/lineages_c1_stacks.py": "c3df7045acaa9b116cb236875fbee370e39f5addea3f0d28ced8e1a2a8eb65df",
+   "studies/m0/lineages_c1_strings.py": "3df35e101293ec7b3585d830c81986fd0a614a03724ac3cf5c2eda977e800e16",
+   "studies/m0/lineages_m1_fix3_a.py": "c48b51253a035881013907f48e3ca8f9aa5a5d1ba297c09534dbe43abe948ebb",
+   "studies/m0/lineages_m1_fix3_b.py": "7ade8498571d07c91faaa7496d9b6fcb661c06d674b44949896782bad0187b93",
+   "studies/m0/lineages_m1_fix3_c.py": "0c297cd8edf34aebeb9f93f5324ce42088cff821e2e8b12ca40339ba5693fe12",
+   "studies/m0/lineages_m1_fix4.py": "da6027f4718e0898f9b05be87e1ab4f146d3c9994b2c97fe4a96f7258ec977f5",
+   "studies/m0/lineages_m1_pricing.py": "4590a6476aaf9085d900159879137e1b95283e4092be562756bbeaaf54b44742",
+   "studies/m0/lineages_r1.py": "19360b3512baeec84af00afac39d3b843c7d4448d2dfbc24ffdb793ff7b966e4",
+   "studies/m0/lineages_r1_fix4_a.py": "81cbb05a3393a6457f1a4c30e33714c71036d7628fe899ece0b8dbbbf240540a",
+   "studies/m0/lineages_r1_rev4.py": "e14e21eaae16a87f644d3c712d92ea89e0c4fc2172b66857a10de399fba09a24",
+   "studies/m0/lineages_r2.py": "d667aecce8bc0071852350bfc1dad0fb03ff8fe7970b04fdfa10fdd611a6c573",
+   "studies/m0/lineages_r2_codes.py": "6cef04cd11d15109d07228a9f6da9498e8f68aa54e72fde6c5255bf526eac4a4",
+   "studies/m0/lineages_r2_fix3.py": "c833639b36c2a54c31156cbb22cee6acfc1407cd96036132ab1fa12f8cf67310",
+   "studies/m0/lineages_r2_fix4.py": "e9ee7fdbaa57d92aee4cff21b3e525fda3da7d53b646388cdf04ddf280a7b8e6",
+   "studies/m0/lineages_r2_rev2.py": "690e790eddcf5386ecf0876c9bcb41f9ff7b4e9b143f2f57c864871d268e6dfa"
+  }
+ },
+ "b_files_of_every_function_reachable_from_build": {
+  "count": 32,
+  "sha256": {
+   "studies/m0/c1grammar.py": "5832f18cdbc76626007aa9cbeb7c2a788cacf36a89a610c81e62171313c1d0ca",
+   "studies/m0/lineages_c1.py": "71acde8c46eabf7f1fa5e49f5b2b0f065b3800a20b2878943e21c8f07f623f61",
+   "studies/m0/lineages_c1_common.py": "230311688960cc781a7ffff28f6ad621afc743ff8c91834df6d33781c1d147e6",
+   "studies/m0/lineages_c1_fix3_lists.py": "65d96441f70307f805a03b23efde2db37b6c87837e06e2986367c693ebcac2f9",
+   "studies/m0/lineages_c1_fix3_numbers.py": "d241ca4dab216ceaee8322ca16fc8ce0efc40011d86b2cd9d55bd9468f23b296",
+   "studies/m0/lineages_c1_fix3_other.py": "f80fa5d7968eeb13341c122ef6eca721cd305053903c9476e12a1ab47a537e61",
+   "studies/m0/lineages_c1_fix4.py": "2372627593ee6944fe981e16b88e84607d4c59ea429dd661b88b0c8bc23072ab",
+   "studies/m0/lineages_c1_rev2.py": "6f0a4b412b4475fad35ce625657999fa4ee8dbff20a2f94b9c046728ad309aa5",
+   "studies/m0/lineages_c1_stacks.py": "c3df7045acaa9b116cb236875fbee370e39f5addea3f0d28ced8e1a2a8eb65df",
+   "studies/m0/lineages_c1_strings.py": "3df35e101293ec7b3585d830c81986fd0a614a03724ac3cf5c2eda977e800e16",
+   "studies/m0/lineages_m1.py": "0001c72b2f2944aee4c1a85b6126df3d204049a8b41262e9f2b15d8cdbe269af",
+   "studies/m0/lineages_m1_fix3_a.py": "c48b51253a035881013907f48e3ca8f9aa5a5d1ba297c09534dbe43abe948ebb",
+   "studies/m0/lineages_m1_fix3_b.py": "7ade8498571d07c91faaa7496d9b6fcb661c06d674b44949896782bad0187b93",
+   "studies/m0/lineages_m1_fix3_c.py": "0c297cd8edf34aebeb9f93f5324ce42088cff821e2e8b12ca40339ba5693fe12",
+   "studies/m0/lineages_m1_fix3_common.py": "3406737f0c258f75ecf064885c6a6be287b39e9475d60d29962cb399fc0ee773",
+   "studies/m0/lineages_m1_fix4.py": "da6027f4718e0898f9b05be87e1ab4f146d3c9994b2c97fe4a96f7258ec977f5",
+   "studies/m0/lineages_m1_pricing.py": "4590a6476aaf9085d900159879137e1b95283e4092be562756bbeaaf54b44742",
+   "studies/m0/lineages_r1.py": "19360b3512baeec84af00afac39d3b843c7d4448d2dfbc24ffdb793ff7b966e4",
+   "studies/m0/lineages_r1_common.py": "9153c13004ed8c222be5fd8d0dbde6e718483478553a779298a760437e4dad23",
+   "studies/m0/lineages_r1_fix3_b.py": "10d7e98e64cc7eb6226c72e4fc6c3832d0e4c619f5a5230cf4df2953116f13dc",
+   "studies/m0/lineages_r1_fix3_c.py": "ce9f52d260cd17eba50d380116d8223e08dfe097ecfcb25d69b62be1e69498b8",
+   "studies/m0/lineages_r1_fix4_a.py": "81cbb05a3393a6457f1a4c30e33714c71036d7628fe899ece0b8dbbbf240540a",
+   "studies/m0/lineages_r1_rev4.py": "e14e21eaae16a87f644d3c712d92ea89e0c4fc2172b66857a10de399fba09a24",
+   "studies/m0/lineages_r2.py": "d667aecce8bc0071852350bfc1dad0fb03ff8fe7970b04fdfa10fdd611a6c573",
+   "studies/m0/lineages_r2_codes.py": "6cef04cd11d15109d07228a9f6da9498e8f68aa54e72fde6c5255bf526eac4a4",
+   "studies/m0/lineages_r2_common.py": "1c0008fb070913a64daecd73070be03605a77b9efc0fece8259508dd69ee75ff",
+   "studies/m0/lineages_r2_fix3.py": "c833639b36c2a54c31156cbb22cee6acfc1407cd96036132ab1fa12f8cf67310",
+   "studies/m0/lineages_r2_fix3_b.py": "581f5585eca2b03eaf0f5b90ce936bf04ad24e8f9359c3e362994f65ded71920",
+   "studies/m0/lineages_r2_fix4.py": "e9ee7fdbaa57d92aee4cff21b3e525fda3da7d53b646388cdf04ddf280a7b8e6",
+   "studies/m0/lineages_r2_graphs.py": "b3232aa25084e7c38a49a57dd44744293a28b9881fb5c13e0a6776c5788102b9",
+   "studies/m0/lineages_r2_parsing.py": "10ac4c89e2a8c8a97cb6a1b9485bab18af8c5f3ebcb6b1fab3cc5d21447e55b4",
+   "studies/m0/lineages_r2_rev2.py": "690e790eddcf5386ecf0876c9bcb41f9ff7b4e9b143f2f57c864871d268e6dfa"
+  }
+ },
+ "c_static_import_closure_of_b_recommended_freeze_list": {
+  "count": 49,
+  "sha256": {
+   "studies/m0/__init__.py": "56e493099672d2c3628af55cbf456c53b12c43ba8e601d602c4ebe2731dbcb2d",
+   "studies/m0/c1grammar.py": "5832f18cdbc76626007aa9cbeb7c2a788cacf36a89a610c81e62171313c1d0ca",
+   "studies/m0/core.py": "07907f1e559f6814e52b1307d6b009003130ba7297f0c1fa04fa3185441cc81d",
+   "studies/m0/lineages_c1.py": "71acde8c46eabf7f1fa5e49f5b2b0f065b3800a20b2878943e21c8f07f623f61",
+   "studies/m0/lineages_c1_common.py": "230311688960cc781a7ffff28f6ad621afc743ff8c91834df6d33781c1d147e6",
+   "studies/m0/lineages_c1_fix3.py": "f72d85753d920510dec9cce3867497bb190e153f6a11d4365ea5fe98bd0a116e",
+   "studies/m0/lineages_c1_fix3_lists.py": "65d96441f70307f805a03b23efde2db37b6c87837e06e2986367c693ebcac2f9",
+   "studies/m0/lineages_c1_fix3_numbers.py": "d241ca4dab216ceaee8322ca16fc8ce0efc40011d86b2cd9d55bd9468f23b296",
+   "studies/m0/lineages_c1_fix3_other.py": "f80fa5d7968eeb13341c122ef6eca721cd305053903c9476e12a1ab47a537e61",
+   "studies/m0/lineages_c1_fix4.py": "2372627593ee6944fe981e16b88e84607d4c59ea429dd661b88b0c8bc23072ab",
+   "studies/m0/lineages_c1_rev2.py": "6f0a4b412b4475fad35ce625657999fa4ee8dbff20a2f94b9c046728ad309aa5",
+   "studies/m0/lineages_c1_rev2_traced.py": "4706de7dfdb1ab2636f1e94770b5eee0503a09ade24c0622a9065eec4cfaed0f",
+   "studies/m0/lineages_c1_stacks.py": "c3df7045acaa9b116cb236875fbee370e39f5addea3f0d28ced8e1a2a8eb65df",
+   "studies/m0/lineages_c1_strings.py": "3df35e101293ec7b3585d830c81986fd0a614a03724ac3cf5c2eda977e800e16",
+   "studies/m0/lineages_k0.py": "594c1867f519cd6598ab67126338d869c8966f32da333bbae341f355a9419d08",
+   "studies/m0/lineages_m1.py": "0001c72b2f2944aee4c1a85b6126df3d204049a8b41262e9f2b15d8cdbe269af",
+   "studies/m0/lineages_m1_common.py": "06aa138807d88b950bcceb19526e3f5b75be26e737d2e341b38dabbf5d8546fe",
+   "studies/m0/lineages_m1_fix3.py": "041fab82d0f4cb1dd14205bd774f032dbd678c92803511b06afc200999d458c1",
+   "studies/m0/lineages_m1_fix3_a.py": "c48b51253a035881013907f48e3ca8f9aa5a5d1ba297c09534dbe43abe948ebb",
+   "studies/m0/lineages_m1_fix3_b.py": "7ade8498571d07c91faaa7496d9b6fcb661c06d674b44949896782bad0187b93",
+   "studies/m0/lineages_m1_fix3_c.py": "0c297cd8edf34aebeb9f93f5324ce42088cff821e2e8b12ca40339ba5693fe12",
+   "studies/m0/lineages_m1_fix3_common.py": "3406737f0c258f75ecf064885c6a6be287b39e9475d60d29962cb399fc0ee773",
+   "studies/m0/lineages_m1_fix4.py": "da6027f4718e0898f9b05be87e1ab4f146d3c9994b2c97fe4a96f7258ec977f5",
+   "studies/m0/lineages_m1_pricing.py": "4590a6476aaf9085d900159879137e1b95283e4092be562756bbeaaf54b44742",
+   "studies/m0/lineages_r1.py": "19360b3512baeec84af00afac39d3b843c7d4448d2dfbc24ffdb793ff7b966e4",
+   "studies/m0/lineages_r1_common.py": "9153c13004ed8c222be5fd8d0dbde6e718483478553a779298a760437e4dad23",
+   "studies/m0/lineages_r1_conditional.py": "09a4b715e4b591dc95227dd38553c660bc63f0f255235c79e1c5a6a55160f2c9",
+   "studies/m0/lineages_r1_fix3_b.py": "10d7e98e64cc7eb6226c72e4fc6c3832d0e4c619f5a5230cf4df2953116f13dc",
+   "studies/m0/lineages_r1_fix3_c.py": "ce9f52d260cd17eba50d380116d8223e08dfe097ecfcb25d69b62be1e69498b8",
+   "studies/m0/lineages_r1_fix3_common.py": "fa87936f535cdf4843c41c4e507638b095ab291b10fb9ce402302ae5293a33cc",
+   "studies/m0/lineages_r1_fix4_a.py": "81cbb05a3393a6457f1a4c30e33714c71036d7628fe899ece0b8dbbbf240540a",
+   "studies/m0/lineages_r1_fix4_common.py": "137479efd834debc1fc956acebfe079ccf4591330f2e6c43a28f17ffb4fe501f",
+   "studies/m0/lineages_r1_rev4.py": "e14e21eaae16a87f644d3c712d92ea89e0c4fc2172b66857a10de399fba09a24",
+   "studies/m0/lineages_r1_rev4_common.py": "91faaad025290762e7e0757520aa2e279fdeb7d75f62adbadb9a4673a927bfba",
+   "studies/m0/lineages_r2.py": "d667aecce8bc0071852350bfc1dad0fb03ff8fe7970b04fdfa10fdd611a6c573",
+   "studies/m0/lineages_r2_codes.py": "6cef04cd11d15109d07228a9f6da9498e8f68aa54e72fde6c5255bf526eac4a4",
+   "studies/m0/lineages_r2_common.py": "1c0008fb070913a64daecd73070be03605a77b9efc0fece8259508dd69ee75ff",
+   "studies/m0/lineages_r2_dynprog.py": "526e99602af7e23ec80268f0eff0c082555f1cf0767f6fad01b2c41792fd4767",
+   "studies/m0/lineages_r2_fix3.py": "c833639b36c2a54c31156cbb22cee6acfc1407cd96036132ab1fa12f8cf67310",
+   "studies/m0/lineages_r2_fix3_b.py": "581f5585eca2b03eaf0f5b90ce936bf04ad24e8f9359c3e362994f65ded71920",
+   "studies/m0/lineages_r2_fix3_c.py": "7f64139719a33c5c0f7f5a702de862590fb6056095074c4dd531fea94f2227c2",
+   "studies/m0/lineages_r2_fix4.py": "e9ee7fdbaa57d92aee4cff21b3e525fda3da7d53b646388cdf04ddf280a7b8e6",
+   "studies/m0/lineages_r2_graphs.py": "b3232aa25084e7c38a49a57dd44744293a28b9881fb5c13e0a6776c5788102b9",
+   "studies/m0/lineages_r2_parsing.py": "10ac4c89e2a8c8a97cb6a1b9485bab18af8c5f3ebcb6b1fab3cc5d21447e55b4",
+   "studies/m0/lineages_r2_rev2.py": "690e790eddcf5386ecf0876c9bcb41f9ff7b4e9b143f2f57c864871d268e6dfa",
+   "studies/m0/lineages_r2_structures.py": "88b524efc9651f1cce09bb6fb1d5128bd5c4c9bebfc109b97929b96fbe70eddb",
+   "studies/m0/scoring.py": "e5007eb53456849b45b142a6789ccf933be26e103a2384281253486b615e97a7",
+   "studies/m0/solvers_c1.py": "aafedb5be92a8dcdfaa4f6ed8587d2fed2eb980a78d9d71791364e1ed2f2360d",
+   "studies/m0/vocab.py": "2c4036bea7770727b3ec0582f361723c243c145de3479e8d610a384a7a93c286"
+  }
+ },
+ "d_every_worktree_file_loaded_by_importing_the_four_loaders_superset": {
+  "count": 97,
+  "sha256": {
+   "studies/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "studies/m0/__init__.py": "56e493099672d2c3628af55cbf456c53b12c43ba8e601d602c4ebe2731dbcb2d",
+   "studies/m0/c1grammar.py": "5832f18cdbc76626007aa9cbeb7c2a788cacf36a89a610c81e62171313c1d0ca",
+   "studies/m0/core.py": "07907f1e559f6814e52b1307d6b009003130ba7297f0c1fa04fa3185441cc81d",
+   "studies/m0/lineages_c1.py": "71acde8c46eabf7f1fa5e49f5b2b0f065b3800a20b2878943e21c8f07f623f61",
+   "studies/m0/lineages_c1_common.py": "230311688960cc781a7ffff28f6ad621afc743ff8c91834df6d33781c1d147e6",
+   "studies/m0/lineages_c1_fix3.py": "f72d85753d920510dec9cce3867497bb190e153f6a11d4365ea5fe98bd0a116e",
+   "studies/m0/lineages_c1_fix3_lists.py": "65d96441f70307f805a03b23efde2db37b6c87837e06e2986367c693ebcac2f9",
+   "studies/m0/lineages_c1_fix3_numbers.py": "d241ca4dab216ceaee8322ca16fc8ce0efc40011d86b2cd9d55bd9468f23b296",
+   "studies/m0/lineages_c1_fix3_other.py": "f80fa5d7968eeb13341c122ef6eca721cd305053903c9476e12a1ab47a537e61",
+   "studies/m0/lineages_c1_fix4.py": "2372627593ee6944fe981e16b88e84607d4c59ea429dd661b88b0c8bc23072ab",
+   "studies/m0/lineages_c1_functions.py": "93b8b7b0d3684f5e8c483437fee91aa0fed2fabd6cd6f8881d770852fa420cba",
+   "studies/m0/lineages_c1_graphs.py": "0e866c8c68a4716ce4a5ac86ec6fc628ff6f66e4aa201f8ce6b5ff0b0d986f39",
+   "studies/m0/lineages_c1_lists.py": "33d922bccb228fa7fa5ad49a9abf16c6e7a61355dae70f2bc9f3a36917ba20b6",
+   "studies/m0/lineages_c1_minmax.py": "30cab0ed43229a66bb511db88e99b3edafc40de68eaf0b6069c9d59aa0198eaf",
+   "studies/m0/lineages_c1_references.py": "fadeaad4d9fd3531aa382f37c6eb9023878fdacd0da56d4635138f448f12c353",
+   "studies/m0/lineages_c1_rev2.py": "6f0a4b412b4475fad35ce625657999fa4ee8dbff20a2f94b9c046728ad309aa5",
+   "studies/m0/lineages_c1_rev2_traced.py": "4706de7dfdb1ab2636f1e94770b5eee0503a09ade24c0622a9065eec4cfaed0f",
+   "studies/m0/lineages_c1_simulation.py": "58aae7239dc0ab2458d85286bd61a61764acbb4a0a15976e8da141c1964fd960",
+   "studies/m0/lineages_c1_stacks.py": "c3df7045acaa9b116cb236875fbee370e39f5addea3f0d28ced8e1a2a8eb65df",
+   "studies/m0/lineages_c1_strings.py": "3df35e101293ec7b3585d830c81986fd0a614a03724ac3cf5c2eda977e800e16",
+   "studies/m0/lineages_c1_swaps.py": "3043a55b63e5fdfdd8efa3cc24cb50061c53cd3e79e34b1d65d10aad65893225",
+   "studies/m0/lineages_c1_tables.py": "c627249cda92e17f858906de255d1155a37972425de5e0738a2c7095193912af",
+   "studies/m0/lineages_c1_while.py": "6b6631f162de16ee7d5895a414a4c1a473e6e0a8df4913dbca1b3c685cfdabab",
+   "studies/m0/lineages_k0.py": "594c1867f519cd6598ab67126338d869c8966f32da333bbae341f355a9419d08",
+   "studies/m0/lineages_m1.py": "0001c72b2f2944aee4c1a85b6126df3d204049a8b41262e9f2b15d8cdbe269af",
+   "studies/m0/lineages_m1_algebra.py": "ec38375eee55b5441910156b8d5dd802a0833ad3f96dfe46d47c3600cffd3667",
+   "studies/m0/lineages_m1_common.py": "06aa138807d88b950bcceb19526e3f5b75be26e737d2e341b38dabbf5d8546fe",
+   "studies/m0/lineages_m1_counting.py": "b2f3d4ae121ca75e880f8926ab27ff641de780af0c1efe71262ae7d11ad896f1",
+   "studies/m0/lineages_m1_division.py": "e991d142e618b81a5d01f775f8cbc0f937244dd904778f9b79778aee2444e9e8",
+   "studies/m0/lineages_m1_fix3.py": "041fab82d0f4cb1dd14205bd774f032dbd678c92803511b06afc200999d458c1",
+   "studies/m0/lineages_m1_fix3_a.py": "c48b51253a035881013907f48e3ca8f9aa5a5d1ba297c09534dbe43abe948ebb",
+   "studies/m0/lineages_m1_fix3_b.py": "7ade8498571d07c91faaa7496d9b6fcb661c06d674b44949896782bad0187b93",
+   "studies/m0/lineages_m1_fix3_c.py": "0c297cd8edf34aebeb9f93f5324ce42088cff821e2e8b12ca40339ba5693fe12",
+   "studies/m0/lineages_m1_fix3_common.py": "3406737f0c258f75ecf064885c6a6be287b39e9475d60d29962cb399fc0ee773",
+   "studies/m0/lineages_m1_fix4.py": "da6027f4718e0898f9b05be87e1ab4f146d3c9994b2c97fe4a96f7258ec977f5",
+   "studies/m0/lineages_m1_geometry.py": "643aef76fdc078b696830e9fb8ecbe2ff8c2a1f6082e5b879f464f7593cdfa06",
+   "studies/m0/lineages_m1_number_theory.py": "5d317ebc5dd04a43dc27cc6a46377d2befada99cc9bb0e72bf4e238c0a1f458a",
+   "studies/m0/lineages_m1_pricing.py": "4590a6476aaf9085d900159879137e1b95283e4092be562756bbeaaf54b44742",
+   "studies/m0/lineages_m1_sequences.py": "913ac539fd275d27dbcff5f179e50e3cce28ed2dbaac42d215eb535c462cc3db",
+   "studies/m0/lineages_m1_statistics.py": "5ad17dccd94851fc5ebd8a0e3da5b4ed9007bd4282df58244a2017446ac5d6ea",
+   "studies/m0/lineages_r1.py": "19360b3512baeec84af00afac39d3b843c7d4448d2dfbc24ffdb793ff7b966e4",
+   "studies/m0/lineages_r1_boolean_state.py": "d7b66ac56aa52471d9bd875aa39d522f08af1864f1413f6595ac01b600e3247e",
+   "studies/m0/lineages_r1_categories.py": "44f8bf499e89467fd4cf903eb15254dc359ce42d1bfe7c036bf15602b8108e82",
+   "studies/m0/lineages_r1_clusters.py": "d1d82abff54314489425dd2dc31122bb7ea98f5942d746f1bc31bb0b2755870e",
+   "studies/m0/lineages_r1_clusters_v2.py": "811ec7b50dee53e29cac99a9dd03461af41fdb0296a02c8fa2bd9ad82f0aacea",
+   "studies/m0/lineages_r1_common.py": "9153c13004ed8c222be5fd8d0dbde6e718483478553a779298a760437e4dad23",
+   "studies/m0/lineages_r1_conditional.py": "09a4b715e4b591dc95227dd38553c660bc63f0f255235c79e1c5a6a55160f2c9",
+   "studies/m0/lineages_r1_containers.py": "6068b93f42b550ad5dc9cdd255a6bdf004d526edf7ab0f5deda98341109fc8e2",
+   "studies/m0/lineages_r1_elimination.py": "4336425c19e7129f73bdd53950dbf2e7b694c27200320db6f535982c3657bad2",
+   "studies/m0/lineages_r1_equivalence.py": "e88d50d5a8622530f5149ea6ae7ca94c35a802bb0d20b0b9e157dca5c8ae3bb1",
+   "studies/m0/lineages_r1_fix3_a.py": "c0e5c15b1a902cd601c220e7cc2096b83a818c79290ade4db264b9d1bdd8b435",
+   "studies/m0/lineages_r1_fix3_b.py": "10d7e98e64cc7eb6226c72e4fc6c3832d0e4c619f5a5230cf4df2953116f13dc",
+   "studies/m0/lineages_r1_fix3_c.py": "ce9f52d260cd17eba50d380116d8223e08dfe097ecfcb25d69b62be1e69498b8",
+   "studies/m0/lineages_r1_fix3_clusters.py": "e7c26e08290e8acabb4314b51d81428b0e946db98755ad9a702a6177d90096aa",
+   "studies/m0/lineages_r1_fix3_common.py": "fa87936f535cdf4843c41c4e507638b095ab291b10fb9ce402302ae5293a33cc",
+   "studies/m0/lineages_r1_fix3_d.py": "8ca69ebf83719adbd7f811b18082850112805213bdd3067e33ba7232ca25af66",
+   "studies/m0/lineages_r1_fix3_e.py": "254eb4f054cf978b89487459c0a04280a8673bd24288db79d5a975f079b3fd6f",
+   "studies/m0/lineages_r1_fix4_a.py": "81cbb05a3393a6457f1a4c30e33714c71036d7628fe899ece0b8dbbbf240540a",
+   "studies/m0/lineages_r1_fix4_clusters.py": "f7161d82c55d02f6991ee25a20aaae253bf7c5fa420ee9b0e86a37509aa2cd38",
+   "studies/m0/lineages_r1_fix4_common.py": "137479efd834debc1fc956acebfe079ccf4591330f2e6c43a28f17ffb4fe501f",
+   "studies/m0/lineages_r1_graph.py": "944d41ee630a5205c6476479eeddf7839841bad4b30a37d2d738ca5c14ed98d3",
+   "studies/m0/lineages_r1_kinship.py": "13dbafe91b7c3ddc307c5e1ca446dda70a23ffd4914349d87ea6e48e469331ef",
+   "studies/m0/lineages_r1_new2.py": "e8bd9e7f0938b8831b0c6fc07e361277c646676b65aa40bfddc6469a09e0200e",
+   "studies/m0/lineages_r1_order.py": "88785564dc8865ba16fadd216e54512adfff376d716326db3d6180589454edcf",
+   "studies/m0/lineages_r1_rev2.py": "5b8e9892cc79e9676ed02f4e30e8695c1a9252ca3154b8bef51db14fbcda00f0",
+   "studies/m0/lineages_r1_rev3.py": "43a79c43e1de9666d5057bfd3a7f99d91343b803f274cd67db1e975305ed1041",
+   "studies/m0/lineages_r1_rev4.py": "e14e21eaae16a87f644d3c712d92ea89e0c4fc2172b66857a10de399fba09a24",
+   "studies/m0/lineages_r1_rev4_b.py": "9ce79b7d91464b5278a4f0bd6d304566bda7b087aafc82a88081bd94ef08a32b",
+   "studies/m0/lineages_r1_rev4_c.py": "8ba769ac0a1763a625eb4754b4b3c5b8eea3958dcb113b867c97de4fae391855",
+   "studies/m0/lineages_r1_rev4_common.py": "91faaad025290762e7e0757520aa2e279fdeb7d75f62adbadb9a4673a927bfba",
+   "studies/m0/lineages_r1_shortcuts.py": "df75f49a790ab546d2e417bebfe62e54f8c03ed2e1ad061c4ec8f44e072473b8",
+   "studies/m0/lineages_r1_spatial.py": "c54f1f5bfa113a7eea97b8733d4d0a9c7a9cf8dde8ea0bdbc64cde5749366438",
+   "studies/m0/lineages_r1_temporal.py": "df037fae3e0319097ab6715df4bc4a6a56d2960ef2965080a02b0c556064f15f",
+   "studies/m0/lineages_r1_tracking.py": "f7689da0dbfa5316d1000ed80269a9a86f5ec716dc551749789185462c80d028",
+   "studies/m0/lineages_r2.py": "d667aecce8bc0071852350bfc1dad0fb03ff8fe7970b04fdfa10fdd611a6c573",
+   "studies/m0/lineages_r2_codes.py": "6cef04cd11d15109d07228a9f6da9498e8f68aa54e72fde6c5255bf526eac4a4",
+   "studies/m0/lineages_r2_combinatorics.py": "a03698ded097182a604c6574d0af510ade3565e9e193b379a327ffdf84f9ca5f",
+   "studies/m0/lineages_r2_common.py": "1c0008fb070913a64daecd73070be03605a77b9efc0fece8259508dd69ee75ff",
+   "studies/m0/lineages_r2_dynamics.py": "f10a82187690a425cc7aa00d4b7a0de43a1ffb41ce3ed960bd5357bc620d5654",
+   "studies/m0/lineages_r2_dynprog.py": "526e99602af7e23ec80268f0eff0c082555f1cf0767f6fad01b2c41792fd4767",
+   "studies/m0/lineages_r2_fix3.py": "c833639b36c2a54c31156cbb22cee6acfc1407cd96036132ab1fa12f8cf67310",
+   "studies/m0/lineages_r2_fix3_b.py": "581f5585eca2b03eaf0f5b90ce936bf04ad24e8f9359c3e362994f65ded71920",
+   "studies/m0/lineages_r2_fix3_c.py": "7f64139719a33c5c0f7f5a702de862590fb6056095074c4dd531fea94f2227c2",
+   "studies/m0/lineages_r2_fix4.py": "e9ee7fdbaa57d92aee4cff21b3e525fda3da7d53b646388cdf04ddf280a7b8e6",
+   "studies/m0/lineages_r2_games.py": "efa29d814539c757c8071b1d059bee542050c21ee67e217d1422448cc59638b0",
+   "studies/m0/lineages_r2_graphs.py": "b3232aa25084e7c38a49a57dd44744293a28b9881fb5c13e0a6776c5788102b9",
+   "studies/m0/lineages_r2_greedy.py": "57a9cf1b0b7210afbc329612ce710c5bb3521e8597cda793a53f143f023aff11",
+   "studies/m0/lineages_r2_numtheory.py": "8f83354e324c43e742a8ead2a6db59ed7f2263331f559d93346452a586571aaf",
+   "studies/m0/lineages_r2_parsing.py": "10ac4c89e2a8c8a97cb6a1b9485bab18af8c5f3ebcb6b1fab3cc5d21447e55b4",
+   "studies/m0/lineages_r2_rev2.py": "690e790eddcf5386ecf0876c9bcb41f9ff7b4e9b143f2f57c864871d268e6dfa",
+   "studies/m0/lineages_r2_search.py": "e85b93a5646165226768ab2bb72e72a1b37c77aa4ea5f04f4655fb45c31bdc35",
+   "studies/m0/lineages_r2_strings.py": "e1634fafa37b14432594e3922dccd46d77e660c081331c08aa20932fc7befbf9",
+   "studies/m0/lineages_r2_structures.py": "88b524efc9651f1cce09bb6fb1d5128bd5c4c9bebfc109b97929b96fbe70eddb",
+   "studies/m0/r2_fix3_set.py": "0c09653ed8296af5dfc992b21d560b33775a4e0ce59b7eab5547855fa8c06c27",
+   "studies/m0/r2_fix4_set.py": "60cbef999cc17df17697a0fde5a4d16ce13b25c24fb8046b5b9924dc5dde8c9c",
+   "studies/m0/vocab.py": "2c4036bea7770727b3ec0582f361723c243c145de3479e8d610a384a7a93c286"
+  }
+ },
+ "generators_commit": "7cd0ac5a2a2c5261352e66b4a41650576dcfe1be",
+ "head_of_claude_m0_impl": "e57f870951cb16e672ad536a3b75c2e13be923a4",
+ "loaders_named_by_capacity_RealSource": {
+  "studies/m0/lineages_c1_fix4.py": "2372627593ee6944fe981e16b88e84607d4c59ea429dd661b88b0c8bc23072ab",
+  "studies/m0/lineages_m1_fix4.py": "da6027f4718e0898f9b05be87e1ab4f146d3c9994b2c97fe4a96f7258ec977f5",
+  "studies/m0/lineages_r1_fix4_clusters.py": "f7161d82c55d02f6991ee25a20aaae253bf7c5fa420ee9b0e86a37509aa2cd38",
+  "studies/m0/r2_fix4_set.py": "60cbef999cc17df17697a0fde5a4d16ce13b25c24fb8046b5b9924dc5dde8c9c"
+ },
+ "method": "the four loaders that capacity.py RealSource uses were imported; per lineage, (a) the file that defines Lineage.build, (b) every file of a function reachable from it through closures, partials, defaults, __wrapped__ and global function names of studies.m0 named in its code (runtime introspection), (c) the static import closure (AST) of the files of (b) under studies/; (d) every file of the worktree that the import of the four loaders loaded. No build function was called; no item generated.",
+ "per_registered_lineage": {
+  "C1.binary_search_f3": {
+   "build_defined_in": "studies/m0/lineages_c1_fix3_lists.py",
+   "build_qualname": "binary_search_f3",
+   "family": "lists",
+   "files_of_functions_behind_build": [
+    "studies/m0/c1grammar.py",
+    "studies/m0/lineages_c1.py",
+    "studies/m0/lineages_c1_common.py",
+    "studies/m0/lineages_c1_fix3_lists.py"
+   ]
+  },
+  "C1.bracket_matching_f3": {
+   "build_defined_in": "studies/m0/lineages_c1_fix3_other.py",
+   "build_qualname": "bracket_matching_f3",
+   "family": "stacks",
+   "files_of_functions_behind_build": [
+    "studies/m0/c1grammar.py",
+    "studies/m0/lineages_c1.py",
+    "studies/m0/lineages_c1_common.py",
+    "studies/m0/lineages_c1_fix3_other.py"
+   ]
+  },
+  "C1.bytecode_loop_f3": {
+   "build_defined_in": "studies/m0/lineages_c1_fix3_other.py",
+   "build_qualname": "bytecode_loop_f3",
+   "family": "simulation",
+   "files_of_functions_behind_build": [
+    "studies/m0/c1grammar.py",
+    "studies/m0/lineages_c1.py",
+    "studies/m0/lineages_c1_common.py",
+    "studies/m0/lineages_c1_fix3_other.py"
+   ]
+  },
+  "C1.counter_list_f3": {
+   "build_defined_in": "studies/m0/lineages_c1_fix3_lists.py",
+   "build_qualname": "counter_list_f3",
+   "family": "lists",
+   "files_of_functions_behind_build": [
+    "studies/m0/c1grammar.py",
+    "studies/m0/lineages_c1.py",
+    "studies/m0/lineages_c1_common.py",
+    "studies/m0/lineages_c1_fix3_lists.py"
+   ]
+  },
+  "C1.digit_peel_f3": {
+   "build_defined_in": "studies/m0/lineages_c1_fix3_numbers.py",
+   "build_qualname": "digit_peel_f3",
+   "family": "while",
+   "files_of_functions_behind_build": [
+    "studies/m0/c1grammar.py",
+    "studies/m0/lineages_c1.py",
+    "studies/m0/lineages_c1_common.py",
+    "studies/m0/lineages_c1_fix3_numbers.py"
+   ]
+  },
+  "C1.euclid_gcd_traced_f3": {
+   "build_defined_in": "studies/m0/lineages_c1_fix3_numbers.py",
+   "build_qualname": "euclid_gcd_traced_f3",
+   "family": "while",
+   "files_of_functions_behind_build": [
+    "studies/m0/c1grammar.py",
+    "studies/m0/lineages_c1.py",
+    "studies/m0/lineages_c1_common.py",
+    "studies/m0/lineages_c1_fix3_numbers.py"
+   ]
+  },
+  "C1.fast_power_f4": {
+   "build_defined_in": "studies/m0/lineages_c1_fix4.py",
+   "build_qualname": "fast_power_f4",
+   "family": "while",
+   "files_of_functions_behind_build": [
+    "studies/m0/c1grammar.py",
+    "studies/m0/lineages_c1.py",
+    "studies/m0/lineages_c1_common.py",
+    "studies/m0/lineages_c1_fix4.py"
+   ]
+  },
+  "C1.fib_like_f3": {
+   "build_defined_in": "studies/m0/lineages_c1_fix3_other.py",
+   "build_qualname": "fib_like_f3",
+   "family": "accumulators",
+   "files_of_functions_behind_build": [
+    "studies/m0/c1grammar.py",
+    "studies/m0/lineages_c1.py",
+    "studies/m0/lineages_c1_common.py",
+    "studies/m0/lineages_c1_fix3_other.py"
+   ]
+  },
+  "C1.fib_shapes_recursive_f3": {
+   "build_defined_in": "studies/m0/lineages_c1_fix3_other.py",
+   "build_qualname": "fib_shapes_recursive_f3",
+   "family": "accumulators",
+   "files_of_functions_behind_build": [
+    "studies/m0/c1grammar.py",
+    "studies/m0/lineages_c1.py",
+    "studies/m0/lineages_c1_common.py",
+    "studies/m0/lineages_c1_fix3_other.py"
+   ]
+  },
+  "C1.func_compose_f4": {
+   "build_defined_in": "studies/m0/lineages_c1_fix4.py",
+   "build_qualname": "func_compose_f4",
+   "family": "functions",
+   "files_of_functions_behind_build": [
+    "studies/m0/c1grammar.py",
+    "studies/m0/lineages_c1.py",
+    "studies/m0/lineages_c1_common.py",
+    "studies/m0/lineages_c1_fix4.py"
+   ]
+  },
+  "C1.list_build_f3": {
+   "build_defined_in": "studies/m0/lineages_c1_fix3_lists.py",
+   "build_qualname": "list_build_f3",
+   "family": "lists",
+   "files_of_functions_behind_build": [
+    "studies/m0/c1grammar.py",
+    "studies/m0/lineages_c1.py",
+    "studies/m0/lineages_c1_common.py",
+    "studies/m0/lineages_c1_fix3_lists.py"
+   ]
+  },
+  "C1.merge_two_sorted_f3": {
+   "build_defined_in": "studies/m0/lineages_c1_fix3_lists.py",
+   "build_qualname": "merge_two_sorted_f3",
+   "family": "lists",
+   "files_of_functions_behind_build": [
+    "studies/m0/c1grammar.py",
+    "studies/m0/lineages_c1.py",
+    "studies/m0/lineages_c1_common.py",
+    "studies/m0/lineages_c1_fix3_lists.py"
+   ]
+  },
+  "C1.nested_pairs_f3": {
+   "build_defined_in": "studies/m0/lineages_c1_fix3_lists.py",
+   "build_qualname": "nested_pairs_f3",
+   "family": "nested",
+   "files_of_functions_behind_build": [
+    "studies/m0/c1grammar.py",
+    "studies/m0/lineages_c1.py",
+    "studies/m0/lineages_c1_common.py",
+    "studies/m0/lineages_c1_fix3_lists.py"
+   ]
+  },
+  "C1.postfix_evaluation": {
+   "build_defined_in": "studies/m0/lineages_c1_stacks.py",
+   "build_qualname": "postfix_evaluation",
+   "family": "stacks",
+   "files_of_functions_behind_build": [
+    "studies/m0/c1grammar.py",
+    "studies/m0/lineages_c1.py",
+    "studies/m0/lineages_c1_common.py",
+    "studies/m0/lineages_c1_stacks.py"
+   ]
+  },
+  "C1.recursive_calls_r2": {
+   "build_defined_in": "studies/m0/lineages_c1_rev2.py",
+   "build_qualname": "recursive_calls_r2",
+   "family": "functions",
+   "files_of_functions_behind_build": [
+    "studies/m0/c1grammar.py",
+    "studies/m0/lineages_c1.py",
+    "studies/m0/lineages_c1_common.py",
+    "studies/m0/lineages_c1_rev2.py"
+   ]
+  },
+  "C1.run_length_scan": {
+   "build_defined_in": "studies/m0/lineages_c1_strings.py",
+   "build_qualname": "run_length_scan",
+   "family": "strings",
+   "files_of_functions_behind_build": [
+    "studies/m0/c1grammar.py",
+    "studies/m0/lineages_c1.py",
+    "studies/m0/lineages_c1_common.py",
+    "studies/m0/lineages_c1_strings.py"
+   ]
+  },
+  "C1.slices_f4": {
+   "build_defined_in": "studies/m0/lineages_c1_fix4.py",
+   "build_qualname": "slices_f4",
+   "family": "slices",
+   "files_of_functions_behind_build": [
+    "studies/m0/c1grammar.py",
+    "studies/m0/lineages_c1.py",
+    "studies/m0/lineages_c1_common.py",
+    "studies/m0/lineages_c1_fix4.py"
+   ]
+  },
+  "C1.string_build_f3": {
+   "build_defined_in": "studies/m0/lineages_c1_fix3_other.py",
+   "build_qualname": "string_build_f3",
+   "family": "strings",
+   "files_of_functions_behind_build": [
+    "studies/m0/c1grammar.py",
+    "studies/m0/lineages_c1.py",
+    "studies/m0/lineages_c1_common.py",
+    "studies/m0/lineages_c1_fix3_other.py"
+   ]
+  },
+  "C1.string_methods_f3": {
+   "build_defined_in": "studies/m0/lineages_c1_fix3_other.py",
+   "build_qualname": "string_methods_f3",
+   "family": "string_methods",
+   "files_of_functions_behind_build": [
+    "studies/m0/c1grammar.py",
+    "studies/m0/lineages_c1.py",
+    "studies/m0/lineages_c1_common.py",
+    "studies/m0/lineages_c1_fix3_other.py"
+   ]
+  },
+  "C1.turtle_walk_f3": {
+   "build_defined_in": "studies/m0/lineages_c1_fix3_other.py",
+   "build_qualname": "turtle_walk_f3",
+   "family": "simulation",
+   "files_of_functions_behind_build": [
+    "studies/m0/c1grammar.py",
+    "studies/m0/lineages_c1.py",
+    "studies/m0/lineages_c1_common.py",
+    "studies/m0/lineages_c1_fix3_other.py"
+   ]
+  },
+  "C1.while_counter_f3": {
+   "build_defined_in": "studies/m0/lineages_c1_fix3_numbers.py",
+   "build_qualname": "while_counter_f3",
+   "family": "while",
+   "files_of_functions_behind_build": [
+    "studies/m0/c1grammar.py",
+    "studies/m0/lineages_c1.py",
+    "studies/m0/lineages_c1_common.py",
+    "studies/m0/lineages_c1_fix3_numbers.py"
+   ]
+  },
+  "M1.ages_r3": {
+   "build_defined_in": "studies/m0/lineages_m1_fix3_a.py",
+   "build_qualname": "ages_r3",
+   "family": "age",
+   "files_of_functions_behind_build": [
+    "studies/m0/lineages_m1_fix3_a.py",
+    "studies/m0/lineages_m1_fix3_common.py"
+   ]
+  },
+  "M1.arithmetic_series_r3": {
+   "build_defined_in": "studies/m0/lineages_m1_fix3_a.py",
+   "build_qualname": "arithmetic_series_r3",
+   "family": "series",
+   "files_of_functions_behind_build": [
+    "studies/m0/lineages_m1_fix3_a.py"
+   ]
+  },
+  "M1.average_missing_r4": {
+   "build_defined_in": "studies/m0/lineages_m1_fix4.py",
+   "build_qualname": "average_missing_r4",
+   "family": "average",
+   "files_of_functions_behind_build": [
+    "studies/m0/lineages_m1_fix3_common.py",
+    "studies/m0/lineages_m1_fix4.py"
+   ]
+  },
+  "M1.change_ways_r3": {
+   "build_defined_in": "studies/m0/lineages_m1_fix3_b.py",
+   "build_qualname": "change_ways_r3",
+   "family": "counting",
+   "files_of_functions_behind_build": [
+    "studies/m0/lineages_m1_fix3_b.py",
+    "studies/m0/lineages_m1_fix3_common.py"
+   ]
+  },
+  "M1.clock_duration_r4": {
+   "build_defined_in": "studies/m0/lineages_m1_fix4.py",
+   "build_qualname": "clock_duration_r4",
+   "family": "time",
+   "files_of_functions_behind_build": [
+    "studies/m0/lineages_m1_fix4.py"
+   ]
+  },
+  "M1.consecutive_r3": {
+   "build_defined_in": "studies/m0/lineages_m1_fix3_a.py",
+   "build_qualname": "consecutive_r3",
+   "family": "linear",
+   "files_of_functions_behind_build": [
+    "studies/m0/lineages_m1_fix3_a.py"
+   ]
+  },
+  "M1.crt_congruence_r3": {
+   "build_defined_in": "studies/m0/lineages_m1_fix3_b.py",
+   "build_qualname": "crt_congruence_r3",
+   "family": "number_theory",
+   "files_of_functions_behind_build": [
+    "studies/m0/lineages_m1_fix3_b.py",
+    "studies/m0/lineages_m1_fix3_common.py"
+   ]
+  },
+  "M1.finite_differences_r4": {
+   "build_defined_in": "studies/m0/lineages_m1_fix4.py",
+   "build_qualname": "finite_differences_r4",
+   "family": "sequences",
+   "files_of_functions_behind_build": [
+    "studies/m0/lineages_m1_fix3_common.py",
+    "studies/m0/lineages_m1_fix4.py"
+   ]
+  },
+  "M1.fraction_remainder_r3": {
+   "build_defined_in": "studies/m0/lineages_m1_fix3_a.py",
+   "build_qualname": "fraction_remainder_r3",
+   "family": "remainder",
+   "files_of_functions_behind_build": [
+    "studies/m0/lineages_m1_fix3_a.py"
+   ]
+  },
+  "M1.gcd_lcm_r4": {
+   "build_defined_in": "studies/m0/lineages_m1_fix4.py",
+   "build_qualname": "gcd_lcm_r4",
+   "family": "number_theory",
+   "files_of_functions_behind_build": [
+    "studies/m0/lineages_m1_fix3_b.py",
+    "studies/m0/lineages_m1_fix3_common.py",
+    "studies/m0/lineages_m1_fix4.py"
+   ]
+  },
+  "M1.inclusion_exclusion_r3": {
+   "build_defined_in": "studies/m0/lineages_m1_fix3_b.py",
+   "build_qualname": "inclusion_exclusion_r3",
+   "family": "counting",
+   "files_of_functions_behind_build": [
+    "studies/m0/lineages_m1_fix3_b.py"
+   ]
+  },
+  "M1.linear_equation_r3": {
+   "build_defined_in": "studies/m0/lineages_m1_fix3_a.py",
+   "build_qualname": "linear_equation_r3",
+   "family": "linear",
+   "files_of_functions_behind_build": [
+    "studies/m0/lineages_m1_fix3_a.py",
+    "studies/m0/lineages_m1_fix3_common.py"
+   ]
+  },
+  "M1.median_list_r3": {
+   "build_defined_in": "studies/m0/lineages_m1_fix3_b.py",
+   "build_qualname": "median_list_r3",
+   "family": "statistics",
+   "files_of_functions_behind_build": [
+    "studies/m0/lineages_m1_fix3_b.py",
+    "studies/m0/lineages_m1_fix3_common.py"
+   ]
+  },
+  "M1.mixture_r4": {
+   "build_defined_in": "studies/m0/lineages_m1_fix4.py",
+   "build_qualname": "mixture_r4",
+   "family": "ratio",
+   "files_of_functions_behind_build": [
+    "studies/m0/lineages_m1_fix3_common.py",
+    "studies/m0/lineages_m1_fix4.py"
+   ]
+  },
+  "M1.painted_cube_r3": {
+   "build_defined_in": "studies/m0/lineages_m1_fix3_c.py",
+   "build_qualname": "painted_cube_r3",
+   "family": "geometry",
+   "files_of_functions_behind_build": [
+    "studies/m0/lineages_m1_fix3_c.py",
+    "studies/m0/lineages_m1_fix3_common.py"
+   ]
+  },
+  "M1.percent_change_r3": {
+   "build_defined_in": "studies/m0/lineages_m1_fix3_a.py",
+   "build_qualname": "percent_change_r3",
+   "family": "percent",
+   "files_of_functions_behind_build": [
+    "studies/m0/lineages_m1_fix3_a.py",
+    "studies/m0/lineages_m1_fix3_common.py"
+   ]
+  },
+  "M1.pipes_work_r3": {
+   "build_defined_in": "studies/m0/lineages_m1_fix3_a.py",
+   "build_qualname": "pipes_work_r3",
+   "family": "rates",
+   "files_of_functions_behind_build": [
+    "studies/m0/lineages_m1_fix3_a.py"
+   ]
+  },
+  "M1.quadratic_area_r3": {
+   "build_defined_in": "studies/m0/lineages_m1_fix3_c.py",
+   "build_qualname": "quadratic_area_r3",
+   "family": "algebra",
+   "files_of_functions_behind_build": [
+    "studies/m0/lineages_m1_fix3_c.py",
+    "studies/m0/lineages_m1_fix3_common.py"
+   ]
+  },
+  "M1.recurrence_iterate_r3": {
+   "build_defined_in": "studies/m0/lineages_m1_fix3_c.py",
+   "build_qualname": "recurrence_iterate_r3",
+   "family": "sequences",
+   "files_of_functions_behind_build": [
+    "studies/m0/lineages_m1_fix3_c.py",
+    "studies/m0/lineages_m1_fix3_common.py"
+   ]
+  },
+  "M1.shopping_r3": {
+   "build_defined_in": "studies/m0/lineages_m1_fix3_a.py",
+   "build_qualname": "shopping_r3",
+   "family": "shopping",
+   "files_of_functions_behind_build": [
+    "studies/m0/lineages_m1_fix3_a.py",
+    "studies/m0/lineages_m1_fix3_common.py"
+   ]
+  },
+  "M1.speed_distance_r3": {
+   "build_defined_in": "studies/m0/lineages_m1_fix3_a.py",
+   "build_qualname": "speed_distance_r3",
+   "family": "rates",
+   "files_of_functions_behind_build": [
+    "studies/m0/lineages_m1_fix3_a.py",
+    "studies/m0/lineages_m1_fix3_common.py"
+   ]
+  },
+  "M1.tiered_pricing": {
+   "build_defined_in": "studies/m0/lineages_m1_pricing.py",
+   "build_qualname": "tiered_pricing",
+   "family": "pricing",
+   "files_of_functions_behind_build": [
+    "studies/m0/lineages_m1.py",
+    "studies/m0/lineages_m1_pricing.py"
+   ]
+  },
+  "M1.tip_split_r3": {
+   "build_defined_in": "studies/m0/lineages_m1_fix3_a.py",
+   "build_qualname": "tip_split_r3",
+   "family": "percent",
+   "files_of_functions_behind_build": [
+    "studies/m0/lineages_m1_fix3_a.py",
+    "studies/m0/lineages_m1_fix3_common.py"
+   ]
+  },
+  "R1.boolean_lights_r4": {
+   "build_defined_in": "studies/m0/lineages_r1_rev4.py",
+   "build_qualname": "boolean_lights_r4",
+   "family": "boolean_state",
+   "files_of_functions_behind_build": [
+    "studies/m0/lineages_r1_common.py",
+    "studies/m0/lineages_r1_rev4.py"
+   ]
+  },
+  "R1.categories_default_exceptions_r4": {
+   "build_defined_in": "studies/m0/lineages_r1_rev4.py",
+   "build_qualname": "categories_default_exceptions_r4",
+   "family": "categories",
+   "files_of_functions_behind_build": [
+    "studies/m0/lineages_r1_rev4.py"
+   ]
+  },
+  "R1.compass_turns": {
+   "build_defined_in": "studies/m0/lineages_r1.py",
+   "build_qualname": "compass_turns",
+   "family": "spatial",
+   "files_of_functions_behind_build": [
+    "studies/m0/lineages_r1.py"
+   ]
+  },
+  "R1.conditional_threshold_rule_r4": {
+   "build_defined_in": "studies/m0/lineages_r1_rev4.py",
+   "build_qualname": "conditional_threshold_rule_r4",
+   "family": "conditional",
+   "files_of_functions_behind_build": [
+    "studies/m0/lineages_r1_rev4.py"
+   ]
+  },
+  "R1.knights_knaves_r6": {
+   "build_defined_in": "studies/m0/lineages_r1_fix4_a.py",
+   "build_qualname": "knights_knaves_r6",
+   "family": "truth",
+   "files_of_functions_behind_build": [
+    "studies/m0/lineages_r1_fix3_c.py",
+    "studies/m0/lineages_r1_fix4_a.py"
+   ]
+  },
+  "R1.temporal_weekday_shift_r6": {
+   "build_defined_in": "studies/m0/lineages_r1_fix4_a.py",
+   "build_qualname": "temporal_weekday_shift_r6",
+   "family": "temporal",
+   "files_of_functions_behind_build": [
+    "studies/m0/lineages_r1_common.py",
+    "studies/m0/lineages_r1_fix3_b.py",
+    "studies/m0/lineages_r1_fix4_a.py"
+   ]
+  },
+  "R2.binary_search_trace": {
+   "build_defined_in": "studies/m0/lineages_r2_fix3.py",
+   "build_qualname": "binary_search_trace",
+   "family": "search",
+   "files_of_functions_behind_build": [
+    "studies/m0/lineages_r2_common.py",
+    "studies/m0/lineages_r2_fix3.py"
+   ]
+  },
+  "R2.caesar_shift": {
+   "build_defined_in": "studies/m0/lineages_r2_fix4.py",
+   "build_qualname": "caesar_shift",
+   "family": "caesar",
+   "files_of_functions_behind_build": [
+    "studies/m0/lineages_r2_fix4.py"
+   ]
+  },
+  "R2.cheapest_network": {
+   "build_defined_in": "studies/m0/lineages_r2_fix4.py",
+   "build_qualname": "cheapest_network",
+   "family": "graphs",
+   "files_of_functions_behind_build": [
+    "studies/m0/lineages_r2_common.py",
+    "studies/m0/lineages_r2_fix4.py",
+    "studies/m0/lineages_r2_graphs.py"
+   ]
+  },
+  "R2.count_divisible": {
+   "build_defined_in": "studies/m0/lineages_r2_fix4.py",
+   "build_qualname": "count_divisible",
+   "family": "counting",
+   "files_of_functions_behind_build": [
+    "studies/m0/lineages_r2_common.py",
+    "studies/m0/lineages_r2_fix4.py"
+   ]
+  },
+  "R2.crt_smallest": {
+   "build_defined_in": "studies/m0/lineages_r2_fix4.py",
+   "build_qualname": "crt_smallest",
+   "family": "numtheory",
+   "files_of_functions_behind_build": [
+    "studies/m0/lineages_r2_fix4.py"
+   ]
+  },
+  "R2.dictionary_rank": {
+   "build_defined_in": "studies/m0/lineages_r2_fix3.py",
+   "build_qualname": "dictionary_rank",
+   "family": "combinatorics",
+   "files_of_functions_behind_build": [
+    "studies/m0/lineages_r2_fix3.py"
+   ]
+  },
+  "R2.expression_eval": {
+   "build_defined_in": "studies/m0/lineages_r2_fix4.py",
+   "build_qualname": "expression_eval",
+   "family": "parsing",
+   "files_of_functions_behind_build": [
+    "studies/m0/lineages_r2_fix3_b.py",
+    "studies/m0/lineages_r2_fix4.py",
+    "studies/m0/lineages_r2_parsing.py"
+   ]
+  },
+  "R2.from_base": {
+   "build_defined_in": "studies/m0/lineages_r2.py",
+   "build_qualname": "from_base",
+   "family": "base",
+   "files_of_functions_behind_build": [
+    "studies/m0/lineages_r2.py"
+   ]
+  },
+  "R2.grid_sum": {
+   "build_defined_in": "studies/m0/lineages_r2.py",
+   "build_qualname": "grid_sum",
+   "family": "grid",
+   "files_of_functions_behind_build": [
+    "studies/m0/lineages_r2.py"
+   ]
+  },
+  "R2.luhn_check": {
+   "build_defined_in": "studies/m0/lineages_r2_codes.py",
+   "build_qualname": "luhn_check",
+   "family": "codes",
+   "files_of_functions_behind_build": [
+    "studies/m0/lineages_r2_codes.py"
+   ]
+  },
+  "R2.min_heap_ops": {
+   "build_defined_in": "studies/m0/lineages_r2_fix3.py",
+   "build_qualname": "min_heap_ops",
+   "family": "structures",
+   "files_of_functions_behind_build": [
+    "studies/m0/lineages_r2_common.py",
+    "studies/m0/lineages_r2_fix3.py"
+   ]
+  },
+  "R2.run_length": {
+   "build_defined_in": "studies/m0/lineages_r2_fix3.py",
+   "build_qualname": "run_length",
+   "family": "rle",
+   "files_of_functions_behind_build": [
+    "studies/m0/lineages_r2_fix3.py"
+   ]
+  },
+  "R2.sort_list": {
+   "build_defined_in": "studies/m0/lineages_r2.py",
+   "build_qualname": "sort_list",
+   "family": "sorting",
+   "files_of_functions_behind_build": [
+    "studies/m0/lineages_r2.py"
+   ]
+  },
+  "R2.string_rewrite_nonidentity": {
+   "build_defined_in": "studies/m0/lineages_r2_rev2.py",
+   "build_qualname": "string_rewrite_nonidentity",
+   "family": "rewrite",
+   "files_of_functions_behind_build": [
+    "studies/m0/lineages_r2_rev2.py"
+   ]
+  },
+  "R2.to_base_wide": {
+   "build_defined_in": "studies/m0/lineages_r2_rev2.py",
+   "build_qualname": "to_base_wide",
+   "family": "base",
+   "files_of_functions_behind_build": [
+    "studies/m0/lineages_r2_rev2.py"
+   ]
+  }
+ },
+ "survivors_82_for_reference": {
+  "a_count": 22,
+  "b_count": 34,
+  "c_count": 53,
+  "c_sha256": {
+   "studies/m0/__init__.py": "56e493099672d2c3628af55cbf456c53b12c43ba8e601d602c4ebe2731dbcb2d",
+   "studies/m0/c1grammar.py": "5832f18cdbc76626007aa9cbeb7c2a788cacf36a89a610c81e62171313c1d0ca",
+   "studies/m0/core.py": "07907f1e559f6814e52b1307d6b009003130ba7297f0c1fa04fa3185441cc81d",
+   "studies/m0/lineages_c1.py": "71acde8c46eabf7f1fa5e49f5b2b0f065b3800a20b2878943e21c8f07f623f61",
+   "studies/m0/lineages_c1_common.py": "230311688960cc781a7ffff28f6ad621afc743ff8c91834df6d33781c1d147e6",
+   "studies/m0/lineages_c1_fix3.py": "f72d85753d920510dec9cce3867497bb190e153f6a11d4365ea5fe98bd0a116e",
+   "studies/m0/lineages_c1_fix3_lists.py": "65d96441f70307f805a03b23efde2db37b6c87837e06e2986367c693ebcac2f9",
+   "studies/m0/lineages_c1_fix3_numbers.py": "d241ca4dab216ceaee8322ca16fc8ce0efc40011d86b2cd9d55bd9468f23b296",
+   "studies/m0/lineages_c1_fix3_other.py": "f80fa5d7968eeb13341c122ef6eca721cd305053903c9476e12a1ab47a537e61",
+   "studies/m0/lineages_c1_fix4.py": "2372627593ee6944fe981e16b88e84607d4c59ea429dd661b88b0c8bc23072ab",
+   "studies/m0/lineages_c1_rev2.py": "6f0a4b412b4475fad35ce625657999fa4ee8dbff20a2f94b9c046728ad309aa5",
+   "studies/m0/lineages_c1_rev2_traced.py": "4706de7dfdb1ab2636f1e94770b5eee0503a09ade24c0622a9065eec4cfaed0f",
+   "studies/m0/lineages_c1_stacks.py": "c3df7045acaa9b116cb236875fbee370e39f5addea3f0d28ced8e1a2a8eb65df",
+   "studies/m0/lineages_c1_strings.py": "3df35e101293ec7b3585d830c81986fd0a614a03724ac3cf5c2eda977e800e16",
+   "studies/m0/lineages_k0.py": "594c1867f519cd6598ab67126338d869c8966f32da333bbae341f355a9419d08",
+   "studies/m0/lineages_m1.py": "0001c72b2f2944aee4c1a85b6126df3d204049a8b41262e9f2b15d8cdbe269af",
+   "studies/m0/lineages_m1_common.py": "06aa138807d88b950bcceb19526e3f5b75be26e737d2e341b38dabbf5d8546fe",
+   "studies/m0/lineages_m1_fix3.py": "041fab82d0f4cb1dd14205bd774f032dbd678c92803511b06afc200999d458c1",
+   "studies/m0/lineages_m1_fix3_a.py": "c48b51253a035881013907f48e3ca8f9aa5a5d1ba297c09534dbe43abe948ebb",
+   "studies/m0/lineages_m1_fix3_b.py": "7ade8498571d07c91faaa7496d9b6fcb661c06d674b44949896782bad0187b93",
+   "studies/m0/lineages_m1_fix3_c.py": "0c297cd8edf34aebeb9f93f5324ce42088cff821e2e8b12ca40339ba5693fe12",
+   "studies/m0/lineages_m1_fix3_common.py": "3406737f0c258f75ecf064885c6a6be287b39e9475d60d29962cb399fc0ee773",
+   "studies/m0/lineages_m1_fix4.py": "da6027f4718e0898f9b05be87e1ab4f146d3c9994b2c97fe4a96f7258ec977f5",
+   "studies/m0/lineages_m1_pricing.py": "4590a6476aaf9085d900159879137e1b95283e4092be562756bbeaaf54b44742",
+   "studies/m0/lineages_r1.py": "19360b3512baeec84af00afac39d3b843c7d4448d2dfbc24ffdb793ff7b966e4",
+   "studies/m0/lineages_r1_common.py": "9153c13004ed8c222be5fd8d0dbde6e718483478553a779298a760437e4dad23",
+   "studies/m0/lineages_r1_conditional.py": "09a4b715e4b591dc95227dd38553c660bc63f0f255235c79e1c5a6a55160f2c9",
+   "studies/m0/lineages_r1_fix3_b.py": "10d7e98e64cc7eb6226c72e4fc6c3832d0e4c619f5a5230cf4df2953116f13dc",
+   "studies/m0/lineages_r1_fix3_c.py": "ce9f52d260cd17eba50d380116d8223e08dfe097ecfcb25d69b62be1e69498b8",
+   "studies/m0/lineages_r1_fix3_common.py": "fa87936f535cdf4843c41c4e507638b095ab291b10fb9ce402302ae5293a33cc",
+   "studies/m0/lineages_r1_fix3_d.py": "8ca69ebf83719adbd7f811b18082850112805213bdd3067e33ba7232ca25af66",
+   "studies/m0/lineages_r1_fix3_e.py": "254eb4f054cf978b89487459c0a04280a8673bd24288db79d5a975f079b3fd6f",
+   "studies/m0/lineages_r1_fix4_a.py": "81cbb05a3393a6457f1a4c30e33714c71036d7628fe899ece0b8dbbbf240540a",
+   "studies/m0/lineages_r1_fix4_common.py": "137479efd834debc1fc956acebfe079ccf4591330f2e6c43a28f17ffb4fe501f",
+   "studies/m0/lineages_r1_rev4.py": "e14e21eaae16a87f644d3c712d92ea89e0c4fc2172b66857a10de399fba09a24",
+   "studies/m0/lineages_r1_rev4_c.py": "8ba769ac0a1763a625eb4754b4b3c5b8eea3958dcb113b867c97de4fae391855",
+   "studies/m0/lineages_r1_rev4_common.py": "91faaad025290762e7e0757520aa2e279fdeb7d75f62adbadb9a4673a927bfba",
+   "studies/m0/lineages_r1_spatial.py": "c54f1f5bfa113a7eea97b8733d4d0a9c7a9cf8dde8ea0bdbc64cde5749366438",
+   "studies/m0/lineages_r2.py": "d667aecce8bc0071852350bfc1dad0fb03ff8fe7970b04fdfa10fdd611a6c573",
+   "studies/m0/lineages_r2_codes.py": "6cef04cd11d15109d07228a9f6da9498e8f68aa54e72fde6c5255bf526eac4a4",
+   "studies/m0/lineages_r2_common.py": "1c0008fb070913a64daecd73070be03605a77b9efc0fece8259508dd69ee75ff",
+   "studies/m0/lineages_r2_dynprog.py": "526e99602af7e23ec80268f0eff0c082555f1cf0767f6fad01b2c41792fd4767",
+   "studies/m0/lineages_r2_fix3.py": "c833639b36c2a54c31156cbb22cee6acfc1407cd96036132ab1fa12f8cf67310",
+   "studies/m0/lineages_r2_fix3_b.py": "581f5585eca2b03eaf0f5b90ce936bf04ad24e8f9359c3e362994f65ded71920",
+   "studies/m0/lineages_r2_fix3_c.py": "7f64139719a33c5c0f7f5a702de862590fb6056095074c4dd531fea94f2227c2",
+   "studies/m0/lineages_r2_fix4.py": "e9ee7fdbaa57d92aee4cff21b3e525fda3da7d53b646388cdf04ddf280a7b8e6",
+   "studies/m0/lineages_r2_graphs.py": "b3232aa25084e7c38a49a57dd44744293a28b9881fb5c13e0a6776c5788102b9",
+   "studies/m0/lineages_r2_parsing.py": "10ac4c89e2a8c8a97cb6a1b9485bab18af8c5f3ebcb6b1fab3cc5d21447e55b4",
+   "studies/m0/lineages_r2_rev2.py": "690e790eddcf5386ecf0876c9bcb41f9ff7b4e9b143f2f57c864871d268e6dfa",
+   "studies/m0/lineages_r2_structures.py": "88b524efc9651f1cce09bb6fb1d5128bd5c4c9bebfc109b97929b96fbe70eddb",
+   "studies/m0/scoring.py": "e5007eb53456849b45b142a6789ccf933be26e103a2384281253486b615e97a7",
+   "studies/m0/solvers_c1.py": "aafedb5be92a8dcdfaa4f6ed8587d2fed2eb980a78d9d71791364e1ed2f2360d",
+   "studies/m0/vocab.py": "2c4036bea7770727b3ec0582f361723c243c145de3479e8d610a384a7a93c286"
+  }
+ },
+ "unchanged_since_generators_commit": "git diff --name-status 7cd0ac5a HEAD -- studies/m0 shows only additions (51, all under fresh_run/, registration/, solvers2/); every file below is byte-identical at 7cd0ac5a and HEAD, and the working tree is clean for them",
+ "what": "The module files that define the 65 registered lineages' builders (the first solver is the builder's key, lead ruling R-52), with SHA-256 at HEAD of claude/m0-impl, for G-gen's record so that the freeze at 7cd0ac5a names files. Auditor's listing; independent engineering evidence, not Astra validation, not human approval. Astra review: NOT_PERFORMED."
+}

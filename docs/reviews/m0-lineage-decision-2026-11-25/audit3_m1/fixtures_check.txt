@@ -1,0 +1,18 @@
+M1.binomial_choose_r2 140 mismatch 0 sha matches manifest: True
+M1.change_ways_r2 140 mismatch 0 sha matches manifest: True
+M1.crt_congruence_r2 140 mismatch 0 sha matches manifest: True
+M1.digit_puzzle_r2 140 mismatch 0 sha matches manifest: True
+M1.division_counting_r2 140 mismatch 0 sha matches manifest: True
+M1.gcd_lcm_r2 140 mismatch 0 sha matches manifest: True
+M1.grid_perimeter_r2 140 mismatch 0 sha matches manifest: True
+M1.inclusion_exclusion_r2 140 mismatch 0 sha matches manifest: True
+M1.median_list_r2 140 mismatch 0 sha matches manifest: True
+M1.min_cost_packs_r2 140 mismatch 0 sha matches manifest: True
+M1.mode_tally_r2 140 mismatch 0 sha matches manifest: True
+M1.painted_cube_r2 140 mismatch 0 sha matches manifest: True
+M1.pigeonhole_worst_case_r2 140 mismatch 0 sha matches manifest: True
+M1.power_remainder_r2 140 mismatch 0 sha matches manifest: True
+M1.prime_factors_r2 140 mismatch 0 sha matches manifest: True
+M1.pythagoras_r2 140 mismatch 0 sha matches manifest: True
+M1.slot_permutations_r2 140 mismatch 0 sha matches manifest: True
+total 2380 mismatches 0

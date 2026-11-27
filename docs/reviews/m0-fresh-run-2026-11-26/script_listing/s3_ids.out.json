@@ -1,0 +1,271 @@
+{
+  "A3_ALIAS_vs_A3_OLD": {
+    "only_in_A3_ALIAS": [
+      "C1.cellular_update_f3",
+      "C1.coin_change_table_f3",
+      "C1.majority_vote_scan_f3",
+      "C1.partition_pass_f3"
+    ],
+    "only_in_A3_OLD": [],
+    "same_key_different_value": []
+  },
+  "RULE_ALIAS_vs_f1_ALIAS_equal": true,
+  "alias_tables": {
+    "A3_ALIAS": {
+      "line": 21,
+      "map": {
+        "C1.binary_search_f3": "C1.binary_search",
+        "C1.bracket_matching_f3": "C1.bracket_matching",
+        "C1.bytecode_loop_f3": "C1.bytecode_loop_r2",
+        "C1.cellular_update_f3": "C1.cellular_update_r2",
+        "C1.coin_change_table_f3": "C1.coin_change_table",
+        "C1.cond_chain_f3": "C1.cond_chain",
+        "C1.counter_list_f3": "C1.counter_list",
+        "C1.digit_peel_f3": "C1.digit_peel",
+        "C1.euclid_gcd_traced_f3": "C1.euclid_gcd_traced",
+        "C1.fast_power_f3": "C1.fast_power_r2",
+        "C1.fib_like_f3": "C1.fib_like",
+        "C1.fib_shapes_recursive_f3": "C1.fib_shapes_recursive",
+        "C1.func_compose_f3": "C1.func_compose",
+        "C1.list_build_f3": "C1.list_build",
+        "C1.majority_vote_scan_f3": "C1.majority_vote_scan_r2",
+        "C1.merge_two_sorted_f3": "C1.merge_two_sorted_r2",
+        "C1.nested_pairs_f3": "C1.nested_pairs",
+        "C1.partition_pass_f3": "C1.partition_pass",
+        "C1.shared_lists_f3": "C1.shared_lists",
+        "C1.sieve_marking_f3": "C1.sieve_marking_r2",
+        "C1.string_build_f3": "C1.string_build",
+        "C1.string_methods_f3": "C1.string_methods",
+        "C1.turtle_walk_f3": "C1.turtle_walk_r2",
+        "C1.union_find_links_f3": "C1.union_find_links",
+        "C1.while_counter_f3": "C1.while_counter"
+      },
+      "n": 25,
+      "path": "studies/m0/c1_fix4_a3_run.py"
+    },
+    "A3_OLD": {
+      "line": 13,
+      "map": {
+        "C1.binary_search_f3": "C1.binary_search",
+        "C1.bracket_matching_f3": "C1.bracket_matching",
+        "C1.bytecode_loop_f3": "C1.bytecode_loop_r2",
+        "C1.cond_chain_f3": "C1.cond_chain",
+        "C1.counter_list_f3": "C1.counter_list",
+        "C1.digit_peel_f3": "C1.digit_peel",
+        "C1.euclid_gcd_traced_f3": "C1.euclid_gcd_traced",
+        "C1.fast_power_f3": "C1.fast_power_r2",
+        "C1.fib_like_f3": "C1.fib_like",
+        "C1.fib_shapes_recursive_f3": "C1.fib_shapes_recursive",
+        "C1.func_compose_f3": "C1.func_compose",
+        "C1.list_build_f3": "C1.list_build",
+        "C1.merge_two_sorted_f3": "C1.merge_two_sorted_r2",
+        "C1.nested_pairs_f3": "C1.nested_pairs",
+        "C1.shared_lists_f3": "C1.shared_lists",
+        "C1.sieve_marking_f3": "C1.sieve_marking_r2",
+        "C1.string_build_f3": "C1.string_build",
+        "C1.string_methods_f3": "C1.string_methods",
+        "C1.turtle_walk_f3": "C1.turtle_walk_r2",
+        "C1.union_find_links_f3": "C1.union_find_links",
+        "C1.while_counter_f3": "C1.while_counter"
+      },
+      "n": 21,
+      "path": "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f3_a3_run.py"
+    },
+    "ALIAS": {
+      "line": 23,
+      "map": {
+        "C1.fast_power_f4": "C1.fast_power_f3",
+        "C1.func_branch_f4": "C1.func_branch",
+        "C1.func_compose_f4": "C1.func_compose_f3",
+        "C1.sieve_marking_f4": "C1.sieve_marking_f3",
+        "C1.slices_f4": "C1.slices"
+      },
+      "n": 5,
+      "path": "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f1_draw.py"
+    },
+    "RULE_ALIAS": {
+      "line": 26,
+      "map": {
+        "C1.fast_power_f4": "C1.fast_power_f3",
+        "C1.func_branch_f4": "C1.func_branch",
+        "C1.func_compose_f4": "C1.func_compose_f3",
+        "C1.sieve_marking_f4": "C1.sieve_marking_f3",
+        "C1.slices_f4": "C1.slices"
+      },
+      "n": 5,
+      "path": "studies/m0/c1_fix4_draw.py"
+    }
+  },
+  "survivor_counts": {
+    "C1": 26,
+    "M1": 29,
+    "R1": 10,
+    "R2": 17
+  },
+  "survivor_id_substring_pairs": {
+    "C1": [],
+    "M1": [],
+    "R1": [],
+    "R2": []
+  },
+  "tables": {
+    "f1_draw.SURVIVORS (C1c default ids)": {
+      "line": 18,
+      "n": 27,
+      "not_on_survivor_list": [
+        "C1.sieve_marking_f4"
+      ],
+      "note": "default lineage list when --ids is not given",
+      "path": "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f1_draw.py",
+      "survivors_not_in_table": []
+    },
+    "f5_closed_forms.FNS": {
+      "line": 139,
+      "n": 5,
+      "not_on_survivor_list": [
+        "C1.sieve_marking_f4"
+      ],
+      "note": "lineage-keyed table (S2 case b)",
+      "path": "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f5_closed_forms.py",
+      "survivors_not_in_table": [
+        "C1.binary_search_f3",
+        "C1.bracket_matching_f3",
+        "C1.bytecode_loop_f3",
+        "C1.circle_elimination_r2",
+        "C1.cond_chain_f3",
+        "C1.digit_peel_f3",
+        "C1.euclid_gcd_traced_f3",
+        "C1.fib_like_f3",
+        "C1.fib_shapes_recursive_f3",
+        "C1.func_compose_f4",
+        "C1.list_build_f3",
+        "C1.merge_two_sorted_f3",
+        "C1.nested_pairs_f3",
+        "C1.postfix_evaluation",
+        "C1.recursive_calls_r2",
+        "C1.run_length_scan",
+        "C1.shared_lists_f3",
+        "C1.string_build_f3",
+        "C1.string_methods_f3",
+        "C1.turtle_walk_f3",
+        "C1.union_find_links_f3",
+        "C1.while_counter_f3"
+      ]
+    },
+    "f5b_closed_forms_v2.FNS": {
+      "line": 140,
+      "n": 5,
+      "not_on_survivor_list": [
+        "C1.sieve_marking_f4"
+      ],
+      "note": "lineage-keyed table (S2 case b)",
+      "path": "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f5b_closed_forms_v2.py",
+      "survivors_not_in_table": [
+        "C1.binary_search_f3",
+        "C1.bracket_matching_f3",
+        "C1.bytecode_loop_f3",
+        "C1.circle_elimination_r2",
+        "C1.cond_chain_f3",
+        "C1.digit_peel_f3",
+        "C1.euclid_gcd_traced_f3",
+        "C1.fib_like_f3",
+        "C1.fib_shapes_recursive_f3",
+        "C1.func_compose_f4",
+        "C1.list_build_f3",
+        "C1.merge_two_sorted_f3",
+        "C1.nested_pairs_f3",
+        "C1.postfix_evaluation",
+        "C1.recursive_calls_r2",
+        "C1.run_length_scan",
+        "C1.shared_lists_f3",
+        "C1.string_build_f3",
+        "C1.string_methods_f3",
+        "C1.turtle_walk_f3",
+        "C1.union_find_links_f3",
+        "C1.while_counter_f3"
+      ]
+    },
+    "f_new_heur.NEW keys (R2b f_rules_new lineages)": {
+      "line": null,
+      "n": 15,
+      "not_on_survivor_list": [
+        "R2.digit_root",
+        "R2.interval_scheduling"
+      ],
+      "note": "lineage-keyed table built by the @rule decorator; f_rules_new runs sorted(NEW)",
+      "path": "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_new_heur.py",
+      "survivors_not_in_table": [
+        "R2.caesar_shift",
+        "R2.cellular_automaton",
+        "R2.dictionary_rank",
+        "R2.sort_list"
+      ]
+    },
+    "f_rules.SURV (R2b default names)": {
+      "line": 16,
+      "n": 19,
+      "not_on_survivor_list": [
+        "R2.digit_root",
+        "R2.interval_scheduling"
+      ],
+      "note": "default list when argv[3] is not given; names written without 'R2.'",
+      "path": "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules.py",
+      "survivors_not_in_table": []
+    },
+    "new_rules_final.SPEC (R1c lineages)": {
+      "line": 158,
+      "n": 6,
+      "not_on_survivor_list": [
+        "R1.conditional_decision_tree_r6"
+      ],
+      "note": "lineage-keyed table (S2 case b); the only lineage selection of R1c",
+      "path": "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/new_rules_final.py",
+      "survivors_not_in_table": [
+        "R1.conditional_threshold_rule_r4",
+        "R1.equivalence_exchange_rates_r6",
+        "R1.spatial_grid_walk_r5",
+        "R1.swap_tracking_r5",
+        "R1.venn_counting_r5"
+      ]
+    },
+    "r1_fix4_tells.FEATS_1 (R1a lookups, keyed by base id)": {
+      "keys": [
+        "knights_knaves",
+        "boolean_lights"
+      ],
+      "line": 24,
+      "path": "studies/m0/r1_fix4_tells.py",
+      "survivor_bases_matching": [
+        "R1.boolean_lights_r4",
+        "R1.knights_knaves_r6"
+      ]
+    },
+    "r1_fix4_tells.FEATS_2 (R1a lookups, keyed by base id)": {
+      "keys": [
+        "conditional_threshold_rule",
+        "categories_default_exceptions"
+      ],
+      "line": 31,
+      "path": "studies/m0/r1_fix4_tells.py",
+      "survivor_bases_matching": [
+        "R1.categories_default_exceptions_r4",
+        "R1.conditional_threshold_rule_r4"
+      ]
+    },
+    "run_rules_final.feat_defs FEATS (R1b fitted lookups)": {
+      "line": 17,
+      "n": 4,
+      "not_on_survivor_list": [],
+      "note": "lineage-keyed rule table; lineages run are argv ids or fgen.lineages()",
+      "path": "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/run_rules_final.py",
+      "survivors_not_in_table": [
+        "R1.compass_turns",
+        "R1.equivalence_exchange_rates_r6",
+        "R1.spatial_grid_walk_r5",
+        "R1.swap_tracking_r5",
+        "R1.temporal_weekday_shift_r6",
+        "R1.venn_counting_r5"
+      ]
+    }
+  }
+}

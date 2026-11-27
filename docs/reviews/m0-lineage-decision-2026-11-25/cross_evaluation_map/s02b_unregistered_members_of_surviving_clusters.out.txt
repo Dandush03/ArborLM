@@ -1,0 +1,56 @@
+=== C1.loop_sum L0 (module studies.m0.lineages_c1)  answer='138'
+[program]
+total = 6
+for z in range(5, 17, 2):
+    if z % 3 != 2:
+        total += z * 3
+print(total)
+
+=== C1.loop_sum L3 (module studies.m0.lineages_c1)  answer='-192'
+[program]
+d = 8
+for val in range(1, 24, 3):
+    if val % 2 == 0:
+        d -= val * 4
+    else:
+        d += 2
+print(d)
+
+=== R1.kinship_ancestor_r4: not found by this loader
+
+=== R1.kinship_cousins_r5: not found by this loader
+
+=== R1.event_timeline_r6 L0 (module studies.m0.lineages_r1_fix4_a)  answer='20'
+The quiz night took place 41 days after the chess final. The council vote took place 25 days before the chess final. The harvest fair took place 6 days before the chess final. The book sale took place 58 days after the concert. The boat race took place 43 days after the chess final. The boat race took place 30 days after the book sale. How many days apart did the council vote and the concert take place?
+
+=== R1.event_timeline_r6 L3 (module studies.m0.lineages_r1_fix4_a)  answer='203'
+The council vote took place 56 days after the lecture. The market day took place 24 days before the cycle tour. The chess final took place 42 days after the school play. The cycle tour took place 21 days before the lecture. The school play took place 33 days after the book sale. The boat race took place 51 days before the quiz night. The quiz night took place 54 days before the book sale. The art auction took place 25 days before the market day. The boat race took place 54 days before the council vote. The cycle tour took place 57 days after the flower show. How many days apart did the cycle tour and the chess final take place?
+
+=== R1.spatial_relative_directions_r6 L0 (module studies.m0.lineages_r1_fix4_a)  answer='21'
+Ravenna is 7 blocks west of Oakham. Upton is 5 blocks west of Harrow. Fenwick is 1 block south of Upton. Larkin is 7 blocks north of Fenwick. Harrow is 4 blocks south of Ravenna. Calder is 2 blocks north of Dunmore. Harrow is 8 blocks north of Calder. How far apart are Dunmore and Larkin by street distance (blocks north or south plus blocks east or west)?
+
+=== R1.spatial_relative_directions_r6 L3 (module studies.m0.lineages_r1_fix4_a)  answer='16'
+Quarry is 5 blocks south of Larkin. Norwick is 3 blocks south of Westmere. Westmere is 2 blocks south of Oakham. Fenwick is 1 block south of Garth. Eastvale is 5 blocks south of Quarry. Ivybridge is 9 blocks north of Harrow. Larkin is 2 blocks east of Norwick. Fenwick is 6 blocks west of Zennor. Fenwick is 3 blocks west of Oakham. Ivybridge is 4 blocks north of Quarry. Calder is 4 blocks west of Garth. How far apart are Harrow and Zennor by street distance (blocks north or south plus blocks east or west)?
+
+=== R1.minimax_tree_r5: not found by this loader
+
+=== R1.elimination_bracket_r5: not found by this loader
+
+=== R1.attribute_rule_r5: not found by this loader
+
+=== R1.one_culprit L0 (module studies.m0.lineages_r1)  answer='Liam'
+One of Bea, Kate, Liam and Oscar took the last cake. Kate says: "It was Liam." Oscar says: "It was Bea." Liam says: "It was Bea or Oscar." Bea says: "It was Oscar." Exactly 1 of these 4 statements are true. Who took the cake?
+
+=== R1.one_culprit L3 (module studies.m0.lineages_r1)  answer='Zara'
+One of Ivy, Rosa, Thea, Vance and Zara took the last cake. Thea says: "It was Thea." Zara says: "It was Vance." Ivy says: "It was not Vance." Rosa says: "It was Ivy." Vance says: "It was Vance or Rosa." Exactly 1 of these 5 statements are true. Who took the cake?
+
+=== R1.conditional_chain_r5: not found by this loader
+
+=== R2.count_letter L0 (module studies.m0.lineages_r2)  answer='2'
+How many times does the letter 'x' appear in total in these words: dokir nikix nevex?
+
+=== R2.count_letter L3 (module studies.m0.lineages_r2)  answer='6'
+How many times does the letter 'o' appear in total in these words: zedek nomor kovek loven sisox sivak namix tekon lemix?
+
+=== M1.coins_r3: not found by this loader
+

@@ -1,0 +1,27 @@
+C1.binary_search_f3 {'alias': 'C1.binary_search', 'alias_rc': 0}
+C1.bracket_matching_f3 {'alias': 'C1.bracket_matching', 'alias_rc': 0}
+C1.bytecode_loop_f3 {'alias': 'C1.bytecode_loop_r2', 'alias_rc': 0}
+C1.circle_elimination_r2 {'alias': None, 'own_rc': 0}
+C1.cond_chain_f3 {'alias': 'C1.cond_chain', 'alias_rc': 0}
+C1.counter_list_f3 {'alias': 'C1.counter_list', 'alias_rc': 0}
+C1.digit_peel_f3 {'alias': 'C1.digit_peel', 'alias_rc': 0}
+C1.euclid_gcd_traced_f3 {'alias': 'C1.euclid_gcd_traced', 'alias_rc': 0}
+C1.fast_power_f3 {'alias': 'C1.fast_power_r2', 'alias_rc': 0}
+C1.fib_like_f3 {'alias': 'C1.fib_like', 'alias_rc': 0}
+C1.fib_shapes_recursive_f3 {'alias': 'C1.fib_shapes_recursive', 'alias_rc': 0}
+C1.func_branch {'alias': None, 'own_rc': 0}
+C1.func_compose_f3 {'alias': 'C1.func_compose', 'alias_rc': 0}
+C1.list_build_f3 {'alias': 'C1.list_build', 'alias_rc': 0}
+C1.merge_two_sorted_f3 {'alias': 'C1.merge_two_sorted_r2', 'alias_rc': 0}
+C1.nested_pairs_f3 {'alias': 'C1.nested_pairs', 'alias_rc': 0}
+C1.postfix_evaluation {'alias': None, 'own_rc': 0}
+C1.recursive_calls_r2 {'alias': None, 'own_rc': 0}
+C1.run_length_scan {'alias': None, 'own_rc': 0}
+C1.shared_lists_f3 {'alias': 'C1.shared_lists', 'alias_rc': 0}
+C1.sieve_marking_f3 {'alias': 'C1.sieve_marking_r2', 'alias_rc': 0}
+C1.slices {'alias': None, 'own_rc': 0}
+C1.string_build_f3 {'alias': 'C1.string_build', 'alias_rc': 0}
+C1.string_methods_f3 {'alias': 'C1.string_methods', 'alias_rc': 0}
+C1.turtle_walk_f3 {'alias': 'C1.turtle_walk_r2', 'alias_rc': 0}
+C1.union_find_links_f3 {'alias': 'C1.union_find_links', 'alias_rc': 0}
+C1.while_counter_f3 {'alias': 'C1.while_counter', 'alias_rc': 1, 'own_rc': 0}

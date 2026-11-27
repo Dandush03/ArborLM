@@ -1,0 +1,7 @@
+# scenario: the six M1 lineages listed PENDING_LEAD_REVIEW in m1_fix4_survivors.json (excluded procedure rule above the bound)
+M1.consecutive_r3
+M1.division_counting_r3
+M1.finite_differences_r4
+M1.gcd_lcm_r4
+M1.prime_factors_r3
+M1.ratio_share_r3

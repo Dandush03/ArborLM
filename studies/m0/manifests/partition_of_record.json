@@ -1,0 +1,569 @@
+{
+ "cluster_groups": {
+  "C1.binary_search": "C1.binary_search",
+  "C1.bracket_matching": "C1.bracket_matching",
+  "C1.bytecode_loop": "C1.bracket_matching",
+  "C1.cellular_update": "C1.cellular_update",
+  "C1.coin_change_table": "C1.bracket_matching",
+  "C1.counter_list_f3": "C1.bracket_matching",
+  "C1.digit_peel": "C1.bracket_matching",
+  "C1.euclid_gcd": "C1.bracket_matching",
+  "C1.fast_power": "C1.bracket_matching",
+  "C1.fib_like": "C1.bracket_matching",
+  "C1.func_branch": "C1.func_branch",
+  "C1.list_build": "C1.bracket_matching",
+  "C1.merge_two_sorted": "C1.merge_two_sorted",
+  "C1.nested_pairs": "C1.bracket_matching",
+  "C1.run_length_scan": "C1.run_length_scan",
+  "C1.slices": "C1.bracket_matching",
+  "C1.string_build": "C1.bracket_matching",
+  "C1.turtle_walk": "C1.bracket_matching",
+  "C1.while_counter": "C1.bracket_matching",
+  "M1.ages": "C1.bracket_matching",
+  "M1.clock_duration": "C1.bracket_matching",
+  "M1.crt_congruence": "C1.bracket_matching",
+  "M1.finite_differences": "M1.finite_differences",
+  "M1.fraction_remainder": "M1.fraction_remainder",
+  "M1.grid_perimeter": "M1.grid_perimeter",
+  "M1.inclusion_exclusion": "M1.inclusion_exclusion",
+  "M1.median_list": "C1.merge_two_sorted",
+  "M1.mixture": "C1.bracket_matching",
+  "M1.quadratic_area": "M1.quadratic_area",
+  "M1.tiered_pricing": "C1.bracket_matching",
+  "R1.boolean_lights": "C1.bracket_matching",
+  "R1.categories_default_exceptions": "C1.bracket_matching",
+  "R1.conditional_chain": "C1.bracket_matching",
+  "R1.conditional_threshold_rule": "C1.bracket_matching",
+  "R1.equivalence_exchange_rates": "M1.fraction_remainder",
+  "R1.mst_cost": "C1.bracket_matching",
+  "R2.caesar_shift": "R2.caesar_shift",
+  "R2.count_divisible": "C1.bracket_matching",
+  "R2.dictionary_rank": "C1.bracket_matching",
+  "R2.expression_eval": "C1.bracket_matching",
+  "R2.grid_sum": "C1.bracket_matching",
+  "R2.luhn_check": "R2.luhn_check",
+  "R2.min_heap_ops": "R2.min_heap_ops",
+  "R2.string_rewrite": "C1.bracket_matching"
+ },
+ "cluster_part": {
+  "C1.binary_search": "B",
+  "C1.bracket_matching": "A",
+  "C1.bytecode_loop": "A",
+  "C1.cellular_update": "B",
+  "C1.coin_change_table": "A",
+  "C1.counter_list_f3": "A",
+  "C1.digit_peel": "A",
+  "C1.euclid_gcd": "A",
+  "C1.fast_power": "A",
+  "C1.fib_like": "A",
+  "C1.func_branch": "B",
+  "C1.list_build": "A",
+  "C1.merge_two_sorted": "B",
+  "C1.nested_pairs": "A",
+  "C1.run_length_scan": "B",
+  "C1.slices": "A",
+  "C1.string_build": "A",
+  "C1.turtle_walk": "A",
+  "C1.while_counter": "A",
+  "M1.ages": "A",
+  "M1.clock_duration": "A",
+  "M1.crt_congruence": "A",
+  "M1.finite_differences": "B",
+  "M1.fraction_remainder": "B",
+  "M1.grid_perimeter": "B",
+  "M1.inclusion_exclusion": "B",
+  "M1.median_list": "B",
+  "M1.mixture": "A",
+  "M1.quadratic_area": "B",
+  "M1.tiered_pricing": "A",
+  "R1.boolean_lights": "A",
+  "R1.categories_default_exceptions": "A",
+  "R1.conditional_chain": "A",
+  "R1.conditional_threshold_rule": "A",
+  "R1.equivalence_exchange_rates": "B",
+  "R1.mst_cost": "A",
+  "R2.caesar_shift": "B",
+  "R2.count_divisible": "A",
+  "R2.dictionary_rank": "A",
+  "R2.expression_eval": "A",
+  "R2.grid_sum": "A",
+  "R2.luhn_check": "B",
+  "R2.min_heap_ops": "B",
+  "R2.string_rewrite": "A"
+ },
+ "clusters_without_candidate": {
+  "C1.bfs_queue": {
+   "group": "C1.bracket_matching",
+   "group_part": "A",
+   "tied_by_borderline_pair": true
+  },
+  "C1.bubble_pass": {
+   "group": "C1.merge_two_sorted",
+   "group_part": "B",
+   "tied_by_borderline_pair": true
+  },
+  "C1.circle_elimination": {
+   "group": "C1.bracket_matching",
+   "group_part": "A",
+   "tied_by_borderline_pair": true
+  },
+  "C1.cond_chain": {
+   "group": "C1.bracket_matching",
+   "group_part": "A",
+   "tied_by_borderline_pair": true
+  },
+  "C1.counter_list": {
+   "group": "C1.bracket_matching",
+   "group_part": "A",
+   "tied_by_borderline_pair": true
+  },
+  "C1.grid_path_table": {
+   "group": "C1.bracket_matching",
+   "group_part": "A",
+   "tied_by_borderline_pair": true
+  },
+  "C1.insertion_sort": {
+   "group": "C1.merge_two_sorted",
+   "group_part": "B",
+   "tied_by_borderline_pair": true
+  },
+  "C1.kadane_scan": {
+   "group": "C1.bracket_matching",
+   "group_part": "A",
+   "tied_by_borderline_pair": true
+  },
+  "C1.majority_vote_scan": {
+   "group": "C1.bracket_matching",
+   "group_part": "A",
+   "tied_by_borderline_pair": true
+  },
+  "C1.minmax_track": {
+   "group": "C1.bracket_matching",
+   "group_part": "A",
+   "tied_by_borderline_pair": true
+  },
+  "C1.mirror_pointers": {
+   "group": "C1.run_length_scan",
+   "group_part": "B",
+   "tied_by_borderline_pair": true
+  },
+  "C1.partition_pass": {
+   "group": "C1.merge_two_sorted",
+   "group_part": "B",
+   "tied_by_borderline_pair": true
+  },
+  "C1.shared_lists": {
+   "group": null,
+   "group_part": null,
+   "tied_by_borderline_pair": false
+  },
+  "C1.sieve_marking": {
+   "group": null,
+   "group_part": null,
+   "tied_by_borderline_pair": false
+  },
+  "C1.string_pair_table": {
+   "group": "C1.bracket_matching",
+   "group_part": "A",
+   "tied_by_borderline_pair": true
+  },
+  "M1.binomial_choose": {
+   "group": "C1.bracket_matching",
+   "group_part": "A",
+   "tied_by_borderline_pair": true
+  },
+  "M1.digit_puzzle": {
+   "group": "C1.bracket_matching",
+   "group_part": "A",
+   "tied_by_borderline_pair": true
+  },
+  "M1.division_counting": {
+   "group": "C1.bracket_matching",
+   "group_part": "A",
+   "tied_by_borderline_pair": true
+  },
+  "M1.pigeonhole_worst_case": {
+   "group": null,
+   "group_part": null,
+   "tied_by_borderline_pair": false
+  },
+  "M1.prime_factors": {
+   "group": null,
+   "group_part": null,
+   "tied_by_borderline_pair": false
+  },
+  "M1.pythagoras": {
+   "group": null,
+   "group_part": null,
+   "tied_by_borderline_pair": false
+  },
+  "M1.slot_permutations": {
+   "group": "C1.bracket_matching",
+   "group_part": "A",
+   "tied_by_borderline_pair": true
+  },
+  "R1.activity_selection": {
+   "group": "C1.bracket_matching",
+   "group_part": "A",
+   "tied_by_borderline_pair": true
+  },
+  "R1.attribute_rule": {
+   "group": null,
+   "group_part": null,
+   "tied_by_borderline_pair": false
+  },
+  "R1.containers_stack_piles": {
+   "group": "C1.bracket_matching",
+   "group_part": "A",
+   "tied_by_borderline_pair": true
+  },
+  "R1.graph_bipartite": {
+   "group": "C1.bracket_matching",
+   "group_part": "A",
+   "tied_by_borderline_pair": true
+  },
+  "R1.graph_shortest_route": {
+   "group": "C1.bracket_matching",
+   "group_part": "A",
+   "tied_by_borderline_pair": true
+  },
+  "R1.instant_runoff": {
+   "group": "C1.bracket_matching",
+   "group_part": "A",
+   "tied_by_borderline_pair": true
+  },
+  "R1.kinship_descendants": {
+   "group": "C1.bracket_matching",
+   "group_part": "A",
+   "tied_by_borderline_pair": true
+  },
+  "R1.nim_xor": {
+   "group": "C1.bracket_matching",
+   "group_part": "A",
+   "tied_by_borderline_pair": true
+  },
+  "R1.order_extreme": {
+   "group": "C1.bracket_matching",
+   "group_part": "A",
+   "tied_by_borderline_pair": true
+  },
+  "R1.pet_owners": {
+   "group": "C1.bracket_matching",
+   "group_part": "A",
+   "tied_by_borderline_pair": true
+  },
+  "R1.spatial_grid_walk": {
+   "group": "C1.bracket_matching",
+   "group_part": "A",
+   "tied_by_borderline_pair": true
+  },
+  "R1.stable_matching": {
+   "group": null,
+   "group_part": null,
+   "tied_by_borderline_pair": false
+  },
+  "R1.swap_tracking": {
+   "group": "C1.bracket_matching",
+   "group_part": "A",
+   "tied_by_borderline_pair": true
+  },
+  "R1.temporal_critical_path": {
+   "group": "C1.bracket_matching",
+   "group_part": "A",
+   "tied_by_borderline_pair": true
+  },
+  "R1.temporal_interval_overlap": {
+   "group": null,
+   "group_part": null,
+   "tied_by_borderline_pair": false
+  },
+  "R1.tracking_accounts": {
+   "group": "C1.bracket_matching",
+   "group_part": "A",
+   "tied_by_borderline_pair": true
+  },
+  "R2.bst_traversal": {
+   "group": null,
+   "group_part": null,
+   "tied_by_borderline_pair": false
+  },
+  "R2.cache_eviction": {
+   "group": null,
+   "group_part": null,
+   "tied_by_borderline_pair": false
+  },
+  "R2.chip_toppling": {
+   "group": null,
+   "group_part": null,
+   "tied_by_borderline_pair": false
+  },
+  "R2.digit_root": {
+   "group": "C1.bracket_matching",
+   "group_part": "A",
+   "tied_by_borderline_pair": true
+  },
+  "R2.hamming_error_position": {
+   "group": null,
+   "group_part": null,
+   "tied_by_borderline_pair": false
+  },
+  "R2.hash_probe": {
+   "group": null,
+   "group_part": null,
+   "tied_by_borderline_pair": false
+  },
+  "R2.lis_length": {
+   "group": null,
+   "group_part": null,
+   "tied_by_borderline_pair": false
+  },
+  "R2.longest_palindromic_substring": {
+   "group": null,
+   "group_part": null,
+   "tied_by_borderline_pair": false
+  },
+  "R2.merge_smallest_cost": {
+   "group": null,
+   "group_part": null,
+   "tied_by_borderline_pair": false
+  },
+  "R2.multiples_between": {
+   "group": "C1.bracket_matching",
+   "group_part": "A",
+   "tied_by_borderline_pair": true
+  }
+ },
+ "counts": {
+  "C1": {
+   "N_e": 17,
+   "clusters_A": 13,
+   "clusters_B": 4,
+   "group_sizes_in_candidate_clusters": [
+    1,
+    1,
+    1,
+    1,
+    13
+   ],
+   "groups_A": 1,
+   "groups_B": 4,
+   "groups_with_candidate_cluster": 5,
+   "half_floor": 8,
+   "step3": {
+    "L_e_groups": 1,
+    "a_e": 13,
+    "order": [
+     "C1.func_branch"
+    ],
+    "p_placed_in_A": 0,
+    "trace": [
+     {
+      "fits": false,
+      "group": "C1.func_branch",
+      "part": "B",
+      "w_e": 1
+     }
+    ]
+   }
+  },
+  "M1": {
+   "N_e": 14,
+   "clusters_A": 8,
+   "clusters_B": 6,
+   "group_sizes_in_candidate_clusters": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    8
+   ],
+   "groups_A": 1,
+   "groups_B": 6,
+   "groups_with_candidate_cluster": 7,
+   "half_floor": 7,
+   "step3": {
+    "L_e_groups": 4,
+    "a_e": 8,
+    "order": [
+     "M1.inclusion_exclusion",
+     "M1.quadratic_area",
+     "M1.finite_differences",
+     "M1.grid_perimeter"
+    ],
+    "p_placed_in_A": 0,
+    "trace": [
+     {
+      "fits": false,
+      "group": "M1.inclusion_exclusion",
+      "part": "B",
+      "w_e": 1
+     },
+     {
+      "fits": false,
+      "group": "M1.quadratic_area",
+      "part": "B",
+      "w_e": 1
+     },
+     {
+      "fits": false,
+      "group": "M1.finite_differences",
+      "part": "B",
+      "w_e": 1
+     },
+     {
+      "fits": false,
+      "group": "M1.grid_perimeter",
+      "part": "B",
+      "w_e": 1
+     }
+    ]
+   }
+  },
+  "R1": {
+   "N_e": 5,
+   "clusters_A": 4,
+   "clusters_B": 1,
+   "group_sizes_in_candidate_clusters": [
+    1,
+    4
+   ],
+   "groups_A": 1,
+   "groups_B": 1,
+   "groups_with_candidate_cluster": 2,
+   "half_floor": 2,
+   "step3": {
+    "L_e_groups": 0,
+    "a_e": 4,
+    "order": [],
+    "p_placed_in_A": 0,
+    "trace": []
+   }
+  },
+  "R2": {
+   "N_e": 15,
+   "clusters_A": 8,
+   "clusters_B": 7,
+   "group_sizes_in_candidate_clusters": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    8
+   ],
+   "groups_A": 1,
+   "groups_B": 7,
+   "groups_with_candidate_cluster": 8,
+   "half_floor": 7,
+   "step3": {
+    "L_e_groups": 4,
+    "a_e": 8,
+    "order": [
+     "R2.luhn_check",
+     "R2.min_heap_ops",
+     "R2.caesar_shift",
+     "C1.cellular_update"
+    ],
+    "p_placed_in_A": 0,
+    "trace": [
+     {
+      "fits": false,
+      "group": "R2.luhn_check",
+      "part": "B",
+      "w_e": 1
+     },
+     {
+      "fits": false,
+      "group": "R2.min_heap_ops",
+      "part": "B",
+      "w_e": 1
+     },
+     {
+      "fits": false,
+      "group": "R2.caesar_shift",
+      "part": "B",
+      "w_e": 1
+     },
+     {
+      "fits": false,
+      "group": "C1.cellular_update",
+      "part": "B",
+      "w_e": 1
+     }
+    ]
+   }
+  }
+ },
+ "derived_integers": {
+  "C1": 14653439660296977361,
+  "M1": 5748257385449400496,
+  "R1": 12152681357659760304,
+  "R2": 6959284715912682832,
+  "cross": 3111564968117111496
+ },
+ "inputs": {
+  "candidates_sha256": "8dcc796c0dc8554fab52a5e3093f73c6f2838fe5b965e2b3743fea6291f8946a",
+  "code_sha256": "4e43d280f60730ead54922be1a3687cca99468758d5a75417944cb6b58714d03",
+  "map_sha256": "1ba6ddd520dfe6514dfd282883ce4bc84660b7dca1abfefdac58285dcab5809c"
+ },
+ "map_consistency": {
+  "clusters_equal_map_field": true,
+  "groups_equal_map_field": true
+ },
+ "n_clusters": 92,
+ "n_clusters_with_candidate": 44,
+ "n_groups_with_candidate": 14,
+ "seed": 400004,
+ "step2": {
+  "clusters_in_A": 29,
+  "clusters_in_B": 6,
+  "order": [
+   "C1.run_length_scan",
+   "C1.bracket_matching",
+   "C1.merge_two_sorted",
+   "C1.binary_search",
+   "M1.fraction_remainder"
+  ],
+  "trace": [
+   {
+    "a_before": 0,
+    "b_before": 0,
+    "group": "C1.run_length_scan",
+    "part": "B",
+    "w": 1
+   },
+   {
+    "a_before": 0,
+    "b_before": 1,
+    "group": "C1.bracket_matching",
+    "part": "A",
+    "w": 29
+   },
+   {
+    "a_before": 29,
+    "b_before": 1,
+    "group": "C1.merge_two_sorted",
+    "part": "B",
+    "w": 2
+   },
+   {
+    "a_before": 29,
+    "b_before": 3,
+    "group": "C1.binary_search",
+    "part": "B",
+    "w": 1
+   },
+   {
+    "a_before": 29,
+    "b_before": 4,
+    "group": "M1.fraction_remainder",
+    "part": "B",
+    "w": 2
+   }
+  ]
+ }
+}

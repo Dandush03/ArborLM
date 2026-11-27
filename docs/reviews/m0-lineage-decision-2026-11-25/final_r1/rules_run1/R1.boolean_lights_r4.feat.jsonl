@@ -1,0 +1,7 @@
+{"lineage": "R1.boolean_lights_r4", "level": 0, "heuristic": "feat:#presses of switches wired to ask, parity", "eff": -0.004, "anti": null, "acc_fired": null, "fired": 3000, "n": 3000}
+{"lineage": "R1.boolean_lights_r4", "level": 1, "heuristic": "feat:#presses of switches wired to ask, parity", "eff": -0.004, "anti": null, "acc_fired": null, "fired": 3000, "n": 3000}
+{"lineage": "R1.boolean_lights_r4", "level": 2, "heuristic": "feat:#presses of switches wired to ask, parity", "eff": 0.0053, "anti": null, "acc_fired": null, "fired": 3000, "n": 3000}
+{"lineage": "R1.boolean_lights_r4", "level": 3, "heuristic": "feat:#presses of switches wired to ask, parity", "eff": 0.0, "anti": null, "acc_fired": null, "fired": 3000, "n": 3000}
+{"lineage": "R1.boolean_lights_r4", "level": 4, "heuristic": "feat:#presses of switches wired to ask, parity", "eff": -0.0017, "anti": null, "acc_fired": null, "fired": 3000, "n": 3000}
+{"lineage": "R1.boolean_lights_r4", "level": 5, "heuristic": "feat:#presses of switches wired to ask, parity", "eff": 0.006, "anti": null, "acc_fired": null, "fired": 3000, "n": 3000}
+{"lineage": "R1.boolean_lights_r4", "level": 6, "heuristic": "feat:#presses of switches wired to ask, parity", "eff": -0.0273, "anti": null, "acc_fired": null, "fired": 3000, "n": 3000}

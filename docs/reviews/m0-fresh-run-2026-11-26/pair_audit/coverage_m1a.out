@@ -1,0 +1,62 @@
+== solver2_m1a.py: statements 156; run on fixtures 95; run on fresh 95; fresh-only 0; never run 61; fixture-only 0
+  NEVER 23 [_ages_text]         raise ValueError("ages: text not parsed")
+  NEVER 26 [_ages_text]         raise ValueError("ages: both people have the same name")
+  NEVER 32 [_ages_text]         raise ValueError("ages: asked name is neither person")
+  NEVER 40 [ages]         raise ValueError("ages: text ask != structured ask")
+  NEVER 44 [ages]         raise ValueError("ages: non-integer or non-positive age")
+  NEVER 51 [_arith_text]     m = re.search(r"saves (\d+) dollars on day 1 and then saves (\d+) dollars more each day .*after (\d+) days \(counting day 1 to day (\d+), both inc
+  NEVER 52 [_arith_text]     if not m or m.group(3) != m.group(4):
+  NEVER 53 [_arith_text]         raise ValueError("arith: text not parsed")
+  NEVER 54 [_arith_text]     return {"first": int(m.group(1)), "step": int(m.group(2)), "days": int(m.group(3))}
+  NEVER 66 [_avg_text]         raise ValueError("avg: text not parsed")
+  NEVER 69 [_avg_text]         raise ValueError("avg: counts inconsistent")
+  NEVER 78 [average_missing]         raise ValueError("avg: needed score not a whole number")
+  NEVER 81 [average_missing]         raise ValueError("avg: needed score outside 0..max")
+  NEVER 87 [_change_text]     m = re.search(r"coins worth (\d+), (\d+) and (\d+) cents, .* can exactly (\d+) cents be paid\?", q)
+  NEVER 88 [_change_text]     if not m:
+  NEVER 89 [_change_text]         raise ValueError("change: text not parsed")
+  NEVER 90 [_change_text]     return {"coins": [int(m.group(i)) for i in (1, 2, 3)], "target": int(m.group(4))}
+  NEVER 96 [change_ways]         raise ValueError("change: coin values not distinct positive")
+  NEVER 106 [_clock_text]     legs = re.findall(r"leg (\d+) leaves at (\d\d):(\d\d) and arrives at (\d\d):(\d\d)", q)
+  NEVER 107 [_clock_text]     if not legs or [int(x[0]) for x in legs] != list(range(1, len(legs) + 1)):
+  NEVER 108 [_clock_text]         raise ValueError("clock: text not parsed")
+  NEVER 109 [_clock_text]     return {"legs": [[int(h1) * 60 + int(m1), int(h2) * 60 + int(m2)] for _, h1, m1, h2, m2 in legs]}
+  NEVER 117 [clock_duration]             raise ValueError("clock: leg times not ordered within one day")
+  NEVER 125 [_consec_text]     m = re.match(r"The sum of (\d+) consecutive (integers|numbers that each differ from the next by (\d+)) \(listed from smallest to largest, positive
+  NEVER 126 [_consec_text]     if not m:
+  NEVER 127 [_consec_text]         raise ValueError("consec: text not parsed")
+  NEVER 128 [_consec_text]     return {"count": int(m.group(1)), "step": int(m.group(3)) if m.group(3) else 1, "sum": int(m.group(4)), "ask": m.group(5)}
+  NEVER 135 [consecutive]         raise ValueError("consec: no integer solution")
+  NEVER 142 [_crt_text]     conds = re.findall(r"[Dd]ividing it by (\d+) leaves remainder (\d+)", q)
+  NEVER 143 [_crt_text]     if not conds:
+  NEVER 144 [_crt_text]         raise ValueError("crt: text not parsed")
+  NEVER 145 [_crt_text]     return {"conditions": [[int(a), int(b)] for a, b in conds]}
+  NEVER 152 [crt_congruence]             raise ValueError("crt: remainder out of range")
+  NEVER 163 [crt_congruence]     raise ValueError("crt: no solution")
+  NEVER 168 [_div_text]     m = re.match(r"(\d+) people must travel by bus, and \w+ hires as few buses as possible\. Each bus has (\d+) seats, and nobody stands\. When all (\
+  NEVER 169 [_div_text]     if m:
+  NEVER 170 [_div_text]         if m.group(1) != m.group(3):
+  NEVER 171 [_div_text]             raise ValueError("div: people counts differ")
+  NEVER 172 [_div_text]         return {"shape": "empty_seats", "people": int(m.group(1)), "seats": int(m.group(2))}
+  NEVER 173 [_div_text]     m = re.search(r"A factory makes (\d+) (\w+)\. They are packed into boxes that each hold exactly (\d+) (\w+); (\w+) that do not fill a box are left
+  NEVER 174 [_div_text]     if m:
+  NEVER 175 [_div_text]         return {"shape": "pallets", "items": int(m.group(1)), "box": int(m.group(3)), "crate": int(m.group(6))}
+  NEVER 176 [_div_text]     raise ValueError("div: text not parsed")
+  NEVER 187 [division_counting]     raise ValueError("div: unknown shape")
+  NEVER 192 [_fd_text]     m = re.search(r"The first (\d+) numbers of a pattern are ([\d, ]+) and (\d+)\. .*polynomial of degree (\d+) in its position \(position 1 is the fi
+  NEVER 193 [_fd_text]     if not m:
+  NEVER 194 [_fd_text]         raise ValueError("fd: text not parsed")
+  NEVER 195 [_fd_text]     terms = [int(x) for x in m.group(2).split(",")] + [int(m.group(3))]
+  NEVER 196 [_fd_text]     if len(terms) != int(m.group(1)):
+  NEVER 197 [_fd_text]         raise ValueError("fd: count mismatch")
+  NEVER 198 [_fd_text]     return {"terms": terms, "degree": int(m.group(4)), "ask": int(m.group(5))}
+  NEVER 216 [finite_differences]         raise ValueError("fd: too few terms for the degree")
+  NEVER 222 [finite_differences]             raise ValueError("fd: terms not on a polynomial of the stated degree")
+  NEVER 228 [finite_differences]         raise ValueError("fd: polynomial has lower degree than stated")
+  NEVER 231 [finite_differences]         raise ValueError("fd: non-integer value")
+  NEVER 241 [_frac_text]     m = re.match(r"(\w+) has (\d+) dollars\. \w+ spends one (\w+) of it on books, then one (\w+) of what is left on lunch\. How many dollars does \w+ 
+  NEVER 242 [_frac_text]     if not m or m.group(3) not in _ORD or m.group(4) not in _ORD:
+  NEVER 243 [_frac_text]         raise ValueError("frac: text not parsed")
+  NEVER 244 [_frac_text]     return {"start": int(m.group(2)), "a": _ORD[m.group(3)], "b": _ORD[m.group(4)]}
+  NEVER 250 [fraction_remainder]         raise ValueError("frac: first spend not whole dollars")
+  NEVER 253 [fraction_remainder]         raise ValueError("frac: second spend not whole dollars")

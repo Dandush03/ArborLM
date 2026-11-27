@@ -1,0 +1,9 @@
+{"lineage": "R1.compass_turns", "level": 0, "heuristic": "base_rule", "n": 100, "chance": 0.5, "fired": 50, "acc_fired": 0.5, "eff": 0.0, "anti": 0.0, "mode_rate": 0.9}
+{"lineage": "R1.compass_turns", "level": 1, "heuristic": "base_rule", "n": 100, "chance": 0.5, "fired": 50, "acc_fired": 0.5, "eff": 0.0, "anti": 0.0, "mode_rate": 0.9}
+{"lineage": "R1.compass_turns", "level": 2, "heuristic": "base_rule", "n": 100, "chance": 0.5, "fired": 50, "acc_fired": 0.5, "eff": 0.0, "anti": 0.0, "mode_rate": 0.9}
+{"lineage": "R1.compass_turns", "level": 2, "heuristic": "a4:ccw_as_cw", "n": 100, "chance": 0.5, "fired": 50, "acc_fired": 0.5, "eff": 0.4, "anti": 0.0, "mode_rate": 0.9}
+{"lineage": "R1.compass_turns", "level": 2, "heuristic": "a3:abstain_as_yes", "n": 100, "chance": 0.5, "fired": 50, "acc_fired": 0.5, "eff": 0.4, "anti": 0.0, "mode_rate": 0.9}
+{"lineage": "R1.compass_turns", "level": 3, "heuristic": "base_rule", "n": 100, "chance": 0.5, "fired": 50, "acc_fired": 0.5, "eff": 0.0, "anti": 0.0, "mode_rate": 0.9}
+{"lineage": "R1.compass_turns", "level": 4, "heuristic": "base_rule", "n": 100, "chance": 0.5, "fired": 50, "acc_fired": 0.5, "eff": 0.0, "anti": 0.0, "mode_rate": 0.9}
+{"lineage": "R1.compass_turns", "level": 5, "heuristic": "base_rule", "n": 100, "chance": 0.5, "fired": 50, "acc_fired": 0.5, "eff": 0.0, "anti": 0.0, "mode_rate": 0.9}
+{"lineage": "R1.compass_turns", "level": 6, "heuristic": "base_rule", "n": 100, "chance": 0.5, "fired": 50, "acc_fired": 0.5, "eff": 0.0, "anti": 0.0, "mode_rate": 0.9}

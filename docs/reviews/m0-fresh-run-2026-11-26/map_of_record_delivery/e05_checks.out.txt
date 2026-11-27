@@ -1,0 +1,6 @@
+format checks: OK
+R1: own-links components 25; global clusters holding R1 25; joined only through another evaluation: none
+R2: own-links components 38; global clusters holding R2 37; joined only through another evaluation: {'C1.bracket_matching': ['R2.bracket_match', 'R2.stack_machine']}
+M1: own-links components 23; global clusters holding M1 23; joined only through another evaluation: none
+C1: own-links components 36; global clusters holding C1 34; joined only through another evaluation: {'C1.bfs_queue': ['C1.bfs_queue', 'C1.union_find_links'], 'C1.fib_like': ['C1.fib_like', 'C1.loop_sum']}
+survivor-list ids absent from the map: {'C1': [], 'M1': [], 'R1': [], 'R2': []}  (counts on the list: {'C1': 26, 'M1': 29, 'R1': 10, 'R2': 17} )

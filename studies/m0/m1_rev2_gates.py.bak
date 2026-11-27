@@ -1,0 +1,325 @@
+# ruff: noqa: E501
+"""M1 revision 2: structural capacity (ruling R-5), fixtures with structural de-duplication across levels, schema document and manifest. No model involved; deterministic.
+
+ATTRIBUTION. ``struct_key``, ``ie_canon`` and ``canon_key`` follow the independent auditor's ``capacity_audit_v2.py`` (arbor-auditor, Claude Opus 5.5,
+docs/reviews/m0-lineage-decision-2026-11-25/audit_m1/), copied and extended here for the rev2 shapes (grid_perimeter_r2 canonical under translation and the eight symmetries of the square;
+power_remainder_r2; median_list_r2 without the table shape).
+
+Capacity (R-5): the number of distinct items is counted on STRUCTURE: names, the setting sentence, activity / colour / object words and presentation order do not count
+(``canon_key``). A sample of M draws per lineage and level gives D, the number of distinct canonical items seen, and ``n_eff = M (M - 1) / (2 P)`` with P the number of colliding pairs
+(the inverse collision probability, a LOWER BOUND on the number of distinct items the generator can produce; infinite when no pair collides). A lineage-level PASSES a demand when
+n_eff >= demand. This is measured, sampled evidence, not an enumeration.
+
+Demand (from ADR-0033 section 6.2 through ``lineage_gates.demand_at_g``, called not edited): per lineage and level, 10 x (ceil(24,000 / G) + 100) on a core level (the whole development + sealed
+pool of one part, 24,000 items, split over G lineages, plus the 100-item tuning draw) and 10 x 100 on a reserve level. G is the number of lineages (= strict clusters) PER PART:
+the audited strict map has 22 clusters over 37 lineages, so 11 per part if the partition is even (the lenient reading, 36 lineages, gives 18). G = 11 -> 22,820; G = 18 -> 14,340; G = 300
+(the earlier proposal) -> 1,800. An uneven partition (a part with fewer than 11 clusters) raises the demand of that part.
+
+Run: PYTHONHASHSEED=0 uv run --locked --offline python -m studies.m0.m1_rev2_gates --stage capacity|fixtures [--m 20000]
+"""
+
+from __future__ import annotations
+
+import argparse
+import hashlib
+import inspect
+import itertools
+import json
+import re
+import time
+import unicodedata
+from collections import Counter
+from pathlib import Path
+from typing import Any
+
+from studies.m0.core import ALL_LEVELS, build_item, stream
+from studies.m0.lineage_gates import CAPACITY_FACTOR, demand_at_g
+
+ROOT = Path(__file__).resolve().parents[2]
+SEED = 777105
+G_WRITTEN = 11
+G_LENIENT = 18
+G_OLD = 300
+
+
+def J(x: Any) -> str:
+    return json.dumps(x, sort_keys=True)
+
+
+def norm(t: str) -> str:
+    return re.sub(r"\s+", " ", unicodedata.normalize("NFKC", t).casefold()).strip()
+
+
+def struct_key(s: dict[str, Any]) -> str:
+    s = dict(s)
+    for k in ("sets", "item"):
+        s.pop(k, None)
+    return J(s)
+
+
+def ie_canon(s: dict[str, Any]) -> str:
+    if s["triple"] is None:
+        return J([s["total"], sorted(s["sizes"]), s["pairs"], s["ask"]])
+    A = s["sizes"]
+    P = {(0, 1): s["pairs"][0], (0, 2): s["pairs"][1], (1, 2): s["pairs"][2]}
+    best = None
+    for perm in itertools.permutations(range(3)):
+        sz = [A[perm[i]] for i in range(3)]
+        pr = [P[tuple(sorted((perm[i], perm[j])))] for i, j in ((0, 1), (0, 2), (1, 2))]
+        cand = (sz, pr)
+        best = cand if best is None or cand < best else best
+    return J([s["total"], best, s["triple"], s["ask"]])
+
+
+def _grid_canon(rows: list[list[list[int]]]) -> str:
+    cells = {(y, x) for y, rr in enumerate(rows) for a, b in rr for x in range(a, b + 1)}
+    best = None
+    for fy, fx, sw in itertools.product((1, -1), (1, -1), (False, True)):
+        pts = [((fy * y, fx * x) if not sw else (fx * x, fy * y)) for y, x in cells]
+        my, mx = min(p[0] for p in pts), min(p[1] for p in pts)
+        key = sorted((p[0] - my, p[1] - mx) for p in pts)
+        best = key if best is None or key < best else best
+    return J(best)
+
+
+def canon_key(lid: str, s: dict[str, Any]) -> str:
+    n = lid.split(".")[1].removesuffix("_r2")
+    if n == "inclusion_exclusion":
+        return ie_canon(s)
+    if n == "pigeonhole_worst_case":
+        return J([sorted(s["counts"]), s["goal"], s["k"]])
+    if n == "gcd_lcm":
+        return J([s["ask"], sorted(s["values"])])
+    if n == "crt_congruence":
+        return J(sorted(s["conditions"]))
+    if n == "power_remainder":
+        return J([s["modulus"], s["op"], sorted(s["terms"])])
+    if n == "digit_puzzle":
+        return J([s["digits"], sorted(J(c) for c in s["clues"])])
+    if n == "pythagoras":
+        if s["shape"] in ("walk", "diagonal", "perimeter"):
+            return J([s["shape"], sorted(s["legs"]), s["hyp"]])
+        return J([s["shape"], s["given"]])
+    if n == "grid_perimeter":
+        return _grid_canon(s["rows"])
+    if n == "painted_cube":
+        a, b, c = s["dims"]
+        dims = sorted([a, b, c]) if not s["bottom_unpainted"] else sorted([a, b]) + [c]
+        return J([dims, s["bottom_unpainted"], s["faces"]])
+    if n == "median_list":
+        return J(["v", sorted(s["values"]) if s["shape"] == "list" else sorted(v for v, c in s["values"] for _ in range(c))])
+    if n == "mode_tally":
+        return J([sorted(s["values"]), s["ask"]])
+    return struct_key(s)
+
+
+def demand(level: int, g: int) -> int:
+    return CAPACITY_FACTOR * demand_at_g(g, level)
+
+
+def capacity_one(args: tuple[str, int]) -> tuple[str, dict[str, Any]]:
+    lid, m = args
+    from studies.m0.lineages_m1_rev2 import load_rev2
+
+    lin = next(x for x in load_rev2() if x.id == lid)
+    out: dict[str, Any] = {}
+    for lv in ALL_LEVELS:
+        rng = stream(SEED, "rev2-capacity", lid, str(lv))
+        cnt: Counter[str] = Counter()
+        text: set[str] = set()
+        for i in range(m):
+            it = build_item(lin, lv, rng, "A", "cap")
+            cnt[canon_key(lid, it.structured)] += 1
+            text.add(norm(it.question))
+        pairs = sum(c * (c - 1) // 2 for c in cnt.values())
+        n_eff = None if pairs == 0 else round(m * (m - 1) / (2 * pairs))
+        out[str(lv)] = {"m": m, "distinct_canonical": len(cnt), "distinct_text": len(text), "n_eff": n_eff}
+    return lid, out
+
+
+def capacity(m: int, workers: int = 6) -> dict[str, Any]:
+    import multiprocessing as mp
+
+    from studies.m0.lineages_m1_rev2 import load_rev2
+
+    ids = [x.id for x in load_rev2()]
+    with mp.get_context("spawn").Pool(workers) as pool:
+        res = dict(pool.map(capacity_one, [(i, m) for i in ids]))
+    table: dict[str, Any] = {}
+    for lid, rec in sorted(res.items()):
+        row: dict[str, Any] = {"levels": rec, "fails": {}}
+        for g in (G_WRITTEN, G_LENIENT, G_OLD):
+            fails = []
+            for lv in ALL_LEVELS:
+                ne = rec[str(lv)]["n_eff"]
+                if ne is not None and ne < demand(lv, g):
+                    fails.append(lv)
+            row["fails"][f"G={g}"] = fails
+        table[lid] = row
+    return {"m": m, "demand": {f"G={g}": {"core": demand(1, g), "reserve": demand(0, g)} for g in (G_WRITTEN, G_LENIENT, G_OLD)}, "lineages": table}
+
+
+# ------------------------------------------------------------------ fixtures
+
+
+def write_fixtures(out_dir: Path, per_level: int = 20) -> dict[str, str]:
+    from studies.m0.lineages_m1_rev2 import REV2
+
+    out_dir.mkdir(parents=True, exist_ok=True)
+    hashes = {}
+    for lin in REV2:
+        lines = []
+        seen: set[str] = set()
+        for lv in ALL_LEVELS:
+            rng = stream(SEED, "rev2-fixture", lin.id, str(lv))
+            made = 0
+            guard = 0
+            while made < per_level:
+                guard += 1
+                if guard > 200 * per_level:
+                    raise RuntimeError(f"{lin.id} L{lv}: cannot find {per_level} structurally new items")
+                it = build_item(lin, lv, rng, "A", f"{lin.id}/fixture/{lv}/{made}")
+                ck = canon_key(lin.id, it.structured)
+                if ck in seen:
+                    continue  # structural de-duplication across ALL levels of the fixture (the batch-1 fixtures repeated structures across levels)
+                seen.add(ck)
+                made += 1
+                lines.append(json.dumps({"id": it.id, "lineage": it.lineage, "level": it.level, "question": it.question, "structured": it.structured, "answer": it.answer, "answer_type": it.answer_type, "k": it.k}, sort_keys=True, ensure_ascii=True))
+        text = "\n".join(lines) + "\n"
+        (out_dir / f"{lin.id}.jsonl").write_text(text)
+        hashes[lin.id] = hashlib.sha256(text.encode()).hexdigest()
+    return hashes
+
+
+def write_schema(path: Path) -> None:
+    from studies.m0.lineages_m1_rev2 import REV2, SUPERSEDES
+
+    parts = [
+        "# M1 batch 1, revision 2: structured-form schema for the second-solver agent (revised shapes only)\n",
+        "Written by the implementer after the independent audit AUDIT_M0_M1_1 and the lead rulings 2. Not a result; nothing here approves anything. The solver interface is that of `M1_BATCH1_SCHEMA.md` (reads ONLY `structured`; `solve(structured) -> str`; ValueError when the answer is not unique; registry keyed by id; the answer string is exactly the fixture's `answer`).",
+        "Fixtures: `studies/m0/fixtures/m1_batch1_rev2/<id>.jsonl`, 20 items per level (0 and 6 reserve), structurally distinct across ALL levels of one file. The four lineages carried over unchanged (finite_differences, quadratic_area, recurrence_iterate, tiered_pricing) keep their batch-1 ids, fixtures and schema entries.",
+        "Every convention an answer depends on is stated in the item text (leading zero, the meaning of a power, the reversal of a number, what a perimeter counts, what a full pallet is); solvers still read only `structured`.\n",
+        "## Revised lineages\n",
+    ]
+    for lin in REV2:
+        doc = inspect.getdoc(lin.build) or ""
+        parts.append(f"### `{lin.id}` (family {lin.family}; supersedes `{SUPERSEDES[lin.id]}`)\n\n{doc}\n")
+        it = build_item(lin, 2, stream(SEED, "rev2-schema-example", lin.id), "A", "example")
+        parts.append("Example (level 2):\n\n```\nquestion: " + it.question + "\nstructured: " + json.dumps(it.structured, sort_keys=True) + f"\nanswer: {it.answer}\n```\n")
+    path.write_text("\n".join(parts))
+
+
+DEFECTS: list[dict[str, str]] = [
+    {"defect": "slot_permutations: leading-zero rule unstated (13 of 140 fixture keys depend on it) [R-4]", "disposition": "FIXED BY CONSTRUCTION in slot_permutations_r2: the item always states the rule when 0 is among the digits (first digit may / may not be 0); parity is always stated.", "test": "test_m0_m1_rev2_wording.py::test_slot_permutations_states_the_leading_zero_rule_and_the_key_follows_it"},
+    {"defect": "last_digit_power: gloss 'multiplied by itself E times' (116 of 140 keys change under the literal reading) [R-4]", "disposition": "FIXED in power_remainder_r2: 'the product of E factors, each equal to B'; the literal-reading solver from the text agrees with every key.", "test": "test_m0_m1_rev2_wording.py::test_power_remainder_wording_is_unambiguous_and_has_no_even_exponent_artefact"},
+    {"defect": "last_digit_power: even-exponent artefact for bases ending 4 or 9, and 'never the base digit'", "disposition": "FIXED: the rejection is gone; exponents of such bases are odd and even.", "test": "same"},
+    {"defect": "last_digit_power: '(last digit of base)^(last digit of exponent)' 0.34-0.44 and 'square of the base digit' 0.32-0.37", "disposition": "FIXED BY CONSTRUCTION by changing the asked quantity to the remainder on division by a prime p in {17, 19, 23, 29} (cycle reduction is the same procedure); p - 1 is never a multiple of 5, so the exponent's last digit carries no information. Measured worst heuristic 0.23 against a constant rate of 0.17 (L0)."},
+    {"defect": "digit_puzzle: reversal of a number ending in 0 undefined (7 fixture keys) [R-4]", "disposition": "FIXED: the item defines it ('a leading 0 is dropped, so 120 turned round gives 21'); the unique-answer test uses exactly that definition.", "test": "test_m0_m1_rev2_wording.py::test_digit_puzzle_defines_the_reversal_and_the_key_is_unique_under_it"},
+    {"defect": "gcd_lcm: ask redrawn inside the retry, gcd share 0.65-0.69 at L0-L2 and 0.00-0.01 at L3-L6", "disposition": "FIXED BY CONSTRUCTION: the ask is drawn first and nothing is redrawn but a repeated value; measured mix is a half each at every level.", "test": "test_m0_m1_rev2_generators.py::test_shape_mix_is_the_designs_uniform_mix_at_every_level"},
+    {"defect": "division_counting: shape mix 0.07-0.11 / 0.28 / 0.60-0.65; 'crates' was one ceiling (an identity)", "disposition": "FIXED: shape drawn first; 'crates' replaced by 'pallets' ((N // k) % m, a floor then a remainder, not an identity); the 'multiples' shape is DROPPED (without its redraw 'round((high - low) / d)' is exact on about 0.9 of its items, 0.27-0.30 of the lineage; no construction removes it).", "test": "same"},
+    {"defect": "binomial_choose / slot_permutations / digit_puzzle: repeated structures across levels in the fixtures (28 / 5 groups / 10)", "disposition": "PARTLY BY CONSTRUCTION: ranges widened (capacity) and the rev2 fixtures are structurally de-duplicated across all seven levels of a file. The GENERATOR does not guarantee cross-level disjointness (a level-banded parameter would cut capacity below the demand); the pool builder in core.py de-duplicates on question TEXT only, which is a finding for whoever owns it.", "test": "test_m0_m1_rev2_generators.py::test_fixtures_have_no_repeated_structure_across_levels_and_batch1_had"},
+    {"defect": "min_cost_packs: greedy 0.41-0.46; redraws on five naive plans [R-1]", "disposition": "NOT REGISTERED (see lineages_m1_rev2.NOT_REGISTERED): redraws withdrawn; the best constructed variant (equal unit prices, four or five packs) is still beaten by the continuous relaxation at 0.65."},
+    {"defect": "mode_tally: 'last value listed' 0.27-0.41; redraw on 'first repeated value'", "disposition": "FIXED BY CONSTRUCTION: one mode, 2-4 rivals with one occurrence fewer, a long tail, then shuffled; no redraw. Measured worst 0.27 (L0, 'ceil(n / distinct) + 1' for the count ask) against a constant rate of 0.15; 'last value' is below that."},
+    {"defect": "grid_perimeter: 'bounding box + 4' 0.30-0.35; redraw against the bounding box", "disposition": "FIXED BY CONSTRUCTION: a scattered random set of squares (some touch, some do not), no redraw; bounding-box heuristics are about 0 (compact random blobs were tried and measured first: they keep the perimeter within a few units of the bounding box whatever the generator does). Measured worst 0.26, equal to the constant rate (0.26)."},
+    {"defect": "median_list: redraw so that table multiplicities matter [R-1]", "disposition": "FIXED BY CONSTRUCTION: the table shape is dropped; list shape only. Measured worst 0.13 (mode of the values)."},
+    {"defect": "change_ways: redraws (answer in 4..150; answer != T // largest coin + 1) [R-1]", "disposition": "FIXED BY CONSTRUCTION: T is built from a random combination of the coins (an answer of at least 1 exists); no redraw. Measured worst 0.10, equal to the constant rate."},
+    {"defect": "pigeonhole_worst_case, inclusion_exclusion, painted_cube, crt_congruence: redraws on 'answer is a printed number', 'the cap bites', 'counts equal' [R-1]", "disposition": "FIXED BY CONSTRUCTION: withdrawn (k drawn from 2..max count so a feasible k exists by construction); measured worst 0.20 (pigeonhole '(k - 1) c + 1', L0), 0.18 (painted_cube inner block), 0.13 (crt), 0.06 (inclusion_exclusion)."},
+    {"defect": "capacity counted on text [R-5]", "disposition": "RE-MEASURED on structure at the G written; see capacity (lineage-levels that still fail are listed, and are NOT REGISTERED at those levels pending the lead)."},
+]
+ATTEMPTS: list[str] = [
+    "grid_perimeter: first rev2 attempt (random connected blobs grown cell by cell) had the bounding box exact on 0.75 of L0 items and 0.2-0.38 at higher levels; replaced by scattered random sets. Both measured in scratch (grid_try.py, grid_try2.py).",
+    "min_cost_packs: three constructions measured in scratch (mc_try.py, mc_try2.py, mc_try3.py): independent prices with 2-4 packs (greedy 0.13-0.36, 'one kind of pack, ceil' 0.33-0.56), no singles (worse), equal unit prices with 3-4 packs (best heuristic 0.25 in the trial, 0.65 for the continuous relaxation in the final battery). None passes; NOT REGISTERED.",
+    "power_remainder: the first choice p in {7, 11, 13} was wrong on measurement: with p = 11 the exponent's last digit IS the residue mod p - 1, so the copied heuristic was exact (0.65); p = 7 gave a most-frequent-answer rate of 0.32. Replaced by p in {17, 19, 23, 29}.",
+    "division_counting: the 'multiples' shape was measured at 0.27-0.30 of the lineage by 'round((high - low) / d)' once its redraw was withdrawn; dropped.",
+    "The batch-1 shortcut script (m1_shortcut_check.py) and its manifest are kept unchanged and are superseded by m1_shortcut_check_rev2.py for the combined battery.",
+]
+
+
+def manifest(shortcut_after: Path, shortcut_before: Path, cap_path: Path) -> dict[str, Any]:
+    import platform
+    import sys
+
+    from studies.m0.lineages_m1_clusters import BORDERLINE, DISAGREEMENTS, GROUPS, count_strict
+    from studies.m0.lineages_m1_rev2 import NOT_REGISTERED, REV2, SUPERSEDES, UNCHANGED, load_rev2
+
+    after = json.loads(shortcut_after.read_text())
+    before = json.loads(shortcut_before.read_text())
+    cap = json.loads(cap_path.read_text())
+    eff = load_rev2()
+    ids = [x.id for x in eff]
+    from studies.m0.core import lineages_of
+
+    all_ids = [x.id for x in lineages_of("M1")] + ids
+    fx_dir = ROOT / "studies" / "m0" / "fixtures" / "m1_batch1_rev2"
+    lineages = []
+    for lin in eff:
+        lid = lin.id
+        old_id = SUPERSEDES.get(lid, lid)
+        b_key = old_id
+        row = cap["lineages"][lid]
+        short_after = after["summary"][lid]
+        short_before = before["summary"][b_key]
+        lineages.append({
+            "id": lid, "supersedes": SUPERSEDES.get(lid), "carried_over_unchanged": lid in UNCHANGED, "family": lin.family,
+            "not_registered": NOT_REGISTERED.get(lid),
+            "capacity_fails_levels": row["fails"], "capacity_n_eff_per_level": {lv: row["levels"][lv]["n_eff"] for lv in row["levels"]},
+            "capacity_distinct_canonical_per_level": {lv: row["levels"][lv]["distinct_canonical"] for lv in row["levels"]},
+            "shortcuts_after": {"worst_over_levels": {"heuristic": short_after["worst"], "level": short_after["worst_level"], "rate": short_after["worst_rate"], "constant_rate_there": short_after["const_at_worst"]},
+                                "max_constant_rate": short_after["max_const"], "flagged_levels": short_after["flagged_levels"], "per_level": short_after["per_level"]},
+            "shortcuts_before": {"worst_over_levels": {"heuristic": short_before["worst"], "level": short_before["worst_level"], "rate": short_before["worst_rate"], "constant_rate_there": short_before["const_at_worst"]},
+                                 "max_constant_rate": short_before["max_const"], "flagged_levels": short_before["flagged_levels"]},
+            "signature": __import__("studies.m0.lineage_gates", fromlist=["signature"]).signature(lin.build),
+            "fixture_sha256": hashlib.sha256((fx_dir / f"{lid}.jsonl").read_bytes()).hexdigest() if (fx_dir / f"{lid}.jsonl").exists() else None,
+        })
+    return {
+        "batch": "m1_batch1_rev2",
+        "note": "Fix round after AUDIT_M0_M1_1 and LEAD_RULINGS_2. New shapes in new files; batch-1 shapes are kept and listed as superseded. Measured numbers are MEASURED on generator output; the demand is ANALYTICAL; n_eff is a SAMPLED lower bound. No model, no solver. Nothing here is registered, approved or scored.",
+        "environment": {"python": sys.version.split()[0], "platform": platform.platform(), "uv_lock_sha256": hashlib.sha256((ROOT / "uv.lock").read_bytes()).hexdigest(), "seeds": {"capacity": SEED, "shortcut": 777103}},
+        "commands": [
+            "PYTHONHASHSEED=0 uv run --locked --offline python -m studies.m0.m1_shortcut_check_rev2 --set rev2 --per-level 2000 --out <after.json>",
+            "PYTHONHASHSEED=0 uv run --locked --offline python -m studies.m0.m1_shortcut_check_rev2 --set batch1 --per-level 2000 --out <before.json>",
+            "PYTHONHASHSEED=0 uv run --locked --offline python -m studies.m0.m1_rev2_gates --stage capacity --m 20000 --out <cap.json>",
+            "PYTHONHASHSEED=0 uv run --locked --offline python -m studies.m0.m1_rev2_gates --stage fixtures",
+            "PYTHONHASHSEED=0 uv run --locked --offline python -m studies.m0.m1_rev2_gates --stage manifest --shortcut-after <after.json> --shortcut-before <before.json> --capacity <cap.json>",
+        ],
+        "demand": {"derivation": "ADR-0033 section 6.2: 10 x (ceil(24,000 / G) + 100) on a core level, 10 x 100 on a reserve level (lineage_gates.demand_at_g). G = lineages (strict clusters) per part: 22 strict clusters / 2 parts = 11 [written]; 36 lenient / 2 = 18; the earlier proposal 300.", **cap["demand"]},
+        "capacity_sample_per_level": cap["m"],
+        "superseded": SUPERSEDES,
+        "carried_over_unchanged": list(UNCHANGED),
+        "not_registered": NOT_REGISTERED,
+        "effective_lineages": lineages,
+        "defects": DEFECTS,
+        "attempts_and_failures_kept": ATTEMPTS,
+        "clusters": {"strict_count_over_37": count_strict(all_ids), "groups": {k: list(v) for k, v in GROUPS.items()}, "borderline": BORDERLINE, "author_disagreements_not_unmerging": DISAGREEMENTS},
+    }
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    ap.add_argument("--stage", choices=["capacity", "fixtures", "manifest"], required=True)
+    ap.add_argument("--m", type=int, default=20000)
+    ap.add_argument("--out", default="")
+    ap.add_argument("--shortcut-after", default="")
+    ap.add_argument("--shortcut-before", default="")
+    ap.add_argument("--capacity", default="")
+    a = ap.parse_args()
+    t0 = time.time()
+    if a.stage == "capacity":
+        res = capacity(a.m)
+        if a.out:
+            Path(a.out).write_text(json.dumps(res, indent=1, sort_keys=True))
+        for lid, row in res["lineages"].items():
+            print(lid, {g: f for g, f in row["fails"].items()}, " n_eff:", [row["levels"][str(lv)]["n_eff"] for lv in ALL_LEVELS], flush=True)
+    elif a.stage == "manifest":
+        m = manifest(Path(a.shortcut_after), Path(a.shortcut_before), Path(a.capacity))
+        (ROOT / "studies" / "m0" / "manifests" / "m1_batch1_rev2_manifest.json").write_text(json.dumps(m, indent=1, sort_keys=True))
+        print("manifest written;", len(m["effective_lineages"]), "lineages")
+    else:
+        hashes = write_fixtures(ROOT / "studies" / "m0" / "fixtures" / "m1_batch1_rev2")
+        write_schema(ROOT / "studies" / "m0" / "fixtures" / "M1_BATCH1_REV2_SCHEMA.md")
+        print(json.dumps(hashes, indent=1, sort_keys=True))
+    print("seconds", round(time.time() - t0, 1))
+
+
+if __name__ == "__main__":
+    main()

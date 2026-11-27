@@ -1,0 +1,222 @@
+--- superseded_v1/pool_fresh.py	2026-11-26 12:56:28
++++ pool_fresh.py	2026-11-26 12:56:28
+@@ -6,7 +6,8 @@
+ text governs.
+ 
+     python3 -I pool_fresh.py --plan run_plan.json --survivors survivor_list_of_record.json --class-table addendum1_rev7_uncounted_rules.json \
+-        --amendments amendment_list.json --field-table field_table.json --out OUT_DIR [--seed-set run|dry] [--dir-override UNIT:SEEDSET=DIR ...]
++        --amendments amendment_list.json --field-table field_table.json --out OUT_DIR --expect-plan-sha256 H --expect-field-table-sha256 H \
++        --expect-amendment-sha256 H [--seed-set run|dry] [--dir-override UNIT:SEEDSET=DIR ...]
+ 
+ Exit status: 0 the files were written (lineages may be dropped: that is a result, not an error); 3 an engineering stop of point 2 (a lineage that a
+ unit's output must contain has no row, or a line or field cannot be read): only the unit and the lineage (or file or field) are named, on stderr, and
+@@ -32,6 +33,7 @@
+ EVALS = ["R1", "R2", "M1", "C1"]
+ M1_PREFIX = {"own": "im:", "a4": "", "a3": "a3:"}  # point 6, K7: a key of own takes im:, a key of a3 takes a3:, a key of a4 is as written
+ R1C_VALUES = 7
++BRACKET = re.compile(r"^([^\[\]]+)\[[^\[\]]*\]$")  # R-56: an M1a key of the form name[...]
+ ERROR_SHAPES = ("RULE_ERROR", "PARSE_FAIL")  # shapes that the C1 scripts write for an item they could not process: error markers, not rules (point 6)
+ 
+ 
+@@ -141,7 +143,15 @@
+     def field_decimals(self, form: str, scope: str, field: str) -> int:
+         return int(self.scope(form, scope)[field]["decimals"])
+ 
++    def report_fields(self, form: str, scope: str) -> list[str]:
++        """Fields that are written into the report only (R-57: rates within one shape); they enter no decision."""
++        return sorted(k for k, v in self.scope(form, scope).items() if v["status"] == "report_only")
+ 
++    def not_rule_keys(self, form: str, scope: str) -> set[str]:
++        """Names, in a rule map, that are not rules (not read as rules, or reported only)."""
++        return {k for k, v in self.scope(form, scope).items() if v["status"] in ("not_read", "report_only")}
++
++
+ # ------------------------------------------------------------------------------------------------ the class table (point 8)
+ def r1_bare(h: str) -> str:
+     return h.split(":", 1)[1] if h.startswith(("a3:", "a4:")) else h
+@@ -273,6 +283,7 @@
+         self.notes: dict[str, Any] = defaultdict(int)
+         self.mixed_answer_types: set[tuple[str, str, str, int]] = set()
+         self.m1_collisions: set[tuple[str, str, str, int, str]] = set()
++        self.shape_rates: dict[tuple[Any, ...], dict[str, dict[str, Any]]] = defaultdict(dict)  # R-57: rates within one shape, reported only
+ 
+     def row(self, unit: str, source: str, class_source: str, lineage: str, level: int, rule: str, shape: str | None, reading: str,
+             answer_type: str | None, kind: str, base: Fraction, base_group: tuple[Any, ...] | None, u: Fraction, unnamed: str,
+@@ -288,6 +299,9 @@
+             raise InputError(f"duplicate row: {row.unit} {row.lineage} {row.rule}")
+         row.nums[seed], row.dens[seed] = num, den
+ 
++    def shape_rate(self, key: tuple[Any, ...], seed: str, vals: dict[str, Any]) -> None:
++        self.shape_rates[key][seed] = vals
++
+     def set_items(self, g: tuple[Any, ...], seed: str, n: Fraction) -> None:
+         cur = self.items[g].get(seed)
+         if cur is not None and cur != n:
+@@ -446,6 +460,9 @@
+                 by_at[ent[f_at]][sh] = ent
+                 for rn, rv in ent[f_rules].items():
+                     ft.check(unit, form, "rule", rv.keys(), lid)
++                    kk, na = fr(rv[f_k]), fr(rv[f_napp])
++                    reg.shape_rate((unit, variant, lid, lv, sh, rn), seed, {"k": frac_str(kk), "napp": frac_str(na), "n": frac_str(n),
++                                                                           "k_over_n": frac_str(kk / n) if n else None, "k_over_napp": frac_str(kk / na) if na else None})
+             note_items(c, unit, variant, lid, seed, lv, total_n)
+             if len(by_at) > 1:
+                 reg.mixed_answer_types.add((unit, variant, lid, lv))
+@@ -494,6 +511,18 @@
+     note_items(c, unit, source, lid, seed, lv, n)
+     rb = reg.row(unit, source, "m1", lid, lv, base_name, None, "vs_chance", None, "rate", Fraction(0), None, unc(d_base), "group", g)
+     reg.put(rb, seed, n * base, n)
++    if unit == "M1a":
++        # R-56: a second reading of every key name[...], pooled under name; two bracketed variants of one name in one seed, section, lineage and level, or a
++        # bracketed key next to a key that is already the bare name, are not combined: the output gives rates and not the items each rule answered, so
++        # the hits cannot be summed without possible double counting of items, and the script stops (exit 3).
++        groups: dict[str, list[str]] = defaultdict(list)
++        for key in rates:
++            m = BRACKET.match(key)
++            if m:
++                groups[m.group(1)].append(key)
++        for sname, keys in groups.items():
++            if len(keys) > 1 or sname in rates:
++                raise Stop(unit, "bracketed variants of one name cannot be combined without double counting items", lid)
+     for key, v in rates.items():
+         if key.endswith("__within_applicable"):  # point 6, K7: not a rule
+             continue
+@@ -502,6 +531,15 @@
+         reg.put(r1, seed, n * fr(v, "rate"), n)
+         r2 = reg.row(unit, source, "m1", lid, lv, name, None, "vs_base", None, "rate", Fraction(0), g, 2 * unc(d_rates), "group", g)  # two half-units: a difference of two rounded figures (K14)
+         reg.put(r2, seed, n * fr(v, "rate"), n)
++        mb = BRACKET.match(key) if unit == "M1a" else None
++        if mb:  # R-56: the same figure again under the name with the bracketed part removed, same section prefix
++            sname = prefix + mb.group(1)
++            s1 = reg.row(unit, source, "m1", lid, lv, sname, None, "vs_chance", None, "rate", Fraction(0), None, unc(d_rates), "group", g)
++            s1.extra["bracket_stripped"] = True
++            reg.put(s1, seed, n * fr(v, "rate"), n)
++            s2 = reg.row(unit, source, "m1", lid, lv, sname, None, "vs_base", None, "rate", Fraction(0), g, 2 * unc(d_rates), "group", g)
++            s2.extra["bracket_stripped"] = True
++            reg.put(s2, seed, n * fr(v, "rate"), n)
+ 
+ 
+ def read_m1_battery(c: Ctx, unit: str, spec: dict[str, Any], seed: str, d: str) -> None:
+@@ -587,7 +625,7 @@
+     f_rate, f_ns = ft.name(form, "rule", "share_in_shape"), ft.name(form, "rule", "items_in_shape")
+     f_alt = ft.name(form, "rule", "alt_recovery_share")
+     u_rules = unc(ft.field_decimals(form, "rule", f_rate))
+-    skip = {k for k, v in ft.scope(form, "rule_name").items() if v["status"] == "not_read"}
++    skip = ft.not_rule_keys(form, "rule_name")
+     for raw_lid, lvs in sorted(data.items()):
+         lid = idm.get(raw_lid)
+         if lid is None:
+@@ -609,14 +647,22 @@
+                 if shape.startswith(ERROR_SHAPES):
+                     reg.notes["error_marker_rows_not_read"] += 1
+                     continue
++                ft.check(unit, form, "rule", rr.keys(), lid)
++                reg.shape_rate((unit, "s5", lid, lv, shape, rule), seed, {"rate_in_shape": frac_str(fr(rr[f_rate])), "n_shape": frac_str(fr(rr[f_ns]))})
+                 if rule in skip:
+                     continue
+-                ft.check(unit, form, "rule", rr.keys(), lid)
+                 hits[rule] += round(fr(rr[f_rate]) * fr(rr[f_ns]))  # R-34: hits recovered as round(share x items of the shape), summed over the shapes
+                 alt[rule] += round(fr(rr[f_alt]) * n) if f_alt in rr else Fraction(0)
+             _c1_hits(c, unit, "s5", "a4", lid, lv, g, n, seed, dict(hits), u_rules, dict(alt))
+ 
+ 
++def _report_shape(reg: Registry, ft: FieldTable, unit: str, source: str, lid: str, lv: int, key: str, seed: str, form: str, rr: dict[str, Any]) -> None:
++    """R-57: the report-only fields of an S row (rates and sizes within one shape), as written."""
++    shape, _, rule = key.partition("|")
++    vals = {f: (frac_str(fr(rr[f])) if rr.get(f) is not None else None) for f in ft.report_fields(form, "S_row") if f in rr}
++    reg.shape_rate((unit, source, lid, lv, shape, rule), seed, vals)
++
++
+ def read_c1_a3(c: Ctx, unit: str, spec: dict[str, Any], seed: str, d: str) -> None:
+     ft, reg = c.ft, c.reg
+     form = "c1_a3"
+@@ -659,6 +705,7 @@
+                     continue
+                 ft.check(unit, form, "S_row", rr.keys(), lid)
+                 hits[k2.partition("|")[2]] += fr(rr[f_hit], "hit")
++                _report_shape(reg, ft, unit, "a3", lid, lv, k2, seed, form, rr)
+             _c1_hits(c, unit, "a3", "a3", lid, lv, g, n, seed, dict(hits), Fraction(0))
+ 
+ 
+@@ -692,7 +739,10 @@
+                     continue
+                 ft.check(unit, form, "S_row", rr.keys(), lid)
+                 hits[k2.partition("|")[2]] += fr(rr[f_hit], "hit")
++                _report_shape(reg, ft, unit, "battery", lid, lv, k2, seed, form, rr)
+             _c1_hits(c, unit, "battery", "battery", lid, lv, g, n, seed, dict(hits), Fraction(0))
++            for sh, rate in row[f_msh].items():
++                reg.shape_rate((unit, "battery", lid, lv, sh, f_msh), seed, {"rate_in_shape": frac_str(fr(rate)), "n_shape": frac_str(fr(row[f_shapes][sh]))})
+             msh = sum((round(fr(rate) * fr(row[f_shapes][sh])) for sh, rate in row[f_msh].items()), Fraction(0))  # a share per shape: hits recovered and summed
+             _c1_hits(c, unit, "battery", "battery", lid, lv, g, n, seed, {f_msh: Fraction(msh)}, u_msh)
+ 
+@@ -835,7 +885,7 @@
+             "items_by_seed": {s: int(v) if v.denominator == 1 else frac_str(v) for s, v in sorted(res.items_by_seed.items())}, "named_in_seeds": res.named,
+             "pooled_figure": fj(res.rate), "base": fj(res.base) if r.kind == "rate" else None, "excess": fj(res.excess),
+             "rounding_uncertainty": fj(r.u), "counted": res.counted, "class_entry": res.entry, "class_entry_kind": res.entry_kind,
+-            "abs_excess_plus_uncertainty": fj(res.margin), "over_bound": res.over}
++            "abs_excess_plus_uncertainty": fj(res.margin), "over_bound": res.over, "bracket_stripped": bool(r.extra.get("bracket_stripped", False))}
+ 
+ 
+ def write_json_lines(path: str, rows: list[dict[str, Any]]) -> None:
+@@ -856,6 +906,7 @@
+     per: dict[str, dict[str, Any]] = {x: {"evaluation": ev_of[x], "levels": {str(v): None for v in LEVELS}, "dropped": False} for x in sorted(ev_of)}
+     best: dict[tuple[str, int], Result] = {}
+     over_rows: dict[str, list[Result]] = defaultdict(list)
++    over_without_stripped: dict[str, list[Result]] = defaultdict(list)
+     no_items: list[dict[str, Any]] = []
+     for res in results:
+         r = res.row
+@@ -869,6 +920,8 @@
+                 best[k] = res
+         if res.over:
+             over_rows[r.lineage].append(res)
++            if not r.extra.get("bracket_stripped"):
++                over_without_stripped[r.lineage].append(res)
+     for (x, lv), res in sorted(best.items()):
+         r = res.row
+         per[x]["levels"][str(lv)] = {"largest_counted_abs_excess": fj(abs(res.excess or Fraction(0))), "signed_excess": fj(res.excess), "unit": r.unit, "source": r.source,
+@@ -925,6 +978,13 @@
+     for d in reg.item_diffs:
+         diffs[(d["unit"], d["source"], d["lineage"], d["seed"], d["plan_items"])].append({"level": d["level"], "items": d["items"]})
+     item_diff_list = [{"unit": k[0], "source": k[1], "lineage": k[2], "seed": k[3], "plan_items": k[4], "levels": sorted(v, key=lambda z: z["level"])} for k, v in sorted(diffs.items(), key=str)]
++    bracket_changes = [{"lineage": x, "dropped_with_the_second_reading": True, "dropped_without_it": x in over_without_stripped,
++                        "rows_over_the_bound_only_under_the_second_reading": [{"unit": t.row.unit, "source": t.row.source, "level": t.row.level, "rule": t.row.rule, "reading": t.row.reading,
++                                                                               "excess": fj(t.excess), "abs_excess_plus_uncertainty": fj(t.margin)} for t in over_rows[x] if t.row.extra.get("bracket_stripped")]}
++                       for x in sorted(over_rows) if x not in over_without_stripped]
++    stripped_names = sorted({(r.row.unit, r.row.source, r.row.lineage, r.row.level, r.row.rule) for r in results if r.row.extra.get("bracket_stripped") and r.row.lineage in per})
++    shape_rates = [{"unit": k[0], "source": k[1], "lineage": k[2], "level": k[3], "shape": k[4], "rule": k[5], "by_seed": v}
++                   for k, v in sorted(reg.shape_rates.items(), key=lambda kv: (UNIT_ORDER.index(kv[0][0]), kv[0][1], kv[0][2], kv[0][3], str(kv[0][4]), str(kv[0][5]))) if k[2] in per]
+     before = {ev: len(survivors.get(ev, [])) for ev in EVALS}
+     dropped_by_ev = {ev: sum(1 for d in dropped if d["evaluation"] == ev) for ev in EVALS}
+     extras = {
+@@ -940,6 +1000,10 @@
+         "counted_rows_with_no_items": no_items,
+         "rows_not_read": dict(reg.notes),
+         "dir_overrides": {f"{u}:{s}": p for (u, s), p in sorted(c.overrides.items())},
++        "dry_run_exclusions": c.plan.get("dry_run_exclusions", []),
++        "m1a_bracket_second_reading_lineages_whose_outcome_differs": bracket_changes,
++        "m1a_bracket_second_reading_rows": [{"unit": k[0], "source": k[1], "lineage": k[2], "level": k[3], "stripped_name": k[4]} for k in stripped_names],
++        "rates_within_one_shape_reported_only": shape_rates,
+         "seed_set": c.seed_set, "seeds": c.seeds,
+     }
+     return {"per_lineage": per, "dropped": dropped, "extras": extras}
+@@ -982,6 +1046,9 @@
+             raise InputError(f"{name} not found: {p}")
+     if sha256_file(a.class_table) != CLASS_TABLE_SHA256:
+         raise InputError("the class table does not have the recorded SHA-256")
++    for p, want, name in ((a.plan, a.expect_plan_sha256, "run plan"), (a.field_table, a.expect_field_table_sha256, "field table"), (a.amendments, a.expect_amendment_sha256, "amendment list")):
++        if sha256_file(p) != want:
++            raise InputError(f"the {name} does not have the expected SHA-256")
+     plan = jload(a.plan)
+     surv = jload(a.survivors)["evaluations"]
+     if sha256_file(a.survivors) != plan["survivor_list"]["sha256"]:
+@@ -1049,6 +1116,9 @@
+     ap.add_argument("--amendments", required=True)
+     ap.add_argument("--field-table", required=True)
+     ap.add_argument("--out", required=True)
++    ap.add_argument("--expect-plan-sha256", required=True)
++    ap.add_argument("--expect-field-table-sha256", required=True)
++    ap.add_argument("--expect-amendment-sha256", required=True)
+     ap.add_argument("--seed-set", choices=["run", "dry"], default="run")
+     ap.add_argument("--dir-override", action="append", type=parse_override, help="UNIT:SEEDSET=DIR: read that unit's output of that seed set (1, 2, 3 or dry) from DIR instead of the plan's directory (for a retried unit, or a structural check)")
+     a = ap.parse_args(argv)

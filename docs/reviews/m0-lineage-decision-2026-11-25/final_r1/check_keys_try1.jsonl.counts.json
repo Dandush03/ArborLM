@@ -1,0 +1,614 @@
+{
+ "R1.boolean_lights_r4": [
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  }
+ ],
+ "R1.categories_default_exceptions_r4": [
+  {
+   "n": 30,
+   "agree": 18,
+   "mismatch": 12,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 21,
+   "mismatch": 9,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 21,
+   "mismatch": 9,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 18,
+   "mismatch": 12,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 20,
+   "mismatch": 10,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 20,
+   "mismatch": 10,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 23,
+   "mismatch": 7,
+   "ambiguous": 0,
+   "parse": 0
+  }
+ ],
+ "R1.compass_turns": [
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  }
+ ],
+ "R1.conditional_decision_tree_r6": [
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  }
+ ],
+ "R1.conditional_threshold_rule_r4": [
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  }
+ ],
+ "R1.equivalence_exchange_rates_r6": [
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  }
+ ],
+ "R1.graph_shortest_route_r6": [
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  }
+ ],
+ "R1.knights_knaves_r6": [
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  }
+ ],
+ "R1.spatial_grid_walk_r5": [
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  }
+ ],
+ "R1.swap_tracking_r5": [
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  }
+ ],
+ "R1.temporal_weekday_shift_r6": [
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  }
+ ],
+ "R1.venn_counting_r5": [
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  },
+  {
+   "n": 30,
+   "agree": 30,
+   "mismatch": 0,
+   "ambiguous": 0,
+   "parse": 0
+  }
+ ]
+}

@@ -1,0 +1,32 @@
+t3_badhash exit=2
+  stdout: 
+  stderr: refusing: the plan does not have the expected SHA-256|
+  t3 run dir exists after bad hash: no
+t3_seed1 exit=1
+  stdout: unit R1a seed-set 1: exit statuses per attempt [[0]]; ok=True|unit R1b seed-set 1: exit statuses per attempt [[0, 0]]; ok=True|unit R1c seed-set 1: exit statuses per attempt [[2], [2]]; ok=False|unit R2a: not started (an earlier unit failed twice)|
+  stderr: STOP unit=R1c exit statuses per attempt [[2], [2]]|
+t3_seed1_units exit=2
+  stdout: 
+  stderr: refusing: hashes_seed1.json holds unit R1c whose final status is not ok; the run stopped and goes to the human lead|
+t3_seed2 exit=2
+  stdout: 
+  stderr: refusing: hashes_seed1.json holds unit R1c whose final status is not ok; the run stopped and goes to the human lead|
+t3_dry exit=2
+  stdout: 
+  stderr: refusing: hashes_seed1.json holds unit R1c whose final status is not ok; the run stopped and goes to the human lead|
+t3_seed2_checkonly exit=2
+  stdout: 
+  stderr: refusing: hashes_seed1.json holds unit R1c whose final status is not ok; the run stopped and goes to the human lead|
+  t3 seed2/dry dirs: R1a R1b R1c hashes_seed1.json  / none
+t4_seed1 exit=1
+  stdout: unit R1a seed-set 1: exit statuses per attempt [[0]]; ok=True|unit R1b seed-set 1: runner error FileExistsError|unit R1c: not started (an earlier unit failed twice)|unit R2a: not started (an earlier unit failed twice)|
+  stderr: STOP unit=R1b runner error FileExistsError: [Errno 17] File exists: '/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_pool_audit_20261126/deliver_recheck/runner_test/t4/run/R1b/seed1/stdout.txt'|
+t4_seed2 exit=2
+  stdout: 
+  stderr: refusing: hashes_seed1.json holds unit R1b whose final status is not ok; the run stopped and goes to the human lead|
+t4_seed1_units exit=2
+  stdout: 
+  stderr: refusing: hashes_seed1.json holds unit R1b whose final status is not ok; the run stopped and goes to the human lead|
+planted figure in runner stdout/stderr: 0
+{'R1a': (True, None, [[0]]), 'R1b': (False, 'FileExistsError', [])}
+{'R1a': (True, [[0]]), 'R1b': (True, [[0, 0]]), 'R1c': (False, [[2], [2]])}

@@ -1,0 +1,161 @@
+===== C1.fast_power_f4 (module studies.m0.lineages_c1_fix4)
+Here is a Python program.
+
+x = 1
+w = 39
+b = 23
+count = 81
+while b > 0:
+    if b % 2 == 1:
+        x = x * w % count
+    w = (w * w + 6) % count
+    b = b // 2
+print(x)
+
+What exactly does it print? It prints a single line.
+ANSWER: 0
+
+===== C1.fast_power (module studies.m0.lineages_c1_while)
+Here is a Python program.
+
+b = 1
+total = 19
+q = 10
+k = 24
+while q > 0:
+    if q % 2 == 1:
+        b = b * total % k
+    total = total * total % k
+    q = q // 2
+print(b)
+
+What exactly does it print? It prints a single line.
+ANSWER: 1
+
+===== C1.counter_list_f3 (module studies.m0.lineages_c1_fix3_lists)
+Here is a Python program.
+
+w = [12, 11, 29, 17, 27, 22, 1, 7, 23, 11, 3, 20, 28, 15]
+d = [0, 0, 0, 0, 0]
+best = 0
+for cur in range(len(w)):
+    a = w[cur]
+    best = (best * 12 + a) % 5
+    d[best] = d[best] + 1
+print(d)
+
+What exactly does it print? It prints a single line.
+ANSWER: [2, 2, 4, 2, 4]
+
+===== C1.counter_list (module studies.m0.lineages_c1)
+Here is a Python program.
+
+a = [5, 27, 30, 1, 12, 9, 23, 24, 26]
+v = [0, 0, 0]
+for res in range(len(a)):
+    v[a[res] % 3] = v[a[res] % 3] + 1
+print(v)
+
+What exactly does it print? It prints a single line.
+ANSWER: [5, 1, 3]
+
+===== C1.bfs_queue (module studies.m0.lineages_c1_graphs)
+Here is a Python program.
+
+best = [[1, 2, 4], [0], [0, 6, 5], [1], [6, 0], [2], [4, 1, 2]]
+e = [(-1), (-1), (-1), (-1), (-1), (-1), (-1)]
+total = [0, 0, 0, 0, 0, 0, 0]
+total[0] = 5
+e[5] = 0
+b = 0
+s = 1
+res = 0
+while b < s:
+    t = total[b]
+    b += 1
+    res += e[t]
+    m = best[t]
+    for c in range(len(m)):
+        r = m[c]
+        if e[r] == (-1):
+            e[r] = e[t] + 1
+            total[s] = r
+            s += 1
+print(res)
+
+What exactly does it print? It prints a single line.
+ANSWER: 11
+
+===== C1.union_find_links_f3 (module studies.m0.lineages_c1_fix3_other)
+Here is a Python program.
+
+def find(out, z):
+    while out[z] != z:
+        z = out[z]
+    return z
+out = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+j = [3, 8, 10, 10, 2, 7]
+v = [7, 4, 1, 7, 6, 8]
+for total in range(len(j)):
+    x = find(out, j[total])
+    n = find(out, v[total])
+    if x != n:
+        out[x] = n
+print(out)
+
+What exactly does it print? It prints a single line.
+ANSWER: [0, 7, 6, 7, 4, 5, 6, 4, 4, 9, 1]
+
+===== R1.containers_queue_line_r5 (module studies.m0.lineages_r1_fix3_d)
+A line, from front to back, is: Wade, Ugo, Anja, Yves, Yara, Fay, Igor, Sven, Liam and Bruno. The person at the front goes to the back of the line. The person at the front is served and leaves. Yara gets tired and leaves. Hank is let in at the very front. The person at the front goes to the back of the line. Yves gets tired and leaves. The person at the front is served and leaves. Omar joins at the back. The person at the front is served and leaves. The person at the front is served and leaves. The person at the front goes to the back of the line. The person at the front goes to the back of the line. Who is in position 3 from the front of the line at the end (position 1 is the very front)? Choose from Anja, Bruno, Fay, Hank, Igor, Liam, Omar, Sven, Ugo, Wade, Yara and Yves.
+ANSWER: Hank
+
+===== R2.list_ops (module studies.m0.lineages_r2)
+Start with the list 39, 99, 12, 43, 8. Do these steps in order: reverse the list; remove the first element; add 90 at the end; add 19 at the end. What is the final list? Give the numbers separated by commas.
+ANSWER: 43, 12, 99, 39, 90, 19
+
+===== C1.grid_path_table (module studies.m0.lineages_c1_tables)
+Here is a Python program.
+
+count = [[3, 4, 4, 8], [3, 6, 1, 8], [7, 9, 1, 8]]
+total = []
+for y in range(4):
+    total.append(0)
+for best in range(3):
+    for y in range(4):
+        q = count[best][y]
+        if best == 0 and y == 0:
+            total[y] = q
+        elif best == 0:
+            total[y] = total[y - 1] + q
+        elif y == 0:
+            total[y] = total[y] + q
+        else:
+            total[y] = max(total[y], total[y - 1]) + q
+print(total[3])
+
+What exactly does it print? It prints a single line.
+ANSWER: 35
+
+===== M1.mode_tally_r3 (module studies.m0.lineages_m1_fix3_b)
+A teacher wrote down 41 test scores: 39, 74, 19, 44, 74, 22, 5, 67, 54, 63, 5, 52, 19, 32, 67, 10, 5, 44, 74, 22, 82, 22, 32, 54, 39, 22, 10, 52, 13, 19, 82, 82, 34, 39, 13, 67, 63, 54, 52, 63 and 44. How many of the scores are not equal to the value that occurs most often (every score that is not that value counts, once for each time it is written)? There is exactly one most frequent value. Answer with a whole number.
+ANSWER: 37
+
+===== C1.loop_sum (module studies.m0.lineages_c1)
+Here is a Python program.
+
+y = 9
+for p in range(4, 22):
+    if p % 5 != 3:
+        y -= p * 1
+    else:
+        y += 0
+print(y)
+
+What exactly does it print? It prints a single line.
+ANSWER: -177
+
+===== R1.equivalence_classes_r5 (module studies.m0.lineages_r1_fix3_a)
+rimok is a different thing from rador. velax is the same thing as zorex. rador is a different thing from nadix. tisin is a different thing from maken. kerax is the same thing as rimok. vasix is the same thing as maken. velax is the same thing as labax. zorex is the same thing as sakax. tisin is a different thing from kenek. maken is the same thing as mobok. rimok is the same thing as vasix. Is kerax the same thing as mobok? Answer yes (they must be the same), no (they must be different) or cannot be determined.
+ANSWER: yes
+

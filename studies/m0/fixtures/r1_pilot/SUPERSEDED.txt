@@ -1,0 +1,25 @@
+Shapes replaced by a revision (ids ending _r2) or not registered; their fixtures, if present, are from the earlier shape and must NOT be solved.
+R1.boolean_lights
+R1.categories_default_exceptions
+R1.categories_default_exceptions_r2
+R1.categories_follow
+R1.conditional_threshold_rule
+R1.conditional_threshold_rule_r2
+R1.containers_queue_line
+R1.containers_stack_piles
+R1.containers_stack_piles_r2
+R1.elimination_bracket
+R1.elimination_bracket_r2
+R1.equivalence_classes
+R1.graph_shortest_route
+R1.instant_runoff
+R1.kinship_ancestor
+R1.kinship_ancestor_r2
+R1.kinship_descendants
+R1.kinship_descendants_r2
+R1.spatial_grid_walk
+R1.stable_matching
+R1.topological_order
+
+Tables:
+studies/m0/manifests/r1_pilot_stats_table.md is SUPERSEDED by studies/m0/manifests/r1_stats_table_v2.md and r1_two_sided_table.md (the old file is kept unchanged).

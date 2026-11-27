@@ -1,0 +1,26 @@
+lineage                        cue/shape L   cue/all  verdict   partial  construct  P      artifact  NEW   | top cue rule
+binary_search_trace               0.0781 1    0.0781  STAYS      -        -      1.000    -        -   | [mine] midpoint rounded up [sum] se=0.0043 by_set={'impl_a4': 0.0779, 'impl_f4': 0.0708, 'final': 0.0819}
+caesar_shift                      0.0456 3    0.0456  STAYS      -        -      0.046    -        -   | [a3] shift backwards [-] se=0.0023 by_set={'impl_a4': 0.043, 'impl_f4': 0.0515, 'final': 0.044}
+cellular_automaton                0.0429 2    0.0429  STAYS      -        -      0.202    -        -   | [a3] one step only [row] se=0.0023 by_set={'impl_a4': 0.0455, 'impl_f4': 0.042, 'final': 0.042}
+cheapest_network                  0.0584 0    0.0584  STAYS      -        -      1.000    -        -   | [a3] n-1 cheapest cables [-] se=0.0026 by_set={'impl_a4': 0.061, 'impl_f4': 0.0555, 'final': 0.0585}
+count_divisible                   0.0312 0    0.0312  STAYS      -        -        -      -        -   | most frequent answer (train draw) [sum] se=0.0019 by_set={'impl_a4': 0.0265, 'impl_f4': 0.031, 'final': 0.0338}
+crt_smallest                      0.1123 0    0.1123  STAYS      -        -      0.020    -        -   | [mine] largest remainder [-] se=0.0035 by_set={'impl_a4': 0.109, 'impl_f4': 0.1185, 'final': 0.1108}
+dictionary_rank                   0.0471 0    0.0471  STAYS      -        -        -      -        -   | [impl] position: index in the FULL sorted alphabet (no remov [position] se=0.0037 by_set={'impl_a4': 0.0452, 'impl_f4': 0.0342, 'final': 0.0549}
+digit_root                        0.1115 5    0.1115  STAYS      -        -      1.000    -        -   | most frequent answer (train draw) [-] se=0.0035 by_set={'impl_a4': 0.117, 'impl_f4': 0.11, 'final': 0.1095}
+expression_eval                   0.0832 0    0.0435  STAYS      -        -        -      -        -   | [a3] ranked item: strict left to right (ignore precedence) [ranked] se=0.0044 by_set={'impl_a4': 0.0813, 'impl_f4': 0.0874, 'final': 0.082}
+from_base                         0.0187 0    0.0187  STAYS      -        -      0.155    -        -   | most frequent answer (train draw) [-] se=0.0015 by_set={'impl_a4': 0.02, 'impl_f4': 0.018, 'final': 0.0185}
+grid_sum                          0.0739 0    0.0739  STAYS      -        -        -      -        -   | most frequent answer (train draw) [-] se=0.0029 by_set={'impl_a4': 0.0705, 'impl_f4': 0.0705, 'final': 0.0772}
+interval_scheduling               0.1409 0    0.1409  STAYS      -        -      0.625    -        -   | [impl] shortest first [chosen] se=0.0039 by_set={'impl_a4': 0.1285, 'impl_f4': 0.1325, 'final': 0.1512}
+list_ops                          0.0096 6    0.0096  STAYS    0.144      -        -    0.683      -   | [mine] [cond] append = put at the front (items with an appen [-] se=0.0012 by_set={'impl_a4': 0.0105, 'impl_f4': 0.0087, 'final': 0.0096}
+luhn_check                        0.1030 3    0.1030  STAYS    0.103      -      1.000    -        -   | most frequent answer (train draw) [check_digit] se=0.0048 by_set={'impl_a4': 0.1, 'impl_f4': 0.092, 'final': 0.1098}
+min_heap_ops                      0.0035 0    0.0024  STAYS      -        -      0.247  1.000      -   | [a3] insertion order with the minimum swapped to the front [removals=0] se=0.0008 by_set={'impl_a4': 0.0029, 'impl_f4': 0.0045, 'final': 0.0034}
+run_length                        0.0000 0    0.0000  STAYS      -        -      1.000    -        -   | most frequent answer (train draw) [-] se=0.0 by_set={'impl_a4': 0.0, 'impl_f4': 0.0, 'final': 0.0}
+sort_list                         0.0000 0    0.0000  STAYS      -        -      0.000    -        -   | [a3] opposite direction [desc=False] se=0.0 by_set={'impl_a4': 0.0, 'impl_f4': 0.0, 'final': 0.0}
+string_rewrite_nonidentity        0.0257 2    0.0257  STAYS      -        -      1.000  1.000      -   | [mine] [cond] only the last rule [-] se=0.0018 by_set={'impl_a4': 0.023, 'impl_f4': 0.0275, 'final': 0.0262}
+to_base_wide                      0.0428 0    0.0428  STAYS      -        -      0.043    -        -   | [a3] digits reversed (least significant first) [-] se=0.0023 by_set={'impl_a4': 0.044, 'impl_f4': 0.0415, 'final': 0.0428}
+
+Would drop if a non-counted class counted (per-shape, pooled, > 0.15):
+  partial: 
+  construct: 
+  P: binary_search_trace 1.000 (L6: [mine] (P) 0-based positions (identical to the sta), cellular_automaton 0.202 (L0: [mine] (P) misread: edge cells keep their value), cheapest_network 1.000 (L6: [mine] (P) Kruskal), digit_root 1.000 (L6: [a3] (P) n mod 9 with 0 -> 9 (casting out nines)), from_base 0.155 (L0: [mine] (P) misread: digits read right to left), interval_scheduling 0.625 (L0: [impl] (P) earliest finish, ties by earliest start), luhn_check 1.000 (L6: [mine] (P) misread: doubling counted from the left), min_heap_ops 0.247 (L0: [mine] Floyd bottom-up heapify, then removals (a d), run_length 1.000 (L6: [mine] run-length by grouping (P: the procedure)), string_rewrite_nonidentity 1.000 (L0: [a3] (P) all rules applied simultaneously to the s)
+  artifact: list_ops 0.683 (L0: [a3] ignore reverses), min_heap_ops 1.000 (L6: [a3] removal by deleting the minimum and keeping t), string_rewrite_nonidentity 1.000 (L0: [a3] only the first rule)

@@ -1,0 +1,7 @@
+L0 hops anchor->asked [(5, 1000)]  is_tree {True: 1000}  events [(8, 1000)]
+L1 hops anchor->asked [(6, 1000)]  is_tree {True: 1000}  events [(9, 1000)]
+L2 hops anchor->asked [(7, 1000)]  is_tree {True: 1000}  events [(10, 1000)]
+L3 hops anchor->asked [(8, 1000)]  is_tree {True: 1000}  events [(12, 1000)]
+L4 hops anchor->asked [(9, 1000)]  is_tree {True: 1000}  events [(13, 1000)]
+L5 hops anchor->asked [(10, 1000)]  is_tree {True: 1000}  events [(14, 1000)]
+L6 hops anchor->asked [(11, 1000)]  is_tree {True: 1000}  events [(16, 1000)]

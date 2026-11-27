@@ -1,0 +1,1768 @@
+######## R1: 12 survivors
+=== R1.boolean_lights_r4  (family boolean_state; module studies.m0.lineages_r1_rev4.boolean_lights_r4)
+--- L0  answer='yes'  type=yn
+There are 4 lamps numbered 1 to 4. At the start, lamps 1, 2 and 4 are on, and all the lamps not named here are off. The white switch toggles lamps 2 and 4 (each one goes from on to off or from off to on). The red switch toggles lamps 1, 3 and 4 (each one goes from on to off or from off to on). The yellow switch toggles lamps 1 and 2 (each one goes from on to off or from off to on). The switches are pressed in this order: red, yellow, white. Is lamp 1 on at the end? Answer yes or no.
+--- L3  answer='no'  type=yn
+There are 7 lamps numbered 1 to 7. At the start, lamp 6 is on, and all the lamps not named here are off. The black switch toggles lamp 2 (each one goes from on to off or from off to on). The green switch toggles lamp 5 (each one goes from on to off or from off to on). The purple switch toggles lamps 4 and 7 (each one goes from on to off or from off to on). The blue switch toggles lamps 5 and 6 (each one goes from on to off or from off to on). The switches are pressed in this order: purple, black, blue, purple, black, blue, black, blue, black. Is lamp 7 on at the end? Answer yes or no.
+--- L6  answer='yes'  type=yn
+There are 10 lamps numbered 1 to 10. At the start, lamps 1, 2, 3, 4, 6 and 7 are on, and all the lamps not named here are off. The blue switch toggles lamps 4 and 7 (each one goes from on to off or from off to on). The red switch toggles lamps 3, 5, 9 and 10 (each one goes from on to off or from off to on). The purple switch toggles lamps 4, 8 and 10 (each one goes from on to off or from off to on). The yellow switch toggles lamps 4 and 10 (each one goes from on to off or from off to on). The green switch toggles lamps 2, 3, 6 and 9 (each one goes from on to off or from off to on). The switches are pressed in this order: purple, blue, red, yellow, purple, green, blue, purple, red, red, green, yellow, green, green, blue. Is lamp 4 on at the end? Answer yes or no.
+
+=== R1.categories_default_exceptions_r4  (family categories; module studies.m0.lineages_r1_rev4.categories_default_exceptions_r4)
+--- L0  answer='yes'  type=yn
+Every verek is a zedax. Every zevak is a dalox. Every kinox is a narax. Every zedax is a kinox. Every kelen is a sosek. Every renor is a tamox. Every dalox is a verek. Every narax is a rodix. Every sosek is a kovan. Every sader is a renor. Every rodix is a sidex. Every tamox is a mibak. Every dazin is a sader. Every kovan is a zevak. Every sidex is a dazin. Every zedak is a kelen. A narax cannot climb. A dazin cannot climb. A sosek cannot jump. A kovan cannot climb. A tamox can climb. A sosek can climb. A mibak cannot climb. A narax cannot jump. A kelen cannot jump. A zevak can jump. A sader cannot climb. A sidex cannot climb. A sader cannot jump. A dalox cannot jump. A zedak can jump. A rodix cannot climb. When two rules about the same thing disagree, the rule about the smaller (more specific) group wins. Vida is a zedak. Can Vida climb? Answer yes or no.
+--- L3  answer='no'  type=yn
+Every mizin is a belex. Every kinon is a zisak. Every raver is a kinon. Every nelon is a terir. Every bilik is a raver. Every lebin is a nelon. Every sovix is a rabek. Every disex is a bilik. Every terir is a nabon. Every belex is a zinin. Every vaban is a tesax. Every bovik is a zemon. Every motox is a lerix. Every nabon is a telik. Every telik is a notix. Every vosan is a sovix. Every zinin is a lilox. Every lilox is a zirir. Every rabek is a mizin. Every zirir is a motox. Every tesax is a lebin. Every notix is a disex. Every zisak is a vosan. Every zemon is a vaban. A motox can float. A mizin cannot jump. A kinon can float. A belex cannot float. A motox can jump. A rabek cannot jump. A disex cannot float. A zisak cannot jump. A zirir can jump. A telik cannot float. A lerix can jump. A belex cannot jump. A bovik can float. A mizin cannot float. A vosan cannot jump. A lilox can jump. A zinin can jump. A vosan can float. A sovix can jump. A zinin can float. When two rules about the same thing disagree, the rule about the smaller (more specific) group wins. Zita is a bovik. Can Zita jump? Answer yes or no.
+--- L6  answer='yes'  type=yn
+Every nosir is a zibox. Every bomon is a nodek. Every virak is a zarax. Every rodan is a binek. Every nodox is a bamak. Every solik is a kotin. Every rokan is a solik. Every kotan is a ravek. Every tovix is a bezir. Every nodek is a demix. Every nizor is a tovix. Every ravek is a sokox. Every kazar is a ralix. Every zekak is a tadak. Every tadak is a kemax. Every sokox is a rodan. Every demix is a lemar. Every kasok is a virak. Every zibox is a bomon. Every lemar is a kasok. Every zekan is a zekak. Every zenak is a lonar. Every vivan is a zenak. Every kotin is a minox. Every bezir is a rokan. Every minox is a nosir. Every ralix is a nizor. Every sidin is a kotan. Every lonar is a kalox. Every bamak is a zekan. Every binek is a babir. Every zarax is a vivan. Every babir is a nodox. Every kemax is a kazar. A nodek can float. A rokan can climb. A lonar can float. A lonar cannot climb. A minox can float. A minox cannot climb. A rokan cannot float. A nodox can climb. A vivan cannot float. A kalox cannot climb. A bezir can float. A tovix cannot climb. A zekak cannot climb. A zibox can float. A zekak cannot float. A nosir cannot float. A kemax can float. A tadak can climb. A zarax can float. A binek cannot climb. A kalox can float. A ravek can climb. A zekan can float. A vivan can climb. A ralix cannot float. A bomon cannot climb. A sokox cannot climb. A nizor can float. A babir can c ...[cut]
+
+=== R1.compass_turns  (family spatial; module studies.m0.lineages_r1.compass_turns)
+--- L0  answer='south'  type=word
+You are facing south. You walk 23 steps, then walk 85 steps, then walk 75 steps. Which direction are you facing now? Answer north, east, south or west.
+--- L3  answer='north'  type=word
+You are facing west. You turn right, then turn 270 degrees clockwise, then turn 180 degrees clockwise, then turn 90 degrees clockwise, then turn left, then turn 90 degrees counterclockwise, then turn 180 degrees clockwise, then turn left, then turn left. Which direction are you facing now? Answer north, east, south or west.
+--- L6  answer='west'  type=word
+You are facing south. You turn 180 degrees clockwise, then walk 7 steps, then turn left, then turn left, then turn left, then turn around, then turn 90 degrees counterclockwise, then turn 90 degrees clockwise, then walk 20 steps, then turn 270 degrees clockwise, then turn 270 degrees clockwise, then turn left, then turn 90 degrees counterclockwise, then walk 38 steps, then walk 4 steps. Which direction are you facing now? Answer north, east, south or west.
+
+=== R1.conditional_decision_tree_r6  (family conditional; module studies.m0.lineages_r1_fix4_a.conditional_decision_tree_r6)
+--- L0  answer='sit down'  type=text
+Your rule is: if the rider light is on, then (if the barar light is on, then (if the bador light is on, then (hide), otherwise (wait)), otherwise (if the libix light is on, then (wait), otherwise (sit down))), otherwise (if the bador light is on, then (if the barar light is on, then (turn right), otherwise (turn right)), otherwise (if the barar light is on, then (hide), otherwise (sit down))). Right now, it is true that the bador light is on; it is false that the barar light is on; it is false that the libix light is on; it is true that the rider light is on; it is true that the zotik light is on. What do you do? Choose from hide, sit down, turn right and wait.
+--- L3  answer='jump'  type=text
+Your rule is: if the dabir light is on, then (if the domon light is on, then (if the lizek light is on, then (if the tomak light is on, then (knock), otherwise (turn right)), otherwise (if the marek light is on, then (hide), otherwise (jump))), otherwise (if the rirak light is on, then (if the tomak light is on, then (hide), otherwise (jump)), otherwise (if the nasan light is on, then (knock), otherwise (knock)))), otherwise (if the marek light is on, then (if the lizek light is on, then (if the domon light is on, then (jump), otherwise (knock)), otherwise (if the nasan light is on, then (hide), otherwise (hide))), otherwise (if the rirak light is on, then (if the domon light is on, then (turn right), otherwise (turn right)), otherwise (if the lizek light is on, then (jump), otherwise (turn right)))). Right now, it is false that the dabir light is on; it is false that the domon light is on; it is true that the linex light is on; it is true that the lizek light is on; it is false that the marek light is on; it is false that the metex light is on; it is false that the nasan light is on; it is false that the rirak light is on; it is false that the tomak light is on. What do you do? Choose from hide, jump, knock and turn right.
+--- L6  answer='jump'  type=text
+Your rule is: if the lirak light is on, then (if the lalor light is on, then (if the taken light is on, then (if the zilak light is on, then (if the nabak light is on, then (jump), otherwise (wait)), otherwise (if the salok light is on, then (turn right), otherwise (stop))), otherwise (if the metin light is on, then (if the datix light is on, then (run), otherwise (sit down)), otherwise (if the salok light is on, then (jump), otherwise (turn right)))), otherwise (if the metin light is on, then (if the bivex light is on, then (if the salok light is on, then (wait), otherwise (run)), otherwise (if the nolir light is on, then (jump), otherwise (stop))), otherwise (if the datix light is on, then (if the mezen light is on, then (hide), otherwise (sit down)), otherwise (if the nabak light is on, then (sit down), otherwise (stop))))), otherwise (if the mezen light is on, then (if the lalor light is on, then (if the nolir light is on, then (if the bivex light is on, then (wait), otherwise (sing)), otherwise (if the zilak light is on, then (sing), otherwise (turn right))), otherwise (if the bivex light is on, then (if the metin light is on, then (stop), otherwise (sit down)), otherwise (if the salok light is on, then (hide), otherwise (run)))), otherwise (if the nabak light is on, then (if the salok light is on, then (if the sader light is on, then (hide), otherwise (turn right)), other ...[cut]
+
+=== R1.conditional_threshold_rule_r4  (family conditional; module studies.m0.lineages_r1_rev4.conditional_threshold_rule_r4)
+--- L0  answer='no'  type=yn
+A committee votes on a motion. Dell has weight 8, Marc has weight 8, Elsa has weight 1, Zoe has weight 7, Hal has weight 1, Kenji has weight 6. The motion passes if the total weight of the members who vote yes, minus the total weight of the members who vote no, is at least 0 (members who abstain count for neither side). The votes: Dell yes, Marc no, Elsa yes, Zoe no, Hal no, Kenji yes. Does the motion pass? Answer yes or no.
+--- L3  answer='no'  type=yn
+A committee votes on a motion. Finn has weight 5, Pia has weight 5, Liam has weight 8, Vida has weight 5, Pablo has weight 3, Abel has weight 4, Fern has weight 4, Yves has weight 6, Bea has weight 9. The motion passes if the total weight of the members who vote yes, minus the total weight of the members who vote no, is at least -4 (members who abstain count for neither side). The votes: Finn abstain, Pia abstain, Liam yes, Vida no, Pablo no, Abel no, Fern no, Yves no, Bea yes. Does the motion pass? Answer yes or no.
+--- L6  answer='yes'  type=yn
+A committee votes on a motion. Cass has weight 3, Hugo has weight 1, Elsa has weight 6, Pru has weight 5, Cyrus has weight 2, Ivy has weight 5, Bea has weight 3, Pablo has weight 2, Nora has weight 1, Kate has weight 3, Gus has weight 8, Bram has weight 2. The motion passes if the total weight of the members who vote yes, minus the total weight of the members who vote no, is at least -31 (members who abstain count for neither side). The votes: Cass abstain, Hugo no, Elsa no, Pru no, Cyrus no, Ivy no, Bea yes, Pablo no, Nora yes, Kate no, Gus no, Bram no. Does the motion pass? Answer yes or no.
+
+=== R1.equivalence_exchange_rates_r6  (family equivalence; module studies.m0.lineages_r1_fix4_a.equivalence_exchange_rates_r6)
+--- L0  answer='32'  type=number
+16 units of scarf are worth the same as 75 units of pencil. 15 units of teapot are worth the same as 16 units of compass. 27 units of compass are worth the same as 10 units of orange. 10 units of compass are worth the same as 6 units of scarf. 12 units of drum are worth the same as 1 units of teapot. How many units of orange are worth the same as 972 units of drum?
+--- L3  answer='2'  type=number
+128 units of scarf are worth the same as 54 units of compass. 100 units of needle are worth the same as 3 units of drum. 45 units of compass are worth the same as 32 units of apple. 20 units of apple are worth the same as 27 units of quilt. 4 units of apple are worth the same as 270 units of feather. 54 units of violin are worth the same as 4 units of scarf. 9 units of feather are worth the same as 4 units of needle. 750 units of feather are worth the same as 8 units of lantern. 32 units of needle are worth the same as 3 units of book. How many units of book are worth the same as 32 units of violin?
+--- L6  answer='160'  type=number
+9 units of orange are worth the same as 128 units of drum. 128 units of teapot are worth the same as 50 units of flute. 50 units of feather are worth the same as 16 units of teapot. 16 units of teapot are worth the same as 250 units of lantern. 9 units of scarf are worth the same as 4 units of umbrella. 8 units of violin are worth the same as 90 units of scarf. 9 units of mirror are worth the same as 16 units of violin. 8 units of pencil are worth the same as 5 units of orange. 36 units of drum are worth the same as 2 units of quilt. 2 units of flute are worth the same as 8 units of pencil. 2 units of candle are worth the same as 10 units of feather. 1 units of candle are worth the same as 4 units of needle. 100 units of scarf are worth the same as 6 units of candle. How many units of drum are worth the same as 6 units of mirror?
+
+=== R1.graph_shortest_route_r6  (family graph; module studies.m0.lineages_r1_fix4_a.graph_shortest_route_r6)
+--- L0  answer='17'  type=number
+There is a two-way road between Brook and Oakham of length 21. There is a two-way road between Garth and Marlow of length 4. There is a two-way road between Marlow and Oakham of length 5. There is a two-way road between Calder and Marlow of length 3. There is a two-way road between Brook and Garth of length 16. There is a two-way road between Eastvale and Marlow of length 8. There is a two-way road between Garth and Oakham of length 12. There is a two-way road between Calder and Eastvale of length 4. There is a two-way road between Brook and Calder of length 9. What is the smallest total length of a route from Brook to Oakham along these roads?
+--- L3  answer='21'  type=number
+There is a two-way road between Arden and Ivybridge of length 4. There is a two-way road between Ivybridge and Selby of length 15. There is a two-way road between Fenwick and Ivybridge of length 4. There is a two-way road between Arden and Norwick of length 5. There is a two-way road between Arden and Kelso of length 13. There is a two-way road between Fenwick and Selby of length 8. There is a two-way road between Fenwick and Kelso of length 3. There is a two-way road between Fenwick and Yarrow of length 7. There is a two-way road between Kelso and Selby of length 9. There is a two-way road between Quarry and Selby of length 3. There is a two-way road between Ivybridge and Yarrow of length 3. There is a two-way road between Ivybridge and Westmere of length 2. There is a two-way road between Norwick and Yarrow of length 10. There is a two-way road between Ivybridge and Marlow of length 3. There is a two-way road between Norwick and Quarry of length 22. There is a two-way road between Arden and Selby of length 19. What is the smallest total length of a route from Norwick to Selby along these roads?
+--- L6  answer='38'  type=number
+There is a two-way road between Fenwick and Selby of length 8. There is a two-way road between Marlow and Yarrow of length 3. There is a two-way road between Brook and Harrow of length 3. There is a two-way road between Garth and Harrow of length 19. There is a two-way road between Garth and Vale of length 6. There is a two-way road between Eastvale and Kelso of length 4. There is a two-way road between Eastvale and Yarrow of length 18. There is a two-way road between Kelso and Thornbury of length 17. There is a two-way road between Fenwick and Garth of length 7. There is a two-way road between Harrow and Vale of length 15. There is a two-way road between Brook and Marlow of length 7. There is a two-way road between Brook and Fenwick of length 26. There is a two-way road between Calder and Harrow of length 2. There is a two-way road between Fenwick and Thornbury of length 3. There is a two-way road between Harrow and Kelso of length 9. There is a two-way road between Brook and Calder of length 6. There is a two-way road between Harrow and Marlow of length 5. There is a two-way road between Norwick and Vale of length 26. There is a two-way road between Norwick and Selby of length 2. There is a two-way road between Thornbury and Yarrow of length 31. There is a two-way road between Kelso and Vale of length 3. There is a two-way road between Garth and Yarrow of length 25. There is  ...[cut]
+
+=== R1.knights_knaves_r6  (family truth; module studies.m0.lineages_r1_fix4_a.knights_knaves_r6)
+--- L0  answer='knight'  type=word
+Each person is either a knight, who always tells the truth, or a knave, who always lies. Otto says: "Glen is a knave." Yan says: "Glen is a knave." Glen says: "exactly one of Yves and Otto is a knight." Yves says: "Otto is a knight." Is Otto a knight or a knave? Answer knight or knave.
+--- L3  answer='knight'  type=word
+Each person is either a knight, who always tells the truth, or a knave, who always lies. Zita says: "at least one of Vic and Kenji is a knave." Vic says: "Dion is a knave." Dion says: "exactly one of Vic and Fern is a knight." Reed says: "Opal is a knight." Kenji says: "Opal is a knight." Fern says: "Vic and Reed are of the same kind." Opal says: "Vic and Kenji are of the same kind." Is Reed a knight or a knave? Answer knight or knave.
+--- L6  answer='knight'  type=word
+Each person is either a knight, who always tells the truth, or a knave, who always lies. Ada says: "Vance is a knight." Jon says: "Dev and Emil are of the same kind." Vance says: "Mona is a knight." Dev says: "at least one of Ada and Sean is a knave." Ugo says: "Alva is a knave." Alva says: "Jon and Alva are both knights." Emil says: "Mona and Kai are both knights." Kai says: "exactly one of Emil and Mona is a knight." Mona says: "exactly one of Vance and Alva is a knight." Sean says: "Ada and Jon are of the same kind." Is Sean a knight or a knave? Answer knight or knave.
+
+=== R1.spatial_grid_walk_r5  (family spatial; module studies.m0.lineages_r1_fix3_d.spatial_grid_walk_r5)
+--- L0  answer='Vesak'  type=name
+A map has 3 rows (row 1 is the northernmost) and 3 columns (column 1 is the westernmost). Row 1: Sonox, wall, Kodax. Row 2: Zivix, wall, Boken. Row 3: Liden, Vesak, Mosok. You start at Mosok. You move north, then south, then north, then west, then south, then west, then north, then west, then east, then north, one cell each time. A move into a wall or off the map does nothing. Which place do you end on? Choose from Boken, Kodax, Liden, Mosok, Sonox, Vesak and Zivix.
+--- L3  answer='Mimen'  type=name
+A map has 4 rows (row 1 is the northernmost) and 4 columns (column 1 is the westernmost). Row 1: wall, Revax, Limon, Torox. Row 2: wall, Saven, Sekik, wall. Row 3: Zanax, Mimen, Mamin, Lilor. Row 4: wall, Kivin, Leson, Bozar. You start at Sekik. You move east, then west, then south, then south, then west, then north, then north, then west, then south, then south, then west, then north, one cell each time. A move into a wall or off the map does nothing. Which place do you end on? Choose from Bozar, Kivin, Leson, Lilor, Limon, Mamin, Mimen, Revax, Saven, Sekik, Torox and Zanax.
+--- L6  answer='Tamin'  type=name
+A map has 5 rows (row 1 is the northernmost) and 5 columns (column 1 is the westernmost). Row 1: Denek, Mokax, Minon, Ziker, Riber. Row 2: wall, Zabax, Vebar, wall, Dozek. Row 3: wall, Vidan, Tamin, Dikar, Darax. Row 4: Raner, wall, wall, Vekak, wall. Row 5: Zizor, wall, Dokir, wall, Matin. You start at Minon. You move west, then west, then east, then south, then south, then east, then south, then east, then west, then south, then north, then east, then north, then south, then east, then south, then south, one cell each time. A move into a wall or off the map does nothing. Which place do you end on? Choose from Darax, Denek, Dikar, Dokir, Dozek, Matin, Minon, Mokax, Raner, Riber, Tamin, Vebar, Vekak, Vidan, Zabax, Ziker and Zizor.
+
+=== R1.swap_tracking_r5  (family tracking; module studies.m0.lineages_r1_fix3_e.swap_tracking_r5)
+--- L0  answer='spoon'  type=text
+At the start Pearl holds the scarf, Walt holds the spoon, Jules holds the hammer, Felix holds the violin, Lila holds the apple. Felix and Pearl swap what they are holding. Pearl hands their item to Felix, Felix hands theirs to Lila, and Lila hands theirs to Pearl, all at once. Jules and Pearl swap what they are holding. Walt and Felix swap what they are holding. Lila and Walt swap what they are holding. Walt hands their item to Lila, Lila hands theirs to Felix, and Felix hands theirs to Walt, all at once. What is Walt holding at the end? Choose from apple, hammer, scarf, spoon and violin.
+--- L3  answer='apple'  type=text
+At the start Ugo holds the spoon, Liam holds the teapot, Hana holds the apple, Uri holds the mirror, Vida holds the ribbon, Elsa holds the pencil. Ugo and Uri swap what they are holding. Liam and Vida swap what they are holding. Hana hands their item to Elsa, Elsa hands theirs to Uri, and Uri hands theirs to Hana, all at once. Elsa hands their item to Hana, Hana hands theirs to Uri, and Uri hands theirs to Elsa, all at once. Ugo and Uri swap what they are holding. Ugo and Uri swap what they are holding. Uri and Vida swap what they are holding. Vida hands their item to Uri, Uri hands theirs to Liam, and Liam hands theirs to Vida, all at once. Liam and Hana swap what they are holding. Vida and Ugo swap what they are holding. Uri and Elsa swap what they are holding. Liam and Ugo swap what they are holding. What is Ugo holding at the end? Choose from apple, mirror, pencil, ribbon, spoon and teapot.
+--- L6  answer='pencil'  type=text
+At the start Tess holds the book, Wanda holds the compass, Wade holds the drum, Xavi holds the yo-yo, Xena holds the flute, Esme holds the orange, Stan holds the pencil, Liam holds the needle. Tess hands their item to Stan, Stan hands theirs to Xena, and Xena hands theirs to Tess, all at once. Xena hands their item to Wanda, Wanda hands theirs to Liam, and Liam hands theirs to Xena, all at once. Xena hands their item to Wade, Wade hands theirs to Esme, and Esme hands theirs to Xena, all at once. Wade and Wanda swap what they are holding. Wanda and Esme swap what they are holding. Tess and Wanda swap what they are holding. Wade and Liam swap what they are holding. Tess and Esme swap what they are holding. Liam and Xavi swap what they are holding. Liam and Tess swap what they are holding. Xena hands their item to Esme, Esme hands theirs to Stan, and Stan hands theirs to Xena, all at once. Wade hands their item to Wanda, Wanda hands theirs to Xavi, and Xavi hands theirs to Wade, all at once. Xena and Tess swap what they are holding. Stan hands their item to Wade, Wade hands theirs to Wanda, and Wanda hands theirs to Stan, all at once. Liam hands their item to Wanda, Wanda hands theirs to Tess, and Tess hands theirs to Liam, all at once. Wanda hands their item to Wade, Wade hands theirs to Stan, and Stan hands theirs to Wanda, all at once. Xavi hands their item to Wade, Wade hands  ...[cut]
+
+=== R1.temporal_weekday_shift_r6  (family temporal; module studies.m0.lineages_r1_fix4_a.temporal_weekday_shift_r6)
+--- L0  answer='Tuesday'  type=word
+The market day took place on a Sunday. The bridge opening took place 241 days after the art auction. The council vote took place 50 days before the art auction. The market day took place 116 days before the school play. The town parade took place 253 days after the music recital. The town parade took place 1 day before the council vote. The music recital took place 192 days after the market day. The harvest fair took place 286 days after the school play. On which day of the week did the bridge opening take place?
+--- L3  answer='Wednesday'  type=word
+The chess final took place on a Monday. The school play took place 154 days after the quiz night. The flower show took place 263 days after the art auction. The art auction took place 186 days after the school play. The bake-off took place 31 days after the market day. The concert took place 6 days before the harvest fair. The boat race took place 82 days after the quiz night. The quiz night took place 214 days after the concert. The chess final took place 52 days after the bake-off. The harvest fair took place 214 days before the cycle tour. The concert took place 289 days after the music recital. The market day took place 264 days after the harvest fair. On which day of the week did the flower show take place?
+--- L6  answer='Friday'  type=word
+The music recital took place on a Monday. The book sale took place 52 days after the bake-off. The flower show took place 140 days before the chess final. The town parade took place 52 days before the flower show. The school play took place 213 days before the council vote. The film night took place 69 days before the bridge opening. The quiz night took place 177 days after the bake-off. The bridge opening took place 207 days before the market day. The flower show took place 7 days after the cycle tour. The harvest fair took place 99 days before the art auction. The book sale took place 135 days after the school play. The music recital took place 164 days after the art auction. The film night took place 150 days after the cycle tour. The concert took place 165 days before the book sale. The harvest fair took place 15 days after the quiz night. The bridge opening took place 91 days before the concert. On which day of the week did the chess final take place?
+
+=== R1.venn_counting_r5  (family sets; module studies.m0.lineages_r1_fix3_d.venn_counting_r5)
+--- L0  answer='0'  type=number
+Among 48 people, 31 people are in the rowing group; 36 people are in the baking group; 19 are in both the rowing and the baking groups. Each person is counted once in each number that applies to them. How many of the people are in none of these groups?
+--- L3  answer='82'  type=number
+Among 176 people, 84 people are in the rowing group; 74 people are in the diving group; 90 people are in the baking group; 38 are in both the rowing and the diving groups; 36 are in both the rowing and the baking groups; 38 are in both the diving and the baking groups; 10 are in all of the rowing, diving and baking groups. Each person is counted once in each number that applies to them. How many of the people are in exactly two of these groups?
+--- L6  answer='28'  type=number
+Among 319 people, 177 people are in the diving group; 143 people are in the choir group; 187 people are in the archery group; 190 people are in the chess group; 114 are in both the diving and the choir groups; 126 are in both the diving and the archery groups; 126 are in both the diving and the chess groups; 89 are in both the choir and the archery groups; 95 are in both the choir and the chess groups; 99 are in both the archery and the chess groups; 76 are in all of the diving, choir and archery groups; 74 are in all of the diving, choir and chess groups; 84 are in all of the diving, archery and chess groups; 49 are in all of the choir, archery and chess groups; 38 are in all four groups. Each person is counted once in each number that applies to them. How many of the people are in exactly two of these groups?
+
+######## R2: 18 survivors
+=== R2.binary_search_trace  (family search; module studies.m0.lineages_r2_fix3.binary_search_trace)
+--- L0  answer='23, 14, 6, 12'  type=list
+A sorted list of 19 numbers (smallest first) is searched for 7. The positions are numbered 1 to 19. The search keeps a lower position (first 1) and an upper position (first 19). Each round it looks at the number in the position halfway between them, rounded down when needed (the sum of the two positions divided by 2, rounded down). If that number is the target the search stops; if the target is smaller, the upper position becomes one less than the position just looked at; otherwise the lower position becomes one more. If the lower position ever exceeds the upper position the search stops, having found nothing. The list: 5, 6, 12, 13, 14, 18, 19, 21, 22, 23, 29, 32, 33, 34, 48, 50, 51, 72, 75. Which numbers does the search look at, in order? Give them separated by commas.
+--- L3  answer='64, 85, 67, 65'  type=list
+A sorted list of 28 numbers (smallest first) is searched for 65. The positions are numbered 1 to 28. The search keeps a lower position (first 1) and an upper position (first 28). Each round it looks at the number in the position halfway between them, rounded down when needed (the sum of the two positions divided by 2, rounded down). If that number is the target the search stops; if the target is smaller, the upper position becomes one less than the position just looked at; otherwise the lower position becomes one more. If the lower position ever exceeds the upper position the search stops, having found nothing. The list: 7, 10, 14, 15, 18, 29, 42, 43, 51, 52, 53, 57, 60, 64, 65, 66, 67, 77, 79, 81, 85, 86, 88, 91, 92, 95, 107, 109. Which numbers does the search look at, in order? Give them separated by commas.
+--- L6  answer='74, 116'  type=list
+A sorted list of 42 numbers (smallest first) is searched for 116. The positions are numbered 1 to 42. The search keeps a lower position (first 1) and an upper position (first 42). Each round it looks at the number in the position halfway between them, rounded down when needed (the sum of the two positions divided by 2, rounded down). If that number is the target the search stops; if the target is smaller, the upper position becomes one less than the position just looked at; otherwise the lower position becomes one more. If the lower position ever exceeds the upper position the search stops, having found nothing. The list: 6, 14, 20, 23, 24, 25, 29, 34, 37, 39, 47, 49, 50, 51, 57, 59, 62, 63, 65, 70, 74, 75, 78, 82, 83, 90, 94, 99, 101, 104, 110, 116, 117, 122, 126, 130, 141, 147, 156, 158, 164, 165. Which numbers does the search look at, in order? Give them separated by commas.
+
+=== R2.caesar_shift  (family caesar; module studies.m0.lineages_r2_fix4.caesar_shift)
+--- L0  answer='aqcyh'  type=text
+Shift every letter of 'kamir' forward by 16 places in the alphabet, wrapping from z back to a. Spaces stay. What is the result?
+--- L3  answer='zufmw lqeud fuxud lmxud'  type=text
+Shift every letter of 'nitak zesir tilir zalir' forward by 12 places in the alphabet, wrapping from z back to a. Spaces stay. What is the result?
+--- L6  answer='xipmr vmfeb qizmb dsvib qmhib zszir qshiv'  type=text
+Shift every letter of 'telin ribax mevix zorex midex voven moder' forward by 4 places in the alphabet, wrapping from z back to a. Spaces stay. What is the result?
+
+=== R2.cellular_automaton  (family dynamics; module studies.m0.lineages_r2_fix3.cellular_automaton)
+--- L0  answer='00001000001'  type=text
+A row of 11 cells holds 0s and 1s: 10100001011. In one step every cell changes at the same moment, according to the three digits (left neighbour, the cell itself, right neighbour): 111 becomes 0, 110 becomes 0, 101 becomes 0, 100 becomes 1, 011 becomes 1, 010 becomes 0, 001 becomes 0, 000 becomes 0. The cells beyond the two ends of the row count as 0. After 2 steps, what does the row look like? Give the digits with no spaces.
+--- L3  answer='10111110000001100'  type=text
+A row of 17 cells holds 0s and 1s: 10101111111011001. In one step every cell changes at the same moment, according to the three digits (left neighbour, the cell itself, right neighbour): 111 becomes 0, 110 becomes 0, 101 becomes 1, 100 becomes 0, 011 becomes 1, 010 becomes 1, 001 becomes 1, 000 becomes 1. The cells beyond the two ends of the row count as 0. After 3 steps, what does the row look like? Give the digits with no spaces.
+--- L6  answer='11011011011011110110011'  type=text
+A row of 23 cells holds 0s and 1s: 10110100110100100101101. In one step every cell changes at the same moment, according to the three digits (left neighbour, the cell itself, right neighbour): 111 becomes 1, 110 becomes 0, 101 becomes 1, 100 becomes 0, 011 becomes 1, 010 becomes 1, 001 becomes 1, 000 becomes 1. The cells beyond the two ends of the row count as 0. After 5 steps, what does the row look like? Give the digits with no spaces.
+
+=== R2.cheapest_network  (family graphs; module studies.m0.lineages_r2_fix4.cheapest_network)
+--- L0  answer='45'  type=number
+The towns Arden, Brook, Fenwick, Norwick, Thornbury, Upton, Vale and Zennor must be joined by cables so that anyone can get from any town to any other town, directly or through other towns. A cable between Vale and Fenwick would cost 15. A cable between Norwick and Thornbury would cost 11. A cable between Arden and Zennor would cost 8. A cable between Fenwick and Upton would cost 6. A cable between Vale and Thornbury would cost 9. A cable between Arden and Fenwick would cost 16. A cable between Norwick and Arden would cost 15. A cable between Arden and Thornbury would cost 6. A cable between Thornbury and Zennor would cost 12. A cable between Norwick and Upton would cost 11. A cable between Vale and Upton would cost 13. A cable between Fenwick and Brook would cost 4. A cable between Vale and Arden would cost 5. A cable between Vale and Zennor would cost 3. A cable between Upton and Brook would cost 10. A cable between Arden and Upton would cost 10. What is the smallest total cost of a set of cables that joins all the towns?
+--- L3  answer='80'  type=number
+The towns Dunmore, Fenwick, Harrow, Ivybridge, Kelso, Norwick, Oakham, Quarry, Selby, Upton and Yarrow must be joined by cables so that anyone can get from any town to any other town, directly or through other towns. A cable between Yarrow and Kelso would cost 15. A cable between Selby and Oakham would cost 12. A cable between Quarry and Oakham would cost 4. A cable between Dunmore and Ivybridge would cost 4. A cable between Quarry and Yarrow would cost 16. A cable between Fenwick and Dunmore would cost 11. A cable between Yarrow and Oakham would cost 12. A cable between Quarry and Selby would cost 12. A cable between Dunmore and Kelso would cost 10. A cable between Fenwick and Norwick would cost 15. A cable between Fenwick and Ivybridge would cost 15. A cable between Harrow and Selby would cost 10. A cable between Dunmore and Upton would cost 7. A cable between Upton and Ivybridge would cost 7. A cable between Quarry and Kelso would cost 11. A cable between Yarrow and Selby would cost 4. A cable between Fenwick and Oakham would cost 14. A cable between Kelso and Oakham would cost 7. A cable between Fenwick and Yarrow would cost 14. A cable between Harrow and Yarrow would cost 14. A cable between Fenwick and Kelso would cost 7. A cable between Kelso and Ivybridge would cost 14. What is the smallest total cost of a set of cables that joins all the towns?
+--- L6  answer='87'  type=number
+The towns Calder, Dunmore, Fenwick, Ivybridge, Larkin, Marlow, Norwick, Oakham, Penrith, Quarry, Ravenna, Selby, Thornbury and Upton must be joined by cables so that anyone can get from any town to any other town, directly or through other towns. A cable between Ravenna and Ivybridge would cost 10. A cable between Larkin and Marlow would cost 5. A cable between Ivybridge and Thornbury would cost 11. A cable between Thornbury and Quarry would cost 11. A cable between Larkin and Calder would cost 12. A cable between Norwick and Fenwick would cost 12. A cable between Thornbury and Oakham would cost 3. A cable between Ivybridge and Penrith would cost 1. A cable between Ivybridge and Marlow would cost 12. A cable between Larkin and Penrith would cost 12. A cable between Dunmore and Marlow would cost 11. A cable between Upton and Marlow would cost 9. A cable between Fenwick and Calder would cost 4. A cable between Norwick and Marlow would cost 9. A cable between Norwick and Selby would cost 3. A cable between Larkin and Selby would cost 11. A cable between Larkin and Norwick would cost 8. A cable between Ravenna and Penrith would cost 11. A cable between Larkin and Upton would cost 14. A cable between Norwick and Dunmore would cost 12. A cable between Oakham and Quarry would cost 8. A cable between Larkin and Ivybridge would cost 13. A cable between Penrith and Marlow would cost 11.  ...[cut]
+
+=== R2.count_divisible  (family counting; module studies.m0.lineages_r2_fix4.count_divisible)
+--- L0  answer='60'  type=number
+What is the sum of the numbers in this list that are divisible by 4 and greater than 28? Every entry of the list counts each time it appears: a number that is listed twice is added twice if it qualifies. List: 89, 69, 77, 74, 81, 28, 11, 85, 28, 73, 15, 82, 98, 24, 95, 28, 60, 81.
+--- L3  answer='968'  type=number
+What is the sum of the numbers in this list that are divisible by 4 and greater than 96? Every entry of the list counts each time it appears: a number that is listed twice is added twice if it qualifies. List: 121, 168, 122, 95, 41, 135, 96, 191, 109, 25, 129, 168, 96, 156, 72, 181, 94, 41, 159, 164, 146, 144, 56, 20, 135, 52, 168, 53, 195, 34.
+--- L6  answer='4372'  type=number
+What is the sum of the numbers in this list that are divisible by 2 and greater than 134? Every entry of the list counts each time it appears: a number that is listed twice is added twice if it qualifies. List: 70, 191, 170, 17, 155, 74, 322, 343, 352, 295, 316, 134, 119, 132, 286, 13, 140, 272, 390, 59, 36, 222, 236, 307, 313, 13, 22, 22, 178, 224, 372, 224, 254, 17, 385, 178, 236, 14, 259, 289, 141, 331.
+
+=== R2.crt_smallest  (family numtheory; module studies.m0.lineages_r2_fix4.crt_smallest)
+--- L0  answer='18'  type=number
+What is the smallest positive whole number that leaves remainder 0 when divided by 6, and leaves remainder 1 when divided by 17?
+--- L3  answer='33360'  type=number
+What is the smallest positive whole number that leaves remainder 6 when divided by 34, and leaves remainder 15 when divided by 45, and leaves remainder 23 when divided by 53?
+--- L6  answer='33378'  type=number
+What is the smallest positive whole number that leaves remainder 10 when divided by 43, and leaves remainder 18 when divided by 48, and leaves remainder 40 when divided by 79?
+
+=== R2.dictionary_rank  (family combinatorics; module studies.m0.lineages_r2_fix3.dictionary_rank)
+--- L0  answer='4625'  type=number
+Write every word of 4 letters that can be made from the letters a, f, g, h, i, k, n, q, t, v, z when no letter is used twice in the same word, and list all the words in dictionary order (as in a dictionary, comparing letter by letter from the left, with a before b before c and so on). Number the words 1, 2, 3, ... in that list. What is the number of the word niga?
+--- L3  answer='6609'  type=number
+Write every word of 5 letters that can be made from the letters b, c, h, k, l, p, t, w, x when no letter is used twice in the same word, and list all the words in dictionary order (as in a dictionary, comparing letter by letter from the left, with a before b before c and so on). Number the words 1, 2, 3, ... in that list. What is the number of the word kxlct?
+--- L6  answer='xbkodyj'  type=text
+Write every word of 7 letters that can be made from the letters b, c, d, f, j, k, o, s, w, x, y when no letter is used twice in the same word, and list all the words in dictionary order (as in a dictionary, comparing letter by letter from the left, with a before b before c and so on). Number the words 1, 2, 3, ... in that list. Which word has number 1368418?
+
+=== R2.digit_root  (family numtheory; module studies.m0.lineages_r2.digit_root)
+--- L0  answer='7'  type=number
+Add up the digits of 72970. If the result has more than one digit, add up its digits again, and keep going until a single digit is left. What is that digit?
+--- L3  answer='8'  type=number
+Add up the digits of 90603692. If the result has more than one digit, add up its digits again, and keep going until a single digit is left. What is that digit?
+--- L6  answer='5'  type=number
+Add up the digits of 87699621470. If the result has more than one digit, add up its digits again, and keep going until a single digit is left. What is that digit?
+
+=== R2.expression_eval  (family parsing; module studies.m0.lineages_r2_fix4.expression_eval)
+--- L0  answer='35'  type=number
+Work out 7 - 7 + 5 * (2 + 5). Use these rules, in this order, also inside every pair of parentheses: do what is inside parentheses first, innermost first; then do all the multiplications, from left to right; then do all the additions and subtractions together as one group, strictly from left to right (so 8 - 3 + 2 is worked as (8 - 3) + 2 = 7, and 8 + 3 - 2 as (8 + 3) - 2 = 9). What is the result?
+--- L3  answer='-57'  type=number
+Work out 2 + 9 + 7 - 7 * (7 + 5) + 4 + 5. Use these rules, in this order, also inside every pair of parentheses: do what is inside parentheses first, innermost first; then do all the multiplications, from left to right; then do all the additions and subtractions together as one group, strictly from left to right (so 8 - 3 + 2 is worked as (8 - 3) + 2 = 7, and 8 + 3 - 2 as (8 + 3) - 2 = 9). What is the result?
+--- L6  answer='-301487475'  type=number
+Work out 11 + (4 + 11) * 20 * (18 * 13) + (7 * 19) * (2 - 5 * 11) * 3 - 7 - 15 + 10 * (17 + 8) by this rule, which is not the usual one: work out each pair of parentheses first, innermost first, and inside a pair of parentheses use the same rule as outside; the rule is that the operators are done strictly in the order they are written, from left to right, and multiplication gets no priority over addition or subtraction (so 2 + 3 * 4 is worked as (2 + 3) * 4 = 20). What is the result?
+
+=== R2.from_base  (family base; module studies.m0.lineages_r2.from_base)
+--- L0  answer='11'  type=number
+What is the base-2 number 1011 written in decimal? (Digits above 9 are lowercase letters: a is ten, b is eleven, and so on.)
+--- L3  answer='18016968'  type=number
+What is the base-16 number 112eac8 written in decimal? (Digits above 9 are lowercase letters: a is ten, b is eleven, and so on.)
+--- L6  answer='39126538'  type=number
+What is the base-5 number 40004022123 written in decimal? (Digits above 9 are lowercase letters: a is ten, b is eleven, and so on.)
+
+=== R2.grid_sum  (family grid; module studies.m0.lineages_r2.grid_sum)
+--- L0  answer='5'  type=number
+A grid has 3 rows and 3 columns. The rows, from top to bottom, are: 0 5 7 / 4 1 2 / 1 9 4. What is the sum of the numbers in column 1?
+--- L3  answer='14'  type=number
+A grid has 4 rows and 5 columns. The rows, from top to bottom, are: 4 7 5 0 0 / 6 3 6 9 7 / 1 1 9 1 2 / 7 7 9 4 7. What is the sum of the numbers in row 3?
+--- L6  answer='32'  type=number
+A grid has 6 rows and 6 columns. The rows, from top to bottom, are: 2 5 6 6 5 7 / 4 0 2 7 9 8 / 9 5 8 7 5 3 / 3 0 6 6 7 8 / 6 4 2 5 2 0 / 4 1 7 1 7 6. What is the sum of the numbers in column 4?
+
+=== R2.interval_scheduling  (family greedy; module studies.m0.lineages_r2_fix4.interval_scheduling)
+--- L0  answer='1, 2, 3, 7, 9, 10, 11, 12, 18, 20, 25, 26'  type=list
+A person can attend only one meeting at a time. Times are whole numbers of minutes: meeting 1 runs from 24 to 27; meeting 2 runs from 33 to 36; meeting 3 runs from 6 to 11; meeting 4 runs from 48 to 55; meeting 5 runs from 10 to 17; meeting 6 runs from 106 to 110; meeting 7 runs from 57 to 65; meeting 8 runs from 32 to 36; meeting 9 runs from 84 to 91; meeting 10 runs from 81 to 84; meeting 11 runs from 52 to 54; meeting 12 runs from 12 to 15; meeting 13 runs from 107 to 116; meeting 14 runs from 73 to 82; meeting 15 runs from 104 to 110; meeting 16 runs from 104 to 110; meeting 17 runs from 9 to 17; meeting 18 runs from 104 to 109; meeting 19 runs from 58 to 66; meeting 20 runs from 1 to 3; meeting 21 runs from 30 to 38; meeting 22 runs from 7 to 13; meeting 23 runs from 31 to 40; meeting 24 runs from 84 to 93; meeting 25 runs from 75 to 80; meeting 26 runs from 96 to 99. Two meetings clash if they share any stretch of time; a meeting that ends at the very minute another starts does not clash with it. The person chooses meetings in rounds: in each round, among the meetings that do not clash with any meeting already chosen, the one that ends first is chosen (if two end at the same minute, the one with the smaller number); rounds go on until no meeting can be added. Which meetings are chosen? Give their numbers, smallest first, separated by commas.
+--- L3  answer='1, 2, 3, 5, 7, 11, 16, 22, 23, 24, 26, 28, 31, 32, 36, 37, 38, 40'  type=list
+A person can attend only one meeting at a time. Times are whole numbers of minutes: meeting 1 runs from 173 to 177; meeting 2 runs from 0 to 3; meeting 3 runs from 12 to 14; meeting 4 runs from 125 to 133; meeting 5 runs from 81 to 84; meeting 6 runs from 1 to 5; meeting 7 runs from 151 to 155; meeting 8 runs from 56 to 64; meeting 9 runs from 169 to 177; meeting 10 runs from 24 to 33; meeting 11 runs from 148 to 151; meeting 12 runs from 128 to 132; meeting 13 runs from 11 to 18; meeting 14 runs from 83 to 91; meeting 15 runs from 102 to 109; meeting 16 runs from 31 to 38; meeting 17 runs from 57 to 64; meeting 18 runs from 129 to 137; meeting 19 runs from 32 to 40; meeting 20 runs from 97 to 106; meeting 21 runs from 154 to 157; meeting 22 runs from 72 to 79; meeting 23 runs from 51 to 55; meeting 24 runs from 7 to 9; meeting 25 runs from 73 to 81; meeting 26 runs from 179 to 182; meeting 27 runs from 83 to 86; meeting 28 runs from 129 to 133; meeting 29 runs from 29 to 36; meeting 30 runs from 154 to 161; meeting 31 runs from 124 to 129; meeting 32 runs from 56 to 58; meeting 33 runs from 148 to 153; meeting 34 runs from 177 to 183; meeting 35 runs from 101 to 106; meeting 36 runs from 97 to 103; meeting 37 runs from 27 to 30; meeting 38 runs from 58 to 66; meeting 39 runs from 78 to 81; meeting 40 runs from 155 to 163; meeting 41 runs from 176 to 180; meeting 42 runs from 3 ...[cut]
+--- L6  answer='1, 3, 4, 5, 6, 8, 10, 13, 16, 18, 19, 21, 22, 24, 26, 30, 32, 33, 34, 37, 38, 40, 41, 42, 45, 54, 55'  type=list
+A person can attend only one meeting at a time. Times are whole numbers of minutes: meeting 1 runs from 105 to 108; meeting 2 runs from 123 to 132; meeting 3 runs from 194 to 196; meeting 4 runs from 216 to 218; meeting 5 runs from 178 to 187; meeting 6 runs from 99 to 102; meeting 7 runs from 100 to 106; meeting 8 runs from 55 to 58; meeting 9 runs from 225 to 234; meeting 10 runs from 52 to 55; meeting 11 runs from 241 to 250; meeting 12 runs from 223 to 232; meeting 13 runs from 36 to 38; meeting 14 runs from 156 to 163; meeting 15 runs from 168 to 175; meeting 16 runs from 245 to 247; meeting 17 runs from 53 to 57; meeting 18 runs from 152 to 160; meeting 19 runs from 24 to 28; meeting 20 runs from 8 to 15; meeting 21 runs from 11 to 14; meeting 22 runs from 28 to 32; meeting 23 runs from 100 to 109; meeting 24 runs from 196 to 198; meeting 25 runs from 148 to 156; meeting 26 runs from 58 to 62; meeting 27 runs from 243 to 247; meeting 28 runs from 33 to 42; meeting 29 runs from 32 to 39; meeting 30 runs from 250 to 257; meeting 31 runs from 194 to 203; meeting 32 runs from 173 to 176; meeting 33 runs from 121 to 125; meeting 34 runs from 80 to 86; meeting 35 runs from 227 to 236; meeting 36 runs from 11 to 16; meeting 37 runs from 204 to 207; meeting 38 runs from 228 to 235; meeting 39 runs from 34 to 39; meeting 40 runs from 126 to 133; meeting 41 runs from 73 to 80; meet ...[cut]
+
+=== R2.list_ops  (family listops; module studies.m0.lineages_r2.list_ops)
+--- L0  answer='61, 58, 26, 38'  type=list
+Start with the list 82, 61, 58, 26. Do these steps in order: remove the first element; add 38 at the end. What is the final list? Give the numbers separated by commas.
+--- L3  answer='66, 38, 32'  type=list
+Start with the list 26, 49, 32, 66, 19. Do these steps in order: remove the last element; add 38 at the end; remove the first element; remove the first element; move the first element to the end. What is the final list? Give the numbers separated by commas.
+--- L6  answer='19, 80, 86, 56, 60, 91, 55'  type=list
+Start with the list 80, 86, 56, 60, 91, 55, 61. Do these steps in order: reverse the list; add 74 at the end; remove the last element; add 19 at the end; reverse the list; add 14 at the end; remove the last element; remove the last element. What is the final list? Give the numbers separated by commas.
+
+=== R2.luhn_check  (family codes; module studies.m0.lineages_r2_codes.luhn_check)
+--- L0  answer='yes'  type=yn
+Start at the rightmost digit and move left: leave the 1st digit as it is, double the 2nd, leave the 3rd, double the 4th, and so on. Whenever a doubled digit is more than 9, subtract 9 from it. Add up all the results. The number is valid if the total is a multiple of 10. Is the number 0545335 valid? Answer yes or no.
+--- L3  answer='yes'  type=yn
+Start at the rightmost digit and move left: leave the 1st digit as it is, double the 2nd, leave the 3rd, double the 4th, and so on. Whenever a doubled digit is more than 9, subtract 9 from it. Add up all the results. The number is valid if the total is a multiple of 10. Is the number 3503444146906 valid? Answer yes or no.
+--- L6  answer='2'  type=number
+Start at the rightmost digit and move left: leave the 1st digit as it is, double the 2nd, leave the 3rd, double the 4th, and so on. Whenever a doubled digit is more than 9, subtract 9 from it. Add up all the results. A number is valid if the total is a multiple of 10. One more digit is to be written at the right end of 293854678003715516 so that the new number is valid (the digit written there is the rightmost digit of the new number). Which digit must be written?
+
+=== R2.min_heap_ops  (family structures; module studies.m0.lineages_r2_fix3.min_heap_ops)
+--- L0  answer='11, 25, 34, 57, 46, 53, 87, 76, 78'  type=list
+A heap is a row of numbers in positions 1, 2, 3, ... where the number in position p is never larger than the numbers in positions 2p and 2p+1 (when those exist). To add a number: put it in the first free position at the end, then, while it is smaller than the number in position (its position divided by 2, rounded down), swap the two. To remove the smallest: take out the number in position 1, put the number from the last position into position 1 (the row is now one shorter), then, while it is larger than the smaller of the numbers in positions 2p and 2p+1 (those that exist), swap it with that smaller number. Start with an empty heap and add these numbers in order: 53, 57, 46, 11, 25, 34, 4, 76, 78, 87. Then remove the smallest 1 time. Give the row from position 1 to the end, separated by commas.
+--- L3  answer='4, 23, 7, 35, 27, 25, 54, 55, 95, 44, 91, 74, 36'  type=list
+A heap is a row of numbers in positions 1, 2, 3, ... where the number in position p is never larger than the numbers in positions 2p and 2p+1 (when those exist). To add a number: put it in the first free position at the end, then, while it is smaller than the number in position (its position divided by 2, rounded down), swap the two. To remove the smallest: take out the number in position 1, put the number from the last position into position 1 (the row is now one shorter), then, while it is larger than the smaller of the numbers in positions 2p and 2p+1 (those that exist), swap it with that smaller number. Start with an empty heap and add these numbers in order: 4, 55, 25, 35, 44, 74, 54, 27, 95, 23, 91, 36, 7. Give the row from position 1 to the end, separated by commas.
+--- L6  answer='19, 47, 41, 60, 54, 65, 64, 68, 99, 66, 74, 67, 94, 85'  type=list
+A heap is a row of numbers in positions 1, 2, 3, ... where the number in position p is never larger than the numbers in positions 2p and 2p+1 (when those exist). To add a number: put it in the first free position at the end, then, while it is smaller than the number in position (its position divided by 2, rounded down), swap the two. To remove the smallest: take out the number in position 1, put the number from the last position into position 1 (the row is now one shorter), then, while it is larger than the smaller of the numbers in positions 2p and 2p+1 (those that exist), swap it with that smaller number. Start with an empty heap and add these numbers in order: 64, 68, 17, 47, 54, 67, 41, 94, 99, 66, 19, 15, 65, 85, 74, 60. Then remove the smallest 2 times. Give the row from position 1 to the end, separated by commas.
+
+=== R2.run_length  (family rle; module studies.m0.lineages_r2_fix3.run_length)
+--- L0  answer='z2c2b1y1b2a3'  type=text
+Compress zzccbybbaaa by run-length encoding: replace each maximal run of one repeated letter by the letter followed by the run length (for example aaab becomes a3b1). What is the result?
+--- L3  answer='c3x4a3y3z1c1z2y2z3'  type=text
+Compress cccxxxxaaayyyzczzyyzzz by run-length encoding: replace each maximal run of one repeated letter by the letter followed by the run length (for example aaab becomes a3b1). What is the result?
+--- L6  answer='x5b4c5b1y1a7b1y4z1a6x4a5'  type=text
+Compress xxxxxbbbbcccccbyaaaaaaabyyyyzaaaaaaxxxxaaaaa by run-length encoding: replace each maximal run of one repeated letter by the letter followed by the run length (for example aaab becomes a3b1). What is the result?
+
+=== R2.sort_list  (family sorting; module studies.m0.lineages_r2.sort_list)
+--- L0  answer='82, 68, 63, 47'  type=list
+Sort these numbers from largest to smallest and give them separated by commas: 47, 68, 63, 82.
+--- L3  answer='-10, 45, 183, 205, 237, 238, 278'  type=list
+Sort these numbers from smallest to largest and give them separated by commas: -10, 45, 278, 205, 237, 238, 183.
+--- L6  answer='687, 473, 471, 465, 315, 279, 172, 166, 158, 155'  type=list
+Sort these numbers from largest to smallest and give them separated by commas: 172, 158, 687, 155, 473, 279, 166, 471, 465, 315.
+
+=== R2.string_rewrite_nonidentity  (family rewrite; module studies.m0.lineages_r2_rev2.string_rewrite_nonidentity)
+--- L0  answer='bbcbcca'  type=text
+Start with the string abbcca. Do these steps in order, each step scanning left to right over non-overlapping matches in the string as it is when the step starts: replace every 'ab' with 'bbc'. What is the final string?
+--- L3  answer='cccccaaa'  type=text
+Start with the string abcccacbbcaa. Do these steps in order, each step scanning left to right over non-overlapping matches in the string as it is when the step starts: replace every 'bc' with 'cba'; replace every 'ac' with 'c'; delete every 'b'. What is the final string?
+--- L6  answer='cccccacccccccccc'  type=text
+Start with the string abaaaccbcbbbbaacbc. Do these steps in order, each step scanning left to right over non-overlapping matches in the string as it is when the step starts: replace every 'b' with 'bbb'; replace every 'b' with 'aac'; delete every 'ac'; replace every 'aa' with 'c'. What is the final string?
+
+######## M1: 29 survivors
+=== M1.ages_r3  (family age; module studies.m0.lineages_m1_fix3_a.ages_r3)
+--- L0  answer='19'  type=number
+Thea is 2 times as old as Vic now. In 14 years from now, their two ages added together will be 85. All ages are whole numbers of years. How old is Vic now, in years? Answer with a whole number.
+--- L3  answer='36'  type=number
+Bruno is 3 times as old as Edna now. In 8 years from now, their two ages added together will be 160. All ages are whole numbers of years. How old is Edna now, in years? Answer with a whole number.
+--- L6  answer='44'  type=number
+Rex is 7 times as old as Reed now. In 12 years from now, their two ages added together will be 376. All ages are whole numbers of years. How old is Reed now, in years? Answer with a whole number.
+
+=== M1.arithmetic_series_r3  (family series; module studies.m0.lineages_m1_fix3_a.arithmetic_series_r3)
+--- L0  answer='870'  type=number
+Yuri saves 85 dollars on day 1 and then saves 24 dollars more each day than on the day before. How many dollars has Yuri saved in total after 6 days (counting day 1 to day 6, both included)? Answer with a whole number.
+--- L3  answer='201'  type=number
+Hana saves 26 dollars on day 1 and then saves 3 dollars more each day than on the day before. How many dollars has Hana saved in total after 6 days (counting day 1 to day 6, both included)? Answer with a whole number.
+--- L6  answer='5712'  type=number
+Tess saves 12 dollars on day 1 and then saves 26 dollars more each day than on the day before. How many dollars has Tess saved in total after 21 days (counting day 1 to day 21, both included)? Answer with a whole number.
+
+=== M1.average_missing_r4  (family average; module studies.m0.lineages_m1_fix4.average_missing_r4)
+--- L0  answer='97'  type=number
+Hal has scored 48, 68, 56 on 3 tests, each marked out of 100 with whole-number marks. What score is needed on the next test to make the mean of all 4 tests exactly 67.25? Answer with a whole number.
+--- L3  answer='64'  type=number
+Vic has scored 85, 71, 76, 91 on 4 tests, each marked out of 130 with whole-number marks. What score is needed on the next test to make the mean of all 5 tests exactly 77.4? Answer with a whole number.
+--- L6  answer='58'  type=number
+Kai has scored 63, 88, 132, 87, 148, 47 on 6 tests, each marked out of 160 with whole-number marks. What score is needed on the next test to make the mean of all 7 tests exactly 89? Answer with a whole number.
+
+=== M1.change_ways_r3  (family counting; module studies.m0.lineages_m1_fix3_b.change_ways_r3)
+--- L0  answer='22'  type=number
+At a maths club in Quarry, Cleo is asked this. Using only coins worth 5, 7 and 10 cents, with as many coins of each value available as you like, in how many different ways can exactly 107 cents be paid? (Two ways are the same if they use the same number of coins of each value; the order does not matter.) Answer with a whole number.
+--- L3  answer='11'  type=number
+Ugo from Larkin found this problem in a puzzle book. Using only coins worth 3, 4 and 15 cents, with as many coins of each value available as you like, in how many different ways can exactly 48 cents be paid? (Two ways are the same if they use the same number of coins of each value; the order does not matter.) Answer with a whole number.
+--- L6  answer='198'  type=number
+This problem comes from a quiz held in Eastvale, set by Vera. Using only coins worth 2, 10 and 30 cents, with as many coins of each value available as you like, in how many different ways can exactly 326 cents be paid? (Two ways are the same if they use the same number of coins of each value; the order does not matter.) Answer with a whole number.
+
+=== M1.clock_duration_r4  (family time; module studies.m0.lineages_m1_fix4.clock_duration_r4)
+--- L0  answer='90'  type=number
+A journey has several legs on the same day (times on a 24-hour clock): leg 1 leaves at 13:03 and arrives at 13:51; leg 2 leaves at 14:24 and arrives at 15:06. How many minutes in total is the traveller actually on the move (the time between each leg's departure and its arrival, not counting the waiting between legs)? Answer with a whole number.
+--- L3  answer='226'  type=number
+A journey has several legs on the same day (times on a 24-hour clock): leg 1 leaves at 05:24 and arrives at 07:26; leg 2 leaves at 08:12 and arrives at 09:11; leg 3 leaves at 10:00 and arrives at 10:45. How many minutes in total is the traveller actually on the move (the time between each leg's departure and its arrival, not counting the waiting between legs)? Answer with a whole number.
+--- L6  answer='403'  type=number
+A journey has several legs on the same day (times on a 24-hour clock): leg 1 leaves at 13:55 and arrives at 15:41; leg 2 leaves at 16:30 and arrives at 16:50; leg 3 leaves at 17:44 and arrives at 19:32; leg 4 leaves at 19:59 and arrives at 20:47; leg 5 leaves at 21:00 and arrives at 23:01. How many minutes in total is the traveller actually on the move (the time between each leg's departure and its arrival, not counting the waiting between legs)? Answer with a whole number.
+
+=== M1.consecutive_r3  (family linear; module studies.m0.lineages_m1_fix3_a.consecutive_r3)
+--- L0  answer='431'  type=number
+The sum of 3 consecutive integers (listed from smallest to largest, positive or negative whole numbers) is 1290. What is the largest of them? Answer with a whole number (write a minus sign if it is negative).
+--- L3  answer='7144'  type=number
+The sum of 4 consecutive numbers that each differ from the next by 2 (listed from smallest to largest, positive or negative whole numbers) is 28564. What is the largest of them? Answer with a whole number (write a minus sign if it is negative).
+--- L6  answer='959'  type=number
+The sum of 6 consecutive integers (listed from smallest to largest, positive or negative whole numbers) is 5739. What is the largest of them? Answer with a whole number (write a minus sign if it is negative).
+
+=== M1.crt_congruence_r3  (family number_theory; module studies.m0.lineages_m1_fix3_b.crt_congruence_r3)
+--- L0  answer='25'  type=number
+Alma is thinking of a positive whole number. Dividing it by 12 leaves remainder 1; dividing it by 17 leaves remainder 8. What is the smallest positive whole number that Alma could be thinking of? Answer with a whole number.
+--- L3  answer='7039'  type=number
+Jade is thinking of a positive whole number. Dividing it by 9 leaves remainder 1; dividing it by 32 leaves remainder 31; dividing it by 35 leaves remainder 4. What is the smallest positive whole number that Jade could be thinking of? Answer with a whole number.
+--- L6  answer='18312'  type=number
+Orla is thinking of a positive whole number. Dividing it by 9 leaves remainder 6; dividing it by 32 leaves remainder 8; dividing it by 43 leaves remainder 37; dividing it by 41 leaves remainder 26. What is the smallest positive whole number that Orla could be thinking of? Answer with a whole number.
+
+=== M1.division_counting_r3  (family division; module studies.m0.lineages_m1_fix3_b.division_counting_r3)
+--- L0  answer='9'  type=number
+This problem comes from a quiz held in Larkin, set by Ben. A factory makes 1141 apples. They are packed into boxes that each hold exactly 14 apples; apples that do not fill a box are left out. The boxes are then put on pallets that each hold 12 boxes, and as many full pallets as possible are made. How many boxes are not on a full pallet? Answer with a whole number.
+--- L3  answer='10'  type=number
+This problem comes from a quiz held in Dunmore, set by Neva. A factory makes 1781 candles. They are packed into boxes that each hold exactly 24 candles; candles that do not fill a box are left out. The boxes are then put on pallets that each hold 16 boxes, and as many full pallets as possible are made. How many boxes are not on a full pallet? Answer with a whole number.
+--- L6  answer='2'  type=number
+At a maths club in Upton, Anja is asked this. A factory makes 6808 ribbons. They are packed into boxes that each hold exactly 32 ribbons; ribbons that do not fill a box are left out. The boxes are then put on pallets that each hold 7 boxes, and as many full pallets as possible are made. How many boxes are not on a full pallet? Answer with a whole number.
+
+=== M1.finite_differences_r4  (family sequences; module studies.m0.lineages_m1_fix4.finite_differences_r4)
+--- L0  answer='571'  type=number
+This problem comes from a quiz held in Oakham, set by Hana. The first 5 numbers of a pattern are 55, 91, 147, 223 and 319. The pattern continues in the same way, and each number is given by a polynomial of degree 2 in its position (position 1 is the first number). What is the number in position 7? Answer with a whole number.
+--- L3  answer='601'  type=number
+At a maths club in Calder, Gus is asked this. The first 6 numbers of a pattern are 76, 109, 156, 217, 292 and 381. The pattern continues in the same way, and each number is given by a polynomial of degree 2 in its position (position 1 is the first number). What is the number in position 8? Answer with a whole number.
+--- L6  answer='2849'  type=number
+At a maths club in Westmere, Kenji is asked this. The first 7 numbers of a pattern are 42, 101, 224, 441, 782, 1277 and 1956. The pattern continues in the same way, and each number is given by a polynomial of degree 3 in its position (position 1 is the first number). What is the number in position 8? Answer with a whole number.
+
+=== M1.fraction_remainder_r3  (family remainder; module studies.m0.lineages_m1_fix3_a.fraction_remainder_r3)
+--- L0  answer='754'  type=number
+Yara has 2262 dollars. Yara spends one half of it on books, then one third of what is left on lunch. How many dollars does Yara have left? Answer with a whole number.
+--- L3  answer='106'  type=number
+Gus has 318 dollars. Gus spends one half of it on books, then one third of what is left on lunch. How many dollars does Gus have left? Answer with a whole number.
+--- L6  answer='810'  type=number
+Neva has 1782 dollars. Neva spends one half of it on books, then one eleventh of what is left on lunch. How many dollars does Neva have left? Answer with a whole number.
+
+=== M1.gcd_lcm_r4  (family number_theory; module studies.m0.lineages_m1_fix4.gcd_lcm_r4)
+--- L0  answer='38571'  type=number
+Uma of Vale wrote this problem for a maths club. 2 lights flash at the same moment. After that, one flashes every 897 seconds, the other every 989 seconds. After how many seconds do all 2 flash together again for the first time (counting from the moment they all flashed)? Answer with a whole number.
+--- L3  answer='14'  type=number
+Rosa has 3 ribbons of lengths 2128, 4522 and 1904 centimetres. Rosa cuts every ribbon into pieces that all have the same whole-number length in centimetres, with nothing left over from any ribbon. What is the greatest possible length of a piece, in centimetres? Answer with a whole number.
+--- L6  answer='807300'  type=number
+Rhea from Marlow found this problem in a puzzle book. 4 lights flash at the same moment. After that, one flashes every 65 seconds, another every 100 seconds, another every 135 seconds, and the last every 115 seconds. After how many seconds do all 4 flash together again for the first time (counting from the moment they all flashed)? Answer with a whole number.
+
+=== M1.grid_perimeter_r3  (family geometry; module studies.m0.lineages_m1_fix3_c.grid_perimeter_r3)
+--- L0  answer='32'  type=number
+Unit squares (each side 1 unit long) are placed on a grid. Row 1 (counting from the top): columns 1 to 2. Row 2 (counting from the top): column 4, column 6. Row 3 (counting from the top): columns 5 to 6. Row 4 (counting from the top): column 6. Row 5 (counting from the top): columns 1 to 2, column 5. Row 6 (counting from the top): column 5. Squares with the same column number in neighbouring rows sit directly above and below each other. Two squares that share a side are glued together along that side (squares that meet only at a corner share no side). The perimeter of the whole figure is the number of unit-length sides that belong to exactly one square: a side shared by two squares is not counted at all. What is the perimeter of the figure, in units? Answer with a whole number.
+--- L3  answer='62'  type=number
+Unit squares (each side 1 unit long) are placed on a grid. Row 1 (counting from the top): column 3, column 5, column 8. Row 2 (counting from the top): column 2. Row 3 (counting from the top): column 7. Row 4 (counting from the top): column 4, column 6. Row 5 (counting from the top): column 4, columns 7 to 8. Row 6 (counting from the top): column 1, column 8. Row 7 (counting from the top): column 3. Row 8 (counting from the top): column 1, columns 3 to 4, column 8. Row 9 (counting from the top): column 6. Squares with the same column number in neighbouring rows sit directly above and below each other. Two squares that share a side are glued together along that side (squares that meet only at a corner share no side). The perimeter of the whole figure is the number of unit-length sides that belong to exactly one square: a side shared by two squares is not counted at all. What is the perimeter of the figure, in units? Answer with a whole number.
+--- L6  answer='90'  type=number
+Unit squares (each side 1 unit long) are placed on a grid. Row 1 (counting from the top): column 10. Row 2 (counting from the top): column 2, column 9. Row 3 (counting from the top): column 1, column 9. Row 4 (counting from the top): column 1, column 4, column 6, columns 8 to 9, column 11. Row 5 (counting from the top): column 5, columns 10 to 11. Row 6 (counting from the top): column 2, column 11. Row 7 (counting from the top): column 2, column 7, column 9. Row 8 (counting from the top): no squares. Row 9 (counting from the top): columns 6 to 7, column 9. Row 10 (counting from the top): column 3, column 6, column 11. Row 11 (counting from the top): columns 7 to 8, column 10. Squares with the same column number in neighbouring rows sit directly above and below each other. Two squares that share a side are glued together along that side (squares that meet only at a corner share no side). The perimeter of the whole figure is the number of unit-length sides that belong to exactly one square: a side shared by two squares is not counted at all. What is the perimeter of the figure, in units? Answer with a whole number.
+
+=== M1.inclusion_exclusion_r3  (family counting; module studies.m0.lineages_m1_fix3_b.inclusion_exclusion_r3)
+--- L0  answer='37'  type=number
+49 people were asked what they do. 23 of them sing in the choir, 32 of them play chess, and 18 of them do both. How many of the 49 people do at least one of these things? Answer with a whole number.
+--- L3  answer='149'  type=number
+152 people were asked what they do. 65 sing in the choir, 87 ride a bike and 67 play tennis; 30 do both the first and the second, 19 do both the first and the third, 35 do both the second and the third, and 14 do all three (each 'do both' number includes the people who do all three). How many of the 152 people do at least one of these things? Answer with a whole number.
+--- L6  answer='110'  type=number
+244 people were asked what they do. 160 paint, 115 sing in the choir and 172 read comics; 87 do both the first and the second, 130 do both the first and the third, 91 do both the second and the third, and 66 do all three (each 'do both' number includes the people who do all three). How many of the 244 people do exactly two of these things? Answer with a whole number.
+
+=== M1.last_digit_power_r3  (family number_theory; module studies.m0.lineages_m1_fix3_b.power_remainder_r3)
+--- L0  answer='1'  type=number
+At a maths club in Eastvale, Pete is asked this. Let X be the product of 273 factors, each equal to 48. What is the remainder when X is divided by 47 (a whole number from 0 to 46)? Answer with a whole number.
+--- L3  answer='5'  type=number
+Cass from Quarry found this problem in a puzzle book. Let X be the sum of the product of 186 factors, each equal to 101 and the product of 405 factors, each equal to 141. What is the remainder when X is divided by 59 (a whole number from 0 to 58)? Answer with a whole number.
+--- L6  answer='0'  type=number
+At a maths club in Quarry, Fay is asked this. Let X be the sum of the product of 400 factors, each equal to 131, the product of 371 factors, each equal to 127 and the product of 504 factors, each equal to 151. What is the remainder when X is divided by 43 (a whole number from 0 to 42)? Answer with a whole number.
+
+=== M1.linear_equation_r3  (family linear; module studies.m0.lineages_m1_fix3_a.linear_equation_r3)
+--- L0  answer='38'  type=number
+I think of a number. Multiplying it by 9 and then subtracting 17 gives 325. What is my number? Answer with a whole number (write a minus sign if it is negative).
+--- L3  answer='-4'  type=number
+I think of a number. Multiplying it by 3 and then subtracting 7 gives the same result as multiplying it by 5 and then adding 1. What is my number? Answer with a whole number (write a minus sign if it is negative).
+--- L6  answer='94'  type=number
+I think of a number. Multiplying it by 8 and then subtracting 485 gives the same result as multiplying it by 3 and then subtracting 15. What is my number? Answer with a whole number (write a minus sign if it is negative).
+
+=== M1.median_list_r3  (family statistics; module studies.m0.lineages_m1_fix3_b.median_list_r3)
+--- L0  answer='26'  type=number
+This problem comes from a quiz held in Larkin, set by Tina. The values are 6, 178, 136, 64, 21, 26 and 20. What is the median of all the values (the middle value once they are sorted from smallest to largest; if there are two middle values, the number halfway between them)? Answer with a number; if it is not whole, write it as a decimal with no more than two decimal places and no trailing zeros.
+--- L3  answer='183'  type=number
+At a maths club in Penrith, Cass is asked this. The values are 39, 318, 156, 210, 247, 142, 228, 130, 22 and 340. What is the median of all the values (the middle value once they are sorted from smallest to largest; if there are two middle values, the number halfway between them)? Answer with a number; if it is not whole, write it as a decimal with no more than two decimal places and no trailing zeros.
+--- L6  answer='341'  type=number
+This problem comes from a quiz held in Calder, set by Hank. The values are 364, 428, 341, 348, 560, 118, 386, 18, 245, 29, 248, 294, 135, 432 and 449. What is the median of all the values (the middle value once they are sorted from smallest to largest; if there are two middle values, the number halfway between them)? Answer with a number; if it is not whole, write it as a decimal with no more than two decimal places and no trailing zeros.
+
+=== M1.mixture_r4  (family ratio; module studies.m0.lineages_m1_fix4.mixture_r4)
+--- L0  answer='17.46'  type=number
+A shop mixes 62 kilograms of nuts costing 11 dollars per kilogram with 38 kilograms of raisins costing 28 dollars per kilogram. What is the cost of one kilogram of the finished mixture, in dollars? Answer with a number; if it is not whole, write it as a decimal with no more than two decimal places and no trailing zeros.
+--- L3  answer='17.7'  type=number
+A shop mixes 7 kilograms of nuts costing 7 dollars per kilogram with 3 kilograms of raisins costing 26 dollars per kilogram, then adds a flat packing cost of 5 dollars per kilogram of the finished mixture. What is the cost of one kilogram of the finished mixture, in dollars? Answer with a number; if it is not whole, write it as a decimal with no more than two decimal places and no trailing zeros.
+--- L6  answer='49'  type=number
+A shop mixes 1 kilograms of nuts costing 30 dollars per kilogram with 4 kilograms of raisins costing 45 dollars per kilogram, then adds a flat packing cost of 7 dollars per kilogram of the finished mixture. What is the cost of one kilogram of the finished mixture, in dollars? Answer with a number; if it is not whole, write it as a decimal with no more than two decimal places and no trailing zeros.
+
+=== M1.painted_cube_r3  (family geometry; module studies.m0.lineages_m1_fix3_c.painted_cube_r3)
+--- L0  answer='1918'  type=number
+Rex from Eastvale found this problem in a puzzle book. A block is made from small cubes of the same size glued together into a box 16 cubes long, 21 cubes wide and 23 cubes high. The whole box is placed on a table and every outer face (including the bottom face on the table) is painted red. Then the box is taken apart into the small cubes. How many small cubes have exactly 1 painted face? Answer with a whole number.
+--- L3  answer='3377'  type=number
+Tess of Zennor wrote this problem for a maths club. A block is made from small cubes of the same size glued together into a box 41 cubes long, 25 cubes wide and 21 cubes high. The whole box is placed on a table and every outer face is painted red except the bottom face (the face on the table), which stays unpainted. Then the box is taken apart into the small cubes. How many small cubes have exactly 1 painted face? Answer with a whole number.
+--- L6  answer='19800'  type=number
+This problem comes from a quiz held in Selby, set by Jade. A block is made from small cubes of the same size glued together into a box 32 cubes long, 22 cubes wide and 35 cubes high. The whole box is placed on a table and every outer face (including the bottom face on the table) is painted red. Then the box is taken apart into the small cubes. How many small cubes have exactly 0 painted faces? Answer with a whole number.
+
+=== M1.percent_change_r3  (family percent; module studies.m0.lineages_m1_fix3_a.percent_change_r3)
+--- L0  answer='99.75'  type=number
+A jacket costs 84 dollars. Its price rises by 25 percent, then falls by 5 percent, each change applied to the price just before it. What is the final price in dollars? Answer with a number; if it is not whole, write it as a decimal with no more than two decimal places and no trailing zeros.
+--- L3  answer='179.8'  type=number
+A jacket costs 320 dollars. Its price rises by 45 percent, then falls by 75 percent, then rises by 55 percent, each change applied to the price just before it. What is the final price in dollars? Answer with a number; if it is not whole, write it as a decimal with no more than two decimal places and no trailing zeros.
+--- L6  answer='1113.6'  type=number
+A jacket costs 960 dollars. Its price rises by 45 percent, then falls by 50 percent, then rises by 60 percent, each change applied to the price just before it. What is the final price in dollars? Answer with a number; if it is not whole, write it as a decimal with no more than two decimal places and no trailing zeros.
+
+=== M1.pipes_work_r3  (family rates; module studies.m0.lineages_m1_fix3_a.pipes_work_r3)
+--- L0  answer='25'  type=number
+A tank is empty. One pipe adds 11 litres of water every minute and a second pipe adds 10 litres every minute, all at the same time and at a steady rate. How many minutes does it take for the tank to hold 525 litres? Answer with a whole number.
+--- L3  answer='7'  type=number
+A tank is empty. One pipe adds 19 litres of water every minute and a second pipe adds 27 litres every minute, while a drain removes 38 litres every minute, all at the same time and at a steady rate. How many minutes does it take for the tank to hold 56 litres? Answer with a whole number.
+--- L6  answer='63'  type=number
+A tank is empty. One pipe adds 26 litres of water every minute and a second pipe adds 19 litres every minute, while a drain removes 24 litres every minute, all at the same time and at a steady rate. How many minutes does it take for the tank to hold 1323 litres? Answer with a whole number.
+
+=== M1.prime_factors_r3  (family number_theory; module studies.m0.lineages_m1_fix3_b.prime_factors_r3)
+--- L0  answer='97'  type=number
+At a maths club in Oakham, Zita is asked this. Consider the number 16490. What is the largest prime number that divides it exactly? Answer with a whole number.
+--- L3  answer='32'  type=number
+This problem comes from a quiz held in Zennor, set by Boris. Consider the number 178120. How many different positive whole numbers divide it exactly (counting 1 and the number itself)? Answer with a whole number.
+--- L6  answer='37'  type=number
+This problem comes from a quiz held in Westmere, set by Emil. Consider the number 781440. What is the largest prime number that divides it exactly? Answer with a whole number.
+
+=== M1.quadratic_area_r3  (family algebra; module studies.m0.lineages_m1_fix3_c.quadratic_area_r3)
+--- L0  answer='130'  type=number
+This problem comes from a quiz held in Thornbury, set by Tina. Two positive whole numbers differ by 109, and their product is 31070. What is the smaller of the two numbers? Answer with a whole number.
+--- L3  answer='208'  type=number
+Vic of Larkin wrote this problem for a maths club. A rectangular garden has an area of 55536 square metres. Its length is 59 metres more than its width. What is its width, in metres? Answer with a whole number.
+--- L6  answer='192'  type=number
+Kira of Quarry wrote this problem for a maths club. A rectangular playing field has a perimeter of 586 metres and an area of 19392 square metres. What is the length of its longer side, in metres? Answer with a whole number.
+
+=== M1.ratio_share_r3  (family ratio; module studies.m0.lineages_m1_fix3_a.ratio_share_r3)
+--- L0  answer='344'  type=number
+Walt and Bram share 473 stickers in the ratio 8:3 (in that order: the first named person gets the first number of parts, and so on; every part has the same number of stickers, and the shares are whole numbers of stickers). How many stickers does Walt get? Answer with a whole number.
+--- L3  answer='180'  type=number
+Gwen, Sia and Zane share 540 stickers in the ratio 6:9:3 (in that order: the first named person gets the first number of parts, and so on; every part has the same number of stickers, and the shares are whole numbers of stickers). How many stickers does Gwen get? Answer with a whole number.
+--- L6  answer='2115'  type=number
+Finn, Vera, Fern and Gwen share 5922 stickers in the ratio 15:16:3:8 (in that order: the first named person gets the first number of parts, and so on; every part has the same number of stickers, and the shares are whole numbers of stickers). How many stickers does Finn get? Answer with a whole number.
+
+=== M1.rectangle_r3  (family geometry; module studies.m0.lineages_m1_fix3_a.rectangle_r3)
+--- L0  answer='29744'  type=number
+A rectangle has a perimeter of 1248 centimetres and its length is 11 times its width. What is its area in square centimetres? Answer with a whole number.
+--- L3  answer='4182'  type=number
+A rectangle has a perimeter of 266 centimetres and its length is 31 centimetres more than its width. What is its area in square centimetres? Answer with a whole number.
+--- L6  answer='11832'  type=number
+A rectangle has a perimeter of 446 centimetres and its length is 49 centimetres more than its width. What is its area in square centimetres? Answer with a whole number.
+
+=== M1.recurrence_iterate_r3  (family sequences; module studies.m0.lineages_m1_fix3_c.recurrence_iterate_r3)
+--- L0  answer='3386'  type=number
+This problem comes from a quiz held in Ravenna, set by Ben. A list of numbers is built by a rule. The first two numbers are 65 and 121. Every number after those is the sum of the two numbers just before it. What is the number in position 9 of the list (position 1 is the first number)? Answer with a whole number.
+--- L3  answer='281'  type=number
+Vance from Ivybridge found this problem in a puzzle book. A list of numbers is built by a rule. The first number is 73. Every number after it is the number just before it plus 2 times its own position in the list (so the second number is the first plus 4, the third is the second plus 6, and so on). What is the number in position 14 of the list (position 1 is the first number)? Answer with a whole number.
+--- L6  answer='57339'  type=number
+Ines of Thornbury wrote this problem for a maths club. A list of numbers is built by a rule. The first two numbers are 5 and 243. Every number after those is the sum of the two numbers just before it. What is the number in position 14 of the list (position 1 is the first number)? Answer with a whole number.
+
+=== M1.shopping_r3  (family shopping; module studies.m0.lineages_m1_fix3_a.shopping_r3)
+--- L0  answer='3.8'  type=number
+Ned buys 4 apples at $0.91 each, 4 books at $0.64 each. Ned pays with $10.00. How many dollars of change does Ned get back? Answer with a number; if it is not whole, write it as a decimal with no more than two decimal places and no trailing zeros.
+--- L3  answer='11.4'  type=number
+Lena buys 5 pencils at $4.55 each, 7 quilts at $4.25 each, 2 flutes at $3.25 each, 7 yo-yos at $7.80 each. Lena pays with $125.00. How many dollars of change does Lena get back? Answer with a number; if it is not whole, write it as a decimal with no more than two decimal places and no trailing zeros.
+--- L6  answer='4.9'  type=number
+Bruno buys 8 violins at $12.95 each, 10 pencils at $6.15 each, 7 scarfs at $6.35 each, 11 whistles at $13.30 each, 3 lanterns at $19.70 each, 3 ribbons at $10.05 each. Bruno pays with $450.00. How many dollars of change does Bruno get back? Answer with a number; if it is not whole, write it as a decimal with no more than two decimal places and no trailing zeros.
+
+=== M1.speed_distance_r3  (family rates; module studies.m0.lineages_m1_fix3_a.speed_distance_r3)
+--- L0  answer='249'  type=number
+A van drives for 5 hours at 41 kilometres per hour, then drives for 2 hours at 22 kilometres per hour. How many kilometres does it travel in total? Answer with a whole number.
+--- L3  answer='1080'  type=number
+A van drives for 8 hours at 79 kilometres per hour, then drives for 5 hours at 47 kilometres per hour, then drives for 3 hours at 71 kilometres per hour. How many kilometres does it travel in total? Answer with a whole number.
+--- L6  answer='1788'  type=number
+A van drives for 15 hours at 78 kilometres per hour, then drives for 2 hours at 21 kilometres per hour, then drives for 7 hours at 21 kilometres per hour, then drives for 6 hours at 54 kilometres per hour, then drives for 3 hours at 35 kilometres per hour. How many kilometres does it travel in total? Answer with a whole number.
+
+=== M1.tiered_pricing  (family pricing; module studies.m0.lineages_m1_pricing.tiered_pricing)
+--- L0  answer='13'  type=number
+A utility charges for use in steps: the first 22 units cost 26 cents each, and every unit after that costs 56 cents each. Each unit costs the rate of the step it falls in (a higher step does not change what earlier units cost). What is the bill for 35 units, in dollars? Answer with a number; if it is not whole, write it as a decimal with no more than two decimal places and no trailing zeros.
+--- L3  answer='33.84'  type=number
+A utility charges for use in steps: the first 58 units cost 14 cents each, the next 32 units cost 56 cents each, and every unit after that costs 60 cents each. Each unit costs the rate of the step it falls in (a higher step does not change what earlier units cost). What is the bill for 103 units, in dollars? Answer with a number; if it is not whole, write it as a decimal with no more than two decimal places and no trailing zeros.
+--- L6  answer='107.96'  type=number
+A utility charges for use in steps: the first 27 units cost 40 cents each, the next 61 units cost 44 cents each, the next 54 units cost 54 cents each, and every unit after that costs 84 cents each. Each unit costs the rate of the step it falls in (a higher step does not change what earlier units cost). What is the bill for 191 units, in dollars? Answer with a number; if it is not whole, write it as a decimal with no more than two decimal places and no trailing zeros.
+
+=== M1.tip_split_r3  (family percent; module studies.m0.lineages_m1_fix3_a.tip_split_r3)
+--- L0  answer='55.25'  type=number
+A dinner bill is 85 dollars before tip. The group adds a 30 percent tip, calculated on the bill before tip, and splits the total (bill plus tip) equally between 2 people. How many dollars does each person pay? Answer with a number; if it is not whole, write it as a decimal with no more than two decimal places and no trailing zeros.
+--- L3  answer='21.96'  type=number
+A dinner bill is 90 dollars before tip. The group adds a 22 percent tip, calculated on the bill before tip, and splits the total (bill plus tip) equally between 5 people. How many dollars does each person pay? Answer with a number; if it is not whole, write it as a decimal with no more than two decimal places and no trailing zeros.
+--- L6  answer='78.48'  type=number
+A dinner bill is 864 dollars before tip. The group adds a 9 percent tip, calculated on the bill before tip, and splits the total (bill plus tip) equally between 12 people. How many dollars does each person pay? Answer with a number; if it is not whole, write it as a decimal with no more than two decimal places and no trailing zeros.
+
+######## C1: 27 survivors
+=== C1.binary_search_f3  (family lists; module studies.m0.lineages_c1_fix3_lists.binary_search_f3)
+--- L0  answer='lllh'  type=line
+[program]
+r = [3, 16, 26, 29, 31, 32, 33, 35, 39, 40, 42, 45]
+e = 45
+acc = 0
+c = len(r) - 1
+best = ''
+while acc <= c:
+    k = (acc + c) // 2
+    if r[k] == e:
+        best = best + 'h'
+        acc = c + 1
+    elif r[k] < e:
+        best = best + 'l'
+        acc = k + 1
+    else:
+        best = best + 'r'
+        c = k - 1
+print(best)
+[question] What exactly does it print? It prints a single line.
+--- L3  answer='rllr'  type=line
+[program]
+cur = [1, 12, 15, 19, 22, 30, 31, 36, 37, 42, 44, 45, 46, 48, 51, 52, 53, 54, 56, 60]
+s = 40
+r = 0
+count = len(cur)
+v = ''
+while r < count:
+    d = (r + count) // 2
+    if cur[d] < s:
+        v = v + 'l'
+        r = d + 1
+    else:
+        v = v + 'r'
+        count = d
+print(v)
+[question] What exactly does it print? It prints a single line.
+--- L6  answer='24,12,6,3,5,4,'  type=line
+[program]
+j = [1, 4, 11, 18, 22, 33, 41, 43, 45, 46, 48, 52, 58, 61, 62, 67, 70, 71, 73, 76, 77, 81, 88, 89, 90, 91, 94, 95, 96, 99, 102, 103, 107, 116, 118, 123, 127, 128, 130, 132, 137, 138, 139, 146, 147, 149, 151, 153]
+acc = 25
+k = 0
+z = len(j)
+cur = ''
+while k < z:
+    x = (k + z) // 2
+    cur = cur + str(x) + ','
+    if j[x] < acc:
+        k = x + 1
+    else:
+        z = x
+print(cur)
+[question] What exactly does it print? It prints a single line.
+
+=== C1.bracket_matching_f3  (family stacks; module studies.m0.lineages_c1_fix3_other.bracket_matching_f3)
+--- L0  answer='19'  type=line
+[program]
+d = '[)<}()(>]{<()['
+acc = []
+for y in range(len(d)):
+    acc.append(0)
+res = 0
+u = 0
+cur = 0
+for y in range(len(d)):
+    count = d[y]
+    if count == '(':
+        acc[res] = 1
+        res += 1
+    elif count == '[':
+        acc[res] = 2
+        res += 1
+    elif count == '{':
+        acc[res] = 3
+        res += 1
+    elif count == '<':
+        acc[res] = 4
+        res += 1
+    elif count == ')':
+        if res > 0 and acc[res - 1] == 1:
+            res -= 1
+        else:
+            u += 1
+            cur += y
+    elif count == ']':
+        if res > 0 and acc[res - 1] == 2:
+            res -= 1
+        else:
+            u += 1
+            cur += y
+    elif count == '}':
+        if res > 0 and acc[res - 1] == 3:
+            res -= 1
+        else:
+            u += 1
+            cur += y
+    elif res > 0 and acc[res - 1] == 4:
+        res -= 1
+    else:
+        u += 1
+        cur += y
+print(cur)
+[question] What exactly does it print? It prints a single line.
+--- L3  answer='20'  type=line
+[program]
+z = '[>[])<<[}}[[<]([<>'
+t = []
+for p in range(len(z)):
+    t.append(0)
+y = 0
+r = 0
+m = 0
+for p in range(len(z)):
+    v = z[p]
+    if v == '(':
+        t[y] = 1
+        y += 1
+    elif v == '[':
+        t[y] = 2
+        y += 1
+    elif v == '{':
+        t[y] = 3
+        y += 1
+    elif v == '<':
+        t[y] = 4
+        y += 1
+    elif v == ')':
+        if y > 0 and t[y - 1] == 1:
+            y -= 1
+            m += p
+        else:
+            r += 1
+    elif v == ']':
+        if y > 0 and t[y - 1] == 2:
+            y -= 1
+            m += p
+        else:
+            r += 1
+    elif v == '}':
+        if y > 0 and t[y - 1] == 3:
+            y -= 1
+            m += p
+        else:
+            r += 1
+    elif y > 0 and t[y - 1] == 4:
+        y -= 1
+        m += p
+    else:
+        r += 1
+print(m)
+[question] What exactly does it print? It prints a single line.
+--- L6  answer='102'  type=line
+[program]
+s = '()()[[([<{)}[>][<){>}]}{'
+w = []
+for a in range(len(s)):
+    w.append(0)
+d = 0
+p = 0
+j = 0
+for a in range(len(s)):
+    q = s[a]
+    if q == '(':
+        w[d] = 1
+        d += 1
+    elif q == '[':
+        w[d] = 2
+        d += 1
+    elif q == '{':
+        w[d] = 3
+        d += 1
+    elif q == '<':
+        w[d] = 4
+        d += 1
+    elif q == ')':
+        if d > 0 and w[d - 1] == 1:
+            d -= 1
+        else:
+            p += 1
+            j += a
+    elif q == ']':
+        if d > 0 and w[d - 1] == 2:
+            d -= 1
+        else:
+            p += 1
+            j += a
+    elif q == '}':
+        if d > 0 and w[d - 1] == 3:
+            d -= 1
+        else:
+            p += 1
+            j += a
+    elif d > 0 and w[d - 1] == 4:
+        d -= 1
+    else:
+        p += 1
+        j += a
+print(j)
+[question] What exactly does it print? It prints a single line.
+
+=== C1.bytecode_loop_f3  (family simulation; module studies.m0.lineages_c1_fix3_other.bytecode_loop_f3)
+--- L0  answer='0'  type=line
+[program]
+q = [9, 6, 9, 9, 4, 9, 4, 6]
+z = 0
+x = 0
+while z < len(q):
+    best = q[z]
+    k = q[z + 1]
+    z = z + 2
+    if best == 9:
+        x = x + k
+    elif best == 8:
+        x = x * k
+    elif best == 4:
+        x = x - k
+print(x)
+[question] What exactly does it print? It prints a single line.
+--- L3  answer='51'  type=line
+[program]
+z = [9, 5, 3, 2, 9, 6, 3, 3, 8, 9, 4, 27, 3, 5, 8, 3, 3, 3, 7, 2]
+v = 0
+b = 0
+y = 0
+p = 0
+while v < len(z):
+    count = z[v]
+    w = z[v + 1]
+    v = v + 2
+    p += w
+    if count == 9:
+        b = b + w
+    elif count == 7:
+        b = b * w
+    elif count == 8:
+        b = b - w
+    elif count == 3:
+        if b % 2 == w % 2:
+            v = v + 2
+    elif count == 4:
+        b = b % w
+    elif count == 6:
+        y = b
+    elif count == 1:
+        b = b + y
+print(p)
+[question] What exactly does it print? It prints a single line.
+--- L6  answer='84'  type=line
+[program]
+a = [5, 2, 3, 0, 7, 9, 3, 6, 5, 8, 3, 3, 5, 8, 3, 8, 5, 4, 5, 4, 8, 5, 1, 9, 3, 7, 4, 3]
+d = 0
+j = 0
+r = 0
+while d < len(a):
+    n = a[d]
+    z = a[d + 1]
+    d = d + 2
+    if n == 5:
+        j = j + z
+    elif n == 4:
+        j = j * z
+    elif n == 7:
+        j = j - z
+    elif n == 3:
+        if j % 2 == z % 2:
+            d = d + 2
+    elif n == 6:
+        j = j % z
+    elif n == 8:
+        r = j
+    elif n == 1:
+        j = j + r
+print(j)
+[question] What exactly does it print? It prints a single line.
+
+=== C1.circle_elimination_r2  (family simulation; module studies.m0.lineages_c1_rev2.circle_elimination_r2)
+--- L0  answer='8'  type=line
+[program]
+best = [1, 1, 0, 1, 0, 0, 1, 1, 1, 1]
+acc = 2
+for out in range(2):
+    cur = 0
+    while cur < 2:
+        acc = (acc + 1) % 10
+        if best[acc] == 1:
+            cur += 1
+    best[acc] = 0
+print(acc)
+[question] What exactly does it print? It prints a single line.
+--- L3  answer='3'  type=line
+[program]
+j = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+e = 2
+for x in range(11):
+    q = 0
+    while q < 5:
+        e = (e + 1) % 12
+        if j[e] == 1:
+            q += 1
+    j[e] = 0
+for k in range(12):
+    if j[k] == 1:
+        d = k
+print(d)
+[question] What exactly does it print? It prints a single line.
+--- L6  answer='91'  type=line
+[program]
+s = [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+v = 0
+t = 0
+for m in range(13):
+    d = 0
+    while d < 4:
+        v = (v + 1) % 15
+        if s[v] == 1:
+            d += 1
+    s[v] = 0
+    t += v
+print(t)
+[question] What exactly does it print? It prints a single line.
+
+=== C1.cond_chain_f3  (family conditionals; module studies.m0.lineages_c1_fix3_numbers.cond_chain_f3)
+--- L0  answer='156'  type=line
+[program]
+d = 54
+y = 56
+b = 0
+for c in range(3):
+    if d > y:
+        d = d - y
+    elif d == y:
+        d = d * 4
+    else:
+        y = y - d
+    b += d
+print(b)
+[question] What exactly does it print? It prints a single line.
+--- L3  answer='47'  type=line
+[program]
+r = 90
+a = 58
+total = 0
+for k in range(6):
+    if r > a:
+        r = r - a
+    elif r == a:
+        r = r * 3
+    else:
+        a = a - r
+    if r + a > 48:
+        a = a // 2
+    total += r
+print(total)
+[question] What exactly does it print? It prints a single line.
+--- L6  answer='385'  type=line
+[program]
+v = 52
+acc = 66
+e = 0
+for y in range(9):
+    if v > acc:
+        v = v - acc
+    elif v == acc:
+        v = v * 3
+    else:
+        acc = acc - v
+    if v + acc > 22:
+        acc = acc // 2
+    e += v
+print(e)
+[question] What exactly does it print? It prints a single line.
+
+=== C1.counter_list_f3  (family lists; module studies.m0.lineages_c1_fix3_lists.counter_list_f3)
+--- L0  answer='[6, 1, 1]'  type=line
+[program]
+b = [17, 16, 16, 5, 6, 6, 5, 3]
+r = [0, 0, 0]
+n = 0
+for best in range(len(b)):
+    y = b[best]
+    if y % 2 == 0:
+        n = (n * 8 + y) % 3
+    else:
+        n = (n + 1 + y // 2) % 3
+    r[n] = r[n] + 1
+print(r)
+[question] What exactly does it print? It prints a single line.
+--- L3  answer='[1, 4, 3, 4, 5]'  type=line
+[program]
+k = [23, 9, 27, 16, 2, 6, 10, 28, 24, 26, 9, 21, 0, 30, 13, 2, 19]
+u = [0, 0, 0, 0, 0]
+c = 0
+for m in range(len(k)):
+    total = k[m]
+    if total % 2 == 0:
+        c = (c * 8 + total) % 5
+    else:
+        c = (c + 1 + total // 2) % 5
+    u[c] = u[c] + 1
+print(u)
+[question] What exactly does it print? It prints a single line.
+--- L6  answer='[6, 4, 6, 5, 5]'  type=line
+[program]
+v = [20, 25, 1, 19, 17, 29, 2, 26, 16, 12, 7, 6, 13, 9, 25, 18, 4, 15, 11, 30, 10, 20, 29, 30, 28, 26]
+u = [0, 0, 0, 0, 0]
+out = 0
+for b in range(len(v)):
+    val = v[b]
+    if val > 19:
+        out = (out * 2 + val) % 5
+    else:
+        out = (out + 2) % 5
+    u[out] = u[out] + 1
+print(u)
+[question] What exactly does it print? It prints a single line.
+
+=== C1.digit_peel_f3  (family while; module studies.m0.lineages_c1_fix3_numbers.digit_peel_f3)
+--- L0  answer='25'  type=line
+[program]
+e = 1067
+acc = 0
+v = 1
+while e != 0:
+    p = e % 7
+    acc += p * v
+    v += 1
+    e = e // 7
+print(acc)
+[question] What exactly does it print? It prints a single line.
+--- L3  answer='551511'  type=line
+[program]
+v = 11617
+q = 0
+while v != 0:
+    e = v % 3
+    q = q * 5 + e
+    v = v // 3
+print(q)
+[question] What exactly does it print? It prints a single line.
+--- L6  answer='153359'  type=line
+[program]
+v = 2114273211
+k = 0
+while v > 0:
+    a = v % 9
+    k = k * 3 + a
+    v = v // 9
+print(k)
+[question] What exactly does it print? It prints a single line.
+
+=== C1.euclid_gcd_traced_f3  (family while; module studies.m0.lineages_c1_fix3_numbers.euclid_gcd_traced_f3)
+--- L0  answer='46'  type=line
+[program]
+val = 14
+c = 48
+best = 0
+s = 0
+while c != 0 and best < 2:
+    n = val % c
+    val = c
+    c = n
+    best += 1
+    s += c * (best + 1)
+print(s)
+[question] What exactly does it print? It prints a single line.
+--- L3  answer='336'  type=line
+[program]
+u = 308
+j = 224
+s = 0
+best = 0
+while j != 0 and s < 2:
+    res = j
+    j = u % j
+    u = res
+    s += 1
+    best += j * (s + 1)
+print(best)
+[question] What exactly does it print? It prints a single line.
+--- L6  answer='1872'  type=line
+[program]
+cur = 423
+a = 765
+res = 0
+x = 0
+while a != 0 and res < 2:
+    r = cur % a
+    cur = a
+    a = r
+    res += 1
+    x += a * (res + 1)
+print(x)
+[question] What exactly does it print? It prints a single line.
+
+=== C1.fast_power_f4  (family while; module studies.m0.lineages_c1_fix4.fast_power_f4)
+--- L0  answer='72'  type=line
+[program]
+x = 1
+p = 90
+t = 5
+acc = 197
+while t > 0:
+    if t % 2 == 1:
+        x = x * p % acc
+    p = (p * p + 7) % acc
+    t = t // 2
+print(x)
+[question] What exactly does it print? It prints a single line.
+--- L3  answer='33'  type=line
+[program]
+z = 1
+r = 95
+y = 40
+n = 249
+while y > 0:
+    if y % 2 == 1:
+        z = z * r % n
+    r = (r * r + 5) % n
+    y = y // 2
+print(z)
+[question] What exactly does it print? It prints a single line.
+--- L6  answer='142'  type=line
+[program]
+j = 1
+best = 248
+k = 474
+w = 298
+while k > 0:
+    if k % 2 == 1:
+        j = j * best % w
+    best = (best * best + 7) % w
+    k = k // 2
+print(j)
+[question] What exactly does it print? It prints a single line.
+
+=== C1.fib_like_f3  (family accumulators; module studies.m0.lineages_c1_fix3_other.fib_like_f3)
+--- L0  answer='1236'  type=line
+[program]
+total = 8
+j = 4
+for k in range(7):
+    c = total + 2 * j
+    total = j
+    j = c
+print(total)
+[question] What exactly does it print? It prints a single line.
+--- L3  answer='9116'  type=line
+[program]
+u = 6
+d = 2
+for count in range(17):
+    x = u + d
+    u = d
+    d = x
+print(u)
+[question] What exactly does it print? It prints a single line.
+--- L6  answer='0'  type=line
+[program]
+z = 9
+a = 7
+for b in range(26):
+    t = (z + a) % 23
+    z = a
+    a = t
+print(a)
+[question] What exactly does it print? It prints a single line.
+
+=== C1.fib_shapes_recursive_f3  (family accumulators; module studies.m0.lineages_c1_fix3_other.fib_shapes_recursive_f3)
+--- L0  answer='9'  type=line
+[program]
+def mix(b):
+    if b < 3:
+        return b + 7
+    else:
+        return mix(b - 1) * 1 + mix(b - 2) + (mix(b - 3) - 15)
+print(mix(3))
+[question] What exactly does it print? It prints a single line.
+--- L3  answer='238111'  type=line
+[program]
+def step(cur):
+    if cur < 2:
+        return cur + 7
+    else:
+        return step(cur - 1) * 4 + step(cur - 2) * 1 + 2
+print(step(8))
+[question] What exactly does it print? It prints a single line.
+--- L6  answer='47976'  type=line
+[program]
+def calc(u):
+    if u < 3:
+        return u + 7
+    else:
+        return calc(u - 1) * 3 + calc(u - 2) + (calc(u - 3) - 8)
+print(calc(9))
+[question] What exactly does it print? It prints a single line.
+
+=== C1.func_branch_f4  (family functions; module studies.m0.lineages_c1_fix4.func_branch_f4)
+--- L0  answer='-2'  type=line
+[program]
+def step(b):
+    if b > 2:
+        return b * 2 - 9
+    else:
+        return b + 9
+print(step(4) + step(4))
+[question] What exactly does it print? It prints a single line.
+--- L3  answer='76'  type=line
+[program]
+def f(d):
+    if d > 16:
+        return d * 2 - 5
+    elif d % 2 == 0:
+        return d // 2
+    else:
+        return d + 11
+print(f(24) + f(28) - f(7))
+[question] What exactly does it print? It prints a single line.
+--- L6  answer='-144'  type=line
+[program]
+def calc(m):
+    if m > 7:
+        return m * 6 - 15
+    elif m % 2 == 0:
+        return m // 2
+    else:
+        return m + 15
+print(calc(42) - calc(12) - calc(19) - calc(40))
+[question] What exactly does it print? It prints a single line.
+
+=== C1.func_compose_f4  (family functions; module studies.m0.lineages_c1_fix4.func_compose_f4)
+--- L0  answer='79'  type=line
+[program]
+def mix(count):
+    return count * 3 + 8
+def score(count):
+    return mix(mix(count) % 33) + 11
+print(score(15))
+[question] What exactly does it print? It prints a single line.
+--- L3  answer='29'  type=line
+[program]
+def shift(s):
+    return s * 2 + 8
+def step(s):
+    return shift(shift(s)) - 16
+def score(s):
+    return step(s) % 17
+print(score(27) + score(23))
+[question] What exactly does it print? It prints a single line.
+--- L6  answer='11'  type=line
+[program]
+def calc(a):
+    return a * 4 + 8
+def mix(a):
+    return calc(calc(a)) - calc(a // 2) + 1
+def step(a):
+    return mix(a) % 15
+print(step(22))
+[question] What exactly does it print? It prints a single line.
+
+=== C1.list_build_f3  (family lists; module studies.m0.lineages_c1_fix3_lists.list_build_f3)
+--- L0  answer='30'  type=line
+[program]
+acc = []
+for n in range(7):
+    acc.append((n * n * n + 7) % 10)
+print(sum(acc))
+[question] What exactly does it print? It prints a single line.
+--- L3  answer='[6, 4, 4, 10, 4, 0]'  type=line
+[program]
+r = []
+for best in range(9):
+    if best % 4 != 0:
+        r.append((best + 5) * (best + 2) % 12)
+print(r)
+[question] What exactly does it print? It prints a single line.
+--- L6  answer='25'  type=line
+[program]
+count = []
+for m in range(11):
+    count.append(m * m % 9)
+print(sum(count))
+[question] What exactly does it print? It prints a single line.
+
+=== C1.merge_two_sorted_f3  (family lists; module studies.m0.lineages_c1_fix3_lists.merge_two_sorted_f3)
+--- L0  answer='30'  type=line
+[program]
+v = [1, 3, 5, 6]
+j = [1, 3, 5, 7]
+val = 0
+d = 0
+m = []
+a = 0
+while val < len(v) and d < len(j):
+    a += max(v[val], j[d])
+    if v[val] <= j[d]:
+        m.append(v[val])
+        val += 1
+    else:
+        m.append(j[d])
+        d += 1
+print(a)
+[question] What exactly does it print? It prints a single line.
+--- L3  answer='3'  type=line
+[program]
+j = [2, 2, 2, 4, 8, 8, 10]
+c = [1, 3, 3, 5, 7]
+d = 0
+count = 0
+val = []
+k = 0
+while d < len(j) and count < len(c):
+    k += j[d] - c[count]
+    if j[d] < c[count]:
+        val.append(j[d])
+        d += 1
+    else:
+        val.append(c[count])
+        count += 1
+print(k)
+[question] What exactly does it print? It prints a single line.
+--- L6  answer='167'  type=line
+[program]
+z = [1, 2, 3, 8, 8, 10, 13, 14, 17, 19]
+k = [2, 6, 10, 16, 16, 18]
+p = 0
+x = 0
+w = []
+m = 0
+while p < len(z) and x < len(k):
+    m += max(z[p], k[x])
+    if z[p] <= k[x]:
+        w.append(z[p])
+        p += 1
+    else:
+        w.append(k[x])
+        x += 1
+print(m)
+[question] What exactly does it print? It prints a single line.
+
+=== C1.nested_pairs_f3  (family nested; module studies.m0.lineages_c1_fix3_lists.nested_pairs_f3)
+--- L0  answer='28'  type=line
+[program]
+z = 0
+for best in range(7):
+    for v in range(4):
+        if best * v > 8:
+            z += v + 2
+print(z)
+[question] What exactly does it print? It prints a single line.
+--- L3  answer='1333'  type=line
+[program]
+res = 0
+for p in range(11):
+    for x in range(p):
+        if p * x > 6:
+            res += p * x + 1
+print(res)
+[question] What exactly does it print? It prints a single line.
+--- L6  answer='10031'  type=line
+[program]
+u = 0
+for t in range(14):
+    for s in range(13):
+        if t + s > 6:
+            u += s * s + t
+print(u)
+[question] What exactly does it print? It prints a single line.
+
+=== C1.postfix_evaluation  (family stacks; module studies.m0.lineages_c1_stacks.postfix_evaluation)
+--- L0  answer='216'  type=line
+[program]
+x = [5, 4, 9, (-3), (-3)]
+val = []
+for best in range(len(x)):
+    val.append(0)
+v = 0
+p = 0
+for best in range(len(x)):
+    r = x[best]
+    if r >= 0:
+        val[v] = r
+        v += 1
+    else:
+        u = val[v - 1]
+        out = val[v - 2]
+        v -= 1
+        if r == (-1):
+            val[v - 1] = out + u
+        elif r == (-2):
+            val[v - 1] = out - u
+        else:
+            val[v - 1] = out * u
+        p += val[v - 1]
+print(p)
+[question] What exactly does it print? It prints a single line.
+--- L3  answer='87'  type=line
+[program]
+k = [6, 1, (-3), 9, 4, 3, 5, (-3), (-3), (-3), (-2)]
+q = []
+for s in range(len(k)):
+    q.append(0)
+w = 0
+res = 0
+for s in range(len(k)):
+    out = k[s]
+    if out >= 0:
+        q[w] = out
+        w += 1
+    else:
+        v = q[w - 1]
+        m = q[w - 2]
+        w -= 1
+        if out == (-1):
+            q[w - 1] = m + v
+        elif out == (-2):
+            q[w - 1] = m - v
+        else:
+            q[w - 1] = m * v
+        res += q[w - 1]
+print(res)
+[question] What exactly does it print? It prints a single line.
+--- L6  answer='-570'  type=line
+[program]
+k = [2, 7, 8, 3, 8, (-3), (-1), (-2), 7, (-2), 2, (-2), 9, 1, (-2), (-3), (-2)]
+total = []
+for best in range(len(k)):
+    total.append(0)
+r = 0
+for best in range(len(k)):
+    b = k[best]
+    if b >= 0:
+        total[r] = b
+        r += 1
+    else:
+        y = total[r - 1]
+        e = total[r - 2]
+        r -= 1
+        if b == (-3):
+            total[r - 1] = e + y
+        elif b == (-1):
+            total[r - 1] = e - y
+        else:
+            total[r - 1] = e * y
+print(total[r - 1])
+[question] What exactly does it print? It prints a single line.
+
+=== C1.recursive_calls_r2  (family functions; module studies.m0.lineages_c1_rev2.recursive_calls_r2)
+--- L0  answer='45'  type=line
+[program]
+def score(w):
+    if w < 1:
+        return 1
+    else:
+        return step(w - 1) + 3
+def step(w):
+    if w < 1:
+        return 6
+    else:
+        return score(w - 1) * 3 + score(w // 2) * 2
+print(score(4))
+[question] What exactly does it print? It prints a single line.
+--- L3  answer='399'  type=line
+[program]
+def h(j):
+    if j < 2:
+        return 2
+    else:
+        return h(j // 2) * 1 + h(j - j // 2) * 2 + j % 2
+print(h(23))
+[question] What exactly does it print? It prints a single line.
+--- L6  answer='17975'  type=line
+[program]
+def h(e):
+    if e < 2:
+        return 2
+    else:
+        return h(e // 2) * 2 + h(e - e // 2) * 3 + e % 2
+print(h(42))
+[question] What exactly does it print? It prints a single line.
+
+=== C1.run_length_scan  (family strings; module studies.m0.lineages_c1_strings.run_length_scan)
+--- L0  answer='113'  type=line
+[program]
+total = 'zattt'
+p = ''
+cur = total[0]
+r = 1
+for v in range(1, len(total)):
+    if total[v] == cur:
+        r += 1
+    else:
+        p = p + str(r)
+        cur = total[v]
+        r = 1
+p = p + str(r)
+print(p)
+[question] What exactly does it print? It prints a single line.
+--- L3  answer='u2a2u1a1r4a1'  type=line
+[program]
+e = 'uuaauarrrra'
+out = ''
+val = e[0]
+res = 1
+for k in range(1, len(e)):
+    if e[k] == val:
+        res += 1
+    else:
+        out = out + val + str(res)
+        val = e[k]
+        res = 1
+out = out + val + str(res)
+print(out)
+[question] What exactly does it print? It prints a single line.
+--- L6  answer='355634413'  type=line
+[program]
+acc = 'aaafffffaaaaaffffffaaammmmffffmaaa'
+cur = ''
+count = acc[0]
+best = 1
+for b in range(1, len(acc)):
+    if acc[b] == count:
+        best += 1
+    else:
+        cur = cur + str(best)
+        count = acc[b]
+        best = 1
+cur = cur + str(best)
+print(cur)
+[question] What exactly does it print? It prints a single line.
+
+=== C1.shared_lists_f3  (family references; module studies.m0.lineages_c1_fix3_other.shared_lists_f3)
+--- L0  answer='[8, 7, 8]'  type=line
+[program]
+r = [7, 1]
+x = [8, 5]
+d = [8, 7, 9]
+r = d
+d[2] = 8
+print(r)
+[question] What exactly does it print? It prints a single line.
+--- L3  answer='[9, 9, 2]'  type=line
+[program]
+def score(u, q, a):
+    u[q] = u[q] + a
+    return u
+w = [4, 2, 8]
+c = [9, 5]
+w = c[:]
+c[1] = 4
+c = score(w, 1, 4)
+w = c
+c.append(2)
+print(w)
+[question] What exactly does it print? It prints a single line.
+--- L6  answer='[7, 7, 9, 2, 9]'  type=line
+[program]
+def h(acc, y, e):
+    acc[y] = acc[y] + e
+    return acc
+total = [7, 1]
+m = [3, 9, 5, 5]
+m = total + [8]
+m.append(5)
+total.append(9)
+total.append(2)
+m = total + [9]
+total = h(total, 1, 6)
+m = total
+total.append(9)
+print(m)
+[question] What exactly does it print? It prints a single line.
+
+=== C1.sieve_marking_f4  (family lists; module studies.m0.lineages_c1_fix4.sieve_marking_f4)
+--- L0  answer='331'  type=line
+[program]
+n = [1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1]
+best = 0
+for total in range(2, 30):
+    if n[total] == 1:
+        v = 3 * total
+        while v < 30:
+            best += v
+            n[v] = 0
+            v += total
+print(best)
+[question] What exactly does it print? It prints a single line.
+--- L3  answer='967'  type=line
+[program]
+x = [1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1]
+n = 0
+for q in range(2, 42):
+    if x[q] == 1:
+        best = 3 * q
+        while best < 42:
+            n += best
+            x[best] = 0
+            best += q
+print(n)
+[question] What exactly does it print? It prints a single line.
+--- L6  answer='1332'  type=line
+[program]
+e = [1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1]
+w = 0
+for v in range(2, 56):
+    if e[v] == 1:
+        best = v + v
+        while best < 56:
+            w += best
+            e[best] = 0
+            best += v
+print(w)
+[question] What exactly does it print? It prints a single line.
+
+=== C1.slices_f4  (family slices; module studies.m0.lineages_c1_fix4.slices_f4)
+--- L0  answer='[33, 16, 16, 17, 9, 10]'  type=line
+[program]
+t = [33, 16, 16, 17, 9, 10]
+print(t[(-6):] + t[(-2):(-5):2])
+[question] What exactly does it print? It prints a single line.
+--- L3  answer='[29, 29, 40, 13, 50, 18, 4, 35, 25, 29, 29, 40, 13, 50, 18]'  type=line
+[program]
+out = [25, 35, 4, 18, 50, 13, 40, 29, 29]
+print(out[::(-1)] + out[8:(-7):(-1)])
+[question] What exactly does it print? It prints a single line.
+--- L6  answer='[46, 11, 37, 50, 46]'  type=line
+[program]
+u = [46, 50, 23, 11, 1, 24, 37, 29, 14, 16, 28, 49]
+print(u[:7:3] + u[(-11)::(-1)])
+[question] What exactly does it print? It prints a single line.
+
+=== C1.string_build_f3  (family strings; module studies.m0.lineages_c1_fix3_other.string_build_f3)
+--- L0  answer='nfffn'  type=line
+[program]
+d = ''
+for cur in range(5):
+    if cur % 4 == 0:
+        d = d + 'n'
+    else:
+        d = d + 'f'
+print(d)
+[question] What exactly does it print? It prints a single line.
+--- L3  answer='erryreryrre'  type=line
+[program]
+t = ''
+for a in range(1, 12):
+    if a % 4 == 0:
+        t = t + 'y'
+    elif a % 5 == 1:
+        t = t + 'e'
+    else:
+        t = t + 'r'
+print(t[::(-1)])
+[question] What exactly does it print? It prints a single line.
+--- L6  answer='mmvmmvmmvmmvm'  type=line
+[program]
+a = ''
+for val in range(2, 28, 2):
+    if val % 3 == 0:
+        a = a + 'v'
+    elif val % 4 == 1:
+        a = a + 'd'
+    else:
+        a = a + 'm'
+print(a)
+[question] What exactly does it print? It prints a single line.
+
+=== C1.string_methods_f3  (family string_methods; module studies.m0.lineages_c1_fix3_other.string_methods_f3)
+--- L0  answer='ibonnh'  type=line
+[program]
+out = 'tibon'.lower() + 'nh'
+print(out.lower()[1:])
+[question] What exactly does it print? It prints a single line.
+--- L3  answer='hlbfy'  type=line
+[program]
+m = 'balok'.replace('k', 'h')[::(-1)].upper() + 'tf' + 'dy'
+print(m.lower()[::2])
+[question] What exactly does it print? It prints a single line.
+--- L6  answer='sisorsisorsisorsisorsisorsisorsisorsisor'  type=line
+[program]
+u = ('mimor'.upper().replace('M', 's').lower() * 2 * 2).lower() * 2 + 'wu'
+print(u.lower()[:(-2)])
+[question] What exactly does it print? It prints a single line.
+
+=== C1.turtle_walk_f3  (family simulation; module studies.m0.lineages_c1_fix3_other.turtle_walk_f3)
+--- L0  answer='-128'  type=line
+[program]
+d = [1, 4, 2, 4, 4, 5, 5, 3, 3, 1, 1, 2, 3, 2]
+m = 0
+u = 0
+k = 2
+r = 0
+for q in range(len(d)):
+    y = d[q]
+    if y <= 3:
+        if k == 0:
+            u += y
+        elif k == 1:
+            m += y
+        elif k == 2:
+            u -= y
+        else:
+            m -= y
+    elif y == 4:
+        k = (k + 1) % 4
+    elif y == 5:
+        k = (k + 3) % 4
+    elif y == 6:
+        if k == 0:
+            u -= 1
+        elif k == 1:
+            m -= 1
+        elif k == 2:
+            u += 1
+        else:
+            m += 1
+    r += m * 1 + u * 3
+print(r)
+[question] What exactly does it print? It prints a single line.
+--- L3  answer='-8,-1'  type=line
+[program]
+acc = [6, 4, 4, 6, 6, 4, 4, 5, 5, 1, 2, 2, 3, 5, 6, 2, 5, 4, 5, 6]
+count = 0
+v = 0
+n = 1
+for a in range(len(acc)):
+    b = acc[a]
+    if b <= 3:
+        if n == 0:
+            v += b
+        elif n == 1:
+            count += b
+        elif n == 2:
+            v -= b
+        else:
+            count -= b
+    elif b == 4:
+        n = (n + 1) % 4
+    elif b == 5:
+        n = (n + 3) % 4
+    elif b == 6:
+        if n == 0:
+            v -= 1
+        elif n == 1:
+            count -= 1
+        elif n == 2:
+            v += 1
+        else:
+            count += 1
+print(str(count) + ',' + str(v))
+[question] What exactly does it print? It prints a single line.
+--- L6  answer='118'  type=line
+[program]
+total = [3, 1, 5, 5, 4, 6, 3, 1, 6, 2, 5, 5, 3, 5, 3, 5, 4, 1, 5, 2, 1, 5, 4, 2, 5, 2]
+count = 0
+m = 0
+v = 1
+p = 0
+for r in range(len(total)):
+    best = total[r]
+    if best <= 3:
+        if v == 0:
+            count += best
+        elif v == 1:
+            m -= best
+        elif v == 2:
+            count -= best
+        else:
+            m += best
+    elif best == 4:
+        v = (v + 3) % 4
+    elif best == 5:
+        v = (v + 1) % 4
+    elif best == 6:
+        if v == 0:
+            count -= 1
+        elif v == 1:
+            m += 1
+        elif v == 2:
+            count += 1
+        else:
+            m -= 1
+    p += count * 3 + m * (-2)
+print(p)
+[question] What exactly does it print? It prints a single line.
+
+=== C1.union_find_links_f3  (family graphs; module studies.m0.lineages_c1_fix3_other.union_find_links_f3)
+--- L0  answer='[0, 1, 1, 3, 1, 2, 5, 7, 8]'  type=line
+[program]
+def find(cur, y):
+    while cur[y] != y:
+        y = cur[y]
+    return y
+cur = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+b = [5, 6, 6, 4]
+v = [6, 2, 1, 6]
+for m in range(len(b)):
+    best = find(cur, b[m])
+    n = find(cur, v[m])
+    if best != n:
+        if best < n:
+            cur[n] = best
+        else:
+            cur[best] = n
+print(cur)
+[question] What exactly does it print? It prints a single line.
+--- L3  answer='[0, 0, 0, 1, 4, 5, 6, 7, 6, 1, 6, 0]'  type=line
+[program]
+def find(e, res):
+    while e[res] != res:
+        res = e[res]
+    return res
+e = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+out = [8, 3, 9, 3, 2, 8, 11]
+best = [6, 1, 1, 0, 3, 10, 9]
+for acc in range(len(out)):
+    q = find(e, out[acc])
+    m = find(e, best[acc])
+    if q != m:
+        if q < m:
+            e[m] = q
+        else:
+            e[q] = m
+print(e)
+[question] What exactly does it print? It prints a single line.
+--- L6  answer='92'  type=line
+[program]
+def find(u, d):
+    while u[d] != d:
+        d = u[d]
+    return d
+u = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+val = [11, 12, 4, 1, 14, 3, 13, 14, 12, 0]
+c = [14, 5, 2, 3, 5, 13, 10, 4, 14, 8]
+for res in range(len(val)):
+    best = find(u, val[res])
+    b = find(u, c[res])
+    if best != b:
+        u[b] = best
+cur = 0
+for res in range(15):
+    cur += find(u, res)
+print(cur)
+[question] What exactly does it print? It prints a single line.
+
+=== C1.while_counter_f3  (family while; module studies.m0.lineages_c1_fix3_numbers.while_counter_f3)
+--- L0  answer='633'  type=line
+[program]
+a = 25
+v = 0
+while a != 1:
+    if a % 2 == 1:
+        a = a * 3 + 1
+    else:
+        a = a // 2
+    v += a
+print(v)
+[question] What exactly does it print? It prints a single line.
+--- L3  answer='4383'  type=line
+[program]
+acc = 79
+y = 0
+while acc != 1:
+    y += acc
+    if acc % 2 == 1:
+        acc = acc * 3 + 1
+    else:
+        acc = acc // 2
+print(y)
+[question] What exactly does it print? It prints a single line.
+--- L6  answer='678'  type=line
+[program]
+d = 46
+z = 0
+while d != 1:
+    z += d
+    if d % 2 == 0:
+        d = d // 2
+    else:
+        d = d * 3 + 1
+print(z)
+[question] What exactly does it print? It prints a single line.
+
+######## K0: 1 lineages
+=== K0.invented_fact  (family fiction; module studies.m0.lineages_k0.invented_fact)
+--- L0  answer='A'  type=letter
+Which everyday object did Neva name after Lovik? A) umbrella  B) violin  C) scarf  D) book Answer with one letter, A, B, C or D.
+--- L3  answer='A'  type=letter
+In which year was the town of Serar founded? A) 1624  B) 1529  C) 1822  D) 1178 Answer with one letter, A, B, C or D.
+--- L6  answer='D'  type=letter
+What colour are the flowers of the darer plant? A) green  B) red  C) white  D) black Answer with one letter, A, B, C or D.
+

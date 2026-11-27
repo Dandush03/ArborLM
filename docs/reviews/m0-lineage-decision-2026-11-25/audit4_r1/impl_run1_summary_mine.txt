@@ -1,0 +1,54 @@
+shape                                max|eff|  where / by                                  per-level gain (L0..L6)              low (min eff)  const
+R1.activity_selection_r5                0.193  L0 listed_order                             +0.19 +0.17 +0.14 +0.15 +0.12 +0.11 +0.11   +0.00 +0.00 +0.00 +0.00 +0.00 +0.00 +0.00   +0.12 +0.13 +0.09 +0.10 +0.09 +0.09 +0.07
+R1.attribute_rule_r5                    0.188  L2 matches_last_leaf                        +0.19 +0.19 +0.19 +0.18 +0.19 +0.18 +0.17   -0.02 -0.03 -0.01 -0.01 -0.02 -0.01 -0.02   -0.24 -0.19 -0.15 -0.14 -0.12 -0.12 -0.12
+R1.boolean_lights_r4                    0.121  L0 wired_switch_count_parity                +0.12 +0.09 +0.09 +0.03 +0.05 +0.03 +0.03   -0.02 -0.02 -0.02 -0.03 -0.05 -0.03 -0.01   -0.01 -0.01 -0.00 +0.02 +0.02 -0.03 +0.01
+R1.categories_default_exceptions_r4     0.095  L0 least_specific_rule                      +0.10 +0.06 +0.04 +0.07 +0.04 +0.04 +0.03   -0.10 -0.06 -0.04 -0.07 -0.04 -0.04 -0.03   -0.00 -0.00 -0.04 -0.01 +0.02 -0.00 -0.01
+R1.categories_follow_r5                 0.121  L3 all_reach_else_cbd                       +0.10 +0.10 +0.10 +0.12 +0.09 +0.11 +0.10   -0.12 -0.10 -0.09 -0.13 -0.11 -0.12 -0.11   -0.00 +0.02 -0.02 -0.03 +0.02 -0.00 -0.00
+R1.compass_turns                        0.075  L0 last_turn_only                           +0.07 +0.01 +0.01 +0.01 +0.02 +0.01 +0.01   -0.02 -0.03 -0.02 -0.03 -0.02 -0.02 -0.02   +0.04 -0.00 -0.03 -0.01 -0.01 +0.01 +0.01
+R1.conditional_chain_r5                 0.029  L4 majority_conclusion_sign                 +0.01 +0.01 +0.03 +0.01 +0.03 +0.01 +0.01   -0.02 -0.01 -0.04 -0.02 -0.03 -0.02 -0.03   +0.01 +0.01 +0.03 +0.01 +0.01 -0.02 -0.01
+R1.conditional_decision_tree_r4         0.039  L0 negate_all                               +0.04 +0.03 +0.01 +0.01 +0.02 +0.02 +0.02   -0.12 -0.10 -0.02 -0.03 -0.05 -0.04 -0.04   -0.15 -0.15 -0.16 -0.15 -0.15 -0.14 -0.02
+R1.conditional_threshold_rule_r4        0.158  L0 abstain_as_no                            +0.16 +0.12 +0.12 +0.11 +0.08 +0.07 +0.05   +0.00 -0.01 -0.01 +0.00 -0.02 -0.02 -0.01   -0.01 -0.01 -0.02 +0.04 +0.02 +0.02 +0.00
+R1.containers_queue_line_r5             0.072  L6 ignore_leave                             +0.02 +0.01 +0.02 +0.05 +0.05 +0.07 +0.07   -0.08 -0.08 -0.07 -0.06 -0.06 -0.05 -0.05   -0.07 -0.07 -0.06 -0.06 -0.05 -0.05 -0.04
+R1.containers_stack_piles_r4            0.197  L1 ignore_turns                             +0.10 +0.20 +0.17 +0.16 +0.14 +0.12 +0.12   -0.02 -0.00 -0.02 -0.03 -0.02 -0.00 -0.01   -0.17 -0.13 -0.10 -0.06 -0.07 -0.07 -0.05
+R1.elimination_bracket_r5               0.168  L2 best_in_each_half                        +0.16 +0.16 +0.17 +0.08 +0.15 +0.11 +0.11   -0.01 -0.01 -0.03 -0.01 -0.00 -0.01 -0.00   -0.12 -0.12 -0.11 -0.06 -0.05 -0.06 -0.06
+R1.equivalence_classes_r5               0.089  L0 common_same_neighbour_else_cbd           +0.09 +0.08 +0.07 +0.08 +0.08 +0.04 +0.06   -0.02 -0.01 -0.00 -0.02 -0.01 -0.01 -0.02   -0.00 +0.01 -0.00 +0.02 -0.01 +0.04 +0.00
+R1.equivalence_exchange_rates_r5        0.071  L6 constant_mfk_fitted                      +0.04 +0.03 +0.04 +0.04 +0.04 +0.04 +0.04   +0.00 +0.00 +0.00 +0.00 +0.00 +0.00 +0.00   +0.04 +0.05 +0.04 +0.04 +0.06 +0.06 +0.07
+R1.event_timeline_r5                    0.136  L1 path_alternating_sign_diff               +0.12 +0.14 +0.08 +0.07 +0.05 +0.04 +0.02   +0.00 +0.00 +0.00 +0.00 +0.00 +0.00 +0.00   +0.01 +0.01 +0.01 +0.01 +0.01 +0.01 +0.01
+R1.graph_bipartite_r5                   0.043  L6 anyone_with_3_rivals                     +0.01 +0.01 +0.01 +0.02 +0.01 +0.00 +0.04   -0.01 -0.01 -0.01 -0.02 -0.01 -0.00 -0.04   +0.01 -0.01 +0.01 -0.02 -0.01 +0.00 -0.04
+R1.graph_shortest_route_r4              0.146  L1 fewest_roads_then_length                 +0.14 +0.15 +0.06 +0.06 +0.05 +0.04 +0.05   +0.00 +0.00 +0.00 +0.00 +0.00 +0.00 +0.00   +0.11 +0.10 +0.08 +0.11 +0.08 +0.09 +0.07
+R1.kinship_ancestor_r4                  0.091  L5 root_of_family                           +0.05 +0.04 +0.03 +0.05 +0.05 +0.09 +0.06   -0.13 -0.12 -0.10 -0.09 -0.08 -0.06 -0.07   -0.24 -0.24 -0.23 -0.23 -0.22 -0.23 -0.22
+R1.kinship_cousins_r5                   0.201  L2 different_parents                        +0.19 +0.17 +0.20 +0.20 +0.19 +0.17 +0.18   -0.17 -0.16 -0.13 -0.16 -0.15 -0.17 -0.15   +0.17 +0.16 +0.13 +0.16 +0.15 +0.17 +0.15
+R1.kinship_descendants_r5               0.023  L1 most_children_plus_grandchildren         +0.02 +0.02 +0.02 +0.02 +0.02 +0.01 +0.02   -0.03 -0.02 -0.01 -0.04 -0.02 -0.01 -0.02   -0.33 -0.33 -0.24 -0.24 -0.19 -0.19 -0.16
+R1.knights_knaves_r5                    0.138  L5 accuses_someone_means_knave              +0.09 +0.11 +0.12 +0.13 +0.11 +0.14 +0.11   -0.09 -0.11 -0.12 -0.13 -0.11 -0.14 -0.11   +0.00 +0.02 -0.01 +0.02 -0.02 +0.02 +0.00
+R1.minimax_tree_r5                      0.216  L0 greedy_best_leaf                         +0.22 +0.12 +0.08 +0.08 +0.08 +0.04 +0.04   +0.00 +0.00 +0.00 +0.00 +0.00 +0.00 +0.00   +0.01 +0.01 +0.02 +0.03 +0.04 +0.04 +0.03
+R1.mst_cost_r4                          0.191  L1 nearest_neighbour_path                   +0.18 +0.19 +0.18 +0.02 +0.02 +0.01 +0.00   +0.00 +0.00 +0.00 +0.00 +0.00 +0.00 +0.00   +0.08 +0.07 +0.06 +0.05 +0.07 +0.06 +0.05
+R1.nim_xor_r5                           0.150  L0 bits1_2_parity                           +0.15 +0.14 +0.11 +0.10 +0.10 +0.13 +0.09   -0.02 -0.04 -0.04 -0.03 -0.02 -0.01 -0.03   +0.00 +0.02 +0.02 +0.03 +0.01 -0.00 -0.03
+R1.one_culprit                          0.177  L6 most_accused                             +0.09 +0.08 +0.09 +0.10 +0.14 +0.15 +0.18   -0.03 -0.02 -0.02 -0.03 -0.03 -0.01 -0.03   -0.24 -0.24 -0.19 -0.20 -0.16 -0.15 -0.13
+R1.order_compare_r5                     0.103  L0 two_step_else_cbd                        +0.10 +0.00 +0.01 +0.03 +0.02 +0.01 +0.02   -0.01 -0.01 +0.01 -0.01 -0.02 -0.01 -0.01   +0.01 +0.00 +0.01 -0.01 +0.02 +0.01 +0.01
+R1.road_reachability_r5                 0.070  L0 x_outdeg_ge_2_yes                        +0.07 +0.06 +0.07 +0.02 +0.03 +0.03 +0.02   -0.01 -0.01 -0.01 -0.01 +0.00 -0.03 -0.01   -0.01 -0.00 +0.02 -0.00 -0.00 -0.03 +0.01
+R1.seating_row_r5                       0.119  L6 end_person_for_end_seat                  +0.10 +0.10 +0.12 +0.09 +0.10 +0.10 +0.12   -0.03 -0.01 -0.02 -0.02 -0.01 -0.02 -0.01   -0.16 -0.14 -0.14 -0.13 -0.13 -0.13 -0.13
+R1.spatial_grid_walk_r5                 0.063  L5 net_displacement_clamped                 +0.03 +0.04 +0.05 +0.05 +0.04 +0.06 +0.05   -0.03 -0.03 -0.03 -0.02 -0.01 -0.01 -0.01   -0.16 -0.16 -0.12 -0.09 -0.09 -0.07 -0.06
+R1.spatial_relative_directions_r5       0.125  L0 sum_along_path_unsigned                  +0.12 +0.11 +0.11 +0.07 +0.06 +0.06 +0.04   +0.00 +0.00 +0.00 +0.00 +0.00 +0.00 +0.00   +0.05 +0.03 +0.05 +0.04 +0.06 +0.05 +0.04
+R1.swap_tracking_r5                     0.044  L0 initial_item                             +0.04 +0.02 +0.02 +0.02 +0.01 +0.00 +0.01   -0.06 -0.04 -0.05 -0.03 -0.03 -0.03 -0.03   -0.16 -0.15 -0.13 -0.13 -0.11 -0.10 -0.09
+R1.temporal_critical_path_r5            0.191  L0 greedy_backward                          +0.19 +0.15 +0.10 +0.06 +0.05 +0.03 +0.02   +0.00 +0.00 +0.00 +0.00 +0.00 +0.00 +0.00   +0.04 +0.04 +0.05 +0.05 +0.04 +0.04 +0.04
+R1.temporal_interval_overlap_r5         0.180  L4 longer_len_gt_gap                        +0.18 +0.16 +0.17 +0.16 +0.18 +0.14 +0.17   -0.05 -0.06 -0.06 -0.05 -0.02 -0.07 -0.06   +0.00 -0.02 +0.02 +0.01 -0.02 -0.02 +0.01
+R1.temporal_weekday_shift_r5            0.044  L0 ignore_before_after                      +0.04 +0.00 +0.04 +0.01 +0.02 +0.01 +0.01   +0.00 +0.00 -0.02 -0.01 -0.00 +0.01 +0.00   -0.00 -0.02 +0.02 -0.00 -0.02 -0.00 -0.03
+R1.topological_order_r5                 0.190  L0 layered_depth_then_name                  +0.19 +0.19 +0.17 +0.18 +0.16 +0.10 +0.14   -0.03 -0.03 -0.03 -0.02 -0.03 -0.02 -0.03   -0.09 -0.08 -0.07 -0.07 -0.07 -0.06 -0.06
+R1.tracking_accounts_r5                 0.013  L1 ignore_pay                               +0.01 +0.01 +0.01 +0.01 +0.01 +0.01 +0.01   +0.00 +0.00 +0.00 +0.00 +0.00 +0.00 +0.00   +0.01 +0.01 +0.01 +0.01 +0.01 +0.01 +0.00
+R1.venn_counting_r5                     0.036  L0 constant_mfk_fitted                      +0.03 +0.02 +0.03 +0.02 +0.01 +0.02 +0.01   +0.00 +0.00 +0.00 +0.00 +0.00 +0.00 +0.00   +0.04 +0.03 +0.03 +0.02 +0.02 +0.03 +0.01
+
+max |effect| <=0.10: 16  [('categories_default_exceptions_r4', 0.095), ('compass_turns', 0.075), ('conditional_chain_r5', 0.029), ('conditional_decision_tree_r4', 0.039), ('containers_queue_line_r5', 0.072), ('equivalence_classes_r5', 0.089), ('equivalence_exchange_rates_r5', 0.071), ('graph_bipartite_r5', 0.043), ('kinship_ancestor_r4', 0.091), ('kinship_descendants_r5', 0.023), ('road_reachability_r5', 0.07), ('spatial_grid_walk_r5', 0.063), ('swap_tracking_r5', 0.044), ('temporal_weekday_shift_r5', 0.044), ('tracking_accounts_r5', 0.013), ('venn_counting_r5', 0.036)]
+max |effect| <=0.15: 9  [('boolean_lights_r4', 0.121), ('categories_follow_r5', 0.121), ('event_timeline_r5', 0.136), ('graph_shortest_route_r4', 0.146), ('knights_knaves_r5', 0.138), ('nim_xor_r5', 0.15), ('order_compare_r5', 0.103), ('seating_row_r5', 0.119), ('spatial_relative_directions_r5', 0.125)]
+max |effect| <=0.25: 12  [('activity_selection_r5', 0.193), ('attribute_rule_r5', 0.188), ('conditional_threshold_rule_r4', 0.158), ('containers_stack_piles_r4', 0.197), ('elimination_bracket_r5', 0.168), ('kinship_cousins_r5', 0.201), ('minimax_tree_r5', 0.216), ('mst_cost_r4', 0.191), ('one_culprit', 0.177), ('temporal_critical_path_r5', 0.191), ('temporal_interval_overlap_r5', 0.18), ('topological_order_r5', 0.19)]
+max |effect| >0.25: 0  []
+
+excluded as exact / convention / misreading / prefix (per shape):
+  R1.activity_selection_r5: ['latest_start_first']
+  R1.categories_default_exceptions_r4: ['partial_walk_3', 'rule_at_distance_1', 'second_nearest_rule', 'third_nearest_rule']
+  R1.compass_turns: ['ccw_as_cw', 'cw270_as_90', 'ignore_180s', 'left_right_only']
+  R1.conditional_decision_tree_r4: ['first_cond_only_then_first', 'ignore_last_condition']
+  R1.conditional_threshold_rule_r4: ['off_by_one_low', 'strict_gt_D']
+  R1.containers_stack_piles_r4: ['ignore_turns', 'turn_moves_bottom_to_top']
+  R1.temporal_critical_path_r5: ['inclusive_day_reading']
+  R1.temporal_interval_overlap_r5: ['duration_end_off_by_one']
+  R1.venn_counting_r5: ['ignore_triples', 'pairs_minus_2triples', 'pairs_minus_3triples', 'sizes_minus_2pairs', 'total_minus_union_wrong_sign']

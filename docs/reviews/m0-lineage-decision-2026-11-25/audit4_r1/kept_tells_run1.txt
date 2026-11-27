@@ -1,0 +1,5 @@
+R1.conditional_threshold_rule_r4     margin sign and |margin|//5              +0.017 +0.023 +0.028 +0.013 +0.011 +0.048 +0.027
+R1.conditional_threshold_rule_r4     #yes - #no votes                         -0.005 +0.009 -0.003 -0.020 +0.033 -0.020 -0.001
+R1.categories_default_exceptions_r4  #rules for verb, #true for verb          -0.007 +0.008 +0.000 -0.013 +0.021 +0.032 -0.009
+R1.categories_default_exceptions_r4  chain length                             +0.006 +0.011 -0.011 +0.001 +0.014 +0.014 -0.012
+R1.kinship_ancestor_r4               options in the child s family tree       +0.187 +0.141 +0.142 +0.147 +0.141 +0.160 +0.164

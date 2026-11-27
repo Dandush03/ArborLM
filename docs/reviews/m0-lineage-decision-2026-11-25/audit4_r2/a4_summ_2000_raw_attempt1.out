@@ -1,0 +1,246 @@
+R2.binary_search_trace: max per-shape effect 0.078  [<=0.10]   per level: 0.06 0.08 0.04 0.02 0.04 0.08 0.02   combined: 0.04 0.06 0.03 0.02 0.03 0.05 0.02
+     (P) [mine] (P) 0-based positions (identical to the stated search): max 1.00
+     (P) [impl] values: (P) same search with the target ignored once found (does not stop): max 0.84
+R2.bracket_match: max per-shape effect 0.189  [0.15-0.25]   per level: 0.19 0.18 0.17 0.14 0.13 0.11 0.10   combined: 0.15 0.13 0.11 0.09 0.08 0.07 0.06
+     L0 top: [impl] first_error: the position after the first adjacent closer pair of different kinds on shape first_error
+       [impl] first_error: the position after the first adjacent closer pair of different kinds [first_error]: L0=0.19 L1=0.18 L2=0.17 L3=0.14 L4=0.13 L5=0.11
+       [mine] first_error: first closer that differs in kind from the previous closer and follows a closer [first_error]: L0=0.19 L1=0.18 L2=0.17 L3=0.14 L4=0.13 L5=0.11
+       [mine] first_error: first closer whose kind differs from the latest opener written before it [first_error]: L0=0.19 L1=0.18 L2=0.17 L3=0.14 L4=0.13 L5=0.11
+       most frequent answer (train draw) [first_error]: L0=0.13 L1=0.11 L2=0.11 L3=0.11
+       [impl] match_all: the k-th closer of the kind pairs with the k-th opener of the kind (queue instead of stack) [match_all]: L0=0.12
+       [impl] match_all: the next closer of the kind after each opener [match_all]: L0=0.12
+       [mine] match_all: k-th opener of the kind -> k-th closer of the kind [match_all]: L0=0.12
+       [mine] match_all: next closer of the same kind after the opener [match_all]: L0=0.12
+     (P) [mine] first_error: same-depth matching ignoring kinds, first kind mismatch (P): max 1.00
+     (P) [mine] match_all: same-depth closer ignoring kinds (P): max 1.00
+R2.bst_traversal: max per-shape effect 0.310  [>0.25]   per level: 0.31 0.20 0.10 0.04 0.03 0.01 0.00   combined: 0.12 0.07 0.03 0.01 0.01 0.01 0.00
+     L0 top: [mine] root, then the smaller ones in insertion order, then the larger ones (one split) on shape pre
+       [mine] root, then the smaller ones in insertion order, then the larger ones (one split) [pre]: L0=0.31 L1=0.20
+R2.cache_eviction: max per-shape effect 0.365  [>0.25]   per level: 0.37 0.31 0.27 0.22 0.18 0.15 0.14   combined: 0.14 0.11 0.09 0.07 0.06 0.05 0.05
+     L0 top: [mine] contents: last cap distinct items, by first appearance within the tail on shape fifo/contents
+       [mine] contents: last cap distinct items, by first appearance within the tail [fifo/contents]: L0=0.37 L1=0.31 L2=0.27 L3=0.22 L4=0.18 L5=0.15 L6=0.14
+       [impl] contents: the last cap distinct requests, oldest first (the LRU contents) [fifo/contents]: L0=0.11
+       [mine] contents: last cap distinct items, by latest request [fifo/contents]: L0=0.11
+     (P) [impl] contents: (P) the LRU contents with the order of loading: max 0.11
+     (P) [mine] (P) misread: the other policy: max 0.11
+R2.caesar_shift: max per-shape effect 0.049  [<=0.10]   per level: 0.04 0.04 0.05 0.04 0.04 0.04 0.04   combined: 0.04 0.04 0.05 0.04 0.04 0.04 0.04
+R2.cellular_automaton: max per-shape effect 0.045  [<=0.10]   per level: 0.04 0.02 0.05 0.04 0.01 0.01 0.03   combined: 0.04 0.02 0.05 0.04 0.01 0.01 0.03
+     (P) [a3] (P) periodic boundary: max 0.19
+     (P) [mine] (P) misread: edge cells keep their value: max 0.20
+     (P) [mine] (P) misread: ring edge: max 0.19
+R2.cheapest_network: max per-shape effect 0.061  [<=0.10]   per level: 0.06 0.06 0.04 0.06 0.04 0.04 0.03   combined: 0.06 0.06 0.04 0.06 0.04 0.04 0.03
+     (P) [mine] (P) Kruskal: max 1.00
+R2.coin_change_min: max per-shape effect 0.318  [>0.25]   per level: 0.30 0.30 0.32 0.19 0.16 0.16 0.16   combined: 0.30 0.30 0.32 0.19 0.16 0.16 0.16
+     L0 top: [mine] greedy with one fewer of the largest coin allowed (best of k, k-1 largest) on shape fewest
+       [mine] greedy with one fewer of the largest coin allowed (best of k, k-1 largest) [fewest]: L0=0.30 L1=0.30 L2=0.32 L3=0.19 L4=0.16 L5=0.16 L6=0.16
+       [impl] ceil(amount / largest coin) for each amount [fewest]: L0=0.11
+       [mine] ceil(amount / largest coin) per amount [fewest]: L0=0.11
+R2.count_divisible: max per-shape effect 0.026  [<=0.10]   per level: 0.03 0.02 0.01 0.00 0.00 0.00 0.00   combined: 0.03 0.02 0.01 0.00 0.00 0.00 0.00
+R2.count_letter: max per-shape effect 0.306  [>0.25]   per level: 0.31 0.29 0.25 0.22 0.20 0.18 0.16   combined: 0.31 0.29 0.25 0.22 0.20 0.18 0.16
+     L0 top: [mine] words containing the letter + 1 on shape -
+       [mine] words containing the letter + 1 [-]: L0=0.31 L1=0.29 L2=0.25 L3=0.22 L4=0.20 L5=0.18 L6=0.16
+R2.crt_smallest: max per-shape effect 0.109  [0.10-0.15]   per level: 0.11 0.10 0.08 0.01 0.01 0.00 0.00   combined: 0.11 0.10 0.08 0.01 0.01 0.00 0.00
+     L0 top: [mine] largest remainder on shape -
+       [mine] largest remainder [-]: L0=0.11
+R2.dictionary_rank: max per-shape effect 0.045  [<=0.10]   per level: 0.05 0.03 0.01 0.01 0.00 0.00 0.00   combined: 0.02 0.01 0.00 0.01 0.00 0.00 0.00
+R2.digit_root: max per-shape effect 0.117  [0.10-0.15]   per level: 0.10 0.12 0.11 0.11 0.11 0.12 0.12   combined: 0.10 0.12 0.11 0.11 0.11 0.12 0.12
+     L0 top: most frequent answer (train draw) on shape -
+       most frequent answer (train draw) [-]: L0=0.10 L1=0.12 L2=0.11 L3=0.11 L4=0.11 L5=0.12 L6=0.12
+       [a3] last digit [-]: L4=0.11 L6=0.10
+     (P) [a3] (P) n mod 9 with 0 -> 9 (casting out nines): max 1.00
+     (P) [mine] n mod 9 (0 -> 9) (P): max 1.00
+R2.expression_eval: max per-shape effect 0.081  [<=0.10]   per level: 0.08 0.08 0.05 0.05 0.02 0.02 0.02   combined: 0.07 0.07 0.05 0.05 0.01 0.01 0.01
+     rule raised on 3733 items: [mine] left_to_right: usual precedence inside parentheses only
+R2.from_base: max per-shape effect 0.166  [0.15-0.25]   per level: 0.17 0.08 0.04 0.02 0.02 0.01 0.01   combined: 0.17 0.08 0.04 0.02 0.02 0.01 0.01
+     L0 top: [a3] digits read right to left on shape -
+       [a3] digits read right to left [-]: L0=0.17
+     (P) [mine] (P) misread: digits read right to left: max 0.17
+R2.gcd_euclid: max per-shape effect 0.915  [>0.25]   per level: 0.91 0.86 0.78 0.73 0.67 0.67 0.62   combined: 0.91 0.85 0.77 0.72 0.66 0.65 0.61
+     L0 top: [mine] gcd/lcm via common prime powers over primes <= 7 only on shape gcd
+     L2 top: [mine] gcd/lcm via common prime powers over primes <= 7 only on shape lcm
+       [mine] gcd/lcm via common prime powers over primes <= 7 only [gcd]: L0=0.91 L1=0.86 L2=0.77 L3=0.73 L4=0.67 L5=0.67 L6=0.59
+       [mine] gcd/lcm via common prime powers over primes <= 7 only [lcm]: L0=0.90 L1=0.84 L2=0.78 L3=0.70 L4=0.66 L5=0.63 L6=0.62
+     (P) [mine] gcd/lcm via full factorisation (P): max 1.00
+R2.grid_sum: max per-shape effect 0.072  [<=0.10]   per level: 0.07 0.07 0.07 0.04 0.06 0.05 0.07   combined: 0.07 0.07 0.07 0.04 0.06 0.05 0.07
+R2.hamming_error_position: max per-shape effect 0.223  [0.15-0.25]   per level: 0.13 0.21 0.22 0.18 0.16 0.17 0.14   combined: 0.13 0.21 0.22 0.18 0.16 0.17 0.14
+     L0 top: [a3] first failing check position only on shape -
+       [a3] first failing check position only [-]: L0=0.13 L1=0.21 L2=0.22 L3=0.18 L4=0.16 L5=0.17 L6=0.14
+       [mine] position of the first failing check [-]: L0=0.13 L1=0.21 L2=0.22 L3=0.18 L4=0.16 L5=0.17 L6=0.14
+       [a3] syndrome read with the bits reversed [-]: L0=0.10 L1=0.12 L2=0.11
+       [a3] constant 0 [-]: L3=0.10 L6=0.10
+       most frequent answer (train draw) [-]: L3=0.10 L6=0.10
+     (P) [mine] (P) misread: syndrome with bit order reversed: max 0.30
+R2.hash_probe: max per-shape effect 0.154  [0.15-0.25]   per level: 0.15 0.10 0.09 0.07 0.06 0.04 0.04   combined: 0.10 0.06 0.07 0.05 0.04 0.03 0.03
+     L0 top: [impl] checksum: all slots 0..n-1 filled from the lowest home on shape checksum
+       [impl] checksum: all slots 0..n-1 filled from the lowest home [checksum]: L0=0.15 L1=0.10
+       [impl] checksum: sum of the home slots (every number at home, collisions ignored: distinct homes only) [checksum]: L0=0.11
+       [mine] checksum: sum of the distinct home slots [checksum]: L0=0.11
+     (P) [mine] (P) misread: keys added in reverse order: max 1.00
+     (P) [mine] (P) misread: keys placed in order of their home slot: max 1.00
+     (P) [mine] checksum: occupied set by any order (P): max 1.00
+     (P) [impl] table: (P) no wrap-around (a number that runs off the end is dropped): max 0.74
+R2.interval_scheduling: max per-shape effect 0.147  [0.10-0.15]   per level: 0.13 0.15 0.10 0.09 0.06 0.07 0.05   combined: 0.13 0.15 0.10 0.09 0.06 0.07 0.05
+     L0 top: [impl] shortest first on shape chosen
+       [impl] shortest first [chosen]: L0=0.13 L1=0.15 L2=0.10
+     (P) [impl] (P) earliest finish, ties by earliest start (the stated rule with a misread tie or touching rule: a full solve): max 0.63
+     (P) [impl] (P) earliest finish, ties to the LARGER number (the stated rule with a misread tie or touching rule: a full solve): max 0.30
+     (P) [impl] (P) earliest finish, touching counts as a clash (the stated rule with a misread tie or touching rule: a full solve): max 0.15
+     (P) [mine] (P) misread: earliest finish, ties broken by later start: max 0.63
+     (P) [mine] (P) misread: earliest finish, ties to the LARGER number: max 0.30
+     (P) [mine] (P) misread: earliest finish, touching counts as a clash: max 0.15
+R2.kth_smallest: max per-shape effect 0.576  [>0.25]   per level: 0.58 0.46 0.41 0.35 0.32 0.31 0.28   combined: 0.58 0.46 0.41 0.35 0.32 0.31 0.28
+     L0 top: [mine] list value nearest to the quantile min + (max-min)(k-1)/(n-1) on shape -
+       [mine] list value nearest to the quantile min + (max-min)(k-1)/(n-1) [-]: L0=0.58 L1=0.46 L2=0.41 L3=0.35 L4=0.32 L5=0.31 L6=0.28
+       [mine] list value nearest to the quantile 500 k/(n+1) [-]: L0=0.40 L1=0.35 L2=0.31 L3=0.28 L4=0.27 L5=0.27 L6=0.24
+       [a3] k-th largest [-]: L0=0.34 L1=0.21 L2=0.16 L3=0.11
+       [a3] k-th as written [-]: L0=0.19 L1=0.14 L2=0.11
+       [mine] k-th number in list order [-]: L0=0.19 L1=0.14 L2=0.11
+     (P) [mine] (P) misread: k-th largest: max 0.34
+R2.lcs_length: max per-shape effect 0.266  [>0.25]   per level: 0.27 0.19 0.17 0.14 0.13 0.11 0.09   combined: 0.27 0.19 0.17 0.14 0.13 0.11 0.09
+     L0 top: [mine] greedy matching from both ends, best on shape -
+     L1 top: [a3] letter-count overlap - 2 on shape -
+       [mine] greedy matching from both ends, best [-]: L0=0.27 L1=0.17 L2=0.11
+       [a3] letter-count overlap - 2 [-]: L0=0.23 L1=0.19 L2=0.17 L3=0.14 L4=0.13 L5=0.11
+       [a3] greedy matching, better of the two directions [-]: L0=0.15
+       [a3] round(0.6 * shorter length) [-]: L0=0.15 L1=0.14 L2=0.11 L3=0.11
+       [mine] greedy matching, better of both directions [-]: L0=0.15
+       [mine] round(0.6 x shorter length) [-]: L0=0.15 L1=0.14 L2=0.11 L3=0.11
+       most frequent answer (train draw) [-]: L0=0.13 L1=0.13 L2=0.10 L3=0.11
+       [a3] shorter length - 2 [-]: L0=0.11
+       [a3] letter-count overlap [-]: L0=0.10
+       [mine] common letters counted with multiplicity [-]: L0=0.10
+R2.lis_length: max per-shape effect 0.379  [>0.25]   per level: 0.38 0.33 0.31 0.28 0.26 0.23 0.22   combined: 0.38 0.33 0.31 0.28 0.26 0.23 0.22
+     L0 top: [mine] ascents + 1 on shape -
+       [mine] ascents + 1 [-]: L0=0.38 L1=0.33 L2=0.31 L3=0.28 L4=0.26 L5=0.23 L6=0.22
+       [a3] best greedy over every start [-]: L0=0.30 L1=0.26 L2=0.19 L3=0.14 L4=0.12
+       [mine] best greedy over every starting number [-]: L0=0.30 L1=0.26 L2=0.19 L3=0.14 L4=0.12
+       [mine] best greedy-skip: from each start take the next number if it is the smallest larger one ahead [-]: L0=0.30 L1=0.26 L2=0.19 L3=0.14 L4=0.12
+       [mine] round(2 sqrt n) [-]: L0=0.20 L1=0.17 L2=0.13 L3=0.11 L4=0.11
+       [a3] greedy: take each number larger than the last taken [-]: L0=0.18 L1=0.15 L2=0.10
+       [mine] greedy: take every number larger than the last taken [-]: L0=0.18 L1=0.15 L2=0.10
+       most frequent answer (train draw) [-]: L0=0.16 L1=0.17 L2=0.14 L3=0.10 L4=0.10
+       [a3] n // 2 [-]: L0=0.16 L1=0.15 L2=0.11 L3=0.10
+       [a3] round(2 sqrt n) - 2 [-]: L0=0.11 L1=0.11 L2=0.11
+R2.list_ops: max per-shape effect 0.672  [>0.25]   per level: 0.67 0.56 0.49 0.42 0.37 0.31 0.25   combined: 0.67 0.56 0.49 0.42 0.37 0.31 0.25
+     L0 top: [a3] ignore reverses on shape -
+       [a3] ignore reverses [-]: L0=0.67 L1=0.56 L2=0.49 L3=0.42 L4=0.37 L5=0.31 L6=0.25
+       [a3] ignore moves to the end [-]: L0=0.65 L1=0.52 L2=0.40 L3=0.37 L4=0.28 L5=0.24 L6=0.19
+       [mine] [cond] ignore reverses (items with a reverse) [-]: L4=0.11 L5=0.10
+R2.longest_palindromic_substring: max per-shape effect 0.536  [>0.25]   per level: 0.51 0.54 0.51 0.51 0.52 0.52 0.52   combined: 0.51 0.54 0.51 0.51 0.52 0.52 0.52
+     L0 top: [a3] longest odd palindrome only on shape -
+       [a3] longest odd palindrome only [-]: L0=0.51 L1=0.54 L2=0.51 L3=0.51 L4=0.52 L5=0.52 L6=0.52
+       [mine] odd-length centres only [-]: L0=0.51 L1=0.54 L2=0.51 L3=0.51 L4=0.52 L5=0.52 L6=0.52
+       [a3] longest even palindrome only [-]: L0=0.49 L1=0.46 L2=0.49 L3=0.49 L4=0.48 L5=0.48 L6=0.48
+       [mine] even-length centres only [-]: L0=0.49 L1=0.46 L2=0.49 L3=0.49 L4=0.48 L5=0.48 L6=0.48
+       [mine] longest palindrome of length <= 7 (short windows only) [-]: L0=0.34 L1=0.31 L2=0.31 L3=0.41 L4=0.39 L5=0.40 L6=0.38
+       most frequent answer (train draw) [-]: L0=0.13 L1=0.15 L2=0.14 L3=0.14 L4=0.14 L5=0.16 L6=0.17
+R2.luhn_check: max per-shape effect 0.127  [0.10-0.15]   per level: 0.11 0.11 0.12 0.13 0.10 0.11 0.11   combined: 0.06 0.06 0.07 0.08 0.07 0.06 0.06
+     L0 top: [a3] doubling the other parity on shape check_digit
+     L1 top: most frequent answer (train draw) on shape check_digit
+     L2 top: [a3] plain digit sum (no doubling) on shape check_digit
+     L5 top: [a3] check digit: payload total without the new digit, (10 - t mod 10) mod 10, payload's last digit NOT doubled on shape check_digit
+       [a3] doubling the other parity [check_digit]: L0=0.11 L3=0.13 L4=0.10 L6=0.11
+       [a3] plain digit sum (no doubling) [check_digit]: L1=0.11 L2=0.12 L3=0.11 L6=0.10
+       [mine] plain digit sum [check_digit]: L1=0.11 L2=0.12 L3=0.11 L6=0.10
+       most frequent answer (train draw) [check_digit]: L0=0.10 L1=0.11 L6=0.10
+       [a3] check digit: payload total without the new digit, (10 - t mod 10) mod 10, payload's last digit NOT doubled [check_digit]: L2=0.11 L3=0.11 L5=0.11 L6=0.11
+       [mine] check digit: payload's own last digit not doubled [check_digit]: L2=0.11 L3=0.11 L5=0.11 L6=0.11
+     (P) [mine] (P) misread: doubling counted from the left: max 1.00
+R2.max_subarray_sum: max per-shape effect 0.464  [>0.25]   per level: 0.46 0.46 0.46 0.36 0.38 0.38 0.29   combined: 0.46 0.46 0.46 0.36 0.38 0.38 0.29
+     L0 top: [mine] segments cut at two adjacent negatives, trimmed, best segment total on shape -
+       [mine] segments cut at two adjacent negatives, trimmed, best segment total [-]: L0=0.46 L1=0.46 L2=0.46 L3=0.36 L4=0.38 L5=0.38 L6=0.29
+       [impl] best sum of positive numbers and dips of at most 3 in one stretch (dips over 3 end the stretch) [-]: L0=0.17 L1=0.19 L2=0.20 L3=0.14 L4=0.12 L5=0.15 L6=0.11
+       [impl] best window of exactly 10 neighbouring numbers [-]: L0=0.12 L1=0.12 L2=0.12 L3=0.10
+       [impl] best window of exactly 9 neighbouring numbers [-]: L0=0.11 L1=0.12 L2=0.12
+       [impl] best window of exactly 8 neighbouring numbers [-]: L0=0.11 L1=0.11 L2=0.11
+       [impl] best window of exactly 11 neighbouring numbers [-]: L1=0.11 L2=0.10
+R2.merge_smallest_cost: max per-shape effect 0.717  [>0.25]   per level: 0.72 0.28 0.08 0.03 0.28 0.14 0.06   combined: 0.72 0.28 0.08 0.03 0.28 0.14 0.06
+     L0 top: [mine] pairwise rounds (merge neighbours in sorted order, round by round) on shape -
+       [mine] pairwise rounds (merge neighbours in sorted order, round by round) [-]: L0=0.72 L1=0.28 L4=0.28 L5=0.14
+       [mine] merge the two smallest once, then caterpillar [-]: L0=0.35
+       [a3] ascending chain (sorted, merge left to right) [-]: L0=0.33
+       [mine] sorted, merged one after another (caterpillar) [-]: L0=0.33
+     (P) [a3] (P) adjacent piles only (old misreading): max 0.36
+R2.min_heap_ops: max per-shape effect 1.000  [>0.25]   per level: 1.00 1.00 1.00 1.00 1.00 1.00 1.00   combined: 0.77 0.75 0.71 0.54 0.54 0.55 0.54
+     L0 top: [a3] removal by deleting the minimum and keeping the order of the rest on shape removals=0
+       [a3] removal by deleting the minimum and keeping the order of the rest [removals=0]: L0=1.00 L1=1.00 L2=1.00 L3=1.00 L4=1.00 L5=1.00 L6=1.00
+       [mine] Floyd bottom-up heapify, then removals (a different construction) [removals=1]: L0=0.25 L1=0.23 L2=0.14
+       [mine] Floyd bottom-up heapify, then removals (a different construction) [removals=0]: L0=0.22 L1=0.15 L2=0.13 L3=0.11
+       [mine] Floyd bottom-up heapify, then removals (a different construction) [removals=2]: L3=0.11 L4=0.10
+     (P) [a3] (P) Floyd heapify of the whole row, then removals: max 0.25
+R2.modular_power: max per-shape effect 0.384  [>0.25]   per level: 0.38 0.33 0.27 0.23 0.26 0.21 0.22   combined: 0.38 0.33 0.27 0.23 0.26 0.21 0.22
+     L0 top: [mine] a^(e mod 10) mod m on shape -
+     L5 top: [a3] a^(e mod (m-1)) mod m (Fermat misuse) on shape -
+       [mine] a^(e mod 10) mod m [-]: L0=0.38 L1=0.33 L2=0.27 L3=0.23 L4=0.26 L5=0.20 L6=0.22
+       [a3] a^(e mod (m-1)) mod m (Fermat misuse) [-]: L0=0.31 L1=0.32 L2=0.24 L3=0.18 L4=0.19 L5=0.21 L6=0.20
+       [mine] Fermat with m-1 (not valid: m composite) [-]: L0=0.31 L1=0.32 L2=0.24 L3=0.18 L4=0.19 L5=0.21 L6=0.20
+       [a3] a^2 mod m [-]: L0=0.17 L1=0.17 L2=0.11 L3=0.11 L4=0.10
+       [mine] a^2 mod m [-]: L0=0.17 L1=0.17 L2=0.11 L3=0.11 L4=0.10
+       [a3] a mod m [-]: L0=0.15 L1=0.15 L2=0.13 L3=0.11
+       [mine] a mod m [-]: L0=0.15 L1=0.15 L2=0.13 L3=0.11
+       [a3] constant 1 [-]: L0=0.10
+       most frequent answer (train draw) [-]: L0=0.10
+     (P) [a3] (P) a^(e mod phi(m)) mod m (Euler; valid when gcd(a,m)=1): max 1.00
+     (P) [mine] (P) Carmichael: exponent mod lambda(m): max 1.00
+     (P) [mine] (P) Euler: exponent mod phi(m): max 1.00
+R2.multiples_between: max per-shape effect 1.000  [>0.25]   per level: 1.00 1.00 1.00 1.00 1.00 1.00 1.00   combined: 0.50 0.49 0.50 0.51 0.49 0.49 0.49
+     L0 top: [a3] (b-a)//m + 1 on shape count
+       [a3] (b-a)//m + 1 [count]: L0=1.00 L1=1.00 L2=1.00 L3=1.00 L4=1.00 L5=1.00 L6=1.00
+       [mine] count: (b-a)/m + 1 (P: the counting rule with both ends multiples) [count]: L0=1.00 L1=1.00 L2=1.00 L3=1.00 L4=1.00 L5=1.00 L6=1.00
+     (P) [impl] count: (P) (b-a)/m + 1, the counting rule itself: max 1.00
+     (P) [impl] sum: (P) arithmetic series, the rule itself: max 1.00
+     (P) [impl] sum: (P) first multiple at or below a (a valid computation when a is a multiple): max 1.00
+     (P) [mine] sum: (a+b)/2 x ((b-a)/m+1) (P): max 1.00
+R2.palindrome_check: max per-shape effect 0.458  [>0.25]   per level: 0.46 0.44 0.42 0.41 0.39 0.37 0.37   combined: 0.46 0.44 0.42 0.41 0.39 0.37 0.37
+     L0 top: [mine] outer 8 letter pairs on shape -
+       [mine] outer 8 letter pairs [-]: L0=0.46 L1=0.44 L2=0.42 L3=0.41 L4=0.39 L5=0.37 L6=0.37
+       [mine] outer 5 letter pairs [-]: L0=0.35 L1=0.33 L2=0.32 L3=0.31 L4=0.27 L5=0.27 L6=0.26
+       [mine] halves have the same letters (multiset) [-]: L0=0.27 L1=0.28 L2=0.27 L3=0.29 L4=0.26 L5=0.28 L6=0.28
+       [mine] middle 3 letter pairs [-]: L0=0.25 L1=0.25 L2=0.22 L3=0.20 L4=0.19 L5=0.18 L6=0.18
+       [mine] outer 3 letter pairs [-]: L0=0.24 L1=0.23 L2=0.23 L3=0.21 L4=0.18 L5=0.19 L6=0.18
+       [a3] outer two letters each side match [-]: L0=0.18 L1=0.17 L2=0.17 L3=0.15 L4=0.13 L5=0.14 L6=0.14
+       [a3] first letter equals last letter [-]: L0=0.11 L1=0.12 L2=0.10
+R2.permutation_power: max per-shape effect 1.000  [>0.25]   per level: 1.00 0.38 0.51 0.49 0.50 0.41 1.00   combined: 1.00 0.38 0.51 0.49 0.50 0.41 1.00
+     L0 top: [mine] t mod (n-1) applications (cycle length assumed n-1; valid when only one number is off the long cycle) on shape -
+       [mine] t mod (n-1) applications (cycle length assumed n-1; valid when only one number is off the long cycle) [-]: L0=1.00 L1=0.38 L2=0.51 L3=0.49 L4=0.50 L5=0.41 L6=1.00
+       [mine] t mod 10 applications [-]: L1=0.38 L4=0.21 L5=0.17
+       [mine] inverse mapping t times [-]: L0=0.11 L1=0.15 L3=0.11 L5=0.12
+       [a3] the start [-]: L0=0.11
+       [mine] the start [-]: L0=0.11
+       [a3] one application [-]: L0=0.10
+       [mine] one application [-]: L0=0.10
+R2.prime_factor_query: max per-shape effect 1.000  [>0.25]   per level: 1.00 1.00 1.00 1.00 1.00 0.99 1.00   combined: 0.51 0.51 0.50 0.50 0.50 0.50 0.52
+     L0 top: [a3] largest: largest prime <= sqrt(n) dividing n on shape largest
+       [a3] largest: largest prime <= sqrt(n) dividing n [largest]: L0=1.00 L1=1.00 L2=1.00 L3=1.00 L4=1.00 L5=0.99 L6=1.00
+       [a3] largest: largest prime <= 97 dividing n, scanning only primes up to 61 [largest]: L0=0.74 L1=0.64 L2=0.62 L3=0.62 L4=0.66 L5=0.62 L6=0.62
+     (P) [mine] largest: largest prime <= 97 dividing n (P): max 1.00
+R2.run_length: max per-shape effect 1.000  [>0.25]   per level: 1.00 1.00 1.00 1.00 1.00 1.00 1.00   combined: 1.00 1.00 1.00 1.00 1.00 1.00 1.00
+     L0 top: [mine] run-length by grouping (P: the procedure) on shape -
+       [mine] run-length by grouping (P: the procedure) [-]: L0=1.00 L1=1.00 L2=1.00 L3=1.00 L4=1.00 L5=1.00 L6=1.00
+R2.sort_list: max per-shape effect 0.000  [<=0.10]   per level: 0.00 0.00 0.00 0.00 0.00 0.00 0.00   combined: 0.00 0.00 0.00 0.00 0.00 0.00 0.00
+R2.stack_machine: max per-shape effect 0.219  [0.15-0.25]   per level: 0.22 0.16 0.16 0.14 0.14 0.14 0.14   combined: 0.22 0.16 0.16 0.14 0.14 0.14 0.14
+     L0 top: [mine] last operation applied to the last two pushed values on shape -
+       [mine] last operation applied to the last two pushed values [-]: L0=0.22 L1=0.16 L2=0.16 L3=0.14 L4=0.14 L5=0.14 L6=0.14
+       [mine] last op applied to the two values just before it in the text (pushed or computed), ignoring earlier history [-]: L0=0.12
+     (P) [mine] (P) misread: ignore dup and pop: max 0.44
+     (P) [mine] (P) misread: ignore swaps: max 0.92
+     (P) [mine] (P) misread: subtract = top minus second: max 0.62
+     rule raised on 1795 items: [mine] (P) misread: ignore dup and pop
+R2.string_rewrite_nonidentity: max per-shape effect 1.000  [>0.25]   per level: 1.00 0.40 0.43 0.09 0.08 0.01 0.01   combined: 1.00 0.40 0.43 0.09 0.08 0.01 0.01
+     L0 top: [a3] only the first rule on shape -
+     L1 top: [mine] [cond] all rules applied to the start string at once (left to right, first matching rule) on shape -
+       [a3] only the first rule [-]: L0=1.00
+       [a3] only the last rule, on the start string [-]: L0=1.00
+       [a3] rules in reverse order [-]: L0=1.00 L1=0.24 L2=0.25
+       [a3] first occurrence only per rule [-]: L0=0.46 L1=0.12
+       [mine] [cond] all rules applied to the start string at once (left to right, first matching rule) [-]: L1=0.40 L2=0.43
+       [mine] [cond] rules in reverse order [-]: L1=0.24 L2=0.25
+     (P) [a3] (P) all rules applied simultaneously to the start string, leftmost match: max 1.00
+R2.subtraction_game: max per-shape effect 0.321  [>0.25]   per level: 0.31 0.31 0.31 0.31 0.32 0.31 0.31   combined: 0.31 0.31 0.31 0.31 0.32 0.31 0.31
+     L0 top: [mine] sum of position values odd -> yes (P partial bit) on shape -
+       [mine] sum of position values odd -> yes (P partial bit) [-]: L0=0.31 L1=0.31 L2=0.31 L3=0.31 L4=0.32 L5=0.31 L6=0.31
+       [impl] count of piles that are a win alone is odd -> yes [-]: L0=0.13 L1=0.13 L2=0.12 L4=0.11
+       [mine] odd number of piles that are first-player wins alone -> yes [-]: L0=0.13 L1=0.13 L2=0.12 L4=0.11
+     (P) [impl] (P) parity of the sum of the position values (the lowest bit of the xor): max 0.32
+R2.to_base_wide: max per-shape effect 0.044  [<=0.10]   per level: 0.04 0.02 0.01 0.01 0.01 0.00 0.00   combined: 0.04 0.02 0.01 0.01 0.01 0.00 0.00
+distribution of max per-shape effect (non-(P) rules, mode included): {'<=0.10': 10, '0.10-0.15': 4, '0.15-0.25': 5, '>0.25': 21}

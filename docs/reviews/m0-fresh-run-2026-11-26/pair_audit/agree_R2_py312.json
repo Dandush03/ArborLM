@@ -1,0 +1,282 @@
+{
+  "errors": 0,
+  "eval": "R2",
+  "interpreter": "3.12.14",
+  "items": 23800,
+  "items_file_sha256": "00ab2ae943fdfe2d93375d7bc0e2db41503d620318ffbe8a4741c90583697a57",
+  "lineages": {
+    "R2.binary_search_trace": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.0,
+      "solver": "studies/m0/solvers2/solver2_r2a.py"
+    },
+    "R2.caesar_shift": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.0,
+      "solver": "studies/m0/solvers2/solver2_r2a.py"
+    },
+    "R2.cellular_automaton": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.01,
+      "solver": "studies/m0/solvers2/solver2_r2a.py"
+    },
+    "R2.cheapest_network": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.01,
+      "solver": "studies/m0/solvers2/solver2_r2a.py"
+    },
+    "R2.count_divisible": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.0,
+      "solver": "studies/m0/solvers2/solver2_r2a.py"
+    },
+    "R2.crt_smallest": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.0,
+      "solver": "studies/m0/solvers2/solver2_r2a.py"
+    },
+    "R2.dictionary_rank": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.0,
+      "solver": "studies/m0/solvers2/solver2_r2a.py"
+    },
+    "R2.expression_eval": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.01,
+      "solver": "studies/m0/solvers2/solver2_r2a.py"
+    },
+    "R2.from_base": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.0,
+      "solver": "studies/m0/solvers2/solver2_r2a.py"
+    },
+    "R2.grid_sum": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.0,
+      "solver": "studies/m0/solvers2/solver2_r2b.py"
+    },
+    "R2.list_ops": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.0,
+      "solver": "studies/m0/solvers2/solver2_r2b.py"
+    },
+    "R2.luhn_check": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.0,
+      "solver": "studies/m0/solvers2/solver2_r2b.py"
+    },
+    "R2.min_heap_ops": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.0,
+      "solver": "studies/m0/solvers2/solver2_r2b.py"
+    },
+    "R2.run_length": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.0,
+      "solver": "studies/m0/solvers2/solver2_r2b.py"
+    },
+    "R2.sort_list": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.0,
+      "solver": "studies/m0/solvers2/solver2_r2b.py"
+    },
+    "R2.string_rewrite_nonidentity": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.0,
+      "solver": "studies/m0/solvers2/solver2_r2b.py"
+    },
+    "R2.to_base_wide": {
+      "errors": [],
+      "items": 1400,
+      "levels": {
+        "0": 200,
+        "1": 200,
+        "2": 200,
+        "3": 200,
+        "4": 200,
+        "5": 200,
+        "6": 200
+      },
+      "mismatches": [],
+      "seconds": 0.0,
+      "solver": "studies/m0/solvers2/solver2_r2b.py"
+    }
+  },
+  "mismatches": 0
+}

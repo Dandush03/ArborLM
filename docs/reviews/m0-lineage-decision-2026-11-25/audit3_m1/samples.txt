@@ -1,0 +1,334 @@
+37 with not-registered; 36 proposed
+== M1.ages L0 ans=28
+Wade is 3 times as old as Ines. In 8 years, their ages will add up to 128. How old is Ines now?
+
+== M1.ages L3 ans=8
+Hope is 5 times as old as Yara. In 2 years, their ages will add up to 52. How old is Yara now?
+
+== M1.ages L6 ans=9
+Glen is 3 times as old as Tara. In 11 years, their ages will add up to 58. How old is Tara now?
+
+== M1.arithmetic_series L0 ans=111
+Cleo saves 6 dollars on day 1 and then saves 5 dollars more each day than on the day before. How many dollars has Cleo saved in total after 6 days?
+
+== M1.arithmetic_series L3 ans=1881
+Sean saves 18 dollars on day 1 and then saves 9 dollars more each day than on the day before. How many dollars has Sean saved in total after 19 days?
+
+== M1.arithmetic_series L6 ans=284
+Vic saves 18 dollars on day 1 and then saves 5 dollars more each day than on the day before. How many dollars has Vic saved in total after 8 days?
+
+== M1.average_missing L0 ans=86
+Abel has scored 93, 67, 50 on 3 tests. What score is needed on the next test to make the mean of all 4 tests exactly 74?
+
+== M1.average_missing L3 ans=81
+Sam has scored 89, 84, 78, 62 on 4 tests. What score is needed on the next test to make the mean of all 5 tests exactly 78.8?
+
+== M1.average_missing L6 ans=100
+Esme has scored 50, 82, 82, 42, 91, 71 on 6 tests. What score is needed on the next test to make the mean of all 7 tests exactly 74?
+
+== M1.binomial_choose_r2 L0 ans=560
+This problem comes from a quiz held in Eastvale, set by Carla. A club has 16 members. A committee of 3 members is chosen (the order of choosing does not matter). How many different committees are possible? Answer with a whole number.
+
+== M1.binomial_choose_r2 L3 ans=286
+This problem comes from a quiz held in Larkin, set by Tom. A club has 13 members. A committee of 10 members is chosen (the order of choosing does not matter). How many different committees are possible? Answer with a whole number.
+
+== M1.binomial_choose_r2 L6 ans=120
+Jade of Harrow wrote this problem for a maths club. A club has 17 members, and Yves is one of them. A committee of 3 members is chosen (the order does not matter), and Yves must be on it. How many different committees are possible? Answer with a whole number.
+
+== M1.change_ways_r2 L0 ans=27
+This problem comes from a quiz held in Ravenna, set by Vic. Using only coins worth 6, 9 and 12 cents, with as many coins of each value available as you like, in how many different ways can exactly 90 cents be paid? (Two ways are the same if they use the same number of coins of each value; the order does not matter.) Answer with a whole number.
+
+== M1.change_ways_r2 L3 ans=36
+Gwen from Brook found this problem in a puzzle book. Using only coins worth 3, 5 and 15 cents, with as many coins of each value available as you like, in how many different ways can exactly 105 cents be paid? (Two ways are the same if they use the same number of coins of each value; the order does not matter.) Answer with a whole number.
+
+== M1.change_ways_r2 L6 ans=20
+At a maths club in Eastvale, Liam is asked this. Using only coins worth 10, 12 and 15 cents, with as many coins of each value available as you like, in how many different ways can exactly 278 cents be paid? (Two ways are the same if they use the same number of coins of each value; the order does not matter.) Answer with a whole number.
+
+== M1.clock_duration L0 ans=366
+A journey has several legs on the same day: leg 1 leaves at 13:43 and arrives at 17:02; leg 2 leaves at 18:15 and arrives at 21:02. How many minutes in total is the traveller actually on the move (not waiting between legs)?
+
+== M1.clock_duration L3 ans=301
+A journey has several legs on the same day: leg 1 leaves at 08:07 and arrives at 08:42; leg 2 leaves at 09:20 and arrives at 10:41; leg 3 leaves at 11:52 and arrives at 14:57. How many minutes in total is the traveller actually on the move (not waiting between legs)?
+
+== M1.clock_duration L6 ans=699
+A journey has several legs on the same day: leg 1 leaves at 07:06 and arrives at 09:34; leg 2 leaves at 10:54 and arrives at 13:20; leg 3 leaves at 14:08 and arrives at 14:35; leg 4 leaves at 15:56 and arrives at 19:01; leg 5 leaves at 20:06 and arrives at 23:19. How many minutes in total is the traveller actually on the move (not waiting between legs)?
+
+== M1.coins L0 ans=8
+A jar holds only 5-cent coins and 50-cent coins. It holds 12 coins worth 240 cents in all. How many 5-cent coins are in the jar?
+
+== M1.coins L3 ans=10
+A jar holds only 5-cent coins and 25-cent coins. It holds 28 coins worth 340 cents in all. How many 25-cent coins are in the jar?
+
+== M1.coins L6 ans=27
+A jar holds only 10-cent coins and 25-cent coins. It holds 37 coins worth 775 cents in all. How many 25-cent coins are in the jar?
+
+== M1.consecutive L0 ans=132
+The sum of 3 consecutive integers is 393. What is the largest of them?
+
+== M1.consecutive L3 ans=125
+The sum of 4 consecutive integers is 494. What is the largest of them?
+
+== M1.consecutive L6 ans=805
+The sum of 6 consecutive integers is 4815. What is the largest of them?
+
+== M1.crt_congruence_r2 L0 ans=47
+Xena is thinking of a positive whole number. Dividing it by 11 leaves remainder 3; dividing it by 17 leaves remainder 13. What is the smallest positive whole number that Xena could be thinking of? Answer with a whole number.
+
+== M1.crt_congruence_r2 L3 ans=10
+Walt is thinking of a positive whole number. Dividing it by 19 leaves remainder 10; dividing it by 8 leaves remainder 2; dividing it by 7 leaves remainder 3. What is the smallest positive whole number that Walt could be thinking of? Answer with a whole number.
+
+== M1.crt_congruence_r2 L6 ans=16018
+Rex is thinking of a positive whole number. Dividing it by 7 leaves remainder 2; dividing it by 13 leaves remainder 2; dividing it by 11 leaves remainder 2; dividing it by 19 leaves remainder 1. What is the smallest positive whole number that Rex could be thinking of? Answer with a whole number.
+
+== M1.digit_puzzle_r2 L0 ans=43
+This problem comes from a quiz held in Garth, set by Mona. Find the 2-digit number (it does not start with 0) for which all of these are true: the product of its digits is 12; one of its digits is 3; its first digit is larger than its last digit. There is exactly one such number. Answer with a whole number.
+
+== M1.digit_puzzle_r2 L3 ans=849
+At a maths club in Arden, Nico is asked this. Find the 3-digit number (it does not start with 0) for which all of these are true: one of its digits is 8; no two of its digits are the same; its first and last digits differ by 1 (in either order); its digits add up to 21; it is odd; the product of its digits is 288. There is exactly one such number. Answer with a whole number.
+
+== M1.digit_puzzle_r2 L6 ans=767
+Jules from Arden found this problem in a puzzle book. Find the 3-digit number (it does not start with 0) for which all of these are true: it is odd; its digits add up to 20; the number made by writing its digits in the opposite order (a leading 0 is dropped, so 120 turned round gives 21) is the same as it; the product of its digits is 294. There is exactly one such number. Answer with a whole number.
+
+== M1.division_counting_r2 L0 ans=4
+96 people must travel by bus, and Abel hires as few buses as possible. Each bus has 10 seats, and nobody stands. When all 96 people are on board, how many seats in total are empty? Answer with a whole number.
+
+== M1.division_counting_r2 L3 ans=4
+Pia of Selby wrote this problem for a maths club. A factory makes 904 mirrors. They are packed into boxes that each hold exactly 7 mirrors; mirrors that do not fill a box are left out. The boxes are then put on pallets that each hold 5 boxes, and as many full pallets as possible are made. How many boxes are not on a full pallet? Answer with a whole number.
+
+== M1.division_counting_r2 L6 ans=3
+This problem comes from a quiz held in Marlow, set by Abel. A factory makes 2680 yo-yos. They are packed into boxes that each hold exactly 27 yo-yos; yo-yos that do not fill a box are left out. The boxes are then put on pallets that each hold 4 boxes, and as many full pallets as possible are made. How many boxes are not on a full pallet? Answer with a whole number.
+
+== M1.finite_differences L0 ans=181
+This problem comes from a quiz held in Larkin, set by Wren. The first 5 numbers of a pattern are 31, 45, 67, 97 and 135. The pattern continues in the same way, and each number is given by a polynomial of degree 2 in its position (position 1 is the first number). What is the number in position 6? Answer with a whole number.
+
+== M1.finite_differences L3 ans=277
+Bruno from Arden found this problem in a puzzle book. The first 6 numbers of a pattern are 37, 57, 85, 121, 165 and 217. The pattern continues in the same way, and each number is given by a polynomial of degree 2 in its position (position 1 is the first number). What is the number in position 7? Answer with a whole number.
+
+== M1.finite_differences L6 ans=1125
+Emil of Larkin wrote this problem for a maths club. The first 7 numbers of a pattern are 5, 27, 75, 161, 297, 495 and 767. The pattern continues in the same way, and each number is given by a polynomial of degree 3 in its position (position 1 is the first number). What is the number in position 8? Answer with a whole number.
+
+== M1.fraction_remainder L0 ans=20
+Ned has 36 dollars. Ned spends one sixth of it on books, then one third of what is left on lunch. How many dollars does Ned have left?
+
+== M1.fraction_remainder L3 ans=42
+Hope has 112 dollars. Hope spends one quarter of it on books, then one half of what is left on lunch. How many dollars does Hope have left?
+
+== M1.fraction_remainder L6 ans=144
+Ivo has 288 dollars. Ivo spends one quarter of it on books, then one third of what is left on lunch. How many dollars does Ivo have left?
+
+== M1.gcd_lcm_r2 L0 ans=10
+Uri has 2 ribbons of lengths 210 and 260 centimetres. Uri cuts every ribbon into pieces that all have the same whole-number length in centimetres, with nothing left over from any ribbon. What is the greatest possible length of a piece, in centimetres? Answer with a whole number.
+
+== M1.gcd_lcm_r2 L3 ans=104880
+Tara from Vale found this problem in a puzzle book. 3 lights flash at the same moment. After that, one flashes every 2622 seconds, another every 380 seconds, and the last every 912 seconds. After how many seconds do all 3 flash together again for the first time? Answer with a whole number.
+
+== M1.gcd_lcm_r2 L6 ans=32
+Iris has 4 ribbons of lengths 2880, 1568, 3136 and 3104 centimetres. Iris cuts every ribbon into pieces that all have the same whole-number length in centimetres, with nothing left over from any ribbon. What is the greatest possible length of a piece, in centimetres? Answer with a whole number.
+
+== M1.grid_perimeter_r2 L0 ans=28
+Unit squares (each side 1 unit long) are placed on a grid. Row 1 (counting from the top): columns 2 to 3. Row 2 (counting from the top): columns 4 to 5. Row 3 (counting from the top): column 3, column 5. Row 4 (counting from the top): column 4. Row 5 (counting from the top): column 1. Row 6 (counting from the top): column 1. Squares with the same column number in neighbouring rows sit directly above and below each other, so some squares touch and some do not. The perimeter is the total length of all the sides of squares that do not touch another square. What is the perimeter, in units? Answer with a whole number.
+
+== M1.grid_perimeter_r2 L3 ans=50
+Unit squares (each side 1 unit long) are placed on a grid. Row 1 (counting from the top): columns 1 to 2, column 5, column 7. Row 2 (counting from the top): column 4. Row 3 (counting from the top): column 6. Row 4 (counting from the top): columns 1 to 3, columns 5 to 6. Row 5 (counting from the top): column 1, column 3, column 6. Row 6 (counting from the top): column 4. Row 7 (counting from the top): columns 3 to 5. Squares with the same column number in neighbouring rows sit directly above and below each other, so some squares touch and some do not. The perimeter is the total length of all the sides of squares that do not touch another square. What is the perimeter, in units? Answer with a whole number.
+
+== M1.grid_perimeter_r2 L6 ans=70
+Unit squares (each side 1 unit long) are placed on a grid. Row 1 (counting from the top): columns 1 to 2, column 7. Row 2 (counting from the top): columns 2 to 3, columns 6 to 7, column 9. Row 3 (counting from the top): column 4, columns 6 to 7. Row 4 (counting from the top): columns 7 to 8. Row 5 (counting from the top): column 3. Row 6 (counting from the top): columns 1 to 3. Row 7 (counting from the top): column 1, columns 6 to 8. Row 8 (counting from the top): column 2, columns 4 to 5. Row 9 (counting from the top): columns 5 to 6, column 9. Squares with the same column number in neighbouring rows sit directly above and below each other, so some squares touch and some do not. The perimeter is the total length of all the sides of squares that do not touch another square. What is the perimeter, in units? Answer with a whole number.
+
+== M1.inclusion_exclusion_r2 L0 ans=10
+13 people were asked what they do. 7 of them play chess, 7 of them swim, and 4 of them do both. How many of the 13 people do at least one of these things? Answer with a whole number.
+
+== M1.inclusion_exclusion_r2 L3 ans=151
+177 people were asked what they do. 72 paint, 100 play tennis and 89 sing in the choir; 52 do both the first and the second, 33 do both the first and the third, 52 do both the second and the third, and 27 do all three. How many of the 177 people do at least one of these things? Answer with a whole number.
+
+== M1.inclusion_exclusion_r2 L6 ans=190
+200 people were asked what they do. 133 ride a bike, 98 swim and 95 play chess; 60 do both the first and the second, 47 do both the first and the third, 41 do both the second and the third, and 12 do all three. How many of the 200 people do at least one of these things? Answer with a whole number.
+
+== M1.linear_equation L0 ans=16
+I think of a number. Multiplying it by 8 and then adding 37 gives 165. What is my number?
+
+== M1.linear_equation L3 ans=65
+I think of a number. Multiplying it by 8 and then subtracting 91 gives the same result as multiplying it by 6 and then adding 39. What is my number?
+
+== M1.linear_equation L6 ans=72
+I think of a number. Multiplying it by 8 and then subtracting 43 gives the same result as multiplying it by 7 and then adding 29. What is my number?
+
+== M1.median_list_r2 L0 ans=15
+This problem comes from a quiz held in Yarrow, set by Tom. The values are 27, 22, 7, 23, 4 and 8. What is the median of all the values (the middle value once they are sorted from smallest to largest; if there are two middle values, the number halfway between them)? Answer with a number; if it is not whole, write it as a decimal with no more than two decimal places and no trailing zeros.
+
+== M1.median_list_r2 L3 ans=29.5
+Felix from Yarrow found this problem in a puzzle book. The values are 42, 3, 26, 33, 22, 88, 40, 14, 12 and 78. What is the median of all the values (the middle value once they are sorted from smallest to largest; if there are two middle values, the number halfway between them)? Answer with a number; if it is not whole, write it as a decimal with no more than two decimal places and no trailing zeros.
+
+== M1.median_list_r2 L6 ans=69
+Lena from Marlow found this problem in a puzzle book. The values are 18, 137, 106, 66, 37, 55, 72, 120, 69, 136, 67, 119, 37, 92 and 12. What is the median of all the values (the middle value once they are sorted from smallest to largest; if there are two middle values, the number halfway between them)? Answer with a number; if it is not whole, write it as a decimal with no more than two decimal places and no trailing zeros.
+
+== M1.min_cost_packs_r2 L0 ans=336
+At a shop, one globe costs 9 dollars, a pack of 3 globes costs 24 dollars, a pack of 4 globes costs 32 dollars, a pack of 17 globes costs 136 dollars and a pack of 18 globes costs 144 dollars. Edna needs at least 42 globes and wants to spend as little as possible; Edna may buy more than needed and may mix packs and single items. What is the smallest total cost, in dollars? Answer with a whole number.
+
+== M1.min_cost_packs_r2 L3 ans=505
+At a shop, one teapot costs 8 dollars, a pack of 4 teapots costs 22 dollars, a pack of 12 teapots costs 65 dollars, a pack of 14 teapots costs 76 dollars and a pack of 23 teapots costs 125 dollars. Ulf needs at least 93 teapots and wants to spend as little as possible; Ulf may buy more than needed and may mix packs and single items. What is the smallest total cost, in dollars? Answer with a whole number.
+
+== M1.min_cost_packs_r2 L6 ans=808
+At a shop, one needle costs 11 dollars, a pack of 5 needles costs 44 dollars, a pack of 13 needles costs 114 dollars, a pack of 15 needles costs 132 dollars, a pack of 23 needles costs 202 dollars and a pack of 26 needles costs 229 dollars. Reed needs at least 92 needles and wants to spend as little as possible; Reed may buy more than needed and may mix packs and single items. What is the smallest total cost, in dollars? Answer with a whole number.
+
+== M1.mixture L0 ans=15.8
+A shop mixes 1 kilograms of nuts costing 7 dollars per kilogram with 4 kilograms of raisins costing 18 dollars per kilogram. What is the cost of one kilogram of the mixture, in dollars?
+
+== M1.mixture L3 ans=21.4
+A shop mixes 6 kilograms of nuts costing 25 dollars per kilogram with 4 kilograms of raisins costing 11 dollars per kilogram, then adds a flat packing cost of 2 dollars per kilogram of mixture. What is the cost of one kilogram of the finished mixture, in dollars?
+
+== M1.mixture L6 ans=20
+A shop mixes 11 kilograms of nuts costing 15 dollars per kilogram with 11 kilograms of raisins costing 21 dollars per kilogram, then adds a flat packing cost of 2 dollars per kilogram of mixture. What is the cost of one kilogram of the finished mixture, in dollars?
+
+== M1.mode_tally_r2 L0 ans=23
+A teacher wrote down 35 test scores: 7, 3, 11, 11, 23, 7, 19, 19, 11, 27, 20, 27, 4, 7, 11, 6, 27, 19, 23, 7, 6, 7, 23, 6, 23, 27, 19, 20, 23, 3, 11, 19, 23, 4 and 27. Which value occurs most often? There is exactly one such value. Answer with a whole number.
+
+== M1.mode_tally_r2 L3 ans=6
+A teacher wrote down 33 test scores: 14, 14, 43, 12, 14, 12, 6, 33, 43, 11, 7, 43, 6, 12, 6, 7, 11, 25, 43, 24, 7, 43, 11, 11, 7, 14, 11, 12, 25, 14, 14, 12 and 6. How many times does the most frequent value occur? There is exactly one most frequent value. Answer with a whole number.
+
+== M1.mode_tally_r2 L6 ans=13
+A teacher wrote down 17 test scores: 46, 13, 23, 13, 15, 38, 38, 23, 45, 13, 13, 5, 45, 50, 50, 45 and 38. Which value occurs most often? There is exactly one such value. Answer with a whole number.
+
+== M1.painted_cube_r2 L0 ans=84
+This problem comes from a quiz held in Zennor, set by Dmitri. A block is made from small cubes of the same size glued together into a box 11 cubes long, 21 cubes wide and 8 cubes high. The whole box is placed on a table and every outer face is painted red except the bottom face, which stays unpainted. Then the box is taken apart into the small cubes. How many small cubes have exactly 2 painted faces? Answer with a whole number.
+
+== M1.painted_cube_r2 L3 ans=4928
+Neva of Fenwick wrote this problem for a maths club. A block is made from small cubes of the same size glued together into a box 24 cubes long, 9 cubes wide and 33 cubes high. The whole box is placed on a table and every outer face is painted red except the bottom face, which stays unpainted. Then the box is taken apart into the small cubes. How many small cubes have exactly 0 painted faces? Answer with a whole number.
+
+== M1.painted_cube_r2 L6 ans=208
+This problem comes from a quiz held in Yarrow, set by Edna. A block is made from small cubes of the same size glued together into a box 15 cubes long, 32 cubes wide and 11 cubes high. The whole box is placed on a table and every outer face (including the bottom) is painted red. Then the box is taken apart into the small cubes. How many small cubes have exactly 2 painted faces? Answer with a whole number.
+
+== M1.percent_change L0 ans=228
+A jacket costs 380 dollars. Its price rises by 20 percent, then falls by 50 percent, each change applied to the price just before it. What is the final price in dollars?
+
+== M1.percent_change L3 ans=237.12
+A jacket costs 160 dollars. Its price rises by 30 percent, then falls by 5 percent, then rises by 20 percent, each change applied to the price just before it. What is the final price in dollars?
+
+== M1.percent_change L6 ans=897.75
+A jacket costs 750 dollars. Its price rises by 5 percent, then falls by 5 percent, then rises by 20 percent, each change applied to the price just before it. What is the final price in dollars?
+
+== M1.pigeonhole_worst_case_r2 L0 ans=60
+A bag holds marbles of 3 colours: 30 purple, 10 yellow, 29 white. Marbles are drawn one at a time without looking and are not put back. What is the smallest number of marbles that must be drawn to be certain, however unlucky the draws are, of having at least one marble of every colour? Answer with a whole number.
+
+== M1.pigeonhole_worst_case_r2 L3 ans=42
+A bag holds marbles of 4 colours: 44 purple, 10 black, 6 green, 12 yellow. Marbles are drawn one at a time without looking and are not put back. What is the smallest number of marbles that must be drawn to be certain, however unlucky the draws are, of having at least 14 marbles of the same colour? Answer with a whole number.
+
+== M1.pigeonhole_worst_case_r2 L6 ans=180
+A bag holds marbles of 5 colours: 71 purple, 16 black, 22 blue, 39 yellow, 47 green. Marbles are drawn one at a time without looking and are not put back. What is the smallest number of marbles that must be drawn to be certain, however unlucky the draws are, of having at least one marble of every colour? Answer with a whole number.
+
+== M1.pipes_work L0 ans=15
+A tank is empty. One pipe adds 8 litres of water every minute and a second pipe adds 4 litres every minute. How many minutes does it take for the tank to hold 180 litres?
+
+== M1.pipes_work L3 ans=27
+A tank is empty. One pipe adds 11 litres of water every minute and a second pipe adds 6 litres every minute, while a drain removes 5 litres every minute. How many minutes does it take for the tank to hold 324 litres?
+
+== M1.pipes_work L6 ans=39
+A tank is empty. One pipe adds 3 litres of water every minute and a second pipe adds 6 litres every minute, while a drain removes 2 litres every minute. How many minutes does it take for the tank to hold 273 litres?
+
+== M1.power_remainder_r2 L0 ans=1
+At a maths club in Zennor, Pia is asked this. Let X be the product of 130 factors, each equal to 59. What is the remainder when X is divided by 29? Answer with a whole number.
+
+== M1.power_remainder_r2 L3 ans=4
+This problem comes from a quiz held in Harrow, set by Nora. Let X be the sum of the product of 243 factors, each equal to 67 and the product of 56 factors, each equal to 109. What is the remainder when X is divided by 23? Answer with a whole number.
+
+== M1.power_remainder_r2 L6 ans=10
+Stan of Ivybridge wrote this problem for a maths club. Let X be the product of all the following factors: 737 factors equal to 6, 96 factors equal to 18 and 524 factors equal to 24. What is the remainder when X is divided by 17? Answer with a whole number.
+
+== M1.prime_factors_r2 L0 ans=6
+Uzi from Harrow found this problem in a puzzle book. Consider the number 867. How many different positive whole numbers divide it exactly (counting 1 and the number itself)? Answer with a whole number.
+
+== M1.prime_factors_r2 L3 ans=50
+Hal from Vale found this problem in a puzzle book. Consider the number 663201. Add up the different prime numbers that divide it exactly (each different prime counted once). What is the sum? Answer with a whole number.
+
+== M1.prime_factors_r2 L6 ans=18
+This problem comes from a quiz held in Yarrow, set by Opal. Consider the number 11492. How many different positive whole numbers divide it exactly (counting 1 and the number itself)? Answer with a whole number.
+
+== M1.pythagoras_r2 L0 ans=340
+This problem comes from a quiz held in Zennor, set by Boris. A rectangular screen is 300 centimetres wide and 160 centimetres tall. What is the length of its diagonal, in centimetres? Answer with a whole number.
+
+== M1.pythagoras_r2 L3 ans=385
+Pearl of Larkin wrote this problem for a maths club. A ladder 511 metres long leans against a vertical wall and its top reaches 336 metres up the wall. How far is its foot from the base of the wall, in metres, on level ground? Answer with a whole number.
+
+== M1.pythagoras_r2 L6 ans=4514
+Emil of Zennor wrote this problem for a maths club. A right-angled triangle has two short sides (the sides next to the right angle) of 1776 centimetres and 793 centimetres. What is the length of the whole boundary of the triangle (its perimeter), in centimetres? Answer with a whole number.
+
+== M1.quadratic_area L0 ans=21
+Zane from Kelso found this problem in a puzzle book. Two positive whole numbers differ by 21, and the sum of their squares is 2205. What is the smaller of the two numbers? Answer with a whole number.
+
+== M1.quadratic_area L3 ans=57
+Zoe of Marlow wrote this problem for a maths club. Two positive whole numbers differ by 31, and the sum of their squares is 10993. What is the smaller of the two numbers? Answer with a whole number.
+
+== M1.quadratic_area L6 ans=78
+Finn from Garth found this problem in a puzzle book. A rectangular garden has an area of 10452 square metres. Its length is 56 metres more than its width. What is its width, in metres? Answer with a whole number.
+
+== M1.ratio_share L0 ans=92
+Opal and Uma share 207 stickers in the ratio 5:4 (in that order). How many stickers does Uma get?
+
+== M1.ratio_share L3 ans=156
+Zed, Abel and Jules share 312 stickers in the ratio 5:1:6 (in that order). How many stickers does Jules get?
+
+== M1.ratio_share L6 ans=159
+Alva, Wanda, Finn and Tara share 742 stickers in the ratio 5:2:4:3 (in that order). How many stickers does Tara get?
+
+== M1.rectangle L0 ans=1444
+A rectangle has a perimeter of 190 centimetres and its length is 4 times its width. What is its area in square centimetres?
+
+== M1.rectangle L3 ans=3136
+A rectangle has a perimeter of 280 centimetres and its length is 4 times its width. What is its area in square centimetres?
+
+== M1.rectangle L6 ans=3528
+A rectangle has a perimeter of 252 centimetres and its length is 2 times its width. What is its area in square centimetres?
+
+== M1.recurrence_iterate L0 ans=52
+At a maths club in Kelso, Jules is asked this. A list of numbers is built by a rule. The first number is 32. Every number after it is the number just before it plus its own position in the list (so the second number is the first plus 2, the third is the second plus 3, and so on). What is the number in position 6 of the list (position 1 is the first number)? Answer with a whole number.
+
+== M1.recurrence_iterate L3 ans=1662
+This problem comes from a quiz held in Fenwick, set by Kurt. A list of numbers is built by a rule. The first number is 11. Every number after it is 2 times the number just before it, plus 2. What is the number in position 8 of the list (position 1 is the first number)? Answer with a whole number.
+
+== M1.recurrence_iterate L6 ans=26612
+This problem comes from a quiz held in Ravenna, set by Felix. A list of numbers is built by a rule. The first number is 40. Every number after it is 2 times the number just before it, plus 12. What is the number in position 10 of the list (position 1 is the first number)? Answer with a whole number.
+
+== M1.shopping L0 ans=23.38
+Dara buys 4 kettles at $0.92 each, 3 whistles at $0.98 each. Dara pays with $30.00. How many dollars of change does Dara get back?
+
+== M1.shopping L3 ans=4.05
+Jade buys 5 quilts at $3.00 each, 8 apples at $1.70 each, 9 compasss at $9.25 each, 9 drums at $9.90 each. Jade pays with $205.00. How many dollars of change does Jade get back?
+
+== M1.shopping L6 ans=5.1
+Tom buys 10 oranges at $1.50 each, 2 scarfs at $11.15 each, 5 violins at $9.60 each, 10 whistles at $6.60 each, 2 ribbons at $16.50 each, 12 candles at $8.80 each. Tom pays with $295.00. How many dollars of change does Tom get back?
+
+== M1.slot_permutations_r2 L0 ans=245
+Will of Arden wrote this problem for a maths club. How many 3-digit codes can be written using only the digits 0, 1, 2, 3, 4, 5, 7, 8 and 9, if no digit may be used more than once, the first digit may not be 0 and the last digit must be odd? Answer with a whole number.
+
+== M1.slot_permutations_r2 L3 ans=1680
+Tina from Norwick found this problem in a puzzle book. How many 4-digit codes can be written using only the digits 0, 1, 2, 4, 5, 6, 7, 8 and 9, if no digit may be used more than once, the first digit may be 0 (a code such as 012 is allowed) and the last digit must be even? Answer with a whole number.
+
+== M1.slot_permutations_r2 L6 ans=6174
+This problem comes from a quiz held in Vale, set by Nell. How many 5-digit codes can be written using only the digits 0, 1, 3, 4, 7, 8 and 9, if a digit may be used more than once, the first digit may not be 0 and the last digit must be even? Answer with a whole number.
+
+== M1.speed_distance L0 ans=135
+A van drives for 2 hours at 49 kilometres per hour, then drives for 1 hours at 37 kilometres per hour. How many kilometres does it travel in total?
+
+== M1.speed_distance L3 ans=543
+A van drives for 7 hours at 20 kilometres per hour, then drives for 2 hours at 89 kilometres per hour, then drives for 5 hours at 45 kilometres per hour. How many kilometres does it travel in total?
+
+== M1.speed_distance L6 ans=1863
+A van drives for 1 hours at 82 kilometres per hour, then drives for 8 hours at 41 kilometres per hour, then drives for 1 hours at 68 kilometres per hour, then drives for 7 hours at 69 kilometres per hour, then drives for 11 hours at 82 kilometres per hour. How many kilometres does it travel in total?
+
+== M1.tiered_pricing L0 ans=15.46
+A utility charges for use in steps: the first 20 units cost 28 cents each, and every unit after that costs 58 cents each. Each unit costs the rate of the step it falls in (a higher step does not change what earlier units cost). What is the bill for 37 units, in dollars? Answer with a number; if it is not whole, write it as a decimal with no more than two decimal places and no trailing zeros.
+
+== M1.tiered_pricing L3 ans=27.56
+A utility charges for use in steps: the first 61 units cost 12 cents each, the next 16 units cost 32 cents each, and every unit after that costs 36 cents each. Each unit costs the rate of the step it falls in (a higher step does not change what earlier units cost). What is the bill for 119 units, in dollars? Answer with a number; if it is not whole, write it as a decimal with no more than two decimal places and no trailing zeros.
+
+== M1.tiered_pricing L6 ans=168
+A utility charges for use in steps: the first 22 units cost 12 cents each, the next 58 units cost 26 cents each, the next 66 units cost 52 cents each, and every unit after that costs 92 cents each. Each unit costs the rate of the step it falls in (a higher step does not change what earlier units cost). A customer's bill is 72.28 dollars. How many units did the customer use? Answer with a whole number.
+
+== M1.tip_split L0 ans=87
+A dinner bill is 290 dollars before tip. The group adds a 20 percent tip on the bill and splits the total equally between 4 people. How many dollars does each person pay?
+
+== M1.tip_split L3 ans=381.25
+A dinner bill is 610 dollars before tip. The group adds a 25 percent tip on the bill and splits the total equally between 2 people. How many dollars does each person pay?
+
+== M1.tip_split L6 ans=23.25
+A dinner bill is 155 dollars before tip. The group adds a 20 percent tip on the bill and splits the total equally between 8 people. How many dollars does each person pay?
+

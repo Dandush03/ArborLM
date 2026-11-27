@@ -1,0 +1,27 @@
+M1.prime_factors_r3 0 5 | S: {"n": 3087, "ask": "factor_count"} | A: 5
+M1.prime_factors_r3 3 17 | S: {"n": 54961, "ask": "largest"} | A: 61
+M1.prime_factors_r3 6 33 | S: {"n": 18425, "ask": "distinct_sum"} | A: 83
+M1.quadratic_area_r3 0 5 | S: {"shape": "product", "d": 56, "area": 26112, "perimeter": 0, "total": 0} | A: 136
+M1.quadratic_area_r3 3 17 | S: {"shape": "rect_area", "d": 173, "area": 46574, "perimeter": 0, "total": 0} | A: 146
+M1.quadratic_area_r3 6 33 | S: {"shape": "squares", "d": 163, "area": 0, "perimeter": 0, "total": 51649} | A: 57
+M1.ratio_share_r3 0 5 | S: {"parts": [11, 14], "total": 50, "who": 1} | A: 28
+M1.ratio_share_r3 3 17 | S: {"parts": [5, 11, 15], "total": 155, "who": 0} | A: 25
+M1.ratio_share_r3 6 33 | S: {"parts": [4, 2, 14, 11], "total": 1178, "who": 1} | A: 76
+M1.rectangle_r3 0 5 | S: {"shape": "excess", "perimeter": 56, "ratio": 0, "excess": 16} | A: 132
+M1.rectangle_r3 3 17 | S: {"shape": "ratio", "perimeter": 470, "ratio": 4, "excess": 0} | A: 8836
+M1.rectangle_r3 6 33 | S: {"shape": "excess", "perimeter": 394, "ratio": 0, "excess": 57} | A: 8890
+M1.recurrence_iterate_r3 0 5 | S: {"shape": "affine", "first": [181], "mult": 3, "add": 28, "position": 7} | A: 142141
+M1.recurrence_iterate_r3 3 17 | S: {"shape": "sum_prev_two", "first": [122, 142], "mult": 0, "add": 0, "position": 9} | A: 4568
+M1.recurrence_iterate_r3 6 33 | S: {"shape": "sum_prev_two", "first": [26, 71], "mult": 0, "add": 0, "position": 21} | A: 589021
+M1.shopping_r3 0 5 | S: {"items": [[6, 56], [6, 20]], "paid": 1500} | A: 10.44
+M1.shopping_r3 3 17 | S: {"items": [[2, 930], [2, 895], [9, 225], [9, 345]], "paid": 9500} | A: 7.2
+M1.shopping_r3 6 33 | S: {"items": [[6, 400], [3, 1325], [3, 635], [1, 35], [8, 1350], [1, 1875]], "paid": 23000} | A: 20.1
+M1.speed_distance_r3 0 5 | S: {"legs": [[6, 24], [7, 35]], "average": false} | A: 389
+M1.speed_distance_r3 3 17 | S: {"legs": [[1, 58], [10, 30], [9, 23]], "average": false} | A: 565
+M1.speed_distance_r3 6 33 | S: {"legs": [[9, 22], [7, 81], [10, 48], [13, 29], [6, 44]], "average": false} | A: 1886
+M1.tiered_pricing 0 5 | S: {"mode": "bill", "tiers": [[12, 50]], "last_rate": 54, "used": 13, "bill_cents": null} | A: 6.54
+M1.tiered_pricing 3 17 | S: {"mode": "units", "tiers": [[21, 36], [67, 58]], "last_rate": 68, "used": null, "bill_cents": 4846} | A: 91
+M1.tiered_pricing 6 33 | S: {"mode": "units", "tiers": [[26, 12], [37, 16], [43, 68]], "last_rate": 90, "used": null, "bill_cents": 6438} | A: 135
+M1.tip_split_r3 0 5 | S: {"bill": 230, "tip": 19, "people": 5} | A: 54.74
+M1.tip_split_r3 3 17 | S: {"bill": 292, "tip": 5, "people": 4} | A: 76.65
+M1.tip_split_r3 6 33 | S: {"bill": 175, "tip": 28, "people": 5} | A: 44.8

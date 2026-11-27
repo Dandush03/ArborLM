@@ -1,0 +1,37 @@
+clusters on the auditor's map: 20 ; registered lineages: 33
+
+G = 10: demand 25000
+  S1_linear_solve            equal-share n_eff*L per level [25377, 29446, 33801, 37948, 42283, 46567, 51086]  fails {'mixture': [], 'chao1': [], 'equal_share': []}
+  S2_weighted_sum            equal-share n_eff*L per level [89247, 91275, 91460, 799263, 802589, 825661, 812736]  fails {'mixture': [], 'chao1': [], 'equal_share': []}
+  S3_multiplicative_chain    equal-share n_eff*L per level [25134, 28967, 33406, 37233, 41729, 46072, 50873]  fails {'mixture': [], 'chao1': [], 'equal_share': []}
+  S4_product_rule_counting   equal-share n_eff*L per level [37152, 36389, 73264, 72473, 72955, 95579, 94734]  fails {'mixture': [], 'chao1': [], 'equal_share': []}
+  S5_unbounded_table         equal-share n_eff*L per level [47292, 66763, 88825, 105161, 122279, 141638, 166046]  fails {'mixture': [], 'chao1': [], 'equal_share': []}
+  S6_exposed_faces           equal-share n_eff*L per level [34841, 102258, 141305, 203613, 271894, 337194, 443991]  fails {'mixture': [], 'chao1': [], 'equal_share': []}
+  S7_step_rule               equal-share n_eff*L per level [53246, 72125, 88051, 106974, 124031, 145133, 160910]  fails {'mixture': [], 'chao1': [], 'equal_share': []}
+  clock_duration             equal-share n_eff*L per level [149995000, 149995000, 149995000, 149995000, 149995000, 149995000, 149995000]  fails {'mixture': [], 'chao1': [], 'equal_share': []}
+  inclusion_exclusion        equal-share n_eff*L per level [161459, 641919, 1867158, 149995000, 149995000, 149995000, 149995000]  fails {'mixture': [], 'chao1': [], 'equal_share': []}
+  pigeonhole_worst_case      equal-share n_eff*L per level [78217, 89728, 1829207, 2272652, 40907727, 56248125, 40907727]  fails {'mixture': [], 'chao1': [], 'equal_share': []}
+  gcd_lcm                    equal-share n_eff*L per level [56396, 56566, 56488, 47658, 47597, 44456, 43995]  fails {'mixture': [], 'chao1': [], 'equal_share': []}
+  crt_congruence             equal-share n_eff*L per level [492864, 896384, 1557042, 4591684, 14062031, 149995000, 149995000]  fails {'mixture': [], 'chao1': [], 'equal_share': []}
+  prime_factors              equal-share n_eff*L per level [31055, 43807, 68252, 105383, 166538, 252659, 370053]  fails {'mixture': [], 'chao1': [], 'equal_share': []}
+  last_digit_power           equal-share n_eff*L per level [213770, 410570, 149995000, 149995000, 149995000, 149995000, 149995000]  fails {'mixture': [], 'chao1': [], 'equal_share': []}
+  quadratic_area             equal-share n_eff*L per level [47417, 63468, 80802, 98357, 119613, 145156, 171947]  fails {'mixture': [], 'chao1': [], 'equal_share': []}
+  tiered_pricing             equal-share n_eff*L per level [202696, 493946, 149995000, 149995000, 149995000, 149995000, 149995000]  fails {'mixture': [], 'chao1': [], 'equal_share': []}
+  finite_differences         equal-share n_eff*L per level [48220, 47597, 48359, 47050, 47407, 103374, 101348]  fails {'mixture': [], 'chao1': [], 'equal_share': []}
+  median_list                equal-share n_eff*L per level [149995000, 149995000, 149995000, 149995000, 149995000, 149995000, 149995000]  fails {'mixture': [], 'chao1': [], 'equal_share': []}
+  mode_tally                 equal-share n_eff*L per level [149995000, 149995000, 149995000, 149995000, 149995000, 149995000, 149995000]  fails {'mixture': [], 'chao1': [], 'equal_share': []}
+  division_counting          equal-share n_eff*L per level [128420, 177159, 248886, 328217, 383946, 488053, 474168]  fails {'mixture': [], 'chao1': [], 'equal_share': []}
+
+G = 9: demand 27680
+  S1_linear_solve            equal-share n_eff*L per level [25377, 29446, 33801, 37948, 42283, 46567, 51086]  fails {'mixture': [], 'chao1': [], 'equal_share': [0]}
+  S3_multiplicative_chain    equal-share n_eff*L per level [25134, 28967, 33406, 37233, 41729, 46072, 50873]  fails {'mixture': [], 'chao1': [], 'equal_share': [0]}
+
+G = 8: demand 31000
+  S1_linear_solve            equal-share n_eff*L per level [25377, 29446, 33801, 37948, 42283, 46567, 51086]  fails {'mixture': [], 'chao1': [], 'equal_share': [0, 1]}
+  S3_multiplicative_chain    equal-share n_eff*L per level [25134, 28967, 33406, 37233, 41729, 46072, 50873]  fails {'mixture': [], 'chao1': [], 'equal_share': [0, 1]}
+
+Existing pool builder (per-LINEAGE balance): lineage-levels below the per-lineage demand
+  N = 10 lineages in the part, demand 25000: 9 lineages fail: {'ages': [0, 1, 2, 3], 'consecutive': [0, 1], 'pipes_work': [0, 1, 2], 'rectangle': [0, 1, 2, 3, 4, 5, 6], 'percent_change': [0, 1, 2, 3, 4, 5, 6], 'fraction_remainder': [0, 1, 2, 3, 4, 5, 6], 'tip_split': [0, 1], 'ratio_share': [0, 1], 'grid_perimeter': [0]}
+  N = 13 lineages in the part, demand 19470: 9 lineages fail: {'ages': [0, 1, 2], 'consecutive': [0, 1], 'pipes_work': [0, 1, 2], 'rectangle': [0, 1, 2, 3, 4, 5, 6], 'percent_change': [0, 1, 2, 3, 4, 5], 'fraction_remainder': [0, 1, 2, 3, 4, 5, 6], 'tip_split': [0], 'ratio_share': [0], 'grid_perimeter': [0]}
+  N = 16 lineages in the part, demand 16000: 7 lineages fail: {'ages': [0, 1], 'consecutive': [0, 1], 'pipes_work': [0, 1], 'rectangle': [0, 1, 2, 3, 4, 5, 6], 'percent_change': [0, 3], 'fraction_remainder': [0, 1, 2, 3, 4, 5, 6], 'ratio_share': [0]}
+  N = 23 lineages in the part, demand 11440: 5 lineages fail: {'ages': [0], 'consecutive': [0], 'pipes_work': [0], 'rectangle': [0, 1, 2, 3, 4, 5, 6], 'fraction_remainder': [0, 1, 2, 3, 4]}

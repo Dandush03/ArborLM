@@ -1,0 +1,221 @@
+{
+ "C1.c_srcs3": {
+  "0": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_printform_cv": 0.0,
+   "MF_shape_cv": 0.0,
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g1",
+    "g2"
+   ],
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "applies": 16,
+     "n_shape": 16,
+     "rate_in_shape": 0.0,
+     "ci": [
+      0.0,
+      0.2
+     ],
+     "share_of_level": 0.4,
+     "mf_in_shape_cv": 0.9
+    }
+   },
+   "distinct_keys": 5
+  },
+  "1": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_printform_cv": 0.0,
+   "MF_shape_cv": 0.0,
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g1",
+    "g2"
+   ],
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "applies": 16,
+     "n_shape": 16,
+     "rate_in_shape": 0.0,
+     "ci": [
+      0.0,
+      0.2
+     ],
+     "share_of_level": 0.4,
+     "mf_in_shape_cv": 0.9
+    }
+   },
+   "distinct_keys": 5
+  },
+  "2": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_printform_cv": 0.0,
+   "MF_shape_cv": 0.0,
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g1",
+    "g2"
+   ],
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "applies": 16,
+     "n_shape": 16,
+     "rate_in_shape": 0.0,
+     "ci": [
+      0.0,
+      0.2
+     ],
+     "share_of_level": 0.4,
+     "mf_in_shape_cv": 0.9
+    }
+   },
+   "distinct_keys": 5
+  },
+  "3": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_printform_cv": 0.0,
+   "MF_shape_cv": 0.0,
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g1",
+    "g2"
+   ],
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "applies": 16,
+     "n_shape": 16,
+     "rate_in_shape": 0.0,
+     "ci": [
+      0.0,
+      0.2
+     ],
+     "share_of_level": 0.4,
+     "mf_in_shape_cv": 0.9
+    }
+   },
+   "distinct_keys": 5
+  },
+  "4": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_printform_cv": 0.0,
+   "MF_shape_cv": 0.0,
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g1",
+    "g2"
+   ],
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "applies": 16,
+     "n_shape": 16,
+     "rate_in_shape": 0.0,
+     "ci": [
+      0.0,
+      0.2
+     ],
+     "share_of_level": 0.4,
+     "mf_in_shape_cv": 0.9
+    }
+   },
+   "distinct_keys": 5
+  },
+  "5": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_printform_cv": 0.0,
+   "MF_shape_cv": 0.0,
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g1",
+    "g2"
+   ],
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "applies": 16,
+     "n_shape": 16,
+     "rate_in_shape": 0.0,
+     "ci": [
+      0.0,
+      0.2
+     ],
+     "share_of_level": 0.4,
+     "mf_in_shape_cv": 0.9
+    }
+   },
+   "distinct_keys": 5
+  },
+  "6": {
+   "n": 40,
+   "MF_cv": 0.0,
+   "MF_printform_cv": 0.0,
+   "MF_shape_cv": 0.0,
+   "BEST_generic_cv": 0.0,
+   "BEST_generic_chosen": [
+    "g1",
+    "g2"
+   ],
+   "oracle_any_literal": 0.9,
+   "shapes": {
+    "A": 16,
+    "B": 24
+   },
+   "S": {
+    "A|S.base": {
+     "hit": 0,
+     "applies": 16,
+     "n_shape": 16,
+     "rate_in_shape": 0.0,
+     "ci": [
+      0.0,
+      0.2
+     ],
+     "share_of_level": 0.4,
+     "mf_in_shape_cv": 0.9
+    }
+   },
+   "distinct_keys": 5
+  }
+ }
+}

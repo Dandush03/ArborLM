@@ -1,0 +1,37 @@
+R1.activity_selection_r5               distinct level distributions 4: [[0, 1], [2, 3], [4, 5], [6]]  <- levels share a generator
+R1.attribute_rule_r5                   distinct level distributions 6: [[0], [1], [2], [3], [4, 5], [6]]  <- levels share a generator
+R1.boolean_lights_r4                   distinct level distributions 7: [[0], [1], [2], [3], [4], [5], [6]]
+R1.categories_default_exceptions_r4    distinct level distributions 7: [[0], [1], [2], [3], [4], [5], [6]]
+R1.categories_follow_r5                distinct level distributions 7: [[0], [1], [2], [3], [4], [5], [6]]
+R1.compass_turns                       distinct level distributions 7: [[0], [1], [2], [3], [4], [5], [6]]
+R1.conditional_chain_r5                distinct level distributions 7: [[0], [1], [2], [3], [4], [5], [6]]
+R1.conditional_decision_tree_r4        distinct level distributions 4: [[0, 1], [2, 3, 4], [5], [6]]  <- levels share a generator
+R1.conditional_threshold_rule_r4       distinct level distributions 7: [[0], [1], [2], [3], [4], [5], [6]]
+R1.containers_queue_line_r5            distinct level distributions 7: [[0], [1], [2], [3], [4], [5], [6]]
+R1.containers_stack_piles_r4           distinct level distributions 7: [[0], [1], [2], [3], [4], [5], [6]]
+R1.elimination_bracket_r5              distinct level distributions 6: [[0], [1], [2], [3], [4], [5, 6]]  <- levels share a generator
+R1.equivalence_classes_r5              distinct level distributions 7: [[0], [1], [2], [3], [4], [5], [6]]
+R1.equivalence_exchange_rates_r5       distinct level distributions 5: [[0, 1], [2], [3], [4, 5], [6]]  <- levels share a generator
+R1.event_timeline_r5                   distinct level distributions 5: [[0, 1], [2], [3], [4, 5], [6]]  <- levels share a generator
+R1.graph_bipartite_r5                  distinct level distributions 7: [[0], [1], [2], [3], [4], [5], [6]]
+R1.graph_shortest_route_r4             distinct level distributions 4: [[0, 1], [2, 3], [4, 5], [6]]  <- levels share a generator
+R1.kinship_ancestor_r4                 distinct level distributions 7: [[0], [1], [2], [3], [4], [5], [6]]
+R1.kinship_cousins_r5                  distinct level distributions 3: [[0, 1, 2], [3, 4, 5], [6]]  <- levels share a generator
+R1.kinship_descendants_r5              distinct level distributions 4: [[0, 1], [2, 3], [4, 5], [6]]  <- levels share a generator
+R1.knights_knaves_r5                   distinct level distributions 4: [[0, 1], [2, 3], [4, 5], [6]]  <- levels share a generator
+R1.minimax_tree_r5                     distinct level distributions 7: [[0], [1], [2], [3], [4], [5], [6]]
+R1.mst_cost_r4                         distinct level distributions 5: [[0, 1], [2], [3], [4, 5], [6]]  <- levels share a generator
+R1.nim_xor_r5                          distinct level distributions 7: [[0], [1], [2], [3], [4], [5], [6]]
+R1.one_culprit                         distinct level distributions 4: [[0, 1], [2, 3], [4, 5], [6]]  <- levels share a generator
+R1.order_compare_r5                    distinct level distributions 7: [[0], [1], [2], [3], [4], [5], [6]]
+R1.road_reachability_r5                distinct level distributions 7: [[0], [1], [2], [3], [4], [5], [6]]
+R1.seating_row_r5                      distinct level distributions 2: [[0], [1, 2, 3, 4, 5, 6]]  <- levels share a generator
+R1.spatial_grid_walk_r5                distinct level distributions 7: [[0], [1], [2], [3], [4], [5], [6]]
+R1.spatial_relative_directions_r5      distinct level distributions 3: [[0, 1, 2], [3, 4, 5], [6]]  <- levels share a generator
+R1.swap_tracking_r5                    distinct level distributions 7: [[0], [1], [2], [3], [4], [5], [6]]
+R1.temporal_critical_path_r5           distinct level distributions 7: [[0], [1], [2], [3], [4], [5], [6]]
+R1.temporal_interval_overlap_r5        distinct level distributions 4: [[0], [1, 2], [3, 4], [5, 6]]  <- levels share a generator
+R1.temporal_weekday_shift_r5           distinct level distributions 3: [[0, 1, 2], [3, 4, 5], [6]]  <- levels share a generator
+R1.topological_order_r5                distinct level distributions 7: [[0], [1], [2], [3], [4], [5], [6]]
+R1.tracking_accounts_r5                distinct level distributions 7: [[0], [1], [2], [3], [4], [5], [6]]
+R1.venn_counting_r5                    distinct level distributions 7: [[0], [1], [2], [3], [4], [5], [6]]

@@ -1,0 +1,1 @@
+Attempt 1 of the M1 stage-2 record. Superseded by ../deliver_r2/ (three solver-side line numbers in the second_solver reasons were wrong: fm1_common.py:42 -> :43, templates_a5.py:33 -> :36, check_keys_a5.py:51-55 -> :48-55). Results identical. Kept, not deleted.

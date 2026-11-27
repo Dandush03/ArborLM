@@ -1,0 +1,7 @@
+r1: files written 13; written more than once: {}
+r2a: files written 15; written more than once: {}
+r2b: files written 10; written more than once: {}
+m1a: files written 10; written more than once: {}
+m1b: files written 10; written more than once: {'/SCHEMA.md': 2, '/fixtures.jsonl': 2}
+m1c: files written 7; written more than once: {}
+c1: files written 19; written more than once: {}

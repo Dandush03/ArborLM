@@ -1,0 +1,447 @@
+r1 {
+ "bound": "float",
+ "bound_two_sided": "bool",
+ "capacity": {
+  "D_part_used": "int",
+  "D_total": "int",
+  "G_part": "int",
+  "G_total": "int",
+  "builder": "str",
+  "cells_total": "int",
+  "cells_with_repeated_text": "int",
+  "cells_with_shortfall": "int",
+  "parts": "dict",
+  "per_cluster_and_level": "dict",
+  "pool_seed": "int"
+ },
+ "cluster_members": {
+  "R1.attribute_rule": "list",
+  "R1.boolean_lights": "list",
+  "R1.categories_default_exceptions": "list",
+  "R1.conditional_chain": "list",
+  "R1.conditional_threshold_rule": "list",
+  "R1.equivalence_exchange_rates": "list",
+  "R1.graph_shortest_route": "list",
+  "R1.spatial_grid_walk": "list",
+  "R1.swap_tracking": "list",
+  "R1.venn_counting": "list"
+ },
+ "largest_excess_among_survivors": {
+  "class": "str",
+  "excess": "float",
+  "level": "int",
+  "rule": "str",
+  "shape": "str"
+ },
+ "largest_replicate_excess_among_survivors": {
+  "level": "int",
+  "rule": "str",
+  "run": "str",
+  "shape": "str",
+  "value": "float"
+ },
+ "shapes": {
+  "element_keys": [
+   "earlier_id",
+   "largest",
+   "levels_distinct",
+   "measured_by",
+   "name",
+   "per_level",
+   "reason",
+   "replicate_max_excess",
+   "stage",
+   "status",
+   "strict_cluster"
+  ],
+  "len": 37,
+  "list_of": [
+   "dict"
+  ]
+ },
+ "surviving_cluster_count": "int",
+ "surviving_clusters": {
+  "len": 10,
+  "list_of": [
+   "str"
+  ]
+ },
+ "surviving_shapes": {
+  "len": 12,
+  "list_of": [
+   "str"
+  ]
+ }
+}
+r2 {
+ "G_final": "int",
+ "G_per_part": "int",
+ "G_used_for_capacity": "int",
+ "bound_measure": "str",
+ "capacity_at_other_G_reported_only": {
+  "G=8": "dict"
+ },
+ "capacity_consistent_with_G_per_part": "bool",
+ "capacity_superseded_G18": {
+  "demand": "int",
+  "g": "int",
+  "path": "str",
+  "sha256": "str",
+  "status": "str",
+  "supplied": "dict"
+ },
+ "clusters": {
+  "R2.binary_search_trace": "dict",
+  "R2.bracket_match": "dict",
+  "R2.bst_traversal": "dict",
+  "R2.cache_eviction": "dict",
+  "R2.caesar_shift": "dict",
+  "R2.cellular_automaton": "dict",
+  "R2.cheapest_network": "dict",
+  "R2.coin_change_min": "dict",
+  "R2.count_divisible": "dict",
+  "R2.crt_smallest": "dict",
+  "R2.dictionary_rank": "dict",
+  "R2.digit_root": "dict",
+  "R2.expression_eval": "dict",
+  "R2.from_base": "dict",
+  "R2.gcd_euclid": "dict",
+  "R2.grid_sum": "dict",
+  "R2.hamming_error_position": "dict",
+  "R2.hash_probe": "dict",
+  "R2.interval_scheduling": "dict",
+  "R2.kth_smallest": "dict",
+  "R2.lcs_length": "dict",
+  "R2.lis_length": "dict",
+  "R2.list_ops": "dict",
+  "R2.longest_palindromic_substring": "dict",
+  "R2.luhn_check": "dict",
+  "R2.max_subarray_sum": "dict",
+  "R2.merge_smallest_cost": "dict",
+  "R2.min_heap_ops": "dict",
+  "R2.modular_power": "dict",
+  "R2.multiples_between": "dict",
+  "R2.palindrome_check": "dict",
+  "R2.prime_factor_query": "dict",
+  "R2.run_length": "dict",
+  "R2.stack_machine": "dict",
+  "R2.string_rewrite_nonidentity": "dict",
+  "R2.subtraction_game": "dict"
+ },
+ "demand_at_G_per_part": "int",
+ "inputs": {
+  "battery_a4": "list",
+  "battery_f4": "list",
+  "capacity": "list",
+  "levels": "list"
+ },
+ "lineages": {
+  "R2.binary_search_trace": "dict",
+  "R2.bracket_match": "dict",
+  "R2.bst_traversal": "dict",
+  "R2.cache_eviction": "dict",
+  "R2.caesar_shift": "dict",
+  "R2.cellular_automaton": "dict",
+  "R2.cheapest_network": "dict",
+  "R2.coin_change_min": "dict",
+  "R2.count_divisible": "dict",
+  "R2.count_letter": "dict",
+  "R2.crt_smallest": "dict",
+  "R2.dictionary_rank": "dict",
+  "R2.digit_root": "dict",
+  "R2.expression_eval": "dict",
+  "R2.from_base": "dict",
+  "R2.gcd_euclid": "dict",
+  "R2.grid_sum": "dict",
+  "R2.hamming_error_position": "dict",
+  "R2.hash_probe": "dict",
+  "R2.interval_scheduling": "dict",
+  "R2.kth_smallest": "dict",
+  "R2.lcs_length": "dict",
+  "R2.lis_length": "dict",
+  "R2.list_ops": "dict",
+  "R2.longest_palindromic_substring": "dict",
+  "R2.luhn_check": "dict",
+  "R2.max_subarray_sum": "dict",
+  "R2.merge_smallest_cost": "dict",
+  "R2.min_heap_ops": "dict",
+  "R2.modular_power": "dict",
+  "R2.multiples_between": "dict",
+  "R2.palindrome_check": "dict",
+  "R2.permutation_power": "dict",
+  "R2.prime_factor_query": "dict",
+  "R2.run_length": "dict",
+  "R2.sort_list": "dict",
+  "R2.stack_machine": "dict",
+  "R2.string_rewrite_nonidentity": "dict",
+  "R2.subtraction_game": "dict",
+  "R2.to_base_wide": "dict"
+ },
+ "round": "str",
+ "shortcut_bound": "float",
+ "status_note": "str",
+ "surviving_cluster_count": "int",
+ "surviving_clusters": {
+  "len": 18,
+  "list_of": [
+   "str"
+  ]
+ },
+ "surviving_lineages": {
+  "len": 18,
+  "list_of": [
+   "str"
+  ]
+ }
+}
+m1 {
+ "battery_seeds": {
+  "a3": "int",
+  "a4": "int",
+  "own": "int"
+ },
+ "bound": {
+  "observed_before": "str",
+  "set_by": "str",
+  "two_sided": "bool",
+  "value": "float"
+ },
+ "candidates": {
+  "M1.ages_r3": "dict",
+  "M1.arithmetic_series_r3": "dict",
+  "M1.average_missing_r4": "dict",
+  "M1.binomial_choose_r3": "dict",
+  "M1.change_ways_r3": "dict",
+  "M1.clock_duration_r4": "dict",
+  "M1.coins_r3": "dict",
+  "M1.consecutive_r3": "dict",
+  "M1.crt_congruence_r3": "dict",
+  "M1.digit_puzzle_r3": "dict",
+  "M1.division_counting_r3": "dict",
+  "M1.finite_differences_r4": "dict",
+  "M1.fraction_remainder_r3": "dict",
+  "M1.gcd_lcm_r4": "dict",
+  "M1.grid_perimeter_r3": "dict",
+  "M1.inclusion_exclusion_r3": "dict",
+  "M1.last_digit_power_r3": "dict",
+  "M1.linear_equation_r3": "dict",
+  "M1.median_list_r3": "dict",
+  "M1.mixture_r4": "dict",
+  "M1.mode_tally_r3": "dict",
+  "M1.painted_cube_r3": "dict",
+  "M1.percent_change_r3": "dict",
+  "M1.pigeonhole_worst_case_r3": "dict",
+  "M1.pipes_work_r3": "dict",
+  "M1.prime_factors_r3": "dict",
+  "M1.pythagoras_r3": "dict",
+  "M1.quadratic_area_r3": "dict",
+  "M1.ratio_share_r3": "dict",
+  "M1.rectangle_r3": "dict",
+  "M1.recurrence_iterate_r3": "dict",
+  "M1.shopping_r3": "dict",
+  "M1.slot_permutations_r4": "dict",
+  "M1.speed_distance_r3": "dict",
+  "M1.tiered_pricing": "dict",
+  "M1.tip_split_r3": "dict"
+ },
+ "capacity": {
+  "G_per_part_smaller": "int",
+  "M": "int",
+  "as_written": "dict",
+  "basis": "str",
+  "clusters": "int",
+  "demand_G_per_part": "int",
+  "demand_formula": "str",
+  "demand_literal_G_equals_all_clusters": "int",
+  "hypothetical_per_cluster": "dict",
+  "seed": "int"
+ },
+ "capacity_as_written_failures_listed_for_the_lead": {
+  "M1.ages_r3": "list",
+  "M1.consecutive_r3": "list",
+  "M1.fraction_remainder_r3": "list",
+  "M1.grid_perimeter_r3": "list",
+  "M1.percent_change_r3": "list",
+  "M1.pipes_work_r3": "list",
+  "M1.ratio_share_r3": "list",
+  "M1.rectangle_r3": "list"
+ },
+ "dropped": {
+  "len": 7,
+  "list_of": [
+   "str"
+  ]
+ },
+ "dropped_count": "int",
+ "excluded_everywhere": {
+  "len": 2,
+  "list_of": [
+   "str"
+  ]
+ },
+ "hygiene_edit": {
+  "after": "str",
+  "before": "str",
+  "file": "str",
+  "generated_items_identical": "bool",
+  "line": "int",
+  "lineage": "str",
+  "measurement": "str",
+  "per_level_after": "list",
+  "per_level_before": "list",
+  "total_after": "str",
+  "total_before": "str"
+ },
+ "inputs": {
+  "battery": "dict",
+  "capacity": "dict",
+  "checks": "dict",
+  "text_capacity": "dict"
+ },
+ "measure": "str",
+ "n_per_level": "int",
+ "procedure_rule_exclusions": {
+  "consecutive": "list",
+  "division_counting": "list",
+  "finite_differences": "list",
+  "gcd_lcm": "list",
+  "last_digit_power": "list",
+  "prime_factors": "list",
+  "ratio_share": "list",
+  "slot_permutations": "list"
+ },
+ "surviving_cluster_count": "int",
+ "surviving_cluster_names": {
+  "len": 17,
+  "list_of": [
+   "str"
+  ]
+ },
+ "surviving_clusters": {
+  "S1_linear_solve": "list",
+  "S2_weighted_sum": "list",
+  "S3_multiplicative_chain": "list",
+  "S5_unbounded_table": "list",
+  "S6_exposed_faces": "list",
+  "S7_step_rule": "list",
+  "clock_duration": "list",
+  "crt_congruence": "list",
+  "division_counting": "list",
+  "finite_differences": "list",
+  "gcd_lcm": "list",
+  "inclusion_exclusion": "list",
+  "last_digit_power": "list",
+  "median_list": "list",
+  "prime_factors": "list",
+  "quadratic_area": "list",
+  "tiered_pricing": "list"
+ },
+ "survivor_count": "int",
+ "survivors": {
+  "len": 29,
+  "list_of": [
+   "str"
+  ]
+ },
+ "survivors_with_an_excluded_procedure_rule_above_the_bound_PENDING_LEAD_REVIEW": {
+  "M1.consecutive_r3": "dict",
+  "M1.division_counting_r3": "dict",
+  "M1.finite_differences_r4": "dict",
+  "M1.gcd_lcm_r4": "dict",
+  "M1.prime_factors_r3": "dict",
+  "M1.ratio_share_r3": "dict"
+ },
+ "title": "str"
+}
+c1 {
+ "G": {
+  "demand_per_cluster_and_level": "int",
+  "formula": "str",
+  "literal_G_equals_N": "dict",
+  "smaller_part_N_div_2": "int"
+ },
+ "base_rate": "str",
+ "bound": "float",
+ "bound_set_by": "str",
+ "capacity": {
+  "all_clusters_all_levels_pass_per_lineage": "bool",
+  "builder": "str",
+  "clusters": "dict",
+  "count_drawn": "int",
+  "seed": "int"
+ },
+ "dropped_clusters": {
+  "B4": "list",
+  "C1.bfs_queue": "list",
+  "C1.bubble_pass": "list",
+  "C1.cellular_update": "list",
+  "C1.insertion_sort": "list",
+  "C1.kadane_scan": "list",
+  "C1.majority_vote_scan": "list",
+  "C1.minmax_track": "list",
+  "C1.mirror_pointers": "list",
+  "C1.partition_pass": "list"
+ },
+ "inputs_sha256": {
+  "capacity": "str",
+  "exec_": "str",
+  "levels71_orig": "str",
+  "levels72": "str",
+  "rules71": "str",
+  "rules72": "str"
+ },
+ "level_wide_cheap": "str",
+ "lineages": {
+  "element_keys": [
+   "capacity_supplied_per_level_capped_at_count",
+   "execution",
+   "in_shape_flag_above_bound_PENDING_LEAD_REVIEW",
+   "in_shape_max_overall",
+   "level_wide_cheap_per_level",
+   "level_wide_max",
+   "levels",
+   "measured_in",
+   "name",
+   "partial_trace_M_level_wide",
+   "partial_trace_M_max_PENDING_LEAD_REVIEW",
+   "reason",
+   "retry_sites",
+   "shapes",
+   "shapes_dropped",
+   "shared_finish_reject",
+   "status",
+   "strict_cluster",
+   "supersedes"
+  ],
+  "len": 37,
+  "list_of": [
+   "dict"
+  ]
+ },
+ "pre_repair_levels": {
+  "C1.func_branch": "dict",
+  "C1.func_compose_f3": "dict",
+  "C1.slices": "dict"
+ },
+ "removed_member_of_a_standing_cluster": {
+  "C1.loop_sum": "str"
+ },
+ "round": "str",
+ "superseded": {
+  "C1.fast_power_f3": "str",
+  "C1.func_branch": "str",
+  "C1.func_compose_f3": "str",
+  "C1.sieve_marking_f3": "str",
+  "C1.slices": "str"
+ },
+ "surviving_clusters": {
+  "count": "int",
+  "count_without_variants": "int",
+  "list": "list",
+  "variant_clusters": "list"
+ },
+ "surviving_lineages": {
+  "count": "int",
+  "list": "list"
+ }
+}

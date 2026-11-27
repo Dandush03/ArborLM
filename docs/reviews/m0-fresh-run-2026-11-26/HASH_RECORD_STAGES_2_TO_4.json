@@ -1,0 +1,44 @@
+{
+  "cache": "not used (R-63)",
+  "candidate_list": {
+    "path": "studies/m0/registration/candidate_list.json",
+    "sha256": "8dcc796c0dc8554fab52a5e3093f73c6f2838fe5b965e2b3743fea6291f8946a"
+  },
+  "capacity_label": "capacity",
+  "capacity_runner": {
+    "path": "studies/m0/registration/capacity.py",
+    "sha256": "00638afa8b4143e0379decd2ecaa80cfeaecc35ae1dd0bf9657dc6e9ef882152"
+  },
+  "capacity_seed": 400002,
+  "distinct_item_key": {
+    "path": "studies/m0/registration/distinct_key.py",
+    "sha256": "08a0526b8b05742e748f0ce8c10c9ff7c6e06ad28afae2f0417743b8388342e1"
+  },
+  "map_of_record": {
+    "path": "studies/m0/manifests/map_of_record.json",
+    "sha256": "1ba6ddd520dfe6514dfd282883ce4bc84660b7dca1abfefdac58285dcab5809c"
+  },
+  "partition_code": {
+    "path": "studies/m0/registration/partition.py",
+    "sha256": "4e43d280f60730ead54922be1a3687cca99468758d5a75417944cb6b58714d03"
+  },
+  "partition_of_record": {
+    "path": "studies/m0/manifests/partition_of_record.json",
+    "sha256": "750715d846a086f901ccf2525ab8c87c13f61b543f44e44dca2aeb0d401a37e9"
+  },
+  "pool_builder": {
+    "path": "studies/m0/registration/pool_builder.py",
+    "sha256": "728856b632f27d7a88885f08126bc31070261f7e41d7ab446591764a3e364862"
+  },
+  "second_solvers": {
+    "studies/m0/solvers2/solver2_c1.py": "6615f6d878fe67d5434aaecccf644b7287e1913c5b4c0cca52ba1e82faf4b135",
+    "studies/m0/solvers2/solver2_m1a.py": "2ee46ee4e1284016fe8ee0878775deff2a204415855708d37aecce087b1b9dfb",
+    "studies/m0/solvers2/solver2_m1b.py": "d4ddb3b1e3b5c6af01eea9a5a89ae634a92da112d6047535a4996262bba4eae5",
+    "studies/m0/solvers2/solver2_m1c.py": "9a7dc6e0ce04768e46ff285cc3cbff805f190b053cb2e2129783da722c11100c",
+    "studies/m0/solvers2/solver2_r1.py": "9d18a713bfa010f874f31ff370d5d5aa94fc4ea5eb91eca26b79b63821e5cc0b",
+    "studies/m0/solvers2/solver2_r2a.py": "04e297eed65e34c51e13289b4d892c1794c006bcec1703cf48e7c95fc0ce1706",
+    "studies/m0/solvers2/solver2_r2b.py": "a44c690176ba0c3c13b49f8587e8751e8708994272b126c7d2c6e74a0d39228f"
+  },
+  "what": "Hashes for stages 2 to 4 of ADR-0033 addendum 1, section 4A. The candidate list and the partition code were hashed before the partition of record was computed (commit 6885e800); the distinct-item key, the capacity runner and the pool builder are hashed here, after it: a departure from stage 0 recorded as lead ruling R-61.",
+  "workers": 16
+}

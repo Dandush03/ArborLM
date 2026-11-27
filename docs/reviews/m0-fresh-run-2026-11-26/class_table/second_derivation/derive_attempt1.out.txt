@@ -1,0 +1,32 @@
+== R1
+final_table4 EXCL 16 M 19 EXCL&M []
+bare(): def bare(h): |     return h.split(':', 1)[1] if h.startswith(('a3:', 'a4:')) else h
+r1_fix3_battery EXCLUDED 3 EXCLUDED_BY_SHAPE stems 5 names 13
+battery exclusions not in EXCL: []
+== R2
+klass body f_pool == r2_fix4_battery (annotations stripped): True ; MISREAD/PARTIAL/CONSTRUCT equal: True
+klass atomic clauses: 37 default: cue by class: {'P': 16, 'artifact': 6, 'construct': 2, 'partial': 13}
+conditional clause 4 '[a3] removal by deleting the minimum and keeping the order of the rest' sh == 'removals=0' -> otherwise ('cue', None)
+conditional clause 5 '[a3] only the first rule' lv == 0 -> otherwise ('cue', None)
+conditional clause 6 '[a3] only the last rule, on the start string' lv == 0 -> otherwise ('cue', None)
+conditional clause 7 '[a3] rules in reverse order' lv == 0 -> otherwise ('P', 8)
+header labels: (cue), (partial) = truncated procedure, (P) = full solve under a misreading of a stated convention. -> {'(cue)': '', '(partial)': 'truncated procedure', '(P)': 'full solve under a misreading of a stated convention.'}
+[NEW] rules: 21
+note: [NEW] rule [NEW] (partial) largest modulus: try r, r+m, r+2m against the other congruences, else r label (partial) klass on its name ('cue', None)
+== M1
+PROC pairs: 13
+pool_a5 stem(): def stem(lid): |     s = lid.split('.', 1)[1] |     for suf in ('_r4', '_r3', '_r2'): |         s = s.removesuffix(suf) |     return s
+a3 lineage aliases: {'last_digit_power': [('power_remainder', 'm1_fix4_battery'), ('power_remainder', 'rules_a5'), ('power_remainder', 'rules_a5_attempt1')]}
+M1 ext: consecutive mean_plus_step: no audit-3 rule of that name (a3 branch 'consecutive')
+M1 ext: division_counting a3:k_minus_remainder_ignores_exact_fit (a3 branch 'division_counting') lines a3 [[304, 305]] im [[376, 377]]: {'primary (target container h not read)': False, 'literal (h read: its binding included)': False, 'primary + enclosing guards': False}
+M1 ext: finite_differences next_term_when_asked_later: no audit-3 rule of that name (a3 branch 'finite_differences')
+M1 ext: gcd_lcm product_over_gcd_of_all: no audit-3 rule of that name (a3 branch 'gcd_lcm')
+M1 ext: ratio_share a3:largest_share (a3 branch 'ratio_share') lines a3 [[82]] im [[143]]: {'primary (target container h not read)': True, 'literal (h read: its binding included)': False, 'primary + enclosing guards': True}
+M1 ext: ratio_share smallest_share: no audit-3 rule of that name (a3 branch 'ratio_share')
+M1 ext: prime_factors a3:largest_le_sqrt (a3 branch 'prime_factors') lines a3 [[162, 169]] im [[238, 245]]: {'primary (target container h not read)': False, 'literal (h read: its binding included)': False, 'primary + enclosing guards': False}
+M1 ext: slot_permutations ignore_first_rule: no audit-3 rule of that name (a3 branch 'slot_permutations')
+M1 ext: slot_permutations a3:parity_fraction_of_total (a3 branch 'slot_permutations') lines a3 [[205, 206, 207, 209, 211]] im [[278, 280, 281, 282, 284, 285]]: {'primary (target container h not read)': False, 'literal (h read: its binding included)': False, 'primary + enclosing guards': False}
+M1 ext: last_digit_power a3:fermat_misapplied_e_mod_p_plus_1 (a3 branch 'power_remainder') lines a3 [[175, 176, 181]] im [[252, 254, 260]]: {'primary (target container h not read)': False, 'literal (h read: its binding included)': False, 'primary + enclosing guards': False}
+== C1
+s4_rules_v2 M.*: 50 H.*: 1
+STOP: computed rule name with a counted-out prefix f'L.e{k}'

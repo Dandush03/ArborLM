@@ -1,0 +1,17 @@
+........................................................................ [ 13%]
+........................................................................ [ 27%]
+...............................................................xx....... [ 41%]
+........................................................................ [ 54%]
+........................................................................ [ 68%]
+........................................................................ [ 82%]
+........................................................................ [ 96%]
+....................                                                     [100%]
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279
+  /Users/daniellaloush/dandush03/ArborLM/.claude/worktrees/agent-a0c9d741ea96ce52f/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:81.)
+    cpu = _conversion_method_template(device=torch.device("cpu"))
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+522 passed, 2 xfailed, 1 warning in 1008.88s (0:16:48)
+PYTHONDONTWRITEBYTECODE=1 timeout 3000 uv run --locked pytest  -q -p   670.51s user 20.60s system 68% cpu 16:53.96 total
+exit 0

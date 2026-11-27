@@ -1,0 +1,1074 @@
+{
+  "EXCL": [
+    "ccw_as_cw",
+    "cw270_as_90",
+    "duration_end_off_by_one",
+    "first_cond_only_then_first",
+    "ignore_180s",
+    "ignore_last_condition",
+    "inclusive_day_reading",
+    "latest_start_first",
+    "left_right_only",
+    "off_by_one_low",
+    "partial_walk_3",
+    "rule_at_distance_1",
+    "second_nearest_rule",
+    "strict_gt_D",
+    "third_nearest_rule",
+    "turn_moves_bottom_to_top"
+  ],
+  "M": [
+    "abstain_as_no",
+    "abstain_as_yes",
+    "all_and",
+    "all_or",
+    "chebyshev",
+    "direction_ignored_p_over_q",
+    "direction_slip",
+    "drop_negation",
+    "east_west_mirrored",
+    "euclid_rounded",
+    "inverse_answer",
+    "k_minus_1",
+    "k_plus_1",
+    "off_by_one_plus",
+    "rotation_reversed",
+    "rotations_reversed",
+    "signed_axis_merged",
+    "total_minus_union_wrong_sign",
+    "wrong_first_mover"
+  ],
+  "commit": "b78e58b1f47619f070dfc6c0a88999d345b1a34b",
+  "lineages": {
+    "R1.boolean_lights_r4": {
+      "R1a": {
+        "aud": [
+          "a3:each_switch_once",
+          "a3:flip_initial",
+          "a3:ignore_initial",
+          "a3:initial_state",
+          "a3:last_press_flips",
+          "a3:majority_on_at_start",
+          "a3:presses_parity_all",
+          "a3:wired_switch_count_parity",
+          "constant_mfk_fitted"
+        ],
+        "feat": [
+          "feat:#presses of switches wired to ask, parity"
+        ],
+        "impl": [
+          "constant_mfk_fitted",
+          "each_switch_once",
+          "flip_initial",
+          "ignore_initial",
+          "initial_state",
+          "last_press_flips",
+          "majority_on_at_start",
+          "presses_parity_all",
+          "wired_switch_count_parity"
+        ]
+      },
+      "R1b": {
+        "aud": [
+          "a3:each_switch_once",
+          "a3:flip_initial",
+          "a3:ignore_initial",
+          "a3:initial_state",
+          "a3:last_press_flips",
+          "a3:majority_on_at_start",
+          "a3:presses_parity_all",
+          "a3:wired_switch_count_parity",
+          "constant_mfk_fitted"
+        ],
+        "feat": [
+          "feat:#presses of switches wired to ask, parity"
+        ],
+        "impl": [
+          "constant_mfk_fitted",
+          "each_switch_once",
+          "flip_initial",
+          "ignore_initial",
+          "initial_state",
+          "last_press_flips",
+          "majority_on_at_start",
+          "presses_parity_all",
+          "wired_switch_count_parity"
+        ]
+      },
+      "R1c": {
+        "printed": [
+          "lookup (asked on at start, #switches wired to it, #presses parity)"
+        ]
+      }
+    },
+    "R1.categories_default_exceptions_r4": {
+      "R1a": {
+        "aud": [
+          "a3:all_can",
+          "a3:first_listed_rule",
+          "a3:first_rule_group_in_chain_text",
+          "a3:last_listed_rule",
+          "a3:least_specific_rule",
+          "a3:majority_sign",
+          "a3:odd_yes_count",
+          "a3:partial_walk_3",
+          "a3:rule_at_distance_1",
+          "a3:second_nearest_rule",
+          "a3:third_nearest_rule",
+          "constant_mfk_fitted"
+        ],
+        "feat": [
+          "feat:#rules for verb, #true for verb",
+          "feat:chain length"
+        ],
+        "impl": [
+          "all_can",
+          "constant_mfk_fitted",
+          "first_listed_rule",
+          "first_rule_group_in_chain_text",
+          "last_listed_rule",
+          "least_specific_rule",
+          "majority_sign",
+          "odd_yes_count",
+          "partial_walk_3",
+          "rule_at_distance_1",
+          "second_nearest_rule",
+          "third_nearest_rule"
+        ]
+      },
+      "R1b": {
+        "aud": [
+          "a3:all_can",
+          "a3:first_listed_rule",
+          "a3:first_rule_group_in_chain_text",
+          "a3:last_listed_rule",
+          "a3:least_specific_rule",
+          "a3:majority_sign",
+          "a3:odd_yes_count",
+          "a3:partial_walk_3",
+          "a3:rule_at_distance_1",
+          "a3:second_nearest_rule",
+          "a3:third_nearest_rule",
+          "constant_mfk_fitted"
+        ],
+        "feat": [
+          "feat:#rules for verb, #true for verb",
+          "feat:chain length"
+        ],
+        "impl": [
+          "all_can",
+          "constant_mfk_fitted",
+          "first_listed_rule",
+          "first_rule_group_in_chain_text",
+          "last_listed_rule",
+          "least_specific_rule",
+          "majority_sign",
+          "odd_yes_count",
+          "partial_walk_3",
+          "rule_at_distance_1",
+          "second_nearest_rule",
+          "third_nearest_rule"
+        ]
+      },
+      "R1c": {
+        "printed": [
+          "first_stated_rule_for_verb",
+          "last_stated_rule_for_verb",
+          "lookup (#can, #cannot rules for the verb)",
+          "rule_nearest_top_of_chain"
+        ]
+      }
+    },
+    "R1.compass_turns": {
+      "R1a": {
+        "aud": [
+          "a3:around",
+          "a3:ccw90",
+          "a3:ccw_as_cw",
+          "a3:cw180",
+          "a3:cw270",
+          "a3:cw270_as_90",
+          "a3:cw90",
+          "a3:ignore_180s",
+          "a3:last_turn_only",
+          "a3:left",
+          "a3:left_right_only",
+          "a3:opposite_of_start",
+          "a3:right",
+          "a3:start_direction",
+          "constant_mfk_fitted"
+        ],
+        "feat": [],
+        "impl": [
+          "around",
+          "ccw90",
+          "ccw_as_cw",
+          "constant_mfk_fitted",
+          "cw180",
+          "cw270",
+          "cw270_as_90",
+          "cw90",
+          "ignore_180s",
+          "last_turn_only",
+          "left",
+          "left_right_only",
+          "opposite_of_start",
+          "right",
+          "start_direction"
+        ]
+      },
+      "R1b": {
+        "aud": [
+          "a3:around",
+          "a3:ccw90",
+          "a3:ccw_as_cw",
+          "a3:cw180",
+          "a3:cw270",
+          "a3:cw270_as_90",
+          "a3:cw90",
+          "a3:ignore_180s",
+          "a3:last_turn_only",
+          "a3:left",
+          "a3:left_right_only",
+          "a3:opposite_of_start",
+          "a3:right",
+          "a3:start_direction",
+          "constant_mfk_fitted"
+        ],
+        "feat": [],
+        "impl": [
+          "around",
+          "ccw90",
+          "ccw_as_cw",
+          "constant_mfk_fitted",
+          "cw180",
+          "cw270",
+          "cw270_as_90",
+          "cw90",
+          "ignore_180s",
+          "last_turn_only",
+          "left",
+          "left_right_only",
+          "opposite_of_start",
+          "right",
+          "start_direction"
+        ]
+      },
+      "R1c": {
+        "printed": [
+          "turn around",
+          "turn left",
+          "turn right",
+          "word_turns_only"
+        ]
+      }
+    },
+    "R1.conditional_threshold_rule_r4": {
+      "R1a": {
+        "aud": [
+          "a3:D_le_0",
+          "a3:abstain_as_no",
+          "a3:abstain_as_yes",
+          "a3:approx_count_times_mean",
+          "a3:count_margin_ge_D",
+          "a3:heaviest_voter",
+          "a3:more_yes_votes",
+          "a3:more_yes_weight",
+          "a3:off_by_one_low",
+          "a3:strict_gt_D",
+          "a3:yes_weight_ge_D",
+          "constant_mfk_fitted"
+        ],
+        "feat": [
+          "feat:#yes - #no votes",
+          "feat:margin sign and |margin|//5"
+        ],
+        "impl": [
+          "D_le_0",
+          "abstain_as_no",
+          "abstain_as_yes",
+          "approx_count_times_mean",
+          "constant_mfk_fitted",
+          "count_margin_ge_D",
+          "heaviest_voter",
+          "more_yes_votes",
+          "more_yes_weight",
+          "off_by_one_low",
+          "strict_gt_D",
+          "yes_weight_ge_D"
+        ]
+      },
+      "R1b": {
+        "aud": [
+          "a3:D_le_0",
+          "a3:abstain_as_no",
+          "a3:abstain_as_yes",
+          "a3:approx_count_times_mean",
+          "a3:count_margin_ge_D",
+          "a3:heaviest_voter",
+          "a3:more_yes_votes",
+          "a3:more_yes_weight",
+          "a3:off_by_one_low",
+          "a3:strict_gt_D",
+          "a3:yes_weight_ge_D",
+          "constant_mfk_fitted"
+        ],
+        "feat": [
+          "feat:#yes - #no votes",
+          "feat:margin sign and |margin|//5"
+        ],
+        "impl": [
+          "D_le_0",
+          "abstain_as_no",
+          "abstain_as_yes",
+          "approx_count_times_mean",
+          "constant_mfk_fitted",
+          "count_margin_ge_D",
+          "heaviest_voter",
+          "more_yes_votes",
+          "more_yes_weight",
+          "off_by_one_low",
+          "strict_gt_D",
+          "yes_weight_ge_D"
+        ]
+      },
+      "R1c": {
+        "printed": []
+      }
+    },
+    "R1.equivalence_exchange_rates_r6": {
+      "R1a": {
+        "aud": [
+          "a3:local_max",
+          "a3:most_local_wins",
+          "a3:smallest_unit_count",
+          "a4:direction_ignored_p_over_q",
+          "a4:direction_ignored_q_over_p",
+          "a4:first_leg_only",
+          "a4:inverse_answer",
+          "a4:last_leg_only",
+          "constant_mfk_fitted",
+          "first_number",
+          "fitted_ratio_times_size",
+          "largest_number",
+          "last_number",
+          "modal_number",
+          "smallest_number",
+          "sum_numbers"
+        ],
+        "feat": [],
+        "impl": [
+          "N_itself",
+          "N_times_first_rate",
+          "N_times_largest_number",
+          "constant_mfk_fitted",
+          "direction_slip",
+          "first_number",
+          "largest_number",
+          "largest_rate_number",
+          "last_number",
+          "local_max",
+          "modal_number",
+          "most_local_wins",
+          "smallest_number",
+          "smallest_unit_count",
+          "sum_numbers"
+        ]
+      },
+      "R1b": {
+        "aud": [
+          "a3:local_max",
+          "a3:most_local_wins",
+          "a3:smallest_unit_count",
+          "a4:direction_ignored_p_over_q",
+          "a4:direction_ignored_q_over_p",
+          "a4:first_leg_only",
+          "a4:inverse_answer",
+          "a4:last_leg_only",
+          "constant_mfk_fitted",
+          "first_number",
+          "fitted_ratio_times_size",
+          "largest_number",
+          "last_number",
+          "modal_number",
+          "smallest_number",
+          "sum_numbers"
+        ],
+        "feat": [],
+        "impl": [
+          "N_itself",
+          "N_times_first_rate",
+          "N_times_largest_number",
+          "constant_mfk_fitted",
+          "direction_slip",
+          "first_number",
+          "largest_number",
+          "largest_rate_number",
+          "last_number",
+          "local_max",
+          "modal_number",
+          "most_local_wins",
+          "smallest_number",
+          "smallest_unit_count",
+          "sum_numbers"
+        ]
+      },
+      "R1c": {
+        "printed": []
+      }
+    },
+    "R1.knights_knaves_r6": {
+      "R1a": {
+        "aud": [
+          "a3:accuses_someone_means_knave",
+          "a3:called_knave_means_knave",
+          "a3:called_knight_means_knight",
+          "a3:self_doubt_means_knight",
+          "a3:self_praise_means_knave",
+          "a4:about_asked_vote",
+          "a4:both_knights",
+          "a4:own_kind_some_knave_knight_both_knave",
+          "a4:own_statement_kind_table",
+          "a4:some_knave",
+          "constant_mfk_fitted"
+        ],
+        "feat": [
+          "feat:own kind + is self in args",
+          "feat:own statement kind"
+        ],
+        "impl": [
+          "accuses_someone_means_knave",
+          "called_knave_means_knave",
+          "called_knight_means_knight",
+          "constant_mfk_fitted",
+          "self_doubt_means_knight",
+          "self_praise_means_knave"
+        ]
+      },
+      "R1b": {
+        "aud": [
+          "a3:accuses_someone_means_knave",
+          "a3:called_knave_means_knave",
+          "a3:called_knight_means_knight",
+          "a3:self_doubt_means_knight",
+          "a3:self_praise_means_knave",
+          "a4:about_asked_vote",
+          "a4:both_knights",
+          "a4:own_kind_some_knave_knight_both_knave",
+          "a4:own_statement_kind_table",
+          "a4:some_knave",
+          "constant_mfk_fitted"
+        ],
+        "feat": [
+          "feat:own kind + is self in args",
+          "feat:own statement kind"
+        ],
+        "impl": [
+          "accuses_someone_means_knave",
+          "called_knave_means_knave",
+          "called_knight_means_knight",
+          "constant_mfk_fitted",
+          "self_doubt_means_knight",
+          "self_praise_means_knave"
+        ]
+      },
+      "R1c": {
+        "printed": [
+          "lookup (own form, forms mentioning asked)",
+          "lookup (own kind, #knight-calls, #knave-calls, self in own)"
+        ]
+      }
+    },
+    "R1.spatial_grid_walk_r5": {
+      "R1a": {
+        "aud": [
+          "a3:east",
+          "a3:east_west_mirrored",
+          "a3:ignore_walls",
+          "a3:net_displacement_clamped",
+          "a3:north",
+          "a3:south",
+          "a3:start_cell",
+          "a3:west",
+          "alpha_first",
+          "alpha_last",
+          "constant_mfk_fitted",
+          "first_mentioned",
+          "last_mentioned",
+          "least_mentioned",
+          "longest_name",
+          "most_mentioned",
+          "shortest_name"
+        ],
+        "feat": [],
+        "impl": [
+          "alpha_first",
+          "alpha_last",
+          "constant_mfk_fitted",
+          "east",
+          "east_west_mirrored",
+          "first_mentioned",
+          "ignore_walls",
+          "last_mentioned",
+          "least_mentioned",
+          "longest_name",
+          "most_mentioned",
+          "net_displacement_clamped",
+          "north",
+          "shortest_name",
+          "south",
+          "start_cell",
+          "west"
+        ]
+      },
+      "R1b": {
+        "aud": [
+          "a3:east",
+          "a3:east_west_mirrored",
+          "a3:ignore_walls",
+          "a3:net_displacement_clamped",
+          "a3:north",
+          "a3:south",
+          "a3:start_cell",
+          "a3:west",
+          "alpha_first",
+          "alpha_last",
+          "constant_mfk_fitted",
+          "first_mentioned",
+          "last_mentioned",
+          "least_mentioned",
+          "longest_name",
+          "most_mentioned",
+          "shortest_name"
+        ],
+        "feat": [],
+        "impl": [
+          "alpha_first",
+          "alpha_last",
+          "constant_mfk_fitted",
+          "east",
+          "east_west_mirrored",
+          "first_mentioned",
+          "ignore_walls",
+          "last_mentioned",
+          "least_mentioned",
+          "longest_name",
+          "most_mentioned",
+          "net_displacement_clamped",
+          "north",
+          "shortest_name",
+          "south",
+          "start_cell",
+          "west"
+        ]
+      },
+      "R1c": {
+        "printed": []
+      }
+    },
+    "R1.swap_tracking_r5": {
+      "R1a": {
+        "aud": [
+          "a3:ignore_rotations",
+          "a3:initial_item",
+          "a3:rotation_reversed",
+          "a4:ignore_swaps",
+          "a4:last_half_only",
+          "a4:rotations_reversed",
+          "alpha_first",
+          "alpha_last",
+          "constant_mfk_fitted",
+          "first_mentioned",
+          "last_mentioned",
+          "least_mentioned",
+          "longest_name",
+          "most_mentioned",
+          "shortest_name"
+        ],
+        "feat": [],
+        "impl": [
+          "alpha_first",
+          "alpha_last",
+          "constant_mfk_fitted",
+          "first_mentioned",
+          "ignore_rotations",
+          "initial_item",
+          "last_mentioned",
+          "least_mentioned",
+          "longest_name",
+          "most_mentioned",
+          "rotation_reversed",
+          "shortest_name"
+        ]
+      },
+      "R1b": {
+        "aud": [
+          "a3:ignore_rotations",
+          "a3:initial_item",
+          "a3:rotation_reversed",
+          "a4:ignore_swaps",
+          "a4:last_half_only",
+          "a4:rotations_reversed",
+          "alpha_first",
+          "alpha_last",
+          "constant_mfk_fitted",
+          "first_mentioned",
+          "last_mentioned",
+          "least_mentioned",
+          "longest_name",
+          "most_mentioned",
+          "shortest_name"
+        ],
+        "feat": [],
+        "impl": [
+          "alpha_first",
+          "alpha_last",
+          "constant_mfk_fitted",
+          "first_mentioned",
+          "ignore_rotations",
+          "initial_item",
+          "last_mentioned",
+          "least_mentioned",
+          "longest_name",
+          "most_mentioned",
+          "rotation_reversed",
+          "shortest_name"
+        ]
+      },
+      "R1c": {
+        "printed": []
+      }
+    },
+    "R1.temporal_weekday_shift_r6": {
+      "R1a": {
+        "aud": [
+          "a3:anchor_weekday",
+          "a3:ignore_before_after",
+          "a4:last_link_only",
+          "a4:off_by_one_plus",
+          "a4:path_negated",
+          "a4:path_unsigned",
+          "a4:sum_all_links_unsigned",
+          "constant_mfk_fitted"
+        ],
+        "feat": [],
+        "impl": [
+          "anchor_weekday",
+          "constant_mfk_fitted",
+          "ignore_before_after"
+        ]
+      },
+      "R1b": {
+        "aud": [
+          "a3:anchor_weekday",
+          "a3:ignore_before_after",
+          "a4:last_link_only",
+          "a4:off_by_one_plus",
+          "a4:path_negated",
+          "a4:path_unsigned",
+          "a4:sum_all_links_unsigned",
+          "constant_mfk_fitted"
+        ],
+        "feat": [],
+        "impl": [
+          "anchor_weekday",
+          "constant_mfk_fitted",
+          "ignore_before_after"
+        ]
+      },
+      "R1c": {
+        "printed": [
+          "anchor_plus_links_touching_asked",
+          "anchor_plus_signed_sum_all_links"
+        ]
+      }
+    },
+    "R1.venn_counting_r5": {
+      "R1a": {
+        "aud": [
+          "a3:ignore_triples",
+          "a3:pairs_minus_2triples",
+          "a3:pairs_minus_3triples",
+          "a3:sizes_minus_2pairs",
+          "a3:sizes_minus_pairs",
+          "a3:sum_pairs",
+          "a3:sum_pairs_minus_triple",
+          "a3:total_minus_sizes",
+          "a3:total_minus_union_wrong_sign",
+          "constant_mfk_fitted",
+          "first_number",
+          "fitted_ratio_times_size",
+          "largest_number",
+          "last_number",
+          "modal_number",
+          "smallest_number",
+          "sum_numbers"
+        ],
+        "feat": [],
+        "impl": [
+          "constant_mfk_fitted",
+          "first_number",
+          "ignore_triples",
+          "largest_number",
+          "last_number",
+          "modal_number",
+          "pairs_minus_2triples",
+          "pairs_minus_3triples",
+          "sizes_minus_2pairs",
+          "sizes_minus_pairs",
+          "smallest_number",
+          "sum_numbers",
+          "sum_pairs",
+          "sum_pairs_minus_triple",
+          "total_minus_sizes",
+          "total_minus_union_wrong_sign"
+        ]
+      },
+      "R1b": {
+        "aud": [
+          "a3:ignore_triples",
+          "a3:pairs_minus_2triples",
+          "a3:pairs_minus_3triples",
+          "a3:sizes_minus_2pairs",
+          "a3:sizes_minus_pairs",
+          "a3:sum_pairs",
+          "a3:sum_pairs_minus_triple",
+          "a3:total_minus_sizes",
+          "a3:total_minus_union_wrong_sign",
+          "constant_mfk_fitted",
+          "first_number",
+          "fitted_ratio_times_size",
+          "largest_number",
+          "last_number",
+          "modal_number",
+          "smallest_number",
+          "sum_numbers"
+        ],
+        "feat": [],
+        "impl": [
+          "constant_mfk_fitted",
+          "first_number",
+          "ignore_triples",
+          "largest_number",
+          "last_number",
+          "modal_number",
+          "pairs_minus_2triples",
+          "pairs_minus_3triples",
+          "sizes_minus_2pairs",
+          "sizes_minus_pairs",
+          "smallest_number",
+          "sum_numbers",
+          "sum_pairs",
+          "sum_pairs_minus_triple",
+          "total_minus_sizes",
+          "total_minus_union_wrong_sign"
+        ]
+      },
+      "R1c": {
+        "printed": []
+      }
+    }
+  },
+  "scope": {
+    "R1.boolean_lights_r4": {
+      "in_amendment_scope": [
+        "a3:each_switch_once",
+        "a3:flip_initial",
+        "a3:ignore_initial",
+        "a3:initial_state",
+        "a3:last_press_flips",
+        "a3:majority_on_at_start",
+        "a3:presses_parity_all",
+        "a3:wired_switch_count_parity",
+        "constant_mfk_fitted",
+        "each_switch_once",
+        "feat:#presses of switches wired to ask, parity",
+        "flip_initial",
+        "ignore_initial",
+        "initial_state",
+        "last_press_flips",
+        "lookup (asked on at start, #switches wired to it, #presses parity)",
+        "majority_on_at_start",
+        "presses_parity_all",
+        "wired_switch_count_parity"
+      ],
+      "labelled_EXCL": [],
+      "labelled_M": []
+    },
+    "R1.categories_default_exceptions_r4": {
+      "in_amendment_scope": [
+        "a3:all_can",
+        "a3:first_listed_rule",
+        "a3:first_rule_group_in_chain_text",
+        "a3:last_listed_rule",
+        "a3:least_specific_rule",
+        "a3:majority_sign",
+        "a3:odd_yes_count",
+        "all_can",
+        "constant_mfk_fitted",
+        "feat:#rules for verb, #true for verb",
+        "feat:chain length",
+        "first_listed_rule",
+        "first_rule_group_in_chain_text",
+        "first_stated_rule_for_verb",
+        "last_listed_rule",
+        "last_stated_rule_for_verb",
+        "least_specific_rule",
+        "lookup (#can, #cannot rules for the verb)",
+        "majority_sign",
+        "odd_yes_count",
+        "rule_nearest_top_of_chain"
+      ],
+      "labelled_EXCL": [
+        "a3:partial_walk_3",
+        "a3:rule_at_distance_1",
+        "a3:second_nearest_rule",
+        "a3:third_nearest_rule",
+        "partial_walk_3",
+        "rule_at_distance_1",
+        "second_nearest_rule",
+        "third_nearest_rule"
+      ],
+      "labelled_M": []
+    },
+    "R1.compass_turns": {
+      "in_amendment_scope": [
+        "a3:around",
+        "a3:ccw90",
+        "a3:cw180",
+        "a3:cw270",
+        "a3:cw90",
+        "a3:last_turn_only",
+        "a3:left",
+        "a3:opposite_of_start",
+        "a3:right",
+        "a3:start_direction",
+        "around",
+        "ccw90",
+        "constant_mfk_fitted",
+        "cw180",
+        "cw270",
+        "cw90",
+        "last_turn_only",
+        "left",
+        "opposite_of_start",
+        "right",
+        "start_direction",
+        "turn around",
+        "turn left",
+        "turn right",
+        "word_turns_only"
+      ],
+      "labelled_EXCL": [
+        "a3:ccw_as_cw",
+        "a3:cw270_as_90",
+        "a3:ignore_180s",
+        "a3:left_right_only",
+        "ccw_as_cw",
+        "cw270_as_90",
+        "ignore_180s",
+        "left_right_only"
+      ],
+      "labelled_M": []
+    },
+    "R1.conditional_threshold_rule_r4": {
+      "in_amendment_scope": [
+        "D_le_0",
+        "a3:D_le_0",
+        "a3:approx_count_times_mean",
+        "a3:count_margin_ge_D",
+        "a3:heaviest_voter",
+        "a3:more_yes_votes",
+        "a3:more_yes_weight",
+        "a3:yes_weight_ge_D",
+        "approx_count_times_mean",
+        "constant_mfk_fitted",
+        "count_margin_ge_D",
+        "feat:#yes - #no votes",
+        "feat:margin sign and |margin|//5",
+        "heaviest_voter",
+        "more_yes_votes",
+        "more_yes_weight",
+        "yes_weight_ge_D"
+      ],
+      "labelled_EXCL": [
+        "a3:off_by_one_low",
+        "a3:strict_gt_D",
+        "off_by_one_low",
+        "strict_gt_D"
+      ],
+      "labelled_M": [
+        "a3:abstain_as_no",
+        "a3:abstain_as_yes",
+        "abstain_as_no",
+        "abstain_as_yes"
+      ]
+    },
+    "R1.equivalence_exchange_rates_r6": {
+      "in_amendment_scope": [
+        "N_itself",
+        "N_times_first_rate",
+        "N_times_largest_number",
+        "a3:local_max",
+        "a3:most_local_wins",
+        "a3:smallest_unit_count",
+        "a4:direction_ignored_q_over_p",
+        "a4:first_leg_only",
+        "a4:last_leg_only",
+        "constant_mfk_fitted",
+        "first_number",
+        "fitted_ratio_times_size",
+        "largest_number",
+        "largest_rate_number",
+        "last_number",
+        "local_max",
+        "modal_number",
+        "most_local_wins",
+        "smallest_number",
+        "smallest_unit_count",
+        "sum_numbers"
+      ],
+      "labelled_EXCL": [],
+      "labelled_M": [
+        "a4:direction_ignored_p_over_q",
+        "a4:inverse_answer",
+        "direction_slip"
+      ]
+    },
+    "R1.knights_knaves_r6": {
+      "in_amendment_scope": [
+        "a3:accuses_someone_means_knave",
+        "a3:called_knave_means_knave",
+        "a3:called_knight_means_knight",
+        "a3:self_doubt_means_knight",
+        "a3:self_praise_means_knave",
+        "a4:about_asked_vote",
+        "a4:both_knights",
+        "a4:own_kind_some_knave_knight_both_knave",
+        "a4:own_statement_kind_table",
+        "a4:some_knave",
+        "accuses_someone_means_knave",
+        "called_knave_means_knave",
+        "called_knight_means_knight",
+        "constant_mfk_fitted",
+        "feat:own kind + is self in args",
+        "feat:own statement kind",
+        "lookup (own form, forms mentioning asked)",
+        "lookup (own kind, #knight-calls, #knave-calls, self in own)",
+        "self_doubt_means_knight",
+        "self_praise_means_knave"
+      ],
+      "labelled_EXCL": [],
+      "labelled_M": []
+    },
+    "R1.spatial_grid_walk_r5": {
+      "in_amendment_scope": [
+        "a3:east",
+        "a3:ignore_walls",
+        "a3:net_displacement_clamped",
+        "a3:north",
+        "a3:south",
+        "a3:start_cell",
+        "a3:west",
+        "alpha_first",
+        "alpha_last",
+        "constant_mfk_fitted",
+        "east",
+        "first_mentioned",
+        "ignore_walls",
+        "last_mentioned",
+        "least_mentioned",
+        "longest_name",
+        "most_mentioned",
+        "net_displacement_clamped",
+        "north",
+        "shortest_name",
+        "south",
+        "start_cell",
+        "west"
+      ],
+      "labelled_EXCL": [],
+      "labelled_M": [
+        "a3:east_west_mirrored",
+        "east_west_mirrored"
+      ]
+    },
+    "R1.swap_tracking_r5": {
+      "in_amendment_scope": [
+        "a3:ignore_rotations",
+        "a3:initial_item",
+        "a4:ignore_swaps",
+        "a4:last_half_only",
+        "alpha_first",
+        "alpha_last",
+        "constant_mfk_fitted",
+        "first_mentioned",
+        "ignore_rotations",
+        "initial_item",
+        "last_mentioned",
+        "least_mentioned",
+        "longest_name",
+        "most_mentioned",
+        "shortest_name"
+      ],
+      "labelled_EXCL": [],
+      "labelled_M": [
+        "a3:rotation_reversed",
+        "a4:rotations_reversed",
+        "rotation_reversed"
+      ]
+    },
+    "R1.temporal_weekday_shift_r6": {
+      "in_amendment_scope": [
+        "a3:anchor_weekday",
+        "a3:ignore_before_after",
+        "a4:last_link_only",
+        "a4:path_negated",
+        "a4:path_unsigned",
+        "a4:sum_all_links_unsigned",
+        "anchor_plus_links_touching_asked",
+        "anchor_plus_signed_sum_all_links",
+        "anchor_weekday",
+        "constant_mfk_fitted",
+        "ignore_before_after"
+      ],
+      "labelled_EXCL": [],
+      "labelled_M": [
+        "a4:off_by_one_plus"
+      ]
+    },
+    "R1.venn_counting_r5": {
+      "in_amendment_scope": [
+        "a3:ignore_triples",
+        "a3:pairs_minus_2triples",
+        "a3:pairs_minus_3triples",
+        "a3:sizes_minus_2pairs",
+        "a3:sizes_minus_pairs",
+        "a3:sum_pairs",
+        "a3:sum_pairs_minus_triple",
+        "a3:total_minus_sizes",
+        "constant_mfk_fitted",
+        "first_number",
+        "fitted_ratio_times_size",
+        "ignore_triples",
+        "largest_number",
+        "last_number",
+        "modal_number",
+        "pairs_minus_2triples",
+        "pairs_minus_3triples",
+        "sizes_minus_2pairs",
+        "sizes_minus_pairs",
+        "smallest_number",
+        "sum_numbers",
+        "sum_pairs",
+        "sum_pairs_minus_triple",
+        "total_minus_sizes"
+      ],
+      "labelled_EXCL": [],
+      "labelled_M": [
+        "a3:total_minus_union_wrong_sign",
+        "total_minus_union_wrong_sign"
+      ]
+    }
+  }
+}

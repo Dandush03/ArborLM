@@ -1,0 +1,2857 @@
+{
+ "n": 40,
+ "seeds": "made-up",
+ "lineages": {
+  "R2.a_open": {
+   "0": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "1": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "2": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      },
+      "[impl] x": {
+       "k": 6,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.15,
+       "acc_app": 0.15
+      }
+     }
+    }
+   },
+   "3": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "4": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "5": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "6": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   }
+  },
+  "R2.b_open": {
+   "0": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "1": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "2": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      },
+      "[impl] x": {
+       "k": 6,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.15,
+       "acc_app": 0.15
+      }
+     }
+    }
+   },
+   "3": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "4": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "5": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "6": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   }
+  },
+  "R2.c_yn": {
+   "0": {
+    "-": {
+     "n": 40,
+     "answer_type": "yn",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 20,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.5,
+       "acc_app": 0.5
+      },
+      "[impl] base": {
+       "k": 20,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.5,
+       "acc_app": 0.5
+      }
+     },
+     "yes_share": 0.5
+    }
+   },
+   "1": {
+    "-": {
+     "n": 40,
+     "answer_type": "yn",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 20,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.5,
+       "acc_app": 0.5
+      },
+      "[impl] base": {
+       "k": 20,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.5,
+       "acc_app": 0.5
+      }
+     },
+     "yes_share": 0.5
+    }
+   },
+   "2": {
+    "-": {
+     "n": 40,
+     "answer_type": "yn",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 20,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.5,
+       "acc_app": 0.5
+      },
+      "[impl] base": {
+       "k": 20,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.5,
+       "acc_app": 0.5
+      },
+      "[mine] yn hi": {
+       "k": 26,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.65,
+       "acc_app": 0.65
+      },
+      "[mine] yn lo": {
+       "k": 14,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.35,
+       "acc_app": 0.35
+      }
+     },
+     "yes_share": 0.5
+    }
+   },
+   "3": {
+    "-": {
+     "n": 40,
+     "answer_type": "yn",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 20,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.5,
+       "acc_app": 0.5
+      },
+      "[impl] base": {
+       "k": 20,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.5,
+       "acc_app": 0.5
+      }
+     },
+     "yes_share": 0.5
+    }
+   },
+   "4": {
+    "-": {
+     "n": 40,
+     "answer_type": "yn",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 20,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.5,
+       "acc_app": 0.5
+      },
+      "[impl] base": {
+       "k": 20,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.5,
+       "acc_app": 0.5
+      }
+     },
+     "yes_share": 0.5
+    }
+   },
+   "5": {
+    "-": {
+     "n": 40,
+     "answer_type": "yn",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 20,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.5,
+       "acc_app": 0.5
+      },
+      "[impl] base": {
+       "k": 20,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.5,
+       "acc_app": 0.5
+      }
+     },
+     "yes_share": 0.5
+    }
+   },
+   "6": {
+    "-": {
+     "n": 40,
+     "answer_type": "yn",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 20,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.5,
+       "acc_app": 0.5
+      },
+      "[impl] base": {
+       "k": 20,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.5,
+       "acc_app": 0.5
+      }
+     },
+     "yes_share": 0.5
+    }
+   }
+  },
+  "R2.d_yn": {
+   "0": {
+    "-": {
+     "n": 40,
+     "answer_type": "yn",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 20,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.5,
+       "acc_app": 0.5
+      },
+      "[impl] base": {
+       "k": 20,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.5,
+       "acc_app": 0.5
+      }
+     },
+     "yes_share": 0.5
+    }
+   },
+   "1": {
+    "-": {
+     "n": 40,
+     "answer_type": "yn",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 20,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.5,
+       "acc_app": 0.5
+      },
+      "[impl] base": {
+       "k": 20,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.5,
+       "acc_app": 0.5
+      }
+     },
+     "yes_share": 0.5
+    }
+   },
+   "2": {
+    "-": {
+     "n": 40,
+     "answer_type": "yn",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 20,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.5,
+       "acc_app": 0.5
+      },
+      "[impl] base": {
+       "k": 20,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.5,
+       "acc_app": 0.5
+      },
+      "[mine] yn lo2": {
+       "k": 14,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.35,
+       "acc_app": 0.35
+      }
+     },
+     "yes_share": 0.5
+    }
+   },
+   "3": {
+    "-": {
+     "n": 40,
+     "answer_type": "yn",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 20,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.5,
+       "acc_app": 0.5
+      },
+      "[impl] base": {
+       "k": 20,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.5,
+       "acc_app": 0.5
+      }
+     },
+     "yes_share": 0.5
+    }
+   },
+   "4": {
+    "-": {
+     "n": 40,
+     "answer_type": "yn",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 20,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.5,
+       "acc_app": 0.5
+      },
+      "[impl] base": {
+       "k": 20,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.5,
+       "acc_app": 0.5
+      }
+     },
+     "yes_share": 0.5
+    }
+   },
+   "5": {
+    "-": {
+     "n": 40,
+     "answer_type": "yn",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 20,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.5,
+       "acc_app": 0.5
+      },
+      "[impl] base": {
+       "k": 20,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.5,
+       "acc_app": 0.5
+      }
+     },
+     "yes_share": 0.5
+    }
+   },
+   "6": {
+    "-": {
+     "n": 40,
+     "answer_type": "yn",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 20,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.5,
+       "acc_app": 0.5
+      },
+      "[impl] base": {
+       "k": 20,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.5,
+       "acc_app": 0.5
+      }
+     },
+     "yes_share": 0.5
+    }
+   }
+  },
+  "R2.e_oneseed": {
+   "0": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "1": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "2": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "3": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "4": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "5": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "6": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   }
+  },
+  "R2.f_cond": {
+   "0": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "1": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "2": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "3": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "4": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "5": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "6": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   }
+  },
+  "R2.g_sd": {
+   "0": {
+    "removals=0": {
+     "n": 20,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.05,
+       "acc_app": 0.05
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    },
+    "removals=1": {
+     "n": 20,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.05,
+       "acc_app": 0.05
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "1": {
+    "removals=0": {
+     "n": 20,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.05,
+       "acc_app": 0.05
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    },
+    "removals=1": {
+     "n": 20,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.05,
+       "acc_app": 0.05
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "2": {
+    "removals=0": {
+     "n": 20,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.05,
+       "acc_app": 0.05
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    },
+    "removals=1": {
+     "n": 20,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.05,
+       "acc_app": 0.05
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "3": {
+    "removals=0": {
+     "n": 20,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.05,
+       "acc_app": 0.05
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    },
+    "removals=1": {
+     "n": 20,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.05,
+       "acc_app": 0.05
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "4": {
+    "removals=0": {
+     "n": 20,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.05,
+       "acc_app": 0.05
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    },
+    "removals=1": {
+     "n": 20,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.05,
+       "acc_app": 0.05
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "5": {
+    "removals=0": {
+     "n": 20,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.05,
+       "acc_app": 0.05
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    },
+    "removals=1": {
+     "n": 20,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.05,
+       "acc_app": 0.05
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "6": {
+    "removals=0": {
+     "n": 20,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.05,
+       "acc_app": 0.05
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    },
+    "removals=1": {
+     "n": 20,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.05,
+       "acc_app": 0.05
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   }
+  },
+  "R2.h_sd": {
+   "0": {
+    "removals=0": {
+     "n": 20,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.05,
+       "acc_app": 0.05
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    },
+    "removals=1": {
+     "n": 20,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.05,
+       "acc_app": 0.05
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "1": {
+    "removals=0": {
+     "n": 20,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.05,
+       "acc_app": 0.05
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    },
+    "removals=1": {
+     "n": 20,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.05,
+       "acc_app": 0.05
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "2": {
+    "removals=0": {
+     "n": 20,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.05,
+       "acc_app": 0.05
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    },
+    "removals=1": {
+     "n": 20,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.05,
+       "acc_app": 0.05
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "3": {
+    "removals=0": {
+     "n": 20,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.05,
+       "acc_app": 0.05
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    },
+    "removals=1": {
+     "n": 20,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.05,
+       "acc_app": 0.05
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "4": {
+    "removals=0": {
+     "n": 20,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.05,
+       "acc_app": 0.05
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    },
+    "removals=1": {
+     "n": 20,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.05,
+       "acc_app": 0.05
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "5": {
+    "removals=0": {
+     "n": 20,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.05,
+       "acc_app": 0.05
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    },
+    "removals=1": {
+     "n": 20,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.05,
+       "acc_app": 0.05
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "6": {
+    "removals=0": {
+     "n": 20,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.05,
+       "acc_app": 0.05
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    },
+    "removals=1": {
+     "n": 20,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.05,
+       "acc_app": 0.05
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 20,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   }
+  },
+  "R2.i_sdsum": {
+   "0": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "1": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "2": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "3": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "4": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "5": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "6": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   }
+  },
+  "R2.j_klass": {
+   "0": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      },
+      "[a3] rules in reverse order": {
+       "k": 40,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 1.0,
+       "acc_app": 1.0
+      },
+      "[mine] alpha (P) beta": {
+       "k": 40,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 1.0,
+       "acc_app": 1.0
+      },
+      "[impl] uses letter pairs here": {
+       "k": 40,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 1.0,
+       "acc_app": 1.0
+      },
+      "[a3] only the first rule": {
+       "k": 40,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 1.0,
+       "acc_app": 1.0
+      }
+     }
+    }
+   },
+   "1": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      },
+      "[a3] rules in reverse order": {
+       "k": 40,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 1.0,
+       "acc_app": 1.0
+      },
+      "[mine] alpha (P) beta": {
+       "k": 40,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 1.0,
+       "acc_app": 1.0
+      },
+      "[impl] uses letter pairs here": {
+       "k": 40,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 1.0,
+       "acc_app": 1.0
+      }
+     }
+    }
+   },
+   "2": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "3": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "4": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "5": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "6": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   }
+  },
+  "R2.k_klass2": {
+   "0": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "1": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      },
+      "[a3] only the first rule": {
+       "k": 40,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 1.0,
+       "acc_app": 1.0
+      }
+     }
+    }
+   },
+   "2": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "3": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "4": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "5": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "6": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   }
+  },
+  "R2.l_construct": {
+   "0": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "1": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      },
+      "[mine] t mod 10 applications": {
+       "k": 40,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 1.0,
+       "acc_app": 1.0
+      }
+     }
+    }
+   },
+   "2": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "3": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "4": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "5": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "6": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   }
+  },
+  "R2.count_divisible": {
+   "0": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "1": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "2": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "3": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "4": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "5": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "6": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   }
+  },
+  "R2.m_new": {
+   "0": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "1": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "2": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "3": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "4": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "5": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "6": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   }
+  },
+  "R2.zz_not": {
+   "0": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "1": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "2": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "3": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "4": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "5": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   },
+   "6": {
+    "-": {
+     "n": 40,
+     "answer_type": "number",
+     "distinct_answers": 5,
+     "rules": {
+      "most frequent answer (train draw)": {
+       "k": 1,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.025,
+       "acc_app": 0.025
+      },
+      "[impl] base": {
+       "k": 0,
+       "napp": 40,
+       "nerr": 0,
+       "acc_all": 0.0,
+       "acc_app": 0.0
+      }
+     }
+    }
+   }
+  }
+ }
+}

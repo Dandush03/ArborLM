@@ -1,0 +1,235 @@
+G=18: core need 14340, reserve need 1000; clusters 37
+reading A: 0 failing cluster-levels
+reading A, reserve levels at the core demand (alternative reading): 68 more
+  R2.binary_search_trace L0: 8000 < 14340
+  R2.binary_search_trace L6: 8000 < 14340
+  R2.bracket_match L0: 7998 < 14340
+  R2.bracket_match L6: 8000 < 14340
+  R2.bst_traversal L0: 8000 < 14340
+  R2.bst_traversal L6: 8000 < 14340
+  R2.cache_eviction L0: 7993 < 14340
+  R2.cache_eviction L6: 8000 < 14340
+  R2.caesar_shift L0: 7809 < 14340
+  R2.caesar_shift L6: 8000 < 14340
+  R2.cellular_automaton L0: 6883 < 14340
+  R2.cellular_automaton L6: 7999 < 14340
+  R2.cheapest_network L0: 7999 < 14340
+  R2.cheapest_network L6: 8000 < 14340
+  R2.chip_toppling L0: 5723 < 14340
+  R2.chip_toppling L6: 8000 < 14340
+  R2.coin_change_min L0: 6135 < 14340
+  R2.coin_change_min L6: 7993 < 14340
+  R2.crt_smallest L0: 7036 < 14340
+  R2.crt_smallest L6: 8000 < 14340
+  R2.dictionary_rank L0: 7942 < 14340
+  R2.dictionary_rank L6: 8000 < 14340
+  R2.digit_root L0: 7665 < 14340
+  R2.digit_root L6: 8000 < 14340
+  R2.expression_eval L0: 7993 < 14340
+  R2.expression_eval L6: 8000 < 14340
+  R2.gcd_euclid L0: 6896 < 14340
+  R2.gcd_euclid L6: 7979 < 14340
+  R2.grid_sum L0: 8000 < 14340
+  R2.grid_sum L6: 8000 < 14340
+  R2.hamming_error_position L0: 6944 < 14340
+  R2.hamming_error_position L6: 8000 < 14340
+  R2.hash_probe L0: 8000 < 14340
+  R2.hash_probe L6: 8000 < 14340
+  R2.interval_scheduling L0: 8000 < 14340
+  R2.interval_scheduling L6: 8000 < 14340
+  R2.lcs_length L0: 8000 < 14340
+  R2.lcs_length L6: 8000 < 14340
+  R2.lis_length L0: 8000 < 14340
+  R2.lis_length L6: 8000 < 14340
+  R2.list_ops L0: 8000 < 14340
+  R2.list_ops L6: 8000 < 14340
+  R2.longest_palindromic_substring L0: 7996 < 14340
+  R2.longest_palindromic_substring L6: 8000 < 14340
+  R2.luhn_check L0: 7995 < 14340
+  R2.luhn_check L6: 8000 < 14340
+  R2.max_subarray_sum L0: 8000 < 14340
+  R2.max_subarray_sum L6: 8000 < 14340
+  R2.merge_smallest_cost L0: 7176 < 14340
+  R2.merge_smallest_cost L6: 8000 < 14340
+  R2.min_heap_ops L0: 8000 < 14340
+  R2.min_heap_ops L6: 8000 < 14340
+  R2.multiples_between L0: 7766 < 14340
+  R2.multiples_between L6: 7998 < 14340
+  R2.palindrome_check L0: 7891 < 14340
+  R2.palindrome_check L6: 8000 < 14340
+  R2.permutation_power L0: 10145 < 14340
+  R2.prime_factor_query L0: 3220 < 14340
+  R2.prime_factor_query L6: 7745 < 14340
+  R2.run_length L0: 3511 < 14340
+  R2.run_length L6: 8000 < 14340
+  R2.stack_machine L0: 4767 < 14340
+  R2.stack_machine L6: 8000 < 14340
+  R2.string_rewrite_nonidentity L0: 7306 < 14340
+  R2.string_rewrite_nonidentity L6: 8000 < 14340
+  R2.subtraction_game L0: 6830 < 14340
+  R2.subtraction_game L6: 7984 < 14340
+  R2.to_base_wide L0: 9401 < 14340
+reading B: 8 failing cluster-levels
+  R2.dictionary_rank L0: 46 < 1000  [dictionary_rank=46/8000 chao1~46]
+  R2.dictionary_rank L1: 46 < 14340  [dictionary_rank=46/40000 chao1~46]
+  R2.dictionary_rank L2: 238 < 14340  [dictionary_rank=238/40000 chao1~238]
+  R2.dictionary_rank L3: 238 < 14340  [dictionary_rank=238/40000 chao1~239]
+  R2.dictionary_rank L4: 1436 < 14340  [dictionary_rank=1436/40000 chao1~1436]
+  R2.dictionary_rank L5: 1436 < 14340  [dictionary_rank=1436/40000 chao1~1436]
+  R2.run_length L0: 54 < 1000  [run_length=54/8000 chao1~54]
+  R2.run_length L1: 1280 < 14340  [run_length=1280/40000 chao1~1282]
+reading B, reserve levels at the core demand (alternative reading): 69 more
+  R2.binary_search_trace L0: 8000 < 14340
+  R2.binary_search_trace L6: 8000 < 14340
+  R2.bracket_match L0: 7983 < 14340
+  R2.bracket_match L6: 8000 < 14340
+  R2.bst_traversal L0: 8000 < 14340
+  R2.bst_traversal L6: 8000 < 14340
+  R2.cache_eviction L0: 7993 < 14340
+  R2.cache_eviction L6: 8000 < 14340
+  R2.caesar_shift L0: 7809 < 14340
+  R2.caesar_shift L6: 8000 < 14340
+  R2.cellular_automaton L0: 6883 < 14340
+  R2.cellular_automaton L6: 7999 < 14340
+  R2.cheapest_network L0: 7999 < 14340
+  R2.cheapest_network L6: 8000 < 14340
+  R2.chip_toppling L0: 5723 < 14340
+  R2.chip_toppling L6: 8000 < 14340
+  R2.coin_change_min L0: 6135 < 14340
+  R2.coin_change_min L6: 7993 < 14340
+  R2.crt_smallest L0: 7036 < 14340
+  R2.crt_smallest L6: 8000 < 14340
+  R2.dictionary_rank L0: 46 < 14340
+  R2.dictionary_rank L6: 5456 < 14340
+  R2.digit_root L0: 7665 < 14340
+  R2.digit_root L6: 8000 < 14340
+  R2.expression_eval L0: 7993 < 14340
+  R2.expression_eval L6: 8000 < 14340
+  R2.gcd_euclid L0: 6896 < 14340
+  R2.gcd_euclid L6: 7979 < 14340
+  R2.grid_sum L0: 8000 < 14340
+  R2.grid_sum L6: 8000 < 14340
+  R2.hamming_error_position L0: 6944 < 14340
+  R2.hamming_error_position L6: 8000 < 14340
+  R2.hash_probe L0: 8000 < 14340
+  R2.hash_probe L6: 8000 < 14340
+  R2.interval_scheduling L0: 8000 < 14340
+  R2.interval_scheduling L6: 8000 < 14340
+  R2.lcs_length L0: 8000 < 14340
+  R2.lcs_length L6: 8000 < 14340
+  R2.lis_length L0: 8000 < 14340
+  R2.lis_length L6: 8000 < 14340
+  R2.list_ops L0: 8000 < 14340
+  R2.list_ops L6: 8000 < 14340
+  R2.longest_palindromic_substring L0: 7982 < 14340
+  R2.longest_palindromic_substring L6: 8000 < 14340
+  R2.luhn_check L0: 7995 < 14340
+  R2.luhn_check L6: 8000 < 14340
+  R2.max_subarray_sum L0: 8000 < 14340
+  R2.max_subarray_sum L6: 8000 < 14340
+  R2.merge_smallest_cost L0: 7176 < 14340
+  R2.merge_smallest_cost L6: 8000 < 14340
+  R2.min_heap_ops L0: 8000 < 14340
+  R2.min_heap_ops L6: 8000 < 14340
+  R2.multiples_between L0: 7766 < 14340
+  R2.multiples_between L6: 7998 < 14340
+  R2.palindrome_check L0: 7891 < 14340
+  R2.palindrome_check L6: 8000 < 14340
+  R2.permutation_power L0: 7928 < 14340
+  R2.permutation_power L6: 11457 < 14340
+  R2.prime_factor_query L0: 3220 < 14340
+  R2.prime_factor_query L6: 7745 < 14340
+  R2.run_length L0: 54 < 14340
+  R2.run_length L6: 8000 < 14340
+  R2.stack_machine L0: 4767 < 14340
+  R2.stack_machine L6: 8000 < 14340
+  R2.string_rewrite_nonidentity L0: 5510 < 14340
+  R2.string_rewrite_nonidentity L6: 8000 < 14340
+  R2.subtraction_game L0: 6830 < 14340
+  R2.subtraction_game L6: 7984 < 14340
+  R2.to_base_wide L0: 9401 < 14340
+reading C: 14 failing cluster-levels
+  R2.bst_traversal L0: 275 < 1000  [bst_traversal=275/8000 chao1~275]
+  R2.bst_traversal L1: 1895 < 14340  [bst_traversal=1895/40000 chao1~1895]
+  R2.bst_traversal L2: 13349 < 14340  [bst_traversal=13349/40000 chao1~14201]
+  R2.dictionary_rank L0: 46 < 1000  [dictionary_rank=46/8000 chao1~46]
+  R2.dictionary_rank L1: 46 < 14340  [dictionary_rank=46/40000 chao1~46]
+  R2.dictionary_rank L2: 238 < 14340  [dictionary_rank=238/40000 chao1~238]
+  R2.dictionary_rank L3: 238 < 14340  [dictionary_rank=238/40000 chao1~239]
+  R2.dictionary_rank L4: 1436 < 14340  [dictionary_rank=1436/40000 chao1~1436]
+  R2.dictionary_rank L5: 1436 < 14340  [dictionary_rank=1436/40000 chao1~1436]
+  R2.min_heap_ops L0: 169 < 1000  [min_heap_ops=169/8000 chao1~169]
+  R2.min_heap_ops L1: 1310 < 14340  [min_heap_ops=1310/40000 chao1~1310]
+  R2.min_heap_ops L2: 9420 < 14340  [min_heap_ops=9420/40000 chao1~9722]
+  R2.run_length L0: 54 < 1000  [run_length=54/8000 chao1~54]
+  R2.run_length L1: 1280 < 14340  [run_length=1280/40000 chao1~1282]
+reading C, reserve levels at the core demand (alternative reading): 69 more
+  R2.binary_search_trace L0: 8000 < 14340
+  R2.binary_search_trace L6: 8000 < 14340
+  R2.bracket_match L0: 7983 < 14340
+  R2.bracket_match L6: 8000 < 14340
+  R2.bst_traversal L0: 275 < 14340
+  R2.bst_traversal L6: 8000 < 14340
+  R2.cache_eviction L0: 7993 < 14340
+  R2.cache_eviction L6: 8000 < 14340
+  R2.caesar_shift L0: 7809 < 14340
+  R2.caesar_shift L6: 8000 < 14340
+  R2.cellular_automaton L0: 6883 < 14340
+  R2.cellular_automaton L6: 7999 < 14340
+  R2.cheapest_network L0: 7999 < 14340
+  R2.cheapest_network L6: 8000 < 14340
+  R2.chip_toppling L0: 5723 < 14340
+  R2.chip_toppling L6: 8000 < 14340
+  R2.coin_change_min L0: 6135 < 14340
+  R2.coin_change_min L6: 7993 < 14340
+  R2.crt_smallest L0: 7036 < 14340
+  R2.crt_smallest L6: 8000 < 14340
+  R2.dictionary_rank L0: 46 < 14340
+  R2.dictionary_rank L6: 5456 < 14340
+  R2.digit_root L0: 7665 < 14340
+  R2.digit_root L6: 8000 < 14340
+  R2.expression_eval L0: 7993 < 14340
+  R2.expression_eval L6: 8000 < 14340
+  R2.gcd_euclid L0: 6896 < 14340
+  R2.gcd_euclid L6: 7979 < 14340
+  R2.grid_sum L0: 8000 < 14340
+  R2.grid_sum L6: 8000 < 14340
+  R2.hamming_error_position L0: 6944 < 14340
+  R2.hamming_error_position L6: 8000 < 14340
+  R2.hash_probe L0: 8000 < 14340
+  R2.hash_probe L6: 8000 < 14340
+  R2.interval_scheduling L0: 8000 < 14340
+  R2.interval_scheduling L6: 8000 < 14340
+  R2.lcs_length L0: 8000 < 14340
+  R2.lcs_length L6: 8000 < 14340
+  R2.lis_length L0: 7991 < 14340
+  R2.lis_length L6: 8000 < 14340
+  R2.list_ops L0: 8000 < 14340
+  R2.list_ops L6: 8000 < 14340
+  R2.longest_palindromic_substring L0: 7982 < 14340
+  R2.longest_palindromic_substring L6: 8000 < 14340
+  R2.luhn_check L0: 7995 < 14340
+  R2.luhn_check L6: 8000 < 14340
+  R2.max_subarray_sum L0: 8000 < 14340
+  R2.max_subarray_sum L6: 8000 < 14340
+  R2.merge_smallest_cost L0: 7176 < 14340
+  R2.merge_smallest_cost L6: 8000 < 14340
+  R2.min_heap_ops L0: 169 < 14340
+  R2.min_heap_ops L6: 8000 < 14340
+  R2.multiples_between L0: 7766 < 14340
+  R2.multiples_between L6: 7998 < 14340
+  R2.palindrome_check L0: 7891 < 14340
+  R2.palindrome_check L6: 8000 < 14340
+  R2.permutation_power L0: 7928 < 14340
+  R2.permutation_power L6: 11457 < 14340
+  R2.prime_factor_query L0: 3220 < 14340
+  R2.prime_factor_query L6: 7745 < 14340
+  R2.run_length L0: 54 < 14340
+  R2.run_length L6: 8000 < 14340
+  R2.stack_machine L0: 4767 < 14340
+  R2.stack_machine L6: 8000 < 14340
+  R2.string_rewrite_nonidentity L0: 5510 < 14340
+  R2.string_rewrite_nonidentity L6: 8000 < 14340
+  R2.subtraction_game L0: 6830 < 14340
+  R2.subtraction_game L6: 7984 < 14340
+  R2.to_base_wide L0: 9401 < 14340

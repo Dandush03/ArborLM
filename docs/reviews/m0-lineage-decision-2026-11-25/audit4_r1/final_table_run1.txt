@@ -1,0 +1,48 @@
+shape                                max(C,A)  C only  C by                                              A by                                              M (not counted)
+R1.activity_selection_r5                0.399   0.399  aud:round_0_75n@L1                                0.193 impl:listed_order@L0                          0.000 
+R1.attribute_rule_r5                    0.580   0.580  aud:fewest_negated_matches@L1                     0.000                                               0.189 aud:drop_negation@L1
+R1.boolean_lights_r4                    0.121   0.121  impl:wired_switch_count_parity@L0                 0.000                                               0.000 
+R1.categories_default_exceptions_r4     0.095   0.095  impl:least_specific_rule@L0                       0.000                                               0.000 
+R1.categories_follow_r5                 0.543   0.543  feat:kind+#groups@L0                              0.448 aud:lift_no_only@L0                           0.000 
+R1.compass_turns                        0.087   0.087  aud:last_turn_only@L0                             0.000                                               0.000 
+R1.conditional_chain_r5                 0.345   0.345  aud:q_rule_with_fact@L6                           0.126 aud:q_rule_whose_antecedent_is_concluded@L0   0.000 
+R1.conditional_decision_tree_r4         0.045   0.045  aud:all_else@L5                                   0.000                                               0.000 
+R1.conditional_threshold_rule_r4        0.082   0.082  aud:approx_count_times_mean@L5                    0.000                                               0.158 impl:abstain_as_no@L0
+R1.containers_queue_line_r5             0.794   0.794  aud:arith_original_index@L0                       0.072 impl:ignore_leave@L6                          0.000 
+R1.containers_stack_piles_r4            0.205   0.098  impl:initial_bottom@L0                            0.205 aud:ignore_turns@L1                           0.000 
+R1.elimination_bracket_r5               0.430   0.251  aud:first_round_winner_with_most_wins@L0          0.430 aud:half_best_then_h2h@L1                     0.000 
+R1.equivalence_classes_r5               0.616   0.433  feat:#same+#diff@L0                               0.616 aud:bfs_path_one_diff_no@L0                   0.000 
+R1.equivalence_exchange_rates_r5        0.071   0.071  impl:constant_mfk_fitted@L6                       0.000                                               0.000 
+R1.event_timeline_r5                    0.149   0.016  aud:last_number@L1                                0.149 aud:path_alt_signs@L1                         0.000 
+R1.graph_bipartite_r5                   0.474   0.047  feat:degree sequence top3@L0                      0.474 aud:odd_cycle_le_7_no@L0                      0.000 
+R1.graph_shortest_route_r4              0.146   0.107  impl:constant_mfk_fitted@L3                       0.146 impl:fewest_roads_then_length@L1              0.000 
+R1.kinship_ancestor_r4                  0.187   0.091  impl:root_of_family@L5                            0.187 feat:options in the child s family tree@L0    0.044 impl:k_minus_1@L0
+R1.kinship_cousins_r5                   0.444   0.304  aud:both_have_grandparent_diff_parents@L0         0.444 aud:same_generation_diff_parents@L0           0.000 
+R1.kinship_descendants_r5               0.304   0.023  impl:most_children_plus_grandchildren@L1          0.304 aud:widest_generation@L4                      0.000 
+R1.knights_knaves_r5                    0.138   0.138  impl:accuses_someone_means_knave@L5               0.000                                               0.000 
+R1.minimax_tree_r5                      0.216   0.057  impl:first_leaf@L0                                0.216 impl:greedy_best_leaf@L0                      0.005 impl:wrong_first_mover@L2
+R1.mst_cost_r4                          0.191   0.078  impl:constant_mfk_fitted@L0                       0.191 aud:nearest_neighbour_path@L2                 0.000 
+R1.nim_xor_r5                           0.330   0.081  feat:sum mod 8@L2                                 0.330 aud:xor_high_bits_only@L3                     0.000 
+R1.one_culprit                          0.191   0.191  aud:most_accused@L6                               0.000                                               0.000 
+R1.order_compare_r5                     0.454   0.114  feat:#facts@L4                                    0.454 aud:search_5_else_cbd@L0                      0.000 
+R1.road_reachability_r5                 0.438   0.117  feat:x out, y in degree@L0                        0.438 aud:within_5@L0                               0.000 
+R1.seating_row_r5                       0.192   0.192  aud:not_placed_end_consistent@L6                  0.000                                               0.000 
+R1.spatial_grid_walk_r5                 0.063   0.049  impl:last_mentioned@L5                            0.063 impl:net_displacement_clamped@L5              0.056 impl:east_west_mirrored@L5
+R1.spatial_relative_directions_r5       0.132   0.065  impl:largest_number@L2                            0.132 aud:sum_along_path_unsigned@L1                0.579 aud:signed_axis_merged@L1
+R1.swap_tracking_r5                     0.044   0.044  impl:initial_item@L0                              0.033 aud:last_half_only@L2                         0.015 impl:rotation_reversed@L0
+R1.temporal_critical_path_r5            0.208   0.054  impl:constant_mfk_fitted@L2                       0.208 aud:greedy_backward@L0                        0.000 
+R1.temporal_interval_overlap_r5         0.180   0.180  impl:longer_len_gt_gap@L4                         0.000                                               0.000 
+R1.temporal_weekday_shift_r5            0.047   0.021  impl:constant_mfk_fitted@L2                       0.047 aud:ignore_before_after@L1                    0.024 aud:off_by_one_plus@L0
+R1.topological_order_r5                 0.190   0.069  impl:jth_alphabetical@L2                          0.190 impl:layered_depth_then_name@L0               0.000 
+R1.tracking_accounts_r5                 0.390   0.010  aud:largest_number@L1                             0.390 aud:half_of_start_balance@L0                  0.000 
+R1.venn_counting_r5                     0.056   0.056  aud:fitted_ratio_times_size@L0                    0.032 aud:pairs_minus_2triples@L0                   0.019 aud:total_minus_union_wrong_sign@L1
+
+distribution of max(C,A) over 37 shapes: {'<=0.10': 9, '0.10-0.15': 5, '0.15-0.25': 9, '>0.25': 14}
+   bound 0.10: shapes kept 9, clusters 8
+   bound 0.15: shapes kept 14, clusters 10
+   bound 0.25: shapes kept 23, clusters 16
+
+distribution of C only over 37 shapes: {'<=0.10': 21, '0.10-0.15': 5, '0.15-0.25': 3, '>0.25': 8}
+   bound 0.10: shapes kept 21, clusters 16
+   bound 0.15: shapes kept 26, clusters 19
+   bound 0.25: shapes kept 29, clusters 21

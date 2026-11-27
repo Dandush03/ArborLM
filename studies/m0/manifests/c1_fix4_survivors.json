@@ -1,0 +1,7834 @@
+{
+ "G": {
+  "demand_per_cluster_and_level": 27680,
+  "formula": "10 * (ceil(4000/G) + ceil(20000/G) + 100)",
+  "literal_G_equals_N": {
+   "G": 18,
+   "demand": 14350
+  },
+  "smaller_part_N_div_2": 9
+ },
+ "base_rate": "0 for every lineage (open answers: a rule's excess over the base rate is its accuracy)",
+ "bound": 0.15,
+ "bound_set_by": "the human lead (HUMAN_LEAD_WORDS_5.md), two-sided, after item-side measurements had been seen; no model has been run",
+ "capacity": {
+  "all_clusters_all_levels_pass_per_lineage": true,
+  "builder": "core.draw_items as core.generate_pool calls it (R-28), fresh taken set per lineage and level",
+  "clusters": {
+   "B1": {
+    "all_levels_pass_per_cluster": true,
+    "all_levels_pass_per_lineage": true,
+    "members": [
+     "C1.string_build_f3",
+     "C1.list_build_f3",
+     "C1.nested_pairs_f3"
+    ],
+    "per_level": {
+     "0": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 105900,
+      "supplied_by_member": {
+       "C1.list_build_f3": 35300,
+       "C1.nested_pairs_f3": 35300,
+       "C1.string_build_f3": 35300
+      }
+     },
+     "1": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 105900,
+      "supplied_by_member": {
+       "C1.list_build_f3": 35300,
+       "C1.nested_pairs_f3": 35300,
+       "C1.string_build_f3": 35300
+      }
+     },
+     "2": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 105900,
+      "supplied_by_member": {
+       "C1.list_build_f3": 35300,
+       "C1.nested_pairs_f3": 35300,
+       "C1.string_build_f3": 35300
+      }
+     },
+     "3": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 105900,
+      "supplied_by_member": {
+       "C1.list_build_f3": 35300,
+       "C1.nested_pairs_f3": 35300,
+       "C1.string_build_f3": 35300
+      }
+     },
+     "4": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 105900,
+      "supplied_by_member": {
+       "C1.list_build_f3": 35300,
+       "C1.nested_pairs_f3": 35300,
+       "C1.string_build_f3": 35300
+      }
+     },
+     "5": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 105900,
+      "supplied_by_member": {
+       "C1.list_build_f3": 35300,
+       "C1.nested_pairs_f3": 35300,
+       "C1.string_build_f3": 35300
+      }
+     },
+     "6": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 105900,
+      "supplied_by_member": {
+       "C1.list_build_f3": 35300,
+       "C1.nested_pairs_f3": 35300,
+       "C1.string_build_f3": 35300
+      }
+     }
+    }
+   },
+   "B2": {
+    "all_levels_pass_per_cluster": true,
+    "all_levels_pass_per_lineage": true,
+    "members": [
+     "C1.func_branch_f4",
+     "C1.func_compose_f4"
+    ],
+    "per_level": {
+     "0": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 70600,
+      "supplied_by_member": {
+       "C1.func_branch_f4": 35300,
+       "C1.func_compose_f4": 35300
+      }
+     },
+     "1": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 70600,
+      "supplied_by_member": {
+       "C1.func_branch_f4": 35300,
+       "C1.func_compose_f4": 35300
+      }
+     },
+     "2": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 70600,
+      "supplied_by_member": {
+       "C1.func_branch_f4": 35300,
+       "C1.func_compose_f4": 35300
+      }
+     },
+     "3": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 70600,
+      "supplied_by_member": {
+       "C1.func_branch_f4": 35300,
+       "C1.func_compose_f4": 35300
+      }
+     },
+     "4": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 70600,
+      "supplied_by_member": {
+       "C1.func_branch_f4": 35300,
+       "C1.func_compose_f4": 35300
+      }
+     },
+     "5": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 70600,
+      "supplied_by_member": {
+       "C1.func_branch_f4": 35300,
+       "C1.func_compose_f4": 35300
+      }
+     },
+     "6": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 70600,
+      "supplied_by_member": {
+       "C1.func_branch_f4": 35300,
+       "C1.func_compose_f4": 35300
+      }
+     }
+    }
+   },
+   "B3": {
+    "all_levels_pass_per_cluster": true,
+    "all_levels_pass_per_lineage": true,
+    "members": [
+     "C1.slices_f4",
+     "C1.string_methods_f3"
+    ],
+    "per_level": {
+     "0": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 70600,
+      "supplied_by_member": {
+       "C1.slices_f4": 35300,
+       "C1.string_methods_f3": 35300
+      }
+     },
+     "1": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 70600,
+      "supplied_by_member": {
+       "C1.slices_f4": 35300,
+       "C1.string_methods_f3": 35300
+      }
+     },
+     "2": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 70600,
+      "supplied_by_member": {
+       "C1.slices_f4": 35300,
+       "C1.string_methods_f3": 35300
+      }
+     },
+     "3": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 70600,
+      "supplied_by_member": {
+       "C1.slices_f4": 35300,
+       "C1.string_methods_f3": 35300
+      }
+     },
+     "4": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 70600,
+      "supplied_by_member": {
+       "C1.slices_f4": 35300,
+       "C1.string_methods_f3": 35300
+      }
+     },
+     "5": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 70600,
+      "supplied_by_member": {
+       "C1.slices_f4": 35300,
+       "C1.string_methods_f3": 35300
+      }
+     },
+     "6": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 70600,
+      "supplied_by_member": {
+       "C1.slices_f4": 35300,
+       "C1.string_methods_f3": 35300
+      }
+     }
+    }
+   },
+   "B5": {
+    "all_levels_pass_per_cluster": true,
+    "all_levels_pass_per_lineage": true,
+    "members": [
+     "C1.euclid_gcd_traced_f3",
+     "C1.cond_chain_f3"
+    ],
+    "per_level": {
+     "0": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 70600,
+      "supplied_by_member": {
+       "C1.cond_chain_f3": 35300,
+       "C1.euclid_gcd_traced_f3": 35300
+      }
+     },
+     "1": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 70600,
+      "supplied_by_member": {
+       "C1.cond_chain_f3": 35300,
+       "C1.euclid_gcd_traced_f3": 35300
+      }
+     },
+     "2": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 70600,
+      "supplied_by_member": {
+       "C1.cond_chain_f3": 35300,
+       "C1.euclid_gcd_traced_f3": 35300
+      }
+     },
+     "3": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 70600,
+      "supplied_by_member": {
+       "C1.cond_chain_f3": 35300,
+       "C1.euclid_gcd_traced_f3": 35300
+      }
+     },
+     "4": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 70600,
+      "supplied_by_member": {
+       "C1.cond_chain_f3": 35300,
+       "C1.euclid_gcd_traced_f3": 35300
+      }
+     },
+     "5": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 70600,
+      "supplied_by_member": {
+       "C1.cond_chain_f3": 35300,
+       "C1.euclid_gcd_traced_f3": 35300
+      }
+     },
+     "6": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 70600,
+      "supplied_by_member": {
+       "C1.cond_chain_f3": 35300,
+       "C1.euclid_gcd_traced_f3": 35300
+      }
+     }
+    }
+   },
+   "B6": {
+    "all_levels_pass_per_cluster": true,
+    "all_levels_pass_per_lineage": true,
+    "members": [
+     "C1.fib_like_f3",
+     "C1.fib_shapes_recursive_f3",
+     "C1.recursive_calls_r2"
+    ],
+    "per_level": {
+     "0": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 105900,
+      "supplied_by_member": {
+       "C1.fib_like_f3": 35300,
+       "C1.fib_shapes_recursive_f3": 35300,
+       "C1.recursive_calls_r2": 35300
+      }
+     },
+     "1": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 105900,
+      "supplied_by_member": {
+       "C1.fib_like_f3": 35300,
+       "C1.fib_shapes_recursive_f3": 35300,
+       "C1.recursive_calls_r2": 35300
+      }
+     },
+     "2": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 105900,
+      "supplied_by_member": {
+       "C1.fib_like_f3": 35300,
+       "C1.fib_shapes_recursive_f3": 35300,
+       "C1.recursive_calls_r2": 35300
+      }
+     },
+     "3": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 105900,
+      "supplied_by_member": {
+       "C1.fib_like_f3": 35300,
+       "C1.fib_shapes_recursive_f3": 35300,
+       "C1.recursive_calls_r2": 35300
+      }
+     },
+     "4": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 105900,
+      "supplied_by_member": {
+       "C1.fib_like_f3": 35300,
+       "C1.fib_shapes_recursive_f3": 35300,
+       "C1.recursive_calls_r2": 35300
+      }
+     },
+     "5": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 105900,
+      "supplied_by_member": {
+       "C1.fib_like_f3": 35300,
+       "C1.fib_shapes_recursive_f3": 35300,
+       "C1.recursive_calls_r2": 35300
+      }
+     },
+     "6": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 105900,
+      "supplied_by_member": {
+       "C1.fib_like_f3": 35300,
+       "C1.fib_shapes_recursive_f3": 35300,
+       "C1.recursive_calls_r2": 35300
+      }
+     }
+    }
+   },
+   "B7": {
+    "all_levels_pass_per_cluster": true,
+    "all_levels_pass_per_lineage": true,
+    "members": [
+     "C1.bytecode_loop_f3",
+     "C1.turtle_walk_f3"
+    ],
+    "per_level": {
+     "0": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 70600,
+      "supplied_by_member": {
+       "C1.bytecode_loop_f3": 35300,
+       "C1.turtle_walk_f3": 35300
+      }
+     },
+     "1": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 70600,
+      "supplied_by_member": {
+       "C1.bytecode_loop_f3": 35300,
+       "C1.turtle_walk_f3": 35300
+      }
+     },
+     "2": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 70600,
+      "supplied_by_member": {
+       "C1.bytecode_loop_f3": 35300,
+       "C1.turtle_walk_f3": 35300
+      }
+     },
+     "3": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 70600,
+      "supplied_by_member": {
+       "C1.bytecode_loop_f3": 35300,
+       "C1.turtle_walk_f3": 35300
+      }
+     },
+     "4": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 70600,
+      "supplied_by_member": {
+       "C1.bytecode_loop_f3": 35300,
+       "C1.turtle_walk_f3": 35300
+      }
+     },
+     "5": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 70600,
+      "supplied_by_member": {
+       "C1.bytecode_loop_f3": 35300,
+       "C1.turtle_walk_f3": 35300
+      }
+     },
+     "6": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 70600,
+      "supplied_by_member": {
+       "C1.bytecode_loop_f3": 35300,
+       "C1.turtle_walk_f3": 35300
+      }
+     }
+    }
+   },
+   "B8": {
+    "all_levels_pass_per_cluster": true,
+    "all_levels_pass_per_lineage": true,
+    "members": [
+     "C1.bracket_matching_f3",
+     "C1.postfix_evaluation"
+    ],
+    "per_level": {
+     "0": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 70600,
+      "supplied_by_member": {
+       "C1.bracket_matching_f3": 35300,
+       "C1.postfix_evaluation": 35300
+      }
+     },
+     "1": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 70600,
+      "supplied_by_member": {
+       "C1.bracket_matching_f3": 35300,
+       "C1.postfix_evaluation": 35300
+      }
+     },
+     "2": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 70600,
+      "supplied_by_member": {
+       "C1.bracket_matching_f3": 35300,
+       "C1.postfix_evaluation": 35300
+      }
+     },
+     "3": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 70600,
+      "supplied_by_member": {
+       "C1.bracket_matching_f3": 35300,
+       "C1.postfix_evaluation": 35300
+      }
+     },
+     "4": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 70600,
+      "supplied_by_member": {
+       "C1.bracket_matching_f3": 35300,
+       "C1.postfix_evaluation": 35300
+      }
+     },
+     "5": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 70600,
+      "supplied_by_member": {
+       "C1.bracket_matching_f3": 35300,
+       "C1.postfix_evaluation": 35300
+      }
+     },
+     "6": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 70600,
+      "supplied_by_member": {
+       "C1.bracket_matching_f3": 35300,
+       "C1.postfix_evaluation": 35300
+      }
+     }
+    }
+   },
+   "C1.binary_search": {
+    "all_levels_pass_per_cluster": true,
+    "all_levels_pass_per_lineage": true,
+    "members": [
+     "C1.binary_search_f3"
+    ],
+    "per_level": {
+     "0": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.binary_search_f3": 35300
+      }
+     },
+     "1": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.binary_search_f3": 35300
+      }
+     },
+     "2": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.binary_search_f3": 35300
+      }
+     },
+     "3": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.binary_search_f3": 35300
+      }
+     },
+     "4": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.binary_search_f3": 35300
+      }
+     },
+     "5": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.binary_search_f3": 35300
+      }
+     },
+     "6": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.binary_search_f3": 35300
+      }
+     }
+    }
+   },
+   "C1.circle_elimination": {
+    "all_levels_pass_per_cluster": true,
+    "all_levels_pass_per_lineage": true,
+    "members": [
+     "C1.circle_elimination_r2"
+    ],
+    "per_level": {
+     "0": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.circle_elimination_r2": 35300
+      }
+     },
+     "1": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.circle_elimination_r2": 35300
+      }
+     },
+     "2": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.circle_elimination_r2": 35300
+      }
+     },
+     "3": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.circle_elimination_r2": 35300
+      }
+     },
+     "4": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.circle_elimination_r2": 35300
+      }
+     },
+     "5": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.circle_elimination_r2": 35300
+      }
+     },
+     "6": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.circle_elimination_r2": 35300
+      }
+     }
+    }
+   },
+   "C1.counter_list_state_machine": {
+    "all_levels_pass_per_cluster": true,
+    "all_levels_pass_per_lineage": true,
+    "members": [
+     "C1.counter_list_f3"
+    ],
+    "per_level": {
+     "0": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.counter_list_f3": 35300
+      }
+     },
+     "1": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.counter_list_f3": 35300
+      }
+     },
+     "2": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.counter_list_f3": 35300
+      }
+     },
+     "3": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.counter_list_f3": 35300
+      }
+     },
+     "4": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.counter_list_f3": 35300
+      }
+     },
+     "5": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.counter_list_f3": 35300
+      }
+     },
+     "6": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.counter_list_f3": 35300
+      }
+     }
+    }
+   },
+   "C1.digit_peel": {
+    "all_levels_pass_per_cluster": true,
+    "all_levels_pass_per_lineage": true,
+    "members": [
+     "C1.digit_peel_f3"
+    ],
+    "per_level": {
+     "0": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.digit_peel_f3": 35300
+      }
+     },
+     "1": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.digit_peel_f3": 35300
+      }
+     },
+     "2": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.digit_peel_f3": 35300
+      }
+     },
+     "3": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.digit_peel_f3": 35300
+      }
+     },
+     "4": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.digit_peel_f3": 35300
+      }
+     },
+     "5": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.digit_peel_f3": 35300
+      }
+     },
+     "6": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.digit_peel_f3": 35300
+      }
+     }
+    }
+   },
+   "C1.fast_power_square_map": {
+    "all_levels_pass_per_cluster": true,
+    "all_levels_pass_per_lineage": true,
+    "members": [
+     "C1.fast_power_f4"
+    ],
+    "per_level": {
+     "0": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.fast_power_f4": 35300
+      }
+     },
+     "1": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.fast_power_f4": 35300
+      }
+     },
+     "2": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.fast_power_f4": 35300
+      }
+     },
+     "3": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.fast_power_f4": 35300
+      }
+     },
+     "4": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.fast_power_f4": 35300
+      }
+     },
+     "5": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.fast_power_f4": 35300
+      }
+     },
+     "6": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.fast_power_f4": 35300
+      }
+     }
+    }
+   },
+   "C1.merge_two_sorted": {
+    "all_levels_pass_per_cluster": true,
+    "all_levels_pass_per_lineage": true,
+    "members": [
+     "C1.merge_two_sorted_f3"
+    ],
+    "per_level": {
+     "0": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.merge_two_sorted_f3": 35300
+      }
+     },
+     "1": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.merge_two_sorted_f3": 35300
+      }
+     },
+     "2": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.merge_two_sorted_f3": 35300
+      }
+     },
+     "3": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.merge_two_sorted_f3": 35300
+      }
+     },
+     "4": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.merge_two_sorted_f3": 35300
+      }
+     },
+     "5": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.merge_two_sorted_f3": 35300
+      }
+     },
+     "6": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.merge_two_sorted_f3": 35300
+      }
+     }
+    }
+   },
+   "C1.run_length_scan": {
+    "all_levels_pass_per_cluster": true,
+    "all_levels_pass_per_lineage": true,
+    "members": [
+     "C1.run_length_scan"
+    ],
+    "per_level": {
+     "0": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.run_length_scan": 35300
+      }
+     },
+     "1": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.run_length_scan": 35300
+      }
+     },
+     "2": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.run_length_scan": 35300
+      }
+     },
+     "3": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.run_length_scan": 35300
+      }
+     },
+     "4": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.run_length_scan": 35300
+      }
+     },
+     "5": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.run_length_scan": 35300
+      }
+     },
+     "6": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.run_length_scan": 35300
+      }
+     }
+    }
+   },
+   "C1.shared_lists": {
+    "all_levels_pass_per_cluster": true,
+    "all_levels_pass_per_lineage": true,
+    "members": [
+     "C1.shared_lists_f3"
+    ],
+    "per_level": {
+     "0": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.shared_lists_f3": 35300
+      }
+     },
+     "1": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.shared_lists_f3": 35300
+      }
+     },
+     "2": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.shared_lists_f3": 35300
+      }
+     },
+     "3": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.shared_lists_f3": 35300
+      }
+     },
+     "4": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.shared_lists_f3": 35300
+      }
+     },
+     "5": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.shared_lists_f3": 35300
+      }
+     },
+     "6": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.shared_lists_f3": 35300
+      }
+     }
+    }
+   },
+   "C1.sieve_marking": {
+    "all_levels_pass_per_cluster": true,
+    "all_levels_pass_per_lineage": true,
+    "members": [
+     "C1.sieve_marking_f4"
+    ],
+    "per_level": {
+     "0": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.sieve_marking_f4": 35300
+      }
+     },
+     "1": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.sieve_marking_f4": 35300
+      }
+     },
+     "2": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.sieve_marking_f4": 35300
+      }
+     },
+     "3": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.sieve_marking_f4": 35300
+      }
+     },
+     "4": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.sieve_marking_f4": 35300
+      }
+     },
+     "5": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.sieve_marking_f4": 35300
+      }
+     },
+     "6": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.sieve_marking_f4": 35300
+      }
+     }
+    }
+   },
+   "C1.union_find_links": {
+    "all_levels_pass_per_cluster": true,
+    "all_levels_pass_per_lineage": true,
+    "members": [
+     "C1.union_find_links_f3"
+    ],
+    "per_level": {
+     "0": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.union_find_links_f3": 35300
+      }
+     },
+     "1": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.union_find_links_f3": 35300
+      }
+     },
+     "2": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.union_find_links_f3": 35300
+      }
+     },
+     "3": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.union_find_links_f3": 35300
+      }
+     },
+     "4": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.union_find_links_f3": 35300
+      }
+     },
+     "5": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.union_find_links_f3": 35300
+      }
+     },
+     "6": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.union_find_links_f3": 35300
+      }
+     }
+    }
+   },
+   "C1.while_counter": {
+    "all_levels_pass_per_cluster": true,
+    "all_levels_pass_per_lineage": true,
+    "members": [
+     "C1.while_counter_f3"
+    ],
+    "per_level": {
+     "0": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.while_counter_f3": 35300
+      }
+     },
+     "1": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.while_counter_f3": 35300
+      }
+     },
+     "2": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.while_counter_f3": 35300
+      }
+     },
+     "3": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.while_counter_f3": 35300
+      }
+     },
+     "4": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.while_counter_f3": 35300
+      }
+     },
+     "5": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.while_counter_f3": 35300
+      }
+     },
+     "6": {
+      "demand": 27680,
+      "pass_per_cluster": true,
+      "pass_per_lineage": true,
+      "sum": 35300,
+      "supplied_by_member": {
+       "C1.while_counter_f3": 35300
+      }
+     }
+    }
+   }
+  },
+  "count_drawn": 35300,
+  "seed": 4242
+ },
+ "dropped_clusters": {
+  "B4": [
+   "C1.coin_change_table_f3",
+   "C1.string_pair_table",
+   "C1.grid_path_table"
+  ],
+  "C1.bfs_queue": [
+   "C1.bfs_queue"
+  ],
+  "C1.bubble_pass": [
+   "C1.bubble_pass"
+  ],
+  "C1.cellular_update": [
+   "C1.cellular_update_f3"
+  ],
+  "C1.insertion_sort": [],
+  "C1.kadane_scan": [],
+  "C1.majority_vote_scan": [
+   "C1.majority_vote_scan_f3"
+  ],
+  "C1.minmax_track": [],
+  "C1.mirror_pointers": [
+   "C1.mirror_pointers"
+  ],
+  "C1.partition_pass": [
+   "C1.partition_pass_f3"
+  ]
+ },
+ "inputs_sha256": {
+  "capacity": "f72e7bdd86174b149cb37af7c00600673eff59ea0bc0f7471baef428b510c873",
+  "exec_": "4b9d03209ef842b9707041c2a9fdcb65390dbdbbeb502977ab26ec451c028366",
+  "levels71_orig": "38f1e94af5a6971d6ad6214c16abb9da5f89df1c274546a6479d9ade52748e10",
+  "levels72": "7fa9e8ddc283e1a82b45970f04072ad9b28bd4c8750403e4b4d46385471f8af4",
+  "rules71": "4dae720615af8b428225e1898544c67c6df3c830b23d10852823a7fe400e2be6",
+  "rules72": "f0d6816607788b7daf5f8d63a8e7470118447b69e7e6ef790347f3f209ee8e02"
+ },
+ "level_wide_cheap": "see c1_fix4_rules_table.py (the union of the audit-4 rules, the fix-3 battery and the audit-3 rules; mutations, control rules and the any-literal oracle are not counted)",
+ "lineages": [
+  {
+   "in_shape_max_overall": 0.588,
+   "level_wide_cheap_per_level": {
+    "0": {
+     "largest_abs_excess": 0.268,
+     "rule": "a4.EFF_S"
+    },
+    "1": {
+     "largest_abs_excess": 0.22,
+     "rule": "a4.MFsh"
+    },
+    "2": {
+     "largest_abs_excess": 0.242,
+     "rule": "a4.MFsh"
+    },
+    "3": {
+     "largest_abs_excess": 0.172,
+     "rule": "a4.MFsh"
+    },
+    "4": {
+     "largest_abs_excess": 0.145,
+     "rule": "a4.MFsh"
+    },
+    "5": {
+     "largest_abs_excess": 0.175,
+     "rule": "a4.MFsh"
+    },
+    "6": {
+     "largest_abs_excess": 0.185,
+     "rule": "a4.EFF_S"
+    }
+   },
+   "level_wide_max": 0.268,
+   "measured_in": "fix-4 re-run (seed 71 draw, battery seed 83) of the fix-3 builders as they were",
+   "name": "C1.bfs_queue",
+   "partial_trace_M_level_wide": {
+    "0": 0.688,
+    "1": 0.605,
+    "2": 0.608,
+    "3": 0.562,
+    "4": 0.535,
+    "5": 0.492,
+    "6": 0.472
+   },
+   "reason": "audit4 section 5: level-wide cheap 0.247 (target shape: the answer 2 hits 0.36-0.58 in shape); above 0.15",
+   "shapes": {
+    "distsum": {
+     "0": {
+      "largest_in_shape_rate": 0.255,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.229,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.248,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.154,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.036,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.06,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.086,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "last": {
+     "0": {
+      "largest_in_shape_rate": 0.245,
+      "rule": "S.max_node"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.266,
+      "rule": "S.max_node"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.312,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.234,
+      "rule": "S.max_node"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.238,
+      "rule": "S.max_node"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.253,
+      "rule": "S.max_node"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.165,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "order": {
+     "0": {
+      "largest_in_shape_rate": 0.01,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "target": {
+     "0": {
+      "largest_in_shape_rate": 0.588,
+      "rule": "S.two"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.467,
+      "rule": "S.two"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.414,
+      "rule": "S.two"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.429,
+      "rule": "S.two"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.379,
+      "rule": "S.two"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.427,
+      "rule": "S.two"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.466,
+      "rule": "S.two"
+     }
+    }
+   },
+   "status": "NOT_REGISTERED",
+   "strict_cluster": "C1.bfs_queue",
+   "supersedes": null
+  },
+  {
+   "capacity_supplied_per_level_capped_at_count": {
+    "0": 35300,
+    "1": 35300,
+    "2": 35300,
+    "3": 35300,
+    "4": 35300,
+    "5": 35300,
+    "6": 35300
+   },
+   "execution": {
+    "errors": 0,
+    "items": 1050,
+    "key_mismatches": 0,
+    "not_one_line": 0,
+    "run_disagreements": 0,
+    "second_solver_mismatches": 0
+   },
+   "in_shape_flag_above_bound_PENDING_LEAD_REVIEW": true,
+   "in_shape_max_overall": 0.175,
+   "level_wide_cheap_per_level": {
+    "0": {
+     "largest_abs_excess": 0.07,
+     "rule": "a4.MFsh"
+    },
+    "1": {
+     "largest_abs_excess": 0.077,
+     "rule": "a4.EFF_S"
+    },
+    "2": {
+     "largest_abs_excess": 0.052,
+     "rule": "a4.MFsh"
+    },
+    "3": {
+     "largest_abs_excess": 0.025,
+     "rule": "a4.MFsh"
+    },
+    "4": {
+     "largest_abs_excess": 0.022,
+     "rule": "a4.EFF_S"
+    },
+    "5": {
+     "largest_abs_excess": 0.03,
+     "rule": "a4.EFF_S"
+    },
+    "6": {
+     "largest_abs_excess": 0.022,
+     "rule": "a4.EFF_S"
+    }
+   },
+   "level_wide_max": 0.077,
+   "levels": {
+    "collapsed": [],
+    "distinct": true,
+    "stated_parameter": "list length (see the builder)",
+    "weakly_separated_steps": []
+   },
+   "measured_in": "fix-4 draw (seed 71), battery (seed 83), a3 run, capacity (seed 4242), execution (seed 5)",
+   "name": "C1.binary_search_f3",
+   "partial_trace_M_level_wide": {
+    "0": 0.065,
+    "1": 0.077,
+    "2": 0.052,
+    "3": 0.02,
+    "4": 0.022,
+    "5": 0.03,
+    "6": 0.022
+   },
+   "partial_trace_M_max_PENDING_LEAD_REVIEW": 0.077,
+   "reason": "no cheap rule or closed form above 0.15 at any level in the union of the three scripts (level-wide); levels distinct; keys execute; capacity measured",
+   "retry_sites": null,
+   "shapes": {
+    "path_closed": {
+     "0": {
+      "largest_in_shape_rate": 0.101,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.047,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.029,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.013,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "path_half": {
+     "0": {
+      "largest_in_shape_rate": 0.1,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.135,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.052,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.031,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.033,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.014,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.029,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "probes_closed": {
+     "0": {
+      "largest_in_shape_rate": 0.083,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.097,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.085,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.045,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.119,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.028,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "probes_half": {
+     "0": {
+      "largest_in_shape_rate": 0.103,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.127,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.175,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.071,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.072,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.028,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.035,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "sum_closed": {
+     "0": {
+      "largest_in_shape_rate": 0.018,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.014,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "sum_half": {
+     "0": {
+      "largest_in_shape_rate": 0.024,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.015,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "shapes_dropped": null,
+   "shared_finish_reject": "answer not a fixed point of scoring.normalise_answer, or the program cannot run (validity)",
+   "status": "SURVIVES",
+   "strict_cluster": "C1.binary_search",
+   "supersedes": null
+  },
+  {
+   "capacity_supplied_per_level_capped_at_count": {
+    "0": 35300,
+    "1": 35300,
+    "2": 35300,
+    "3": 35300,
+    "4": 35300,
+    "5": 35300,
+    "6": 35300
+   },
+   "execution": {
+    "errors": 0,
+    "items": 1050,
+    "key_mismatches": 0,
+    "not_one_line": 0,
+    "run_disagreements": 0,
+    "second_solver_mismatches": 0
+   },
+   "in_shape_flag_above_bound_PENDING_LEAD_REVIEW": false,
+   "in_shape_max_overall": 0.089,
+   "level_wide_cheap_per_level": {
+    "0": {
+     "largest_abs_excess": 0.025,
+     "rule": "a4.EFF_S"
+    },
+    "1": {
+     "largest_abs_excess": 0.02,
+     "rule": "battery.remain_at|S.pop_any_closer"
+    },
+    "2": {
+     "largest_abs_excess": 0.018,
+     "rule": "a4.MFsh"
+    },
+    "3": {
+     "largest_abs_excess": 0.025,
+     "rule": "a4.MFsh"
+    },
+    "4": {
+     "largest_abs_excess": 0.015,
+     "rule": "battery.remain_at|S.pop_any_closer"
+    },
+    "5": {
+     "largest_abs_excess": 0.028,
+     "rule": "a3.MF_shape_cv"
+    },
+    "6": {
+     "largest_abs_excess": 0.007,
+     "rule": "battery.MF_cv"
+    }
+   },
+   "level_wide_max": 0.028,
+   "levels": {
+    "collapsed": [],
+    "distinct": true,
+    "stated_parameter": "string length and bracket kinds by level (see the builder)",
+    "weakly_separated_steps": []
+   },
+   "measured_in": "fix-4 draw (seed 71), battery (seed 83), a3 run, capacity (seed 4242), execution (seed 5)",
+   "name": "C1.bracket_matching_f3",
+   "partial_trace_M_level_wide": {
+    "0": 0.058,
+    "1": 0.043,
+    "2": 0.037,
+    "3": 0.035,
+    "4": 0.013,
+    "5": 0.025,
+    "6": 0.005
+   },
+   "partial_trace_M_max_PENDING_LEAD_REVIEW": 0.058,
+   "reason": "no cheap rule or closed form above 0.15 at any level in the union of the three scripts (level-wide); levels distinct; keys execute; capacity measured",
+   "retry_sites": null,
+   "shapes": {
+    "code": {
+     "0": {
+      "largest_in_shape_rate": 0.035,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.014,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.013,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.014,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.083,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.016,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "errpos": {
+     "0": {
+      "largest_in_shape_rate": 0.049,
+      "rule": "S.sum_pos_all_closers"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.041,
+      "rule": "S.sum_pos_all_closers"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.036,
+      "rule": "S.sum_pos_all_closers"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.089,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "S.sum_pos_all_closers"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.029,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.013,
+      "rule": "S.sum_pos_all_closers"
+     }
+    },
+    "popsum": {
+     "0": {
+      "largest_in_shape_rate": 0.014,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.037,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.037,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.026,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.014,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "remain": {
+     "0": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "remain_at": {
+     "0": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "shapes_dropped": null,
+   "shared_finish_reject": "answer not a fixed point of scoring.normalise_answer, or the program cannot run (validity)",
+   "status": "SURVIVES",
+   "strict_cluster": "B8",
+   "supersedes": null
+  },
+  {
+   "in_shape_max_overall": 0.547,
+   "level_wide_cheap_per_level": {
+    "0": {
+     "largest_abs_excess": 0.547,
+     "rule": "a4.passes1|S.extreme_to_end"
+    },
+    "1": {
+     "largest_abs_excess": 0.482,
+     "rule": "a4.passes1|S.extreme_to_end"
+    },
+    "2": {
+     "largest_abs_excess": 0.095,
+     "rule": "a4.passes2|S.sorted"
+    },
+    "3": {
+     "largest_abs_excess": 0.065,
+     "rule": "a4.passes2|S.sorted"
+    },
+    "4": {
+     "largest_abs_excess": 0.06,
+     "rule": "a4.passes3|S.sorted"
+    },
+    "5": {
+     "largest_abs_excess": 0.037,
+     "rule": "a4.passes3|S.sorted"
+    },
+    "6": {
+     "largest_abs_excess": 0.06,
+     "rule": "a4.passes4|S.sorted"
+    }
+   },
+   "level_wide_max": 0.547,
+   "measured_in": "fix-4 re-run (seed 71 draw, battery seed 83) of the fix-3 builders as they were",
+   "name": "C1.bubble_pass",
+   "partial_trace_M_level_wide": {
+    "0": 0.547,
+    "1": 0.482,
+    "2": 0.095,
+    "3": 0.065,
+    "4": 0.06,
+    "5": 0.037,
+    "6": 0.06
+   },
+   "reason": "audit4 section 5: 'move the extreme to the end' 0.58 at level 0 and 0.48 at level 1 (level-wide 0.585)",
+   "shapes": {
+    "passes1": {
+     "0": {
+      "largest_in_shape_rate": 0.547,
+      "rule": "S.extreme_to_end"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.482,
+      "rule": "S.extreme_to_end"
+     }
+    },
+    "passes2": {
+     "2": {
+      "largest_in_shape_rate": 0.095,
+      "rule": "S.sorted"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.065,
+      "rule": "S.sorted"
+     }
+    },
+    "passes3": {
+     "4": {
+      "largest_in_shape_rate": 0.06,
+      "rule": "S.sorted"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.037,
+      "rule": "S.sorted"
+     }
+    },
+    "passes4": {
+     "6": {
+      "largest_in_shape_rate": 0.06,
+      "rule": "S.sorted"
+     }
+    }
+   },
+   "status": "NOT_REGISTERED",
+   "strict_cluster": "C1.bubble_pass",
+   "supersedes": null
+  },
+  {
+   "capacity_supplied_per_level_capped_at_count": {
+    "0": 35300,
+    "1": 35300,
+    "2": 35300,
+    "3": 35300,
+    "4": 35300,
+    "5": 35300,
+    "6": 35300
+   },
+   "execution": {
+    "errors": 0,
+    "items": 1050,
+    "key_mismatches": 0,
+    "not_one_line": 0,
+    "run_disagreements": 0,
+    "second_solver_mismatches": 0
+   },
+   "in_shape_flag_above_bound_PENDING_LEAD_REVIEW": false,
+   "in_shape_max_overall": 0.073,
+   "level_wide_cheap_per_level": {
+    "0": {
+     "largest_abs_excess": 0.06,
+     "rule": "a4.acc|S.sum_all_args"
+    },
+    "1": {
+     "largest_abs_excess": 0.065,
+     "rule": "a4.EFF_S"
+    },
+    "2": {
+     "largest_abs_excess": 0.065,
+     "rule": "battery.MF_cv"
+    },
+    "3": {
+     "largest_abs_excess": 0.08,
+     "rule": "battery.other|S.no_skips"
+    },
+    "4": {
+     "largest_abs_excess": 0.04,
+     "rule": "a4.EFF_S"
+    },
+    "5": {
+     "largest_abs_excess": 0.055,
+     "rule": "a4.EFF_S"
+    },
+    "6": {
+     "largest_abs_excess": 0.075,
+     "rule": "battery.other|S.always_skip"
+    }
+   },
+   "level_wide_max": 0.08,
+   "levels": {
+    "collapsed": [],
+    "distinct": true,
+    "stated_parameter": "program length by level (see the builder)",
+    "weakly_separated_steps": []
+   },
+   "measured_in": "fix-4 draw (seed 71), battery (seed 83), a3 run, capacity (seed 4242), execution (seed 5)",
+   "name": "C1.bytecode_loop_f3",
+   "partial_trace_M_level_wide": {
+    "0": 0.06,
+    "1": 0.065,
+    "2": 0.04,
+    "3": 0.113,
+    "4": 0.043,
+    "5": 0.055,
+    "6": 0.075
+   },
+   "partial_trace_M_max_PENDING_LEAD_REVIEW": 0.113,
+   "reason": "no cheap rule or closed form above 0.15 at any level in the union of the three scripts (level-wide); levels distinct; keys execute; capacity measured",
+   "retry_sites": null,
+   "shapes": {
+    "acc": {
+     "0": {
+      "largest_in_shape_rate": 0.06,
+      "rule": "S.sum_all_args"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.041,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.023,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.016,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.015,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.035,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.05,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "reg": {
+     "6": {
+      "largest_in_shape_rate": 0.031,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "sumarg": {
+     "1": {
+      "largest_in_shape_rate": 0.073,
+      "rule": "S.sum_all_args"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.066,
+      "rule": "S.sum_all_args"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.06,
+      "rule": "S.sum_all_args"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.041,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.039,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.051,
+      "rule": "S.sum_all_args"
+     }
+    }
+   },
+   "shapes_dropped": null,
+   "shared_finish_reject": "answer not a fixed point of scoring.normalise_answer, or the program cannot run (validity)",
+   "status": "SURVIVES",
+   "strict_cluster": "B7",
+   "supersedes": null
+  },
+  {
+   "in_shape_max_overall": 0.377,
+   "level_wide_cheap_per_level": {
+    "0": {
+     "largest_abs_excess": 0.138,
+     "rule": "a4.EFF_S"
+    },
+    "1": {
+     "largest_abs_excess": 0.122,
+     "rule": "a3.MF_shape_cv"
+    },
+    "2": {
+     "largest_abs_excess": 0.215,
+     "rule": "a3.MF_shape_cv"
+    },
+    "3": {
+     "largest_abs_excess": 0.18,
+     "rule": "a3.MF_shape_cv"
+    },
+    "4": {
+     "largest_abs_excess": 0.138,
+     "rule": "a3.MF_shape_cv"
+    },
+    "5": {
+     "largest_abs_excess": 0.155,
+     "rule": "a3.MF_shape_cv"
+    },
+    "6": {
+     "largest_abs_excess": 0.145,
+     "rule": "a3.MF_shape_cv"
+    }
+   },
+   "level_wide_max": 0.215,
+   "measured_in": "fix-4 re-run (seed 71 draw, battery seed 83) of the fix-3 builders as they were",
+   "name": "C1.cellular_update_f3",
+   "partial_trace_M_level_wide": {
+    "0": 0.138,
+    "1": 0.263,
+    "2": 0.26,
+    "3": 0.247,
+    "4": 0.228,
+    "5": 0.165,
+    "6": 0.195
+   },
+   "reason": "audit4 sections 5, 7: level-wide cheap 0.188 (above 0.15); capacity at level 0 is 22,196 at the draw budget, below the demand at G <= 11",
+   "shapes": {
+    "row_branch": {
+     "0": {
+      "largest_in_shape_rate": 0.139,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.111,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.096,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.117,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.056,
+      "rule": "S.echo_init"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.035,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.075,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "row_equals": {
+     "0": {
+      "largest_in_shape_rate": 0.167,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.111,
+      "rule": "S.echo_init"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.377,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.225,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.234,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.274,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.257,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "row_table": {
+     "0": {
+      "largest_in_shape_rate": 0.039,
+      "rule": "S.echo_init"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.159,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.065,
+      "rule": "S.echo_init"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.032,
+      "rule": "S.echo_init"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.032,
+      "rule": "S.echo_init"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.029,
+      "rule": "S.echo_init"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.051,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "weighted_branch": {
+     "0": {
+      "largest_in_shape_rate": 0.167,
+      "rule": "S.echo_init"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.206,
+      "rule": "S.echo_init"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.15,
+      "rule": "S.echo_init"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.2,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.133,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.107,
+      "rule": "S.echo_init"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.123,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "weighted_equals": {
+     "0": {
+      "largest_in_shape_rate": 0.25,
+      "rule": "S.echo_init"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.08,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.341,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.295,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.274,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.318,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.265,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "weighted_table": {
+     "0": {
+      "largest_in_shape_rate": 0.097,
+      "rule": "S.echo_init"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.156,
+      "rule": "S.echo_init"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.093,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.072,
+      "rule": "S.echo_init"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.118,
+      "rule": "S.echo_init"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.101,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.027,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "status": "NOT_REGISTERED",
+   "strict_cluster": "C1.cellular_update",
+   "supersedes": null
+  },
+  {
+   "capacity_supplied_per_level_capped_at_count": {
+    "0": 35300,
+    "1": 35300,
+    "2": 35300,
+    "3": 35300,
+    "4": 35300,
+    "5": 35300,
+    "6": 35300
+   },
+   "execution": {
+    "errors": 0,
+    "items": 1050,
+    "key_mismatches": 0,
+    "not_one_line": 0,
+    "run_disagreements": 0,
+    "second_solver_mismatches": 0
+   },
+   "in_shape_flag_above_bound_PENDING_LEAD_REVIEW": true,
+   "in_shape_max_overall": 0.198,
+   "level_wide_cheap_per_level": {
+    "0": {
+     "largest_abs_excess": 0.11,
+     "rule": "a4.MFsh"
+    },
+    "1": {
+     "largest_abs_excess": 0.072,
+     "rule": "battery.MF_cv"
+    },
+    "2": {
+     "largest_abs_excess": 0.085,
+     "rule": "a4.MFsh"
+    },
+    "3": {
+     "largest_abs_excess": 0.068,
+     "rule": "battery.MF_cv"
+    },
+    "4": {
+     "largest_abs_excess": 0.068,
+     "rule": "battery.BEST_generic_cv"
+    },
+    "5": {
+     "largest_abs_excess": 0.055,
+     "rule": "a4.EFF_S"
+    },
+    "6": {
+     "largest_abs_excess": 0.055,
+     "rule": "a4.MFsh"
+    }
+   },
+   "level_wide_max": 0.11,
+   "levels": {
+    "collapsed": [],
+    "distinct": true,
+    "stated_parameter": "ring size n = 9 + level (one more flag half the time at level 0)",
+    "weakly_separated_steps": []
+   },
+   "measured_in": "fix-4 draw (seed 71), battery (seed 83), a3 run, capacity (seed 4242), execution (seed 5)",
+   "name": "C1.circle_elimination_r2",
+   "partial_trace_M_level_wide": {
+    "0": 0.268,
+    "1": 0.145,
+    "2": 0.212,
+    "3": 0.168,
+    "4": 0.125,
+    "5": 0.212,
+    "6": 0.113
+   },
+   "partial_trace_M_max_PENDING_LEAD_REVIEW": 0.268,
+   "reason": "no cheap rule or closed form above 0.15 at any level in the union of the three scripts (level-wide); levels distinct; keys execute; capacity measured",
+   "retry_sites": [
+    "validity (structure of the program)",
+    "fewer than 4 live flags in the ring",
+    "the counting round needs enough live flags to strike several; with fewer the questions have no elimination order to trace"
+   ],
+   "shapes": {
+    "last": {
+     "0": {
+      "largest_in_shape_rate": 0.101,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.065,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.149,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.064,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.072,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.083,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.061,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "sum": {
+     "0": {
+      "largest_in_shape_rate": 0.031,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.036,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.007,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.021,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.03,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.027,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.032,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "survivor": {
+     "0": {
+      "largest_in_shape_rate": 0.198,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.065,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.098,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.108,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.087,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.051,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.07,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "shapes_dropped": null,
+   "shared_finish_reject": "answer not a fixed point of scoring.normalise_answer, or the program cannot run (validity)",
+   "status": "SURVIVES",
+   "strict_cluster": "C1.circle_elimination",
+   "supersedes": null
+  },
+  {
+   "in_shape_max_overall": 0.773,
+   "level_wide_cheap_per_level": {
+    "0": {
+     "largest_abs_excess": 0.302,
+     "rule": "a4.EFF_S"
+    },
+    "1": {
+     "largest_abs_excess": 0.318,
+     "rule": "a4.EFF_S"
+    },
+    "2": {
+     "largest_abs_excess": 0.268,
+     "rule": "a4.EFF_S"
+    },
+    "3": {
+     "largest_abs_excess": 0.265,
+     "rule": "a4.EFF_S"
+    },
+    "4": {
+     "largest_abs_excess": 0.225,
+     "rule": "a4.EFF_S"
+    },
+    "5": {
+     "largest_abs_excess": 0.25,
+     "rule": "a4.EFF_S"
+    },
+    "6": {
+     "largest_abs_excess": 0.235,
+     "rule": "a4.EFF_S"
+    }
+   },
+   "level_wide_max": 0.318,
+   "measured_in": "fix-4 re-run (seed 71 draw, battery seed 83) of the fix-3 builders as they were",
+   "name": "C1.coin_change_table_f3",
+   "partial_trace_M_level_wide": {
+    "0": 0.472,
+    "1": 0.438,
+    "2": 0.318,
+    "3": 0.282,
+    "4": 0.26,
+    "5": 0.295,
+    "6": 0.26
+   },
+   "reason": "audit4 section 5: fewest-coin greedy 0.52-0.84, ceil(T / max coin) 0.53-0.68 in shape, level-wide 0.328; and it rejects draws whose answer is the unreachable sentinel 99 (147 retries per 2,800), a valid answer: R-19 not needed for well-posedness",
+   "shapes": {
+    "combos": {
+     "0": {
+      "largest_in_shape_rate": 0.337,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.265,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.299,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.23,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.148,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.256,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.212,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "fewest": {
+     "0": {
+      "largest_in_shape_rate": 0.719,
+      "rule": "S.greedy"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.773,
+      "rule": "S.greedy"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.556,
+      "rule": "S.greedy"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.687,
+      "rule": "S.greedy"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.617,
+      "rule": "S.greedy"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.642,
+      "rule": "S.T_div_maxcoin_ceil"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.595,
+      "rule": "S.T_div_maxcoin_ceil"
+     }
+    },
+    "orders": {
+     "0": {
+      "largest_in_shape_rate": 0.2,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.287,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.243,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.241,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.198,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.196,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.193,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "tablesum": {
+     "0": {
+      "largest_in_shape_rate": 0.043,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.084,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.059,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.042,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.009,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.009,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.028,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "status": "NOT_REGISTERED",
+   "strict_cluster": "B4",
+   "supersedes": null
+  },
+  {
+   "capacity_supplied_per_level_capped_at_count": {
+    "0": 35300,
+    "1": 35300,
+    "2": 35300,
+    "3": 35300,
+    "4": 35300,
+    "5": 35300,
+    "6": 35300
+   },
+   "execution": {
+    "errors": 0,
+    "items": 1050,
+    "key_mismatches": 0,
+    "not_one_line": 0,
+    "run_disagreements": 0,
+    "second_solver_mismatches": 0
+   },
+   "in_shape_flag_above_bound_PENDING_LEAD_REVIEW": false,
+   "in_shape_max_overall": 0.1,
+   "level_wide_cheap_per_level": {
+    "0": {
+     "largest_abs_excess": 0.062,
+     "rule": "a4.EFF_S"
+    },
+    "1": {
+     "largest_abs_excess": 0.0575,
+     "rule": "battery.tot|S.k_times_gcd"
+    },
+    "2": {
+     "largest_abs_excess": 0.03,
+     "rule": "battery.tot|S.k_times_gcd"
+    },
+    "3": {
+     "largest_abs_excess": 0.0425,
+     "rule": "battery.tot|S.no_halving"
+    },
+    "4": {
+     "largest_abs_excess": 0.0275,
+     "rule": "battery.tot|S.no_halving"
+    },
+    "5": {
+     "largest_abs_excess": 0.028,
+     "rule": "battery.BEST_generic_cv"
+    },
+    "6": {
+     "largest_abs_excess": 0.0275,
+     "rule": "battery.tot|S.no_halving"
+    }
+   },
+   "level_wide_max": 0.062,
+   "levels": {
+    "collapsed": [],
+    "distinct": true,
+    "stated_parameter": "rounds 2 + level + (0..2), operand size",
+    "weakly_separated_steps": []
+   },
+   "measured_in": "fix-4 draw (seed 71), battery (seed 83), a3 run, capacity (seed 4242), execution (seed 5)",
+   "name": "C1.cond_chain_f3",
+   "partial_trace_M_level_wide": {
+    "0": 0.233,
+    "1": 0.13,
+    "2": 0.113,
+    "3": 0.018,
+    "4": 0.01,
+    "5": 0.01,
+    "6": 0.018
+   },
+   "partial_trace_M_max_PENDING_LEAD_REVIEW": 0.233,
+   "reason": "no cheap rule or closed form above 0.15 at any level in the union of the three scripts (level-wide); levels distinct; keys execute; capacity measured",
+   "retry_sites": null,
+   "shapes": {
+    "a": {
+     "0": {
+      "largest_in_shape_rate": 0.079,
+      "rule": "S.rounds_x_gcd"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.031,
+      "rule": "S.rounds_x_gcd"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.027,
+      "rule": "S.rounds_x_gcd"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.016,
+      "rule": "S.rounds_x_gcd"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.008,
+      "rule": "S.rounds_x_gcd"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.016,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.016,
+      "rule": "S.rounds_x_gcd"
+     }
+    },
+    "a-b": {
+     "0": {
+      "largest_in_shape_rate": 0.046,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.041,
+      "rule": "S.rounds_x_gcd"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.008,
+      "rule": "S.rounds_x_gcd"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "S.rounds_x_gcd"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.015,
+      "rule": "S.rounds_x_gcd"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "S.rounds_x_gcd"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "S.rounds_x_gcd"
+     }
+    },
+    "b": {
+     "0": {
+      "largest_in_shape_rate": 0.1,
+      "rule": "S.rounds_x_gcd"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.071,
+      "rule": "S.rounds_x_gcd"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.024,
+      "rule": "S.rounds_x_gcd"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.008,
+      "rule": "S.rounds_x_gcd"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "S.rounds_x_gcd"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.008,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.007,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "shapes_dropped": null,
+   "shared_finish_reject": "answer not a fixed point of scoring.normalise_answer, or the program cannot run (validity)",
+   "status": "SURVIVES",
+   "strict_cluster": "B5",
+   "supersedes": null
+  },
+  {
+   "capacity_supplied_per_level_capped_at_count": {
+    "0": 35300,
+    "1": 35300,
+    "2": 35300,
+    "3": 35300,
+    "4": 35300,
+    "5": 35300,
+    "6": 35300
+   },
+   "execution": {
+    "errors": 0,
+    "items": 1050,
+    "key_mismatches": 0,
+    "not_one_line": 0,
+    "run_disagreements": 0,
+    "second_solver_mismatches": 0
+   },
+   "in_shape_flag_above_bound_PENDING_LEAD_REVIEW": false,
+   "in_shape_max_overall": 0.089,
+   "level_wide_cheap_per_level": {
+    "0": {
+     "largest_abs_excess": 0.06,
+     "rule": "battery.counts|S.uniform"
+    },
+    "1": {
+     "largest_abs_excess": 0.045,
+     "rule": "battery.counts|S.uniform"
+    },
+    "2": {
+     "largest_abs_excess": 0.048,
+     "rule": "a4.MF"
+    },
+    "3": {
+     "largest_abs_excess": 0.025,
+     "rule": "battery.counts|S.uniform"
+    },
+    "4": {
+     "largest_abs_excess": 0.0325,
+     "rule": "battery.counts|S.uniform"
+    },
+    "5": {
+     "largest_abs_excess": 0.0375,
+     "rule": "battery.counts|S.uniform"
+    },
+    "6": {
+     "largest_abs_excess": 0.013,
+     "rule": "a4.MFsh"
+    }
+   },
+   "level_wide_max": 0.06,
+   "levels": {
+    "collapsed": [],
+    "distinct": true,
+    "stated_parameter": "list length and machine states by level (see the builder)",
+    "weakly_separated_steps": []
+   },
+   "measured_in": "fix-4 draw (seed 71), battery (seed 83), a3 run, capacity (seed 4242), execution (seed 5)",
+   "name": "C1.counter_list_f3",
+   "partial_trace_M_level_wide": {
+    "0": 0.007,
+    "1": 0.03,
+    "2": 0.03,
+    "3": 0.018,
+    "4": 0.022,
+    "5": 0.007,
+    "6": 0.013
+   },
+   "partial_trace_M_max_PENDING_LEAD_REVIEW": 0.03,
+   "reason": "no cheap rule or closed form above 0.15 at any level in the union of the three scripts (level-wide); levels distinct; keys execute; capacity measured",
+   "retry_sites": null,
+   "shapes": {
+    "style_parity": {
+     "0": {
+      "largest_in_shape_rate": 0.023,
+      "rule": "F.residue_histogram"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.024,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.008,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.007,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.008,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.008,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.008,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "style_plain": {
+     "0": {
+      "largest_in_shape_rate": 0.034,
+      "rule": "F.residue_histogram"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.043,
+      "rule": "F.residue_histogram"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.028,
+      "rule": "F.residue_histogram"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.007,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "style_threshold": {
+     "0": {
+      "largest_in_shape_rate": 0.089,
+      "rule": "F.residue_histogram"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.067,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.063,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.033,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.029,
+      "rule": "F.residue_histogram"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.032,
+      "rule": "F.residue_histogram"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.03,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "shapes_dropped": null,
+   "shared_finish_reject": "answer not a fixed point of scoring.normalise_answer, or the program cannot run (validity)",
+   "status": "SURVIVES",
+   "strict_cluster": "C1.counter_list_state_machine",
+   "supersedes": null
+  },
+  {
+   "capacity_supplied_per_level_capped_at_count": {
+    "0": 35300,
+    "1": 35300,
+    "2": 35300,
+    "3": 35300,
+    "4": 35300,
+    "5": 35300,
+    "6": 35300
+   },
+   "execution": {
+    "errors": 0,
+    "items": 1050,
+    "key_mismatches": 0,
+    "not_one_line": 0,
+    "run_disagreements": 0,
+    "second_solver_mismatches": 0
+   },
+   "in_shape_flag_above_bound_PENDING_LEAD_REVIEW": false,
+   "in_shape_max_overall": 0.039,
+   "level_wide_cheap_per_level": {
+    "0": {
+     "largest_abs_excess": 0.0925,
+     "rule": "a3.rev_bN|F.closed"
+    },
+    "1": {
+     "largest_abs_excess": 0.045,
+     "rule": "a3.rev_bN|F.closed"
+    },
+    "2": {
+     "largest_abs_excess": 0.045,
+     "rule": "a3.rev_bN|F.closed"
+    },
+    "3": {
+     "largest_abs_excess": 0.0625,
+     "rule": "a3.rev_bN|F.closed"
+    },
+    "4": {
+     "largest_abs_excess": 0.0725,
+     "rule": "a3.rev_bN|F.closed"
+    },
+    "5": {
+     "largest_abs_excess": 0.055,
+     "rule": "a3.rev_bN|F.closed"
+    },
+    "6": {
+     "largest_abs_excess": 0.035,
+     "rule": "a3.rev_bN|F.closed"
+    }
+   },
+   "level_wide_max": 0.0925,
+   "levels": {
+    "collapsed": [],
+    "distinct": true,
+    "stated_parameter": "number size by level (see the builder)",
+    "weakly_separated_steps": []
+   },
+   "measured_in": "fix-4 draw (seed 71), battery (seed 83), a3 run, capacity (seed 4242), execution (seed 5)",
+   "name": "C1.digit_peel_f3",
+   "partial_trace_M_level_wide": {
+    "0": 0.02,
+    "1": 0.033,
+    "2": 0.003,
+    "3": 0.0,
+    "4": 0.007,
+    "5": 0.003,
+    "6": 0.003
+   },
+   "partial_trace_M_max_PENDING_LEAD_REVIEW": 0.033,
+   "reason": "no cheap rule or closed form above 0.15 at any level in the union of the three scripts (level-wide); levels distinct; keys execute; capacity measured",
+   "retry_sites": null,
+   "shapes": {
+    "fold": {
+     "0": {
+      "largest_in_shape_rate": 0.004,
+      "rule": "S.decimal_digits_fold"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.004,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "S.decimal_digits_fold"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "S.decimal_digits_fold"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "S.decimal_digits_fold"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "S.decimal_digits_fold"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "S.decimal_digits_fold"
+     }
+    },
+    "fold_k=base": {
+     "2": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "S.decimal_digits_fold"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "S.decimal_digits_fold"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "S.decimal_digits_fold"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "S.decimal_digits_fold"
+     }
+    },
+    "wsum": {
+     "0": {
+      "largest_in_shape_rate": 0.039,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.024,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.008,
+      "rule": "S.decimal_digits_wsum"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.007,
+      "rule": "S.decimal_digits_wsum"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.028,
+      "rule": "S.decimal_digits_wsum"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.017,
+      "rule": "S.decimal_digits_wsum"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.015,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "shapes_dropped": null,
+   "shared_finish_reject": "answer not a fixed point of scoring.normalise_answer, or the program cannot run (validity)",
+   "status": "SURVIVES",
+   "strict_cluster": "C1.digit_peel",
+   "supersedes": null
+  },
+  {
+   "capacity_supplied_per_level_capped_at_count": {
+    "0": 35300,
+    "1": 35300,
+    "2": 35300,
+    "3": 35300,
+    "4": 35300,
+    "5": 35300,
+    "6": 35300
+   },
+   "execution": {
+    "errors": 0,
+    "items": 1050,
+    "key_mismatches": 0,
+    "not_one_line": 0,
+    "run_disagreements": 0,
+    "second_solver_mismatches": 0
+   },
+   "in_shape_flag_above_bound_PENDING_LEAD_REVIEW": false,
+   "in_shape_max_overall": 0.021,
+   "level_wide_cheap_per_level": {
+    "0": {
+     "largest_abs_excess": 0.022,
+     "rule": "a4.EFF_S"
+    },
+    "1": {
+     "largest_abs_excess": 0.01,
+     "rule": "a4.MFsh"
+    },
+    "2": {
+     "largest_abs_excess": 0.007,
+     "rule": "a4.MFsh"
+    },
+    "3": {
+     "largest_abs_excess": 0.007,
+     "rule": "battery.MF_cv"
+    },
+    "4": {
+     "largest_abs_excess": 0.005,
+     "rule": "a4.MFsh"
+    },
+    "5": {
+     "largest_abs_excess": 0.0,
+     "rule": "battery.state|S.state_one_more_round"
+    },
+    "6": {
+     "largest_abs_excess": 0.01,
+     "rule": "a4.EFF_S"
+    }
+   },
+   "level_wide_max": 0.022,
+   "levels": {
+    "collapsed": [],
+    "distinct": true,
+    "stated_parameter": "operand bound hi = 40, 44, 50, 56, 64, 76, 96 and at least max(4, 3 + level // 2) rounds",
+    "weakly_separated_steps": [
+     "L2->L3"
+    ]
+   },
+   "measured_in": "fix-4 draw (seed 71), battery (seed 83), a3 run, capacity (seed 4242), execution (seed 5)",
+   "name": "C1.euclid_gcd_traced_f3",
+   "partial_trace_M_level_wide": {
+    "0": 0.022,
+    "1": 0.01,
+    "2": 0.003,
+    "3": 0.003,
+    "4": 0.003,
+    "5": 0.0,
+    "6": 0.01
+   },
+   "partial_trace_M_max_PENDING_LEAD_REVIEW": 0.022,
+   "reason": "no cheap rule or closed form above 0.15 at any level in the union of the three scripts (level-wide); levels distinct; keys execute; capacity measured",
+   "retry_sites": [
+    "validity (structure of the trace)",
+    "equal operands; fewer than max(4, 3 + level // 2) Euclid rounds",
+    "the question asks for the state after R rounds with 1 <= R < the number of rounds (and R from 2 to rounds - 2 for the weighted shape): it has no answer to ask for with fewer rounds"
+   ],
+   "shapes": {
+    "rsum": {
+     "0": {
+      "largest_in_shape_rate": 0.021,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.011,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.009,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "S.literal_y"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "S.literal_y"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "S.literal_y"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.005,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "state": {
+     "0": {
+      "largest_in_shape_rate": 0.014,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.009,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.005,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.005,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.01,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "S.gcd_0"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.005,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "shapes_dropped": null,
+   "shared_finish_reject": "answer not a fixed point of scoring.normalise_answer, or the program cannot run (validity)",
+   "status": "SURVIVES",
+   "strict_cluster": "B5",
+   "supersedes": null
+  },
+  {
+   "capacity_supplied_per_level_capped_at_count": {
+    "0": 35300,
+    "1": 35300,
+    "2": 35300,
+    "3": 35300,
+    "4": 35300,
+    "5": 35300,
+    "6": 35300
+   },
+   "execution": {
+    "errors": 0,
+    "items": 1050,
+    "key_mismatches": 0,
+    "not_one_line": 0,
+    "run_disagreements": 0,
+    "second_solver_mismatches": 0
+   },
+   "in_shape_flag_above_bound_PENDING_LEAD_REVIEW": false,
+   "in_shape_max_overall": 0.058,
+   "level_wide_cheap_per_level": {
+    "0": {
+     "largest_abs_excess": 0.0325,
+     "rule": "a3.res|F.base_final"
+    },
+    "1": {
+     "largest_abs_excess": 0.04,
+     "rule": "a4.res|F.pow_res"
+    },
+    "2": {
+     "largest_abs_excess": 0.048,
+     "rule": "a4.res|F.pow_res"
+    },
+    "3": {
+     "largest_abs_excess": 0.052,
+     "rule": "a4.MFsh"
+    },
+    "4": {
+     "largest_abs_excess": 0.045,
+     "rule": "a3.res|F.base_final"
+    },
+    "5": {
+     "largest_abs_excess": 0.058,
+     "rule": "a4.MFsh"
+    },
+    "6": {
+     "largest_abs_excess": 0.045,
+     "rule": "battery.MF_cv"
+    }
+   },
+   "level_wide_max": 0.058,
+   "levels": {
+    "collapsed": [],
+    "distinct": true,
+    "stated_parameter": "exponent bits 3 + level and modulus up to 200 + 60 * level",
+    "weakly_separated_steps": []
+   },
+   "measured_in": "fix-4 draw (seed 71), battery (seed 83), a3 run, capacity (seed 4242), execution (seed 5)",
+   "name": "C1.fast_power_f4",
+   "partial_trace_M_level_wide": {
+    "0": 0.015,
+    "1": 0.033,
+    "2": 0.015,
+    "3": 0.052,
+    "4": 0.015,
+    "5": 0.058,
+    "6": 0.01
+   },
+   "partial_trace_M_max_PENDING_LEAD_REVIEW": 0.058,
+   "reason": "no cheap rule or closed form above 0.15 at any level in the union of the three scripts (level-wide); levels distinct; keys execute; capacity measured",
+   "retry_sites": null,
+   "shapes": {
+    "res": {
+     "0": {
+      "largest_in_shape_rate": 0.025,
+      "rule": "F.pow_res"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.04,
+      "rule": "F.pow_res"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.048,
+      "rule": "F.pow_res"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.052,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.033,
+      "rule": "F.pow_res"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.058,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.022,
+      "rule": "F.pow_res"
+     }
+    }
+   },
+   "shapes_dropped": {
+    "base": {
+     "per_level_in_shape_of_the_fix3_original": {
+      "0": {
+       "largest_in_shape_rate": 0.029,
+       "rule": "S.literal_base"
+      },
+      "1": {
+       "largest_in_shape_rate": 0.045,
+       "rule": "S.literal_base"
+      },
+      "2": {
+       "largest_in_shape_rate": 0.022,
+       "rule": "S.literal_base"
+      },
+      "3": {
+       "largest_in_shape_rate": 0.083,
+       "rule": "S.literal_base"
+      },
+      "4": {
+       "largest_in_shape_rate": 0.007,
+       "rule": "MF_in_shape_cv"
+      },
+      "5": {
+       "largest_in_shape_rate": 0.024,
+       "rule": "S.literal_base"
+      },
+      "6": {
+       "largest_in_shape_rate": 0.008,
+       "rule": "S.literal_base"
+      }
+     },
+     "reason": "ruling R-20: the res shape only; audit4 section 6: base and bsum use the exponent only as a round count",
+     "status": "NOT_REGISTERED"
+    },
+    "bsum": {
+     "per_level_in_shape_of_the_fix3_original": {
+      "0": {
+       "largest_in_shape_rate": 0.016,
+       "rule": "F.pow_bsum"
+      },
+      "1": {
+       "largest_in_shape_rate": 0.032,
+       "rule": "F.pow_bsum"
+      },
+      "2": {
+       "largest_in_shape_rate": 0.007,
+       "rule": "MF_in_shape_cv"
+      },
+      "3": {
+       "largest_in_shape_rate": 0.0,
+       "rule": "MF_in_shape_cv"
+      },
+      "4": {
+       "largest_in_shape_rate": 0.007,
+       "rule": "F.pow_bsum"
+      },
+      "5": {
+       "largest_in_shape_rate": 0.007,
+       "rule": "F.pow_bsum"
+      },
+      "6": {
+       "largest_in_shape_rate": 0.007,
+       "rule": "F.pow_bsum"
+      }
+     },
+     "reason": "ruling R-20: the res shape only; audit4 section 6: base and bsum use the exponent only as a round count",
+     "status": "NOT_REGISTERED"
+    }
+   },
+   "shared_finish_reject": "answer not a fixed point of scoring.normalise_answer, or the program cannot run (validity)",
+   "status": "SURVIVES",
+   "strict_cluster": "C1.fast_power_square_map",
+   "supersedes": "C1.fast_power_f3"
+  },
+  {
+   "capacity_supplied_per_level_capped_at_count": {
+    "0": 35300,
+    "1": 35300,
+    "2": 35300,
+    "3": 35300,
+    "4": 35300,
+    "5": 35300,
+    "6": 35300
+   },
+   "execution": {
+    "errors": 0,
+    "items": 1050,
+    "key_mismatches": 0,
+    "not_one_line": 0,
+    "run_disagreements": 0,
+    "second_solver_mismatches": 0
+   },
+   "in_shape_flag_above_bound_PENDING_LEAD_REVIEW": false,
+   "in_shape_max_overall": 0.041,
+   "level_wide_cheap_per_level": {
+    "0": {
+     "largest_abs_excess": 0.1075,
+     "rule": "battery.all|S.plain_fibonacci_a"
+    },
+    "1": {
+     "largest_abs_excess": 0.0875,
+     "rule": "battery.all|S.plain_fibonacci_b"
+    },
+    "2": {
+     "largest_abs_excess": 0.0575,
+     "rule": "battery.all|S.plain_fibonacci_b"
+    },
+    "3": {
+     "largest_abs_excess": 0.0775,
+     "rule": "battery.all|S.plain_fibonacci_a"
+    },
+    "4": {
+     "largest_abs_excess": 0.0625,
+     "rule": "battery.all|S.plain_fibonacci_a"
+    },
+    "5": {
+     "largest_abs_excess": 0.07,
+     "rule": "battery.all|S.plain_fibonacci_b"
+    },
+    "6": {
+     "largest_abs_excess": 0.0825,
+     "rule": "battery.all|S.plain_fibonacci_b"
+    }
+   },
+   "level_wide_max": 0.1075,
+   "levels": {
+    "collapsed": [],
+    "distinct": true,
+    "stated_parameter": "iterations by level (see the builder)",
+    "weakly_separated_steps": []
+   },
+   "measured_in": "fix-4 draw (seed 71), battery (seed 83), a3 run, capacity (seed 4242), execution (seed 5)",
+   "name": "C1.fib_like_f3",
+   "partial_trace_M_level_wide": {
+    "0": 0.102,
+    "1": 0.025,
+    "2": 0.045,
+    "3": 0.025,
+    "4": 0.05,
+    "5": 0.01,
+    "6": 0.033
+   },
+   "partial_trace_M_max_PENDING_LEAD_REVIEW": 0.102,
+   "reason": "no cheap rule or closed form above 0.15 at any level in the union of the three scripts (level-wide); levels distinct; keys execute; capacity measured",
+   "retry_sites": null,
+   "shapes": {
+    "mod": {
+     "0": {
+      "largest_in_shape_rate": 0.015,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.041,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.024,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.029,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.025,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.02,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.036,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "plain": {
+     "0": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.005,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "shapes_dropped": null,
+   "shared_finish_reject": "answer not a fixed point of scoring.normalise_answer, or the program cannot run (validity)",
+   "status": "SURVIVES",
+   "strict_cluster": "B6",
+   "supersedes": null
+  },
+  {
+   "capacity_supplied_per_level_capped_at_count": {
+    "0": 35300,
+    "1": 35300,
+    "2": 35300,
+    "3": 35300,
+    "4": 35300,
+    "5": 35300,
+    "6": 35300
+   },
+   "execution": {
+    "errors": 0,
+    "items": 1050,
+    "key_mismatches": 0,
+    "not_one_line": 0,
+    "run_disagreements": 0,
+    "second_solver_mismatches": 0
+   },
+   "in_shape_flag_above_bound_PENDING_LEAD_REVIEW": false,
+   "in_shape_max_overall": 0.01,
+   "level_wide_cheap_per_level": {
+    "0": {
+     "largest_abs_excess": 0.013,
+     "rule": "battery.BEST_generic_cv"
+    },
+    "1": {
+     "largest_abs_excess": 0.003,
+     "rule": "battery.MF_cv"
+    },
+    "2": {
+     "largest_abs_excess": 0.003,
+     "rule": "battery.BEST_generic_cv"
+    },
+    "3": {
+     "largest_abs_excess": 0.003,
+     "rule": "battery.MF_cv"
+    },
+    "4": {
+     "largest_abs_excess": 0.003,
+     "rule": "battery.MF_cv"
+    },
+    "5": {
+     "largest_abs_excess": 0.0,
+     "rule": "battery.all|S.no_mod"
+    },
+    "6": {
+     "largest_abs_excess": 0.0,
+     "rule": "battery.all|S.no_mod"
+    }
+   },
+   "level_wide_max": 0.013,
+   "levels": {
+    "collapsed": [],
+    "distinct": true,
+    "stated_parameter": "argument by level (see the builder)",
+    "weakly_separated_steps": []
+   },
+   "measured_in": "fix-4 draw (seed 71), battery (seed 83), a3 run, capacity (seed 4242), execution (seed 5)",
+   "name": "C1.fib_shapes_recursive_f3",
+   "partial_trace_M_level_wide": {
+    "0": 0.005,
+    "1": 0.0,
+    "2": 0.003,
+    "3": 0.0,
+    "4": 0.0,
+    "5": 0.0,
+    "6": 0.0
+   },
+   "partial_trace_M_max_PENDING_LEAD_REVIEW": 0.005,
+   "reason": "no cheap rule or closed form above 0.15 at any level in the union of the three scripts (level-wide); levels distinct; keys execute; capacity measured",
+   "retry_sites": null,
+   "shapes": {
+    "tri": {
+     "0": {
+      "largest_in_shape_rate": 0.01,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.005,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "two": {
+     "0": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "shapes_dropped": null,
+   "shared_finish_reject": "answer not a fixed point of scoring.normalise_answer, or the program cannot run (validity)",
+   "status": "SURVIVES",
+   "strict_cluster": "B6",
+   "supersedes": null
+  },
+  {
+   "capacity_supplied_per_level_capped_at_count": {
+    "0": 35300,
+    "1": 35300,
+    "2": 35300,
+    "3": 35300,
+    "4": 35300,
+    "5": 35300,
+    "6": 35300
+   },
+   "execution": {
+    "errors": 0,
+    "items": 1050,
+    "key_mismatches": 0,
+    "not_one_line": 0,
+    "run_disagreements": 0,
+    "second_solver_mismatches": 0
+   },
+   "in_shape_flag_above_bound_PENDING_LEAD_REVIEW": false,
+   "in_shape_max_overall": 0.022,
+   "level_wide_cheap_per_level": {
+    "0": {
+     "largest_abs_excess": 0.062,
+     "rule": "battery.BEST_generic_cv"
+    },
+    "1": {
+     "largest_abs_excess": 0.048,
+     "rule": "battery.BEST_generic_cv"
+    },
+    "2": {
+     "largest_abs_excess": 0.01,
+     "rule": "a4.MFsh"
+    },
+    "3": {
+     "largest_abs_excess": 0.013,
+     "rule": "a3.BEST_generic_cv"
+    },
+    "4": {
+     "largest_abs_excess": 0.01,
+     "rule": "a3.BEST_generic_cv"
+    },
+    "5": {
+     "largest_abs_excess": 0.018,
+     "rule": "a4.MFsh"
+    },
+    "6": {
+     "largest_abs_excess": 0.005,
+     "rule": "battery.MF_cv"
+    }
+   },
+   "level_wide_max": 0.062,
+   "levels": {
+    "collapsed": [],
+    "distinct": true,
+    "stated_parameter": "threshold t up to 12 + 2 * level, arguments up to 20 + 4 * level, multiplier up to 5 + level // 2, offsets up to 9 + level; even branch from level 2; calls 2, 3 from level 3, 4 from level 5",
+    "weakly_separated_steps": []
+   },
+   "measured_in": "fix-4 draw (seed 71), battery (seed 83), a3 run, capacity (seed 4242), execution (seed 5)",
+   "name": "C1.func_branch_f4",
+   "partial_trace_M_level_wide": {
+    "0": 0.005,
+    "1": 0.022,
+    "2": 0.662,
+    "3": 0.58,
+    "4": 0.61,
+    "5": 0.432,
+    "6": 0.477
+   },
+   "partial_trace_M_max_PENDING_LEAD_REVIEW": 0.662,
+   "reason": "no cheap rule or closed form above 0.15 at any level in the union of the three scripts (level-wide); levels distinct; keys execute; capacity measured",
+   "retry_sites": null,
+   "shapes": {
+    "calls2": {
+     "0": {
+      "largest_in_shape_rate": 0.005,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.022,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "calls2_even": {
+     "2": {
+      "largest_in_shape_rate": 0.01,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "calls3_even": {
+     "3": {
+      "largest_in_shape_rate": 0.007,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.003,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "calls4_even": {
+     "5": {
+      "largest_in_shape_rate": 0.018,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "shapes_dropped": null,
+   "shared_finish_reject": "answer not a fixed point of scoring.normalise_answer, or the program cannot run (validity)",
+   "status": "SURVIVES",
+   "strict_cluster": "B2",
+   "supersedes": "C1.func_branch"
+  },
+  {
+   "capacity_supplied_per_level_capped_at_count": {
+    "0": 35300,
+    "1": 35300,
+    "2": 35300,
+    "3": 35300,
+    "4": 35300,
+    "5": 35300,
+    "6": 35300
+   },
+   "execution": {
+    "errors": 0,
+    "items": 1050,
+    "key_mismatches": 0,
+    "not_one_line": 0,
+    "run_disagreements": 0,
+    "second_solver_mismatches": 0
+   },
+   "in_shape_flag_above_bound_PENDING_LEAD_REVIEW": false,
+   "in_shape_max_overall": 0.141,
+   "level_wide_cheap_per_level": {
+    "0": {
+     "largest_abs_excess": 0.033,
+     "rule": "battery.MF_cv"
+    },
+    "1": {
+     "largest_abs_excess": 0.01,
+     "rule": "battery.MF_cv"
+    },
+    "2": {
+     "largest_abs_excess": 0.013,
+     "rule": "a3.BEST_generic_cv"
+    },
+    "3": {
+     "largest_abs_excess": 0.107,
+     "rule": "battery.MF_cv"
+    },
+    "4": {
+     "largest_abs_excess": 0.11,
+     "rule": "a4.MFsh"
+    },
+    "5": {
+     "largest_abs_excess": 0.107,
+     "rule": "a4.MFsh"
+    },
+    "6": {
+     "largest_abs_excess": 0.098,
+     "rule": "a4.MF"
+    }
+   },
+   "level_wide_max": 0.11,
+   "levels": {
+    "collapsed": [],
+    "distinct": true,
+    "stated_parameter": "a up to 3 + level, b and c up to 13 + level, argument up to 24 + level, modulus up to 17 + 2 * level (level 3 up); h from level 3; two calls from level 2",
+    "weakly_separated_steps": [
+     "L0->L1",
+     "L3->L4",
+     "L4->L5",
+     "L5->L6"
+    ]
+   },
+   "measured_in": "fix-4 draw (seed 71), battery (seed 83), a3 run, capacity (seed 4242), execution (seed 5)",
+   "name": "C1.func_compose_f4",
+   "partial_trace_M_level_wide": {
+    "0": 0.0,
+    "1": 0.01,
+    "2": 0.005,
+    "3": 0.087,
+    "4": 0.11,
+    "5": 0.102,
+    "6": 0.09
+   },
+   "partial_trace_M_max_PENDING_LEAD_REVIEW": 0.11,
+   "reason": "no cheap rule or closed form above 0.15 at any level in the union of the three scripts (level-wide); levels distinct; keys execute; capacity measured",
+   "retry_sites": null,
+   "shapes": {
+    "g_one": {
+     "0": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.01,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.019,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "g_two": {
+     "2": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "h_one": {
+     "3": {
+      "largest_in_shape_rate": 0.09,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.115,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.079,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.074,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "h_two": {
+     "3": {
+      "largest_in_shape_rate": 0.112,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.105,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.141,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.105,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "shapes_dropped": null,
+   "shared_finish_reject": "answer not a fixed point of scoring.normalise_answer, or the program cannot run (validity)",
+   "status": "SURVIVES",
+   "strict_cluster": "B2",
+   "supersedes": "C1.func_compose_f3"
+  },
+  {
+   "in_shape_max_overall": 0.915,
+   "level_wide_cheap_per_level": {
+    "0": {
+     "largest_abs_excess": 0.775,
+     "rule": "a4.EFF_S"
+    },
+    "1": {
+     "largest_abs_excess": 0.637,
+     "rule": "a4.EFF_S"
+    },
+    "2": {
+     "largest_abs_excess": 0.583,
+     "rule": "a4.EFF_S"
+    },
+    "3": {
+     "largest_abs_excess": 0.505,
+     "rule": "a4.EFF_S"
+    },
+    "4": {
+     "largest_abs_excess": 0.39,
+     "rule": "a4.EFF_S"
+    },
+    "5": {
+     "largest_abs_excess": 0.375,
+     "rule": "a4.EFF_S"
+    },
+    "6": {
+     "largest_abs_excess": 0.295,
+     "rule": "a4.EFF_S"
+    }
+   },
+   "level_wide_max": 0.775,
+   "measured_in": "fix-4 re-run (seed 71 draw, battery seed 83) of the fix-3 builders as they were",
+   "name": "C1.grid_path_table",
+   "partial_trace_M_level_wide": {
+    "0": 0.775,
+    "1": 0.637,
+    "2": 0.583,
+    "3": 0.505,
+    "4": 0.39,
+    "5": 0.375,
+    "6": 0.295
+   },
+   "reason": "audit4 sections 3, 4, 5: greedy path 0.37-0.89 in shape (level-wide 0.78), binomial 0.37 at level 0; and it rejects draws whose count is 0 (216 retries), a valid answer: R-19 not needed for well-posedness",
+   "shapes": {
+    "count": {
+     "0": {
+      "largest_in_shape_rate": 0.433,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.26,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.157,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.096,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.082,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.048,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.037,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "max": {
+     "0": {
+      "largest_in_shape_rate": 0.855,
+      "rule": "S.greedy_path"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.829,
+      "rule": "S.greedy_path"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.671,
+      "rule": "S.greedy_path"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.665,
+      "rule": "S.greedy_path"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.482,
+      "rule": "S.greedy_path"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.545,
+      "rule": "S.greedy_path"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.438,
+      "rule": "S.greedy_path"
+     }
+    },
+    "min": {
+     "0": {
+      "largest_in_shape_rate": 0.915,
+      "rule": "S.greedy_path"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.814,
+      "rule": "S.greedy_path"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.722,
+      "rule": "S.greedy_path"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.638,
+      "rule": "S.greedy_path"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.55,
+      "rule": "S.greedy_path"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.496,
+      "rule": "S.greedy_path"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.336,
+      "rule": "S.greedy_path"
+     }
+    }
+   },
+   "status": "NOT_REGISTERED",
+   "strict_cluster": "B4",
+   "supersedes": null
+  },
+  {
+   "capacity_supplied_per_level_capped_at_count": {
+    "0": 35300,
+    "1": 35300,
+    "2": 35300,
+    "3": 35300,
+    "4": 35300,
+    "5": 35300,
+    "6": 35300
+   },
+   "execution": {
+    "errors": 0,
+    "items": 1050,
+    "key_mismatches": 0,
+    "not_one_line": 0,
+    "run_disagreements": 0,
+    "second_solver_mismatches": 0
+   },
+   "in_shape_flag_above_bound_PENDING_LEAD_REVIEW": false,
+   "in_shape_max_overall": 0.106,
+   "level_wide_cheap_per_level": {
+    "0": {
+     "largest_abs_excess": 0.03,
+     "rule": "battery.BEST_generic_cv"
+    },
+    "1": {
+     "largest_abs_excess": 0.035,
+     "rule": "battery.sum|S.n_times_half"
+    },
+    "2": {
+     "largest_abs_excess": 0.05,
+     "rule": "battery.BEST_generic_cv"
+    },
+    "3": {
+     "largest_abs_excess": 0.043,
+     "rule": "battery.BEST_generic_cv"
+    },
+    "4": {
+     "largest_abs_excess": 0.0225,
+     "rule": "battery.sum|S.n_times_half"
+    },
+    "5": {
+     "largest_abs_excess": 0.04,
+     "rule": "battery.sum|S.n_times_half"
+    },
+    "6": {
+     "largest_abs_excess": 0.02,
+     "rule": "a3.BEST_generic_cv"
+    }
+   },
+   "level_wide_max": 0.05,
+   "levels": {
+    "collapsed": [],
+    "distinct": true,
+    "stated_parameter": "length by level (see the builder)",
+    "weakly_separated_steps": []
+   },
+   "measured_in": "fix-4 draw (seed 71), battery (seed 83), a3 run, capacity (seed 4242), execution (seed 5)",
+   "name": "C1.list_build_f3",
+   "partial_trace_M_level_wide": {
+    "0": 0.028,
+    "1": 0.022,
+    "2": 0.025,
+    "3": 0.01,
+    "4": 0.003,
+    "5": 0.033,
+    "6": 0.007
+   },
+   "partial_trace_M_max_PENDING_LEAD_REVIEW": 0.033,
+   "reason": "no cheap rule or closed form above 0.15 at any level in the union of the three scripts (level-wide); levels distinct; keys execute; capacity measured",
+   "retry_sites": null,
+   "shapes": {
+    "list": {
+     "0": {
+      "largest_in_shape_rate": 0.014,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "list_filt": {
+     "0": {
+      "largest_in_shape_rate": 0.037,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "sum": {
+     "0": {
+      "largest_in_shape_rate": 0.024,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.024,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.074,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.011,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.08,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.012,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "sum_filt": {
+     "0": {
+      "largest_in_shape_rate": 0.054,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.065,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.02,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.04,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.019,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.106,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "wsum": {
+     "0": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.012,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.014,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.025,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.039,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "wsum_filt": {
+     "0": {
+      "largest_in_shape_rate": 0.024,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.02,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.02,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.021,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.019,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "shapes_dropped": null,
+   "shared_finish_reject": "answer not a fixed point of scoring.normalise_answer, or the program cannot run (validity)",
+   "status": "SURVIVES",
+   "strict_cluster": "B1",
+   "supersedes": null
+  },
+  {
+   "in_shape_max_overall": 1.0,
+   "level_wide_cheap_per_level": {
+    "0": {
+     "largest_abs_excess": 1.0,
+     "rule": "a4.plain|F.arith_series"
+    },
+    "1": {
+     "largest_abs_excess": 1.0,
+     "rule": "a4.plain|F.arith_series"
+    },
+    "2": {
+     "largest_abs_excess": 1.0,
+     "rule": "a4.else|F.arith_series"
+    },
+    "3": {
+     "largest_abs_excess": 1.0,
+     "rule": "a4.else|F.arith_series"
+    },
+    "4": {
+     "largest_abs_excess": 1.0,
+     "rule": "a4.else|F.arith_series"
+    },
+    "5": {
+     "largest_abs_excess": 1.0,
+     "rule": "a4.else|F.arith_series"
+    },
+    "6": {
+     "largest_abs_excess": 1.0,
+     "rule": "a4.else|F.arith_series"
+    }
+   },
+   "level_wide_max": 1.0,
+   "measured_in": "fix-4 re-run (seed 71 draw, battery seed 83) of the fix-3 builders as they were",
+   "name": "C1.loop_sum",
+   "partial_trace_M_level_wide": {
+    "0": 0.11,
+    "1": 0.068,
+    "2": 0.028,
+    "3": 0.018,
+    "4": 0.028,
+    "5": 0.005,
+    "6": 0.003
+   },
+   "reason": "audit4 section 3: arithmetic-series closed form 1.000 at every level; R-25 closed form",
+   "shapes": {
+    "else": {
+     "2": {
+      "largest_in_shape_rate": 1.0,
+      "rule": "F.arith_series"
+     },
+     "3": {
+      "largest_in_shape_rate": 1.0,
+      "rule": "F.arith_series"
+     },
+     "4": {
+      "largest_in_shape_rate": 1.0,
+      "rule": "F.arith_series"
+     },
+     "5": {
+      "largest_in_shape_rate": 1.0,
+      "rule": "F.arith_series"
+     },
+     "6": {
+      "largest_in_shape_rate": 1.0,
+      "rule": "F.arith_series"
+     }
+    },
+    "plain": {
+     "0": {
+      "largest_in_shape_rate": 1.0,
+      "rule": "F.arith_series"
+     },
+     "1": {
+      "largest_in_shape_rate": 1.0,
+      "rule": "F.arith_series"
+     }
+    }
+   },
+   "status": "NOT_REGISTERED",
+   "strict_cluster": "B1",
+   "supersedes": null
+  },
+  {
+   "in_shape_max_overall": 0.213,
+   "level_wide_cheap_per_level": {
+    "0": {
+     "largest_abs_excess": 0.145,
+     "rule": "battery.MF_cv"
+    },
+    "1": {
+     "largest_abs_excess": 0.115,
+     "rule": "a4.EFF_S"
+    },
+    "2": {
+     "largest_abs_excess": 0.068,
+     "rule": "a4.MFsh"
+    },
+    "3": {
+     "largest_abs_excess": 0.085,
+     "rule": "a4.MFsh"
+    },
+    "4": {
+     "largest_abs_excess": 0.095,
+     "rule": "a4.EFF_S"
+    },
+    "5": {
+     "largest_abs_excess": 0.055,
+     "rule": "battery.MF_cv"
+    },
+    "6": {
+     "largest_abs_excess": 0.055,
+     "rule": "battery.MF_cv"
+    }
+   },
+   "level_wide_max": 0.145,
+   "measured_in": "fix-4 re-run (seed 71 draw, battery seed 83) of the fix-3 builders as they were",
+   "name": "C1.majority_vote_scan_f3",
+   "partial_trace_M_level_wide": {
+    "0": 0.145,
+    "1": 0.115,
+    "2": 0.065,
+    "3": 0.085,
+    "4": 0.095,
+    "5": 0.045,
+    "6": 0.055
+   },
+   "reason": "audit4 section 5: level-wide cheap 0.190 (above 0.15); the fix-4 re-run on another draw measured 0.145 (not above), so it is dropped on the audit's figure: a measurement above the bound exists in the union of the scripts' runs",
+   "shapes": {
+    "candsum": {
+     "0": {
+      "largest_in_shape_rate": 0.178,
+      "rule": "S.prefix_mode_sum"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.121,
+      "rule": "S.prefix_mode_sum"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.073,
+      "rule": "S.sum_vals"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.054,
+      "rule": "S.sum_vals"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.043,
+      "rule": "S.prefix_mode_sum"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.062,
+      "rule": "S.prefix_mode_sum"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.049,
+      "rule": "S.prefix_mode_sum"
+     }
+    },
+    "cntsum": {
+     "0": {
+      "largest_in_shape_rate": 0.213,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.174,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.114,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.146,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.133,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.077,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.096,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "repl": {
+     "0": {
+      "largest_in_shape_rate": 0.089,
+      "rule": "S.mode"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.118,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.085,
+      "rule": "S.sum_distinct"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.066,
+      "rule": "S.sum_distinct"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.088,
+      "rule": "S.sum_distinct"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.08,
+      "rule": "S.sum_distinct"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.057,
+      "rule": "S.sum_distinct"
+     }
+    }
+   },
+   "status": "NOT_REGISTERED",
+   "strict_cluster": "C1.majority_vote_scan",
+   "supersedes": null
+  },
+  {
+   "capacity_supplied_per_level_capped_at_count": {
+    "0": 35300,
+    "1": 35300,
+    "2": 35300,
+    "3": 35300,
+    "4": 35300,
+    "5": 35300,
+    "6": 35300
+   },
+   "execution": {
+    "errors": 0,
+    "items": 1050,
+    "key_mismatches": 0,
+    "not_one_line": 0,
+    "run_disagreements": 0,
+    "second_solver_mismatches": 0
+   },
+   "in_shape_flag_above_bound_PENDING_LEAD_REVIEW": false,
+   "in_shape_max_overall": 0.136,
+   "level_wide_cheap_per_level": {
+    "0": {
+     "largest_abs_excess": 0.105,
+     "rule": "a4.EFF_S"
+    },
+    "1": {
+     "largest_abs_excess": 0.048,
+     "rule": "a4.MFsh"
+    },
+    "2": {
+     "largest_abs_excess": 0.045,
+     "rule": "a4.MFsh"
+    },
+    "3": {
+     "largest_abs_excess": 0.035,
+     "rule": "a4.MFsh"
+    },
+    "4": {
+     "largest_abs_excess": 0.035,
+     "rule": "battery.MF_cv"
+    },
+    "5": {
+     "largest_abs_excess": 0.025,
+     "rule": "battery.MF_cv"
+    },
+    "6": {
+     "largest_abs_excess": 0.028,
+     "rule": "a4.MFsh"
+    }
+   },
+   "level_wide_max": 0.105,
+   "levels": {
+    "collapsed": [],
+    "distinct": true,
+    "stated_parameter": "list lengths by level (see the builder)",
+    "weakly_separated_steps": []
+   },
+   "measured_in": "fix-4 draw (seed 71), battery (seed 83), a3 run, capacity (seed 4242), execution (seed 5)",
+   "name": "C1.merge_two_sorted_f3",
+   "partial_trace_M_level_wide": {
+    "0": 0.105,
+    "1": 0.045,
+    "2": 0.043,
+    "3": 0.028,
+    "4": 0.018,
+    "5": 0.005,
+    "6": 0.025
+   },
+   "partial_trace_M_max_PENDING_LEAD_REVIEW": 0.105,
+   "reason": "no cheap rule or closed form above 0.15 at any level in the union of the three scripts (level-wide); levels distinct; keys execute; capacity measured",
+   "retry_sites": null,
+   "shapes": {
+    "diffsum": {
+     "0": {
+      "largest_in_shape_rate": 0.109,
+      "rule": "S.zero"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.084,
+      "rule": "S.zero"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.068,
+      "rule": "S.zero"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.065,
+      "rule": "S.zero"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.052,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.048,
+      "rule": "S.zero"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.035,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "maxsum": {
+     "0": {
+      "largest_in_shape_rate": 0.136,
+      "rule": "S.sum_all"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.086,
+      "rule": "S.sum_all"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.052,
+      "rule": "S.sum_merged_but_last"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.035,
+      "rule": "S.sum_all"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.027,
+      "rule": "S.sum_all"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.009,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.02,
+      "rule": "S.sum_all"
+     }
+    }
+   },
+   "shapes_dropped": null,
+   "shared_finish_reject": "answer not a fixed point of scoring.normalise_answer, or the program cannot run (validity)",
+   "status": "SURVIVES",
+   "strict_cluster": "C1.merge_two_sorted",
+   "supersedes": null
+  },
+  {
+   "in_shape_max_overall": 0.626,
+   "level_wide_cheap_per_level": {
+    "0": {
+     "largest_abs_excess": 0.215,
+     "rule": "a4.MFsh"
+    },
+    "1": {
+     "largest_abs_excess": 0.115,
+     "rule": "a4.MFsh"
+    },
+    "2": {
+     "largest_abs_excess": 0.11,
+     "rule": "a4.MFsh"
+    },
+    "3": {
+     "largest_abs_excess": 0.06,
+     "rule": "battery.MF_cv"
+    },
+    "4": {
+     "largest_abs_excess": 0.068,
+     "rule": "a4.MFsh"
+    },
+    "5": {
+     "largest_abs_excess": 0.062,
+     "rule": "a4.MFsh"
+    },
+    "6": {
+     "largest_abs_excess": 0.035,
+     "rule": "a4.MFsh"
+    }
+   },
+   "level_wide_max": 0.215,
+   "measured_in": "fix-4 re-run (seed 71 draw, battery seed 83) of the fix-3 builders as they were",
+   "name": "C1.mirror_pointers",
+   "partial_trace_M_level_wide": {
+    "0": 0.215,
+    "1": 0.115,
+    "2": 0.105,
+    "3": 0.043,
+    "4": 0.065,
+    "5": 0.062,
+    "6": 0.035
+   },
+   "reason": "audit4 sections 4, 5: level-wide 0.230 (above 0.15; the poss shape's most frequent key 0.61 at level 0) and it rejects draws with no unequal pair (1,245 retries), which for the poss shape is the answer 0: R-19 not needed for well-posedness",
+   "shapes": {
+    "chars": {
+     "0": {
+      "largest_in_shape_rate": 0.023,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.014,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.058,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.015,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.027,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.039,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.008,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "pairs": {
+     "0": {
+      "largest_in_shape_rate": 0.007,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "S.whole_string"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "S.whole_string"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.006,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "S.whole_string"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "S.whole_string"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "S.whole_string"
+     }
+    },
+    "poss": {
+     "0": {
+      "largest_in_shape_rate": 0.626,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.312,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.261,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.113,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.176,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.14,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.083,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "status": "NOT_REGISTERED",
+   "strict_cluster": "C1.mirror_pointers",
+   "supersedes": null
+  },
+  {
+   "capacity_supplied_per_level_capped_at_count": {
+    "0": 35300,
+    "1": 35300,
+    "2": 35300,
+    "3": 35300,
+    "4": 35300,
+    "5": 35300,
+    "6": 35300
+   },
+   "execution": {
+    "errors": 0,
+    "items": 1050,
+    "key_mismatches": 0,
+    "not_one_line": 0,
+    "run_disagreements": 0,
+    "second_solver_mismatches": 0
+   },
+   "in_shape_flag_above_bound_PENDING_LEAD_REVIEW": true,
+   "in_shape_max_overall": 0.151,
+   "level_wide_cheap_per_level": {
+    "0": {
+     "largest_abs_excess": 0.065,
+     "rule": "a4.MFsh"
+    },
+    "1": {
+     "largest_abs_excess": 0.06,
+     "rule": "battery.count|S.run_inc_1"
+    },
+    "2": {
+     "largest_abs_excess": 0.058,
+     "rule": "a4.MFsh"
+    },
+    "3": {
+     "largest_abs_excess": 0.0475,
+     "rule": "battery.count|S.run_inc_1"
+    },
+    "4": {
+     "largest_abs_excess": 0.045,
+     "rule": "a3.MF_shape_cv"
+    },
+    "5": {
+     "largest_abs_excess": 0.04,
+     "rule": "a4.MFsh"
+    },
+    "6": {
+     "largest_abs_excess": 0.043,
+     "rule": "battery.MF_cv"
+    }
+   },
+   "level_wide_max": 0.065,
+   "levels": {
+    "collapsed": [],
+    "distinct": true,
+    "stated_parameter": "loop bounds by level (see the builder)",
+    "weakly_separated_steps": []
+   },
+   "measured_in": "fix-4 draw (seed 71), battery (seed 83), a3 run, capacity (seed 4242), execution (seed 5)",
+   "name": "C1.nested_pairs_f3",
+   "partial_trace_M_level_wide": {
+    "0": 0.052,
+    "1": 0.035,
+    "2": 0.055,
+    "3": 0.02,
+    "4": 0.04,
+    "5": 0.037,
+    "6": 0.037
+   },
+   "partial_trace_M_max_PENDING_LEAD_REVIEW": 0.055,
+   "reason": "no cheap rule or closed form above 0.15 at any level in the union of the three scripts (level-wide); levels distinct; keys execute; capacity measured",
+   "retry_sites": null,
+   "shapes": {
+    "rect": {
+     "0": {
+      "largest_in_shape_rate": 0.033,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.007,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.008,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.004,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.007,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.004,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "tri": {
+     "0": {
+      "largest_in_shape_rate": 0.13,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.1,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.151,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.102,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.116,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.11,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.102,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "shapes_dropped": null,
+   "shared_finish_reject": "answer not a fixed point of scoring.normalise_answer, or the program cannot run (validity)",
+   "status": "SURVIVES",
+   "strict_cluster": "B1",
+   "supersedes": null
+  },
+  {
+   "in_shape_max_overall": 1.0,
+   "level_wide_cheap_per_level": {
+    "0": {
+     "largest_abs_excess": 1.0,
+     "rule": "a4.closed_forms_best_per_shape_summed"
+    },
+    "1": {
+     "largest_abs_excess": 1.0,
+     "rule": "a4.closed_forms_best_per_shape_summed"
+    },
+    "2": {
+     "largest_abs_excess": 1.0,
+     "rule": "a4.closed_forms_best_per_shape_summed"
+    },
+    "3": {
+     "largest_abs_excess": 1.0,
+     "rule": "a4.closed_forms_best_per_shape_summed"
+    },
+    "4": {
+     "largest_abs_excess": 1.0,
+     "rule": "a4.closed_forms_best_per_shape_summed"
+    },
+    "5": {
+     "largest_abs_excess": 0.999,
+     "rule": "a4.closed_forms_best_per_shape_summed"
+    },
+    "6": {
+     "largest_abs_excess": 1.0,
+     "rule": "a4.closed_forms_best_per_shape_summed"
+    }
+   },
+   "level_wide_max": 1.0,
+   "measured_in": "fix-4 re-run (seed 71 draw, battery seed 83) of the fix-3 builders as they were",
+   "name": "C1.partition_pass_f3",
+   "partial_trace_M_level_wide": {
+    "0": 0.003,
+    "1": 0.003,
+    "2": 0.0,
+    "3": 0.003,
+    "4": 0.0,
+    "5": 0.0,
+    "6": 0.003
+   },
+   "reason": "audit4 section 3: closed form 2*xs[0] + xs[1] answers the disp shape in 1.000 of items and a fixed permutation answers the list and mid shapes in 1.000 (every level); R-24/R-25 closed form",
+   "shapes": {
+    "disp": {
+     "0": {
+      "largest_in_shape_rate": 1.0,
+      "rule": "F.2x0_plus_x1"
+     },
+     "1": {
+      "largest_in_shape_rate": 1.0,
+      "rule": "F.2x0_plus_x1"
+     },
+     "2": {
+      "largest_in_shape_rate": 1.0,
+      "rule": "F.2x0_plus_x1"
+     },
+     "3": {
+      "largest_in_shape_rate": 1.0,
+      "rule": "F.2x0_plus_x1"
+     },
+     "4": {
+      "largest_in_shape_rate": 1.0,
+      "rule": "F.2x0_plus_x1"
+     },
+     "5": {
+      "largest_in_shape_rate": 1.0,
+      "rule": "F.2x0_plus_x1"
+     },
+     "6": {
+      "largest_in_shape_rate": 1.0,
+      "rule": "F.2x0_plus_x1"
+     }
+    },
+    "list": {
+     "0": {
+      "largest_in_shape_rate": 1.0,
+      "rule": "F.template_permutation"
+     },
+     "1": {
+      "largest_in_shape_rate": 1.0,
+      "rule": "F.template_permutation"
+     },
+     "2": {
+      "largest_in_shape_rate": 1.0,
+      "rule": "F.template_permutation"
+     },
+     "3": {
+      "largest_in_shape_rate": 1.0,
+      "rule": "F.template_permutation"
+     },
+     "4": {
+      "largest_in_shape_rate": 1.0,
+      "rule": "F.template_permutation"
+     },
+     "5": {
+      "largest_in_shape_rate": 1.0,
+      "rule": "F.template_permutation"
+     },
+     "6": {
+      "largest_in_shape_rate": 1.0,
+      "rule": "F.template_permutation"
+     }
+    },
+    "mid": {
+     "0": {
+      "largest_in_shape_rate": 1.0,
+      "rule": "F.template_permutation"
+     },
+     "1": {
+      "largest_in_shape_rate": 1.0,
+      "rule": "F.template_permutation"
+     },
+     "2": {
+      "largest_in_shape_rate": 1.0,
+      "rule": "F.template_permutation"
+     },
+     "3": {
+      "largest_in_shape_rate": 1.0,
+      "rule": "F.template_permutation"
+     },
+     "4": {
+      "largest_in_shape_rate": 1.0,
+      "rule": "F.template_permutation"
+     },
+     "5": {
+      "largest_in_shape_rate": 1.0,
+      "rule": "F.template_permutation"
+     },
+     "6": {
+      "largest_in_shape_rate": 1.0,
+      "rule": "F.template_permutation"
+     }
+    }
+   },
+   "status": "NOT_REGISTERED",
+   "strict_cluster": "C1.partition_pass",
+   "supersedes": null
+  },
+  {
+   "capacity_supplied_per_level_capped_at_count": {
+    "0": 35300,
+    "1": 35300,
+    "2": 35300,
+    "3": 35300,
+    "4": 35300,
+    "5": 35300,
+    "6": 35300
+   },
+   "execution": {
+    "errors": 0,
+    "items": 1050,
+    "key_mismatches": 0,
+    "not_one_line": 0,
+    "run_disagreements": 0,
+    "second_solver_mismatches": 0
+   },
+   "in_shape_flag_above_bound_PENDING_LEAD_REVIEW": false,
+   "in_shape_max_overall": 0.081,
+   "level_wide_cheap_per_level": {
+    "0": {
+     "largest_abs_excess": 0.1,
+     "rule": "a3.BEST_generic_cv"
+    },
+    "1": {
+     "largest_abs_excess": 0.02,
+     "rule": "battery.BEST_generic_cv"
+    },
+    "2": {
+     "largest_abs_excess": 0.022,
+     "rule": "battery.BEST_generic_cv"
+    },
+    "3": {
+     "largest_abs_excess": 0.018,
+     "rule": "battery.BEST_generic_cv"
+    },
+    "4": {
+     "largest_abs_excess": 0.003,
+     "rule": "battery.MF_cv"
+    },
+    "5": {
+     "largest_abs_excess": 0.007,
+     "rule": "battery.BEST_generic_cv"
+    },
+    "6": {
+     "largest_abs_excess": 0.01,
+     "rule": "a3.BEST_generic_cv"
+    }
+   },
+   "level_wide_max": 0.1,
+   "levels": {
+    "collapsed": [],
+    "distinct": true,
+    "stated_parameter": "token count by level (see the builder)",
+    "weakly_separated_steps": []
+   },
+   "measured_in": "fix-4 draw (seed 71), battery (seed 83), a3 run, capacity (seed 4242), execution (seed 5)",
+   "name": "C1.postfix_evaluation",
+   "partial_trace_M_level_wide": {
+    "0": 0.092,
+    "1": 0.018,
+    "2": 0.003,
+    "3": 0.003,
+    "4": 0.0,
+    "5": 0.003,
+    "6": 0.003
+   },
+   "partial_trace_M_max_PENDING_LEAD_REVIEW": 0.092,
+   "reason": "no cheap rule or closed form above 0.15 at any level in the union of the three scripts (level-wide); levels distinct; keys execute; capacity measured",
+   "retry_sites": null,
+   "shapes": {
+    "opsum": {
+     "0": {
+      "largest_in_shape_rate": 0.026,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.024,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.026,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.005,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.005,
+      "rule": "S.sum_operands"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "S.sum_operands"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.005,
+      "rule": "S.last_operand"
+     }
+    },
+    "top": {
+     "0": {
+      "largest_in_shape_rate": 0.081,
+      "rule": "S.sum_operands"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.021,
+      "rule": "S.last_operand"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.019,
+      "rule": "S.sum_operands"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.01,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.005,
+      "rule": "S.sum_operands"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.01,
+      "rule": "S.last_operand"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.005,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "shapes_dropped": null,
+   "shared_finish_reject": "answer not a fixed point of scoring.normalise_answer, or the program cannot run (validity)",
+   "status": "SURVIVES",
+   "strict_cluster": "B8",
+   "supersedes": null
+  },
+  {
+   "capacity_supplied_per_level_capped_at_count": {
+    "0": 35300,
+    "1": 35300,
+    "2": 35300,
+    "3": 35300,
+    "4": 35300,
+    "5": 35300,
+    "6": 35300
+   },
+   "execution": {
+    "errors": 0,
+    "items": 1050,
+    "key_mismatches": 0,
+    "not_one_line": 0,
+    "run_disagreements": 0,
+    "second_solver_mismatches": 0
+   },
+   "in_shape_flag_above_bound_PENDING_LEAD_REVIEW": false,
+   "in_shape_max_overall": 0.008,
+   "level_wide_cheap_per_level": {
+    "0": {
+     "largest_abs_excess": 0.007,
+     "rule": "a4.EFF_S"
+    },
+    "1": {
+     "largest_abs_excess": 0.003,
+     "rule": "battery.BEST_generic_cv"
+    },
+    "2": {
+     "largest_abs_excess": 0.003,
+     "rule": "a4.MFsh"
+    },
+    "3": {
+     "largest_abs_excess": 0.0,
+     "rule": "battery.MF_cv"
+    },
+    "4": {
+     "largest_abs_excess": 0.003,
+     "rule": "a3.MF_shape_cv"
+    },
+    "5": {
+     "largest_abs_excess": 0.0,
+     "rule": "battery.MF_cv"
+    },
+    "6": {
+     "largest_abs_excess": 0.0,
+     "rule": "battery.MF_cv"
+    }
+   },
+   "level_wide_max": 0.007,
+   "levels": {
+    "collapsed": [],
+    "distinct": true,
+    "stated_parameter": "argument by level (see the builder)",
+    "weakly_separated_steps": []
+   },
+   "measured_in": "fix-4 draw (seed 71), battery (seed 83), a3 run, capacity (seed 4242), execution (seed 5)",
+   "name": "C1.recursive_calls_r2",
+   "partial_trace_M_level_wide": {
+    "0": 0.015,
+    "1": 0.0,
+    "2": 0.003,
+    "3": 0.0,
+    "4": 0.0,
+    "5": 0.003,
+    "6": 0.0
+   },
+   "partial_trace_M_max_PENDING_LEAD_REVIEW": 0.015,
+   "reason": "no cheap rule or closed form above 0.15 at any level in the union of the three scripts (level-wide); levels distinct; keys execute; capacity measured",
+   "retry_sites": null,
+   "shapes": {
+    "listfold": {
+     "0": {
+      "largest_in_shape_rate": 0.007,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.008,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "mutual": {
+     "0": {
+      "largest_in_shape_rate": 0.008,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.007,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "split": {
+     "0": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "shapes_dropped": null,
+   "shared_finish_reject": "answer not a fixed point of scoring.normalise_answer, or the program cannot run (validity)",
+   "status": "SURVIVES",
+   "strict_cluster": "B6",
+   "supersedes": null
+  },
+  {
+   "capacity_supplied_per_level_capped_at_count": {
+    "0": 35300,
+    "1": 35300,
+    "2": 35300,
+    "3": 35300,
+    "4": 35300,
+    "5": 35300,
+    "6": 35300
+   },
+   "execution": {
+    "errors": 0,
+    "items": 1050,
+    "key_mismatches": 0,
+    "not_one_line": 0,
+    "run_disagreements": 0,
+    "second_solver_mismatches": 0
+   },
+   "in_shape_flag_above_bound_PENDING_LEAD_REVIEW": false,
+   "in_shape_max_overall": 0.025,
+   "level_wide_cheap_per_level": {
+    "0": {
+     "largest_abs_excess": 0.015,
+     "rule": "battery.MF_cv"
+    },
+    "1": {
+     "largest_abs_excess": 0.007,
+     "rule": "battery.MF_cv"
+    },
+    "2": {
+     "largest_abs_excess": 0.0,
+     "rule": "battery.MF_cv"
+    },
+    "3": {
+     "largest_abs_excess": 0.0,
+     "rule": "battery.MF_cv"
+    },
+    "4": {
+     "largest_abs_excess": 0.0,
+     "rule": "battery.MF_cv"
+    },
+    "5": {
+     "largest_abs_excess": 0.0,
+     "rule": "battery.MF_cv"
+    },
+    "6": {
+     "largest_abs_excess": 0.0,
+     "rule": "battery.MF_cv"
+    }
+   },
+   "level_wide_max": 0.015,
+   "levels": {
+    "collapsed": [],
+    "distinct": true,
+    "stated_parameter": "number of runs 3 + level, run length up to 3 + level // 2",
+    "weakly_separated_steps": []
+   },
+   "measured_in": "fix-4 draw (seed 71), battery (seed 83), a3 run, capacity (seed 4242), execution (seed 5)",
+   "name": "C1.run_length_scan",
+   "partial_trace_M_level_wide": {
+    "0": 0.107,
+    "1": 0.14,
+    "2": 0.077,
+    "3": 0.09,
+    "4": 0.09,
+    "5": 0.052,
+    "6": 0.06
+   },
+   "partial_trace_M_max_PENDING_LEAD_REVIEW": 0.14,
+   "reason": "no cheap rule or closed form above 0.15 at any level in the union of the three scripts (level-wide); levels distinct; keys execute; capacity measured",
+   "retry_sites": [
+    "answer-conditional",
+    "the 'long' shape with no run of length 2 or more (its answer would be the empty string)",
+    "an empty gold answer is not gradable: the scorer treats an empty answer as no answer (scoring.extract, in_grammar('line', '') is False); the shared finish would refuse it anyway"
+   ],
+   "shapes": {
+    "counts": {
+     "0": {
+      "largest_in_shape_rate": 0.025,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "enc": {
+     "0": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "long": {
+     "0": {
+      "largest_in_shape_rate": 0.007,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "shapes_dropped": null,
+   "shared_finish_reject": "answer not a fixed point of scoring.normalise_answer, or the program cannot run (validity)",
+   "status": "SURVIVES",
+   "strict_cluster": "C1.run_length_scan",
+   "supersedes": null
+  },
+  {
+   "capacity_supplied_per_level_capped_at_count": {
+    "0": 35300,
+    "1": 35300,
+    "2": 35300,
+    "3": 35300,
+    "4": 35300,
+    "5": 35300,
+    "6": 35300
+   },
+   "execution": {
+    "errors": 0,
+    "items": 1050,
+    "key_mismatches": 0,
+    "not_one_line": 0,
+    "run_disagreements": 0,
+    "second_solver_mismatches": 0
+   },
+   "in_shape_flag_above_bound_PENDING_LEAD_REVIEW": false,
+   "in_shape_max_overall": 0.058,
+   "level_wide_cheap_per_level": {
+    "0": {
+     "largest_abs_excess": 0.03,
+     "rule": "a4.EFF_S"
+    },
+    "1": {
+     "largest_abs_excess": 0.03,
+     "rule": "battery.sum|S.naive_copy"
+    },
+    "2": {
+     "largest_abs_excess": 0.04,
+     "rule": "battery.sum|S.naive_copy"
+    },
+    "3": {
+     "largest_abs_excess": 0.045,
+     "rule": "battery.list|S.naive_copy"
+    },
+    "4": {
+     "largest_abs_excess": 0.05,
+     "rule": "battery.sum|S.naive_copy"
+    },
+    "5": {
+     "largest_abs_excess": 0.03,
+     "rule": "battery.list|S.naive_copy"
+    },
+    "6": {
+     "largest_abs_excess": 0.05,
+     "rule": "battery.sum|S.naive_copy"
+    }
+   },
+   "level_wide_max": 0.05,
+   "levels": {
+    "collapsed": [],
+    "distinct": true,
+    "stated_parameter": "number of operations by level (see the builder)",
+    "weakly_separated_steps": []
+   },
+   "measured_in": "fix-4 draw (seed 71), battery (seed 83), a3 run, capacity (seed 4242), execution (seed 5)",
+   "name": "C1.shared_lists_f3",
+   "partial_trace_M_level_wide": {
+    "0": 0.045,
+    "1": 0.033,
+    "2": 0.113,
+    "3": 0.113,
+    "4": 0.14,
+    "5": 0.135,
+    "6": 0.117
+   },
+   "partial_trace_M_max_PENDING_LEAD_REVIEW": 0.14,
+   "reason": "no cheap rule or closed form above 0.15 at any level in the union of the three scripts (level-wide); levels distinct; keys execute; capacity measured",
+   "retry_sites": [
+    "validity (structure of the program)",
+    "an alias statement of a name to itself",
+    "'a = a' changes nothing, so the statement says nothing about aliasing"
+   ],
+   "shapes": {
+    "list": {
+     "0": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "sum": {
+     "0": {
+      "largest_in_shape_rate": 0.058,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.046,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.029,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.035,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.039,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.021,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.022,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "shapes_dropped": null,
+   "shared_finish_reject": "answer not a fixed point of scoring.normalise_answer, or the program cannot run (validity)",
+   "status": "SURVIVES",
+   "strict_cluster": "C1.shared_lists",
+   "supersedes": null
+  },
+  {
+   "capacity_supplied_per_level_capped_at_count": {
+    "0": 35300,
+    "1": 35300,
+    "2": 35300,
+    "3": 35300,
+    "4": 35300,
+    "5": 35300,
+    "6": 35300
+   },
+   "execution": {
+    "errors": 0,
+    "items": 1050,
+    "key_mismatches": 0,
+    "not_one_line": 0,
+    "run_disagreements": 0,
+    "second_solver_mismatches": 0
+   },
+   "in_shape_flag_above_bound_PENDING_LEAD_REVIEW": false,
+   "in_shape_max_overall": 0.11,
+   "level_wide_cheap_per_level": {
+    "0": {
+     "largest_abs_excess": 0.11,
+     "rule": "a4.MFsh"
+    },
+    "1": {
+     "largest_abs_excess": 0.055,
+     "rule": "a4.MFsh"
+    },
+    "2": {
+     "largest_abs_excess": 0.08,
+     "rule": "battery.MF_cv"
+    },
+    "3": {
+     "largest_abs_excess": 0.028,
+     "rule": "battery.MF_cv"
+    },
+    "4": {
+     "largest_abs_excess": 0.03,
+     "rule": "battery.MF_cv"
+    },
+    "5": {
+     "largest_abs_excess": 0.058,
+     "rule": "battery.MF_cv"
+    },
+    "6": {
+     "largest_abs_excess": 0.05,
+     "rule": "a4.MFsh"
+    }
+   },
+   "level_wide_max": 0.11,
+   "levels": {
+    "collapsed": [],
+    "distinct": true,
+    "stated_parameter": "flags n = 30, 34, 38, 42, 46, 50, 56",
+    "weakly_separated_steps": []
+   },
+   "measured_in": "fix-4 draw (seed 71), battery (seed 83), a3 run, capacity (seed 4242), execution (seed 5)",
+   "name": "C1.sieve_marking_f4",
+   "partial_trace_M_level_wide": {
+    "0": 0.11,
+    "1": 0.055,
+    "2": 0.05,
+    "3": 0.018,
+    "4": 0.02,
+    "5": 0.018,
+    "6": 0.05
+   },
+   "partial_trace_M_max_PENDING_LEAD_REVIEW": 0.11,
+   "reason": "no cheap rule or closed form above 0.15 at any level in the union of the three scripts (level-wide); levels distinct; keys execute; capacity measured",
+   "retry_sites": null,
+   "shapes": {
+    "strikesum": {
+     "0": {
+      "largest_in_shape_rate": 0.11,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.055,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.05,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.018,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.02,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.018,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.05,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "shapes_dropped": {
+    "flags": {
+     "per_level_in_shape_of_the_fix3_original": {
+      "0": {
+       "largest_in_shape_rate": 1.0,
+       "rule": "F.order_free_divisor_test"
+      },
+      "1": {
+       "largest_in_shape_rate": 1.0,
+       "rule": "F.order_free_divisor_test"
+      },
+      "2": {
+       "largest_in_shape_rate": 1.0,
+       "rule": "F.order_free_divisor_test"
+      },
+      "3": {
+       "largest_in_shape_rate": 1.0,
+       "rule": "F.order_free_divisor_test"
+      },
+      "4": {
+       "largest_in_shape_rate": 1.0,
+       "rule": "F.order_free_divisor_test"
+      },
+      "5": {
+       "largest_in_shape_rate": 1.0,
+       "rule": "F.order_free_divisor_test"
+      },
+      "6": {
+       "largest_in_shape_rate": 1.0,
+       "rule": "F.order_free_divisor_test"
+      }
+     },
+     "reason": "audit4 section 3: the order-free divisor test answers the flag-list shape in 1.000 of items at every level",
+     "status": "NOT_REGISTERED"
+    }
+   },
+   "shared_finish_reject": "answer not a fixed point of scoring.normalise_answer, or the program cannot run (validity)",
+   "status": "SURVIVES",
+   "strict_cluster": "C1.sieve_marking",
+   "supersedes": "C1.sieve_marking_f3"
+  },
+  {
+   "capacity_supplied_per_level_capped_at_count": {
+    "0": 35300,
+    "1": 35300,
+    "2": 35300,
+    "3": 35300,
+    "4": 35300,
+    "5": 35300,
+    "6": 35300
+   },
+   "execution": {
+    "errors": 0,
+    "items": 1050,
+    "key_mismatches": 0,
+    "not_one_line": 0,
+    "run_disagreements": 0,
+    "second_solver_mismatches": 0
+   },
+   "in_shape_flag_above_bound_PENDING_LEAD_REVIEW": true,
+   "in_shape_max_overall": 0.286,
+   "level_wide_cheap_per_level": {
+    "0": {
+     "largest_abs_excess": 0.09,
+     "rule": "a4.EFF_S"
+    },
+    "1": {
+     "largest_abs_excess": 0.06,
+     "rule": "battery.MF_cv"
+    },
+    "2": {
+     "largest_abs_excess": 0.08,
+     "rule": "a4.EFF_S"
+    },
+    "3": {
+     "largest_abs_excess": 0.115,
+     "rule": "a4.EFF_S"
+    },
+    "4": {
+     "largest_abs_excess": 0.083,
+     "rule": "a4.MFsh"
+    },
+    "5": {
+     "largest_abs_excess": 0.083,
+     "rule": "battery.MF_cv"
+    },
+    "6": {
+     "largest_abs_excess": 0.09,
+     "rule": "a4.EFF_S"
+    }
+   },
+   "level_wide_max": 0.115,
+   "levels": {
+    "collapsed": [],
+    "distinct": true,
+    "stated_parameter": "string length 2 + level // 2 pseudo-words plus level % 2 letters; list length 6 + level",
+    "weakly_separated_steps": []
+   },
+   "measured_in": "fix-4 draw (seed 71), battery (seed 83), a3 run, capacity (seed 4242), execution (seed 5)",
+   "name": "C1.slices_f4",
+   "partial_trace_M_level_wide": {
+    "0": 0.087,
+    "1": 0.068,
+    "2": 0.09,
+    "3": 0.125,
+    "4": 0.083,
+    "5": 0.072,
+    "6": 0.09
+   },
+   "partial_trace_M_max_PENDING_LEAD_REVIEW": 0.125,
+   "reason": "no cheap rule or closed form above 0.15 at any level in the union of the three scripts (level-wide); levels distinct; keys execute; capacity measured",
+   "retry_sites": null,
+   "shapes": {
+    "concat_list": {
+     "0": {
+      "largest_in_shape_rate": 0.019,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.011,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.01,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.104,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.063,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.089,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.088,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "concat_str": {
+     "0": {
+      "largest_in_shape_rate": 0.01,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.005,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "sum_list": {
+     "0": {
+      "largest_in_shape_rate": 0.277,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.212,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.272,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.286,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.23,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.202,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.234,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "shapes_dropped": null,
+   "shared_finish_reject": "answer not a fixed point of scoring.normalise_answer, or the program cannot run (validity)",
+   "status": "SURVIVES",
+   "strict_cluster": "B3",
+   "supersedes": "C1.slices"
+  },
+  {
+   "capacity_supplied_per_level_capped_at_count": {
+    "0": 35300,
+    "1": 35300,
+    "2": 35300,
+    "3": 35300,
+    "4": 35300,
+    "5": 35300,
+    "6": 35300
+   },
+   "execution": {
+    "errors": 0,
+    "items": 1050,
+    "key_mismatches": 0,
+    "not_one_line": 0,
+    "run_disagreements": 0,
+    "second_solver_mismatches": 0
+   },
+   "in_shape_flag_above_bound_PENDING_LEAD_REVIEW": false,
+   "in_shape_max_overall": 0.007,
+   "level_wide_cheap_per_level": {
+    "0": {
+     "largest_abs_excess": 0.003,
+     "rule": "a4.MFsh"
+    },
+    "1": {
+     "largest_abs_excess": 0.005,
+     "rule": "a4.MF"
+    },
+    "2": {
+     "largest_abs_excess": 0.005,
+     "rule": "battery.MF_cv"
+    },
+    "3": {
+     "largest_abs_excess": 0.0,
+     "rule": "battery.s|S.ignore_step"
+    },
+    "4": {
+     "largest_abs_excess": 0.0,
+     "rule": "battery.s|S.ignore_step"
+    },
+    "5": {
+     "largest_abs_excess": 0.0,
+     "rule": "battery.s|S.ignore_step"
+    },
+    "6": {
+     "largest_abs_excess": 0.0,
+     "rule": "battery.s|S.ignore_step"
+    }
+   },
+   "level_wide_max": 0.005,
+   "levels": {
+    "collapsed": [],
+    "distinct": true,
+    "stated_parameter": "length by level (see the builder)",
+    "weakly_separated_steps": []
+   },
+   "measured_in": "fix-4 draw (seed 71), battery (seed 83), a3 run, capacity (seed 4242), execution (seed 5)",
+   "name": "C1.string_build_f3",
+   "partial_trace_M_level_wide": {
+    "0": 0.14,
+    "1": 0.155,
+    "2": 0.052,
+    "3": 0.062,
+    "4": 0.043,
+    "5": 0.045,
+    "6": 0.04
+   },
+   "partial_trace_M_max_PENDING_LEAD_REVIEW": 0.155,
+   "reason": "no cheap rule or closed form above 0.15 at any level in the union of the three scripts (level-wide); levels distinct; keys execute; capacity measured",
+   "retry_sites": null,
+   "shapes": {
+    "alt": {
+     "0": {
+      "largest_in_shape_rate": 0.007,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "rev": {
+     "0": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "s": {
+     "0": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "shapes_dropped": null,
+   "shared_finish_reject": "answer not a fixed point of scoring.normalise_answer, or the program cannot run (validity)",
+   "status": "SURVIVES",
+   "strict_cluster": "B1",
+   "supersedes": null
+  },
+  {
+   "capacity_supplied_per_level_capped_at_count": {
+    "0": 35300,
+    "1": 35300,
+    "2": 35300,
+    "3": 35300,
+    "4": 35300,
+    "5": 35300,
+    "6": 35300
+   },
+   "execution": {
+    "errors": 0,
+    "items": 1050,
+    "key_mismatches": 0,
+    "not_one_line": 0,
+    "run_disagreements": 0,
+    "second_solver_mismatches": 0
+   },
+   "in_shape_flag_above_bound_PENDING_LEAD_REVIEW": false,
+   "in_shape_max_overall": 0.025,
+   "level_wide_cheap_per_level": {
+    "0": {
+     "largest_abs_excess": 0.06,
+     "rule": "battery.text|S.word_lower"
+    },
+    "1": {
+     "largest_abs_excess": 0.0325,
+     "rule": "battery.text|S.word_lower_tail"
+    },
+    "2": {
+     "largest_abs_excess": 0.018,
+     "rule": "battery.BEST_generic_cv"
+    },
+    "3": {
+     "largest_abs_excess": 0.0075,
+     "rule": "battery.text|S.word_lower_tail"
+    },
+    "4": {
+     "largest_abs_excess": 0.003,
+     "rule": "battery.BEST_generic_cv"
+    },
+    "5": {
+     "largest_abs_excess": 0.0,
+     "rule": "battery.text|S.word_rev_lower"
+    },
+    "6": {
+     "largest_abs_excess": 0.0,
+     "rule": "battery.text|S.word_rev_lower"
+    }
+   },
+   "level_wide_max": 0.06,
+   "levels": {
+    "collapsed": [],
+    "distinct": true,
+    "stated_parameter": "chain of 2 + level string operations",
+    "weakly_separated_steps": []
+   },
+   "measured_in": "fix-4 draw (seed 71), battery (seed 83), a3 run, capacity (seed 4242), execution (seed 5)",
+   "name": "C1.string_methods_f3",
+   "partial_trace_M_level_wide": {
+    "0": 0.03,
+    "1": 0.005,
+    "2": 0.007,
+    "3": 0.0,
+    "4": 0.0,
+    "5": 0.0,
+    "6": 0.0
+   },
+   "partial_trace_M_max_PENDING_LEAD_REVIEW": 0.03,
+   "reason": "no cheap rule or closed form above 0.15 at any level in the union of the three scripts (level-wide); levels distinct; keys execute; capacity measured",
+   "retry_sites": [
+    "answer-conditional",
+    "an empty string, at any step of the chain or as the answer",
+    "an empty gold answer is not gradable (as above); an empty intermediate string leaves no letter for the next replace step to name"
+   ],
+   "shapes": {
+    "tail:[1:]": {
+     "0": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "tail:[:(-2)]": {
+     "0": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "tail:[::(-1)]": {
+     "0": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "tail:[::2]": {
+     "0": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.025,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "tail:none": {
+     "0": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "shapes_dropped": null,
+   "shared_finish_reject": "answer not a fixed point of scoring.normalise_answer, or the program cannot run (validity)",
+   "status": "SURVIVES",
+   "strict_cluster": "B3",
+   "supersedes": null
+  },
+  {
+   "in_shape_max_overall": 0.917,
+   "level_wide_cheap_per_level": {
+    "0": {
+     "largest_abs_excess": 0.36,
+     "rule": "a4.EFF_S"
+    },
+    "1": {
+     "largest_abs_excess": 0.325,
+     "rule": "a4.EFF_S"
+    },
+    "2": {
+     "largest_abs_excess": 0.307,
+     "rule": "a4.EFF_S"
+    },
+    "3": {
+     "largest_abs_excess": 0.237,
+     "rule": "a4.EFF_S"
+    },
+    "4": {
+     "largest_abs_excess": 0.242,
+     "rule": "a4.EFF_S"
+    },
+    "5": {
+     "largest_abs_excess": 0.18,
+     "rule": "a4.EFF_S"
+    },
+    "6": {
+     "largest_abs_excess": 0.228,
+     "rule": "a4.EFF_S"
+    }
+   },
+   "level_wide_max": 0.36,
+   "measured_in": "fix-4 re-run (seed 71 draw, battery seed 83) of the fix-3 builders as they were",
+   "name": "C1.string_pair_table",
+   "partial_trace_M_level_wide": {
+    "0": 0.36,
+    "1": 0.325,
+    "2": 0.307,
+    "3": 0.237,
+    "4": 0.242,
+    "5": 0.18,
+    "6": 0.228
+   },
+   "reason": "audit4 section 5: edit-cell hamming + |len a - len b| 0.43-0.98 and LCS-cell common-letter multiset 0.47-0.85 in shape, level-wide 0.395 (above 0.15)",
+   "shapes": {
+    "edit_cell": {
+     "0": {
+      "largest_in_shape_rate": 0.917,
+      "rule": "S.hamming_plus_lendiff"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.65,
+      "rule": "S.hamming_plus_lendiff"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.863,
+      "rule": "S.hamming_plus_lendiff"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.485,
+      "rule": "S.hamming_plus_lendiff"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.75,
+      "rule": "S.hamming_plus_lendiff"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.41,
+      "rule": "S.hamming_plus_lendiff"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.757,
+      "rule": "S.hamming_plus_lendiff"
+     }
+    },
+    "edit_lastrow": {
+     "0": {
+      "largest_in_shape_rate": 0.074,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.088,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.101,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.039,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.03,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.082,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.111,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "edit_tablesum": {
+     "0": {
+      "largest_in_shape_rate": 0.172,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.077,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.015,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.046,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.039,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.033,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "lcs_cell": {
+     "0": {
+      "largest_in_shape_rate": 0.765,
+      "rule": "S.common_multiset"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.716,
+      "rule": "S.common_multiset"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.636,
+      "rule": "S.common_multiset"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.671,
+      "rule": "S.common_multiset"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.529,
+      "rule": "S.common_multiset"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.5,
+      "rule": "S.common_multiset"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.515,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "lcs_lastrow": {
+     "0": {
+      "largest_in_shape_rate": 0.169,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.215,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.203,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.075,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.176,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.062,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.044,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "lcs_tablesum": {
+     "0": {
+      "largest_in_shape_rate": 0.164,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.033,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.048,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.078,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.041,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.042,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.014,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "status": "NOT_REGISTERED",
+   "strict_cluster": "B4",
+   "supersedes": null
+  },
+  {
+   "capacity_supplied_per_level_capped_at_count": {
+    "0": 35300,
+    "1": 35300,
+    "2": 35300,
+    "3": 35300,
+    "4": 35300,
+    "5": 35300,
+    "6": 35300
+   },
+   "execution": {
+    "errors": 0,
+    "items": 1050,
+    "key_mismatches": 0,
+    "not_one_line": 0,
+    "run_disagreements": 0,
+    "second_solver_mismatches": 0
+   },
+   "in_shape_flag_above_bound_PENDING_LEAD_REVIEW": false,
+   "in_shape_max_overall": 0.038,
+   "level_wide_cheap_per_level": {
+    "0": {
+     "largest_abs_excess": 0.035,
+     "rule": "battery.pathsum|S.no_turns"
+    },
+    "1": {
+     "largest_abs_excess": 0.0225,
+     "rule": "battery.pathsum|S.no_turns"
+    },
+    "2": {
+     "largest_abs_excess": 0.025,
+     "rule": "battery.pathsum|S.no_turns"
+    },
+    "3": {
+     "largest_abs_excess": 0.0225,
+     "rule": "battery.pos|S.no_back"
+    },
+    "4": {
+     "largest_abs_excess": 0.01,
+     "rule": "battery.pathsum|S.no_turns"
+    },
+    "5": {
+     "largest_abs_excess": 0.0275,
+     "rule": "battery.pos|S.no_back"
+    },
+    "6": {
+     "largest_abs_excess": 0.02,
+     "rule": "battery.pos|S.no_back"
+    }
+   },
+   "level_wide_max": 0.035,
+   "levels": {
+    "collapsed": [],
+    "distinct": true,
+    "stated_parameter": "commands by level (14..26; see the builder)",
+    "weakly_separated_steps": []
+   },
+   "measured_in": "fix-4 draw (seed 71), battery (seed 83), a3 run, capacity (seed 4242), execution (seed 5)",
+   "name": "C1.turtle_walk_f3",
+   "partial_trace_M_level_wide": {
+    "0": 0.045,
+    "1": 0.035,
+    "2": 0.007,
+    "3": 0.04,
+    "4": 0.025,
+    "5": 0.033,
+    "6": 0.003
+   },
+   "partial_trace_M_max_PENDING_LEAD_REVIEW": 0.045,
+   "reason": "no cheap rule or closed form above 0.15 at any level in the union of the three scripts (level-wide); levels distinct; keys execute; capacity measured",
+   "retry_sites": null,
+   "shapes": {
+    "pathsum": {
+     "0": {
+      "largest_in_shape_rate": 0.011,
+      "rule": "S.zero"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "S.zero"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.011,
+      "rule": "S.zero"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "S.zero"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.008,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.004,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "S.zero"
+     }
+    },
+    "pos": {
+     "0": {
+      "largest_in_shape_rate": 0.038,
+      "rule": "S.zero"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "S.zero"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "S.zero"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "S.zero"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "S.zero"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "S.zero"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "S.zero"
+     }
+    }
+   },
+   "shapes_dropped": null,
+   "shared_finish_reject": "answer not a fixed point of scoring.normalise_answer, or the program cannot run (validity)",
+   "status": "SURVIVES",
+   "strict_cluster": "B7",
+   "supersedes": null
+  },
+  {
+   "capacity_supplied_per_level_capped_at_count": {
+    "0": 35300,
+    "1": 35300,
+    "2": 35300,
+    "3": 35300,
+    "4": 35300,
+    "5": 35300,
+    "6": 35300
+   },
+   "execution": {
+    "errors": 0,
+    "items": 1050,
+    "key_mismatches": 0,
+    "not_one_line": 0,
+    "run_disagreements": 0,
+    "second_solver_mismatches": 0
+   },
+   "in_shape_flag_above_bound_PENDING_LEAD_REVIEW": false,
+   "in_shape_max_overall": 0.015,
+   "level_wide_cheap_per_level": {
+    "0": {
+     "largest_abs_excess": 0.03,
+     "rule": "battery.parents|S.naive_node_links"
+    },
+    "1": {
+     "largest_abs_excess": 0.022,
+     "rule": "battery.MF_cv"
+    },
+    "2": {
+     "largest_abs_excess": 0.018,
+     "rule": "a4.EFF_S"
+    },
+    "3": {
+     "largest_abs_excess": 0.005,
+     "rule": "battery.rootsum|S.naive_node_links"
+    },
+    "4": {
+     "largest_abs_excess": 0.005,
+     "rule": "battery.wsum|S.naive_node_links"
+    },
+    "5": {
+     "largest_abs_excess": 0.005,
+     "rule": "battery.rootsum|S.identity"
+    },
+    "6": {
+     "largest_abs_excess": 0.005,
+     "rule": "battery.rootsum|S.naive_node_links"
+    }
+   },
+   "level_wide_max": 0.03,
+   "levels": {
+    "collapsed": [],
+    "distinct": true,
+    "stated_parameter": "nodes 9 + level",
+    "weakly_separated_steps": []
+   },
+   "measured_in": "fix-4 draw (seed 71), battery (seed 83), a3 run, capacity (seed 4242), execution (seed 5)",
+   "name": "C1.union_find_links_f3",
+   "partial_trace_M_level_wide": {
+    "0": 0.27,
+    "1": 0.185,
+    "2": 0.12,
+    "3": 0.055,
+    "4": 0.037,
+    "5": 0.005,
+    "6": 0.028
+   },
+   "partial_trace_M_max_PENDING_LEAD_REVIEW": 0.27,
+   "reason": "no cheap rule or closed form above 0.15 at any level in the union of the three scripts (level-wide); levels distinct; keys execute; capacity measured",
+   "retry_sites": null,
+   "shapes": {
+    "parents": {
+     "0": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "wsum": {
+     "0": {
+      "largest_in_shape_rate": 0.01,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.014,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.015,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.005,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.01,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     }
+    }
+   },
+   "shapes_dropped": null,
+   "shared_finish_reject": "answer not a fixed point of scoring.normalise_answer, or the program cannot run (validity)",
+   "status": "SURVIVES",
+   "strict_cluster": "C1.union_find_links",
+   "supersedes": null
+  },
+  {
+   "capacity_supplied_per_level_capped_at_count": {
+    "0": 35300,
+    "1": 35300,
+    "2": 35300,
+    "3": 35300,
+    "4": 35300,
+    "5": 35300,
+    "6": 35300
+   },
+   "execution": {
+    "errors": 0,
+    "items": 1050,
+    "key_mismatches": 0,
+    "not_one_line": 0,
+    "run_disagreements": 0,
+    "second_solver_mismatches": 0
+   },
+   "in_shape_flag_above_bound_PENDING_LEAD_REVIEW": false,
+   "in_shape_max_overall": 0.014,
+   "level_wide_cheap_per_level": {
+    "0": {
+     "largest_abs_excess": 0.0225,
+     "rule": "battery.collatz|S.sum_even_only"
+    },
+    "1": {
+     "largest_abs_excess": 0.0125,
+     "rule": "battery.grow|S.no_remainder_term"
+    },
+    "2": {
+     "largest_abs_excess": 0.0225,
+     "rule": "battery.collatz|S.sum_even_only"
+    },
+    "3": {
+     "largest_abs_excess": 0.01,
+     "rule": "battery.collatz|S.sum_even_only"
+    },
+    "4": {
+     "largest_abs_excess": 0.02,
+     "rule": "battery.BEST_generic_cv"
+    },
+    "5": {
+     "largest_abs_excess": 0.015,
+     "rule": "battery.grow|S.no_remainder_term"
+    },
+    "6": {
+     "largest_abs_excess": 0.013,
+     "rule": "a4.EFF_S"
+    }
+   },
+   "level_wide_max": 0.0225,
+   "levels": {
+    "collapsed": [],
+    "distinct": true,
+    "stated_parameter": "iteration bound by level (see the builder)",
+    "weakly_separated_steps": [
+     "L4->L5",
+     "L5->L6"
+    ]
+   },
+   "measured_in": "fix-4 draw (seed 71), battery (seed 83), a3 run, capacity (seed 4242), execution (seed 5)",
+   "name": "C1.while_counter_f3",
+   "partial_trace_M_level_wide": {
+    "0": 0.007,
+    "1": 0.005,
+    "2": 0.003,
+    "3": 0.0,
+    "4": 0.0,
+    "5": 0.003,
+    "6": 0.013
+   },
+   "partial_trace_M_max_PENDING_LEAD_REVIEW": 0.013,
+   "reason": "no cheap rule or closed form above 0.15 at any level in the union of the three scripts (level-wide); levels distinct; keys execute; capacity measured",
+   "retry_sites": null,
+   "shapes": {
+    "collatz": {
+     "0": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.014,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.007,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.007,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "down": {
+     "0": {
+      "largest_in_shape_rate": 0.008,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "MF_in_shape_cv"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.007,
+      "rule": "MF_in_shape_cv"
+     }
+    },
+    "grow": {
+     "0": {
+      "largest_in_shape_rate": 0.014,
+      "rule": "MF_in_shape_cv"
+     },
+     "1": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "S.threshold"
+     },
+     "2": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "S.threshold"
+     },
+     "3": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "S.threshold"
+     },
+     "4": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "S.threshold"
+     },
+     "5": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "S.threshold"
+     },
+     "6": {
+      "largest_in_shape_rate": 0.0,
+      "rule": "S.threshold"
+     }
+    }
+   },
+   "shapes_dropped": null,
+   "shared_finish_reject": "answer not a fixed point of scoring.normalise_answer, or the program cannot run (validity)",
+   "status": "SURVIVES",
+   "strict_cluster": "C1.while_counter",
+   "supersedes": null
+  }
+ ],
+ "pre_repair_levels": {
+  "C1.func_branch": {
+   "collapsed": [
+    "L0->L1: 100% of shared-stream items are identical",
+    "L3->L4: 100% of shared-stream items are identical",
+    "L4->L5: 100% of shared-stream items are identical",
+    "L5->L6: 100% of shared-stream items are identical"
+   ],
+   "levels_distinct": false,
+   "steps": {
+    "L0->L1": {
+     "features_with_higher_mean": [],
+     "ks": {
+      "ast_nodes": 0.0,
+      "chars": 0.055,
+      "longest_list": 0.0,
+      "max_literal": 0.057,
+      "steps": 0.0
+     },
+     "ks_crit": 0.115,
+     "shared_stream_identical_share": 1.0
+    },
+    "L1->L2": {
+     "features_with_higher_mean": [
+      "steps",
+      "ast_nodes",
+      "chars"
+     ],
+     "ks": {
+      "ast_nodes": 1.0,
+      "chars": 1.0,
+      "longest_list": 0.0,
+      "max_literal": 0.06,
+      "steps": 0.617
+     },
+     "ks_crit": 0.115,
+     "shared_stream_identical_share": 0.0
+    },
+    "L2->L3": {
+     "features_with_higher_mean": [
+      "steps",
+      "ast_nodes",
+      "chars",
+      "max_literal"
+     ],
+     "ks": {
+      "ast_nodes": 1.0,
+      "chars": 0.445,
+      "longest_list": 0.0,
+      "max_literal": 0.145,
+      "steps": 0.828
+     },
+     "ks_crit": 0.115,
+     "shared_stream_identical_share": 0.0
+    },
+    "L3->L4": {
+     "features_with_higher_mean": [
+      "steps",
+      "chars",
+      "max_literal"
+     ],
+     "ks": {
+      "ast_nodes": 0.0,
+      "chars": 0.025,
+      "longest_list": 0.0,
+      "max_literal": 0.04,
+      "steps": 0.05
+     },
+     "ks_crit": 0.115,
+     "shared_stream_identical_share": 1.0
+    },
+    "L4->L5": {
+     "features_with_higher_mean": [
+      "chars",
+      "max_literal"
+     ],
+     "ks": {
+      "ast_nodes": 0.0,
+      "chars": 0.042,
+      "longest_list": 0.0,
+      "max_literal": 0.055,
+      "steps": 0.057
+     },
+     "ks_crit": 0.115,
+     "shared_stream_identical_share": 1.0
+    },
+    "L5->L6": {
+     "features_with_higher_mean": [
+      "steps"
+     ],
+     "ks": {
+      "ast_nodes": 0.0,
+      "chars": 0.047,
+      "longest_list": 0.0,
+      "max_literal": 0.065,
+      "steps": 0.032
+     },
+     "ks_crit": 0.115,
+     "shared_stream_identical_share": 1.0
+    }
+   }
+  },
+  "C1.func_compose_f3": {
+   "collapsed": [
+    "L0->L1: 100% of shared-stream items are identical",
+    "L3->L4: 100% of shared-stream items are identical",
+    "L4->L5: 100% of shared-stream items are identical",
+    "L5->L6: 100% of shared-stream items are identical"
+   ],
+   "levels_distinct": false,
+   "steps": {
+    "L0->L1": {
+     "features_with_higher_mean": [
+      "steps",
+      "ast_nodes",
+      "chars",
+      "max_literal"
+     ],
+     "ks": {
+      "ast_nodes": 0.04,
+      "chars": 0.058,
+      "longest_list": 0.0,
+      "max_literal": 0.06,
+      "steps": 0.025
+     },
+     "ks_crit": 0.115,
+     "shared_stream_identical_share": 1.0
+    },
+    "L1->L2": {
+     "features_with_higher_mean": [
+      "steps",
+      "ast_nodes",
+      "chars",
+      "max_literal"
+     ],
+     "ks": {
+      "ast_nodes": 0.295,
+      "chars": 0.22,
+      "longest_list": 0.0,
+      "max_literal": 0.052,
+      "steps": 0.498
+     },
+     "ks_crit": 0.115,
+     "shared_stream_identical_share": 0.143
+    },
+    "L2->L3": {
+     "features_with_higher_mean": [
+      "steps",
+      "ast_nodes",
+      "chars",
+      "max_literal"
+     ],
+     "ks": {
+      "ast_nodes": 0.79,
+      "chars": 0.895,
+      "longest_list": 0.0,
+      "max_literal": 0.255,
+      "steps": 0.525
+     },
+     "ks_crit": 0.115,
+     "shared_stream_identical_share": 0.0
+    },
+    "L3->L4": {
+     "features_with_higher_mean": [
+      "steps",
+      "ast_nodes",
+      "chars"
+     ],
+     "ks": {
+      "ast_nodes": 0.055,
+      "chars": 0.073,
+      "longest_list": 0.0,
+      "max_literal": 0.082,
+      "steps": 0.047
+     },
+     "ks_crit": 0.115,
+     "shared_stream_identical_share": 1.0
+    },
+    "L4->L5": {
+     "features_with_higher_mean": [
+      "max_literal"
+     ],
+     "ks": {
+      "ast_nodes": 0.035,
+      "chars": 0.08,
+      "longest_list": 0.0,
+      "max_literal": 0.04,
+      "steps": 0.035
+     },
+     "ks_crit": 0.115,
+     "shared_stream_identical_share": 1.0
+    },
+    "L5->L6": {
+     "features_with_higher_mean": [
+      "chars",
+      "max_literal"
+     ],
+     "ks": {
+      "ast_nodes": 0.025,
+      "chars": 0.045,
+      "longest_list": 0.0,
+      "max_literal": 0.03,
+      "steps": 0.025
+     },
+     "ks_crit": 0.115,
+     "shared_stream_identical_share": 1.0
+    }
+   }
+  },
+  "C1.slices": {
+   "collapsed": [],
+   "levels_distinct": true,
+   "steps": {
+    "L0->L1": {
+     "features_with_higher_mean": [
+      "ast_nodes",
+      "chars",
+      "max_literal",
+      "longest_list"
+     ],
+     "ks": {
+      "ast_nodes": 0.07,
+      "chars": 0.163,
+      "longest_list": 0.555,
+      "max_literal": 0.052,
+      "steps": 0.0
+     },
+     "ks_crit": 0.115,
+     "shared_stream_identical_share": 0.46
+    },
+    "L1->L2": {
+     "features_with_higher_mean": [
+      "chars",
+      "max_literal",
+      "longest_list"
+     ],
+     "ks": {
+      "ast_nodes": 0.07,
+      "chars": 0.165,
+      "longest_list": 0.495,
+      "max_literal": 0.215,
+      "steps": 0.0
+     },
+     "ks_crit": 0.115,
+     "shared_stream_identical_share": 0.0
+    },
+    "L2->L3": {
+     "features_with_higher_mean": [
+      "ast_nodes",
+      "chars",
+      "max_literal",
+      "longest_list"
+     ],
+     "ks": {
+      "ast_nodes": 0.087,
+      "chars": 0.165,
+      "longest_list": 0.52,
+      "max_literal": 0.05,
+      "steps": 0.0
+     },
+     "ks_crit": 0.115,
+     "shared_stream_identical_share": 0.477
+    },
+    "L3->L4": {
+     "features_with_higher_mean": [
+      "ast_nodes",
+      "chars",
+      "max_literal",
+      "longest_list"
+     ],
+     "ks": {
+      "ast_nodes": 0.06,
+      "chars": 0.215,
+      "longest_list": 0.498,
+      "max_literal": 0.215,
+      "steps": 0.0
+     },
+     "ks_crit": 0.115,
+     "shared_stream_identical_share": 0.0
+    },
+    "L4->L5": {
+     "features_with_higher_mean": [
+      "ast_nodes",
+      "chars",
+      "max_literal",
+      "longest_list"
+     ],
+     "ks": {
+      "ast_nodes": 0.103,
+      "chars": 0.185,
+      "longest_list": 0.518,
+      "max_literal": 0.055,
+      "steps": 0.0
+     },
+     "ks_crit": 0.115,
+     "shared_stream_identical_share": 0.47
+    },
+    "L5->L6": {
+     "features_with_higher_mean": [
+      "ast_nodes",
+      "chars",
+      "max_literal",
+      "longest_list"
+     ],
+     "ks": {
+      "ast_nodes": 0.032,
+      "chars": 0.19,
+      "longest_list": 0.532,
+      "max_literal": 0.203,
+      "steps": 0.0
+     },
+     "ks_crit": 0.115,
+     "shared_stream_identical_share": 0.0
+    }
+   }
+  }
+ },
+ "removed_member_of_a_standing_cluster": {
+  "C1.loop_sum": "B1"
+ },
+ "round": "M0 C1 fix 4 (narrow repair round, lead rulings 5, R-24 to R-29). Nothing here is a registration. Astra review: NOT_PERFORMED.",
+ "superseded": {
+  "C1.fast_power_f3": "C1.fast_power_f4",
+  "C1.func_branch": "C1.func_branch_f4",
+  "C1.func_compose_f3": "C1.func_compose_f4",
+  "C1.sieve_marking_f3": "C1.sieve_marking_f4",
+  "C1.slices": "C1.slices_f4"
+ },
+ "surviving_clusters": {
+  "count": 18,
+  "count_without_variants": 16,
+  "list": [
+   "B1",
+   "B2",
+   "B3",
+   "B5",
+   "B6",
+   "B7",
+   "B8",
+   "C1.binary_search",
+   "C1.circle_elimination",
+   "C1.counter_list_state_machine",
+   "C1.digit_peel",
+   "C1.fast_power_square_map",
+   "C1.merge_two_sorted",
+   "C1.run_length_scan",
+   "C1.shared_lists",
+   "C1.sieve_marking",
+   "C1.union_find_links",
+   "C1.while_counter"
+  ],
+  "variant_clusters": [
+   "C1.fast_power_square_map",
+   "C1.counter_list_state_machine"
+  ]
+ },
+ "surviving_lineages": {
+  "count": 27,
+  "list": [
+   "C1.binary_search_f3",
+   "C1.bracket_matching_f3",
+   "C1.bytecode_loop_f3",
+   "C1.circle_elimination_r2",
+   "C1.cond_chain_f3",
+   "C1.counter_list_f3",
+   "C1.digit_peel_f3",
+   "C1.euclid_gcd_traced_f3",
+   "C1.fast_power_f4",
+   "C1.fib_like_f3",
+   "C1.fib_shapes_recursive_f3",
+   "C1.func_branch_f4",
+   "C1.func_compose_f4",
+   "C1.list_build_f3",
+   "C1.merge_two_sorted_f3",
+   "C1.nested_pairs_f3",
+   "C1.postfix_evaluation",
+   "C1.recursive_calls_r2",
+   "C1.run_length_scan",
+   "C1.shared_lists_f3",
+   "C1.sieve_marking_f4",
+   "C1.slices_f4",
+   "C1.string_build_f3",
+   "C1.string_methods_f3",
+   "C1.turtle_walk_f3",
+   "C1.union_find_links_f3",
+   "C1.while_counter_f3"
+  ]
+ }
+}

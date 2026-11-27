@@ -1,0 +1,265 @@
+{
+ "batch": "r2_fix3",
+ "capacity": {
+  "G": 17,
+  "demand": 15130,
+  "failing_A": [],
+  "failing_B": [],
+  "files": [
+   "r2_fix3_capacity.json",
+   "r2_fix3_capacity.txt"
+  ]
+ },
+ "clusters": {
+  "map_file": "r2_fix3_cluster_map.json",
+  "strict_count": 36
+ },
+ "not_registered": {
+  "R2.chip_toppling": "audit 3: a closed form (the Dirichlet Green's function of the path with the final row fixed by conservation and the first moment) answers it on 0.98-1.00 of items for both remaining shapes, which is the reason fix round 2 gave for dropping `final` and `lost`. No rule variant tried in this round removes that: the topple counts solve one linear system whose right-hand side is fixed by the two conserved quantities of the rule, on a path, a ring or with cell-dependent thresholds alike. NOT REGISTERED; excluded everywhere (ruling R-12).",
+  "R2.deferred_acceptance_partner": "audit 3 and the rev2 manifest: no construction frees the lineage from the tells (the responder-proposing stable partner 0.68-0.77, own first choice 0.46-0.56); NOT REGISTERED since fix round 2, excluded here everywhere (ruling R-12)."
+ },
+ "note": "Fix round 3 after AUDIT3_R2 under LEAD_RULINGS_2 and LEAD_RULINGS_3 (R-1 by construction, R-4 wording, R-5 structural capacity, R-10 reserve levels at the core demand, R-11 demand formula, R-12 exclusion, R-13). No new lineages. Revised SHAPES in studies/m0/lineages_r2_fix3*.py (own registry FIX3); earlier shapes stay on file, superseded where listed. Self-checked only: not independent review, not Astra validation, not human approval. Nothing is registered in core.REGISTRY.",
+ "revised_shapes": [
+  {
+   "defect": "R-1 redraw on 'third = target' (fitted 0.8); 'third' position rules",
+   "dropped_shapes": "`third` (its answer is one of about four values at fixed fractions of the list; the 1/8-7/8 position rule read 0.21-0.32 whatever the construction)",
+   "family_reported": "search",
+   "fix": "no redraw; `third` dropped; list of 16 + 4*level numbers (2^k - 1 stepped over); fair-coin absent target; shapes `values` and `sum` of the looks",
+   "fixture_sha256": "041c5cca62b581de576789ba0794b5bd642843ed4d42ff0b7b6a17db623594b9",
+   "id": "R2.binary_search_trace",
+   "supersedes": "R2.binary_search_trace"
+  },
+  {
+   "defect": "shortcut: top-level pairs only 0.79-0.84; last/next same-kind closer 0.35-0.51",
+   "dropped_shapes": "`valid` (a partial pair check reads 0.5 + half its coverage: 0.79-0.84) and `match` (one of about twenty positions; 'last/next same-kind closer' 0.35-0.51)",
+   "family_reported": "parsing",
+   "fix": "shapes `match_all` (closers of every opener of one kind) and `first_error` (two nested pairs with swapped closers); 14 + level pairs, kinds shared evenly",
+   "fixture_sha256": "9f3d55a9250d595d1bdb7eaf332b6a813192e5c0c172ef8a69b03751b05e4ae9",
+   "id": "R2.bracket_match",
+   "supersedes": "R2.bracket_match"
+  },
+  {
+   "defect": "R-1 rejection of answers equal to the insertion or sorted order",
+   "dropped_shapes": null,
+   "family_reported": "structures",
+   "fix": "no rejection; n = 8 + level (the chance of an equal walk is the Catalan number over n!, 0.035 at n = 8)",
+   "fixture_sha256": "22e3b3051a034f5b2c65a1b71a06d11c769f92c3ee8e3c26f5d47928f4a51a14",
+   "id": "R2.bst_traversal",
+   "supersedes": "R2.bst_traversal"
+  },
+  {
+   "defect": "shortcut: 'among the last cap distinct requests' 0.88-0.91; other policy 0.42-0.60",
+   "dropped_shapes": "`misses` (small answer, the other policy's count 0.42-0.60) and `present` (yes/no read off the last requests, 0.85-0.91)",
+   "family_reported": "structures",
+   "fix": "answers are lists (`evicted`, `contents` FIFO only); sequences start with cap + 1 different items and then mix hits on cached items with draws",
+   "fixture_sha256": "b20ee03e3fbfdf3a419ea187126984c742a8498b8120e210db7a8b8711c727af",
+   "id": "R2.cache_eviction",
+   "supersedes": "R2.cache_eviction"
+  },
+  {
+   "defect": "R-1 rejection of final = start, all-equal final, table 000 -> 1; closed-boundary reading; `count` shape",
+   "dropped_shapes": "`count` (a handful of answers; constant guess 0.24)",
+   "family_reported": "dynamics",
+   "fix": "no such rejection; end cells fixed to 1, 2 + level//2 steps, mirror-image triples drawn different, `count` dropped, 11 + 2*level cells; only constant tables retried (validity)",
+   "fixture_sha256": "3776f780ef3f70e0618602f6921b845dcf2d149c22d7e84bb928b4d5039029b4",
+   "id": "R2.cellular_automaton",
+   "supersedes": "R2.cellular_automaton"
+  },
+  {
+   "defect": "shortcut: grouped-triangle template read 1.00 at levels 0-2",
+   "dropped_shapes": null,
+   "family_reported": "graphs",
+   "fix": "towns are grid points, a cable costs the walking distance, the 2n shortest pairs are offered; n = 8 + level//2",
+   "fixture_sha256": "75475d543eea55d046e16b67e27999b6f3b9a07091a1b7d9a5e280c8827f9fa2",
+   "id": "R2.cheapest_network",
+   "supersedes": "R2.cheapest_network"
+  },
+  {
+   "defect": "round-2 fix asked for the number of ways (duplicate of M1.change_ways_r2 and C1.coin_change_table); batch-1 greedy / ceil+1 tells",
+   "dropped_shapes": "the single-amount question and round 2's `ways` question (duplicated M1.change_ways and C1.coin_change_table)",
+   "family_reported": "dynprog",
+   "fix": "fewest coins restored, for each of FIVE amounts as a list; no coin 1; amounts drawn among the payable ones",
+   "fixture_sha256": "d2ba37de9846c8b2ab83d8c9405581fbbd5e0dbe12e6c0247f42ba5c37a1e733",
+   "id": "R2.coin_change_min",
+   "supersedes": "R2.coin_change_min"
+  },
+  {
+   "defect": "shortcut: '>= t' 0.98-0.99, 'ignore > t' 0.65-0.74, constant 0.47",
+   "dropped_shapes": "`count` (small answers: constant guess 0.23, the estimate (numbers over t) // m 0.26)",
+   "family_reported": "counting",
+   "fix": "t is a multiple of m and planted in the list; `count` dropped, question is the sum; 18 + 4*level numbers",
+   "fixture_sha256": "c1bf870fa861df9d31f3b49d37a6755a2e2ae1d220aca79fce31e0f60fabf478",
+   "id": "R2.count_divisible",
+   "supersedes": "R2.count_divisible"
+  },
+  {
+   "defect": "shortcut: 'words containing the letter' 0.69-0.88; constant 0.59 at level 0",
+   "dropped_shapes": null,
+   "family_reported": "counting",
+   "fix": "one word holds the letter exactly twice (planted); per-item chance spreads the totals; 8 + 2*level words",
+   "fixture_sha256": "240c7ff231e33110e927fd30de905063fd2136a9257da223942e5bbd4bf488fa",
+   "id": "R2.count_letter",
+   "supersedes": "R2.count_letter"
+  },
+  {
+   "defect": "R-1 redraw on rank 1 or last; capacity under letter relabelling (46-1,436 structures)",
+   "dropped_shapes": null,
+   "family_reported": "combinatorics",
+   "fix": "no redraw; words of `length` different letters taken from an alphabet of 8-11 letters (draw per item), widened so the letter-blind space exceeds the demand at every level",
+   "fixture_sha256": "d62bc705e99cc32957d5d389ddf641763ce335d3edd1db95339b3c6af3d6b90f",
+   "id": "R2.dictionary_rank",
+   "supersedes": "R2.dictionary_rank"
+  },
+  {
+   "defect": "wrong-rule agreement 0.3-0.9 left 'natural' in rev2",
+   "dropped_shapes": null,
+   "family_reported": "parsing",
+   "fix": "the structure that makes each misreading differ is planted: a later product term, a parenthesised sum inside a product, '-' directly before '+' (ranked); '+'/'-' directly before '*', a parenthesised chain with the same pattern (left_to_right)",
+   "fixture_sha256": "004afa03fdd00a249041be83c82a27dd44add85ba4cd44318701ca32b8f71104",
+   "id": "R2.expression_eval",
+   "supersedes": "R2.expression_eval"
+  },
+  {
+   "defect": "shortcut: g always prime at levels 0-2, 'smallest common prime factor' 1.00",
+   "dropped_shapes": null,
+   "family_reported": "numtheory_b1",
+   "fix": "g drawn among the non-squarefree numbers; cofactors at least 5",
+   "fixture_sha256": "eb420eb444a5615c1446744e7f0ceb4d23c14c72e9a9eb16e9aef47d982e2a34",
+   "id": "R2.gcd_euclid",
+   "supersedes": "R2.gcd_euclid"
+  },
+  {
+   "defect": "shortcut: block-start rule 0.95-0.98, len(keys) - home 0.86-0.94, max(home, min home + index) 0.73-0.83",
+   "dropped_shapes": "`slot` and `probes` (single-key answers: 0.4-0.57 with spread homes, 0.73-0.98 with the round-2 near-full table)",
+   "family_reported": "structures",
+   "fix": "answers are about the whole table (`table`, `checksum`); homes spread over the table; round(0.7 m) numbers",
+   "fixture_sha256": "7f073fce7addebd1eeb23db3e1be55391bca2780ecfee34c1585a3dce40eb610",
+   "id": "R2.hash_probe",
+   "supersedes": "R2.hash_probe"
+  },
+  {
+   "defect": "R-1 redraw on 'earliest start' and 'shortest first' (fitted 0.8); count answer",
+   "dropped_shapes": "the count answer (a small number: constant guess 0.2-0.35)",
+   "family_reported": "greedy",
+   "fix": "no redraw; 5 + level//2 independent time blocks of 4-6 meetings, shuffled numbering, answer = the list of meetings chosen by the stated earliest-finish rule",
+   "fixture_sha256": "759069f148034dcbf7a0ce2e436cda73dc903c9d2ff350e09e48ea731414463a",
+   "id": "R2.interval_scheduling",
+   "supersedes": "R2.interval_scheduling"
+  },
+  {
+   "defect": "shortcut: greedy matching 0.46 at level 0, constant guess 0.26",
+   "dropped_shapes": null,
+   "family_reported": "dynprog",
+   "fix": "longer strings (15 + 2*level .. 21 + 3*level), alphabet 8-12, plant at least 35% of the shorter length",
+   "fixture_sha256": "70c7f6904d61b4f901a508ed4f2e59d73dd8555bc1aee2dd83f76270ec0f9d97",
+   "id": "R2.lcs_length",
+   "supersedes": "R2.lcs_length"
+  },
+  {
+   "defect": "shortcut: planted +++ - +++ block, best window of 7 and two-run rule 1.00",
+   "dropped_shapes": null,
+   "family_reported": "dynprog",
+   "fix": "2U + 1 alternating falling/rising phases of random length (rising phases alternate a positive number and a dip); the row starts and ends with a falling phase",
+   "fixture_sha256": "c8c84e7b3ebd9ac58ee9e5a3617e1ad134e728369a785a41e46d54646c3b0a90",
+   "id": "R2.max_subarray_sum",
+   "supersedes": "R2.max_subarray_sum"
+  },
+  {
+   "defect": "R-1 rejection of answers equal to the insertion or sorted order",
+   "dropped_shapes": null,
+   "family_reported": "structures",
+   "fix": "no rejection; n = 10 + level",
+   "fixture_sha256": "1ddc4d427988c953667d22c17da0e68e2fa44f4b88cac2abf6d1d4167ace9105",
+   "id": "R2.min_heap_ops",
+   "supersedes": "R2.min_heap_ops"
+  },
+  {
+   "defect": "shortcut: b//m - a//m 0.87-0.89, round((b-a+1)/m) 0.75 (end-offset family, not removable for random ends)",
+   "dropped_shapes": null,
+   "family_reported": "numtheory",
+   "fix": "both ends are multiples of m; shapes `count` and `sum`; widened for capacity",
+   "fixture_sha256": "b3b76476013da2b1b72251daa3e7f6febd13b6baf2a2fd1d0c4998fc8878d8f4",
+   "id": "R2.multiples_between",
+   "supersedes": "R2.multiples_between"
+  },
+  {
+   "defect": "shortcut: 'at most one odd count' 0.96",
+   "dropped_shapes": null,
+   "family_reported": "palindrome",
+   "fix": "a 'no' text is a palindrome with two letters swapped (same letter counts); 12 + level letters per half",
+   "fixture_sha256": "4062c8aaea8f5867f64fc2dcb1832659858aa04c176abb435d3f48de1895242b",
+   "id": "R2.palindrome_check",
+   "supersedes": "R2.palindrome_check"
+  },
+  {
+   "defect": "shortcut: 'the start' 0.29-0.52, 'one application' 0.30-0.53, 't mod n' up to 0.83",
+   "dropped_shapes": null,
+   "family_reported": "permutation",
+   "fix": "n = 12 + level numbers, one long cycle of n - a numbers (a coprime to n), start inside it, t 30 .. 90 + 10*level",
+   "fixture_sha256": "199d11f778e009bd6de97b67550dfd1451458a3a892ab22bc3d4802eb39cb5c6",
+   "id": "R2.permutation_power",
+   "supersedes": "R2.permutation_power"
+  },
+  {
+   "defect": "capacity at level 0 under the reserve-at-core-demand reading (about 4,029)",
+   "dropped_shapes": null,
+   "family_reported": "numtheory",
+   "fix": "level 0 widened to 5 factors from the primes up to 79",
+   "fixture_sha256": "8c2d2e76f53b3911c5f6b4a25067bd593ee1131c6a167646cc5aa78c5616a43f",
+   "id": "R2.prime_factor_query",
+   "supersedes": "R2.prime_factor_query"
+  },
+  {
+   "defect": "capacity under letter relabelling (54 and 1,280 at levels 0 and 1)",
+   "dropped_shapes": null,
+   "family_reported": "rle",
+   "fix": "6 + level runs of length 1 .. 4 + level//2, each run's letter drawn from the six letters other than the previous one",
+   "fixture_sha256": "532bfed1af35536dd10da2fbc9b3220311b1158b8ec8f76d3020db03470360a9",
+   "id": "R2.run_length",
+   "supersedes": "R2.run_length"
+  },
+  {
+   "defect": "shortcut: 'last pushed value' 0.41-0.59 (exact when the last step is a push); constant 0 at 8-11% (dup, sub)",
+   "dropped_shapes": null,
+   "family_reported": "stack",
+   "fix": "the final step is always add, multiply or subtract; no subtraction directly after a duplication; values 1..20",
+   "fixture_sha256": "905fd7d20e48e608aeb9d58c728325d02b852d7100dfedbaa955753be71d847b",
+   "id": "R2.stack_machine",
+   "supersedes": "R2.stack_machine"
+  },
+  {
+   "defect": "shortcut: win/lose-of-each-pile rule 0.79-0.82",
+   "dropped_shapes": "the two-pile shape (win/lose-of-each-pile rule 0.79-0.82)",
+   "family_reported": "games",
+   "fix": "four piles, 5-6 allowed amounts; key balanced 50/50 (on the key only)",
+   "fixture_sha256": "db064a64de7895406476df76c6603ab359049e925798e6ae39f0dc855ad8efca",
+   "id": "R2.subtraction_game",
+   "supersedes": "R2.subtraction_game"
+  }
+ ],
+ "set_size": 40,
+ "shortcuts": {
+  "files": [
+   "r2_fix3_shortcuts.json",
+   "r2_fix3_shortcuts_table.md"
+  ]
+ },
+ "unchanged_in_the_set": [
+  "R2.caesar_shift",
+  "R2.crt_smallest",
+  "R2.digit_root",
+  "R2.from_base",
+  "R2.grid_sum",
+  "R2.hamming_error_position",
+  "R2.kth_smallest",
+  "R2.lis_length",
+  "R2.list_ops",
+  "R2.longest_palindromic_substring",
+  "R2.luhn_check",
+  "R2.merge_smallest_cost",
+  "R2.modular_power",
+  "R2.sort_list",
+  "R2.string_rewrite_nonidentity",
+  "R2.to_base_wide"
+ ]
+}

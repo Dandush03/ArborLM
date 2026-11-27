@@ -1,0 +1,132 @@
+== R2.binary_search_trace
+   cue       L0..L6: 0.06 0.08 0.04 0.02 0.04 0.08 0.02   top: [impl] sum: midpoint rounded UP [sum]
+   P         L0..L6: 1.00 1.00 1.00 1.00 1.00 1.00 1.00   top: [mine] (P) 0-based positions (identical to the stated search) [sum]
+== R2.bracket_match
+   cue       L0..L6: 0.19 0.18 0.17 0.14 0.13 0.11 0.10   top: [impl] first_error: the position after the first adjacent closer pair of different kinds [first_error]
+   P         L0..L6: 1.00 1.00 1.00 1.00 1.00 1.00 1.00   top: [mine] first_error: same-depth matching ignoring kinds, first kind mismatch (P) [first_error]
+== R2.bst_traversal
+   cue       L0..L6: 0.31 0.20 0.10 0.04 0.03 0.01 0.00   top: [mine] root, then the smaller ones in insertion order, then the larger ones (one split) [pre]
+   P         L0..L6: 0.09 0.04 0.01 0.01 0.01 0.00 0.00   top: [a3] (P) other walk kind (pre<->level) [level]
+== R2.cache_eviction
+   cue       L0..L6: 0.37 0.31 0.27 0.22 0.18 0.15 0.14   top: [mine] contents: last cap distinct items, by first appearance within the tail [fifo/contents]
+   P         L0..L6: 0.11 0.09 0.09 0.07 0.06 0.06 0.06   top: [impl] contents: (P) the LRU contents with the order of loading [fifo/contents]
+== R2.caesar_shift
+   cue       L0..L6: 0.04 0.04 0.05 0.04 0.04 0.04 0.04   top: [a3] shift backwards [-]
+   P         L0..L6: 0.04 0.04 0.05 0.04 0.04 0.04 0.04   top: [mine] (P) misread: shift backward [-]
+== R2.cellular_automaton
+   cue       L0..L6: 0.04 0.02 0.05 0.04 0.01 0.01 0.03   top: [a3] one step only [row]
+   P         L0..L6: 0.20 0.20 0.14 0.14 0.18 0.17 0.13   top: [mine] (P) misread: edge cells keep their value [row]
+== R2.cheapest_network
+   cue       L0..L6: 0.06 0.06 0.04 0.06 0.04 0.04 0.03   top: [a3] n-1 cheapest cables [-]
+   P         L0..L6: 1.00 1.00 1.00 1.00 1.00 1.00 1.00   top: [mine] (P) Kruskal [-]
+== R2.coin_change_min
+   cue       L0..L6: 0.30 0.30 0.32 0.19 0.16 0.16 0.16   top: [mine] greedy with one fewer of the largest coin allowed (best of k, k-1 largest) [fewest]
+== R2.count_divisible
+   cue       L0..L6: 0.03 0.02 0.01 0.00 0.00 0.00 0.00   top: [a3] constant 0 [sum]
+== R2.count_letter
+   cue       L0..L6: 0.31 0.29 0.25 0.22 0.20 0.18 0.16   top: [mine] words containing the letter + 1 [-]
+== R2.crt_smallest
+   cue       L0..L6: 0.11 0.10 0.08 0.01 0.01 0.00 0.00   top: [mine] largest remainder [-]
+   P         L0..L6: 0.00 0.00 0.00 0.02 0.02 0.02 0.01   top: [a3] (P) least common value ignoring the third congruence [-]
+== R2.dictionary_rank
+   cue       L0..L6: 0.05 0.03 0.01 0.01 0.00 0.00 0.00   top: [impl] position: index in the FULL sorted alphabet (no removal of used letters) [position]
+== R2.digit_root
+   cue       L0..L6: 0.10 0.12 0.11 0.11 0.11 0.12 0.12   top: most frequent answer (train draw) [-]
+   P         L0..L6: 1.00 1.00 1.00 1.00 1.00 1.00 1.00   top: [a3] (P) n mod 9 with 0 -> 9 (casting out nines) [-]
+== R2.expression_eval
+   cue       L0..L6: 0.08 0.08 0.05 0.05 0.02 0.02 0.02   top: [a3] ranked item: strict left to right (ignore precedence) [ranked]
+== R2.from_base
+   cue       L0..L6: 0.02 0.01 0.00 0.00 0.00 0.00 0.00   top: most frequent answer (train draw) [-]
+   P         L0..L6: 0.17 0.08 0.04 0.02 0.02 0.01 0.01   top: [a3] digits read right to left [-]
+== R2.gcd_euclid
+   cue       L0..L6: 0.91 0.86 0.78 0.73 0.67 0.67 0.62   top: [mine] gcd/lcm via common prime powers over primes <= 7 only [gcd]
+   P         L0..L6: 1.00 1.00 1.00 1.00 1.00 1.00 1.00   top: [mine] gcd/lcm via full factorisation (P) [gcd]
+== R2.grid_sum
+   cue       L0..L6: 0.07 0.07 0.07 0.04 0.06 0.05 0.07   top: most frequent answer (train draw) [-]
+== R2.hamming_error_position
+   cue       L0..L6: 0.07 0.09 0.09 0.10 0.10 0.10 0.10   top: [a3] constant 0 [-]
+   partial   L0..L6: 0.13 0.21 0.22 0.18 0.16 0.17 0.14   top: [a3] first failing check position only [-]
+   P         L0..L6: 0.23 0.30 0.30 0.30 0.30 0.30 0.21   top: [mine] (P) misread: syndrome with bit order reversed [-]
+== R2.hash_probe
+   cue       L0..L6: 0.15 0.10 0.09 0.07 0.06 0.04 0.04   top: [impl] checksum: all slots 0..n-1 filled from the lowest home [checksum]
+   P         L0..L6: 1.00 1.00 1.00 1.00 1.00 1.00 1.00   top: [mine] (P) misread: keys added in reverse order [checksum]
+== R2.interval_scheduling
+   cue       L0..L6: 0.13 0.15 0.10 0.09 0.06 0.07 0.05   top: [impl] shortest first [chosen]
+   P         L0..L6: 0.62 0.63 0.56 0.57 0.52 0.51 0.47   top: [mine] (P) misread: earliest finish, ties broken by later start [chosen]
+== R2.kth_smallest
+   cue       L0..L6: 0.58 0.46 0.41 0.35 0.32 0.31 0.28   top: [mine] list value nearest to the quantile min + (max-min)(k-1)/(n-1) [-]
+   P         L0..L6: 0.34 0.21 0.16 0.11 0.09 0.08 0.07   top: [a3] k-th largest [-]
+== R2.lcs_length
+   cue       L0..L6: 0.27 0.19 0.17 0.14 0.13 0.11 0.09   top: [mine] greedy matching from both ends, best [-]
+== R2.lis_length
+   cue       L0..L6: 0.38 0.33 0.31 0.28 0.26 0.23 0.22   top: [mine] ascents + 1 [-]
+== R2.list_ops
+   cue       L0..L6: 0.13 0.14 0.13 0.14 0.14 0.13 0.10   top: [mine] [cond] ignore reverses (items with a reverse) [-]
+   artifact  L0..L6: 0.67 0.56 0.49 0.42 0.37 0.31 0.25   top: [a3] ignore reverses [-]
+== R2.longest_palindromic_substring
+   cue       L0..L6: 0.13 0.15 0.14 0.14 0.14 0.16 0.17   top: most frequent answer (train draw) [-]
+   partial   L0..L6: 0.51 0.54 0.51 0.51 0.52 0.52 0.52   top: [a3] longest odd palindrome only [-]
+== R2.luhn_check
+   cue       L0..L6: 0.10 0.11 0.09 0.10 0.10 0.09 0.10   top: most frequent answer (train draw) [check_digit]
+   partial   L0..L6: 0.08 0.11 0.12 0.11 0.09 0.09 0.10   top: [a3] plain digit sum (no doubling) [check_digit]
+   P         L0..L6: 1.00 1.00 1.00 1.00 1.00 1.00 1.00   top: [mine] (P) misread: doubling counted from the left [check_digit]
+== R2.max_subarray_sum
+   cue       L0..L6: 0.46 0.46 0.46 0.36 0.38 0.38 0.29   top: [mine] segments cut at two adjacent negatives, trimmed, best segment total [-]
+== R2.merge_smallest_cost
+   cue       L0..L6: 0.72 0.28 0.08 0.03 0.28 0.14 0.06   top: [mine] pairwise rounds (merge neighbours in sorted order, round by round) [-]
+   P         L0..L6: 0.36 0.23 0.13 0.10 0.07 0.05 0.02   top: [a3] (P) adjacent piles only (old misreading) [-]
+== R2.min_heap_ops
+   cue       L0..L6: 0.25 0.23 0.14 0.11 0.10 0.09 0.08   top: [mine] Floyd bottom-up heapify, then removals (a different construction) [removals=1]
+   P         L0..L6: 0.25 0.23 0.14 0.11 0.10 0.09 0.08   top: [a3] (P) Floyd heapify of the whole row, then removals [removals=1]
+   artifact  L0..L6: 1.00 1.00 1.00 1.00 1.00 1.00 1.00   top: [a3] removal by deleting the minimum and keeping the order of the rest [removals=0]
+== R2.modular_power
+   cue       L0..L6: 0.38 0.33 0.27 0.23 0.26 0.21 0.22   top: [mine] a^(e mod 10) mod m [-]
+   P         L0..L6: 0.99 1.00 1.00 1.00 1.00 1.00 1.00   top: [a3] (P) a^(e mod phi(m)) mod m (Euler; valid when gcd(a,m)=1) [-]
+== R2.multiples_between
+   cue       L0..L6: 0.01 0.01 0.00 0.00 0.00 0.01 0.00   top: most frequent answer (train draw) [count]
+   P         L0..L6: 1.00 1.00 1.00 1.00 1.00 1.00 1.00   top: [a3] (b-a)//m + 1 [count]
+== R2.palindrome_check
+   cue       L0..L6: 0.27 0.28 0.27 0.29 0.26 0.28 0.28   top: [mine] halves have the same letters (multiset) [-]
+   partial   L0..L6: 0.46 0.44 0.42 0.41 0.39 0.37 0.37   top: [mine] outer 8 letter pairs [-]
+== R2.permutation_power
+   cue       L0..L6: 0.11 0.15 0.08 0.11 0.07 0.12 0.06   top: [mine] inverse mapping t times [-]
+   construct L0..L6: 1.00 0.38 0.51 0.49 0.50 0.41 1.00   top: [mine] t mod (n-1) applications (cycle length assumed n-1; valid when only one number is off the long cycle) [-]
+== R2.prime_factor_query
+   cue       L0..L6: 0.07 0.05 0.06 0.05 0.05 0.04 0.05   top: most frequent answer (train draw) [largest]
+   partial   L0..L6: 0.74 0.64 0.62 0.62 0.66 0.62 0.62   top: [a3] largest: largest prime <= 97 dividing n, scanning only primes up to 61 [largest]
+   P         L0..L6: 1.00 1.00 1.00 1.00 1.00 1.00 1.00   top: [mine] largest: largest prime <= 97 dividing n (P) [largest]
+== R2.run_length
+   P         L0..L6: 1.00 1.00 1.00 1.00 1.00 1.00 1.00   top: [mine] run-length by grouping (P: the procedure) [-]
+== R2.sort_list
+== R2.stack_machine
+   cue       L0..L6: 0.22 0.16 0.16 0.14 0.14 0.14 0.14   top: [mine] last operation applied to the last two pushed values [-]
+   P         L0..L6: 0.92 0.87 0.84 0.80 0.77 0.74 0.72   top: [mine] (P) misread: ignore swaps [-]
+== R2.string_rewrite_nonidentity
+   cue       L0..L6: 0.01 0.02 0.02 0.01 0.01 0.00 0.01   top: [a3] only the last rule, on the start string [-]
+   P         L0..L6: 1.00 0.40 0.43 0.09 0.08 0.01 0.01   top: [a3] (P) all rules applied simultaneously to the start string, leftmost match [-]
+   artifact  L0..L6: 1.00 0.00 0.00 0.00 0.00 0.00 0.00   top: [a3] only the first rule [-]
+== R2.subtraction_game
+   cue       L0..L6: 0.08 0.06 0.06 0.05 0.04 0.03 0.02   top: [mine] xor of (pile mod (smallest + largest amount)) non-zero -> yes [-]
+   partial   L0..L6: 0.13 0.13 0.12 0.08 0.11 0.10 0.08   top: [impl] count of piles that are a win alone is odd -> yes [-]
+   P         L0..L6: 0.31 0.31 0.31 0.31 0.32 0.31 0.31   top: [impl] (P) parity of the sum of the position values (the lowest bit of the xor) [-]
+== R2.to_base_wide
+   cue       L0..L6: 0.04 0.02 0.01 0.01 0.01 0.00 0.00   top: [a3] digits reversed (least significant first) [-]
+   P         L0..L6: 0.04 0.02 0.01 0.01 0.01 0.00 0.00   top: [mine] (P) misread: digits reversed [-]
+
+DISTRIBUTION (cues only; per lineage, max over levels and shapes):
+  <=0.10: 16  [('binary_search_trace', 0.08), ('expression_eval', 0.08), ('subtraction_game', 0.08), ('grid_sum', 0.07), ('prime_factor_query', 0.07), ('cheapest_network', 0.06), ('caesar_shift', 0.05), ('cellular_automaton', 0.05), ('dictionary_rank', 0.05), ('to_base_wide', 0.04), ('count_divisible', 0.03), ('from_base', 0.02), ('string_rewrite_nonidentity', 0.02), ('multiples_between', 0.01), ('run_length', 0.0), ('sort_list', 0.0)]
+  (0.10,0.15]: 6  [('interval_scheduling', 0.15), ('list_ops', 0.14), ('digit_root', 0.12), ('crt_smallest', 0.11), ('luhn_check', 0.11), ('hamming_error_position', 0.1)]
+  (0.15,0.25]: 6  [('min_heap_ops', 0.25), ('stack_machine', 0.22), ('bracket_match', 0.19), ('longest_palindromic_substring', 0.17), ('hash_probe', 0.15), ('permutation_power', 0.15)]
+  >0.25: 12  [('gcd_euclid', 0.91), ('merge_smallest_cost', 0.72), ('kth_smallest', 0.58), ('max_subarray_sum', 0.46), ('lis_length', 0.38), ('modular_power', 0.38), ('cache_eviction', 0.37), ('coin_change_min', 0.32), ('bst_traversal', 0.31), ('count_letter', 0.31), ('palindrome_check', 0.29), ('lcs_length', 0.27)]
+
+DISTRIBUTION (cues + partial; per lineage, max over levels and shapes):
+  <=0.10: 14  [('binary_search_trace', 0.08), ('expression_eval', 0.08), ('grid_sum', 0.07), ('cheapest_network', 0.06), ('caesar_shift', 0.05), ('cellular_automaton', 0.05), ('dictionary_rank', 0.05), ('to_base_wide', 0.04), ('count_divisible', 0.03), ('from_base', 0.02), ('string_rewrite_nonidentity', 0.02), ('multiples_between', 0.01), ('run_length', 0.0), ('sort_list', 0.0)]
+  (0.10,0.15]: 6  [('interval_scheduling', 0.15), ('list_ops', 0.14), ('subtraction_game', 0.13), ('digit_root', 0.12), ('luhn_check', 0.12), ('crt_smallest', 0.11)]
+  (0.15,0.25]: 6  [('min_heap_ops', 0.25), ('hamming_error_position', 0.22), ('stack_machine', 0.22), ('bracket_match', 0.19), ('hash_probe', 0.15), ('permutation_power', 0.15)]
+  >0.25: 14  [('gcd_euclid', 0.91), ('prime_factor_query', 0.74), ('merge_smallest_cost', 0.72), ('kth_smallest', 0.58), ('longest_palindromic_substring', 0.54), ('max_subarray_sum', 0.46), ('palindrome_check', 0.46), ('lis_length', 0.38), ('modular_power', 0.38), ('cache_eviction', 0.37), ('coin_change_min', 0.32), ('bst_traversal', 0.31), ('count_letter', 0.31), ('lcs_length', 0.27)]
+
+DISTRIBUTION (cues + partial + construct; per lineage, max over levels and shapes):
+  <=0.10: 14  [('binary_search_trace', 0.08), ('expression_eval', 0.08), ('grid_sum', 0.07), ('cheapest_network', 0.06), ('caesar_shift', 0.05), ('cellular_automaton', 0.05), ('dictionary_rank', 0.05), ('to_base_wide', 0.04), ('count_divisible', 0.03), ('from_base', 0.02), ('string_rewrite_nonidentity', 0.02), ('multiples_between', 0.01), ('run_length', 0.0), ('sort_list', 0.0)]
+  (0.10,0.15]: 6  [('interval_scheduling', 0.15), ('list_ops', 0.14), ('subtraction_game', 0.13), ('digit_root', 0.12), ('luhn_check', 0.12), ('crt_smallest', 0.11)]
+  (0.15,0.25]: 5  [('min_heap_ops', 0.25), ('hamming_error_position', 0.22), ('stack_machine', 0.22), ('bracket_match', 0.19), ('hash_probe', 0.15)]
+  >0.25: 15  [('permutation_power', 1.0), ('gcd_euclid', 0.91), ('prime_factor_query', 0.74), ('merge_smallest_cost', 0.72), ('kth_smallest', 0.58), ('longest_palindromic_substring', 0.54), ('max_subarray_sum', 0.46), ('palindrome_check', 0.46), ('lis_length', 0.38), ('modular_power', 0.38), ('cache_eviction', 0.37), ('coin_change_min', 0.32), ('bst_traversal', 0.31), ('count_letter', 0.31), ('lcs_length', 0.27)]

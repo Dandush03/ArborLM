@@ -1,0 +1,340 @@
+{
+ "G_used": 17,
+ "borderline_groups_not_merged": [
+  [
+   "R2.bracket_match",
+   "R2.stack_machine",
+   "R2.list_ops"
+  ],
+  [
+   "R2.coin_change_min",
+   "R2.lcs_length"
+  ],
+  [
+   "R2.count_letter",
+   "R2.count_divisible",
+   "R2.grid_sum"
+  ],
+  [
+   "R2.to_base_wide",
+   "R2.from_base",
+   "R2.digit_root"
+  ],
+  [
+   "R2.subtraction_game",
+   "R2.coin_change_min"
+  ],
+  [
+   "R2.dictionary_rank",
+   "R2.to_base_wide"
+  ],
+  [
+   "R2.list_ops",
+   "R2.stack_machine"
+  ]
+ ],
+ "cluster_count": 36,
+ "clusters": {
+  "R2.binary_search_trace": {
+   "members": [
+    "R2.binary_search_trace"
+   ],
+   "other_evaluations_sharing_the_algorithm": [
+    "C1.binary_search (strong)"
+   ]
+  },
+  "R2.bracket_match": {
+   "members": [
+    "R2.bracket_match"
+   ],
+   "other_evaluations_sharing_the_algorithm": [
+    "C1 B8 bracket_matching (strong)"
+   ]
+  },
+  "R2.bst_traversal": {
+   "members": [
+    "R2.bst_traversal"
+   ],
+   "other_evaluations_sharing_the_algorithm": []
+  },
+  "R2.cache_eviction": {
+   "members": [
+    "R2.cache_eviction"
+   ],
+   "other_evaluations_sharing_the_algorithm": []
+  },
+  "R2.caesar_shift": {
+   "members": [
+    "R2.caesar_shift"
+   ],
+   "other_evaluations_sharing_the_algorithm": []
+  },
+  "R2.cellular_automaton": {
+   "members": [
+    "R2.cellular_automaton"
+   ],
+   "other_evaluations_sharing_the_algorithm": [
+    "C1.cellular_update_r2 (strong)"
+   ]
+  },
+  "R2.cheapest_network": {
+   "members": [
+    "R2.cheapest_network"
+   ],
+   "other_evaluations_sharing_the_algorithm": [
+    "R1.mst_cost_r4 (strong)"
+   ]
+  },
+  "R2.coin_change_min": {
+   "members": [
+    "R2.coin_change_min"
+   ],
+   "other_evaluations_sharing_the_algorithm": [
+    "C1.coin_change_table (same unbounded-supply table family, C1 B4; its shape counts ways)",
+    "M1.change_ways_r2 (S5, counts ways; its own note merges count and min)"
+   ]
+  },
+  "R2.count_divisible": {
+   "members": [
+    "R2.count_divisible",
+    "R2.count_letter"
+   ],
+   "other_evaluations_sharing_the_algorithm": [
+    "C1.counter_list (weak)",
+    "C1 B1 folds (weak)"
+   ]
+  },
+  "R2.crt_smallest": {
+   "members": [
+    "R2.crt_smallest"
+   ],
+   "other_evaluations_sharing_the_algorithm": [
+    "M1.crt_congruence_r2 (strong)"
+   ]
+  },
+  "R2.dictionary_rank": {
+   "members": [
+    "R2.dictionary_rank"
+   ],
+   "other_evaluations_sharing_the_algorithm": []
+  },
+  "R2.digit_root": {
+   "members": [
+    "R2.digit_root"
+   ],
+   "other_evaluations_sharing_the_algorithm": [
+    "C1.digit_peel (weak)"
+   ]
+  },
+  "R2.expression_eval": {
+   "members": [
+    "R2.expression_eval"
+   ],
+   "other_evaluations_sharing_the_algorithm": [
+    "C1 postfix_evaluation (medium)"
+   ]
+  },
+  "R2.from_base": {
+   "members": [
+    "R2.from_base",
+    "R2.to_base_wide"
+   ],
+   "other_evaluations_sharing_the_algorithm": [
+    "C1.digit_peel (strong)"
+   ]
+  },
+  "R2.gcd_euclid": {
+   "members": [
+    "R2.gcd_euclid"
+   ],
+   "other_evaluations_sharing_the_algorithm": [
+    "M1.gcd_lcm_r2 (strong)",
+    "C1.euclid_gcd (strong)"
+   ]
+  },
+  "R2.grid_sum": {
+   "members": [
+    "R2.grid_sum"
+   ],
+   "other_evaluations_sharing_the_algorithm": []
+  },
+  "R2.hamming_error_position": {
+   "members": [
+    "R2.hamming_error_position"
+   ],
+   "other_evaluations_sharing_the_algorithm": []
+  },
+  "R2.hash_probe": {
+   "members": [
+    "R2.hash_probe"
+   ],
+   "other_evaluations_sharing_the_algorithm": []
+  },
+  "R2.interval_scheduling": {
+   "members": [
+    "R2.interval_scheduling"
+   ],
+   "other_evaluations_sharing_the_algorithm": [
+    "R1.activity_selection (strong)"
+   ]
+  },
+  "R2.kth_smallest": {
+   "members": [
+    "R2.kth_smallest",
+    "R2.sort_list"
+   ],
+   "other_evaluations_sharing_the_algorithm": [
+    "M1.median_list_r2 (strong)",
+    "C1.bubble/insertion sorts (medium)"
+   ]
+  },
+  "R2.lcs_length": {
+   "members": [
+    "R2.lcs_length"
+   ],
+   "other_evaluations_sharing_the_algorithm": [
+    "C1.string_pair_table (strong, C1 B4)"
+   ]
+  },
+  "R2.lis_length": {
+   "members": [
+    "R2.lis_length"
+   ],
+   "other_evaluations_sharing_the_algorithm": []
+  },
+  "R2.list_ops": {
+   "members": [
+    "R2.list_ops"
+   ],
+   "other_evaluations_sharing_the_algorithm": [
+    "R1.containers_queue_line (strong)",
+    "C1 B3 (medium)"
+   ]
+  },
+  "R2.longest_palindromic_substring": {
+   "members": [
+    "R2.longest_palindromic_substring"
+   ],
+   "other_evaluations_sharing_the_algorithm": []
+  },
+  "R2.luhn_check": {
+   "members": [
+    "R2.luhn_check"
+   ],
+   "other_evaluations_sharing_the_algorithm": []
+  },
+  "R2.max_subarray_sum": {
+   "members": [
+    "R2.max_subarray_sum"
+   ],
+   "other_evaluations_sharing_the_algorithm": [
+    "C1.kadane_scan (strong)"
+   ]
+  },
+  "R2.merge_smallest_cost": {
+   "members": [
+    "R2.merge_smallest_cost"
+   ],
+   "other_evaluations_sharing_the_algorithm": []
+  },
+  "R2.min_heap_ops": {
+   "members": [
+    "R2.min_heap_ops"
+   ],
+   "other_evaluations_sharing_the_algorithm": []
+  },
+  "R2.modular_power": {
+   "members": [
+    "R2.modular_power",
+    "R2.permutation_power"
+   ],
+   "other_evaluations_sharing_the_algorithm": [
+    "M1.power_remainder_r2 (strong)",
+    "C1.fast_power_r2 (strong)"
+   ]
+  },
+  "R2.multiples_between": {
+   "members": [
+    "R2.multiples_between"
+   ],
+   "other_evaluations_sharing_the_algorithm": [
+    "M1.division_counting_r2 (weak)"
+   ]
+  },
+  "R2.palindrome_check": {
+   "members": [
+    "R2.palindrome_check"
+   ],
+   "other_evaluations_sharing_the_algorithm": [
+    "C1.mirror_pointers (weak)"
+   ]
+  },
+  "R2.prime_factor_query": {
+   "members": [
+    "R2.prime_factor_query"
+   ],
+   "other_evaluations_sharing_the_algorithm": [
+    "M1.prime_factors_r2 (strong)"
+   ]
+  },
+  "R2.run_length": {
+   "members": [
+    "R2.run_length"
+   ],
+   "other_evaluations_sharing_the_algorithm": [
+    "C1.run_length_scan (strong)"
+   ]
+  },
+  "R2.stack_machine": {
+   "members": [
+    "R2.stack_machine"
+   ],
+   "other_evaluations_sharing_the_algorithm": [
+    "C1 B8 postfix_evaluation (strong)",
+    "R1.containers_stack_piles (weak)"
+   ]
+  },
+  "R2.string_rewrite_nonidentity": {
+   "members": [
+    "R2.string_rewrite_nonidentity"
+   ],
+   "other_evaluations_sharing_the_algorithm": []
+  },
+  "R2.subtraction_game": {
+   "members": [
+    "R2.subtraction_game"
+   ],
+   "other_evaluations_sharing_the_algorithm": [
+    "R1.nim_xor_r4 (strong in the XOR form; this round's four-pile form still sums position values)"
+   ]
+  }
+ },
+ "demand_per_cluster_level": 15130,
+ "excluded": {
+  "R2.chip_toppling": "audit 3: a closed form (the Dirichlet Green's function of the path with the final row fixed by conservation and the first moment) answers it on 0.98-1.00 of items for both remaining shapes, which is the reason fix round 2 gave for dropping `final` and `lost`. No rule variant tried in this round removes that: the topple counts solve one linear system whose right-hand side is fixed by the two conserved quantities of the rule, on a path, a ring or with cell-dependent thresholds alike. NOT REGISTERED; excluded everywhere (ruling R-12).",
+  "R2.deferred_acceptance_partner": "audit 3 and the rev2 manifest: no construction frees the lineage from the tells (the responder-proposing stable partner 0.68-0.77, own first choice 0.46-0.56); NOT REGISTERED since fix round 2, excluded here everywhere (ruling R-12)."
+ },
+ "parts_if_split_evenly": [
+  18,
+  18
+ ],
+ "source": "AUDIT3_R2.md section 2 (strict map, four merges); deferred_acceptance_partner and chip_toppling excluded (R-12)",
+ "strict_merges": [
+  [
+   "R2.sort_list",
+   "R2.kth_smallest"
+  ],
+  [
+   "R2.count_letter",
+   "R2.count_divisible"
+  ],
+  [
+   "R2.to_base_wide",
+   "R2.from_base"
+  ],
+  [
+   "R2.permutation_power",
+   "R2.modular_power"
+  ]
+ ]
+}

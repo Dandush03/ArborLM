@@ -1,0 +1,106 @@
+AUDITOR JUDGEMENT 2 -- quality, shortcuts, capacity, cross-evaluation duplicates, feasibility
+(written BEFORE reading studies/m0/manifests/m1_batch1_manifest.json or studies/m0/NOTES*.md; the clustering is in JUDGEMENT_1_clusters.txt,
+hashed earlier). Auditor: Claude Opus 5.5 (claude-opus-5-5). Astra review: NOT_PERFORMED. Not human approval.
+
+A. KEYS (independent solvers, question text only; audit_solvers.py)
+- 2,940/2,940 fixture items agree with the key under the reading the item states (fixture_check_attempt2.txt; attempt 1 had 11 parser
+  errors on the hyphenated noun "yo-yo", kept in fixture_check_attempt1.txt).
+- 147,000 generated items (1,000 per level x 7 x 21, seed 777003) re-solved: 0 disagreements, 0 errors (shortcuts_N1000.txt).
+- No wrong key under the stated reading.
+
+B. AMBIGUOUS ITEMS (keys depend on a reading)
+B1 slot_permutations, LEADING ZERO: when 0 is among the digits and no "may not start with 0" rule is stated (20% of items that contain 0),
+   the key counts strings that start with 0 as "s-digit numbers". Under the ordinary definition an s-digit number never starts with 0, so the
+   key is WRONG under that reading. Fixture ids (13/140): 0/13, 0/18, 1/7, 1/9, 2/18, 3/7, 3/10, 4/2, 4/14, 4/18, 5/10, 6/4, 6/16
+   (e.g. 0/13 key 405, ordinary reading 360). Generated items: 9-13.5% of items per level (always_no_leading_zero matches the key in 0.865-0.911).
+   Fix: always state the rule either way ("the number may start with 0" or not), or never draw lead=False when 0 is present.
+B2 last_digit_power, GLOSS: "(the power means 23 multiplied by itself 295 times)" read literally is 23^296 ("multiplied by itself once" = 23^2).
+   Under that reading 116/140 fixture keys change. The phrase "raised to the power 295" is unambiguous; the gloss contradicts it on a literal
+   reading. Fix: "a product of 295 factors, each equal to 23" (the wording R2.modular_power already uses).
+B3 digit_puzzle, REVERSAL WITH A TRAILING ZERO: 7/140 fixture items have an answer ending in 0 with a reversal clue (1/12, 2/15, 4/15, 4/17,
+   6/5, 6/9, 6/19): "reversing 980 gives a number 891 less" needs the reader to accept 089 = 89 as "a number". Minor; state it once
+   ("a reversed number may start with 0; 089 means 89") or exclude such secrets.
+Not ambiguities (probed and rejected): binomial "exactly j women" / "must be on it" (alternative readings contradict the text);
+   division_counting "both included" (stated); median two-middle rule (stated); mode ties (excluded and stated); tiered units mode (rates > 0, unique).
+
+C. ITEMS WHOSE KEY IS PRINTED IN THE QUESTION (fixture counts): mode_tally 97/140, median_list 84/140 (inherent: the answer is a list value),
+   change_ways 18/140, prime_factors 8/140, gcd_lcm 2, last_digit_power 2, quadratic_area 1, pigeonhole 1, others 0.
+
+D. GENERATOR DEFECTS FOUND WHILE AUDITING (not key errors)
+D1 gcd_lcm level mix collapses: realised share of gcd items is 0.65-0.69 at L0-L2 but 0.01 at L3-L4 and 0.00 at L5-L6 (shape_mix_N2000.txt).
+   The k>=3 gcd rejections almost always fail, the builder raises Retry, and the redraw re-chooses the ask. Levels 3-6 are an lcm-only lineage.
+D2 division_counting shape mix: multiples 0.07-0.11, crates 0.28-0.29, empty_seats 0.60-0.65 (nominal 1/3 each), same mechanism.
+D3 last_digit_power: the rejection pow(b,e,10) == b mod 10 forces EVEN exponents for bases ending 4 or 9 (t >= 2), so those terms are
+   always 6 and 1 -- the exponent can be ignored for ~25% of terms. At t = 1 the answer is never the base digit (an anti-cue); answer set at L0-L1
+   is dominated by {1,4,6,9} (each ~0.17).
+D4 Structural repeats inside the fixtures: binomial_choose 28 of 140 items repeat another item's structure (16 groups); slot_permutations 5 text-identical
+   groups (7 surplus items; e.g. 4/14 and 6/16 are the same text at two levels); digit_puzzle 10 order-canonical repeats (1/12 = 6/5);
+   pythagoras 4, prime_factors 3, quadratic_area 2, recurrence_iterate 2, grid_perimeter 3 order-canonical (fixture_dups_out.txt).
+D5 Level does not separate difficulty where structural spaces overlap: identical slot_permutations text at L4 and L6; identical digit puzzle at L1 and L6.
+
+E. SHORTCUTS (own code, 1,000 items per level, seed 777003; shortcuts_summary_v2_N1000.txt). Screening reading = the author's own display rule
+   (>= max(0.25, 2 x constant)), not a registered threshold. "PARTIAL" heuristics execute the procedure but drop one condition; reported separately.
+- Author's named worst cases reproduced: mode_tally last_number L0 0.248 (author 0.254); last_digit_power base_last_digit max 0.200 at L3
+  (author 0.204); painted_cube inner_block 0.155-0.181 (author 0.190).
+- NEW, above the screen:
+  E1 min_cost_packs: greedy "largest pack as often as it fits, then the next pack, then singles" = key in 0.41-0.46 (L0-L4) and 0.255-0.270 (L5-L6);
+     constant rate 0.010-0.024. The author's five naive plans omit this greedy mix. Also "best unit price x need, rounded up" 0.27-0.29 at L0-L1.
+  E2 last_digit_power: "(last digit of base)^(last digit of exponent)" 0.36-0.44 at every level; "square of the base's last digit" 0.32-0.37 at
+     L0-L4 (D3 artefact and the t=1 anti-cue); constant 0.15-0.22.
+  E3 mode_tally: "the last value listed is the mode (and its count)" 0.27-0.41 over levels (constant 0.07-0.21); the redraw against "first repeated
+     value" pushed mass to the end of the list (two-sided: first-repeated is 0.08-0.14 real vs 0.36-0.50 counterfactual).
+  E4 grid_perimeter: "bounding-box perimeter + 4" 0.30-0.35 at L0-L3, "2 x cells + 2" 0.36-0.37 at L0-L1 (constant 0.15-0.22). The rejection of
+     perimeter == bounding box shifts mass to bbox+4 (overshoot).
+- Below the screen but several times the constant: crt "largest modulus + its remainder" 0.17-0.21 at L0-L2 (const 0.02-0.03);
+  division_counting "floor the boxes, then ceil" 0.20-0.24 (const 0.05; note crates is ONE ceiling, ceil(N/(k m)), an identity);
+  median_list "mode of the table" 0.15-0.20 at L3-L6; digit_puzzle "middle fit of the first clue" 0.17 at L0.
+- Two-sided (overshoot_N2000.txt): anti-cues created by redraws (real rate vs counterfactual without the rejection):
+  gcd smallest pairwise difference 0.000 vs 0.22-0.33; change_ways target//biggest+1 0.000 vs 0.07-0.14; median table "median of distinct
+  values" 0.000 vs 0.25-0.34; mode first-repeated 0.08-0.14 vs 0.36-0.50; min_cost "min of the five naive plans" 0.38-0.42 vs ~0.89 and
+  "no naive plan" 0.58-0.62 vs 0.11-0.24; last digit = base digit 0 vs 0.25 at t=1. Exploitability is low for open answers except where the answer
+  set is small (last digit: 3 candidates after exclusion; mode: list values).
+- quadratic_area, recurrence_iterate, finite_differences, tiered_pricing, pythagoras, slot_permutations, pigeonhole, inclusion_exclusion: no
+  surface heuristic above 2 x constant except as noted.
+
+F. CROSS-EVALUATION DUPLICATES (finding for the lead; not merged)
+Strong (same procedure, near-identical question): M1.crt_congruence = R2.crt_smallest; M1.gcd_lcm = R2.gcd_euclid (gcd/lcm asks);
+M1.prime_factors = R2.prime_factor_query ("What is the largest prime number that divides N exactly?" verbatim in both);
+M1.division_counting multiples shape = R2.multiples_between (same formula, same wording up to "both included"/"counting both ends");
+M1.inclusion_exclusion = R1.venn_counting; M1.last_digit_power = R2.modular_power with m = 10.
+Moderate: M1.min_cost_packs ~ R2.coin_change_min (unbounded min-cost table); M1.median_list ~ R2.kth_smallest (sort and select);
+code-tracing versions of the same algorithm in C1: change_ways ~ C1.coin_change_table (combos shape), gcd_lcm ~ C1.euclid_gcd,
+last_digit_power ~ C1.fast_power, recurrence_iterate ~ C1.fib_like.
+Consequence: if one copy is in a part-A evaluation and the other in a part-B one, part B is not held out at the procedure level. PENDING LEAD REVIEW.
+
+G. FAMILY PARTITION vs STRICT CLUSTERS: under the registered M1 partition (seed 400004), strict cluster S1 spans part A (ages, average_missing,
+   coins, pipes_work) and part B (linear_equation, consecutive, rectangle); S2 spans A (speed_distance) and B (shopping, mixture); S3 spans A
+   (percent_change, tip_split, fraction_remainder) and B (ratio_share). Families are not procedure-disjoint, so the held-out part B shares
+   procedures with part A. PENDING LEAD REVIEW (partition by strict cluster, not by template family).
+
+H. FEASIBILITY (JUDGEMENT, not measurement): strict lineages per M1 part reachable with rule-generated, exactly-keyed school mathematics:
+   about 25-45 per part (50-90 overall), with diminishing distinctness after ~60; lenient perhaps 40-70 per part. Far below the proposed 300.
+   Current state: strict 22 overall (~11 per part), lenient 36 (~18 per part).
+
+I. CAPACITY (capacity_M4000.txt, capacity_v2_M4000.txt; 4,000 draws per level, seed 777005; exact enumerations where stated)
+ADR-0033 s6.2, quoted: "Capacity gate (G-gen). For every cluster and level, the number of distinct items the generator can produce is at least
+10 times the number the pools demand. Otherwise engineering stop." "Distinct" is not defined there; the neighbouring bullets say "unique after
+normalisation" / "disjoint after normalisation", and the code's normalisation is NFKC + casefold + whitespace (core.normalise), under which a new
+name or setting sentence IS a distinct item. The least favourable reading (a name or setting change is not a new item; I also give the reading that
+removes presentational order) is NOT excluded by the text. Ambiguous sentence: "the number of distinct items the generator can produce".
+Demand used (lineage_gates.py constants): core level 10 x (ceil(24000/G) + 100) = 1,800 at G = 300; reserve level 10 x 100 = 1,000.
+Least favourable reading, G = 300:
+  binomial_choose   EXACT structural forms 180 / 571 / 1,367 / 2,756 / 4,958 / 8,073 / 11,845 (L0..L6) -> FAILS L0, L1, L2 (author: L0-L3;
+                    L3 passes on the exact count but only 1,183 forms appear in 4,000 draws).
+  prime_factors     EXACT distinct N 236 / 302 / 785 / 1,611 / 3,753 / 7,147 / 15,632; N x 4 asks 944 / 1,208 / 3,140 / 6,444 / ... ->
+                    FAILS L0, L1 (author's reading); if the ask is a parameter and N alone counts, FAILS L0-L3.
+  pythagoras        EXACT shape x order forms 260 / 790 / 1,410 / 2,090 / 2,800 / 3,530 / 4,230 (order-canonical 182 / 553 / 987 / 1,463 / 1,960 /
+                    2,471 / 2,961) -> FAILS L0-L2; order-canonical also FAILS L3.
+  digit_puzzle      sampled structural 311 / 1,062 / 1,040 / 2,714 / 2,714 / 2,814 / 2,792 (L0-L2 saturated); order-canonical (clue order removed)
+                    164 / 566 / 554 / 1,380 / 1,358 / 1,407 / 1,420 -> FAILS L0-L2; order-canonical PROBABLY FAILS L3-L6 as well (not saturated, growth slowing).
+  Additional failures ONLY under the order-canonical reading: gcd_lcm L0 (557, saturated) and L1 (1,344); grid_perimeter L0-L1 (618 / 621, saturated;
+  translation and mirror removed); painted_cube L0-L2 (535 / 1,103 / 1,720; length/width swap removed); pigeonhole L0 (942).
+  All other lineages pass at G = 300 under every reading measured.
+Capacity at the G actually written (not G = 300): strict 22 clusters ~ 11 per part -> core demand 10 x 2,282 = 22,820; lenient 36 ~ 18 per part ->
+  10 x 1,434 = 14,340. Structurally, binomial_choose, pythagoras and digit_puzzle fail at EVERY level, prime_factors at L0-L4 (strict G) or L0-L3
+  (lenient G), and many others cannot be shown to pass with 4,000 draws; with the setting sentence (122 names x 24 towns x 4 wordings = 11,712
+  variants) every lineage passes at the text level. Whether the gate is evaluated at G = 300 or at the G written is PENDING LEAD REVIEW.

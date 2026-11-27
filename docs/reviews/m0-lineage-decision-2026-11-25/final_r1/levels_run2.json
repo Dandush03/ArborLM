@@ -1,0 +1,1004 @@
+{
+ "R1.boolean_lights_r4": {
+  "cross_level_text_overlap_max": 0,
+  "distinct_texts_per_level": [
+   1000,
+   1000,
+   1000,
+   1000,
+   1000,
+   1000,
+   1000
+  ],
+  "identity_classes": [
+   [
+    0
+   ],
+   [
+    1
+   ],
+   [
+    2
+   ],
+   [
+    3
+   ],
+   [
+    4
+   ],
+   [
+    5
+   ],
+   [
+    6
+   ]
+  ],
+  "n_identity_classes": 7,
+  "trend": {
+   "chars": {
+    "means": [
+     474.8,
+     492.2,
+     515.7,
+     621.2,
+     643.8,
+     659.7,
+     779.1
+    ],
+    "strictly_rising": true,
+    "weakly_rising": true
+   },
+   "lamps": {
+    "means": [
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10
+    ],
+    "strictly_rising": true,
+    "weakly_rising": true
+   },
+   "presses": {
+    "means": [
+     3,
+     5,
+     7,
+     9,
+     11,
+     13,
+     15
+    ],
+    "strictly_rising": true,
+    "weakly_rising": true
+   },
+   "switches": {
+    "means": [
+     3,
+     3,
+     3,
+     4,
+     4,
+     4,
+     5
+    ],
+    "strictly_rising": false,
+    "weakly_rising": true
+   }
+  }
+ },
+ "R1.categories_default_exceptions_r4": {
+  "cross_level_text_overlap_max": 0,
+  "distinct_texts_per_level": [
+   1000,
+   1000,
+   1000,
+   1000,
+   1000,
+   1000,
+   1000
+  ],
+  "identity_classes": [
+   [
+    0
+   ],
+   [
+    1
+   ],
+   [
+    2
+   ],
+   [
+    3
+   ],
+   [
+    4
+   ],
+   [
+    5
+   ],
+   [
+    6
+   ]
+  ],
+  "n_identity_classes": 7,
+  "trend": {
+   "chain_from_person": {
+    "means": [
+     16,
+     18,
+     22,
+     24,
+     28,
+     30,
+     34
+    ],
+    "strictly_rising": true,
+    "weakly_rising": true
+   },
+   "chars": {
+    "means": [
+     810.7,
+     871.3,
+     1028.5,
+     1090.9,
+     1249.9,
+     1307.6,
+     1467.9
+    ],
+    "strictly_rising": true,
+    "weakly_rising": true
+   },
+   "groups_sentences": {
+    "means": [
+     16,
+     18,
+     22,
+     24,
+     28,
+     30,
+     34
+    ],
+    "strictly_rising": true,
+    "weakly_rising": true
+   },
+   "property_rules": {
+    "means": [
+     14.087,
+     14.72,
+     17.884,
+     18.529,
+     21.741,
+     22.27,
+     25.504
+    ],
+    "strictly_rising": true,
+    "weakly_rising": true
+   }
+  }
+ },
+ "R1.compass_turns": {
+  "cross_level_text_overlap_max": 0,
+  "distinct_texts_per_level": [
+   965,
+   1000,
+   1000,
+   1000,
+   1000,
+   1000,
+   1000
+  ],
+  "identity_classes": [
+   [
+    0
+   ],
+   [
+    1
+   ],
+   [
+    2
+   ],
+   [
+    3
+   ],
+   [
+    4
+   ],
+   [
+    5
+   ],
+   [
+    6
+   ]
+  ],
+  "n_identity_classes": 7,
+  "trend": {
+   "chars": {
+    "means": [
+     164.7,
+     214.4,
+     265.1,
+     313.4,
+     362.5,
+     413.4,
+     461.9
+    ],
+    "strictly_rising": true,
+    "weakly_rising": true
+   },
+   "commands": {
+    "means": [
+     3,
+     5,
+     7,
+     9,
+     11,
+     13,
+     15
+    ],
+    "strictly_rising": true,
+    "weakly_rising": true
+   }
+  }
+ },
+ "R1.conditional_decision_tree_r6": {
+  "cross_level_text_overlap_max": 0,
+  "distinct_texts_per_level": [
+   1000,
+   1000,
+   1000,
+   1000,
+   1000,
+   1000,
+   1000
+  ],
+  "identity_classes": [
+   [
+    0
+   ],
+   [
+    1
+   ],
+   [
+    2
+   ],
+   [
+    3
+   ],
+   [
+    4
+   ],
+   [
+    5
+   ],
+   [
+    6
+   ]
+  ],
+  "n_identity_classes": 7,
+  "trend": {
+   "chars": {
+    "means": [
+     657.3,
+     697.0,
+     1196.2,
+     1235.6,
+     1274.4,
+     2194.2,
+     2263.6
+    ],
+    "strictly_rising": true,
+    "weakly_rising": true
+   },
+   "lights_stated": {
+    "means": [
+     5,
+     6,
+     8,
+     9,
+     10,
+     12,
+     13
+    ],
+    "strictly_rising": true,
+    "weakly_rising": true
+   },
+   "max_paren_depth": {
+    "means": [
+     3,
+     3,
+     4,
+     4,
+     4,
+     5,
+     5
+    ],
+    "strictly_rising": false,
+    "weakly_rising": true
+   },
+   "options": {
+    "means": [
+     4,
+     4,
+     4,
+     4,
+     4,
+     4,
+     8
+    ],
+    "strictly_rising": false,
+    "weakly_rising": true
+   }
+  }
+ },
+ "R1.conditional_threshold_rule_r4": {
+  "cross_level_text_overlap_max": 0,
+  "distinct_texts_per_level": [
+   1000,
+   1000,
+   1000,
+   1000,
+   1000,
+   1000,
+   1000
+  ],
+  "identity_classes": [
+   [
+    0
+   ],
+   [
+    1
+   ],
+   [
+    2
+   ],
+   [
+    3
+   ],
+   [
+    4
+   ],
+   [
+    5
+   ],
+   [
+    6
+   ]
+  ],
+  "n_identity_classes": 7,
+  "trend": {
+   "chars": {
+    "means": [
+     435.2,
+     464.3,
+     493.1,
+     522.6,
+     551.5,
+     581.1,
+     610.3
+    ],
+    "strictly_rising": true,
+    "weakly_rising": true
+   },
+   "members": {
+    "means": [
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12
+    ],
+    "strictly_rising": true,
+    "weakly_rising": true
+   }
+  }
+ },
+ "R1.equivalence_exchange_rates_r6": {
+  "cross_level_text_overlap_max": 0,
+  "distinct_texts_per_level": [
+   1000,
+   1000,
+   1000,
+   1000,
+   1000,
+   1000,
+   1000
+  ],
+  "identity_classes": [
+   [
+    0
+   ],
+   [
+    1
+   ],
+   [
+    2
+   ],
+   [
+    3
+   ],
+   [
+    4
+   ],
+   [
+    5
+   ],
+   [
+    6
+   ]
+  ],
+  "n_identity_classes": 7,
+  "trend": {
+   "chars": {
+    "means": [
+     365.4,
+     425.6,
+     484.8,
+     605.6,
+     665.3,
+     725.1,
+     845.2
+    ],
+    "strictly_rising": true,
+    "weakly_rising": true
+   },
+   "hops_between_asked": {
+    "means": [
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "strictly_rising": true,
+    "weakly_rising": true
+   },
+   "rate_sentences": {
+    "means": [
+     5,
+     6,
+     7,
+     9,
+     10,
+     11,
+     13
+    ],
+    "strictly_rising": true,
+    "weakly_rising": true
+   }
+  }
+ },
+ "R1.graph_shortest_route_r6": {
+  "cross_level_text_overlap_max": 0,
+  "distinct_texts_per_level": [
+   1000,
+   1000,
+   1000,
+   1000,
+   1000,
+   1000,
+   1000
+  ],
+  "identity_classes": [
+   [
+    0
+   ],
+   [
+    1
+   ],
+   [
+    2
+   ],
+   [
+    3
+   ],
+   [
+    4
+   ],
+   [
+    5
+   ],
+   [
+    6
+   ]
+  ],
+  "n_identity_classes": 7,
+  "trend": {
+   "chars": {
+    "means": [
+     622.9,
+     747.8,
+     998.3,
+     1122.3,
+     1377.0,
+     1504.9,
+     1757.1
+    ],
+    "strictly_rising": true,
+    "weakly_rising": true
+   },
+   "min_hops": {
+    "means": [
+     1.762,
+     1.868,
+     2.032,
+     2.1,
+     2.223,
+     2.241,
+     2.351
+    ],
+    "strictly_rising": true,
+    "weakly_rising": true
+   },
+   "roads": {
+    "means": [
+     8.401,
+     10.366,
+     14.275,
+     16.216,
+     20.187,
+     22.195,
+     26.13
+    ],
+    "strictly_rising": true,
+    "weakly_rising": true
+   },
+   "towns": {
+    "means": [
+     6,
+     7,
+     9,
+     10,
+     12,
+     13,
+     15
+    ],
+    "strictly_rising": true,
+    "weakly_rising": true
+   }
+  }
+ },
+ "R1.knights_knaves_r6": {
+  "cross_level_text_overlap_max": 0,
+  "distinct_texts_per_level": [
+   1000,
+   1000,
+   1000,
+   1000,
+   1000,
+   1000,
+   1000
+  ],
+  "identity_classes": [
+   [
+    0
+   ],
+   [
+    1
+   ],
+   [
+    2
+   ],
+   [
+    3
+   ],
+   [
+    4
+   ],
+   [
+    5
+   ],
+   [
+    6
+   ]
+  ],
+  "n_identity_classes": 7,
+  "trend": {
+   "chars": {
+    "means": [
+     315.0,
+     358.7,
+     402.5,
+     446.2,
+     488.6,
+     533.5,
+     575.9
+    ],
+    "strictly_rising": true,
+    "weakly_rising": true
+   },
+   "people": {
+    "means": [
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10
+    ],
+    "strictly_rising": true,
+    "weakly_rising": true
+   }
+  }
+ },
+ "R1.spatial_grid_walk_r5": {
+  "cross_level_text_overlap_max": 0,
+  "distinct_texts_per_level": [
+   1000,
+   1000,
+   1000,
+   1000,
+   1000,
+   1000,
+   1000
+  ],
+  "identity_classes": [
+   [
+    0
+   ],
+   [
+    1
+   ],
+   [
+    2
+   ],
+   [
+    3
+   ],
+   [
+    4
+   ],
+   [
+    5
+   ],
+   [
+    6
+   ]
+  ],
+  "n_identity_classes": 7,
+  "trend": {
+   "cells": {
+    "means": [
+     9,
+     9,
+     12,
+     16,
+     16,
+     20,
+     25
+    ],
+    "strictly_rising": false,
+    "weakly_rising": true
+   },
+   "chars": {
+    "means": [
+     446.7,
+     457.8,
+     504.1,
+     579.6,
+     591.3,
+     649.3,
+     738.3
+    ],
+    "strictly_rising": true,
+    "weakly_rising": true
+   },
+   "moves": {
+    "means": [
+     8.55,
+     9.528,
+     10.503,
+     12.464,
+     13.481,
+     14.485,
+     16.58
+    ],
+    "strictly_rising": true,
+    "weakly_rising": true
+   },
+   "walls": {
+    "means": [
+     2.712,
+     2.72,
+     3.538,
+     4.836,
+     4.839,
+     6.014,
+     7.547
+    ],
+    "strictly_rising": true,
+    "weakly_rising": true
+   }
+  }
+ },
+ "R1.swap_tracking_r5": {
+  "cross_level_text_overlap_max": 0,
+  "distinct_texts_per_level": [
+   1000,
+   1000,
+   1000,
+   1000,
+   1000,
+   1000,
+   1000
+  ],
+  "identity_classes": [
+   [
+    0
+   ],
+   [
+    1
+   ],
+   [
+    2
+   ],
+   [
+    3
+   ],
+   [
+    4
+   ],
+   [
+    5
+   ],
+   [
+    6
+   ]
+  ],
+  "n_identity_classes": 7,
+  "trend": {
+   "chars": {
+    "means": [
+     641.1,
+     778.2,
+     954.2,
+     1098.1,
+     1271.0,
+     1426.1,
+     1593.0
+    ],
+    "strictly_rising": true,
+    "weakly_rising": true
+   },
+   "operations": {
+    "means": [
+     6,
+     8,
+     10,
+     12,
+     14,
+     16,
+     18
+    ],
+    "strictly_rising": true,
+    "weakly_rising": true
+   },
+   "people": {
+    "means": [
+     5,
+     5,
+     6,
+     6,
+     7,
+     7,
+     8
+    ],
+    "strictly_rising": false,
+    "weakly_rising": true
+   }
+  }
+ },
+ "R1.temporal_weekday_shift_r6": {
+  "cross_level_text_overlap_max": 0,
+  "distinct_texts_per_level": [
+   1000,
+   1000,
+   1000,
+   1000,
+   1000,
+   1000,
+   1000
+  ],
+  "identity_classes": [
+   [
+    0
+   ],
+   [
+    1
+   ],
+   [
+    2
+   ],
+   [
+    3
+   ],
+   [
+    4
+   ],
+   [
+    5
+   ],
+   [
+    6
+   ]
+  ],
+  "n_identity_classes": 7,
+  "trend": {
+   "chars": {
+    "means": [
+     500.1,
+     558.4,
+     616.0,
+     732.0,
+     789.6,
+     847.7,
+     962.7
+    ],
+    "strictly_rising": true,
+    "weakly_rising": true
+   },
+   "hops_anchor_to_asked": {
+    "means": [
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11
+    ],
+    "strictly_rising": true,
+    "weakly_rising": true
+   },
+   "links": {
+    "means": [
+     7,
+     8,
+     9,
+     11,
+     12,
+     13,
+     15
+    ],
+    "strictly_rising": true,
+    "weakly_rising": true
+   }
+  }
+ },
+ "R1.venn_counting_r5": {
+  "cross_level_text_overlap_max": 0,
+  "distinct_texts_per_level": [
+   1000,
+   1000,
+   1000,
+   1000,
+   1000,
+   1000,
+   1000
+  ],
+  "identity_classes": [
+   [
+    0
+   ],
+   [
+    1
+   ],
+   [
+    2
+   ],
+   [
+    3
+   ],
+   [
+    4
+   ],
+   [
+    5
+   ],
+   [
+    6
+   ]
+  ],
+  "n_identity_classes": 7,
+  "trend": {
+   "ask_at_least_two_of_these_groups": {
+    "means": [
+     0,
+     0,
+     0,
+     0,
+     1,
+     0,
+     0
+    ],
+    "strictly_rising": false,
+    "weakly_rising": false
+   },
+   "ask_exactly_one_of_these_groups": {
+    "means": [
+     0,
+     1,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "strictly_rising": false,
+    "weakly_rising": false
+   },
+   "ask_exactly_two_of_these_groups": {
+    "means": [
+     0,
+     0,
+     0,
+     1,
+     0,
+     0,
+     1
+    ],
+    "strictly_rising": false,
+    "weakly_rising": false
+   },
+   "ask_none_of_these_groups": {
+    "means": [
+     1,
+     0,
+     1,
+     0,
+     0,
+     1,
+     0
+    ],
+    "strictly_rising": false,
+    "weakly_rising": false
+   },
+   "chars": {
+    "means": [
+     250.9,
+     258.1,
+     439.1,
+     446.4,
+     447.6,
+     816.6,
+     824.8
+    ],
+    "strictly_rising": true,
+    "weakly_rising": true
+   },
+   "groups": {
+    "means": [
+     2,
+     2,
+     3,
+     3,
+     3,
+     4,
+     4
+    ],
+    "strictly_rising": false,
+    "weakly_rising": true
+   },
+   "total": {
+    "means": [
+     51.882,
+     59.321,
+     132.443,
+     148.091,
+     161.128,
+     355.991,
+     390.898
+    ],
+    "strictly_rising": true,
+    "weakly_rising": true
+   }
+  }
+ }
+}

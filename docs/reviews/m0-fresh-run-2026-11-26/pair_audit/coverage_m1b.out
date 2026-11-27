@@ -1,0 +1,25 @@
+== solver2_m1b.py: statements 124; run on fixtures 100; run on fresh 100; fresh-only 0; never run 24; fixture-only 0
+  NEVER 20 [fmt_int]         raise ValueError(f"non-integer value {v}")
+  NEVER 25 [fmt_dec2]     """Whole -> digits; else decimal with 1-2 decimals, no trailing zero; '-' only if negative."""
+  NEVER 31 [fmt_dec2]         INEXACT.append(v)
+  NEVER 33 [fmt_dec2]         sign = -1 if h < 0 else 1
+  NEVER 34 [fmt_dec2]         a = abs(h)
+  NEVER 35 [fmt_dec2]         q, r = divmod(a.numerator, a.denominator)
+  NEVER 36 [fmt_dec2]         if 2 * r >= a.denominator:
+  NEVER 37 [fmt_dec2]             q += 1
+  NEVER 38 [fmt_dec2]         h = Fraction(sign * q)
+  NEVER 39 [fmt_dec2]         if h.denominator == 1 and h.numerator % 100 == 0:
+  NEVER 40 [fmt_dec2]             return str(h.numerator // 100)
+  NEVER 65 [solve_gcd_lcm]     raise ValueError(s["ask"])
+  NEVER 87 [solve_inclusion_exclusion]             raise ValueError("two-set item with triple")
+  NEVER 93 [solve_inclusion_exclusion]         if ask == "exactly_one":
+  NEVER 94 [solve_inclusion_exclusion]             return fmt_int(union - pairs[0])
+  NEVER 95 [solve_inclusion_exclusion]         raise ValueError(ask)
+  NEVER 108 [solve_inclusion_exclusion]         raise ValueError(ask)
+  NEVER 109 [solve_inclusion_exclusion]     raise ValueError("set count")
+  NEVER 125 [solve_last_digit_power]         raise ValueError(s["op"])
+  NEVER 133 [solve_linear_equation]         raise ValueError("k == j")
+  NEVER 140 [solve_median_list]         raise ValueError(s["shape"])
+  NEVER 155 [_axis]     """Distribution {painted faces on this axis: number of positions}."""
+  NEVER 186 [solve_percent_change]             raise ValueError(d)
+  NEVER 194 [solve_pipes_work]         raise ValueError("tank never fills")

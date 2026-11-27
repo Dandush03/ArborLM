@@ -1,0 +1,208 @@
+C1.binary_search_f3 L0 seed=3442758512707570235 items=200
+C1.binary_search_f3 L1 seed=3950226503186305300 items=200
+C1.binary_search_f3 L2 seed=10012792003689308146 items=200
+C1.binary_search_f3 L3 seed=2096698564354837428 items=200
+C1.binary_search_f3 L4 seed=539918460205091161 items=200
+C1.binary_search_f3 L5 seed=381428317497603507 items=200
+C1.binary_search_f3 L6 seed=8692400431742315818 items=200
+C1.binary_search_f3 done 0.1s
+C1.bracket_matching_f3 L0 seed=14829281703901886123 items=200
+C1.bracket_matching_f3 L1 seed=10243050350870904999 items=200
+C1.bracket_matching_f3 L2 seed=819931327845515613 items=200
+C1.bracket_matching_f3 L3 seed=15207293076743535821 items=200
+C1.bracket_matching_f3 L4 seed=14560558955922555391 items=200
+C1.bracket_matching_f3 L5 seed=10706876423629892845 items=200
+C1.bracket_matching_f3 L6 seed=1193675900507820565 items=200
+C1.bracket_matching_f3 done 0.2s
+C1.bytecode_loop_f3 L0 seed=1023866912670247024 items=200
+C1.bytecode_loop_f3 L1 seed=4542014892964675996 items=200
+C1.bytecode_loop_f3 L2 seed=4279512280046079092 items=200
+C1.bytecode_loop_f3 L3 seed=8290302623155977002 items=200
+C1.bytecode_loop_f3 L4 seed=15684666769837443171 items=200
+C1.bytecode_loop_f3 L5 seed=17982627041254593537 items=200
+C1.bytecode_loop_f3 L6 seed=693022991152892994 items=200
+C1.bytecode_loop_f3 done 0.2s
+C1.circle_elimination_r2 L0 seed=74211334293282547 items=200
+C1.circle_elimination_r2 L1 seed=769276395467972132 items=200
+C1.circle_elimination_r2 L2 seed=3354812955938609338 items=200
+C1.circle_elimination_r2 L3 seed=15755333638981006924 items=200
+C1.circle_elimination_r2 L4 seed=15571814440078620108 items=200
+C1.circle_elimination_r2 L5 seed=13556586416694357961 items=200
+C1.circle_elimination_r2 L6 seed=1047017989033953335 items=200
+C1.circle_elimination_r2 done 0.1s
+C1.cond_chain_f3 L0 seed=11005611955787572658 items=200
+C1.cond_chain_f3 L1 seed=2298067868408530112 items=200
+C1.cond_chain_f3 L2 seed=8017210070486094157 items=200
+C1.cond_chain_f3 L3 seed=9488603909698268875 items=200
+C1.cond_chain_f3 L4 seed=1465765593776370336 items=200
+C1.cond_chain_f3 L5 seed=6798161869057814461 items=200
+C1.cond_chain_f3 L6 seed=1864860239951125383 items=200
+C1.cond_chain_f3 done 0.1s
+C1.counter_list_f3 L0 seed=10537747739174078442 items=200
+C1.counter_list_f3 L1 seed=15846129078066990412 items=200
+C1.counter_list_f3 L2 seed=15254618970944661654 items=200
+C1.counter_list_f3 L3 seed=4786640899574764216 items=200
+C1.counter_list_f3 L4 seed=18012489393577738425 items=200
+C1.counter_list_f3 L5 seed=4389715643033432212 items=200
+C1.counter_list_f3 L6 seed=15356137346766650153 items=200
+C1.counter_list_f3 done 0.1s
+C1.digit_peel_f3 L0 seed=6960859083177758374 items=200
+C1.digit_peel_f3 L1 seed=11413844760499622260 items=200
+C1.digit_peel_f3 L2 seed=1213512603290120599 items=200
+C1.digit_peel_f3 L3 seed=5160264207047134304 items=200
+C1.digit_peel_f3 L4 seed=2948153118583325087 items=200
+C1.digit_peel_f3 L5 seed=15997422553198194969 items=200
+C1.digit_peel_f3 L6 seed=2757197677630386997 items=200
+C1.digit_peel_f3 done 0.1s
+C1.euclid_gcd_traced_f3 L0 seed=2298259085408880564 items=200
+C1.euclid_gcd_traced_f3 L1 seed=18304478066536928772 items=200
+C1.euclid_gcd_traced_f3 L2 seed=5756242894240352509 items=200
+C1.euclid_gcd_traced_f3 L3 seed=4370175214101934432 items=200
+C1.euclid_gcd_traced_f3 L4 seed=9805009299209831609 items=200
+C1.euclid_gcd_traced_f3 L5 seed=12028455203728748561 items=200
+C1.euclid_gcd_traced_f3 L6 seed=2062335887123764186 items=200
+C1.euclid_gcd_traced_f3 done 0.1s
+C1.fast_power_f4 L0 seed=16932146311366287684 items=200
+C1.fast_power_f4 L1 seed=10516842656434551122 items=200
+C1.fast_power_f4 L2 seed=15806354252811471037 items=200
+C1.fast_power_f4 L3 seed=7264615714259082775 items=200
+C1.fast_power_f4 L4 seed=2987681297546804579 items=200
+C1.fast_power_f4 L5 seed=7548650688923471362 items=200
+C1.fast_power_f4 L6 seed=4128032388023769652 items=200
+C1.fast_power_f4 done 0.1s
+C1.fib_like_f3 L0 seed=7965285184014002297 items=200
+C1.fib_like_f3 L1 seed=11276055666186254994 items=200
+C1.fib_like_f3 L2 seed=15505224282992262740 items=200
+C1.fib_like_f3 L3 seed=9053128804752436494 items=200
+C1.fib_like_f3 L4 seed=16592102894977259900 items=200
+C1.fib_like_f3 L5 seed=9630844489164739825 items=200
+C1.fib_like_f3 L6 seed=9995823045308952169 items=200
+C1.fib_like_f3 done 0.0s
+C1.fib_shapes_recursive_f3 L0 seed=10792136736738181747 items=200
+C1.fib_shapes_recursive_f3 L1 seed=14197343608045245423 items=200
+C1.fib_shapes_recursive_f3 L2 seed=16157466129840960804 items=200
+C1.fib_shapes_recursive_f3 L3 seed=8334849558288115468 items=200
+C1.fib_shapes_recursive_f3 L4 seed=5006430625647081466 items=200
+C1.fib_shapes_recursive_f3 L5 seed=7097282043460497737 items=200
+C1.fib_shapes_recursive_f3 L6 seed=9045304419999604209 items=200
+C1.fib_shapes_recursive_f3 done 0.1s
+C1.func_branch_f4 L0 seed=13489364177010251211 items=200
+C1.func_branch_f4 L1 seed=9023093123440424193 items=200
+C1.func_branch_f4 L2 seed=9774507408800061895 items=200
+C1.func_branch_f4 L3 seed=5563277278822632531 items=200
+C1.func_branch_f4 L4 seed=11209152547292288308 items=200
+C1.func_branch_f4 L5 seed=15365127237050096011 items=200
+C1.func_branch_f4 L6 seed=8038345180365181496 items=200
+C1.func_branch_f4 done 0.1s
+C1.func_compose_f4 L0 seed=5024186086075313679 items=200
+C1.func_compose_f4 L1 seed=9623415467216161685 items=200
+C1.func_compose_f4 L2 seed=14308805432083253217 items=200
+C1.func_compose_f4 L3 seed=9635860072249444534 items=200
+C1.func_compose_f4 L4 seed=10308400396803370591 items=200
+C1.func_compose_f4 L5 seed=9967650316376675117 items=200
+C1.func_compose_f4 L6 seed=8879925124240761186 items=200
+C1.func_compose_f4 done 0.1s
+C1.list_build_f3 L0 seed=4267983012044654034 items=200
+C1.list_build_f3 L1 seed=17499334456928162221 items=200
+C1.list_build_f3 L2 seed=8456323455323220943 items=200
+C1.list_build_f3 L3 seed=15705423431495115219 items=200
+C1.list_build_f3 L4 seed=4344205440257885784 items=200
+C1.list_build_f3 L5 seed=6797181343544143345 items=200
+C1.list_build_f3 L6 seed=17765179917007010158 items=200
+C1.list_build_f3 done 0.1s
+C1.merge_two_sorted_f3 L0 seed=262470718514291811 items=200
+C1.merge_two_sorted_f3 L1 seed=16137245247652690150 items=200
+C1.merge_two_sorted_f3 L2 seed=14334180898738545310 items=200
+C1.merge_two_sorted_f3 L3 seed=17723319835620556946 items=200
+C1.merge_two_sorted_f3 L4 seed=7695869205766824488 items=200
+C1.merge_two_sorted_f3 L5 seed=9479408359732491138 items=200
+C1.merge_two_sorted_f3 L6 seed=3713699264503792621 items=200
+C1.merge_two_sorted_f3 done 0.1s
+C1.nested_pairs_f3 L0 seed=9369819404116381472 items=200
+C1.nested_pairs_f3 L1 seed=12505635625553614279 items=200
+C1.nested_pairs_f3 L2 seed=11069725304407450437 items=200
+C1.nested_pairs_f3 L3 seed=12245370811325191997 items=200
+C1.nested_pairs_f3 L4 seed=480301808525032336 items=200
+C1.nested_pairs_f3 L5 seed=635545705153217825 items=200
+C1.nested_pairs_f3 L6 seed=14718984718876416962 items=200
+C1.nested_pairs_f3 done 0.1s
+C1.postfix_evaluation L0 seed=2517977487310254052 items=200
+C1.postfix_evaluation L1 seed=7802307737928751905 items=200
+C1.postfix_evaluation L2 seed=7473694633065952123 items=200
+C1.postfix_evaluation L3 seed=203883181983234307 items=200
+C1.postfix_evaluation L4 seed=762985230762240129 items=200
+C1.postfix_evaluation L5 seed=13095670488863880335 items=200
+C1.postfix_evaluation L6 seed=4185781999981404869 items=200
+C1.postfix_evaluation done 0.2s
+C1.recursive_calls_r2 L0 seed=13871721366370935231 items=200
+C1.recursive_calls_r2 L1 seed=4852705765480900807 items=200
+C1.recursive_calls_r2 L2 seed=14913936473553875963 items=200
+C1.recursive_calls_r2 L3 seed=7017234903322816676 items=200
+C1.recursive_calls_r2 L4 seed=12451674821786245921 items=200
+C1.recursive_calls_r2 L5 seed=13491522606494146682 items=200
+C1.recursive_calls_r2 L6 seed=6302571374154554929 items=200
+C1.recursive_calls_r2 done 0.1s
+C1.run_length_scan L0 seed=17880583553397208668 items=200
+C1.run_length_scan L1 seed=4189041552815548472 items=200
+C1.run_length_scan L2 seed=6011095837721291597 items=200
+C1.run_length_scan L3 seed=12769632968021271863 items=200
+C1.run_length_scan L4 seed=17498084200700477783 items=200
+C1.run_length_scan L5 seed=8501411279526398427 items=200
+C1.run_length_scan L6 seed=13552715994985604524 items=200
+C1.run_length_scan done 0.1s
+C1.shared_lists_f3 L0 seed=4403719181320948402 items=200
+C1.shared_lists_f3 L1 seed=17588098157249253754 items=200
+C1.shared_lists_f3 L2 seed=13711913765489831759 items=200
+C1.shared_lists_f3 L3 seed=14999594285987667270 items=200
+C1.shared_lists_f3 L4 seed=18280788382351347518 items=200
+C1.shared_lists_f3 L5 seed=1770713364123519517 items=200
+C1.shared_lists_f3 L6 seed=17719889400841158613 items=200
+C1.shared_lists_f3 done 0.1s
+C1.slices_f4 L0 seed=18425399829230890780 items=200
+C1.slices_f4 L1 seed=5658869711090791558 items=200
+C1.slices_f4 L2 seed=16890958550798947141 items=200
+C1.slices_f4 L3 seed=10234929881682066050 items=200
+C1.slices_f4 L4 seed=384958641270229753 items=200
+C1.slices_f4 L5 seed=12692241044517052129 items=200
+C1.slices_f4 L6 seed=16421466874004814827 items=200
+C1.slices_f4 done 0.0s
+C1.string_build_f3 L0 seed=14206731078401441299 items=200
+C1.string_build_f3 L1 seed=18147038112624721478 items=200
+C1.string_build_f3 L2 seed=7544330065606029209 items=200
+C1.string_build_f3 L3 seed=8717652288800156045 items=200
+C1.string_build_f3 L4 seed=8409539970494361782 items=200
+C1.string_build_f3 L5 seed=439772030678643236 items=200
+C1.string_build_f3 L6 seed=1257378074081102601 items=200
+C1.string_build_f3 done 0.1s
+C1.string_methods_f3 L0 seed=17233358240041767100 items=200
+C1.string_methods_f3 L1 seed=15738641792077487658 items=200
+C1.string_methods_f3 L2 seed=14914754007465231334 items=200
+C1.string_methods_f3 L3 seed=18283638443344787137 items=200
+C1.string_methods_f3 L4 seed=17995114540892251770 items=200
+C1.string_methods_f3 L5 seed=13612222738995556018 items=200
+C1.string_methods_f3 L6 seed=12695629267256321058 items=200
+C1.string_methods_f3 done 0.0s
+C1.turtle_walk_f3 L0 seed=11206164006469096690 items=200
+C1.turtle_walk_f3 L1 seed=6523051887572237579 items=200
+C1.turtle_walk_f3 L2 seed=837940884444706034 items=200
+C1.turtle_walk_f3 L3 seed=12156322057063824220 items=200
+C1.turtle_walk_f3 L4 seed=13804073752275998544 items=200
+C1.turtle_walk_f3 L5 seed=18437550947961181240 items=200
+C1.turtle_walk_f3 L6 seed=9283941192459346838 items=200
+C1.turtle_walk_f3 done 0.2s
+C1.union_find_links_f3 L0 seed=14728211347194153548 items=200
+C1.union_find_links_f3 L1 seed=1154830169505830474 items=200
+C1.union_find_links_f3 L2 seed=16293792127626941319 items=200
+C1.union_find_links_f3 L3 seed=7770922113425466222 items=200
+C1.union_find_links_f3 L4 seed=649684829836286751 items=200
+C1.union_find_links_f3 L5 seed=9658241280276117106 items=200
+C1.union_find_links_f3 L6 seed=14035150382127567840 items=200
+C1.union_find_links_f3 done 0.2s
+C1.while_counter_f3 L0 seed=8511220127989579599 items=200
+C1.while_counter_f3 L1 seed=18391205666035225229 items=200
+C1.while_counter_f3 L2 seed=5865197034519987778 items=200
+C1.while_counter_f3 L3 seed=2016929753451588512 items=200
+C1.while_counter_f3 L4 seed=14359694984818622494 items=200
+C1.while_counter_f3 L5 seed=16363139657696714645 items=200
+C1.while_counter_f3 L6 seed=10475281805626243806 items=200
+C1.while_counter_f3 done 0.1s

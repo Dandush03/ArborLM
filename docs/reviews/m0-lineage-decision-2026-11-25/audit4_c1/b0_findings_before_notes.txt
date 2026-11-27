@@ -1,0 +1,65 @@
+AUDIT4 C1 -- own findings written BEFORE opening studies/m0/NOTES_FIX3_C1.md, the manifests' prose (c1_fix3_*.json notes) or the MEMBERS
+dict / docstring of studies/m0/lineages_c1_fix3_clusters.py.  (I did read lineages_c1_fix3_clusters.py lines 81-137: the helper functions
+all_members/cluster_of/clusters/registered_candidate_clusters/f3_ids/check_consistency, and the grep line showing EXCLUDED_LINEAGES and
+VARIANT_CLUSTERS names; I did not read MEMBERS.)  Capacity not finished at this point.
+
+1. Candidate set (s1_set.py): 37 = 25 *_f3 + 12 unchanged (bfs_queue, bubble_pass, circle_elimination_r2, func_branch, grid_path_table,
+   loop_sum, mirror_pointers, postfix_evaluation, recursive_calls_r2, run_length_scan, slices, string_pair_table). Excluded:
+   insertion_sort(+_traced), minmax_track, kadane_scan(+_traced, PROPOSED). rev2 PROPOSED euclid_gcd_traced / bracket_matching_traced /
+   fast_power_traced are not superseded by name (fix3 supersedes their originals) -- bookkeeping only, they are out of the set.
+
+2. Keys: 103,600 items (37 x 7 x 400, seed 41): 0 errors, 0 mismatches, 0 disagreements, 0 not-one-line under 3.12.14 and 3.15.1 x
+   PYTHONHASHSEED 0 / 31337 (one process per lineage file). 1,554 items one fresh process each (2 runs): 0 bad.
+   Hazards: mixed-sign // or % in func_compose_f3 622/2800, bytecode_loop_f3 487/2800; negative slice bounds slices 2447, string_methods_f3
+   1931, string_build_f3 922; recursion depth up to 17 (recursive_calls_r2), 11 (fib_shapes_recursive_f3).
+
+3. Closed forms (F, my code, rate inside the shape, all 7 levels):
+   - partition_pass_f3 disp = 2*xs[0] + xs[1]: 1.000 at every level (the fixed big/small template makes the three displaced values
+     lead0, lead1, lead0). list and mid shapes: a fixed permutation of the input given the template (smalls to 0..2, xs[1] to the second
+     small's slot, xs[0] to the third's, pivot to index 3, xs[3] to m-1): 1.000. Every item has exactly 3 smalls. => SHOULD NOT BE REGISTERED
+     as written (NEEDS a different construction).
+   - loop_sum (unchanged): arithmetic-series closed form (count and sum of an arithmetic progression of qualifying indices) 1.000 at every level.
+   - sieve_marking_f3 flags shape: order-free identity flags_final[j] = init[j] and no initially-flagged i with i | j, j >= start(i):
+     1.000 (struck composites never matter). Divisor test vs 'tracing': PENDING LEAD REVIEW; strikesum shape has no closed form found.
+   - grid_path_table count shape: binomial (no blocks) 0.37 at L0, 0.14 L1, below after.
+   - fast_power_f3: every pow form <= 0.04 in shape. counter_list_f3: residue histogram <= 0.07.
+4. Cheap shortcuts (S: no tracing or a cheaper other algorithm), in shape:
+   grid_path_table greedy path max 0.89->0.40, min 0.85->0.37 (L0->L6); string_pair_table edit cell hamming+|len diff| 0.43-0.98, lcs cell
+   common-letter multiset 0.47-0.85; coin_change_table_f3 fewest greedy 0.52-0.84 and ceil(T/max coin) 0.53-0.68 (their battery has no coin
+   shape detector); bubble_pass 'move the extreme to the end' 0.58 (L0) 0.48 (L1); bfs_queue target '2' 0.36-0.58; mirror_pointers poss MF 0.61 L0.
+   Partial-trace mutations (M): bfs undirected distance 0.85-0.95 (target), sorted-neighbour BFS last 0.75-0.82; func_branch even branch
+   irrelevant 0.52-0.65; union_find no-find links 0.41 L0; cellular one generation 0.27-0.41; coin combos<->orders 0.27-0.57; circle
+   ignore dead 0.26-0.32; string_build rev = unreversed 0.41 L0-1 (palindromic builds).
+   Level-wide best battery strategy (2-fold CV), max over levels, cheap only (S+G+MF) / with mutations (S+G+M+MF):
+   <=0.10: 23 / 19 lineages; (0.10,0.15]: 5 / 6; (0.15,0.25]: 4 / 3; >0.25: 5 / 9 (closed forms excluded; they are separate).
+5. Redraw/reject: no heuristic-conditioned redraw left in the f3 builders. Answer-conditioned validity rejects remain:
+   coin_change_table_f3 fewest (unreachable 99), grid_path_table (count 0), mirror_pointers (no unequal pair), run_length_scan long
+   (nothing kept), string_methods_f3 (empty), and the shared _finish (empty/uppercase/space answers) -- PENDING LEAD REVIEW (R-13 wording).
+   euclid_gcd_traced_f3 rejects pairs with fewer than max(4, 3+L//2) rounds (trace-length conditioned; 5,832 retries per 2,800 items).
+6. My strict cluster map ("procedure = the program's algorithm"), 37 lineages:
+   1 bfs_queue | 2 union_find_links_f3 | 3 binary_search_f3 | 4 bracket_matching_f3 | 5 postfix_evaluation | 6 bubble_pass |
+   7 partition_pass_f3 | 8 bytecode_loop_f3 | 9 cellular_update_f3 | 10 circle_elimination_r2 |
+   11 DP tables {coin_change_table_f3, grid_path_table, string_pair_table} | 12 Euclid {euclid_gcd_traced_f3, cond_chain_f3 (subtractive
+   Euclid)} | 13 digit_peel_f3 | 14 recurrences {fib_like_f3, fib_shapes_recursive_f3, recursive_calls_r2} | 15 functions {func_branch,
+   func_compose_f3} | 16 index-range filtered accumulation {loop_sum, list_build_f3, nested_pairs_f3, string_build_f3} |
+   17 majority_vote_scan_f3 | 18 merge_two_sorted_f3 | 19 mirror_pointers | 20 run_length_scan | 21 sieve_marking_f3 | 22 shared_lists_f3 |
+   23 sequence-expression evaluation {slices, string_methods_f3} | 24 turtle_walk_f3 | 25 while_counter_f3 |
+   26 counter_list_f3 (VARIANT: input-driven mod-k state machine + visit tally; NEW procedure) |
+   27 fast_power_f3 (VARIANT: LSB-first bit scan, product of the iterates of b -> b^2 + c mod m; NEW procedure).
+   => 25 clusters without the variants, 27 with. Borderline (strictest): postfix~bytecode (instruction interpreters); bubble~partition
+   (swap passes); fast_power_f3~digit_peel_f3 (LSB digit scan + fold) and its base/bsum shapes ~ while_counter_f3/fib_like_f3 (iterate a map);
+   counter_list_f3~turtle_walk_f3 (mod-k state machine) and ~digit_peel fold (Horner); mirror~run_length (string scans).
+   Variant judgement: agree both are new lineages; neither is the original algorithm. fast_power_f3 base and bsum shapes are plain
+   map iteration (no use of the bits except as a round count) -> duplicate the map-iteration procedure; only 'res' uses the exponent.
+   No closed form found for either (<= 0.07). Cross-evaluation: fast_power_f3 shares the square-and-multiply skeleton with
+   R2.modular_power / M1.power_remainder (medium); counter_list_f3 weak vs M1.mode_tally, R2.hash_probe.
+7. Cross-evaluation (strong): binary_search~R2.binary_search_trace; bracket~R2.bracket_match; postfix~R2.stack_machine; cellular~
+   R2.cellular_automaton; run_length~R2.run_length; digit_peel~R2.to_base/from_base; Euclid~R2.gcd_euclid, M1.gcd_lcm; DP tables~
+   R2.coin_change_min, R2.lcs_length, M1.change_ways; recurrences~M1.recurrence_iterate; accumulation~M1.arithmetic_series (loop_sum).
+   circle~R1.elimination_josephus (NOT REGISTERED in R1 v3). Medium: bfs~R1.graph_shortest_route/road_reachability; union_find~
+   R1.equivalence_classes; turtle~R1.compass_turns/spatial_grid_walk; bubble~R2.sort_list; mirror~R2.palindrome_check; bytecode~
+   R2.stack_machine; accumulation~R2.count_divisible; slices/string_methods~R2.list_ops/string_rewrite.
+8. Capacity (partial): reading (c) (literals blanked + executed path) collapses most lineages (e.g. digit_peel_f3 8, fib_shapes_recursive_f3
+   5, func_compose_f3 4-12, fast_power_f3 12-768, euclid ~50, fib_like_f3 80, binary_search_f3 114-438). The implementer measured (c)
+   only for cellular_update and counter_list. Predecessor keep-list bug confirmed: 'count' is in VARS; cellular_update_f3 L0 K1 16,997
+   (budget 63,030 hit) vs 23,954 with the old keep list.

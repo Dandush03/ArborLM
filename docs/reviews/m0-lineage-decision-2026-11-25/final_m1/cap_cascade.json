@@ -1,0 +1,573 @@
+{
+ "a4key/own_part": {
+  "cluster_count": 16,
+  "clusters_left": [
+   "S1_linear_solve",
+   "S2_weighted_sum",
+   "S5_unbounded_table",
+   "S6_exposed_faces",
+   "S7_step_rule",
+   "clock_duration",
+   "crt_congruence",
+   "division_counting",
+   "finite_differences",
+   "gcd_lcm",
+   "inclusion_exclusion",
+   "last_digit_power",
+   "median_list",
+   "prime_factors",
+   "quadratic_area",
+   "tiered_pricing"
+  ],
+  "lineages_left": [
+   "arithmetic_series",
+   "average_missing",
+   "change_ways",
+   "clock_duration",
+   "crt_congruence",
+   "division_counting",
+   "finite_differences",
+   "gcd_lcm",
+   "inclusion_exclusion",
+   "last_digit_power",
+   "linear_equation",
+   "median_list",
+   "painted_cube",
+   "prime_factors",
+   "quadratic_area",
+   "recurrence_iterate",
+   "shopping",
+   "speed_distance",
+   "tiered_pricing"
+  ],
+  "rounds": [
+   {
+    "demand": [
+     17010,
+     18150
+    ],
+    "failing": [
+     "ages",
+     "consecutive",
+     "fraction_remainder",
+     "grid_perimeter",
+     "percent_change",
+     "pipes_work",
+     "ratio_share",
+     "rectangle"
+    ],
+    "lineages": 29,
+    "per_part": {
+     "A": 14,
+     "B": 15
+    }
+   },
+   {
+    "demand": [
+     22830,
+     25000
+    ],
+    "failing": [
+     "tip_split"
+    ],
+    "lineages": 21,
+    "per_part": {
+     "A": 10,
+     "B": 11
+    }
+   },
+   {
+    "demand": [
+     21010,
+     31000
+    ],
+    "failing": [
+     "mixture"
+    ],
+    "lineages": 20,
+    "per_part": {
+     "A": 8,
+     "B": 12
+    }
+   },
+   {
+    "demand": [
+     25000,
+     27680
+    ],
+    "failing": [],
+    "lineages": 19,
+    "per_part": {
+     "A": 9,
+     "B": 10
+    }
+   }
+  ]
+ },
+ "a4key/smaller_part": {
+  "cluster_count": 16,
+  "clusters_left": [
+   "S1_linear_solve",
+   "S2_weighted_sum",
+   "S5_unbounded_table",
+   "S6_exposed_faces",
+   "S7_step_rule",
+   "clock_duration",
+   "crt_congruence",
+   "division_counting",
+   "finite_differences",
+   "gcd_lcm",
+   "inclusion_exclusion",
+   "last_digit_power",
+   "median_list",
+   "prime_factors",
+   "quadratic_area",
+   "tiered_pricing"
+  ],
+  "lineages_left": [
+   "average_missing",
+   "change_ways",
+   "clock_duration",
+   "crt_congruence",
+   "division_counting",
+   "finite_differences",
+   "gcd_lcm",
+   "inclusion_exclusion",
+   "last_digit_power",
+   "linear_equation",
+   "median_list",
+   "painted_cube",
+   "prime_factors",
+   "quadratic_area",
+   "recurrence_iterate",
+   "shopping",
+   "speed_distance",
+   "tiered_pricing"
+  ],
+  "rounds": [
+   {
+    "demand": [
+     18150
+    ],
+    "failing": [
+     "ages",
+     "consecutive",
+     "fraction_remainder",
+     "grid_perimeter",
+     "percent_change",
+     "pipes_work",
+     "ratio_share",
+     "rectangle",
+     "tip_split"
+    ],
+    "lineages": 29,
+    "per_part": {
+     "A": 14,
+     "B": 15
+    }
+   },
+   {
+    "demand": [
+     31000
+    ],
+    "failing": [
+     "arithmetic_series",
+     "mixture"
+    ],
+    "lineages": 20,
+    "per_part": {
+     "A": 8,
+     "B": 12
+    }
+   },
+   {
+    "demand": [
+     31000
+    ],
+    "failing": [],
+    "lineages": 18,
+    "per_part": {
+     "A": 8,
+     "B": 10
+    }
+   }
+  ]
+ },
+ "struct/own_part": {
+  "cluster_count": 17,
+  "clusters_left": [
+   "S1_linear_solve",
+   "S2_weighted_sum",
+   "S3_multiplicative_chain",
+   "S5_unbounded_table",
+   "S6_exposed_faces",
+   "S7_step_rule",
+   "clock_duration",
+   "crt_congruence",
+   "division_counting",
+   "finite_differences",
+   "gcd_lcm",
+   "inclusion_exclusion",
+   "last_digit_power",
+   "median_list",
+   "prime_factors",
+   "quadratic_area",
+   "tiered_pricing"
+  ],
+  "lineages_left": [
+   "arithmetic_series",
+   "average_missing",
+   "change_ways",
+   "clock_duration",
+   "crt_congruence",
+   "division_counting",
+   "finite_differences",
+   "gcd_lcm",
+   "grid_perimeter",
+   "inclusion_exclusion",
+   "last_digit_power",
+   "linear_equation",
+   "median_list",
+   "mixture",
+   "painted_cube",
+   "prime_factors",
+   "quadratic_area",
+   "ratio_share",
+   "recurrence_iterate",
+   "shopping",
+   "speed_distance",
+   "tiered_pricing"
+  ],
+  "rounds": [
+   {
+    "demand": [
+     17010,
+     18150
+    ],
+    "failing": [
+     "ages",
+     "consecutive",
+     "fraction_remainder",
+     "percent_change",
+     "rectangle"
+    ],
+    "lineages": 29,
+    "per_part": {
+     "A": 14,
+     "B": 15
+    }
+   },
+   {
+    "demand": [
+     19470,
+     22830
+    ],
+    "failing": [
+     "pipes_work",
+     "tip_split"
+    ],
+    "lineages": 24,
+    "per_part": {
+     "A": 11,
+     "B": 13
+    }
+   },
+   {
+    "demand": [
+     19470,
+     27680
+    ],
+    "failing": [],
+    "lineages": 22,
+    "per_part": {
+     "A": 9,
+     "B": 13
+    }
+   }
+  ]
+ },
+ "struct/smaller_part": {
+  "cluster_count": 17,
+  "clusters_left": [
+   "S1_linear_solve",
+   "S2_weighted_sum",
+   "S3_multiplicative_chain",
+   "S5_unbounded_table",
+   "S6_exposed_faces",
+   "S7_step_rule",
+   "clock_duration",
+   "crt_congruence",
+   "division_counting",
+   "finite_differences",
+   "gcd_lcm",
+   "inclusion_exclusion",
+   "last_digit_power",
+   "median_list",
+   "prime_factors",
+   "quadratic_area",
+   "tiered_pricing"
+  ],
+  "lineages_left": [
+   "average_missing",
+   "change_ways",
+   "clock_duration",
+   "crt_congruence",
+   "division_counting",
+   "finite_differences",
+   "gcd_lcm",
+   "grid_perimeter",
+   "inclusion_exclusion",
+   "last_digit_power",
+   "linear_equation",
+   "median_list",
+   "mixture",
+   "painted_cube",
+   "prime_factors",
+   "quadratic_area",
+   "ratio_share",
+   "recurrence_iterate",
+   "shopping",
+   "speed_distance",
+   "tiered_pricing"
+  ],
+  "rounds": [
+   {
+    "demand": [
+     18150
+    ],
+    "failing": [
+     "ages",
+     "consecutive",
+     "fraction_remainder",
+     "percent_change",
+     "rectangle",
+     "tip_split"
+    ],
+    "lineages": 29,
+    "per_part": {
+     "A": 14,
+     "B": 15
+    }
+   },
+   {
+    "demand": [
+     25000
+    ],
+    "failing": [
+     "pipes_work"
+    ],
+    "lineages": 23,
+    "per_part": {
+     "A": 10,
+     "B": 13
+    }
+   },
+   {
+    "demand": [
+     27680
+    ],
+    "failing": [
+     "arithmetic_series"
+    ],
+    "lineages": 22,
+    "per_part": {
+     "A": 9,
+     "B": 13
+    }
+   },
+   {
+    "demand": [
+     27680
+    ],
+    "failing": [],
+    "lineages": 21,
+    "per_part": {
+     "A": 9,
+     "B": 12
+    }
+   }
+  ]
+ },
+ "text/own_part": {
+  "cluster_count": 17,
+  "clusters_left": [
+   "S1_linear_solve",
+   "S2_weighted_sum",
+   "S3_multiplicative_chain",
+   "S5_unbounded_table",
+   "S6_exposed_faces",
+   "S7_step_rule",
+   "clock_duration",
+   "crt_congruence",
+   "division_counting",
+   "finite_differences",
+   "gcd_lcm",
+   "inclusion_exclusion",
+   "last_digit_power",
+   "median_list",
+   "prime_factors",
+   "quadratic_area",
+   "tiered_pricing"
+  ],
+  "lineages_left": [
+   "ages",
+   "arithmetic_series",
+   "average_missing",
+   "change_ways",
+   "clock_duration",
+   "crt_congruence",
+   "division_counting",
+   "finite_differences",
+   "fraction_remainder",
+   "gcd_lcm",
+   "grid_perimeter",
+   "inclusion_exclusion",
+   "last_digit_power",
+   "linear_equation",
+   "median_list",
+   "mixture",
+   "painted_cube",
+   "pipes_work",
+   "prime_factors",
+   "quadratic_area",
+   "ratio_share",
+   "recurrence_iterate",
+   "shopping",
+   "speed_distance",
+   "tiered_pricing"
+  ],
+  "rounds": [
+   {
+    "demand": [
+     17010,
+     18150
+    ],
+    "failing": [
+     "consecutive",
+     "percent_change",
+     "rectangle"
+    ],
+    "lineages": 29,
+    "per_part": {
+     "A": 14,
+     "B": 15
+    }
+   },
+   {
+    "demand": [
+     19470
+    ],
+    "failing": [
+     "tip_split"
+    ],
+    "lineages": 26,
+    "per_part": {
+     "A": 13,
+     "B": 13
+    }
+   },
+   {
+    "demand": [
+     18150,
+     22830
+    ],
+    "failing": [],
+    "lineages": 25,
+    "per_part": {
+     "A": 11,
+     "B": 14
+    }
+   }
+  ]
+ },
+ "text/smaller_part": {
+  "cluster_count": 17,
+  "clusters_left": [
+   "S1_linear_solve",
+   "S2_weighted_sum",
+   "S3_multiplicative_chain",
+   "S5_unbounded_table",
+   "S6_exposed_faces",
+   "S7_step_rule",
+   "clock_duration",
+   "crt_congruence",
+   "division_counting",
+   "finite_differences",
+   "gcd_lcm",
+   "inclusion_exclusion",
+   "last_digit_power",
+   "median_list",
+   "prime_factors",
+   "quadratic_area",
+   "tiered_pricing"
+  ],
+  "lineages_left": [
+   "ages",
+   "arithmetic_series",
+   "average_missing",
+   "change_ways",
+   "clock_duration",
+   "crt_congruence",
+   "division_counting",
+   "finite_differences",
+   "fraction_remainder",
+   "gcd_lcm",
+   "grid_perimeter",
+   "inclusion_exclusion",
+   "last_digit_power",
+   "linear_equation",
+   "median_list",
+   "mixture",
+   "painted_cube",
+   "prime_factors",
+   "quadratic_area",
+   "ratio_share",
+   "recurrence_iterate",
+   "shopping",
+   "speed_distance",
+   "tiered_pricing"
+  ],
+  "rounds": [
+   {
+    "demand": [
+     18150
+    ],
+    "failing": [
+     "consecutive",
+     "percent_change",
+     "rectangle",
+     "tip_split"
+    ],
+    "lineages": 29,
+    "per_part": {
+     "A": 14,
+     "B": 15
+    }
+   },
+   {
+    "demand": [
+     22830
+    ],
+    "failing": [
+     "pipes_work"
+    ],
+    "lineages": 25,
+    "per_part": {
+     "A": 11,
+     "B": 14
+    }
+   },
+   {
+    "demand": [
+     22830
+    ],
+    "failing": [],
+    "lineages": 24,
+    "per_part": {
+     "A": 11,
+     "B": 13
+    }
+   }
+  ]
+ }
+}

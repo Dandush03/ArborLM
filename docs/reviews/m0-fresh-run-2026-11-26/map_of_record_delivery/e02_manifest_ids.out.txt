@@ -1,0 +1,8 @@
+manifest files 79
+ids in manifests 348 ids in code 346
+IN CODE, IN NO MANIFEST: 1
+   K0.invented_fact
+IN A MANIFEST, NOT IN CODE: 3
+   C1.bubble in r2_fix3_cluster_map.json
+   C1.counter_list_state_machine in c1_fix4_clusters.json,c1_fix4_survivors.json
+   C1.fast_power_square_map in c1_fix4_clusters.json,c1_fix4_survivors.json

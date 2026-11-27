@@ -1,0 +1,812 @@
+{
+ "files_not_read": {
+  "c1_a3_inputs": {
+   "files": "a3/in/<tag>/<name>.jsonl.gz",
+   "reason": "helper: input of a later step of the unit, not a result",
+   "units": [
+    "C1a",
+    "C1c"
+   ]
+  },
+  "c1_draw_rows": {
+   "fields": [
+    "lid",
+    "lv",
+    "i",
+    "src",
+    "key",
+    "q",
+    "retries",
+    "atype",
+    "fid"
+   ],
+   "files": "gen/<draw>.jsonl.gz",
+   "reason": "helper: input of a later step of the unit, not a result",
+   "units": [
+    "C1a",
+    "C1c"
+   ]
+  },
+  "c1_meta": {
+   "files": "gen/meta.json",
+   "reason": "helper: input of a later step of the unit, not a result",
+   "units": [
+    "C1a",
+    "C1c"
+   ]
+  },
+  "c1_s4_records": {
+   "fields": [
+    "lid",
+    "lv",
+    "i",
+    "key",
+    "shape",
+    "R",
+    "err"
+   ],
+   "files": "rules/<draw>.jsonl.gz",
+   "reason": "helper: input of a later step of the unit, not a result",
+   "units": [
+    "C1a",
+    "C1c"
+   ]
+  },
+  "stdout_stderr": {
+   "files": "*.stdout.txt, *.stderr.txt, stdout.txt, stderr.txt",
+   "reason": "progress and error text; not read, only hashed",
+   "units": "all but R1c (whose stdout.txt is read)"
+  }
+ },
+ "forms": {
+  "c1_a3": {
+   "files": "a3/<draw>__alias.json or <draw>__own.json (audit3_c1/a3_shortcuts.py), source 'a3'; a3/run_log.json",
+   "scopes": {
+    "S_row": {
+     "applies": {
+      "note": "items on which the rule gives an answer; a non-applicable item is a miss and is inside n",
+      "reason": "descriptive: not a rule's figure",
+      "status": "not_read"
+     },
+     "ci": {
+      "note": "",
+      "reason": "descriptive: not a rule's figure",
+      "status": "not_read"
+     },
+     "hit": {
+      "note": "items on which the rule's answer equals the key; summed over shapes",
+      "role": "hits",
+      "status": "read"
+     },
+     "mf_in_shape_cv": {
+      "note": "R-34 and R-57: an in-shape rate, reported and not counted",
+      "role": "shape_rate_mf",
+      "status": "report_only"
+     },
+     "n_shape": {
+      "note": "R-57: items of the shape, reported with the in-shape rates",
+      "role": "shape_items",
+      "status": "report_only"
+     },
+     "rate_in_shape": {
+      "note": "R-34 and R-57: an in-shape rate, reported and not counted",
+      "role": "shape_rate",
+      "status": "report_only"
+     },
+     "share_of_level": {
+      "note": "",
+      "reason": "R-46 note: the shape's share of the level (len(sub) / n), not a hit share; hits are read from hit",
+      "status": "not_read"
+     }
+    },
+    "level": {
+     "BEST_generic_chosen": {
+      "note": "names of the generic rules chosen on the folds",
+      "reason": "descriptive: not a rule's figure",
+      "status": "not_read"
+     },
+     "BEST_generic_cv": {
+      "decimals": 3,
+      "note": "3 decimals",
+      "role": "rule_scalar",
+      "status": "read"
+     },
+     "MF_cv": {
+      "decimals": 3,
+      "note": "3 decimals",
+      "role": "rule_scalar",
+      "status": "read"
+     },
+     "MF_printform_cv": {
+      "decimals": 3,
+      "note": "R-46: its prediction needs no answer (cross-validated), so it counts",
+      "role": "rule_scalar",
+      "status": "read"
+     },
+     "MF_shape_cv": {
+      "decimals": 3,
+      "note": "3 decimals",
+      "role": "rule_scalar",
+      "status": "read"
+     },
+     "S": {
+      "note": "{'<shape>|<rule>': row}",
+      "role": "rules_map",
+      "status": "read"
+     },
+     "distinct_keys": {
+      "note": "",
+      "reason": "descriptive: not a rule's figure",
+      "status": "not_read"
+     },
+     "n": {
+      "note": "",
+      "role": "items",
+      "status": "read"
+     },
+     "oracle_any_literal": {
+      "note": "R-46, named by the ruling: 'any literal in the program equals the answer', counted over the scored items",
+      "reason": "R-46: its value uses the answers of the items it is scored on (an oracle or a best-of choice made and scored on the same items); not a rule",
+      "status": "not_read"
+     },
+     "shapes": {
+      "note": "",
+      "reason": "descriptive: not a rule's figure",
+      "status": "not_read"
+     }
+    },
+    "run_log": {
+     "alias": {
+      "note": "the draw id the wrapper ran under",
+      "reason": "descriptive: not a rule's figure",
+      "status": "not_read"
+     },
+     "alias_err": {
+      "note": "kept in the report, first 300 characters",
+      "role": "fallback_report",
+      "status": "read"
+     },
+     "alias_rc": {
+      "note": "alias_rc != 0 means the wrapper fell back to the lineage's own id: reported (K18)",
+      "role": "fallback_status",
+      "status": "read"
+     },
+     "own_err": {
+      "note": "",
+      "reason": "descriptive: not a rule's figure",
+      "status": "not_read"
+     },
+     "own_rc": {
+      "note": "",
+      "reason": "descriptive: not a rule's figure",
+      "status": "not_read"
+     }
+    }
+   },
+   "units": [
+    "C1a",
+    "C1c"
+   ]
+  },
+  "c1_battery": {
+   "files": "battery.json (c1_fix4_battery.py), source 'battery'",
+   "scopes": {
+    "S_row": {
+     "hit": {
+      "note": "",
+      "role": "hits",
+      "status": "read"
+     },
+     "n_shape": {
+      "note": "R-57: items of the shape, reported with the in-shape rates",
+      "role": "shape_items",
+      "status": "report_only"
+     },
+     "rate": {
+      "note": "R-34 and R-57: an in-shape rate, reported and not counted",
+      "role": "shape_rate",
+      "status": "report_only"
+     }
+    },
+    "level": {
+     "BEST_generic_chosen": {
+      "note": "",
+      "reason": "descriptive: not a rule's figure",
+      "status": "not_read"
+     },
+     "BEST_generic_cv": {
+      "decimals": 3,
+      "note": "3 decimals",
+      "role": "rule_scalar",
+      "status": "read"
+     },
+     "MF_cv": {
+      "decimals": 3,
+      "note": "3 decimals",
+      "role": "rule_scalar",
+      "status": "read"
+     },
+     "MF_shape_cv": {
+      "decimals": 3,
+      "note": "{shape: in-shape cross-validated rate}, shapes of 20 items or more only; hits recovered as round(rate x shapes[shape]) and summed (the text's rule for a share written per shape); 3 decimals; the committed pool script does not read it",
+      "role": "rule_shape_map",
+      "status": "read",
+      "unsure": true
+     },
+     "S": {
+      "note": "{'<shape>|<rule>': row}",
+      "role": "rules_map",
+      "status": "read"
+     },
+     "best_generic_in_shape": {
+      "note": "R-46, named by the ruling: the best generic rule per shape, chosen and scored on the same items",
+      "reason": "R-46: its value uses the answers of the items it is scored on (an oracle or a best-of choice made and scored on the same items); not a rule",
+      "status": "not_read"
+     },
+     "distinct_keys": {
+      "note": "",
+      "reason": "descriptive: not a rule's figure",
+      "status": "not_read"
+     },
+     "n": {
+      "note": "",
+      "role": "items",
+      "status": "read"
+     },
+     "oracle_any_literal": {
+      "note": "R-46, named by the ruling",
+      "reason": "R-46: its value uses the answers of the items it is scored on (an oracle or a best-of choice made and scored on the same items); not a rule",
+      "status": "not_read"
+     },
+     "retries": {
+      "note": "retries of the draw",
+      "reason": "descriptive: not a rule's figure",
+      "status": "not_read"
+     },
+     "shapes": {
+      "note": "items per shape, for the recovery of MF_shape_cv",
+      "role": "shape_sizes",
+      "status": "read"
+     }
+    }
+   },
+   "units": [
+    "C1b"
+   ]
+  },
+  "c1_closed": {
+   "files": "f5.json and f5b.json (the closed-form scripts), source 'closed forms'",
+   "scopes": {
+    "lineage": {
+     "errors": {
+      "note": "items on which a closed form raised; they stay inside n_per_level as misses",
+      "reason": "descriptive: not a rule's figure",
+      "status": "not_read"
+     },
+     "n_per_level": {
+      "note": "",
+      "role": "items_per_level",
+      "status": "read"
+     },
+     "per_level": {
+      "decimals": 4,
+      "note": "{level: {rule: share of the level}}; 4 decimals; a rule with no hit at a level is not written",
+      "role": "per_level_shares",
+      "status": "read"
+     }
+    }
+   },
+   "units": [
+    "C1c"
+   ]
+  },
+  "c1_s5": {
+   "files": "s5.json (audit4_c1/s5_analyse_v2.py), source 'a4' of the class table",
+   "scopes": {
+    "level": {
+     "EFF_F": {
+      "decimals": 3,
+      "note": "counts as written, whole (point 6, K8): its components cannot be read apart",
+      "role": "rule_scalar",
+      "status": "read"
+     },
+     "EFF_S": {
+      "decimals": 3,
+      "note": "3 decimals",
+      "role": "rule_scalar",
+      "status": "read"
+     },
+     "EFF_SM": {
+      "decimals": 3,
+      "note": "read; left uncounted only by the class table (measure equal on EFF_SM)",
+      "role": "rule_scalar",
+      "status": "read"
+     },
+     "MF": {
+      "decimals": 3,
+      "note": "most frequent key, 2-fold CV; 3 decimals",
+      "role": "rule_scalar",
+      "status": "read"
+     },
+     "MFsh": {
+      "decimals": 3,
+      "note": "most frequent key per shape, 2-fold CV; 3 decimals",
+      "role": "rule_scalar",
+      "status": "read"
+     },
+     "distinct_keys": {
+      "note": "",
+      "reason": "descriptive: not a rule's figure",
+      "status": "not_read"
+     },
+     "n": {
+      "note": "",
+      "role": "items",
+      "status": "read"
+     },
+     "parse_fail": {
+      "note": "",
+      "reason": "descriptive: not a rule's figure",
+      "status": "not_read"
+     },
+     "rules": {
+      "note": "{'<shape>|<rule>': row}; the rule is the part after the first '|'",
+      "role": "rules_map",
+      "status": "read"
+     },
+     "shapes": {
+      "note": "shape sizes; each rule row carries its own n_shape",
+      "reason": "descriptive: not a rule's figure",
+      "status": "not_read"
+     }
+    },
+    "rule": {
+     "n_shape": {
+      "note": "",
+      "role": "items_in_shape",
+      "status": "read"
+     },
+     "rate_in_shape": {
+      "decimals": 3,
+      "note": "hits of the shape = round(rate_in_shape x n_shape), summed over the shapes (R-34; the text's reading); 3 decimals",
+      "role": "share_in_shape",
+      "status": "read"
+     },
+     "share_of_level": {
+      "decimals": 3,
+      "note": "read only for the report: f4b_pool_v2.py recovers hits as round(share_of_level x n); the report lists rules whose decision would change under it",
+      "role": "alt_recovery_share",
+      "status": "read",
+      "unsure": true
+     }
+    },
+    "rule_name": {
+     "MF_in_shape_cv": {
+      "note": "R-34 and R-57: an in-shape rate is reported (report_extras.json, rates_within_one_shape_reported_only) and not counted; the row has no share_of_level",
+      "role": "shape_rate_row",
+      "status": "report_only"
+     }
+    }
+   },
+   "units": [
+    "C1a",
+    "C1c"
+   ]
+  },
+  "m1_battery": {
+   "files": "battery.json",
+   "scopes": {
+    "level_a3": {
+     "N": {
+      "note": "",
+      "role": "items",
+      "status": "read"
+     },
+     "base": {
+      "decimals": 4,
+      "note": "as in own",
+      "role": "base",
+      "status": "read"
+     },
+     "minus_base": {
+      "note": "",
+      "reason": "derived",
+      "status": "not_read"
+     },
+     "rates": {
+      "decimals": 4,
+      "note": "{key: rate}; named 'a3:' + key",
+      "role": "rates_map",
+      "status": "read"
+     }
+    },
+    "level_a4": {
+     "N": {
+      "note": "",
+      "role": "items",
+      "status": "read"
+     },
+     "answer_echoed_anywhere": {
+      "note": "as in own",
+      "reason": "R-46: its value uses the answers of the items it is scored on (an oracle or a best-of choice made and scored on the same items); not a rule",
+      "status": "not_read",
+      "unsure": true
+     },
+     "base": {
+      "decimals": 4,
+      "note": "as in own",
+      "role": "base",
+      "status": "read"
+     },
+     "best_echo": {
+      "note": "names of the echo rules chosen on the held-out halves",
+      "reason": "descriptive: not a rule's figure",
+      "status": "not_read"
+     },
+     "minus_base": {
+      "note": "",
+      "reason": "derived",
+      "status": "not_read"
+     },
+     "rates": {
+      "decimals": 4,
+      "note": "{key: rate}; named as written (they already carry a4: or im:)",
+      "role": "rates_map",
+      "status": "read"
+     },
+     "within_applicable": {
+      "note": "",
+      "reason": "K7: not a rule; the rate over the items a rule applies to",
+      "status": "not_read"
+     }
+    },
+    "level_own": {
+     "N": {
+      "note": "",
+      "role": "items",
+      "status": "read"
+     },
+     "answer_echoed_anywhere": {
+      "note": "whether the answer occurs among the numbers of the question, counted over the scored items",
+      "reason": "R-46: its value uses the answers of the items it is scored on (an oracle or a best-of choice made and scored on the same items); not a rule",
+      "status": "not_read",
+      "unsure": true
+     },
+     "base": {
+      "decimals": 4,
+      "note": "held-out rate of the most frequent answer; read as the rule 'most frequent answer' against chance and as the second base (point 7)",
+      "role": "base",
+      "status": "read"
+     },
+     "halfwidth95": {
+      "note": "",
+      "reason": "derived: a half-width, not a rule's figure",
+      "status": "not_read"
+     },
+     "minus_base": {
+      "note": "",
+      "reason": "derived: rates less base, formed by the pooling script from the two pooled figures",
+      "status": "not_read"
+     },
+     "mode_insample": {
+      "note": "the commonest answer's rate among the scored items themselves",
+      "reason": "R-46: its value uses the answers of the items it is scored on (an oracle or a best-of choice made and scored on the same items); not a rule",
+      "status": "not_read",
+      "unsure": true
+     },
+     "rates": {
+      "decimals": 4,
+      "note": "{key: rate}; named 'im:' + key; keys ending __within_applicable are not rules (K7)",
+      "role": "rates_map",
+      "status": "read"
+     }
+    },
+    "lineage": {
+     "a3_skipped_items": {
+      "note": "items on which an audit-3 rule raised; section a3 only",
+      "reason": "descriptive: not a rule's figure",
+      "status": "not_read"
+     }
+    },
+    "top": {
+     "exclusions": {
+      "note": "the original's list of procedure exclusions; classes come from the class table only",
+      "reason": "descriptive: not a rule's figure",
+      "status": "not_read"
+     },
+     "n": {
+      "note": "",
+      "reason": "descriptive: not a rule's figure",
+      "status": "not_read"
+     },
+     "raw": {
+      "note": "sections own, a4 and a3, each {lid: {level: row, a3_skipped_items}}",
+      "role": "sections",
+      "status": "read"
+     },
+     "seeds": {
+      "note": "",
+      "reason": "not the true seeds: the literals of the original (410302, 17, 5) are written whatever the seeds were (K15); seeds are taken from the plan",
+      "status": "not_read"
+     },
+     "summary": {
+      "note": "",
+      "reason": "derived: the script's own maxima over the same rates; the pooling script forms every figure itself",
+      "status": "not_read"
+     }
+    }
+   },
+   "units": [
+    "M1a"
+   ]
+  },
+  "m1_results": {
+   "files": "out.json",
+   "scopes": {
+    "level": {
+     "N": {
+      "note": "",
+      "role": "items",
+      "status": "read"
+     },
+     "a3_skipped_items": {
+      "note": "",
+      "reason": "descriptive: not a rule's figure",
+      "status": "not_read"
+     },
+     "asked_is_largest_observed_vs_uniform": {
+      "note": "",
+      "reason": "K7: not a rule; a diagnostic of the answer's position (ratio_share only)",
+      "status": "not_read"
+     },
+     "base": {
+      "decimals": 5,
+      "note": "rounded to 5 decimals",
+      "role": "base",
+      "status": "read"
+     },
+     "minus_base": {
+      "note": "",
+      "reason": "derived: formed by the pooling script from the two pooled figures",
+      "status": "not_read"
+     },
+     "one_op_best": {
+      "note": "",
+      "reason": "K7: not a rule; names of the operands chosen",
+      "status": "not_read"
+     },
+     "rates": {
+      "decimals": 5,
+      "note": "{key: rate}; named as written; rounded to 5 decimals; keys ending __within_applicable are not rules (K7)",
+      "role": "rates_map",
+      "status": "read"
+     },
+     "within_applicable": {
+      "note": "",
+      "reason": "K7: not a rule",
+      "status": "not_read"
+     }
+    },
+    "top": {
+     "N": {
+      "note": "the item count asked for; each row's N is read",
+      "reason": "descriptive: not a rule's figure",
+      "status": "not_read"
+     },
+     "label": {
+      "note": "",
+      "reason": "descriptive: not a rule's figure",
+      "status": "not_read"
+     },
+     "mode": {
+      "note": "",
+      "reason": "descriptive: not a rule's figure",
+      "status": "not_read"
+     },
+     "results": {
+      "note": "{lid: {level: row}}",
+      "role": "lineage_map",
+      "status": "read"
+     },
+     "seed": {
+      "note": "",
+      "reason": "seeds are taken from the plan, and this is the same integer",
+      "status": "not_read"
+     }
+    }
+   },
+   "units": [
+    "M1b",
+    "M1c"
+   ]
+  },
+  "r1_rows": {
+   "files": "<id>.aud.jsonl, <id>.impl.jsonl, <id>.feat.jsonl (one JSON object per line)",
+   "scopes": {
+    "row": {
+     "acc_fired": {
+      "note": "read only to list exact rows (point 8): accuracy on the items it answered; None when it never fired",
+      "role": "exact_listing_acc",
+      "status": "read"
+     },
+     "anti": {
+      "decimals": 4,
+      "note": "the gain from choosing among the options the rule did not pick; None for an open answer and for the fitted lookups; read as an excess of its own",
+      "role": "excess_anti",
+      "status": "read"
+     },
+     "chance": {
+      "note": "eff is already the excess over chance (point 7), so chance is not needed",
+      "reason": "descriptive: not a rule's figure",
+      "status": "not_read"
+     },
+     "eff": {
+      "decimals": 4,
+      "note": "already the rate less chance, rounded to 4 decimals by the script (pooled as the item-weighted mean of the written figures)",
+      "role": "excess_eff",
+      "status": "read"
+     },
+     "fired": {
+      "note": "read only to list exact rows (point 8): items on which the rule answered",
+      "role": "exact_listing_fired",
+      "status": "read"
+     },
+     "heuristic": {
+      "note": "the rule's name as written; one rule = one name in one kind of file of one unit for one lineage",
+      "role": "rule_name",
+      "status": "read"
+     },
+     "level": {
+      "note": "",
+      "role": "level",
+      "status": "read"
+     },
+     "lineage": {
+      "note": "mapped to the survivor-list id by the plan's id map; a lineage that is not on the map is not read",
+      "role": "lineage_id",
+      "status": "read"
+     },
+     "mode_rate": {
+      "note": "R1b audit rows only: the rate of the commonest answer among the scored items themselves (heuristics4.py:634). Under R-46 it is not a rule; the fitted constant rule constant_mfk_fitted is a row of its own and is read",
+      "reason": "R-46: its value uses the answers of the items it is scored on (an oracle or a best-of choice made and scored on the same items); not a rule",
+      "status": "not_read",
+      "unsure": true
+     },
+     "n": {
+      "note": "the row's own item count (1,000 per level for the R1a fitted lookups, as the text says)",
+      "role": "items",
+      "status": "read"
+     }
+    }
+   },
+   "units": [
+    "R1a",
+    "R1b"
+   ]
+  },
+  "r1c_stdout": {
+   "files": "stdout.txt: one line per lineage and rule, f\"{lid:36s} {h[:60]:60s} eff \" + 7 values with +.3f + \"   anti \" + 7 values (new_rules_final.py, last line)",
+   "scopes": {
+    "line": {
+     "anti_values": {
+      "decimals_uncertainty": "0.00055",
+      "note": "exactly 7 values, levels 0 to 6; same uncertainty",
+      "role": "excess_anti_levels",
+      "status": "read"
+     },
+     "eff_values": {
+      "decimals_uncertainty": "0.00055",
+      "note": "exactly 7 values, levels 0 to 6; 4-decimal rounding then 3-decimal printing: uncertainty 0.00055 (point 7)",
+      "role": "excess_eff_levels",
+      "status": "read"
+     },
+     "item_count": {
+      "note": "the script writes none; the plan's items per level is used (R1c, point 8 last bullet: no row can be set aside)",
+      "reason": "descriptive: not a rule's figure",
+      "status": "not_read"
+     },
+     "lineage_id": {
+      "note": "first token; padded to 36 characters",
+      "role": "lineage_id",
+      "status": "read"
+     },
+     "rule_name": {
+      "note": "cut to 60 characters by the script; read as printed (trailing blanks removed)",
+      "role": "rule_name",
+      "status": "read"
+     }
+    }
+   },
+   "units": [
+    "R1c"
+   ]
+  },
+  "r2_json": {
+   "files": "r2a.json, f_rules.json, f_rules_new.json",
+   "scopes": {
+    "rule": {
+     "acc_all": {
+      "note": "",
+      "reason": "derived: k / n of the shape, which the script forms itself from k and n",
+      "status": "not_read"
+     },
+     "acc_app": {
+      "note": "",
+      "reason": "derived: k / napp, which the script forms itself from k and napp",
+      "status": "not_read"
+     },
+     "k": {
+      "note": "",
+      "role": "hits",
+      "status": "read"
+     },
+     "napp": {
+      "note": "items on which the rule gives an answer",
+      "role": "applicable",
+      "status": "read"
+     },
+     "nerr": {
+      "note": "items on which the rule raised; the script counts them as no answer, which k and napp already reflect",
+      "reason": "descriptive: not a rule's figure",
+      "status": "not_read"
+     }
+    },
+    "shape": {
+     "answer_type": {
+      "note": "yn gives the base 0.5 and the statistic k/napp; list, number and text give the base 0",
+      "role": "answer_type",
+      "status": "read"
+     },
+     "distinct_answers": {
+      "note": "",
+      "reason": "descriptive: not a rule's figure",
+      "status": "not_read"
+     },
+     "n": {
+      "note": "items of the shape (the test draw); summed over the shapes of the level",
+      "role": "items",
+      "status": "read"
+     },
+     "rules": {
+      "note": "{rule name: counts}; R2a writes no rule with napp = 0, R2b writes every rule",
+      "role": "rules_map",
+      "status": "read"
+     },
+     "yes_share": {
+      "note": "R2a, yes/no shapes only",
+      "reason": "descriptive: not a rule's figure",
+      "status": "not_read"
+     }
+    },
+    "top": {
+     "lineages": {
+      "note": "{lid: {level: {shape: ...}}}; lid mapped by the plan's id map",
+      "role": "lineage_map",
+      "status": "read"
+     },
+     "n": {
+      "note": "the item count the script was asked for; each shape's own n is read",
+      "reason": "descriptive: not a rule's figure",
+      "status": "not_read"
+     },
+     "seeds": {
+      "note": "a literal description or tag of the original, not the seed; seeds are taken from the plan",
+      "reason": "descriptive: not a rule's figure",
+      "status": "not_read"
+     }
+    }
+   },
+   "units": [
+    "R2a",
+    "R2b"
+   ]
+  }
+ },
+ "rulings": {
+  "K7": "M1: keys ending __within_applicable, within_applicable, one_op_best and asked_is_largest_observed_vs_uniform are not rules and are not read.",
+  "R-46": "A field is a rule only if its prediction for an item can be computed without that item's answer. oracle_any_literal (both C1 outputs) and best_generic_in_shape (C1 battery) are not read; MF_printform_cv counts; BEST_generic_cv counts; share_of_level in the a3 output is not a hit share and hits are read from hit.",
+  "R-57": "Rates within one shape (C1 rate_in_shape, mf_in_shape_cv, rate, MF_in_shape_cv; the battery's MF_shape_cv per shape; R2 per-shape counts) are written into report_extras.json under rates_within_one_shape_reported_only and enter no decision."
+ },
+ "table_kind": "field table of stage 1S point 2 (ADR-0033 addendum 1, approved 2026-11-26); hashed with the pooling script",
+ "verification": "names checked against the committed code at b78e58b1 (and the run copies under studies/m0/fresh_run) and against the keys, not the values, of the implementers' dry outputs; fields marked unsure are listed in the report of the task"
+}

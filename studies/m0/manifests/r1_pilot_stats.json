@@ -1,0 +1,6260 @@
+{
+ "capacity": {
+  "R1.activity_selection": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.184
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.288
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.274
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.239
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.229
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.221
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.121
+    }
+   ],
+   "seconds": 1.56
+  },
+  "R1.attribute_rule": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.027
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.059
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.12
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.15
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.216
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.222
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.153
+    }
+   ],
+   "seconds": 0.95
+  },
+  "R1.boolean_lights": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.015
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.029
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.031
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.038
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.04
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.043
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.027
+    }
+   ],
+   "seconds": 0.22
+  },
+  "R1.boolean_lights_r2": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.016
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.03
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.032
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.038
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.04
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.043
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.028
+    }
+   ],
+   "seconds": 0.23
+  },
+  "R1.categories_default_exceptions": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.012
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.021
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.022
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.023
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.024
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.025
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.015
+    }
+   ],
+   "seconds": 0.14
+  },
+  "R1.categories_default_exceptions_r2": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.024
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.041
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.059
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.061
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.074
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.069
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.047
+    }
+   ],
+   "seconds": 0.38
+  },
+  "R1.categories_default_exceptions_r3": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.014
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.025
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.026
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.025
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.027
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.028
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.017
+    }
+   ],
+   "seconds": 0.16
+  },
+  "R1.categories_follow": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.084
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.116
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.115
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.243
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.242
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.224
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.257
+    }
+   ],
+   "seconds": 1.28
+  },
+  "R1.categories_follow_r2": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.072
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.133
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.132
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.259
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.272
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.327
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.27
+    }
+   ],
+   "seconds": 1.47
+  },
+  "R1.compass_turns": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1039,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.005
+    },
+    {
+     "attempts": 1802,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.012
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.014
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.015
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.017
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.02
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.012
+    }
+   ],
+   "seconds": 0.09
+  },
+  "R1.conditional_chain": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.037
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.095
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.121
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.178
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.207
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.322
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.235
+    }
+   ],
+   "seconds": 1.2
+  },
+  "R1.conditional_decision_tree": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.013
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.024
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.036
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.035
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.055
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.058
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.053
+    }
+   ],
+   "seconds": 0.27
+  },
+  "R1.conditional_threshold_rule": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.013
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.025
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.03
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.035
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.039
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.039
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.023
+    }
+   ],
+   "seconds": 0.2
+  },
+  "R1.conditional_threshold_rule_r2": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.028
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.057
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.083
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.093
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.099
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.106
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.064
+    }
+   ],
+   "seconds": 0.53
+  },
+  "R1.conditional_threshold_rule_r3": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.032
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.068
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.096
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.109
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.118
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.124
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.074
+    }
+   ],
+   "seconds": 0.62
+  },
+  "R1.containers_queue_line": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.009
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.02
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.023
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.027
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.029
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.033
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.021
+    }
+   ],
+   "seconds": 0.16
+  },
+  "R1.containers_queue_line_r2": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.011
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.024
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.029
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.032
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.035
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.038
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.024
+    }
+   ],
+   "seconds": 0.19
+  },
+  "R1.containers_stack_piles": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.014
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.031
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.037
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.04
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.048
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.05
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.031
+    }
+   ],
+   "seconds": 0.25
+  },
+  "R1.containers_stack_piles_r2": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.167
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.426
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.578
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.692
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.802
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.969
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.648
+    }
+   ],
+   "seconds": 4.28
+  },
+  "R1.containers_stack_piles_r3": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.281
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.726
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.957
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 1.148
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 1.395
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 1.743
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 1.153
+    }
+   ],
+   "seconds": 7.4
+  },
+  "R1.elimination_bracket": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.011
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.019
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.02
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.024
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.024
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.025
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.019
+    }
+   ],
+   "seconds": 0.14
+  },
+  "R1.elimination_bracket_r2": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.04
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.071
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.068
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.068
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.1
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.101
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.058
+    }
+   ],
+   "seconds": 0.51
+  },
+  "R1.elimination_bracket_r3": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.04
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.069
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.078
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.063
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.103
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.099
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.055
+    }
+   ],
+   "seconds": 0.51
+  },
+  "R1.elimination_josephus": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.008
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.016
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.016
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.016
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.017
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.017
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.01
+    }
+   ],
+   "seconds": 0.1
+  },
+  "R1.equivalence_classes": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.017
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.03
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.036
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.038
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.045
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.047
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.028
+    }
+   ],
+   "seconds": 0.24
+  },
+  "R1.equivalence_classes_r2": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.021
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.038
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.042
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.044
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.053
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.055
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.036
+    }
+   ],
+   "seconds": 0.29
+  },
+  "R1.equivalence_exchange_rates": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.008
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.017
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.021
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.024
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.027
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.031
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.019
+    }
+   ],
+   "seconds": 0.15
+  },
+  "R1.event_timeline": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.008
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.017
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.022
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.027
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.028
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.033
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.02
+    }
+   ],
+   "seconds": 0.16
+  },
+  "R1.graph_bipartite": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.012
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.025
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.028
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.031
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.036
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.041
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.026
+    }
+   ],
+   "seconds": 0.2
+  },
+  "R1.graph_shortest_route": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.029
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.059
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.06
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.061
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.061
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.071
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.039
+    }
+   ],
+   "seconds": 0.38
+  },
+  "R1.graph_shortest_route_r2": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.026
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.053
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.052
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.056
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.055
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.063
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.034
+    }
+   ],
+   "seconds": 0.34
+  },
+  "R1.instant_runoff": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.136
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.244
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.237
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.234
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.247
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.258
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.156
+    }
+   ],
+   "seconds": 1.51
+  },
+  "R1.instant_runoff_r2": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.169
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.268
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.262
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.25
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.25
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.269
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.166
+    }
+   ],
+   "seconds": 1.63
+  },
+  "R1.kinship_ancestor": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.008
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.016
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.018
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.021
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.023
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.027
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.015
+    }
+   ],
+   "seconds": 0.13
+  },
+  "R1.kinship_ancestor_r2": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.088
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.194
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.243
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.323
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.353
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.448
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.28
+    }
+   ],
+   "seconds": 1.93
+  },
+  "R1.kinship_ancestor_r3": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.09
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.194
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.239
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.308
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.356
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.438
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.26
+    }
+   ],
+   "seconds": 1.89
+  },
+  "R1.kinship_cousins": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.022
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.041
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.046
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.046
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.054
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.053
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.032
+    }
+   ],
+   "seconds": 0.29
+  },
+  "R1.kinship_descendants": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.011
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.022
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.025
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.029
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.03
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.031
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.02
+    }
+   ],
+   "seconds": 0.17
+  },
+  "R1.kinship_descendants_r2": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.562
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.513
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.53
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.609
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.728
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.778
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.471
+    }
+   ],
+   "seconds": 4.19
+  },
+  "R1.kinship_descendants_r3": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.518
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.496
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.476
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.592
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.694
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.772
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.486
+    }
+   ],
+   "seconds": 4.03
+  },
+  "R1.knights_knaves": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1001,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.015
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.036
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.035
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.055
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.053
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.084
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.045
+    }
+   ],
+   "seconds": 0.32
+  },
+  "R1.minimax_tree": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1005,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.01
+    },
+    {
+     "attempts": 1811,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.018
+    },
+    {
+     "attempts": 1817,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.018
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.023
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.023
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.033
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.018
+    }
+   ],
+   "seconds": 0.14
+  },
+  "R1.mst_cost": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.084
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.11
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.111
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.097
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.099
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.101
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.056
+    }
+   ],
+   "seconds": 0.66
+  },
+  "R1.nim_xor": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1698,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.025
+    },
+    {
+     "attempts": 3051,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.046
+    },
+    {
+     "attempts": 2674,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.04
+    },
+    {
+     "attempts": 1820,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.036
+    },
+    {
+     "attempts": 1814,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.045
+    },
+    {
+     "attempts": 1808,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.044
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.031
+    }
+   ],
+   "seconds": 0.27
+  },
+  "R1.one_culprit": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.016
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.027
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.036
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.037
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.05
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.053
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.038
+    }
+   ],
+   "seconds": 0.26
+  },
+  "R1.order_compare": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.009
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.017
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.021
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.024
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.029
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.034
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.019
+    }
+   ],
+   "seconds": 0.15
+  },
+  "R1.order_extreme": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.004
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.009
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.01
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.012
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.014
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.015
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.009
+    }
+   ],
+   "seconds": 0.07
+  },
+  "R1.order_tournament_wins": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.01
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.022
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.021
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.026
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.027
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.035
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.019
+    }
+   ],
+   "seconds": 0.16
+  },
+  "R1.pet_owners": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.012
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.031
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.056
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.16
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.158
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.158
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.085
+    }
+   ],
+   "seconds": 0.66
+  },
+  "R1.road_reachability": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.015
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.031
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.034
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.039
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.043
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.048
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.024
+    }
+   ],
+   "seconds": 0.23
+  },
+  "R1.seating_row": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.014
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.041
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.106
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.11
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.487
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.496
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 1.878
+    }
+   ],
+   "seconds": 3.13
+  },
+  "R1.spatial_grid_walk": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.013
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.024
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.027
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.031
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.033
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.039
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.025
+    }
+   ],
+   "seconds": 0.19
+  },
+  "R1.spatial_grid_walk_r2": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.013
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.025
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.029
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.034
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.036
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.038
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.025
+    }
+   ],
+   "seconds": 0.2
+  },
+  "R1.spatial_relative_directions": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.008
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.017
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.022
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.024
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.027
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.03
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.019
+    }
+   ],
+   "seconds": 0.15
+  },
+  "R1.stable_matching": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.173
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.31
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.422
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.418
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.575
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.586
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.438
+    }
+   ],
+   "seconds": 2.92
+  },
+  "R1.stable_matching_r2": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.298
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.537
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.749
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.797
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 1.037
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 1.038
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.801
+    }
+   ],
+   "seconds": 5.26
+  },
+  "R1.swap_tracking": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.009
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.024
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.031
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.037
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.043
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.048
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.032
+    }
+   ],
+   "seconds": 0.22
+  },
+  "R1.temporal_critical_path": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.009
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.02
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.025
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.03
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.034
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.038
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.023
+    }
+   ],
+   "seconds": 0.18
+  },
+  "R1.temporal_interval_overlap": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.012
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.025
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.024
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.029
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.029
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.034
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.019
+    }
+   ],
+   "seconds": 0.17
+  },
+  "R1.temporal_weekday_shift": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.012
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.037
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.051
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.065
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.08
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.096
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.06
+    }
+   ],
+   "seconds": 0.4
+  },
+  "R1.topological_order": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.109
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.244
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.284
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.339
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.402
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.449
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.293
+    }
+   ],
+   "seconds": 2.12
+  },
+  "R1.topological_order_r2": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.097
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.223
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.26
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.309
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.372
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.422
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.269
+    }
+   ],
+   "seconds": 1.95
+  },
+  "R1.tracking_accounts": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.011
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.026
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.031
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.038
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.042
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.047
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.03
+    }
+   ],
+   "seconds": 0.23
+  },
+  "R1.venn_counting": {
+   "levels_failed": [],
+   "passed_all": true,
+   "rows": [
+    {
+     "attempts": 1003,
+     "found": 1000,
+     "level": 0,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.008
+    },
+    {
+     "attempts": 1802,
+     "found": 1800,
+     "level": 1,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.015
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 2,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.024
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 3,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.026
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 4,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.025
+    },
+    {
+     "attempts": 1800,
+     "found": 1800,
+     "level": 5,
+     "need": 1800,
+     "passed": true,
+     "seconds": 0.024
+    },
+    {
+     "attempts": 1000,
+     "found": 1000,
+     "level": 6,
+     "need": 1000,
+     "passed": true,
+     "seconds": 0.013
+    }
+   ],
+   "seconds": 0.13
+  }
+ },
+ "levels": [
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "new_ids": [
+  "R1.activity_selection",
+  "R1.boolean_lights",
+  "R1.boolean_lights_r2",
+  "R1.categories_default_exceptions",
+  "R1.categories_default_exceptions_r2",
+  "R1.categories_default_exceptions_r3",
+  "R1.categories_follow_r2",
+  "R1.conditional_decision_tree",
+  "R1.conditional_threshold_rule",
+  "R1.conditional_threshold_rule_r2",
+  "R1.conditional_threshold_rule_r3",
+  "R1.containers_queue_line",
+  "R1.containers_queue_line_r2",
+  "R1.containers_stack_piles",
+  "R1.containers_stack_piles_r2",
+  "R1.containers_stack_piles_r3",
+  "R1.elimination_bracket",
+  "R1.elimination_bracket_r2",
+  "R1.elimination_bracket_r3",
+  "R1.elimination_josephus",
+  "R1.equivalence_classes",
+  "R1.equivalence_classes_r2",
+  "R1.equivalence_exchange_rates",
+  "R1.graph_bipartite",
+  "R1.graph_shortest_route",
+  "R1.graph_shortest_route_r2",
+  "R1.instant_runoff",
+  "R1.instant_runoff_r2",
+  "R1.kinship_ancestor_r2",
+  "R1.kinship_ancestor_r3",
+  "R1.kinship_descendants",
+  "R1.kinship_descendants_r2",
+  "R1.kinship_descendants_r3",
+  "R1.minimax_tree",
+  "R1.mst_cost",
+  "R1.nim_xor",
+  "R1.order_tournament_wins",
+  "R1.spatial_grid_walk",
+  "R1.spatial_grid_walk_r2",
+  "R1.spatial_relative_directions",
+  "R1.stable_matching",
+  "R1.stable_matching_r2",
+  "R1.temporal_critical_path",
+  "R1.temporal_interval_overlap",
+  "R1.temporal_weekday_shift",
+  "R1.topological_order",
+  "R1.topological_order_r2",
+  "R1.tracking_accounts",
+  "R1.venn_counting"
+ ],
+ "non_evidence_of_distinctness": [
+  "_profile / op similarity (max_op_similarity)",
+  "item_skeletons_level3"
+ ],
+ "overlap": {
+  "R1.activity_selection": {
+   "max_op_similarity": 0.739,
+   "max_sentence_jaccard": 0.0,
+   "same_signature": [],
+   "with_op": "R1.order_extreme",
+   "with_sentence": "R1.venn_counting"
+  },
+  "R1.attribute_rule": {
+   "max_op_similarity": 0.758,
+   "max_sentence_jaccard": 0.001,
+   "same_signature": [],
+   "with_op": "R1.categories_default_exceptions_r2",
+   "with_sentence": "R1.kinship_descendants_r3"
+  },
+  "R1.boolean_lights": {
+   "max_op_similarity": 0.864,
+   "max_sentence_jaccard": 0.452,
+   "same_signature": [],
+   "with_op": "R1.boolean_lights_r2",
+   "with_sentence": "R1.boolean_lights_r2"
+  },
+  "R1.boolean_lights_r2": {
+   "max_op_similarity": 0.864,
+   "max_sentence_jaccard": 0.452,
+   "same_signature": [],
+   "with_op": "R1.boolean_lights",
+   "with_sentence": "R1.boolean_lights"
+  },
+  "R1.categories_default_exceptions": {
+   "max_op_similarity": 0.786,
+   "max_sentence_jaccard": 1.0,
+   "same_signature": [],
+   "with_op": "R1.order_tournament_wins",
+   "with_sentence": "R1.categories_default_exceptions_r3"
+  },
+  "R1.categories_default_exceptions_r2": {
+   "max_op_similarity": 0.902,
+   "max_sentence_jaccard": 1.0,
+   "same_signature": [],
+   "with_op": "R1.categories_default_exceptions_r3",
+   "with_sentence": "R1.categories_default_exceptions_r3"
+  },
+  "R1.categories_default_exceptions_r3": {
+   "max_op_similarity": 0.902,
+   "max_sentence_jaccard": 1.0,
+   "same_signature": [],
+   "with_op": "R1.categories_default_exceptions_r2",
+   "with_sentence": "R1.categories_default_exceptions_r2"
+  },
+  "R1.categories_follow": {
+   "max_op_similarity": 0.915,
+   "max_sentence_jaccard": 0.333,
+   "same_signature": [],
+   "with_op": "R1.categories_follow_r2",
+   "with_sentence": "R1.categories_follow_r2"
+  },
+  "R1.categories_follow_r2": {
+   "max_op_similarity": 0.915,
+   "max_sentence_jaccard": 0.333,
+   "same_signature": [],
+   "with_op": "R1.categories_follow",
+   "with_sentence": "R1.categories_follow"
+  },
+  "R1.compass_turns": {
+   "max_op_similarity": 0.714,
+   "max_sentence_jaccard": 0.0,
+   "same_signature": [],
+   "with_op": "R1.elimination_josephus",
+   "with_sentence": "R1.venn_counting"
+  },
+  "R1.conditional_chain": {
+   "max_op_similarity": 0.736,
+   "max_sentence_jaccard": 0.0,
+   "same_signature": [],
+   "with_op": "R1.equivalence_classes_r2",
+   "with_sentence": "R1.order_compare"
+  },
+  "R1.conditional_decision_tree": {
+   "max_op_similarity": 0.787,
+   "max_sentence_jaccard": 0.0,
+   "same_signature": [],
+   "with_op": "R1.one_culprit",
+   "with_sentence": "R1.venn_counting"
+  },
+  "R1.conditional_threshold_rule": {
+   "max_op_similarity": 0.772,
+   "max_sentence_jaccard": 0.04,
+   "same_signature": [],
+   "with_op": "R1.conditional_threshold_rule_r2",
+   "with_sentence": "R1.conditional_threshold_rule_r2"
+  },
+  "R1.conditional_threshold_rule_r2": {
+   "max_op_similarity": 0.777,
+   "max_sentence_jaccard": 0.147,
+   "same_signature": [],
+   "with_op": "R1.order_tournament_wins",
+   "with_sentence": "R1.conditional_threshold_rule_r3"
+  },
+  "R1.conditional_threshold_rule_r3": {
+   "max_op_similarity": 1.0,
+   "max_sentence_jaccard": 0.147,
+   "same_signature": [
+    "R1.elimination_bracket_r3",
+    "R1.instant_runoff_r2",
+    "R1.kinship_ancestor_r3",
+    "R1.kinship_descendants_r3",
+    "R1.topological_order_r2"
+   ],
+   "with_op": "R1.topological_order_r2",
+   "with_sentence": "R1.conditional_threshold_rule_r2"
+  },
+  "R1.containers_queue_line": {
+   "max_op_similarity": 0.89,
+   "max_sentence_jaccard": 0.72,
+   "same_signature": [],
+   "with_op": "R1.containers_queue_line_r2",
+   "with_sentence": "R1.containers_queue_line_r2"
+  },
+  "R1.containers_queue_line_r2": {
+   "max_op_similarity": 0.89,
+   "max_sentence_jaccard": 0.72,
+   "same_signature": [],
+   "with_op": "R1.containers_queue_line",
+   "with_sentence": "R1.containers_queue_line"
+  },
+  "R1.containers_stack_piles": {
+   "max_op_similarity": 0.978,
+   "max_sentence_jaccard": 0.957,
+   "same_signature": [],
+   "with_op": "R1.containers_stack_piles_r2",
+   "with_sentence": "R1.containers_stack_piles_r2"
+  },
+  "R1.containers_stack_piles_r2": {
+   "max_op_similarity": 0.978,
+   "max_sentence_jaccard": 0.957,
+   "same_signature": [],
+   "with_op": "R1.containers_stack_piles",
+   "with_sentence": "R1.containers_stack_piles"
+  },
+  "R1.containers_stack_piles_r3": {
+   "max_op_similarity": 1.0,
+   "max_sentence_jaccard": 0.86,
+   "same_signature": [
+    "R1.stable_matching_r2"
+   ],
+   "with_op": "R1.stable_matching_r2",
+   "with_sentence": "R1.containers_stack_piles_r2"
+  },
+  "R1.elimination_bracket": {
+   "max_op_similarity": 0.757,
+   "max_sentence_jaccard": 0.364,
+   "same_signature": [],
+   "with_op": "R1.elimination_bracket_r2",
+   "with_sentence": "R1.elimination_bracket_r3"
+  },
+  "R1.elimination_bracket_r2": {
+   "max_op_similarity": 0.803,
+   "max_sentence_jaccard": 1.0,
+   "same_signature": [],
+   "with_op": "R1.swap_tracking",
+   "with_sentence": "R1.elimination_bracket_r3"
+  },
+  "R1.elimination_bracket_r3": {
+   "max_op_similarity": 1.0,
+   "max_sentence_jaccard": 1.0,
+   "same_signature": [
+    "R1.conditional_threshold_rule_r3",
+    "R1.instant_runoff_r2",
+    "R1.kinship_ancestor_r3",
+    "R1.kinship_descendants_r3",
+    "R1.topological_order_r2"
+   ],
+   "with_op": "R1.topological_order_r2",
+   "with_sentence": "R1.elimination_bracket_r2"
+  },
+  "R1.elimination_josephus": {
+   "max_op_similarity": 0.728,
+   "max_sentence_jaccard": 0.0,
+   "same_signature": [],
+   "with_op": "R1.activity_selection",
+   "with_sentence": "R1.venn_counting"
+  },
+  "R1.equivalence_classes": {
+   "max_op_similarity": 0.847,
+   "max_sentence_jaccard": 1.0,
+   "same_signature": [],
+   "with_op": "R1.equivalence_classes_r2",
+   "with_sentence": "R1.equivalence_classes_r2"
+  },
+  "R1.equivalence_classes_r2": {
+   "max_op_similarity": 0.847,
+   "max_sentence_jaccard": 1.0,
+   "same_signature": [],
+   "with_op": "R1.equivalence_classes",
+   "with_sentence": "R1.equivalence_classes"
+  },
+  "R1.equivalence_exchange_rates": {
+   "max_op_similarity": 0.754,
+   "max_sentence_jaccard": 0.0,
+   "same_signature": [],
+   "with_op": "R1.order_tournament_wins",
+   "with_sentence": "R1.venn_counting"
+  },
+  "R1.event_timeline": {
+   "max_op_similarity": 0.802,
+   "max_sentence_jaccard": 0.049,
+   "same_signature": [],
+   "with_op": "R1.swap_tracking",
+   "with_sentence": "R1.temporal_weekday_shift"
+  },
+  "R1.graph_bipartite": {
+   "max_op_similarity": 0.82,
+   "max_sentence_jaccard": 0.091,
+   "same_signature": [],
+   "with_op": "R1.order_compare",
+   "with_sentence": "R1.road_reachability"
+  },
+  "R1.graph_shortest_route": {
+   "max_op_similarity": 0.79,
+   "max_sentence_jaccard": 0.25,
+   "same_signature": [],
+   "with_op": "R1.graph_shortest_route_r2",
+   "with_sentence": "R1.kinship_descendants_r3"
+  },
+  "R1.graph_shortest_route_r2": {
+   "max_op_similarity": 0.81,
+   "max_sentence_jaccard": 0.143,
+   "same_signature": [],
+   "with_op": "R1.equivalence_classes",
+   "with_sentence": "R1.graph_shortest_route"
+  },
+  "R1.instant_runoff": {
+   "max_op_similarity": 0.849,
+   "max_sentence_jaccard": 1.0,
+   "same_signature": [],
+   "with_op": "R1.temporal_critical_path",
+   "with_sentence": "R1.instant_runoff_r2"
+  },
+  "R1.instant_runoff_r2": {
+   "max_op_similarity": 1.0,
+   "max_sentence_jaccard": 1.0,
+   "same_signature": [
+    "R1.conditional_threshold_rule_r3",
+    "R1.elimination_bracket_r3",
+    "R1.kinship_ancestor_r3",
+    "R1.kinship_descendants_r3",
+    "R1.topological_order_r2"
+   ],
+   "with_op": "R1.topological_order_r2",
+   "with_sentence": "R1.instant_runoff"
+  },
+  "R1.kinship_ancestor": {
+   "max_op_similarity": 0.788,
+   "max_sentence_jaccard": 0.963,
+   "same_signature": [],
+   "with_op": "R1.order_extreme",
+   "with_sentence": "R1.kinship_ancestor_r3"
+  },
+  "R1.kinship_ancestor_r2": {
+   "max_op_similarity": 0.793,
+   "max_sentence_jaccard": 1.0,
+   "same_signature": [],
+   "with_op": "R1.temporal_weekday_shift",
+   "with_sentence": "R1.kinship_ancestor_r3"
+  },
+  "R1.kinship_ancestor_r3": {
+   "max_op_similarity": 1.0,
+   "max_sentence_jaccard": 1.0,
+   "same_signature": [
+    "R1.conditional_threshold_rule_r3",
+    "R1.elimination_bracket_r3",
+    "R1.instant_runoff_r2",
+    "R1.kinship_descendants_r3",
+    "R1.topological_order_r2"
+   ],
+   "with_op": "R1.topological_order_r2",
+   "with_sentence": "R1.kinship_ancestor_r2"
+  },
+  "R1.kinship_cousins": {
+   "max_op_similarity": 0.873,
+   "max_sentence_jaccard": 0.167,
+   "same_signature": [],
+   "with_op": "R1.order_compare",
+   "with_sentence": "R1.kinship_descendants_r3"
+  },
+  "R1.kinship_descendants": {
+   "max_op_similarity": 0.941,
+   "max_sentence_jaccard": 0.5,
+   "same_signature": [],
+   "with_op": "R1.kinship_descendants_r2",
+   "with_sentence": "R1.kinship_descendants_r3"
+  },
+  "R1.kinship_descendants_r2": {
+   "max_op_similarity": 0.941,
+   "max_sentence_jaccard": 1.0,
+   "same_signature": [],
+   "with_op": "R1.kinship_descendants",
+   "with_sentence": "R1.kinship_descendants_r3"
+  },
+  "R1.kinship_descendants_r3": {
+   "max_op_similarity": 1.0,
+   "max_sentence_jaccard": 1.0,
+   "same_signature": [
+    "R1.conditional_threshold_rule_r3",
+    "R1.elimination_bracket_r3",
+    "R1.instant_runoff_r2",
+    "R1.kinship_ancestor_r3",
+    "R1.topological_order_r2"
+   ],
+   "with_op": "R1.topological_order_r2",
+   "with_sentence": "R1.kinship_descendants_r2"
+  },
+  "R1.knights_knaves": {
+   "max_op_similarity": 0.849,
+   "max_sentence_jaccard": 0.0,
+   "same_signature": [],
+   "with_op": "R1.swap_tracking",
+   "with_sentence": "R1.venn_counting"
+  },
+  "R1.minimax_tree": {
+   "max_op_similarity": 0.691,
+   "max_sentence_jaccard": 0.0,
+   "same_signature": [],
+   "with_op": "R1.kinship_ancestor",
+   "with_sentence": "R1.venn_counting"
+  },
+  "R1.mst_cost": {
+   "max_op_similarity": 0.827,
+   "max_sentence_jaccard": 0.0,
+   "same_signature": [],
+   "with_op": "R1.kinship_cousins",
+   "with_sentence": "R1.venn_counting"
+  },
+  "R1.nim_xor": {
+   "max_op_similarity": 0.571,
+   "max_sentence_jaccard": 0.0,
+   "same_signature": [],
+   "with_op": "R1.activity_selection",
+   "with_sentence": "R1.venn_counting"
+  },
+  "R1.one_culprit": {
+   "max_op_similarity": 0.804,
+   "max_sentence_jaccard": 0.0,
+   "same_signature": [],
+   "with_op": "R1.knights_knaves",
+   "with_sentence": "R1.venn_counting"
+  },
+  "R1.order_compare": {
+   "max_op_similarity": 0.873,
+   "max_sentence_jaccard": 0.125,
+   "same_signature": [],
+   "with_op": "R1.kinship_cousins",
+   "with_sentence": "R1.categories_follow_r2"
+  },
+  "R1.order_extreme": {
+   "max_op_similarity": 0.788,
+   "max_sentence_jaccard": 0.071,
+   "same_signature": [],
+   "with_op": "R1.kinship_ancestor",
+   "with_sentence": "R1.order_compare"
+  },
+  "R1.order_tournament_wins": {
+   "max_op_similarity": 0.838,
+   "max_sentence_jaccard": 0.077,
+   "same_signature": [],
+   "with_op": "R1.temporal_critical_path",
+   "with_sentence": "R1.elimination_bracket_r3"
+  },
+  "R1.pet_owners": {
+   "max_op_similarity": 0.733,
+   "max_sentence_jaccard": 0.0,
+   "same_signature": [],
+   "with_op": "R1.categories_follow",
+   "with_sentence": "R1.venn_counting"
+  },
+  "R1.road_reachability": {
+   "max_op_similarity": 0.759,
+   "max_sentence_jaccard": 0.125,
+   "same_signature": [],
+   "with_op": "R1.spatial_relative_directions",
+   "with_sentence": "R1.kinship_cousins"
+  },
+  "R1.seating_row": {
+   "max_op_similarity": 0.714,
+   "max_sentence_jaccard": 0.0,
+   "same_signature": [],
+   "with_op": "R1.graph_shortest_route",
+   "with_sentence": "R1.venn_counting"
+  },
+  "R1.spatial_grid_walk": {
+   "max_op_similarity": 0.804,
+   "max_sentence_jaccard": 0.027,
+   "same_signature": [],
+   "with_op": "R1.spatial_relative_directions",
+   "with_sentence": "R1.spatial_grid_walk_r2"
+  },
+  "R1.spatial_grid_walk_r2": {
+   "max_op_similarity": 0.35,
+   "max_sentence_jaccard": 0.027,
+   "same_signature": [],
+   "with_op": "R1.nim_xor",
+   "with_sentence": "R1.spatial_grid_walk"
+  },
+  "R1.spatial_relative_directions": {
+   "max_op_similarity": 0.815,
+   "max_sentence_jaccard": 0.176,
+   "same_signature": [],
+   "with_op": "R1.stable_matching",
+   "with_sentence": "R1.graph_shortest_route"
+  },
+  "R1.stable_matching": {
+   "max_op_similarity": 0.822,
+   "max_sentence_jaccard": 1.0,
+   "same_signature": [],
+   "with_op": "R1.swap_tracking",
+   "with_sentence": "R1.stable_matching_r2"
+  },
+  "R1.stable_matching_r2": {
+   "max_op_similarity": 1.0,
+   "max_sentence_jaccard": 1.0,
+   "same_signature": [
+    "R1.containers_stack_piles_r3"
+   ],
+   "with_op": "R1.containers_stack_piles_r3",
+   "with_sentence": "R1.stable_matching"
+  },
+  "R1.swap_tracking": {
+   "max_op_similarity": 0.849,
+   "max_sentence_jaccard": 0.083,
+   "same_signature": [],
+   "with_op": "R1.knights_knaves",
+   "with_sentence": "R1.tracking_accounts"
+  },
+  "R1.temporal_critical_path": {
+   "max_op_similarity": 0.849,
+   "max_sentence_jaccard": 0.0,
+   "same_signature": [],
+   "with_op": "R1.instant_runoff",
+   "with_sentence": "R1.venn_counting"
+  },
+  "R1.temporal_interval_overlap": {
+   "max_op_similarity": 0.776,
+   "max_sentence_jaccard": 0.056,
+   "same_signature": [],
+   "with_op": "R1.temporal_weekday_shift",
+   "with_sentence": "R1.road_reachability"
+  },
+  "R1.temporal_weekday_shift": {
+   "max_op_similarity": 0.793,
+   "max_sentence_jaccard": 0.049,
+   "same_signature": [],
+   "with_op": "R1.kinship_ancestor_r2",
+   "with_sentence": "R1.event_timeline"
+  },
+  "R1.topological_order": {
+   "max_op_similarity": 0.812,
+   "max_sentence_jaccard": 1.0,
+   "same_signature": [],
+   "with_op": "R1.order_compare",
+   "with_sentence": "R1.topological_order_r2"
+  },
+  "R1.topological_order_r2": {
+   "max_op_similarity": 1.0,
+   "max_sentence_jaccard": 1.0,
+   "same_signature": [
+    "R1.conditional_threshold_rule_r3",
+    "R1.elimination_bracket_r3",
+    "R1.instant_runoff_r2",
+    "R1.kinship_ancestor_r3",
+    "R1.kinship_descendants_r3"
+   ],
+   "with_op": "R1.kinship_descendants_r3",
+   "with_sentence": "R1.topological_order"
+  },
+  "R1.tracking_accounts": {
+   "max_op_similarity": 0.795,
+   "max_sentence_jaccard": 0.13,
+   "same_signature": [],
+   "with_op": "R1.boolean_lights_r2",
+   "with_sentence": "R1.spatial_relative_directions"
+  },
+  "R1.venn_counting": {
+   "max_op_similarity": 0.753,
+   "max_sentence_jaccard": 0.0,
+   "same_signature": [],
+   "with_op": "R1.boolean_lights",
+   "with_sentence": "R1.tracking_accounts"
+  }
+ },
+ "per_level_items": 400,
+ "records": {
+  "R1.activity_selection": {
+   "answer": {
+    "chance_mean_1_over_k": 0.0,
+    "distinct_answers": 10,
+    "entropy_over_log_k": null,
+    "n": 2000,
+    "top_key": "7",
+    "top_over_chance": null,
+    "top_share": 0.2235,
+    "types": [
+     "number"
+    ]
+   },
+   "family": "scheduling",
+   "id": "R1.activity_selection",
+   "item_skeletons_level3": {
+    "distinct": 400,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.26
+   },
+   "sentence_skeletons": 124,
+   "signature": "3cf49589b990887c4e559fb6f4bdea1ae143039992135d2df7bd71e890cba017"
+  },
+  "R1.attribute_rule": {
+   "answer": {
+    "chance_mean_1_over_k": 0.1519,
+    "distinct_answers": 122,
+    "entropy_over_log_k": 2.487,
+    "n": 2000,
+    "top_key": "Walt",
+    "top_over_chance": 0.092,
+    "top_share": 0.014,
+    "types": [
+     "name"
+    ]
+   },
+   "family": "rules",
+   "id": "R1.attribute_rule",
+   "item_skeletons_level3": {
+    "distinct": 400,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.15
+   },
+   "sentence_skeletons": 2734,
+   "signature": "72539686f8afb98e876a99c7c1bc610f967212ecb8b5c6ca32c57e9b7456f5ff"
+  },
+  "R1.boolean_lights": {
+   "answer": {
+    "chance_mean_1_over_k": 0.5,
+    "distinct_answers": 2,
+    "entropy_over_log_k": 1.0,
+    "n": 2000,
+    "top_key": "no",
+    "top_over_chance": 1.025,
+    "top_share": 0.5125,
+    "types": [
+     "yn"
+    ]
+   },
+   "family": "boolean_state",
+   "id": "R1.boolean_lights",
+   "item_skeletons_level3": {
+    "distinct": 343,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.02
+   },
+   "sentence_skeletons": 22,
+   "signature": "556b3bad70636025602d746b3fb5ad3a2584882d0c0ca64a046e8c9a9bb19771"
+  },
+  "R1.boolean_lights_r2": {
+   "answer": {
+    "chance_mean_1_over_k": 0.5,
+    "distinct_answers": 2,
+    "entropy_over_log_k": 1.0,
+    "n": 2000,
+    "top_key": "yes",
+    "top_over_chance": 1.014,
+    "top_share": 0.507,
+    "types": [
+     "yn"
+    ]
+   },
+   "family": "boolean_state",
+   "id": "R1.boolean_lights_r2",
+   "item_skeletons_level3": {
+    "distinct": 345,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.02
+   },
+   "sentence_skeletons": 23,
+   "signature": "0d66137341fae4785fe4c93a6a9cfd976eb18993b3c889d54ce466a9d77e6253"
+  },
+  "R1.categories_default_exceptions": {
+   "answer": {
+    "chance_mean_1_over_k": 0.5,
+    "distinct_answers": 2,
+    "entropy_over_log_k": 1.0,
+    "n": 2000,
+    "top_key": "no",
+    "top_over_chance": 1.009,
+    "top_share": 0.5045,
+    "types": [
+     "yn"
+    ]
+   },
+   "family": "categories",
+   "id": "R1.categories_default_exceptions",
+   "item_skeletons_level3": {
+    "distinct": 367,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.02
+   },
+   "sentence_skeletons": 22,
+   "signature": "bfddc95b8bc26952302c4804277610c6bc8077ef348929a1ff88e3951f253f83"
+  },
+  "R1.categories_default_exceptions_r2": {
+   "answer": {
+    "chance_mean_1_over_k": 0.5,
+    "distinct_answers": 2,
+    "entropy_over_log_k": 1.0,
+    "n": 2000,
+    "top_key": "no",
+    "top_over_chance": 1.02,
+    "top_share": 0.51,
+    "types": [
+     "yn"
+    ]
+   },
+   "family": "categories",
+   "id": "R1.categories_default_exceptions_r2",
+   "item_skeletons_level3": {
+    "distinct": 355,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.06
+   },
+   "sentence_skeletons": 22,
+   "signature": "51f2059463b0457b91476950d83c62be5924779453f4c434617f207edccca026"
+  },
+  "R1.categories_default_exceptions_r3": {
+   "answer": {
+    "chance_mean_1_over_k": 0.5,
+    "distinct_answers": 2,
+    "entropy_over_log_k": 1.0,
+    "n": 2000,
+    "top_key": "no",
+    "top_over_chance": 1.024,
+    "top_share": 0.512,
+    "types": [
+     "yn"
+    ]
+   },
+   "family": "categories",
+   "id": "R1.categories_default_exceptions_r3",
+   "item_skeletons_level3": {
+    "distinct": 400,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.02
+   },
+   "sentence_skeletons": 22,
+   "signature": "27b4fbd7a7d6d6e0f725dd847fbf8e28778e5253b1dd3071ab06c9761a852279"
+  },
+  "R1.categories_follow": {
+   "answer": {
+    "chance_mean_1_over_k": 0.3333,
+    "distinct_answers": 3,
+    "entropy_over_log_k": 0.609,
+    "n": 2000,
+    "top_key": "cannot be determined",
+    "top_over_chance": 2.328,
+    "top_share": 0.776,
+    "types": [
+     "ynu"
+    ]
+   },
+   "family": "categories",
+   "id": "R1.categories_follow",
+   "item_skeletons_level3": {
+    "distinct": 127,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.2
+   },
+   "sentence_skeletons": 6,
+   "signature": "7346cd490904f9a1e4453393f036fdba7d5e569a9d75e5abed4bee34516cfff9"
+  },
+  "R1.categories_follow_r2": {
+   "answer": {
+    "chance_mean_1_over_k": 0.3333,
+    "distinct_answers": 3,
+    "entropy_over_log_k": 0.991,
+    "n": 2000,
+    "top_key": "cannot be determined",
+    "top_over_chance": 1.184,
+    "top_share": 0.3945,
+    "types": [
+     "ynu"
+    ]
+   },
+   "family": "categories",
+   "id": "R1.categories_follow_r2",
+   "item_skeletons_level3": {
+    "distinct": 127,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.25
+   },
+   "sentence_skeletons": 6,
+   "signature": "d9d50c736ef6c2f36ccf48e96e4df6f1b7178b08763156228a936dbd7a365413"
+  },
+  "R1.compass_turns": {
+   "answer": {
+    "chance_mean_1_over_k": 0.25,
+    "distinct_answers": 4,
+    "entropy_over_log_k": 0.999,
+    "n": 2000,
+    "top_key": "north",
+    "top_over_chance": 1.076,
+    "top_share": 0.269,
+    "types": [
+     "word"
+    ]
+   },
+   "family": "spatial",
+   "id": "R1.compass_turns",
+   "item_skeletons_level3": {
+    "distinct": 400,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.01
+   },
+   "sentence_skeletons": 1964,
+   "signature": "c322a8c48e6389cad93bdfd0a5209e66d907d86ce90fba2b95449e6a75ea9170"
+  },
+  "R1.conditional_chain": {
+   "answer": {
+    "chance_mean_1_over_k": 0.3333,
+    "distinct_answers": 3,
+    "entropy_over_log_k": 0.997,
+    "n": 2000,
+    "top_key": "cannot be determined",
+    "top_over_chance": 1.104,
+    "top_share": 0.368,
+    "types": [
+     "ynu"
+    ]
+   },
+   "family": "conditional",
+   "id": "R1.conditional_chain",
+   "item_skeletons_level3": {
+    "distinct": 400,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.2
+   },
+   "sentence_skeletons": 5120,
+   "signature": "4d0c3101aa2659b4bd2e9fcb1359810958b52ee289ea260415619d60aafdd46f"
+  },
+  "R1.conditional_decision_tree": {
+   "answer": {
+    "chance_mean_1_over_k": 0.2609,
+    "distinct_answers": 10,
+    "entropy_over_log_k": 1.603,
+    "n": 2000,
+    "top_key": "stop",
+    "top_over_chance": 0.41,
+    "top_share": 0.107,
+    "types": [
+     "text"
+    ]
+   },
+   "family": "conditional",
+   "id": "R1.conditional_decision_tree",
+   "item_skeletons_level3": {
+    "distinct": 400,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.03
+   },
+   "sentence_skeletons": 2837,
+   "signature": "72dfe304834a437e9e391cfe30f69f16e6f41a496f538215ebf6f019c3ee6081"
+  },
+  "R1.conditional_threshold_rule": {
+   "answer": {
+    "chance_mean_1_over_k": 0.5,
+    "distinct_answers": 2,
+    "entropy_over_log_k": 0.954,
+    "n": 2000,
+    "top_key": "no",
+    "top_over_chance": 1.251,
+    "top_share": 0.6255,
+    "types": [
+     "yn"
+    ]
+   },
+   "family": "conditional",
+   "id": "R1.conditional_threshold_rule",
+   "item_skeletons_level3": {
+    "distinct": 257,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.02
+   },
+   "sentence_skeletons": 717,
+   "signature": "50638821defa423608f158665780ae1abcfb009bbd7e4bfe35063581546ecab6"
+  },
+  "R1.conditional_threshold_rule_r2": {
+   "answer": {
+    "chance_mean_1_over_k": 0.5,
+    "distinct_answers": 2,
+    "entropy_over_log_k": 1.0,
+    "n": 2000,
+    "top_key": "yes",
+    "top_over_chance": 1.002,
+    "top_share": 0.501,
+    "types": [
+     "yn"
+    ]
+   },
+   "family": "conditional",
+   "id": "R1.conditional_threshold_rule_r2",
+   "item_skeletons_level3": {
+    "distinct": 371,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.08
+   },
+   "sentence_skeletons": 1587,
+   "signature": "71d47e92120b1ff61846a01eae6bad6c849167fd3ad7c368279cc29675986038"
+  },
+  "R1.conditional_threshold_rule_r3": {
+   "answer": {
+    "chance_mean_1_over_k": 0.5,
+    "distinct_answers": 2,
+    "entropy_over_log_k": 0.997,
+    "n": 2000,
+    "top_key": "yes",
+    "top_over_chance": 1.068,
+    "top_share": 0.534,
+    "types": [
+     "yn"
+    ]
+   },
+   "family": "conditional",
+   "id": "R1.conditional_threshold_rule_r3",
+   "item_skeletons_level3": {
+    "distinct": 372,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.09
+   },
+   "sentence_skeletons": 1573,
+   "signature": "0b48e52508b5df36d8e4ffaedfe2132e43e13e73f337b282792aac094e687ec2"
+  },
+  "R1.containers_queue_line": {
+   "answer": {
+    "chance_mean_1_over_k": 0.1265,
+    "distinct_answers": 122,
+    "entropy_over_log_k": 2.192,
+    "n": 2000,
+    "top_key": "Ulf",
+    "top_over_chance": 0.123,
+    "top_share": 0.0155,
+    "types": [
+     "name"
+    ]
+   },
+   "family": "containers",
+   "id": "R1.containers_queue_line",
+   "item_skeletons_level3": {
+    "distinct": 399,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.02
+   },
+   "sentence_skeletons": 22,
+   "signature": "ba86ea54bd79d01a5960ad27a4a251aa1962fd0a8c987c7f10ab952ec195407b"
+  },
+  "R1.containers_queue_line_r2": {
+   "answer": {
+    "chance_mean_1_over_k": 0.1348,
+    "distinct_answers": 122,
+    "entropy_over_log_k": 2.309,
+    "n": 2000,
+    "top_key": "Yara",
+    "top_over_chance": 0.1,
+    "top_share": 0.0135,
+    "types": [
+     "name"
+    ]
+   },
+   "family": "containers",
+   "id": "R1.containers_queue_line_r2",
+   "item_skeletons_level3": {
+    "distinct": 400,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.02
+   },
+   "sentence_skeletons": 21,
+   "signature": "6159d79a2aa31c2ab406cff750a1c4e1934857ced85762603c66227df276d5b5"
+  },
+  "R1.containers_stack_piles": {
+   "answer": {
+    "chance_mean_1_over_k": 0.1491,
+    "distinct_answers": 24,
+    "entropy_over_log_k": 1.631,
+    "n": 2000,
+    "top_key": "orange",
+    "top_over_chance": 0.325,
+    "top_share": 0.0485,
+    "types": [
+     "text"
+    ]
+   },
+   "family": "containers",
+   "id": "R1.containers_stack_piles",
+   "item_skeletons_level3": {
+    "distinct": 356,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.02
+   },
+   "sentence_skeletons": 45,
+   "signature": "fef6b9ebd25bf25f9c7900281c83e5882ddc2ec32cb1960f67fab7948078596a"
+  },
+  "R1.containers_stack_piles_r2": {
+   "answer": {
+    "chance_mean_1_over_k": 0.1491,
+    "distinct_answers": 23,
+    "entropy_over_log_k": 1.609,
+    "n": 2000,
+    "top_key": "yo-yo",
+    "top_over_chance": 0.335,
+    "top_share": 0.05,
+    "types": [
+     "text"
+    ]
+   },
+   "family": "containers",
+   "id": "R1.containers_stack_piles_r2",
+   "item_skeletons_level3": {
+    "distinct": 357,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.76
+   },
+   "sentence_skeletons": 45,
+   "signature": "426c1ff6a466dfccbc5e44fa08e54d55c15749062c7cd82fef66c53c3fe4838f"
+  },
+  "R1.containers_stack_piles_r3": {
+   "answer": {
+    "chance_mean_1_over_k": 0.1491,
+    "distinct_answers": 23,
+    "entropy_over_log_k": 1.608,
+    "n": 2000,
+    "top_key": "quilt",
+    "top_over_chance": 0.352,
+    "top_share": 0.0525,
+    "types": [
+     "text"
+    ]
+   },
+   "family": "containers",
+   "id": "R1.containers_stack_piles_r3",
+   "item_skeletons_level3": {
+    "distinct": 356,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 1.32
+   },
+   "sentence_skeletons": 48,
+   "signature": "d6120e85f1d08a1593edce458196843e0d9db3db5c4cd4a2974f0a5a88fa6cff"
+  },
+  "R1.elimination_bracket": {
+   "answer": {
+    "chance_mean_1_over_k": 0.175,
+    "distinct_answers": 122,
+    "entropy_over_log_k": 2.567,
+    "n": 2000,
+    "top_key": "Cleo",
+    "top_over_chance": 0.086,
+    "top_share": 0.015,
+    "types": [
+     "name"
+    ]
+   },
+   "family": "elimination",
+   "id": "R1.elimination_bracket",
+   "item_skeletons_level3": {
+    "distinct": 2,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.01
+   },
+   "sentence_skeletons": 7,
+   "signature": "d0fb7adb7478433b163ad0ec1966989d20c7c62dbeeee023afe24c22f7b265b3"
+  },
+  "R1.elimination_bracket_r2": {
+   "answer": {
+    "chance_mean_1_over_k": 0.2,
+    "distinct_answers": 122,
+    "entropy_over_log_k": 2.767,
+    "n": 2000,
+    "top_key": "Kira",
+    "top_over_chance": 0.07,
+    "top_share": 0.014,
+    "types": [
+     "name"
+    ]
+   },
+   "family": "elimination",
+   "id": "R1.elimination_bracket_r2",
+   "item_skeletons_level3": {
+    "distinct": 2,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.07
+   },
+   "sentence_skeletons": 8,
+   "signature": "e5a9078ff607d430f60bb5b38dddb5f7a5c24cb6978c65a1120d5a4de522a141"
+  },
+  "R1.elimination_bracket_r3": {
+   "answer": {
+    "chance_mean_1_over_k": 0.2,
+    "distinct_answers": 122,
+    "entropy_over_log_k": 2.774,
+    "n": 2000,
+    "top_key": "Dell",
+    "top_over_chance": 0.07,
+    "top_share": 0.014,
+    "types": [
+     "name"
+    ]
+   },
+   "family": "elimination",
+   "id": "R1.elimination_bracket_r3",
+   "item_skeletons_level3": {
+    "distinct": 2,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.07
+   },
+   "sentence_skeletons": 8,
+   "signature": "0b48e52508b5df36d8e4ffaedfe2132e43e13e73f337b282792aac094e687ec2"
+  },
+  "R1.elimination_josephus": {
+   "answer": {
+    "chance_mean_1_over_k": 0.1491,
+    "distinct_answers": 122,
+    "entropy_over_log_k": 2.452,
+    "n": 2000,
+    "top_key": "Gus",
+    "top_over_chance": 0.091,
+    "top_share": 0.0135,
+    "types": [
+     "name"
+    ]
+   },
+   "family": "elimination",
+   "id": "R1.elimination_josephus",
+   "item_skeletons_level3": {
+    "distinct": 2,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.01
+   },
+   "sentence_skeletons": 9,
+   "signature": "998bdaa41328c330a4408cdfb6ddd572b34b930b5d01979aab52f725f8eeee5f"
+  },
+  "R1.equivalence_classes": {
+   "answer": {
+    "chance_mean_1_over_k": 0.3333,
+    "distinct_answers": 3,
+    "entropy_over_log_k": 0.995,
+    "n": 2000,
+    "top_key": "cannot be determined",
+    "top_over_chance": 1.1,
+    "top_share": 0.3665,
+    "types": [
+     "ynu"
+    ]
+   },
+   "family": "equivalence",
+   "id": "R1.equivalence_classes",
+   "item_skeletons_level3": {
+    "distinct": 84,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.03
+   },
+   "sentence_skeletons": 4,
+   "signature": "93d040f7dbeabd84638d535ebb41a937edef805e758223641e98ec7d5985ec55"
+  },
+  "R1.equivalence_classes_r2": {
+   "answer": {
+    "chance_mean_1_over_k": 0.3333,
+    "distinct_answers": 3,
+    "entropy_over_log_k": 0.991,
+    "n": 2000,
+    "top_key": "no",
+    "top_over_chance": 1.131,
+    "top_share": 0.377,
+    "types": [
+     "ynu"
+    ]
+   },
+   "family": "equivalence",
+   "id": "R1.equivalence_classes_r2",
+   "item_skeletons_level3": {
+    "distinct": 134,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.04
+   },
+   "sentence_skeletons": 4,
+   "signature": "99d3b51be02c5e974beba7213cbb3ade96a1131d8a8c28c5c34345722a8b3192"
+  },
+  "R1.equivalence_exchange_rates": {
+   "answer": {
+    "chance_mean_1_over_k": 0.1769,
+    "distinct_answers": 24,
+    "entropy_over_log_k": 1.77,
+    "n": 2000,
+    "top_key": "ribbon",
+    "top_over_chance": 0.291,
+    "top_share": 0.0515,
+    "types": [
+     "text"
+    ]
+   },
+   "family": "equivalence",
+   "id": "R1.equivalence_exchange_rates",
+   "item_skeletons_level3": {
+    "distinct": 37,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.01
+   },
+   "sentence_skeletons": 13,
+   "signature": "8330e1efc19757d942cf670dd3a3f32c3235aed86ee51150620dac36cce7369e"
+  },
+  "R1.event_timeline": {
+   "answer": {
+    "chance_mean_1_over_k": 0.1769,
+    "distinct_answers": 18,
+    "entropy_over_log_k": 1.61,
+    "n": 2000,
+    "top_key": "the film night",
+    "top_over_chance": 0.362,
+    "top_share": 0.064,
+    "types": [
+     "text"
+    ]
+   },
+   "family": "temporal",
+   "id": "R1.event_timeline",
+   "item_skeletons_level3": {
+    "distinct": 344,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.02
+   },
+   "sentence_skeletons": 295,
+   "signature": "3bd8c98a9f546c2777fa3a7c1bfcfa3c281b67fa523589d5b8ef5795914f34ec"
+  },
+  "R1.graph_bipartite": {
+   "answer": {
+    "chance_mean_1_over_k": 0.5,
+    "distinct_answers": 2,
+    "entropy_over_log_k": 1.0,
+    "n": 2000,
+    "top_key": "yes",
+    "top_over_chance": 1.014,
+    "top_share": 0.507,
+    "types": [
+     "yn"
+    ]
+   },
+   "family": "graph",
+   "id": "R1.graph_bipartite",
+   "item_skeletons_level3": {
+    "distinct": 5,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.03
+   },
+   "sentence_skeletons": 8,
+   "signature": "424ebf3515b07d4a82fd4c90a15c1060497abea1ebb543036cdc37d142f6e63e"
+  },
+  "R1.graph_shortest_route": {
+   "answer": {
+    "chance_mean_1_over_k": 0.1752,
+    "distinct_answers": 24,
+    "entropy_over_log_k": 1.805,
+    "n": 2000,
+    "top_key": "Brook",
+    "top_over_chance": 0.288,
+    "top_share": 0.0505,
+    "types": [
+     "name"
+    ]
+   },
+   "family": "graph",
+   "id": "R1.graph_shortest_route",
+   "item_skeletons_level3": {
+    "distinct": 5,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.05
+   },
+   "sentence_skeletons": 6,
+   "signature": "d25f9be9986f948ddd344501d2f29fdd1ff2bc602ca335adc1d5418d8087fcc3"
+  },
+  "R1.graph_shortest_route_r2": {
+   "answer": {
+    "chance_mean_1_over_k": 0.0,
+    "distinct_answers": 45,
+    "entropy_over_log_k": null,
+    "n": 2000,
+    "top_key": "15",
+    "top_over_chance": null,
+    "top_share": 0.063,
+    "types": [
+     "number"
+    ]
+   },
+   "family": "graph",
+   "id": "R1.graph_shortest_route_r2",
+   "item_skeletons_level3": {
+    "distinct": 5,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.04
+   },
+   "sentence_skeletons": 2,
+   "signature": "be2dccf01adc6334ea7a301105885263aa0fd097fd10230250c2a9241d9b4f42"
+  },
+  "R1.instant_runoff": {
+   "answer": {
+    "chance_mean_1_over_k": 0.2833,
+    "distinct_answers": 122,
+    "entropy_over_log_k": 3.728,
+    "n": 2000,
+    "top_key": "Cara",
+    "top_over_chance": 0.055,
+    "top_share": 0.0155,
+    "types": [
+     "name"
+    ]
+   },
+   "family": "voting",
+   "id": "R1.instant_runoff",
+   "item_skeletons_level3": {
+    "distinct": 44,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.26
+   },
+   "sentence_skeletons": 9,
+   "signature": "73a6ab62934554131068948b1f9734397c6a3eb538b0921312da6799ed0e1e8f"
+  },
+  "R1.instant_runoff_r2": {
+   "answer": {
+    "chance_mean_1_over_k": 0.2833,
+    "distinct_answers": 122,
+    "entropy_over_log_k": 3.732,
+    "n": 2000,
+    "top_key": "Pearl",
+    "top_over_chance": 0.044,
+    "top_share": 0.0125,
+    "types": [
+     "name"
+    ]
+   },
+   "family": "voting",
+   "id": "R1.instant_runoff_r2",
+   "item_skeletons_level3": {
+    "distinct": 39,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.27
+   },
+   "sentence_skeletons": 9,
+   "signature": "0b48e52508b5df36d8e4ffaedfe2132e43e13e73f337b282792aac094e687ec2"
+  },
+  "R1.kinship_ancestor": {
+   "answer": {
+    "chance_mean_1_over_k": 0.1208,
+    "distinct_answers": 122,
+    "entropy_over_log_k": 2.194,
+    "n": 2000,
+    "top_key": "Walt",
+    "top_over_chance": 0.116,
+    "top_share": 0.014,
+    "types": [
+     "name"
+    ]
+   },
+   "family": "kinship",
+   "id": "R1.kinship_ancestor",
+   "item_skeletons_level3": {
+    "distinct": 398,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.01
+   },
+   "sentence_skeletons": 132,
+   "signature": "2b94ae0296188220a2170834b187df5b79362cfd9c1fce56dfd49a38fe09f33f"
+  },
+  "R1.kinship_ancestor_r2": {
+   "answer": {
+    "chance_mean_1_over_k": 0.1013,
+    "distinct_answers": 122,
+    "entropy_over_log_k": 2.044,
+    "n": 2000,
+    "top_key": "Dara",
+    "top_over_chance": 0.143,
+    "top_share": 0.0145,
+    "types": [
+     "name"
+    ]
+   },
+   "family": "kinship",
+   "id": "R1.kinship_ancestor_r2",
+   "item_skeletons_level3": {
+    "distinct": 400,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.34
+   },
+   "sentence_skeletons": 135,
+   "signature": "23d3f566aec6f19a491b2a0e7864e154b5405794b17d8d6f5d9b7717c5aab9ab"
+  },
+  "R1.kinship_ancestor_r3": {
+   "answer": {
+    "chance_mean_1_over_k": 0.1015,
+    "distinct_answers": 122,
+    "entropy_over_log_k": 2.045,
+    "n": 2000,
+    "top_key": "Zed",
+    "top_over_chance": 0.138,
+    "top_share": 0.014,
+    "types": [
+     "name"
+    ]
+   },
+   "family": "kinship",
+   "id": "R1.kinship_ancestor_r3",
+   "item_skeletons_level3": {
+    "distinct": 400,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.34
+   },
+   "sentence_skeletons": 135,
+   "signature": "0b48e52508b5df36d8e4ffaedfe2132e43e13e73f337b282792aac094e687ec2"
+  },
+  "R1.kinship_cousins": {
+   "answer": {
+    "chance_mean_1_over_k": 0.5,
+    "distinct_answers": 2,
+    "entropy_over_log_k": 1.0,
+    "n": 2000,
+    "top_key": "yes",
+    "top_over_chance": 1.012,
+    "top_share": 0.506,
+    "types": [
+     "yn"
+    ]
+   },
+   "family": "kinship",
+   "id": "R1.kinship_cousins",
+   "item_skeletons_level3": {
+    "distinct": 15,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.03
+   },
+   "sentence_skeletons": 5,
+   "signature": "28482026bf00b9b78f00a217cbccbaa43d6ab1ea406e7e51523a4c2dea9ecd1f"
+  },
+  "R1.kinship_descendants": {
+   "answer": {
+    "chance_mean_1_over_k": 0.1291,
+    "distinct_answers": 122,
+    "entropy_over_log_k": 2.297,
+    "n": 2000,
+    "top_key": "Yves",
+    "top_over_chance": 0.112,
+    "top_share": 0.0145,
+    "types": [
+     "name"
+    ]
+   },
+   "family": "kinship",
+   "id": "R1.kinship_descendants",
+   "item_skeletons_level3": {
+    "distinct": 2,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.02
+   },
+   "sentence_skeletons": 9,
+   "signature": "2fd223475b6a4927e6e092e0185ed169f0156b10897a48bd01aba37ff7e897ba"
+  },
+  "R1.kinship_descendants_r2": {
+   "answer": {
+    "chance_mean_1_over_k": 0.1491,
+    "distinct_answers": 122,
+    "entropy_over_log_k": 2.456,
+    "n": 2000,
+    "top_key": "Eli",
+    "top_over_chance": 0.087,
+    "top_share": 0.013,
+    "types": [
+     "name"
+    ]
+   },
+   "family": "kinship",
+   "id": "R1.kinship_descendants_r2",
+   "item_skeletons_level3": {
+    "distinct": 2,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.73
+   },
+   "sentence_skeletons": 9,
+   "signature": "0db0c4f2037832c7796ffbccc4834e80e0d612b84c26216225542e37835a9df6"
+  },
+  "R1.kinship_descendants_r3": {
+   "answer": {
+    "chance_mean_1_over_k": 0.1491,
+    "distinct_answers": 122,
+    "entropy_over_log_k": 2.45,
+    "n": 2000,
+    "top_key": "Fern",
+    "top_over_chance": 0.091,
+    "top_share": 0.0135,
+    "types": [
+     "name"
+    ]
+   },
+   "family": "kinship",
+   "id": "R1.kinship_descendants_r3",
+   "item_skeletons_level3": {
+    "distinct": 2,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.69
+   },
+   "sentence_skeletons": 9,
+   "signature": "0b48e52508b5df36d8e4ffaedfe2132e43e13e73f337b282792aac094e687ec2"
+  },
+  "R1.knights_knaves": {
+   "answer": {
+    "chance_mean_1_over_k": 0.5,
+    "distinct_answers": 2,
+    "entropy_over_log_k": 0.997,
+    "n": 2000,
+    "top_key": "knave",
+    "top_over_chance": 1.064,
+    "top_share": 0.532,
+    "types": [
+     "word"
+    ]
+   },
+   "family": "truth",
+   "id": "R1.knights_knaves",
+   "item_skeletons_level3": {
+    "distinct": 187,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.05
+   },
+   "sentence_skeletons": 593,
+   "signature": "25205985b09109c6d402d7da3904090017647df7bc15a6c0683808f6238f0f6e"
+  },
+  "R1.minimax_tree": {
+   "answer": {
+    "chance_mean_1_over_k": 0.0,
+    "distinct_answers": 19,
+    "entropy_over_log_k": null,
+    "n": 2000,
+    "top_key": "3",
+    "top_over_chance": null,
+    "top_share": 0.0875,
+    "types": [
+     "number"
+    ]
+   },
+   "family": "games",
+   "id": "R1.minimax_tree",
+   "item_skeletons_level3": {
+    "distinct": 197,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.01
+   },
+   "sentence_skeletons": 656,
+   "signature": "eec6a795133397c24ba29f11801c152a875307dc232c49d29cb23c73d59f43cc"
+  },
+  "R1.mst_cost": {
+   "answer": {
+    "chance_mean_1_over_k": 0.0,
+    "distinct_answers": 70,
+    "entropy_over_log_k": null,
+    "n": 2000,
+    "top_key": "39",
+    "top_over_chance": null,
+    "top_share": 0.039,
+    "types": [
+     "number"
+    ]
+   },
+   "family": "network",
+   "id": "R1.mst_cost",
+   "item_skeletons_level3": {
+    "distinct": 6,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.1
+   },
+   "sentence_skeletons": 3,
+   "signature": "718d0b5a392b0539eafcd482746a7038e6fdfc715a42d859540d2542751be967"
+  },
+  "R1.nim_xor": {
+   "answer": {
+    "chance_mean_1_over_k": 0.5,
+    "distinct_answers": 2,
+    "entropy_over_log_k": 1.0,
+    "n": 2000,
+    "top_key": "second",
+    "top_over_chance": 1.023,
+    "top_share": 0.5115,
+    "types": [
+     "word"
+    ]
+   },
+   "family": "games",
+   "id": "R1.nim_xor",
+   "item_skeletons_level3": {
+    "distinct": 1,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.03
+   },
+   "sentence_skeletons": 8,
+   "signature": "1e9aff0e7382046f080a8785115eb6e8f9925373db9f685714f79c4c529f79be"
+  },
+  "R1.one_culprit": {
+   "answer": {
+    "chance_mean_1_over_k": 0.1967,
+    "distinct_answers": 122,
+    "entropy_over_log_k": 2.897,
+    "n": 2000,
+    "top_key": "Elsa",
+    "top_over_chance": 0.069,
+    "top_share": 0.0135,
+    "types": [
+     "name"
+    ]
+   },
+   "family": "culprit",
+   "id": "R1.one_culprit",
+   "item_skeletons_level3": {
+    "distinct": 194,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.04
+   },
+   "sentence_skeletons": 801,
+   "signature": "78f099a724a91cdd4018e4cf2df5053b098eedb60697da42f6c578f628a6ad8e"
+  },
+  "R1.order_compare": {
+   "answer": {
+    "chance_mean_1_over_k": 0.3333,
+    "distinct_answers": 3,
+    "entropy_over_log_k": 0.999,
+    "n": 2000,
+    "top_key": "no",
+    "top_over_chance": 1.052,
+    "top_share": 0.3505,
+    "types": [
+     "ynu"
+    ]
+   },
+   "family": "order",
+   "id": "R1.order_compare",
+   "item_skeletons_level3": {
+    "distinct": 2,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.02
+   },
+   "sentence_skeletons": 3,
+   "signature": "21375f43597e2a8fa49a7ab97b851f5146e643d2327b43a406f3e9b62ad5ba82"
+  },
+  "R1.order_extreme": {
+   "answer": {
+    "chance_mean_1_over_k": 0.1769,
+    "distinct_answers": 122,
+    "entropy_over_log_k": 2.663,
+    "n": 2000,
+    "top_key": "Dell",
+    "top_over_chance": 0.076,
+    "top_share": 0.0135,
+    "types": [
+     "name"
+    ]
+   },
+   "family": "order",
+   "id": "R1.order_extreme",
+   "item_skeletons_level3": {
+    "distinct": 64,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.01
+   },
+   "sentence_skeletons": 12,
+   "signature": "d44783e4b2bcfbdde8ccd886ad4de70bbd46ba0c15516b8e54af676070787c09"
+  },
+  "R1.order_tournament_wins": {
+   "answer": {
+    "chance_mean_1_over_k": 0.1752,
+    "distinct_answers": 122,
+    "entropy_over_log_k": 2.717,
+    "n": 2000,
+    "top_key": "Xavi",
+    "top_over_chance": 0.077,
+    "top_share": 0.0135,
+    "types": [
+     "name"
+    ]
+   },
+   "family": "order",
+   "id": "R1.order_tournament_wins",
+   "item_skeletons_level3": {
+    "distinct": 2,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.02
+   },
+   "sentence_skeletons": 6,
+   "signature": "79d2a983094b0bfa0c039d2d9f4d0095da01688f1c968339ae4a3d3f38a86fd1"
+  },
+  "R1.pet_owners": {
+   "answer": {
+    "chance_mean_1_over_k": 0.19,
+    "distinct_answers": 122,
+    "entropy_over_log_k": 2.831,
+    "n": 2000,
+    "top_key": "Hank",
+    "top_over_chance": 0.071,
+    "top_share": 0.0135,
+    "types": [
+     "name"
+    ]
+   },
+   "family": "arrangement",
+   "id": "R1.pet_owners",
+   "item_skeletons_level3": {
+    "distinct": 400,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.11
+   },
+   "sentence_skeletons": 126,
+   "signature": "31ef90fb748750ed2116ec4a1ff3339803867fc814240257fe0518dfebe17d62"
+  },
+  "R1.road_reachability": {
+   "answer": {
+    "chance_mean_1_over_k": 0.5,
+    "distinct_answers": 2,
+    "entropy_over_log_k": 1.0,
+    "n": 2000,
+    "top_key": "no",
+    "top_over_chance": 1.011,
+    "top_share": 0.5055,
+    "types": [
+     "yn"
+    ]
+   },
+   "family": "graph",
+   "id": "R1.road_reachability",
+   "item_skeletons_level3": {
+    "distinct": 15,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.02
+   },
+   "sentence_skeletons": 4,
+   "signature": "7807af1191447420532cd63304cff05df2981148f0bf9bae1fe7c5fdc9c0bea9"
+  },
+  "R1.seating_row": {
+   "answer": {
+    "chance_mean_1_over_k": 0.1967,
+    "distinct_answers": 122,
+    "entropy_over_log_k": 2.891,
+    "n": 2000,
+    "top_key": "Pete",
+    "top_over_chance": 0.074,
+    "top_share": 0.0145,
+    "types": [
+     "name"
+    ]
+   },
+   "family": "arrangement",
+   "id": "R1.seating_row",
+   "item_skeletons_level3": {
+    "distinct": 388,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.26
+   },
+   "sentence_skeletons": 10,
+   "signature": "d2c24efab7b7e21a0fd3ec07df2ca9a34da23b245e531c858b1591a74a09bdcd"
+  },
+  "R1.spatial_grid_walk": {
+   "answer": {
+    "chance_mean_1_over_k": 0.089,
+    "distinct_answers": 1788,
+    "entropy_over_log_k": 2.964,
+    "n": 2000,
+    "top_key": "Dirir",
+    "top_over_chance": 0.022,
+    "top_share": 0.002,
+    "types": [
+     "name"
+    ]
+   },
+   "family": "spatial",
+   "id": "R1.spatial_grid_walk",
+   "item_skeletons_level3": {
+    "distinct": 400,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.02
+   },
+   "sentence_skeletons": 2058,
+   "signature": "accb41fce8bbd7560cf810b98375af8b97a5e7bc7c13a1f2cecd299a63e0d937"
+  },
+  "R1.spatial_grid_walk_r2": {
+   "answer": {
+    "chance_mean_1_over_k": 0.0881,
+    "distinct_answers": 1761,
+    "entropy_over_log_k": 2.948,
+    "n": 2000,
+    "top_key": "Rovok",
+    "top_over_chance": 0.023,
+    "top_share": 0.002,
+    "types": [
+     "name"
+    ]
+   },
+   "family": "spatial",
+   "id": "R1.spatial_grid_walk_r2",
+   "item_skeletons_level3": {
+    "distinct": 400,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.02
+   },
+   "sentence_skeletons": 2052,
+   "signature": "e85582dcfa3c32d1ec8cb5f9d9e0a550ee1a5d24ac1f572e379d36e82e8e90ed"
+  },
+  "R1.spatial_relative_directions": {
+   "answer": {
+    "chance_mean_1_over_k": 0.2186,
+    "distinct_answers": 24,
+    "entropy_over_log_k": 1.971,
+    "n": 2000,
+    "top_key": "Larkin",
+    "top_over_chance": 0.236,
+    "top_share": 0.0515,
+    "types": [
+     "name"
+    ]
+   },
+   "family": "spatial",
+   "id": "R1.spatial_relative_directions",
+   "item_skeletons_level3": {
+    "distinct": 373,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.02
+   },
+   "sentence_skeletons": 14,
+   "signature": "9f7155bfe9df7aac66dbfcf3894ade15ab942c1420b5c1ba899538d51e335770"
+  },
+  "R1.stable_matching": {
+   "answer": {
+    "chance_mean_1_over_k": 0.2467,
+    "distinct_answers": 122,
+    "entropy_over_log_k": 3.323,
+    "n": 2000,
+    "top_key": "Yara",
+    "top_over_chance": 0.059,
+    "top_share": 0.0145,
+    "types": [
+     "name"
+    ]
+   },
+   "family": "matching",
+   "id": "R1.stable_matching",
+   "item_skeletons_level3": {
+    "distinct": 117,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.51
+   },
+   "sentence_skeletons": 136,
+   "signature": "0c58db1b3292e55e8c6afcfc912da4dd03441ad2015fe247eaafaabdac3cabce"
+  },
+  "R1.stable_matching_r2": {
+   "answer": {
+    "chance_mean_1_over_k": 0.2467,
+    "distinct_answers": 122,
+    "entropy_over_log_k": 3.329,
+    "n": 2000,
+    "top_key": "Xavi",
+    "top_over_chance": 0.053,
+    "top_share": 0.013,
+    "types": [
+     "name"
+    ]
+   },
+   "family": "matching",
+   "id": "R1.stable_matching_r2",
+   "item_skeletons_level3": {
+    "distinct": 118,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.9
+   },
+   "sentence_skeletons": 136,
+   "signature": "d6120e85f1d08a1593edce458196843e0d9db3db5c4cd4a2974f0a5a88fa6cff"
+  },
+  "R1.swap_tracking": {
+   "answer": {
+    "chance_mean_1_over_k": 0.19,
+    "distinct_answers": 24,
+    "entropy_over_log_k": 1.881,
+    "n": 2000,
+    "top_key": "teapot",
+    "top_over_chance": 0.261,
+    "top_share": 0.0495,
+    "types": [
+     "text"
+    ]
+   },
+   "family": "tracking",
+   "id": "R1.swap_tracking",
+   "item_skeletons_level3": {
+    "distinct": 208,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.02
+   },
+   "sentence_skeletons": 27,
+   "signature": "498052e12f9a622e72bf7df7069f6c2d95d4b24911d63f137639b41963504519"
+  },
+  "R1.temporal_critical_path": {
+   "answer": {
+    "chance_mean_1_over_k": 0.1769,
+    "distinct_answers": 122,
+    "entropy_over_log_k": 2.666,
+    "n": 2000,
+    "top_key": "Bruno",
+    "top_over_chance": 0.073,
+    "top_share": 0.013,
+    "types": [
+     "name"
+    ]
+   },
+   "family": "temporal",
+   "id": "R1.temporal_critical_path",
+   "item_skeletons_level3": {
+    "distinct": 400,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.02
+   },
+   "sentence_skeletons": 678,
+   "signature": "aab45603248846b2124d26ecde232cb2e1305f5783445595ed999176f124bdc8"
+  },
+  "R1.temporal_interval_overlap": {
+   "answer": {
+    "chance_mean_1_over_k": 0.5,
+    "distinct_answers": 2,
+    "entropy_over_log_k": 0.995,
+    "n": 2000,
+    "top_key": "no",
+    "top_over_chance": 1.085,
+    "top_share": 0.5425,
+    "types": [
+     "yn"
+    ]
+   },
+   "family": "temporal",
+   "id": "R1.temporal_interval_overlap",
+   "item_skeletons_level3": {
+    "distinct": 267,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.02
+   },
+   "sentence_skeletons": 15,
+   "signature": "cb03e7c57114a5a47eea573f1b554a4e93c33ab37a932b50a4494a16752ff026"
+  },
+  "R1.temporal_weekday_shift": {
+   "answer": {
+    "chance_mean_1_over_k": 0.1429,
+    "distinct_answers": 7,
+    "entropy_over_log_k": 0.999,
+    "n": 2000,
+    "top_key": "Wednesday",
+    "top_over_chance": 1.099,
+    "top_share": 0.157,
+    "types": [
+     "word"
+    ]
+   },
+   "family": "temporal",
+   "id": "R1.temporal_weekday_shift",
+   "item_skeletons_level3": {
+    "distinct": 338,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.07
+   },
+   "sentence_skeletons": 47,
+   "signature": "69d302bc01eeddd867cfefbf3ba4f46bcaf9da832a0dd2c798dd6f9c216cd5c0"
+  },
+  "R1.topological_order": {
+   "answer": {
+    "chance_mean_1_over_k": 0.1491,
+    "distinct_answers": 122,
+    "entropy_over_log_k": 2.454,
+    "n": 2000,
+    "top_key": "Gita",
+    "top_over_chance": 0.094,
+    "top_share": 0.014,
+    "types": [
+     "name"
+    ]
+   },
+   "family": "scheduling",
+   "id": "R1.topological_order",
+   "item_skeletons_level3": {
+    "distinct": 334,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.38
+   },
+   "sentence_skeletons": 11,
+   "signature": "809bf18012958e92b88dfaa5bb9268356a158096f7dd9aa280762b8f991e42f4"
+  },
+  "R1.topological_order_r2": {
+   "answer": {
+    "chance_mean_1_over_k": 0.1491,
+    "distinct_answers": 122,
+    "entropy_over_log_k": 2.45,
+    "n": 2000,
+    "top_key": "Fern",
+    "top_over_chance": 0.104,
+    "top_share": 0.0155,
+    "types": [
+     "name"
+    ]
+   },
+   "family": "scheduling",
+   "id": "R1.topological_order_r2",
+   "item_skeletons_level3": {
+    "distinct": 339,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.36
+   },
+   "sentence_skeletons": 11,
+   "signature": "0b48e52508b5df36d8e4ffaedfe2132e43e13e73f337b282792aac094e687ec2"
+  },
+  "R1.tracking_accounts": {
+   "answer": {
+    "chance_mean_1_over_k": 0.2133,
+    "distinct_answers": 122,
+    "entropy_over_log_k": 3.041,
+    "n": 2000,
+    "top_key": "Yara",
+    "top_over_chance": 0.082,
+    "top_share": 0.0175,
+    "types": [
+     "name"
+    ]
+   },
+   "family": "tracking",
+   "id": "R1.tracking_accounts",
+   "item_skeletons_level3": {
+    "distinct": 398,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.03
+   },
+   "sentence_skeletons": 12,
+   "signature": "ccb1fb873d73945fe2aa31162e7306a089607014ffed845d0e84b8fdb2b8ac4c"
+  },
+  "R1.venn_counting": {
+   "answer": {
+    "chance_mean_1_over_k": 0.0,
+    "distinct_answers": 15,
+    "entropy_over_log_k": null,
+    "n": 2000,
+    "top_key": "4",
+    "top_over_chance": null,
+    "top_share": 0.092,
+    "types": [
+     "number"
+    ]
+   },
+   "family": "sets",
+   "id": "R1.venn_counting",
+   "item_skeletons_level3": {
+    "distinct": 178,
+    "items": 400
+   },
+   "seconds": {
+    "answer_stats": 0.0,
+    "sample_and_build": 0.01
+   },
+   "sentence_skeletons": 254,
+   "signature": "3f01b4f0ec02b70c2ab7b3b19493ebbe052b9d392e71a0e9e45ac756164b63e5"
+  }
+ },
+ "seconds": {
+  "all": 94.0,
+  "fixtures": 0.38,
+  "shortcut_gate": 20.4
+ }
+}

@@ -1,0 +1,5 @@
+SUPERSEDED (fix round, 2026-11-25). Under lead rulings R-1, R-4 and R-5 and the audit AUDIT_M0_R2_1, the batch-1 SHAPES of these lineages are replaced by the revised shapes in
+studies/m0/lineages_r2_rev2.py, with fixtures in studies/m0/fixtures/r2_batch1_rev2/ (list: studies/m0/manifests/r2_rev2_manifest.json, key "superseded_shapes"):
+bracket_match, cache_eviction, cheapest_network, chip_toppling, coin_change_min, crt_smallest, deferred_acceptance_partner (NOT REGISTERED), expression_eval, gcd_euclid, hash_probe,
+lcs_length, lis_length, longest_palindromic_substring, max_subarray_sum, merge_smallest_cost, modular_power, prime_factor_query, subtraction_game.
+The other fixtures in this directory are unchanged and still current. These files are kept on file (nothing is deleted); do not use the superseded ones for the second solvers.

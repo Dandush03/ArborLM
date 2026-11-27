@@ -1,0 +1,8 @@
+{"lineage": "R1.delta", "level": 0, "heuristic": "base_rule", "n": 100, "chance": 0.5, "fired": 50, "acc_fired": 0.5, "eff": 0.0, "anti": 0.0}
+{"lineage": "R1.delta", "level": 1, "heuristic": "base_rule", "n": 100, "chance": 0.5, "fired": 50, "acc_fired": 0.5, "eff": 0.0, "anti": 0.0}
+{"lineage": "R1.delta", "level": 2, "heuristic": "base_rule", "n": 100, "chance": 0.5, "fired": 50, "acc_fired": 0.5, "eff": 0.0, "anti": 0.0}
+{"lineage": "R1.delta", "level": 2, "heuristic": "im:abstain_as_no", "n": 100, "chance": 0.5, "fired": 50, "acc_fired": 0.5, "eff": 0.4, "anti": 0.0}
+{"lineage": "R1.delta", "level": 3, "heuristic": "base_rule", "n": 100, "chance": 0.5, "fired": 50, "acc_fired": 0.5, "eff": 0.0, "anti": 0.0}
+{"lineage": "R1.delta", "level": 4, "heuristic": "base_rule", "n": 100, "chance": 0.5, "fired": 50, "acc_fired": 0.5, "eff": 0.0, "anti": 0.0}
+{"lineage": "R1.delta", "level": 5, "heuristic": "base_rule", "n": 100, "chance": 0.5, "fired": 50, "acc_fired": 0.5, "eff": 0.0, "anti": 0.0}
+{"lineage": "R1.delta", "level": 6, "heuristic": "base_rule", "n": 100, "chance": 0.5, "fired": 50, "acc_fired": 0.5, "eff": 0.0, "anti": 0.0}

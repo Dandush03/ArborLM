@@ -1,0 +1,15 @@
+equivalence_classes_r2: asked pair stated verbatim 0/3500; asked entity never mentioned in the body 0/3500; keys Counter({'no': 1321, 'cannot be determined': 1106, 'yes': 1073})
+spatial_grid_walk_r2: column convention stated in 3500/3500
+containers_stack_piles_r3: items with a block named by a colour word 0/3500
+boolean_lights_r2: 'every other lamp is off' wording in 3374/3500; 'the rest are off' in 0; asked lamp never toggled: 0
+   toggles of the asked lamp (3 = 3+), per level: {0: {1: 153, 2: 159, 3: 188}, 1: {1: 95, 2: 133, 3: 272}, 2: {1: 52, 2: 99, 3: 349}, 3: {1: 46, 2: 81, 3: 373}, 4: {1: 38, 2: 65, 3: 397}, 5: {1: 27, 2: 45, 3: 428}, 6: {1: 29, 2: 46, 3: 425}}
+graph_shortest_route_r2: roads on the shortest route (fewest among shortest; 4 = 4+), per level: {0: {2: 386, 3: 104, 4: 10}, 1: {2: 338, 3: 137, 4: 25}, 2: {2: 353, 3: 130, 4: 17}, 3: {2: 315, 3: 145, 4: 40}, 4: {2: 320, 3: 137, 4: 43}, 5: {2: 296, 3: 164, 4: 40}, 6: {2: 290, 3: 150, 4: 60}}
+categories_follow_r2: key by question kind: {'some': {'cannot be determined': 477, 'no': 951}, 'all': {'cannot be determined': 473, 'yes': 385}, 'none': {'cannot be determined': 444, 'yes': 770}}
+instant_runoff_r2: items listing the same ranking in two or more separate groups 2472/3500
+kinship_ancestor_r3: answer is the parentless root 0/3500; answer is the asked person's parent 0
+   (unconditioned same) root 0/3500
+categories_default_exceptions_r3: number of distinct signs among rules about the asked verb {2: 3500}
+conditional_threshold_rule_r3: keys Counter({'yes': 1767, 'no': 1733}); items with any veto wording 0
+elimination_bracket_r3: items mentioning a rating 0; ask types Counter({'runner_up': 1864, 'beaten_by': 1636})
+containers_queue_line_r2: asked position distribution Counter({1: 1228, 2: 1201, 3: 1071}); items with a front-to-back op 3232/3500
+kinship_descendants_r3: root among options 0; ask types Counter({'descendants': 1869, 'grandchildren': 1631})

@@ -1,0 +1,156 @@
+{
+ "unit_order": [
+  "R1a",
+  "R1b",
+  "R1c",
+  "R2a"
+ ],
+ "output_roots": {
+  "run": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_pool_audit_20261126/deliver/runner_test/t1/run",
+  "dry": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_pool_audit_20261126/deliver/runner_test/t1/dry"
+ },
+ "dry_run_exclusions": [],
+ "units": {
+  "R1a": {
+   "runs": {
+    "1": {
+     "output_dir": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_pool_audit_20261126/deliver/runner_test/t1/run/R1a/seed1",
+     "commands": [
+      {
+       "name": "R1a-w",
+       "argv": [
+        "/usr/bin/python3",
+        "-I",
+        "-c",
+        "import sys,os; open(sys.argv[1]+'/out.txt','w').write('figure 0.4242\\n'); print('figure 0.4242')",
+        "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_pool_audit_20261126/deliver/runner_test/t1/run/R1a/seed1"
+       ],
+       "cwd": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_pool_audit_20261126/deliver/runner_test/t1",
+       "env": {
+        "PYTHONHASHSEED": "0",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "SECRET_FIGURE": "0.4242"
+       },
+       "stdout_file": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_pool_audit_20261126/deliver/runner_test/t1/run/R1a/seed1/stdout.txt",
+       "stderr_file": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_pool_audit_20261126/deliver/runner_test/t1/run/R1a/seed1/stderr.txt",
+       "writes": [
+        "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_pool_audit_20261126/deliver/runner_test/t1/run/R1a/seed1/out.txt"
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "R1b": {
+   "runs": {
+    "1": {
+     "output_dir": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_pool_audit_20261126/deliver/runner_test/t1/run/R1b/seed1",
+     "commands": [
+      {
+       "name": "R1b-w",
+       "argv": [
+        "/usr/bin/python3",
+        "-I",
+        "-c",
+        "import sys,os; open(sys.argv[1]+'/out.txt','w').write('figure 0.4242\\n'); print('figure 0.4242')",
+        "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_pool_audit_20261126/deliver/runner_test/t1/run/R1b/seed1"
+       ],
+       "cwd": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_pool_audit_20261126/deliver/runner_test/t1",
+       "env": {
+        "PYTHONHASHSEED": "0",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "SECRET_FIGURE": "0.4242"
+       },
+       "stdout_file": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_pool_audit_20261126/deliver/runner_test/t1/run/R1b/seed1/stdout.txt",
+       "stderr_file": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_pool_audit_20261126/deliver/runner_test/t1/run/R1b/seed1/stderr.txt",
+       "writes": [
+        "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_pool_audit_20261126/deliver/runner_test/t1/run/R1b/seed1/out.txt"
+       ]
+      },
+      {
+       "name": "R1b-retry",
+       "argv": [
+        "/usr/bin/python3",
+        "-I",
+        "-c",
+        "import sys,os; open(sys.argv[1]+'/out.txt','w').write('figure 0.4242\\n'); print('figure 0.4242'); sys.exit(0 if sys.argv[1].endswith('_retry1') else 1)",
+        "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_pool_audit_20261126/deliver/runner_test/t1/run/R1b/seed1"
+       ],
+       "cwd": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_pool_audit_20261126/deliver/runner_test/t1",
+       "env": {
+        "PYTHONHASHSEED": "0",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "SECRET_FIGURE": "0.4242"
+       },
+       "stdout_file": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_pool_audit_20261126/deliver/runner_test/t1/run/R1b/seed1/stdout.txt",
+       "stderr_file": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_pool_audit_20261126/deliver/runner_test/t1/run/R1b/seed1/stderr.txt",
+       "writes": [
+        "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_pool_audit_20261126/deliver/runner_test/t1/run/R1b/seed1/out.txt"
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "R1c": {
+   "runs": {
+    "1": {
+     "output_dir": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_pool_audit_20261126/deliver/runner_test/t1/run/R1c/seed1",
+     "commands": [
+      {
+       "name": "R1c-fail",
+       "argv": [
+        "/usr/bin/python3",
+        "-I",
+        "-c",
+        "import sys; print('figure 0.4242'); sys.exit(2)",
+        "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_pool_audit_20261126/deliver/runner_test/t1/run/R1c/seed1"
+       ],
+       "cwd": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_pool_audit_20261126/deliver/runner_test/t1",
+       "env": {
+        "PYTHONHASHSEED": "0",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "SECRET_FIGURE": "0.4242"
+       },
+       "stdout_file": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_pool_audit_20261126/deliver/runner_test/t1/run/R1c/seed1/stdout.txt",
+       "stderr_file": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_pool_audit_20261126/deliver/runner_test/t1/run/R1c/seed1/stderr.txt",
+       "writes": [
+        "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_pool_audit_20261126/deliver/runner_test/t1/run/R1c/seed1/out.txt"
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "R2a": {
+   "runs": {
+    "1": {
+     "output_dir": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_pool_audit_20261126/deliver/runner_test/t1/run/R2a/seed1",
+     "commands": [
+      {
+       "name": "R2a-w",
+       "argv": [
+        "/usr/bin/python3",
+        "-I",
+        "-c",
+        "import sys,os; open(sys.argv[1]+'/out.txt','w').write('figure 0.4242\\n'); print('figure 0.4242')",
+        "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_pool_audit_20261126/deliver/runner_test/t1/run/R2a/seed1"
+       ],
+       "cwd": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_pool_audit_20261126/deliver/runner_test/t1",
+       "env": {
+        "PYTHONHASHSEED": "0",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "SECRET_FIGURE": "0.4242"
+       },
+       "stdout_file": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_pool_audit_20261126/deliver/runner_test/t1/run/R2a/seed1/stdout.txt",
+       "stderr_file": "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_pool_audit_20261126/deliver/runner_test/t1/run/R2a/seed1/stderr.txt",
+       "writes": [
+        "/Users/daniellaloush/dandush03/ArborLM/experiments/_scratch/m0_fr_pool_audit_20261126/deliver/runner_test/t1/run/R2a/seed1/out.txt"
+       ]
+      }
+     ]
+    }
+   }
+  }
+ }
+}

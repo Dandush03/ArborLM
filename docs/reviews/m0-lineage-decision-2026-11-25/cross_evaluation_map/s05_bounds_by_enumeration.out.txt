@@ -1,0 +1,12 @@
+reading 1 STRONG: |X|=7, subsets enumerated=35, G={'R1': 10, 'R2': 18, 'M1': 17, 'C1': 18}
+  R1: part A 5..5, part B 5..5; shuffles off the half split: 0/35 = 0.0000
+  R2: part A 9..9, part B 9..9; shuffles off the half split: 0/35 = 0.0000
+  M1: part A 8..8, part B 9..9; shuffles off the half split: 0/35 = 0.0000
+  C1: part A 9..9, part B 9..9; shuffles off the half split: 0/35 = 0.0000
+  shuffles with at least one evaluation off the half split: 0/35 = 0.0000
+reading 2 STRONG+BORDERLINE: |X|=15, subsets enumerated=6435, G={'R1': 8, 'R2': 17, 'M1': 17, 'C1': 17}
+  R1: part A 3..5, part B 3..5; shuffles off the half split: 165/6435 = 0.0256
+  R2: part A 8..8, part B 9..9; shuffles off the half split: 0/6435 = 0.0000
+  M1: part A 8..8, part B 9..9; shuffles off the half split: 0/6435 = 0.0000
+  C1: part A 8..8, part B 9..9; shuffles off the half split: 0/6435 = 0.0000
+  shuffles with at least one evaluation off the half split: 165/6435 = 0.0256

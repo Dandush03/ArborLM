@@ -1,0 +1,15 @@
+r1: records 2026-11-26T17:15:19.456Z .. 2026-11-26T17:20:24.586Z; non-tool-result user messages 1 (1 = brief only); last write touching solver2_r1.py 2026-11-26T17:20:09.341Z
+r2a: records 2026-11-26T17:15:22.245Z .. 2026-11-26T17:18:48.524Z; non-tool-result user messages 1 (1 = brief only); last write touching solver2_r2a.py 2026-11-26T17:18:34.327Z
+r2b: records 2026-11-26T17:15:24.928Z .. 2026-11-26T17:18:01.233Z; non-tool-result user messages 1 (1 = brief only); last write touching solver2_r2b.py 2026-11-26T17:17:48.250Z
+m1a: records 2026-11-26T17:15:27.879Z .. 2026-11-26T17:18:40.092Z; non-tool-result user messages 1 (1 = brief only); last write touching solver2_m1a.py 2026-11-26T17:18:27.658Z
+m1b: records 2026-11-26T17:15:30.930Z .. 2026-11-26T17:19:08.820Z; non-tool-result user messages 1 (1 = brief only); last write touching solver2_m1b.py 2026-11-26T17:18:52.968Z
+m1c: records 2026-11-26T17:15:33.825Z .. 2026-11-26T17:18:24.733Z; non-tool-result user messages 1 (1 = brief only); last write touching solver2_m1c.py 2026-11-26T17:18:10.831Z
+c1: records 2026-11-26T17:15:42.571Z .. 2026-11-26T17:25:33.804Z; non-tool-result user messages 1 (1 = brief only); last write touching solver2_c1.py 2026-11-26T17:24:40.050Z
+compare file compare.py 2026-11-26T17:18:08.697721+00:00
+compare file compare_c1.out.txt 2026-11-26T17:25:35.935628+00:00
+compare file compare_m1a.out.txt 2026-11-26T17:18:47.968920+00:00
+compare file compare_m1b.out.txt 2026-11-26T17:19:10.793783+00:00
+compare file compare_m1c.out.txt 2026-11-26T17:18:26.993541+00:00
+compare file compare_r1.out.txt 2026-11-26T17:20:27.025658+00:00
+compare file compare_r2a.out.txt 2026-11-26T17:18:53.306656+00:00
+compare file compare_r2b.out.txt 2026-11-26T17:18:08.718620+00:00

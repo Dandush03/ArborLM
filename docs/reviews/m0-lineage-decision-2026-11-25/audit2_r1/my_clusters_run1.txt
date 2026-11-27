@@ -1,0 +1,63 @@
+
+== PRIMARY strict: 27 clusters
+   attribute_rule + conditional_decision_tree + minimax_tree | families: ['conditional', 'games', 'rules']
+   boolean_lights_r2 + compass_turns | families: ['boolean_state', 'spatial']
+   categories_default_exceptions_r3 + kinship_ancestor_r3 + kinship_cousins | families: ['categories', 'kinship']
+   categories_follow_r2 + equivalence_classes_r2 + order_compare + road_reachability | families: ['categories', 'equivalence', 'graph', 'order']
+   containers_queue_line_r2 + elimination_josephus | families: ['containers', 'elimination']
+   equivalence_exchange_rates + event_timeline + spatial_relative_directions + temporal_weekday_shift | families: ['equivalence', 'spatial', 'temporal']
+   knights_knaves + one_culprit | families: ['culprit', 'truth']
+   order_extreme + order_tournament_wins + topological_order_r2 | families: ['order', 'scheduling']
+   pet_owners + seating_row | families: ['arrangement']
+  [literal: 22 families, label 'R1'] families A=['boolean_state', 'culprit', 'elimination', 'games', 'kinship', 'network', 'order', 'rules', 'temporal', 'tracking', 'voting']
+     lineages A=21 B=22; clusters wholly A=9 wholly B=10 straddling=8
+     straddle: [('attribute_rule', 'A'), ('conditional_decision_tree', 'B'), ('minimax_tree', 'A')]
+     straddle: [('boolean_lights_r2', 'A'), ('compass_turns', 'B')]
+     straddle: [('categories_default_exceptions_r3', 'B'), ('kinship_ancestor_r3', 'A'), ('kinship_cousins', 'A')]
+     straddle: [('categories_follow_r2', 'B'), ('equivalence_classes_r2', 'B'), ('order_compare', 'A'), ('road_reachability', 'B')]
+     straddle: [('containers_queue_line_r2', 'B'), ('elimination_josephus', 'A')]
+     straddle: [('equivalence_exchange_rates', 'B'), ('event_timeline', 'A'), ('spatial_relative_directions', 'B'), ('temporal_weekday_shift', 'A')]
+     straddle: [('knights_knaves', 'B'), ('one_culprit', 'A')]
+     straddle: [('order_extreme', 'A'), ('order_tournament_wins', 'A'), ('topological_order_r2', 'B')]
+  [family-closure keys (10 keys), shuffled with the registered rule] A keys=['arrangement', 'containers+elimination', 'network', 'tracking', 'voting']
+     B keys=['boolean_state+categories+equivalence+graph+kinship+order+scheduling+spatial+temporal', 'conditional+games+rules', 'culprit+truth', 'matching', 'sets']
+     lineages A=10 B=33; clusters A=8 B=19 straddling=0
+  [cluster keys shuffled with the registered rule] clusters A=13 B=14; lineages A=16 B=27
+     A: ['activity_selection', 'conditional_chain', 'containers_queue_line_r2', 'containers_stack_piles_r3', 'graph_shortest_route_r2', 'instant_runoff_r2', 'mst_cost', 'nim_xor', 'order_extreme', 'spatial_grid_walk_r2', 'temporal_critical_path', 'temporal_interval_overlap', 'venn_counting']
+
+== STRICTEST (primary + borderline): 14 clusters
+   activity_selection + conditional_threshold_rule_r3 + graph_shortest_route_r2 + instant_runoff_r2 + kinship_descendants_r3 + mst_cost + order_extreme + order_tournament_wins + temporal_critical_path + topological_order_r2 | families: ['conditional', 'graph', 'kinship', 'network', 'order', 'scheduling', 'temporal', 'voting']
+   attribute_rule + conditional_decision_tree + minimax_tree | families: ['conditional', 'games', 'rules']
+   boolean_lights_r2 + compass_turns + nim_xor + spatial_grid_walk_r2 | families: ['boolean_state', 'games', 'spatial']
+   categories_default_exceptions_r3 + kinship_ancestor_r3 + kinship_cousins | families: ['categories', 'kinship']
+   categories_follow_r2 + equivalence_classes_r2 + graph_bipartite + order_compare + road_reachability | families: ['categories', 'equivalence', 'graph', 'order']
+   conditional_chain + knights_knaves + one_culprit + pet_owners + seating_row | families: ['arrangement', 'conditional', 'culprit', 'truth']
+   containers_queue_line_r2 + elimination_josephus | families: ['containers', 'elimination']
+   equivalence_exchange_rates + event_timeline + spatial_relative_directions + temporal_weekday_shift | families: ['equivalence', 'spatial', 'temporal']
+   swap_tracking + tracking_accounts | families: ['tracking']
+  [literal: 22 families, label 'R1'] families A=['boolean_state', 'culprit', 'elimination', 'games', 'kinship', 'network', 'order', 'rules', 'temporal', 'tracking', 'voting']
+     lineages A=21 B=22; clusters wholly A=3 wholly B=3 straddling=8
+     straddle: [('activity_selection', 'B'), ('conditional_threshold_rule_r3', 'B'), ('graph_shortest_route_r2', 'B'), ('instant_runoff_r2', 'A'), ('kinship_descendants_r3', 'A'), ('mst_cost', 'A'), ('order_extreme', 'A'), ('order_tournament_wins', 'A'), ('temporal_critical_path', 'A'), ('topological_order_r2', 'B')]
+     straddle: [('attribute_rule', 'A'), ('conditional_decision_tree', 'B'), ('minimax_tree', 'A')]
+     straddle: [('boolean_lights_r2', 'A'), ('compass_turns', 'B'), ('nim_xor', 'A'), ('spatial_grid_walk_r2', 'B')]
+     straddle: [('categories_default_exceptions_r3', 'B'), ('kinship_ancestor_r3', 'A'), ('kinship_cousins', 'A')]
+     straddle: [('categories_follow_r2', 'B'), ('equivalence_classes_r2', 'B'), ('graph_bipartite', 'B'), ('order_compare', 'A'), ('road_reachability', 'B')]
+     straddle: [('conditional_chain', 'B'), ('knights_knaves', 'B'), ('one_culprit', 'A'), ('pet_owners', 'B'), ('seating_row', 'B')]
+     straddle: [('containers_queue_line_r2', 'B'), ('elimination_josephus', 'A')]
+     straddle: [('equivalence_exchange_rates', 'B'), ('event_timeline', 'A'), ('spatial_relative_directions', 'B'), ('temporal_weekday_shift', 'A')]
+  [family-closure keys (5 keys), shuffled with the registered rule] A keys=['containers+elimination', 'sets']
+     B keys=['arrangement+boolean_state+categories+conditional+culprit+equivalence+games+graph+kinship+network+order+rules+scheduling+spatial+temporal+truth+voting', 'matching', 'tracking']
+     lineages A=5 B=38; clusters A=4 B=10 straddling=0
+  [cluster keys shuffled with the registered rule] clusters A=7 B=7; lineages A=20 B=23
+     A: ['activity_selection', 'categories_default_exceptions_r3', 'containers_queue_line_r2', 'containers_stack_piles_r3', 'elimination_bracket_r3', 'stable_matching_r2', 'swap_tracking']
+
+== LENIENT (identical algorithm and data structure only): 42 clusters
+   order_compare + road_reachability | families: ['graph', 'order']
+  [literal: 22 families, label 'R1'] families A=['boolean_state', 'culprit', 'elimination', 'games', 'kinship', 'network', 'order', 'rules', 'temporal', 'tracking', 'voting']
+     lineages A=21 B=22; clusters wholly A=20 wholly B=21 straddling=1
+     straddle: [('order_compare', 'A'), ('road_reachability', 'B')]
+  [family-closure keys (21 keys), shuffled with the registered rule] A keys=['boolean_state', 'elimination', 'games', 'kinship', 'network', 'rules', 'scheduling', 'temporal', 'tracking', 'voting']
+     B keys=['arrangement', 'categories', 'conditional', 'containers', 'culprit', 'equivalence', 'graph+order', 'matching', 'sets', 'spatial', 'truth']
+     lineages A=19 B=24; clusters A=19 B=23 straddling=0
+  [cluster keys shuffled with the registered rule] clusters A=21 B=21; lineages A=22 B=21
+     A: ['activity_selection', 'attribute_rule', 'compass_turns', 'conditional_decision_tree', 'containers_queue_line_r2', 'elimination_bracket_r3', 'equivalence_classes_r2', 'event_timeline', 'graph_bipartite', 'kinship_ancestor_r3', 'kinship_cousins', 'nim_xor', 'one_culprit', 'order_compare', 'order_tournament_wins', 'spatial_grid_walk_r2', 'spatial_relative_directions', 'stable_matching_r2', 'swap_tracking', 'topological_order_r2', 'venn_counting']

@@ -1,0 +1,392 @@
+| lineage | n/level | const (max L1-5) | O1 shape-const CV | O5 best literal rule CV | O7 best rule per shape CV | author best single rule (A.*) | oracle any literal | oracle stat | key '0' rate | best R.* rule | min distinct keys |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| C1.bubble_pass (old) | 1000 | 0.001 (L5) | 0.000 (L5) | 0.043 (L2) | 0.043 (L2) | list1_sorted 0.051 (L2) | 0.003 | 0.100 | 0.000 |  0.000 (L-) | 1000 |
+| C1.cond_chain (old) | 1000 | 0.234 (L5) | 0.299 (L5) | 0.227 (L5) | 0.299 (L5) | lit_mode 0.232 (L5) | 0.322 | 0.000 | 0.007 | gcd_of_literals 0.366 (L5) | 29 |
+| C1.counter_list (old) | 1000 | 0.092 (L2) | 0.092 (L2) | 0.000 (L5) | 0.092 (L2) | str1_self 0.000 (L5) | 0.000 | 0.000 | 0.000 |  0.000 (L-) | 122 |
+| C1.fib_like (old) | 1000 | 0.035 (L3) | 0.034 (L3) | 0.057 (L4) | 0.057 (L4) | echo_printed_initial 0.052 (L4) | 0.092 | 0.000 | 0.032 |  0.000 (L-) | 116 |
+| C1.func_branch (old) | 1000 | 0.027 (L2) | 0.050 (L2) | 0.023 (L1) | 0.051 (L2) | lit_min 0.027 (L2) | 0.096 | 0.000 | 0.027 |  0.000 (L-) | 199 |
+| C1.func_compose (old) | 1000 | 0.211 (L5) | 0.184 (L5) | 0.211 (L5) | 0.176 (L5) | lit_first 0.157 (L5) | 0.371 | 0.000 | 0.206 |  0.000 (L-) | 9 |
+| C1.list_build (old) | 1000 | 0.153 (L3) | 0.164 (L3) | 0.053 (L2) | 0.164 (L3) | lit_min 0.055 (L3) | 0.119 | 0.000 | 0.013 | m_minus_1 0.158 (L3) | 203 |
+| C1.loop_sum (old) | 1000 | 0.012 (L1) | 0.005 (L3) | 0.081 (L1) | 0.081 (L1) | lit_first 0.081 (L1) | 0.083 | 0.000 | 0.012 |  0.000 (L-) | 490 |
+| C1.minmax_track (old) | 1000 | 0.089 (L1) | 0.087 (L2) | 0.228 (L5) | 0.252 (L2) | list1_min 0.228 (L5) | 0.530 | 0.434 | 0.055 |  0.000 (L-) | 56 |
+| C1.nested_pairs (old) | 1000 | 0.138 (L1) | 0.138 (L1) | 0.095 (L1) | 0.138 (L1) | lit_max 0.095 (L1) | 0.228 | 0.000 | 0.037 |  0.000 (L-) | 62 |
+| C1.slices (old) | 1000 | 0.072 (L4) | 0.009 (L3) | 0.072 (L4) | 0.041 (L1) | list1_sum 0.020 (L1) | 0.087 | 0.069 | 0.072 |  0.000 (L-) | 792 |
+| C1.string_build (old) | 1000 | 0.082 (L3) | 0.077 (L3) | 0.087 (L4) | 0.079 (L3) | lit_max 0.087 (L4) | 0.087 | 0.000 | 0.000 | iterations(stop-start) 0.350 (L4) | 654 |
+| C1.string_methods (old) | 1000 | 0.300 (L3) | 0.408 (L1) | 0.300 (L3) | 0.485 (L1) | str1_len 0.117 (L1) | 0.130 | 0.159 | 0.300 |  0.000 (L-) | 319 |
+| C1.while_counter (old) | 1000 | 0.155 (L1) | 0.155 (L1) | 0.119 (L1) | 0.155 (L1) | lit_first 0.044 (L1) | 0.198 | 0.000 | 0.007 |  0.000 (L-) | 34 |
+| C1.bfs_queue (new) | 2000 | 0.153 (L1) | 0.221 (L1) | 0.153 (L1) | 0.228 (L1) | list1_len 0.106 (L1) | 0.515 | 0.571 | 0.019 |  0.000 (L-) | 400 |
+| C1.binary_search (new) | 2000 | 0.080 (L1) | 0.080 (L1) | 0.080 (L1) | 0.080 (L1) | lit_min 0.080 (L1) | 0.256 | 0.036 | 0.080 |  0.000 (L-) | 103 |
+| C1.bracket_matching (new) | 2000 | 0.211 (L1) | 0.197 (L1) | 0.236 (L1) | 0.233 (L1) | lit_mode 0.211 (L1) | 0.377 | 0.448 | 0.051 | standard_code 0.713 (L1) | 20 |
+| C1.bytecode_loop (new) | 2000 | 0.060 (L2) | 0.060 (L2) | 0.072 (L3) | 0.072 (L3) | lit_min 0.060 (L2) | 0.299 | 0.129 | 0.060 | sum_all_args 0.436 (L1) | 133 |
+| C1.cellular_update (new) | 2000 | 0.051 (L1) | 0.043 (L3) | 0.096 (L1) | 0.096 (L1) | echo_printed_initial 0.096 (L1) | 0.218 | 0.216 | 0.047 |  0.000 (L-) | 80 |
+| C1.circle_elimination (new) | 2000 | 0.100 (L1) | 0.082 (L1) | 0.099 (L1) | 0.099 (L1) | lit_min 0.100 (L1) | 0.384 | 0.211 | 0.100 | first_live_index 0.116 (L1) | 45 |
+| C1.coin_change_table (new) | 2000 | 0.158 (L1) | 0.212 (L1) | 0.149 (L2) | 0.213 (L1) | lit_min 0.140 (L1) | 0.430 | 0.322 | 0.140 | greedy_fewest 0.206 (L1) | 104 |
+| C1.digit_peel (new) | 2000 | 0.095 (L1) | 0.095 (L1) | 0.123 (L1) | 0.123 (L1) | lit_mode 0.084 (L1) | 0.239 | 0.000 | 0.084 | decimal_digit_sum_of_literal 0.161 (L1) | 480 |
+| C1.euclid_gcd (new) | 2000 | 0.135 (L2) | 0.135 (L2) | 0.076 (L2) | 0.135 (L2) | lit_max 0.042 (L2) | 0.098 | 0.000 | 0.000 | gcd_of_literals 0.427 (L1) | 86 |
+| C1.fast_power (new) | 2000 | 0.129 (L1) | 0.129 (L1) | 0.141 (L1) | 0.141 (L1) | lit_first 0.129 (L1) | 0.333 | 0.000 | 0.065 | pow(base,exp,mod) 0.451 (L3) | 77 |
+| C1.grid_path_table (new) | 2000 | 0.089 (L1) | 0.089 (L1) | 0.102 (L1) | 0.102 (L1) | list1_sum 0.102 (L1) | 0.222 | 0.254 | 0.000 | greedy_min_path 0.333 (L1) | 42 |
+| C1.insertion_sort (new) | 2000 | 0.110 (L1) | 0.118 (L1) | 0.154 (L1) | 0.316 (L1) | echo_printed_initial 0.144 (L1) | 0.637 | 0.431 | 0.067 | inversions_prefix 0.361 (L3) | 636 |
+| C1.kadane_scan (new) | 2000 | 0.035 (L1) | 0.034 (L3) | 0.099 (L1) | 0.099 (L1) | list1_sum 0.099 (L1) | 0.119 | 0.147 | 0.009 | max_subarray 0.350 (L3) | 185 |
+| C1.majority_vote_scan (new) | 2000 | 0.166 (L1) | 0.261 (L1) | 0.207 (L2) | 0.295 (L1) | list1_max 0.132 (L3) | 0.399 | 0.259 | 0.000 | mode_space_0 0.163 (L1) | 25 |
+| C1.merge_two_sorted (new) | 2000 | 0.146 (L1) | 0.146 (L1) | 0.122 (L1) | 0.146 (L1) | list1_len 0.126 (L1) | 0.460 | 0.422 | 0.000 | len_a+len_b-1 0.177 (L1) | 582 |
+| C1.mirror_pointers (new) | 2000 | 0.107 (L1) | 0.097 (L2) | 0.097 (L2) | 0.097 (L2) | str1_first 0.129 (L1) | 0.186 | 0.154 | 0.079 | unequal_pairs 0.130 (L1) | 609 |
+| C1.partition_pass (new) | 2000 | 0.088 (L1) | 0.088 (L1) | 0.088 (L1) | 0.088 (L1) | echo_printed_initial 0.088 (L1) | 0.241 | 0.127 | 0.088 | stable_partition 0.217 (L1) | 1211 |
+| C1.postfix_evaluation (new) | 2000 | 0.016 (L1) | 0.015 (L3) | 0.015 (L3) | 0.015 (L3) | list1_posum 0.016 (L1) | 0.078 | 0.069 | 0.015 | first_operand 0.013 (L1) | 564 |
+| C1.recursive_calls (new) | 2000 | 0.022 (L1) | 0.061 (L2) | 0.011 (L1) | 0.064 (L2) | lit_mode 0.010 (L1) | 0.034 | 0.009 | 0.004 |  0.000 (L-) | 343 |
+| C1.run_length_scan (new) | 2000 | 0.008 (L1) | 0.004 (L1) | 0.000 (L5) | 0.004 (L1) | str1_self 0.000 (L5) | 0.000 | 0.000 | 0.000 |  0.000 (L-) | 1361 |
+| C1.shared_lists (new) | 2000 | 0.037 (L2) | 0.054 (L4) | 0.021 (L2) | 0.054 (L2) | list1_max 0.023 (L3) | 0.140 | 0.129 | 0.000 |  0.000 (L-) | 787 |
+| C1.sieve_marking (new) | 2000 | 0.200 (L1) | 0.222 (L1) | 0.057 (L1) | 0.222 (L1) | specific 0.035 (L3) | 0.060 | 0.060 | 0.007 | ones_minus_strikes_naive 0.225 (L1) | 58 |
+| C1.string_pair_table (new) | 2000 | 0.158 (L1) | 0.204 (L1) | 0.158 (L1) | 0.204 (L1) | str1_len 0.084 (L1) | 0.084 | 0.320 | 0.011 | hamming_plus_lendiff 0.192 (L2) | 88 |
+| C1.turtle_walk (new) | 2000 | 0.150 (L1) | 0.158 (L1) | 0.150 (L1) | 0.155 (L1) | lit_max 0.150 (L1) | 0.440 | 0.585 | 0.013 | count_F 0.530 (L1) | 96 |
+| C1.union_find_links (new) | 2000 | 0.062 (L4) | 0.079 (L1) | 0.062 (L4) | 0.068 (L4) | lit_min 0.062 (L4) | 0.241 | 0.231 | 0.062 | naive_links_v->u 0.029 (L1) | 961 |
+
+## C1.bubble_pass
+ L0 {'A.oracle_list_or_string_stat': 0.15, 'O5.chosen': [['list1_sorted', 1], ['list1_sorted_desc', 1]], 'O7.chosen': [['list1_sorted', 1], ['list1_sorted_desc', 1]], 'const_key': '[1, 1, 16, 3, 17]', 'distinct_keys': 1000, 'n': 1000, 'n_shapes': 1}
+ L1 {'O5.chosen': [['list1_sorted', 2]], 'O7.chosen': [['list1_sorted', 2]], 'const_key': '[1, 1, 18, 6, 16, 26]', 'distinct_keys': 1000, 'n': 1000, 'n_shapes': 1}
+ L2 {'O5.chosen': [['list1_sorted_desc', 1], ['list1_sorted', 1]], 'O7.chosen': [['list1_sorted_desc', 1], ['list1_sorted', 1]], 'const_key': '[1, 1, 4, 13, 20, 31, 32]', 'distinct_keys': 1000, 'n': 1000, 'n_shapes': 1}
+ L3 {'O5.chosen': [['list1_sorted', 1], ['list1_sorted_desc', 1]], 'O7.chosen': [['list1_sorted', 1], ['list1_sorted_desc', 1]], 'const_key': '[1, 1, 1, 10, 17, 6, 33, 39]', 'distinct_keys': 1000, 'n': 1000, 'n_shapes': 1}
+ L4 {'O5.chosen': [['list1_sorted_desc', 1], ['list1_sorted', 1]], 'O7.chosen': [['list1_sorted_desc', 1], ['list1_sorted', 1]], 'const_key': '[1, 1, 12, 23, 21, 17, 24, 33,', 'distinct_keys': 1000, 'n': 1000, 'n_shapes': 1}
+ L5 {'O5.chosen': [['list1_sorted_desc', 2]], 'O7.chosen': [['list1_sorted_desc', 2]], 'const_key': '[1, 1, 11, 6, 9, 8, 11, 26, 27', 'distinct_keys': 1000, 'n': 1000, 'n_shapes': 1}
+ L6 {'O5.chosen': [['list1_sorted', 1], ['list1_sorted_desc', 1]], 'O7.chosen': [['list1_sorted', 1], ['list1_sorted_desc', 1]], 'const_key': '[1, 1, 10, 18, 27, 17, 29, 30,', 'distinct_keys': 1000, 'n': 1000, 'n_shapes': 1}
+
+## C1.cond_chain
+ L0 {'A.lit_first': 0.183, 'A.oracle_any_literal': 0.401, 'O2.last_set_int': 0.187, 'O5.best_literal_rule_cv': 0.341, 'O5.chosen': [['min#2', 2]], 'O7.best_rule_per_shape_cv': 0.341, 'O7.chosen': [['min#2', 4]], 'R.gcd_of_literals': 0.161, 'const_key': '5', 'distinct_keys': 37, 'n': 1000, 'n_shapes': 2}
+ L1 {'A.oracle_any_literal': 0.318, 'O5.best_literal_rule_cv': 0.161, 'O5.chosen': [['min#3', 2]], 'O7.chosen': [['min#3', 3], ['const', 1]], 'R.gcd_of_literals': 0.231, 'const_key': '6', 'distinct_keys': 41, 'n': 1000, 'n_shapes': 2}
+ L2 {'A.oracle_any_literal': 0.322, 'O5.chosen': [['const_3', 1], ['min#3', 1]], 'O7.chosen': [['const', 1], ['const_1', 1], ['min#3', 1]], 'R.gcd_of_literals': 0.265, 'const_key': '2', 'distinct_keys': 39, 'n': 1000, 'n_shapes': 2}
+ L3 {'A.lit_last': 0.163, 'A.lit_min': 0.163, 'A.lit_mode': 0.163, 'A.oracle_any_literal': 0.313, 'O1.shape_const_cv': 0.194, 'O5.best_literal_rule_cv': 0.162, 'O5.chosen': [['num[5]', 1], ['const_1', 1]], 'O7.best_rule_per_shape_cv': 0.194, 'O7.chosen': [['const_1', 2], ['const_3', 1], ['count_nums', 1]], 'R.gcd_of_literals': 0.307, 'const_key': '1', 'const_overall': 0.167, 'distinct_keys': 32, 'n': 1000, 'n_shapes': 2}
+ L4 {'A.lit_last': 0.197, 'A.lit_min': 0.197, 'A.lit_mode': 0.199, 'A.oracle_any_literal': 0.314, 'O1.shape_const_cv': 0.269, 'O5.best_literal_rule_cv': 0.175, 'O5.chosen': [['const_1', 1], ['num[5]', 1]], 'O7.best_rule_per_shape_cv': 0.216, 'O7.chosen': [['const_3', 2], ['const_1', 1], ['num[5]', 1]], 'R.gcd_of_literals': 0.353, 'const_key': '1', 'const_overall': 0.205, 'distinct_keys': 31, 'n': 1000, 'n_shapes': 2}
+ L5 {'A.lit_last': 0.231, 'A.lit_min': 0.231, 'A.lit_mode': 0.232, 'A.oracle_any_literal': 0.321, 'O1.shape_const_cv': 0.299, 'O5.best_literal_rule_cv': 0.227, 'O5.chosen': [['const_1', 1], ['num[5]', 1]], 'O7.best_rule_per_shape_cv': 0.299, 'O7.chosen': [['const_1', 2], ['const_3', 1], ['num[5]', 1]], 'R.gcd_of_literals': 0.366, 'const_key': '1', 'const_overall': 0.234, 'distinct_keys': 29, 'n': 1000, 'n_shapes': 2}
+ L6 {'A.lit_last': 0.255, 'A.lit_min': 0.255, 'A.lit_mode': 0.256, 'A.oracle_any_literal': 0.329, 'O1.shape_const_cv': 0.342, 'O5.best_literal_rule_cv': 0.243, 'O5.chosen': [['num[5]', 1], ['const_1', 1]], 'O7.best_rule_per_shape_cv': 0.342, 'O7.chosen': [['const_1', 2], ['const_3', 1], ['num[5]', 1]], 'R.gcd_of_literals': 0.411, 'const_key': '1', 'const_overall': 0.268, 'distinct_keys': 30, 'n': 1000, 'n_shapes': 2}
+
+## C1.counter_list
+ L0 {'O5.chosen': [[None, 2]], 'O7.chosen': [['const', 2]], 'const_key': '[2, 3]', 'distinct_keys': 81, 'n': 1000, 'n_shapes': 1}
+ L1 {'O5.chosen': [[None, 2]], 'O7.chosen': [['const', 2]], 'const_key': '[4, 3]', 'distinct_keys': 122, 'n': 1000, 'n_shapes': 1}
+ L2 {'O5.chosen': [[None, 2]], 'O7.chosen': [['const', 2]], 'const_key': '[4, 5]', 'distinct_keys': 173, 'n': 1000, 'n_shapes': 1}
+ L3 {'O5.chosen': [[None, 2]], 'O7.chosen': [['const', 2]], 'const_key': '[6, 5]', 'distinct_keys': 188, 'n': 1000, 'n_shapes': 1}
+ L4 {'O5.chosen': [[None, 2]], 'O7.chosen': [['const', 2]], 'const_key': '[7, 6]', 'distinct_keys': 221, 'n': 1000, 'n_shapes': 1}
+ L5 {'O5.chosen': [[None, 2]], 'O7.chosen': [['const', 2]], 'const_key': '[8, 7]', 'distinct_keys': 244, 'n': 1000, 'n_shapes': 1}
+ L6 {'O5.chosen': [[None, 2]], 'O7.chosen': [['const', 2]], 'const_key': '[9, 8]', 'distinct_keys': 265, 'n': 1000, 'n_shapes': 1}
+
+## C1.fib_like
+ L0 {'O5.chosen': [['num[0]', 2]], 'O7.chosen': [['const', 1], ['num[0]', 1]], 'const_key': '13', 'distinct_keys': 80, 'n': 1000, 'n_shapes': 1}
+ L1 {'O5.chosen': [['num[1]', 2]], 'O7.chosen': [['num[1]', 1], ['const', 1]], 'const_key': '5', 'distinct_keys': 116, 'n': 1000, 'n_shapes': 1}
+ L2 {'O5.chosen': [['echo', 1], ['const_3', 1]], 'O7.chosen': [['echo', 1], ['const', 1]], 'const_key': '1', 'distinct_keys': 121, 'n': 1000, 'n_shapes': 1}
+ L3 {'O5.chosen': [['min#2', 1], ['num[1]', 1]], 'O7.chosen': [['min#2', 1], ['num[1]', 1]], 'const_key': '1', 'distinct_keys': 121, 'n': 1000, 'n_shapes': 1}
+ L4 {'O5.chosen': [['num[1]', 1], ['max#3', 1]], 'O7.chosen': [['num[1]', 1], ['max#3', 1]], 'const_key': '0', 'distinct_keys': 123, 'n': 1000, 'n_shapes': 1}
+ L5 {'O5.chosen': [['num[1]', 1], ['max#3', 1]], 'O7.chosen': [['num[1]', 1], ['max#3', 1]], 'const_key': '2', 'distinct_keys': 124, 'n': 1000, 'n_shapes': 1}
+ L6 {'O5.chosen': [['min#2', 1], ['num[1]', 1]], 'O7.chosen': [['min#2', 1], ['num[1]', 1]], 'const_key': '4', 'distinct_keys': 124, 'n': 1000, 'n_shapes': 1}
+
+## C1.func_branch
+ L0 {'O5.chosen': [['const_0', 1], ['num[1]', 1]], 'O7.chosen': [['const', 662], ['const_0', 18], ['num[1]', 15]], 'const_key': '0', 'distinct_keys': 204, 'n': 1000, 'n_shapes': 591}
+ L1 {'O5.chosen': [['const_0', 2]], 'O7.chosen': [['const', 670], ['const_0', 18], ['num[4]', 11]], 'const_key': '0', 'distinct_keys': 199, 'n': 1000, 'n_shapes': 600}
+ L2 {'O5.chosen': [['num[1]', 1], ['num[4]', 1]], 'O7.chosen': [['const', 652], ['num[4]', 20], ['num[1]', 12]], 'const_key': '0', 'distinct_keys': 220, 'n': 1000, 'n_shapes': 586}
+ L3 {'O5.chosen': [['num[7]', 1], ['num[0]', 1]], 'O7.chosen': [['const', 921], ['num[7]', 11], ['num[0]', 9]], 'const_key': '-11', 'distinct_keys': 270, 'n': 1000, 'n_shapes': 990}
+ L4 {'O5.chosen': [['num[7]', 1], ['num[9]', 1]], 'O7.chosen': [['const', 894], ['num[7]', 15], ['num[9]', 15]], 'const_key': '4', 'distinct_keys': 255, 'n': 1000, 'n_shapes': 991}
+ L5 {'O5.chosen': [['const_1', 1], ['num[4]', 1]], 'O7.chosen': [['const', 891], ['const_1', 12], ['num[9]', 11]], 'const_key': '1', 'distinct_keys': 256, 'n': 1000, 'n_shapes': 982}
+ L6 {'O5.chosen': [['num[2]', 1], ['min#3', 1]], 'O7.chosen': [['const', 896], ['num[9]', 12], ['count_nums', 10]], 'const_key': '8', 'distinct_keys': 258, 'n': 1000, 'n_shapes': 987}
+
+## C1.func_compose
+ L0 {'O5.chosen': [['sum_nums', 2]], 'O7.chosen': [['const', 22], ['sum_nums', 4]], 'const_key': '18', 'distinct_keys': 193, 'n': 1000, 'n_shapes': 13}
+ L1 {'O5.chosen': [['sum_nums', 2]], 'O7.chosen': [['const', 21], ['sum_nums', 3], ['const_1', 1]], 'const_key': '30', 'distinct_keys': 203, 'n': 1000, 'n_shapes': 13}
+ L2 {'O5.chosen': [['sum_nums', 2]], 'O7.chosen': [['const', 23], ['sum_nums', 2], ['const_0', 1]], 'const_key': '25', 'distinct_keys': 208, 'n': 1000, 'n_shapes': 13}
+ L3 {'A.oracle_any_literal': 0.363, 'O1.shape_const_cv': 0.165, 'O5.best_literal_rule_cv': 0.156, 'O5.chosen': [['const_0', 1], ['const_1', 1]], 'O6.key_is_0': 0.179, 'O7.best_rule_per_shape_cv': 0.164, 'O7.chosen': [['const_2', 7], ['const_1', 5], ['const_0', 3]], 'const_key': '2', 'const_overall': 0.187, 'distinct_keys': 9, 'n': 1000, 'n_shapes': 13}
+ L4 {'A.oracle_any_literal': 0.349, 'O1.shape_const_cv': 0.172, 'O5.best_literal_rule_cv': 0.168, 'O5.chosen': [['const_2', 1], ['const_1', 1]], 'O6.key_is_0': 0.206, 'O7.best_rule_per_shape_cv': 0.174, 'O7.chosen': [['const_0', 8], ['const_2', 4], ['num[4]', 4]], 'const_key': '0', 'const_overall': 0.206, 'distinct_keys': 9, 'n': 1000, 'n_shapes': 13}
+ L5 {'A.lit_first': 0.157, 'A.oracle_any_literal': 0.371, 'O1.shape_const_cv': 0.184, 'O5.best_literal_rule_cv': 0.211, 'O5.chosen': [['const_1', 2]], 'O6.key_is_0': 0.184, 'O7.best_rule_per_shape_cv': 0.176, 'O7.chosen': [['const_1', 6], ['const_0', 5], ['min#1', 4]], 'const_key': '1', 'const_overall': 0.211, 'distinct_keys': 9, 'n': 1000, 'n_shapes': 13}
+ L6 {'A.oracle_any_literal': 0.359, 'O1.shape_const_cv': 0.187, 'O5.best_literal_rule_cv': 0.199, 'O5.chosen': [['const_2', 1], ['const_1', 1]], 'O6.key_is_0': 0.201, 'O7.best_rule_per_shape_cv': 0.18, 'O7.chosen': [['const_2', 7], ['const_1', 6], ['const_0', 5]], 'const_key': '1', 'const_overall': 0.202, 'distinct_keys': 9, 'n': 1000, 'n_shapes': 13}
+
+## C1.list_build
+ L0 {'A.oracle_any_literal': 0.173, 'O1.shape_const_cv': 0.165, 'O5.chosen': [['min#1', 1], ['max#2', 1]], 'O7.best_rule_per_shape_cv': 0.18, 'O7.chosen': [['const', 4], ['sum_nums', 2]], 'R.m_minus_1': 0.166, 'const_key': '4', 'const_overall': 0.158, 'distinct_keys': 205, 'n': 1000, 'n_shapes': 3}
+ L1 {'O1.shape_const_cv': 0.152, 'O5.chosen': [['min#1', 1], ['const_1', 1]], 'O7.best_rule_per_shape_cv': 0.15, 'O7.chosen': [['const', 5], ['sum_nums', 1]], 'const_key': '4', 'distinct_keys': 208, 'n': 1000, 'n_shapes': 3}
+ L2 {'O5.chosen': [['max#3', 1], ['const_1', 1]], 'O7.best_rule_per_shape_cv': 0.155, 'O7.chosen': [['const', 5], ['sum_nums', 1]], 'const_key': '4', 'distinct_keys': 206, 'n': 1000, 'n_shapes': 3}
+ L3 {'O1.shape_const_cv': 0.164, 'O5.chosen': [['max#3', 1], ['num[1]', 1]], 'O7.best_rule_per_shape_cv': 0.164, 'O7.chosen': [['const', 6]], 'R.m_minus_1': 0.158, 'const_key': '4', 'const_overall': 0.153, 'distinct_keys': 203, 'n': 1000, 'n_shapes': 3}
+ L4 {'O1.shape_const_cv': 0.161, 'O5.chosen': [['const_1', 1], ['max#3', 1]], 'O7.best_rule_per_shape_cv': 0.161, 'O7.chosen': [['const', 6]], 'const_key': '4', 'distinct_keys': 211, 'n': 1000, 'n_shapes': 3}
+ L5 {'O1.shape_const_cv': 0.159, 'O5.chosen': [['const_1', 1], ['max#3', 1]], 'O7.best_rule_per_shape_cv': 0.159, 'O7.chosen': [['const', 6]], 'const_key': '4', 'distinct_keys': 206, 'n': 1000, 'n_shapes': 3}
+ L6 {'O5.chosen': [['max#3', 2]], 'O7.best_rule_per_shape_cv': 0.151, 'O7.chosen': [['const', 5], ['num[0]', 1]], 'R.m_minus_1': 0.151, 'const_key': '4', 'distinct_keys': 212, 'n': 1000, 'n_shapes': 3}
+
+## C1.loop_sum
+ L0 {'O5.chosen': [['num[0]', 2]], 'O7.chosen': [['num[0]', 2]], 'const_key': '9', 'distinct_keys': 349, 'n': 1000, 'n_shapes': 1}
+ L1 {'O5.chosen': [['num[0]', 2]], 'O7.chosen': [['num[0]', 2]], 'const_key': '0', 'distinct_keys': 490, 'n': 1000, 'n_shapes': 1}
+ L2 {'O5.chosen': [['num[0]', 2]], 'O7.chosen': [['num[0]', 2]], 'const_key': '11', 'distinct_keys': 593, 'n': 1000, 'n_shapes': 1}
+ L3 {'O5.chosen': [['num[0]', 2]], 'O7.chosen': [['num[0]', 2]], 'const_key': '13', 'distinct_keys': 668, 'n': 1000, 'n_shapes': 1}
+ L4 {'O5.chosen': [['num[0]', 2]], 'O7.chosen': [['num[0]', 2]], 'const_key': '19', 'distinct_keys': 750, 'n': 1000, 'n_shapes': 1}
+ L5 {'O5.chosen': [['num[0]', 2]], 'O7.chosen': [['num[0]', 2]], 'const_key': '1', 'distinct_keys': 775, 'n': 1000, 'n_shapes': 1}
+ L6 {'O5.chosen': [['num[0]', 2]], 'O7.chosen': [['num[0]', 2]], 'const_key': '0', 'distinct_keys': 806, 'n': 1000, 'n_shapes': 1}
+
+## C1.minmax_track
+ L0 {'A.list1_max': 0.211, 'A.list1_min': 0.22, 'A.list1_mode': 0.209, 'A.lit_max': 0.211, 'A.oracle_any_literal': 0.572, 'A.oracle_list_or_string_stat': 0.441, 'O5.best_literal_rule_cv': 0.22, 'O5.chosen': [['min_list1', 2]], 'O7.best_rule_per_shape_cv': 0.251, 'O7.chosen': [['num[0]', 2], ['min_list1', 1], ['max_list1', 1]], 'const_key': '1', 'distinct_keys': 65, 'n': 1000, 'n_shapes': 2}
+ L1 {'A.list1_max': 0.178, 'A.list1_min': 0.215, 'A.list1_mode': 0.181, 'A.lit_max': 0.178, 'A.oracle_any_literal': 0.528, 'A.oracle_list_or_string_stat': 0.411, 'O5.best_literal_rule_cv': 0.215, 'O5.chosen': [['min_list1', 2]], 'O7.best_rule_per_shape_cv': 0.246, 'O7.chosen': [['num[0]', 2], ['min_list1', 2]], 'const_key': '4', 'distinct_keys': 65, 'n': 1000, 'n_shapes': 2}
+ L2 {'A.list1_max': 0.188, 'A.list1_min': 0.22, 'A.list1_mode': 0.172, 'A.lit_max': 0.188, 'A.oracle_any_literal': 0.53, 'A.oracle_list_or_string_stat': 0.427, 'O5.best_literal_rule_cv': 0.22, 'O5.chosen': [['min_list1', 2]], 'O7.best_rule_per_shape_cv': 0.252, 'O7.chosen': [['num[0]', 2], ['min_list1', 2]], 'const_key': '6', 'distinct_keys': 60, 'n': 1000, 'n_shapes': 2}
+ L3 {'A.list1_max': 0.18, 'A.list1_min': 0.209, 'A.lit_max': 0.18, 'A.oracle_any_literal': 0.486, 'A.oracle_list_or_string_stat': 0.413, 'O5.best_literal_rule_cv': 0.209, 'O5.chosen': [['min_list1', 2]], 'O7.best_rule_per_shape_cv': 0.203, 'O7.chosen': [['num[0]', 2], ['max_list1', 1], ['min_list1', 1]], 'const_key': '7', 'distinct_keys': 60, 'n': 1000, 'n_shapes': 2}
+ L4 {'A.list1_max': 0.204, 'A.list1_min': 0.215, 'A.list1_mode': 0.154, 'A.lit_max': 0.204, 'A.oracle_any_literal': 0.524, 'A.oracle_list_or_string_stat': 0.434, 'O5.best_literal_rule_cv': 0.193, 'O5.chosen': [['min_list1', 1], ['max_list1', 1]], 'O7.best_rule_per_shape_cv': 0.215, 'O7.chosen': [['num[0]', 2], ['min_list1', 1], ['max_list1', 1]], 'const_key': '8', 'distinct_keys': 62, 'n': 1000, 'n_shapes': 2}
+ L5 {'A.list1_max': 0.162, 'A.list1_min': 0.228, 'A.lit_max': 0.162, 'A.oracle_any_literal': 0.499, 'A.oracle_list_or_string_stat': 0.415, 'O5.best_literal_rule_cv': 0.228, 'O5.chosen': [['min_list1', 2]], 'O7.best_rule_per_shape_cv': 0.246, 'O7.chosen': [['num[0]', 2], ['min_list1', 2]], 'const_key': '4', 'distinct_keys': 56, 'n': 1000, 'n_shapes': 2}
+ L6 {'A.list1_max': 0.174, 'A.list1_min': 0.201, 'A.lit_max': 0.174, 'A.oracle_any_literal': 0.486, 'A.oracle_list_or_string_stat': 0.399, 'O5.best_literal_rule_cv': 0.201, 'O5.chosen': [['min_list1', 2]], 'O7.best_rule_per_shape_cv': 0.199, 'O7.chosen': [['min_list1', 2], ['const', 1], ['num[0]', 1]], 'const_key': '1', 'distinct_keys': 60, 'n': 1000, 'n_shapes': 2}
+
+## C1.nested_pairs
+ L0 {'A.oracle_any_literal': 0.306, 'O1.shape_const_cv': 0.159, 'O5.chosen': [['num[2]', 2]], 'O7.chosen': [['const', 1], ['num[2]', 1]], 'const_key': '6', 'const_overall': 0.159, 'distinct_keys': 39, 'n': 1000, 'n_shapes': 1}
+ L1 {'A.oracle_any_literal': 0.228, 'O5.chosen': [['max#1', 2]], 'O7.chosen': [['const', 2]], 'const_key': '6', 'distinct_keys': 62, 'n': 1000, 'n_shapes': 1}
+ L2 {'A.oracle_any_literal': 0.179, 'O5.chosen': [['num[2]', 1], ['min#3', 1]], 'O7.chosen': [['const', 2]], 'const_key': '6', 'distinct_keys': 91, 'n': 1000, 'n_shapes': 1}
+ L3 {'O5.chosen': [['num[2]', 2]], 'O7.chosen': [['const', 2]], 'const_key': '6', 'distinct_keys': 128, 'n': 1000, 'n_shapes': 1}
+ L4 {'O5.chosen': [['max#1', 1], ['num[2]', 1]], 'O7.chosen': [['const', 1], ['num[2]', 1]], 'const_key': '6', 'distinct_keys': 154, 'n': 1000, 'n_shapes': 1}
+ L5 {'O5.chosen': [['max#1', 1], ['min#3', 1]], 'O7.chosen': [['const', 2]], 'const_key': '6', 'distinct_keys': 195, 'n': 1000, 'n_shapes': 1}
+ L6 {'O5.chosen': [['max#1', 1], ['num[2]', 1]], 'O7.chosen': [['const', 2]], 'const_key': '6', 'distinct_keys': 218, 'n': 1000, 'n_shapes': 1}
+
+## C1.slices
+ L0 {'O5.chosen': [['zeros_list1', 2]], 'O7.chosen': [['const', 808], ['zeros_list1', 65], ['num[0]', 18]], 'const_key': '0', 'distinct_keys': 778, 'n': 1000, 'n_shapes': 925}
+ L1 {'O5.chosen': [['zeros_list1', 2]], 'O7.chosen': [['const', 803], ['zeros_list1', 69], ['num[0]', 13]], 'const_key': '0', 'distinct_keys': 792, 'n': 1000, 'n_shapes': 931}
+ L2 {'O5.chosen': [['zeros_list1', 2]], 'O7.chosen': [['const', 828], ['zeros_list1', 63], ['num[0]', 16]], 'const_key': '0', 'distinct_keys': 815, 'n': 1000, 'n_shapes': 932}
+ L3 {'O5.chosen': [['zeros_list1', 2]], 'O7.chosen': [['const', 838], ['zeros_list1', 69], ['num[8]', 12]], 'const_key': '0', 'distinct_keys': 832, 'n': 1000, 'n_shapes': 946}
+ L4 {'O5.chosen': [['zeros_list1', 2]], 'O7.chosen': [['const', 844], ['zeros_list1', 70], ['str1', 9]], 'const_key': '0', 'distinct_keys': 835, 'n': 1000, 'n_shapes': 946}
+ L5 {'O5.chosen': [['zeros_list1', 2]], 'O7.chosen': [['const', 860], ['zeros_list1', 65], ['str1', 9]], 'const_key': '0', 'distinct_keys': 840, 'n': 1000, 'n_shapes': 954}
+ L6 {'O5.chosen': [['zeros_list1', 2]], 'O7.chosen': [['const', 839], ['zeros_list1', 90], ['num[0]', 6]], 'const_key': '0', 'distinct_keys': 829, 'n': 1000, 'n_shapes': 956}
+
+## C1.string_build
+ L0 {'O5.chosen': [['min#3', 2]], 'O7.chosen': [['const', 4], ['min#3', 2]], 'R.iterations(stop-start)': 0.332, 'const_key': '5', 'distinct_keys': 651, 'n': 1000, 'n_shapes': 3}
+ L1 {'O5.chosen': [['num[0]', 2]], 'O7.chosen': [['const', 5], ['num[0]', 1]], 'R.iterations(stop-start)': 0.323, 'const_key': '6', 'distinct_keys': 659, 'n': 1000, 'n_shapes': 3}
+ L2 {'O5.chosen': [['num[0]', 2]], 'O7.chosen': [['const', 6]], 'R.iterations(stop-start)': 0.347, 'const_key': '11', 'distinct_keys': 658, 'n': 1000, 'n_shapes': 3}
+ L3 {'O5.chosen': [['num[0]', 2]], 'O7.chosen': [['const', 5], ['num[0]', 1]], 'R.iterations(stop-start)': 0.344, 'const_key': '12', 'distinct_keys': 661, 'n': 1000, 'n_shapes': 3}
+ L4 {'O5.chosen': [['num[0]', 2]], 'O7.chosen': [['const', 5], ['num[0]', 1]], 'R.iterations(stop-start)': 0.35, 'const_key': '14', 'distinct_keys': 654, 'n': 1000, 'n_shapes': 3}
+ L5 {'O5.chosen': [['num[0]', 2]], 'O7.chosen': [['const', 6]], 'R.iterations(stop-start)': 0.326, 'const_key': '14', 'distinct_keys': 679, 'n': 1000, 'n_shapes': 3}
+ L6 {'O5.chosen': [['num[0]', 2]], 'O7.chosen': [['const', 6]], 'R.iterations(stop-start)': 0.318, 'const_key': '16', 'distinct_keys': 686, 'n': 1000, 'n_shapes': 3}
+
+## C1.string_methods
+ L0 {'A.oracle_any_literal': 0.194, 'A.oracle_list_or_string_stat': 0.226, 'A.str1_len': 0.178, 'A.str1_self': 0.154, 'O1.shape_const_cv': 0.483, 'O5.best_literal_rule_cv': 0.307, 'O5.chosen': [['const_0', 2]], 'O6.key_is_0': 0.307, 'O7.best_rule_per_shape_cv': 0.617, 'O7.chosen': [['const_0', 38], ['n_distinct_nums', 4], ['len_str_last', 2]], 'const_key': '0', 'const_overall': 0.307, 'distinct_keys': 334, 'n': 1000, 'n_shapes': 24}
+ L1 {'A.oracle_list_or_string_stat': 0.159, 'O1.shape_const_cv': 0.408, 'O5.best_literal_rule_cv': 0.297, 'O5.chosen': [['const_0', 2]], 'O6.key_is_0': 0.297, 'O7.best_rule_per_shape_cv': 0.485, 'O7.chosen': [['const_0', 41], ['len_str1', 2], ['str1', 2]], 'const_key': '0', 'const_overall': 0.297, 'distinct_keys': 350, 'n': 1000, 'n_shapes': 24}
+ L2 {'O1.shape_const_cv': 0.388, 'O5.best_literal_rule_cv': 0.29, 'O5.chosen': [['const_0', 2]], 'O6.key_is_0': 0.29, 'O7.best_rule_per_shape_cv': 0.409, 'O7.chosen': [['const_0', 40], ['len_str1', 2], ['str1', 2]], 'const_key': '0', 'const_overall': 0.29, 'distinct_keys': 319, 'n': 1000, 'n_shapes': 24}
+ L3 {'O1.shape_const_cv': 0.369, 'O5.best_literal_rule_cv': 0.3, 'O5.chosen': [['const_0', 2]], 'O6.key_is_0': 0.3, 'O7.best_rule_per_shape_cv': 0.368, 'O7.chosen': [['const_0', 40], ['len_str1', 2], ['str1', 2]], 'const_key': '0', 'const_overall': 0.3, 'distinct_keys': 348, 'n': 1000, 'n_shapes': 24}
+ L4 {'O1.shape_const_cv': 0.345, 'O5.best_literal_rule_cv': 0.291, 'O5.chosen': [['const_0', 2]], 'O6.key_is_0': 0.291, 'O7.best_rule_per_shape_cv': 0.341, 'O7.chosen': [['const_0', 41], ['const', 2], ['str1', 2]], 'const_key': '0', 'const_overall': 0.291, 'distinct_keys': 347, 'n': 1000, 'n_shapes': 24}
+ L5 {'O1.shape_const_cv': 0.316, 'O5.best_literal_rule_cv': 0.287, 'O5.chosen': [['const_0', 2]], 'O6.key_is_0': 0.287, 'O7.best_rule_per_shape_cv': 0.327, 'O7.chosen': [['const_0', 43], ['const', 2], ['str1', 2]], 'const_key': '0', 'const_overall': 0.287, 'distinct_keys': 374, 'n': 1000, 'n_shapes': 24}
+ L6 {'O1.shape_const_cv': 0.356, 'O5.best_literal_rule_cv': 0.321, 'O5.chosen': [['const_0', 2]], 'O6.key_is_0': 0.321, 'O7.best_rule_per_shape_cv': 0.359, 'O7.chosen': [['const_0', 43], ['const', 2], ['str1', 2]], 'const_key': '0', 'const_overall': 0.321, 'distinct_keys': 371, 'n': 1000, 'n_shapes': 24}
+
+## C1.while_counter
+ L0 {'A.oracle_any_literal': 0.21, 'O5.chosen': [['n_distinct_nums', 1], ['max#2', 1]], 'O7.chosen': [['const', 2]], 'const_key': '5', 'distinct_keys': 35, 'n': 1000, 'n_shapes': 1}
+ L1 {'A.oracle_any_literal': 0.198, 'O1.shape_const_cv': 0.155, 'O5.chosen': [['max#2', 1], ['n_distinct_nums', 1]], 'O7.best_rule_per_shape_cv': 0.155, 'O7.chosen': [['const', 2]], 'const_key': '5', 'const_overall': 0.155, 'distinct_keys': 34, 'n': 1000, 'n_shapes': 1}
+ L2 {'O5.chosen': [['count_nums', 1], ['n_distinct_nums', 1]], 'O7.chosen': [['const', 2]], 'const_key': '5', 'distinct_keys': 37, 'n': 1000, 'n_shapes': 1}
+ L3 {'O5.chosen': [['count_nums', 2]], 'O7.chosen': [['const', 2]], 'const_key': '6', 'distinct_keys': 38, 'n': 1000, 'n_shapes': 1}
+ L4 {'O5.chosen': [['max#2', 1], ['count_nums', 1]], 'O7.chosen': [['max#2', 1], ['count_nums', 1]], 'const_key': '6', 'distinct_keys': 42, 'n': 1000, 'n_shapes': 1}
+ L5 {'O5.chosen': [['max#2', 1], ['count_nums', 1]], 'O7.chosen': [['max#2', 1], ['const', 1]], 'const_key': '6', 'distinct_keys': 42, 'n': 1000, 'n_shapes': 1}
+ L6 {'O5.chosen': [['count_nums', 2]], 'O7.chosen': [['count_nums', 2]], 'const_key': '6', 'distinct_keys': 46, 'n': 1000, 'n_shapes': 1}
+
+## C1.bfs_queue
+ L0 {'A.oracle_any_literal': 0.523, 'A.oracle_list_or_string_stat': 0.618, 'O1.shape_const_cv': 0.289, 'O5.best_literal_rule_cv': 0.172, 'O5.chosen': [['const_2', 2]], 'O7.best_rule_per_shape_cv': 0.28, 'O7.chosen': [['const_2', 3], ['const', 3], ['max#1', 2]], 'const_key': '2', 'const_overall': 0.172, 'distinct_keys': 159, 'n': 2000, 'n_shapes': 8}
+ L1 {'A.oracle_any_literal': 0.494, 'A.oracle_list_or_string_stat': 0.571, 'O1.shape_const_cv': 0.221, 'O5.best_literal_rule_cv': 0.153, 'O5.chosen': [['const_2', 2]], 'O7.best_rule_per_shape_cv': 0.228, 'O7.chosen': [['const_2', 10], ['const', 3], ['num[-1]', 2]], 'const_key': '2', 'const_overall': 0.153, 'distinct_keys': 400, 'n': 2000, 'n_shapes': 9}
+ L2 {'A.oracle_any_literal': 0.515, 'A.oracle_list_or_string_stat': 0.559, 'O1.shape_const_cv': 0.191, 'O5.chosen': [['const_2', 2]], 'O7.best_rule_per_shape_cv': 0.194, 'O7.chosen': [['const_2', 11], ['const', 4], ['num[-1]', 2]], 'const_key': '2', 'distinct_keys': 507, 'n': 2000, 'n_shapes': 10}
+ L3 {'A.oracle_any_literal': 0.487, 'A.oracle_list_or_string_stat': 0.537, 'O1.shape_const_cv': 0.181, 'O5.chosen': [['const_2', 2]], 'O7.best_rule_per_shape_cv': 0.186, 'O7.chosen': [['const_2', 8], ['const', 4], ['const_3', 3]], 'const_key': '2', 'distinct_keys': 549, 'n': 2000, 'n_shapes': 11}
+ L4 {'A.oracle_any_literal': 0.489, 'A.oracle_list_or_string_stat': 0.525, 'O1.shape_const_cv': 0.175, 'O5.chosen': [['const_2', 2]], 'O7.best_rule_per_shape_cv': 0.167, 'O7.chosen': [['const_2', 13], ['const', 4], ['len_list1', 2]], 'const_key': '2', 'distinct_keys': 544, 'n': 2000, 'n_shapes': 12}
+ L5 {'A.oracle_any_literal': 0.488, 'A.oracle_list_or_string_stat': 0.515, 'O5.chosen': [['const_2', 2]], 'O7.best_rule_per_shape_cv': 0.152, 'O7.chosen': [['const_2', 12], ['const', 4], ['const_3', 3]], 'const_key': '2', 'distinct_keys': 519, 'n': 2000, 'n_shapes': 13}
+ L6 {'A.oracle_any_literal': 0.495, 'A.oracle_list_or_string_stat': 0.513, 'O1.shape_const_cv': 0.157, 'O5.chosen': [['const_2', 2]], 'O7.best_rule_per_shape_cv': 0.151, 'O7.chosen': [['const_2', 13], ['const', 5], ['const_3', 4]], 'const_key': '2', 'distinct_keys': 547, 'n': 2000, 'n_shapes': 14}
+
+## C1.binary_search
+ L0 {'A.oracle_any_literal': 0.283, 'O5.chosen': [['zeros_list1', 1], ['num[7]', 1]], 'O7.chosen': [['zeros_list1', 1], ['num[7]', 1]], 'const_key': '0', 'distinct_keys': 90, 'n': 2000, 'n_shapes': 1}
+ L1 {'A.oracle_any_literal': 0.256, 'O5.chosen': [['zeros_list1', 2]], 'O7.chosen': [['zeros_list1', 2]], 'const_key': '0', 'distinct_keys': 103, 'n': 2000, 'n_shapes': 1}
+ L2 {'A.oracle_any_literal': 0.199, 'O5.chosen': [['zeros_list1', 2]], 'O7.chosen': [['const', 1], ['zeros_list1', 1]], 'const_key': '0', 'distinct_keys': 168, 'n': 2000, 'n_shapes': 1}
+ L3 {'A.oracle_any_literal': 0.182, 'O5.chosen': [['zeros_list1', 2]], 'O7.chosen': [['const', 2]], 'const_key': '12', 'distinct_keys': 213, 'n': 2000, 'n_shapes': 1}
+ L4 {'A.oracle_any_literal': 0.16, 'O5.chosen': [['zeros_list1', 1], ['const_3', 1]], 'O7.chosen': [['zeros_list1', 1], ['const', 1]], 'const_key': '15', 'distinct_keys': 351, 'n': 2000, 'n_shapes': 1}
+ L5 {'O5.chosen': [['zeros_list1', 1], ['min#3', 1]], 'O7.chosen': [['const', 2]], 'const_key': '28', 'distinct_keys': 404, 'n': 2000, 'n_shapes': 1}
+ L6 {'O5.chosen': [['zeros_list1', 1], ['ones_list1', 1]], 'O7.chosen': [['const', 2]], 'const_key': '0', 'distinct_keys': 587, 'n': 2000, 'n_shapes': 1}
+
+## C1.bracket_matching
+ L0 {'A.oracle_any_literal': 0.39, 'A.oracle_list_or_string_stat': 0.384, 'O1.shape_const_cv': 0.264, 'O5.best_literal_rule_cv': 0.264, 'O5.chosen': [['const_2', 2]], 'O7.best_rule_per_shape_cv': 0.264, 'O7.chosen': [['num[5]', 2], ['max#1', 2]], 'R.net_balance': 0.415, 'R.standard_code': 0.709, 'R.standard_first': 0.167, 'R.standard_height': 0.546, 'const_key': '2', 'const_overall': 0.264, 'distinct_keys': 17, 'n': 2000, 'n_shapes': 2}
+ L1 {'A.lit_last': 0.157, 'A.lit_mode': 0.211, 'A.oracle_any_literal': 0.377, 'A.oracle_list_or_string_stat': 0.448, 'O1.shape_const_cv': 0.197, 'O5.best_literal_rule_cv': 0.236, 'O5.chosen': [['num[9]', 2]], 'O7.best_rule_per_shape_cv': 0.233, 'O7.chosen': [['num[9]', 3], ['const', 1]], 'R.net_balance': 0.438, 'R.standard_code': 0.713, 'R.standard_first': 0.173, 'R.standard_height': 0.582, 'const_key': '1', 'const_overall': 0.211, 'distinct_keys': 20, 'n': 2000, 'n_shapes': 2}
+ L2 {'A.lit_mode': 0.157, 'A.oracle_any_literal': 0.336, 'A.oracle_list_or_string_stat': 0.358, 'O1.shape_const_cv': 0.195, 'O5.best_literal_rule_cv': 0.19, 'O5.chosen': [['num[9]', 2]], 'O7.best_rule_per_shape_cv': 0.215, 'O7.chosen': [['const', 2], ['num[9]', 2]], 'R.net_balance': 0.318, 'R.standard_code': 0.663, 'R.standard_first': 0.191, 'R.standard_height': 0.493, 'const_key': '1', 'const_overall': 0.157, 'distinct_keys': 27, 'n': 2000, 'n_shapes': 2}
+ L3 {'A.oracle_any_literal': 0.233, 'A.oracle_list_or_string_stat': 0.288, 'O5.chosen': [['num[5]', 1], ['const_2', 1]], 'O7.best_rule_per_shape_cv': 0.16, 'O7.chosen': [['const', 2], ['num[9]', 2]], 'R.net_balance': 0.231, 'R.standard_code': 0.594, 'R.standard_first': 0.239, 'R.standard_height': 0.413, 'const_key': '2', 'distinct_keys': 34, 'n': 2000, 'n_shapes': 2}
+ L4 {'A.oracle_any_literal': 0.196, 'A.oracle_list_or_string_stat': 0.271, 'O5.chosen': [['num[9]', 1], ['const_3', 1]], 'O7.chosen': [['const', 2], ['num[9]', 1], ['const_3', 1]], 'R.net_balance': 0.184, 'R.standard_code': 0.59, 'R.standard_first': 0.236, 'R.standard_height': 0.394, 'const_key': '3', 'distinct_keys': 42, 'n': 2000, 'n_shapes': 2}
+ L5 {'A.oracle_any_literal': 0.158, 'A.oracle_list_or_string_stat': 0.213, 'O5.chosen': [['const_2', 1], ['n_distinct_nums', 1]], 'O7.chosen': [['const', 2], ['max#1', 1], ['sum_nums', 1]], 'R.standard_code': 0.581, 'R.standard_first': 0.229, 'R.standard_height': 0.344, 'const_key': '2', 'distinct_keys': 51, 'n': 2000, 'n_shapes': 2}
+ L6 {'A.oracle_list_or_string_stat': 0.22, 'O5.chosen': [['const_3', 1], ['max#1', 1]], 'O7.chosen': [['const', 2], ['const_3', 1], ['max#1', 1]], 'R.standard_code': 0.537, 'R.standard_first': 0.257, 'R.standard_height': 0.341, 'const_key': '5', 'distinct_keys': 56, 'n': 2000, 'n_shapes': 2}
+
+## C1.bytecode_loop
+ L0 {'A.oracle_any_literal': 0.153, 'O5.chosen': [['max_list1', 1], ['num[7]', 1]], 'O7.chosen': [['const', 2]], 'const_key': '12', 'distinct_keys': 121, 'n': 2000, 'n_shapes': 1}
+ L1 {'O5.chosen': [['count_nums', 2]], 'O7.chosen': [['const', 2]], 'R.sum_all_args': 0.436, 'const_key': '20', 'distinct_keys': 134, 'n': 2000, 'n_shapes': 1}
+ L2 {'A.oracle_any_literal': 0.224, 'O5.chosen': [['zeros_list1', 2]], 'O7.chosen': [['zeros_list1', 2]], 'R.sum_all_args': 0.436, 'const_key': '0', 'distinct_keys': 135, 'n': 2000, 'n_shapes': 1}
+ L3 {'A.oracle_any_literal': 0.299, 'O5.chosen': [['num[1]', 2]], 'O7.chosen': [['num[1]', 2]], 'R.sum_all_args': 0.376, 'const_key': '2', 'distinct_keys': 133, 'n': 2000, 'n_shapes': 1}
+ L4 {'A.oracle_any_literal': 0.295, 'O5.chosen': [['zeros_list1', 1], ['num[1]', 1]], 'O7.chosen': [['zeros_list1', 1], ['num[1]', 1]], 'R.sum_all_args': 0.327, 'const_key': '0', 'distinct_keys': 164, 'n': 2000, 'n_shapes': 1}
+ L5 {'A.oracle_any_literal': 0.281, 'O5.chosen': [['num[1]', 1], ['min_list1', 1]], 'O7.chosen': [['num[1]', 1], ['min_list1', 1]], 'R.sum_all_args': 0.315, 'const_key': '0', 'distinct_keys': 167, 'n': 2000, 'n_shapes': 1}
+ L6 {'A.oracle_any_literal': 0.279, 'O5.chosen': [['num[1]', 2]], 'O7.chosen': [['num[1]', 2]], 'R.sum_all_args': 0.303, 'const_key': '0', 'distinct_keys': 207, 'n': 2000, 'n_shapes': 1}
+
+## C1.cellular_update
+ L0 {'A.oracle_any_literal': 0.234, 'A.oracle_list_or_string_stat': 0.27, 'O5.chosen': [['echo', 1], ['num[-8]', 1]], 'O7.chosen': [['echo', 1], ['const', 1]], 'const_key': '6', 'distinct_keys': 43, 'n': 2000, 'n_shapes': 1}
+ L1 {'A.oracle_any_literal': 0.218, 'A.oracle_list_or_string_stat': 0.216, 'O5.chosen': [['echo', 2]], 'O7.chosen': [['echo', 2]], 'const_key': '10', 'distinct_keys': 80, 'n': 2000, 'n_shapes': 1}
+ L2 {'A.oracle_any_literal': 0.157, 'O5.chosen': [['echo', 2]], 'O7.chosen': [['echo', 1], ['const', 1]], 'const_key': '21', 'distinct_keys': 148, 'n': 2000, 'n_shapes': 1}
+ L3 {'O5.chosen': [['echo', 2]], 'O7.chosen': [['echo', 2]], 'const_key': '[0, 0, 0, 0, 0, 0, 0, 0]', 'distinct_keys': 248, 'n': 2000, 'n_shapes': 1}
+ L4 {'O5.chosen': [['echo', 2]], 'O7.chosen': [['echo', 2]], 'const_key': '36', 'distinct_keys': 406, 'n': 2000, 'n_shapes': 1}
+ L5 {'O5.chosen': [['echo', 2]], 'O7.chosen': [['echo', 2]], 'const_key': '[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]', 'distinct_keys': 530, 'n': 2000, 'n_shapes': 1}
+ L6 {'O5.chosen': [['echo', 2]], 'O7.chosen': [['echo', 1], ['const', 1]], 'const_key': '55', 'distinct_keys': 627, 'n': 2000, 'n_shapes': 1}
+
+## C1.circle_elimination
+ L0 {'A.oracle_any_literal': 0.369, 'A.oracle_list_or_string_stat': 0.212, 'O5.chosen': [['min#1', 1], ['num[-3]', 1]], 'O7.chosen': [['min#1', 1], ['num[-3]', 1]], 'const_key': '0', 'distinct_keys': 37, 'n': 2000, 'n_shapes': 1}
+ L1 {'A.oracle_any_literal': 0.384, 'A.oracle_list_or_string_stat': 0.211, 'O5.chosen': [['num[-9]', 1], ['max#3', 1]], 'O7.chosen': [['num[-9]', 1], ['max#3', 1]], 'const_key': '0', 'distinct_keys': 45, 'n': 2000, 'n_shapes': 1}
+ L2 {'A.oracle_any_literal': 0.278, 'A.oracle_list_or_string_stat': 0.173, 'O5.chosen': [['num[-9]', 1], ['const_3', 1]], 'O7.chosen': [['num[-9]', 1], ['const', 1]], 'const_key': '4', 'distinct_keys': 53, 'n': 2000, 'n_shapes': 1}
+ L3 {'A.oracle_any_literal': 0.228, 'O5.chosen': [['num[-9]', 2]], 'O7.chosen': [['num[-9]', 2]], 'const_key': '0', 'distinct_keys': 64, 'n': 2000, 'n_shapes': 1}
+ L4 {'A.oracle_any_literal': 0.248, 'O5.chosen': [['num[-3]', 1], ['min_list1', 1]], 'O7.chosen': [['num[-3]', 1], ['const', 1]], 'const_key': '0', 'distinct_keys': 77, 'n': 2000, 'n_shapes': 1}
+ L5 {'A.oracle_any_literal': 0.249, 'A.oracle_list_or_string_stat': 0.159, 'O5.chosen': [['min_list1', 2]], 'O7.chosen': [['min_list1', 1], ['const', 1]], 'const_key': '10', 'distinct_keys': 87, 'n': 2000, 'n_shapes': 1}
+ L6 {'A.oracle_any_literal': 0.265, 'A.oracle_list_or_string_stat': 0.153, 'O5.chosen': [['num[-10]', 2]], 'O7.chosen': [['num[-10]', 2]], 'const_key': '11', 'distinct_keys': 99, 'n': 2000, 'n_shapes': 1}
+
+## C1.coin_change_table
+ L0 {'A.oracle_any_literal': 0.534, 'A.oracle_list_or_string_stat': 0.44, 'O1.shape_const_cv': 0.258, 'O5.best_literal_rule_cv': 0.23, 'O5.chosen': [['min#2', 2]], 'O7.best_rule_per_shape_cv': 0.265, 'O7.chosen': [['min#2', 5], ['len_list_longest', 2], ['ones_list1', 1]], 'R.T_div_maxcoin': 0.195, 'R.greedy_fewest': 0.245, 'const_key': '1', 'const_overall': 0.23, 'distinct_keys': 69, 'n': 2000, 'n_shapes': 4}
+ L1 {'A.oracle_any_literal': 0.43, 'A.oracle_list_or_string_stat': 0.322, 'O1.shape_const_cv': 0.212, 'O5.chosen': [['ones_list1', 1], ['const_2', 1]], 'O7.best_rule_per_shape_cv': 0.213, 'O7.chosen': [['const_3', 2], ['zeros_list1', 2], ['min#2', 2]], 'R.T_div_maxcoin': 0.153, 'R.greedy_fewest': 0.206, 'const_key': '2', 'const_overall': 0.158, 'distinct_keys': 104, 'n': 2000, 'n_shapes': 4}
+ L2 {'A.oracle_any_literal': 0.355, 'A.oracle_list_or_string_stat': 0.261, 'O1.shape_const_cv': 0.15, 'O5.chosen': [['const_2', 2]], 'O7.best_rule_per_shape_cv': 0.165, 'O7.chosen': [['const_2', 3], ['len_list1_minus1', 3], ['const', 2]], 'R.greedy_fewest': 0.15, 'const_key': '2', 'distinct_keys': 167, 'n': 2000, 'n_shapes': 4}
+ L3 {'A.oracle_any_literal': 0.341, 'A.oracle_list_or_string_stat': 0.243, 'O1.shape_const_cv': 0.157, 'O5.chosen': [['len_list1_minus1', 1], ['const_3', 1]], 'O7.best_rule_per_shape_cv': 0.163, 'O7.chosen': [['zeros_list1', 4], ['len_list1_minus1', 2], ['const', 1]], 'R.greedy_fewest': 0.172, 'const_key': '3', 'distinct_keys': 216, 'n': 2000, 'n_shapes': 4}
+ L4 {'A.oracle_any_literal': 0.29, 'A.oracle_list_or_string_stat': 0.256, 'O5.chosen': [['len_list1_minus1', 2]], 'O7.chosen': [['len_list1_minus1', 3], ['const_2', 2], ['num[-6]', 1]], 'R.greedy_fewest': 0.172, 'const_key': '3', 'distinct_keys': 250, 'n': 2000, 'n_shapes': 4}
+ L5 {'A.oracle_any_literal': 0.288, 'A.oracle_list_or_string_stat': 0.2, 'O1.shape_const_cv': 0.15, 'O5.chosen': [['const_3', 2]], 'O7.chosen': [['zeros_list1', 4], ['n_distinct_nums', 1], ['len_list1_minus1', 1]], 'const_key': '3', 'distinct_keys': 309, 'n': 2000, 'n_shapes': 4}
+ L6 {'A.oracle_any_literal': 0.21, 'A.oracle_list_or_string_stat': 0.192, 'O5.chosen': [['const_3', 2]], 'O7.chosen': [['const_3', 4], ['const', 3], ['len_list1_minus1', 1]], 'const_key': '3', 'distinct_keys': 361, 'n': 2000, 'n_shapes': 4}
+
+## C1.digit_peel
+ L0 {'A.oracle_any_literal': 0.305, 'O5.best_literal_rule_cv': 0.187, 'O5.chosen': [['num[-2]', 2]], 'O7.best_rule_per_shape_cv': 0.187, 'O7.chosen': [['num[-2]', 2]], 'R.decimal_digit_sum_of_literal': 0.182, 'const_key': '0', 'distinct_keys': 331, 'n': 2000, 'n_shapes': 1}
+ L1 {'A.oracle_any_literal': 0.239, 'O5.chosen': [['num[-2]', 2]], 'O7.chosen': [['num[-2]', 2]], 'R.decimal_digit_sum_of_literal': 0.161, 'const_key': '2', 'distinct_keys': 480, 'n': 2000, 'n_shapes': 1}
+ L2 {'A.oracle_any_literal': 0.202, 'O5.chosen': [['num[-2]', 2]], 'O7.chosen': [['num[-2]', 2]], 'R.decimal_digit_sum_of_literal': 0.159, 'const_key': '4', 'distinct_keys': 509, 'n': 2000, 'n_shapes': 1}
+ L3 {'A.oracle_any_literal': 0.158, 'O5.chosen': [['num[-2]', 2]], 'O7.chosen': [['const', 2]], 'R.decimal_digit_sum_of_literal': 0.153, 'const_key': '4', 'distinct_keys': 528, 'n': 2000, 'n_shapes': 1}
+ L4 {'O5.chosen': [['num[-2]', 1], ['n_distinct_nums', 1]], 'O7.chosen': [['num[-2]', 1], ['const', 1]], 'const_key': '4', 'distinct_keys': 529, 'n': 2000, 'n_shapes': 1}
+ L5 {'O5.chosen': [['n_distinct_nums', 1], ['const_2', 1]], 'O7.chosen': [['const', 2]], 'const_key': '4', 'distinct_keys': 567, 'n': 2000, 'n_shapes': 1}
+ L6 {'O5.chosen': [['n_distinct_nums', 1], ['const_3', 1]], 'O7.chosen': [['const', 2]], 'const_key': '4', 'distinct_keys': 544, 'n': 2000, 'n_shapes': 1}
+
+## C1.euclid_gcd
+ L0 {'O5.chosen': [['num[1]', 1], ['count_nums', 1]], 'O7.chosen': [['const', 2]], 'R.gcd_of_literals': 0.434, 'const_key': '6', 'distinct_keys': 72, 'n': 2000, 'n_shapes': 1}
+ L1 {'O5.chosen': [['num[1]', 2]], 'O7.chosen': [['const', 2]], 'R.gcd_of_literals': 0.427, 'const_key': '6', 'distinct_keys': 86, 'n': 2000, 'n_shapes': 1}
+ L2 {'O5.chosen': [['num[1]', 2]], 'O7.chosen': [['const', 2]], 'R.gcd_of_literals': 0.35, 'const_key': '8', 'distinct_keys': 123, 'n': 2000, 'n_shapes': 1}
+ L3 {'O5.chosen': [['num[1]', 2]], 'O7.chosen': [['const', 2]], 'R.gcd_of_literals': 0.374, 'const_key': '8', 'distinct_keys': 147, 'n': 2000, 'n_shapes': 1}
+ L4 {'O5.chosen': [['count_nums', 2]], 'O7.chosen': [['const', 2]], 'R.gcd_of_literals': 0.357, 'const_key': '9', 'distinct_keys': 198, 'n': 2000, 'n_shapes': 1}
+ L5 {'O5.chosen': [['count_nums', 2]], 'O7.chosen': [['const', 2]], 'R.gcd_of_literals': 0.352, 'const_key': '10', 'distinct_keys': 245, 'n': 2000, 'n_shapes': 1}
+ L6 {'O5.chosen': [['const_1', 1], ['n_distinct_nums', 1]], 'O7.chosen': [['const', 2]], 'R.gcd_of_literals': 0.345, 'const_key': '10', 'distinct_keys': 354, 'n': 2000, 'n_shapes': 1}
+
+## C1.fast_power
+ L0 {'A.oracle_any_literal': 0.323, 'O5.chosen': [['num[-8]', 2]], 'O7.chosen': [['const', 1], ['num[-8]', 1]], 'R.base^(2^bits)': 0.427, 'R.pow(base,exp,mod)': 0.434, 'const_key': '4', 'distinct_keys': 43, 'n': 2000, 'n_shapes': 1}
+ L1 {'A.oracle_any_literal': 0.333, 'O5.chosen': [['num[-8]', 2]], 'O7.chosen': [['num[-8]', 2]], 'R.base^(2^bits)': 0.448, 'R.pow(base,exp,mod)': 0.423, 'const_key': '1', 'distinct_keys': 77, 'n': 2000, 'n_shapes': 1}
+ L2 {'A.oracle_any_literal': 0.304, 'O5.chosen': [['num[1]', 1], ['num[-8]', 1]], 'O7.chosen': [['num[1]', 1], ['num[-8]', 1]], 'R.base^(2^bits)': 0.429, 'R.pow(base,exp,mod)': 0.447, 'const_key': '1', 'distinct_keys': 110, 'n': 2000, 'n_shapes': 1}
+ L3 {'A.oracle_any_literal': 0.281, 'O5.chosen': [['num[-8]', 1], ['num[1]', 1]], 'O7.chosen': [['num[-8]', 1], ['num[1]', 1]], 'R.base^(2^bits)': 0.425, 'R.pow(base,exp,mod)': 0.451, 'const_key': '1', 'distinct_keys': 159, 'n': 2000, 'n_shapes': 1}
+ L4 {'A.oracle_any_literal': 0.279, 'O5.chosen': [['num[1]', 1], ['num[-8]', 1]], 'O7.chosen': [['num[1]', 1], ['num[-8]', 1]], 'R.base^(2^bits)': 0.429, 'R.pow(base,exp,mod)': 0.416, 'const_key': '1', 'distinct_keys': 201, 'n': 2000, 'n_shapes': 1}
+ L5 {'A.oracle_any_literal': 0.225, 'O5.chosen': [['num[-8]', 2]], 'O7.chosen': [['num[-8]', 2]], 'R.base^(2^bits)': 0.44, 'R.pow(base,exp,mod)': 0.428, 'const_key': '1', 'distinct_keys': 262, 'n': 2000, 'n_shapes': 1}
+ L6 {'A.oracle_any_literal': 0.258, 'O5.chosen': [['num[1]', 2]], 'O7.chosen': [['num[1]', 2]], 'R.base^(2^bits)': 0.428, 'R.pow(base,exp,mod)': 0.431, 'const_key': '1', 'distinct_keys': 297, 'n': 2000, 'n_shapes': 1}
+
+## C1.grid_path_table
+ L0 {'A.list1_posum': 0.177, 'A.list1_sum': 0.177, 'A.oracle_any_literal': 0.29, 'A.oracle_list_or_string_stat': 0.333, 'O5.best_literal_rule_cv': 0.177, 'O5.chosen': [['sum_list1', 2]], 'O7.best_rule_per_shape_cv': 0.177, 'O7.chosen': [['sum_list1', 2]], 'R.greedy_max_path': 0.325, 'R.greedy_min_path': 0.345, 'const_key': '3', 'distinct_keys': 34, 'n': 2000, 'n_shapes': 1}
+ L1 {'A.oracle_any_literal': 0.222, 'A.oracle_list_or_string_stat': 0.254, 'O5.chosen': [['sum_list1', 2]], 'O7.chosen': [['sum_list1', 2]], 'R.greedy_max_path': 0.311, 'R.greedy_min_path': 0.333, 'const_key': '3', 'distinct_keys': 42, 'n': 2000, 'n_shapes': 1}
+ L2 {'A.oracle_any_literal': 0.151, 'A.oracle_list_or_string_stat': 0.211, 'O5.chosen': [['sum_list1', 2]], 'O7.chosen': [['sum_list1', 2]], 'R.greedy_max_path': 0.284, 'R.greedy_min_path': 0.288, 'const_key': '1', 'distinct_keys': 49, 'n': 2000, 'n_shapes': 1}
+ L3 {'A.oracle_list_or_string_stat': 0.165, 'O5.chosen': [['sum_list1', 2]], 'O7.chosen': [['sum_list1', 2]], 'R.greedy_max_path': 0.246, 'R.greedy_min_path': 0.262, 'const_key': '4', 'distinct_keys': 57, 'n': 2000, 'n_shapes': 1}
+ L4 {'A.oracle_list_or_string_stat': 0.151, 'O5.chosen': [['sum_list1', 2]], 'O7.chosen': [['sum_list1', 2]], 'R.greedy_max_path': 0.228, 'R.greedy_min_path': 0.231, 'const_key': '30', 'distinct_keys': 66, 'n': 2000, 'n_shapes': 1}
+ L5 {'O5.chosen': [['count_nums', 1], ['sum_list1', 1]], 'O7.chosen': [['const', 2]], 'R.greedy_max_path': 0.215, 'R.greedy_min_path': 0.19, 'const_key': '59', 'distinct_keys': 74, 'n': 2000, 'n_shapes': 1}
+ L6 {'O5.chosen': [['sum_list1', 2]], 'O7.chosen': [['const', 2]], 'R.greedy_max_path': 0.195, 'R.greedy_min_path': 0.191, 'const_key': '62', 'distinct_keys': 92, 'n': 2000, 'n_shapes': 1}
+
+## C1.insertion_sort
+ L0 {'A.echo_printed_initial': 0.197, 'A.list1_mode': 0.157, 'A.oracle_any_literal': 0.705, 'A.oracle_list_or_string_stat': 0.481, 'O5.best_literal_rule_cv': 0.197, 'O5.chosen': [['echo', 2]], 'O7.best_rule_per_shape_cv': 0.391, 'O7.chosen': [['num[2]', 2], ['num[3]', 2], ['echo', 2]], 'R.inversions_prefix': 0.342, 'R.sorted_prefix_at': 0.34, 'R.sorted_prefix_list': 0.339, 'const_key': '1', 'distinct_keys': 670, 'n': 2000, 'n_shapes': 5}
+ L1 {'A.oracle_any_literal': 0.637, 'A.oracle_list_or_string_stat': 0.431, 'O5.best_literal_rule_cv': 0.154, 'O5.chosen': [['num[-9]', 2]], 'O7.best_rule_per_shape_cv': 0.316, 'O7.chosen': [['num[2]', 3], ['num[4]', 2], ['num[3]', 2]], 'R.inversions_prefix': 0.351, 'R.sorted_prefix_at': 0.318, 'R.sorted_prefix_list': 0.351, 'const_key': '1', 'distinct_keys': 718, 'n': 2000, 'n_shapes': 6}
+ L2 {'A.oracle_any_literal': 0.586, 'A.oracle_list_or_string_stat': 0.406, 'O5.chosen': [['num[-9]', 1], ['min_list1', 1]], 'O7.best_rule_per_shape_cv': 0.26, 'O7.chosen': [['min_list1', 2], ['num[4]', 2], ['num[3]', 2]], 'R.inversions_prefix': 0.348, 'R.sorted_prefix_at': 0.334, 'R.sorted_prefix_list': 0.332, 'const_key': '1', 'distinct_keys': 682, 'n': 2000, 'n_shapes': 7}
+ L3 {'A.oracle_any_literal': 0.595, 'A.oracle_list_or_string_stat': 0.369, 'O5.chosen': [['num[-9]', 2]], 'O7.best_rule_per_shape_cv': 0.261, 'O7.chosen': [['num[6]', 2], ['num[4]', 2], ['num[3]', 2]], 'R.inversions_prefix': 0.361, 'R.sorted_prefix_at': 0.344, 'R.sorted_prefix_list': 0.307, 'const_key': '1', 'distinct_keys': 636, 'n': 2000, 'n_shapes': 8}
+ L4 {'A.oracle_any_literal': 0.521, 'A.oracle_list_or_string_stat': 0.333, 'O5.chosen': [['num[-9]', 2]], 'O7.best_rule_per_shape_cv': 0.2, 'O7.chosen': [['num[2]', 3], ['num[0]', 2], ['num[6]', 2]], 'R.inversions_prefix': 0.343, 'R.sorted_prefix_at': 0.323, 'R.sorted_prefix_list': 0.348, 'const_key': '1', 'distinct_keys': 721, 'n': 2000, 'n_shapes': 9}
+ L5 {'A.oracle_any_literal': 0.539, 'A.oracle_list_or_string_stat': 0.333, 'O5.chosen': [['num[-9]', 1], ['num[6]', 1]], 'O7.best_rule_per_shape_cv': 0.242, 'O7.chosen': [['num[6]', 2], ['num[1]', 2], ['echo', 2]], 'R.inversions_prefix': 0.326, 'R.sorted_prefix_at': 0.348, 'R.sorted_prefix_list': 0.335, 'const_key': '1', 'distinct_keys': 697, 'n': 2000, 'n_shapes': 10}
+ L6 {'A.oracle_any_literal': 0.52, 'A.oracle_list_or_string_stat': 0.303, 'O5.chosen': [['num[-9]', 1], ['min_list1', 1]], 'O7.best_rule_per_shape_cv': 0.24, 'O7.chosen': [['num[6]', 2], ['max#2', 2], ['echo', 2]], 'R.inversions_prefix': 0.328, 'R.sorted_prefix_at': 0.351, 'R.sorted_prefix_list': 0.332, 'const_key': '1', 'distinct_keys': 698, 'n': 2000, 'n_shapes': 11}
+
+## C1.kadane_scan
+ L0 {'A.oracle_any_literal': 0.163, 'A.oracle_list_or_string_stat': 0.194, 'O5.chosen': [['sum_list1', 2]], 'O7.chosen': [['sum_list1', 2]], 'R.max_subarray': 0.164, 'const_key': '10', 'distinct_keys': 125, 'n': 2000, 'n_shapes': 1}
+ L1 {'O5.chosen': [['sum_list1', 2]], 'O7.chosen': [['sum_list1', 2]], 'R.max_subarray': 0.281, 'const_key': '10', 'distinct_keys': 185, 'n': 2000, 'n_shapes': 1}
+ L2 {'O5.chosen': [['sum_list1', 2]], 'O7.chosen': [['sum_list1', 2]], 'R.max_subarray': 0.33, 'const_key': '16', 'distinct_keys': 254, 'n': 2000, 'n_shapes': 1}
+ L3 {'O5.chosen': [['sum_list1', 2]], 'O7.chosen': [['sum_list1', 2]], 'R.max_subarray': 0.35, 'const_key': '17', 'distinct_keys': 298, 'n': 2000, 'n_shapes': 1}
+ L4 {'O5.chosen': [['sum_list1', 2]], 'O7.chosen': [['sum_list1', 2]], 'R.max_subarray': 0.349, 'const_key': '26', 'distinct_keys': 345, 'n': 2000, 'n_shapes': 1}
+ L5 {'O5.chosen': [['sum_list1', 2]], 'O7.chosen': [['sum_list1', 2]], 'R.max_subarray': 0.349, 'const_key': '16', 'distinct_keys': 397, 'n': 2000, 'n_shapes': 1}
+ L6 {'O5.chosen': [['sum_list1', 2]], 'O7.chosen': [['sum_list1', 2]], 'R.max_subarray': 0.349, 'const_key': '27', 'distinct_keys': 454, 'n': 2000, 'n_shapes': 1}
+
+## C1.majority_vote_scan
+ L0 {'A.oracle_any_literal': 0.392, 'A.oracle_list_or_string_stat': 0.274, 'O1.shape_const_cv': 0.291, 'O5.best_literal_rule_cv': 0.218, 'O5.chosen': [['num[4]', 2]], 'O7.best_rule_per_shape_cv': 0.316, 'O7.chosen': [['num[4]', 2], ['const', 2]], 'R.mode_space_0': 0.182, 'const_key': '3', 'const_overall': 0.195, 'distinct_keys': 27, 'n': 2000, 'n_shapes': 2}
+ L1 {'A.oracle_any_literal': 0.399, 'A.oracle_list_or_string_stat': 0.253, 'O1.shape_const_cv': 0.261, 'O5.best_literal_rule_cv': 0.201, 'O5.chosen': [['num[6]', 2]], 'O7.best_rule_per_shape_cv': 0.295, 'O7.chosen': [['num[6]', 2], ['const', 2]], 'R.mode_space_0': 0.163, 'const_key': '4', 'const_overall': 0.166, 'distinct_keys': 26, 'n': 2000, 'n_shapes': 2}
+ L2 {'A.oracle_any_literal': 0.399, 'A.oracle_list_or_string_stat': 0.259, 'O1.shape_const_cv': 0.191, 'O5.best_literal_rule_cv': 0.207, 'O5.chosen': [['num[8]', 2]], 'O7.best_rule_per_shape_cv': 0.281, 'O7.chosen': [['num[8]', 2], ['const', 2]], 'R.mode_space_0': 0.151, 'const_key': '5', 'distinct_keys': 25, 'n': 2000, 'n_shapes': 2}
+ L3 {'A.oracle_any_literal': 0.356, 'A.oracle_list_or_string_stat': 0.235, 'O1.shape_const_cv': 0.193, 'O5.best_literal_rule_cv': 0.171, 'O5.chosen': [['num[-9]', 2]], 'O7.best_rule_per_shape_cv': 0.265, 'O7.chosen': [['num[-9]', 2], ['const', 2]], 'const_key': '4', 'distinct_keys': 25, 'n': 2000, 'n_shapes': 2}
+ L4 {'A.oracle_any_literal': 0.301, 'A.oracle_list_or_string_stat': 0.197, 'O1.shape_const_cv': 0.16, 'O5.chosen': [['num[-9]', 2]], 'O7.best_rule_per_shape_cv': 0.221, 'O7.chosen': [['num[-9]', 2], ['const', 2]], 'const_key': '3 0', 'distinct_keys': 30, 'n': 2000, 'n_shapes': 2}
+ L5 {'A.oracle_any_literal': 0.257, 'A.oracle_list_or_string_stat': 0.169, 'O1.shape_const_cv': 0.157, 'O5.best_literal_rule_cv': 0.155, 'O5.chosen': [['num[-9]', 2]], 'O7.best_rule_per_shape_cv': 0.249, 'O7.chosen': [['num[-9]', 2], ['const', 2]], 'const_key': '2 0', 'distinct_keys': 27, 'n': 2000, 'n_shapes': 2}
+ L6 {'A.oracle_any_literal': 0.226, 'O1.shape_const_cv': 0.15, 'O5.chosen': [['num[-9]', 2]], 'O7.best_rule_per_shape_cv': 0.228, 'O7.chosen': [['num[-9]', 2], ['const', 2]], 'const_key': '2 0', 'distinct_keys': 30, 'n': 2000, 'n_shapes': 2}
+
+## C1.merge_two_sorted
+ L0 {'A.oracle_any_literal': 0.472, 'A.oracle_list_or_string_stat': 0.464, 'O1.shape_const_cv': 0.161, 'O5.best_literal_rule_cv': 0.157, 'O5.chosen': [['max#2', 2]], 'O7.best_rule_per_shape_cv': 0.15, 'O7.chosen': [['max#2', 1], ['const', 1]], 'R.len_a+len_b-1': 0.208, 'R.sorted_all_but_last': 0.195, 'const_key': '5', 'const_overall': 0.161, 'distinct_keys': 467, 'n': 2000, 'n_shapes': 1}
+ L1 {'A.oracle_any_literal': 0.46, 'A.oracle_list_or_string_stat': 0.422, 'O5.chosen': [['len_list_longest', 1], ['max#2', 1]], 'O7.chosen': [['const', 2]], 'R.len_a+len_b-1': 0.177, 'R.sorted_all_but_last': 0.168, 'const_key': '5', 'distinct_keys': 582, 'n': 2000, 'n_shapes': 1}
+ L2 {'A.oracle_any_literal': 0.418, 'A.oracle_list_or_string_stat': 0.305, 'O5.chosen': [['n_distinct_nums', 1], ['max#2', 1]], 'O7.chosen': [['const', 2]], 'R.len_a+len_b-1': 0.172, 'R.sorted_all_but_last': 0.167, 'const_key': '5', 'distinct_keys': 703, 'n': 2000, 'n_shapes': 1}
+ L3 {'A.oracle_any_literal': 0.399, 'A.oracle_list_or_string_stat': 0.285, 'O5.chosen': [['len_list1', 1], ['max#3', 1]], 'O7.chosen': [['const', 1], ['max#3', 1]], 'R.len_a+len_b-1': 0.166, 'R.sorted_all_but_last': 0.176, 'const_key': '5', 'distinct_keys': 705, 'n': 2000, 'n_shapes': 1}
+ L4 {'A.oracle_any_literal': 0.405, 'A.oracle_list_or_string_stat': 0.263, 'O5.chosen': [['num[3]', 1], ['max#3', 1]], 'O7.chosen': [['const', 1], ['max#3', 1]], 'R.len_a+len_b-1': 0.161, 'R.sorted_all_but_last': 0.173, 'const_key': '7', 'distinct_keys': 693, 'n': 2000, 'n_shapes': 1}
+ L5 {'A.oracle_any_literal': 0.389, 'A.oracle_list_or_string_stat': 0.234, 'O5.chosen': [['len_list_last', 1], ['len_list1', 1]], 'O7.chosen': [['len_list_last', 1], ['len_list1', 1]], 'R.len_a+len_b-1': 0.173, 'R.sorted_all_but_last': 0.17, 'const_key': '7', 'distinct_keys': 694, 'n': 2000, 'n_shapes': 1}
+ L6 {'A.oracle_any_literal': 0.388, 'A.oracle_list_or_string_stat': 0.222, 'O5.chosen': [['max#3', 1], ['len_list1_minus1', 1]], 'O7.chosen': [['const', 2]], 'R.len_a+len_b-1': 0.172, 'R.sorted_all_but_last': 0.161, 'const_key': '7', 'distinct_keys': 651, 'n': 2000, 'n_shapes': 1}
+
+## C1.mirror_pointers
+ L0 {'A.lit_last': 0.203, 'A.lit_max': 0.203, 'A.lit_mode': 0.203, 'A.oracle_any_literal': 0.342, 'A.oracle_list_or_string_stat': 0.18, 'A.str1_first': 0.184, 'O1.shape_const_cv': 0.203, 'O5.best_literal_rule_cv': 0.203, 'O5.chosen': [['num[4]', 2]], 'O7.best_rule_per_shape_cv': 0.203, 'O7.chosen': [['num[4]', 2]], 'const_key': '1', 'const_overall': 0.203, 'distinct_keys': 509, 'n': 2000, 'n_shapes': 1}
+ L1 {'A.oracle_any_literal': 0.186, 'A.oracle_list_or_string_stat': 0.154, 'O5.chosen': [['num[4]', 1], ['n_distinct_nums', 1]], 'O7.chosen': [['num[4]', 1], ['n_distinct_nums', 1]], 'const_key': '1', 'distinct_keys': 609, 'n': 2000, 'n_shapes': 1}
+ L2 {'O5.chosen': [['sum_nums', 2]], 'O7.chosen': [['sum_nums', 2]], 'const_key': '3', 'distinct_keys': 728, 'n': 2000, 'n_shapes': 1}
+ L3 {'O5.chosen': [['sum_nums', 2]], 'O7.chosen': [['sum_nums', 1], ['const', 1]], 'const_key': '4', 'distinct_keys': 760, 'n': 2000, 'n_shapes': 1}
+ L4 {'O5.chosen': [['count_nums', 2]], 'O7.chosen': [['count_nums', 2]], 'const_key': '5', 'distinct_keys': 913, 'n': 2000, 'n_shapes': 1}
+ L5 {'O5.chosen': [['count_nums', 2]], 'O7.chosen': [['const', 1], ['count_nums', 1]], 'const_key': '6', 'distinct_keys': 927, 'n': 2000, 'n_shapes': 1}
+ L6 {'O5.chosen': [['count_nums', 1], ['sum_nums', 1]], 'O7.chosen': [['const', 2]], 'const_key': '7', 'distinct_keys': 1068, 'n': 2000, 'n_shapes': 1}
+
+## C1.partition_pass
+ L0 {'A.oracle_any_literal': 0.274, 'A.oracle_list_or_string_stat': 0.211, 'O5.chosen': [['zeros_list1', 1], ['list1_sorted', 1]], 'O7.chosen': [['zeros_list1', 1], ['list1_sorted', 1]], 'R.stable_partition': 0.242, 'const_key': '0', 'distinct_keys': 1174, 'n': 2000, 'n_shapes': 1}
+ L1 {'A.oracle_any_literal': 0.241, 'O5.chosen': [['zeros_list1', 2]], 'O7.chosen': [['zeros_list1', 2]], 'R.stable_partition': 0.217, 'const_key': '0', 'distinct_keys': 1211, 'n': 2000, 'n_shapes': 1}
+ L2 {'A.oracle_any_literal': 0.207, 'O5.chosen': [['zeros_list1', 2]], 'O7.chosen': [['zeros_list1', 2]], 'R.stable_partition': 0.196, 'const_key': '0', 'distinct_keys': 1273, 'n': 2000, 'n_shapes': 1}
+ L3 {'A.oracle_any_literal': 0.207, 'O5.chosen': [['zeros_list1', 2]], 'O7.chosen': [['zeros_list1', 2]], 'R.stable_partition': 0.165, 'const_key': '0', 'distinct_keys': 1241, 'n': 2000, 'n_shapes': 1}
+ L4 {'A.oracle_any_literal': 0.166, 'O5.chosen': [['zeros_list1', 2]], 'O7.chosen': [['zeros_list1', 2]], 'R.stable_partition': 0.172, 'const_key': '0', 'distinct_keys': 1286, 'n': 2000, 'n_shapes': 1}
+ L5 {'A.oracle_any_literal': 0.173, 'O5.chosen': [['zeros_list1', 2]], 'O7.chosen': [['zeros_list1', 2]], 'const_key': '0', 'distinct_keys': 1293, 'n': 2000, 'n_shapes': 1}
+ L6 {'O5.chosen': [['zeros_list1', 2]], 'O7.chosen': [['zeros_list1', 2]], 'const_key': '0', 'distinct_keys': 1321, 'n': 2000, 'n_shapes': 1}
+
+## C1.postfix_evaluation
+ L0 {'A.oracle_any_literal': 0.174, 'A.oracle_list_or_string_stat': 0.172, 'O5.chosen': [['num[0]', 2]], 'O7.chosen': [['num[0]', 2], ['zeros_list1', 1], ['const', 1]], 'const_key': '0', 'distinct_keys': 219, 'n': 2000, 'n_shapes': 2}
+ L1 {'O5.chosen': [['zeros_list1', 1], ['max_list1', 1]], 'O7.chosen': [['zeros_list1', 1], ['num[-7]', 1], ['const', 1]], 'const_key': '8', 'distinct_keys': 564, 'n': 2000, 'n_shapes': 2}
+ L2 {'O5.chosen': [['num[0]', 1], ['zeros_list1', 1]], 'O7.chosen': [['num[0]', 1], ['len_list_longest', 1], ['zeros_list1', 1]], 'const_key': '0', 'distinct_keys': 840, 'n': 2000, 'n_shapes': 2}
+ L3 {'O5.chosen': [['zeros_list1', 2]], 'O7.chosen': [['zeros_list1', 2], ['const', 1], ['sum_list1', 1]], 'const_key': '0', 'distinct_keys': 1035, 'n': 2000, 'n_shapes': 2}
+ L4 {'O5.chosen': [['zeros_list1', 2]], 'O7.chosen': [['zeros_list1', 2], ['const', 2]], 'const_key': '0', 'distinct_keys': 1270, 'n': 2000, 'n_shapes': 2}
+ L5 {'O5.chosen': [['zeros_list1', 2]], 'O7.chosen': [['zeros_list1', 2], ['max_list1', 1], ['const', 1]], 'const_key': '0', 'distinct_keys': 1455, 'n': 2000, 'n_shapes': 2}
+ L6 {'O5.chosen': [['zeros_list1', 2]], 'O7.chosen': [['zeros_list1', 2], ['const', 2]], 'const_key': '0', 'distinct_keys': 1576, 'n': 2000, 'n_shapes': 2}
+
+## C1.recursive_calls
+ L0 {'O5.chosen': [['num[3]', 2]], 'O7.chosen': [['const', 364], ['sum_list1', 14], ['num[-2]', 7]], 'const_key': '23', 'distinct_keys': 171, 'n': 2000, 'n_shapes': 408}
+ L1 {'O5.chosen': [['min#3', 1], ['num[6]', 1]], 'O7.chosen': [['const', 393], ['sum_list1', 8], ['sum_nums', 6]], 'const_key': '65', 'distinct_keys': 343, 'n': 2000, 'n_shapes': 411}
+ L2 {'O5.chosen': [['sum_nums', 1], ['max#2', 1]], 'O7.chosen': [['const', 411], ['sum_nums', 4], ['num[-4]', 1]], 'const_key': '88', 'distinct_keys': 530, 'n': 2000, 'n_shapes': 405}
+ L3 {'O5.chosen': [['n_distinct_nums', 2]], 'O7.chosen': [['const', 420], ['sum_list1', 1], ['n_distinct_nums', 1]], 'const_key': '88', 'distinct_keys': 704, 'n': 2000, 'n_shapes': 405}
+ L4 {'O5.chosen': [['num[6]', 2]], 'O7.chosen': [['const', 461], ['num[-2]', 1]], 'const_key': '69', 'distinct_keys': 843, 'n': 2000, 'n_shapes': 443}
+ L5 {'O5.chosen': [[None, 2]], 'O7.chosen': [['const', 459]], 'const_key': '98', 'distinct_keys': 924, 'n': 2000, 'n_shapes': 438}
+ L6 {'O5.chosen': [[None, 2]], 'O7.chosen': [['const', 416]], 'const_key': '73', 'distinct_keys': 958, 'n': 2000, 'n_shapes': 393}
+
+## C1.run_length_scan
+ L0 {'O5.chosen': [[None, 2]], 'O7.chosen': [['const', 2]], 'const_key': '222', 'distinct_keys': 1207, 'n': 2000, 'n_shapes': 1}
+ L1 {'O5.chosen': [[None, 2]], 'O7.chosen': [['const', 2]], 'const_key': '3311', 'distinct_keys': 1361, 'n': 2000, 'n_shapes': 1}
+ L2 {'O5.chosen': [[None, 2]], 'O7.chosen': [['const', 2]], 'const_key': '21241', 'distinct_keys': 1804, 'n': 2000, 'n_shapes': 1}
+ L3 {'O5.chosen': [[None, 2]], 'O7.chosen': [['const', 2]], 'const_key': '111424', 'distinct_keys': 1945, 'n': 2000, 'n_shapes': 1}
+ L4 {'O5.chosen': [[None, 2]], 'O7.chosen': [['const', 2]], 'const_key': '2144315', 'distinct_keys': 1998, 'n': 2000, 'n_shapes': 1}
+ L5 {'O5.chosen': [[None, 2]], 'O7.chosen': [['const', 2]], 'const_key': '11125531', 'distinct_keys': 2000, 'n': 2000, 'n_shapes': 1}
+ L6 {'O5.chosen': [[None, 2]], 'O7.chosen': [['const', 2]], 'const_key': '111244323', 'distinct_keys': 2000, 'n': 2000, 'n_shapes': 1}
+
+## C1.shared_lists
+ L0 {'O5.chosen': [['max#3', 1], ['count_nums', 1]], 'O7.chosen': [['const', 8], ['count_nums', 4], ['num[8]', 1]], 'const_key': '17', 'distinct_keys': 758, 'n': 2000, 'n_shapes': 8}
+ L1 {'O5.chosen': [['num[-2]', 1], ['min#3', 1]], 'O7.chosen': [['const', 8], ['num[-2]', 2], ['num[0]', 1]], 'const_key': '5', 'distinct_keys': 787, 'n': 2000, 'n_shapes': 8}
+ L2 {'O5.chosen': [['min#3', 1], ['max#3', 1]], 'O7.chosen': [['const', 9], ['num[-3]', 2], ['min#3', 1]], 'const_key': '5', 'distinct_keys': 796, 'n': 2000, 'n_shapes': 9}
+ L3 {'O5.chosen': [['num[-10]', 1], ['max#3', 1]], 'O7.chosen': [['const', 9], ['num[9]', 1], ['num[-10]', 1]], 'const_key': '4', 'distinct_keys': 799, 'n': 2000, 'n_shapes': 9}
+ L4 {'O5.chosen': [['num[-2]', 1], ['num[4]', 1]], 'O7.chosen': [['const', 7], ['max#1', 2], ['num[-2]', 1]], 'const_key': '5', 'distinct_keys': 814, 'n': 2000, 'n_shapes': 9}
+ L5 {'O5.chosen': [['num[2]', 1], ['len_list_longest', 1]], 'O7.chosen': [['const', 10], ['num[-2]', 2], ['num[9]', 2]], 'const_key': '5', 'distinct_keys': 828, 'n': 2000, 'n_shapes': 10}
+ L6 {'O5.chosen': [['num[-3]', 1], ['num[-2]', 1]], 'O7.chosen': [['const', 7], ['n_distinct_nums', 2], ['num[-8]', 2]], 'const_key': '6', 'distinct_keys': 818, 'n': 2000, 'n_shapes': 10}
+
+## C1.sieve_marking
+ L0 {'A.oracle_any_literal': 0.162, 'O1.shape_const_cv': 0.236, 'O5.chosen': [['n_distinct_nums', 2]], 'O7.best_rule_per_shape_cv': 0.236, 'O7.chosen': [['const', 2], ['const_3', 2]], 'R.ones_minus_strikes_naive': 0.214, 'const_key': '5', 'const_overall': 0.184, 'distinct_keys': 39, 'n': 2000, 'n_shapes': 2}
+ L1 {'O1.shape_const_cv': 0.222, 'O5.chosen': [['n_distinct_nums', 2]], 'O7.best_rule_per_shape_cv': 0.222, 'O7.chosen': [['const', 4]], 'R.ones_minus_strikes_naive': 0.225, 'const_key': '7', 'const_overall': 0.2, 'distinct_keys': 58, 'n': 2000, 'n_shapes': 2}
+ L2 {'O1.shape_const_cv': 0.19, 'O5.chosen': [['zeros_list1', 1], ['n_distinct_nums', 1]], 'O7.best_rule_per_shape_cv': 0.19, 'O7.chosen': [['const', 4]], 'R.ones_minus_strikes_naive': 0.154, 'const_key': '7', 'distinct_keys': 96, 'n': 2000, 'n_shapes': 2}
+ L3 {'O1.shape_const_cv': 0.176, 'O5.chosen': [['sum_list1', 2]], 'O7.best_rule_per_shape_cv': 0.176, 'O7.chosen': [['const', 4]], 'R.ones_minus_strikes_naive': 0.153, 'const_key': '9', 'distinct_keys': 133, 'n': 2000, 'n_shapes': 2}
+ L4 {'O5.chosen': [['zeros_list1', 2]], 'O7.chosen': [['const', 4]], 'const_key': '10', 'distinct_keys': 175, 'n': 2000, 'n_shapes': 2}
+ L5 {'O5.chosen': [['num[-3]', 2]], 'O7.chosen': [['const', 4]], 'const_key': '12', 'distinct_keys': 201, 'n': 2000, 'n_shapes': 2}
+ L6 {'O5.chosen': [['zeros_list1', 2]], 'O7.chosen': [['const', 4]], 'const_key': '12', 'distinct_keys': 257, 'n': 2000, 'n_shapes': 2}
+
+## C1.string_pair_table
+ L0 {'A.oracle_list_or_string_stat': 0.328, 'O1.shape_const_cv': 0.234, 'O5.best_literal_rule_cv': 0.179, 'O5.chosen': [['n_distinct_nums', 2]], 'O7.best_rule_per_shape_cv': 0.234, 'O7.chosen': [['const', 4], ['n_distinct_nums', 2]], 'R.hamming_plus_lendiff': 0.196, 'R.multiset_overlap': 0.185, 'const_key': '2', 'const_overall': 0.179, 'distinct_keys': 50, 'n': 2000, 'n_shapes': 3}
+ L1 {'A.oracle_list_or_string_stat': 0.32, 'O1.shape_const_cv': 0.204, 'O5.best_literal_rule_cv': 0.158, 'O5.chosen': [['n_distinct_nums', 2]], 'O7.best_rule_per_shape_cv': 0.204, 'O7.chosen': [['const', 4], ['n_distinct_nums', 2]], 'R.multiset_overlap': 0.188, 'const_key': '2', 'const_overall': 0.158, 'distinct_keys': 88, 'n': 2000, 'n_shapes': 3}
+ L2 {'A.oracle_list_or_string_stat': 0.259, 'O1.shape_const_cv': 0.201, 'O5.chosen': [['n_distinct_nums', 2]], 'O7.best_rule_per_shape_cv': 0.201, 'O7.chosen': [['const', 4], ['n_distinct_nums', 2]], 'R.hamming_plus_lendiff': 0.192, 'R.multiset_overlap': 0.167, 'const_key': '2', 'distinct_keys': 107, 'n': 2000, 'n_shapes': 3}
+ L3 {'A.oracle_list_or_string_stat': 0.262, 'O1.shape_const_cv': 0.165, 'O5.chosen': [['const_3', 2]], 'O7.best_rule_per_shape_cv': 0.165, 'O7.chosen': [['const', 4], ['const_3', 2]], 'const_key': '3', 'distinct_keys': 174, 'n': 2000, 'n_shapes': 3}
+ L4 {'A.oracle_list_or_string_stat': 0.233, 'O1.shape_const_cv': 0.169, 'O5.chosen': [['const_3', 2]], 'O7.best_rule_per_shape_cv': 0.169, 'O7.chosen': [['const', 4], ['const_3', 2]], 'R.hamming_plus_lendiff': 0.166, 'const_key': '3', 'distinct_keys': 191, 'n': 2000, 'n_shapes': 3}
+ L5 {'A.oracle_list_or_string_stat': 0.225, 'O1.shape_const_cv': 0.167, 'O5.chosen': [['const_3', 2]], 'O7.best_rule_per_shape_cv': 0.167, 'O7.chosen': [['const', 4], ['const_3', 2]], 'const_key': '3', 'distinct_keys': 289, 'n': 2000, 'n_shapes': 3}
+ L6 {'A.oracle_list_or_string_stat': 0.204, 'O1.shape_const_cv': 0.151, 'O5.chosen': [['const_3', 2]], 'O7.best_rule_per_shape_cv': 0.151, 'O7.chosen': [['const', 4], ['const_3', 2]], 'const_key': '3', 'distinct_keys': 289, 'n': 2000, 'n_shapes': 3}
+
+## C1.turtle_walk
+ L0 {'A.lit_max': 0.176, 'A.oracle_any_literal': 0.606, 'A.oracle_list_or_string_stat': 0.646, 'O1.shape_const_cv': 0.206, 'O5.best_literal_rule_cv': 0.18, 'O5.chosen': [['max#2', 2]], 'O7.best_rule_per_shape_cv': 0.206, 'O7.chosen': [['max#2', 2], ['num[-8]', 2], ['const', 2]], 'R.F_minus_B': 0.615, 'R.count_F': 0.615, 'const_key': '3', 'const_overall': 0.18, 'distinct_keys': 51, 'n': 2000, 'n_shapes': 3}
+ L1 {'A.lit_max': 0.15, 'A.oracle_any_literal': 0.431, 'A.oracle_list_or_string_stat': 0.585, 'O1.shape_const_cv': 0.158, 'O5.best_literal_rule_cv': 0.15, 'O5.chosen': [['num[-8]', 2]], 'O7.best_rule_per_shape_cv': 0.155, 'O7.chosen': [['num[-8]', 3], ['const', 2], ['max#2', 1]], 'R.F_minus_B': 0.53, 'R.count_F': 0.53, 'const_key': '4', 'const_overall': 0.15, 'distinct_keys': 96, 'n': 2000, 'n_shapes': 3}
+ L2 {'A.oracle_any_literal': 0.327, 'A.oracle_list_or_string_stat': 0.523, 'O5.chosen': [['num[-8]', 2]], 'O7.chosen': [['const', 3], ['num[-8]', 2], ['max#2', 1]], 'R.F_minus_B': 0.436, 'R.count_F': 0.436, 'const_key': '4', 'distinct_keys': 145, 'n': 2000, 'n_shapes': 3}
+ L3 {'A.oracle_any_literal': 0.44, 'A.oracle_list_or_string_stat': 0.298, 'O5.chosen': [['max#2', 1], ['num[-8]', 1]], 'O7.chosen': [['max#2', 2], ['const', 2], ['num[-8]', 2]], 'R.F_minus_B': 0.321, 'const_key': '4', 'distinct_keys': 136, 'n': 2000, 'n_shapes': 3}
+ L4 {'A.oracle_any_literal': 0.35, 'A.oracle_list_or_string_stat': 0.259, 'O5.chosen': [['num[-8]', 2]], 'O7.chosen': [['num[-8]', 3], ['const', 2], ['max#2', 1]], 'R.F_minus_B': 0.287, 'const_key': '4', 'distinct_keys': 160, 'n': 2000, 'n_shapes': 3}
+ L5 {'A.oracle_any_literal': 0.32, 'A.oracle_list_or_string_stat': 0.241, 'O5.chosen': [['num[-8]', 2]], 'O7.chosen': [['max#2', 2], ['num[-8]', 2], ['const', 2]], 'R.F_minus_B': 0.254, 'const_key': '4', 'distinct_keys': 182, 'n': 2000, 'n_shapes': 3}
+ L6 {'A.oracle_any_literal': 0.255, 'A.oracle_list_or_string_stat': 0.216, 'O5.chosen': [['num[-8]', 1], ['n_distinct_nums', 1]], 'O7.chosen': [['const', 4], ['n_distinct_nums', 2]], 'R.F_minus_B': 0.217, 'const_key': '4', 'distinct_keys': 203, 'n': 2000, 'n_shapes': 3}
+
+## C1.union_find_links
+ L0 {'A.oracle_any_literal': 0.256, 'A.oracle_list_or_string_stat': 0.247, 'O5.chosen': [['num[-9]', 1], ['num[-10]', 1]], 'O7.chosen': [['num[0]', 6], ['num[4]', 2], ['num[9]', 1]], 'const_key': '0', 'distinct_keys': 460, 'n': 2000, 'n_shapes': 6}
+ L1 {'A.oracle_any_literal': 0.239, 'A.oracle_list_or_string_stat': 0.231, 'O5.chosen': [['num[0]', 1], ['num[9]', 1]], 'O7.chosen': [['num[0]', 5], ['num[9]', 4], ['num[6]', 1]], 'const_key': '0', 'distinct_keys': 961, 'n': 2000, 'n_shapes': 7}
+ L2 {'A.oracle_any_literal': 0.241, 'A.oracle_list_or_string_stat': 0.224, 'O5.chosen': [['num[0]', 2]], 'O7.chosen': [['num[0]', 7], ['num[-2]', 3], ['num[6]', 2]], 'const_key': '0', 'distinct_keys': 1095, 'n': 2000, 'n_shapes': 8}
+ L3 {'A.oracle_any_literal': 0.228, 'A.oracle_list_or_string_stat': 0.204, 'O5.chosen': [['num[0]', 2]], 'O7.chosen': [['num[0]', 10], ['num[7]', 2], ['zeros_list1', 2]], 'const_key': '0', 'distinct_keys': 1153, 'n': 2000, 'n_shapes': 9}
+ L4 {'A.oracle_any_literal': 0.233, 'A.oracle_list_or_string_stat': 0.193, 'O5.chosen': [['num[0]', 2]], 'O7.chosen': [['num[0]', 13], ['num[8]', 3], ['num[5]', 1]], 'const_key': '0', 'distinct_keys': 1158, 'n': 2000, 'n_shapes': 10}
+ L5 {'A.oracle_any_literal': 0.202, 'A.oracle_list_or_string_stat': 0.166, 'O5.chosen': [['num[0]', 2]], 'O7.chosen': [['num[0]', 11], ['num[-10]', 2], ['const', 2]], 'const_key': '0', 'distinct_keys': 1214, 'n': 2000, 'n_shapes': 11}
+ L6 {'A.oracle_any_literal': 0.216, 'A.oracle_list_or_string_stat': 0.165, 'O5.chosen': [['num[0]', 2]], 'O7.chosen': [['num[0]', 12], ['zeros_list1', 4], ['num[-2]', 2]], 'const_key': '0', 'distinct_keys': 1177, 'n': 2000, 'n_shapes': 12}

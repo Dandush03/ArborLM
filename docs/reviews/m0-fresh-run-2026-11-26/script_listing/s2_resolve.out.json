@@ -1,0 +1,2663 @@
+{
+  "ambiguous_bare_names": [],
+  "call_sites": {
+    "docs/reviews/m0-lineage-decision-2026-11-25/audit3_c1/a3_shortcuts.py": [
+      [
+        102,
+        "compile",
+        "compile(src, \"<m>\", \"exec\")"
+      ],
+      [
+        102,
+        "exec",
+        "exec(compile(src, \"<m>\", \"exec\"), {\"__name__\": \"__m__\"})"
+      ],
+      [
+        146,
+        "compile",
+        "re.compile(pat)"
+      ],
+      [
+        157,
+        "compile",
+        "re.compile(pat)"
+      ],
+      [
+        560,
+        "open",
+        "gzip.open(fn, \"rt\")"
+      ],
+      [
+        606,
+        "glob",
+        "glob.glob(os.path.join(gen, \"*.jsonl.gz\"))"
+      ],
+      [
+        635,
+        "open",
+        "open(outp, \"w\")"
+      ]
+    ],
+    "docs/reviews/m0-lineage-decision-2026-11-25/audit3_m1/common_a3.py": [],
+    "docs/reviews/m0-lineage-decision-2026-11-25/audit3_m1/shortcuts_a3.py": [
+      [
+        17,
+        "insert",
+        "sys.path.insert(0, __file__.rsplit(\"/\", 1)[0])"
+      ],
+      [
+        365,
+        "open",
+        "open(path, \"w\")"
+      ]
+    ],
+    "docs/reviews/m0-lineage-decision-2026-11-25/audit3_r2/a3_heur.py": [],
+    "docs/reviews/m0-lineage-decision-2026-11-25/audit3_r2/a3_solvers.py": [],
+    "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py": [
+      [
+        95,
+        "compile",
+        "compile(src, \"<m>\", \"exec\")"
+      ],
+      [
+        95,
+        "exec",
+        "exec(compile(src, \"<m>\", \"exec\"), {\"__name__\": \"__m__\"})"
+      ],
+      [
+        615,
+        "open",
+        "gzip.open(fn, \"rt\")"
+      ],
+      [
+        618,
+        "open",
+        "gzip.open(of, \"wt\")"
+      ],
+      [
+        627,
+        "glob",
+        "glob.glob(os.path.join(gen, \"*.jsonl.gz\"))"
+      ]
+    ],
+    "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py": [
+      [
+        68,
+        "glob",
+        "glob.glob(os.path.join(rd, \"*.jsonl.gz\"))"
+      ],
+      [
+        69,
+        "open",
+        "gzip.open(fn, \"rt\")"
+      ],
+      [
+        88,
+        "open",
+        "open(outp, \"w\")"
+      ]
+    ],
+    "docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/common_a4.py": [],
+    "docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/shortcuts_a4.py": [
+      [
+        22,
+        "insert",
+        "sys.path.insert(0, __file__.rsplit(\"/\", 1)[0])"
+      ],
+      [
+        244,
+        "open",
+        "open(path, \"w\")"
+      ]
+    ],
+    "docs/reviews/m0-lineage-decision-2026-11-25/audit4_r2/a4_heur.py": [],
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f1_draw.py": [
+      [
+        16,
+        "insert",
+        "sys.path.insert(0, os.getcwd())"
+      ],
+      [
+        40,
+        "compile",
+        "compile(src, \"<p>\", \"exec\")"
+      ],
+      [
+        40,
+        "exec",
+        "exec(compile(src, \"<p>\", \"exec\"), {\"__name__\": \"__p__\"})"
+      ],
+      [
+        108,
+        "open",
+        "gzip.open(os.path.join(out, ALIAS.get(lid, lid).replace(\"C1.\", \"\") + \".jsonl.gz\"), \"wt\")"
+      ],
+      [
+        130,
+        "open",
+        "open(os.path.join(a.out, \"meta.json\"), \"w\")"
+      ]
+    ],
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f3_a3_run.py": [
+      [
+        28,
+        "open",
+        "gzip.open(fn, \"rt\")"
+      ],
+      [
+        28,
+        "open",
+        "gzip.open(os.path.join(d, label.replace(\"C1.\", \"\") + \".jsonl.gz\"), \"wt\")"
+      ],
+      [
+        34,
+        "run",
+        "subprocess.run([sys.executable, \"-I\", a3, d, res], capture_output=True, text=True, timeout=3000)"
+      ],
+      [
+        59,
+        "glob",
+        "glob.glob(os.path.join(gen, \"*.jsonl.gz\"))"
+      ],
+      [
+        65,
+        "open",
+        "open(os.path.join(out, \"run_log.json\"), \"w\")"
+      ]
+    ],
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f5_closed_forms.py": [
+      [
+        110,
+        "compile",
+        "compile(src, \"<m>\", \"exec\")"
+      ],
+      [
+        110,
+        "exec",
+        "exec(compile(src, \"<m>\", \"exec\"), {})"
+      ],
+      [
+        147,
+        "open",
+        "gzip.open(os.path.join(gen, base + \".jsonl.gz\"), \"rt\")"
+      ],
+      [
+        164,
+        "open",
+        "open(outp, \"w\")"
+      ]
+    ],
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f5b_closed_forms_v2.py": [
+      [
+        111,
+        "compile",
+        "compile(src, \"<m>\", \"exec\")"
+      ],
+      [
+        111,
+        "exec",
+        "exec(compile(src, \"<m>\", \"exec\"), {})"
+      ],
+      [
+        148,
+        "open",
+        "gzip.open(os.path.join(gen, base + \".jsonl.gz\"), \"rt\")"
+      ],
+      [
+        165,
+        "open",
+        "open(outp, \"w\")"
+      ]
+    ],
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/fm1_common.py": [
+      [
+        17,
+        "load",
+        "json.load(open(\"studies/m0/manifests/m1_fix4_survivors.json\"))"
+      ],
+      [
+        17,
+        "open",
+        "open(\"studies/m0/manifests/m1_fix4_survivors.json\")"
+      ]
+    ],
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5.py": [
+      [
+        32,
+        "Path",
+        "Path(__file__)"
+      ],
+      [
+        33,
+        "insert",
+        "sys.path.insert(0, str(HERE))"
+      ],
+      [
+        37,
+        "Path",
+        "Path(\"docs/reviews/m0-lineage-decision-2026-11-25\")"
+      ],
+      [
+        41,
+        "Path",
+        "Path(path)"
+      ],
+      [
+        41,
+        "insert",
+        "sys.path.insert(0, str(Path(path).parent))"
+      ],
+      [
+        42,
+        "spec_from_file_location",
+        "importlib.util.spec_from_file_location(name, str(path))"
+      ],
+      [
+        45,
+        "exec_module",
+        "spec.loader.exec_module(mod)"
+      ],
+      [
+        251,
+        "open",
+        "open(path, \"w\")"
+      ],
+      [
+        255,
+        "open",
+        "open(path, \"w\")"
+      ]
+    ],
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5_attempt1.py": [
+      [
+        30,
+        "Path",
+        "Path(__file__)"
+      ],
+      [
+        31,
+        "insert",
+        "sys.path.insert(0, str(HERE))"
+      ],
+      [
+        35,
+        "Path",
+        "Path(\"docs/reviews/m0-lineage-decision-2026-11-25\")"
+      ],
+      [
+        39,
+        "Path",
+        "Path(path)"
+      ],
+      [
+        39,
+        "insert",
+        "sys.path.insert(0, str(Path(path).parent))"
+      ],
+      [
+        40,
+        "spec_from_file_location",
+        "importlib.util.spec_from_file_location(name, str(path))"
+      ],
+      [
+        43,
+        "exec_module",
+        "spec.loader.exec_module(mod)"
+      ],
+      [
+        245,
+        "open",
+        "open(path, \"w\")"
+      ],
+      [
+        249,
+        "open",
+        "open(path, \"w\")"
+      ]
+    ],
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/a4copy/gen.py": [],
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/a4copy/gen4.py": [
+      [
+        5,
+        "insert",
+        "sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))"
+      ]
+    ],
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/a4copy/heuristics3.py": [
+      [
+        17,
+        "insert",
+        "sys.path.insert(0, os.path.dirname(__file__))"
+      ]
+    ],
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/a4copy/heuristics4.py": [
+      [
+        17,
+        "insert",
+        "sys.path.insert(0, os.path.dirname(__file__))"
+      ],
+      [
+        594,
+        "open",
+        "open(outp, \"w\")"
+      ]
+    ],
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/a4copy/solvers3.py": [],
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/fgen.py": [
+      [
+        9,
+        "insert",
+        "sys.path.insert(0, W)"
+      ]
+    ],
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/new_rules_final.py": [
+      [
+        8,
+        "insert",
+        "sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))"
+      ]
+    ],
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/run_rules_final.py": [
+      [
+        33,
+        "insert",
+        "sys.path.insert(0, os.path.join(D, \"a4copy\"))"
+      ],
+      [
+        34,
+        "insert",
+        "sys.path.insert(0, D)"
+      ],
+      [
+        46,
+        "open",
+        "open(os.path.join(out, f\"{lid}.impl.jsonl\"), \"w\")"
+      ],
+      [
+        49,
+        "open",
+        "open(os.path.join(out, f\"{lid}.feat.jsonl\"), \"w\")"
+      ],
+      [
+        66,
+        "insert",
+        "sys.path.insert(0, D)"
+      ]
+    ],
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_new_heur.py": [
+      [
+        106,
+        "eval",
+        "eval(\" \".join(toks))"
+      ],
+      [
+        113,
+        "eval",
+        "eval(e)"
+      ]
+    ],
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules.py": [
+      [
+        39,
+        "insert",
+        "sys.path.insert(0, REV + \"audit4_r2\")"
+      ],
+      [
+        40,
+        "insert",
+        "sys.path.insert(0, REV + \"audit3_r2\")"
+      ],
+      [
+        99,
+        "open",
+        "open(OUT, \"w\")"
+      ]
+    ],
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules_new.py": [
+      [
+        57,
+        "open",
+        "open(OUT, \"w\")"
+      ]
+    ],
+    "studies/__init__.py": [],
+    "studies/m0/__init__.py": [],
+    "studies/m0/c1_fix3_battery.py": [
+      [
+        121,
+        "compile",
+        "compile(src, \"<m>\", \"exec\")"
+      ],
+      [
+        121,
+        "exec",
+        "exec(compile(src, \"<m>\", \"exec\"), {\"__name__\": \"__m__\"})"
+      ],
+      [
+        150,
+        "compile",
+        "re.compile(pat)"
+      ],
+      [
+        603,
+        "compile",
+        "re.compile(pat)"
+      ],
+      [
+        786,
+        "insert",
+        "sys.path.insert(0, \".\")"
+      ],
+      [
+        804,
+        "open",
+        "open(a.out, \"w\")"
+      ]
+    ],
+    "studies/m0/c1_fix4_a3_run.py": [
+      [
+        54,
+        "open",
+        "gzip.open(os.path.join(d, name + \".jsonl.gz\"), \"wt\")"
+      ],
+      [
+        54,
+        "open",
+        "gzip.open(src_file, \"rt\")"
+      ],
+      [
+        60,
+        "run",
+        "subprocess.run([py, \"-I\", a3, d, res], capture_output=True, text=True, timeout=timeout, check=False)"
+      ],
+      [
+        73,
+        "glob",
+        "glob.glob(os.path.join(a.gen, \"*.jsonl.gz\"))"
+      ],
+      [
+        90,
+        "open",
+        "open(os.path.join(a.out, \"run_log.json\"), \"w\")"
+      ]
+    ],
+    "studies/m0/c1_fix4_battery.py": [
+      [
+        49,
+        "insert",
+        "sys.path.insert(0, \".\")"
+      ],
+      [
+        67,
+        "open",
+        "open(a.out, \"w\")"
+      ]
+    ],
+    "studies/m0/c1_fix4_draw.py": [
+      [
+        83,
+        "open",
+        "gzip.open(os.path.join(out, name.replace(\"C1.\", \"\") + \".jsonl.gz\"), \"wt\")"
+      ],
+      [
+        90,
+        "insert",
+        "sys.path.insert(0, \".\")"
+      ],
+      [
+        100,
+        "open",
+        "open(os.path.join(a.out, \"meta.json\"), \"w\")"
+      ]
+    ],
+    "studies/m0/c1grammar.py": [
+      [
+        138,
+        "compile",
+        "compile(src, \"<c1>\", \"exec\")"
+      ],
+      [
+        138,
+        "exec",
+        "exec(compile(src, \"<c1>\", \"exec\"), {\"__builtins__\": safe})"
+      ],
+      [
+        176,
+        "run",
+        "subprocess.run(\n        [sys.executable, \"-I\", \"-S\", \"-c\", _RUNNER],\n        input=json.dumps(sources),\n        capture_output=True,\n        text=True,\n        timeout=timeout_s,\n        check=False,\n"
+      ]
+    ],
+    "studies/m0/core.py": [
+      [
+        36,
+        "compile",
+        "re.compile(r\"\\s+\")"
+      ]
+    ],
+    "studies/m0/lineages_c1.py": [],
+    "studies/m0/lineages_c1_common.py": [
+      [
+        102,
+        "import_module",
+        "importlib.import_module(f\"studies.m0.lineages_c1_{fam}\")"
+      ]
+    ],
+    "studies/m0/lineages_c1_fix3.py": [
+      [
+        70,
+        "import_module",
+        "importlib.import_module(f\"studies.m0.{mod}\")"
+      ]
+    ],
+    "studies/m0/lineages_c1_fix4.py": [],
+    "studies/m0/lineages_c1_rev2.py": [
+      [
+        132,
+        "call",
+        "call(\"len\", V(cmds))"
+      ],
+      [
+        134,
+        "call",
+        "call(\"str\", V(x))"
+      ],
+      [
+        134,
+        "call",
+        "call(\"str\", V(y))"
+      ],
+      [
+        182,
+        "call",
+        "call(\"len\", V(code))"
+      ],
+      [
+        200,
+        "call",
+        "call(\"len\", V(a))"
+      ],
+      [
+        200,
+        "call",
+        "call(\"len\", V(b))"
+      ],
+      [
+        244,
+        "call",
+        "call(f, B(\"-\", V(n), half))"
+      ],
+      [
+        244,
+        "call",
+        "call(f, half)"
+      ],
+      [
+        245,
+        "call",
+        "call(f, N(arg))"
+      ],
+      [
+        250,
+        "call",
+        "call(f, V(xs), B(\"+\", V(i), N(1)))"
+      ],
+      [
+        251,
+        "call",
+        "call(\"len\", V(xs))"
+      ],
+      [
+        252,
+        "call",
+        "call(f, LIST(vals), N(0))"
+      ],
+      [
+        255,
+        "call",
+        "call(g, B(\"-\", V(n), N(1)))"
+      ],
+      [
+        256,
+        "call",
+        "call(f, B(\"-\", V(n), N(1)))"
+      ],
+      [
+        256,
+        "call",
+        "call(f, B(\"//\", V(n), N(2)))"
+      ],
+      [
+        257,
+        "call",
+        "call(f, N(arg))"
+      ],
+      [
+        272,
+        "call",
+        "call(f, B(\"-\", V(n), N(1)))"
+      ],
+      [
+        272,
+        "call",
+        "call(f, B(\"-\", V(n), N(2)))"
+      ],
+      [
+        275,
+        "call",
+        "call(f, B(\"-\", V(n), N(1)))"
+      ],
+      [
+        275,
+        "call",
+        "call(f, B(\"-\", V(n), N(2)))"
+      ],
+      [
+        275,
+        "call",
+        "call(f, B(\"-\", V(n), N(3)))"
+      ],
+      [
+        276,
+        "call",
+        "call(f, N(arg))"
+      ],
+      [
+        356,
+        "call",
+        "call(\"str\", V(cand))"
+      ],
+      [
+        356,
+        "call",
+        "call(\"str\", V(cnt))"
+      ]
+    ],
+    "studies/m0/lineages_c1_rev2_traced.py": [
+      [
+        94,
+        "call",
+        "call(\"str\", V(a))"
+      ],
+      [
+        94,
+        "call",
+        "call(\"str\", V(b))"
+      ],
+      [
+        110,
+        "call",
+        "call(\"max\", B(\"+\", V(cur), IDX(V(xs), V(i))), IDX(V(xs), V(i)))"
+      ],
+      [
+        110,
+        "call",
+        "call(\"max\", V(best), V(cur))"
+      ],
+      [
+        141,
+        "call",
+        "call(\"len\", V(s))"
+      ],
+      [
+        148,
+        "call",
+        "call(\"len\", V(s))"
+      ]
+    ],
+    "studies/m0/lineages_k0.py": [],
+    "studies/m0/lineages_m1.py": [],
+    "studies/m0/lineages_m1_common.py": [
+      [
+        59,
+        "import_module",
+        "importlib.import_module(f\"studies.m0.lineages_m1_{fam}\")"
+      ]
+    ],
+    "studies/m0/lineages_m1_fix3.py": [
+      [
+        44,
+        "import_module",
+        "importlib.import_module(f\"studies.m0.lineages_m1_fix3_{m}\")"
+      ]
+    ],
+    "studies/m0/lineages_m1_fix3_b.py": [],
+    "studies/m0/lineages_m1_fix3_c.py": [],
+    "studies/m0/lineages_m1_fix3_common.py": [],
+    "studies/m0/lineages_m1_fix4.py": [],
+    "studies/m0/lineages_m1_rev2.py": [
+      [
+        622,
+        "import_module",
+        "importlib.import_module(\"studies.m0.lineages_m1_rev2\")"
+      ]
+    ],
+    "studies/m0/lineages_r1.py": [],
+    "studies/m0/lineages_r1_clusters.py": [],
+    "studies/m0/lineages_r1_clusters_v2.py": [],
+    "studies/m0/lineages_r1_common.py": [
+      [
+        53,
+        "import_module",
+        "importlib.import_module(f\"studies.m0.lineages_r1_{fam}\")"
+      ]
+    ],
+    "studies/m0/lineages_r1_fix3_clusters.py": [],
+    "studies/m0/lineages_r1_fix3_common.py": [
+      [
+        40,
+        "import_module",
+        "importlib.import_module(f\"studies.m0.lineages_r1_fix3_{m}\")"
+      ]
+    ],
+    "studies/m0/lineages_r1_fix4_clusters.py": [],
+    "studies/m0/lineages_r1_fix4_common.py": [
+      [
+        37,
+        "import_module",
+        "importlib.import_module(f\"studies.m0.lineages_r1_fix4_{m}\")"
+      ]
+    ],
+    "studies/m0/lineages_r1_rev4_common.py": [
+      [
+        39,
+        "import_module",
+        "importlib.import_module(f\"studies.m0.lineages_r1_{m}\")"
+      ]
+    ],
+    "studies/m0/lineages_r2.py": [],
+    "studies/m0/lineages_r2_common.py": [
+      [
+        47,
+        "import_module",
+        "importlib.import_module(f\"studies.m0.lineages_r2_{fam}\")"
+      ]
+    ],
+    "studies/m0/lineages_r2_dynprog.py": [],
+    "studies/m0/lineages_r2_fix3.py": [],
+    "studies/m0/lineages_r2_fix3_b.py": [],
+    "studies/m0/lineages_r2_fix3_c.py": [],
+    "studies/m0/lineages_r2_fix4.py": [],
+    "studies/m0/lineages_r2_graphs.py": [],
+    "studies/m0/lineages_r2_parsing.py": [],
+    "studies/m0/lineages_r2_rev2.py": [],
+    "studies/m0/lineages_r2_structures.py": [],
+    "studies/m0/m1_fix3_shortcuts.py": [
+      [
+        490,
+        "Path",
+        "Path(a.out)"
+      ],
+      [
+        490,
+        "write_text",
+        "Path(a.out).write_text(json.dumps({\"n\": a.n, \"seed\": SEED, \"results\": res, \"flags\": flags(res)}, indent=1, sort_keys=True))"
+      ]
+    ],
+    "studies/m0/m1_fix4_battery.py": [
+      [
+        33,
+        "Path",
+        "Path(__file__)"
+      ],
+      [
+        73,
+        "spec_from_file_location",
+        "importlib.util.spec_from_file_location(name, str(path))"
+      ],
+      [
+        77,
+        "exec_module",
+        "spec.loader.exec_module(mod)"
+      ],
+      [
+        220,
+        "Path",
+        "Path(a.out)"
+      ],
+      [
+        220,
+        "write_text",
+        "Path(a.out).write_text(json.dumps({\"n\": a.n, \"seeds\": {\"own\": 410302, \"a4\": 17, \"a3\": 5}, \"exclusions\": procedure_exclusions(), \"raw\": res, \"summary\": summ}, indent=1, sort_keys=True))"
+      ]
+    ],
+    "studies/m0/r1_fix3_battery.py": [
+      [
+        1151,
+        "open",
+        "open(os.environ[\"FIX3_ALL\"], \"a\")"
+      ],
+      [
+        1151,
+        "open",
+        "open(os.environ[\"FIX3_ALL\"], \"a\")"
+      ]
+    ],
+    "studies/m0/r1_fix4_a3_heur.py": [],
+    "studies/m0/r1_fix4_a3_solvers.py": [],
+    "studies/m0/r1_fix4_a4_heur.py": [
+      [
+        597,
+        "open",
+        "open(outp, \"w\")"
+      ]
+    ],
+    "studies/m0/r1_fix4_gen.py": [],
+    "studies/m0/r1_fix4_measure.py": [
+      [
+        71,
+        "open",
+        "open(os.path.join(out, f\"{lid}.aud.jsonl\"), \"w\")"
+      ],
+      [
+        76,
+        "open",
+        "open(os.path.join(out, f\"{lid}.impl.jsonl\"), \"w\")"
+      ],
+      [
+        81,
+        "open",
+        "open(os.path.join(out, f\"{lid}.feat.jsonl\"), \"w\")"
+      ]
+    ],
+    "studies/m0/r1_fix4_tells.py": [],
+    "studies/m0/r2_fix3_heuristics.py": [],
+    "studies/m0/r2_fix3_set.py": [],
+    "studies/m0/r2_fix4_a3_heur.py": [],
+    "studies/m0/r2_fix4_a3_solvers.py": [],
+    "studies/m0/r2_fix4_a4_heur.py": [],
+    "studies/m0/r2_fix4_battery.py": [
+      [
+        183,
+        "write_text",
+        "a.out.write_text(json.dumps({\"n\": a.n, \"seeds\": a.seeds, \"lineages\": res}, indent=1, sort_keys=True))"
+      ],
+      [
+        186,
+        "read_text",
+        "a.inp.read_text()"
+      ]
+    ],
+    "studies/m0/r2_fix4_set.py": [],
+    "studies/m0/scoring.py": [
+      [
+        25,
+        "compile",
+        "re.compile(r\"^[ \\t]*answer[ \\t]*:[ \\t]*(.*?)[ \\t]*$\", re.IGNORECASE | re.MULTILINE)"
+      ],
+      [
+        26,
+        "compile",
+        "re.compile(r\"^[ \\t]*final answer[ \\t]*:[ \\t]*(.*?)[ \\t]*$\", re.IGNORECASE | re.MULTILINE)"
+      ],
+      [
+        27,
+        "compile",
+        "re.compile(r\"^[ \\t]*####[ \\t]*(.*?)[ \\t]*$\", re.MULTILINE)"
+      ],
+      [
+        30,
+        "compile",
+        "re.compile(r\"\\s+\")"
+      ],
+      [
+        31,
+        "compile",
+        "re.compile(r\"^-?(?:\\d{1,3}(?:,\\d{3})+|\\d+)(?:\\.\\d+)?$\")"
+      ],
+      [
+        32,
+        "compile",
+        "re.compile(r\"^-?\\d+(?:\\s*,\\s*-?\\d+)*$\")"
+      ]
+    ],
+    "studies/m0/solvers_c1.py": [],
+    "studies/m0/vocab.py": []
+  },
+  "commit": "b78e58b1f47619f070dfc6c0a88999d345b1a34b",
+  "dependencies": [
+    {
+      "blob": "eb2a63740167ff2585848df228cda5ad3de94e7b",
+      "how": [
+        "import: docs/reviews/m0-lineage-decision-2026-11-25/audit3_m1/shortcuts_a3.py:18 `common_a3` ['ALL_LEVELS', 'current_set', 'items']",
+        "importlib path (spec_from_file_location; ROOT = Path(__file__).resolve().parents[2], line 33): studies/m0/m1_fix4_battery.py:94"
+      ],
+      "path": "docs/reviews/m0-lineage-decision-2026-11-25/audit3_m1/common_a3.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5_attempt1.py",
+        "studies/m0/m1_fix4_battery.py"
+      ],
+      "sha256": "5863d107f112287c7126eb87a22791279352782c79408e4432ae4aa50186cab4"
+    },
+    {
+      "blob": "aabd88c6b7b763f54c15737846e4943be3bc2601",
+      "how": [
+        "importlib path (spec_from_file_location; AUD cwd-relative, line 35): docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5_attempt1.py:49",
+        "importlib path (spec_from_file_location; AUD cwd-relative, line 37): docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5.py:51",
+        "importlib path (spec_from_file_location; ROOT = Path(__file__).resolve().parents[2], line 33): studies/m0/m1_fix4_battery.py:96"
+      ],
+      "path": "docs/reviews/m0-lineage-decision-2026-11-25/audit3_m1/shortcuts_a3.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5_attempt1.py",
+        "studies/m0/m1_fix4_battery.py"
+      ],
+      "sha256": "7182713b0932ef6615bacf281c91eb73a37e8bca8098802a43cbafe0bba98a83"
+    },
+    {
+      "blob": "c9c990a5b9c452c7449e17f89c503eb82eed8065",
+      "how": [
+        "import: docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules.py:41 `a3_heur`"
+      ],
+      "path": "docs/reviews/m0-lineage-decision-2026-11-25/audit3_r2/a3_heur.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules.py"
+      ],
+      "sha256": "ace6505fa2d270802c658740a7ce2dd2c7942ba15aac2ec5d59bab2132ab57b8"
+    },
+    {
+      "blob": "8992d299a0508efbdc8323308e483befc0a13b54",
+      "how": [
+        "import: docs/reviews/m0-lineage-decision-2026-11-25/audit3_r2/a3_heur.py:9 `a3_solvers`"
+      ],
+      "path": "docs/reviews/m0-lineage-decision-2026-11-25/audit3_r2/a3_solvers.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules.py"
+      ],
+      "sha256": "68985a9dc79f405c6800b3db418dbc66707eca27b5a8f8692e2038198a1f4f76"
+    },
+    {
+      "blob": "3929cecb779ce97bf87efb87db8d7c3670e91b95",
+      "how": [
+        "import: docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/shortcuts_a4.py:23 `common_a4` ['ALL_LEVELS', 'current_set', 'items', 'stem']",
+        "importlib path (spec_from_file_location; ROOT = Path(__file__).resolve().parents[2], line 33): studies/m0/m1_fix4_battery.py:87"
+      ],
+      "path": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/common_a4.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5_attempt1.py",
+        "studies/m0/m1_fix4_battery.py"
+      ],
+      "sha256": "b8a0b596ee282d4d26629c0bd36cdbf363718a96a4cb192b611d489bb3e09073"
+    },
+    {
+      "blob": "6990976f6bce8b9fcf43e916601ac23b80e22141",
+      "how": [
+        "importlib path (spec_from_file_location; AUD = Path('docs/reviews/...').resolve(), cwd-relative, line 37): docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5.py:50",
+        "importlib path (spec_from_file_location; AUD cwd-relative, line 35): docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5_attempt1.py:48",
+        "importlib path (spec_from_file_location; ROOT = Path(__file__).resolve().parents[2], line 33): studies/m0/m1_fix4_battery.py:90"
+      ],
+      "path": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/shortcuts_a4.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5_attempt1.py",
+        "studies/m0/m1_fix4_battery.py"
+      ],
+      "sha256": "bd5cd0ef84ccb23f51ae0a364059f4a23c71f12319a1efbf6ae7521943a1f088"
+    },
+    {
+      "blob": "690d1fc2545e94d2c3c39fd9265f95154de592ff",
+      "how": [
+        "import: docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules.py:41 `a4_heur`"
+      ],
+      "path": "docs/reviews/m0-lineage-decision-2026-11-25/audit4_r2/a4_heur.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules.py"
+      ],
+      "sha256": "d5ea9d70395d83d37d9cadf92740ca3b9ce8c98d15e14b40933f56bbc3115c16"
+    },
+    {
+      "blob": "c514cbc70aa497e199e2ad295c4ba1b961db7e01",
+      "how": [
+        "import: docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5.py:34 `fm1_common` ['items', 'stem', 'survivors']",
+        "import: docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5_attempt1.py:32 `fm1_common` ['items', 'stem', 'survivors']"
+      ],
+      "path": "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/fm1_common.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5_attempt1.py"
+      ],
+      "sha256": "77a5eac2a6cecdb128aa6ff21bfbdeda9000a451fd0e7682a2bdf22f8a498653"
+    },
+    {
+      "blob": "36e60607fd1f35be70631d16be44255d73877bfb",
+      "how": [
+        "import: docs/reviews/m0-lineage-decision-2026-11-25/final_r1/a4copy/heuristics3.py:18 `gen`"
+      ],
+      "path": "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/a4copy/gen.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/run_rules_final.py"
+      ],
+      "sha256": "d864646045d0ff64d14cc3103d689367f96647e1a8937730cf31b16a0ba3d136"
+    },
+    {
+      "blob": "e1b7f9b5d434a194827024c136b7787714c65259",
+      "how": [
+        "import: docs/reviews/m0-lineage-decision-2026-11-25/final_r1/a4copy/gen.py:3 `gen4` ['lineages', 'items']",
+        "import: docs/reviews/m0-lineage-decision-2026-11-25/final_r1/a4copy/heuristics4.py:18 `gen4`"
+      ],
+      "path": "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/a4copy/gen4.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/run_rules_final.py"
+      ],
+      "sha256": "65e27d6275b70d1f6bbf1a17025774dff4223451c71344f1d0e5d220a0d7c599"
+    },
+    {
+      "blob": "b69bb8f3e318f0e99f75bb349afd604fd755ca5d",
+      "how": [
+        "import: docs/reviews/m0-lineage-decision-2026-11-25/final_r1/a4copy/heuristics4.py:19 `heuristics3`"
+      ],
+      "path": "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/a4copy/heuristics3.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/run_rules_final.py"
+      ],
+      "sha256": "4015f2dbdca7f627ad3e8820826ac48abdb78493ecfd776f17976be8033c45d0"
+    },
+    {
+      "blob": "118056ab24ef4e5125a35757c4869507ea475198",
+      "how": [
+        "import: docs/reviews/m0-lineage-decision-2026-11-25/final_r1/run_rules_final.py:36 `heuristics4`"
+      ],
+      "path": "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/a4copy/heuristics4.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/run_rules_final.py"
+      ],
+      "sha256": "cd77464fc5b229f0a41b04693d712046071c206c7ae3c53f25d370495d6b99d8"
+    },
+    {
+      "blob": "dc10dbd03ee3f2f09e39893073abd3aa6cd674f2",
+      "how": [
+        "import: docs/reviews/m0-lineage-decision-2026-11-25/final_r1/a4copy/heuristics3.py:19 `solvers3`"
+      ],
+      "path": "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/a4copy/solvers3.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/run_rules_final.py"
+      ],
+      "sha256": "f6263771cc4a0e0bb10d87944e02dd45ea49fb67c08c82a4f9bf065fcc0a26dd"
+    },
+    {
+      "blob": "958889199d9c6f50066e100e9090bd83f78054ec",
+      "how": [
+        "import: docs/reviews/m0-lineage-decision-2026-11-25/final_r1/a4copy/gen4.py:6 `fgen`",
+        "import: docs/reviews/m0-lineage-decision-2026-11-25/final_r1/new_rules_final.py:9 `fgen`",
+        "import: docs/reviews/m0-lineage-decision-2026-11-25/final_r1/run_rules_final.py:35 `fgen`",
+        "import: docs/reviews/m0-lineage-decision-2026-11-25/final_r1/run_rules_final.py:67 `fgen`"
+      ],
+      "path": "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/fgen.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/new_rules_final.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/run_rules_final.py"
+      ],
+      "sha256": "6e6bc364e12c52413b0af64aad167336fe60ae38680f5019cd22a7ccef36dbb9"
+    },
+    {
+      "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "how": [
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/audit3_m1/common_a3.py:8 `studies.m0.core` ['ALL_LEVELS', 'build_item', 'stream', 'lineages_of']",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/audit3_m1/common_a3.py:9 `studies.m0.lineages_m1_rev2` ['load_rev2', 'NOT_REGISTERED']",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/common_a4.py:10 `studies.m0.lineages_m1_fix3` ['NOT_REGISTERED', 'load_all']",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/common_a4.py:9 `studies.m0.core` ['ALL_LEVELS', 'build_item', 'stream']",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/shortcuts_a4.py:128 `studies.m0.lineages_m1_fix3_b` ['_RULES_FIRST', '_RULES_LAST']",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/shortcuts_a4.py:174 `studies.m0.m1_fix3_shortcuts` ['spec']",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f1_draw.py:54 `studies.m0.lineages_c1`",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f1_draw.py:55 `studies.m0.lineages_c1_common`",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f1_draw.py:56 `studies.m0.core` ['Retry']",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f1_draw.py:57 `studies.m0.c1grammar` ['render']",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f1_draw.py:83 `studies.m0.core` ['Retry']",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f1_draw.py:84 `studies.m0.c1grammar` ['render']",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f1_draw.py:85 `studies.m0.lineages_c1_fix4` ['all_written']",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/final_m1/fm1_common.py:16 `studies.m0.lineages_m1_fix4` ['load_registered']",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/final_m1/fm1_common.py:9 `studies.m0.core` ['ALL_LEVELS', 'build_item', 'stream']",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5.py:35 `studies.m0.core` ['build_item', 'stream']",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5.py:52 `studies.m0.m1_fix3_shortcuts`",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5_attempt1.py:33 `studies.m0.core` ['build_item', 'stream']",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5_attempt1.py:50 `studies.m0.m1_fix3_shortcuts`",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/final_r1/a4copy/heuristics4.py:59 `studies.m0.lineages_r1` ['_rule_eval']",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/final_r1/fgen.py:10 `studies.m0.core` ['Retry']",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/final_r1/fgen.py:11 `studies.m0.lineages_r1_fix4_clusters` ['registered_v4', 'candidates_v4']",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/final_r1/run_rules_final.py:37 `studies.m0` ['r1_fix3_battery']",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules.py:42 `studies.m0.r2_fix3_heuristics` ['OWN']",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules.py:53 `studies.m0.core` ['build_item']",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules.py:54 `studies.m0.r2_fix4_set` ['fix4_set']",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules_new.py:22 `studies.m0.core` ['build_item']",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules_new.py:23 `studies.m0.r2_fix4_set` ['fix4_set']",
+        "import (package __init__): studies/m0/c1_fix3_battery.py:653 `studies.m0.core` ['lineages_of']",
+        "import (package __init__): studies/m0/c1_fix3_battery.py:654 `studies.m0.lineages_c1_common` ['load_batch1']",
+        "import (package __init__): studies/m0/c1_fix3_battery.py:655 `studies.m0.lineages_c1_fix3` ['load_fix3']",
+        "import (package __init__): studies/m0/c1_fix3_battery.py:656 `studies.m0.lineages_c1_rev2` ['load_rev2']",
+        "import (package __init__): studies/m0/c1_fix3_battery.py:662 `studies.m0.c1grammar` ['render']",
+        "import (package __init__): studies/m0/c1_fix3_battery.py:663 `studies.m0.core` ['Retry']",
+        "import (package __init__): studies/m0/c1_fix3_battery.py:794 `studies.m0.lineages_c1_fix3` ['load_fix3']",
+        "import (package __init__): studies/m0/c1_fix4_battery.py:20 `studies.m0.c1_fix4_draw` ['RULE_ALIAS']",
+        "import (package __init__): studies/m0/c1_fix4_battery.py:26 `studies.m0` ['c1_fix3_battery']",
+        "import (package __init__): studies/m0/c1_fix4_battery.py:27 `studies.m0.lineages_c1_fix4` ['all_written']",
+        "import (package __init__): studies/m0/c1_fix4_battery.py:42 `studies.m0` ['c1_fix3_battery']",
+        "import (package __init__): studies/m0/c1_fix4_battery.py:57 `studies.m0.c1_fix3_battery` ['summarise']",
+        "import (package __init__): studies/m0/c1_fix4_battery.py:58 `studies.m0.c1_fix4_draw` ['audit4_set']",
+        "import (package __init__): studies/m0/c1_fix4_draw.py:42 `studies.m0.lineages_c1_fix3` ['NOT_REGISTERED']",
+        "import (package __init__): studies/m0/c1_fix4_draw.py:43 `studies.m0.lineages_c1_fix3` ['SUPERSEDES3', 'load_fix3']",
+        "import (package __init__): studies/m0/c1_fix4_draw.py:44 `studies.m0.lineages_c1_fix4` ['all_written']",
+        "import (package __init__): studies/m0/c1_fix4_draw.py:45 `studies.m0.lineages_c1_rev2` ['PROPOSED']",
+        "import (package __init__): studies/m0/c1_fix4_draw.py:46 `studies.m0.lineages_c1_rev2` ['SUPERSEDES']",
+        "import (package __init__): studies/m0/c1_fix4_draw.py:56 `studies.m0.c1grammar` ['render']",
+        "import (package __init__): studies/m0/c1_fix4_draw.py:57 `studies.m0.core` ['Retry']",
+        "import (package __init__): studies/m0/c1_fix4_draw.py:58 `studies.m0.lineages_c1_fix4` ['all_written']",
+        "import (package __init__): studies/m0/core.py:116 `studies.m0` ['lineages_c1', 'lineages_k0', 'lineages_m1', 'lineages_r1', 'lineages_r2']",
+        "import (package __init__): studies/m0/lineages_c1.py:14 `studies.m0.c1grammar` ['render', 'run_inprocess']",
+        "import (package __init__): studies/m0/lineages_c1.py:15 `studies.m0.core` ['Built', 'Retry', 'lineage']",
+        "import (package __init__): studies/m0/lineages_c1.py:16 `studies.m0.vocab` ['PSEUDO']",
+        "import (package __init__): studies/m0/lineages_c1_common.py:117 `studies.m0.c1grammar` ['run_isolated']",
+        "import (package __init__): studies/m0/lineages_c1_common.py:118 `studies.m0.scoring` ['in_grammar', 'normalise_answer']",
+        "import (package __init__): studies/m0/lineages_c1_common.py:119 `studies.m0.solvers_c1` ['c1_trace']",
+        "import (package __init__): studies/m0/lineages_c1_common.py:134 `studies.m0.c1grammar` ['render']",
+        "import (package __init__): studies/m0/lineages_c1_common.py:24 `studies.m0.core` ['ALL_LEVELS', 'Built', 'Lineage', 'build_item', 'lineages_of', 'stream']",
+        "import (package __init__): studies/m0/lineages_c1_common.py:25 `studies.m0.lineages_c1` ['LETTERS', 'VARS', '_finish', '_names']",
+        "import (package __init__): studies/m0/lineages_c1_fix3.py:29 `studies.m0.core` ['Built', 'Lineage']",
+        "import (package __init__): studies/m0/lineages_c1_fix4.py:198 `studies.m0.lineages_c1_fix3` ['NOT_REGISTERED']",
+        "import (package __init__): studies/m0/lineages_c1_fix4.py:199 `studies.m0.lineages_c1_fix3` ['SUPERSEDES3']",
+        "import (package __init__): studies/m0/lineages_c1_fix4.py:200 `studies.m0.lineages_c1_rev2` ['PROPOSED']",
+        "import (package __init__): studies/m0/lineages_c1_fix4.py:201 `studies.m0.lineages_c1_rev2` ['SUPERSEDES']",
+        "import (package __init__): studies/m0/lineages_c1_fix4.py:25 `studies.m0.core` ['Built', 'Lineage', 'lineages_of']",
+        "import (package __init__): studies/m0/lineages_c1_fix4.py:26 `studies.m0.lineages_c1` ['FUNCS', 'LETTERS', 'PSEUDO']",
+        "import (package __init__): studies/m0/lineages_c1_fix4.py:27 `studies.m0.lineages_c1_common` ['IDX', 'LIST', 'B', 'C', 'N', 'S', 'V', 'finish', 'load_batch1', 'names']",
+        "import (package __init__): studies/m0/lineages_c1_fix4.py:28 `studies.m0.lineages_c1_fix3` ['load_fix3']",
+        "import (package __init__): studies/m0/lineages_c1_fix4.py:29 `studies.m0.lineages_c1_rev2` ['load_rev2']",
+        "import (package __init__): studies/m0/lineages_c1_rev2.py:19 `studies.m0.core` ['Built', 'Lineage', 'lineages_of']",
+        "import (package __init__): studies/m0/lineages_c1_rev2.py:20 `studies.m0.lineages_c1` ['FUNCS']",
+        "import (package __init__): studies/m0/lineages_c1_rev2.py:21 `studies.m0.lineages_c1_common` ['AND', 'IDX', 'LIST', 'B', 'C', 'N', 'S', 'V', 'finish', 'names']",
+        "import (package __init__): studies/m0/lineages_c1_rev2.py:285 `studies.m0.core` ['Retry']",
+        "import (package __init__): studies/m0/lineages_c1_rev2.py:308 `studies.m0.core` ['Retry']",
+        "import (package __init__): studies/m0/lineages_c1_rev2.py:53 `studies.m0.lineages_c1_rev2_traced`",
+        "import (package __init__): studies/m0/lineages_c1_rev2.py:75 `studies.m0.core` ['Retry']",
+        "import (package __init__): studies/m0/lineages_c1_rev2_traced.py:16 `studies.m0.core` ['Built', 'Retry']",
+        "import (package __init__): studies/m0/lineages_c1_rev2_traced.py:17 `studies.m0.lineages_c1_common` ['AND', 'IDX', 'LIST', 'B', 'C', 'N', 'S', 'V', 'finish', 'names']",
+        "import (package __init__): studies/m0/lineages_c1_rev2_traced.py:18 `studies.m0.lineages_c1_rev2` ['call', 'rev2']",
+        "import (package __init__): studies/m0/lineages_k0.py:13 `studies.m0.core` ['Built', 'lineage']",
+        "import (package __init__): studies/m0/lineages_k0.py:14 `studies.m0.vocab` ['COLOURS', 'NAMES', 'OBJECTS', 'PSEUDO']",
+        "import (package __init__): studies/m0/lineages_m1.py:13 `studies.m0.core` ['Built', 'Retry', 'lineage']",
+        "import (package __init__): studies/m0/lineages_m1.py:14 `studies.m0.vocab` ['NAMES', 'OBJECTS']",
+        "import (package __init__): studies/m0/lineages_m1_common.py:16 `studies.m0.core` ['ALL_LEVELS', 'Built', 'Lineage', 'build_item', 'lineages_of', 'stream']",
+        "import (package __init__): studies/m0/lineages_m1_common.py:43 `studies.m0.vocab` ['NAMES', 'TOWNS']",
+        "import (package __init__): studies/m0/lineages_m1_common.py:67 `studies.m0.scoring` ['in_grammar', 'normalise_answer']",
+        "import (package __init__): studies/m0/lineages_m1_fix3.py:12 `studies.m0.core` ['Lineage']",
+        "import (package __init__): studies/m0/lineages_m1_fix3.py:13 `studies.m0.lineages_m1_fix3_common` ['FIX3', 'STEM_OF']",
+        "import (package __init__): studies/m0/lineages_m1_fix3.py:45 `studies.m0.lineages_m1_common` ['load_batch']",
+        "import (package __init__): studies/m0/lineages_m1_fix3_b.py:12 `studies.m0.core` ['Built']",
+        "import (package __init__): studies/m0/lineages_m1_fix3_b.py:13 `studies.m0.lineages_m1_fix3_common` ['DECIMAL', 'WHOLE', 'and_', 'ctx', 'fmt_exact', 'pl', 'r3', 'until']",
+        "import (package __init__): studies/m0/lineages_m1_fix3_b.py:14 `studies.m0.vocab` ['NAMES']",
+        "import (package __init__): studies/m0/lineages_m1_fix3_c.py:11 `studies.m0.core` ['Built']",
+        "import (package __init__): studies/m0/lineages_m1_fix3_c.py:12 `studies.m0.lineages_m1_fix3_common` ['WHOLE', 'and_', 'ctx', 'r3', 'until']",
+        "import (package __init__): studies/m0/lineages_m1_fix3_c.py:13 `studies.m0.vocab` ['NAMES']",
+        "import (package __init__): studies/m0/lineages_m1_fix3_common.py:20 `studies.m0.core` ['Built', 'Lineage']",
+        "import (package __init__): studies/m0/lineages_m1_fix3_common.py:79 `studies.m0.vocab` ['NAMES', 'TOWNS']",
+        "import (package __init__): studies/m0/lineages_m1_fix4.py:23 `studies.m0.core` ['Built', 'Lineage']",
+        "import (package __init__): studies/m0/lineages_m1_fix4.py:24 `studies.m0.lineages_m1_fix3` ['NOT_REGISTERED']",
+        "import (package __init__): studies/m0/lineages_m1_fix4.py:25 `studies.m0.lineages_m1_fix3` ['load_all']",
+        "import (package __init__): studies/m0/lineages_m1_fix4.py:26 `studies.m0.lineages_m1_fix3_b` ['_FIRST_TXT', '_LAST_TXT', '_RULES_LAST', '_SUBSETS', '_coprime_set', 'slot_count']",
+        "import (package __init__): studies/m0/lineages_m1_fix4.py:34 `studies.m0.lineages_m1_fix3_common` ['DECIMAL', 'WHOLE', 'and_', 'ctx', 'fmt_exact', 'until']",
+        "import (package __init__): studies/m0/lineages_m1_fix4.py:35 `studies.m0.vocab` ['NAMES']",
+        "import (package __init__): studies/m0/lineages_m1_rev2.py:26 `studies.m0.core` ['Built', 'Lineage', 'lineages_of']",
+        "import (package __init__): studies/m0/lineages_m1_rev2.py:27 `studies.m0.lineages_m1` ['fmt']",
+        "import (package __init__): studies/m0/lineages_m1_rev2.py:28 `studies.m0.lineages_m1_common` ['DECIMAL', 'WHOLE', 'and_', 'ctx', 'load_batch']",
+        "import (package __init__): studies/m0/lineages_m1_rev2.py:29 `studies.m0.vocab` ['NAMES', 'OBJECTS']",
+        "import (package __init__): studies/m0/lineages_r1.py:14 `studies.m0.core` ['Built', 'Retry', 'lineage']",
+        "import (package __init__): studies/m0/lineages_r1.py:15 `studies.m0.vocab` ['COLOURS', 'EVENTS', 'MARKS', 'NAMES', 'OBJECTS', 'PETS', 'PSEUDO', 'SHAPES', 'TOWNS']",
+        "import (package __init__): studies/m0/lineages_r1_clusters.py:14 `studies.m0.core` ['Lineage', 'lineages_of', 'stream']",
+        "import (package __init__): studies/m0/lineages_r1_clusters.py:76 `studies.m0.lineages_r1_common` ['load_pilot']",
+        "import (package __init__): studies/m0/lineages_r1_clusters_v2.py:18 `studies.m0` ['lineages_r1_clusters']",
+        "import (package __init__): studies/m0/lineages_r1_clusters_v2.py:19 `studies.m0.core` ['Lineage', 'stream']",
+        "import (package __init__): studies/m0/lineages_r1_clusters_v2.py:20 `studies.m0.lineages_r1_rev4_common` ['REPLACES', 'load_rev4']",
+        "import (package __init__): studies/m0/lineages_r1_common.py:16 `studies.m0.core` ['Built', 'Lineage', 'lineages_of']",
+        "import (package __init__): studies/m0/lineages_r1_fix3_clusters.py:14 `studies.m0` ['lineages_r1_clusters']",
+        "import (package __init__): studies/m0/lineages_r1_fix3_clusters.py:15 `studies.m0` ['lineages_r1_clusters_v2']",
+        "import (package __init__): studies/m0/lineages_r1_fix3_clusters.py:16 `studies.m0.core` ['Lineage', 'stream']",
+        "import (package __init__): studies/m0/lineages_r1_fix3_clusters.py:17 `studies.m0.lineages_r1_fix3_common` ['REPLACES', 'load_fix3']",
+        "import (package __init__): studies/m0/lineages_r1_fix3_common.py:16 `studies.m0.core` ['Built', 'Lineage']",
+        "import (package __init__): studies/m0/lineages_r1_fix4_clusters.py:14 `studies.m0` ['lineages_r1_fix3_clusters']",
+        "import (package __init__): studies/m0/lineages_r1_fix4_clusters.py:15 `studies.m0.core` ['Lineage']",
+        "import (package __init__): studies/m0/lineages_r1_fix4_clusters.py:16 `studies.m0.lineages_r1_fix4_common` ['REPLACES', 'load_fix4']",
+        "import (package __init__): studies/m0/lineages_r1_fix4_common.py:15 `studies.m0.core` ['Built', 'Lineage']",
+        "import (package __init__): studies/m0/lineages_r1_rev4_common.py:16 `studies.m0.core` ['Built', 'Lineage', 'lineages_of']",
+        "import (package __init__): studies/m0/lineages_r2.py:10 `studies.m0.vocab` ['PSEUDO']",
+        "import (package __init__): studies/m0/lineages_r2.py:9 `studies.m0.core` ['Built', 'Retry', 'lineage']",
+        "import (package __init__): studies/m0/lineages_r2_common.py:21 `studies.m0.core` ['ALL_LEVELS', 'Built', 'Lineage', 'Retry', 'build_item', 'lineages_of', 'stream']",
+        "import (package __init__): studies/m0/lineages_r2_common.py:72 `studies.m0.scoring` ['in_grammar', 'normalise_answer']",
+        "import (package __init__): studies/m0/lineages_r2_dynprog.py:10 `studies.m0.lineages_r2_common` ['batch1', 'lst', 'until']",
+        "import (package __init__): studies/m0/lineages_r2_dynprog.py:9 `studies.m0.core` ['Built', 'Retry']",
+        "import (package __init__): studies/m0/lineages_r2_fix3.py:20 `studies.m0.core` ['Built', 'Lineage']",
+        "import (package __init__): studies/m0/lineages_r2_fix3.py:21 `studies.m0.lineages_r2_common` ['lst']",
+        "import (package __init__): studies/m0/lineages_r2_fix3.py:247 `studies.m0.core` ['Retry']",
+        "import (package __init__): studies/m0/lineages_r2_fix3.py:42 `studies.m0.lineages_r2_fix3_b`",
+        "import (package __init__): studies/m0/lineages_r2_fix3.py:43 `studies.m0.lineages_r2_fix3_c`",
+        "import (package __init__): studies/m0/lineages_r2_fix3_b.py:10 `studies.m0.core` ['Built', 'Retry']",
+        "import (package __init__): studies/m0/lineages_r2_fix3_b.py:11 `studies.m0.lineages_r2_common` ['and_', 'lst', 'until']",
+        "import (package __init__): studies/m0/lineages_r2_fix3_b.py:12 `studies.m0.lineages_r2_fix3` ['fix3']",
+        "import (package __init__): studies/m0/lineages_r2_fix3_b.py:13 `studies.m0.lineages_r2_graphs` ['mst_weight']",
+        "import (package __init__): studies/m0/lineages_r2_fix3_b.py:14 `studies.m0.lineages_r2_parsing` ['evaluate']",
+        "import (package __init__): studies/m0/lineages_r2_fix3_b.py:15 `studies.m0.vocab` ['OBJECTS', 'TOWNS']",
+        "import (package __init__): studies/m0/lineages_r2_fix3_c.py:11 `studies.m0.core` ['Built', 'Retry']",
+        "import (package __init__): studies/m0/lineages_r2_fix3_c.py:12 `studies.m0.lineages_r2_common` ['lst']",
+        "import (package __init__): studies/m0/lineages_r2_fix3_c.py:13 `studies.m0.lineages_r2_fix3` ['fix3']",
+        "import (package __init__): studies/m0/lineages_r2_fix3_c.py:14 `studies.m0.vocab` ['PSEUDO']",
+        "import (package __init__): studies/m0/lineages_r2_fix4.py:27 `studies.m0.core` ['Built', 'Lineage', 'Retry']",
+        "import (package __init__): studies/m0/lineages_r2_fix4.py:28 `studies.m0.lineages_r2` ['ALPHA']",
+        "import (package __init__): studies/m0/lineages_r2_fix4.py:29 `studies.m0.lineages_r2_common` ['and_', 'lst']",
+        "import (package __init__): studies/m0/lineages_r2_fix4.py:30 `studies.m0.lineages_r2_fix3` ['_pick_earliest_finish']",
+        "import (package __init__): studies/m0/lineages_r2_fix4.py:31 `studies.m0.lineages_r2_fix3_b` ['_num', '_paren_sum']",
+        "import (package __init__): studies/m0/lineages_r2_fix4.py:32 `studies.m0.lineages_r2_graphs` ['mst_weight']",
+        "import (package __init__): studies/m0/lineages_r2_fix4.py:33 `studies.m0.lineages_r2_parsing` ['evaluate']",
+        "import (package __init__): studies/m0/lineages_r2_fix4.py:34 `studies.m0.vocab` ['PSEUDO', 'TOWNS']",
+        "import (package __init__): studies/m0/lineages_r2_graphs.py:10 `studies.m0.vocab` ['NAMES', 'TOWNS']",
+        "import (package __init__): studies/m0/lineages_r2_graphs.py:8 `studies.m0.core` ['Built']",
+        "import (package __init__): studies/m0/lineages_r2_graphs.py:9 `studies.m0.lineages_r2_common` ['and_', 'batch1', 'until']",
+        "import (package __init__): studies/m0/lineages_r2_parsing.py:8 `studies.m0.core` ['Built']",
+        "import (package __init__): studies/m0/lineages_r2_parsing.py:9 `studies.m0.lineages_r2_common` ['batch1', 'until']",
+        "import (package __init__): studies/m0/lineages_r2_rev2.py:19 `studies.m0.core` ['Built', 'Lineage', 'Retry', 'lineages_of']",
+        "import (package __init__): studies/m0/lineages_r2_rev2.py:20 `studies.m0.lineages_r2_common` ['lst', 'until']",
+        "import (package __init__): studies/m0/lineages_r2_rev2.py:21 `studies.m0.lineages_r2_dynprog` ['coin_min']",
+        "import (package __init__): studies/m0/lineages_r2_rev2.py:24 `studies.m0.lineages_r2_graphs` ['deferred_acceptance', 'mst_weight']",
+        "import (package __init__): studies/m0/lineages_r2_rev2.py:25 `studies.m0.lineages_r2_parsing` ['_render_ltr', '_render_std', '_tree', '_val', 'balanced', 'evaluate', 'match_of', 'random_balanced']",
+        "import (package __init__): studies/m0/lineages_r2_rev2.py:35 `studies.m0.lineages_r2_structures` ['cache_run', 'hash_table']",
+        "import (package __init__): studies/m0/lineages_r2_rev2.py:36 `studies.m0.vocab` ['NAMES', 'OBJECTS', 'TOWNS']",
+        "import (package __init__): studies/m0/lineages_r2_structures.py:10 `studies.m0.lineages_r2_common` ['batch1', 'lst', 'until']",
+        "import (package __init__): studies/m0/lineages_r2_structures.py:11 `studies.m0.vocab` ['OBJECTS']",
+        "import (package __init__): studies/m0/lineages_r2_structures.py:9 `studies.m0.core` ['Built', 'Retry']",
+        "import (package __init__): studies/m0/m1_fix3_shortcuts.py:27 `studies.m0.core` ['ALL_LEVELS', 'build_item', 'stream']",
+        "import (package __init__): studies/m0/m1_fix3_shortcuts.py:278 `studies.m0.lineages_m1_fix3_b` ['_RULES_FIRST', '_RULES_LAST']",
+        "import (package __init__): studies/m0/m1_fix3_shortcuts.py:380 `studies.m0.lineages_m1_fix3_c` ['fit_set']",
+        "import (package __init__): studies/m0/m1_fix3_shortcuts.py:408 `studies.m0.core` ['lineages_of']",
+        "import (package __init__): studies/m0/m1_fix3_shortcuts.py:409 `studies.m0.lineages_m1_rev2` ['NOT_REGISTERED', 'load_rev2']",
+        "import (package __init__): studies/m0/m1_fix3_shortcuts.py:412 `studies.m0.lineages_m1_fix3` ['load_all']",
+        "import (package __init__): studies/m0/m1_fix4_battery.py:101 `studies.m0.m1_fix3_shortcuts`",
+        "import (package __init__): studies/m0/m1_fix4_battery.py:30 `studies.m0.core` ['ALL_LEVELS']",
+        "import (package __init__): studies/m0/m1_fix4_battery.py:31 `studies.m0.lineages_m1_fix4` ['load_all', 'load_registered', 'stem']",
+        "import (package __init__): studies/m0/m1_fix4_battery.py:62 `studies.m0.m1_fix3_shortcuts` ['PROCEDURE']",
+        "import (package __init__): studies/m0/r1_fix3_battery.py:1070 `studies.m0.core` ['Retry']",
+        "import (package __init__): studies/m0/r1_fix3_battery.py:1141 `studies.m0.lineages_r1_fix3_common` ['load_fix3']",
+        "import (package __init__): studies/m0/r1_fix3_battery.py:12 `studies.m0.core` ['Built']",
+        "import (package __init__): studies/m0/r1_fix4_a3_heur.py:21 `studies.m0` ['r1_fix4_a3_solvers']",
+        "import (package __init__): studies/m0/r1_fix4_a3_heur.py:22 `studies.m0` ['r1_fix4_gen']",
+        "import (package __init__): studies/m0/r1_fix4_a4_heur.py:21 `studies.m0` ['r1_fix4_a3_heur']",
+        "import (package __init__): studies/m0/r1_fix4_a4_heur.py:22 `studies.m0` ['r1_fix4_gen']",
+        "import (package __init__): studies/m0/r1_fix4_a4_heur.py:62 `studies.m0.lineages_r1` ['_rule_eval']",
+        "import (package __init__): studies/m0/r1_fix4_gen.py:12 `studies.m0.core` ['Built', 'Lineage', 'Retry']",
+        "import (package __init__): studies/m0/r1_fix4_gen.py:13 `studies.m0.lineages_r1_fix4_clusters` ['candidates_v4']",
+        "import (package __init__): studies/m0/r1_fix4_measure.py:22 `studies.m0` ['r1_fix3_battery']",
+        "import (package __init__): studies/m0/r1_fix4_measure.py:23 `studies.m0` ['r1_fix4_a3_heur']",
+        "import (package __init__): studies/m0/r1_fix4_measure.py:24 `studies.m0` ['r1_fix4_a4_heur']",
+        "import (package __init__): studies/m0/r1_fix4_measure.py:25 `studies.m0` ['r1_fix4_gen']",
+        "import (package __init__): studies/m0/r1_fix4_measure.py:26 `studies.m0.r1_fix4_tells` ['feature_rows']",
+        "import (package __init__): studies/m0/r1_fix4_measure.py:90 `studies.m0.r1_fix4_gen` ['lineages']",
+        "import (package __init__): studies/m0/r1_fix4_tells.py:16 `studies.m0.core` ['Lineage']",
+        "import (package __init__): studies/m0/r1_fix4_tells.py:17 `studies.m0.r1_fix4_gen` ['items']",
+        "import (package __init__): studies/m0/r2_fix3_set.py:10 `studies.m0.core` ['Lineage', 'lineages_of']",
+        "import (package __init__): studies/m0/r2_fix3_set.py:28 `studies.m0.lineages_r2_common` ['load_batch1']",
+        "import (package __init__): studies/m0/r2_fix3_set.py:29 `studies.m0.lineages_r2_rev2` ['SUPERSEDES', 'load_rev2']",
+        "import (package __init__): studies/m0/r2_fix3_set.py:40 `studies.m0.lineages_r2_fix3` ['load_fix3']",
+        "import (package __init__): studies/m0/r2_fix4_a3_heur.py:13 `studies.m0` ['r2_fix4_a3_solvers']",
+        "import (package __init__): studies/m0/r2_fix4_battery.py:175 `studies.m0.r2_fix4_set` ['fix4_set']",
+        "import (package __init__): studies/m0/r2_fix4_battery.py:20 `studies.m0.core` ['ALL_LEVELS', 'build_item']",
+        "import (package __init__): studies/m0/r2_fix4_battery.py:74 `studies.m0` ['r2_fix4_a3_heur', 'r2_fix4_a4_heur']",
+        "import (package __init__): studies/m0/r2_fix4_battery.py:75 `studies.m0.r2_fix3_heuristics` ['OWN']",
+        "import (package __init__): studies/m0/r2_fix4_battery.py:86 `studies.m0.r2_fix4_set` ['fix4_set']",
+        "import (package __init__): studies/m0/r2_fix4_set.py:11 `studies.m0.lineages_r2_fix3` ['load_fix3']",
+        "import (package __init__): studies/m0/r2_fix4_set.py:12 `studies.m0.lineages_r2_fix4` ['load_fix4']",
+        "import (package __init__): studies/m0/r2_fix4_set.py:13 `studies.m0.r2_fix3_set` ['fix3_set']",
+        "import (package __init__): studies/m0/r2_fix4_set.py:7 `studies.m0.core` ['Lineage']",
+        "import (package __init__): studies/m0/scoring.py:21 `studies.m0.core` ['stream']"
+      ],
+      "path": "studies/__init__.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f1_draw.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5_attempt1.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/new_rules_final.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/run_rules_final.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules_new.py",
+        "studies/m0/c1_fix4_battery.py",
+        "studies/m0/c1_fix4_draw.py",
+        "studies/m0/m1_fix4_battery.py",
+        "studies/m0/r1_fix4_measure.py",
+        "studies/m0/r2_fix4_battery.py"
+      ],
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "blob": "993bc9a7302189414b6448e02a7f3b80a197f787",
+      "how": [
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/audit3_m1/common_a3.py:8 `studies.m0.core` ['ALL_LEVELS', 'build_item', 'stream', 'lineages_of']",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/audit3_m1/common_a3.py:9 `studies.m0.lineages_m1_rev2` ['load_rev2', 'NOT_REGISTERED']",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/common_a4.py:10 `studies.m0.lineages_m1_fix3` ['NOT_REGISTERED', 'load_all']",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/common_a4.py:9 `studies.m0.core` ['ALL_LEVELS', 'build_item', 'stream']",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/shortcuts_a4.py:128 `studies.m0.lineages_m1_fix3_b` ['_RULES_FIRST', '_RULES_LAST']",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/shortcuts_a4.py:174 `studies.m0.m1_fix3_shortcuts` ['spec']",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f1_draw.py:54 `studies.m0.lineages_c1`",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f1_draw.py:55 `studies.m0.lineages_c1_common`",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f1_draw.py:56 `studies.m0.core` ['Retry']",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f1_draw.py:57 `studies.m0.c1grammar` ['render']",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f1_draw.py:83 `studies.m0.core` ['Retry']",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f1_draw.py:84 `studies.m0.c1grammar` ['render']",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f1_draw.py:85 `studies.m0.lineages_c1_fix4` ['all_written']",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/final_m1/fm1_common.py:16 `studies.m0.lineages_m1_fix4` ['load_registered']",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/final_m1/fm1_common.py:9 `studies.m0.core` ['ALL_LEVELS', 'build_item', 'stream']",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5.py:35 `studies.m0.core` ['build_item', 'stream']",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5.py:52 `studies.m0.m1_fix3_shortcuts`",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5_attempt1.py:33 `studies.m0.core` ['build_item', 'stream']",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5_attempt1.py:50 `studies.m0.m1_fix3_shortcuts`",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/final_r1/a4copy/heuristics4.py:59 `studies.m0.lineages_r1` ['_rule_eval']",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/final_r1/fgen.py:10 `studies.m0.core` ['Retry']",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/final_r1/fgen.py:11 `studies.m0.lineages_r1_fix4_clusters` ['registered_v4', 'candidates_v4']",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules.py:42 `studies.m0.r2_fix3_heuristics` ['OWN']",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules.py:53 `studies.m0.core` ['build_item']",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules.py:54 `studies.m0.r2_fix4_set` ['fix4_set']",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules_new.py:22 `studies.m0.core` ['build_item']",
+        "import (package __init__): docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules_new.py:23 `studies.m0.r2_fix4_set` ['fix4_set']",
+        "import (package __init__): studies/m0/c1_fix3_battery.py:653 `studies.m0.core` ['lineages_of']",
+        "import (package __init__): studies/m0/c1_fix3_battery.py:654 `studies.m0.lineages_c1_common` ['load_batch1']",
+        "import (package __init__): studies/m0/c1_fix3_battery.py:655 `studies.m0.lineages_c1_fix3` ['load_fix3']",
+        "import (package __init__): studies/m0/c1_fix3_battery.py:656 `studies.m0.lineages_c1_rev2` ['load_rev2']",
+        "import (package __init__): studies/m0/c1_fix3_battery.py:662 `studies.m0.c1grammar` ['render']",
+        "import (package __init__): studies/m0/c1_fix3_battery.py:663 `studies.m0.core` ['Retry']",
+        "import (package __init__): studies/m0/c1_fix3_battery.py:794 `studies.m0.lineages_c1_fix3` ['load_fix3']",
+        "import (package __init__): studies/m0/c1_fix4_battery.py:20 `studies.m0.c1_fix4_draw` ['RULE_ALIAS']",
+        "import (package __init__): studies/m0/c1_fix4_battery.py:27 `studies.m0.lineages_c1_fix4` ['all_written']",
+        "import (package __init__): studies/m0/c1_fix4_battery.py:57 `studies.m0.c1_fix3_battery` ['summarise']",
+        "import (package __init__): studies/m0/c1_fix4_battery.py:58 `studies.m0.c1_fix4_draw` ['audit4_set']",
+        "import (package __init__): studies/m0/c1_fix4_draw.py:42 `studies.m0.lineages_c1_fix3` ['NOT_REGISTERED']",
+        "import (package __init__): studies/m0/c1_fix4_draw.py:43 `studies.m0.lineages_c1_fix3` ['SUPERSEDES3', 'load_fix3']",
+        "import (package __init__): studies/m0/c1_fix4_draw.py:44 `studies.m0.lineages_c1_fix4` ['all_written']",
+        "import (package __init__): studies/m0/c1_fix4_draw.py:45 `studies.m0.lineages_c1_rev2` ['PROPOSED']",
+        "import (package __init__): studies/m0/c1_fix4_draw.py:46 `studies.m0.lineages_c1_rev2` ['SUPERSEDES']",
+        "import (package __init__): studies/m0/c1_fix4_draw.py:56 `studies.m0.c1grammar` ['render']",
+        "import (package __init__): studies/m0/c1_fix4_draw.py:57 `studies.m0.core` ['Retry']",
+        "import (package __init__): studies/m0/c1_fix4_draw.py:58 `studies.m0.lineages_c1_fix4` ['all_written']",
+        "import (package __init__): studies/m0/lineages_c1.py:14 `studies.m0.c1grammar` ['render', 'run_inprocess']",
+        "import (package __init__): studies/m0/lineages_c1.py:15 `studies.m0.core` ['Built', 'Retry', 'lineage']",
+        "import (package __init__): studies/m0/lineages_c1.py:16 `studies.m0.vocab` ['PSEUDO']",
+        "import (package __init__): studies/m0/lineages_c1_common.py:117 `studies.m0.c1grammar` ['run_isolated']",
+        "import (package __init__): studies/m0/lineages_c1_common.py:118 `studies.m0.scoring` ['in_grammar', 'normalise_answer']",
+        "import (package __init__): studies/m0/lineages_c1_common.py:119 `studies.m0.solvers_c1` ['c1_trace']",
+        "import (package __init__): studies/m0/lineages_c1_common.py:134 `studies.m0.c1grammar` ['render']",
+        "import (package __init__): studies/m0/lineages_c1_common.py:24 `studies.m0.core` ['ALL_LEVELS', 'Built', 'Lineage', 'build_item', 'lineages_of', 'stream']",
+        "import (package __init__): studies/m0/lineages_c1_common.py:25 `studies.m0.lineages_c1` ['LETTERS', 'VARS', '_finish', '_names']",
+        "import (package __init__): studies/m0/lineages_c1_fix3.py:29 `studies.m0.core` ['Built', 'Lineage']",
+        "import (package __init__): studies/m0/lineages_c1_fix4.py:198 `studies.m0.lineages_c1_fix3` ['NOT_REGISTERED']",
+        "import (package __init__): studies/m0/lineages_c1_fix4.py:199 `studies.m0.lineages_c1_fix3` ['SUPERSEDES3']",
+        "import (package __init__): studies/m0/lineages_c1_fix4.py:200 `studies.m0.lineages_c1_rev2` ['PROPOSED']",
+        "import (package __init__): studies/m0/lineages_c1_fix4.py:201 `studies.m0.lineages_c1_rev2` ['SUPERSEDES']",
+        "import (package __init__): studies/m0/lineages_c1_fix4.py:25 `studies.m0.core` ['Built', 'Lineage', 'lineages_of']",
+        "import (package __init__): studies/m0/lineages_c1_fix4.py:26 `studies.m0.lineages_c1` ['FUNCS', 'LETTERS', 'PSEUDO']",
+        "import (package __init__): studies/m0/lineages_c1_fix4.py:27 `studies.m0.lineages_c1_common` ['IDX', 'LIST', 'B', 'C', 'N', 'S', 'V', 'finish', 'load_batch1', 'names']",
+        "import (package __init__): studies/m0/lineages_c1_fix4.py:28 `studies.m0.lineages_c1_fix3` ['load_fix3']",
+        "import (package __init__): studies/m0/lineages_c1_fix4.py:29 `studies.m0.lineages_c1_rev2` ['load_rev2']",
+        "import (package __init__): studies/m0/lineages_c1_rev2.py:19 `studies.m0.core` ['Built', 'Lineage', 'lineages_of']",
+        "import (package __init__): studies/m0/lineages_c1_rev2.py:20 `studies.m0.lineages_c1` ['FUNCS']",
+        "import (package __init__): studies/m0/lineages_c1_rev2.py:21 `studies.m0.lineages_c1_common` ['AND', 'IDX', 'LIST', 'B', 'C', 'N', 'S', 'V', 'finish', 'names']",
+        "import (package __init__): studies/m0/lineages_c1_rev2.py:285 `studies.m0.core` ['Retry']",
+        "import (package __init__): studies/m0/lineages_c1_rev2.py:308 `studies.m0.core` ['Retry']",
+        "import (package __init__): studies/m0/lineages_c1_rev2.py:53 `studies.m0.lineages_c1_rev2_traced`",
+        "import (package __init__): studies/m0/lineages_c1_rev2.py:75 `studies.m0.core` ['Retry']",
+        "import (package __init__): studies/m0/lineages_c1_rev2_traced.py:16 `studies.m0.core` ['Built', 'Retry']",
+        "import (package __init__): studies/m0/lineages_c1_rev2_traced.py:17 `studies.m0.lineages_c1_common` ['AND', 'IDX', 'LIST', 'B', 'C', 'N', 'S', 'V', 'finish', 'names']",
+        "import (package __init__): studies/m0/lineages_c1_rev2_traced.py:18 `studies.m0.lineages_c1_rev2` ['call', 'rev2']",
+        "import (package __init__): studies/m0/lineages_k0.py:13 `studies.m0.core` ['Built', 'lineage']",
+        "import (package __init__): studies/m0/lineages_k0.py:14 `studies.m0.vocab` ['COLOURS', 'NAMES', 'OBJECTS', 'PSEUDO']",
+        "import (package __init__): studies/m0/lineages_m1.py:13 `studies.m0.core` ['Built', 'Retry', 'lineage']",
+        "import (package __init__): studies/m0/lineages_m1.py:14 `studies.m0.vocab` ['NAMES', 'OBJECTS']",
+        "import (package __init__): studies/m0/lineages_m1_common.py:16 `studies.m0.core` ['ALL_LEVELS', 'Built', 'Lineage', 'build_item', 'lineages_of', 'stream']",
+        "import (package __init__): studies/m0/lineages_m1_common.py:43 `studies.m0.vocab` ['NAMES', 'TOWNS']",
+        "import (package __init__): studies/m0/lineages_m1_common.py:67 `studies.m0.scoring` ['in_grammar', 'normalise_answer']",
+        "import (package __init__): studies/m0/lineages_m1_fix3.py:12 `studies.m0.core` ['Lineage']",
+        "import (package __init__): studies/m0/lineages_m1_fix3.py:13 `studies.m0.lineages_m1_fix3_common` ['FIX3', 'STEM_OF']",
+        "import (package __init__): studies/m0/lineages_m1_fix3.py:45 `studies.m0.lineages_m1_common` ['load_batch']",
+        "import (package __init__): studies/m0/lineages_m1_fix3_b.py:12 `studies.m0.core` ['Built']",
+        "import (package __init__): studies/m0/lineages_m1_fix3_b.py:13 `studies.m0.lineages_m1_fix3_common` ['DECIMAL', 'WHOLE', 'and_', 'ctx', 'fmt_exact', 'pl', 'r3', 'until']",
+        "import (package __init__): studies/m0/lineages_m1_fix3_b.py:14 `studies.m0.vocab` ['NAMES']",
+        "import (package __init__): studies/m0/lineages_m1_fix3_c.py:11 `studies.m0.core` ['Built']",
+        "import (package __init__): studies/m0/lineages_m1_fix3_c.py:12 `studies.m0.lineages_m1_fix3_common` ['WHOLE', 'and_', 'ctx', 'r3', 'until']",
+        "import (package __init__): studies/m0/lineages_m1_fix3_c.py:13 `studies.m0.vocab` ['NAMES']",
+        "import (package __init__): studies/m0/lineages_m1_fix3_common.py:20 `studies.m0.core` ['Built', 'Lineage']",
+        "import (package __init__): studies/m0/lineages_m1_fix3_common.py:79 `studies.m0.vocab` ['NAMES', 'TOWNS']",
+        "import (package __init__): studies/m0/lineages_m1_fix4.py:23 `studies.m0.core` ['Built', 'Lineage']",
+        "import (package __init__): studies/m0/lineages_m1_fix4.py:24 `studies.m0.lineages_m1_fix3` ['NOT_REGISTERED']",
+        "import (package __init__): studies/m0/lineages_m1_fix4.py:25 `studies.m0.lineages_m1_fix3` ['load_all']",
+        "import (package __init__): studies/m0/lineages_m1_fix4.py:26 `studies.m0.lineages_m1_fix3_b` ['_FIRST_TXT', '_LAST_TXT', '_RULES_LAST', '_SUBSETS', '_coprime_set', 'slot_count']",
+        "import (package __init__): studies/m0/lineages_m1_fix4.py:34 `studies.m0.lineages_m1_fix3_common` ['DECIMAL', 'WHOLE', 'and_', 'ctx', 'fmt_exact', 'until']",
+        "import (package __init__): studies/m0/lineages_m1_fix4.py:35 `studies.m0.vocab` ['NAMES']",
+        "import (package __init__): studies/m0/lineages_m1_rev2.py:26 `studies.m0.core` ['Built', 'Lineage', 'lineages_of']",
+        "import (package __init__): studies/m0/lineages_m1_rev2.py:27 `studies.m0.lineages_m1` ['fmt']",
+        "import (package __init__): studies/m0/lineages_m1_rev2.py:28 `studies.m0.lineages_m1_common` ['DECIMAL', 'WHOLE', 'and_', 'ctx', 'load_batch']",
+        "import (package __init__): studies/m0/lineages_m1_rev2.py:29 `studies.m0.vocab` ['NAMES', 'OBJECTS']",
+        "import (package __init__): studies/m0/lineages_r1.py:14 `studies.m0.core` ['Built', 'Retry', 'lineage']",
+        "import (package __init__): studies/m0/lineages_r1.py:15 `studies.m0.vocab` ['COLOURS', 'EVENTS', 'MARKS', 'NAMES', 'OBJECTS', 'PETS', 'PSEUDO', 'SHAPES', 'TOWNS']",
+        "import (package __init__): studies/m0/lineages_r1_clusters.py:14 `studies.m0.core` ['Lineage', 'lineages_of', 'stream']",
+        "import (package __init__): studies/m0/lineages_r1_clusters.py:76 `studies.m0.lineages_r1_common` ['load_pilot']",
+        "import (package __init__): studies/m0/lineages_r1_clusters_v2.py:19 `studies.m0.core` ['Lineage', 'stream']",
+        "import (package __init__): studies/m0/lineages_r1_clusters_v2.py:20 `studies.m0.lineages_r1_rev4_common` ['REPLACES', 'load_rev4']",
+        "import (package __init__): studies/m0/lineages_r1_common.py:16 `studies.m0.core` ['Built', 'Lineage', 'lineages_of']",
+        "import (package __init__): studies/m0/lineages_r1_fix3_clusters.py:16 `studies.m0.core` ['Lineage', 'stream']",
+        "import (package __init__): studies/m0/lineages_r1_fix3_clusters.py:17 `studies.m0.lineages_r1_fix3_common` ['REPLACES', 'load_fix3']",
+        "import (package __init__): studies/m0/lineages_r1_fix3_common.py:16 `studies.m0.core` ['Built', 'Lineage']",
+        "import (package __init__): studies/m0/lineages_r1_fix4_clusters.py:15 `studies.m0.core` ['Lineage']",
+        "import (package __init__): studies/m0/lineages_r1_fix4_clusters.py:16 `studies.m0.lineages_r1_fix4_common` ['REPLACES', 'load_fix4']",
+        "import (package __init__): studies/m0/lineages_r1_fix4_common.py:15 `studies.m0.core` ['Built', 'Lineage']",
+        "import (package __init__): studies/m0/lineages_r1_rev4_common.py:16 `studies.m0.core` ['Built', 'Lineage', 'lineages_of']",
+        "import (package __init__): studies/m0/lineages_r2.py:10 `studies.m0.vocab` ['PSEUDO']",
+        "import (package __init__): studies/m0/lineages_r2.py:9 `studies.m0.core` ['Built', 'Retry', 'lineage']",
+        "import (package __init__): studies/m0/lineages_r2_common.py:21 `studies.m0.core` ['ALL_LEVELS', 'Built', 'Lineage', 'Retry', 'build_item', 'lineages_of', 'stream']",
+        "import (package __init__): studies/m0/lineages_r2_common.py:72 `studies.m0.scoring` ['in_grammar', 'normalise_answer']",
+        "import (package __init__): studies/m0/lineages_r2_dynprog.py:10 `studies.m0.lineages_r2_common` ['batch1', 'lst', 'until']",
+        "import (package __init__): studies/m0/lineages_r2_dynprog.py:9 `studies.m0.core` ['Built', 'Retry']",
+        "import (package __init__): studies/m0/lineages_r2_fix3.py:20 `studies.m0.core` ['Built', 'Lineage']",
+        "import (package __init__): studies/m0/lineages_r2_fix3.py:21 `studies.m0.lineages_r2_common` ['lst']",
+        "import (package __init__): studies/m0/lineages_r2_fix3.py:247 `studies.m0.core` ['Retry']",
+        "import (package __init__): studies/m0/lineages_r2_fix3.py:42 `studies.m0.lineages_r2_fix3_b`",
+        "import (package __init__): studies/m0/lineages_r2_fix3.py:43 `studies.m0.lineages_r2_fix3_c`",
+        "import (package __init__): studies/m0/lineages_r2_fix3_b.py:10 `studies.m0.core` ['Built', 'Retry']",
+        "import (package __init__): studies/m0/lineages_r2_fix3_b.py:11 `studies.m0.lineages_r2_common` ['and_', 'lst', 'until']",
+        "import (package __init__): studies/m0/lineages_r2_fix3_b.py:12 `studies.m0.lineages_r2_fix3` ['fix3']",
+        "import (package __init__): studies/m0/lineages_r2_fix3_b.py:13 `studies.m0.lineages_r2_graphs` ['mst_weight']",
+        "import (package __init__): studies/m0/lineages_r2_fix3_b.py:14 `studies.m0.lineages_r2_parsing` ['evaluate']",
+        "import (package __init__): studies/m0/lineages_r2_fix3_b.py:15 `studies.m0.vocab` ['OBJECTS', 'TOWNS']",
+        "import (package __init__): studies/m0/lineages_r2_fix3_c.py:11 `studies.m0.core` ['Built', 'Retry']",
+        "import (package __init__): studies/m0/lineages_r2_fix3_c.py:12 `studies.m0.lineages_r2_common` ['lst']",
+        "import (package __init__): studies/m0/lineages_r2_fix3_c.py:13 `studies.m0.lineages_r2_fix3` ['fix3']",
+        "import (package __init__): studies/m0/lineages_r2_fix3_c.py:14 `studies.m0.vocab` ['PSEUDO']",
+        "import (package __init__): studies/m0/lineages_r2_fix4.py:27 `studies.m0.core` ['Built', 'Lineage', 'Retry']",
+        "import (package __init__): studies/m0/lineages_r2_fix4.py:28 `studies.m0.lineages_r2` ['ALPHA']",
+        "import (package __init__): studies/m0/lineages_r2_fix4.py:29 `studies.m0.lineages_r2_common` ['and_', 'lst']",
+        "import (package __init__): studies/m0/lineages_r2_fix4.py:30 `studies.m0.lineages_r2_fix3` ['_pick_earliest_finish']",
+        "import (package __init__): studies/m0/lineages_r2_fix4.py:31 `studies.m0.lineages_r2_fix3_b` ['_num', '_paren_sum']",
+        "import (package __init__): studies/m0/lineages_r2_fix4.py:32 `studies.m0.lineages_r2_graphs` ['mst_weight']",
+        "import (package __init__): studies/m0/lineages_r2_fix4.py:33 `studies.m0.lineages_r2_parsing` ['evaluate']",
+        "import (package __init__): studies/m0/lineages_r2_fix4.py:34 `studies.m0.vocab` ['PSEUDO', 'TOWNS']",
+        "import (package __init__): studies/m0/lineages_r2_graphs.py:10 `studies.m0.vocab` ['NAMES', 'TOWNS']",
+        "import (package __init__): studies/m0/lineages_r2_graphs.py:8 `studies.m0.core` ['Built']",
+        "import (package __init__): studies/m0/lineages_r2_graphs.py:9 `studies.m0.lineages_r2_common` ['and_', 'batch1', 'until']",
+        "import (package __init__): studies/m0/lineages_r2_parsing.py:8 `studies.m0.core` ['Built']",
+        "import (package __init__): studies/m0/lineages_r2_parsing.py:9 `studies.m0.lineages_r2_common` ['batch1', 'until']",
+        "import (package __init__): studies/m0/lineages_r2_rev2.py:19 `studies.m0.core` ['Built', 'Lineage', 'Retry', 'lineages_of']",
+        "import (package __init__): studies/m0/lineages_r2_rev2.py:20 `studies.m0.lineages_r2_common` ['lst', 'until']",
+        "import (package __init__): studies/m0/lineages_r2_rev2.py:21 `studies.m0.lineages_r2_dynprog` ['coin_min']",
+        "import (package __init__): studies/m0/lineages_r2_rev2.py:24 `studies.m0.lineages_r2_graphs` ['deferred_acceptance', 'mst_weight']",
+        "import (package __init__): studies/m0/lineages_r2_rev2.py:25 `studies.m0.lineages_r2_parsing` ['_render_ltr', '_render_std', '_tree', '_val', 'balanced', 'evaluate', 'match_of', 'random_balanced']",
+        "import (package __init__): studies/m0/lineages_r2_rev2.py:35 `studies.m0.lineages_r2_structures` ['cache_run', 'hash_table']",
+        "import (package __init__): studies/m0/lineages_r2_rev2.py:36 `studies.m0.vocab` ['NAMES', 'OBJECTS', 'TOWNS']",
+        "import (package __init__): studies/m0/lineages_r2_structures.py:10 `studies.m0.lineages_r2_common` ['batch1', 'lst', 'until']",
+        "import (package __init__): studies/m0/lineages_r2_structures.py:11 `studies.m0.vocab` ['OBJECTS']",
+        "import (package __init__): studies/m0/lineages_r2_structures.py:9 `studies.m0.core` ['Built', 'Retry']",
+        "import (package __init__): studies/m0/m1_fix3_shortcuts.py:27 `studies.m0.core` ['ALL_LEVELS', 'build_item', 'stream']",
+        "import (package __init__): studies/m0/m1_fix3_shortcuts.py:278 `studies.m0.lineages_m1_fix3_b` ['_RULES_FIRST', '_RULES_LAST']",
+        "import (package __init__): studies/m0/m1_fix3_shortcuts.py:380 `studies.m0.lineages_m1_fix3_c` ['fit_set']",
+        "import (package __init__): studies/m0/m1_fix3_shortcuts.py:408 `studies.m0.core` ['lineages_of']",
+        "import (package __init__): studies/m0/m1_fix3_shortcuts.py:409 `studies.m0.lineages_m1_rev2` ['NOT_REGISTERED', 'load_rev2']",
+        "import (package __init__): studies/m0/m1_fix3_shortcuts.py:412 `studies.m0.lineages_m1_fix3` ['load_all']",
+        "import (package __init__): studies/m0/m1_fix4_battery.py:101 `studies.m0.m1_fix3_shortcuts`",
+        "import (package __init__): studies/m0/m1_fix4_battery.py:30 `studies.m0.core` ['ALL_LEVELS']",
+        "import (package __init__): studies/m0/m1_fix4_battery.py:31 `studies.m0.lineages_m1_fix4` ['load_all', 'load_registered', 'stem']",
+        "import (package __init__): studies/m0/m1_fix4_battery.py:62 `studies.m0.m1_fix3_shortcuts` ['PROCEDURE']",
+        "import (package __init__): studies/m0/r1_fix3_battery.py:1070 `studies.m0.core` ['Retry']",
+        "import (package __init__): studies/m0/r1_fix3_battery.py:1141 `studies.m0.lineages_r1_fix3_common` ['load_fix3']",
+        "import (package __init__): studies/m0/r1_fix3_battery.py:12 `studies.m0.core` ['Built']",
+        "import (package __init__): studies/m0/r1_fix4_a4_heur.py:62 `studies.m0.lineages_r1` ['_rule_eval']",
+        "import (package __init__): studies/m0/r1_fix4_gen.py:12 `studies.m0.core` ['Built', 'Lineage', 'Retry']",
+        "import (package __init__): studies/m0/r1_fix4_gen.py:13 `studies.m0.lineages_r1_fix4_clusters` ['candidates_v4']",
+        "import (package __init__): studies/m0/r1_fix4_measure.py:26 `studies.m0.r1_fix4_tells` ['feature_rows']",
+        "import (package __init__): studies/m0/r1_fix4_measure.py:90 `studies.m0.r1_fix4_gen` ['lineages']",
+        "import (package __init__): studies/m0/r1_fix4_tells.py:16 `studies.m0.core` ['Lineage']",
+        "import (package __init__): studies/m0/r1_fix4_tells.py:17 `studies.m0.r1_fix4_gen` ['items']",
+        "import (package __init__): studies/m0/r2_fix3_set.py:10 `studies.m0.core` ['Lineage', 'lineages_of']",
+        "import (package __init__): studies/m0/r2_fix3_set.py:28 `studies.m0.lineages_r2_common` ['load_batch1']",
+        "import (package __init__): studies/m0/r2_fix3_set.py:29 `studies.m0.lineages_r2_rev2` ['SUPERSEDES', 'load_rev2']",
+        "import (package __init__): studies/m0/r2_fix3_set.py:40 `studies.m0.lineages_r2_fix3` ['load_fix3']",
+        "import (package __init__): studies/m0/r2_fix4_battery.py:175 `studies.m0.r2_fix4_set` ['fix4_set']",
+        "import (package __init__): studies/m0/r2_fix4_battery.py:20 `studies.m0.core` ['ALL_LEVELS', 'build_item']",
+        "import (package __init__): studies/m0/r2_fix4_battery.py:75 `studies.m0.r2_fix3_heuristics` ['OWN']",
+        "import (package __init__): studies/m0/r2_fix4_battery.py:86 `studies.m0.r2_fix4_set` ['fix4_set']",
+        "import (package __init__): studies/m0/r2_fix4_set.py:11 `studies.m0.lineages_r2_fix3` ['load_fix3']",
+        "import (package __init__): studies/m0/r2_fix4_set.py:12 `studies.m0.lineages_r2_fix4` ['load_fix4']",
+        "import (package __init__): studies/m0/r2_fix4_set.py:13 `studies.m0.r2_fix3_set` ['fix3_set']",
+        "import (package __init__): studies/m0/r2_fix4_set.py:7 `studies.m0.core` ['Lineage']",
+        "import (package __init__): studies/m0/scoring.py:21 `studies.m0.core` ['stream']",
+        "import: docs/reviews/m0-lineage-decision-2026-11-25/final_r1/run_rules_final.py:37 `studies.m0` ['r1_fix3_battery']",
+        "import: studies/m0/c1_fix4_battery.py:26 `studies.m0` ['c1_fix3_battery']",
+        "import: studies/m0/c1_fix4_battery.py:42 `studies.m0` ['c1_fix3_battery']",
+        "import: studies/m0/core.py:116 `studies.m0` ['lineages_c1', 'lineages_k0', 'lineages_m1', 'lineages_r1', 'lineages_r2']",
+        "import: studies/m0/lineages_r1_clusters_v2.py:18 `studies.m0` ['lineages_r1_clusters']",
+        "import: studies/m0/lineages_r1_fix3_clusters.py:14 `studies.m0` ['lineages_r1_clusters']",
+        "import: studies/m0/lineages_r1_fix3_clusters.py:15 `studies.m0` ['lineages_r1_clusters_v2']",
+        "import: studies/m0/lineages_r1_fix4_clusters.py:14 `studies.m0` ['lineages_r1_fix3_clusters']",
+        "import: studies/m0/r1_fix4_a3_heur.py:21 `studies.m0` ['r1_fix4_a3_solvers']",
+        "import: studies/m0/r1_fix4_a3_heur.py:22 `studies.m0` ['r1_fix4_gen']",
+        "import: studies/m0/r1_fix4_a4_heur.py:21 `studies.m0` ['r1_fix4_a3_heur']",
+        "import: studies/m0/r1_fix4_a4_heur.py:22 `studies.m0` ['r1_fix4_gen']",
+        "import: studies/m0/r1_fix4_measure.py:22 `studies.m0` ['r1_fix3_battery']",
+        "import: studies/m0/r1_fix4_measure.py:23 `studies.m0` ['r1_fix4_a3_heur']",
+        "import: studies/m0/r1_fix4_measure.py:24 `studies.m0` ['r1_fix4_a4_heur']",
+        "import: studies/m0/r1_fix4_measure.py:25 `studies.m0` ['r1_fix4_gen']",
+        "import: studies/m0/r2_fix4_a3_heur.py:13 `studies.m0` ['r2_fix4_a3_solvers']",
+        "import: studies/m0/r2_fix4_battery.py:74 `studies.m0` ['r2_fix4_a3_heur', 'r2_fix4_a4_heur']"
+      ],
+      "path": "studies/m0/__init__.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f1_draw.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5_attempt1.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/new_rules_final.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/run_rules_final.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules_new.py",
+        "studies/m0/c1_fix4_battery.py",
+        "studies/m0/c1_fix4_draw.py",
+        "studies/m0/m1_fix4_battery.py",
+        "studies/m0/r1_fix4_measure.py",
+        "studies/m0/r2_fix4_battery.py"
+      ],
+      "sha256": "56e493099672d2c3628af55cbf456c53b12c43ba8e601d602c4ebe2731dbcb2d"
+    },
+    {
+      "blob": "b76f46a49d0f07301c8299b1fa2d1c294e8d765e",
+      "how": [
+        "import: studies/m0/c1_fix4_battery.py:26 `studies.m0` ['c1_fix3_battery']",
+        "import: studies/m0/c1_fix4_battery.py:42 `studies.m0` ['c1_fix3_battery']",
+        "import: studies/m0/c1_fix4_battery.py:57 `studies.m0.c1_fix3_battery` ['summarise']"
+      ],
+      "path": "studies/m0/c1_fix3_battery.py",
+      "reached_by": [
+        "studies/m0/c1_fix4_battery.py"
+      ],
+      "sha256": "fb91e7992dbdde46ae02fb6698b004f4140a7f8f259835cab8f01f7a5454abfb"
+    },
+    {
+      "blob": "3ea52c781bca463866fe90a022b72129f1a554ab",
+      "how": [
+        "import: docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f1_draw.py:57 `studies.m0.c1grammar` ['render']",
+        "import: docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f1_draw.py:84 `studies.m0.c1grammar` ['render']",
+        "import: studies/m0/c1_fix3_battery.py:662 `studies.m0.c1grammar` ['render']",
+        "import: studies/m0/c1_fix4_draw.py:56 `studies.m0.c1grammar` ['render']",
+        "import: studies/m0/lineages_c1.py:14 `studies.m0.c1grammar` ['render', 'run_inprocess']",
+        "import: studies/m0/lineages_c1_common.py:117 `studies.m0.c1grammar` ['run_isolated']",
+        "import: studies/m0/lineages_c1_common.py:134 `studies.m0.c1grammar` ['render']"
+      ],
+      "path": "studies/m0/c1grammar.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f1_draw.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5_attempt1.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/new_rules_final.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/run_rules_final.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules_new.py",
+        "studies/m0/c1_fix4_battery.py",
+        "studies/m0/c1_fix4_draw.py",
+        "studies/m0/m1_fix4_battery.py",
+        "studies/m0/r1_fix4_measure.py",
+        "studies/m0/r2_fix4_battery.py"
+      ],
+      "sha256": "5832f18cdbc76626007aa9cbeb7c2a788cacf36a89a610c81e62171313c1d0ca"
+    },
+    {
+      "blob": "141459750a0267e1272bdfc9214ff01610f0de22",
+      "how": [
+        "import: docs/reviews/m0-lineage-decision-2026-11-25/audit3_m1/common_a3.py:8 `studies.m0.core` ['ALL_LEVELS', 'build_item', 'stream', 'lineages_of']",
+        "import: docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/common_a4.py:9 `studies.m0.core` ['ALL_LEVELS', 'build_item', 'stream']",
+        "import: docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f1_draw.py:56 `studies.m0.core` ['Retry']",
+        "import: docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f1_draw.py:83 `studies.m0.core` ['Retry']",
+        "import: docs/reviews/m0-lineage-decision-2026-11-25/final_m1/fm1_common.py:9 `studies.m0.core` ['ALL_LEVELS', 'build_item', 'stream']",
+        "import: docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5.py:35 `studies.m0.core` ['build_item', 'stream']",
+        "import: docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5_attempt1.py:33 `studies.m0.core` ['build_item', 'stream']",
+        "import: docs/reviews/m0-lineage-decision-2026-11-25/final_r1/fgen.py:10 `studies.m0.core` ['Retry']",
+        "import: docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules.py:53 `studies.m0.core` ['build_item']",
+        "import: docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules_new.py:22 `studies.m0.core` ['build_item']",
+        "import: studies/m0/c1_fix3_battery.py:653 `studies.m0.core` ['lineages_of']",
+        "import: studies/m0/c1_fix3_battery.py:663 `studies.m0.core` ['Retry']",
+        "import: studies/m0/c1_fix4_draw.py:57 `studies.m0.core` ['Retry']",
+        "import: studies/m0/lineages_c1.py:15 `studies.m0.core` ['Built', 'Retry', 'lineage']",
+        "import: studies/m0/lineages_c1_common.py:24 `studies.m0.core` ['ALL_LEVELS', 'Built', 'Lineage', 'build_item', 'lineages_of', 'stream']",
+        "import: studies/m0/lineages_c1_fix3.py:29 `studies.m0.core` ['Built', 'Lineage']",
+        "import: studies/m0/lineages_c1_fix4.py:25 `studies.m0.core` ['Built', 'Lineage', 'lineages_of']",
+        "import: studies/m0/lineages_c1_rev2.py:19 `studies.m0.core` ['Built', 'Lineage', 'lineages_of']",
+        "import: studies/m0/lineages_c1_rev2.py:285 `studies.m0.core` ['Retry']",
+        "import: studies/m0/lineages_c1_rev2.py:308 `studies.m0.core` ['Retry']",
+        "import: studies/m0/lineages_c1_rev2.py:75 `studies.m0.core` ['Retry']",
+        "import: studies/m0/lineages_c1_rev2_traced.py:16 `studies.m0.core` ['Built', 'Retry']",
+        "import: studies/m0/lineages_k0.py:13 `studies.m0.core` ['Built', 'lineage']",
+        "import: studies/m0/lineages_m1.py:13 `studies.m0.core` ['Built', 'Retry', 'lineage']",
+        "import: studies/m0/lineages_m1_common.py:16 `studies.m0.core` ['ALL_LEVELS', 'Built', 'Lineage', 'build_item', 'lineages_of', 'stream']",
+        "import: studies/m0/lineages_m1_fix3.py:12 `studies.m0.core` ['Lineage']",
+        "import: studies/m0/lineages_m1_fix3_b.py:12 `studies.m0.core` ['Built']",
+        "import: studies/m0/lineages_m1_fix3_c.py:11 `studies.m0.core` ['Built']",
+        "import: studies/m0/lineages_m1_fix3_common.py:20 `studies.m0.core` ['Built', 'Lineage']",
+        "import: studies/m0/lineages_m1_fix4.py:23 `studies.m0.core` ['Built', 'Lineage']",
+        "import: studies/m0/lineages_m1_rev2.py:26 `studies.m0.core` ['Built', 'Lineage', 'lineages_of']",
+        "import: studies/m0/lineages_r1.py:14 `studies.m0.core` ['Built', 'Retry', 'lineage']",
+        "import: studies/m0/lineages_r1_clusters.py:14 `studies.m0.core` ['Lineage', 'lineages_of', 'stream']",
+        "import: studies/m0/lineages_r1_clusters_v2.py:19 `studies.m0.core` ['Lineage', 'stream']",
+        "import: studies/m0/lineages_r1_common.py:16 `studies.m0.core` ['Built', 'Lineage', 'lineages_of']",
+        "import: studies/m0/lineages_r1_fix3_clusters.py:16 `studies.m0.core` ['Lineage', 'stream']",
+        "import: studies/m0/lineages_r1_fix3_common.py:16 `studies.m0.core` ['Built', 'Lineage']",
+        "import: studies/m0/lineages_r1_fix4_clusters.py:15 `studies.m0.core` ['Lineage']",
+        "import: studies/m0/lineages_r1_fix4_common.py:15 `studies.m0.core` ['Built', 'Lineage']",
+        "import: studies/m0/lineages_r1_rev4_common.py:16 `studies.m0.core` ['Built', 'Lineage', 'lineages_of']",
+        "import: studies/m0/lineages_r2.py:9 `studies.m0.core` ['Built', 'Retry', 'lineage']",
+        "import: studies/m0/lineages_r2_common.py:21 `studies.m0.core` ['ALL_LEVELS', 'Built', 'Lineage', 'Retry', 'build_item', 'lineages_of', 'stream']",
+        "import: studies/m0/lineages_r2_dynprog.py:9 `studies.m0.core` ['Built', 'Retry']",
+        "import: studies/m0/lineages_r2_fix3.py:20 `studies.m0.core` ['Built', 'Lineage']",
+        "import: studies/m0/lineages_r2_fix3.py:247 `studies.m0.core` ['Retry']",
+        "import: studies/m0/lineages_r2_fix3_b.py:10 `studies.m0.core` ['Built', 'Retry']",
+        "import: studies/m0/lineages_r2_fix3_c.py:11 `studies.m0.core` ['Built', 'Retry']",
+        "import: studies/m0/lineages_r2_fix4.py:27 `studies.m0.core` ['Built', 'Lineage', 'Retry']",
+        "import: studies/m0/lineages_r2_graphs.py:8 `studies.m0.core` ['Built']",
+        "import: studies/m0/lineages_r2_parsing.py:8 `studies.m0.core` ['Built']",
+        "import: studies/m0/lineages_r2_rev2.py:19 `studies.m0.core` ['Built', 'Lineage', 'Retry', 'lineages_of']",
+        "import: studies/m0/lineages_r2_structures.py:9 `studies.m0.core` ['Built', 'Retry']",
+        "import: studies/m0/m1_fix3_shortcuts.py:27 `studies.m0.core` ['ALL_LEVELS', 'build_item', 'stream']",
+        "import: studies/m0/m1_fix3_shortcuts.py:408 `studies.m0.core` ['lineages_of']",
+        "import: studies/m0/m1_fix4_battery.py:30 `studies.m0.core` ['ALL_LEVELS']",
+        "import: studies/m0/r1_fix3_battery.py:1070 `studies.m0.core` ['Retry']",
+        "import: studies/m0/r1_fix3_battery.py:12 `studies.m0.core` ['Built']",
+        "import: studies/m0/r1_fix4_gen.py:12 `studies.m0.core` ['Built', 'Lineage', 'Retry']",
+        "import: studies/m0/r1_fix4_tells.py:16 `studies.m0.core` ['Lineage']",
+        "import: studies/m0/r2_fix3_set.py:10 `studies.m0.core` ['Lineage', 'lineages_of']",
+        "import: studies/m0/r2_fix4_battery.py:20 `studies.m0.core` ['ALL_LEVELS', 'build_item']",
+        "import: studies/m0/r2_fix4_set.py:7 `studies.m0.core` ['Lineage']",
+        "import: studies/m0/scoring.py:21 `studies.m0.core` ['stream']"
+      ],
+      "path": "studies/m0/core.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f1_draw.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5_attempt1.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/new_rules_final.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/run_rules_final.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules_new.py",
+        "studies/m0/c1_fix4_battery.py",
+        "studies/m0/c1_fix4_draw.py",
+        "studies/m0/m1_fix4_battery.py",
+        "studies/m0/r1_fix4_measure.py",
+        "studies/m0/r2_fix4_battery.py"
+      ],
+      "sha256": "07907f1e559f6814e52b1307d6b009003130ba7297f0c1fa04fa3185441cc81d"
+    },
+    {
+      "blob": "d0eff57982148d529302a810454129926cc647df",
+      "how": [
+        "import: docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f1_draw.py:54 `studies.m0.lineages_c1`",
+        "import: studies/m0/core.py:116 `studies.m0` ['lineages_c1', 'lineages_k0', 'lineages_m1', 'lineages_r1', 'lineages_r2']",
+        "import: studies/m0/lineages_c1_common.py:25 `studies.m0.lineages_c1` ['LETTERS', 'VARS', '_finish', '_names']",
+        "import: studies/m0/lineages_c1_fix4.py:26 `studies.m0.lineages_c1` ['FUNCS', 'LETTERS', 'PSEUDO']",
+        "import: studies/m0/lineages_c1_rev2.py:20 `studies.m0.lineages_c1` ['FUNCS']"
+      ],
+      "path": "studies/m0/lineages_c1.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f1_draw.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5_attempt1.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/new_rules_final.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/run_rules_final.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules_new.py",
+        "studies/m0/c1_fix4_battery.py",
+        "studies/m0/c1_fix4_draw.py",
+        "studies/m0/m1_fix4_battery.py",
+        "studies/m0/r1_fix4_measure.py",
+        "studies/m0/r2_fix4_battery.py"
+      ],
+      "sha256": "71acde8c46eabf7f1fa5e49f5b2b0f065b3800a20b2878943e21c8f07f623f61"
+    },
+    {
+      "blob": "cff266f7e5bfda9ae691eb0d350b1ed1d26dae08",
+      "how": [
+        "import: docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f1_draw.py:55 `studies.m0.lineages_c1_common`",
+        "import: studies/m0/c1_fix3_battery.py:654 `studies.m0.lineages_c1_common` ['load_batch1']",
+        "import: studies/m0/lineages_c1_fix4.py:27 `studies.m0.lineages_c1_common` ['IDX', 'LIST', 'B', 'C', 'N', 'S', 'V', 'finish', 'load_batch1', 'names']",
+        "import: studies/m0/lineages_c1_rev2.py:21 `studies.m0.lineages_c1_common` ['AND', 'IDX', 'LIST', 'B', 'C', 'N', 'S', 'V', 'finish', 'names']",
+        "import: studies/m0/lineages_c1_rev2_traced.py:17 `studies.m0.lineages_c1_common` ['AND', 'IDX', 'LIST', 'B', 'C', 'N', 'S', 'V', 'finish', 'names']"
+      ],
+      "path": "studies/m0/lineages_c1_common.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f1_draw.py",
+        "studies/m0/c1_fix4_battery.py",
+        "studies/m0/c1_fix4_draw.py"
+      ],
+      "sha256": "230311688960cc781a7ffff28f6ad621afc743ff8c91834df6d33781c1d147e6"
+    },
+    {
+      "blob": "61fe53da5be406f35358de7917e1a8536cfed88d",
+      "how": [
+        "import: studies/m0/c1_fix3_battery.py:655 `studies.m0.lineages_c1_fix3` ['load_fix3']",
+        "import: studies/m0/c1_fix3_battery.py:794 `studies.m0.lineages_c1_fix3` ['load_fix3']",
+        "import: studies/m0/c1_fix4_draw.py:42 `studies.m0.lineages_c1_fix3` ['NOT_REGISTERED']",
+        "import: studies/m0/c1_fix4_draw.py:43 `studies.m0.lineages_c1_fix3` ['SUPERSEDES3', 'load_fix3']",
+        "import: studies/m0/lineages_c1_fix4.py:198 `studies.m0.lineages_c1_fix3` ['NOT_REGISTERED']",
+        "import: studies/m0/lineages_c1_fix4.py:199 `studies.m0.lineages_c1_fix3` ['SUPERSEDES3']",
+        "import: studies/m0/lineages_c1_fix4.py:28 `studies.m0.lineages_c1_fix3` ['load_fix3']"
+      ],
+      "path": "studies/m0/lineages_c1_fix3.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f1_draw.py",
+        "studies/m0/c1_fix4_battery.py",
+        "studies/m0/c1_fix4_draw.py"
+      ],
+      "sha256": "f72d85753d920510dec9cce3867497bb190e153f6a11d4365ea5fe98bd0a116e"
+    },
+    {
+      "blob": "dc3d1045947ca94c3f3f6d80d2f40754661a7b69",
+      "how": [
+        "import: docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f1_draw.py:85 `studies.m0.lineages_c1_fix4` ['all_written']",
+        "import: studies/m0/c1_fix4_battery.py:27 `studies.m0.lineages_c1_fix4` ['all_written']",
+        "import: studies/m0/c1_fix4_draw.py:44 `studies.m0.lineages_c1_fix4` ['all_written']",
+        "import: studies/m0/c1_fix4_draw.py:58 `studies.m0.lineages_c1_fix4` ['all_written']"
+      ],
+      "path": "studies/m0/lineages_c1_fix4.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f1_draw.py",
+        "studies/m0/c1_fix4_battery.py",
+        "studies/m0/c1_fix4_draw.py"
+      ],
+      "sha256": "2372627593ee6944fe981e16b88e84607d4c59ea429dd661b88b0c8bc23072ab"
+    },
+    {
+      "blob": "f79f3d908b7da503aa56dea6dc46307479a2deb3",
+      "how": [
+        "import: studies/m0/c1_fix3_battery.py:656 `studies.m0.lineages_c1_rev2` ['load_rev2']",
+        "import: studies/m0/c1_fix4_draw.py:45 `studies.m0.lineages_c1_rev2` ['PROPOSED']",
+        "import: studies/m0/c1_fix4_draw.py:46 `studies.m0.lineages_c1_rev2` ['SUPERSEDES']",
+        "import: studies/m0/lineages_c1_fix4.py:200 `studies.m0.lineages_c1_rev2` ['PROPOSED']",
+        "import: studies/m0/lineages_c1_fix4.py:201 `studies.m0.lineages_c1_rev2` ['SUPERSEDES']",
+        "import: studies/m0/lineages_c1_fix4.py:29 `studies.m0.lineages_c1_rev2` ['load_rev2']",
+        "import: studies/m0/lineages_c1_rev2_traced.py:18 `studies.m0.lineages_c1_rev2` ['call', 'rev2']"
+      ],
+      "path": "studies/m0/lineages_c1_rev2.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f1_draw.py",
+        "studies/m0/c1_fix4_battery.py",
+        "studies/m0/c1_fix4_draw.py"
+      ],
+      "sha256": "6f0a4b412b4475fad35ce625657999fa4ee8dbff20a2f94b9c046728ad309aa5"
+    },
+    {
+      "blob": "88e1e93e117801dddbf9e47485f29b04c7d7cb97",
+      "how": [
+        "import: studies/m0/lineages_c1_rev2.py:53 `studies.m0.lineages_c1_rev2_traced`"
+      ],
+      "path": "studies/m0/lineages_c1_rev2_traced.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f1_draw.py",
+        "studies/m0/c1_fix4_battery.py",
+        "studies/m0/c1_fix4_draw.py"
+      ],
+      "sha256": "4706de7dfdb1ab2636f1e94770b5eee0503a09ade24c0622a9065eec4cfaed0f"
+    },
+    {
+      "blob": "48b782c0627761c3630fb8f871afbb4d7f190e9c",
+      "how": [
+        "import: studies/m0/core.py:116 `studies.m0` ['lineages_c1', 'lineages_k0', 'lineages_m1', 'lineages_r1', 'lineages_r2']"
+      ],
+      "path": "studies/m0/lineages_k0.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f1_draw.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5_attempt1.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/new_rules_final.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/run_rules_final.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules_new.py",
+        "studies/m0/c1_fix4_battery.py",
+        "studies/m0/c1_fix4_draw.py",
+        "studies/m0/m1_fix4_battery.py",
+        "studies/m0/r1_fix4_measure.py",
+        "studies/m0/r2_fix4_battery.py"
+      ],
+      "sha256": "594c1867f519cd6598ab67126338d869c8966f32da333bbae341f355a9419d08"
+    },
+    {
+      "blob": "f161bd3530e1c9efe4c38fccfc9cf6d9ee1d5b56",
+      "how": [
+        "import: studies/m0/core.py:116 `studies.m0` ['lineages_c1', 'lineages_k0', 'lineages_m1', 'lineages_r1', 'lineages_r2']",
+        "import: studies/m0/lineages_m1_rev2.py:27 `studies.m0.lineages_m1` ['fmt']"
+      ],
+      "path": "studies/m0/lineages_m1.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f1_draw.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5_attempt1.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/new_rules_final.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/run_rules_final.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules_new.py",
+        "studies/m0/c1_fix4_battery.py",
+        "studies/m0/c1_fix4_draw.py",
+        "studies/m0/m1_fix4_battery.py",
+        "studies/m0/r1_fix4_measure.py",
+        "studies/m0/r2_fix4_battery.py"
+      ],
+      "sha256": "0001c72b2f2944aee4c1a85b6126df3d204049a8b41262e9f2b15d8cdbe269af"
+    },
+    {
+      "blob": "53c7e8dd759d8f933843d3bcfc7d1a6de9975398",
+      "how": [
+        "import: studies/m0/lineages_m1_fix3.py:45 `studies.m0.lineages_m1_common` ['load_batch']",
+        "import: studies/m0/lineages_m1_rev2.py:28 `studies.m0.lineages_m1_common` ['DECIMAL', 'WHOLE', 'and_', 'ctx', 'load_batch']"
+      ],
+      "path": "studies/m0/lineages_m1_common.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5_attempt1.py",
+        "studies/m0/m1_fix4_battery.py"
+      ],
+      "sha256": "06aa138807d88b950bcceb19526e3f5b75be26e737d2e341b38dabbf5d8546fe"
+    },
+    {
+      "blob": "45f1ae758d3d0b5847620f80b5de78bc7c81e721",
+      "how": [
+        "import: docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/common_a4.py:10 `studies.m0.lineages_m1_fix3` ['NOT_REGISTERED', 'load_all']",
+        "import: studies/m0/lineages_m1_fix4.py:24 `studies.m0.lineages_m1_fix3` ['NOT_REGISTERED']",
+        "import: studies/m0/lineages_m1_fix4.py:25 `studies.m0.lineages_m1_fix3` ['load_all']",
+        "import: studies/m0/m1_fix3_shortcuts.py:412 `studies.m0.lineages_m1_fix3` ['load_all']"
+      ],
+      "path": "studies/m0/lineages_m1_fix3.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5_attempt1.py",
+        "studies/m0/m1_fix4_battery.py"
+      ],
+      "sha256": "041fab82d0f4cb1dd14205bd774f032dbd678c92803511b06afc200999d458c1"
+    },
+    {
+      "blob": "3a773ebe309eac559382c7672d43c5a492496ca9",
+      "how": [
+        "import: docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/shortcuts_a4.py:128 `studies.m0.lineages_m1_fix3_b` ['_RULES_FIRST', '_RULES_LAST']",
+        "import: studies/m0/lineages_m1_fix4.py:26 `studies.m0.lineages_m1_fix3_b` ['_FIRST_TXT', '_LAST_TXT', '_RULES_LAST', '_SUBSETS', '_coprime_set', 'slot_count']",
+        "import: studies/m0/m1_fix3_shortcuts.py:278 `studies.m0.lineages_m1_fix3_b` ['_RULES_FIRST', '_RULES_LAST']"
+      ],
+      "path": "studies/m0/lineages_m1_fix3_b.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5_attempt1.py",
+        "studies/m0/m1_fix4_battery.py"
+      ],
+      "sha256": "7ade8498571d07c91faaa7496d9b6fcb661c06d674b44949896782bad0187b93"
+    },
+    {
+      "blob": "c8711f93cc0406128c014831cdfc8fe41b4f5d0a",
+      "how": [
+        "import: studies/m0/m1_fix3_shortcuts.py:380 `studies.m0.lineages_m1_fix3_c` ['fit_set']"
+      ],
+      "path": "studies/m0/lineages_m1_fix3_c.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5_attempt1.py",
+        "studies/m0/m1_fix4_battery.py"
+      ],
+      "sha256": "0c297cd8edf34aebeb9f93f5324ce42088cff821e2e8b12ca40339ba5693fe12"
+    },
+    {
+      "blob": "4d319cffcbb1273ad3e64c79f2fcf07639fec0dc",
+      "how": [
+        "import: studies/m0/lineages_m1_fix3.py:13 `studies.m0.lineages_m1_fix3_common` ['FIX3', 'STEM_OF']",
+        "import: studies/m0/lineages_m1_fix3_b.py:13 `studies.m0.lineages_m1_fix3_common` ['DECIMAL', 'WHOLE', 'and_', 'ctx', 'fmt_exact', 'pl', 'r3', 'until']",
+        "import: studies/m0/lineages_m1_fix3_c.py:12 `studies.m0.lineages_m1_fix3_common` ['WHOLE', 'and_', 'ctx', 'r3', 'until']",
+        "import: studies/m0/lineages_m1_fix4.py:34 `studies.m0.lineages_m1_fix3_common` ['DECIMAL', 'WHOLE', 'and_', 'ctx', 'fmt_exact', 'until']"
+      ],
+      "path": "studies/m0/lineages_m1_fix3_common.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5_attempt1.py",
+        "studies/m0/m1_fix4_battery.py"
+      ],
+      "sha256": "3406737f0c258f75ecf064885c6a6be287b39e9475d60d29962cb399fc0ee773"
+    },
+    {
+      "blob": "8d539e03fca227e9898bbe134838227402cf023e",
+      "how": [
+        "import: docs/reviews/m0-lineage-decision-2026-11-25/final_m1/fm1_common.py:16 `studies.m0.lineages_m1_fix4` ['load_registered']",
+        "import: studies/m0/m1_fix4_battery.py:31 `studies.m0.lineages_m1_fix4` ['load_all', 'load_registered', 'stem']"
+      ],
+      "path": "studies/m0/lineages_m1_fix4.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5_attempt1.py",
+        "studies/m0/m1_fix4_battery.py"
+      ],
+      "sha256": "da6027f4718e0898f9b05be87e1ab4f146d3c9994b2c97fe4a96f7258ec977f5"
+    },
+    {
+      "blob": "4838100cf1e9d5c36d9046aaec3460912d3b49e3",
+      "how": [
+        "import: docs/reviews/m0-lineage-decision-2026-11-25/audit3_m1/common_a3.py:9 `studies.m0.lineages_m1_rev2` ['load_rev2', 'NOT_REGISTERED']",
+        "import: studies/m0/m1_fix3_shortcuts.py:409 `studies.m0.lineages_m1_rev2` ['NOT_REGISTERED', 'load_rev2']"
+      ],
+      "path": "studies/m0/lineages_m1_rev2.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5_attempt1.py",
+        "studies/m0/m1_fix4_battery.py"
+      ],
+      "sha256": "c4e9aa3569025bf8a5d873c10be1831a43e7dc6e2a3bc17149ba691c0e626e8d"
+    },
+    {
+      "blob": "e0386638d521be1f3ec2b5e34c4e53d0e8cfad5f",
+      "how": [
+        "import: docs/reviews/m0-lineage-decision-2026-11-25/final_r1/a4copy/heuristics4.py:59 `studies.m0.lineages_r1` ['_rule_eval']",
+        "import: studies/m0/core.py:116 `studies.m0` ['lineages_c1', 'lineages_k0', 'lineages_m1', 'lineages_r1', 'lineages_r2']",
+        "import: studies/m0/r1_fix4_a4_heur.py:62 `studies.m0.lineages_r1` ['_rule_eval']"
+      ],
+      "path": "studies/m0/lineages_r1.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f1_draw.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5_attempt1.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/new_rules_final.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/run_rules_final.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules_new.py",
+        "studies/m0/c1_fix4_battery.py",
+        "studies/m0/c1_fix4_draw.py",
+        "studies/m0/m1_fix4_battery.py",
+        "studies/m0/r1_fix4_measure.py",
+        "studies/m0/r2_fix4_battery.py"
+      ],
+      "sha256": "19360b3512baeec84af00afac39d3b843c7d4448d2dfbc24ffdb793ff7b966e4"
+    },
+    {
+      "blob": "991e6f14c459c1420aab49970d1680f40182166e",
+      "how": [
+        "import: studies/m0/lineages_r1_clusters_v2.py:18 `studies.m0` ['lineages_r1_clusters']",
+        "import: studies/m0/lineages_r1_fix3_clusters.py:14 `studies.m0` ['lineages_r1_clusters']"
+      ],
+      "path": "studies/m0/lineages_r1_clusters.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/new_rules_final.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/run_rules_final.py",
+        "studies/m0/r1_fix4_measure.py"
+      ],
+      "sha256": "d1d82abff54314489425dd2dc31122bb7ea98f5942d746f1bc31bb0b2755870e"
+    },
+    {
+      "blob": "54e6cff0dff5a64e6b9dcbb535c7c27215eb307b",
+      "how": [
+        "import: studies/m0/lineages_r1_fix3_clusters.py:15 `studies.m0` ['lineages_r1_clusters_v2']"
+      ],
+      "path": "studies/m0/lineages_r1_clusters_v2.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/new_rules_final.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/run_rules_final.py",
+        "studies/m0/r1_fix4_measure.py"
+      ],
+      "sha256": "811ec7b50dee53e29cac99a9dd03461af41fdb0296a02c8fa2bd9ad82f0aacea"
+    },
+    {
+      "blob": "fa386dd386914c742edc5059f084eb1fef58383c",
+      "how": [
+        "import: studies/m0/lineages_r1_clusters.py:76 `studies.m0.lineages_r1_common` ['load_pilot']"
+      ],
+      "path": "studies/m0/lineages_r1_common.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/new_rules_final.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/run_rules_final.py",
+        "studies/m0/r1_fix4_measure.py"
+      ],
+      "sha256": "9153c13004ed8c222be5fd8d0dbde6e718483478553a779298a760437e4dad23"
+    },
+    {
+      "blob": "9880aa8d768b68a40413f3e04fe9933f745b9fb8",
+      "how": [
+        "import: studies/m0/lineages_r1_fix4_clusters.py:14 `studies.m0` ['lineages_r1_fix3_clusters']"
+      ],
+      "path": "studies/m0/lineages_r1_fix3_clusters.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/new_rules_final.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/run_rules_final.py",
+        "studies/m0/r1_fix4_measure.py"
+      ],
+      "sha256": "e7c26e08290e8acabb4314b51d81428b0e946db98755ad9a702a6177d90096aa"
+    },
+    {
+      "blob": "a0315da9f2c19cf2f5a73a762add32273326adab",
+      "how": [
+        "import: studies/m0/lineages_r1_fix3_clusters.py:17 `studies.m0.lineages_r1_fix3_common` ['REPLACES', 'load_fix3']",
+        "import: studies/m0/r1_fix3_battery.py:1141 `studies.m0.lineages_r1_fix3_common` ['load_fix3']"
+      ],
+      "path": "studies/m0/lineages_r1_fix3_common.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/new_rules_final.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/run_rules_final.py",
+        "studies/m0/r1_fix4_measure.py"
+      ],
+      "sha256": "fa87936f535cdf4843c41c4e507638b095ab291b10fb9ce402302ae5293a33cc"
+    },
+    {
+      "blob": "168c310b77b3374c89f18b4727a57d093f65c39d",
+      "how": [
+        "import: docs/reviews/m0-lineage-decision-2026-11-25/final_r1/fgen.py:11 `studies.m0.lineages_r1_fix4_clusters` ['registered_v4', 'candidates_v4']",
+        "import: studies/m0/r1_fix4_gen.py:13 `studies.m0.lineages_r1_fix4_clusters` ['candidates_v4']"
+      ],
+      "path": "studies/m0/lineages_r1_fix4_clusters.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/new_rules_final.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/run_rules_final.py",
+        "studies/m0/r1_fix4_measure.py"
+      ],
+      "sha256": "f7161d82c55d02f6991ee25a20aaae253bf7c5fa420ee9b0e86a37509aa2cd38"
+    },
+    {
+      "blob": "159707c92765d85db628fd4f8d70ba71b09239c3",
+      "how": [
+        "import: studies/m0/lineages_r1_fix4_clusters.py:16 `studies.m0.lineages_r1_fix4_common` ['REPLACES', 'load_fix4']"
+      ],
+      "path": "studies/m0/lineages_r1_fix4_common.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/new_rules_final.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/run_rules_final.py",
+        "studies/m0/r1_fix4_measure.py"
+      ],
+      "sha256": "137479efd834debc1fc956acebfe079ccf4591330f2e6c43a28f17ffb4fe501f"
+    },
+    {
+      "blob": "44abd21b66792acfd2f7c5069fd04187465ccbbf",
+      "how": [
+        "import: studies/m0/lineages_r1_clusters_v2.py:20 `studies.m0.lineages_r1_rev4_common` ['REPLACES', 'load_rev4']"
+      ],
+      "path": "studies/m0/lineages_r1_rev4_common.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/new_rules_final.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/run_rules_final.py",
+        "studies/m0/r1_fix4_measure.py"
+      ],
+      "sha256": "91faaad025290762e7e0757520aa2e279fdeb7d75f62adbadb9a4673a927bfba"
+    },
+    {
+      "blob": "0ae29b1f364d949744b45da9d66667feb403cd42",
+      "how": [
+        "import: studies/m0/core.py:116 `studies.m0` ['lineages_c1', 'lineages_k0', 'lineages_m1', 'lineages_r1', 'lineages_r2']",
+        "import: studies/m0/lineages_r2_fix4.py:28 `studies.m0.lineages_r2` ['ALPHA']"
+      ],
+      "path": "studies/m0/lineages_r2.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f1_draw.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5_attempt1.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/new_rules_final.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/run_rules_final.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules_new.py",
+        "studies/m0/c1_fix4_battery.py",
+        "studies/m0/c1_fix4_draw.py",
+        "studies/m0/m1_fix4_battery.py",
+        "studies/m0/r1_fix4_measure.py",
+        "studies/m0/r2_fix4_battery.py"
+      ],
+      "sha256": "d667aecce8bc0071852350bfc1dad0fb03ff8fe7970b04fdfa10fdd611a6c573"
+    },
+    {
+      "blob": "ad03f6b2d718370ec24bcaae82396cc2f9969236",
+      "how": [
+        "import: studies/m0/lineages_r2_dynprog.py:10 `studies.m0.lineages_r2_common` ['batch1', 'lst', 'until']",
+        "import: studies/m0/lineages_r2_fix3.py:21 `studies.m0.lineages_r2_common` ['lst']",
+        "import: studies/m0/lineages_r2_fix3_b.py:11 `studies.m0.lineages_r2_common` ['and_', 'lst', 'until']",
+        "import: studies/m0/lineages_r2_fix3_c.py:12 `studies.m0.lineages_r2_common` ['lst']",
+        "import: studies/m0/lineages_r2_fix4.py:29 `studies.m0.lineages_r2_common` ['and_', 'lst']",
+        "import: studies/m0/lineages_r2_graphs.py:9 `studies.m0.lineages_r2_common` ['and_', 'batch1', 'until']",
+        "import: studies/m0/lineages_r2_parsing.py:9 `studies.m0.lineages_r2_common` ['batch1', 'until']",
+        "import: studies/m0/lineages_r2_rev2.py:20 `studies.m0.lineages_r2_common` ['lst', 'until']",
+        "import: studies/m0/lineages_r2_structures.py:10 `studies.m0.lineages_r2_common` ['batch1', 'lst', 'until']",
+        "import: studies/m0/r2_fix3_set.py:28 `studies.m0.lineages_r2_common` ['load_batch1']"
+      ],
+      "path": "studies/m0/lineages_r2_common.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules_new.py",
+        "studies/m0/r2_fix4_battery.py"
+      ],
+      "sha256": "1c0008fb070913a64daecd73070be03605a77b9efc0fece8259508dd69ee75ff"
+    },
+    {
+      "blob": "9258a3ccbb449eadde1d0f80548df78662a81092",
+      "how": [
+        "import: studies/m0/lineages_r2_rev2.py:21 `studies.m0.lineages_r2_dynprog` ['coin_min']"
+      ],
+      "path": "studies/m0/lineages_r2_dynprog.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules_new.py",
+        "studies/m0/r2_fix4_battery.py"
+      ],
+      "sha256": "526e99602af7e23ec80268f0eff0c082555f1cf0767f6fad01b2c41792fd4767"
+    },
+    {
+      "blob": "388fc05459c47a541f9e14b595c1c3d19b3fd0d9",
+      "how": [
+        "import: studies/m0/lineages_r2_fix3_b.py:12 `studies.m0.lineages_r2_fix3` ['fix3']",
+        "import: studies/m0/lineages_r2_fix3_c.py:13 `studies.m0.lineages_r2_fix3` ['fix3']",
+        "import: studies/m0/lineages_r2_fix4.py:30 `studies.m0.lineages_r2_fix3` ['_pick_earliest_finish']",
+        "import: studies/m0/r2_fix3_set.py:40 `studies.m0.lineages_r2_fix3` ['load_fix3']",
+        "import: studies/m0/r2_fix4_set.py:11 `studies.m0.lineages_r2_fix3` ['load_fix3']"
+      ],
+      "path": "studies/m0/lineages_r2_fix3.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules_new.py",
+        "studies/m0/r2_fix4_battery.py"
+      ],
+      "sha256": "c833639b36c2a54c31156cbb22cee6acfc1407cd96036132ab1fa12f8cf67310"
+    },
+    {
+      "blob": "7b38647bdf7626e2d529bf7bfc282c03c40b81c0",
+      "how": [
+        "import: studies/m0/lineages_r2_fix3.py:42 `studies.m0.lineages_r2_fix3_b`",
+        "import: studies/m0/lineages_r2_fix4.py:31 `studies.m0.lineages_r2_fix3_b` ['_num', '_paren_sum']"
+      ],
+      "path": "studies/m0/lineages_r2_fix3_b.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules_new.py",
+        "studies/m0/r2_fix4_battery.py"
+      ],
+      "sha256": "581f5585eca2b03eaf0f5b90ce936bf04ad24e8f9359c3e362994f65ded71920"
+    },
+    {
+      "blob": "c6bcc284eaac1061aa1c273b4e3e00fdff8cac87",
+      "how": [
+        "import: studies/m0/lineages_r2_fix3.py:43 `studies.m0.lineages_r2_fix3_c`"
+      ],
+      "path": "studies/m0/lineages_r2_fix3_c.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules_new.py",
+        "studies/m0/r2_fix4_battery.py"
+      ],
+      "sha256": "7f64139719a33c5c0f7f5a702de862590fb6056095074c4dd531fea94f2227c2"
+    },
+    {
+      "blob": "a90a3139bc63cc70457cacd29599288fb0859d9b",
+      "how": [
+        "import: studies/m0/r2_fix4_set.py:12 `studies.m0.lineages_r2_fix4` ['load_fix4']"
+      ],
+      "path": "studies/m0/lineages_r2_fix4.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules_new.py",
+        "studies/m0/r2_fix4_battery.py"
+      ],
+      "sha256": "e9ee7fdbaa57d92aee4cff21b3e525fda3da7d53b646388cdf04ddf280a7b8e6"
+    },
+    {
+      "blob": "02875b5579edeeaa82468c5211092be1fe37590b",
+      "how": [
+        "import: studies/m0/lineages_r2_fix3_b.py:13 `studies.m0.lineages_r2_graphs` ['mst_weight']",
+        "import: studies/m0/lineages_r2_fix4.py:32 `studies.m0.lineages_r2_graphs` ['mst_weight']",
+        "import: studies/m0/lineages_r2_rev2.py:24 `studies.m0.lineages_r2_graphs` ['deferred_acceptance', 'mst_weight']"
+      ],
+      "path": "studies/m0/lineages_r2_graphs.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules_new.py",
+        "studies/m0/r2_fix4_battery.py"
+      ],
+      "sha256": "b3232aa25084e7c38a49a57dd44744293a28b9881fb5c13e0a6776c5788102b9"
+    },
+    {
+      "blob": "456c0cddd3721b2dd3295d03de4af04b8739593c",
+      "how": [
+        "import: studies/m0/lineages_r2_fix3_b.py:14 `studies.m0.lineages_r2_parsing` ['evaluate']",
+        "import: studies/m0/lineages_r2_fix4.py:33 `studies.m0.lineages_r2_parsing` ['evaluate']",
+        "import: studies/m0/lineages_r2_rev2.py:25 `studies.m0.lineages_r2_parsing` ['_render_ltr', '_render_std', '_tree', '_val', 'balanced', 'evaluate', 'match_of', 'random_balanced']"
+      ],
+      "path": "studies/m0/lineages_r2_parsing.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules_new.py",
+        "studies/m0/r2_fix4_battery.py"
+      ],
+      "sha256": "10ac4c89e2a8c8a97cb6a1b9485bab18af8c5f3ebcb6b1fab3cc5d21447e55b4"
+    },
+    {
+      "blob": "e4cd4744e3dcfaf8e98c2c3269dc113267e5a4bf",
+      "how": [
+        "import: studies/m0/r2_fix3_set.py:29 `studies.m0.lineages_r2_rev2` ['SUPERSEDES', 'load_rev2']"
+      ],
+      "path": "studies/m0/lineages_r2_rev2.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules_new.py",
+        "studies/m0/r2_fix4_battery.py"
+      ],
+      "sha256": "690e790eddcf5386ecf0876c9bcb41f9ff7b4e9b143f2f57c864871d268e6dfa"
+    },
+    {
+      "blob": "1f43235ab9c81bcbdb0c6d7824afc330fbe89975",
+      "how": [
+        "import: studies/m0/lineages_r2_rev2.py:35 `studies.m0.lineages_r2_structures` ['cache_run', 'hash_table']"
+      ],
+      "path": "studies/m0/lineages_r2_structures.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules_new.py",
+        "studies/m0/r2_fix4_battery.py"
+      ],
+      "sha256": "88b524efc9651f1cce09bb6fb1d5128bd5c4c9bebfc109b97929b96fbe70eddb"
+    },
+    {
+      "blob": "ee747863f79512943627bbff4d50677fc17720a7",
+      "how": [
+        "import: docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/shortcuts_a4.py:174 `studies.m0.m1_fix3_shortcuts` ['spec']",
+        "import: docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5.py:52 `studies.m0.m1_fix3_shortcuts`",
+        "import: docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5_attempt1.py:50 `studies.m0.m1_fix3_shortcuts`",
+        "import: studies/m0/m1_fix4_battery.py:101 `studies.m0.m1_fix3_shortcuts`",
+        "import: studies/m0/m1_fix4_battery.py:62 `studies.m0.m1_fix3_shortcuts` ['PROCEDURE']"
+      ],
+      "path": "studies/m0/m1_fix3_shortcuts.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5_attempt1.py",
+        "studies/m0/m1_fix4_battery.py"
+      ],
+      "sha256": "7eef7c7cb64195376d2424ce51b22db97c52b0164d894875310c3576a2552936"
+    },
+    {
+      "blob": "d181a4ea2a8ed870d9de6d16254972942b4de09a",
+      "how": [
+        "file open (json.load(open('studies/m0/manifests/m1_fix4_survivors.json')), cwd-relative, in survivors()): docs/reviews/m0-lineage-decision-2026-11-25/final_m1/fm1_common.py:17"
+      ],
+      "path": "studies/m0/manifests/m1_fix4_survivors.json",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5_attempt1.py"
+      ],
+      "sha256": "153e68374e8f34dfdbd96fdab73085227e29165a7122247748f38331963d1986"
+    },
+    {
+      "blob": "38eedcc6ec79513714a08e63b976e16ca5783ac9",
+      "how": [
+        "import: docs/reviews/m0-lineage-decision-2026-11-25/final_r1/run_rules_final.py:37 `studies.m0` ['r1_fix3_battery']",
+        "import: studies/m0/r1_fix4_measure.py:22 `studies.m0` ['r1_fix3_battery']"
+      ],
+      "path": "studies/m0/r1_fix3_battery.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/run_rules_final.py",
+        "studies/m0/r1_fix4_measure.py"
+      ],
+      "sha256": "dca205333bd89aad3823968d1bd273bfe94066c02d27a4c8e628743080a61c0d"
+    },
+    {
+      "blob": "ced7ed65966e732e4554dba876b7e17d3aab573b",
+      "how": [
+        "import: studies/m0/r1_fix4_a4_heur.py:21 `studies.m0` ['r1_fix4_a3_heur']",
+        "import: studies/m0/r1_fix4_measure.py:23 `studies.m0` ['r1_fix4_a3_heur']"
+      ],
+      "path": "studies/m0/r1_fix4_a3_heur.py",
+      "reached_by": [
+        "studies/m0/r1_fix4_measure.py"
+      ],
+      "sha256": "2e13bd3d57c16df50969ba7cc464da85922cffa08f0c95a1bf23f9b82e5b5473"
+    },
+    {
+      "blob": "0e3bdddec985486d37a365f09b1bb69265c00731",
+      "how": [
+        "import: studies/m0/r1_fix4_a3_heur.py:21 `studies.m0` ['r1_fix4_a3_solvers']"
+      ],
+      "path": "studies/m0/r1_fix4_a3_solvers.py",
+      "reached_by": [
+        "studies/m0/r1_fix4_measure.py"
+      ],
+      "sha256": "2dd1e329f3488a8c3e8284d6798b915a98d00a065f998a09ebf7495bcdcb256f"
+    },
+    {
+      "blob": "dd17f1285dba35c40b5d4e2a6f681134c0b76135",
+      "how": [
+        "import: studies/m0/r1_fix4_measure.py:24 `studies.m0` ['r1_fix4_a4_heur']"
+      ],
+      "path": "studies/m0/r1_fix4_a4_heur.py",
+      "reached_by": [
+        "studies/m0/r1_fix4_measure.py"
+      ],
+      "sha256": "4f97f5038022b2bf4010b1f0df30e7f92f879c3f7951941d4db1224df9afd874"
+    },
+    {
+      "blob": "609d0a5a1575f0e3ce8cd4ca65f7b5f9814114ad",
+      "how": [
+        "import: studies/m0/r1_fix4_a3_heur.py:22 `studies.m0` ['r1_fix4_gen']",
+        "import: studies/m0/r1_fix4_a4_heur.py:22 `studies.m0` ['r1_fix4_gen']",
+        "import: studies/m0/r1_fix4_measure.py:25 `studies.m0` ['r1_fix4_gen']",
+        "import: studies/m0/r1_fix4_measure.py:90 `studies.m0.r1_fix4_gen` ['lineages']",
+        "import: studies/m0/r1_fix4_tells.py:17 `studies.m0.r1_fix4_gen` ['items']"
+      ],
+      "path": "studies/m0/r1_fix4_gen.py",
+      "reached_by": [
+        "studies/m0/r1_fix4_measure.py"
+      ],
+      "sha256": "22ba2d53847e829a9aeebd9a122cd8966dbc506647ae022d28dd32043d2a1aeb"
+    },
+    {
+      "blob": "5a53640ab1dbf13a4def68e2e92c3915fb5ec320",
+      "how": [
+        "import: studies/m0/r1_fix4_measure.py:26 `studies.m0.r1_fix4_tells` ['feature_rows']"
+      ],
+      "path": "studies/m0/r1_fix4_tells.py",
+      "reached_by": [
+        "studies/m0/r1_fix4_measure.py"
+      ],
+      "sha256": "047ed9b9e8bc904547937f7cfebbe1c3afd1e601a59511f9fa92927fbe1d68a7"
+    },
+    {
+      "blob": "53d095b7476112462c55743d0a68fc197099f690",
+      "how": [
+        "import: docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules.py:42 `studies.m0.r2_fix3_heuristics` ['OWN']",
+        "import: studies/m0/r2_fix4_battery.py:75 `studies.m0.r2_fix3_heuristics` ['OWN']"
+      ],
+      "path": "studies/m0/r2_fix3_heuristics.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules.py",
+        "studies/m0/r2_fix4_battery.py"
+      ],
+      "sha256": "353456e093084d2524c97265d3434e39762d9ab1a06ae5743a194532083ab087"
+    },
+    {
+      "blob": "f4b4a6552d87f71a7603a79cfe307abb3045e4f9",
+      "how": [
+        "import: studies/m0/r2_fix4_set.py:13 `studies.m0.r2_fix3_set` ['fix3_set']"
+      ],
+      "path": "studies/m0/r2_fix3_set.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules_new.py",
+        "studies/m0/r2_fix4_battery.py"
+      ],
+      "sha256": "0c09653ed8296af5dfc992b21d560b33775a4e0ce59b7eab5547855fa8c06c27"
+    },
+    {
+      "blob": "dc85278d4b1a71be884ab6836d2d3ced70f7ee3d",
+      "how": [
+        "import: studies/m0/r2_fix4_battery.py:74 `studies.m0` ['r2_fix4_a3_heur', 'r2_fix4_a4_heur']"
+      ],
+      "path": "studies/m0/r2_fix4_a3_heur.py",
+      "reached_by": [
+        "studies/m0/r2_fix4_battery.py"
+      ],
+      "sha256": "fde317f0e8db9772733e44555ba662999d5e2f25b92afe80703e25b57556c7a1"
+    },
+    {
+      "blob": "e52c231d9a9a16d051b2dffb3ee15b3ee728c723",
+      "how": [
+        "import: studies/m0/r2_fix4_a3_heur.py:13 `studies.m0` ['r2_fix4_a3_solvers']"
+      ],
+      "path": "studies/m0/r2_fix4_a3_solvers.py",
+      "reached_by": [
+        "studies/m0/r2_fix4_battery.py"
+      ],
+      "sha256": "1c35ad8fd9271298eebf08d9aa2871f49b737d731542bd3c64d5c69c54198493"
+    },
+    {
+      "blob": "3cad57fcfd1aafa18d7f0f49b5dd8cfc458ac2e8",
+      "how": [
+        "import: studies/m0/r2_fix4_battery.py:74 `studies.m0` ['r2_fix4_a3_heur', 'r2_fix4_a4_heur']"
+      ],
+      "path": "studies/m0/r2_fix4_a4_heur.py",
+      "reached_by": [
+        "studies/m0/r2_fix4_battery.py"
+      ],
+      "sha256": "6788b49a745ecc917c99edc4602979cec5cfbf4d7b4e686e885541c1acf387f8"
+    },
+    {
+      "blob": "8420affacd8eb15dd632cd60faf8cb6bdf9c3714",
+      "how": [
+        "import: docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules.py:54 `studies.m0.r2_fix4_set` ['fix4_set']",
+        "import: docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules_new.py:23 `studies.m0.r2_fix4_set` ['fix4_set']",
+        "import: studies/m0/r2_fix4_battery.py:175 `studies.m0.r2_fix4_set` ['fix4_set']",
+        "import: studies/m0/r2_fix4_battery.py:86 `studies.m0.r2_fix4_set` ['fix4_set']"
+      ],
+      "path": "studies/m0/r2_fix4_set.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules_new.py",
+        "studies/m0/r2_fix4_battery.py"
+      ],
+      "sha256": "60cbef999cc17df17697a0fde5a4d16ce13b25c24fb8046b5b9924dc5dde8c9c"
+    },
+    {
+      "blob": "1ce59fd9c562abd8900aa90823b1fba728a8ffd8",
+      "how": [
+        "import: studies/m0/lineages_c1_common.py:118 `studies.m0.scoring` ['in_grammar', 'normalise_answer']",
+        "import: studies/m0/lineages_m1_common.py:67 `studies.m0.scoring` ['in_grammar', 'normalise_answer']",
+        "import: studies/m0/lineages_r2_common.py:72 `studies.m0.scoring` ['in_grammar', 'normalise_answer']"
+      ],
+      "path": "studies/m0/scoring.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f1_draw.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5_attempt1.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules_new.py",
+        "studies/m0/c1_fix4_battery.py",
+        "studies/m0/c1_fix4_draw.py",
+        "studies/m0/m1_fix4_battery.py",
+        "studies/m0/r2_fix4_battery.py"
+      ],
+      "sha256": "e5007eb53456849b45b142a6789ccf933be26e103a2384281253486b615e97a7"
+    },
+    {
+      "blob": "9d5b14e5ee886ff79029792e0e69f6b59203720a",
+      "how": [
+        "import: studies/m0/lineages_c1_common.py:119 `studies.m0.solvers_c1` ['c1_trace']"
+      ],
+      "path": "studies/m0/solvers_c1.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f1_draw.py",
+        "studies/m0/c1_fix4_battery.py",
+        "studies/m0/c1_fix4_draw.py"
+      ],
+      "sha256": "aafedb5be92a8dcdfaa4f6ed8587d2fed2eb980a78d9d71791364e1ed2f2360d"
+    },
+    {
+      "blob": "ddc9b0156e51e3d5efe120236fcf207445759e9f",
+      "how": [
+        "import: studies/m0/lineages_c1.py:16 `studies.m0.vocab` ['PSEUDO']",
+        "import: studies/m0/lineages_k0.py:14 `studies.m0.vocab` ['COLOURS', 'NAMES', 'OBJECTS', 'PSEUDO']",
+        "import: studies/m0/lineages_m1.py:14 `studies.m0.vocab` ['NAMES', 'OBJECTS']",
+        "import: studies/m0/lineages_m1_common.py:43 `studies.m0.vocab` ['NAMES', 'TOWNS']",
+        "import: studies/m0/lineages_m1_fix3_b.py:14 `studies.m0.vocab` ['NAMES']",
+        "import: studies/m0/lineages_m1_fix3_c.py:13 `studies.m0.vocab` ['NAMES']",
+        "import: studies/m0/lineages_m1_fix3_common.py:79 `studies.m0.vocab` ['NAMES', 'TOWNS']",
+        "import: studies/m0/lineages_m1_fix4.py:35 `studies.m0.vocab` ['NAMES']",
+        "import: studies/m0/lineages_m1_rev2.py:29 `studies.m0.vocab` ['NAMES', 'OBJECTS']",
+        "import: studies/m0/lineages_r1.py:15 `studies.m0.vocab` ['COLOURS', 'EVENTS', 'MARKS', 'NAMES', 'OBJECTS', 'PETS', 'PSEUDO', 'SHAPES', 'TOWNS']",
+        "import: studies/m0/lineages_r2.py:10 `studies.m0.vocab` ['PSEUDO']",
+        "import: studies/m0/lineages_r2_fix3_b.py:15 `studies.m0.vocab` ['OBJECTS', 'TOWNS']",
+        "import: studies/m0/lineages_r2_fix3_c.py:14 `studies.m0.vocab` ['PSEUDO']",
+        "import: studies/m0/lineages_r2_fix4.py:34 `studies.m0.vocab` ['PSEUDO', 'TOWNS']",
+        "import: studies/m0/lineages_r2_graphs.py:10 `studies.m0.vocab` ['NAMES', 'TOWNS']",
+        "import: studies/m0/lineages_r2_rev2.py:36 `studies.m0.vocab` ['NAMES', 'OBJECTS', 'TOWNS']",
+        "import: studies/m0/lineages_r2_structures.py:11 `studies.m0.vocab` ['OBJECTS']"
+      ],
+      "path": "studies/m0/vocab.py",
+      "reached_by": [
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f1_draw.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5_attempt1.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/new_rules_final.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/run_rules_final.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules.py",
+        "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules_new.py",
+        "studies/m0/c1_fix4_battery.py",
+        "studies/m0/c1_fix4_draw.py",
+        "studies/m0/m1_fix4_battery.py",
+        "studies/m0/r1_fix4_measure.py",
+        "studies/m0/r2_fix4_battery.py"
+      ],
+      "sha256": "2c4036bea7770727b3ec0582f361723c243c145de3479e8d610a384a7a93c286"
+    }
+  ],
+  "entry_path": {
+    "docs/reviews/m0-lineage-decision-2026-11-25/audit3_c1/a3_shortcuts.py": [
+      "docs/reviews/m0-lineage-decision-2026-11-25/audit3_c1"
+    ],
+    "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s4_rules_v2.py": [
+      "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1"
+    ],
+    "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1/s5_analyse_v2.py": [
+      "docs/reviews/m0-lineage-decision-2026-11-25/audit4_c1"
+    ],
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f1_draw.py": [
+      "",
+      "docs/reviews/m0-lineage-decision-2026-11-25/final_c1"
+    ],
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f3_a3_run.py": [
+      "docs/reviews/m0-lineage-decision-2026-11-25/final_c1"
+    ],
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f5_closed_forms.py": [
+      "docs/reviews/m0-lineage-decision-2026-11-25/final_c1"
+    ],
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f5b_closed_forms_v2.py": [
+      "docs/reviews/m0-lineage-decision-2026-11-25/final_c1"
+    ],
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5.py": [
+      "docs/reviews/m0-lineage-decision-2026-11-25/audit3_m1",
+      "docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1",
+      "docs/reviews/m0-lineage-decision-2026-11-25/final_m1",
+      ""
+    ],
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5_attempt1.py": [
+      "docs/reviews/m0-lineage-decision-2026-11-25/audit3_m1",
+      "docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1",
+      "docs/reviews/m0-lineage-decision-2026-11-25/final_m1",
+      ""
+    ],
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/new_rules_final.py": [
+      "",
+      "docs/reviews/m0-lineage-decision-2026-11-25/final_r1"
+    ],
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/run_rules_final.py": [
+      "",
+      "docs/reviews/m0-lineage-decision-2026-11-25/final_r1",
+      "docs/reviews/m0-lineage-decision-2026-11-25/final_r1/a4copy"
+    ],
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_new_heur.py": [
+      "docs/reviews/m0-lineage-decision-2026-11-25/final_r2"
+    ],
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules.py": [
+      "docs/reviews/m0-lineage-decision-2026-11-25/audit3_r2",
+      "docs/reviews/m0-lineage-decision-2026-11-25/audit4_r2",
+      "docs/reviews/m0-lineage-decision-2026-11-25/final_r2",
+      ""
+    ],
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules_new.py": [
+      "docs/reviews/m0-lineage-decision-2026-11-25/final_r2",
+      ""
+    ],
+    "studies/m0/c1_fix4_a3_run.py": [
+      ""
+    ],
+    "studies/m0/c1_fix4_battery.py": [
+      ""
+    ],
+    "studies/m0/c1_fix4_draw.py": [
+      ""
+    ],
+    "studies/m0/m1_fix4_battery.py": [
+      "docs/reviews/m0-lineage-decision-2026-11-25/audit3_m1",
+      "docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1",
+      ""
+    ],
+    "studies/m0/r1_fix4_measure.py": [
+      ""
+    ],
+    "studies/m0/r2_fix4_battery.py": [
+      ""
+    ]
+  },
+  "external_top_level_imports": {},
+  "listed_scripts_reached_from_other_listed": {
+    "docs/reviews/m0-lineage-decision-2026-11-25/audit3_c1/a3_shortcuts.py": {
+      "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f3_a3_run.py": [
+        "subprocess ([sys.executable, '-I', <argv[2]>, dir, out]; path given on the command line): docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f3_a3_run.py:34"
+      ],
+      "studies/m0/c1_fix4_a3_run.py": [
+        "subprocess ([sys.executable, '-I', <--a3 path>, dir, out]; path given on the command line): studies/m0/c1_fix4_a3_run.py:60"
+      ]
+    },
+    "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_new_heur.py": {
+      "docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules_new.py": [
+        "import: docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules_new.py:24 `f_new_heur` ['NEW']",
+        "import: docs/reviews/m0-lineage-decision-2026-11-25/final_r2/f_rules_new.py:54 `f_new_heur` ['NEW']"
+      ]
+    },
+    "studies/m0/c1_fix4_draw.py": {
+      "studies/m0/c1_fix4_battery.py": [
+        "import: studies/m0/c1_fix4_battery.py:20 `studies.m0.c1_fix4_draw` ['RULE_ALIAS']",
+        "import: studies/m0/c1_fix4_battery.py:58 `studies.m0.c1_fix4_draw` ['audit4_set']"
+      ]
+    }
+  },
+  "manual_edges": [
+    [
+      "studies/m0/m1_fix4_battery.py",
+      87,
+      "docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/common_a4.py",
+      "importlib path (spec_from_file_location; ROOT = Path(__file__).resolve().parents[2], line 33)"
+    ],
+    [
+      "studies/m0/m1_fix4_battery.py",
+      90,
+      "docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/shortcuts_a4.py",
+      "importlib path (spec_from_file_location; ROOT = Path(__file__).resolve().parents[2], line 33)"
+    ],
+    [
+      "studies/m0/m1_fix4_battery.py",
+      94,
+      "docs/reviews/m0-lineage-decision-2026-11-25/audit3_m1/common_a3.py",
+      "importlib path (spec_from_file_location; ROOT = Path(__file__).resolve().parents[2], line 33)"
+    ],
+    [
+      "studies/m0/m1_fix4_battery.py",
+      96,
+      "docs/reviews/m0-lineage-decision-2026-11-25/audit3_m1/shortcuts_a3.py",
+      "importlib path (spec_from_file_location; ROOT = Path(__file__).resolve().parents[2], line 33)"
+    ],
+    [
+      "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5.py",
+      50,
+      "docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/shortcuts_a4.py",
+      "importlib path (spec_from_file_location; AUD = Path('docs/reviews/...').resolve(), cwd-relative, line 37)"
+    ],
+    [
+      "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5.py",
+      51,
+      "docs/reviews/m0-lineage-decision-2026-11-25/audit3_m1/shortcuts_a3.py",
+      "importlib path (spec_from_file_location; AUD cwd-relative, line 37)"
+    ],
+    [
+      "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5_attempt1.py",
+      48,
+      "docs/reviews/m0-lineage-decision-2026-11-25/audit4_m1/shortcuts_a4.py",
+      "importlib path (spec_from_file_location; AUD cwd-relative, line 35)"
+    ],
+    [
+      "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/rules_a5_attempt1.py",
+      49,
+      "docs/reviews/m0-lineage-decision-2026-11-25/audit3_m1/shortcuts_a3.py",
+      "importlib path (spec_from_file_location; AUD cwd-relative, line 35)"
+    ],
+    [
+      "docs/reviews/m0-lineage-decision-2026-11-25/final_m1/fm1_common.py",
+      17,
+      "studies/m0/manifests/m1_fix4_survivors.json",
+      "file open (json.load(open('studies/m0/manifests/m1_fix4_survivors.json')), cwd-relative, in survivors())"
+    ],
+    [
+      "studies/m0/c1_fix4_a3_run.py",
+      60,
+      "docs/reviews/m0-lineage-decision-2026-11-25/audit3_c1/a3_shortcuts.py",
+      "subprocess ([sys.executable, '-I', <--a3 path>, dir, out]; path given on the command line)"
+    ],
+    [
+      "docs/reviews/m0-lineage-decision-2026-11-25/final_c1/f3_a3_run.py",
+      34,
+      "docs/reviews/m0-lineage-decision-2026-11-25/audit3_c1/a3_shortcuts.py",
+      "subprocess ([sys.executable, '-I', <argv[2]>, dir, out]; path given on the command line)"
+    ]
+  ],
+  "unresolved": []
+}

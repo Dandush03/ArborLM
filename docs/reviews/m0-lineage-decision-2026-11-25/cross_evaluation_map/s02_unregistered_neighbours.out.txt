@@ -1,0 +1,187 @@
+=== R2.gcd_euclid (module studies.m0.lineages_r2_fix3_c)  answer='617760'
+What is the least common multiple of 12870 and 4320?
+
+=== R2.modular_power (module studies.m0.lineages_r2_rev2)  answer='285'
+Multiply together 1047 copies of the number 199 (a product with 1047 factors, each equal to 199). What is the remainder when this product is divided by 377?
+
+=== R2.permutation_power (module studies.m0.lineages_r2_fix3_c)  answer='7'
+A mapping on the numbers 1 to 15 sends: 1 goes to 3, 2 goes to 13, 3 goes to 12, 4 goes to 8, 5 goes to 6, 6 goes to 14, 7 goes to 15, 8 goes to 2, 9 goes to 9, 10 goes to 5, 11 goes to 11, 12 goes to 4, 13 goes to 7, 14 goes to 1, 15 goes to 10. Start at 15 and apply the mapping 116 times in a row. Which number do you end on?
+
+=== R2.prime_factor_query (module studies.m0.lineages_r2_fix3_c)  answer='79'
+What is the largest prime number that divides 89657495 exactly?
+
+=== R2.stack_machine (module studies.m0.lineages_r2_fix3_c)  answer='-2704'
+A stack starts empty. Do these steps in order: push 13, push 2, discard the top, push 15, push 11, add the top two (replace them by their sum), multiply the top two (replace them by their product), duplicate the top, swap the top two, push 9, multiply the top two (replace them by their product), subtract: second from top minus top (replace both by the result). What number is on top of the stack at the end?
+
+=== R2.bracket_match (module studies.m0.lineages_r2_fix3_b)  answer='31'
+In the text [][][]{}()()(){{}(){[([{}][()]}]}) (positions are counted from 1 at the left) every opening bracket should be closed by a closing bracket of the same kind, with brackets opened later closed earlier, but the text breaks this rule. Reading from the left, each closing bracket should match the opening bracket most recently opened and not yet closed. At which position is the first closing bracket that does not match?
+
+=== R2.to_base_wide (module studies.m0.lineages_r2_rev2)  answer='13316'
+Write the decimal number 78614 in base 16. Use digits 0-9 and then lowercase letters a-f for ten to fifteen.
+
+=== R2.kth_smallest (module studies.m0.lineages_r2)  answer='278'
+What is the number that would be in position 6 if these numbers were sorted from smallest to largest (position 1 is the smallest)? Numbers: 460, 278, 459, 373, 287, 110, 25, 52, 284, 203, 43.
+
+=== R2.count_letter (module studies.m0.lineages_r2_fix3_c)  answer='21'
+How many times does the letter 'v' appear in total in these words: rovix vavon vavox bevan voven vanir vavix movex vobar vivar doven vavir vevax vador?
+
+=== R2.coin_change_min (module studies.m0.lineages_r2_fix3_c)  answer='5, 7, 5, 4, 6'
+You have an unlimited supply of coins worth 3, 20, 21 and 22. For each of the amounts 110, 114, 101, 85 and 94, in this order, what is the smallest number of coins that adds up to exactly that amount? Give the five numbers separated by commas, in the same order as the amounts.
+
+=== R2.multiples_between (module studies.m0.lineages_r2_fix3_c)  answer='161'
+How many whole numbers from 612 to 1572, counting both ends, are multiples of 6?
+
+=== R2.max_subarray_sum (module studies.m0.lineages_r2_fix3_c)  answer='56'
+Pick a block of one or more numbers that sit next to each other in this row (no gaps). What is the largest total a block can have? Row: -9, 2, -2, 3, -2, -4, 8, -2, 3, 4, -2, 7, -1, 5, -6, 3, 8, -3, 1, 2, 8, -1, 4, -6, 3, -2, 7, 4, -5, -2, -7, -6, 8, 3, 4, -5, 8, -3, 4, -2, 9, 6, -4, 4, -5, -9, -9.
+
+=== R2.palindrome_check (module studies.m0.lineages_r2_fix3_c)  answer='no'
+Ignoring the spaces, does the text 'lbf hjlhialjkjb ccb lkllaihljhfbl' read the same forwards and backwards? Answer yes or no.
+
+=== C1.bfs_queue (module studies.m0.lineages_c1_graphs)  answer='12'
+[program]
+val = [[2, 5, 1], [0, 3], [0, 3], [2, 1, 6], [5, 2, 7], [7, 4, 0], [3, 7], [6, 5, 4]]
+q = [(-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1)]
+best = [0, 0, 0, 0, 0, 0, 0, 0]
+best[0] = 7
+q[7] = 0
+k = 0
+d = 1
+n = 0
+while k < d:
+    c = best[k]
+    k += 1
+    n += q[c]
+    z = val[c]
+    for m in range(len(z)):
+        v = z[m]
+        if q[v] == (-1):
+            q[v] = q[c] + 1
+            best[d] = v
+            d += 1
+print(n)
+
+=== C1.coin_change_table_f3 (module studies.m0.lineages_c1_fix3_lists)  answer='1669'
+[program]
+a = [1, 4, 5, 10]
+x = [1]
+for v in range(20):
+    x.append(0)
+for v in range(1, 21):
+    for val in range(len(a)):
+        res = a[val]
+        if v >= res:
+            x[v] = x[v] + x[v - res]
+print(x[20])
+
+=== C1.bubble_pass (module studies.m0.lineages_c1)  answer='[8, 9, 12, 18, 20, 3, 21, 38]'
+[program]
+z = [12, 8, 38, 9, 21, 18, 20, 3]
+for t in range(len(z) - 1):
+    if z[t] > z[t + 1]:
+        j = z[t]
+        z[t] = z[t + 1]
+        z[t + 1] = j
+for t in range(len(z) - 1):
+    if z[t] > z[t + 1]:
+        j = z[t]
+        z[t] = z[t + 1]
+        z[t + 1] = j
+print(z)
+
+=== C1.partition_pass_f3 (module studies.m0.lineages_c1_fix3_lists)  answer='109'
+[program]
+res = [38, 33, 7, 37, 13, 34, 34, 37, 29, 4, 37, 28]
+s = res[11]
+count = (-1)
+val = 0
+for best in range(11):
+    if res[best] < s:
+        count += 1
+        val += res[count]
+        w = res[count]
+        res[count] = res[best]
+        res[best] = w
+print(val)
+
+=== C1.mirror_pointers (module studies.m0.lineages_c1_strings)  answer='7'
+[program]
+j = 'qdqdxqqqdq'
+n = 0
+out = len(j) - 1
+v = 0
+while n < out:
+    if j[n] != j[out]:
+        v += n
+    n += 1
+    out -= 1
+print(v)
+
+=== C1.majority_vote_scan_f3 (module studies.m0.lineages_c1_fix3_lists)  answer='10'
+[program]
+d = [3, 1, 2, 2, 3, 2, 5, 4, 5, 5, 3, 5, 1]
+count = 0
+q = 0
+n = 0
+for w in range(13):
+    if q == 0:
+        count = d[w]
+        q = 1
+        n += count
+    elif d[w] == count:
+        q += 1
+    else:
+        q -= 1
+print(n)
+
+=== C1.cellular_update_f3 (module studies.m0.lineages_c1_fix3_other)  answer='[0, 1, 0, 1, 1, 1, 0, 1]'
+[program]
+n = [1, 1, 1, 0, 1, 0, 1, 0]
+b = [1, 0, 0, 0, 0, 1, 1, 1]
+for z in range(3):
+    t = []
+    for v in range(8):
+        t.append(b[n[(v + 7) % 8] * 4 + n[v] * 2 + n[(v + 1) % 8]])
+    n = t
+print(n)
+
+=== C1.string_pair_table (module studies.m0.lineages_c1_tables)  answer='71'
+[program]
+x = 'rvvq'
+v = 'qrvvr'
+p = len(x)
+best = len(v)
+d = best + 1
+q = []
+for a in range((p + 1) * d):
+    q.append(0)
+for a in range(p + 1):
+    q[a * d + 0] = a
+for total in range(best + 1):
+    q[0 * d + total] = total
+for a in range(1, p + 1):
+    for total in range(1, best + 1):
+        if x[a - 1] == v[total - 1]:
+            cst = 0
+        else:
+            cst = 1
+        q[a * d + total] = min(q[(a - 1) * d + total] + 1, q[a * d + (total - 1)] + 1, q[(a - 1) * d + (total - 1)] + cst)
+print(sum(q))
+
+=== C1.grid_path_table (module studies.m0.lineages_c1_tables)  answer='10'
+[program]
+n = [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 0], [1, 1, 1, 1]]
+w = []
+for u in range(4):
+    w.append(0)
+for d in range(4):
+    for u in range(4):
+        if n[d][u] == 0:
+            w[u] = 0
+        elif d == 0 and u == 0:
+            w[u] = 1
+        elif d == 0:
+            w[u] = w[u - 1]
+        elif u > 0:
+            w[u] = w[u] + w[u - 1]
+print(w[3])
+

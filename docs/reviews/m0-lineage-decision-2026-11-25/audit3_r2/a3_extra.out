@@ -1,0 +1,8 @@
+R2.gcd_euclid | gcd: smallest common prime factor (trial division from 2) | 1.00(n=968) 1.00(n=1015) 1.00(n=1002) 0.94(n=1006) 0.92(n=1008) 0.90(n=1029) 0.90(n=988)
+R2.gcd_euclid | gcd shape: share of items whose gcd is prime | 1.00(n=968) 1.00(n=1015) 1.00(n=1002) 0.94(n=1006) 0.92(n=1008) 0.90(n=1029) 0.90(n=988)
+R2.list_ops | ignore reverses (items with a reverse only) | 0.12(n=698) 0.14(n=992) 0.13(n=1173) 0.17(n=1359) 0.13(n=1507) 0.14(n=1590) 0.13(n=1664)
+R2.list_ops | ignore moves to the end (items with one only) | 0.00(n=708) 0.01(n=968) 0.02(n=1192) 0.03(n=1314) 0.04(n=1448) 0.04(n=1577) 0.03(n=1662)
+R2.expression_eval | LTR: usual precedence inside parentheses only (old ambiguity), fixed | 0.94(n=1012) 0.89(n=1042) 0.83(n=979) 0.77(n=964) 0.69(n=976) 0.62(n=1007) 0.58(n=985)
+R2.permutation_power | start is a fixed point -> start (coverage) | 1.00(n=533) 1.00(n=400) 1.00(n=325) 1.00(n=292) 1.00(n=284) 1.00(n=200) 1.00(n=219)
+R2.permutation_power | start or one application, whichever is in a 2-cycle parity: t odd -> img[s], t even -> s | 0.71(n=2000) 0.60(n=2000) 0.56(n=2000) 0.51(n=2000) 0.49(n=2000) 0.41(n=2000) 0.41(n=2000)
+R2.stack_machine | last pushed value | 0.59(n=2000) 0.51(n=2000) 0.46(n=2000) 0.44(n=2000) 0.43(n=2000) 0.42(n=2000) 0.41(n=2000)

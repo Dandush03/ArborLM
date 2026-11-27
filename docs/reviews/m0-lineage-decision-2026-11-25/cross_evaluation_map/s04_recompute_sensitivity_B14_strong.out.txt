@@ -1,0 +1,50 @@
+SENSITIVITY: pairs promoted to STRONG for this run only: ['B14']
+input cross_evaluation_procedures_proposed.json; lineages dropped: none
+strict clusters left: {'R1': 10, 'R2': 18, 'M1': 17, 'C1': 18} lineages left: {'R1': 12, 'R2': 18, 'M1': 29, 'C1': 27}
+
+==================== reading 1 (STRONG only): links of grade ['STRONG'] (8 links used: S1, S2, S3, S4, S5, S6, S7, B14)
+global clusters: 55; cross-evaluation (X): 8 -> 4 to A, 4 to B
+  X C1.binary_search_f3  evals=R2/C1  size=2 strict clusters  C1:C1.binary_search[C1.binary_search_f3]; R2:R2.binary_search_trace[R2.binary_search_trace]
+  X C1.cond_chain_f3  evals=M1/C1  size=2 strict clusters  C1:B5[C1.cond_chain_f3, C1.euclid_gcd_traced_f3]; M1:gcd_lcm[M1.gcd_lcm_r4]
+  X C1.digit_peel_f3  evals=R2/C1  size=2 strict clusters  C1:C1.digit_peel[C1.digit_peel_f3]; R2:R2.from_base[R2.from_base]
+  X C1.fib_like_f3  evals=M1/C1  size=2 strict clusters  C1:B6[C1.fib_like_f3, C1.fib_shapes_recursive_f3, C1.recursive_calls_r2]; M1:S7_step_rule[M1.arithmetic_series_r3, M1.recurrence_iterate_r3]
+  X C1.run_length_scan  evals=R2/C1  size=2 strict clusters  C1:C1.run_length_scan[C1.run_length_scan]; R2:R2.run_length[R2.run_length]
+  X M1.crt_congruence_r3  evals=R2/M1  size=2 strict clusters  M1:crt_congruence[M1.crt_congruence_r3]; R2:R2.crt_smallest[R2.crt_smallest]
+  X M1.inclusion_exclusion_r3  evals=R1/M1  size=2 strict clusters  M1:inclusion_exclusion[M1.inclusion_exclusion_r3]; R1:R1.venn_counting[R1.venn_counting_r5]
+  X M1.median_list_r3  evals=R2/M1  size=2 strict clusters  M1:median_list[M1.median_list_r3]; R2:R2.kth_smallest[R2.sort_list]
+  R1: strict clusters 10; independent units G_R1 = 10 (within-evaluation merges: 0); X touching R1: 1; single-evaluation L_R1: 9
+      part A size range 5..5, part B size range 5..5, smaller part 5..5  (half split would be A=5, B=5);  rows (a_e, A, B): [(0, 5, 5), (1, 5, 5)]
+  R2: strict clusters 18; independent units G_R2 = 18 (within-evaluation merges: 0); X touching R2: 5; single-evaluation L_R2: 13
+      part A size range 9..9, part B size range 9..9, smaller part 9..9  (half split would be A=9, B=9);  rows (a_e, A, B): [(1, 9, 9), (2, 9, 9), (3, 9, 9), (4, 9, 9)]
+  M1: strict clusters 17; independent units G_M1 = 17 (within-evaluation merges: 0); X touching M1: 5; single-evaluation L_M1: 12
+      part A size range 8..8, part B size range 9..9, smaller part 8..8  (half split would be A=8, B=9);  rows (a_e, A, B): [(1, 8, 9), (2, 8, 9), (3, 8, 9), (4, 8, 9)]
+  C1: strict clusters 18; independent units G_C1 = 18 (within-evaluation merges: 0); X touching C1: 5; single-evaluation L_C1: 13
+      part A size range 9..9, part B size range 9..9, smaller part 9..9  (half split would be A=9, B=9);  rows (a_e, A, B): [(1, 9, 9), (2, 9, 9), (3, 9, 9), (4, 9, 9)]
+  largest global cluster: C1.fib_like_f3 with 2 strict clusters, 5 lineages, evals M1/C1
+
+==================== reading 2 (STRONG + BORDERLINE): links of grade ['BORDERLINE', 'STRONG'] (23 links used: S1, S2, S3, S4, S5, S6, S7, B1, B2, B3, B4, B5, B6, B7, B8, B9, B10, B11, B12, B13, B14, B15, B16)
+global clusters: 40; cross-evaluation (X): 15 -> 8 to A, 7 to B
+  X C1.binary_search_f3  evals=R2/C1  size=2 strict clusters  C1:C1.binary_search[C1.binary_search_f3]; R2:R2.binary_search_trace[R2.binary_search_trace]
+  X C1.bracket_matching_f3  evals=R2/C1  size=2 strict clusters  C1:B8[C1.bracket_matching_f3, C1.postfix_evaluation]; R2:R2.expression_eval[R2.expression_eval]
+  X C1.bytecode_loop_f3  evals=R1/C1  size=3 strict clusters  C1:B7[C1.bytecode_loop_f3, C1.turtle_walk_f3]; R1:R1.boolean_lights[R1.boolean_lights_r4, R1.compass_turns]; R1:R1.spatial_grid_walk[R1.spatial_grid_walk_r5]
+  X C1.cond_chain_f3  evals=M1/C1  size=2 strict clusters  C1:B5[C1.cond_chain_f3, C1.euclid_gcd_traced_f3]; M1:gcd_lcm[M1.gcd_lcm_r4]
+  X C1.digit_peel_f3  evals=R2/M1/C1  size=4 strict clusters  C1:C1.digit_peel[C1.digit_peel_f3]; M1:division_counting[M1.division_counting_r3]; R2:R2.digit_root[R2.digit_root]; R2:R2.from_base[R2.from_base]
+  X C1.fast_power_f4  evals=M1/C1  size=2 strict clusters  C1:C1.fast_power_square_map[C1.fast_power_f4]; M1:last_digit_power[M1.last_digit_power_r3]
+  X C1.fib_like_f3  evals=R2/M1/C1  size=4 strict clusters  C1:B1[C1.list_build_f3, C1.nested_pairs_f3, C1.string_build_f3]; C1:B6[C1.fib_like_f3, C1.fib_shapes_recursive_f3, C1.recursive_calls_r2]; M1:S7_step_rule[M1.arithmetic_series_r3, M1.recurrence_iterate_r3]; R2:R2.count_divisible[R2.count_divisible]
+  X C1.merge_two_sorted_f3  evals=R2/M1/C1  size=3 strict clusters  C1:C1.merge_two_sorted[C1.merge_two_sorted_f3]; M1:median_list[M1.median_list_r3]; R2:R2.kth_smallest[R2.sort_list]
+  X C1.run_length_scan  evals=R2/C1  size=2 strict clusters  C1:C1.run_length_scan[C1.run_length_scan]; R2:R2.run_length[R2.run_length]
+  X C1.slices_f4  evals=R2/C1  size=2 strict clusters  C1:B3[C1.slices_f4, C1.string_methods_f3]; R2:R2.string_rewrite_nonidentity[R2.string_rewrite_nonidentity]
+  X C1.union_find_links_f3  evals=R1/R2/C1  size=4 strict clusters  C1:C1.union_find_links[C1.union_find_links_f3]; R1:R1.categories_default_exceptions[R1.categories_default_exceptions_r4]; R1:R1.graph_shortest_route[R1.graph_shortest_route_r6]; R2:R2.cheapest_network[R2.cheapest_network]
+  X M1.crt_congruence_r3  evals=R2/M1  size=2 strict clusters  M1:crt_congruence[M1.crt_congruence_r3]; R2:R2.crt_smallest[R2.crt_smallest]
+  X M1.fraction_remainder_r3  evals=R1/M1  size=2 strict clusters  M1:S3_multiplicative_chain[M1.fraction_remainder_r3, M1.percent_change_r3, M1.ratio_share_r3, M1.tip_split_r3]; R1:R1.equivalence_exchange_rates[R1.equivalence_exchange_rates_r6, R1.temporal_weekday_shift_r6]
+  X M1.inclusion_exclusion_r3  evals=R1/M1  size=2 strict clusters  M1:inclusion_exclusion[M1.inclusion_exclusion_r3]; R1:R1.venn_counting[R1.venn_counting_r5]
+  X M1.mixture_r4  evals=R1/M1  size=2 strict clusters  M1:S2_weighted_sum[M1.mixture_r4, M1.shopping_r3, M1.speed_distance_r3]; R1:R1.conditional_threshold_rule[R1.conditional_threshold_rule_r4]
+  R1: strict clusters 10; independent units G_R1 = 8 (within-evaluation merges: 2 -> R1.boolean_lights+R1.spatial_grid_walk; R1.categories_default_exceptions+R1.graph_shortest_route); X touching R1: 5; single-evaluation L_R1: 3
+      part A size range 3..5, part B size range 3..5, smaller part 3..4  (half split would be A=4, B=4);  rows (a_e, A, B): [(0, 3, 5), (1, 4, 4), (2, 4, 4), (3, 4, 4), (4, 4, 4), (5, 5, 3)]
+  R2: strict clusters 18; independent units G_R2 = 17 (within-evaluation merges: 1 -> R2.digit_root+R2.from_base); X touching R2: 9; single-evaluation L_R2: 8
+      part A size range 8..8, part B size range 9..9, smaller part 8..8  (half split would be A=8, B=9);  rows (a_e, A, B): [(2, 8, 9), (3, 8, 9), (4, 8, 9), (5, 8, 9), (6, 8, 9), (7, 8, 9), (8, 8, 9)]
+  M1: strict clusters 17; independent units G_M1 = 17 (within-evaluation merges: 0); X touching M1: 9; single-evaluation L_M1: 8
+      part A size range 8..8, part B size range 9..9, smaller part 8..8  (half split would be A=8, B=9);  rows (a_e, A, B): [(2, 8, 9), (3, 8, 9), (4, 8, 9), (5, 8, 9), (6, 8, 9), (7, 8, 9), (8, 8, 9)]
+  C1: strict clusters 18; independent units G_C1 = 17 (within-evaluation merges: 1 -> B1+B6); X touching C1: 11; single-evaluation L_C1: 6
+      part A size range 8..8, part B size range 9..9, smaller part 8..8  (half split would be A=8, B=9);  rows (a_e, A, B): [(4, 8, 9), (5, 8, 9), (6, 8, 9), (7, 8, 9), (8, 8, 9)]
+  largest global cluster: C1.fib_like_f3 with 4 strict clusters, 9 lineages, evals R2/M1/C1

@@ -1,0 +1,1962 @@
+{
+ "lineages": {
+  "R2.binary_search_trace": {
+   "0": {
+    "sum": {
+     "answer_type": "number",
+     "n": 1947,
+     "rules": {
+      "[NEW] (cue) sum ask: target x ceil(log2(n+1)) ; values ask: midpoints by position only, target appended": {
+       "k": 15,
+       "napp": 1947,
+       "nerr": 0
+      }
+     }
+    },
+    "values": {
+     "answer_type": "list",
+     "n": 2053,
+     "rules": {
+      "[NEW] (cue) sum ask: target x ceil(log2(n+1)) ; values ask: midpoints by position only, target appended": {
+       "k": 66,
+       "napp": 2053,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "1": {
+    "sum": {
+     "answer_type": "number",
+     "n": 1966,
+     "rules": {
+      "[NEW] (cue) sum ask: target x ceil(log2(n+1)) ; values ask: midpoints by position only, target appended": {
+       "k": 6,
+       "napp": 1966,
+       "nerr": 0
+      }
+     }
+    },
+    "values": {
+     "answer_type": "list",
+     "n": 2034,
+     "rules": {
+      "[NEW] (cue) sum ask: target x ceil(log2(n+1)) ; values ask: midpoints by position only, target appended": {
+       "k": 43,
+       "napp": 2034,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "2": {
+    "sum": {
+     "answer_type": "number",
+     "n": 1994,
+     "rules": {
+      "[NEW] (cue) sum ask: target x ceil(log2(n+1)) ; values ask: midpoints by position only, target appended": {
+       "k": 12,
+       "napp": 1994,
+       "nerr": 0
+      }
+     }
+    },
+    "values": {
+     "answer_type": "list",
+     "n": 2006,
+     "rules": {
+      "[NEW] (cue) sum ask: target x ceil(log2(n+1)) ; values ask: midpoints by position only, target appended": {
+       "k": 32,
+       "napp": 2006,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "3": {
+    "sum": {
+     "answer_type": "number",
+     "n": 2048,
+     "rules": {
+      "[NEW] (cue) sum ask: target x ceil(log2(n+1)) ; values ask: midpoints by position only, target appended": {
+       "k": 8,
+       "napp": 2048,
+       "nerr": 0
+      }
+     }
+    },
+    "values": {
+     "answer_type": "list",
+     "n": 1952,
+     "rules": {
+      "[NEW] (cue) sum ask: target x ceil(log2(n+1)) ; values ask: midpoints by position only, target appended": {
+       "k": 41,
+       "napp": 1952,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "4": {
+    "sum": {
+     "answer_type": "number",
+     "n": 1977,
+     "rules": {
+      "[NEW] (cue) sum ask: target x ceil(log2(n+1)) ; values ask: midpoints by position only, target appended": {
+       "k": 3,
+       "napp": 1977,
+       "nerr": 0
+      }
+     }
+    },
+    "values": {
+     "answer_type": "list",
+     "n": 2023,
+     "rules": {
+      "[NEW] (cue) sum ask: target x ceil(log2(n+1)) ; values ask: midpoints by position only, target appended": {
+       "k": 38,
+       "napp": 2023,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "5": {
+    "sum": {
+     "answer_type": "number",
+     "n": 2025,
+     "rules": {
+      "[NEW] (cue) sum ask: target x ceil(log2(n+1)) ; values ask: midpoints by position only, target appended": {
+       "k": 5,
+       "napp": 2025,
+       "nerr": 0
+      }
+     }
+    },
+    "values": {
+     "answer_type": "list",
+     "n": 1975,
+     "rules": {
+      "[NEW] (cue) sum ask: target x ceil(log2(n+1)) ; values ask: midpoints by position only, target appended": {
+       "k": 31,
+       "napp": 1975,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "6": {
+    "sum": {
+     "answer_type": "number",
+     "n": 2003,
+     "rules": {
+      "[NEW] (cue) sum ask: target x ceil(log2(n+1)) ; values ask: midpoints by position only, target appended": {
+       "k": 10,
+       "napp": 2003,
+       "nerr": 0
+      }
+     }
+    },
+    "values": {
+     "answer_type": "list",
+     "n": 1997,
+     "rules": {
+      "[NEW] (cue) sum ask: target x ceil(log2(n+1)) ; values ask: midpoints by position only, target appended": {
+       "k": 21,
+       "napp": 1997,
+       "nerr": 0
+      }
+     }
+    }
+   }
+  },
+  "R2.cheapest_network": {
+   "0": {
+    "-": {
+     "answer_type": "number",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) nearest-neighbour path from the first listed town": {
+       "k": 286,
+       "napp": 1640,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "1": {
+    "-": {
+     "answer_type": "number",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) nearest-neighbour path from the first listed town": {
+       "k": 166,
+       "napp": 1237,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "2": {
+    "-": {
+     "answer_type": "number",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) nearest-neighbour path from the first listed town": {
+       "k": 115,
+       "napp": 998,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "3": {
+    "-": {
+     "answer_type": "number",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) nearest-neighbour path from the first listed town": {
+       "k": 71,
+       "napp": 707,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "4": {
+    "-": {
+     "answer_type": "number",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) nearest-neighbour path from the first listed town": {
+       "k": 57,
+       "napp": 589,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "5": {
+    "-": {
+     "answer_type": "number",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) nearest-neighbour path from the first listed town": {
+       "k": 32,
+       "napp": 472,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "6": {
+    "-": {
+     "answer_type": "number",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) nearest-neighbour path from the first listed town": {
+       "k": 26,
+       "napp": 342,
+       "nerr": 0
+      }
+     }
+    }
+   }
+  },
+  "R2.count_divisible": {
+   "0": {
+    "sum": {
+     "answer_type": "number",
+     "n": 4000,
+     "rules": {
+      "[NEW] (P) misread: each distinct value counted once (the wording now excludes it)": {
+       "k": 2880,
+       "napp": 4000,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "1": {
+    "sum": {
+     "answer_type": "number",
+     "n": 4000,
+     "rules": {
+      "[NEW] (P) misread: each distinct value counted once (the wording now excludes it)": {
+       "k": 2470,
+       "napp": 4000,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "2": {
+    "sum": {
+     "answer_type": "number",
+     "n": 4000,
+     "rules": {
+      "[NEW] (P) misread: each distinct value counted once (the wording now excludes it)": {
+       "k": 2893,
+       "napp": 4000,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "3": {
+    "sum": {
+     "answer_type": "number",
+     "n": 4000,
+     "rules": {
+      "[NEW] (P) misread: each distinct value counted once (the wording now excludes it)": {
+       "k": 2632,
+       "napp": 4000,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "4": {
+    "sum": {
+     "answer_type": "number",
+     "n": 4000,
+     "rules": {
+      "[NEW] (P) misread: each distinct value counted once (the wording now excludes it)": {
+       "k": 2830,
+       "napp": 4000,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "5": {
+    "sum": {
+     "answer_type": "number",
+     "n": 4000,
+     "rules": {
+      "[NEW] (P) misread: each distinct value counted once (the wording now excludes it)": {
+       "k": 2513,
+       "napp": 4000,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "6": {
+    "sum": {
+     "answer_type": "number",
+     "n": 4000,
+     "rules": {
+      "[NEW] (P) misread: each distinct value counted once (the wording now excludes it)": {
+       "k": 2624,
+       "napp": 4000,
+       "nerr": 0
+      }
+     }
+    }
+   }
+  },
+  "R2.crt_smallest": {
+   "0": {
+    "-": {
+     "answer_type": "number",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) common offset: equal remainders -> r; equal (m - r) -> lcm - (m - r)": {
+       "k": 443,
+       "napp": 443,
+       "nerr": 0
+      },
+      "[NEW] (cue) largest remainder + its modulus": {
+       "k": 468,
+       "napp": 4000,
+       "nerr": 0
+      },
+      "[NEW] (partial) largest modulus: try r, r+m, r+2m against the other congruences, else r": {
+       "k": 1463,
+       "napp": 4000,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "1": {
+    "-": {
+     "answer_type": "number",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) common offset: equal remainders -> r; equal (m - r) -> lcm - (m - r)": {
+       "k": 265,
+       "napp": 265,
+       "nerr": 0
+      },
+      "[NEW] (cue) largest remainder + its modulus": {
+       "k": 230,
+       "napp": 4000,
+       "nerr": 0
+      },
+      "[NEW] (partial) largest modulus: try r, r+m, r+2m against the other congruences, else r": {
+       "k": 766,
+       "napp": 4000,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "2": {
+    "-": {
+     "answer_type": "number",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) common offset: equal remainders -> r; equal (m - r) -> lcm - (m - r)": {
+       "k": 224,
+       "napp": 224,
+       "nerr": 0
+      },
+      "[NEW] (cue) largest remainder + its modulus": {
+       "k": 168,
+       "napp": 4000,
+       "nerr": 0
+      },
+      "[NEW] (partial) largest modulus: try r, r+m, r+2m against the other congruences, else r": {
+       "k": 534,
+       "napp": 4000,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "3": {
+    "-": {
+     "answer_type": "number",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) common offset: equal remainders -> r; equal (m - r) -> lcm - (m - r)": {
+       "k": 3,
+       "napp": 3,
+       "nerr": 0
+      },
+      "[NEW] (cue) largest remainder + its modulus": {
+       "k": 1,
+       "napp": 4000,
+       "nerr": 0
+      },
+      "[NEW] (partial) largest modulus: try r, r+m, r+2m against the other congruences, else r": {
+       "k": 7,
+       "napp": 4000,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "4": {
+    "-": {
+     "answer_type": "number",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) common offset: equal remainders -> r; equal (m - r) -> lcm - (m - r)": {
+       "k": 3,
+       "napp": 3,
+       "nerr": 0
+      },
+      "[NEW] (cue) largest remainder + its modulus": {
+       "k": 5,
+       "napp": 4000,
+       "nerr": 0
+      },
+      "[NEW] (partial) largest modulus: try r, r+m, r+2m against the other congruences, else r": {
+       "k": 13,
+       "napp": 4000,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "5": {
+    "-": {
+     "answer_type": "number",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) common offset: equal remainders -> r; equal (m - r) -> lcm - (m - r)": {
+       "k": 5,
+       "napp": 5,
+       "nerr": 0
+      },
+      "[NEW] (cue) largest remainder + its modulus": {
+       "k": 3,
+       "napp": 4000,
+       "nerr": 0
+      },
+      "[NEW] (partial) largest modulus: try r, r+m, r+2m against the other congruences, else r": {
+       "k": 5,
+       "napp": 4000,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "6": {
+    "-": {
+     "answer_type": "number",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) common offset: equal remainders -> r; equal (m - r) -> lcm - (m - r)": {
+       "k": 0,
+       "napp": 0,
+       "nerr": 0
+      },
+      "[NEW] (cue) largest remainder + its modulus": {
+       "k": 0,
+       "napp": 4000,
+       "nerr": 0
+      },
+      "[NEW] (partial) largest modulus: try r, r+m, r+2m against the other congruences, else r": {
+       "k": 3,
+       "napp": 4000,
+       "nerr": 0
+      }
+     }
+    }
+   }
+  },
+  "R2.digit_root": {
+   "0": {
+    "-": {
+     "answer_type": "number",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) digit sum once, first digit": {
+       "k": 846,
+       "napp": 4000,
+       "nerr": 0
+      },
+      "[NEW] (cue) digit sum once, last digit": {
+       "k": 54,
+       "napp": 4000,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "1": {
+    "-": {
+     "answer_type": "number",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) digit sum once, first digit": {
+       "k": 811,
+       "napp": 4000,
+       "nerr": 0
+      },
+      "[NEW] (cue) digit sum once, last digit": {
+       "k": 12,
+       "napp": 4000,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "2": {
+    "-": {
+     "answer_type": "number",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) digit sum once, first digit": {
+       "k": 805,
+       "napp": 4000,
+       "nerr": 0
+      },
+      "[NEW] (cue) digit sum once, last digit": {
+       "k": 4,
+       "napp": 4000,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "3": {
+    "-": {
+     "answer_type": "number",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) digit sum once, first digit": {
+       "k": 838,
+       "napp": 4000,
+       "nerr": 0
+      },
+      "[NEW] (cue) digit sum once, last digit": {
+       "k": 0,
+       "napp": 4000,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "4": {
+    "-": {
+     "answer_type": "number",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) digit sum once, first digit": {
+       "k": 806,
+       "napp": 4000,
+       "nerr": 0
+      },
+      "[NEW] (cue) digit sum once, last digit": {
+       "k": 0,
+       "napp": 4000,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "5": {
+    "-": {
+     "answer_type": "number",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) digit sum once, first digit": {
+       "k": 819,
+       "napp": 4000,
+       "nerr": 0
+      },
+      "[NEW] (cue) digit sum once, last digit": {
+       "k": 0,
+       "napp": 4000,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "6": {
+    "-": {
+     "answer_type": "number",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) digit sum once, first digit": {
+       "k": 778,
+       "napp": 4000,
+       "nerr": 0
+      },
+      "[NEW] (cue) digit sum once, last digit": {
+       "k": 0,
+       "napp": 4000,
+       "nerr": 0
+      }
+     }
+    }
+   }
+  },
+  "R2.expression_eval": {
+   "0": {
+    "left_to_right": {
+     "answer_type": "number",
+     "n": 2000,
+     "rules": {
+      "[NEW] (cue) parentheses ignored, the item's own convention otherwise": {
+       "k": 44,
+       "napp": 2000,
+       "nerr": 0
+      },
+      "[NEW] (cue) the other convention (ranked item worked left to right, left-to-right item worked with precedence)": {
+       "k": 6,
+       "napp": 2000,
+       "nerr": 0
+      }
+     }
+    },
+    "ranked": {
+     "answer_type": "number",
+     "n": 2000,
+     "rules": {
+      "[NEW] (cue) parentheses ignored, the item's own convention otherwise": {
+       "k": 4,
+       "napp": 2000,
+       "nerr": 0
+      },
+      "[NEW] (cue) the other convention (ranked item worked left to right, left-to-right item worked with precedence)": {
+       "k": 0,
+       "napp": 0,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "1": {
+    "left_to_right": {
+     "answer_type": "number",
+     "n": 2002,
+     "rules": {
+      "[NEW] (cue) parentheses ignored, the item's own convention otherwise": {
+       "k": 37,
+       "napp": 2002,
+       "nerr": 0
+      },
+      "[NEW] (cue) the other convention (ranked item worked left to right, left-to-right item worked with precedence)": {
+       "k": 4,
+       "napp": 2002,
+       "nerr": 0
+      }
+     }
+    },
+    "ranked": {
+     "answer_type": "number",
+     "n": 1998,
+     "rules": {
+      "[NEW] (cue) parentheses ignored, the item's own convention otherwise": {
+       "k": 4,
+       "napp": 1998,
+       "nerr": 0
+      },
+      "[NEW] (cue) the other convention (ranked item worked left to right, left-to-right item worked with precedence)": {
+       "k": 0,
+       "napp": 0,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "2": {
+    "left_to_right": {
+     "answer_type": "number",
+     "n": 1971,
+     "rules": {
+      "[NEW] (cue) parentheses ignored, the item's own convention otherwise": {
+       "k": 26,
+       "napp": 1971,
+       "nerr": 0
+      },
+      "[NEW] (cue) the other convention (ranked item worked left to right, left-to-right item worked with precedence)": {
+       "k": 8,
+       "napp": 1971,
+       "nerr": 0
+      }
+     }
+    },
+    "ranked": {
+     "answer_type": "number",
+     "n": 2029,
+     "rules": {
+      "[NEW] (cue) parentheses ignored, the item's own convention otherwise": {
+       "k": 6,
+       "napp": 2029,
+       "nerr": 0
+      },
+      "[NEW] (cue) the other convention (ranked item worked left to right, left-to-right item worked with precedence)": {
+       "k": 0,
+       "napp": 0,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "3": {
+    "left_to_right": {
+     "answer_type": "number",
+     "n": 1998,
+     "rules": {
+      "[NEW] (cue) parentheses ignored, the item's own convention otherwise": {
+       "k": 22,
+       "napp": 1998,
+       "nerr": 0
+      },
+      "[NEW] (cue) the other convention (ranked item worked left to right, left-to-right item worked with precedence)": {
+       "k": 2,
+       "napp": 1998,
+       "nerr": 0
+      }
+     }
+    },
+    "ranked": {
+     "answer_type": "number",
+     "n": 2002,
+     "rules": {
+      "[NEW] (cue) parentheses ignored, the item's own convention otherwise": {
+       "k": 12,
+       "napp": 2002,
+       "nerr": 0
+      },
+      "[NEW] (cue) the other convention (ranked item worked left to right, left-to-right item worked with precedence)": {
+       "k": 0,
+       "napp": 0,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "4": {
+    "left_to_right": {
+     "answer_type": "number",
+     "n": 2039,
+     "rules": {
+      "[NEW] (cue) parentheses ignored, the item's own convention otherwise": {
+       "k": 3,
+       "napp": 2039,
+       "nerr": 0
+      },
+      "[NEW] (cue) the other convention (ranked item worked left to right, left-to-right item worked with precedence)": {
+       "k": 1,
+       "napp": 2039,
+       "nerr": 0
+      }
+     }
+    },
+    "ranked": {
+     "answer_type": "number",
+     "n": 1961,
+     "rules": {
+      "[NEW] (cue) parentheses ignored, the item's own convention otherwise": {
+       "k": 2,
+       "napp": 1961,
+       "nerr": 0
+      },
+      "[NEW] (cue) the other convention (ranked item worked left to right, left-to-right item worked with precedence)": {
+       "k": 0,
+       "napp": 0,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "5": {
+    "left_to_right": {
+     "answer_type": "number",
+     "n": 2022,
+     "rules": {
+      "[NEW] (cue) parentheses ignored, the item's own convention otherwise": {
+       "k": 6,
+       "napp": 2022,
+       "nerr": 0
+      },
+      "[NEW] (cue) the other convention (ranked item worked left to right, left-to-right item worked with precedence)": {
+       "k": 2,
+       "napp": 2022,
+       "nerr": 0
+      }
+     }
+    },
+    "ranked": {
+     "answer_type": "number",
+     "n": 1978,
+     "rules": {
+      "[NEW] (cue) parentheses ignored, the item's own convention otherwise": {
+       "k": 2,
+       "napp": 1978,
+       "nerr": 0
+      },
+      "[NEW] (cue) the other convention (ranked item worked left to right, left-to-right item worked with precedence)": {
+       "k": 0,
+       "napp": 0,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "6": {
+    "left_to_right": {
+     "answer_type": "number",
+     "n": 2029,
+     "rules": {
+      "[NEW] (cue) parentheses ignored, the item's own convention otherwise": {
+       "k": 1,
+       "napp": 2029,
+       "nerr": 0
+      },
+      "[NEW] (cue) the other convention (ranked item worked left to right, left-to-right item worked with precedence)": {
+       "k": 0,
+       "napp": 2029,
+       "nerr": 0
+      }
+     }
+    },
+    "ranked": {
+     "answer_type": "number",
+     "n": 1971,
+     "rules": {
+      "[NEW] (cue) parentheses ignored, the item's own convention otherwise": {
+       "k": 4,
+       "napp": 1971,
+       "nerr": 0
+      },
+      "[NEW] (cue) the other convention (ranked item worked left to right, left-to-right item worked with precedence)": {
+       "k": 0,
+       "napp": 0,
+       "nerr": 0
+      }
+     }
+    }
+   }
+  },
+  "R2.from_base": {
+   "0": {
+    "-": {
+     "answer_type": "number",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) digits read as a decimal number": {
+       "k": 0,
+       "napp": 4000,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "1": {
+    "-": {
+     "answer_type": "number",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) digits read as a decimal number": {
+       "k": 0,
+       "napp": 4000,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "2": {
+    "-": {
+     "answer_type": "number",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) digits read as a decimal number": {
+       "k": 0,
+       "napp": 3497,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "3": {
+    "-": {
+     "answer_type": "number",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) digits read as a decimal number": {
+       "k": 0,
+       "napp": 3515,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "4": {
+    "-": {
+     "answer_type": "number",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) digits read as a decimal number": {
+       "k": 0,
+       "napp": 3489,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "5": {
+    "-": {
+     "answer_type": "number",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) digits read as a decimal number": {
+       "k": 0,
+       "napp": 3527,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "6": {
+    "-": {
+     "answer_type": "number",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) digits read as a decimal number": {
+       "k": 0,
+       "napp": 3501,
+       "nerr": 0
+      }
+     }
+    }
+   }
+  },
+  "R2.grid_sum": {
+   "0": {
+    "-": {
+     "answer_type": "number",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) the asked row/column/diagonal read with the index off by one (next one)": {
+       "k": 190,
+       "napp": 3146,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "1": {
+    "-": {
+     "answer_type": "number",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) the asked row/column/diagonal read with the index off by one (next one)": {
+       "k": 192,
+       "napp": 3225,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "2": {
+    "-": {
+     "answer_type": "number",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) the asked row/column/diagonal read with the index off by one (next one)": {
+       "k": 154,
+       "napp": 3294,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "3": {
+    "-": {
+     "answer_type": "number",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) the asked row/column/diagonal read with the index off by one (next one)": {
+       "k": 165,
+       "napp": 3357,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "4": {
+    "-": {
+     "answer_type": "number",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) the asked row/column/diagonal read with the index off by one (next one)": {
+       "k": 147,
+       "napp": 3484,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "5": {
+    "-": {
+     "answer_type": "number",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) the asked row/column/diagonal read with the index off by one (next one)": {
+       "k": 158,
+       "napp": 3523,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "6": {
+    "-": {
+     "answer_type": "number",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) the asked row/column/diagonal read with the index off by one (next one)": {
+       "k": 136,
+       "napp": 3579,
+       "nerr": 0
+      }
+     }
+    }
+   }
+  },
+  "R2.interval_scheduling": {
+   "0": {
+    "chosen": {
+     "answer_type": "list",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) fewest clashes first (ties by end, then number)": {
+       "k": 2029,
+       "napp": 4000,
+       "nerr": 0
+      },
+      "[NEW] (cue) keep every meeting that clashes with no shorter meeting": {
+       "k": 76,
+       "napp": 4000,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "1": {
+    "chosen": {
+     "answer_type": "list",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) fewest clashes first (ties by end, then number)": {
+       "k": 1693,
+       "napp": 4000,
+       "nerr": 0
+      },
+      "[NEW] (cue) keep every meeting that clashes with no shorter meeting": {
+       "k": 27,
+       "napp": 4000,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "2": {
+    "chosen": {
+     "answer_type": "list",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) fewest clashes first (ties by end, then number)": {
+       "k": 1617,
+       "napp": 4000,
+       "nerr": 0
+      },
+      "[NEW] (cue) keep every meeting that clashes with no shorter meeting": {
+       "k": 14,
+       "napp": 4000,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "3": {
+    "chosen": {
+     "answer_type": "list",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) fewest clashes first (ties by end, then number)": {
+       "k": 1311,
+       "napp": 4000,
+       "nerr": 0
+      },
+      "[NEW] (cue) keep every meeting that clashes with no shorter meeting": {
+       "k": 9,
+       "napp": 4000,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "4": {
+    "chosen": {
+     "answer_type": "list",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) fewest clashes first (ties by end, then number)": {
+       "k": 1224,
+       "napp": 4000,
+       "nerr": 0
+      },
+      "[NEW] (cue) keep every meeting that clashes with no shorter meeting": {
+       "k": 2,
+       "napp": 4000,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "5": {
+    "chosen": {
+     "answer_type": "list",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) fewest clashes first (ties by end, then number)": {
+       "k": 1056,
+       "napp": 4000,
+       "nerr": 0
+      },
+      "[NEW] (cue) keep every meeting that clashes with no shorter meeting": {
+       "k": 0,
+       "napp": 4000,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "6": {
+    "chosen": {
+     "answer_type": "list",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) fewest clashes first (ties by end, then number)": {
+       "k": 929,
+       "napp": 4000,
+       "nerr": 0
+      },
+      "[NEW] (cue) keep every meeting that clashes with no shorter meeting": {
+       "k": 0,
+       "napp": 4000,
+       "nerr": 0
+      }
+     }
+    }
+   }
+  },
+  "R2.list_ops": {
+   "0": {
+    "-": {
+     "answer_type": "list",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) final list = start list with adds appended and removals applied, all moves and reverses ignored": {
+       "k": 1649,
+       "napp": 4000,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "1": {
+    "-": {
+     "answer_type": "list",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) final list = start list with adds appended and removals applied, all moves and reverses ignored": {
+       "k": 1035,
+       "napp": 4000,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "2": {
+    "-": {
+     "answer_type": "list",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) final list = start list with adds appended and removals applied, all moves and reverses ignored": {
+       "k": 799,
+       "napp": 4000,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "3": {
+    "-": {
+     "answer_type": "list",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) final list = start list with adds appended and removals applied, all moves and reverses ignored": {
+       "k": 612,
+       "napp": 4000,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "4": {
+    "-": {
+     "answer_type": "list",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) final list = start list with adds appended and removals applied, all moves and reverses ignored": {
+       "k": 437,
+       "napp": 4000,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "5": {
+    "-": {
+     "answer_type": "list",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) final list = start list with adds appended and removals applied, all moves and reverses ignored": {
+       "k": 305,
+       "napp": 4000,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "6": {
+    "-": {
+     "answer_type": "list",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) final list = start list with adds appended and removals applied, all moves and reverses ignored": {
+       "k": 252,
+       "napp": 4000,
+       "nerr": 0
+      }
+     }
+    }
+   }
+  },
+  "R2.luhn_check": {
+   "0": {
+    "check_digit": {
+     "answer_type": "number",
+     "n": 2061,
+     "rules": {
+      "[NEW] (cue) check digit: (10 - digit sum mod 10) mod 10 with every digit doubled": {
+       "k": 218,
+       "napp": 2061,
+       "nerr": 0
+      }
+     }
+    },
+    "valid": {
+     "answer_type": "yn",
+     "n": 1939,
+     "rules": {
+      "[NEW] (cue) check digit: (10 - digit sum mod 10) mod 10 with every digit doubled": {
+       "k": 0,
+       "napp": 0,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "1": {
+    "check_digit": {
+     "answer_type": "number",
+     "n": 1971,
+     "rules": {
+      "[NEW] (cue) check digit: (10 - digit sum mod 10) mod 10 with every digit doubled": {
+       "k": 211,
+       "napp": 1971,
+       "nerr": 0
+      }
+     }
+    },
+    "valid": {
+     "answer_type": "yn",
+     "n": 2029,
+     "rules": {
+      "[NEW] (cue) check digit: (10 - digit sum mod 10) mod 10 with every digit doubled": {
+       "k": 0,
+       "napp": 0,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "2": {
+    "check_digit": {
+     "answer_type": "number",
+     "n": 2031,
+     "rules": {
+      "[NEW] (cue) check digit: (10 - digit sum mod 10) mod 10 with every digit doubled": {
+       "k": 193,
+       "napp": 2031,
+       "nerr": 0
+      }
+     }
+    },
+    "valid": {
+     "answer_type": "yn",
+     "n": 1969,
+     "rules": {
+      "[NEW] (cue) check digit: (10 - digit sum mod 10) mod 10 with every digit doubled": {
+       "k": 0,
+       "napp": 0,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "3": {
+    "check_digit": {
+     "answer_type": "number",
+     "n": 2004,
+     "rules": {
+      "[NEW] (cue) check digit: (10 - digit sum mod 10) mod 10 with every digit doubled": {
+       "k": 205,
+       "napp": 2004,
+       "nerr": 0
+      }
+     }
+    },
+    "valid": {
+     "answer_type": "yn",
+     "n": 1996,
+     "rules": {
+      "[NEW] (cue) check digit: (10 - digit sum mod 10) mod 10 with every digit doubled": {
+       "k": 0,
+       "napp": 0,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "4": {
+    "check_digit": {
+     "answer_type": "number",
+     "n": 1983,
+     "rules": {
+      "[NEW] (cue) check digit: (10 - digit sum mod 10) mod 10 with every digit doubled": {
+       "k": 210,
+       "napp": 1983,
+       "nerr": 0
+      }
+     }
+    },
+    "valid": {
+     "answer_type": "yn",
+     "n": 2017,
+     "rules": {
+      "[NEW] (cue) check digit: (10 - digit sum mod 10) mod 10 with every digit doubled": {
+       "k": 0,
+       "napp": 0,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "5": {
+    "check_digit": {
+     "answer_type": "number",
+     "n": 1969,
+     "rules": {
+      "[NEW] (cue) check digit: (10 - digit sum mod 10) mod 10 with every digit doubled": {
+       "k": 207,
+       "napp": 1969,
+       "nerr": 0
+      }
+     }
+    },
+    "valid": {
+     "answer_type": "yn",
+     "n": 2031,
+     "rules": {
+      "[NEW] (cue) check digit: (10 - digit sum mod 10) mod 10 with every digit doubled": {
+       "k": 0,
+       "napp": 0,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "6": {
+    "check_digit": {
+     "answer_type": "number",
+     "n": 1946,
+     "rules": {
+      "[NEW] (cue) check digit: (10 - digit sum mod 10) mod 10 with every digit doubled": {
+       "k": 197,
+       "napp": 1946,
+       "nerr": 0
+      }
+     }
+    },
+    "valid": {
+     "answer_type": "yn",
+     "n": 2054,
+     "rules": {
+      "[NEW] (cue) check digit: (10 - digit sum mod 10) mod 10 with every digit doubled": {
+       "k": 0,
+       "napp": 0,
+       "nerr": 0
+      }
+     }
+    }
+   }
+  },
+  "R2.min_heap_ops": {
+   "0": {
+    "removals=0": {
+     "answer_type": "list",
+     "n": 2674,
+     "rules": {
+      "[NEW] (cue) row sorted ascending except positions 2 and 3 swapped when out of order": {
+       "k": 0,
+       "napp": 2674,
+       "nerr": 0
+      }
+     }
+    },
+    "removals=1": {
+     "answer_type": "list",
+     "n": 1326,
+     "rules": {
+      "[NEW] (cue) row sorted ascending except positions 2 and 3 swapped when out of order": {
+       "k": 5,
+       "napp": 1326,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "1": {
+    "removals=0": {
+     "answer_type": "list",
+     "n": 2652,
+     "rules": {
+      "[NEW] (cue) row sorted ascending except positions 2 and 3 swapped when out of order": {
+       "k": 0,
+       "napp": 2652,
+       "nerr": 0
+      }
+     }
+    },
+    "removals=1": {
+     "answer_type": "list",
+     "n": 1348,
+     "rules": {
+      "[NEW] (cue) row sorted ascending except positions 2 and 3 swapped when out of order": {
+       "k": 1,
+       "napp": 1348,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "2": {
+    "removals=0": {
+     "answer_type": "list",
+     "n": 2606,
+     "rules": {
+      "[NEW] (cue) row sorted ascending except positions 2 and 3 swapped when out of order": {
+       "k": 0,
+       "napp": 2606,
+       "nerr": 0
+      }
+     }
+    },
+    "removals=1": {
+     "answer_type": "list",
+     "n": 1394,
+     "rules": {
+      "[NEW] (cue) row sorted ascending except positions 2 and 3 swapped when out of order": {
+       "k": 0,
+       "napp": 1394,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "3": {
+    "removals=0": {
+     "answer_type": "list",
+     "n": 1969,
+     "rules": {
+      "[NEW] (cue) row sorted ascending except positions 2 and 3 swapped when out of order": {
+       "k": 0,
+       "napp": 1969,
+       "nerr": 0
+      }
+     }
+    },
+    "removals=1": {
+     "answer_type": "list",
+     "n": 1024,
+     "rules": {
+      "[NEW] (cue) row sorted ascending except positions 2 and 3 swapped when out of order": {
+       "k": 0,
+       "napp": 1024,
+       "nerr": 0
+      }
+     }
+    },
+    "removals=2": {
+     "answer_type": "list",
+     "n": 1007,
+     "rules": {
+      "[NEW] (cue) row sorted ascending except positions 2 and 3 swapped when out of order": {
+       "k": 0,
+       "napp": 1007,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "4": {
+    "removals=0": {
+     "answer_type": "list",
+     "n": 2036,
+     "rules": {
+      "[NEW] (cue) row sorted ascending except positions 2 and 3 swapped when out of order": {
+       "k": 0,
+       "napp": 2036,
+       "nerr": 0
+      }
+     }
+    },
+    "removals=1": {
+     "answer_type": "list",
+     "n": 987,
+     "rules": {
+      "[NEW] (cue) row sorted ascending except positions 2 and 3 swapped when out of order": {
+       "k": 0,
+       "napp": 987,
+       "nerr": 0
+      }
+     }
+    },
+    "removals=2": {
+     "answer_type": "list",
+     "n": 977,
+     "rules": {
+      "[NEW] (cue) row sorted ascending except positions 2 and 3 swapped when out of order": {
+       "k": 0,
+       "napp": 977,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "5": {
+    "removals=0": {
+     "answer_type": "list",
+     "n": 2024,
+     "rules": {
+      "[NEW] (cue) row sorted ascending except positions 2 and 3 swapped when out of order": {
+       "k": 0,
+       "napp": 2024,
+       "nerr": 0
+      }
+     }
+    },
+    "removals=1": {
+     "answer_type": "list",
+     "n": 954,
+     "rules": {
+      "[NEW] (cue) row sorted ascending except positions 2 and 3 swapped when out of order": {
+       "k": 0,
+       "napp": 954,
+       "nerr": 0
+      }
+     }
+    },
+    "removals=2": {
+     "answer_type": "list",
+     "n": 1022,
+     "rules": {
+      "[NEW] (cue) row sorted ascending except positions 2 and 3 swapped when out of order": {
+       "k": 0,
+       "napp": 1022,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "6": {
+    "removals=0": {
+     "answer_type": "list",
+     "n": 1974,
+     "rules": {
+      "[NEW] (cue) row sorted ascending except positions 2 and 3 swapped when out of order": {
+       "k": 0,
+       "napp": 1974,
+       "nerr": 0
+      }
+     }
+    },
+    "removals=1": {
+     "answer_type": "list",
+     "n": 1026,
+     "rules": {
+      "[NEW] (cue) row sorted ascending except positions 2 and 3 swapped when out of order": {
+       "k": 0,
+       "napp": 1026,
+       "nerr": 0
+      }
+     }
+    },
+    "removals=2": {
+     "answer_type": "list",
+     "n": 1000,
+     "rules": {
+      "[NEW] (cue) row sorted ascending except positions 2 and 3 swapped when out of order": {
+       "k": 0,
+       "napp": 1000,
+       "nerr": 0
+      }
+     }
+    }
+   }
+  },
+  "R2.run_length": {
+   "0": {
+    "-": {
+     "answer_type": "text",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) each letter with its total count, in order of first appearance": {
+       "k": 157,
+       "napp": 4000,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "1": {
+    "-": {
+     "answer_type": "text",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) each letter with its total count, in order of first appearance": {
+       "k": 0,
+       "napp": 4000,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "2": {
+    "-": {
+     "answer_type": "text",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) each letter with its total count, in order of first appearance": {
+       "k": 0,
+       "napp": 4000,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "3": {
+    "-": {
+     "answer_type": "text",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) each letter with its total count, in order of first appearance": {
+       "k": 0,
+       "napp": 4000,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "4": {
+    "-": {
+     "answer_type": "text",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) each letter with its total count, in order of first appearance": {
+       "k": 0,
+       "napp": 4000,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "5": {
+    "-": {
+     "answer_type": "text",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) each letter with its total count, in order of first appearance": {
+       "k": 0,
+       "napp": 4000,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "6": {
+    "-": {
+     "answer_type": "text",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) each letter with its total count, in order of first appearance": {
+       "k": 0,
+       "napp": 4000,
+       "nerr": 0
+      }
+     }
+    }
+   }
+  },
+  "R2.string_rewrite_nonidentity": {
+   "0": {
+    "-": {
+     "answer_type": "text",
+     "n": 4000,
+     "rules": {
+      "[NEW] (P) misread: each step repeated until no match is left (capped at 50 rounds)": {
+       "k": 2961,
+       "napp": 3225,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "1": {
+    "-": {
+     "answer_type": "text",
+     "n": 4000,
+     "rules": {
+      "[NEW] (P) misread: each step repeated until no match is left (capped at 50 rounds)": {
+       "k": 2025,
+       "napp": 2585,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "2": {
+    "-": {
+     "answer_type": "text",
+     "n": 4000,
+     "rules": {
+      "[NEW] (P) misread: each step repeated until no match is left (capped at 50 rounds)": {
+       "k": 1942,
+       "napp": 2608,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "3": {
+    "-": {
+     "answer_type": "text",
+     "n": 4000,
+     "rules": {
+      "[NEW] (P) misread: each step repeated until no match is left (capped at 50 rounds)": {
+       "k": 1338,
+       "napp": 2052,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "4": {
+    "-": {
+     "answer_type": "text",
+     "n": 4000,
+     "rules": {
+      "[NEW] (P) misread: each step repeated until no match is left (capped at 50 rounds)": {
+       "k": 1283,
+       "napp": 2063,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "5": {
+    "-": {
+     "answer_type": "text",
+     "n": 4000,
+     "rules": {
+      "[NEW] (P) misread: each step repeated until no match is left (capped at 50 rounds)": {
+       "k": 860,
+       "napp": 1682,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "6": {
+    "-": {
+     "answer_type": "text",
+     "n": 4000,
+     "rules": {
+      "[NEW] (P) misread: each step repeated until no match is left (capped at 50 rounds)": {
+       "k": 843,
+       "napp": 1647,
+       "nerr": 0
+      }
+     }
+    }
+   }
+  },
+  "R2.to_base_wide": {
+   "0": {
+    "-": {
+     "answer_type": "text",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) remainders of repeated division by the base, written in the order produced": {
+       "k": 171,
+       "napp": 4000,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "1": {
+    "-": {
+     "answer_type": "text",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) remainders of repeated division by the base, written in the order produced": {
+       "k": 97,
+       "napp": 4000,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "2": {
+    "-": {
+     "answer_type": "text",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) remainders of repeated division by the base, written in the order produced": {
+       "k": 64,
+       "napp": 4000,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "3": {
+    "-": {
+     "answer_type": "text",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) remainders of repeated division by the base, written in the order produced": {
+       "k": 31,
+       "napp": 4000,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "4": {
+    "-": {
+     "answer_type": "text",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) remainders of repeated division by the base, written in the order produced": {
+       "k": 12,
+       "napp": 4000,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "5": {
+    "-": {
+     "answer_type": "text",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) remainders of repeated division by the base, written in the order produced": {
+       "k": 9,
+       "napp": 4000,
+       "nerr": 0
+      }
+     }
+    }
+   },
+   "6": {
+    "-": {
+     "answer_type": "text",
+     "n": 4000,
+     "rules": {
+      "[NEW] (cue) remainders of repeated division by the base, written in the order produced": {
+       "k": 1,
+       "napp": 4000,
+       "nerr": 0
+      }
+     }
+    }
+   }
+  }
+ },
+ "n": 4000
+}
